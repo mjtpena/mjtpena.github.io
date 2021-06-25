@@ -1,4 +1,4 @@
-baseURL = "https://mjtpena.github.io/docs"
+baseURL = "https://mjtpena.github.io"
 languageCode = "en-us"
 title = "⚡️ Michael John Peña"
 theme = "cactus"
