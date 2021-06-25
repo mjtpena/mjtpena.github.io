@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>⚡️ Michael John Peña</title>
+    <link>https://mjtpena.github.io/</link>
+    <description>Recent content on ⚡️ Michael John Peña</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Michael John Peña 2021</copyright>
+    <lastBuildDate>Thu, 24 Jun 2021 16:20:29 +0000</lastBuildDate><atom:link href="https://mjtpena.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSH Connect to Linux Server from a Mac using SOCKS5 Proxy</title>
+      <link>https://mjtpena.github.io/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</link>
+      <pubDate>Thu, 24 Jun 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</guid>
+      <description>Introduction I&amp;rsquo;ve been spending a lot of time lately in setting up on-premises Linux Servers. There are a lot of reasons why you would like to SSH to a Linux server such as checking configuration files, copying files, or even port forwarding.
+Just open your MacOS terminal and the command to ssh to a Linux Server is as simple as:
+ssh user@host or ssh michael@192.0.0.1
+However, where it gets tricky is when you need to use a proxy such as SOCKS5 in order to access that Linux server from your MacOS machine.</description>
+    </item>
+    
+    <item>
+      <title>How to disable auto-locking of MacOS Keychains</title>
+      <link>https://mjtpena.github.io/blog/how-to-disable-auto-locking-of-macos-keychains/</link>
+      <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/how-to-disable-auto-locking-of-macos-keychains/</guid>
+      <description>Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle. However, not all companies have adopted to those tools and they still prefer to build their apps in their on-prem data servers. They use something like TeamCity or Azure DevOps Server.
+We streamlined the configuration of our Mac Build agents to a repository where we can update our Provisioning Profiles, Keychains, etc.</description>
+    </item>
+    
+    <item>
+      <title>The 3 Types of Blockchain and Cryptocurrencies people I’ve met</title>
+      <link>https://mjtpena.github.io/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/</link>
+      <pubDate>Fri, 26 Feb 2021 03:28:06 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/</guid>
+      <description>I&amp;rsquo;ve been in the crazy Blockchain space for quite a while now. I&amp;rsquo;ve had a lot of conversations and people I&amp;rsquo;ve met online and in-person to talk about it. Over and over, I see patterns on the people I interact with whether they do it as part of their job, an enthusiast, developer, investor, or simply just a person.
+I&amp;rsquo;ve probably had hundreds of interactions already and most likely, they will belong to either of these 3 buckets.</description>
+    </item>
+    
+    <item>
+      <title>Why I don’t read or watch mainstream media that much</title>
+      <link>https://mjtpena.github.io/blog/why-i-dont-read-or-watch-mainstream-media-that-much/</link>
+      <pubDate>Mon, 22 Feb 2021 05:45:26 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/why-i-dont-read-or-watch-mainstream-media-that-much/</guid>
+      <description>Ever since I was a kid, I was never really the person who watches the mainstream television to watch news. Watching news on a television is a culture that a lot of people just grew up with as a &amp;ldquo;default.&amp;rdquo;
+Here are some of thoughts on why I don&amp;rsquo;t value reading or watching mainstream media anymore.
+ The important news will come to you one way or the other. They are written or crafted to trigger emotions rather than inform about things.</description>
+    </item>
+    
+    <item>
+      <title>Why you should experience being self-employed</title>
+      <link>https://mjtpena.github.io/blog/why-you-should-experience-being-self-employed/</link>
+      <pubDate>Wed, 27 Jan 2021 21:18:51 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/why-you-should-experience-being-self-employed/</guid>
+      <description>In someone&amp;rsquo;s employment life, she/he dreams of having her/his own company to beat the thoughts of having a manager or a boss. You know the promise of being your own boss, handling your own time, and $$$ - who wouldn&amp;rsquo;t want that? It&amp;rsquo;s &amp;ldquo;relatively&amp;rdquo; easy to establish a company compare to the last decades - thanks to technology. There are also a lot of avenues to profit from &amp;ldquo;the gig economy&amp;rdquo; that sometimes get big and would need a team to work on.</description>
+    </item>
+    
+    <item>
+      <title>How to beat procrastination</title>
+      <link>https://mjtpena.github.io/blog/how-to-beat-procrastination/</link>
+      <pubDate>Thu, 14 Jan 2021 00:47:30 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/how-to-beat-procrastination/</guid>
+      <description>One of the colossal beasts that all knowledge workers fight time and time again is procrastination. This is when you know you should work, but you don&amp;rsquo;t have enough willpower to do it. You can&amp;rsquo;t code, you can&amp;rsquo;t do that design document, you can&amp;rsquo;t write that next blog post&amp;hellip; the list goes on. Here are 5 of my usual methods when I&amp;rsquo;m stuck in that limbo.
+Avoid Distractions The first and obvious thing that you have to do is to avoid distraction.</description>
+    </item>
+    
+    <item>
+      <title>You should read books, you know you should</title>
+      <link>https://mjtpena.github.io/blog/you-should-read-books-you-know-you-should/</link>
+      <pubDate>Fri, 08 Jan 2021 20:47:16 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/you-should-read-books-you-know-you-should/</guid>
+      <description>Before 2018, I was never a book reader. Reading a book seems like a chore to me. I can barely finish a chapter. I always had that internal conflict (possibly based from childhood experience) that only &amp;ldquo;the smart people&amp;rdquo; can read books. Another factor is, I&amp;rsquo;ve always associated books to &amp;ldquo;school&amp;rdquo; or &amp;ldquo;academia&amp;rdquo; that felt like an enclosed culture that didn&amp;rsquo;t really synced in to me. Also, I&amp;rsquo;d rather watch a film or TV series than read a 300 to 500 pager book - because of cinematics.</description>
+    </item>
+    
+    <item>
+      <title>AI across the Microsoft Cloud</title>
+      <link>https://mjtpena.github.io/blog/ai-across-the-microsoft-cloud/</link>
+      <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/ai-across-the-microsoft-cloud/</guid>
+      <description>Artificial Intelligence (AI) and Machine Learning (ML) are trending topics right now. In 2021, there are countless of ways to have a form of &amp;ldquo;AI&amp;rdquo; in your apps and platforms. A lot of companies from startups to software giants offer services that relate to this space. I spent the last 2 years exploring this space, and I still swimming my way as the movements in this area are quick and it&amp;rsquo;s hard to keep up.</description>
+    </item>
+    
+    <item>
+      <title>Why it’s okay to be “an ordinary” developer</title>
+      <link>https://mjtpena.github.io/blog/why-its-okay-to-be-an-ordinary-developer/</link>
+      <pubDate>Wed, 06 Jan 2021 19:22:55 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/why-its-okay-to-be-an-ordinary-developer/</guid>
+      <description>Someone once asked me, what does it take to become a prominent developer? A 10X Engineer? You know some who are &amp;ldquo;extraordinary&amp;rdquo;. What do you mean by extraordinary? I&amp;rsquo;ve always had some thoughts (all of us do) around it, but my understanding and opinion of it is now much more concrete. Actually, this applies not only to being a developer, but to any other career or profession that you&amp;rsquo;re in.</description>
+    </item>
+    
+    <item>
+      <title>Digital Intentionalization: Don’t click that next button</title>
+      <link>https://mjtpena.github.io/blog/digital-intentionalization-dont-click-that-next-button/</link>
+      <pubDate>Tue, 05 Jan 2021 22:29:45 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/digital-intentionalization-dont-click-that-next-button/</guid>
+      <description>It&amp;rsquo;s very tempting to click on &amp;ldquo;that next button&amp;rdquo; wether that is from YouTube, Netflix, Facebook videos or any endless buffet of consumption. You start watching a video about a topic you&amp;rsquo;re really interested in to and end up watching something weird after 3 hours. As I do more research in my personal journey of Digital Intentionalization, this is probably one of the most obvious ones. We let the platform play the next content.</description>
+    </item>
+    
+    <item>
+      <title>My only goal for 2021: Digital Intentionality</title>
+      <link>https://mjtpena.github.io/blog/my-only-goal-for-2021-digital-intentionality/</link>
+      <pubDate>Mon, 04 Jan 2021 23:15:38 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/my-only-goal-for-2021-digital-intentionality/</guid>
+      <description>During the holidays, I was contemplating on what skills should I invest time on for 2021. As someone who is working in the technology field, there are a lot of exciting things to double-down on: from Artificial Intelligence (AI), Internet of Things (IoT), Blockchain, and a plethora of technology trends. As I reflected on how my 2020 went in terms of career and lifestyle, I noticed that there is an area I really need to work on - my digital life.</description>
+    </item>
+    
+    <item>
+      <title>Synology NAS Series – Cloud Sync with Azure Storage</title>
+      <link>https://mjtpena.github.io/blog/synology-nas-series-cloud-sync-with-azure-storage/</link>
+      <pubDate>Mon, 28 Sep 2020 03:55:27 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/synology-nas-series-cloud-sync-with-azure-storage/</guid>
+      <description>Foreword Synology reached out to me to give their new DiskStation DS920+a review. If you&amp;rsquo;re not yet aware of Synology, they are the leading NAS (Network-attached storage) provider for home and work use-cases. You can use a NAS for pretty much anything such as backing up files, sharing files in a local network, streaming media files, or have your own &amp;ldquo;private cloud&amp;rdquo;.
+Throughout the years, the concept of NAS has developed and there is now a very thin line between doing things locally in your network and storage capabilities of cloud vendors.</description>
+    </item>
+    
+    <item>
+      <title>5 Years of being a Microsoft MVP!</title>
+      <link>https://mjtpena.github.io/blog/5-years-of-being-a-microsoft-mvp/</link>
+      <pubDate>Wed, 09 Sep 2020 07:12:03 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/5-years-of-being-a-microsoft-mvp/</guid>
+      <description>Wow! It’s been 5 years since my first Microsoft MVP award. If you don’t know what the Microsoft MVP program is, check this site. Throughout the years, I have transitioned from various categories and technology award. In particular, Windows Development (Windows 8/8.1/10/RT and XAML), to Developer Technologies (C#, .NET, Xamarin), to Azure with focus on Blockchain, PAAS (Platform as a Service), and Integrations.
+In those years, I’ve seen Microsoft and the MVP program changed a lot (for the better).</description>
+    </item>
+    
+    <item>
+      <title>I’m going to start writing again!</title>
+      <link>https://mjtpena.github.io/blog/writing-again/</link>
+      <pubDate>Wed, 26 Aug 2020 07:51:48 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/blog/writing-again/</guid>
+      <description>I have been meaning to write a blog post for an awfully long time, but it has blocked me for so many reasons. There are many reasons I stopped writing. I find different excuses for not doing it. Lazy. Busy. Afraid that contents I write may not be good enough. I feel my English is not good enough. So much more. No one will read it, why write?
+But then the more I think about it, the more I realised that I spend a lot of time in my day writing.</description>
+    </item>
+    
+    <item>
+      <title>👨🏻‍💻 About Me</title>
+      <link>https://mjtpena.github.io/about/</link>
+      <pubDate>Mon, 24 Aug 2020 04:01:50 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/about/</guid>
+      <description>Hello there 👋 Welcome to my little space of the internet that I can call mine.
+For the past 10 years, I’ve spent my career dealing with software and the cloud. I wore many hats from being a developer, tester, data engineer, IT operations, solutions architect, project manager, technical pre-sales, trainer, and everything else in between. I had some very successful outcomes and some that also failed or did not materialised.</description>
+    </item>
+    
+    <item>
+      <title>👨🏻‍💻 About Me</title>
+      <link>https://mjtpena.github.io/presentations/</link>
+      <pubDate>Mon, 24 Aug 2020 04:01:50 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/presentations/</guid>
+      <description>Hello there 👋 Welcome to my little space of the internet that I can call mine.
+For the past 10 years, I’ve spent my career dealing with software and the cloud. I wore many hats from being a developer, tester, data engineer, IT operations, solutions architect, project manager, technical pre-sales, trainer, and everything else in between. I had some very successful outcomes and some that also failed or did not materialised.</description>
+    </item>
+    
+    <item>
+      <title>👨🏻‍💻 About Me</title>
+      <link>https://mjtpena.github.io/projects/</link>
+      <pubDate>Mon, 24 Aug 2020 04:01:50 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/projects/</guid>
+      <description>Hello there 👋 Welcome to my little space of the internet that I can call mine.
+For the past 10 years, I’ve spent my career dealing with software and the cloud. I wore many hats from being a developer, tester, data engineer, IT operations, solutions architect, project manager, technical pre-sales, trainer, and everything else in between. I had some very successful outcomes and some that also failed or did not materialised.</description>
+    </item>
+    
+  </channel>
+</rss>
