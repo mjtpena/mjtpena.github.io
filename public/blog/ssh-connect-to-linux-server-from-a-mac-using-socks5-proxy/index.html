@@ -14,7 +14,7 @@ Just open your MacOS terminal and the command to ssh to a Linux Server is as sim
 ssh user@host or ssh michael@192.0.0.1
 However, where it gets tricky is when you need to use a proxy such as SOCKS5 in order to access that Linux server from your MacOS machine." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://mjtpena.github.io/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://mjtpena.github.io/public/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-06-24T16:20:29&#43;00:00" />
 <meta property="article:modified_time" content="2021-06-24T16:20:29&#43;00:00" />
 
@@ -31,7 +31,7 @@ However, where it gets tricky is when you need to use a proxy such as SOCKS5 in 
     
   
   
-  <link rel="stylesheet" href="https://mjtpena.github.io/css/style-white.css">
+  <link rel="stylesheet" href="https://mjtpena.github.io/public/css/style-white.css">
   
   
   
@@ -42,7 +42,7 @@ However, where it gets tricky is when you need to use a proxy such as SOCKS5 in 
   
 
   
-<link rel="icon" type="image/png" href="https://mjtpena.github.io/images/favicon.ico" />
+<link rel="icon" type="image/png" href="https://mjtpena.github.io/public/images/favicon.ico" />
 
   
   
@@ -61,11 +61,11 @@ However, where it gets tricky is when you need to use a proxy such as SOCKS5 in 
     <span id="nav">
       <ul>
          
-        <li><a href="https://mjtpena.github.io/">Home</a></li>
+        <li><a href="https://mjtpena.github.io/public/">Home</a></li>
          
-        <li><a href="https://mjtpena.github.io/posts">Blog</a></li>
+        <li><a href="https://mjtpena.github.io/public/posts">Blog</a></li>
          
-        <li><a href="https://mjtpena.github.io/about">About</a></li>
+        <li><a href="https://mjtpena.github.io/public/about">About</a></li>
         
       </ul>
     </span>
@@ -74,7 +74,7 @@ However, where it gets tricky is when you need to use a proxy such as SOCKS5 in 
       <ul>
         
         <li>
-          <a class="icon" href=" https://mjtpena.github.io/blog/how-to-disable-auto-locking-of-macos-keychains/" aria-label="Previous">
+          <a class="icon" href=" https://mjtpena.github.io/public/blog/how-to-disable-auto-locking-of-macos-keychains/" aria-label="Previous">
             <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
           </a>
         </li>
@@ -106,47 +106,47 @@ However, where it gets tricky is when you need to use a proxy such as SOCKS5 in 
   
   
   <li>
-    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f" aria-label="Facebook">
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f" aria-label="Facebook">
       <i class="fab fa-facebook " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&text=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Twitter">
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&text=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Twitter">
       <i class="fab fa-twitter " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Linkedin">
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Linkedin">
       <i class="fab fa-linkedin " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&is_video=false&description=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Pinterest">
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&is_video=false&description=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Pinterest">
       <i class="fab fa-pinterest " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="mailto:?subject=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy&body=Check out this article: https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f" aria-label="Email">
+    <a class="icon" href="mailto:?subject=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy&body=Check out this article: https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f" aria-label="Email">
       <i class="fas fa-envelope " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Pocket">
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Pocket">
       <i class="fab fa-get-pocket " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="reddit">
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="reddit">
       <i class="fab fa-reddit " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&name=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy&description=Introduction%20I%26rsquo%3bve%20been%20spending%20a%20lot%20of%20time%20lately%20in%20setting%20up%20on-premises%20Linux%20Servers.%20There%20are%20a%20lot%20of%20reasons%20why%20you%20would%20like%20to%20SSH%20to%20a%20Linux%20server%20such%20as%20checking%20configuration%20files%2c%20copying%20files%2c%20or%20even%20port%20forwarding.%0aJust%20open%20your%20MacOS%20terminal%20and%20the%20command%20to%20ssh%20to%20a%20Linux%20Server%20is%20as%20simple%20as%3a%0assh%20user%40host%20or%20ssh%20michael%40192.0.0.1%0aHowever%2c%20where%20it%20gets%20tricky%20is%20when%20you%20need%20to%20use%20a%20proxy%20such%20as%20SOCKS5%20in%20order%20to%20access%20that%20Linux%20server%20from%20your%20MacOS%20machine." aria-label="Tumblr">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&name=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy&description=Introduction%20I%26rsquo%3bve%20been%20spending%20a%20lot%20of%20time%20lately%20in%20setting%20up%20on-premises%20Linux%20Servers.%20There%20are%20a%20lot%20of%20reasons%20why%20you%20would%20like%20to%20SSH%20to%20a%20Linux%20server%20such%20as%20checking%20configuration%20files%2c%20copying%20files%2c%20or%20even%20port%20forwarding.%0aJust%20open%20your%20MacOS%20terminal%20and%20the%20command%20to%20ssh%20to%20a%20Linux%20Server%20is%20as%20simple%20as%3a%0assh%20user%40host%20or%20ssh%20michael%40192.0.0.1%0aHowever%2c%20where%20it%20gets%20tricky%20is%20when%20you%20need%20to%20use%20a%20proxy%20such%20as%20SOCKS5%20in%20order%20to%20access%20that%20Linux%20server%20from%20your%20MacOS%20machine." aria-label="Tumblr">
       <i class="fab fa-tumblr " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&t=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Hacker News">
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&t=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Hacker News">
       <i class="fab fa-hacker-news " aria-hidden="true"></i>
     </a>
   </li>
@@ -193,7 +193,7 @@ However, where it gets tricky is when you need to use a proxy such as SOCKS5 in 
             <i class="fas fa-archive"></i>
             
             
-            <a class="category-link" href="https://mjtpena.github.io/categories/technology">Technology</a>
+            <a class="category-link" href="https://mjtpena.github.io/public/categories/technology">Technology</a>
             
         </div>
         
@@ -249,11 +249,11 @@ However, where it gets tricky is when you need to use a proxy such as SOCKS5 in 
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="https://mjtpena.github.io/">Home</a></li>
+          <li><a href="https://mjtpena.github.io/public/">Home</a></li>
          
-          <li><a href="https://mjtpena.github.io/posts">Blog</a></li>
+          <li><a href="https://mjtpena.github.io/public/posts">Blog</a></li>
          
-          <li><a href="https://mjtpena.github.io/about">About</a></li>
+          <li><a href="https://mjtpena.github.io/public/about">About</a></li>
         
       </ul>
     </div>
@@ -285,47 +285,47 @@ However, where it gets tricky is when you need to use a proxy such as SOCKS5 in 
   
   
   <li>
-    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f" aria-label="Facebook">
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f" aria-label="Facebook">
       <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&text=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Twitter">
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&text=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Twitter">
       <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Linkedin">
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Linkedin">
       <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&is_video=false&description=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Pinterest">
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&is_video=false&description=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Pinterest">
       <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="mailto:?subject=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy&body=Check out this article: https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f" aria-label="Email">
+    <a class="icon" href="mailto:?subject=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy&body=Check out this article: https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f" aria-label="Email">
       <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Pocket">
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Pocket">
       <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="reddit">
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&title=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="reddit">
       <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&name=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy&description=Introduction%20I%26rsquo%3bve%20been%20spending%20a%20lot%20of%20time%20lately%20in%20setting%20up%20on-premises%20Linux%20Servers.%20There%20are%20a%20lot%20of%20reasons%20why%20you%20would%20like%20to%20SSH%20to%20a%20Linux%20server%20such%20as%20checking%20configuration%20files%2c%20copying%20files%2c%20or%20even%20port%20forwarding.%0aJust%20open%20your%20MacOS%20terminal%20and%20the%20command%20to%20ssh%20to%20a%20Linux%20Server%20is%20as%20simple%20as%3a%0assh%20user%40host%20or%20ssh%20michael%40192.0.0.1%0aHowever%2c%20where%20it%20gets%20tricky%20is%20when%20you%20need%20to%20use%20a%20proxy%20such%20as%20SOCKS5%20in%20order%20to%20access%20that%20Linux%20server%20from%20your%20MacOS%20machine." aria-label="Tumblr">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&name=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy&description=Introduction%20I%26rsquo%3bve%20been%20spending%20a%20lot%20of%20time%20lately%20in%20setting%20up%20on-premises%20Linux%20Servers.%20There%20are%20a%20lot%20of%20reasons%20why%20you%20would%20like%20to%20SSH%20to%20a%20Linux%20server%20such%20as%20checking%20configuration%20files%2c%20copying%20files%2c%20or%20even%20port%20forwarding.%0aJust%20open%20your%20MacOS%20terminal%20and%20the%20command%20to%20ssh%20to%20a%20Linux%20Server%20is%20as%20simple%20as%3a%0assh%20user%40host%20or%20ssh%20michael%40192.0.0.1%0aHowever%2c%20where%20it%20gets%20tricky%20is%20when%20you%20need%20to%20use%20a%20proxy%20such%20as%20SOCKS5%20in%20order%20to%20access%20that%20Linux%20server%20from%20your%20MacOS%20machine." aria-label="Tumblr">
       <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fmjtpena.github.io%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&t=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Hacker News">
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fmjtpena.github.io%2fpublic%2fblog%2fssh-connect-to-linux-server-from-a-mac-using-socks5-proxy%2f&t=SSH%20Connect%20to%20Linux%20Server%20from%20a%20Mac%20using%20SOCKS5%20Proxy" aria-label="Hacker News">
       <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
     </a>
   </li>
@@ -359,9 +359,9 @@ However, where it gets tricky is when you need to use a proxy such as SOCKS5 in 
   </div>
 </body>
 
-<link rel="stylesheet" href=https://mjtpena.github.io/lib/font-awesome/css/all.min.css>
-<script src=https://mjtpena.github.io/lib/jquery/jquery.min.js></script>
-<script src=https://mjtpena.github.io/js/main.js></script>
+<link rel="stylesheet" href=https://mjtpena.github.io/public/lib/font-awesome/css/all.min.css>
+<script src=https://mjtpena.github.io/public/lib/jquery/jquery.min.js></script>
+<script src=https://mjtpena.github.io/public/js/main.js></script>
 
 
 

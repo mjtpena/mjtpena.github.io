@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>self-help on ⚡️ Michael John Peña</title>
-    <link>https://mjtpena.github.io/tags/self-help/</link>
+    <link>https://mjtpena.github.io/public/tags/self-help/</link>
     <description>Recent content in self-help on ⚡️ Michael John Peña</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>- Michael John Peña 2021</copyright>
-    <lastBuildDate>Wed, 06 Jan 2021 19:22:55 +0000</lastBuildDate><atom:link href="https://mjtpena.github.io/tags/self-help/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Jan 2021 19:22:55 +0000</lastBuildDate><atom:link href="https://mjtpena.github.io/public/tags/self-help/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why it’s okay to be “an ordinary” developer</title>
-      <link>https://mjtpena.github.io/blog/why-its-okay-to-be-an-ordinary-developer/</link>
+      <link>https://mjtpena.github.io/public/blog/why-its-okay-to-be-an-ordinary-developer/</link>
       <pubDate>Wed, 06 Jan 2021 19:22:55 +0000</pubDate>
       
-      <guid>https://mjtpena.github.io/blog/why-its-okay-to-be-an-ordinary-developer/</guid>
+      <guid>https://mjtpena.github.io/public/blog/why-its-okay-to-be-an-ordinary-developer/</guid>
       <description>Someone once asked me, what does it take to become a prominent developer? A 10X Engineer? You know some who are &amp;ldquo;extraordinary&amp;rdquo;. What do you mean by extraordinary? I&amp;rsquo;ve always had some thoughts (all of us do) around it, but my understanding and opinion of it is now much more concrete. Actually, this applies not only to being a developer, but to any other career or profession that you&amp;rsquo;re in.</description>
     </item>
     
