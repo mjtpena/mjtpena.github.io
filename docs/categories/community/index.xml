@@ -2,28 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Community on ⚡️ Michael John Peña</title>
-    <link>https://mjtpena.github.io/categories/community/</link>
+    <link>https://www.michaeljohnpena.com/categories/community/</link>
     <description>Recent content in Community on ⚡️ Michael John Peña</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>- Michael John Peña 2021</copyright>
-    <lastBuildDate>Fri, 26 Feb 2021 03:28:06 +0000</lastBuildDate><atom:link href="https://mjtpena.github.io/categories/community/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Feb 2021 03:28:06 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/categories/community/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The 3 Types of Blockchain and Cryptocurrencies people I’ve met</title>
-      <link>https://mjtpena.github.io/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/</link>
+      <link>https://www.michaeljohnpena.com/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/</link>
       <pubDate>Fri, 26 Feb 2021 03:28:06 +0000</pubDate>
       
-      <guid>https://mjtpena.github.io/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/</guid>
+      <guid>https://www.michaeljohnpena.com/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/</guid>
       <description>I&amp;rsquo;ve been in the crazy Blockchain space for quite a while now. I&amp;rsquo;ve had a lot of conversations and people I&amp;rsquo;ve met online and in-person to talk about it. Over and over, I see patterns on the people I interact with whether they do it as part of their job, an enthusiast, developer, investor, or simply just a person.
 I&amp;rsquo;ve probably had hundreds of interactions already and most likely, they will belong to either of these 3 buckets.</description>
     </item>
     
     <item>
       <title>5 Years of being a Microsoft MVP!</title>
-      <link>https://mjtpena.github.io/blog/5-years-of-being-a-microsoft-mvp/</link>
+      <link>https://www.michaeljohnpena.com/blog/5-years-of-being-a-microsoft-mvp/</link>
       <pubDate>Wed, 09 Sep 2020 07:12:03 +0000</pubDate>
       
-      <guid>https://mjtpena.github.io/blog/5-years-of-being-a-microsoft-mvp/</guid>
+      <guid>https://www.michaeljohnpena.com/blog/5-years-of-being-a-microsoft-mvp/</guid>
       <description>Wow! It’s been 5 years since my first Microsoft MVP award. If you don’t know what the Microsoft MVP program is, check this site. Throughout the years, I have transitioned from various categories and technology award. In particular, Windows Development (Windows 8/8.1/10/RT and XAML), to Developer Technologies (C#, .NET, Xamarin), to Azure with focus on Blockchain, PAAS (Platform as a Service), and Integrations.
 In those years, I’ve seen Microsoft and the MVP program changed a lot (for the better).</description>
     </item>
