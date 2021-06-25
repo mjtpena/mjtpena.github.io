@@ -4,6 +4,7 @@ title = "⚡️ Michael John Peña"
 theme = "cactus"
 Copyright = "- Michael John Peña 2021"
 canonifyurls = true
+publishDir = "docs"
 
 [params]
 colortheme = "white" # dark, light, white, or classic
