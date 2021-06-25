@@ -1,0 +1,130 @@
+
+---Downloaded files---
+The import files for: Writing were successfully downloaded!
+Initial max execution time = 300
+Files info:
+Site URL = https://michaeljohnpena.com
+Data file = D:\home\site\wwwroot/wp-content/themes/writing/framework/demo_import/writing.xml
+Widget file = D:\home\site\wwwroot/wp-content/themes/writing/framework/demo_import/widgets.wie
+Customizer file = D:\home\site\wwwroot/wp-content/themes/writing/framework/demo_import/customizer.dat
+Redux files:
+not defined!
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+---Importing widgets---
+Default sidebar : 
+
+Search - No Title - Imported
+Recent Posts - No Title - Imported
+Recent Comments - No Title - Imported
+Archives - No Title - Imported
+Categories - No Title - Imported
+Meta - No Title - Imported
+Categories - No Title - Imported
+Writing - Posts List - Recent Posts - Imported
+Tag Cloud - No Title - Imported
+Search - No Title - Imported
+
+Sliding Sidebar : 
+
+Search - No Title - Imported
+Writing - About Me - About Me - Imported
+Writing - Social Profiles - Social Profiles - Imported
+Writing - Posts List - Recent Posts - Imported
+Writing - Facebook Page - Facebook - Imported
+
+404 page sidebar : 
+
+Writing - Tweets - Latest Tweets - Imported
+Writing - Social Profiles - Follow Me - Imported
+
+Footer Widgets 1 : 
+
+Writing - About Me - About Me - Imported
+
+Footer Widgets 2 : 
+
+Writing - Tweets - Tweets - Imported
+
+Footer Widgets 3 : 
+
+Instagram Slider - Instagram Slider - Imported
+
+
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---pt-ocdi/after_import---
+
