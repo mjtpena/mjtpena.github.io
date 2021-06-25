@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Technology on ⚡️ Michael John Peña</title>
+    <link>https://mjtpena.github.io/public/categories/technology/</link>
+    <description>Recent content in Technology on ⚡️ Michael John Peña</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Michael John Peña 2021</copyright>
+    <lastBuildDate>Thu, 24 Jun 2021 16:20:29 +0000</lastBuildDate><atom:link href="https://mjtpena.github.io/public/categories/technology/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSH Connect to Linux Server from a Mac using SOCKS5 Proxy</title>
+      <link>https://mjtpena.github.io/public/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</link>
+      <pubDate>Thu, 24 Jun 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/public/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</guid>
+      <description>Introduction I&amp;rsquo;ve been spending a lot of time lately in setting up on-premises Linux Servers. There are a lot of reasons why you would like to SSH to a Linux server such as checking configuration files, copying files, or even port forwarding.
+Just open your MacOS terminal and the command to ssh to a Linux Server is as simple as:
+ssh user@host or ssh michael@192.0.0.1
+However, where it gets tricky is when you need to use a proxy such as SOCKS5 in order to access that Linux server from your MacOS machine.</description>
+    </item>
+    
+    <item>
+      <title>How to disable auto-locking of MacOS Keychains</title>
+      <link>https://mjtpena.github.io/public/blog/how-to-disable-auto-locking-of-macos-keychains/</link>
+      <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/public/blog/how-to-disable-auto-locking-of-macos-keychains/</guid>
+      <description>Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle. However, not all companies have adopted to those tools and they still prefer to build their apps in their on-prem data servers. They use something like TeamCity or Azure DevOps Server.
+We streamlined the configuration of our Mac Build agents to a repository where we can update our Provisioning Profiles, Keychains, etc.</description>
+    </item>
+    
+    <item>
+      <title>The 3 Types of Blockchain and Cryptocurrencies people I’ve met</title>
+      <link>https://mjtpena.github.io/public/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/</link>
+      <pubDate>Fri, 26 Feb 2021 03:28:06 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/public/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/</guid>
+      <description>I&amp;rsquo;ve been in the crazy Blockchain space for quite a while now. I&amp;rsquo;ve had a lot of conversations and people I&amp;rsquo;ve met online and in-person to talk about it. Over and over, I see patterns on the people I interact with whether they do it as part of their job, an enthusiast, developer, investor, or simply just a person.
+I&amp;rsquo;ve probably had hundreds of interactions already and most likely, they will belong to either of these 3 buckets.</description>
+    </item>
+    
+    <item>
+      <title>AI across the Microsoft Cloud</title>
+      <link>https://mjtpena.github.io/public/blog/ai-across-the-microsoft-cloud/</link>
+      <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/public/blog/ai-across-the-microsoft-cloud/</guid>
+      <description>Artificial Intelligence (AI) and Machine Learning (ML) are trending topics right now. In 2021, there are countless of ways to have a form of &amp;ldquo;AI&amp;rdquo; in your apps and platforms. A lot of companies from startups to software giants offer services that relate to this space. I spent the last 2 years exploring this space, and I still swimming my way as the movements in this area are quick and it&amp;rsquo;s hard to keep up.</description>
+    </item>
+    
+    <item>
+      <title>Why it’s okay to be “an ordinary” developer</title>
+      <link>https://mjtpena.github.io/public/blog/why-its-okay-to-be-an-ordinary-developer/</link>
+      <pubDate>Wed, 06 Jan 2021 19:22:55 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/public/blog/why-its-okay-to-be-an-ordinary-developer/</guid>
+      <description>Someone once asked me, what does it take to become a prominent developer? A 10X Engineer? You know some who are &amp;ldquo;extraordinary&amp;rdquo;. What do you mean by extraordinary? I&amp;rsquo;ve always had some thoughts (all of us do) around it, but my understanding and opinion of it is now much more concrete. Actually, this applies not only to being a developer, but to any other career or profession that you&amp;rsquo;re in.</description>
+    </item>
+    
+    <item>
+      <title>Synology NAS Series – Cloud Sync with Azure Storage</title>
+      <link>https://mjtpena.github.io/public/blog/synology-nas-series-cloud-sync-with-azure-storage/</link>
+      <pubDate>Mon, 28 Sep 2020 03:55:27 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/public/blog/synology-nas-series-cloud-sync-with-azure-storage/</guid>
+      <description>Foreword Synology reached out to me to give their new DiskStation DS920+a review. If you&amp;rsquo;re not yet aware of Synology, they are the leading NAS (Network-attached storage) provider for home and work use-cases. You can use a NAS for pretty much anything such as backing up files, sharing files in a local network, streaming media files, or have your own &amp;ldquo;private cloud&amp;rdquo;.
+Throughout the years, the concept of NAS has developed and there is now a very thin line between doing things locally in your network and storage capabilities of cloud vendors.</description>
+    </item>
+    
+    <item>
+      <title>5 Years of being a Microsoft MVP!</title>
+      <link>https://mjtpena.github.io/public/blog/5-years-of-being-a-microsoft-mvp/</link>
+      <pubDate>Wed, 09 Sep 2020 07:12:03 +0000</pubDate>
+      
+      <guid>https://mjtpena.github.io/public/blog/5-years-of-being-a-microsoft-mvp/</guid>
+      <description>Wow! It’s been 5 years since my first Microsoft MVP award. If you don’t know what the Microsoft MVP program is, check this site. Throughout the years, I have transitioned from various categories and technology award. In particular, Windows Development (Windows 8/8.1/10/RT and XAML), to Developer Technologies (C#, .NET, Xamarin), to Azure with focus on Blockchain, PAAS (Platform as a Service), and Integrations.
+In those years, I’ve seen Microsoft and the MVP program changed a lot (for the better).</description>
+    </item>
+    
+  </channel>
+</rss>
