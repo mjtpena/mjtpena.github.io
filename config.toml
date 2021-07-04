@@ -8,7 +8,7 @@ publishDir = "docs"
 
 [params]
 colortheme = "white" # dark, light, white, or classic
-description = "🚀 __Author__. __Software Guy__. __Technical Consultant__. __Problem Solver__."
+description = "🚀 Technologist. Entrepreneur. Author. Speaker."
 mainSectionTitle = "Blog"
 mainSection = "posts"
 showAllPostsOnHomePage = false
