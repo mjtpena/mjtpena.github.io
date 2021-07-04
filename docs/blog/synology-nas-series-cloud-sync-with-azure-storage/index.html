@@ -12,7 +12,7 @@
 <meta property="og:description" content="Foreword Synology reached out to me to give their new DiskStation DS920&#43;a review. If you&rsquo;re not yet aware of Synology, they are the leading NAS (Network-attached storage) provider for home and work use-cases. You can use a NAS for pretty much anything such as backing up files, sharing files in a local network, streaming media files, or have your own &ldquo;private cloud&rdquo;.
 Throughout the years, the concept of NAS has developed and there is now a very thin line between doing things locally in your network and storage capabilities of cloud vendors." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.michaeljohnpena.com/blog/synology-nas-series-cloud-sync-with-azure-storage/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://www.michaeljohnpena.com/docs/blog/synology-nas-series-cloud-sync-with-azure-storage/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-09-28T03:55:27+00:00" />
 <meta property="article:modified_time" content="2020-09-28T03:55:27+00:00" />
 
@@ -27,7 +27,7 @@ Throughout the years, the concept of NAS has developed and there is now a very t
     
   
   
-  <link rel="stylesheet" href="https://www.michaeljohnpena.com/css/style-white.css">
+  <link rel="stylesheet" href="https://www.michaeljohnpena.com/docs/css/style-white.css">
   
   
   
@@ -38,7 +38,7 @@ Throughout the years, the concept of NAS has developed and there is now a very t
   
 
   
-<link rel="icon" type="image/png" href="https://www.michaeljohnpena.com/images/favicon.ico" />
+<link rel="icon" type="image/png" href="https://www.michaeljohnpena.com/docs/images/favicon.ico" />
 
   
   
@@ -57,11 +57,11 @@ Throughout the years, the concept of NAS has developed and there is now a very t
     <span id="nav">
       <ul>
          
-        <li><a href="https://www.michaeljohnpena.com/">Home</a></li>
+        <li><a href="https://www.michaeljohnpena.com/docs/">Home</a></li>
          
-        <li><a href="https://www.michaeljohnpena.com/posts">Blog</a></li>
+        <li><a href="https://www.michaeljohnpena.com/docs/posts">Blog</a></li>
          
-        <li><a href="https://www.michaeljohnpena.com/about">About</a></li>
+        <li><a href="https://www.michaeljohnpena.com/docs/about">About</a></li>
         
       </ul>
     </span>
@@ -70,14 +70,14 @@ Throughout the years, the concept of NAS has developed and there is now a very t
       <ul>
         
         <li>
-          <a class="icon" href=" https://www.michaeljohnpena.com/blog/5-years-of-being-a-microsoft-mvp/" aria-label="Previous">
+          <a class="icon" href=" https://www.michaeljohnpena.com/docs/blog/5-years-of-being-a-microsoft-mvp/" aria-label="Previous">
             <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
           </a>
         </li>
         
         
         <li>
-          <a class="icon" href="https://www.michaeljohnpena.com/blog/my-only-goal-for-2021-digital-intentionality/" aria-label="Next">
+          <a class="icon" href="https://www.michaeljohnpena.com/docs/blog/my-only-goal-for-2021-digital-intentionality/" aria-label="Next">
             <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
           </a>
         </li>
@@ -108,47 +108,47 @@ Throughout the years, the concept of NAS has developed and there is now a very t
   
   
   <li>
-    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f" aria-label="Facebook">
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f" aria-label="Facebook">
       <i class="fab fa-facebook " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&text=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Twitter">
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&text=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Twitter">
       <i class="fab fa-twitter " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Linkedin">
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Linkedin">
       <i class="fab fa-linkedin " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&is_video=false&description=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Pinterest">
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&is_video=false&description=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Pinterest">
       <i class="fab fa-pinterest " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="mailto:?subject=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage&body=Check out this article: https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f" aria-label="Email">
+    <a class="icon" href="mailto:?subject=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage&body=Check out this article: https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f" aria-label="Email">
       <i class="fas fa-envelope " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Pocket">
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Pocket">
       <i class="fab fa-get-pocket " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="reddit">
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="reddit">
       <i class="fab fa-reddit " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&name=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage&description=Foreword%20Synology%20reached%20out%20to%20me%20to%20give%20their%20new%20DiskStation%c2%a0DS920%2ba%20review.%20If%20you%26rsquo%3bre%20not%20yet%20aware%20of%20Synology%2c%20they%20are%20the%20leading%20NAS%20%28Network-attached%20storage%29%20provider%20for%20home%20and%20work%20use-cases.%20You%20can%20use%20a%20NAS%20for%20pretty%20much%20anything%20such%20as%20backing%20up%20files%2c%20sharing%20files%20in%20a%20local%20network%2c%20streaming%20media%20files%2c%20or%20have%20your%20own%20%26ldquo%3bprivate%20cloud%26rdquo%3b.%0aThroughout%20the%20years%2c%20the%20concept%20of%20NAS%20has%20developed%20and%20there%20is%20now%20a%20very%20thin%20line%20between%20doing%20things%20locally%20in%20your%20network%20and%20storage%20capabilities%20of%20cloud%20vendors." aria-label="Tumblr">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&name=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage&description=Foreword%20Synology%20reached%20out%20to%20me%20to%20give%20their%20new%20DiskStation%c2%a0DS920%2ba%20review.%20If%20you%26rsquo%3bre%20not%20yet%20aware%20of%20Synology%2c%20they%20are%20the%20leading%20NAS%20%28Network-attached%20storage%29%20provider%20for%20home%20and%20work%20use-cases.%20You%20can%20use%20a%20NAS%20for%20pretty%20much%20anything%20such%20as%20backing%20up%20files%2c%20sharing%20files%20in%20a%20local%20network%2c%20streaming%20media%20files%2c%20or%20have%20your%20own%20%26ldquo%3bprivate%20cloud%26rdquo%3b.%0aThroughout%20the%20years%2c%20the%20concept%20of%20NAS%20has%20developed%20and%20there%20is%20now%20a%20very%20thin%20line%20between%20doing%20things%20locally%20in%20your%20network%20and%20storage%20capabilities%20of%20cloud%20vendors." aria-label="Tumblr">
       <i class="fab fa-tumblr " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&t=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Hacker News">
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&t=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Hacker News">
       <i class="fab fa-hacker-news " aria-hidden="true"></i>
     </a>
   </li>
@@ -194,7 +194,7 @@ Throughout the years, the concept of NAS has developed and there is now a very t
             <i class="fas fa-archive"></i>
             
             
-            <a class="category-link" href="https://www.michaeljohnpena.com/categories/technology">Technology</a>
+            <a class="category-link" href="https://www.michaeljohnpena.com/docs/categories/technology">Technology</a>
             
         </div>
         
@@ -203,16 +203,16 @@ Throughout the years, the concept of NAS has developed and there is now a very t
             <i class="fas fa-tag"></i>
             
             
-            <a class="tag-link" href="https://www.michaeljohnpena.com/tags/azure" rel="tag">azure</a>
+            <a class="tag-link" href="https://www.michaeljohnpena.com/docs/tags/azure" rel="tag">azure</a>
             
              ,  
-            <a class="tag-link" href="https://www.michaeljohnpena.com/tags/cloud" rel="tag">cloud</a>
+            <a class="tag-link" href="https://www.michaeljohnpena.com/docs/tags/cloud" rel="tag">cloud</a>
             
              ,  
-            <a class="tag-link" href="https://www.michaeljohnpena.com/tags/nas" rel="tag">nas</a>
+            <a class="tag-link" href="https://www.michaeljohnpena.com/docs/tags/nas" rel="tag">nas</a>
             
              ,  
-            <a class="tag-link" href="https://www.michaeljohnpena.com/tags/storage" rel="tag">storage</a>
+            <a class="tag-link" href="https://www.michaeljohnpena.com/docs/tags/storage" rel="tag">storage</a>
             
         </div>
         
@@ -240,7 +240,7 @@ Throughout the years, the concept of NAS has developed and there is now a very t
 <p>Cloud Sync can also schedule upload times to avoid disrupting the network during office hours.</p>
 <h1 id="getting-started">Getting Started</h1>
 <p>Setting up Cloud Sync is fairly easy and a straightforward process. To get started, go to your Synology NAS landing page. Then go to &ldquo;Package Center&rdquo; to search, install, and open Cloud Sync.<!-- raw HTML omitted --></p>
-<p><img src="https://www.michaeljohnpena.com/2020/09/Package-Center-1024x558.png" alt="img"></p>
+<p><img src="https://www.michaeljohnpena.com/docs/2020/09/Package-Center-1024x558.png" alt="img"></p>
 <h2 id="choose-a-cloud-provider">Choose a Cloud Provider</h2>
 <p>After opening Cloud Sync, it will prompt you to choose a cloud provider. Choose Azure storage.</p>
 <h2 id="optional-create-an-azure-storage">Optional: Create an Azure storage</h2>
@@ -250,10 +250,10 @@ Throughout the years, the concept of NAS has developed and there is now a very t
 <p>Finish the wizard and create the resource.</p>
 <h2 id="optional-create-a-blob-container">Optional: Create a Blob Container</h2>
 <p>If you already have a blob container, skip to the next section. In your Azure storage, navigate to the Blob Service section of the main blade and click on Containers.</p>
-<p><img src="https://www.michaeljohnpena.com/2020/09/image-1.png" alt="img"></p>
+<p><img src="https://www.michaeljohnpena.com/docs/2020/09/image-1.png" alt="img"></p>
 <p>Create a container by clicking on the &ldquo;+ Container&rdquo; button. Assign a name and access to it.</p>
 <p>Note: For this specific exercise, the access level would not matter.</p>
-<p><img src="https://www.michaeljohnpena.com/2020/09/image-2-1024x492.png" alt="img"></p>
+<p><img src="https://www.michaeljohnpena.com/docs/2020/09/image-2-1024x492.png" alt="img"></p>
 <h2 id="retrieve-the-storage-key">Retrieve the Storage Key</h2>
 <p>We need a storage key to establish a secure connection between Cloud Sync and the Azure storage.</p>
 <p>To do this, go to the Azure Portal and navigate to the Azure storage that you want Cloud Sync to point to.</p>
@@ -301,11 +301,11 @@ Throughout the years, the concept of NAS has developed and there is now a very t
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="https://www.michaeljohnpena.com/">Home</a></li>
+          <li><a href="https://www.michaeljohnpena.com/docs/">Home</a></li>
          
-          <li><a href="https://www.michaeljohnpena.com/posts">Blog</a></li>
+          <li><a href="https://www.michaeljohnpena.com/docs/posts">Blog</a></li>
          
-          <li><a href="https://www.michaeljohnpena.com/about">About</a></li>
+          <li><a href="https://www.michaeljohnpena.com/docs/about">About</a></li>
         
       </ul>
     </div>
@@ -336,47 +336,47 @@ Throughout the years, the concept of NAS has developed and there is now a very t
   
   
   <li>
-    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f" aria-label="Facebook">
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f" aria-label="Facebook">
       <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&text=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Twitter">
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&text=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Twitter">
       <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Linkedin">
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Linkedin">
       <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&is_video=false&description=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Pinterest">
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&is_video=false&description=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Pinterest">
       <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="mailto:?subject=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage&body=Check out this article: https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f" aria-label="Email">
+    <a class="icon" href="mailto:?subject=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage&body=Check out this article: https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f" aria-label="Email">
       <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Pocket">
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Pocket">
       <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="reddit">
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&title=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="reddit">
       <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&name=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage&description=Foreword%20Synology%20reached%20out%20to%20me%20to%20give%20their%20new%20DiskStation%c2%a0DS920%2ba%20review.%20If%20you%26rsquo%3bre%20not%20yet%20aware%20of%20Synology%2c%20they%20are%20the%20leading%20NAS%20%28Network-attached%20storage%29%20provider%20for%20home%20and%20work%20use-cases.%20You%20can%20use%20a%20NAS%20for%20pretty%20much%20anything%20such%20as%20backing%20up%20files%2c%20sharing%20files%20in%20a%20local%20network%2c%20streaming%20media%20files%2c%20or%20have%20your%20own%20%26ldquo%3bprivate%20cloud%26rdquo%3b.%0aThroughout%20the%20years%2c%20the%20concept%20of%20NAS%20has%20developed%20and%20there%20is%20now%20a%20very%20thin%20line%20between%20doing%20things%20locally%20in%20your%20network%20and%20storage%20capabilities%20of%20cloud%20vendors." aria-label="Tumblr">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&name=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage&description=Foreword%20Synology%20reached%20out%20to%20me%20to%20give%20their%20new%20DiskStation%c2%a0DS920%2ba%20review.%20If%20you%26rsquo%3bre%20not%20yet%20aware%20of%20Synology%2c%20they%20are%20the%20leading%20NAS%20%28Network-attached%20storage%29%20provider%20for%20home%20and%20work%20use-cases.%20You%20can%20use%20a%20NAS%20for%20pretty%20much%20anything%20such%20as%20backing%20up%20files%2c%20sharing%20files%20in%20a%20local%20network%2c%20streaming%20media%20files%2c%20or%20have%20your%20own%20%26ldquo%3bprivate%20cloud%26rdquo%3b.%0aThroughout%20the%20years%2c%20the%20concept%20of%20NAS%20has%20developed%20and%20there%20is%20now%20a%20very%20thin%20line%20between%20doing%20things%20locally%20in%20your%20network%20and%20storage%20capabilities%20of%20cloud%20vendors." aria-label="Tumblr">
       <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&t=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Hacker News">
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.michaeljohnpena.com%2fdocs%2fblog%2fsynology-nas-series-cloud-sync-with-azure-storage%2f&t=Synology%20NAS%20Series%20%e2%80%93%20Cloud%20Sync%20with%20Azure%20Storage" aria-label="Hacker News">
       <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
     </a>
   </li>
@@ -410,9 +410,9 @@ Throughout the years, the concept of NAS has developed and there is now a very t
   </div>
 </body>
 
-<link rel="stylesheet" href=https://www.michaeljohnpena.com/lib/font-awesome/css/all.min.css>
-<script src=https://www.michaeljohnpena.com/lib/jquery/jquery.min.js></script>
-<script src=https://www.michaeljohnpena.com/js/main.js></script>
+<link rel="stylesheet" href=https://www.michaeljohnpena.com/docs/lib/font-awesome/css/all.min.css>
+<script src=https://www.michaeljohnpena.com/docs/lib/jquery/jquery.min.js></script>
+<script src=https://www.michaeljohnpena.com/docs/js/main.js></script>
 
 
 
