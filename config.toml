@@ -2,7 +2,7 @@ baseURL = "https://www.michaeljohnpena.com"
 languageCode = "en-us"
 title = "⚡️ Michael John Peña"
 theme = "cactus"
-Copyright = "- Michael John Peña 2021"
+Copyright = "- Michael John Peña"
 canonifyurls = true
 publishDir = "docs"
 

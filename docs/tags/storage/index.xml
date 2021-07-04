@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>storage on ⚡️ Michael John Peña</title>
-    <link>https://www.michaeljohnpena.com/docs/tags/storage/</link>
+    <link>https://www.michaeljohnpena.com/tags/storage/</link>
     <description>Recent content in storage on ⚡️ Michael John Peña</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>- Michael John Peña 2021</copyright>
-    <lastBuildDate>Mon, 28 Sep 2020 03:55:27 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/docs/tags/storage/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>- Michael John Peña</copyright>
+    <lastBuildDate>Mon, 28 Sep 2020 03:55:27 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/storage/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Synology NAS Series – Cloud Sync with Azure Storage</title>
-      <link>https://www.michaeljohnpena.com/docs/blog/synology-nas-series-cloud-sync-with-azure-storage/</link>
+      <link>https://www.michaeljohnpena.com/blog/synology-nas-series-cloud-sync-with-azure-storage/</link>
       <pubDate>Mon, 28 Sep 2020 03:55:27 +0000</pubDate>
       
-      <guid>https://www.michaeljohnpena.com/docs/blog/synology-nas-series-cloud-sync-with-azure-storage/</guid>
+      <guid>https://www.michaeljohnpena.com/blog/synology-nas-series-cloud-sync-with-azure-storage/</guid>
       <description>Foreword Synology reached out to me to give their new DiskStation DS920+a review. If you&amp;rsquo;re not yet aware of Synology, they are the leading NAS (Network-attached storage) provider for home and work use-cases. You can use a NAS for pretty much anything such as backing up files, sharing files in a local network, streaming media files, or have your own &amp;ldquo;private cloud&amp;rdquo;.
 Throughout the years, the concept of NAS has developed and there is now a very thin line between doing things locally in your network and storage capabilities of cloud vendors.</description>
     </item>
