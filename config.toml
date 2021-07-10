@@ -5,6 +5,7 @@ theme = "cactus"
 Copyright = "- Michael John Peña"
 canonifyurls = true
 publishDir = "docs"
+googleAnalytics = "UA-186803288-1"
 
 [params]
 colortheme = "white" # dark, light, white, or classic
