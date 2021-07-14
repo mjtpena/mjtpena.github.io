@@ -28,20 +28,25 @@ name = "Blog"
 url = "/posts"
 weight = 2
 
+[[menu.main]]
+name = "Micro"
+url = "/micro"
+weight = 3
+
 # [[menu.main]]
 # name = "Presentations"
 # url = "/presentations"
-# weight = 3
+# weight = 4
 
 # [[menu.main]]
 # name = "Projects"
 # url = "/projects"
-# weight = 4
+# weight = 5
 
 [[menu.main]]
 name = "About"
 url = "/about"
-weight = 5
+weight = 6
 
 [[params.social]]
   name = "twitter"
