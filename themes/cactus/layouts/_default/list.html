@@ -10,11 +10,9 @@
     {{ if in (print .URL) "mlogs" }} 
     <li class="micro-item">
       <div class="meta">
-        <time datetime="{{ time .Date }}" itemprop="datePublished">{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
-      </div>
-      <span>    
+        <time datetime="{{ time .Date }}" itemprop="datePublished">{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time> - 
         <a class="micro-title">{{ if .Title }} {{ .Title }} {{ else }} Untitled {{ end }}</a>
-      </span>
+      </div>
       <span>    
         <a class="micro-content">{{ if .Content }} {{ .Content }} {{ else }} Empty {{ end }}</a>
       </span>
