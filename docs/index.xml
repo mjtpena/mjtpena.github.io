@@ -7,16 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>- Michael John Peña</copyright>
-    <lastBuildDate>Wed, 14 Jul 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Boredom</title>
-      <link>https://www.michaeljohnpena.com/micro/boredom/</link>
-      <pubDate>Wed, 14 Jul 2021 02:19:19 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/micro/boredom/</guid>
-      <description>It&amp;rsquo;s okay to be bored from time to time. It means that you don&amp;rsquo;t have something that is urgent and important. It&amp;rsquo;s bad to be bored if it&amp;rsquo;s a coping mechanism to avoid stress. A right amount of stress is good for you, to keep you challenged and energised - also in a way have purpose in life. Aim to have boring days, so that out of the stressful day, you have some time to recharge and contemplate on what&amp;rsquo;s really important for you.</description>
-    </item>
-    
+    <lastBuildDate>Thu, 24 Jun 2021 16:20:29 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SSH Connect to Linux Server from a Mac using SOCKS5 Proxy</title>
       <link>https://www.michaeljohnpena.com/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</link>
@@ -182,6 +173,15 @@ For the past 10 years, I’ve spent my career dealing with software and the clou
       <guid>https://www.michaeljohnpena.com/projects/</guid>
       <description>Hello there 👋 Welcome to my little space of the internet that I can call mine.
 For the past 10 years, I’ve spent my career dealing with software and the cloud. I wore many hats from being a developer, tester, data engineer, IT operations, solutions architect, project manager, technical pre-sales, trainer, and everything else in between. I had some very successful outcomes and some that also failed or did not materialised.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.michaeljohnpena.com/micro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/micro/</guid>
+      <description></description>
     </item>
     
   </channel>
