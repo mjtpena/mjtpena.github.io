@@ -4,6 +4,7 @@ author: MJ Peña
 draft: false
 date: 2021-07-13T16:20:29+00:00
 url: /blog/my-ultimate-windows-and-mac-setup/
+featured_image: /2021/07/Battle-station-2021.jpeg
 categories:
   - Technology
   - Life-style
@@ -14,7 +15,7 @@ categories:
 ---
 
 # Introduction
-![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FEYv0qObMjm.jpeg?alt=media&token=b0c99d2d-96af-4ece-b458-3c8263fb671d)
+![img](/2021/07/Battle-station-2021.jpeg)
 __My Battle Station @ 2021__
 
 In a parallel world, I'll be just using 1 device and 1 Operating system for all the things. However, given the nature of my work with mobile, web, blockchain, machine learning, and cloud development, I need to have multiple devices to cater things.
