@@ -1,6 +1,6 @@
 ---
 title: "Boredom"
-date: 2021-07-14T02:19:19Z
+date: 2021-07-13T02:19:19Z
 draft: false
 ---
 
