@@ -7,13 +7,58 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>- Michael John Peña</copyright>
-    <lastBuildDate>Thu, 24 Jun 2021 16:20:29 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Jul 2021 16:20:29 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Life Style</title>
+      <link>https://www.michaeljohnpena.com/categories/life-style/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/categories/life-style/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MacOS</title>
+      <link>https://www.michaeljohnpena.com/categories/macos/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/categories/macos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mobile</title>
+      <link>https://www.michaeljohnpena.com/categories/mobile/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/categories/mobile/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Technology</title>
       <link>https://www.michaeljohnpena.com/categories/technology/</link>
-      <pubDate>Thu, 24 Jun 2021 16:20:29 +0000</pubDate>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
       
       <guid>https://www.michaeljohnpena.com/categories/technology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://www.michaeljohnpena.com/categories/web/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/categories/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://www.michaeljohnpena.com/categories/windows/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/categories/windows/</guid>
       <description></description>
     </item>
     
@@ -23,15 +68,6 @@
       <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
       
       <guid>https://www.michaeljohnpena.com/categories/ios-development/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mobile</title>
-      <link>https://www.michaeljohnpena.com/categories/mobile/</link>
-      <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/categories/mobile/</guid>
       <description></description>
     </item>
     
@@ -59,15 +95,6 @@
       <pubDate>Mon, 22 Feb 2021 05:45:26 +0000</pubDate>
       
       <guid>https://www.michaeljohnpena.com/categories/digital-intentionalization/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Life Style</title>
-      <link>https://www.michaeljohnpena.com/categories/life-style/</link>
-      <pubDate>Mon, 22 Feb 2021 05:45:26 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/categories/life-style/</guid>
       <description></description>
     </item>
     

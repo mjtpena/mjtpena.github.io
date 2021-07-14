@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MacOS on ⚡️ Michael John Peña</title>
+    <link>https://www.michaeljohnpena.com/categories/macos/</link>
+    <description>Recent content in MacOS on ⚡️ Michael John Peña</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>- Michael John Peña</copyright>
+    <lastBuildDate>Tue, 13 Jul 2021 16:20:29 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/categories/macos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Ultimate Windows and Mac Setup (2021 Edition)</title>
+      <link>https://www.michaeljohnpena.com/blog/my-ultimate-windows-and-mac-setup/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/blog/my-ultimate-windows-and-mac-setup/</guid>
+      <description>Introduction My Battle Station @ 2021
+In a parallel world, I&amp;rsquo;ll be just using 1 device and 1 Operating system for all the things. However, given the nature of my work with mobile, web, blockchain, machine learning, and cloud development, I need to have multiple devices to cater things.
+I tried doing &amp;ldquo;Shared mouse and keyboard&amp;rdquo; in the past such as Synergy, but I decided to use a KVM switch instead.</description>
+    </item>
+    
+  </channel>
+</rss>
