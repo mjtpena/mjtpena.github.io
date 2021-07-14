@@ -1,7 +1,6 @@
 ---
 title: "Boredom"
 date: 2021-07-14T02:19:19Z
-url: /micro/boredom/
 draft: false
 ---
 
