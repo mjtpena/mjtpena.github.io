@@ -29,8 +29,8 @@ url = "/posts"
 weight = 2
 
 [[menu.main]]
-name = "Micro"
-url = "/micro"
+name = "µLogs"
+url = "/mlogs"
 weight = 3
 
 # [[menu.main]]
