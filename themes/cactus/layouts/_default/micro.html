@@ -1,5 +1,5 @@
 {{ define "main"}}
-<div id="#archive">
+<div id="#log-archive">
   <ul class="micro-list">
   {{ range (sort .Paginator.Pages "Date" "desc") }}
     {{ $pageYear := (.Date.Format "2006") }}
