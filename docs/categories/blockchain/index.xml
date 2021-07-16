@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blockchain on ⚡️ Michael John Peña</title>
+    <link>https://www.michaeljohnpena.com/categories/blockchain/</link>
+    <description>Recent content in Blockchain on ⚡️ Michael John Peña</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>- Michael John Peña</copyright>
+    <lastBuildDate>Tue, 13 Jul 2021 16:20:29 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/categories/blockchain/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting Started with DeFi</title>
+      <link>https://www.michaeljohnpena.com/blog/getting-started-with-defi/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/blog/getting-started-with-defi/</guid>
+      <description>Introduction Blockchain is not dead. Actually, quite the contrary is happening in the past year. There are more and more interest and it&amp;rsquo;s gaining a lot more traction than before. A big portion of this growth is due to &amp;ldquo;DeFi&amp;rdquo; AKA Decentralised Finance applications. From the hyped cryptocurrencies, we are now seeing the new next wave of this transformation as we see more financial products being developed: lending, exchanges, yield farming, and pools just to name a few.</description>
+    </item>
+    
+  </channel>
+</rss>
