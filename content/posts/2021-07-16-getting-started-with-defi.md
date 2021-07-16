@@ -1,7 +1,7 @@
 ---
 title: Getting Started with DeFi
 author: MJ Peña
-draft: true
+draft: false
 date: 2021-07-13T16:20:29+00:00
 url: /blog/getting-started-with-defi/
 featured_image: /2021/07/Battle-station-2021.jpeg
@@ -55,39 +55,83 @@ Throughout the years, there has been so many use cases of blockchain and decentr
 
 ## Transparency
 
-Transparency is one of the most important reason on why you would even want to use blockchaind and decentralised technologies. With these technologies, you can have an end to end trace of all the transactions that are happeing within the chain and the DeFi apps. A lot of DeFi apps are also open-sourced in order to gain reputation and peer review from the wider community.
-
 ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FZb_xXukrwQ.png?alt=media&token=1a9e1a47-ab6c-43b5-aa37-61c49ea3bbc2)
 __SushiSwap contract on Ethereum__
 
+Transparency is one of the most important reason on why you would even want to use blockchaind and decentralised technologies. With these technologies, you can have an end to end trace of all the transactions that are happeing within the chain and the DeFi apps. A lot of DeFi apps are also open-sourced in order to gain reputation and peer review from the wider community.
 ## Accessibility
-
-Unlike traditional banking products, you need to be in a certain category or must have specific things in order to do transactions. A DeFi should be inclusive to all users all over the world regardless of your ethnicity, race, religion, gender, and to an extent your financial background.
 
 ![How DeFi Is Reinventing The World&#39;s Financial System](https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5f47c6d1393155131be2bed8%2F960x0.jpg%3Ffit%3Dscale)
 
 __Image taken from__ [Forbes: How DeFi is Reinventing The World's Financial System](https://www.forbes.com/sites/forbestechcouncil/2020/08/28/how-defi-is-reinventing-the-worlds-financial-system/)
 
-## Accountability
+Unlike traditional banking products, you need to be in a certain category or must have specific things in order to do transactions. A DeFi should be inclusive to all users all over the world regardless of your ethnicity, race, religion, gender, and to an extent your financial background.
 
-Althoguht it is totally optional, as the founder of Bitcoin, Satoshi Nakamoto still remains anonymous; the world is changing. It is intrinsic in our nature to trust people, brand, and entities. As there has been a lot of scams and risks in this industry, having to know the founders and their background would gain confidence for people to use your DeFi product.
+## Accountability
 
 ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FWsItyWFeKu.png?alt=media&token=ce7f8509-fb73-4f87-9a3c-3296ab096ee4)
 
-## Interoperability
+Althoguht it is totally optional, as the founder of Bitcoin, Satoshi Nakamoto still remains anonymous; the world is changing. It is intrinsic in our nature to trust people, brand, and entities. As there has been a lot of scams and risks in this industry, having to know the founders and their background would gain confidence for people to use your DeFi product.
 
-This is a hard technical problem to have. Interoperability means your asset or product can work to various blockchain networks, or supports multiple types of coin, and even support non-blockchain data. I've dealt with these and I'm telling you it's not one of the easiest thing to work on. There are a lot of performance considerations as well as overall user experiences. 
+## Interoperability
 
 ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FpauvZSSEHw.png?alt=media&token=7167728a-127d-4918-84e0-10359081c28a)
 __Image taken from__ [Binance Academy Article](https://academy.binance.com/en/articles/binance-smart-chain-vs-ethereum-what-s-the-difference)
 
-# Use Cases and Popular DApps
+This is a hard technical problem to have. Interoperability means your asset or product can work to various blockchain networks, or supports multiple types of coin, and even support non-blockchain data. I've dealt with these and I'm telling you it's not one of the easiest thing to work on. There are a lot of performance considerations as well as overall user experiences. 
 
+
+# Use Cases and Popular DeFi Apps
+
+There are a lot of popular use cases and DeFi Apps lately. Although some are more dominant than others in terms of locked asset, there are still a lot of opportunities to capture more market.
+Here are some of the popular DApps (Decentralised Apps) out there that are categorised as DeFi.
 ## Exchanges
+
+**UniSwap**
+ is a fully decentralized on-chain protocol for token exchange on Ethereum that uses liquidity pools instead of order books.
+![What is the Uniswap Protocol Token %28UNI%29? | Binance Research](https://research.binance.com/static/images/projects/uniswap/logo.png)
+https://uniswap.exchange
+
+
+**SushiSwap**
+ is a fully decentralized on-chain protocol for exchanging tokens through a process of automated market-making (AMM) which uses 'liquidity pools' rather than an orderbook.
+![SushiSwap price today, SUSHI live marketcap, chart, and info | CoinMarketCap](https://s2.coinmarketcap.com/static/img/coins/200x200/6758.png)
+https://app.sushi.com
+
+**PancakeSwap**
+ is a decentralized exchange built on Binance Smart Chain.
+![PancakeSwap price today, CAKE live marketcap, chart, and info |  CoinMarketCap](https://s2.coinmarketcap.com/static/img/coins/200x200/7186.png)
+https://pancakeswap.finance
 
 ## Lending
 
+**Compound**
+ is an algorithmic money market protocol on Ethereum that lets users earn interest or borrow assets against collateral.
+[Compound Labs %28@compoundfinance%29 | Twitter](https://pbs.twimg.com/profile_images/1152363392595714048/OVJu6nwQ_400x400.png)
+https://app.compound.finance/
+
+**Aave**
+ (from the Finnish word for "ghost") is an open source non-custodial protocol on Ethereum for decentralized lending and borrowing
+![Aave %28@AaveAave%29 | Twitter](https://pbs.twimg.com/profile_images/1186270065085370368/J1YJtvdI_400x400.jpg)
+https://app.aave.com/
+
+**MakerDAO**
+ is a decentralized credit platform on Ethereum that supports Dai, a stablecoin whose value is pegged to USD.
+![Maker %28@MakerDAO%29 | Twitter](https://pbs.twimg.com/profile_images/1196456510424961025/zacb-9pN_400x400.jpg)
+https://oasis.app
+
+
 ## Assets / Yields
+
+**Synthetix**
+ is a decentralized platform on Ethereum for the creation of Synths: on-chain synthetic assets that track the value of real-world assets.
+![Synthetix ⚔️ %28@synthetix_io%29 | Twitter](https://pbs.twimg.com/profile_images/1299241789669269508/HU-JT5GI_400x400.png)
+https://staking.synthetix.io
+
+**Yearn.finance**
+ is a decentralized ecosystem of aggregators that utilize lending services such as Aave, Compound, Dydx, and Fulcrum to optimize your token lending.
+![Yearn.Finance Doesn&#39;t Need More YFI Tokens to Reward Its Developers •  CryptoMode](https://cryptomode.com/wp-content/uploads/2020/08/CryptoMode-YFI-42-Coin-Bitcoin.png)
+https://yearn.finance
 
 # How to Get Started?
 
@@ -96,6 +140,8 @@ If you want to get started creating a DeFi product (before jumping to code or ha
 ## Define your "Asset"
 
 You first have to define what is the "asset" of your product. Are you thinking of creating an exchange, a marketplace, lending platform, etc.
+
+These are some of the common standards to look at to get started:
 
 - Your own fungible token ie create your own Currency (ERC-20) / (BEP-20)
     - https://ethereum.org/en/developers/docs/standards/tokens/erc-20/
@@ -115,7 +161,8 @@ The popular ones are:
 - Binance Smart Chain
 - TRON
 - Stellar
-and you'll be surprised that there are more.
+
+and you'll be surprised that there are more. A lot more.
 
 Another option is to hard fork one of these or spin-up your own infrastructure.
 
