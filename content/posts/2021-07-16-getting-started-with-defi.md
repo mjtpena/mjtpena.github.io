@@ -4,7 +4,7 @@ author: MJ Peña
 draft: false
 date: 2021-07-13T16:20:29+00:00
 url: /blog/getting-started-with-defi/
-featured_image: /2021/07/Battle-station-2021.jpeg
+featured_image: /2021/07/crypto.jpg
 categories:
   - Technology
   - Blockchain
