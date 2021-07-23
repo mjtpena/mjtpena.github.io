@@ -11,6 +11,7 @@ categories:
   - Mobile
   - Technology
 ---
+
 The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .NET only works only on Windows. However, as the journey to "One .NET" is still unfolding, there is a lot of confusion on how we can use .NET on MacOS. There is Mono, .NET Core, .NET 5, Xamarin.Mac, Xamarin.Forms, Mac Catalyst, .NET 6, and MAUI.
 
 # Mono and .NET
@@ -23,19 +24,22 @@ The .NET framework (and the wider ecosystem) has embraced a lot of openness thes
 
 - Xamarin was the commercial spin-off of Mono for Mac, iOS, and Android. It was later acquired by Microsoft and became part of the wider Developer tools ecosystem such as Visual Studio and .NET. To understand how it relates specifically to Mac OS, we have to talk about Xamarin.Mac and Xamarin.Forms.
 - ## Xamarin.Mac
-    - It started as MonoMac and eventually carried out as Xamarin.Mac. These libraries create bindings between the native Mac OS APIs and exposed as C#. This allows you to create a Mac OS application written in C# instead of Objective-C/Swift.
 
-    - Under the hood, it still uses XCode and follows the same principles like: AppDelegatre, Main, Entitlements, Plists, provisioning profiles, etc. Xamarin.Mac allows you to transpile the C# code into something that XCode will eventually compile to create the ".app" package.
+  - It started as MonoMac and eventually carried out as Xamarin.Mac. These libraries create bindings between the native Mac OS APIs and exposed as C#. This allows you to create a Mac OS application written in C# instead of Objective-C/Swift.
 
-    - In Xamarin.Mac (using Visual Studio for Mac) you can define your user interfaces using Storyboards and will invoke XCode for you to do the UI components and data bindings.
+  - Under the hood, it still uses XCode and follows the same principles like: AppDelegatre, Main, Entitlements, Plists, provisioning profiles, etc. Xamarin.Mac allows you to transpile the C# code into something that XCode will eventually compile to create the ".app" package.
+
+  - In Xamarin.Mac (using Visual Studio for Mac) you can define your user interfaces using Storyboards and will invoke XCode for you to do the UI components and data bindings.
+
 - ## Xamarin.Forms
-    - Xamarin.Forms is a cross-platform UI framework that allows you to create native applications on MacOS, iOS, Android, Windows, and even Tizen OS. Unlike Xamarin.Mac, using Xamarin.Forms, you can use XAML and C# to create your components.
 
-    - The advantage of this approach is the flexibility of targeting multiple platforms using the same code base. The result, however, is still native. Even if you coded your button in C# / XAML, the result is still a native MacOS button.
+  - Xamarin.Forms is a cross-platform UI framework that allows you to create native applications on MacOS, iOS, Android, Windows, and even Tizen OS. Unlike Xamarin.Mac, using Xamarin.Forms, you can use XAML and C# to create your components.
 
-    - Under the hood, you would still have a Xamarin.Mac project that just calls the Xamarin.Forms project. It just abstracts the creation of the app in Xamarin.Forms layer.
+  - The advantage of this approach is the flexibility of targeting multiple platforms using the same code base. The result, however, is still native. Even if you coded your button in C# / XAML, the result is still a native MacOS button.
 
-    - You have the flexibility on your Xamarin.Forms project to only render components depending on the target platform: ie show this button on MacOS but not on Windows. You also have the flexibility of having a single function on Xamarin.Forms that implements differently on each platform: ie press this button and it will do X for MacOS and it will do Y for Windows.
+  - Under the hood, you would still have a Xamarin.Mac project that just calls the Xamarin.Forms project. It just abstracts the creation of the app in Xamarin.Forms layer.
+
+  - You have the flexibility on your Xamarin.Forms project to only render components depending on the target platform: ie show this button on MacOS but not on Windows. You also have the flexibility of having a single function on Xamarin.Forms that implements differently on each platform: ie press this button and it will do X for MacOS and it will do Y for Windows.
 
 # .NET 5 (Core)
 
@@ -62,16 +66,16 @@ The .NET framework (and the wider ecosystem) has embraced a lot of openness thes
 - .NET MAUI (Multi-platform App UI) is the evolution of Xamarin.Forms in combination of UWP. Imagine having a single unified UI approach in building apps that works across platform. Think of it in the future, you can port your legacy WinForms / WPF app to run on iPad OS with MAUI and MacCatalyst!
 
 - These are the workloads that apply to MacOS
-    - `dotnet workload install microsoft-macos-sdk-full`
-    - `dotnet workload install microsoft-maccatalyst-sdk-full`
-    - `dotnet workload install maui-maccatalyst`
+  - `dotnet workload install microsoft-macos-sdk-full`
+  - `dotnet workload install microsoft-maccatalyst-sdk-full`
+  - `dotnet workload install maui-maccatalyst`
 
 ![h:311 w:441 bg right](/2021/07/maui.png)
 
 - If you're already familiar with Xamarin ecosystem, pretty much this is the simplified version:
-    - Xamarin.Mac => Microsoft-MacOS
-    - Xamarin.MaciOS + Mac Catalyst => Microsoft-MacCatalyst
-    - Xamarin.Forms + UWP => **MAUI**
+  - Xamarin.Mac => Microsoft-MacOS
+  - Xamarin.MaciOS + Mac Catalyst => Microsoft-MacCatalyst
+  - Xamarin.Forms + UWP => **MAUI**
 
 # Summary
 
@@ -80,3 +84,11 @@ The .NET framework (and the wider ecosystem) has embraced a lot of openness thes
 - .NET 5 is relevant right now to MacOS to host server-side applications, not client apps you install on your "Applications" folder.
 - .NET 6 onwards creates an interesting take of having .NET to run everywhere! There are a lot of opportunities to share code between Web, Mobile, and IoT projects.
 - MAUI is a road forward in creating rich and native user experience that can work to all platforms.
+
+# Resources
+
+[mjtpena/Mac.NET.Samples](https://github.com/mjtpena/Mac.NET.Samples)
+[Mac Catalyst Overview - Apple Developer](https://developer.apple.com/mac-catalyst/)
+[.NET Blog (microsoft.com)](https://devblogs.microsoft.com/dotnet/)
+[dotnet/maui-samples](https://github.com/dotnet/maui-samples)
+[Mono Project](https://www.mono-project.com/)
