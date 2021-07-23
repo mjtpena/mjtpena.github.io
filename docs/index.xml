@@ -7,13 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>- Michael John Peña</copyright>
-    <lastBuildDate>Fri, 23 Jul 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jul 2021 03:56:25 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sleep</title>
+      <link>https://www.michaeljohnpena.com/mlogs/2021-07-23-focus/</link>
+      <pubDate>Fri, 23 Jul 2021 03:56:25 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/mlogs/2021-07-23-focus/</guid>
+      <description>Focus is very important. This is what sets a task to be done in months or days into hours and minutes. Having focus means having the dexterity to know where to shoot your arrow. For me to be in focus, I need to be in flow. I was a victim of being a &amp;ldquo;hardworker&amp;rdquo; in the past, where I burn the midnight oil to non-valuable things.
+I need to make sure I setup my mindset and environment to respect my thought processing.</description>
+    </item>
+    
     <item>
       <title>Developing MacOS Apps using .NET</title>
-      <link>https://www.michaeljohnpena.com/blog/message-to-the-young/</link>
+      <link>https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/</link>
       <pubDate>Fri, 23 Jul 2021 02:19:19 +0000</pubDate>
       
-      <guid>https://www.michaeljohnpena.com/blog/message-to-the-young/</guid>
+      <guid>https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/</guid>
       <description>The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .NET only works on Windows. However, as the journey to &amp;ldquo;One .NET&amp;rdquo; is still unfolding, there is a lot of confusion on how we can use .NET on MacOS. There is Mono, .NET Core, .NET 5, Xamarin.Mac, Xamarin.Forms, Mac Catalyst, .NET 6, and MAUI. This blog post explains some of the core concepts across these nomenclature.</description>
     </item>
     
