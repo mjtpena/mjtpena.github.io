@@ -12,7 +12,7 @@ categories:
   - Technology
 ---
 
-The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .NET only works only on Windows. However, as the journey to "One .NET" is still unfolding, there is a lot of confusion on how we can use .NET on MacOS. There is Mono, .NET Core, .NET 5, Xamarin.Mac, Xamarin.Forms, Mac Catalyst, .NET 6, and MAUI.
+The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .NET only works on Windows. However, as the journey to "One .NET" is still unfolding, there is a lot of confusion on how we can use .NET on MacOS. There is Mono, .NET Core, .NET 5, Xamarin.Mac, Xamarin.Forms, Mac Catalyst, .NET 6, and MAUI. This blog post explains some of the core concepts across these nomenclature.
 
 # Mono and .NET
 

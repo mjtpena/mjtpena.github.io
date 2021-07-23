@@ -14,8 +14,7 @@
       <pubDate>Fri, 23 Jul 2021 02:19:19 +0000</pubDate>
       
       <guid>https://www.michaeljohnpena.com/blog/message-to-the-young/</guid>
-      <description>The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .NET only works only on Windows. However, as the journey to &amp;ldquo;One .NET&amp;rdquo; is still unfolding, there is a lot of confusion on how we can use .NET on MacOS. There is Mono, .NET Core, .NET 5, Xamarin.Mac, Xamarin.Forms, Mac Catalyst, .NET 6, and MAUI.
-Mono and .NET   Mono is the original vision and execution of having .</description>
+      <description>The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .NET only works on Windows. However, as the journey to &amp;ldquo;One .NET&amp;rdquo; is still unfolding, there is a lot of confusion on how we can use .NET on MacOS. There is Mono, .NET Core, .NET 5, Xamarin.Mac, Xamarin.Forms, Mac Catalyst, .NET 6, and MAUI. This blog post explains some of the core concepts across these nomenclature.</description>
     </item>
     
     <item>
