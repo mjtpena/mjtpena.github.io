@@ -87,8 +87,8 @@ The .NET framework (and the wider ecosystem) has embraced a lot of openness thes
 
 # Resources
 
-[mjtpena/Mac.NET.Samples](https://github.com/mjtpena/Mac.NET.Samples)
-[Mac Catalyst Overview - Apple Developer](https://developer.apple.com/mac-catalyst/)
-[.NET Blog (microsoft.com)](https://devblogs.microsoft.com/dotnet/)
-[dotnet/maui-samples](https://github.com/dotnet/maui-samples)
-[Mono Project](https://www.mono-project.com/)
+- [mjtpena/Mac.NET.Samples](https://github.com/mjtpena/Mac.NET.Samples)
+- [Mac Catalyst Overview - Apple Developer](https://developer.apple.com/mac-catalyst/)
+- [.NET Blog (microsoft.com)](https://devblogs.microsoft.com/dotnet/)
+- [dotnet/maui-samples](https://github.com/dotnet/maui-samples)
+- [Mono Project](https://www.mono-project.com/)
