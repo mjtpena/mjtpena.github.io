@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>- Michael John Peña</copyright>
-    <lastBuildDate>Thu, 29 Jul 2021 03:56:25 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Jul 2021 03:56:25 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Markdown</title>
+      <link>https://www.michaeljohnpena.com/mlogs/2021-07-30-markdown/</link>
+      <pubDate>Fri, 30 Jul 2021 03:56:25 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/mlogs/2021-07-30-markdown/</guid>
+      <description>I&amp;rsquo;m particularly liking the Markdown format in creating notes. Thanks to [[RoamResearch]] and [[Hugo]] (with the whole JAMstack craze), I am being sucked in this cult. I am actually realizing the benefits as I have more structure on my thoughts and flow of information. I follow a format that would work to most systems these days, and it&amp;rsquo;s easy to convert and transpose anywhere.
+I am still learning some of the advanced capabilities of Markdown.</description>
+    </item>
+    
     <item>
       <title>Podcasts</title>
       <link>https://www.michaeljohnpena.com/mlogs/2021-07-29-podcasts/</link>
