@@ -174,8 +174,18 @@ if (!doNotTrack) {
     <div id="toc">
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#xamarinmac">Xamarin.Mac</a></li>
-    <li><a href="#xamarinforms">Xamarin.Forms</a></li>
+    <li><a href="#mono-and-net">Mono and .NET</a></li>
+    <li><a href="#xamarin">Xamarin</a>
+      <ul>
+        <li><a href="#xamarinmac">Xamarin.Mac</a></li>
+        <li><a href="#xamarinforms">Xamarin.Forms</a></li>
+      </ul>
+    </li>
+    <li><a href="#net-5-core">.NET 5 (Core)</a></li>
+    <li><a href="#mac-catalyst">Mac Catalyst</a></li>
+    <li><a href="#net-6-and-maui">.NET 6 and MAUI</a></li>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#resources">Resources</a></li>
   </ul>
 </nav>
     </div>
@@ -222,7 +232,7 @@ if (!doNotTrack) {
   
     <div class="content" itemprop="articleBody">
       <p>The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .NET only works on Windows. However, as the journey to &ldquo;One .NET&rdquo; is still unfolding, there is a lot of confusion on how we can use .NET on MacOS. There is Mono, .NET Core, .NET 5, Xamarin.Mac, Xamarin.Forms, Mac Catalyst, .NET 6, and MAUI. This blog post explains some of the core concepts across these nomenclature.</p>
-<h1 id="mono-and-net">Mono and .NET</h1>
+<h2 id="mono-and-net">Mono and .NET</h2>
 <ul>
 <li>
 <p>Mono is the original vision and execution of having .NET and C# available to non-Windows platform. The project has been around since 2004 and was as an alternative way of using .NET on MacOS. It&rsquo;s not officially supported by Microsoft (specially back then) and it&rsquo;s a project started by the legendary Miguel de Icaza who also started GNOME and eventually Xamarin.</p>
@@ -231,13 +241,13 @@ if (!doNotTrack) {
 <p>Mono can run not just on MacOS and Linux, but also on gaming and mobile operating systems like iOS, Android, and PlayStation. It&rsquo;s the roots of what&rsquo;s now called Xamarin.</p>
 </li>
 </ul>
-<h1 id="xamarin">Xamarin</h1>
+<h2 id="xamarin">Xamarin</h2>
 <ul>
 <li>
 <p>Xamarin was the commercial spin-off of Mono for Mac, iOS, and Android. It was later acquired by Microsoft and became part of the wider Developer tools ecosystem such as Visual Studio and .NET. To understand how it relates specifically to Mac OS, we have to talk about Xamarin.Mac and Xamarin.Forms.</p>
 </li>
 <li>
-<h2 id="xamarinmac">Xamarin.Mac</h2>
+<h3 id="xamarinmac">Xamarin.Mac</h3>
 <ul>
 <li>
 <p>It started as MonoMac and eventually carried out as Xamarin.Mac. These libraries create bindings between the native Mac OS APIs and exposed as C#. This allows you to create a Mac OS application written in C# instead of Objective-C/Swift.</p>
@@ -251,7 +261,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 <li>
-<h2 id="xamarinforms">Xamarin.Forms</h2>
+<h3 id="xamarinforms">Xamarin.Forms</h3>
 <ul>
 <li>
 <p>Xamarin.Forms is a cross-platform UI framework that allows you to create native applications on MacOS, iOS, Android, Windows, and even Tizen OS. Unlike Xamarin.Mac, using Xamarin.Forms, you can use XAML and C# to create your components.</p>
@@ -268,7 +278,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h1 id="net-5-core">.NET 5 (Core)</h1>
+<h2 id="net-5-core">.NET 5 (Core)</h2>
 <ul>
 <li>
 <p>.NET 5 is now a general purpose framework to build apps targeting Windows, Linux, and MacOS. Unlike the traditional &ldquo;.NET framework&rdquo; which is exclusive to Windows, .NET 5 (previous iteration called .NET Core) is a step to create apps that can use MacOS as the host. Think of it you can now treat MacOS as the &ldquo;server&rdquo; host of your .NET app.</p>
@@ -280,7 +290,7 @@ if (!doNotTrack) {
 <p>However, .NET 5 doesn&rsquo;t interface yet with Cocoa or the rich native libraries of MacOS like Xamarin.Mac does. More of that on .NET 6 onwards.</p>
 </li>
 </ul>
-<h1 id="mac-catalyst">Mac Catalyst</h1>
+<h2 id="mac-catalyst">Mac Catalyst</h2>
 <ul>
 <li>
 <p>Mac Catalyst is totally independent of .NET 6 or even Xamarin. It is basically Apple&rsquo;s approach of having shared libraries between Mac OS and the new iPad OS. This allows you to have unified and consistent components like pop-up buttons, tooltips, window&rsquo;s sidebar. This also allows you to share code for implementing GameKit, PassKit, Core Audio, Core Bluetooth amongst others.</p>
@@ -292,7 +302,7 @@ if (!doNotTrack) {
 <p>In order to run Mac Catalyst, you need XCode 13 on either Big Sur or Monterey.</p>
 </li>
 </ul>
-<h1 id="net-6-and-maui">.NET 6 and MAUI</h1>
+<h2 id="net-6-and-maui">.NET 6 and MAUI</h2>
 <ul>
 <li>
 <p>There are a lot of updates for .NET 6, and it&rsquo;s very exciting because this is really a borderless unified framework.</p>
@@ -322,7 +332,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h1 id="summary">Summary</h1>
+<h2 id="summary">Summary</h2>
 <ul>
 <li>Mono is arguably the roots and inspiration on having .NET to run across all platforms (besides Windows).</li>
 <li>Xamarin made its way to having .NET runs commercially on MacOS and mobile platforms.</li>
@@ -330,7 +340,7 @@ if (!doNotTrack) {
 <li>.NET 6 onwards creates an interesting take of having .NET to run everywhere! There are a lot of opportunities to share code between Web, Mobile, and IoT projects.</li>
 <li>MAUI is a road forward in creating rich and native user experience that can work to all platforms.</li>
 </ul>
-<h1 id="resources">Resources</h1>
+<h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://github.com/mjtpena/Mac.NET.Samples">mjtpena/Mac.NET.Samples</a></li>
 <li><a href="https://developer.apple.com/mac-catalyst/">Mac Catalyst Overview - Apple Developer</a></li>
@@ -369,8 +379,18 @@ if (!doNotTrack) {
     <div id="toc-footer" style="display: none">
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#xamarinmac">Xamarin.Mac</a></li>
-    <li><a href="#xamarinforms">Xamarin.Forms</a></li>
+    <li><a href="#mono-and-net">Mono and .NET</a></li>
+    <li><a href="#xamarin">Xamarin</a>
+      <ul>
+        <li><a href="#xamarinmac">Xamarin.Mac</a></li>
+        <li><a href="#xamarinforms">Xamarin.Forms</a></li>
+      </ul>
+    </li>
+    <li><a href="#net-5-core">.NET 5 (Core)</a></li>
+    <li><a href="#mac-catalyst">Mac Catalyst</a></li>
+    <li><a href="#net-6-and-maui">.NET 6 and MAUI</a></li>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#resources">Resources</a></li>
   </ul>
 </nav>
     </div>
