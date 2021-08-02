@@ -1,14 +1,14 @@
 {
   "list": [
     {
-      "name": "Cloud Analytics with Microsoft Azure",
-      "url": "https://www.packtpub.com/product/cloud-analytics-with-microsoft-azure-second-edition/9781800202436",
-      "desc": "A book I co-authored. Cloud Analytics with Microsoft Azure serves as a comprehensive guide for big data analysis and processing using a range of Microsoft Azure features."
-    },
-    {
       "name": "The Battle of Clouds",
       "url": "https://open.spotify.com/show/3UCdDeqk1RnCXb8m6wVADn",
       "desc": "The battle of clouds aims to bridge complex cloud and technology topics to the Filipino community."
+    },
+    {
+      "name": "Cloud Analytics with Microsoft Azure",
+      "url": "https://www.packtpub.com/product/cloud-analytics-with-microsoft-azure-second-edition/9781800202436",
+      "desc": "A book I co-authored. Cloud Analytics with Microsoft Azure serves as a comprehensive guide for big data analysis and processing using a range of Microsoft Azure features."
     }
   ]
 }
