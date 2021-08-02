@@ -16,6 +16,8 @@ showAllPostsOnHomePage = false
 postsOnHomePage = 5
 showProjectsList = false
 rss = true
+  [params.comments]
+    enabled = true
 
 # Main menu which appears below site header.
 [[menu.main]]
