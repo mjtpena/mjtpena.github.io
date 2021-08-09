@@ -1,6 +1,36 @@
 {
   "list": [
     {
+      "name": "DePost (TBA)",
+      "url": "#",
+      "desc": "A next generation file unlock protocol using decentralized technologies."
+    },
+    {
+      "name": "Farm to Fork supply chain",
+      "url": "https://lumachain.io/",
+      "desc": "A first generation patented supply chain solution for the protein industry using Microsoft Azure, AI, Blockchain, Hybrid Cloud, and IoT technologies."
+    },
+    {
+      "name": "Apple Wallet - Building Access",
+      "url": "#",
+      "desc": "First generation Apple wallet mobile implementation for building, locker, and property related accesses."
+    },
+    {
+      "name": "Smart Building - Workplace Locations",
+      "url": "#",
+      "desc": "A first in the world for mobile and enterprise smart enterprise building spaces management and utilisation system."
+    },
+    {
+      "name": "React Native Modernization",
+      "url": "#",
+      "desc": "Migrating an overly complex React Native app to simpler and modern native stack: React Hooks, Swift & Kotlin native bindings, and more."
+    },
+    {
+      "name": "Building a house in Sydney",
+      "url": "#",
+      "desc": "We're currently in the journey of building our 'forever home' in the suburbs of Sydney, NSW, Australia."
+    },
+    {
       "name": "The Battle of Clouds",
       "url": "https://open.spotify.com/show/3UCdDeqk1RnCXb8m6wVADn",
       "desc": "The battle of clouds aims to bridge complex cloud and technology topics to the Filipino community."
