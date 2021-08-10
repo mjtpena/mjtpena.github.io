@@ -7,61 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>- Michael John Peña</copyright>
-    <lastBuildDate>Mon, 09 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Blockchain</title>
-      <link>https://www.michaeljohnpena.com/categories/blockchain/</link>
-      <pubDate>Mon, 09 Aug 2021 02:19:19 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/categories/blockchain/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Crypto</title>
-      <link>https://www.michaeljohnpena.com/categories/crypto/</link>
-      <pubDate>Mon, 09 Aug 2021 02:19:19 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/categories/crypto/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ethereum</title>
-      <link>https://www.michaeljohnpena.com/categories/ethereum/</link>
-      <pubDate>Mon, 09 Aug 2021 02:19:19 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/categories/ethereum/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NFT</title>
-      <link>https://www.michaeljohnpena.com/categories/nft/</link>
-      <pubDate>Mon, 09 Aug 2021 02:19:19 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/categories/nft/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Stablecoins</title>
-      <link>https://www.michaeljohnpena.com/categories/stablecoins/</link>
-      <pubDate>Mon, 09 Aug 2021 02:19:19 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/categories/stablecoins/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Technology</title>
-      <link>https://www.michaeljohnpena.com/categories/technology/</link>
-      <pubDate>Mon, 09 Aug 2021 02:19:19 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/categories/technology/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Fri, 23 Jul 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>.NET</title>
       <link>https://www.michaeljohnpena.com/categories/.net/</link>
@@ -90,6 +36,15 @@
     </item>
     
     <item>
+      <title>Technology</title>
+      <link>https://www.michaeljohnpena.com/categories/technology/</link>
+      <pubDate>Fri, 23 Jul 2021 02:19:19 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/categories/technology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Motivation</title>
       <link>https://www.michaeljohnpena.com/categories/motivation/</link>
       <pubDate>Wed, 21 Jul 2021 16:20:29 +0000</pubDate>
@@ -113,6 +68,15 @@
       <pubDate>Wed, 21 Jul 2021 16:20:29 +0000</pubDate>
       
       <guid>https://www.michaeljohnpena.com/categories/philisopy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blockchain</title>
+      <link>https://www.michaeljohnpena.com/categories/blockchain/</link>
+      <pubDate>Thu, 15 Jul 2021 16:20:29 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/categories/blockchain/</guid>
       <description></description>
     </item>
     

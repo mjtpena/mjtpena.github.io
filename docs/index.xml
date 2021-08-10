@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>- Michael John Peña</copyright>
-    <lastBuildDate>Mon, 09 Aug 2021 03:56:25 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Aug 2021 03:56:25 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NFTs</title>
+      <link>https://www.michaeljohnpena.com/mlogs/2021-08-10-nfts/</link>
+      <pubDate>Tue, 10 Aug 2021 03:56:25 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/mlogs/2021-08-10-nfts/</guid>
+      <description>Non-Fungible Tokens or also known as NFTs are a big hype right now. It’s been around for quite some time now, but we’re just seeing more use cases and platforms emerging as part of this trend. We are now seeing more and more projects trying to “tokenise” a physical or digital asset.
+I believe in this use case of [[Blockchain]], and I can argue that it’s probably one of the very few proper use cases of it.</description>
+    </item>
+    
     <item>
       <title>Sydney</title>
       <link>https://www.michaeljohnpena.com/mlogs/2021-08-09-sydney/</link>
@@ -15,15 +25,6 @@
       
       <guid>https://www.michaeljohnpena.com/mlogs/2021-08-09-sydney/</guid>
       <description>Sydney is home for me. When I first came here on 2011, I already knew that this place is home and this is where I want to grow a family. There are so many things I like about Sydney: having both my sisters here and extended family, from food and people diversity, a lot of friends I met along the way. It brought me a lot of opportunity, from being a coder, consultant, and entrepreneur; I thrived in this place.</description>
-    </item>
-    
-    <item>
-      <title>What are these blockchain and crypto tokens?</title>
-      <link>https://www.michaeljohnpena.com/blog/blockchain-tokens/</link>
-      <pubDate>Mon, 09 Aug 2021 02:19:19 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/blog/blockchain-tokens/</guid>
-      <description>So you keep hearing or reading about &amp;ldquo;tokens&amp;rdquo;, these &amp;ldquo;cryptos&amp;rdquo;, the &amp;ldquo;blockchain bitcoins&amp;rdquo;, and so on. It&amp;rsquo;s been quite some time now that it has involved me with blockchains and cryptos that over and over, I have to explain to people (often new clients) on what are these tokens. Even until now, at almost late 2021, I still get asked about these: Is it Bitcoin? Is it Ethereum? Is it Coin X, Coin Y?</description>
     </item>
     
     <item>

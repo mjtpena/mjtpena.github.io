@@ -2,7 +2,7 @@
 title: What are these blockchain and crypto tokens?
 author: MJ Peña
 draft: false
-date: 2021-08-09T02:19:19Z
+date: 2021-08-11T02:19:19Z
 url: /blog/blockchain-tokens/
 featured_image: /2021/08/coins.jpg
 categories:
