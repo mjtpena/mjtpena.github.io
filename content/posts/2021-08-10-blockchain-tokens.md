@@ -14,7 +14,7 @@ categories:
   - Stablecoins
 ---
 
-So you keep hearing or reading about "tokens", these "cryptos", the "blockchain bitcoins", and so on. It's been quite some time now that it has involved me with blockchains and cryptos that over and over, I have to explain to people (often new clients) on what are these tokens. Even until now, at almost late 2021, I still get asked about these: Is it Bitcoin? Is it Ethereum? Is it Coin X, Coin Y? What are these NFTs? This is my attempt on how I can simplify these concepts to answer most of the important questions like what are these different tokens and shed some light on some real world use cases of them/
+So you keep hearing or reading about "tokens", these "cryptos", the "blockchain bitcoins", and so on. It's been quite some time now that it has involved me with blockchains and cryptos that over and over, I have to explain to people (often new clients) on what are these tokens. Even until now, at almost late 2021, I still get asked about these: Is it Bitcoin? Is it Ethereum? Is it Coin X, Coin Y? What are these NFTs? This is my attempt on how I can simplify these concepts to answer most of the important questions like what are these different tokens and shed some light on some real world use cases of them.
 
 The term token is so generic that we have used it across different industries, practices, and domains. Like if you talk about tokens in web development & security, it's most likely about the "Access Tokens". But in the blockchain world, it's somehow different. To avoid the confusion further, let's narrow it down to 3 major types of tokens that are popular right now in circulation. They are the fungible tokens, non-fungible tokens (NFTs), and hybrid tokens.
 
