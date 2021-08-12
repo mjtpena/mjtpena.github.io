@@ -4,14 +4,7 @@ author: MJ Peña
 type: page
 date: 2020-08-24T04:01:50+00:00
 featured_image: /2020/12/Hello-Michael-940x510.png
-asalah_show_share:
-  - no
-show_author_box:
-  - no
-asalah_enable_facebook_comments:
-  - no
-asalah_author_orderby_list:
-  - registered
+comments: false
 ---
 
 ![img](/2020/12/Hello-Michael-1024x768.png)
