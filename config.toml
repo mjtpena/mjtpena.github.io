@@ -15,6 +15,7 @@ publishDir                    = "docs"
 
 
 [Params]
+  title                       = "YEAH"
   subTitle                    = "Personal site, Blog, and Portfolio"
   description                 = "🚀 Technologist. Entrepreneur. Author. Speaker." # Site Description. Used in meta description
   images                      = ["img/avatar.webp"]
@@ -80,9 +81,9 @@ url = "/blog"
 weight = 1 
 
 [[menu.main]]
-identifier = "logs"
-pre = "🪵"
-url = "/logs" 
+identifier = "now"
+pre = "⌚"
+url = "/now" 
 weight = 2 
 
 [[menu.main]]
@@ -102,16 +103,6 @@ identifier = "About"
 pre = "😆"
 url = "/about" 
 weight = 5
-
-[[menu.main]]
-identifier = "Contact"
-pre = "🤝🏻"
-url = "/contact" 
-weight = 6
-
-[Params.Breadcrumb]
-  enable                      = true # Enable breadcrumb block globally
-  homeText                    = "Home" # Home node text
 
 [Params.Social]
   twitter                     = "mjtpena"
