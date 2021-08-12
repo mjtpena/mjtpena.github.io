@@ -1,80 +1,207 @@
 baseURL = "https://www.michaeljohnpena.com"
-languageCode = "en-us"
-title = "⚡️ Michael John Peña"
-theme = "cactus"
-Copyright = "- Michael John Peña"
-canonifyurls = true
-publishDir = "docs"
-googleAnalytics = "UA-186803288-1"
+languageCode                  = "id"
+title                         = "Michael John Peña ⚡️"
+theme                         = "personal-site"
+summaryLength                 = 20
+publishDir                    = "docs"
 
-[params]
-colortheme = "white" # dark, light, white, or classic
-description = "🚀 Technologist. Entrepreneur. Author. Speaker."
-mainSectionTitle = "Blog"
-mainSections = ["posts", "mlogs"]
-showAllPostsOnHomePage = false
-postsOnHomePage = 5
-showProjectsList = false
-rss = true
-  [params.comments]
-    enabled = true
+[Author] # Used in authorbox
+  name                        = "Michael John Peña"
+  bio                         = "Michael is an experienced technologist based in Sydney, Australia, a Microsoft MVP since 2015 with over 12 years of working experience ranging from Mobile, Cloud, Web and DevOps. He currently owns Datachain Consulting, a company that focuses on democratizing AI and Blockchain technologies. He is also a technical advisor to some technology startups. His roles allow him to explore the cutting edge technologies of Artificial Intelligence, Blockchain, IoT, Edge Computing, and the Cloud."
+  avatar                      = "img/avatar.webp"
+  job                         = "Software Engineer"
+  gender                      = "male"
+  email                       = "michael@datachain.consulting"
 
-# Main menu which appears below site header.
+
+[Params]
+  subTitle                    = "Personal site, Blog, and Portfolio"
+  description                 = "🚀 Technologist. Entrepreneur. Author. Speaker." # Site Description. Used in meta description
+  images                      = ["img/avatar.webp"]
+  copyright                   = "Michael John Peña" # Copyright holder, otherwise will use .Site.Title
+  opengraph                   = true # Enable OpenGraph if true
+  twitter_cards               = true # Enable Twitter Cards if true
+  mainSections                = ["blog"] # Set main page sections
+  dateFormat                  = "January 02, 2006" # Change the format of dates
+  # customCSS                 = ["css/custom.css"] # Include custom CSS files
+  customJS                    = []
+  mainMenuAlignment           = "right" # Align main menu (desktop version) to the right side
+  authorbox                   = true # Show authorbox at bottom of single pages if true
+  comments                    = true # Enable comments for all site pages
+  related                     = true # Enable Related content for single pages
+  relatedMax                  = 5
+  mathjax                     = false # Enable MathJax for all site pages
+  hideNoPostsWarning          = false # Don't show no posts empty state warning in main page, if true
+  fontUnit                    = "em"
+  largestFontSize             = 2.5
+  smallestFontSize            = 1
+  googleSearchConsole         = ""
+  GoogleAnalytics             = "UA-186803288-1"
+  # fb_admins                   = 
+  # fb_app_id                   = 
+  paginateLength              = 5
+  # adsenseId                   = 
+
+  # Google Search custom, more info: https://cse.google.com/cse/all
+  customSearchId              = "004021659876411083349:a2ysxpichpc"
+
+  endMessagePost              = "Wrong content? "
+  
+  # Link repo to edit content
+  editContentPageLink         = "https://github.com/mjtpena/mjtpena.github.io/edit/main/content/"
+  
+  # Formspree form contact id, more info: https://cse.google.com/cse/all
+  formspreeId                 = ""
+  
+
+
+[Params.Hero]
+  title                       = "👨🏻‍💻 Michael John Peña ⚡️"
+  desc                        = "🚀 Technologist. Entrepreneur. Author. Speaker."
+
+[Params.Entry]
+  meta                        = ["date", "categories"] # Enable meta fields in given order
+  toc                         = true # Enable Table of Contents
+  tocOpen                     = false # Open Table of Contents block. Optional
+
+[Params.Featured]
+  previewOnly                 = false # Show only preview featured image
+
+[Params.Comments]
+  repository                  = "" # Repository to host your comment, ex: username/repo
+
+# Navigation bar
+[menu]
+
 [[menu.main]]
-name = "Home"
-url = "/"
-weight = 1
+identifier = "Blog"
+pre = "📝"
+url = "/blog" 
+weight = 1 
 
 [[menu.main]]
-name = "Blog"
-url = "/posts"
-weight = 2
+identifier = "logs"
+pre = "🪵"
+url = "/logs" 
+weight = 2 
 
 [[menu.main]]
-name = "µLogs"
-url = "/mlogs"
-weight = 3
-
-# [[menu.main]]
-# name = "Presentations"
-# url = "/presentations"
-# weight = 4
-
-# [[menu.main]]
-# name = "Projects"
-# url = "/projects"
-# weight = 5
+identifier = "Projects"
+pre = "🦾"
+url = "/projects" 
+weight = 3 
 
 [[menu.main]]
-name = "About"
-url = "/about"
+identifier = "Presentations"
+pre = "👨🏻‍🏫"
+url = "/presentations" 
+weight = 4 
+
+[[menu.main]]
+identifier = "About"
+pre = "😆"
+url = "/about" 
+weight = 5
+
+[[menu.main]]
+identifier = "Contact"
+pre = "🤝🏻"
+url = "/contact" 
 weight = 6
 
-[[params.social]]
-  name = "twitter"
-  link = "https://twitter.com/mjtpena"
+[Params.Breadcrumb]
+  enable                      = true # Enable breadcrumb block globally
+  homeText                    = "Home" # Home node text
 
-[[params.social]]
-  name = "github"
-  link = "https://github.com/mjtpena"
+[Params.Social]
+  twitter                     = "mjtpena"
+  linkedin                    = "michaeljohnpena"
+  github                      = "mjtpena"
+  medium                      = "mjtpena"
 
-[[params.social]]
-  name = "email"
-  link = "michael@datachain.consulting" # no need for "mailto:" at the start
+[Params.Share] # Entry Share block
+  facebook                    = true
+  twitter                     = true
+  reddit                      = true
+  linkedin                    = true
+  pinterest                   = true
 
-[[params.social]]
-  name = "linkedin"
-  link = "https://www.linkedin.com/in/michaeljohnpena/"
+# Web App Manifest settings
+# https://www.w3.org/TR/appmanifest/
+# https://developers.google.com/web/fundamentals/web-app-manifest/
+[Params.Manifest]
+  name                        = "Michael John Peña"
+  shortName                   = "mjtpena"
+  display                     = "standalone"
+  startUrl                    = "/?utm_source=homescreen"
+  backgroundColor             = "#8dc153"
+  themeColor                  = "#1da1f2"
+  description                 = "Personal Site By Michael John Peña"
+  orientation                 = "portrait"
+  scope                       = "/"
 
+[outputFormats]
+  [outputFormats.MANIFEST]
+    mediaType                 = "application/json"
+    baseName                  = "manifest"
+    isPlainText               = true
+    notAlternative            = true
+
+[outputs]
+  home                        = ["HTML", "RSS", "MANIFEST"]
+
+enableRobotsTXT               = true
+
+# Pagination
+Paginate                      = 3
+ 
+
+# Code
 [markup]
+  # defaultMarkdownHandler    = "blackfriday"
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList          = true
+      footnote                = true
+      linkify                 = true
+      strikethrough           = true
+      table                   = true
+      taskList                = true
+      typographer             = true
+    [markup.goldmark.parser]
+      attribute               = true
+      autoHeadingID           = true
+      autoHeadingIDType       = "github"
+    [markup.goldmark.renderer]
+      hardWraps               = false
+      unsafe                  = true
+      xhtml                   = false
+  [markup.blackFriday]
+    angledQuotes              = false
+    footnoteAnchorPrefix      = ""
+    footnoteReturnLinkContents= ""
+    fractions                 = true
+    hrefTargetBlank           = false
+    latexDashes               = true
+    nofollowLinks             = false
+    noreferrerLinks           = false
+    plainIDAnchors            = true
+    skipHTML                  = false
+    smartDashes               = true
+    smartypants               = true
+    smartypantsQuotesNBSP     = false
+    taskLists                 = true
   [markup.highlight]
-    codeFences = true
-    guessSyntax = false
-    hl_Lines = ""
-    lineNoStart = 1
-    lineNos = false
-    lineNumbersInTable = true
-    noClasses = true
-    style = "monokai"
-    tabWidth = 4
-
+    codeFences                = true
+    guessSyntax               = false
+    hl_Lines                  = ""
+    lineNoStart               = 1
+    lineNos                   = false
+    lineNumbersInTable        = false
+    noClasses                 = false
+    style                     = "dracula"
+    tabWidth                  = 4
+  [markup.tableOfContents]
+    endLevel                  = 6
+    ordered                   = false
+    startLevel                = 2
