@@ -27,7 +27,7 @@ publishDir                    = "docs"
   customJS                    = []
   mainMenuAlignment           = "right" # Align main menu (desktop version) to the right side
   authorbox                   = true # Show authorbox at bottom of single pages if true
-  comments                    = true # Enable comments for all site pages
+  comments                    = false # Enable comments for all site pages
   related                     = true # Enable Related content for single pages
   relatedMax                  = 5
   mathjax                     = false # Enable MathJax for all site pages
@@ -66,9 +66,6 @@ publishDir                    = "docs"
 
 [Params.Featured]
   previewOnly                 = false # Show only preview featured image
-
-[Params.Comments]
-  repository                  = "" # Repository to host your comment, ex: username/repo
 
 # Navigation bar
 [menu]
