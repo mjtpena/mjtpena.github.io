@@ -5,7 +5,7 @@ draft: false
 date: 2021-01-04T23:15:38+00:00
 url: /blog/my-only-goal-for-2021-digital-intentionality/
 featured_image: /2021/01/jumpstory-download20210104-231305-940x510.jpg
-categories:
+tags:
   - Life Style
   - Philosophy
 tags:

@@ -4,7 +4,7 @@ author: MJ Peña
 draft: false
 date: 2021-06-24T16:20:29+00:00
 url: /blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/
-categories:
+tags:
   - Technology
 ---
 

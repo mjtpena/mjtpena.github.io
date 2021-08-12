@@ -5,7 +5,7 @@ draft: false
 date: 2021-01-08T20:47:16+00:00
 url: /blog/you-should-read-books-you-know-you-should/
 featured_image: /2021/01/jumpstory-download20210108-203724-940x510.jpg
-categories:
+tags:
   - Books
 tags:
   - books
