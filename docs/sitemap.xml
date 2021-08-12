@@ -1723,4 +1723,17 @@
   </url>
   
   
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/search/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
 </urlset>

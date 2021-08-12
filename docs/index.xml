@@ -497,5 +497,14 @@ For the past 10 years, I’ve spent my career dealing with software and the clou
       <description>Page is under construction. Watch out for this space.</description>
     </item>
     
+    <item>
+      <title>Search 🔍</title>
+      <link>https://www.michaeljohnpena.com/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/search/</guid>
+      <description>.gsc-control-cse, .gsc-result{ border: none!important; background-color: transparent!important; } .gsc-result-info, .gsc-orderby-label{ color: var(--disabled-text-color)!important; } .gs-title *{ color: var(--text-color)!important; font-size: 1.7rem!important; } .</description>
+    </item>
+    
   </channel>
 </rss>
