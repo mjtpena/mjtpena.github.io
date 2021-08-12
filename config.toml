@@ -8,17 +8,16 @@ publishDir                    = "docs"
 [Author] # Used in authorbox
   name                        = "Michael John Peña"
   bio                         = "Michael is an experienced technologist based in Sydney, Australia, a Microsoft MVP since 2015 with over 12 years of working experience ranging from Mobile, Cloud, Web and DevOps. He currently owns Datachain Consulting, a company that focuses on democratizing AI and Blockchain technologies. He is also a technical advisor to some technology startups. His roles allow him to explore the cutting edge technologies of Artificial Intelligence, Blockchain, IoT, Edge Computing, and the Cloud."
-  avatar                      = "img/avatar.webp"
+  avatar                      = "mjtpena.jpg"
   job                         = "Software Engineer"
   gender                      = "male"
   email                       = "michael@datachain.consulting"
 
 
 [Params]
-  title                       = "YEAH"
   subTitle                    = "Personal site, Blog, and Portfolio"
   description                 = "🚀 Technologist. Entrepreneur. Author. Speaker." # Site Description. Used in meta description
-  images                      = ["img/avatar.webp"]
+  images                      = ["mjtpena.jpg"]
   copyright                   = "Michael John Peña" # Copyright holder, otherwise will use .Site.Title
   opengraph                   = true # Enable OpenGraph if true
   twitter_cards               = true # Enable Twitter Cards if true
