@@ -5,7 +5,7 @@ draft: false
 date: 2021-07-21T16:20:29+00:00
 url: /blog/message-to-the-young/
 featured_image: /2021/07/success.jpg
-categories:
+tags:
   - Personal
   - Philisopy
   - Motivation

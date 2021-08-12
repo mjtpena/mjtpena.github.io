@@ -5,7 +5,7 @@ draft: false
 date: 2021-01-05T22:29:45+00:00
 url: /blog/digital-intentionalization-dont-click-that-next-button/
 featured_image: /2021/01/jumpstory-download20210105-222238-940x510.jpg
-categories:
+tags:
   - Digital Intentionalization
 tags:
   - Distraction

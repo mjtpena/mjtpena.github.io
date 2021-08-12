@@ -5,7 +5,7 @@ draft: false
 date: 2021-01-06T19:22:55+00:00
 url: /blog/why-its-okay-to-be-an-ordinary-developer/
 featured_image: /2021/01/Screen-Shot-2021-01-07-at-06.01.46-940x510.png
-categories:
+tags:
   - Career
   - Philosophy
   - Technology

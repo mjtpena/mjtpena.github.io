@@ -5,7 +5,7 @@ draft: false
 date: 2020-09-28T03:55:27+00:00
 url: /blog/synology-nas-series-cloud-sync-with-azure-storage/
 featured_image: /2020/09/20200821_025202969_iOS-940x510.jpg
-categories:
+tags:
   - Technology
 tags:
   - azure

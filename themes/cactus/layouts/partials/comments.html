@@ -13,7 +13,8 @@
 {{ if (or (not (isset .Site.Params.Comments "engine")) (eq .Site.Params.Comments.Engine "disqus")) }}
 <div class="blog-post-comments">
   <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="daed2877-b6a1-4dc4-bb01-f5fe4d9ed3f7"
-    data-page-id="{{ .File.UniqueID }}" data-page-url="{{ .Permalink }}" data-page-title="{{ .Title }}"></div>
+    data-page-id="{{ .File.UniqueID }}" data-page-url="{{ .Permalink }}" data-page-title="{{ .Title }}">
+  </div>
   <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 </div>
 

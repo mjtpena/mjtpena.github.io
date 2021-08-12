@@ -5,7 +5,7 @@ draft: false
 date: 2021-01-27T21:18:51+00:00
 url: /blog/why-you-should-experience-being-self-employed/
 featured_image: /2021/01/jumpstory-download20210127-211611-940x510.jpg
-categories:
+tags:
   - Career
   - Startups
 tags:

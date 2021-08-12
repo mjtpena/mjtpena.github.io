@@ -5,7 +5,7 @@ draft: false
 date: 2021-07-13T16:20:29+00:00
 url: /blog/my-ultimate-windows-and-mac-setup/
 featured_image: /2021/07/Battle-station-2021.jpeg
-categories:
+tags:
   - Technology
   - Life-style
   - Mobile
