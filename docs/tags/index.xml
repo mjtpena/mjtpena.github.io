@@ -1,18 +1,163 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on ⚡️ Michael John Peña</title>
+    <title>Tags on Michael John Peña ⚡️</title>
     <link>https://www.michaeljohnpena.com/tags/</link>
-    <description>Recent content in Tags on ⚡️ Michael John Peña</description>
+    <description>Recent content in Tags on Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>- Michael John Peña</copyright>
-    <lastBuildDate>Sun, 14 Mar 2021 23:27:46 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>id</language>
+    <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
+    <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
+    <lastBuildDate>Tue, 10 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blockchain</title>
+      <link>https://www.michaeljohnpena.com/tags/blockchain/</link>
+      <pubDate>Tue, 10 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/blockchain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crypto</title>
+      <link>https://www.michaeljohnpena.com/tags/crypto/</link>
+      <pubDate>Tue, 10 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/crypto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ethereum</title>
+      <link>https://www.michaeljohnpena.com/tags/ethereum/</link>
+      <pubDate>Tue, 10 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/ethereum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NFT</title>
+      <link>https://www.michaeljohnpena.com/tags/nft/</link>
+      <pubDate>Tue, 10 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/nft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Stablecoins</title>
+      <link>https://www.michaeljohnpena.com/tags/stablecoins/</link>
+      <pubDate>Tue, 10 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/stablecoins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Technology</title>
+      <link>https://www.michaeljohnpena.com/tags/technology/</link>
+      <pubDate>Tue, 10 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/technology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>.NET</title>
+      <link>https://www.michaeljohnpena.com/tags/.net/</link>
+      <pubDate>Fri, 23 Jul 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/.net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>https://www.michaeljohnpena.com/tags/mac/</link>
+      <pubDate>Fri, 23 Jul 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mobile</title>
+      <link>https://www.michaeljohnpena.com/tags/mobile/</link>
+      <pubDate>Fri, 23 Jul 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/mobile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Motivation</title>
+      <link>https://www.michaeljohnpena.com/tags/motivation/</link>
+      <pubDate>Wed, 21 Jul 2021 16:20:29 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/motivation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Personal</title>
+      <link>https://www.michaeljohnpena.com/tags/personal/</link>
+      <pubDate>Wed, 21 Jul 2021 16:20:29 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/personal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Philisopy</title>
+      <link>https://www.michaeljohnpena.com/tags/philisopy/</link>
+      <pubDate>Wed, 21 Jul 2021 16:20:29 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/philisopy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://www.michaeljohnpena.com/tags/web/</link>
+      <pubDate>Thu, 15 Jul 2021 16:20:29 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Life-style</title>
+      <link>https://www.michaeljohnpena.com/tags/life-style/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/life-style/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MacOS</title>
+      <link>https://www.michaeljohnpena.com/tags/macos/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/macos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://www.michaeljohnpena.com/tags/windows/</link>
+      <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/windows/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Build Server</title>
       <link>https://www.michaeljohnpena.com/tags/build-server/</link>
       <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/build-server/</guid>
       <description></description>
     </item>
@@ -21,7 +166,7 @@
       <title>iOS Distribution</title>
       <link>https://www.michaeljohnpena.com/tags/ios-distribution/</link>
       <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/ios-distribution/</guid>
       <description></description>
     </item>
@@ -30,17 +175,8 @@
       <title>Keychain</title>
       <link>https://www.michaeljohnpena.com/tags/keychain/</link>
       <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/keychain/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MacOS</title>
-      <link>https://www.michaeljohnpena.com/tags/macos/</link>
-      <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/tags/macos/</guid>
       <description></description>
     </item>
     
@@ -48,7 +184,7 @@
       <title>Mobile Development</title>
       <link>https://www.michaeljohnpena.com/tags/mobile-development/</link>
       <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/mobile-development/</guid>
       <description></description>
     </item>
@@ -57,17 +193,8 @@
       <title>Bitcoin</title>
       <link>https://www.michaeljohnpena.com/tags/bitcoin/</link>
       <pubDate>Fri, 26 Feb 2021 03:28:06 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/bitcoin/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Blockchain</title>
-      <link>https://www.michaeljohnpena.com/tags/blockchain/</link>
-      <pubDate>Fri, 26 Feb 2021 03:28:06 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/tags/blockchain/</guid>
       <description></description>
     </item>
     
@@ -75,7 +202,7 @@
       <title>Cryptocurrency</title>
       <link>https://www.michaeljohnpena.com/tags/cryptocurrency/</link>
       <pubDate>Fri, 26 Feb 2021 03:28:06 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/cryptocurrency/</guid>
       <description></description>
     </item>
@@ -84,17 +211,8 @@
       <title>DeFi</title>
       <link>https://www.michaeljohnpena.com/tags/defi/</link>
       <pubDate>Fri, 26 Feb 2021 03:28:06 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/defi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ethereum</title>
-      <link>https://www.michaeljohnpena.com/tags/ethereum/</link>
-      <pubDate>Fri, 26 Feb 2021 03:28:06 +0000</pubDate>
-      
-      <guid>https://www.michaeljohnpena.com/tags/ethereum/</guid>
       <description></description>
     </item>
     
@@ -102,7 +220,7 @@
       <title>Philosophy</title>
       <link>https://www.michaeljohnpena.com/tags/philosophy/</link>
       <pubDate>Fri, 26 Feb 2021 03:28:06 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/philosophy/</guid>
       <description></description>
     </item>
@@ -111,7 +229,7 @@
       <title>media</title>
       <link>https://www.michaeljohnpena.com/tags/media/</link>
       <pubDate>Mon, 22 Feb 2021 05:45:26 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/media/</guid>
       <description></description>
     </item>
@@ -120,7 +238,7 @@
       <title>news</title>
       <link>https://www.michaeljohnpena.com/tags/news/</link>
       <pubDate>Mon, 22 Feb 2021 05:45:26 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/news/</guid>
       <description></description>
     </item>
@@ -129,7 +247,7 @@
       <title>reading</title>
       <link>https://www.michaeljohnpena.com/tags/reading/</link>
       <pubDate>Mon, 22 Feb 2021 05:45:26 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/reading/</guid>
       <description></description>
     </item>
@@ -138,7 +256,7 @@
       <title>social media</title>
       <link>https://www.michaeljohnpena.com/tags/social-media/</link>
       <pubDate>Mon, 22 Feb 2021 05:45:26 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/social-media/</guid>
       <description></description>
     </item>
@@ -147,7 +265,7 @@
       <title>business</title>
       <link>https://www.michaeljohnpena.com/tags/business/</link>
       <pubDate>Wed, 27 Jan 2021 21:18:51 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/business/</guid>
       <description></description>
     </item>
@@ -156,7 +274,7 @@
       <title>company</title>
       <link>https://www.michaeljohnpena.com/tags/company/</link>
       <pubDate>Wed, 27 Jan 2021 21:18:51 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/company/</guid>
       <description></description>
     </item>
@@ -165,7 +283,7 @@
       <title>startup</title>
       <link>https://www.michaeljohnpena.com/tags/startup/</link>
       <pubDate>Wed, 27 Jan 2021 21:18:51 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/startup/</guid>
       <description></description>
     </item>
@@ -174,7 +292,7 @@
       <title>work</title>
       <link>https://www.michaeljohnpena.com/tags/work/</link>
       <pubDate>Wed, 27 Jan 2021 21:18:51 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/work/</guid>
       <description></description>
     </item>
@@ -183,7 +301,7 @@
       <title>lazy</title>
       <link>https://www.michaeljohnpena.com/tags/lazy/</link>
       <pubDate>Thu, 14 Jan 2021 00:47:30 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/lazy/</guid>
       <description></description>
     </item>
@@ -192,7 +310,7 @@
       <title>mental</title>
       <link>https://www.michaeljohnpena.com/tags/mental/</link>
       <pubDate>Thu, 14 Jan 2021 00:47:30 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/mental/</guid>
       <description></description>
     </item>
@@ -201,7 +319,7 @@
       <title>procrastination</title>
       <link>https://www.michaeljohnpena.com/tags/procrastination/</link>
       <pubDate>Thu, 14 Jan 2021 00:47:30 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/procrastination/</guid>
       <description></description>
     </item>
@@ -210,7 +328,7 @@
       <title>productivity</title>
       <link>https://www.michaeljohnpena.com/tags/productivity/</link>
       <pubDate>Thu, 14 Jan 2021 00:47:30 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/productivity/</guid>
       <description></description>
     </item>
@@ -219,7 +337,7 @@
       <title>willpower</title>
       <link>https://www.michaeljohnpena.com/tags/willpower/</link>
       <pubDate>Thu, 14 Jan 2021 00:47:30 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/willpower/</guid>
       <description></description>
     </item>
@@ -228,7 +346,7 @@
       <title>books</title>
       <link>https://www.michaeljohnpena.com/tags/books/</link>
       <pubDate>Fri, 08 Jan 2021 20:47:16 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/books/</guid>
       <description></description>
     </item>
@@ -237,7 +355,7 @@
       <title>artificial intelligence</title>
       <link>https://www.michaeljohnpena.com/tags/artificial-intelligence/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/artificial-intelligence/</guid>
       <description></description>
     </item>
@@ -246,7 +364,7 @@
       <title>azure</title>
       <link>https://www.michaeljohnpena.com/tags/azure/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/azure/</guid>
       <description></description>
     </item>
@@ -255,7 +373,7 @@
       <title>Data Science</title>
       <link>https://www.michaeljohnpena.com/tags/data-science/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/data-science/</guid>
       <description></description>
     </item>
@@ -264,7 +382,7 @@
       <title>Databricks</title>
       <link>https://www.michaeljohnpena.com/tags/databricks/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/databricks/</guid>
       <description></description>
     </item>
@@ -273,7 +391,7 @@
       <title>machine learning</title>
       <link>https://www.michaeljohnpena.com/tags/machine-learning/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/machine-learning/</guid>
       <description></description>
     </item>
@@ -282,7 +400,7 @@
       <title>Microsoft Cloud</title>
       <link>https://www.michaeljohnpena.com/tags/microsoft-cloud/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/microsoft-cloud/</guid>
       <description></description>
     </item>
@@ -291,7 +409,7 @@
       <title>MLOps</title>
       <link>https://www.michaeljohnpena.com/tags/mlops/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/mlops/</guid>
       <description></description>
     </item>
@@ -300,7 +418,7 @@
       <title>Power Platform</title>
       <link>https://www.michaeljohnpena.com/tags/power-platform/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/power-platform/</guid>
       <description></description>
     </item>
@@ -309,7 +427,7 @@
       <title>Synapse</title>
       <link>https://www.michaeljohnpena.com/tags/synapse/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/synapse/</guid>
       <description></description>
     </item>
@@ -318,7 +436,7 @@
       <title>10xengineer</title>
       <link>https://www.michaeljohnpena.com/tags/10xengineer/</link>
       <pubDate>Wed, 06 Jan 2021 19:22:55 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/10xengineer/</guid>
       <description></description>
     </item>
@@ -327,7 +445,7 @@
       <title>career</title>
       <link>https://www.michaeljohnpena.com/tags/career/</link>
       <pubDate>Wed, 06 Jan 2021 19:22:55 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/career/</guid>
       <description></description>
     </item>
@@ -336,7 +454,7 @@
       <title>developer</title>
       <link>https://www.michaeljohnpena.com/tags/developer/</link>
       <pubDate>Wed, 06 Jan 2021 19:22:55 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/developer/</guid>
       <description></description>
     </item>
@@ -345,7 +463,7 @@
       <title>self-help</title>
       <link>https://www.michaeljohnpena.com/tags/self-help/</link>
       <pubDate>Wed, 06 Jan 2021 19:22:55 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/self-help/</guid>
       <description></description>
     </item>
@@ -354,7 +472,7 @@
       <title>software engineer</title>
       <link>https://www.michaeljohnpena.com/tags/software-engineer/</link>
       <pubDate>Wed, 06 Jan 2021 19:22:55 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/software-engineer/</guid>
       <description></description>
     </item>
@@ -363,7 +481,7 @@
       <title>Distraction</title>
       <link>https://www.michaeljohnpena.com/tags/distraction/</link>
       <pubDate>Tue, 05 Jan 2021 22:29:45 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/distraction/</guid>
       <description></description>
     </item>
@@ -372,7 +490,7 @@
       <title>Facebook Vidoes</title>
       <link>https://www.michaeljohnpena.com/tags/facebook-vidoes/</link>
       <pubDate>Tue, 05 Jan 2021 22:29:45 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/facebook-vidoes/</guid>
       <description></description>
     </item>
@@ -381,7 +499,7 @@
       <title>Netflix</title>
       <link>https://www.michaeljohnpena.com/tags/netflix/</link>
       <pubDate>Tue, 05 Jan 2021 22:29:45 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/netflix/</guid>
       <description></description>
     </item>
@@ -390,7 +508,7 @@
       <title>Next Button</title>
       <link>https://www.michaeljohnpena.com/tags/next-button/</link>
       <pubDate>Tue, 05 Jan 2021 22:29:45 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/next-button/</guid>
       <description></description>
     </item>
@@ -399,7 +517,7 @@
       <title>YouTube</title>
       <link>https://www.michaeljohnpena.com/tags/youtube/</link>
       <pubDate>Tue, 05 Jan 2021 22:29:45 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/youtube/</guid>
       <description></description>
     </item>
@@ -408,7 +526,7 @@
       <title>digital</title>
       <link>https://www.michaeljohnpena.com/tags/digital/</link>
       <pubDate>Mon, 04 Jan 2021 23:15:38 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/digital/</guid>
       <description></description>
     </item>
@@ -417,7 +535,7 @@
       <title>goals</title>
       <link>https://www.michaeljohnpena.com/tags/goals/</link>
       <pubDate>Mon, 04 Jan 2021 23:15:38 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/goals/</guid>
       <description></description>
     </item>
@@ -426,7 +544,7 @@
       <title>cloud</title>
       <link>https://www.michaeljohnpena.com/tags/cloud/</link>
       <pubDate>Mon, 28 Sep 2020 03:55:27 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/cloud/</guid>
       <description></description>
     </item>
@@ -435,7 +553,7 @@
       <title>nas</title>
       <link>https://www.michaeljohnpena.com/tags/nas/</link>
       <pubDate>Mon, 28 Sep 2020 03:55:27 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/nas/</guid>
       <description></description>
     </item>
@@ -444,8 +562,26 @@
       <title>storage</title>
       <link>https://www.michaeljohnpena.com/tags/storage/</link>
       <pubDate>Mon, 28 Sep 2020 03:55:27 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/storage/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Community</title>
+      <link>https://www.michaeljohnpena.com/tags/community/</link>
+      <pubDate>Wed, 09 Sep 2020 07:12:03 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/community/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Writing</title>
+      <link>https://www.michaeljohnpena.com/tags/writing/</link>
+      <pubDate>Wed, 26 Aug 2020 07:51:48 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/writing/</guid>
       <description></description>
     </item>
     

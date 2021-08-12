@@ -1,395 +1,1726 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  
   <url>
-    <loc>https://www.michaeljohnpena.com/mlogs/</loc>
-    <lastmod>2021-08-10T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-10-nfts/</loc>
-    <lastmod>2021-08-10T03:56:25+00:00</lastmod>
-  </url><url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-12-event-planning/</loc>
+    <lastmod>2021-08-12T03:56:25+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/</loc>
+    <lastmod>2021-08-12T03:56:25+00:00</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/</loc>
+    <lastmod>2021-08-12T03:56:25+00:00</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-11-friendship/</loc>
+    <lastmod>2021-08-11T03:56:25+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-10-nfts/</loc>
     <lastmod>2021-08-10T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/blockchain/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/blockchain/</loc>
     <lastmod>2021-08-10T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/blog/</loc>
     <lastmod>2021-08-10T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/crypto/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/crypto/</loc>
     <lastmod>2021-08-10T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/ethereum/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/ethereum/</loc>
     <lastmod>2021-08-10T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/nft/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/nft/</loc>
     <lastmod>2021-08-10T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/posts/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/stablecoins/</loc>
     <lastmod>2021-08-10T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/stablecoins/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/</loc>
     <lastmod>2021-08-10T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/technology/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/technology/</loc>
     <lastmod>2021-08-10T02:19:19+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/blockchain-tokens/</loc>
     <lastmod>2021-08-10T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-09-sydney/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-09-sydney/</loc>
     <lastmod>2021-08-09T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-08-mental-block/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-08-mental-block/</loc>
     <lastmod>2021-08-08T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-07-trust/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-07-trust/</loc>
     <lastmod>2021-08-07T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-06-midnight-oil/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-06-midnight-oil/</loc>
     <lastmod>2021-08-06T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-05-season/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-05-season/</loc>
     <lastmod>2021-08-05T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-04-community/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-04-community/</loc>
     <lastmod>2021-08-04T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-03-practice/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-03-practice/</loc>
     <lastmod>2021-08-03T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-02-building-house/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-02-building-house/</loc>
     <lastmod>2021-08-02T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-08-01-weekends/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-01-weekends/</loc>
     <lastmod>2021-08-01T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-31-startup/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-31-startup/</loc>
     <lastmod>2021-07-31T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-30-markdown/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-30-markdown/</loc>
     <lastmod>2021-07-30T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-29-podcasts/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-29-podcasts/</loc>
     <lastmod>2021-07-29T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-28-overwhelmed/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-28-overwhelmed/</loc>
     <lastmod>2021-07-28T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-26-motivation/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-26-motivation/</loc>
     <lastmod>2021-07-27T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-27-running/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-27-running/</loc>
     <lastmod>2021-07-27T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-26-productive-day/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-26-productive-day/</loc>
     <lastmod>2021-07-26T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-25-listen/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-25-listen/</loc>
     <lastmod>2021-07-25T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-24-perfect/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-24-perfect/</loc>
     <lastmod>2021-07-24T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-23-focus/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-23-focus/</loc>
     <lastmod>2021-07-23T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/.net/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/.net/</loc>
     <lastmod>2021-07-23T02:19:19+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/</loc>
     <lastmod>2021-07-23T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/mac/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/mac/</loc>
     <lastmod>2021-07-23T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/mobile/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/mobile/</loc>
     <lastmod>2021-07-23T02:19:19+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-22-sleep/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-22-sleep/</loc>
     <lastmod>2021-07-22T03:56:25+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/message-to-the-young/</loc>
     <lastmod>2021-07-21T16:20:29+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/motivation/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/motivation/</loc>
     <lastmod>2021-07-21T16:20:29+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/personal/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/personal/</loc>
     <lastmod>2021-07-21T16:20:29+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/philisopy/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/philisopy/</loc>
     <lastmod>2021-07-21T16:20:29+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-21-deadlines/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-21-deadlines/</loc>
     <lastmod>2021-07-21T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-20-binaural-beats/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-20-binaural-beats/</loc>
     <lastmod>2021-07-20T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-19-achieving-success/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-19-achieving-success/</loc>
     <lastmod>2021-07-19T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-18-what-is-success/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-18-what-is-success/</loc>
     <lastmod>2021-07-18T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-17-online-influencers/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-17-online-influencers/</loc>
     <lastmod>2021-07-17T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-16-keep-on-writing/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-16-keep-on-writing/</loc>
     <lastmod>2021-07-16T03:56:25+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/getting-started-with-defi/</loc>
     <lastmod>2021-07-15T16:20:29+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/web/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/web/</loc>
     <lastmod>2021-07-15T16:20:29+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-15-feeling-nervous/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-15-feeling-nervous/</loc>
     <lastmod>2021-07-15T03:56:25+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-14-being-busy/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-14-being-busy/</loc>
     <lastmod>2021-07-14T03:07:24+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/life-style/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/life-style/</loc>
     <lastmod>2021-07-13T16:20:29+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/macos/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/macos/</loc>
     <lastmod>2021-07-13T16:20:29+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/my-ultimate-windows-and-mac-setup/</loc>
     <lastmod>2021-07-13T16:20:29+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/windows/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/windows/</loc>
     <lastmod>2021-07-13T16:20:29+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/mlogs/2021-07-13-boredom/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-07-13-boredom/</loc>
     <lastmod>2021-07-13T02:19:19+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</loc>
     <lastmod>2021-06-24T16:20:29+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/build-server/</loc>
     <lastmod>2021-03-14T23:27:46+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/how-to-disable-auto-locking-of-macos-keychains/</loc>
     <lastmod>2021-03-14T23:27:46+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/ios-development/</loc>
-    <lastmod>2021-03-14T23:27:46+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/ios-distribution/</loc>
     <lastmod>2021-03-14T23:27:46+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/keychain/</loc>
     <lastmod>2021-03-14T23:27:46+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/tags/macos/</loc>
-    <lastmod>2021-03-14T23:27:46+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/mobile-development/</loc>
     <lastmod>2021-03-14T23:27:46+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/tags/</loc>
-    <lastmod>2021-03-14T23:27:46+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/bitcoin/</loc>
     <lastmod>2021-02-26T03:28:06+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/tags/blockchain/</loc>
-    <lastmod>2021-02-26T03:28:06+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/community/</loc>
-    <lastmod>2021-02-26T03:28:06+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/cryptocurrency/</loc>
     <lastmod>2021-02-26T03:28:06+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/defi/</loc>
     <lastmod>2021-02-26T03:28:06+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/tags/ethereum/</loc>
-    <lastmod>2021-02-26T03:28:06+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/philosophy/</loc>
     <lastmod>2021-02-26T03:28:06+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/philosophy/</loc>
-    <lastmod>2021-02-26T03:28:06+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/</loc>
     <lastmod>2021-02-26T03:28:06+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/digital-intentionalization/</loc>
-    <lastmod>2021-02-22T05:45:26+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/media/</loc>
     <lastmod>2021-02-22T05:45:26+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/news/</loc>
     <lastmod>2021-02-22T05:45:26+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/reading/</loc>
     <lastmod>2021-02-22T05:45:26+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/social-media/</loc>
     <lastmod>2021-02-22T05:45:26+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/why-i-dont-read-or-watch-mainstream-media-that-much/</loc>
     <lastmod>2021-02-22T05:45:26+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/business/</loc>
     <lastmod>2021-01-27T21:18:51+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/career/</loc>
-    <lastmod>2021-01-27T21:18:51+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/company/</loc>
     <lastmod>2021-01-27T21:18:51+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/startup/</loc>
     <lastmod>2021-01-27T21:18:51+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/startups/</loc>
-    <lastmod>2021-01-27T21:18:51+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/why-you-should-experience-being-self-employed/</loc>
     <lastmod>2021-01-27T21:18:51+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/work/</loc>
     <lastmod>2021-01-27T21:18:51+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/how-to-beat-procrastination/</loc>
     <lastmod>2021-01-14T00:47:30+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/lazy/</loc>
     <lastmod>2021-01-14T00:47:30+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/mental/</loc>
     <lastmod>2021-01-14T00:47:30+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/procrastination/</loc>
     <lastmod>2021-01-14T00:47:30+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/productivity/</loc>
     <lastmod>2021-01-14T00:47:30+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/willpower/</loc>
     <lastmod>2021-01-14T00:47:30+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/books/</loc>
-    <lastmod>2021-01-08T20:47:16+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/books/</loc>
     <lastmod>2021-01-08T20:47:16+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/you-should-read-books-you-know-you-should/</loc>
     <lastmod>2021-01-08T20:47:16+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/ai-across-the-microsoft-cloud/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/artificial-intelligence/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/azure/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/data-science/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/databricks/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/machine-learning/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/microsoft-cloud/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/mlops/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/power-platform/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/synapse/</loc>
     <lastmod>2021-01-07T09:07:24+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/10xengineer/</loc>
     <lastmod>2021-01-06T19:22:55+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/career/</loc>
     <lastmod>2021-01-06T19:22:55+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/developer/</loc>
     <lastmod>2021-01-06T19:22:55+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/self-help/</loc>
     <lastmod>2021-01-06T19:22:55+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/software-engineer/</loc>
     <lastmod>2021-01-06T19:22:55+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/why-its-okay-to-be-an-ordinary-developer/</loc>
     <lastmod>2021-01-06T19:22:55+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/digital-intentionalization-dont-click-that-next-button/</loc>
     <lastmod>2021-01-05T22:29:45+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/distraction/</loc>
     <lastmod>2021-01-05T22:29:45+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/facebook-vidoes/</loc>
     <lastmod>2021-01-05T22:29:45+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/netflix/</loc>
     <lastmod>2021-01-05T22:29:45+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/next-button/</loc>
     <lastmod>2021-01-05T22:29:45+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/youtube/</loc>
     <lastmod>2021-01-05T22:29:45+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/digital/</loc>
     <lastmod>2021-01-04T23:15:38+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/goals/</loc>
     <lastmod>2021-01-04T23:15:38+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/my-only-goal-for-2021-digital-intentionality/</loc>
     <lastmod>2021-01-04T23:15:38+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/cloud/</loc>
     <lastmod>2020-09-28T03:55:27+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/nas/</loc>
     <lastmod>2020-09-28T03:55:27+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/tags/storage/</loc>
     <lastmod>2020-09-28T03:55:27+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/synology-nas-series-cloud-sync-with-azure-storage/</loc>
     <lastmod>2020-09-28T03:55:27+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/5-years-of-being-a-microsoft-mvp/</loc>
     <lastmod>2020-09-09T07:12:03+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/community/</loc>
+    <lastmod>2020-09-09T07:12:03+00:00</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/blog/writing-again/</loc>
     <lastmod>2020-08-26T07:51:48+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/categories/writing/</loc>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/tags/writing/</loc>
     <lastmod>2020-08-26T07:51:48+00:00</lastmod>
-  </url><url>
-    <loc>https://www.michaeljohnpena.com/about/</loc>
-    <lastmod>2020-08-24T04:01:50+00:00</lastmod>
-  </url><url>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/presentations/</loc>
     <lastmod>2020-08-24T04:01:50+00:00</lastmod>
-  </url><url>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/about/</loc>
+    <lastmod>2020-08-24T04:01:50+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
     <loc>https://www.michaeljohnpena.com/projects/</loc>
     <lastmod>2020-08-24T04:01:50+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
   </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/categories/</loc>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
 </urlset>

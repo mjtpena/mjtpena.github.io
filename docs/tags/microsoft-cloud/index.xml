@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Microsoft Cloud on ⚡️ Michael John Peña</title>
+    <title>Microsoft Cloud on Michael John Peña ⚡️</title>
     <link>https://www.michaeljohnpena.com/tags/microsoft-cloud/</link>
-    <description>Recent content in Microsoft Cloud on ⚡️ Michael John Peña</description>
+    <description>Recent content in Microsoft Cloud on Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>- Michael John Peña</copyright>
+    <language>id</language>
+    <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
+    <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
     <lastBuildDate>Thu, 07 Jan 2021 09:07:24 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/microsoft-cloud/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI across the Microsoft Cloud</title>
       <link>https://www.michaeljohnpena.com/blog/ai-across-the-microsoft-cloud/</link>
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      
+      <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/blog/ai-across-the-microsoft-cloud/</guid>
-      <description>Artificial Intelligence (AI) and Machine Learning (ML) are trending topics right now. In 2021, there are countless of ways to have a form of &amp;ldquo;AI&amp;rdquo; in your apps and platforms. A lot of companies from startups to software giants offer services that relate to this space. I spent the last 2 years exploring this space, and I still swimming my way as the movements in this area are quick and it&amp;rsquo;s hard to keep up.</description>
+      <description>Artificial Intelligence (AI) and Machine Learning (ML) are trending topics right now. In 2021, there are countless of ways to have a form of &amp;ldquo;AI&amp;rdquo; in your apps and platforms.</description>
     </item>
     
   </channel>
