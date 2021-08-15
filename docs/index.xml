@@ -19,6 +19,15 @@
     </item>
     
     <item>
+      <title>Using WSL2 (Windows Subsystem for Linux) for Blockchain Development</title>
+      <link>https://www.michaeljohnpena.com/blog/blockchain-wsl2/</link>
+      <pubDate>Sun, 15 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/blog/blockchain-wsl2/</guid>
+      <description>In the past, I&amp;rsquo;ve been using my Macbook Pro to do all things blockchain and smart contracts development. One of the hurdles I encountered in the past is that some tooling and frameworks were not first class citizens on Windows.</description>
+    </item>
+    
+    <item>
       <title>Watching Movies</title>
       <link>https://www.michaeljohnpena.com/now/2021-08-14-watching-movies/</link>
       <pubDate>Sat, 14 Aug 2021 03:56:25 +0000</pubDate>

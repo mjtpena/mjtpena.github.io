@@ -8,7 +8,16 @@
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
     <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
-    <lastBuildDate>Tue, 10 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/ethereum/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/ethereum/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using WSL2 (Windows Subsystem for Linux) for Blockchain Development</title>
+      <link>https://www.michaeljohnpena.com/blog/blockchain-wsl2/</link>
+      <pubDate>Sun, 15 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/blog/blockchain-wsl2/</guid>
+      <description>In the past, I&amp;rsquo;ve been using my Macbook Pro to do all things blockchain and smart contracts development. One of the hurdles I encountered in the past is that some tooling and frameworks were not first class citizens on Windows.</description>
+    </item>
+    
     <item>
       <title>What are these blockchain and crypto tokens?</title>
       <link>https://www.michaeljohnpena.com/blog/blockchain-tokens/</link>
