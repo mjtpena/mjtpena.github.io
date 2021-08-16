@@ -4,7 +4,7 @@ author: MJ Peña
 draft: false
 date: 2021-08-15T02:19:19Z
 url: /blog/blockchain-wsl2/
-featured_image: /2021/08/wsl2-blockchain.png
+featured_image: /2021/08/wsl.jpg
 tags:
   - Blockchain
   - Crypto
@@ -24,7 +24,7 @@ But what's interesting now is that Windows 10 comes with WSL2 (Windows Subsystem
 
 So going back to Blockchain development on WSL2, there are a lot of things that actually work for my workflow without having too much friction and context switching. Below is the high-level "at a glance" image of how I set up my machine.
 
-![](/2021/08/wsl2-blockchain.png)
+![](/2021/08/wsl.jpg)
 
 ## Visual Studio Code
 
