@@ -4,7 +4,8 @@ author: MJ Peña
 draft: false
 date: 2021-08-15T02:19:19Z
 url: /blog/blockchain-wsl2/
-featured_image: /2021/08/wsl.jpg
+images: 
+  - /2021/08/wsl.jpg
 tags:
   - Blockchain
   - Crypto
