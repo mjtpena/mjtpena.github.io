@@ -4,7 +4,8 @@ author: MJ Peña
 draft: false
 date: 2021-01-07T09:07:24+00:00
 url: /blog/ai-across-the-microsoft-cloud/
-featured_image: /2021/01/Azure-AI-1-940x510.png
+images: 
+     - /2021/01/Azure-AI-1-940x510.png
 tags:
   - Technology
 tags:

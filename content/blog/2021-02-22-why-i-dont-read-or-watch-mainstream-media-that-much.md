@@ -4,7 +4,8 @@ author: MJ Peña
 draft: false
 date: 2021-02-22T05:45:26+00:00
 url: /blog/why-i-dont-read-or-watch-mainstream-media-that-much/
-featured_image: /2021/02/jumpstory-download20210222-053810-940x510.jpg
+images: 
+     - /2021/02/jumpstory-download20210222-053810-940x510.jpg
 tags:
   - Digital Intentionalization
   - Life Style

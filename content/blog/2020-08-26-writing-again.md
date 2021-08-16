@@ -4,7 +4,8 @@ author: MJ Peña
 draft: false
 date: 2020-08-26T07:51:48+00:00
 url: /blog/writing-again/
-featured_image: /2020/08/mike-tinnion-3ym6i13Y9LU-unsplash-scaled.jpg
+images: 
+  - /2020/08/mike-tinnion-3ym6i13Y9LU-unsplash-scaled.jpg
 tags:
   - Writing
 ---

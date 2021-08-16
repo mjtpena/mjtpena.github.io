@@ -4,7 +4,8 @@ author: MJ Peña
 draft: false
 date: 2021-08-10T02:19:19Z
 url: /blog/blockchain-tokens/
-featured_image: /2021/08/coins.jpg
+images: 
+     - /2021/08/coins.jpg
 tags:
   - Blockchain
   - Crypto

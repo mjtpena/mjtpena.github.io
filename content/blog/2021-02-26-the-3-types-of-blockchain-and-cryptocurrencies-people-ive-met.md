@@ -4,7 +4,8 @@ author: MJ Peña
 draft: false
 date: 2021-02-26T03:28:06+00:00
 url: /blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/
-featured_image: /2021/02/jumpstory-download20210226-032132-940x510.jpg
+images: 
+     - /2021/02/jumpstory-download20210226-032132-940x510.jpg
 tags:
   - Community
   - Philosophy

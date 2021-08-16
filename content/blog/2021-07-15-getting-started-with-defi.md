@@ -4,7 +4,8 @@ author: MJ Peña
 draft: false
 date: 2021-07-15T16:20:29+00:00
 url: /blog/getting-started-with-defi/
-featured_image: /2021/07/crypto.jpg
+images: 
+     - /2021/07/crypto.jpg
 tags:
   - Technology
   - Blockchain

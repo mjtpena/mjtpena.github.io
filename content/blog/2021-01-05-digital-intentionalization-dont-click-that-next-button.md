@@ -4,7 +4,8 @@ author: MJ Peña
 draft: false
 date: 2021-01-05T22:29:45+00:00
 url: /blog/digital-intentionalization-dont-click-that-next-button/
-featured_image: /2021/01/jumpstory-download20210105-222238-940x510.jpg
+images: 
+     - /2021/01/jumpstory-download20210105-222238-940x510.jpg
 tags:
   - Digital Intentionalization
 tags:
