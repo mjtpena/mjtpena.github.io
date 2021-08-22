@@ -8,7 +8,25 @@
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
     <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
-    <lastBuildDate>Thu, 19 Aug 2021 03:56:25 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/now/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 Aug 2021 03:56:25 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/now/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thinking in Pictures</title>
+      <link>https://www.michaeljohnpena.com/now/2021-08-21-thinking-in-pictures/</link>
+      <pubDate>Sat, 21 Aug 2021 03:56:25 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/now/2021-08-21-thinking-in-pictures/</guid>
+      <description>My brain works better when I think in pictures. This is probably why I thrive as a software engineer and architect.</description>
+    </item>
+    
+    <item>
+      <title>Security</title>
+      <link>https://www.michaeljohnpena.com/now/2021-08-20-security/</link>
+      <pubDate>Fri, 20 Aug 2021 03:56:25 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/now/2021-08-20-security/</guid>
+      <description>Security is such a broad topic but is simple in principle. It’s about protecting something, either that is you, your family, or properties against unwanted scenarios.</description>
+    </item>
+    
     <item>
       <title>Energy</title>
       <link>https://www.michaeljohnpena.com/now/2021-08-19-energy/</link>
