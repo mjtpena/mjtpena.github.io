@@ -8,7 +8,61 @@
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
     <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
-    <lastBuildDate>Sun, 15 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>azure</title>
+      <link>https://www.michaeljohnpena.com/tags/azure/</link>
+      <pubDate>Fri, 27 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/azure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Edge</title>
+      <link>https://www.michaeljohnpena.com/tags/edge/</link>
+      <pubDate>Fri, 27 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/edge/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hybrid Cloud</title>
+      <link>https://www.michaeljohnpena.com/tags/hybrid-cloud/</link>
+      <pubDate>Fri, 27 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/hybrid-cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Infrastructure</title>
+      <link>https://www.michaeljohnpena.com/tags/infrastructure/</link>
+      <pubDate>Fri, 27 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/infrastructure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IoT</title>
+      <link>https://www.michaeljohnpena.com/tags/iot/</link>
+      <pubDate>Fri, 27 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/iot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Technology</title>
+      <link>https://www.michaeljohnpena.com/tags/technology/</link>
+      <pubDate>Fri, 27 Aug 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/tags/technology/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Blockchain</title>
       <link>https://www.michaeljohnpena.com/tags/blockchain/</link>
@@ -42,15 +96,6 @@
       <pubDate>Sun, 15 Aug 2021 02:19:19 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Technology</title>
-      <link>https://www.michaeljohnpena.com/tags/technology/</link>
-      <pubDate>Sun, 15 Aug 2021 02:19:19 +0000</pubDate>
-      <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/tags/technology/</guid>
       <description></description>
     </item>
     
@@ -375,15 +420,6 @@
       <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/tags/artificial-intelligence/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>azure</title>
-      <link>https://www.michaeljohnpena.com/tags/azure/</link>
-      <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
-      <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/tags/azure/</guid>
       <description></description>
     </item>
     

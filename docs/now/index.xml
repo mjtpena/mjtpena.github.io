@@ -8,7 +8,25 @@
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
     <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
-    <lastBuildDate>Wed, 25 Aug 2021 03:56:25 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/now/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Aug 2021 03:56:25 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/now/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Back to Normal</title>
+      <link>https://www.michaeljohnpena.com/now/2021-08-27-back-to-normal/</link>
+      <pubDate>Fri, 27 Aug 2021 03:56:25 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/now/2021-08-27-back-to-normal/</guid>
+      <description>There is no going back to normal. It took me a while to get it, but that is the sad and harsh truth.</description>
+    </item>
+    
+    <item>
+      <title>Pair Programming</title>
+      <link>https://www.michaeljohnpena.com/now/2021-08-26-pair-programming/</link>
+      <pubDate>Thu, 26 Aug 2021 03:56:25 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/now/2021-08-26-pair-programming/</guid>
+      <description>Collaborating using share screen is fun. I think this is the modern way of doing pair-programming. This is a very efficient method for both people to learn, share ideas, and collaborate.</description>
+    </item>
+    
     <item>
       <title>Human Mind</title>
       <link>https://www.michaeljohnpena.com/now/2021-08-25-human-mind/</link>
