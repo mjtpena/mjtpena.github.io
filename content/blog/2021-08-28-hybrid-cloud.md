@@ -2,10 +2,10 @@
 title: The Hybrid Cloud Journey with Microsoft Azure
 author: MJ Peña
 draft: false
-date: 2021-08-27T02:19:19Z
+date: 2021-08-28T02:19:19Z
 url: /blog/hybrid-cloud/
 images: 
-     - /2021/08/AzureArc.png
+     - /2021/08/AzureHybrid-featured.png
 tags:
   - Azure
   - Hybrid Cloud
