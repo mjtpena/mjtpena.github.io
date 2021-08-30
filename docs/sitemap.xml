@@ -4,8 +4,8 @@
   
   
   <url>
-    <loc>https://www.michaeljohnpena.com/now/2021-08-28-gaming/</loc>
-    <lastmod>2021-08-28T03:56:25+00:00</lastmod>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-30-messaging/</loc>
+    <lastmod>2021-08-30T03:56:25+00:00</lastmod>
     
     
     
@@ -19,7 +19,7 @@
   
   <url>
     <loc>https://www.michaeljohnpena.com/</loc>
-    <lastmod>2021-08-28T03:56:25+00:00</lastmod>
+    <lastmod>2021-08-30T03:56:25+00:00</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -33,12 +33,40 @@
   
   <url>
     <loc>https://www.michaeljohnpena.com/now/</loc>
-    <lastmod>2021-08-28T03:56:25+00:00</lastmod>
+    <lastmod>2021-08-30T03:56:25+00:00</lastmod>
     
     <changefreq>monthly</changefreq>
     
      
     <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-29-cleaning/</loc>
+    <lastmod>2021-08-29T03:56:25+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-08-28-gaming/</loc>
+    <lastmod>2021-08-28T03:56:25+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
     
     
   </url>
