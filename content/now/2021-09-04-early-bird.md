@@ -1,6 +1,6 @@
 ---
 title: "Early Bird"
-date: 2021-09-03T03:56:25Z
+date: 2021-09-04T03:56:25Z
 draft: false
 ---
 
