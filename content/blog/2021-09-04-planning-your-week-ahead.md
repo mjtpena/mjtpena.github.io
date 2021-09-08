@@ -33,7 +33,7 @@ I spend an hour of my Sunday to plan what to do for the week ahead. I plan what 
 By blocking time in your calendar, you commit to yourself that you are going to do it. If you’re using a digital calendar, this will also be reflective on your team's calendar, showing that you're "busy" or "away". People won't just randomly set-up a meeting with you to "talk about something." I know not workplace respects these concepts and "everything is urgent" / "I want it done... NOW!" If you're working in that environment where people don't respect (or abuse) your attention and time, then it is not a very healthy one. 
 
 
-![](/2021/09/mycalendar-block.png)
+![](/2021/09/mycalendar-block2.png)
 
 If something else gets prioritised, let's say some production issues or emergency meetings, then it gets clearer for you and everyone else involved in why you weren't able to accomplish X. You then move those work chunks into another time of the day or the week.
 
