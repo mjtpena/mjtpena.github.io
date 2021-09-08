@@ -4,8 +4,22 @@
   
   
   <url>
-    <loc>https://www.michaeljohnpena.com/now/2021-09-04-early-bird/</loc>
-    <lastmod>2021-09-04T03:56:25+00:00</lastmod>
+    <loc>https://www.michaeljohnpena.com/</loc>
+    <lastmod>2021-09-08T03:56:25+00:00</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    
+     
+    <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-09-08-microsoft/</loc>
+    <lastmod>2021-09-08T03:56:25+00:00</lastmod>
     
     
     
@@ -18,8 +32,8 @@
   
   
   <url>
-    <loc>https://www.michaeljohnpena.com/</loc>
-    <lastmod>2021-09-04T03:56:25+00:00</lastmod>
+    <loc>https://www.michaeljohnpena.com/now/</loc>
+    <lastmod>2021-09-08T03:56:25+00:00</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -32,13 +46,55 @@
   
   
   <url>
-    <loc>https://www.michaeljohnpena.com/now/</loc>
+    <loc>https://www.michaeljohnpena.com/now/2021-09-07-that-one-thing/</loc>
+    <lastmod>2021-09-07T03:56:25+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-09-06-anger-management/</loc>
+    <lastmod>2021-09-06T03:56:25+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-09-05-self-manage/</loc>
+    <lastmod>2021-09-05T03:56:25+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-09-04-early-bird/</loc>
     <lastmod>2021-09-04T03:56:25+00:00</lastmod>
     
-    <changefreq>monthly</changefreq>
     
-     
-    <priority>0.3</priority>
+    
+    
+    <priority>-1</priority>
     
     
   </url>
