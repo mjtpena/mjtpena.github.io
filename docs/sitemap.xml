@@ -4,8 +4,8 @@
   
   
   <url>
-    <loc>https://www.michaeljohnpena.com/now/2021-10-06-keep-producing/</loc>
-    <lastmod>2021-10-06T03:56:25+00:00</lastmod>
+    <loc>https://www.michaeljohnpena.com/now/2021-10-08-how-much-time/</loc>
+    <lastmod>2021-10-08T03:56:25+00:00</lastmod>
     
     
     
@@ -19,7 +19,7 @@
   
   <url>
     <loc>https://www.michaeljohnpena.com/</loc>
-    <lastmod>2021-10-06T03:56:25+00:00</lastmod>
+    <lastmod>2021-10-08T03:56:25+00:00</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -33,12 +33,40 @@
   
   <url>
     <loc>https://www.michaeljohnpena.com/now/</loc>
-    <lastmod>2021-10-06T03:56:25+00:00</lastmod>
+    <lastmod>2021-10-08T03:56:25+00:00</lastmod>
     
     <changefreq>monthly</changefreq>
     
      
     <priority>0.3</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-10-07-autopilot/</loc>
+    <lastmod>2021-10-07T03:56:25+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://www.michaeljohnpena.com/now/2021-10-06-keep-producing/</loc>
+    <lastmod>2021-10-06T03:56:25+00:00</lastmod>
+    
+    
+    
+    
+    <priority>-1</priority>
     
     
   </url>
