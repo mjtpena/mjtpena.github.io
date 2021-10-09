@@ -8,4 +8,4 @@ I never really understood why I wanted a vertically mounted monitor. I mean, it'
 
 Based from my observation in the last couple of months, I find that all I need is 1 really good monitor, then everything else are extras. Whether the secondary is horizontal or vertical, it needs to be positioned as secondary. 
 
-What I'll be doing is exploring this to monitor graphs such as stocks, cloud resources, and my always open notes. It's probably a good place to put on timers, music players like Spotify. #microblog
+What I'll be doing is exploring this to monitor graphs such as stocks, cloud resources, and my always open notes. It's probably a good place to put on timers, music players like Spotify.
