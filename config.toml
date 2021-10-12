@@ -1,7 +1,9 @@
+baseURL = "https://www.michaeljohnpena.com"
 languageCode                  = "id"
 title                         = "Michael John Peña ⚡️"
 theme                         = "personal-site"
 summaryLength                 = 20
+publishDir                    = "docs"
 
 [Author] # Used in authorbox
   name                        = "Michael John Peña"
