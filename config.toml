@@ -3,7 +3,6 @@ languageCode                  = "id"
 title                         = "Michael John Peña ⚡️"
 theme                         = "personal-site"
 summaryLength                 = 20
-publishDir                    = "publish"
 
 [Author] # Used in authorbox
   name                        = "Michael John Peña"
