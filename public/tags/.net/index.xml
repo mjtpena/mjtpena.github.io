@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>.NET on Michael John Peña ⚡️</title>
+    <link>https://www.michaeljohnpena.com/tags/.net/</link>
+    <description>Recent content in .NET on Michael John Peña ⚡️</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>id</language>
+    <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
+    <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
+    <lastBuildDate>Fri, 23 Jul 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Developing MacOS Apps using .NET</title>
+      <link>https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/</link>
+      <pubDate>Fri, 23 Jul 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/</guid>
+      <description>The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .</description>
+    </item>
+    
+  </channel>
+</rss>
