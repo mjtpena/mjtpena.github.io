@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Michael John Peña ⚡️</title>
-    <link>https://www.michaeljohnpena.com/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
-    <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster><atom:link href="https://www.michaeljohnpena.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

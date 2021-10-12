@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IoT on Michael John Peña ⚡️</title>
-    <link>https://www.michaeljohnpena.com/tags/iot/</link>
+    <link>/tags/iot/</link>
     <description>Recent content in IoT on Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
     <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
-    <lastBuildDate>Sat, 28 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/iot/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="/tags/iot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Hybrid Cloud Journey with Microsoft Azure</title>
-      <link>https://www.michaeljohnpena.com/blog/hybrid-cloud/</link>
+      <link>/blog/hybrid-cloud/</link>
       <pubDate>Sat, 28 Aug 2021 02:19:19 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/hybrid-cloud/</guid>
+      <guid>/blog/hybrid-cloud/</guid>
       <description>Hybrid cloud is the trend right now I see in a lot of companies and enterprises. The term hybrid has grown too in the last couple of years.</description>
     </item>
     

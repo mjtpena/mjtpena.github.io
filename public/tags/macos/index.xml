@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MacOS on Michael John Peña ⚡️</title>
-    <link>https://www.michaeljohnpena.com/tags/macos/</link>
+    <link>/tags/macos/</link>
     <description>Recent content in MacOS on Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
     <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
-    <lastBuildDate>Tue, 13 Jul 2021 16:20:29 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Jul 2021 16:20:29 +0000</lastBuildDate><atom:link href="/tags/macos/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Ultimate Windows and Mac Setup (2021 Edition)</title>
-      <link>https://www.michaeljohnpena.com/blog/my-ultimate-windows-and-mac-setup/</link>
+      <link>/blog/my-ultimate-windows-and-mac-setup/</link>
       <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/my-ultimate-windows-and-mac-setup/</guid>
+      <guid>/blog/my-ultimate-windows-and-mac-setup/</guid>
       <description>Introduction  My Battle Station @ 2021
 In a parallel world, I&amp;rsquo;ll be just using 1 device and 1 Operating system for all the things.</description>
     </item>
     
     <item>
       <title>How to disable auto-locking of MacOS Keychains</title>
-      <link>https://www.michaeljohnpena.com/blog/how-to-disable-auto-locking-of-macos-keychains/</link>
+      <link>/blog/how-to-disable-auto-locking-of-macos-keychains/</link>
       <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/how-to-disable-auto-locking-of-macos-keychains/</guid>
+      <guid>/blog/how-to-disable-auto-locking-of-macos-keychains/</guid>
       <description>Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle.</description>
     </item>
     

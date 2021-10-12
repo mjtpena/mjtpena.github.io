@@ -2,83 +2,83 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Technology on Michael John Peña ⚡️</title>
-    <link>https://www.michaeljohnpena.com/tags/technology/</link>
+    <link>/tags/technology/</link>
     <description>Recent content in Technology on Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
     <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
-    <lastBuildDate>Sat, 28 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/technology/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Aug 2021 02:19:19 +0000</lastBuildDate><atom:link href="/tags/technology/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Hybrid Cloud Journey with Microsoft Azure</title>
-      <link>https://www.michaeljohnpena.com/blog/hybrid-cloud/</link>
+      <link>/blog/hybrid-cloud/</link>
       <pubDate>Sat, 28 Aug 2021 02:19:19 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/hybrid-cloud/</guid>
+      <guid>/blog/hybrid-cloud/</guid>
       <description>Hybrid cloud is the trend right now I see in a lot of companies and enterprises. The term hybrid has grown too in the last couple of years.</description>
     </item>
     
     <item>
       <title>Using WSL2 (Windows Subsystem for Linux) for Blockchain Development</title>
-      <link>https://www.michaeljohnpena.com/blog/blockchain-wsl2/</link>
+      <link>/blog/blockchain-wsl2/</link>
       <pubDate>Sun, 15 Aug 2021 02:19:19 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/blockchain-wsl2/</guid>
+      <guid>/blog/blockchain-wsl2/</guid>
       <description>In the past, I&amp;rsquo;ve been using my Macbook Pro to do all things blockchain and smart contracts development. One of the hurdles I encountered in the past is that some tooling and frameworks were not first class citizens on Windows.</description>
     </item>
     
     <item>
       <title>What are these blockchain and crypto tokens?</title>
-      <link>https://www.michaeljohnpena.com/blog/blockchain-tokens/</link>
+      <link>/blog/blockchain-tokens/</link>
       <pubDate>Tue, 10 Aug 2021 02:19:19 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/blockchain-tokens/</guid>
+      <guid>/blog/blockchain-tokens/</guid>
       <description>So you keep hearing or reading about &amp;ldquo;tokens&amp;rdquo;, these &amp;ldquo;cryptos&amp;rdquo;, the &amp;ldquo;blockchain bitcoins&amp;rdquo;, and so on. It&amp;rsquo;s been quite some time now that it has involved me with blockchains and cryptos that over and over, I have to explain to people (often new clients) on what are these tokens.</description>
     </item>
     
     <item>
       <title>Developing MacOS Apps using .NET</title>
-      <link>https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/</link>
+      <link>/blog/developing-macos-apps-using-net/</link>
       <pubDate>Fri, 23 Jul 2021 02:19:19 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/</guid>
+      <guid>/blog/developing-macos-apps-using-net/</guid>
       <description>The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .</description>
     </item>
     
     <item>
       <title>Getting Started with DeFi</title>
-      <link>https://www.michaeljohnpena.com/blog/getting-started-with-defi/</link>
+      <link>/blog/getting-started-with-defi/</link>
       <pubDate>Thu, 15 Jul 2021 16:20:29 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/getting-started-with-defi/</guid>
+      <guid>/blog/getting-started-with-defi/</guid>
       <description>Introduction Blockchain is not dead. Actually, quite the contrary is happening in the past year. There are more and more interest and it&amp;rsquo;s gaining a lot more traction than before.</description>
     </item>
     
     <item>
       <title>My Ultimate Windows and Mac Setup (2021 Edition)</title>
-      <link>https://www.michaeljohnpena.com/blog/my-ultimate-windows-and-mac-setup/</link>
+      <link>/blog/my-ultimate-windows-and-mac-setup/</link>
       <pubDate>Tue, 13 Jul 2021 16:20:29 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/my-ultimate-windows-and-mac-setup/</guid>
+      <guid>/blog/my-ultimate-windows-and-mac-setup/</guid>
       <description>Introduction  My Battle Station @ 2021
 In a parallel world, I&amp;rsquo;ll be just using 1 device and 1 Operating system for all the things.</description>
     </item>
     
     <item>
       <title>SSH Connect to Linux Server from a Mac using SOCKS5 Proxy</title>
-      <link>https://www.michaeljohnpena.com/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</link>
+      <link>/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</link>
       <pubDate>Thu, 24 Jun 2021 16:20:29 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</guid>
+      <guid>/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/</guid>
       <description>Introduction # I&amp;rsquo;ve been spending a lot of time lately in setting up on-premises Linux Servers. There are a lot of reasons why you would like to SSH to a Linux server such as checking configuration files, copying files, or even port forwarding.</description>
     </item>
     
     <item>
       <title>5 Years of being a Microsoft MVP!</title>
-      <link>https://www.michaeljohnpena.com/blog/5-years-of-being-a-microsoft-mvp/</link>
+      <link>/blog/5-years-of-being-a-microsoft-mvp/</link>
       <pubDate>Wed, 09 Sep 2020 07:12:03 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
-      <guid>https://www.michaeljohnpena.com/blog/5-years-of-being-a-microsoft-mvp/</guid>
+      <guid>/blog/5-years-of-being-a-microsoft-mvp/</guid>
       <description>Wow! It’s been 5 years since my first Microsoft MVP award. If you don’t know what the Microsoft MVP program is, check this site.</description>
     </item>
     
