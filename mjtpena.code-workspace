@@ -17,16 +17,16 @@
 			"panel.border": "#65c89b",
 			"sash.hoverBorder": "#65c89b",
 			"sideBar.border": "#65c89b",
-			"statusBar.background": "#42b883",
+			"statusBar.background": "#42b882",
 			"statusBar.foreground": "#15202b",
-			"statusBarItem.hoverBackground": "#359268",
-			"statusBarItem.remoteBackground": "#42b883",
+			"statusBarItem.hoverBackground": "#359267",
+			"statusBarItem.remoteBackground": "#42b882",
 			"statusBarItem.remoteForeground": "#15202b",
-			"titleBar.activeBackground": "#42b883",
+			"titleBar.activeBackground": "#42b882",
 			"titleBar.activeForeground": "#15202b",
-			"titleBar.inactiveBackground": "#42b88399",
+			"titleBar.inactiveBackground": "#42b88299",
 			"titleBar.inactiveForeground": "#15202b99"
 		},
-		"peacock.remoteColor": "#42b883"
+		"peacock.remoteColor": "#42b882"
 	}
 }

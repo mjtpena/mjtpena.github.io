@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Running on Michael John Peña ⚡️</title>
+    <link>https://www.michaeljohnpena.com/tags/running/</link>
+    <description>Recent content in Running on Michael John Peña ⚡️</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>id</language>
+    <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
+    <webMaster>michael@datachain.consulting (Michael John Peña)</webMaster>
+    <lastBuildDate>Mon, 08 Nov 2021 02:19:19 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/running/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Run for Autism - 2021</title>
+      <link>https://www.michaeljohnpena.com/blog/run-for-autism-2021/</link>
+      <pubDate>Mon, 08 Nov 2021 02:19:19 +0000</pubDate>
+      <author>michael@datachain.consulting (Michael John Peña)</author>
+      <guid>https://www.michaeljohnpena.com/blog/run-for-autism-2021/</guid>
+      <description>A couple of weeks ago, I started a campaign to raise money into my [[Run For Autism 2021]]. Long story short, I made it!</description>
+    </item>
+    
+  </channel>
+</rss>
