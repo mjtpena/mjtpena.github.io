@@ -98,7 +98,7 @@ We've spent a lot of time lately in applying to different schools around Austral
 
 ## Home Updates
 
-- **House**. The last rental place in Ingleburn had a lot of water trouble and we have moved to a new rental place in Leumeah, NSW (Campbeltown). We've secured a lot in Austral, NSW. We're in the process of finalising our house plans and ETA of completion is around January 2022. If all goes well, Andriel will start his Primary school in Austral.
+- **House**. The last rental place in Ingleburn had a lot of water trouble and we have moved to a new rental place in Leumeah, NSW (Campbeltown). We've secured a lot in Austral, NSW. We're in the process of finalising our house plans and ETA of completion is around January 2023. If all goes well, Andriel will start his Primary school in Austral.
 
 - **Toileting**. Andriel doesn't use nappies anymore on day times. He tends to go for a "Wee" and "Poo" when prompted to go to the toilet. Sometimes he shows gestures of discomfort, and we proceed to go to the toilet. We will keep doing this for the next few weeks, then we'll also try to remove nappies at night time as we need more observation for this. In the near future, we want him to be more expressive and inform us when he needs to go.
 
