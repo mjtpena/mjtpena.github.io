@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Power Platform on Congo</title>
+    <link>https://www.michaeljohnpena.com/tags/power-platform/</link>
+    <description>Recent content in Power Platform on Congo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 07 Jan 2021 09:07:24 +0000</lastBuildDate><atom:link href="https://www.michaeljohnpena.com/tags/power-platform/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI across the Microsoft Cloud</title>
+      <link>https://www.michaeljohnpena.com/blog/ai-across-the-microsoft-cloud/</link>
+      <pubDate>Thu, 07 Jan 2021 09:07:24 +0000</pubDate>
+      
+      <guid>https://www.michaeljohnpena.com/blog/ai-across-the-microsoft-cloud/</guid>
+      <description>Artificial Intelligence (AI) and Machine Learning (ML) are trending topics right now.</description>
+    </item>
+    
+  </channel>
+</rss>

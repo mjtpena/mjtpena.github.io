@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head>
+  <meta charset="utf-8" />
+  
+    <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Synology NAS Series – Cloud Sync with Azure Storage &middot; Congo</title>
+    <meta name="title" content="Synology NAS Series – Cloud Sync with Azure Storage &middot; Congo" />
+  
+  
+  
+  
+  
+  <link rel="canonical" href="https://www.michaeljohnpena.com/blog/synology-nas-series-cloud-sync-with-azure-storage/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.39b7a5b20cc3e1243a974332de8d5e458dd9f15f0f8e06962e8afb4c2b9ce9805c65a0f9359b396ceb5d5f8c16f9ede5d854c208fb561f4fbc5b9a05f4c3cdec.css"
+    integrity="sha512-ObelsgzD4SQ6l0My3o1eRY3Z8V8PjgaWLor7TCuc6YBcZaD5NZs5bOtdX4wW&#43;e3l2FTCCPtWH0&#43;8W5oF9MPN7A=="
+  />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.12e98742cd283574d030a7fe55f29597df4ee214f7ff7075b4d19a64d046a602753c715295550be7899b661619cec89c679049d36c624681671a8013c1249896.js" integrity="sha512-EumHQs0oNXTQMKf&#43;VfKVl99O4hT3/3B1tNGaZNBGpgJ1PHFSlVUL54mbZhYZzsicZ5BJ02xiRoFnGoATwSSYlg=="></script>
+  
+  
+  
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Synology NAS Series – Cloud Sync with Azure Storage" />
+<meta property="og:description" content="Foreword # Synology reached out to me to give their new DiskStation DS920&#43; a review." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.michaeljohnpena.com/blog/synology-nas-series-cloud-sync-with-azure-storage/" /><meta property="og:image" content="https://www.michaeljohnpena.com/2020/09/20200821_025202969_iOS-940x510.jpg" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2020-09-28T03:55:27+00:00" />
+<meta property="article:modified_time" content="2020-09-28T03:55:27+00:00" /><meta property="og:site_name" content="Congo" />
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.michaeljohnpena.com/2020/09/20200821_025202969_iOS-940x510.jpg"/>
+
+<meta name="twitter:title" content="Synology NAS Series – Cloud Sync with Azure Storage"/>
+<meta name="twitter:description" content="Foreword # Synology reached out to me to give their new DiskStation DS920&#43; a review."/>
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Blogs",
+    "name": "Synology NAS Series – Cloud Sync with Azure Storage",
+    "headline": "Synology NAS Series – Cloud Sync with Azure Storage",
+    
+    "abstract": "Foreword # Synology reached out to me to give their new DiskStation DS920\u002b a review.",
+    "inLanguage": "en",
+    "url" : "https:\/\/www.michaeljohnpena.com\/blog\/synology-nas-series-cloud-sync-with-azure-storage\/",
+    "author" : {
+      "@type": "Person",
+      "name": ""
+    },
+    "copyrightYear": "2020",
+    "dateCreated": "2020-09-28T03:55:27\u002b00:00",
+    "datePublished": "2020-09-28T03:55:27\u002b00:00",
+    
+    "dateModified": "2020-09-28T03:55:27\u002b00:00",
+    
+    "keywords": ["azure","cloud","nas","storage"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1082"
+  }]
+  </script>
+
+
+  
+  
+    <meta name="generator" content="Hugo 0.96.0" />
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+  
+  
+  
+  
+
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 bg-neutral text-neutral-900 sm:px-14 md:px-24 lg:px-32 dark:bg-neutral-800 dark:text-neutral max-w-7xl"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 dark:bg-neutral-600 focus:translate-y-0"
+        href="#main-content"
+        ><span class="font-bold ltr:pr-2 rtl:pl-2 text-primary-600 dark:text-primary-400"
+          >&darr;</span
+        >Skip to main content</a
+      >
+    </div><header
+  class="flex justify-between py-6 font-semibold sm:items-center sm:py-10 text-neutral-900 dark:text-neutral print:hidden"
+>
+  
+  <div>
+    
+      <a
+        class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+        rel="me"
+        href="/"
+        >Congo</a
+      >
+    
+
+  </div>
+  
+  
+    <nav>
+      <ul class="flex flex-col list-none sm:flex-row">
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href=""
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/categories/"
+              title="Categories"
+              >Categories</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/tags/"
+              title="Tags"
+              >Tags</a
+            >
+          </li>
+        
+        
+      </ul>
+    </nav>
+  
+</header>
+<main id="main-content" class="relative grow">
+  <article>
+    <header class="max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Synology NAS Series – Cloud Sync with Azure Storage
+      </h1>
+      <div class="mt-8 mb-12 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+    
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2020-09-28 03:55:27 &#43;0000 &#43;0000">28 September 2020</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">6 mins</span>
+    
+
+    
+    
+  </div>
+
+  
+  
+
+
+      </div>
+    </header>
+    <section class="flex flex-col max-w-full mt-0 prose lg:flex-row dark:prose-invert">
+      
+      <div class="min-w-0 min-h-0 max-w-prose">
+        <h1 id="foreword" class="relative group">Foreword <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#foreword" aria-label="Anchor">#</a></span></h1>
+<p>Synology reached out to me to give their new <a href="https://www.synology.com/en-us/products/DS920+" target="_blank" rel="noreferrer noopener">DiskStation DS920+</a> a review. If you&rsquo;re not yet aware of Synology, they are the leading NAS (Network-attached storage) provider for home and work use-cases. You can use a NAS for pretty much anything such as backing up files, sharing files in a local network, streaming media files, or have your own &ldquo;private cloud&rdquo;.</p>
+<p>Throughout the years, the concept of NAS has developed and there is now a very thin line between doing things locally in your network and storage capabilities of cloud vendors.</p>
+<p>I am creating a Synology NAS series on highlighting the different capabilities of their NAS. In particular, the features that work within the Microsoft ecosystem such as Microsoft Azure, Azure Active Directory, and Microsoft 365, which is something I use on a day-to-day basis.</p>
+<h1 id="introduction" class="relative group">Introduction <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#introduction" aria-label="Anchor">#</a></span></h1>
+<p>Lately I&rsquo;ve been working on a lot of live video analytics to analyse CCTV (surveillance) feeds and extract useful information around it. There are 3 major points around my customer&rsquo;s business requirements and policy.</p>
+<ol>
+<li>The video analytics processing should happen in an &ldquo;edge&rdquo; environment. The stream should not send data constantly to the public cloud in real-time, where &ldquo;the magic&rdquo; is happening in the cloud. This whole environment including the &ldquo;AI/ML&rdquo; models should run through a local server.</li>
+<li>We archive CCTV feeds in the public cloud through a reliable and cost-effective public storage mechanism. There is no requirement for these videos to be accessible in real-time.</li>
+<li>The customer wants that network traffic should not clog or would require dedicated network connections for video processing and archiving. They leverage the same network infrastructure in their remote office locations.</li>
+</ol>
+<h1 id="why-cloud-sync--azure-storage" class="relative group">Why Cloud Sync + Azure Storage? <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#why-cloud-sync--azure-storage" aria-label="Anchor">#</a></span></h1>
+<p>In this specific business case, the customer already uses Synology for NAS and an active Azure subscription.</p>
+<p>One thing you might think of is, why don&rsquo;t I just use my personal OneDrive or Dropbox to do this? Well, the answer is that Enterprise customers usually have massive files. In particular, this customer has around 100+ cameras surveying 24/7. Using something of a personal subscription is not cost effective.</p>
+<p>The video files are around 2 Terabytes per day and for archiving purposes only. Example is when there are incidents that require manual investigation.</p>
+<p>Azure Blob storage is the perfect fit for this as it has: hot, cool, and archive access tiers. Learn more <a rel="noreferrer noopener" href="https://docs.microsoft.com/en-gb/azure/storage/blobs/storage-blob-storage-tiers?tabs=azure-portal" target="_blank">here</a>.</p>
+<p>Cloud Sync can also schedule upload times to avoid disrupting the network during office hours.</p>
+<h1 id="getting-started" class="relative group">Getting Started <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#getting-started" aria-label="Anchor">#</a></span></h1>
+<p>Setting up Cloud Sync is fairly easy and a straightforward process. To get started, go to your Synology NAS landing page. Then go to &ldquo;Package Center&rdquo; to search, install, and open Cloud Sync.<figure class="wp-block-image size-large"></p>
+<p>
+
+
+
+  
+  
+  
+    <figure>
+      <img class="my-0 rounded-md" src="/2020/09/Package-Center-1024x558.png" alt="img" />
+      
+    </figure>
+  
+
+</p>
+<h2 id="choose-a-cloud-provider" class="relative group">Choose a Cloud Provider <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#choose-a-cloud-provider" aria-label="Anchor">#</a></span></h2>
+<p>After opening Cloud Sync, it will prompt you to choose a cloud provider. Choose Azure storage.</p>
+<h2 id="optional-create-an-azure-storage" class="relative group">Optional: Create an Azure storage <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#optional-create-an-azure-storage" aria-label="Anchor">#</a></span></h2>
+<p>If you don&rsquo;t have an existing Azure Storage or wish to create a new one, then follow the steps below.</p>
+<p>In the Azure portal, search for &ldquo;Storage&rdquo; and create a new instance.</p>
+<p>Note: You can customize other parameters here, such as Access Tier (Cool / Hot) and Performance (Standard / Premium).</p>
+<p>Finish the wizard and create the resource.</p>
+<h2 id="optional-create-a-blob-container" class="relative group">Optional: Create a Blob Container <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#optional-create-a-blob-container" aria-label="Anchor">#</a></span></h2>
+<p>If you already have a blob container, skip to the next section. In your Azure storage, navigate to the Blob Service section of the main blade and click on Containers.</p>
+<p>
+
+
+
+  
+  
+  
+    <figure>
+      <img class="my-0 rounded-md" src="/2020/09/image-1.png" alt="img" />
+      
+    </figure>
+  
+
+</p>
+<p>Create a container by clicking on the &ldquo;+ Container&rdquo; button. Assign a name and access to it.</p>
+<p>Note: For this specific exercise, the access level would not matter.</p>
+<p>
+
+
+
+  
+  
+  
+    <figure>
+      <img class="my-0 rounded-md" src="/2020/09/image-2-1024x492.png" alt="img" />
+      
+    </figure>
+  
+
+</p>
+<h2 id="retrieve-the-storage-key" class="relative group">Retrieve the Storage Key <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#retrieve-the-storage-key" aria-label="Anchor">#</a></span></h2>
+<p>We need a storage key to establish a secure connection between Cloud Sync and the Azure storage.</p>
+<p>To do this, go to the Azure Portal and navigate to the Azure storage that you want Cloud Sync to point to.</p>
+<p>In the Settings section of the main blade of the storage account, go to &ldquo;Access Keys&rdquo;.</p>
+<p>Copy the value of either key1 or key2. Make sure you don&rsquo;t share these keys to other people who don&rsquo;t need it, nor save it to a location that others can easily access like a text file.</p>
+<h2 id="cloud-sync---establish-connection" class="relative group">Cloud Sync - establish connection <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#cloud-sync---establish-connection" aria-label="Anchor">#</a></span></h2>
+<p>Go back to the Cloud Sync wizard and fill in the details below:</p>
+<ul>
+<li><strong>Service endpoint</strong>: Azure Global (or China)</li>
+<li><strong>Storage account</strong>: name of the Azure storage without prefixes and suffixes. Note that all storage account names are unique.</li>
+<li><strong>Access key</strong>: Paste in the key mentioned above.</li>
+<li><strong>Blob container name</strong>: The Blob container where you want to upload the files.</li>
+</ul>
+<p>Click on Next.</p>
+<h2 id="choose-the-folders-you-want-to-sync" class="relative group">Choose the folder(s) you want to Sync <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#choose-the-folders-you-want-to-sync" aria-label="Anchor">#</a></span></h2>
+<p>In the task setting, Select which folder(s) you want to sync. I recommend that you merge the files in a folder specific for archiving.</p>
+<h2 id="choose-sync-direction" class="relative group">Choose Sync Direction <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#choose-sync-direction" aria-label="Anchor">#</a></span></h2>
+<p>You have the option to set the sync direction of your files. In most cases it is ideal to set it to Bidirectional, so that when a system fails, you still have other options to back-up and recover files.</p>
+<h2 id="set-schedule-settings" class="relative group">Set schedule settings <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#set-schedule-settings" aria-label="Anchor">#</a></span></h2>
+<p>This is an outstanding feature of Cloud Sync. With this customer, we don&rsquo;t want to upload the Terabytes of data during office hours. We only set it during off hours and weekends.</p>
+<p>Set the time of days you want syncing to run and suspended.</p>
+<h2 id="optional-encrypt-data" class="relative group">Optional: Encrypt Data <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#optional-encrypt-data" aria-label="Anchor">#</a></span></h2>
+<p>There is an optional setting to encrypt data. This will allow the files to be encrypted in transit and when in storage. The downside of doing this approach is that only Cloud Sync can recognize the data that were uploaded.</p>
+<h2 id="complete-the-wizard" class="relative group">Complete the Wizard <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#complete-the-wizard" aria-label="Anchor">#</a></span></h2>
+<p>Click on Next and finish the wizard. A pop-up should appear, confirming a successful setup.</p>
+<p>Once the connection to the Azure storage is established, you will see the notifications saying files are being synced.</p>
+<h1 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Anchor">#</a></span></h1>
+<p>To my interest, I&rsquo;ve also adapted this pattern with my personal/home surveillance system.</p>
+<p>One thing I would say is that - it just works - which is good. I think it&rsquo;s seldom to see managed services or platform these days where the burden of over configuration is in the hands of the customer.</p>
+<p>I&rsquo;ve been running this setup for a few weeks now and I am very delighted with the results. The setup is very easy that doesn&rsquo;t require deep technical skills in file storage. I remember the days when doing this would require complex scripts to sync between network files and centralized servers. Those days are now a thing of a past.</p>
+
+      </div>
+    </section>
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  <div class="flex">
+    
+    <div class="place-self-center">
+      
+      
+      <div class="text-2xl sm:text-lg">
+</div>
+    </div>
+  </div>
+
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="flex group" href="/blog/5-years-of-being-a-microsoft-mvp/">
+              <span
+                class="mr-3 ltr:inline rtl:hidden text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+              <span
+                class="ml-3 ltr:hidden rtl:inline text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >5 Years of being a Microsoft MVP!</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2020-09-09 07:12:03 &#43;0000 &#43;0000">9 September 2020</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="flex text-right group" href="/blog/my-only-goal-for-2021-digital-intentionality/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >My only goal for 2021: Digital Intentionality</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2021-01-04 23:15:38 &#43;0000 &#43;0000">4 January 2021</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ml-3 ltr:inline rtl:hidden text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span
+                class="mr-3 ltr:hidden rtl:inline text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+    </footer>
+    
+  </article>
+
+      
+        <div
+          class="absolute top-[110vh] ltr:right-0 rtl:left-0 w-12 pointer-events-none bottom-[-5.5rem]"
+        >
+          <a
+            href="#the-top"
+            class="w-12 h-12 sticky pointer-events-auto top-[calc(100vh-5rem)] bg-neutral/50 dark:bg-neutral-800/50 backdrop-blur rounded-full text-xl flex items-center justify-center text-neutral-700 dark:text-neutral hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            &uarr;
+          </a>
+        </div>
+      
+    </main>
+    <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex justify-between">
+    <div>
+      
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2022
+          
+      </p>
+      
+      
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          
+          
+          Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+            href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://git.io/hugo-congo" target="_blank" rel="noopener noreferrer">Congo</a>
+        </p>
+      
+    </div>
+    
+    
+  </div>
+  
+  
+</footer>
+</body>
+</html>

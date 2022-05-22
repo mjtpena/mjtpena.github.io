@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head>
+  <meta charset="utf-8" />
+  
+    <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>SSH Connect to Linux Server from a Mac using SOCKS5 Proxy &middot; Congo</title>
+    <meta name="title" content="SSH Connect to Linux Server from a Mac using SOCKS5 Proxy &middot; Congo" />
+  
+  
+  
+  
+  
+  <link rel="canonical" href="https://www.michaeljohnpena.com/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.39b7a5b20cc3e1243a974332de8d5e458dd9f15f0f8e06962e8afb4c2b9ce9805c65a0f9359b396ceb5d5f8c16f9ede5d854c208fb561f4fbc5b9a05f4c3cdec.css"
+    integrity="sha512-ObelsgzD4SQ6l0My3o1eRY3Z8V8PjgaWLor7TCuc6YBcZaD5NZs5bOtdX4wW&#43;e3l2FTCCPtWH0&#43;8W5oF9MPN7A=="
+  />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.12e98742cd283574d030a7fe55f29597df4ee214f7ff7075b4d19a64d046a602753c715295550be7899b661619cec89c679049d36c624681671a8013c1249896.js" integrity="sha512-EumHQs0oNXTQMKf&#43;VfKVl99O4hT3/3B1tNGaZNBGpgJ1PHFSlVUL54mbZhYZzsicZ5BJ02xiRoFnGoATwSSYlg=="></script>
+  
+  
+  
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="SSH Connect to Linux Server from a Mac using SOCKS5 Proxy" />
+<meta property="og:description" content="Introduction # I&rsquo;ve been spending a lot of time lately in setting up on-premises Linux Servers." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.michaeljohnpena.com/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-06-24T16:20:29+00:00" />
+<meta property="article:modified_time" content="2021-06-24T16:20:29+00:00" /><meta property="og:site_name" content="Congo" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SSH Connect to Linux Server from a Mac using SOCKS5 Proxy"/>
+<meta name="twitter:description" content="Introduction # I&rsquo;ve been spending a lot of time lately in setting up on-premises Linux Servers."/>
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Blogs",
+    "name": "SSH Connect to Linux Server from a Mac using SOCKS5 Proxy",
+    "headline": "SSH Connect to Linux Server from a Mac using SOCKS5 Proxy",
+    
+    "abstract": "Introduction # I\u0026rsquo;ve been spending a lot of time lately in setting up on-premises Linux Servers.",
+    "inLanguage": "en",
+    "url" : "https:\/\/www.michaeljohnpena.com\/blog\/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy\/",
+    "author" : {
+      "@type": "Person",
+      "name": ""
+    },
+    "copyrightYear": "2021",
+    "dateCreated": "2021-06-24T16:20:29\u002b00:00",
+    "datePublished": "2021-06-24T16:20:29\u002b00:00",
+    
+    "dateModified": "2021-06-24T16:20:29\u002b00:00",
+    
+    "keywords": ["Technology"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "393"
+  }]
+  </script>
+
+
+  
+  
+    <meta name="generator" content="Hugo 0.96.0" />
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+  
+  
+  
+  
+
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 bg-neutral text-neutral-900 sm:px-14 md:px-24 lg:px-32 dark:bg-neutral-800 dark:text-neutral max-w-7xl"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 dark:bg-neutral-600 focus:translate-y-0"
+        href="#main-content"
+        ><span class="font-bold ltr:pr-2 rtl:pl-2 text-primary-600 dark:text-primary-400"
+          >&darr;</span
+        >Skip to main content</a
+      >
+    </div><header
+  class="flex justify-between py-6 font-semibold sm:items-center sm:py-10 text-neutral-900 dark:text-neutral print:hidden"
+>
+  
+  <div>
+    
+      <a
+        class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+        rel="me"
+        href="/"
+        >Congo</a
+      >
+    
+
+  </div>
+  
+  
+    <nav>
+      <ul class="flex flex-col list-none sm:flex-row">
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href=""
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/categories/"
+              title="Categories"
+              >Categories</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/tags/"
+              title="Tags"
+              >Tags</a
+            >
+          </li>
+        
+        
+      </ul>
+    </nav>
+  
+</header>
+<main id="main-content" class="relative grow">
+  <article>
+    <header class="max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        SSH Connect to Linux Server from a Mac using SOCKS5 Proxy
+      </h1>
+      <div class="mt-8 mb-12 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+    
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2021-06-24 16:20:29 &#43;0000 &#43;0000">24 June 2021</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">2 mins</span>
+    
+
+    
+    
+  </div>
+
+  
+  
+
+
+      </div>
+    </header>
+    <section class="flex flex-col max-w-full mt-0 prose lg:flex-row dark:prose-invert">
+      
+      <div class="min-w-0 min-h-0 max-w-prose">
+        <h2 id="introduction" class="relative group">Introduction <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#introduction" aria-label="Anchor">#</a></span></h2>
+<p>I&rsquo;ve been spending a lot of time lately in setting up on-premises Linux Servers. There are a lot of reasons why you would like to SSH to a Linux server such as checking configuration files, copying files, or even port forwarding.</p>
+<p>Just open your MacOS terminal and the command to ssh to a Linux Server is as simple as:</p>
+<p><code>ssh user@host</code> or <code>ssh michael@192.0.0.1</code></p>
+<p>However, where it gets tricky is when you need to use a proxy such as SOCKS5 in order to access that Linux server from your MacOS machine.</p>
+<h2 id="installation" class="relative group">Installation <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#installation" aria-label="Anchor">#</a></span></h2>
+<p>I ended up using <a href="https://github.com/gotoh/ssh-connect">ssh-connect</a> which can easily be installed using Homebrew.</p>
+<p><code>brew install connect</code></p>
+<h2 id="useful-commands" class="relative group">Useful Commands <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#useful-commands" aria-label="Anchor">#</a></span></h2>
+<h3 id="set-socks5-password" class="relative group">Set SOCKS5 Password <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#set-socks5-password" aria-label="Anchor">#</a></span></h3>
+<p>Now in order to use a proxy such as SOCKS5, it&rsquo;s best to export the password prior to the SSH command, otherwise you will end up typing this password repeatedly.</p>
+<p><code>export SOCKS5_PASSWORD='XXXXXXXXXXXXX</code></p>
+<h3 id="ssh-session" class="relative group">SSH session <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ssh-session" aria-label="Anchor">#</a></span></h3>
+<p>Now to start an SSH session to that Linux server, use the following command:</p>
+<p><code>ssh -o 'ProxyCommand=/usr/local/bin/connect -S michael-px@sshproxydomain​:1080 %h %p' michael-vm@192.0.0.1</code></p>
+<p><strong>michael-px</strong> is my user under the SOCKS5 proxy. The password was set from above &ldquo;SOCKS5_PASSWORD&rdquo;. 1080 is the port used by the SOCKS5 proxy.</p>
+<p><strong>michael-vm</strong> is my user inside the Linux VM. 192.0.0.1 is the IP address of the VM.</p>
+<h3 id="port-forwarding" class="relative group">Port Forwarding <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#port-forwarding" aria-label="Anchor">#</a></span></h3>
+<p>To port forward from the Linux server to your localhost (MacOS), use the following command:</p>
+<p><code>ssh -o 'ProxyCommand=/usr/local/bin/connect -S michael-px@sshproxydomain​:1080 %h %p' michael-vm@192.0.0.1 -L 8888:localhost:80</code></p>
+<p>It&rsquo;s very similar to the SSH session command but added with <strong>-L 8888</strong> to point that it&rsquo;s the &ldquo;localhost:8888&rdquo; of the server and it forwards the traffic to the MacOS&rsquo; <strong>localhost:80</strong> or 127.0.0.1:80.</p>
+<p>This is very useful whenever you are debugging or testing a deployed service or website inside that Linux VM.</p>
+<h3 id="copy-files-via-ssh" class="relative group">Copy files via SSH <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#copy-files-via-ssh" aria-label="Anchor">#</a></span></h3>
+<p>To copy files from your MacOS machine to the Linux server, use the following command:</p>
+<p><code>scp -o 'ProxyCommand=/usr/local/bin/connect -S michael-px@sshproxydomain:1080 %h %p' FROM_FILE_DIRECTORY michael-vm@192.0.0.1:~/TO_FILE_DIRECTORY</code></p>
+<p>Instead of using ssh, this time you are using the scp command. the FROM_FILE_DIRECTORY can be something like ./myfile.zip and the TO_FILE_DIRECTORY can be /mnt/hdd1/file-drops</p>
+<p>Note that it could also work the other way around (from Linux Server to MacOS local machine).</p>
+<h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Anchor">#</a></span></h2>
+<p>The world of Linux and command lines are wonderful and very flexible. There are more things you can do once you&rsquo;re inside the server. Happy SSH-ing!</p>
+
+      </div>
+    </section>
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  <div class="flex">
+    
+    <div class="place-self-center">
+      
+      
+      <div class="text-2xl sm:text-lg">
+</div>
+    </div>
+  </div>
+
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="flex group" href="/blog/how-to-disable-auto-locking-of-macos-keychains/">
+              <span
+                class="mr-3 ltr:inline rtl:hidden text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+              <span
+                class="ml-3 ltr:hidden rtl:inline text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >How to disable auto-locking of MacOS Keychains</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2021-03-14 23:27:46 &#43;0000 &#43;0000">14 March 2021</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="flex text-right group" href="/blog/my-ultimate-windows-and-mac-setup/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >My Ultimate Windows and Mac Setup (2021 Edition)</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2021-07-13 16:20:29 &#43;0000 &#43;0000">13 July 2021</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ml-3 ltr:inline rtl:hidden text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span
+                class="mr-3 ltr:hidden rtl:inline text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+    </footer>
+    
+  </article>
+
+      
+        <div
+          class="absolute top-[110vh] ltr:right-0 rtl:left-0 w-12 pointer-events-none bottom-[-5.5rem]"
+        >
+          <a
+            href="#the-top"
+            class="w-12 h-12 sticky pointer-events-auto top-[calc(100vh-5rem)] bg-neutral/50 dark:bg-neutral-800/50 backdrop-blur rounded-full text-xl flex items-center justify-center text-neutral-700 dark:text-neutral hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            &uarr;
+          </a>
+        </div>
+      
+    </main>
+    <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex justify-between">
+    <div>
+      
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2022
+          
+      </p>
+      
+      
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          
+          
+          Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+            href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://git.io/hugo-congo" target="_blank" rel="noopener noreferrer">Congo</a>
+        </p>
+      
+    </div>
+    
+    
+  </div>
+  
+  
+</footer>
+</body>
+</html>

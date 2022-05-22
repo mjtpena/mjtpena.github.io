@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head>
+  <meta charset="utf-8" />
+  
+    <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Developing MacOS Apps using .NET &middot; Congo</title>
+    <meta name="title" content="Developing MacOS Apps using .NET &middot; Congo" />
+  
+  
+  
+  
+  
+  <link rel="canonical" href="https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.39b7a5b20cc3e1243a974332de8d5e458dd9f15f0f8e06962e8afb4c2b9ce9805c65a0f9359b396ceb5d5f8c16f9ede5d854c208fb561f4fbc5b9a05f4c3cdec.css"
+    integrity="sha512-ObelsgzD4SQ6l0My3o1eRY3Z8V8PjgaWLor7TCuc6YBcZaD5NZs5bOtdX4wW&#43;e3l2FTCCPtWH0&#43;8W5oF9MPN7A=="
+  />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.12e98742cd283574d030a7fe55f29597df4ee214f7ff7075b4d19a64d046a602753c715295550be7899b661619cec89c679049d36c624681671a8013c1249896.js" integrity="sha512-EumHQs0oNXTQMKf&#43;VfKVl99O4hT3/3B1tNGaZNBGpgJ1PHFSlVUL54mbZhYZzsicZ5BJ02xiRoFnGoATwSSYlg=="></script>
+  
+  
+  
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Developing MacOS Apps using .NET" />
+<meta property="og:description" content="The ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/" /><meta property="og:image" content="https://www.michaeljohnpena.com/2021/07/maui.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-07-23T02:19:19+00:00" />
+<meta property="article:modified_time" content="2021-07-23T02:19:19+00:00" /><meta property="og:site_name" content="Congo" />
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.michaeljohnpena.com/2021/07/maui.png"/>
+
+<meta name="twitter:title" content="Developing MacOS Apps using .NET"/>
+<meta name="twitter:description" content="The ."/>
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Blogs",
+    "name": "Developing MacOS Apps using .NET",
+    "headline": "Developing MacOS Apps using .NET",
+    
+    "abstract": "The .",
+    "inLanguage": "en",
+    "url" : "https:\/\/www.michaeljohnpena.com\/blog\/developing-macos-apps-using-net\/",
+    "author" : {
+      "@type": "Person",
+      "name": ""
+    },
+    "copyrightYear": "2021",
+    "dateCreated": "2021-07-23T02:19:19\u002b00:00",
+    "datePublished": "2021-07-23T02:19:19\u002b00:00",
+    
+    "dateModified": "2021-07-23T02:19:19\u002b00:00",
+    
+    "keywords": ["Mac",".NET","Mobile","Technology"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1114"
+  }]
+  </script>
+
+
+  
+  
+    <meta name="generator" content="Hugo 0.96.0" />
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+  
+  
+  
+  
+
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 bg-neutral text-neutral-900 sm:px-14 md:px-24 lg:px-32 dark:bg-neutral-800 dark:text-neutral max-w-7xl"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 dark:bg-neutral-600 focus:translate-y-0"
+        href="#main-content"
+        ><span class="font-bold ltr:pr-2 rtl:pl-2 text-primary-600 dark:text-primary-400"
+          >&darr;</span
+        >Skip to main content</a
+      >
+    </div><header
+  class="flex justify-between py-6 font-semibold sm:items-center sm:py-10 text-neutral-900 dark:text-neutral print:hidden"
+>
+  
+  <div>
+    
+      <a
+        class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+        rel="me"
+        href="/"
+        >Congo</a
+      >
+    
+
+  </div>
+  
+  
+    <nav>
+      <ul class="flex flex-col list-none sm:flex-row">
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href=""
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/categories/"
+              title="Categories"
+              >Categories</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/tags/"
+              title="Tags"
+              >Tags</a
+            >
+          </li>
+        
+        
+      </ul>
+    </nav>
+  
+</header>
+<main id="main-content" class="relative grow">
+  <article>
+    <header class="max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Developing MacOS Apps using .NET
+      </h1>
+      <div class="mt-8 mb-12 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+    
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2021-07-23 02:19:19 &#43;0000 UTC">23 July 2021</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">6 mins</span>
+    
+
+    
+    
+  </div>
+
+  
+  
+
+
+      </div>
+    </header>
+    <section class="flex flex-col max-w-full mt-0 prose lg:flex-row dark:prose-invert">
+      
+      <div class="min-w-0 min-h-0 max-w-prose">
+        <p>The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .NET only works on Windows. However, as the journey to &ldquo;One .NET&rdquo; is still unfolding, there is a lot of confusion on how we can use .NET on MacOS. There is Mono, .NET Core, .NET 5, Xamarin.Mac, Xamarin.Forms, Mac Catalyst, .NET 6, and MAUI. This blog post explains some of the core concepts across these nomenclature.</p>
+<h2 id="mono-and-net" class="relative group">Mono and .NET <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#mono-and-net" aria-label="Anchor">#</a></span></h2>
+<ul>
+<li>
+<p>Mono is the original vision and execution of having .NET and C# available to non-Windows platform. The project has been around since 2004 and was as an alternative way of using .NET on MacOS. It&rsquo;s not officially supported by Microsoft (specially back then) and it&rsquo;s a project started by the legendary Miguel de Icaza who also started GNOME and eventually Xamarin.</p>
+</li>
+<li>
+<p>Mono can run not just on MacOS and Linux, but also on gaming and mobile operating systems like iOS, Android, and PlayStation. It&rsquo;s the roots of what&rsquo;s now called Xamarin.</p>
+</li>
+</ul>
+<h2 id="xamarin" class="relative group">Xamarin <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#xamarin" aria-label="Anchor">#</a></span></h2>
+<ul>
+<li>
+<p>Xamarin was the commercial spin-off of Mono for Mac, iOS, and Android. It was later acquired by Microsoft and became part of the wider Developer tools ecosystem such as Visual Studio and .NET. To understand how it relates specifically to Mac OS, we have to talk about Xamarin.Mac and Xamarin.Forms.</p>
+</li>
+<li>
+<h3 id="xamarinmac" class="relative group">Xamarin.Mac <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#xamarinmac" aria-label="Anchor">#</a></span></h3>
+<ul>
+<li>
+<p>It started as MonoMac and eventually carried out as Xamarin.Mac. These libraries create bindings between the native Mac OS APIs and exposed as C#. This allows you to create a Mac OS application written in C# instead of Objective-C/Swift.</p>
+</li>
+<li>
+<p>Under the hood, it still uses XCode and follows the same principles like: AppDelegatre, Main, Entitlements, Plists, provisioning profiles, etc. Xamarin.Mac allows you to transpile the C# code into something that XCode will eventually compile to create the &ldquo;.app&rdquo; package.</p>
+</li>
+<li>
+<p>In Xamarin.Mac (using Visual Studio for Mac) you can define your user interfaces using Storyboards and will invoke XCode for you to do the UI components and data bindings.</p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="xamarinforms" class="relative group">Xamarin.Forms <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#xamarinforms" aria-label="Anchor">#</a></span></h3>
+<ul>
+<li>
+<p>Xamarin.Forms is a cross-platform UI framework that allows you to create native applications on MacOS, iOS, Android, Windows, and even Tizen OS. Unlike Xamarin.Mac, using Xamarin.Forms, you can use XAML and C# to create your components.</p>
+</li>
+<li>
+<p>The advantage of this approach is the flexibility of targeting multiple platforms using the same code base. The result, however, is still native. Even if you coded your button in C# / XAML, the result is still a native MacOS button.</p>
+</li>
+<li>
+<p>Under the hood, you would still have a Xamarin.Mac project that just calls the Xamarin.Forms project. It just abstracts the creation of the app in Xamarin.Forms layer.</p>
+</li>
+<li>
+<p>You have the flexibility on your Xamarin.Forms project to only render components depending on the target platform: ie show this button on MacOS but not on Windows. You also have the flexibility of having a single function on Xamarin.Forms that implements differently on each platform: ie press this button and it will do X for MacOS and it will do Y for Windows.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="net-5-core" class="relative group">.NET 5 (Core) <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#net-5-core" aria-label="Anchor">#</a></span></h2>
+<ul>
+<li>
+<p>.NET 5 is now a general purpose framework to build apps targeting Windows, Linux, and MacOS. Unlike the traditional &ldquo;.NET framework&rdquo; which is exclusive to Windows, .NET 5 (previous iteration called .NET Core) is a step to create apps that can use MacOS as the host. Think of it you can now treat MacOS as the &ldquo;server&rdquo; host of your .NET app.</p>
+</li>
+<li>
+<p>What this means is that .NET 5 now supports the whole ASPNET family (Blazor, API, gRPC, React, Angular, Vue) on Mac. It also now supports console apps and worker services you would traditionally can do on a Windows machine. The power of this lies with having portable libraries such as ML.NET work on Mac as well.</p>
+</li>
+<li>
+<p>However, .NET 5 doesn&rsquo;t interface yet with Cocoa or the rich native libraries of MacOS like Xamarin.Mac does. More of that on .NET 6 onwards.</p>
+</li>
+</ul>
+<h2 id="mac-catalyst" class="relative group">Mac Catalyst <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#mac-catalyst" aria-label="Anchor">#</a></span></h2>
+<ul>
+<li>
+<p>Mac Catalyst is totally independent of .NET 6 or even Xamarin. It is basically Apple&rsquo;s approach of having shared libraries between Mac OS and the new iPad OS. This allows you to have unified and consistent components like pop-up buttons, tooltips, window&rsquo;s sidebar. This also allows you to share code for implementing GameKit, PassKit, Core Audio, Core Bluetooth amongst others.</p>
+</li>
+<li>
+<p>Unlike when the previous versions of iPad uses iOS, it&rsquo;s more of a mobile device using mobile libraries and frameworks and less of what you can do on Mac OS. This time around, it&rsquo;s now becoming a more unified experience between a tablet and laptop in the Apple ecosystem.</p>
+</li>
+<li>
+<p>In order to run Mac Catalyst, you need XCode 13 on either Big Sur or Monterey.</p>
+</li>
+</ul>
+<h2 id="net-6-and-maui" class="relative group">.NET 6 and MAUI <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#net-6-and-maui" aria-label="Anchor">#</a></span></h2>
+<ul>
+<li>
+<p>There are a lot of updates for .NET 6, and it&rsquo;s very exciting because this is really a borderless unified framework.</p>
+</li>
+<li>
+<p>.NET 6 introduced the concept of &ldquo;workload&rdquo; that allows you to install SDKs on top of the .NET 6 SDK to target specific platforms. What this means on Mac OS apps is that you can use .NET 6 as your base project and you&rsquo;re confident that it can execute those line of codes across all platforms. The &ldquo;workload&rdquo; is the platform specific SDKs and bindings to target that specific platform and leverage the native capabilities. Think of all the libraries that existed in the past and can now expand its reach to more platforms!</p>
+</li>
+<li>
+<p>.NET MAUI (Multi-platform App UI) is the evolution of Xamarin.Forms in combination of UWP. Imagine having a single unified UI approach in building apps that works across platform. Think of it in the future, you can port your legacy WinForms / WPF app to run on iPad OS with MAUI and MacCatalyst!</p>
+</li>
+<li>
+<p>These are the workloads that apply to MacOS</p>
+<ul>
+<li><code>dotnet workload install microsoft-macos-sdk-full</code></li>
+<li><code>dotnet workload install microsoft-maccatalyst-sdk-full</code></li>
+<li><code>dotnet workload install maui-maccatalyst</code></li>
+</ul>
+</li>
+</ul>
+<p>
+
+
+
+  
+  
+  
+    <figure>
+      <img class="my-0 rounded-md" src="/2021/07/maui.png" alt="h:311 w:441 bg right" />
+      
+    </figure>
+  
+
+</p>
+<ul>
+<li>If you&rsquo;re already familiar with Xamarin ecosystem, pretty much this is the simplified version:
+<ul>
+<li>Xamarin.Mac =&gt; Microsoft-MacOS</li>
+<li>Xamarin.MaciOS + Mac Catalyst =&gt; Microsoft-MacCatalyst</li>
+<li>Xamarin.Forms + UWP =&gt; <strong>MAUI</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="summary" class="relative group">Summary <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#summary" aria-label="Anchor">#</a></span></h2>
+<ul>
+<li>Mono is arguably the roots and inspiration on having .NET to run across all platforms (besides Windows).</li>
+<li>Xamarin made its way to having .NET runs commercially on MacOS and mobile platforms.</li>
+<li>.NET 5 is relevant right now to MacOS to host server-side applications, not client apps you install on your &ldquo;Applications&rdquo; folder.</li>
+<li>.NET 6 onwards creates an interesting take of having .NET to run everywhere! There are a lot of opportunities to share code between Web, Mobile, and IoT projects.</li>
+<li>MAUI is a road forward in creating rich and native user experience that can work to all platforms.</li>
+</ul>
+<h2 id="resources" class="relative group">Resources <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#resources" aria-label="Anchor">#</a></span></h2>
+<ul>
+<li><a href="https://github.com/mjtpena/Mac.NET.Samples">mjtpena/Mac.NET.Samples</a></li>
+<li><a href="https://developer.apple.com/mac-catalyst/">Mac Catalyst Overview - Apple Developer</a></li>
+<li><a href="https://devblogs.microsoft.com/dotnet/">.NET Blog (microsoft.com)</a></li>
+<li><a href="https://github.com/dotnet/maui-samples">dotnet/maui-samples</a></li>
+<li><a href="https://www.mono-project.com/">Mono Project</a></li>
+</ul>
+
+      </div>
+    </section>
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  <div class="flex">
+    
+    <div class="place-self-center">
+      
+      
+      <div class="text-2xl sm:text-lg">
+</div>
+    </div>
+  </div>
+
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="flex group" href="/blog/message-to-the-young/">
+              <span
+                class="mr-3 ltr:inline rtl:hidden text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+              <span
+                class="ml-3 ltr:hidden rtl:inline text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Message to the young</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2021-07-21 16:20:29 &#43;0000 &#43;0000">21 July 2021</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="flex text-right group" href="/blog/blockchain-tokens/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >What are these blockchain and crypto tokens?</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2021-08-10 02:19:19 &#43;0000 UTC">10 August 2021</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ml-3 ltr:inline rtl:hidden text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span
+                class="mr-3 ltr:hidden rtl:inline text-neutral-700 dark:text-neutral group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+    </footer>
+    
+  </article>
+
+      
+        <div
+          class="absolute top-[110vh] ltr:right-0 rtl:left-0 w-12 pointer-events-none bottom-[-5.5rem]"
+        >
+          <a
+            href="#the-top"
+            class="w-12 h-12 sticky pointer-events-auto top-[calc(100vh-5rem)] bg-neutral/50 dark:bg-neutral-800/50 backdrop-blur rounded-full text-xl flex items-center justify-center text-neutral-700 dark:text-neutral hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            &uarr;
+          </a>
+        </div>
+      
+    </main>
+    <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex justify-between">
+    <div>
+      
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2022
+          
+      </p>
+      
+      
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          
+          
+          Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+            href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://git.io/hugo-congo" target="_blank" rel="noopener noreferrer">Congo</a>
+        </p>
+      
+    </div>
+    
+    
+  </div>
+  
+  
+</footer>
+</body>
+</html>
