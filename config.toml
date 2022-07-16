@@ -1,23 +1,25 @@
 baseURL = "https://www.michaeljohnpena.com"
 languageCode                  = "id"
 title                         = "Michael John Peña ⚡️"
-theme                         = "personal-site"
+theme = "bilberry-hugo-theme"
 summaryLength                 = 20
 publishDir                    = "docs"
+permanentTopNav               = true
+stickyNav                     = true
+resizeImages                  = true
 
 [Author] # Used in authorbox
   name                        = "Michael John Peña"
   bio                         = "Michael is an experienced technologist based in Sydney, Australia, a Microsoft MVP since 2015 with over 12 years of working experience ranging from Mobile, Cloud, Web and DevOps. He currently owns Datachain Consulting, a company that focuses on democratizing AI and Blockchain technologies. He is also a technical advisor to some technology startups. His roles allow him to explore the cutting edge technologies of Artificial Intelligence, Blockchain, IoT, Edge Computing, and the Cloud."
-  avatar                      = "mjtpena.jpg"
+  customImage                 = "mjtpena.jpg"
   job                         = "Software Engineer"
   gender                      = "male"
   email                       = "michael@datachain.consulting"
 
 
 [Params]
-  subTitle                    = "Personal site, Blog, and Portfolio"
-  description                 = "🚀 Technologist. Entrepreneur. Author. Speaker." # Site Description. Used in meta description
-  images                      = ["mjtpena.jpg"]
+  subTitle                    = "🚀 Technologist. Entrepreneur. Author. Speaker." # Site Description. Used in meta description
+  avatarEmail                 = "mjtpena@outlook.com"
   copyright                   = "Michael John Peña" # Copyright holder, otherwise will use .Site.Title
   opengraph                   = true # Enable OpenGraph if true
   twitter_cards               = true # Enable Twitter Cards if true
@@ -52,7 +54,12 @@ publishDir                    = "docs"
   
   # Formspree form contact id, more info: https://cse.google.com/cse/all
   formspreeId                 = ""
-  
+  copyrightBy = "by Michael J. Peña"
+  copyrightUseCurrentYear = true  # set to true to always display the current year in the copyright
+  copyrightYearOverride = "2022"
+  copyrightUrl = "https://github.com/mjtpena/mjtpena.github.io"
+  creditsText = " "
+  creditsUrl = "https://github.com/Lednerb/bilberry-hugo-theme"
 
 
 [Params.Hero]
@@ -77,21 +84,15 @@ url = "/blog"
 weight = 1 
 
 [[menu.main]]
-identifier = "now"
-pre = "⌚"
-url = "/now" 
-weight = 2 
-
-[[menu.main]]
 identifier = "Projects"
 pre = "🦾"
 url = "/projects" 
 weight = 3 
 
 [[menu.main]]
-identifier = "Presentations"
+identifier = "Talks"
 pre = "👨🏻‍🏫"
-url = "/presentations" 
+url = "/talks" 
 weight = 4 
 
 [[menu.main]]

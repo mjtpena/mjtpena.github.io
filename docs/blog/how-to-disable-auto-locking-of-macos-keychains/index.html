@@ -1,461 +1,350 @@
 <!DOCTYPE html>
-<html class="no-js" lang="id">
+
+
+  
+<html itemscope itemtype="https://schema.org/WebPage" class="no-js" lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#1da1f2">
-	<title>How to disable auto-locking of MacOS Keychains |  Michael John Peña ⚡️ </title>
-	<meta name="description"
-		content="Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle.">
-	<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://www.michaeljohnpena.com/2021/03/Screen-Shot-2021-03-15-at-10.08.51-am-940x232.png"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="siteBaseUrl" content="https://www.michaeljohnpena.com">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="Hugo 0.101.0" />
+    <title>
+        
+           
+               How to disable auto-locking of MacOS Keychains &vert; Michael John Peña ⚡️
+           
+        
+    </title>
+    <meta itemprop="name" content="How to disable auto-locking of MacOS Keychains">
+    <meta itemprop="description" content="How to disable auto-locking of MacOS Keychains - %!s(&lt;nil&gt;)">
+    <meta property="og:title" content="How to disable auto-locking of MacOS Keychains">
+    <meta property="og:description" content="How to disable auto-locking of MacOS Keychains - %!s(&lt;nil&gt;)">
+    <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
+    <meta property="og:url" content="https://www.michaeljohnpena.com/blog/how-to-disable-auto-locking-of-macos-keychains/">
+    <meta property="og:site_name" content="Michael John Peña ⚡️">
+    <meta property="og:type" content="article">
 
-<meta name="twitter:title" content="How to disable auto-locking of MacOS Keychains"/>
-<meta name="twitter:description" content="Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle."/>
-
-	<meta name="twitter:site" content="@mjtpena" />
-	<meta itemprop="name" content="How to disable auto-locking of MacOS Keychains">
-<meta itemprop="description" content="Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle."><meta itemprop="datePublished" content="2021-03-14T23:27:46+00:00" />
-<meta itemprop="dateModified" content="2021-03-14T23:27:46+00:00" />
-<meta itemprop="wordCount" content="231"><meta itemprop="image" content="https://www.michaeljohnpena.com/2021/03/Screen-Shot-2021-03-15-at-10.08.51-am-940x232.png">
-<meta itemprop="keywords" content="Build Server,iOS Distribution,Keychain,MacOS,Mobile Development," />
-	<link rel="stylesheet" href="/css/bundle.min.css">
-	<link rel="apple-touch-icon" sizes="180x180" href="https://www.michaeljohnpena.com/icons/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="https://www.michaeljohnpena.com/icons/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="https://www.michaeljohnpena.com/icons/favicon-16x16.png">
-	<link rel="shortcut icon" href="https://www.michaeljohnpena.com/icons/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="https://www.michaeljohnpena.com/icons/favicon.ico" type="image/x-icon">
-	<meta name="msapplication-TileColor" content="#1da1f2">
-	<link rel="manifest" href="https://www.michaeljohnpena.com/manifest.json">
-	
-	<script type="application/ld+json">
-{
-	"@context":"http://schema.org",
-	"@type":"WebSite",
-	"name":"Michael John Peña ⚡️",
-	"url":"https:\/\/www.michaeljohnpena.com",
-	"sameAs":[
-		"https://twitter.com/mjtpena",
-		"https://gitlab.com/",
-		"https://linkedin.com/in/michaeljohnpena",
-		"https://t.me/"
-		],
-	"potentialAction": {
-		"@type": "SearchAction",
-		"target": "https://wisnuwiry.space/search?q={search_term}",
-		"query-input": "required name=search_term"
-	}
-}
-</script>
-
-<script type='application/ld+json'>
-{
-	"@context": "http://www.schema.org",
-	"@type": "person",
-	"name": "Michael John Peña",
-	"jobTitle": "Software Engineer",
-	"gender": "male",
-	"url": "https:\/\/www.michaeljohnpena.com",
-	"sameAs":[
-		"https://twitter.com/mjtpena",
-		"https://gitlab.com/",
-		"https://linkedin.com/in/michaeljohnpena",
-		"https://t.me/"
-		],
-	"image": "https:\/\/www.michaeljohnpena.com\/mjtpena.jpg",
-	"address": {
-		"@type": "PostalAddress",
-		"streetAddress": "Mayong, Jepara",
-		"addressLocality": "Jepara",
-		"addressRegion": "Jawa Tengah",
-		"addressCountry": "Indonesia"
-	},
-	"email": "michael@datachain.consulting",
-	"birthDate": "2003-01-31",
-	"birthPlace": "Jepara",
-	"nationality": "Indonesian"
-}
-</script>
-
-<script type="application/ld+json">
-{
-	"@context":"http://schema.org",
-	"@type":"BlogPosting",
-	"mainEntityOfPage":{
-		"@type":"WebPage",
-		"@id":"https:\/\/www.michaeljohnpena.comhttps:\/\/www.michaeljohnpena.com\/blog\/how-to-disable-auto-locking-of-macos-keychains\/"
-	},
-	"headline":"How to disable auto-locking of MacOS Keychains",
-	"datePublished":"2021-03-14T23",
-	"dateModified":"2021-03-14T23",
-	"description":"Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle.",
-	"isFamilyFriendly": "true",
-	"image":  ["https://www.michaeljohnpena.com/2021/03/Screen-Shot-2021-03-15-at-10.08.51-am-940x232.png"] ,
-	"wordCount" : "231",
-	"keywords": ["Build Server","iOS Distribution","Keychain","MacOS","Mobile Development"],
-	"genre": ["Build Server","iOS Distribution","Keychain","MacOS","Mobile Development"],
-	"accountablePerson": {
-		"@type": "Person",
-		"name": "Michael John Peña",
-		"url": ""
-	},
-	"author": {
-		"@type": "Person",
-		"name": "Michael John Peña",
-		"url": ""
-	},
-	"creator": {
-		"@type": "Person",
-		"name": "Michael John Peña",
-		"url": ""
-	},
-	"publisher":{
-		"@type":"Organization",
-		"name":"Michael John Peña", 
-		"logo": {
-			"@type": "imageObject",
-			"url": "https:\/\/www.michaeljohnpena.com\/mjtpena.jpg"
-		}
-	}
-}</script>
+    
 
 
-	<meta content="" property="fb:admins">
-	<meta content="" property="fb:app_id">
-	<meta content="index,follow" name="googlebot">
-	<meta content="follow, all" name="Googlebot-Image">
-	<meta content="follow, all" name="Scooter">
-	<meta content="follow, all" name="msnbot">
-	<meta content="follow, all" name="alexabot">
-	<meta content="follow, all" name="Slurp">
-	<meta content="follow, all" name="ZyBorg">
-	<meta content="follow, all" name="Scooter">
-	<meta content="true" name="MSSmartTagsPreventParsing">
-	<meta content="ALL" name="SPIDERS">
-	<meta content="ALL" name="WEBCRAWLERS">
-	<meta
-		content="aeiwi, alexa, alltheWeb, altavista, aol netfind, anzwers, canada, directhit, euroseek, excite, overture, go, google, hotbot. infomak, kanoodle, lycos, mastersite, national directory, northern light, searchit, simplesearch, Websmostlinked, webtop, what-u-seek, aol, yahoo, webcrawler, infoseek, excite, magellan, looksmart, bing, cnet, googlebot"
-		name="search engines">
-	
+    <script src="/modernizr-simple.js"></script>
+
+    
+    <link href="/blog/how-to-disable-auto-locking-of-macos-keychains/" rel="alternate" type="application/rss+xml" title="Michael John Peña ⚡️" />
+    <link href="/blog/how-to-disable-auto-locking-of-macos-keychains/" rel="feed" type="application/rss+xml" title="Michael John Peña ⚡️" />
+    
+
+    
+    <link rel="canonical" href="https://www.michaeljohnpena.com/blog/how-to-disable-auto-locking-of-macos-keychains/">
+    
+
+    <link rel="stylesheet" href="https://www.michaeljohnpena.com/theme.css">
+
+    
+
+    
 </head>
 
-<body class="">
-	<div class="site-container">
-		<header class="top" id="js-header">
-	<a class="logo" href="/" title="Michael John Peña ⚡️">
-    <img src="/img/placeholder.svg" alt="Michael John Peña ⚡️" class="lazyload" data-src="/mjtpena.jpg">
-</a>
-	
-	<nav class="navbar js-navbar">
-		<ul class="navbar__menu">
-			
-			
-				
-				<li>
-					<a href="/blog" target="_self">
-						📝 Blog
-					</a>
-				</li>
-				
-				
-				<li>
-					<a href="/now" target="_self">
-						⌚ now
-					</a>
-				</li>
-				
-				
-				<li>
-					<a href="/projects" target="_self">
-						🦾 Projects
-					</a>
-				</li>
-				
-				
-				<li>
-					<a href="/presentations" target="_self">
-						👨🏻‍🏫 Presentations
-					</a>
-				</li>
-				
-				
-				<li>
-					<a href="/about" target="_self">
-						😆 About
-					</a>
-				</li>
-				
-		</ul>
-		<button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span>
-		</button>
-	</nav>
-	<div class="search">
-	<a class="search__btn btn" aria-label="Search" href="/search" title="Search">
-		<svg viewBox="0 0 15 15">
-<path d="M14.81,13.14l-3-3h0a6.52,6.52,0,1,0-1.67,1.67h0l3,3a1.06,1.06,0,0,0,1.43-.24A1.06,1.06,0,0,0,14.81,13.14ZM6.5,11A4.5,4.5,0,1,1,11,6.5,4.51,4.51,0,0,1,6.5,11Z"/>
-</svg>
+<body class="bilberry-hugo-theme">
 
-	</a>
-	<button class="search__btn large" aria-label="Switch Theme" id="toggle-theme">
-		<svg viewBox="0 0 24 24">
-			<path id="icon-theme"></path>
-		</svg>
-	</button>
-</div>
+    
+    <nav>
+
+    <div class="container">
+        <ul class="topnav">
+            
+                
+                    <li><a href="https://www.michaeljohnpena.com/talks/">👨🏻‍🏫 Presentations</a></li>
+                
+            
+                
+                    <li><a href="https://www.michaeljohnpena.com/about/">👨🏻‍💻 About Me</a></li>
+                
+            
+                
+                    <li><a href="https://www.michaeljohnpena.com/projects/">🦾 Projects</a></li>
+                
+            
+                
+                    <li><a href="https://www.michaeljohnpena.com/search/">Search 🔍</a></li>
+                
+            
+        </ul>
+
+        
+    </div>
+</nav>
+
+
+    
+    <header>
+
+    <div class="container">
+        <div class="logo">
+            <a href="/" class="logo">
+                
+                    
+                    
+                        
+                    
+                    <img src="https://seccdn.libravatar.org/avatar/cfc893f12b0342d6d618b28d380d3ee4?d=mm&size=200" alt="">
+                
+
+                <span class="overlay"><i class="fa fa-home"></i></span>
+            </a>
+        </div>
+        <div class="titles">
+            <h3 class="title">
+                <a href="/">
+                    Michael John Peña ⚡️
+                </a>
+            </h3>
+
+            
+                <span class="subtitle">🚀 Technologist. Entrepreneur. Author. Speaker.</span>
+            
+        </div>
+
+        
+
+        
+            <div class="toggler">
+        
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+    </div>
 </header>
 
-		<main>
-			
-<div class="hero">
-	
 
+    <div class="main container">
+        
+    <div class="article-wrapper u-cf single">
+        
+            <a class="bubble" href="https://www.michaeljohnpena.com/blog/how-to-disable-auto-locking-of-macos-keychains/">
+    <i class="fas fa-fw fa-pencil-alt"></i>
+</a>
 
-<figure class="hero__image hero__image--overlay">
-	<img class="hero__image-img lazyload" data-src="/2021/03/Screen-Shot-2021-03-15-at-10.08.51-am-940x232.png" src="/img/placeholder.svg" alt="How to disable auto-locking of MacOS Keychains"/>
-</figure>
+<article class="default article">
+    
 
+    <div class="content">
+    <h1 class="article-title">
+        <a href="https://www.michaeljohnpena.com/blog/how-to-disable-auto-locking-of-macos-keychains/">
+            How to disable auto-locking of MacOS Keychains
+        </a>
+    </h1>
 
-	<header class="hero__content" >
-	<div class="wrapper">
-		<h1 itemprop="name"  style="color: white;" >
-	
-		How to disable auto-locking of MacOS Keychains
-	
-		</h1>
-	
-		</div>
-	</header>
-</div>
+    <div class="meta">
+        
+            
+                <span class="date moment">2021-03-14</span>
+            
+        
 
-	
-	<div class="progress-container" >
-    <div class="scroll-indicator-bar" id="indicator"></div>
-</div>
+        
 
-	<div class="content  grid ">
-		
-<aside class="tableOfContentContainer" id="tableOfContentContainer">
-	<nav id="TableOfContents"></nav>
-</aside>
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        enableStickyToc();
-    });
-</script>
+        
 
-		<div class="wrapper post__entry">
-			<div class='property outline'>
-    <p>📅️ Published: 
-        <time itemprop="datePublished" datetime="2021-03-14T23:27:46Z">March 14, 2021</time>
-    </p>
-    <p>🔄 Updated: 
-        <time itemprop="dateModified" datetime="2021-03-14T23:27:46Z">March 14, 2021</time>
-    </p>
-    <p>🕔 2 min read ∙ 231 words</p></div>
-			
-			<div class="single block">
-				<article class="entry" id="article">
-					<div class="entry__content">
-					<p>Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle. However, not all companies have adopted to those tools and they still prefer to build their apps in their on-prem data servers. They use something like TeamCity or Azure DevOps Server.</p>
+        
+            <span class="author">
+                
+                
+            </span>
+        
+    </div>
+
+    
+        
+
+        <p>Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle. However, not all companies have adopted to those tools and they still prefer to build their apps in their on-prem data servers. They use something like TeamCity or Azure DevOps Server.</p>
 <p>We streamlined the configuration of our Mac Build agents to a repository where we can update our Provisioning Profiles, Keychains, etc.</p>
 <p>Lately, I&rsquo;m seeing a lot of this:</p>
 <p><code>error: No signing certificate &quot;iOS Distribution&quot; found: No &quot;iOS Distribution&quot; signing certificate matching team ID &quot;XXXXXXXX&quot; with a private key was found. (in target 'XXXXX' from project 'XXXXX')</code></p>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FhUK6MA22wq.png?alt=media&amp;token=8f178aa7-3a07-4657-8288-480cdabcec45'
-    alt='img'
-     title="img"
- 	/>
-</figure>
-</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FhUK6MA22wq.png?alt=media&amp;token=8f178aa7-3a07-4657-8288-480cdabcec45" alt="img"></p>
 <p>It turns out that the Keychain where the distribution certificate and private key was stored keeps locking up every 2 hours.</p>
 <p>Here&rsquo;s a simple step by step process to remove that lock 🔐 .</p>
 <ol>
 <li>Open the local copy of your Keychain through Keychain Access.</li>
 </ol>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FZSxS7fv_Au.png?alt=media&amp;token=d9e97e60-28e3-4f51-9e32-44d4a8198d88'
-    alt='img'
-     title="img"
- 	/>
-</figure>
-</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FZSxS7fv_Au.png?alt=media&amp;token=d9e97e60-28e3-4f51-9e32-44d4a8198d88" alt="img"></p>
 <ol start="2">
 <li>Right click on the keychain and select &ldquo;Change Settings&hellip;&rdquo;</li>
 </ol>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2Fe4gMKg1Kuk.png?alt=media&amp;token=d11d2398-ffdf-4b23-b7c7-e2f91b29b96e'
-    alt='img'
-     title="img"
- 	/>
-</figure>
-</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2Fe4gMKg1Kuk.png?alt=media&amp;token=d11d2398-ffdf-4b23-b7c7-e2f91b29b96e" alt="img"></p>
 <ol start="3">
 <li>Untick the &ldquo;Lock after&hellip;&rdquo; and &ldquo;Lock when sleeping&rdquo;. Click on Save.</li>
 </ol>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FkWUREz7y1a.png?alt=media&amp;token=5abe6d8c-5101-4268-9627-7d7f0dcc5e57'
-    alt='img'
-     title="img"
- 	/>
-</figure>
-</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FkWUREz7y1a.png?alt=media&amp;token=5abe6d8c-5101-4268-9627-7d7f0dcc5e57" alt="img"></p>
 <ol start="4">
 <li>Back on the keychain items, right click on the private key. Select &ldquo;Allow all applications&hellip;&rdquo; since the build servers doesn&rsquo;t really need a GUI, otherwise you would need to manually RDP to the servers and unlock the keychain.</li>
 </ol>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FkSxnP7LbjR.png?alt=media&amp;token=0bea0854-a54f-47e0-b69c-ef41654fc14a'
-    alt='img'
-     title="img"
- 	/>
-</figure>
-</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FkSxnP7LbjR.png?alt=media&amp;token=0bea0854-a54f-47e0-b69c-ef41654fc14a" alt="img"></p>
 <ol start="5">
 <li>Save all changes. Create a pull request. Merge the branch. Run the pipeline again.</li>
 </ol>
 
-					
-    <hr>
-    <p>Wrong content?  <a href="https://github.com/mjtpena/mjtpena.github.io/edit/main/content/blog/2021-03-14-how-to-disable-auto-locking-of-macos-keychains.md">Edit on Github</a>.</p>
-    <hr>
-
-					
-
-					
-
-					</div>
-					
-					<footer class="entry__footer">
-						
-<div class="post__tag">
-			<a href="/tags/build-server/"># Build Server</a>
-			<a href="/tags/ios-distribution/"># iOS Distribution</a>
-			<a href="/tags/keychain/"># Keychain</a>
-			<a href="/tags/macos/"># MacOS</a>
-			<a href="/tags/mobile-development/"># Mobile Development</a>
-</div>
-						
-<div class="post__share">
-	<a class="js-share btn" title=" Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fhow-to-disable-auto-locking-of-macos-keychains%2f" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' Facebook', 'width=800,height=600,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="Facebook" role="img" width="32" height="32" viewBox="0 0 512 512"><path d="M330 512V322h64l9-74h-73v-47c0-22 6-36 37-36h39V99c-7-1-30-3-57-3-57 0-95 34-95 98v54h-64v74h64v190z"/></svg>
-	</a>
-	<a class="js-share btn" title=" Twitter" href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fhow-to-disable-auto-locking-of-macos-keychains%2f&amp;text=How%20to%20disable%20auto-locking%20of%20MacOS%20Keychains" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="Twitter" viewBox="0 0 24.999 20.316"><path d="M25 2.405a10.253 10.253 0 0 1-2.947.808A5.144 5.144 0 0 0 24.308.376 10.27 10.27 0 0 1 21.05 1.62a5.134 5.134 0 0 0-8.74 4.68A14.56 14.56 0 0 1 1.74.94a5.134 5.134 0 0 0 1.587 6.846 5.108 5.108 0 0 1-2.323-.642v.064a5.132 5.132 0 0 0 4.114 5.03 5.142 5.142 0 0 1-2.316.088 5.134 5.134 0 0 0 4.79 3.562 10.29 10.29 0 0 1-6.37 2.2A10.44 10.44 0 0 1 0 18.012a14.586 14.586 0 0 0 22.454-12.29q0-.333-.015-.662A10.423 10.423 0 0 0 25 2.405z" /></svg>
-
-	</a>
-	<a class="js-share btn" title=" Reddit" href="https://www.reddit.com/submit?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fhow-to-disable-auto-locking-of-macos-keychains%2f&amp;title=How%20to%20disable%20auto-locking%20of%20MacOS%20Keychains" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' Reddit', 'width=832,height=624,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="Reddit" role="img" width="32" height="32" viewBox="0 0 512 512"><path fill-rule="evenodd" d="M375 146a32 32 0 1 0-29-46l-65-13c-5-1-9 2-10 6l-22 97c-45 1-85 15-113 36a42 42 0 1 0-45 69l-1 12c0 65 74 117 166 117s166-52 166-117l-1-11a42 42 0 1 0-44-69c-28-21-67-35-111-37l19-86 58 13a32 32 0 0 0 32 29zM190 353c2-1 4 0 5 1 15 11 38 18 61 18s46-6 61-18a7 7 0 0 1 8 10c-18 14-44 21-69 21-25-1-51-7-69-21a6 6 0 0 1 3-11zm23-44a31 31 0 1 1-44-44 31 31 0 0 1 44 44zm130 0a31 31 0 1 0-44-44 31 31 0 0 0 44 44z"/></svg>
-	</a>
-	<a class="js-share btn" title=" LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fhow-to-disable-auto-locking-of-macos-keychains%2f&title=How%20to%20disable%20auto-locking%20of%20MacOS%20Keychains" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="LinkedIn" role="img" viewBox="0 0 34.48 32"><path d="M29.632,0H2.362A2.336,2.336,0,0,0,0,2.306V29.691A2.337,2.337,0,0,0,2.362,32h27.27A2.342,2.342,0,0,0,32,29.691V2.306A2.34,2.34,0,0,0,29.632,0ZM9.491,27.268H4.744V12H9.491ZM7.119,9.909a2.752,2.752,0,1,1,2.75-2.753A2.753,2.753,0,0,1,7.119,9.909ZM27.268,27.268H22.525V19.842c0-1.772-.033-4.05-2.466-4.05-2.47,0-2.848,1.929-2.848,3.921v7.555H12.468V12h4.553v2.086h.063a4.986,4.986,0,0,1,4.491-2.467c4.806,0,5.694,3.163,5.694,7.275Z"/></svg>
-
-	</a>
-	<a class="js-share btn" title=" Pinterest" href="https://pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fhow-to-disable-auto-locking-of-macos-keychains%2f&description=How%20to%20disable%20auto-locking%20of%20MacOS%20Keychains" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' Pocket', 'width=800,height=720,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="Pinterest" role="img" width="32" height="32" viewBox="0 0 512 512"><path d="m265 65c-104 0-157 75-157 138 0 37 14 71 45 83 5 2 10 0 12-5l3-18c2-6 1-7-2-12-9-11-15-24-15-43 0-56 41-106 108-106 60 0 92 37 92 85 0 64-28 116-70 116-23 0-40-18-34-42 6-27 19-57 19-77 0-18-9-34-30-34-24 0-42 25-42 58 0 20 7 34 7 34l-29 120a249 249 0 0 0 2 86l3-1c2-3 31-37 40-72l16-61c7 15 29 28 53 28 71 0 119-64 119-151 0-66-56-126-140-126z"/></svg>
-	</a>
-</div>
-						
-<div class="post__bio bio" >
-		<img class="lazyload bio__avatar" alt="Michael John Peña avatar" data-src="/mjtpena.jpg" height="90" width="90" src="/img/placeholder.svg">
-	<div class="bio__info">
-		<a class="bio__name invert" href="/about">
-			<p itemprop="author">Michael John Peña</p>
-		</a>
-		<p itemprop="about">Michael is an experienced technologist based in Sydney, Australia, a Microsoft MVP since 2015 with over 12 years of working experience ranging from Mobile, Cloud, Web and DevOps. He currently owns Datachain Consulting, a company that focuses on democratizing AI and Blockchain technologies. He is also a technical advisor to some technology startups. His roles allow him to explore the cutting edge technologies of Artificial Intelligence, Blockchain, IoT, Edge Computing, and the Cloud.</p>
-		
-	</div>
+    
 </div>
 
-					</footer>
-					
-				</article>
-				
-			</div>
-		</div>
-	</div>
-	
+    
+<div class="footer">
 
 
+    
+        <div class="tags">
+            <i class="fa fa-tags"></i>
+            <div class="links">
+                
+                    
+                    
+                    <a href="https://www.michaeljohnpena.com/tags/build-server/">Build Server</a>
+                    
+                
+                    
+                    
+                    <a href="https://www.michaeljohnpena.com/tags/ios-distribution/">iOS Distribution</a>
+                    
+                
+                    
+                    
+                    <a href="https://www.michaeljohnpena.com/tags/keychain/">Keychain</a>
+                    
+                
+                    
+                    
+                    <a href="https://www.michaeljohnpena.com/tags/macos/">MacOS</a>
+                    
+                
+                    
+                    
+                    <a href="https://www.michaeljohnpena.com/tags/mobile-development/">Mobile Development</a>
+                    
+                
+            </div>
+        </div>
+    
 
-	
-	
-
-		</main>
-		<footer class="footer">
-<div class="footer__social">
-		<a itemprop="sameAs" class="social__link" target="_blank" rel="noopener noreferrer" href="https://twitter.com/mjtpena">
-			<svg class="social__icon" aria-label="Twitter" viewBox="0 0 24.999 20.316"><path d="M25 2.405a10.253 10.253 0 0 1-2.947.808A5.144 5.144 0 0 0 24.308.376 10.27 10.27 0 0 1 21.05 1.62a5.134 5.134 0 0 0-8.74 4.68A14.56 14.56 0 0 1 1.74.94a5.134 5.134 0 0 0 1.587 6.846 5.108 5.108 0 0 1-2.323-.642v.064a5.132 5.132 0 0 0 4.114 5.03 5.142 5.142 0 0 1-2.316.088 5.134 5.134 0 0 0 4.79 3.562 10.29 10.29 0 0 1-6.37 2.2A10.44 10.44 0 0 1 0 18.012a14.586 14.586 0 0 0 22.454-12.29q0-.333-.015-.662A10.423 10.423 0 0 0 25 2.405z" /></svg>
-
-		</a>
-		<a itemprop="sameAs" class="social__link" target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/michaeljohnpena">
-			<svg class="social__icon" aria-label="LinkedIn" role="img" viewBox="0 0 34.48 32"><path d="M29.632,0H2.362A2.336,2.336,0,0,0,0,2.306V29.691A2.337,2.337,0,0,0,2.362,32h27.27A2.342,2.342,0,0,0,32,29.691V2.306A2.34,2.34,0,0,0,29.632,0ZM9.491,27.268H4.744V12H9.491ZM7.119,9.909a2.752,2.752,0,1,1,2.75-2.753A2.753,2.753,0,0,1,7.119,9.909ZM27.268,27.268H22.525V19.842c0-1.772-.033-4.05-2.466-4.05-2.47,0-2.848,1.929-2.848,3.921v7.555H12.468V12h4.553v2.086h.063a4.986,4.986,0,0,1,4.491-2.467c4.806,0,5.694,3.163,5.694,7.275Z"/></svg>
-
-		</a>
-		<a itemprop="sameAs" class="social__link" target="_blank" rel="noopener noreferrer" href="https://github.com/mjtpena">
-			<svg class="social__icon" aria-label="Github" role="img" viewBox="0 0 25 25"><path d="m12 .5c-6.63 0-12 5.28-12 11.792 0 5.211 3.438 9.63 8.205 11.188.6.111.82-.254.82-.567 0-.28-.01-1.022-.015-2.005-3.338.711-4.042-1.582-4.042-1.582-.546-1.361-1.335-1.725-1.335-1.725-1.087-.731.084-.716.084-.716 1.205.082 1.838 1.215 1.838 1.215 1.07 1.803 2.809 1.282 3.495.981.108-.763.417-1.282.76-1.577-2.665-.295-5.466-1.309-5.466-5.827 0-1.287.465-2.339 1.235-3.164-.135-.298-.54-1.497.105-3.121 0 0 1.005-.316 3.3 1.209.96-.262 1.98-.392 3-.398 1.02.006 2.04.136 3 .398 2.28-1.525 3.285-1.209 3.285-1.209.645 1.624.24 2.823.12 3.121.765.825 1.23 1.877 1.23 3.164 0 4.53-2.805 5.527-5.475 5.817.42.354.81 1.077.81 2.182 0 1.578-.015 2.846-.015 3.229 0 .309.21.678.825.56 4.801-1.548 8.236-5.97 8.236-11.173 0-6.512-5.373-11.792-12-11.792z" /></svg>
-
-		</a>
-		<a itemprop="sameAs" class="social__link" target="_blank" rel="noopener noreferrer" href="https://medium.com/@mjtpena">
-			<svg class="social__icon" aria-label="Medium" role="img" width="32" height="32" viewBox="0 0 400 400"><path d="M125 173c0-4-2-9-5-11l-31-38v-6h98l75 166 67-166h93v6l-27 26c-2 1-3 4-3 7v190c0 3 1 6 3 8l27 25v6H289v-6l27-26c3-3 3-4 3-8V193l-76 192h-10l-88-192v129c-1 5 1 11 5 15l35 43v5H85v-5l35-43c4-4 6-10 5-15z"/></svg>
-
-		</a>
+    
 </div>
-	<div class="footer__copyright">© 2022 <a href="https://wisnuwiry.space">Michael John Peña</a> <span class="footer__copyright-credits"></span> | Created with ❤️ <a href="//gohugo.io">Hugo</a></div>
+
+</article>
+
+        
+    </div>
+
+    
+        <div id="comments-container">
+            
+            
+
+            
+
+            
+
+        </div>
+    
+
+    </div>
+
+    
+<footer>
+    <div class="container">
+
+        
+        <div class="recent-posts">
+            <strong>Latest posts</strong>
+            <ul>
+                
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/andriel-newsletter16/">Andriel&#39;s Newsletter no. 16</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/andriel-newsletter15/">Andriel&#39;s Newsletter no. 15</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/andriel-newsletter14/">Andriel&#39;s Newsletter no. 14</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/run-for-autism-2021/">Run for Autism - 2021</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/accountability-partner/">Productive this Pandemic - Accountability Partner</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/planning-your-week-ahead/">Productive this Pandemic - Planning your week ahead</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/hybrid-cloud/">The Hybrid Cloud Journey with Microsoft Azure</a>
+                    </li>
+                
+            </ul>
+        </div>
+        
+
+        
+
+        <div class="right">
+            
+            <div class="external-profiles">
+                <strong>Social media</strong>
+
+                
+            </div>
+            
+
+            
+
+            
+            <div class="archive">
+                <a href="/archive/"><strong>Archive</strong></a>
+            </div>
+            
+        </div>
+    </div>
 </footer>
-	</div>
-	
 
 
+<div class="credits">
+    <div class="container">
+        <div class="copyright">
+            <a href="https://github.com/mjtpena/mjtpena.github.io" target="_blank">
+                &copy;
+                
+                2022
+                
+                by Michael J. Peña
+            </a>
+            
+        </div>
+        <div class="author">
+            <a href="https://github.com/Lednerb/bilberry-hugo-theme"
+                target="_blank"> </a>
+        </div>
+    </div>
+</div>
 
-<script type="text/javascript" src="/js/bundle.min.js" defer></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.0/lazysizes.min.js"></script>
-<script>(function (d, e) { d[e] = d[e].replace("no-js", "js"); })(document.documentElement, "className");</script>
-<script>
+
     
-        (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-186803288-1', 'auto'); ga('send', 'pageview');
+
     
 
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-            .register('/sw.js', { scope: '/' })
-            .then(function (registration) {
-                console.log('Service Worker Registered');
-            });
 
-        navigator.serviceWorker
-            .ready
-            .then(function (registration) {
-                console.log('Service Worker Ready');
-            });
-    }
-</script>
+    <script src="https://www.michaeljohnpena.com/theme.js"></script>
 
+    
+
+    
 </body>
 
 </html>

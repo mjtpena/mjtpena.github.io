@@ -1,552 +1,273 @@
 <!DOCTYPE html>
-<html class="no-js" lang="id">
+
+
+  
+<html itemscope itemtype="https://schema.org/WebPage" class="no-js" lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#1da1f2">
-	<title>Getting Started with DeFi |  Michael John Peña ⚡️ </title>
-	<meta name="description"
-		content="Introduction Blockchain is not dead. Actually, quite the contrary is happening in the past year. There are more and more interest and it&rsquo;s gaining a lot more traction than before.">
-	<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://www.michaeljohnpena.com/2021/07/crypto.jpg"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="siteBaseUrl" content="https://www.michaeljohnpena.com">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="Hugo 0.101.0" />
+    <title>
+        
+           
+               Getting Started with DeFi &vert; Michael John Peña ⚡️
+           
+        
+    </title>
+    <meta itemprop="name" content="Getting Started with DeFi">
+    <meta itemprop="description" content="Getting Started with DeFi - %!s(&lt;nil&gt;)">
+    <meta property="og:title" content="Getting Started with DeFi">
+    <meta property="og:description" content="Getting Started with DeFi - %!s(&lt;nil&gt;)">
+    <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
+    <meta property="og:url" content="https://www.michaeljohnpena.com/blog/getting-started-with-defi/">
+    <meta property="og:site_name" content="Michael John Peña ⚡️">
+    <meta property="og:type" content="article">
 
-<meta name="twitter:title" content="Getting Started with DeFi"/>
-<meta name="twitter:description" content="Introduction Blockchain is not dead. Actually, quite the contrary is happening in the past year. There are more and more interest and it&rsquo;s gaining a lot more traction than before."/>
-
-	<meta name="twitter:site" content="@mjtpena" />
-	<meta itemprop="name" content="Getting Started with DeFi">
-<meta itemprop="description" content="Introduction Blockchain is not dead. Actually, quite the contrary is happening in the past year. There are more and more interest and it&rsquo;s gaining a lot more traction than before."><meta itemprop="datePublished" content="2021-07-15T16:20:29+00:00" />
-<meta itemprop="dateModified" content="2021-07-15T16:20:29+00:00" />
-<meta itemprop="wordCount" content="1478"><meta itemprop="image" content="https://www.michaeljohnpena.com/2021/07/crypto.jpg">
-<meta itemprop="keywords" content="Technology,Blockchain,Web," />
-	<link rel="stylesheet" href="/css/bundle.min.css">
-	<link rel="apple-touch-icon" sizes="180x180" href="https://www.michaeljohnpena.com/icons/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="https://www.michaeljohnpena.com/icons/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="https://www.michaeljohnpena.com/icons/favicon-16x16.png">
-	<link rel="shortcut icon" href="https://www.michaeljohnpena.com/icons/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="https://www.michaeljohnpena.com/icons/favicon.ico" type="image/x-icon">
-	<meta name="msapplication-TileColor" content="#1da1f2">
-	<link rel="manifest" href="https://www.michaeljohnpena.com/manifest.json">
-	
-	<script type="application/ld+json">
-{
-	"@context":"http://schema.org",
-	"@type":"WebSite",
-	"name":"Michael John Peña ⚡️",
-	"url":"https:\/\/www.michaeljohnpena.com",
-	"sameAs":[
-		"https://twitter.com/mjtpena",
-		"https://gitlab.com/",
-		"https://linkedin.com/in/michaeljohnpena",
-		"https://t.me/"
-		],
-	"potentialAction": {
-		"@type": "SearchAction",
-		"target": "https://wisnuwiry.space/search?q={search_term}",
-		"query-input": "required name=search_term"
-	}
-}
-</script>
-
-<script type='application/ld+json'>
-{
-	"@context": "http://www.schema.org",
-	"@type": "person",
-	"name": "Michael John Peña",
-	"jobTitle": "Software Engineer",
-	"gender": "male",
-	"url": "https:\/\/www.michaeljohnpena.com",
-	"sameAs":[
-		"https://twitter.com/mjtpena",
-		"https://gitlab.com/",
-		"https://linkedin.com/in/michaeljohnpena",
-		"https://t.me/"
-		],
-	"image": "https:\/\/www.michaeljohnpena.com\/mjtpena.jpg",
-	"address": {
-		"@type": "PostalAddress",
-		"streetAddress": "Mayong, Jepara",
-		"addressLocality": "Jepara",
-		"addressRegion": "Jawa Tengah",
-		"addressCountry": "Indonesia"
-	},
-	"email": "michael@datachain.consulting",
-	"birthDate": "2003-01-31",
-	"birthPlace": "Jepara",
-	"nationality": "Indonesian"
-}
-</script>
-
-<script type="application/ld+json">
-{
-	"@context":"http://schema.org",
-	"@type":"BlogPosting",
-	"mainEntityOfPage":{
-		"@type":"WebPage",
-		"@id":"https:\/\/www.michaeljohnpena.comhttps:\/\/www.michaeljohnpena.com\/blog\/getting-started-with-defi\/"
-	},
-	"headline":"Getting Started with DeFi",
-	"datePublished":"2021-07-15T16",
-	"dateModified":"2021-07-15T16",
-	"description":"Introduction Blockchain is not dead. Actually, quite the contrary is happening in the past year. There are more and more interest and it\u0026rsquo;s gaining a lot more traction than before.",
-	"isFamilyFriendly": "true",
-	"image":  ["https://www.michaeljohnpena.com/2021/07/crypto.jpg"] ,
-	"wordCount" : "1478",
-	"keywords": ["Technology","Blockchain","Web"],
-	"genre": ["Technology","Blockchain","Web"],
-	"accountablePerson": {
-		"@type": "Person",
-		"name": "Michael John Peña",
-		"url": ""
-	},
-	"author": {
-		"@type": "Person",
-		"name": "Michael John Peña",
-		"url": ""
-	},
-	"creator": {
-		"@type": "Person",
-		"name": "Michael John Peña",
-		"url": ""
-	},
-	"publisher":{
-		"@type":"Organization",
-		"name":"Michael John Peña", 
-		"logo": {
-			"@type": "imageObject",
-			"url": "https:\/\/www.michaeljohnpena.com\/mjtpena.jpg"
-		}
-	}
-}</script>
+    
 
 
-	<meta content="" property="fb:admins">
-	<meta content="" property="fb:app_id">
-	<meta content="index,follow" name="googlebot">
-	<meta content="follow, all" name="Googlebot-Image">
-	<meta content="follow, all" name="Scooter">
-	<meta content="follow, all" name="msnbot">
-	<meta content="follow, all" name="alexabot">
-	<meta content="follow, all" name="Slurp">
-	<meta content="follow, all" name="ZyBorg">
-	<meta content="follow, all" name="Scooter">
-	<meta content="true" name="MSSmartTagsPreventParsing">
-	<meta content="ALL" name="SPIDERS">
-	<meta content="ALL" name="WEBCRAWLERS">
-	<meta
-		content="aeiwi, alexa, alltheWeb, altavista, aol netfind, anzwers, canada, directhit, euroseek, excite, overture, go, google, hotbot. infomak, kanoodle, lycos, mastersite, national directory, northern light, searchit, simplesearch, Websmostlinked, webtop, what-u-seek, aol, yahoo, webcrawler, infoseek, excite, magellan, looksmart, bing, cnet, googlebot"
-		name="search engines">
-	
+    <script src="/modernizr-simple.js"></script>
+
+    
+    <link href="/blog/getting-started-with-defi/" rel="alternate" type="application/rss+xml" title="Michael John Peña ⚡️" />
+    <link href="/blog/getting-started-with-defi/" rel="feed" type="application/rss+xml" title="Michael John Peña ⚡️" />
+    
+
+    
+    <link rel="canonical" href="https://www.michaeljohnpena.com/blog/getting-started-with-defi/">
+    
+
+    <link rel="stylesheet" href="https://www.michaeljohnpena.com/theme.css">
+
+    
+
+    
 </head>
 
-<body class="">
-	<div class="site-container">
-		<header class="top" id="js-header">
-	<a class="logo" href="/" title="Michael John Peña ⚡️">
-    <img src="/img/placeholder.svg" alt="Michael John Peña ⚡️" class="lazyload" data-src="/mjtpena.jpg">
-</a>
-	
-	<nav class="navbar js-navbar">
-		<ul class="navbar__menu">
-			
-			
-				
-				<li>
-					<a href="/blog" target="_self">
-						📝 Blog
-					</a>
-				</li>
-				
-				
-				<li>
-					<a href="/now" target="_self">
-						⌚ now
-					</a>
-				</li>
-				
-				
-				<li>
-					<a href="/projects" target="_self">
-						🦾 Projects
-					</a>
-				</li>
-				
-				
-				<li>
-					<a href="/presentations" target="_self">
-						👨🏻‍🏫 Presentations
-					</a>
-				</li>
-				
-				
-				<li>
-					<a href="/about" target="_self">
-						😆 About
-					</a>
-				</li>
-				
-		</ul>
-		<button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span>
-		</button>
-	</nav>
-	<div class="search">
-	<a class="search__btn btn" aria-label="Search" href="/search" title="Search">
-		<svg viewBox="0 0 15 15">
-<path d="M14.81,13.14l-3-3h0a6.52,6.52,0,1,0-1.67,1.67h0l3,3a1.06,1.06,0,0,0,1.43-.24A1.06,1.06,0,0,0,14.81,13.14ZM6.5,11A4.5,4.5,0,1,1,11,6.5,4.51,4.51,0,0,1,6.5,11Z"/>
-</svg>
+<body class="bilberry-hugo-theme">
 
-	</a>
-	<button class="search__btn large" aria-label="Switch Theme" id="toggle-theme">
-		<svg viewBox="0 0 24 24">
-			<path id="icon-theme"></path>
-		</svg>
-	</button>
-</div>
+    
+    <nav>
+
+    <div class="container">
+        <ul class="topnav">
+            
+                
+                    <li><a href="https://www.michaeljohnpena.com/talks/">👨🏻‍🏫 Presentations</a></li>
+                
+            
+                
+                    <li><a href="https://www.michaeljohnpena.com/about/">👨🏻‍💻 About Me</a></li>
+                
+            
+                
+                    <li><a href="https://www.michaeljohnpena.com/projects/">🦾 Projects</a></li>
+                
+            
+                
+                    <li><a href="https://www.michaeljohnpena.com/search/">Search 🔍</a></li>
+                
+            
+        </ul>
+
+        
+    </div>
+</nav>
+
+
+    
+    <header>
+
+    <div class="container">
+        <div class="logo">
+            <a href="/" class="logo">
+                
+                    
+                    
+                        
+                    
+                    <img src="https://seccdn.libravatar.org/avatar/cfc893f12b0342d6d618b28d380d3ee4?d=mm&size=200" alt="">
+                
+
+                <span class="overlay"><i class="fa fa-home"></i></span>
+            </a>
+        </div>
+        <div class="titles">
+            <h3 class="title">
+                <a href="/">
+                    Michael John Peña ⚡️
+                </a>
+            </h3>
+
+            
+                <span class="subtitle">🚀 Technologist. Entrepreneur. Author. Speaker.</span>
+            
+        </div>
+
+        
+
+        
+            <div class="toggler">
+        
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+    </div>
 </header>
 
-		<main>
-			
-<div class="hero">
-	
 
+    <div class="main container">
+        
+    <div class="article-wrapper u-cf single">
+        
+            <a class="bubble" href="https://www.michaeljohnpena.com/blog/getting-started-with-defi/">
+    <i class="fas fa-fw fa-pencil-alt"></i>
+</a>
 
-<figure class="hero__image hero__image--overlay">
-	<img class="hero__image-img lazyload" data-src="/2021/07/crypto.jpg" src="/img/placeholder.svg" alt="Getting Started with DeFi"/>
-</figure>
+<article class="default article">
+    
 
+    <div class="content">
+    <h1 class="article-title">
+        <a href="https://www.michaeljohnpena.com/blog/getting-started-with-defi/">
+            Getting Started with DeFi
+        </a>
+    </h1>
 
-	<header class="hero__content" >
-	<div class="wrapper">
-		<h1 itemprop="name"  style="color: white;" >
-	
-		Getting Started with DeFi
-	
-		</h1>
-	
-		</div>
-	</header>
-</div>
+    <div class="meta">
+        
+            
+                <span class="date moment">2021-07-15</span>
+            
+        
 
-	
-	<div class="progress-container" >
-    <div class="scroll-indicator-bar" id="indicator"></div>
-</div>
+        
 
-	<div class="content  grid ">
-		
-<aside class="tableOfContentContainer" id="tableOfContentContainer">
-	<nav id="TableOfContents">
-  <ul>
-    <li><a href="#developer--technology">Developer / Technology</a></li>
-    <li><a href="#startup-founder">Startup Founder</a></li>
-    <li><a href="#works-in-finance">Works in Finance</a></li>
-  </ul>
+        
 
-  <ul>
-    <li><a href="#transparency">Transparency</a></li>
-    <li><a href="#accessibility">Accessibility</a></li>
-    <li><a href="#accountability">Accountability</a></li>
-    <li><a href="#interoperability">Interoperability</a></li>
-  </ul>
+        
+            <span class="author">
+                
+                
+            </span>
+        
+    </div>
 
-  <ul>
-    <li><a href="#exchanges">Exchanges</a></li>
-    <li><a href="#lending">Lending</a></li>
-    <li><a href="#assets--yields">Assets / Yields</a></li>
-  </ul>
+    
+        
 
-  <ul>
-    <li><a href="#define-your-asset">Define your &ldquo;Asset&rdquo;</a></li>
-    <li><a href="#chainnetwork">Chain/Network</a></li>
-    <li><a href="#wallets">Wallets</a></li>
-    <li><a href="#stablecoins">Stablecoins</a></li>
-    <li><a href="#other-defi-products">Other DeFi products</a></li>
-  </ul>
-</nav>
-</aside>
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        enableStickyToc();
-    });
-</script>
-
-		<div class="wrapper post__entry">
-			<div class='property outline'>
-    <p>📅️ Published: 
-        <time itemprop="datePublished" datetime="2021-07-15T16:20:29Z">July 15, 2021</time>
-    </p>
-    <p>🔄 Updated: 
-        <time itemprop="dateModified" datetime="2021-07-15T16:20:29Z">July 15, 2021</time>
-    </p>
-    <p>🕔 7 min read ∙ 1478 words</p></div>
-			
-			<div class="single block">
-				<article class="entry" id="article">
-					<div class="entry__content">
-					<h1 id="introduction" itemprop="headline" class="heading">Introduction</h1>
+        <h1 id="introduction">Introduction</h1>
 <p>Blockchain is not dead. Actually, quite the contrary is happening in the past year. There are more and more interest and it&rsquo;s gaining a lot more traction than before. A big portion of this growth is due to &ldquo;DeFi&rdquo; AKA Decentralised Finance applications. From the hyped cryptocurrencies, we are now seeing the new next wave of this transformation as we see more financial products being developed: lending, exchanges, yield farming, and pools just to name a few. It is a hot topic right now and there are a lot of demand in this space. There are also a lot of opportunities to start creating your own innovative products as part of this wave.</p>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='/2021/07/crypto.jpg'
-    alt='img'
-     title="img"
- 	/>
-</figure>
-
+<p><img src="/2021/07/crypto.jpg" alt="img">
 <strong>Warning: Cryptocurrencies involve risks, so do your own research before investing.</strong></p>
-<h1 id="why-defi-and-blockchain" itemprop="headline" class="heading">Why DeFi and blockchain?</h1>
+<h1 id="why-defi-and-blockchain">Why DeFi and blockchain?</h1>
 <p>There are a lot of locked money right now in DeFi. As of now, we have at least 54 Billion dollar worth of locked assets that are circulating just in this vertical.</p>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='/2021/07/defipulse.png'
-    alt='img'
-     title="img"
- 	/>
-</figure>
-
-<strong>Image taken from: <a href="https://defipulse.com" target="_blank" rel="noopener">https://defipulse.com</a> @ 13/July/2021</strong></p>
-<h2 id="developer--technology" itemprop="headline" class="heading">Developer / Technology <a class="anchor-link" href="#developer--technology">#</a></h2>
+<p><img src="/2021/07/defipulse.png" alt="img">
+<strong>Image taken from: <a href="https://defipulse.com">https://defipulse.com</a> @ 13/July/2021</strong></p>
+<h2 id="developer--technology">Developer / Technology</h2>
 <ul>
 <li>A lot of demand to DApps developers.</li>
 <li>A lot of saturation in open source community.</li>
 <li>The tools and technologies are improving in a rapid pace.</li>
 </ul>
-<h2 id="startup-founder" itemprop="headline" class="heading">Startup Founder <a class="anchor-link" href="#startup-founder">#</a></h2>
+<h2 id="startup-founder">Startup Founder</h2>
 <ul>
 <li>An opportunity to start a new product or service offering.</li>
 <li>Opportunities to raise capital or funding.</li>
 <li>The market is still maturing and open to innovation.</li>
 </ul>
-<h2 id="works-in-finance" itemprop="headline" class="heading">Works in Finance <a class="anchor-link" href="#works-in-finance">#</a></h2>
+<h2 id="works-in-finance">Works in Finance</h2>
 <ul>
 <li>DeFi &ldquo;has been&rdquo; disrupting traditional financial products</li>
 <li>Opportunity to adapt and innovate.</li>
 <li>Leverage DeFi side-by-side with your existing products.</li>
 </ul>
-<h1 id="what-is-defi-or-decentralized-finance" itemprop="headline" class="heading">What is DeFi or Decentralized Finance?</h1>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://miro.medium.com/max/1400/1*UAq2AOQGRwErIPDlPmBS1w.png'
-    alt=''
-    
- 	/>
-</figure>
-
-<strong>Image taken from:</strong> <a href="https://medium.com/stably-blog/decentralized-finance-vs-traditional-finance-what-you-need-to-know-3b57aed7a0c2" target="_blank" rel="noopener">Stably blog on Medium</a></p>
+<h1 id="what-is-defi-or-decentralized-finance">What is DeFi or Decentralized Finance?</h1>
+<p><img src="https://miro.medium.com/max/1400/1*UAq2AOQGRwErIPDlPmBS1w.png" alt="">
+<strong>Image taken from:</strong> <a href="https://medium.com/stably-blog/decentralized-finance-vs-traditional-finance-what-you-need-to-know-3b57aed7a0c2">Stably blog on Medium</a></p>
 <p>DeFi is similar to how we call Financial Technologies as &ldquo;FinTech&rdquo;. It&rsquo;s an industry vertical use of decentralised technologies that are specific to financial products. This includes exchanges, lending &amp; borrowing, interests &amp; compounds, staking &amp; liquidity pools, and many more.</p>
 <p>One of the key advantages of DeFi is the decentralised nature of it. Compared to traditional banking and financial institutes, you need a &ldquo;middle man&rdquo; in order to do transactions. With the use of decentralised technologies, no central entity have &ldquo;control&rdquo; on the network of exchanges and transactions. This allows more efficient and straightforward transactions across individuals.</p>
-<h1 id="what-makes-a-product-defi" itemprop="headline" class="heading">What makes a product DeFi?</h1>
+<h1 id="what-makes-a-product-defi">What makes a product DeFi?</h1>
 <p>Throughout the years, there has been so many use cases of blockchain and decentralised technologies. There are also a lot of applications that seems to be just partially decentralised. These are some of the properties to look at in order for a product to utilise these revolutionary movement.</p>
-<h2 id="transparency" itemprop="headline" class="heading">Transparency <a class="anchor-link" href="#transparency">#</a></h2>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FZb_xXukrwQ.png?alt=media&amp;token=1a9e1a47-ab6c-43b5-aa37-61c49ea3bbc2'
-    alt=''
-    
- 	/>
-</figure>
-
+<h2 id="transparency">Transparency</h2>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FZb_xXukrwQ.png?alt=media&amp;token=1a9e1a47-ab6c-43b5-aa37-61c49ea3bbc2" alt="">
 <strong>SushiSwap contract on Ethereum</strong></p>
 <p>Transparency is one of the most important reason on why you would even want to use blockchaind and decentralised technologies. With these technologies, you can have an end to end trace of all the transactions that are happeing within the chain and the DeFi apps. A lot of DeFi apps are also open-sourced in order to gain reputation and peer review from the wider community.</p>
-<h2 id="accessibility" itemprop="headline" class="heading">Accessibility <a class="anchor-link" href="#accessibility">#</a></h2>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5f47c6d1393155131be2bed8%2F960x0.jpg%3Ffit%3Dscale'
-    alt='How DeFi Is Reinventing The World&#39;s Financial System'
-     title="How DeFi Is Reinventing The World&#39;s Financial System"
- 	/>
-</figure>
-</p>
-<p><strong>Image taken from</strong> <a href="https://www.forbes.com/sites/forbestechcouncil/2020/08/28/how-defi-is-reinventing-the-worlds-financial-system/" target="_blank" rel="noopener">Forbes: How DeFi is Reinventing The World&rsquo;s Financial System</a></p>
+<h2 id="accessibility">Accessibility</h2>
+<p><img src="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5f47c6d1393155131be2bed8%2F960x0.jpg%3Ffit%3Dscale" alt="How DeFi Is Reinventing The World&amp;#39;s Financial System"></p>
+<p><strong>Image taken from</strong> <a href="https://www.forbes.com/sites/forbestechcouncil/2020/08/28/how-defi-is-reinventing-the-worlds-financial-system/">Forbes: How DeFi is Reinventing The World&rsquo;s Financial System</a></p>
 <p>Unlike traditional banking products, you need to be in a certain category or must have specific things in order to do transactions. A DeFi should be inclusive to all users all over the world regardless of your ethnicity, race, religion, gender, and to an extent your financial background.</p>
-<h2 id="accountability" itemprop="headline" class="heading">Accountability <a class="anchor-link" href="#accountability">#</a></h2>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FWsItyWFeKu.png?alt=media&amp;token=ce7f8509-fb73-4f87-9a3c-3296ab096ee4'
-    alt=''
-    
- 	/>
-</figure>
-</p>
+<h2 id="accountability">Accountability</h2>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FWsItyWFeKu.png?alt=media&amp;token=ce7f8509-fb73-4f87-9a3c-3296ab096ee4" alt=""></p>
 <p>Althoguht it is totally optional, as the founder of Bitcoin, Satoshi Nakamoto still remains anonymous; the world is changing. It is intrinsic in our nature to trust people, brand, and entities. As there has been a lot of scams and risks in this industry, having to know the founders and their background would gain confidence for people to use your DeFi product.</p>
-<h2 id="interoperability" itemprop="headline" class="heading">Interoperability <a class="anchor-link" href="#interoperability">#</a></h2>
-<p><figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FpauvZSSEHw.png?alt=media&amp;token=7167728a-127d-4918-84e0-10359081c28a'
-    alt=''
-    
- 	/>
-</figure>
-
-<strong>Image taken from</strong> <a href="https://academy.binance.com/en/articles/binance-smart-chain-vs-ethereum-what-s-the-difference" target="_blank" rel="noopener">Binance Academy Article</a></p>
+<h2 id="interoperability">Interoperability</h2>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FpauvZSSEHw.png?alt=media&amp;token=7167728a-127d-4918-84e0-10359081c28a" alt="">
+<strong>Image taken from</strong> <a href="https://academy.binance.com/en/articles/binance-smart-chain-vs-ethereum-what-s-the-difference">Binance Academy Article</a></p>
 <p>This is a hard technical problem to have. Interoperability means your asset or product can work to various blockchain networks, or supports multiple types of coin, and even support non-blockchain data. I&rsquo;ve dealt with these and I&rsquo;m telling you it&rsquo;s not one of the easiest thing to work on. There are a lot of performance considerations as well as overall user experiences.</p>
-<h1 id="use-cases-and-popular-defi-apps" itemprop="headline" class="heading">Use Cases and Popular DeFi Apps</h1>
+<h1 id="use-cases-and-popular-defi-apps">Use Cases and Popular DeFi Apps</h1>
 <p>There are a lot of popular use cases and DeFi Apps lately. Although some are more dominant than others in terms of locked asset, there are still a lot of opportunities to capture more market.
 Here are some of the popular DApps (Decentralised Apps) out there that are categorised as DeFi.</p>
-<h2 id="exchanges" itemprop="headline" class="heading">Exchanges <a class="anchor-link" href="#exchanges">#</a></h2>
+<h2 id="exchanges">Exchanges</h2>
 <p><strong>UniSwap</strong>
 is a fully decentralized on-chain protocol for token exchange on Ethereum that uses liquidity pools instead of order books.
-<figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://research.binance.com/static/images/projects/uniswap/logo.png'
-    alt='What is the Uniswap Protocol Token %28UNI%29? | Binance Research'
-     title="What is the Uniswap Protocol Token %28UNI%29? | Binance Research"
- 	/>
-</figure>
-
-<a href="https://uniswap.exchange" target="_blank" rel="noopener">https://uniswap.exchange</a></p>
+<img src="https://research.binance.com/static/images/projects/uniswap/logo.png" alt="What is the Uniswap Protocol Token %28UNI%29? | Binance Research">
+<a href="https://uniswap.exchange">https://uniswap.exchange</a></p>
 <p><strong>SushiSwap</strong>
 is a fully decentralized on-chain protocol for exchanging tokens through a process of automated market-making (AMM) which uses &rsquo;liquidity pools&rsquo; rather than an orderbook.
-<figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://s2.coinmarketcap.com/static/img/coins/200x200/6758.png'
-    alt='SushiSwap price today, SUSHI live marketcap, chart, and info | CoinMarketCap'
-     title="SushiSwap price today, SUSHI live marketcap, chart, and info | CoinMarketCap"
- 	/>
-</figure>
-
-<a href="https://app.sushi.com" target="_blank" rel="noopener">https://app.sushi.com</a></p>
+<img src="https://s2.coinmarketcap.com/static/img/coins/200x200/6758.png" alt="SushiSwap price today, SUSHI live marketcap, chart, and info | CoinMarketCap">
+<a href="https://app.sushi.com">https://app.sushi.com</a></p>
 <p><strong>PancakeSwap</strong>
 is a decentralized exchange built on Binance Smart Chain.
-<figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://s2.coinmarketcap.com/static/img/coins/200x200/7186.png'
-    alt='PancakeSwap price today, CAKE live marketcap, chart, and info |  CoinMarketCap'
-     title="PancakeSwap price today, CAKE live marketcap, chart, and info |  CoinMarketCap"
- 	/>
-</figure>
-
-<a href="https://pancakeswap.finance" target="_blank" rel="noopener">https://pancakeswap.finance</a></p>
-<h2 id="lending" itemprop="headline" class="heading">Lending <a class="anchor-link" href="#lending">#</a></h2>
+<img src="https://s2.coinmarketcap.com/static/img/coins/200x200/7186.png" alt="PancakeSwap price today, CAKE live marketcap, chart, and info |  CoinMarketCap">
+<a href="https://pancakeswap.finance">https://pancakeswap.finance</a></p>
+<h2 id="lending">Lending</h2>
 <p><strong>Compound</strong>
 is an algorithmic money market protocol on Ethereum that lets users earn interest or borrow assets against collateral.
-<a href="https://pbs.twimg.com/profile_images/1152363392595714048/OVJu6nwQ_400x400.png" target="_blank" rel="noopener">Compound Labs %28@compoundfinance%29 | Twitter</a>
-<a href="https://app.compound.finance/" target="_blank" rel="noopener">https://app.compound.finance/</a></p>
+<a href="https://pbs.twimg.com/profile_images/1152363392595714048/OVJu6nwQ_400x400.png">Compound Labs %28@compoundfinance%29 | Twitter</a>
+<a href="https://app.compound.finance/">https://app.compound.finance/</a></p>
 <p><strong>Aave</strong>
 (from the Finnish word for &ldquo;ghost&rdquo;) is an open source non-custodial protocol on Ethereum for decentralized lending and borrowing
-<figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://pbs.twimg.com/profile_images/1186270065085370368/J1YJtvdI_400x400.jpg'
-    alt='Aave %28@AaveAave%29 | Twitter'
-     title="Aave %28@AaveAave%29 | Twitter"
- 	/>
-</figure>
-
-<a href="https://app.aave.com/" target="_blank" rel="noopener">https://app.aave.com/</a></p>
+<img src="https://pbs.twimg.com/profile_images/1186270065085370368/J1YJtvdI_400x400.jpg" alt="Aave %28@AaveAave%29 | Twitter">
+<a href="https://app.aave.com/">https://app.aave.com/</a></p>
 <p><strong>MakerDAO</strong>
 is a decentralized credit platform on Ethereum that supports Dai, a stablecoin whose value is pegged to USD.
-<figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://pbs.twimg.com/profile_images/1196456510424961025/zacb-9pN_400x400.jpg'
-    alt='Maker %28@MakerDAO%29 | Twitter'
-     title="Maker %28@MakerDAO%29 | Twitter"
- 	/>
-</figure>
-
-<a href="https://oasis.app" target="_blank" rel="noopener">https://oasis.app</a></p>
-<h2 id="assets--yields" itemprop="headline" class="heading">Assets / Yields <a class="anchor-link" href="#assets--yields">#</a></h2>
+<img src="https://pbs.twimg.com/profile_images/1196456510424961025/zacb-9pN_400x400.jpg" alt="Maker %28@MakerDAO%29 | Twitter">
+<a href="https://oasis.app">https://oasis.app</a></p>
+<h2 id="assets--yields">Assets / Yields</h2>
 <p><strong>Synthetix</strong>
 is a decentralized platform on Ethereum for the creation of Synths: on-chain synthetic assets that track the value of real-world assets.
-<figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://pbs.twimg.com/profile_images/1299241789669269508/HU-JT5GI_400x400.png'
-    alt='Synthetix ⚔️ %28@synthetix_io%29 | Twitter'
-     title="Synthetix ⚔️ %28@synthetix_io%29 | Twitter"
- 	/>
-</figure>
-
-<a href="https://staking.synthetix.io" target="_blank" rel="noopener">https://staking.synthetix.io</a></p>
+<img src="https://pbs.twimg.com/profile_images/1299241789669269508/HU-JT5GI_400x400.png" alt="Synthetix ⚔️ %28@synthetix_io%29 | Twitter">
+<a href="https://staking.synthetix.io">https://staking.synthetix.io</a></p>
 <p><strong>Yearn.finance</strong>
 is a decentralized ecosystem of aggregators that utilize lending services such as Aave, Compound, Dydx, and Fulcrum to optimize your token lending.
-<figure class="post__image">
-	<img 
-	itemprop="image"
-	class="lazyload post__image" 
-    data-sizes="auto"
-    src="/img/placeholder.svg"
-    data-src='https://cryptomode.com/wp-content/uploads/2020/08/CryptoMode-YFI-42-Coin-Bitcoin.png'
-    alt='Yearn.Finance Doesn&#39;t Need More YFI Tokens to Reward Its Developers •  CryptoMode'
-     title="Yearn.Finance Doesn&#39;t Need More YFI Tokens to Reward Its Developers •  CryptoMode"
- 	/>
-</figure>
-
-<a href="https://yearn.finance" target="_blank" rel="noopener">https://yearn.finance</a></p>
-<h1 id="how-to-get-started" itemprop="headline" class="heading">How to Get Started?</h1>
+<img src="https://cryptomode.com/wp-content/uploads/2020/08/CryptoMode-YFI-42-Coin-Bitcoin.png" alt="Yearn.Finance Doesn&amp;#39;t Need More YFI Tokens to Reward Its Developers •  CryptoMode">
+<a href="https://yearn.finance">https://yearn.finance</a></p>
+<h1 id="how-to-get-started">How to Get Started?</h1>
 <p>If you want to get started creating a DeFi product (before jumping to code or hard technical bits), these are some of the guiding pillars that you can look at in order to structure your thought processing.</p>
-<h2 id="define-your-asset" itemprop="headline" class="heading">Define your &ldquo;Asset&rdquo; <a class="anchor-link" href="#define-your-asset">#</a></h2>
+<h2 id="define-your-asset">Define your &ldquo;Asset&rdquo;</h2>
 <p>You first have to define what is the &ldquo;asset&rdquo; of your product. Are you thinking of creating an exchange, a marketplace, lending platform, etc.</p>
 <p>These are some of the common standards to look at to get started:</p>
 <ul>
 <li>
 <p>Your own fungible token ie create your own Currency (ERC-20) / (BEP-20)</p>
 <ul>
-<li><a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-20/" target="_blank" rel="noopener">https://ethereum.org/en/developers/docs/standards/tokens/erc-20/</a></li>
-<li><a href="https://github.com/binance-chain/BEPs/blob/master/BEP20.md" target="_blank" rel="noopener">https://github.com/binance-chain/BEPs/blob/master/BEP20.md</a></li>
+<li><a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-20/">https://ethereum.org/en/developers/docs/standards/tokens/erc-20/</a></li>
+<li><a href="https://github.com/binance-chain/BEPs/blob/master/BEP20.md">https://github.com/binance-chain/BEPs/blob/master/BEP20.md</a></li>
 </ul>
 </li>
 <li>
 <p>NFTs / Non-fungible tokens meaning assets that are unique such as trading cards, game items, etc (ERC-721) / (EIP-1155)</p>
 <ul>
-<li><a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/" target="_blank" rel="noopener">https://ethereum.org/en/developers/docs/standards/tokens/erc-721/</a></li>
-<li><a href="https://eips.ethereum.org/EIPS/eip-1155" target="_blank" rel="noopener">https://eips.ethereum.org/EIPS/eip-1155</a></li>
+<li><a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/">https://ethereum.org/en/developers/docs/standards/tokens/erc-721/</a></li>
+<li><a href="https://eips.ethereum.org/EIPS/eip-1155">https://eips.ethereum.org/EIPS/eip-1155</a></li>
 </ul>
 </li>
 </ul>
-<h2 id="chainnetwork" itemprop="headline" class="heading">Chain/Network <a class="anchor-link" href="#chainnetwork">#</a></h2>
+<h2 id="chainnetwork">Chain/Network</h2>
 <p>The next part is choosing which chain do you want to use.</p>
 <p>The popular ones are:</p>
 <ul>
@@ -557,23 +278,23 @@ is a decentralized ecosystem of aggregators that utilize lending services such a
 </ul>
 <p>and you&rsquo;ll be surprised that there are more. A lot more.</p>
 <p>Another option is to hard fork one of these or spin-up your own infrastructure.</p>
-<h2 id="wallets" itemprop="headline" class="heading">Wallets <a class="anchor-link" href="#wallets">#</a></h2>
+<h2 id="wallets">Wallets</h2>
 <p>Wallets are what holds those different assets, whether they cryptocurrencies or NFTs.
 There are so many to choose from these days: from browser extensions, mobile apps, hardware ledger, the list goes on.</p>
 <p>They vary in security layers and user experience.</p>
 <p>You need to work on which of these wallets will support your product.</p>
 <p>The popular ones are Metamask for Web and Argent for Mobile.</p>
-<h2 id="stablecoins" itemprop="headline" class="heading">Stablecoins <a class="anchor-link" href="#stablecoins">#</a></h2>
-<p>Given the volatility of the crypto market, you have options to use stablecoins.
+<h2 id="stablecoins">Stablecoins</h2>
+<p>Given the volatility of the crypto market, you have options to use stablecoins. 
 Stablecoins are basically instruments that allow you to put your assets or coins as collateral against the value of a stable product such as USD, Oil, Gold, etc. These are very useful in products that leverage collaterals.</p>
 <p>However, there are some opinions around it wherein if you are still married with these traditional assets, then you might not be really fully embracing the cryptocurrency world.</p>
-<h2 id="other-defi-products" itemprop="headline" class="heading">Other DeFi products <a class="anchor-link" href="#other-defi-products">#</a></h2>
+<h2 id="other-defi-products">Other DeFi products</h2>
 <p>Sometimes you don&rsquo;t really have to do everything from scratch. You can mix and match different products and platforms as they are not your core business or focus. Most of the DeFi products embraces the use of APIs and SDKs as a means of interoperability.</p>
-<h1 id="challenges-of-defi" itemprop="headline" class="heading">Challenges of DeFi</h1>
+<h1 id="challenges-of-defi">Challenges of DeFi</h1>
 <p>Although DeFi and the whole world of blockchain and cryptocurrencies have a lot of potential to improve, this is still a relative young market. There are still a lot of lessons learnt to have, as well as more innovative products to come.</p>
 <p>There are still a lot of unregulated products and platforms around. This is actually very complex as decentralization now opens a larger border than just governing countries. We need more political leaders to regulate this as a means of proper and innovative financial instrument that people all over the world can really benefit from.</p>
 <p>Another current problem that most DeFi faces is problem with scalability as the Ethereum network is having a hard time to cater a lot of transactions. Not only that, but as well as some current limitations of smart contracts in terms of size and gas costs. I am confident though that this is a problem that the market will eventually evolve to overcome.</p>
-<h1 id="summary-and-resources" itemprop="headline" class="heading">Summary and Resources</h1>
+<h1 id="summary-and-resources">Summary and Resources</h1>
 <ul>
 <li>DeFi gives a new wave of more materialised crypto.</li>
 <li>The market is still maturing and has a lot of room to grow.</li>
@@ -581,161 +302,160 @@ Stablecoins are basically instruments that allow you to put your assets or coins
 </ul>
 <p>To learn more:</p>
 <ul>
-<li><a href="https://defipulse.com" target="_blank" rel="noopener">https://defipulse.com</a></li>
-<li><a href="https://defiprime.com" target="_blank" rel="noopener">https://defiprime.com</a></li>
-<li><a href="https://docs.microsoft.com/en-us/learn/paths/ethereum-blockchain-development/" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/learn/paths/ethereum-blockchain-development/</a></li>
-<li><a href="https://ethereum.org/en/developers/tutorials/create-and-deploy-a-defi-app" target="_blank" rel="noopener">https://ethereum.org/en/developers/tutorials/create-and-deploy-a-defi-app</a></li>
+<li><a href="https://defipulse.com">https://defipulse.com</a></li>
+<li><a href="https://defiprime.com">https://defiprime.com</a></li>
+<li><a href="https://docs.microsoft.com/en-us/learn/paths/ethereum-blockchain-development/">https://docs.microsoft.com/en-us/learn/paths/ethereum-blockchain-development/</a></li>
+<li><a href="https://ethereum.org/en/developers/tutorials/create-and-deploy-a-defi-app">https://ethereum.org/en/developers/tutorials/create-and-deploy-a-defi-app</a></li>
 </ul>
 
-					
-    <hr>
-    <p>Wrong content?  <a href="https://github.com/mjtpena/mjtpena.github.io/edit/main/content/blog/2021-07-15-getting-started-with-defi.md">Edit on Github</a>.</p>
-    <hr>
-
-					
-
-					
-
-					</div>
-					
-					<footer class="entry__footer">
-						
-<div class="post__tag">
-			<a href="/tags/technology/"># Technology</a>
-			<a href="/tags/blockchain/"># Blockchain</a>
-			<a href="/tags/web/"># Web</a>
-</div>
-						
-<div class="post__share">
-	<a class="js-share btn" title=" Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fgetting-started-with-defi%2f" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' Facebook', 'width=800,height=600,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="Facebook" role="img" width="32" height="32" viewBox="0 0 512 512"><path d="M330 512V322h64l9-74h-73v-47c0-22 6-36 37-36h39V99c-7-1-30-3-57-3-57 0-95 34-95 98v54h-64v74h64v190z"/></svg>
-	</a>
-	<a class="js-share btn" title=" Twitter" href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fgetting-started-with-defi%2f&amp;text=Getting%20Started%20with%20DeFi" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="Twitter" viewBox="0 0 24.999 20.316"><path d="M25 2.405a10.253 10.253 0 0 1-2.947.808A5.144 5.144 0 0 0 24.308.376 10.27 10.27 0 0 1 21.05 1.62a5.134 5.134 0 0 0-8.74 4.68A14.56 14.56 0 0 1 1.74.94a5.134 5.134 0 0 0 1.587 6.846 5.108 5.108 0 0 1-2.323-.642v.064a5.132 5.132 0 0 0 4.114 5.03 5.142 5.142 0 0 1-2.316.088 5.134 5.134 0 0 0 4.79 3.562 10.29 10.29 0 0 1-6.37 2.2A10.44 10.44 0 0 1 0 18.012a14.586 14.586 0 0 0 22.454-12.29q0-.333-.015-.662A10.423 10.423 0 0 0 25 2.405z" /></svg>
-
-	</a>
-	<a class="js-share btn" title=" Reddit" href="https://www.reddit.com/submit?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fgetting-started-with-defi%2f&amp;title=Getting%20Started%20with%20DeFi" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' Reddit', 'width=832,height=624,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="Reddit" role="img" width="32" height="32" viewBox="0 0 512 512"><path fill-rule="evenodd" d="M375 146a32 32 0 1 0-29-46l-65-13c-5-1-9 2-10 6l-22 97c-45 1-85 15-113 36a42 42 0 1 0-45 69l-1 12c0 65 74 117 166 117s166-52 166-117l-1-11a42 42 0 1 0-44-69c-28-21-67-35-111-37l19-86 58 13a32 32 0 0 0 32 29zM190 353c2-1 4 0 5 1 15 11 38 18 61 18s46-6 61-18a7 7 0 0 1 8 10c-18 14-44 21-69 21-25-1-51-7-69-21a6 6 0 0 1 3-11zm23-44a31 31 0 1 1-44-44 31 31 0 0 1 44 44zm130 0a31 31 0 1 0-44-44 31 31 0 0 0 44 44z"/></svg>
-	</a>
-	<a class="js-share btn" title=" LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fgetting-started-with-defi%2f&title=Getting%20Started%20with%20DeFi" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="LinkedIn" role="img" viewBox="0 0 34.48 32"><path d="M29.632,0H2.362A2.336,2.336,0,0,0,0,2.306V29.691A2.337,2.337,0,0,0,2.362,32h27.27A2.342,2.342,0,0,0,32,29.691V2.306A2.34,2.34,0,0,0,29.632,0ZM9.491,27.268H4.744V12H9.491ZM7.119,9.909a2.752,2.752,0,1,1,2.75-2.753A2.753,2.753,0,0,1,7.119,9.909ZM27.268,27.268H22.525V19.842c0-1.772-.033-4.05-2.466-4.05-2.47,0-2.848,1.929-2.848,3.921v7.555H12.468V12h4.553v2.086h.063a4.986,4.986,0,0,1,4.491-2.467c4.806,0,5.694,3.163,5.694,7.275Z"/></svg>
-
-	</a>
-	<a class="js-share btn" title=" Pinterest" href="https://pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.michaeljohnpena.com%2fblog%2fgetting-started-with-defi%2f&description=Getting%20Started%20with%20DeFi" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, ' Pocket', 'width=800,height=720,toolbar=0,status=0'); return false">
-		<svg class="share__icon" aria-label="Pinterest" role="img" width="32" height="32" viewBox="0 0 512 512"><path d="m265 65c-104 0-157 75-157 138 0 37 14 71 45 83 5 2 10 0 12-5l3-18c2-6 1-7-2-12-9-11-15-24-15-43 0-56 41-106 108-106 60 0 92 37 92 85 0 64-28 116-70 116-23 0-40-18-34-42 6-27 19-57 19-77 0-18-9-34-30-34-24 0-42 25-42 58 0 20 7 34 7 34l-29 120a249 249 0 0 0 2 86l3-1c2-3 31-37 40-72l16-61c7 15 29 28 53 28 71 0 119-64 119-151 0-66-56-126-140-126z"/></svg>
-	</a>
-</div>
-						
-<div class="post__bio bio" >
-		<img class="lazyload bio__avatar" alt="Michael John Peña avatar" data-src="/mjtpena.jpg" height="90" width="90" src="/img/placeholder.svg">
-	<div class="bio__info">
-		<a class="bio__name invert" href="/about">
-			<p itemprop="author">Michael John Peña</p>
-		</a>
-		<p itemprop="about">Michael is an experienced technologist based in Sydney, Australia, a Microsoft MVP since 2015 with over 12 years of working experience ranging from Mobile, Cloud, Web and DevOps. He currently owns Datachain Consulting, a company that focuses on democratizing AI and Blockchain technologies. He is also a technical advisor to some technology startups. His roles allow him to explore the cutting edge technologies of Artificial Intelligence, Blockchain, IoT, Edge Computing, and the Cloud.</p>
-		
-	</div>
+    
 </div>
 
-					</footer>
-					
-				</article>
-				
-			</div>
-		</div>
-	</div>
-	
+    
+<div class="footer">
 
 
+    
+        <div class="tags">
+            <i class="fa fa-tags"></i>
+            <div class="links">
+                
+                    
+                    
+                    <a href="https://www.michaeljohnpena.com/tags/technology/">Technology</a>
+                    
+                
+                    
+                    
+                    <a href="https://www.michaeljohnpena.com/tags/blockchain/">Blockchain</a>
+                    
+                
+                    
+                    
+                    <a href="https://www.michaeljohnpena.com/tags/web/">Web</a>
+                    
+                
+            </div>
+        </div>
+    
 
-<div class="post__related related">
-	<div class="wrapper">
-		<h2 class="h5 related__title">You should also read:</h2>
-		
-		<article class="related__item">
-			<div class="feed__meta">
-				
-	<time itemprop="datePublished" class="feed__date" datetime="2021-07-13T16:20:29Z">July 13, 2021</time>
-			</div>
-			<h3><a class="invert" href="/blog/my-ultimate-windows-and-mac-setup/">My Ultimate Windows and Mac Setup (2021 Edition)</a></h3></article>
-		
-		<article class="related__item">
-			<div class="feed__meta">
-				
-	<time itemprop="datePublished" class="feed__date" datetime="2021-06-24T16:20:29Z">June 24, 2021</time>
-			</div>
-			<h3><a class="invert" href="/blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/">SSH Connect to Linux Server from a Mac using SOCKS5 Proxy</a></h3></article>
-		
-		<article class="related__item">
-			<div class="feed__meta">
-				
-	<time itemprop="datePublished" class="feed__date" datetime="2021-02-26T03:28:06Z">February 26, 2021</time>
-			</div>
-			<h3><a class="invert" href="/blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/">The 3 Types of Blockchain and Cryptocurrencies people I’ve met</a></h3></article>
-		
-		<article class="related__item">
-			<div class="feed__meta">
-				
-	<time itemprop="datePublished" class="feed__date" datetime="2020-09-09T07:12:03Z">September 09, 2020</time>
-			</div>
-			<h3><a class="invert" href="/blog/5-years-of-being-a-microsoft-mvp/">5 Years of being a Microsoft MVP!</a></h3></article>
-		
-	</div>
+    
 </div>
 
-	
-	
+</article>
 
-		</main>
-		<footer class="footer">
-<div class="footer__social">
-		<a itemprop="sameAs" class="social__link" target="_blank" rel="noopener noreferrer" href="https://twitter.com/mjtpena">
-			<svg class="social__icon" aria-label="Twitter" viewBox="0 0 24.999 20.316"><path d="M25 2.405a10.253 10.253 0 0 1-2.947.808A5.144 5.144 0 0 0 24.308.376 10.27 10.27 0 0 1 21.05 1.62a5.134 5.134 0 0 0-8.74 4.68A14.56 14.56 0 0 1 1.74.94a5.134 5.134 0 0 0 1.587 6.846 5.108 5.108 0 0 1-2.323-.642v.064a5.132 5.132 0 0 0 4.114 5.03 5.142 5.142 0 0 1-2.316.088 5.134 5.134 0 0 0 4.79 3.562 10.29 10.29 0 0 1-6.37 2.2A10.44 10.44 0 0 1 0 18.012a14.586 14.586 0 0 0 22.454-12.29q0-.333-.015-.662A10.423 10.423 0 0 0 25 2.405z" /></svg>
+        
+    </div>
 
-		</a>
-		<a itemprop="sameAs" class="social__link" target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/michaeljohnpena">
-			<svg class="social__icon" aria-label="LinkedIn" role="img" viewBox="0 0 34.48 32"><path d="M29.632,0H2.362A2.336,2.336,0,0,0,0,2.306V29.691A2.337,2.337,0,0,0,2.362,32h27.27A2.342,2.342,0,0,0,32,29.691V2.306A2.34,2.34,0,0,0,29.632,0ZM9.491,27.268H4.744V12H9.491ZM7.119,9.909a2.752,2.752,0,1,1,2.75-2.753A2.753,2.753,0,0,1,7.119,9.909ZM27.268,27.268H22.525V19.842c0-1.772-.033-4.05-2.466-4.05-2.47,0-2.848,1.929-2.848,3.921v7.555H12.468V12h4.553v2.086h.063a4.986,4.986,0,0,1,4.491-2.467c4.806,0,5.694,3.163,5.694,7.275Z"/></svg>
+    
+        <div id="comments-container">
+            
+            
 
-		</a>
-		<a itemprop="sameAs" class="social__link" target="_blank" rel="noopener noreferrer" href="https://github.com/mjtpena">
-			<svg class="social__icon" aria-label="Github" role="img" viewBox="0 0 25 25"><path d="m12 .5c-6.63 0-12 5.28-12 11.792 0 5.211 3.438 9.63 8.205 11.188.6.111.82-.254.82-.567 0-.28-.01-1.022-.015-2.005-3.338.711-4.042-1.582-4.042-1.582-.546-1.361-1.335-1.725-1.335-1.725-1.087-.731.084-.716.084-.716 1.205.082 1.838 1.215 1.838 1.215 1.07 1.803 2.809 1.282 3.495.981.108-.763.417-1.282.76-1.577-2.665-.295-5.466-1.309-5.466-5.827 0-1.287.465-2.339 1.235-3.164-.135-.298-.54-1.497.105-3.121 0 0 1.005-.316 3.3 1.209.96-.262 1.98-.392 3-.398 1.02.006 2.04.136 3 .398 2.28-1.525 3.285-1.209 3.285-1.209.645 1.624.24 2.823.12 3.121.765.825 1.23 1.877 1.23 3.164 0 4.53-2.805 5.527-5.475 5.817.42.354.81 1.077.81 2.182 0 1.578-.015 2.846-.015 3.229 0 .309.21.678.825.56 4.801-1.548 8.236-5.97 8.236-11.173 0-6.512-5.373-11.792-12-11.792z" /></svg>
+            
 
-		</a>
-		<a itemprop="sameAs" class="social__link" target="_blank" rel="noopener noreferrer" href="https://medium.com/@mjtpena">
-			<svg class="social__icon" aria-label="Medium" role="img" width="32" height="32" viewBox="0 0 400 400"><path d="M125 173c0-4-2-9-5-11l-31-38v-6h98l75 166 67-166h93v6l-27 26c-2 1-3 4-3 7v190c0 3 1 6 3 8l27 25v6H289v-6l27-26c3-3 3-4 3-8V193l-76 192h-10l-88-192v129c-1 5 1 11 5 15l35 43v5H85v-5l35-43c4-4 6-10 5-15z"/></svg>
+            
 
-		</a>
-</div>
-	<div class="footer__copyright">© 2022 <a href="https://wisnuwiry.space">Michael John Peña</a> <span class="footer__copyright-credits"></span> | Created with ❤️ <a href="//gohugo.io">Hugo</a></div>
+        </div>
+    
+
+    </div>
+
+    
+<footer>
+    <div class="container">
+
+        
+        <div class="recent-posts">
+            <strong>Latest posts</strong>
+            <ul>
+                
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/andriel-newsletter16/">Andriel&#39;s Newsletter no. 16</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/andriel-newsletter15/">Andriel&#39;s Newsletter no. 15</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/andriel-newsletter14/">Andriel&#39;s Newsletter no. 14</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/run-for-autism-2021/">Run for Autism - 2021</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/accountability-partner/">Productive this Pandemic - Accountability Partner</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/planning-your-week-ahead/">Productive this Pandemic - Planning your week ahead</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.michaeljohnpena.com/blog/hybrid-cloud/">The Hybrid Cloud Journey with Microsoft Azure</a>
+                    </li>
+                
+            </ul>
+        </div>
+        
+
+        
+
+        <div class="right">
+            
+            <div class="external-profiles">
+                <strong>Social media</strong>
+
+                
+            </div>
+            
+
+            
+
+            
+            <div class="archive">
+                <a href="/archive/"><strong>Archive</strong></a>
+            </div>
+            
+        </div>
+    </div>
 </footer>
-	</div>
-	
 
 
+<div class="credits">
+    <div class="container">
+        <div class="copyright">
+            <a href="https://github.com/mjtpena/mjtpena.github.io" target="_blank">
+                &copy;
+                
+                2022
+                
+                by Michael J. Peña
+            </a>
+            
+        </div>
+        <div class="author">
+            <a href="https://github.com/Lednerb/bilberry-hugo-theme"
+                target="_blank"> </a>
+        </div>
+    </div>
+</div>
 
-<script type="text/javascript" src="/js/bundle.min.js" defer></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.0/lazysizes.min.js"></script>
-<script>(function (d, e) { d[e] = d[e].replace("no-js", "js"); })(document.documentElement, "className");</script>
-<script>
+
     
-        (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-186803288-1', 'auto'); ga('send', 'pageview');
+
     
 
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-            .register('/sw.js', { scope: '/' })
-            .then(function (registration) {
-                console.log('Service Worker Registered');
-            });
 
-        navigator.serviceWorker
-            .ready
-            .then(function (registration) {
-                console.log('Service Worker Ready');
-            });
-    }
-</script>
+    <script src="https://www.michaeljohnpena.com/theme.js"></script>
 
+    
+
+    
 </body>
 
 </html>
