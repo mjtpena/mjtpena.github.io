@@ -61,6 +61,13 @@ resizeImages                  = true
   creditsText = " "
   creditsUrl = "https://github.com/Lednerb/bilberry-hugo-theme"
 
+  # Enable / Disable algolia search
+  algolia_search    = true
+  algolia_appId     = "KMLPIAKUQ2"
+  algolia_apiKey    = "efcd5109e974559bf12078bf7528f7a4"
+  algolia_indexName = "mjp"
+  # Set this option to false if you want to search within all articles in all languages at once
+  algolia_currentLanguageOnly = true
 
 [Params.Hero]
   title                       = "👨🏻‍💻 Michael John Peña ⚡️"
