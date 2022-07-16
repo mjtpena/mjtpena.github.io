@@ -21,8 +21,8 @@ mix.setPublicPath('./static')
   .sass('assets/sass/theme.scss', './')
   .then(() => {
     const fs = require("fs");
-    const oldFontsPath = './static/fonts';
-    const newFontsPath = './static/fonts';
+    const oldFontsPath = './static/fonts/vendor';
+    const newFontsPath = './static/fonts/_vendor';
     const themeFile = './static/theme.css';
 
     if (fs.existsSync(newFontsPath)) {
