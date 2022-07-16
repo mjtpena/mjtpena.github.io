@@ -37,7 +37,6 @@ resizeImages                  = true
   fontUnit                    = "em"
   largestFontSize             = 2.5
   smallestFontSize            = 1
-  googleSearchConsole         = ""
   GoogleAnalytics             = "UA-186803288-1"
   # fb_admins                   = 
   # fb_app_id                   = 
@@ -65,7 +64,7 @@ resizeImages                  = true
   algolia_search    = true
   algolia_appId     = "KMLPIAKUQ2"
   algolia_apiKey    = "efcd5109e974559bf12078bf7528f7a4"
-  algolia_indexName = "mjp"
+  algolia_indexName = "MJP"
   # Set this option to false if you want to search within all articles in all languages at once
   algolia_currentLanguageOnly = true
 
@@ -85,12 +84,6 @@ resizeImages                  = true
 [menu]
 
 [[menu.main]]
-identifier = "Blog"
-pre = "📝"
-url = "/blog" 
-weight = 1 
-
-[[menu.main]]
 identifier = "Projects"
 pre = "🦾"
 url = "/projects" 
@@ -100,13 +93,13 @@ weight = 3
 identifier = "Talks"
 pre = "👨🏻‍🏫"
 url = "/talks" 
-weight = 4 
+weight = 5 
 
 [[menu.main]]
 identifier = "About"
 pre = "😆"
 url = "/about" 
-weight = 5
+weight = 1
 
 [Params.Social]
   twitter                     = "mjtpena"
