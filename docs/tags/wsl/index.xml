@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>WSL on Michael John Peña ⚡️</title>
+    <title>WSL on 👨🏻‍💻 Michael John Peña ⚡️</title>
     <link>https://www.michaeljohnpena.com/tags/wsl/</link>
-    <description>Recent content in WSL on Michael John Peña ⚡️</description>
+    <description>Recent content in WSL on 👨🏻‍💻 Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
@@ -15,7 +15,8 @@
       <pubDate>Sun, 15 Aug 2021 02:19:19 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/blog/blockchain-wsl2/</guid>
-      <description>In the past, I&amp;rsquo;ve been using my Macbook Pro to do all things blockchain and smart contracts development. One of the hurdles I encountered in the past is that some tooling and frameworks were not first class citizens on Windows.</description>
+      <description>In the past, I&amp;rsquo;ve been using my Macbook Pro to do all things blockchain and smart contracts development. One of the hurdles I encountered in the past is that some tooling and frameworks were not first class citizens on Windows. Majority of these tools, especially those that come with scripts and complex networking architecture (circa 2015) just works in MacOS and Linux:Ubuntu.
+Introduction Of course there have been a lot of improvements now in the ecosystem since then.</description>
     </item>
     
   </channel>

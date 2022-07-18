@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Life-style on Michael John Peña ⚡️</title>
+    <title>Life-style on 👨🏻‍💻 Michael John Peña ⚡️</title>
     <link>https://www.michaeljohnpena.com/tags/life-style/</link>
-    <description>Recent content in Life-style on Michael John Peña ⚡️</description>
+    <description>Recent content in Life-style on 👨🏻‍💻 Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
@@ -16,7 +16,8 @@
       <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/blog/my-ultimate-windows-and-mac-setup/</guid>
       <description>Introduction My Battle Station @ 2021
-In a parallel world, I&amp;rsquo;ll be just using 1 device and 1 Operating system for all the things.</description>
+In a parallel world, I&amp;rsquo;ll be just using 1 device and 1 Operating system for all the things. However, given the nature of my work with mobile, web, blockchain, machine learning, and cloud development, I need to have multiple devices to cater things.
+I tried doing &amp;ldquo;Shared mouse and keyboard&amp;rdquo; in the past such as Synergy, but I decided to use a KVM switch instead.</description>
     </item>
     
   </channel>

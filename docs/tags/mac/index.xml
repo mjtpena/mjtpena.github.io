@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mac on Michael John Peña ⚡️</title>
+    <title>Mac on 👨🏻‍💻 Michael John Peña ⚡️</title>
     <link>https://www.michaeljohnpena.com/tags/mac/</link>
-    <description>Recent content in Mac on Michael John Peña ⚡️</description>
+    <description>Recent content in Mac on 👨🏻‍💻 Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
@@ -15,7 +15,7 @@
       <pubDate>Fri, 23 Jul 2021 02:19:19 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/blog/developing-macos-apps-using-net/</guid>
-      <description>The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .</description>
+      <description>The .NET framework (and the wider ecosystem) has embraced a lot of openness these past few years. Gone are the days when .NET only works on Windows. However, as the journey to &amp;ldquo;One .NET&amp;rdquo; is still unfolding, there is a lot of confusion on how we can use .NET on MacOS. There is Mono, .NET Core, .NET 5, Xamarin.Mac, Xamarin.Forms, Mac Catalyst, .NET 6, and MAUI. This blog post explains some of the core concepts across these nomenclature.</description>
     </item>
     
   </channel>

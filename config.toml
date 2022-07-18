@@ -1,12 +1,12 @@
 baseURL = "https://www.michaeljohnpena.com"
 languageCode                  = "id"
-title                         = "Michael John Peña ⚡️"
-theme = "bilberry-hugo-theme"
-summaryLength                 = 20
+title                         = "👨🏻‍💻 Michael John Peña ⚡️"
+theme                         = "KeepIt"
 publishDir                    = "docs"
-permanentTopNav               = true
-stickyNav                     = true
-resizeImages                  = true
+paginate                      = 12
+enableEmoji                   = true
+enableRobotsTXT               = true
+googleAnalytics               = "UA-186803288-1"
 
 [Author] # Used in authorbox
   name                        = "Michael John Peña"
@@ -18,88 +18,41 @@ resizeImages                  = true
 
 
 [Params]
-  subTitle                    = "🚀 Technologist. Entrepreneur. Author. Speaker." # Site Description. Used in meta description
-  avatarEmail                 = "mjtpena@outlook.com"
-  copyright                   = "Michael John Peña" # Copyright holder, otherwise will use .Site.Title
-  opengraph                   = true # Enable OpenGraph if true
-  twitter_cards               = true # Enable Twitter Cards if true
-  mainSections                = ["blog"] # Set main page sections
-  dateFormat                  = "January 02, 2006" # Change the format of dates
-  # customCSS                 = ["css/custom.css"] # Include custom CSS files
-  customJS                    = []
-  mainMenuAlignment           = "right" # Align main menu (desktop version) to the right side
-  authorbox                   = true # Show authorbox at bottom of single pages if true
-  comments                    = false # Enable comments for all site pages
-  related                     = true # Enable Related content for single pages
-  relatedMax                  = 5
-  mathjax                     = false # Enable MathJax for all site pages
-  hideNoPostsWarning          = false # Don't show no posts empty state warning in main page, if true
-  fontUnit                    = "em"
-  largestFontSize             = 2.5
-  smallestFontSize            = 1
-  GoogleAnalytics             = "UA-186803288-1"
-  # fb_admins                   = 
-  # fb_app_id                   = 
-  paginateLength              = 5
-  # adsenseId                   = 
-
-  # Google Search custom, more info: https://cse.google.com/cse/all
-  customSearchId              = "006802411290405048751:yzlfy2edfeq"
-
-  endMessagePost              = "Wrong content? "
-  
-  # Link repo to edit content
-  editContentPageLink         = "https://github.com/mjtpena/mjtpena.github.io/edit/main/content/"
-  
-  # Formspree form contact id, more info: https://cse.google.com/cse/all
-  formspreeId                 = ""
-  copyrightBy = "by Michael J. Peña"
-  copyrightUseCurrentYear = true  # set to true to always display the current year in the copyright
-  copyrightYearOverride = "2022"
-  copyrightUrl = "https://github.com/mjtpena/mjtpena.github.io"
-  creditsText = " "
-  creditsUrl = "https://github.com/Lednerb/bilberry-hugo-theme"
-
-  # Enable / Disable algolia search
-  algolia_search    = true
-  algolia_appId     = "KMLPIAKUQ2"
-  algolia_apiKey    = "efcd5109e974559bf12078bf7528f7a4"
-  algolia_indexName = "MJP"
-  # Set this option to false if you want to search within all articles in all languages at once
-  algolia_currentLanguageOnly = true
-
-[Params.Hero]
-  title                       = "👨🏻‍💻 Michael John Peña ⚡️"
-  desc                        = "🚀 Technologist. Entrepreneur. Author. Speaker."
-
-[Params.Entry]
-  meta                        = ["date", "categories"] # Enable meta fields in given order
-  toc                         = true # Enable Table of Contents
-  tocOpen                     = false # Open Table of Contents block. Optional
-
-[Params.Featured]
-  previewOnly                 = false # Show only preview featured image
+    since = 2020
+    author = "mjtpena"              
+    subtitle = "🚀 Technologist. 👨‍👩‍👦‍👦 Life. 🔨 Creator."
+    home_mode = "" # post or other
 
 # Navigation bar
 [menu]
 
-[[menu.main]]
-identifier = "Projects"
-pre = "🦾"
-url = "/projects" 
-weight = 3 
+  [[menu.main]]
+  name = "😆 About"
+  url = "/about" 
+  weight = 1
+  
+  [[menu.main]]
+  name = "📝 Blog"
+  url = "/blog" 
+  weight = 2
 
-[[menu.main]]
-identifier = "Talks"
-pre = "👨🏻‍🏫"
-url = "/talks" 
-weight = 5 
+  [[menu.main]]
+  name = "⌚ Status"
+  url = "/status" 
+  weight = 3
 
-[[menu.main]]
-identifier = "About"
-pre = "😆"
-url = "/about" 
-weight = 1
+  [[menu.main]]
+  name = "🦾 Projects"
+  url = "/projects" 
+  weight = 4 
+
+  [[menu.main]]
+  name = "👨🏻‍🏫 Talks"
+  url = "/talks" 
+  weight = 5 
+
+[Params.gravatar]
+    email = "mjtpena@outlook.com"
 
 [Params.Social]
   twitter                     = "mjtpena"
@@ -137,59 +90,3 @@ weight = 1
 
 [outputs]
   home                        = ["HTML", "RSS", "MANIFEST"]
-
-enableRobotsTXT               = true
-
-# Pagination
-Paginate                      = 3
- 
-
-# Code
-[markup]
-  # defaultMarkdownHandler    = "blackfriday"
-  [markup.goldmark]
-    [markup.goldmark.extensions]
-      definitionList          = true
-      footnote                = true
-      linkify                 = true
-      strikethrough           = true
-      table                   = true
-      taskList                = true
-      typographer             = true
-    [markup.goldmark.parser]
-      attribute               = true
-      autoHeadingID           = true
-      autoHeadingIDType       = "github"
-    [markup.goldmark.renderer]
-      hardWraps               = false
-      unsafe                  = true
-      xhtml                   = false
-  [markup.blackFriday]
-    angledQuotes              = false
-    footnoteAnchorPrefix      = ""
-    footnoteReturnLinkContents= ""
-    fractions                 = true
-    hrefTargetBlank           = false
-    latexDashes               = true
-    nofollowLinks             = false
-    noreferrerLinks           = false
-    plainIDAnchors            = true
-    skipHTML                  = false
-    smartDashes               = true
-    smartypants               = true
-    smartypantsQuotesNBSP     = false
-    taskLists                 = true
-  [markup.highlight]
-    codeFences                = true
-    guessSyntax               = false
-    hl_Lines                  = ""
-    lineNoStart               = 1
-    lineNos                   = false
-    lineNumbersInTable        = false
-    noClasses                 = false
-    style                     = "dracula"
-    tabWidth                  = 4
-  [markup.tableOfContents]
-    endLevel                  = 6
-    ordered                   = false
-    startLevel                = 2

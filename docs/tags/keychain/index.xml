@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Keychain on Michael John Peña ⚡️</title>
+    <title>Keychain on 👨🏻‍💻 Michael John Peña ⚡️</title>
     <link>https://www.michaeljohnpena.com/tags/keychain/</link>
-    <description>Recent content in Keychain on Michael John Peña ⚡️</description>
+    <description>Recent content in Keychain on 👨🏻‍💻 Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
@@ -15,7 +15,8 @@
       <pubDate>Sun, 14 Mar 2021 23:27:46 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/blog/how-to-disable-auto-locking-of-macos-keychains/</guid>
-      <description>Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle.</description>
+      <description>Signing an iOS app for release is one of the trivial things most mobile developers face. A lot of CLIs and SAAS emerged as part of this struggle. However, not all companies have adopted to those tools and they still prefer to build their apps in their on-prem data servers. They use something like TeamCity or Azure DevOps Server.
+We streamlined the configuration of our Mac Build agents to a repository where we can update our Provisioning Profiles, Keychains, etc.</description>
     </item>
     
   </channel>

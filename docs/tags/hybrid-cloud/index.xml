@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hybrid Cloud on Michael John Peña ⚡️</title>
+    <title>Hybrid Cloud on 👨🏻‍💻 Michael John Peña ⚡️</title>
     <link>https://www.michaeljohnpena.com/tags/hybrid-cloud/</link>
-    <description>Recent content in Hybrid Cloud on Michael John Peña ⚡️</description>
+    <description>Recent content in Hybrid Cloud on 👨🏻‍💻 Michael John Peña ⚡️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>id</language>
     <managingEditor>michael@datachain.consulting (Michael John Peña)</managingEditor>
@@ -15,7 +15,8 @@
       <pubDate>Sat, 28 Aug 2021 02:19:19 +0000</pubDate>
       <author>michael@datachain.consulting (Michael John Peña)</author>
       <guid>https://www.michaeljohnpena.com/blog/hybrid-cloud/</guid>
-      <description>Hybrid cloud is the trend right now I see in a lot of companies and enterprises. The term hybrid has grown too in the last couple of years.</description>
+      <description>Hybrid cloud is the trend right now I see in a lot of companies and enterprises. The term hybrid has grown too in the last couple of years. It used to be just the connectivity between an on-premises data center to public clouds like AWS and Azure. This time, hybrid now also includes multi-cloud and edge computing. It&amp;rsquo;s about borderless connectivity across different topologies or deployment models happening around.
+Why hybrid cloud?</description>
     </item>
     
   </channel>
