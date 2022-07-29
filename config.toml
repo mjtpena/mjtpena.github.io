@@ -1,6 +1,5 @@
 baseURL = "https://www.michaeljohnpena.com"
-languageCode                  = "id"
-title                         = "👨🏻‍💻 Michael John Peña ⚡️"
+title                         = "👨🏻‍💻 MJP ⚡️"
 theme                         = "KeepIt"
 publishDir                    = "docs"
 paginate                      = 12
@@ -19,8 +18,8 @@ googleAnalytics               = "UA-186803288-1"
 
 [Params]
     since = 2020
-    author = "mjtpena"              
-    subtitle = "🚀 Technologist. 👨‍👩‍👦‍👦 Life. 🔨 Creator."
+    author = "Michael John Peña"              
+    subtitle = "👨‍👩‍👦‍👦 Life. 🚀 Technology. 🧠 Mind."
     home_mode = "" # post or other
 
 # Navigation bar
