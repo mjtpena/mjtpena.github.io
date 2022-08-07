@@ -14,6 +14,8 @@ Here are some of the projects I'm actively working on:
 
 - [MetaDhana](https://www.metadhana.io/) and [Rooster Wars](https://www.roosterwars.io/)
 - [Datachain](https://datachain.consulting/): digital assets & smart buildings
+- Building our house [MJA Home](https://www.facebook.com/mjahome2023). 
+- Lowering my bad cholesterol by physical activities [Strava Profile](https://www.strava.com/athletes/22813178). 
 
 ## Topics
 
