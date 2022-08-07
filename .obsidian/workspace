@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "dd8e9aaad77de6ab",
+        "id": "7a3c3577676575ae",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "content/_index.md",
+            "file": "content/drafts/Azure Messaging Services.md",
             "mode": "source",
             "source": false
           }
@@ -77,7 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/_index.md",
+                "file": "content/drafts/Azure Messaging Services.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,7 +94,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "content/_index.md",
+                "file": "content/drafts/Azure Messaging Services.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -117,7 +117,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/_index.md"
+                "file": "content/drafts/Azure Messaging Services.md"
               }
             }
           }
@@ -128,14 +128,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "585b8be9586f3612",
+  "active": "7a3c3577676575ae",
   "lastOpenFiles": [
-    "Productivity/Second Brain.md",
-    "Neurodiversity/Autism.md",
-    "Microsoft Azure/Azure Event Hub.md",
-    "Microsoft Azure/Azure Event Grid.md",
-    "Money/Savings.md",
-    "tags/money.md",
-    "_index.md"
+    "content/drafts/2022-08-14-Andriel-Newsletter19.md",
+    "content/drafts/Azure Messaging Services.md",
+    "content/posts/2021/2021-01-04-my-only-goal-for-2021-digital-intentionality.md",
+    "content/templates/Andriel's Newsletter.md",
+    "content/news/2022-07-31-Andriel-Newsletter18.md",
+    "content/notes/Blockchain/Blockchain.md",
+    "content/posts/2022/What is a Second Brain?.md",
+    "content/notes/Productivity/Second Brain.md",
+    "content/posts/2020/2020-08-26-writing-again.md",
+    "content/_index.md"
   ]
 }
