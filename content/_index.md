@@ -5,6 +5,7 @@ title: Michael John Peña
 👋🏼 Hi there! Thank you for visiting my ever growing garden of thoughts, notes, reflections, and opinions. This is an avenue in the internet that I can officially call my own.
 
 **About Me**
+
 ![[icon.png|300]]
 
 > A father, husband, technologist, speaker, programmer, developer, project's success manager, writer, runner, cyclist, book reader, audiobooks fan, movie enthusiast, cook, motivator, mentor, startup hustler, part-time investor, newbie financial analyst, stoic, amateur economist, teacher, forever student, explorer, and a free thinker - **often not in that order**.
