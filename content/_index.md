@@ -4,12 +4,12 @@ title: Michael John Peña
 
 👋🏼 Hi there! Thank you for visiting my ever growing garden of thoughts, notes, reflections, and opinions. This is an avenue in the internet that I can officially call my own.
 
-## About Me
+**About Me**
 ![[icon.png|300]]
 
 > A father, husband, technologist, speaker, programmer, developer, project's success manager, writer, runner, cyclist, book reader, audiobooks fan, movie enthusiast, cook, motivator, mentor, startup hustler, part-time investor, newbie financial analyst, stoic, amateur economist, teacher, forever student, explorer, and a free thinker - **often not in that order**.
 
-## Projects
+**Projects**
 
 Here are some of the projects I'm actively working on:
 
@@ -18,7 +18,7 @@ Here are some of the projects I'm actively working on:
 - Building our house [MJA Home](https://www.facebook.com/mjahome2023).
 - Lowering my bad cholesterol by physical activities [Strava Profile](https://www.strava.com/athletes/22813178).
 
-## Topics
+**Topics**
 
 Lately, these are the topics that interests me:
 
@@ -27,7 +27,7 @@ Lately, these are the topics that interests me:
 3. [Productivity](/tags/productivity) topics including Second Brain, Motivation, and Habits.
 4. Neurodiversity subjects such as [Autism](/tags/autism)
 
-## Contact
+**Contact**
 
 The best way to contact me is through [LinkedIn](https://www.linkedin.com/in/michaeljohnpena/). I'm open on the following:
 
