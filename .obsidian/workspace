@@ -1,0 +1,133 @@
+{
+  "main": {
+    "id": "665170f6590186b8",
+    "type": "split",
+    "children": [
+      {
+        "id": "dd8e9aaad77de6ab",
+        "type": "leaf",
+        "state": {
+          "type": "empty",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5015576d8bd69cf0",
+    "type": "split",
+    "children": [
+      {
+        "id": "ef8d6b1773f447c4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "585b8be9586f3612",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "6c6a7212c1ea491c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "00f530d9256cb7fc",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "59a2f243d59613eb",
+    "type": "split",
+    "children": [
+      {
+        "id": "d87af2d738c641fa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cf56171319da7a6e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "65d4b4ced439dadb",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "fef3fa318411c29f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "2a7fa7b330ec0fb0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "dd8e9aaad77de6ab",
+  "lastOpenFiles": [
+    "Productivity/Second Brain.md",
+    "Neurodiversity/Autism.md",
+    "Microsoft Azure/Azure Event Hub.md",
+    "Microsoft Azure/Azure Event Grid.md",
+    "Money/Savings.md",
+    "tags/money.md",
+    "_index.md"
+  ]
+}

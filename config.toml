@@ -1,91 +1,34 @@
-baseURL = "https://www.michaeljohnpena.com"
-title                         = "👨🏻‍💻 MJP ⚡️"
-theme                         = "KeepIt"
-publishDir                    = "docs"
-paginate                      = 12
-enableEmoji                   = true
-enableRobotsTXT               = true
-googleAnalytics               = "UA-186803288-1"
+baseURL = "https://michaeljohnpena.com"
+languageCode = "en-us"
+googleAnalytics = "UA-186803288-1"
+relativeURLs = false
+disablePathToLower = true
+ignoreFiles = [
+    "/content/templates/*",
+    "/content/private/*",
+]
+summaryLength = 20
+paginate = 10
+enableGitInfo = true
 
-[Author] # Used in authorbox
-  name                        = "Michael John Peña"
-  bio                         = "Michael is an experienced technologist based in Sydney, Australia, a Microsoft MVP since 2015 with over 12 years of working experience ranging from Mobile, Cloud, Web and DevOps. He currently owns Datachain Consulting, a company that focuses on democratizing AI and Blockchain technologies. He is also a technical advisor to some technology startups. His roles allow him to explore the cutting edge technologies of Artificial Intelligence, Blockchain, IoT, Edge Computing, and the Cloud."
-  customImage                 = "mjtpena.jpg"
-  job                         = "Software Engineer"
-  gender                      = "male"
-  email                       = "michael@datachain.consulting"
-
-
-[Params]
-    since = 2020
-    author = "Michael John Peña"              
-    subtitle = "👨‍👩‍👦‍👦 Life. 🚀 Technology. 🧠 Mind."
-    home_mode = "" # post or other
-
-# Navigation bar
-[menu]
-
-  [[menu.main]]
-  name = "😆 About"
-  url = "/about" 
-  weight = 1
-  
-  [[menu.main]]
-  name = "📝 Blog"
-  url = "/blog" 
-  weight = 2
-
-  [[menu.main]]
-  name = "⌚ Status"
-  url = "/status" 
-  weight = 3
-
-  [[menu.main]]
-  name = "🦾 Projects"
-  url = "/projects" 
-  weight = 4 
-
-  [[menu.main]]
-  name = "👨🏻‍🏫 Talks"
-  url = "/talks" 
-  weight = 5 
-
-[Params.gravatar]
-    email = "mjtpena@outlook.com"
-
-[Params.Social]
-  twitter                     = "mjtpena"
-  linkedin                    = "michaeljohnpena"
-  github                      = "mjtpena"
-  medium                      = "mjtpena"
-
-[Params.Share] # Entry Share block
-  facebook                    = true
-  twitter                     = true
-  reddit                      = true
-  linkedin                    = true
-  pinterest                   = true
-
-# Web App Manifest settings
-# https://www.w3.org/TR/appmanifest/
-# https://developers.google.com/web/fundamentals/web-app-manifest/
-[Params.Manifest]
-  name                        = "Michael John Peña"
-  shortName                   = "mjtpena"
-  display                     = "standalone"
-  startUrl                    = "/?utm_source=homescreen"
-  backgroundColor             = "#8dc153"
-  themeColor                  = "#1da1f2"
-  description                 = "Personal Site By Michael John Peña"
-  orientation                 = "portrait"
-  scope                       = "/"
-
-[outputFormats]
-  [outputFormats.MANIFEST]
-    mediaType                 = "application/json"
-    baseName                  = "manifest"
-    isPlainText               = true
-    notAlternative            = true
-
-[outputs]
-  home                        = ["HTML", "RSS", "MANIFEST"]
+[markup]
+    [markup.tableOfContents]
+        endLevel = 3
+        ordered = true
+        startLevel = 2
+    [markup.highlight]
+        noClasses = false
+        anchorLineNos = false
+        codeFences = true
+        guessSyntax = true
+        hl_Lines = ""
+        lineAnchors = ""
+        lineNoStart = 1
+        lineNos = true
+        lineNumbersInTable = true
+        style = "dracula"
+    [frontmatter]
+        lastmod = ["lastmod", ":git", "date", "publishDate"]
+        publishDate = ["publishDate", "date"]
+    [markup.goldmark.renderer]
+        unsafe = true
