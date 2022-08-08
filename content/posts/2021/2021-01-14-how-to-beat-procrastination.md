@@ -2,7 +2,7 @@
 title: How to beat procrastination
 author: MJ Peña
 draft: false
-date: 2021-01-14T00:47:30+00:00
+date: 2021-01-14
 url: /blog/how-to-beat-procrastination/
 images: 
      - /2021/01/jumpstory-download20210113-170737-940x510.jpg

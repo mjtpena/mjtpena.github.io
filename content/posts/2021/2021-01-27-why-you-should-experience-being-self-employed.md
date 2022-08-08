@@ -2,7 +2,7 @@
 title: Why you should experience being self-employed
 author: MJ Peña
 draft: false
-date: 2021-01-27T21:18:51+00:00
+date: 2021-01-27
 url: /blog/why-you-should-experience-being-self-employed/
 images: 
      - /2021/01/jumpstory-download20210127-211611-940x510.jpg

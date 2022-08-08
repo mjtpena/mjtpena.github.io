@@ -2,7 +2,7 @@
 title: SSH Connect to Linux Server from a Mac using SOCKS5 Proxy
 author: MJ Peña
 draft: false
-date: 2021-06-24T16:20:29+00:00
+date: 2021-06-24
 url: /blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/
 tags:
   - Technology

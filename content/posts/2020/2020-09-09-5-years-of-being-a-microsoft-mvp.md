@@ -2,7 +2,7 @@
 title: 5 Years of being a Microsoft MVP!
 author: MJ Peña
 draft: false
-date: 2020-09-09T07:12:03+00:00
+date: 2020-09-09
 url: /blog/5-years-of-being-a-microsoft-mvp/
 images: 
      - /2020/12/20200826_005156926_iOS-940x510.jpg

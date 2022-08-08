@@ -61,7 +61,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 444.5
   },
   "right": {
     "id": "59a2f243d59613eb",
@@ -132,13 +132,13 @@
   "lastOpenFiles": [
     "content/posts/2021/2021-11-08-run-for-autism-2021.md",
     "content/posts/2022/My Tools List.md",
-    "content/drafts/Azure Messaging Services.md",
-    "content/drafts/2022-08-14-Andriel-Newsletter19.md",
-    "content/posts/2021/2021-01-04-my-only-goal-for-2021-digital-intentionality.md",
-    "content/templates/Andriel's Newsletter.md",
-    "content/news/2022-07-31-Andriel-Newsletter18.md",
-    "content/notes/Blockchain/Blockchain.md",
-    "content/posts/2022/What is a Second Brain?.md",
-    "content/notes/Productivity/Second Brain.md"
+    "content/posts/2021/2021-09-13-accountability-partner.md",
+    "content/posts/2021/2021-09-04-planning-your-week-ahead.md",
+    "content/posts/2021/2021-08-28-hybrid-cloud.md",
+    "content/posts/2021/2021-08-15-blockchain-wsl2.md",
+    "content/posts/2021/2021-08-10-blockchain-tokens.md",
+    "content/posts/2021/2021-07-23-developing-macos-apps-using-net.md",
+    "content/posts/2021/2021-07-21-message-to-the-young.md",
+    "content/posts/2021/2021-07-15-getting-started-with-defi.md"
   ]
 }

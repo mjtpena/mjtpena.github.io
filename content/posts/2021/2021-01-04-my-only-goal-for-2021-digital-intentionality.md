@@ -2,7 +2,7 @@
 title: "My only goal for 2021: Digital Intentionality"
 author: MJ Peña
 draft: false
-date: 2021-01-04T23:15:38+00:00
+date: 2021-01-04
 url: /blog/my-only-goal-for-2021-digital-intentionality/
 images: 
      - /2021/01/jumpstory-download20210104-231305-940x510.jpg

@@ -2,7 +2,7 @@
 title: I’m going to start writing again!
 author: MJ Peña
 draft: false
-date: 2020-08-26T07:51:48+00:00
+date: 2020-08-26
 url: /blog/writing-again/
 images: 
   - /2020/08/mike-tinnion-3ym6i13Y9LU-unsplash-scaled.jpg

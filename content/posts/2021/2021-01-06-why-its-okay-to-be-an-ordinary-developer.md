@@ -2,7 +2,7 @@
 title: Why it’s okay to be “an ordinary” developer
 author: MJ Peña
 draft: false
-date: 2021-01-06T19:22:55+00:00
+date: 2021-01-06
 url: /blog/why-its-okay-to-be-an-ordinary-developer/
 images: 
      - /2021/01/Screen-Shot-2021-01-07-at-06.01.46-940x510.png

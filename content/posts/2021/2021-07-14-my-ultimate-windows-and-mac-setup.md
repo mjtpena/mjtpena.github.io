@@ -2,7 +2,7 @@
 title: My Ultimate Windows and Mac Setup (2021 Edition)
 author: MJ Peña
 draft: false
-date: 2021-07-13T16:20:29+00:00
+date: 2021-07-13
 url: /blog/my-ultimate-windows-and-mac-setup/
 images: 
      - /2021/07/Battle-station-2021.jpeg

@@ -2,7 +2,7 @@
 title: Synology NAS Series – Cloud Sync with Azure Storage
 author: MJ Peña
 draft: false
-date: 2020-09-28T03:55:27+00:00
+date: 2020-09-28
 url: /blog/synology-nas-series-cloud-sync-with-azure-storage/
 images: 
      - /2020/09/20200821_025202969_iOS-940x510.jpg

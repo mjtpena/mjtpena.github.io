@@ -2,7 +2,7 @@
 title: Developing MacOS Apps using .NET
 author: MJ Peña
 draft: false
-date: 2021-07-23T02:19:19Z
+date: 2021-07-23
 url: /blog/developing-macos-apps-using-net/
 images: 
      - /2021/07/maui.png

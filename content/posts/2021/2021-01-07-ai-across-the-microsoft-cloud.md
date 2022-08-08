@@ -2,7 +2,7 @@
 title: AI across the Microsoft Cloud
 author: MJ Peña
 draft: false
-date: 2021-01-07T09:07:24+00:00
+date: 2021-01-07
 url: /blog/ai-across-the-microsoft-cloud/
 images: 
      - /2021/01/Azure-AI-1-940x510.png

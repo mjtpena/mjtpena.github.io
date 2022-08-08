@@ -2,7 +2,7 @@
 title: Message to the young
 author: MJ Peña
 draft: false
-date: 2021-07-21T16:20:29+00:00
+date: 2021-07-21
 url: /blog/message-to-the-young/
 images: 
      - /2021/07/success.jpg

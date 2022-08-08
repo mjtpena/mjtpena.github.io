@@ -2,7 +2,7 @@
 title: Using WSL2 (Windows Subsystem for Linux) for Blockchain Development
 author: MJ Peña
 draft: false
-date: 2021-08-15T02:19:19Z
+date: 2021-08-15
 url: /blog/blockchain-wsl2/
 images: 
      - /2021/08/wsl.jpg

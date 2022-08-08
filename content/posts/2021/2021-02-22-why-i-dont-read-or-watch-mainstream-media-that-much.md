@@ -2,7 +2,7 @@
 title: Why I don’t read or watch mainstream media that much
 author: MJ Peña
 draft: false
-date: 2021-02-22T05:45:26+00:00
+date: 2021-02-22
 url: /blog/why-i-dont-read-or-watch-mainstream-media-that-much/
 images: 
      - /2021/02/jumpstory-download20210222-053810-940x510.jpg

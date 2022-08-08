@@ -2,7 +2,7 @@
 title: Productive this Pandemic - Accountability Partner
 author: MJ Peña
 draft: false
-date: 2021-09-13T02:19:19Z
+date: 2021-09-13
 url: /blog/accountability-partner/
 images: 
      - /2021/09/accountability-partner-banner.png

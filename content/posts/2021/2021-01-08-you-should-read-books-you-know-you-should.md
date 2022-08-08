@@ -2,7 +2,7 @@
 title: You should read books, you know you should
 author: MJ Peña
 draft: false
-date: 2021-01-08T20:47:16+00:00
+date: 2021-01-08
 url: /blog/you-should-read-books-you-know-you-should/
 images: 
      - /2021/01/jumpstory-download20210108-203724-940x510.jpg

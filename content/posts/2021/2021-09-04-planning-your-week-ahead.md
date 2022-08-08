@@ -2,7 +2,7 @@
 title: Productive this Pandemic - Planning your week ahead
 author: MJ Peña
 draft: false
-date: 2021-09-04T02:19:19Z
+date: 2021-09-04
 url: /blog/planning-your-week-ahead/
 images: 
      - /2021/09/planning-banner.png
