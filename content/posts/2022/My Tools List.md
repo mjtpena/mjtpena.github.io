@@ -1,5 +1,6 @@
 ---
 title: "My Tech List 2022"
+url: /tools
 tags: 
 	- Productivity
 	- Technology
