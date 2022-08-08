@@ -1,7 +1,7 @@
 ---
 title: "My Tech List 2022"
 draft: false
-url: /tools
+url: /tools/2022/
 tags: 
 	- Productivity
 	- Technology
