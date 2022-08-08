@@ -2,9 +2,11 @@
 title: "My Tech List 2022"
 draft: false
 url: /tools/2022/
-tags: 
-	- Productivity
-	- Technology
+tags:
+  - Productivity
+  - Technology
+  - Tools
+  - Personal
 ---
 
 Here is a list of all the relevant technology set up that I use personally at work, home, and everything in between. I grouped them on different groups according to function. Nowadays, I tend to be minimalist on what I purchase both on hardware and software, and make sure that I am very intentional with their uses and not because of vanity / impulse buying.
