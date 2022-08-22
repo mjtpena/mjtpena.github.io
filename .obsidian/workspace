@@ -7,11 +7,9 @@
         "id": "f9405cc8c62076eb",
         "type": "leaf",
         "state": {
-          "type": "markdown",
+          "type": "image",
           "state": {
-            "file": "content/posts/2022/2022-08-23-azuresql-datastudio.md",
-            "mode": "source",
-            "source": false
+            "file": "static/2022/08/Pasted image 20220823070905.png"
           }
         }
       }
@@ -77,7 +75,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/posts/2022/2022-08-23-azuresql-datastudio.md",
+                "file": "static/2022/08/Pasted image 20220823070905.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,7 +92,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "content/posts/2022/2022-08-23-azuresql-datastudio.md",
+                "file": "static/2022/08/Pasted image 20220823070905.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -117,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/posts/2022/2022-08-23-azuresql-datastudio.md"
+                "file": "static/2022/08/Pasted image 20220823070905.png"
               }
             }
           }
@@ -130,8 +128,8 @@
   },
   "active": "f9405cc8c62076eb",
   "lastOpenFiles": [
-    "content/posts/2022/2022-08-08-my-tools-list.md",
     "content/posts/2022/2022-08-23-azuresql-datastudio.md",
+    "content/posts/2022/2022-08-08-my-tools-list.md",
     "content/posts/2021/2021-11-08-run-for-autism-2021.md",
     "static/2022/08/Pasted image 20220823070905.png",
     "icon.png",
