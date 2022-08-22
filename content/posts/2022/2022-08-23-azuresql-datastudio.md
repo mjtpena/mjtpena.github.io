@@ -41,3 +41,26 @@ Complete the wizard (choose file location) and confirm.
 
 It will then download a bacpac of your Azure SQL Database!
 ![[Pasted image 20220823071806.png]]
+
+## Doing it via SQL Server Management Studio (SSMS)
+
+Connect to the Azure SQL database via SSMS.
+
+Right click on the database and select "Generate Scripts..."
+
+![[Pasted image 20220823080654.png]]
+
+Choose the objects that you want.
+![[Pasted image 20220823080908.png]]
+
+Select the scripting options. If you want to include the data, go to "Advanced"
+![[Pasted image 20220823080938.png]]
+
+On the types of data to script, choose "Schema and Data"
+![[Pasted image 20220823081003.png]]
+
+It will then create a SQL script of your database.
+
+The good thing about this approach is that you can modify the script in case you have other features that are only applicable to certain SQL type such as Ledger capabilities.
+
+This is not recommended if your database is huge and contains a lot of data. 
