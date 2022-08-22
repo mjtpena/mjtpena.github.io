@@ -1,4 +1,7 @@
 {
   "promptDelete": false,
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "static"
 }
