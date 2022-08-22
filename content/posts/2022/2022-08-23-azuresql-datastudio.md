@@ -2,7 +2,7 @@
 title: "Backup Azure SQL Database using Azure Data Studio on your Desktop"
 author: MJ Peña
 draft: false
-date: 2022-08-23
+date: 2022-08-22
 url: /blog/azuresql-datastudio/
 tags:
   - SQL Azure
