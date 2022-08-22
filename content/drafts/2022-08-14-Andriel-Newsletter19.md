@@ -1,8 +1,8 @@
 # 📰 What's New?
 - 🦷 Dental Surgery
 - 👵🏼 Grandmas in town
-- 👂 Improved receptive
-- 
+- 👂 Improved receptive skills
+- 🌳 Nature walk
 ---
 # 🏫 Therapies and Schools
 ## Therapies

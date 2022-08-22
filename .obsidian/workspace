@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "7a3c3577676575ae",
+        "id": "f9405cc8c62076eb",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "content/posts/2022/2022-08-08-my-tools-list.md",
+            "file": "content/posts/2022/2022-08-23-azuresql-datastudio.md",
             "mode": "source",
             "source": false
           }
@@ -61,7 +61,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 444.5
+    "width": 300
   },
   "right": {
     "id": "59a2f243d59613eb",
@@ -77,7 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/posts/2022/2022-08-08-my-tools-list.md",
+                "file": "content/posts/2022/2022-08-23-azuresql-datastudio.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,7 +94,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "content/posts/2022/2022-08-08-my-tools-list.md",
+                "file": "content/posts/2022/2022-08-23-azuresql-datastudio.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -117,7 +117,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/posts/2022/2022-08-08-my-tools-list.md"
+                "file": "content/posts/2022/2022-08-23-azuresql-datastudio.md"
               }
             }
           }
@@ -128,17 +128,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "7a3c3577676575ae",
+  "active": "f9405cc8c62076eb",
   "lastOpenFiles": [
-    "content/posts/2021/2021-11-08-run-for-autism-2021.md",
-    "content/posts/2022/2022-08-08-my-tools-list.md",
-    "content/posts/2021/2021-09-13-accountability-partner.md",
-    "content/posts/2021/2021-09-04-planning-your-week-ahead.md",
-    "content/posts/2021/2021-08-28-hybrid-cloud.md",
-    "content/posts/2021/2021-08-15-blockchain-wsl2.md",
-    "content/posts/2021/2021-08-10-blockchain-tokens.md",
-    "content/posts/2021/2021-07-23-developing-macos-apps-using-net.md",
-    "content/posts/2021/2021-07-21-message-to-the-young.md",
-    "content/posts/2021/2021-07-15-getting-started-with-defi.md"
+    "content/posts/2021/2021-01-04-my-only-goal-for-2021-digital-intentionality.md",
+    "content/posts/2022/2022-08-23-azuresql-datastudio.md",
+    "content/drafts/2022-08-14-Andriel-Newsletter19.md",
+    "content/posts/2022/My Tools List.md",
+    "content/posts/2021-11-08-run-for-autism-2021.md",
+    "content/templates/post.md",
+    "content/_index.md",
+    "Productivity/Second Brain.md",
+    "Neurodiversity/Autism.md",
+    "Microsoft Azure/Azure Event Hub.md"
   ]
 }
