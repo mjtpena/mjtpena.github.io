@@ -1,9 +1,0 @@
-{
-  "promptDelete": false,
-  "alwaysUpdateLinks": true,
-  "useMarkdownLinks": true,
-  "newFileLocation": "folder",
-  "newFileFolderPath": "content/notes",
-  "newLinkFormat": "absolute",
-  "attachmentFolderPath": "./"
-}
