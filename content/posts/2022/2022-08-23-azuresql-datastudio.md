@@ -14,10 +14,10 @@ tags:
 I'm trying to backup our SQL Azure database, and to my surprise, it doesn't seem to be "straight forward". Officially, you have to do it via the Azure portal (or Azure CLI), but I find the process a bit overwhelming for simple backup of "I just want the file". 
 
 If you do it via the portal, you have to go to the Database instance, and click on Export.
-![](Pasted%20image%2020220823070905.png)
+![](static/2022/08/20220823070905.png)
 
 Then fill up the destination value.
-![](Pasted%20image%2020220823071017.png)
+![](static/2022/08/20220823071017.png)
 
 Wait for the process to finish, and then download the file on that Azure storage. I personally think this is the preferred approach when the database file is very big that it doesn't make sense to download locally.
 
@@ -32,32 +32,31 @@ Good thing, there is this [SQL Server dacpac extension](https://docs.microsoft.c
 
 After installing the extension, right click on the Azure SQL Database that you want to export and select "Data-tier Application Wizard":
 
-![](Pasted%20image%2020220823071629.png)
+![](static/2022/08/20220823071629.png)
 
 Select the 4th option (Export both schema and data as .bacpac)
-![](Pasted%20image%2020220823071714.png)
+![](static/2022/08/20220823071714.png)
 
 Complete the wizard (choose file location) and confirm.
 
 It will then download a bacpac of your Azure SQL Database!
-![](Pasted%20image%2020220823071806.png)
+![](static/2022/08/20220823071806.png)
 
 ## Doing it via SQL Server Management Studio (SSMS)
 
 Connect to the Azure SQL database via SSMS.
 
 Right click on the database and select "Generate Scripts..."
-
-![](Pasted%20image%2020220823080654.png)
+![](static/2022/08/20220823080654.png)
 
 Choose the objects that you want.
-![](Pasted%20image%2020220823080908.png)
+![](static/2022/08/20220823080908.png)
 
 Select the scripting options. If you want to include the data, go to "Advanced"
-![](Pasted%20image%2020220823080938.png)
+![](static/2022/08/20220823080938.png)
 
 On the types of data to script, choose "Schema and Data"
-![](Pasted%20image%2020220823081003.png)
+![](static/2022/08/20220823081003.png)
 
 It will then create a SQL script of your database.
 

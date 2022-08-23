@@ -3,5 +3,6 @@
   "alwaysUpdateLinks": true,
   "useMarkdownLinks": true,
   "newFileLocation": "folder",
-  "newFileFolderPath": "static"
+  "newFileFolderPath": "static",
+  "newLinkFormat": "absolute"
 }
