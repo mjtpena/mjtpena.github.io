@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "2229d0e63ae1b0cf",
+        "id": "f7e2e1a9da19f1c8",
         "type": "leaf",
         "state": {
           "type": "markdown",
@@ -128,17 +128,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "2229d0e63ae1b0cf",
+  "active": "585b8be9586f3612",
   "lastOpenFiles": [
+    "content/posts/2022/attachments/20220823070905.png",
+    "content/posts/2022/2022-08-23-azuresql-datastudio.md",
     "static/icon.png",
     "icon.png",
-    "static/2022/08/20220823070905.png",
-    "content/posts/2022/2022-08-23-azuresql-datastudio.md",
-    "static/2022/08/20220823081003.png",
-    "static/2022/08/20220823080938.png",
-    "static/2022/08/20220823080908.png",
-    "static/2022/08/20220823080654.png",
-    "static/2022/08/20220823071806.png",
-    "static/2022/08/20220823071714.png"
+    "content/posts/2022/attachments/20220823081003.png",
+    "content/posts/2022/attachments/20220823080938.png",
+    "content/posts/2022/attachments/20220823080908.png",
+    "content/posts/2022/attachments/20220823080654.png",
+    "content/posts/2022/attachments/20220823071806.png",
+    "content/posts/2022/attachments/20220823071714.png"
   ]
 }
