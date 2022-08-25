@@ -6,7 +6,7 @@ url: /blog/csharp-inmemory-sqlite/
 tags:
   - CSharp
   - SQLite
-  - .NET
+  - DotNet
   - Memory
 ---
 
