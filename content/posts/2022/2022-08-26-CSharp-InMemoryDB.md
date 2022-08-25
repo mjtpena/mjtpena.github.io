@@ -2,10 +2,9 @@
 title: "In Memory SQLite database on C#"
 author: MJ Peña
 draft: false
-date: 2022-08-26
 url: /blog/csharp-inmemory-sqlite/
 tags:
-  - C#
+  - CSharp
   - SQLite
   - .NET
   - Memory
