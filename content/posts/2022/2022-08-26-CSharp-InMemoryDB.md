@@ -16,7 +16,7 @@ There are multiple ways of implemeting these:
 
 - Plain C# object / list / dictionary / hash table
 - Dependency Injection with proper lifetime (singleton/trancient/scoped)
-- Using SQLite
+- Using SQLite (preferred)
 
 ## Why use it?
 
