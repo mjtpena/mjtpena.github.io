@@ -5,9 +5,9 @@ draft: false
 date: 2022-08-26
 url: /blog/csharp-inmemory-sqlite/
 tags:
-  - C#
+  - csharp
   - SQLite
-  - .NET
+  - dotnet
   - Memory
 ---
 
