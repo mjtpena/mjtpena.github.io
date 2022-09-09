@@ -9,6 +9,7 @@ tags:
   - SQLite
   - dotnet
   - Memory
+featured_image: /2022/08/sqlite-featured.jpg
 ---
 
 If you're running a .NET application that doesn't require a database, one of the options that you can use is having `In Memory Database`. What this means is that you are using the machine's RAM to store data for your application.
@@ -92,6 +93,7 @@ The most important bits:
 ---
 
 References:
-[InMemory Database Provider - EF Core | Microsoft Docs](https://docs.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli)
-[In-memory databases - Microsoft.Data.Sqlite | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/in-memory-databases)
-[docs/Program.cs at main · dotnet/docs (github.com)](https://github.com/dotnet/docs/blob/main/samples/snippets/standard/data/sqlite/InMemorySample/Program.cs)
+
+- [InMemory Database Provider - EF Core | Microsoft Docs](https://docs.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli)
+- [In-memory databases - Microsoft.Data.Sqlite | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/in-memory-databases)
+- [docs/Program.cs at main · dotnet/docs (github.com)](https://github.com/dotnet/docs/blob/main/samples/snippets/standard/data/sqlite/InMemorySample/Program.cs)

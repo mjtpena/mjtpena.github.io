@@ -27,22 +27,10 @@ paginate = 6
     weight = 1
 
   [[menu.main]]
-    identifier = "projects"
-    name = "Projects"
-    url = "/projects/"
-    weight = 2
-
-  [[menu.main]]
     identifier = "blog"
     name = "Blog"
     url = "/posts/"
     weight = 3
-
-  [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "/about/"
-    weight = 4
 
   # Call to action button
   [params.menu.button]
@@ -56,16 +44,8 @@ paginate = 6
     author__title = "👋🏼 I'm MJP. Nice to meet you!"
     author__bio = "A father, husband, technologist, speaker, programmer, developer, project’s success manager, writer, runner, cyclist, book reader, audiobooks fan, movie enthusiast, cook, motivator, mentor, startup hustler, part-time investor, newbie financial analyst, stoic, amateur economist, teacher, forever student, explorer, and a free thinker - often not in that order."
     author__image = "images/mjtpena.png"
-    author__avatar = "https://via.placeholder.com/200x200"
+    author__avatar = "http://2.gravatar.com/avatar/cfc893f12b0342d6d618b28d380d3ee4"
     button__text = "What I'm working on..."
-
-
-  #-------------------------------
-  # Projects Settings
-  [params.projects]
-    enable = true
-    projects__title= "Latest <span class='text-span'>Works</span>" # Add a 'text-span' class to highlight text.
-    projects__description= "The projects I'm currently working on. This is where majority of my current mental energy is spent on."
 
   #-------------------------------
   # Blog Section
