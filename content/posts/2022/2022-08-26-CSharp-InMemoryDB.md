@@ -37,7 +37,6 @@ There are multiple ways of implementing these:
 One of the advantages of using SQLite is the ability to treat the data store just like a SQL database. You can perform simple T-SQL query statements and even use Entity Framework.
 
 ```csharp
-
 using Microsoft.Data.Sqlite;
 
 const string connectionString = "Data Source=InMemorySample;Mode=Memory;Cache=Shared";
@@ -80,7 +79,6 @@ using (var secondConnection = new SqliteConnection(connectionString))
     Console.WriteLine(value);
 }
 
-// After all the connections are closed, the database is deleted.
 masterConnection.Close();
 
 ```

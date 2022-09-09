@@ -61,12 +61,8 @@ paginate = 6
     enable = true
     contact__email = "michael@datachain.consulting" # Add your form_id
     contact__title = "<span class='text-span'>Contact</span> me" # Add a title to your form
-    contact__description = "Avenco comes with a built-in contact form." # Add a description to your form
+    contact__description = "Interests include: Speaking and writing opportunities. Startup co-founding and advising. Business ventures. Personal messages." # Add a description to your form
 
-    # NOTE
-    # Avenco comes with a built-in contact form, that you can use with Formspree service to handle up to 50 submissions per month for free. You could also easily switch to another contact form service if you want.
-
-  #-------------------------------
   # Comment Section (Utterances)
   [params.utterances]
     enable = true
@@ -77,49 +73,39 @@ paginate = 6
   [[params.social]]
     icon = "ion-logo-twitter"
     name = "Twitter"
-    link = "https://twitter.com"
+    link = "https://twitter.com/mjtpena"
 
   [[params.social]]
     icon = "ion-logo-github"
     name = "Github"
-    link = "https://github.com"
-
-  [[params.social]]
-    icon = "ion-logo-pinterest"
-    name = "Pinterest"
-    link = "https://pinterest.com"
-
-  [[params.social]]
-    icon = "ion-logo-codepen"
-    name = "Codepen"
-    link = "https://codepen.io"
-
-  [[params.social]]
-    icon = "ion-logo-vimeo"
-    name = "Vimeo"
-    link = "https://vimeo.com"
+    link = "https://github.com/mjtpena"
 
   [[params.social]]
     icon = "ion-logo-youtube"
     name = "Youtube"
-    link = "https://youtube.com"
+    link = "https://www.youtube.com/channel/UCtcfJf7N6dgigJM-t7Bb3yQ"
 
   # Example of adding a new link to the footer section:
   # [[params.social]]
   #   icon = "ion-logo-facebook"
   #   name = "Facebook"
-  #   link = "https://facebook.com"
+  #   link = "https://www.facebook.com/themichaeljohnpena"
 
   # Other icons can be found at https://ionicons.com/v4/
 
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-
-
-[markup.highlight]
-  codeFences = true
-  guessSyntax = true
-  noClasses = false
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ''
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    noHl = false
+    style = 'monokai'
+    tabWidth = 4
