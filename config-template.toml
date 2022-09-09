@@ -9,13 +9,13 @@ paginate = 6
 
 
 [params]
-  logo = "/images/logo.png"
+  logo = "" # You can add own logo. For example "/images/logo.png".
   description = "MJP - Michael John Peña Technology Consulting"
 
 
 [params.global.image]
   enable = true
-  cover__image = '/images/cover-image.png' # Add global cover image (This field adds a background to the top and bottom of the site.)
+  cover__image = 'https://via.placeholder.com/1920x600' # Add global cover image (This field adds a background to the top and bottom of the site.)
 
 #-------------------------------
 # Main Menu
@@ -27,14 +27,33 @@ paginate = 6
     weight = 1
 
   [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    url = "/projects/"
+    weight = 2
+
+  [[menu.main]]
     identifier = "blog"
     name = "Blog"
     url = "/posts/"
     weight = 3
+    hasChildren = true
+
+      [[menu.main]]
+      parent = "Pages"
+      name = "About"
+      url = "/about/"
+      weight = 1
+
+      [[menu.main]]
+      parent = "Pages"
+      name = "Elements"
+      url = "/elements/"
+      weight = 2
 
   # Call to action button
   [params.menu.button]
-    cta__button__text = "Contact me"
+    cta__button__text = "Get in touch"
 
 
   #-------------------------------
@@ -44,8 +63,16 @@ paginate = 6
     author__title = "👋🏼 I'm MJP. Nice to meet you!"
     author__bio = "A father, husband, technologist, speaker, programmer, developer, project’s success manager, writer, runner, cyclist, book reader, audiobooks fan, movie enthusiast, cook, motivator, mentor, startup hustler, part-time investor, newbie financial analyst, stoic, amateur economist, teacher, forever student, explorer, and a free thinker - often not in that order."
     author__image = "images/mjtpena.png"
-    author__avatar = "http://2.gravatar.com/avatar/cfc893f12b0342d6d618b28d380d3ee4"
+    author__avatar = "https://via.placeholder.com/200x200"
     button__text = "What I'm working on..."
+
+
+  #-------------------------------
+  # Projects Settings
+  [params.projects]
+    enable = true
+    projects__title= "Latest <span class='text-span'>Works</span>" # Add a 'text-span' class to highlight text.
+    projects__description= "The projects I'm currently working on. This is where majority of my current mental energy is spent on."
 
   #-------------------------------
   # Blog Section
@@ -59,17 +86,29 @@ paginate = 6
   # Contact Settings
   [params.contact]
     enable = true
-    contact__email = "michael@datachain.consulting" # Add your form_id
-    contact__title = "<span class='text-span'>Contact</span> me" # Add a title to your form
+    contact__email = "your@email.com" # Add your form_id
+    contact__title = "<span class='text-span'>Get</span> in touch" # Add a title to your form
     contact__description = "Avenco comes with a built-in contact form." # Add a description to your form
 
     # NOTE
     # Avenco comes with a built-in contact form, that you can use with Formspree service to handle up to 50 submissions per month for free. You could also easily switch to another contact form service if you want.
 
+
   #-------------------------------
-  # Comment Section (Utterances)
-  [params.utterances]
+  # Newsletter Settings
+  [params.mailchimp]
     enable = true
+    mailchimp__title = "<span class='text-span'>Join</span> my mailing list" # Add your title
+    mailchimp__text = "Get the best inspiration and, cool stuff about design!" # Add descriptions to the form. If you want to use more than one sentence, be sure to separate them with a comma.
+    mailchimp__identifier = "frnla.us6.list-manage.com/subscribe/post?u=6314d69a3f315af7ce3fb00a0&amp;id=3038727cc3" # Add your MailChimp form identifier. For example - frnla.us6.list-manage.com/subscribe/post?u=6314d69a3f315af7ce3fb00a0&amp;id=3038727cc3
+    mailchimp__button__text = "Subscribe" # Add your button text
+
+  #-------------------------------
+  # Comment Section (Disqus)
+  [params.disqus]
+    enable = true
+    disqusShortname = "anvodstudio-demo" # Add your shortname for Disqus Comment. For example anvodstudio-demo
+
 
   #-------------------------------
   # Footer Settings
