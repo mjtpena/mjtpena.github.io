@@ -2,14 +2,14 @@
 
 Avenco is a modern and minimal portfolio theme for Hugo. This theme was specially created to help show your work in a simple yet creative way. Also, the Avenco theme includes several basic and easily customizable sections such as Works, Testimonials, Blog, Contact and therefore will be a good choice for any freelancer, designer, or developer.
 
-* * *
+---
 
 ### Demo
 
 Check the theme in action [Live Demo](https://avenco-hugo.netlify.app/) |
 [Anvod Studio](https://themeforest.net/user/anvodstudio)
 
-* * *
+---
 
 ### Theme features
 
@@ -29,12 +29,11 @@ Check the theme in action [Live Demo](https://avenco-hugo.netlify.app/) |
 - Custom logo support
 - Supports contact form (Formspree)
 - Supports MailChimp newsletter
-- Supports Disqus comments
 - Supports Google Analytics
 - Ionicons icons
 - Free Google Fonts
 
-* * *
+---
 
 ### Deployment
 
@@ -42,7 +41,7 @@ To run the theme locally, navigate to the theme directory and run `hugo` to star
 
 I would recommend checking the [Deployment Methods](https://gohugo.io/hosting-and-deployment/) page on HUGO website.
 
-* * *
+---
 
 ### Documentation
 

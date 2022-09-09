@@ -56,10 +56,7 @@
 
 {{ partial "related-posts.html" . }}
 
-{{ if .Site.Params.disqus.disqusShortname }}
-  {{ partial "disqus-comments.html" . }}
-{{ end }}
-
+{{ partial "comments.html" . }}
 
 {{ else }}
 
