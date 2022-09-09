@@ -3,13 +3,13 @@ title: "In Memory SQLite database on C#"
 author: MJ Peña
 draft: false
 date: 2022-08-26
+image: /2022/08/sqlite-featured.png
 url: /blog/csharp-inmemory-sqlite/
 tags:
   - csharp
   - SQLite
   - dotnet
   - Memory
-featured_image: /2022/08/sqlite-featured.jpg
 ---
 
 If you're running a .NET application that doesn't require a database, one of the options that you can use is having `In Memory Database`. What this means is that you are using the machine's RAM to store data for your application.
