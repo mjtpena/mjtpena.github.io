@@ -1,14 +1,21 @@
-<hr/>
+<!-- begin footer -->
+<footer class="footer">
 
-{{if $.Site.Data.config.enableFooter}}
-<div class="page-end">
-    <div class="backlinks-container">
-        {{partial "backlinks.html" .}}
+  {{ if .Site.Params.global.image.enable }}
+    <div class="footer-cover">
+      <div class="cover-image">
+        <img class="lazy" data-src="{{.Site.Params.global.image.cover__image}}" alt="{{.Site.Params.title}}">
+      </div>
     </div>
-    <div>
-        {{partial "graph.html" .}}
-    </div>
-</div>
-{{end}}
+  {{ end }}
 
-{{partial "contact.html" .}}
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        {{ partial "social-links.html" . }}
+        <div class="copyright">{{ dateFormat "2006" now }} &copy; <a href="/">{{ .Site.Title }}</a>. All Right Reserved. Published with <a href="https://gohugo.io/">Hugo</a>.</div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
