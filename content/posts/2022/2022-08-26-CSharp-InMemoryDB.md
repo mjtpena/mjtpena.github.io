@@ -14,7 +14,7 @@ tags:
 
 If you're running a .NET application that doesn't require a database, one of the options that you can use is having `In Memory Database`. What this means is that you are using the machine's RAM to store data for your application.
 
-There are multiple ways of implemeting these:
+There are multiple ways of implementing these:
 
 - Plain C# object / list / dictionary / hash table
 - Dependency Injection with proper lifetime (singleton/trancient/scoped)
