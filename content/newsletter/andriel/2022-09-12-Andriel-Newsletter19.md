@@ -12,7 +12,7 @@ tags:
 
 - 🥅Overall improvement across various aspects
 - 🎒School readiness
-- ⭐️Levelling up
+- ⭐️Leveling up
 - 👶Looking forward to baby brother
 
 ---
