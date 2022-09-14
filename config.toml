@@ -36,7 +36,7 @@ paginate = 6
   [[menu.main]]
     parent = "Newsletter"
     name = "Andriel"
-    url = "/newsletter/andriel"
+    url = "/andriel-newsletters/"
     weight = 1
 
 
