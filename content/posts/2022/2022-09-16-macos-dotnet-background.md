@@ -2,7 +2,7 @@
 title: "Creating native MacOS background apps with .NET"
 author: MJ Peña
 draft: false
-date: 2022-09-16
+date: 2022-09-15T21:52:19+00:00
 image: /2022/09/macos-dotnet-background-featured.png
 url: /blog/macos-dotnet-background/
 tags:
