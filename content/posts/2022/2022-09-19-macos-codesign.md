@@ -2,7 +2,7 @@
 title: "Code Signing and Notarizing your MacOS Apps"
 author: MJ Peña
 draft: false
-date: 2022-09-19
+date: 2022-09-18T21:52:19+00:00
 image: /2022/09/macos-codesign-featured.png
 url: /blog/macos-codesign/
 tags:
