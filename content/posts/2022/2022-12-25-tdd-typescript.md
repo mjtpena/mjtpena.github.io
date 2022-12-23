@@ -6,7 +6,7 @@ date: 2022-12-23
 image: /2022/12/typescript-tdd.jpg
 url: /blog/typescript-tdd/
 tags:
-  - rust
+  - typescript
   - testing
 ---
 
