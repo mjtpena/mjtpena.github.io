@@ -24,7 +24,9 @@ Before we get started, you will need the following:
 
 You also need to create a resource group as part of this tutorial:
 
-`az group create --location westus --resource-group MyResourceGroup`
+```bash
+az group create --location westus --resource-group MyResourceGroup
+```
 
 ## Step 1: Create a container group
 
@@ -38,7 +40,9 @@ Replace `my-container-group` with a unique name for your container group. This c
 
 By default, the container group is not accessible from the internet. To expose it, we need to create a public IP address and attach it to the container group. Use the following command to do that:
 
-`az container create --name my-container-group --image gotenberg/gotenberg:latest --resource-group MyResourceGroup --ports 3000 --dns-name-label contoso --ip-address public`
+```bash
+az container create --name my-container-group --image gotenberg/gotenberg:latest --resource-group MyResourceGroup --ports 3000 --dns-name-label contoso --ip-address public
+```
 
 Note that it's also recommended to have a DNS label as the IP Address is not reserved.
 
