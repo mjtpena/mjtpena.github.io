@@ -351,4 +351,4 @@ In this blog post, we looked at four cache patterns: Cache-Aside, Write-Through,
 
 I hope this helps! Let me know if you have any questions.
 
-For the code above, refer to this repoL [AzureFunctions.Samples/RedisCachePatterns at main · mjtpena/AzureFunctions.Samples (github.com)](https://github.com/mjtpena/AzureFunctions.Samples/tree/main/RedisCachePatterns)
+For the code above, refer to this repository: [AzureFunctions.Samples/RedisCachePatterns at main · mjtpena/AzureFunctions.Samples (github.com)](https://github.com/mjtpena/AzureFunctions.Samples/tree/main/RedisCachePatterns)
