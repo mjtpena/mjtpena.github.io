@@ -2,7 +2,7 @@
 title: "TDD (Test-Driven Development) Overview with NextJS Example"
 author: MJ Peña
 draft: false
-date: 2023-02-07
+date: 2023-02-12
 image: /2023/02/tdd-nextjs.png
 url: /blog/tdd-nextjs/
 tags:
