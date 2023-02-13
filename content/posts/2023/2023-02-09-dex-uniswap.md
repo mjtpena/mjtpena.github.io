@@ -10,6 +10,7 @@ tags:
   - Cryptocurrency
   - Solidity
   - Finance
+  - Blockchain
 ---
 
 Decentralized exchanges (DEXs) are a new and innovative concept in the world of blockchain, offering a peer-to-peer alternative to centralized exchanges. In this blog post, we will explore how to implement a decentralized exchange like Uniswap using the Ethereum blockchain.
