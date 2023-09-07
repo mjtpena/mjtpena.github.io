@@ -1,7 +1,7 @@
 ---
-title: My Autism Journey
-date: 2022-01-25 07:50:35 +0300
-subtitle: Branding
+title: Playtime Solutions
+date: 2022-09-07 08:00:35 +0300
+subtitle: Bespoke enterprise-grade application and data modernisation services.
 image: "https://via.placeholder.com/1200x800"
 ---
 

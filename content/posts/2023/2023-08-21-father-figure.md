@@ -1,11 +1,12 @@
 ---
 title: The Importance of a Father Figure
-description: ""
+author: MJ Peña
+draft: false
 date: 2023-08-21T00:20:21.142Z
-preview: ""
-draft: true
-tags: []
-categories: []
+image: /2023/09/futuristic-father.png
+url: /blog/father-figure/
+tags:
+  - Parenting
 ---
 
 Throughout my life, "Father Figure" has been an evolving term. At nine, the loss of my biological father left me grappling with an abstract notion of fatherhood, rooted in scattered memories and recounted tales. The entrance of my stepfather later painted a more nuanced picture, emphasizing not just familial ties but also connection, understanding, and shared experiences. But his untimely recent departure left the phrase "Father Figure" more ambiguous than ever.

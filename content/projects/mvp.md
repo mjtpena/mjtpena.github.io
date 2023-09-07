@@ -1,7 +1,7 @@
 ---
-title: My Fitness Goals
-date: 2022-01-25 07:40:35 +0300
-subtitle: Photography
+title: Microsoft MVP
+date: 2023-09-07 08:00:35 +0300
+subtitle: Artificial Intelligence, Blockchain, Edge Computing - Demystified
 image: "https://via.placeholder.com/1200x800"
 ---
 

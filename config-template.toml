@@ -62,7 +62,7 @@ paginate = 6
     author__name = "Michael John Peña"
     author__title = "👋🏼 I'm MJP. Nice to meet you!"
     author__bio = "A father, husband, technologist, speaker, programmer, developer, project’s success manager, writer, runner, cyclist, book reader, audiobooks fan, movie enthusiast, cook, motivator, mentor, startup hustler, part-time investor, newbie financial analyst, stoic, amateur economist, teacher, forever student, explorer, and a free thinker - often not in that order."
-    author__image = "images/mjtpena.png"
+    author__image = "images/mjtpena.jpg"
     author__avatar = "https://via.placeholder.com/200x200"
     button__text = "What I'm working on..."
 
