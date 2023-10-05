@@ -1,0 +1,106 @@
+baseURL: "https://michaeljohnpena.com/"
+title: Michael John Peña
+paginate: 20
+theme: PaperMod
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+
+taxonomies:
+  tag: tags
+
+menu:
+  main:
+    - name: Blog
+      url: /blog/
+      weight: 1
+    - name: Projects
+      url: /Projects/
+      weight: 2
+    - name: Talks
+      url: /talks/
+      weight: 3
+    - name: Newsletter
+      url: https://pmichaillat.substack.com
+      weight: 4
+
+params:
+  description: "I am a Technologist with background in Applications Development, Data Engineering, and Cloud Platforms. I am passionate about emerging data technologies."
+  author: Michael John Peña
+  googleAnalyticsID: "G-R3817JRRRG"
+  DateFormat: "January 2006"
+  defaultTheme: light
+  hideFooter: true
+  disableThemeToggle: true
+  ShowShareButtons: false
+  ShowReadingTime: false
+  disableSpecial1stPost: true
+  disableAnchoredHeadings: true
+  ShowPostNavLinks: false
+  ShowBreadCrumbs: false
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: false
+  ShowToc: false
+  disableScrollToTop: true
+  TocOpen: true
+  ShowWordCount: false
+  UseHugoToc: true
+  comments: false
+  math: true
+  profileMode:
+    enabled: true
+    title: Michael John Peña
+    subtitle: "I am a Technologist with background in Applications Development, Data Engineering, and Cloud Platforms. I am passionate about emerging data technologies."
+    imageUrl: "/mjtpena.png"
+    imageWidth: 160
+    imageHeight: 160
+    imageTitle: Michael John Peña
+    buttons:
+      - name: Blog
+        url: /blog/
+      - name: Projects
+        url: /projects/
+      - name: Talks
+        url: /talks/
+      - name: Newsletter
+        url: https://mjtpena.substack.com
+      - name: Keywords
+        url: /tags/
+  socialIcons:
+    - name: LinkedIn
+      url: https://www.linkedin.com/in/michaeljohnpena/
+    - name: Medium
+      url: https://medium.com/@mjtpena
+    - name: Email
+      url: mailto:michael@datachain.consulting
+    - name: Office Hours
+      url: https://outlook.office.com/bookwithme/user/223added151a49e2b74d1759ac409456@playtimesolutions.com.au?anonymous&ep=plink
+    - name: YouTube
+      url: https://www.youtube.com/@mjtpena
+    - name: GitHub
+      url: https://github.com/mjtpena
+    - name: Instagram
+      url: https://www.instagram.com/mjtpena
+
+  assets:
+    disableHLJS: true
+    disableScrollBarStyle: true
+  cover:
+    hiddenInList: true
+    hiddenInSingle: true
+  label:
+    text: "Michael John Peña"
+    icon: /favicon.ico
+    iconHeight: 18
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    guessSyntax: true
+    style: autumn
+  tableOfProjects:
+    endLevel: 2
+    ordered: false
+    startLevel: 2
