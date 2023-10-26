@@ -63,7 +63,7 @@ params:
       - name: Talks
         url: /talks/
       - name: Newsletter
-        url: https://mjtpena.substack.com
+        url: https://www.linkedin.com/newsletters/7099185972998799360/
       - name: Keywords
         url: /tags/
   socialIcons:
