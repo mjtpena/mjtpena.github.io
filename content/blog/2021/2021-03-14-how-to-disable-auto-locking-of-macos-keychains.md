@@ -7,10 +7,6 @@ url: /blog/how-to-disable-auto-locking-of-macos-keychains/
 images: 
      - /2021/03/Screen-Shot-2021-03-15-at-10.08.51-am-940x232.png
 tags:
-  - iOS Development
-  - Mobile
-  - Technology
-tags:
   - Build Server
   - iOS Distribution
   - Keychain

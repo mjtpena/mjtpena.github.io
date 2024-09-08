@@ -7,9 +7,6 @@ url: /blog/why-you-should-experience-being-self-employed/
 images: 
      - /2021/01/jumpstory-download20210127-211611-940x510.jpg
 tags:
-  - Career
-  - Startups
-tags:
   - business
   - company
   - startup

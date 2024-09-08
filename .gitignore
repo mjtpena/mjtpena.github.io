@@ -8,3 +8,4 @@ assets/indices/contentIndex.json
 linkmap
 
 node_modules
+.env

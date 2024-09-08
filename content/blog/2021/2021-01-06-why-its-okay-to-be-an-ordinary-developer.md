@@ -7,10 +7,6 @@ url: /blog/why-its-okay-to-be-an-ordinary-developer/
 images: 
      - /2021/01/Screen-Shot-2021-01-07-at-06.01.46-940x510.png
 tags:
-  - Career
-  - Philosophy
-  - Technology
-tags:
   - 10xengineer
   - career
   - developer

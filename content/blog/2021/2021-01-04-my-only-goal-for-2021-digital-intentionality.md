@@ -7,9 +7,6 @@ url: /blog/my-only-goal-for-2021-digital-intentionality/
 images: 
      - /2021/01/jumpstory-download20210104-231305-940x510.jpg
 tags:
-  - Life Style
-  - Philosophy
-tags:
   - digital
   - goals
   - productivity

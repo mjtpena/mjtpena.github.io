@@ -7,10 +7,6 @@ url: /blog/the-3-types-of-blockchain-and-cryptocurrencies-people-ive-met/
 images: 
      - /2021/02/jumpstory-download20210226-032132-940x510.jpg
 tags:
-  - Community
-  - Philosophy
-  - Technology
-tags:
   - Bitcoin
   - Blockchain
   - Cryptocurrency

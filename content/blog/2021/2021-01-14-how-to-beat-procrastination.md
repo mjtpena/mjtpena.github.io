@@ -7,9 +7,6 @@ url: /blog/how-to-beat-procrastination/
 images: 
      - /2021/01/jumpstory-download20210113-170737-940x510.jpg
 tags:
-  - Digital Intentionalization
-  - Philosophy
-tags:
   - lazy
   - mental
   - procrastination

@@ -7,9 +7,6 @@ url: /blog/why-i-dont-read-or-watch-mainstream-media-that-much/
 images: 
      - /2021/02/jumpstory-download20210222-053810-940x510.jpg
 tags:
-  - Digital Intentionalization
-  - Life Style
-tags:
   - media
   - news
   - reading

@@ -1,0 +1,20 @@
+{
+  "name": "mjtpena.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm tinacms dev -c \"hugo server\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tinacms": "^2.2.2"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^1.6.2",
+    "@types/node": "^22.5.4"
+  }
+}

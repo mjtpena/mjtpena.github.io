@@ -7,8 +7,6 @@ url: /blog/ai-across-the-microsoft-cloud/
 images: 
      - /2021/01/Azure-AI-1-940x510.png
 tags:
-  - Technology
-tags:
   - artificial intelligence
   - azure
   - Data Science
