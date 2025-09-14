@@ -1,76 +1,108 @@
+body {
+    font-family: var(--font-family-ui);
+    font-size: var(--textsize);
+    line-height: var(--lineheight);
+    word-break: break-word;
+    background: var(--theme);
+    color: var(--primary);
+}
+
+code, pre, .code {
+    font-family: var(--font-family-mono);
+}
+
+/* VSCode-like styling for main content */
 .main {
     position: relative;
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
     max-width: calc(var(--main-width) + var(--gap) * 2);
     margin: auto;
     padding: var(--gap);
+    background: var(--theme);
 }
 
 .page-header h1 {
     font-size: var(--h1size);
+    font-weight: var(--semibold);
+    color: var(--primary);
 }
 
+/* VSCode-like pagination */
 .pagination {
     display: flex;
+    gap: 8px;
 }
 
 .pagination a {
     color: var(--theme);
-    font-size: 13px;
-    line-height: 36px;
-    background: var(--primary);
-    border-radius: calc(36px / 2);
-    padding: 0 16px;
+    font-size: 12px;
+    line-height: 28px;
+    background: var(--vscode-blue);
+    border: 1px solid var(--vscode-border);
+    border-radius: var(--radius);
+    padding: 0 12px;
+    transition: background-color 0.2s ease;
+}
+
+.pagination a:hover {
+    background: var(--vscode-selection);
+    color: var(--primary);
 }
 
 .pagination .next {
     margin-inline-start: auto;
 }
 
+/* VSCode-like social icons */
 .social-icons {
     padding: 12px 0;
 }
 
 .social-icons a:not(:last-of-type) {
-    margin-inline-end: 16px;
+    margin-inline-end: 12px;
 }
 
 .social-icons a svg {
-    height: 28px;
-    width: 28px;
+    height: 20px;
+    width: 20px;
 }
 
 .social-icons a:hover {
-    color: var(--darkpurple);
+    color: var(--vscode-blue);
 }
 
 code {
     direction: ltr;
-}
-
-code {
     text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }
 
+/* VSCode-like code blocks */
 div.highlight,
 pre {
     position: relative;
+    background: var(--code-bg);
+    border: 1px solid var(--vscode-border);
+    border-radius: var(--radius);
+    margin: 8px 0;
 }
 
 .copy-code {
     display: none;
     position: absolute;
-    top: 4px;
-    right: 4px;
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(78, 78, 78, 0.8);
+    top: 8px;
+    right: 8px;
+    color: var(--vscode-text);
+    background: var(--vscode-blue);
     border-radius: var(--radius);
-    padding: 0 5px;
-    font-size: 14px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-family: var(--font-family-ui);
     user-select: none;
+    border: none;
+    cursor: pointer;
 }
 
 div.highlight:hover .copy-code,

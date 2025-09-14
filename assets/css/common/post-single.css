@@ -317,10 +317,11 @@
     margin-top: 60px;
 }
 
+/* VSCode-like post tags and navigation */
 .post-tags li {
     display: inline-block;
-    margin-inline-end: 5px;
-    margin-bottom: 10px;
+    margin-inline-end: 8px;
+    margin-bottom: 8px;
 }
 
 .post-tags a,
@@ -328,41 +329,55 @@
 .paginav {
     border-radius: var(--radius);
     background: var(--code-bg);
-    border: 1px solid var(--border);
+    border: 1px solid var(--vscode-border);
 }
 
 .post-tags a {
     display: block;
-    padding-inline-start: 10px;
-    padding-inline-end: 10px;
-    color: var(--secondary);
-    font-size: 16px;
-    line-height: 32px;
-    background: var(--code-bg);
+    padding: 4px 8px;
+    color: var(--primary);
+    font-size: 11px;
+    font-family: var(--font-family-ui);
+    font-weight: 500;
+    background: var(--vscode-sidebar);
+    border: 1px solid var(--vscode-border);
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .post-tags a:hover {
-    background: var(--lightpurple);
+    background: var(--vscode-blue);
+    color: var(--theme);
 }
 
 .paginav a:hover {
-    background: var(--lightpurple);
+    background: var(--vscode-selection);
+    color: var(--primary);
 }
 
 .share-buttons {
-    margin: 13px 0;
-    padding-inline-start: var(--radius);
+    margin: 16px 0;
+    padding: 8px;
     display: flex;
     justify-content: center;
     overflow-x: auto;
+    background: var(--vscode-sidebar);
 }
 
 .share-buttons a {
-    margin-top: 10px;
+    margin: 4px;
+    padding: 8px;
+    border-radius: var(--radius);
+    background: var(--vscode-blue);
+    color: var(--theme);
+    transition: background-color 0.2s ease;
+}
+
+.share-buttons a:hover {
+    background: var(--vscode-selection);
 }
 
 .share-buttons a:not(:last-of-type) {
-    margin-inline-end: 12px;
+    margin-inline-end: 8px;
 }
 
 h1:hover .anchor,
@@ -372,40 +387,44 @@ h4:hover .anchor,
 h5:hover .anchor,
 h6:hover .anchor {
     display: inline-flex;
-    color: var(--darkpurple);
-    margin-inline-start: 10px;
-    font-weight: 700;
+    color: var(--vscode-blue);
+    margin-inline-start: 8px;
+    font-weight: 600;
     user-select: none;
-    box-shadow: 0 0px 0 var(--darkpurple);
 }
 
+/* VSCode-like pagination navigation */
 .paginav {
-    margin: 10px 0;
+    margin: 16px 0;
     display: flex;
     line-height: var(--lineheight);
-    font-size: var(--footersize);
+    font-size: 12px;
     border-radius: var(--radius);
+    background: var(--vscode-sidebar);
+    border: 1px solid var(--vscode-border);
 }
 
 .paginav a {
-    padding-inline-start: 15px;
-    padding-inline-end: 15px;
+    padding: 12px 16px;
     border-radius: var(--radius);
-    color: var(--secondary);
+    color: var(--primary);
+    font-family: var(--font-family-ui);
+    transition: background-color 0.2s ease;
 }
 
 .paginav .title {
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    font-size: small;
-    color: var(--secondary);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--vscode-text-muted);
+    margin-bottom: 4px;
 }
 
 .paginav .prev,
 .paginav .next {
     width: 50%;
 }
-
 
 .paginav .next {
     margin-inline-start: auto;

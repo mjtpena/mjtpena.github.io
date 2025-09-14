@@ -1,46 +1,71 @@
 :root {
-    --gap: 24px;
-    --content-gap: 20px;
+    --gap: 20px;
+    --content-gap: 16px;
     --nav-width: 1024px;
-    --main-width: 720px;
-    --header-height: 44px;
-    --footer-height: 70px;
-    --radius: 8px;
-    --theme: rgb(255, 255, 255);
-    --entry: rgb(255, 255, 255);
-    --primary: rgb(30, 30, 30);
-    --secondary: rgb(108, 108, 108);
-    --tertiary: rgb(214, 214, 214);
-    --gray: rgb(165, 165, 165);
-    --content: rgb(30, 30, 30);
-    --hljs-bg: rgb(28, 29, 33);
-    --code-bg: rgb(245, 245, 245);
-    --border: rgb(238, 238, 238);
-    --darkpurple: #8e7bd0;
-    --midpurple:#c0b5e5;
-    --lightpurple: #e5e1f4;
-    --semibold: 500;
-    --homesize: 16px;
-    --textsize: 18px;
-    --h1size: 25px;
-    --entrysize: 15px;
-    --headersize: 16px;
-    --footersize: 13px;
-    --lineheight: 1.45;
+    --main-width: 800px;
+    --header-height: 35px;
+    --footer-height: 60px;
+    --radius: 3px;
+    
+    /* VSCode Light Theme Colors */
+    --theme: #ffffff;
+    --entry: #ffffff;
+    --primary: #1e1e1e;
+    --secondary: #6a6a6a;
+    --tertiary: #e5e5e5;
+    --gray: #8c8c8c;
+    --content: #1e1e1e;
+    --hljs-bg: #f8f8f8;
+    --code-bg: #f6f6f6;
+    --border: #e5e5e5;
+    
+    /* VSCode Accent Colors */
+    --vscode-blue: #007acc;
+    --vscode-activity-bar: #2c2c2c;
+    --vscode-sidebar: #f3f3f3;
+    --vscode-editor: #ffffff;
+    --vscode-selection: #add6ff;
+    --vscode-text: #1e1e1e;
+    --vscode-text-muted: #6a6a6a;
+    --vscode-border: #e5e5e5;
+    
+    /* Typography */
+    --font-family-ui: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-family-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+    --semibold: 600;
+    --homesize: 14px;
+    --textsize: 14px;
+    --h1size: 22px;
+    --entrysize: 13px;
+    --headersize: 13px;
+    --footersize: 12px;
+    --lineheight: 1.4;
     --lineclamp: 8;
-    --marginleft: 26px;
+    --marginleft: 20px;
 }
 
 .dark {
-    --theme: rgb(29, 30, 32);
-    --entry: rgb(46, 46, 51);
-    --primary: rgb(218, 218, 219);
-    --secondary: rgb(155, 156, 157);
-    --tertiary: rgb(65, 66, 68);
-    --content: rgb(196, 196, 197);
-    --hljs-bg: rgb(46, 46, 51);
-    --code-bg: rgb(55, 56, 62);
-    --border: rgb(51, 51, 51);
+    /* VSCode Dark Theme Colors */
+    --theme: #1e1e1e;
+    --entry: #2d2d30;
+    --primary: #cccccc;
+    --secondary: #969696;
+    --tertiary: #464647;
+    --gray: #808080;
+    --content: #cccccc;
+    --hljs-bg: #2d2d30;
+    --code-bg: #1e1e1e;
+    --border: #464647;
+    
+    /* VSCode Dark Accent Colors */
+    --vscode-blue: #0078d4;
+    --vscode-activity-bar: #333333;
+    --vscode-sidebar: #252526;
+    --vscode-editor: #1e1e1e;
+    --vscode-selection: #264f78;
+    --vscode-text: #cccccc;
+    --vscode-text-muted: #969696;
+    --vscode-border: #464647;
 }
 
 .list {

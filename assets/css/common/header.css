@@ -1,3 +1,4 @@
+/* VSCode-like navigation header */
 .nav {
     display: flex;
     flex-wrap: wrap;
@@ -5,11 +6,19 @@
     margin-inline-start: auto;
     margin-inline-end: auto;
     line-height: var(--header-height);
-    background: var(--code-bg);
+    background: var(--vscode-activity-bar);
+    border-bottom: 1px solid var(--vscode-border);
+    font-family: var(--font-family-ui);
+}
+
+.dark .nav {
+    background: var(--vscode-activity-bar);
+    border-bottom: 1px solid var(--vscode-border);
 }
 
 .nav a {
     display: block;
+    color: var(--vscode-text);
 }
 
 .logo,
@@ -25,6 +34,9 @@
 .logo a {
     font-size: var(--headersize);
     font-weight: var(--semibold);
+    color: var(--theme);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .logo a img, .logo a svg {
@@ -32,13 +44,14 @@
     vertical-align: middle;
     pointer-events: none;
     transform: translate(0, -10%);
-    border-radius: 6px;
+    border-radius: var(--radius);
     margin-inline-end: 8px;
 }
 
 button#theme-toggle {
-    font-size: 20px;
+    font-size: 16px;
     margin: auto 4px;
+    color: var(--vscode-text);
 }
 
 body.dark #moon {
@@ -55,19 +68,31 @@ body:not(.dark) #sun {
     word-break: keep-all;
     overflow-x: auto;
     white-space: nowrap;
+    gap: var(--gap);
 }
 
 #menu li + li {
-    margin-inline-start: var(--gap);
+    margin-inline-start: 0;
 }
 
 #menu a {
     font-size: var(--headersize);
     font-weight: 400;
+    color: var(--vscode-text-muted);
+    padding: 0 8px;
+    border-radius: var(--radius);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#menu a:hover {
+    background: var(--vscode-selection);
+    color: var(--theme);
 }
 
 #menu .active {
-    border-bottom: 2px solid var(--darkpurple);
+    background: var(--vscode-blue);
+    color: var(--theme);
+    border-bottom: none;
 }
 
 .lang-switch li,
@@ -84,8 +109,9 @@ body:not(.dark) #sun {
 
 .lang-switch a {
     margin: auto 3px;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 500;
+    color: var(--vscode-text-muted);
 }
 
 .logo-switches {
