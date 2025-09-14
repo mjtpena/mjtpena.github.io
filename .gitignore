@@ -9,3 +9,8 @@ linkmap
 
 node_modules
 .env
+
+# Temporary files
+*.tmp
+*.temp
+*.deb
