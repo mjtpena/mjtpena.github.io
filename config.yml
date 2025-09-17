@@ -29,7 +29,7 @@ params:
   author: Michael John Peña
   googleAnalyticsID: "G-R3817JRRRG"
   DateFormat: "January 2006"
-  defaultTheme: light
+  defaultTheme: dark
   hideFooter: true
   disableThemeToggle: true
   ShowShareButtons: false
