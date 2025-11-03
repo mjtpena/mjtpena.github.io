@@ -1,0 +1,528 @@
+/* ========================================
+   UI/UX ENHANCEMENTS
+   Custom styling to improve visual design
+   ======================================== */
+
+/* ===== TYPOGRAPHY IMPROVEMENTS ===== */
+
+/* Better font stack with system fonts */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improved heading hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* Better code font */
+code, pre {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+/* ===== ENHANCED POST CARDS ===== */
+
+.post-entry {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.post-entry:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.dark .post-entry:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Better spacing for post entry headers */
+.entry-header h2 {
+    font-size: 22px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Subtle divider between posts */
+.post-entry + .post-entry {
+    margin-top: 24px;
+}
+
+/* ===== IMPROVED READING EXPERIENCE ===== */
+
+/* Wider content for better readability */
+:root {
+    --main-width: 800px;
+    --reading-width: 680px;
+}
+
+.post-content {
+    max-width: var(--reading-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Better paragraph spacing */
+.post-content p {
+    margin-bottom: 1.5em;
+    line-height: 1.7;
+}
+
+/* Improved list styling */
+.post-content ul, 
+.post-content ol {
+    margin: 1.5em 0;
+    padding-left: 1.5em;
+}
+
+.post-content li {
+    margin-bottom: 0.5em;
+    line-height: 1.7;
+}
+
+/* Better blockquote design */
+.post-content blockquote {
+    border-left: 4px solid var(--darkpurple);
+    padding: 1em 1.5em;
+    margin: 2em 0;
+    background: var(--code-bg);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+
+.post-content blockquote p {
+    margin: 0;
+}
+
+/* ===== CODE BLOCKS ENHANCEMENT ===== */
+
+/* Better code block styling */
+.post-content pre {
+    border-radius: 12px;
+    padding: 1.5em;
+    overflow-x: auto;
+    margin: 2em 0;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dark .post-content pre {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Inline code improvement */
+.post-content code {
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+/* Copy code button enhancement */
+.copy-code {
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.copy-code:hover {
+    background: rgba(78, 78, 78, 1);
+}
+
+div.highlight:hover .copy-code,
+pre:hover .copy-code {
+    opacity: 1;
+}
+
+/* ===== IMAGES ENHANCEMENT ===== */
+
+/* Better image display */
+.post-content img {
+    border-radius: 12px;
+    margin: 2em auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dark .post-content img {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Featured image enhancement */
+.post-cover img {
+    border-radius: 16px;
+    margin: 2em 0;
+}
+
+/* ===== TABLE OF CONTENTS STYLING ===== */
+
+.toc {
+    background: var(--code-bg);
+    border-radius: 12px;
+    padding: 1.5em;
+    margin: 2em 0;
+    border: 2px solid var(--border);
+}
+
+.toc summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1em;
+    padding: 0.5em 0;
+}
+
+.toc ul {
+    margin-top: 1em;
+}
+
+.toc li {
+    margin: 0.5em 0;
+}
+
+.toc a {
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.toc a:hover {
+    transform: translateX(4px);
+    color: var(--darkpurple);
+}
+
+/* ===== HEADER IMPROVEMENTS ===== */
+
+.nav {
+    backdrop-filter: blur(10px);
+    background: rgba(245, 245, 245, 0.9);
+    border-bottom: 1px solid var(--border);
+}
+
+.dark .nav {
+    background: rgba(46, 46, 51, 0.9);
+}
+
+/* Better menu hover effects */
+#menu a {
+    transition: all 0.2s;
+    position: relative;
+}
+
+#menu a:hover {
+    color: var(--darkpurple);
+}
+
+#menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--darkpurple);
+    transition: width 0.3s;
+}
+
+#menu a:hover::after {
+    width: 100%;
+}
+
+/* Theme toggle button enhancement */
+button#theme-toggle {
+    transition: all 0.3s;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+button#theme-toggle:hover {
+    background: var(--border);
+    transform: rotate(180deg);
+}
+
+/* ===== TAG & CATEGORY PILLS ===== */
+
+.post-tags li {
+    display: inline-block;
+}
+
+.post-tags a {
+    background: var(--code-bg);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 2px solid var(--border);
+    display: inline-block;
+}
+
+.post-tags a:hover {
+    background: var(--darkpurple);
+    color: white;
+    border-color: var(--darkpurple);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(142, 123, 208, 0.3);
+}
+
+/* ===== SOCIAL SHARE BUTTONS ===== */
+
+.share-buttons {
+    margin: 3em 0;
+    padding: 2em 0;
+    border-top: 2px solid var(--border);
+    border-bottom: 2px solid var(--border);
+}
+
+.share-buttons a {
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--code-bg);
+    margin: 4px;
+}
+
+.share-buttons a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== POST NAVIGATION ENHANCEMENT ===== */
+
+.post-footer {
+    margin-top: 4em;
+}
+
+.paginav {
+    margin: 3em 0;
+    display: flex;
+    gap: 1em;
+}
+
+.paginav a {
+    flex: 1;
+    padding: 1.5em;
+    background: var(--entry);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+.paginav a:hover {
+    border-color: var(--darkpurple);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== SEARCH PAGE ENHANCEMENT ===== */
+
+#searchInput {
+    width: 100%;
+    padding: 1em 1.5em;
+    font-size: 18px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: var(--entry);
+    color: var(--primary);
+    transition: all 0.3s;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--darkpurple);
+    box-shadow: 0 0 0 4px rgba(142, 123, 208, 0.1);
+}
+
+#searchResults li {
+    padding: 1.5em;
+    margin: 1em 0;
+    background: var(--entry);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+#searchResults li:hover {
+    border-color: var(--midpurple);
+    transform: translateX(4px);
+}
+
+/* ===== FOOTER ENHANCEMENT ===== */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 2em 0;
+    margin-top: 4em;
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+
+/* Better focus states */
+a:focus,
+button:focus,
+input:focus {
+    outline: 2px solid var(--darkpurple);
+    outline-offset: 2px;
+}
+
+/* Skip to content link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--darkpurple);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ===== PROFILE MODE ENHANCEMENT ===== */
+
+.profile img {
+    border-radius: 50%;
+    border: 4px solid var(--border);
+    transition: all 0.3s;
+}
+
+.profile img:hover {
+    transform: scale(1.05);
+    border-color: var(--darkpurple);
+}
+
+.profile .profile_inner h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.profile .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.profile .buttons a {
+    padding: 12px 24px;
+    border-radius: 8px;
+    background: var(--entry);
+    border: 2px solid var(--border);
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.profile .buttons a:hover {
+    background: var(--darkpurple);
+    color: white;
+    border-color: var(--darkpurple);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(142, 123, 208, 0.3);
+}
+
+/* ===== RESPONSIVE IMPROVEMENTS ===== */
+
+@media (max-width: 768px) {
+    :root {
+        --main-width: 100%;
+        --reading-width: 100%;
+    }
+    
+    .post-entry:hover {
+        transform: none;
+    }
+    
+    .paginav {
+        flex-direction: column;
+    }
+    
+    .profile .buttons {
+        flex-direction: column;
+    }
+    
+    .profile .buttons a {
+        width: 100%;
+    }
+}
+
+/* ===== ANIMATION UTILITIES ===== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post-entry,
+.post-content > * {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* ===== SMOOTH SCROLLING ===== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Scroll margin for anchored headings */
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
+    scroll-margin-top: 80px;
+}
+
+/* ===== SELECTION HIGHLIGHT ===== */
+
+::selection {
+    background: var(--midpurple);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--midpurple);
+    color: white;
+}
+
+/* ===== LOADING STATE ===== */
+
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+    .nav,
+    .post-footer,
+    .share-buttons,
+    button#theme-toggle {
+        display: none;
+    }
+    
+    .post-content {
+        max-width: 100%;
+    }
+    
+    .post-content a {
+        color: #000;
+        text-decoration: underline;
+    }
+}

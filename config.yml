@@ -6,8 +6,15 @@ theme: PaperMod
 enableInlineShortcodes: true
 enableRobotsTXT: true
 
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
 taxonomies:
   tag: tags
+  category: categories
 
 menu:
   main:
@@ -21,26 +28,29 @@ menu:
       url: /talks/
       weight: 3
     - name: Newsletter
-      url: https://pmichaillat.substack.com
+      url: https://www.linkedin.com/newsletters/7099185972998799360/
       weight: 4
+    - name: Search
+      url: /search/
+      weight: 5
 
 params:
   description: "I am a Technologist with background in Applications Development, Data Engineering, and Cloud Platforms. I am passionate about emerging data technologies."
   author: Michael John Peña
   googleAnalyticsID: "G-R3817JRRRG"
   DateFormat: "January 2006"
-  defaultTheme: light
+  defaultTheme: auto
   hideFooter: true
-  disableThemeToggle: true
-  ShowShareButtons: false
-  ShowReadingTime: false
+  disableThemeToggle: false
+  ShowShareButtons: true
+  ShowReadingTime: true
   disableSpecial1stPost: true
   disableAnchoredHeadings: true
-  ShowPostNavLinks: false
+  ShowPostNavLinks: true
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
-  ShowRssButtonInSectionTermList: false
-  ShowToc: false
+  ShowRssButtonInSectionTermList: true
+  ShowToc: true
   disableScrollToTop: true
   TocOpen: true
   ShowWordCount: false
@@ -86,12 +96,18 @@ params:
     disableHLJS: true
     disableScrollBarStyle: true
   cover:
-    hiddenInList: true
-    hiddenInSingle: true
+    hiddenInList: false
+    hiddenInSingle: false
   label:
     text: "Michael John Peña"
     icon: /favicon.ico
     iconHeight: 18
+  
+  # SEO & Social sharing
+  images: ["/mjtpena.png"]
+  
+  # Enable social share buttons
+  ShareButtons: ["linkedin", "twitter", "facebook", "reddit", "whatsapp", "email"]
 
 markup:
   goldmark:
