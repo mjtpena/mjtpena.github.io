@@ -1,9 +1,9 @@
 /* ========================================
-   MICROSOFT FLUENT DESIGN UI/UX
-   Modern, clean design with Fluent principles
+   MICROSOFT FABRIC DESIGN SYSTEM
+   Clean, modern with signature green accents
    ======================================== */
 
-/* ===== TYPOGRAPHY - FLUENT STYLE ===== */
+/* ===== TYPOGRAPHY - FABRIC STYLE ===== */
 
 /* Segoe UI font family - Microsoft's design language */
 body {
@@ -13,11 +13,26 @@ body {
     font-weight: 400;
 }
 
-/* Fluent heading hierarchy */
+/* Fabric heading hierarchy with green accent on hover */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--primary);
+}
+
+h1 {
+    border-left: none;
+    padding-left: 0;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+h3 {
+    font-size: 20px;
 }
 
 /* Code font - Cascadia Code (Microsoft) */
@@ -25,105 +40,133 @@ code, pre {
     font-family: var(--font-family-monospace);
 }
 
-/* ===== FLUENT CARDS & SURFACES ===== */
+/* ===== FABRIC CARDS & SURFACES - MINIMAL STYLE ===== */
 
 .post-entry {
-    transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
-    box-shadow: var(--shadow-2);
-    border-radius: var(--radius);
+    transition: all 0.15s ease;
+    box-shadow: none;
+    border-radius: 2px;
     border: 1px solid var(--border);
     background: var(--entry);
+    padding: 32px 24px;
 }
 
 .post-entry:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-8);
-    border-color: var(--fluent-blue);
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-color: var(--neutral-lightest);
 }
 
 .post-entry:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-4);
+    transform: none;
 }
 
-/* Fluent card spacing */
+/* Fabric card spacing - clean and spacious */
 .entry-header h2 {
-    font-size: 20px;
-    line-height: 1.4;
-    margin-bottom: 8px;
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 12px;
     font-weight: 600;
     color: var(--primary);
+    margin-top: 8px;
 }
 
 .post-entry + .post-entry {
-    margin-top: 16px;
+    margin-top: 24px;
 }
 
-/* ===== FLUENT BUTTONS & INTERACTIVE ELEMENTS ===== */
+/* Post meta styling */
+.entry-header .entry-hint,
+.post-meta {
+    font-size: 14px;
+    color: var(--secondary);
+    margin-top: 12px;
+}
 
-/* Primary Fluent button style */
+/* Post summary/excerpt */
+.entry-content {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin-top: 12px;
+}
+
+/* ===== FABRIC BUTTONS - CLEAN & SIMPLE ===== */
+
+/* Primary Fabric button with green */
 .profile .buttons a,
 .pagination a {
-    background: var(--fluent-blue);
+    background: var(--fabric-green);
     color: white;
     border: none;
-    border-radius: var(--radius);
-    padding: 10px 20px;
+    border-radius: 2px;
+    padding: 12px 24px;
     font-weight: 600;
     font-size: 14px;
-    transition: all 0.1s cubic-bezier(0.1, 0.9, 0.2, 1);
-    box-shadow: var(--shadow-2);
+    transition: all 0.15s ease;
+    box-shadow: none;
 }
 
 .profile .buttons a:hover,
 .pagination a:hover {
-    background: var(--fluent-blue-hover);
-    box-shadow: var(--shadow-4);
-    transform: translateY(-1px);
+    background: var(--fabric-green-hover);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: none;
 }
 
 .profile .buttons a:active,
 .pagination a:active {
-    background: var(--fluent-blue-pressed);
-    transform: translateY(0);
-    box-shadow: var(--shadow-2);
+    background: var(--fabric-green-pressed);
+    transform: none;
+    box-shadow: none;
 }
 
-/* ===== FLUENT NAVIGATION ===== */
+/* Secondary actions use blue */
+.profile .buttons a.secondary {
+    background: var(--fluent-blue);
+}
+
+.profile .buttons a.secondary:hover {
+    background: var(--fluent-blue-hover);
+}
+
+/* ===== FABRIC NAVIGATION - CLEAN & MINIMAL ===== */
 
 .nav {
-    backdrop-filter: saturate(180%) blur(20px);
-    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: none;
+    background: var(--theme);
     border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow-2);
+    box-shadow: none;
 }
 
 .dark .nav {
-    background: rgba(27, 26, 25, 0.8);
+    background: var(--theme);
 }
 
-/* Fluent menu items */
+/* Fabric menu items - subtle hover */
 #menu a {
-    transition: all 0.1s ease;
+    transition: all 0.15s ease;
     position: relative;
-    padding: 6px 12px;
-    border-radius: var(--radius);
+    padding: 8px 16px;
+    border-radius: 2px;
     font-weight: 600;
+    font-size: 14px;
     color: var(--primary);
 }
 
 #menu a:hover {
     background: var(--neutral-lighter);
-    color: var(--fluent-blue);
+    color: var(--fabric-green);
 }
 
 #menu .active {
-    background: var(--fluent-blue-lighter);
-    color: var(--fluent-blue);
-    border-bottom: 2px solid var(--fluent-blue);
+    background: transparent;
+    color: var(--fabric-green);
+    border-bottom: 2px solid var(--fabric-green);
+    border-radius: 0;
 }
 
-/* Remove the sliding underline animation, use Fluent style */
+/* Remove the sliding underline animation, use Fabric style */
 #menu a::after {
     display: none;
 }
@@ -145,11 +188,11 @@ button#theme-toggle:active {
     background: var(--neutral-lightest);
 }
 
-/* ===== FLUENT READING EXPERIENCE ===== */
+/* ===== FABRIC READING EXPERIENCE - SPACIOUS ===== */
 
 /* Wider content for modern displays */
 :root {
-    --main-width: 1024px;
+    --main-width: 1200px;
     --reading-width: 800px;
 }
 
@@ -157,6 +200,55 @@ button#theme-toggle:active {
     max-width: var(--reading-width);
     margin-left: auto;
     margin-right: auto;
+}
+
+.main {
+    padding: 32px 24px;
+}
+
+/* List view spacing */
+.main.list {
+    padding: 40px 24px;
+}
+
+.list .top-link {
+    font-size: 14px;
+    padding: 10px;
+}
+
+/* ===== HOME: RECENT POSTS GRID ===== */
+.home-recent {
+    margin-top: 32px;
+}
+
+.home-recent h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.recent-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 16px;
+}
+
+@media (min-width: 700px) {
+    .recent-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .recent-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.home-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
 }
 
 /* Fluent paragraph spacing */
@@ -177,15 +269,15 @@ button#theme-toggle:active {
     line-height: 1.6;
 }
 
-/* Fluent blockquote design */
+/* Fabric blockquote design - minimal with subtle green */
 .post-content blockquote {
-    border-left: 4px solid var(--fluent-blue);
+    border-left: 3px solid var(--fabric-green);
     padding: 16px 20px;
     margin: 24px 0;
     background: var(--neutral-light);
-    border-radius: var(--radius);
-    font-style: normal;
-    box-shadow: var(--shadow-2);
+    border-radius: 0;
+    font-style: italic;
+    box-shadow: none;
 }
 
 .post-content blockquote p {
@@ -195,30 +287,30 @@ button#theme-toggle:active {
 
 /* ===== FLUENT CODE BLOCKS ===== */
 
-/* Microsoft-style code blocks */
+/* Microsoft-style code blocks - minimal */
 .post-content pre {
-    border-radius: var(--radius);
-    padding: 16px;
+    border-radius: 2px;
+    padding: 20px;
     overflow-x: auto;
     margin: 20px 0;
     border: 1px solid var(--border);
-    box-shadow: var(--shadow-2);
+    box-shadow: none;
     background: var(--code-bg);
 }
 
 .dark .post-content pre {
-    box-shadow: var(--shadow-4);
+    box-shadow: none;
 }
 
-/* Inline code - Fluent style */
+/* Inline code - clean style */
 .post-content code {
     padding: 2px 6px;
-    border-radius: 3px;
+    border-radius: 2px;
     font-size: 0.9em;
     font-weight: 400;
     background: var(--neutral-lighter);
-    color: var(--fluent-blue);
-    border: 1px solid var(--border);
+    color: var(--fabric-green);
+    border: none;
 }
 
 /* Copy code button - Fluent design */
@@ -248,35 +340,35 @@ pre:hover .copy-code {
 /* ===== FLUENT IMAGES ===== */
 
 .post-content img {
-    border-radius: var(--radius);
+    border-radius: 2px;
     margin: 24px auto;
     display: block;
     max-width: 100%;
     height: auto;
-    box-shadow: var(--shadow-4);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     border: 1px solid var(--border);
 }
 
 .dark .post-content img {
-    box-shadow: var(--shadow-8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Featured image - Fluent card style */
+/* Featured image - clean card style */
 .post-cover img {
-    border-radius: var(--radius);
+    border-radius: 2px;
     margin: 20px 0;
-    box-shadow: var(--shadow-8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* ===== FLUENT TABLE OF CONTENTS ===== */
+/* ===== FABRIC TABLE OF CONTENTS - MINIMAL ===== */
 
 .toc {
     background: var(--neutral-light);
-    border-radius: var(--radius);
+    border-radius: 2px;
     padding: 20px;
     margin: 24px 0;
     border: 1px solid var(--border);
-    box-shadow: var(--shadow-2);
+    box-shadow: none;
 }
 
 .toc summary {
@@ -296,46 +388,71 @@ pre:hover .copy-code {
 }
 
 .toc a {
-    transition: all 0.1s;
+    transition: all 0.15s;
     display: inline-block;
     color: var(--secondary);
-    padding: 4px 8px;
-    border-radius: var(--radius);
+    padding: 4px 0;
+    border-radius: 0;
 }
 
 .toc a:hover {
-    background: var(--fluent-blue-lighter);
-    color: var(--fluent-blue);
-    transform: translateX(4px);
+    background: transparent;
+    color: var(--fabric-green);
+    transform: none;
+    padding-left: 8px;
 }
 
-/* ===== FLUENT TAGS & PILLS ===== */
+/* ===== FABRIC TAGS - MINIMAL PILLS ===== */
 
 .post-tags li {
     display: inline-block;
 }
 
-.post-tags a {
-    background: var(--neutral-lighter);
-    padding: 6px 12px;
-    border-radius: 16px;
+.post-tags a,
+.entry-footer a {
+    background: transparent;
+    padding: 4px 12px;
+    border-radius: 12px;
     font-size: 12px;
     font-weight: 600;
-    transition: all 0.1s;
+    transition: all 0.15s;
     border: 1px solid var(--border);
     display: inline-block;
     color: var(--secondary);
 }
 
-.post-tags a:hover {
-    background: var(--fluent-blue);
+.post-tags a:hover,
+.entry-footer a:hover {
+    background: var(--fabric-green);
     color: white;
-    border-color: var(--fluent-blue);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-4);
+    border-color: var(--fabric-green);
+    transform: none;
+    box-shadow: none;
 }
 
-/* ===== FLUENT SHARE BUTTONS ===== */
+/* Category badges above post titles */
+.post-meta a[href*="category"],
+.post-meta a[href*="categories"] {
+    background: transparent;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    color: var(--fabric-green);
+    text-transform: capitalize;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.post-meta a[href*="category"]:hover,
+.post-meta a[href*="categories"]:hover {
+    background: var(--fabric-green);
+    color: white;
+    border-color: var(--fabric-green);
+}
+
+/* ===== FABRIC SHARE BUTTONS - MINIMAL ===== */
 
 .share-buttons {
     margin: 32px 0;
@@ -345,13 +462,13 @@ pre:hover .copy-code {
 }
 
 .share-buttons a {
-    transition: all 0.1s;
+    transition: all 0.15s;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
-    border-radius: var(--radius);
-    background: var(--neutral-lighter);
+    border-radius: 2px;
+    background: transparent;
     margin: 4px;
     font-weight: 600;
     font-size: 14px;
@@ -360,14 +477,14 @@ pre:hover .copy-code {
 }
 
 .share-buttons a:hover {
-    background: var(--fluent-blue);
+    background: var(--fabric-green);
     color: white;
-    border-color: var(--fluent-blue);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-4);
+    border-color: var(--fabric-green);
+    transform: none;
+    box-shadow: none;
 }
 
-/* ===== FLUENT POST NAVIGATION ===== */
+/* ===== FABRIC POST NAVIGATION - CLEAN ===== */
 
 .post-footer {
     margin-top: 48px;
@@ -381,45 +498,45 @@ pre:hover .copy-code {
 
 .paginav a {
     flex: 1;
-    padding: 16px 20px;
+    padding: 20px 24px;
     background: var(--entry);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: all 0.1s;
-    box-shadow: var(--shadow-2);
+    border-radius: 2px;
+    transition: all 0.15s;
+    box-shadow: none;
     font-weight: 600;
 }
 
 .paginav a:hover {
-    border-color: var(--fluent-blue);
-    box-shadow: var(--shadow-8);
-    transform: translateY(-2px);
+    border-color: var(--fabric-green);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: none;
 }
 
 .paginav a:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-4);
+    transform: none;
+    box-shadow: none;
 }
 
-/* ===== FLUENT SEARCH PAGE ===== */
+/* ===== FABRIC SEARCH PAGE - CLEAN ===== */
 
 #searchInput {
     width: 100%;
     padding: 12px 16px;
     font-size: 16px;
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    border-radius: 2px;
     background: var(--entry);
     color: var(--primary);
-    transition: all 0.1s;
+    transition: all 0.15s;
     font-family: var(--font-family-base);
-    box-shadow: var(--shadow-2);
+    box-shadow: none;
 }
 
 #searchInput:focus {
     outline: none;
-    border-color: var(--fluent-blue);
-    box-shadow: 0 0 0 1px var(--fluent-blue);
+    border-color: var(--fabric-green);
+    box-shadow: 0 0 0 1px var(--fabric-green);
 }
 
 #searchInput:hover {
@@ -427,38 +544,38 @@ pre:hover .copy-code {
 }
 
 #searchResults li {
-    padding: 16px;
-    margin: 12px 0;
+    padding: 20px;
+    margin: 16px 0;
     background: var(--entry);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: all 0.1s;
-    box-shadow: var(--shadow-2);
+    border-radius: 2px;
+    transition: all 0.15s;
+    box-shadow: none;
 }
 
 #searchResults li:hover {
-    border-color: var(--fluent-blue);
-    box-shadow: var(--shadow-4);
-    transform: translateX(4px);
+    border-color: var(--fabric-green);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: none;
 }
 
-/* ===== FLUENT PROFILE MODE ===== */
+/* ===== FABRIC PROFILE MODE - CLEAN ===== */
 
 .profile img {
     border-radius: 50%;
     border: 3px solid var(--border);
-    transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
-    box-shadow: var(--shadow-8);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .profile img:hover {
-    transform: scale(1.05);
-    border-color: var(--fluent-blue);
-    box-shadow: var(--shadow-16);
+    transform: scale(1.02);
+    border-color: var(--fabric-green);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .profile .profile_inner h1 {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 600;
     margin-bottom: 12px;
     color: var(--primary);
@@ -473,45 +590,45 @@ pre:hover .copy-code {
 }
 
 .profile .buttons a {
-    padding: 10px 24px;
-    border-radius: var(--radius);
-    background: var(--fluent-blue);
+    padding: 12px 28px;
+    border-radius: 2px;
+    background: var(--fabric-green);
     color: white;
     border: none;
-    transition: all 0.1s cubic-bezier(0.1, 0.9, 0.2, 1);
+    transition: all 0.15s ease;
     font-weight: 600;
-    box-shadow: var(--shadow-2);
+    box-shadow: none;
 }
 
 .profile .buttons a:hover {
-    background: var(--fluent-blue-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-8);
+    background: var(--fabric-green-hover);
+    transform: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .profile .buttons a:active {
-    background: var(--fluent-blue-pressed);
-    transform: translateY(0);
-    box-shadow: var(--shadow-2);
+    background: var(--fabric-green-pressed);
+    transform: none;
+    box-shadow: none;
 }
 
 /* ===== FLUENT ACCESSIBILITY ===== */
 
-/* Fluent focus states */
+/* Fabric focus states with green */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
-    outline: 2px solid var(--fluent-blue);
+    outline: 2px solid var(--fabric-green);
     outline-offset: 2px;
     border-radius: var(--radius);
 }
 
-/* Skip to content link - Fluent style */
+/* Skip to content link - Fabric green style */
 .skip-link {
     position: absolute;
     top: -40px;
     left: 0;
-    background: var(--fluent-blue);
+    background: var(--fabric-green);
     color: white;
     padding: 8px 16px;
     text-decoration: none;
@@ -524,46 +641,39 @@ input:focus-visible {
     top: 8px;
 }
 
-/* ===== FLUENT FOOTER ===== */
+/* ===== FABRIC FOOTER - SIMPLE ===== */
 
 footer {
     border-top: 1px solid var(--border);
-    padding: 24px 0;
-    margin-top: 48px;
-    background: var(--neutral-light);
+    padding: 32px 0;
+    margin-top: 64px;
+    background: var(--theme);
 }
 
-/* ===== FLUENT RESPONSIVE DESIGN ===== */
+/* ===== FABRIC-INSPIRED RESPONSIVE DESIGN ===== */
 
 @media (max-width: 768px) {
     :root {
         --main-width: 100%;
         --reading-width: 100%;
+        --gap: 20px;
+        --content-gap: 16px;
+    }
+    
+    .post-entry {
+        padding: 24px 20px;
     }
     
     .post-entry:hover {
         transform: none;
-        box-shadow: var(--shadow-2);
     }
     
-    .paginav {
-        flex-direction: column;
+    .entry-header h2 {
+        font-size: 20px;
     }
     
-    .profile .buttons {
-        flex-direction: column;
-    }
-    
-    .profile .buttons a {
-        width: 100%;
-        text-align: center;
-    }
-    
-    /* Reduce shadows on mobile for performance */
-    .post-entry,
-    .post-content img,
-    #searchInput {
-        box-shadow: var(--shadow-2);
+    .profile .profile_inner h1 {
+        font-size: 28px;
     }
 }
 
@@ -602,42 +712,42 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
     scroll-margin-top: 64px;
 }
 
-/* ===== FLUENT SELECTION HIGHLIGHT ===== */
+/* ===== FABRIC SELECTION HIGHLIGHT WITH GREEN ===== */
 
 ::selection {
-    background: var(--fluent-blue-lighter);
-    color: var(--fluent-blue);
+    background: var(--fabric-green-lighter);
+    color: var(--fabric-green);
 }
 
 ::-moz-selection {
-    background: var(--fluent-blue-lighter);
-    color: var(--fluent-blue);
+    background: var(--fabric-green-lighter);
+    color: var(--fabric-green);
 }
 
 /* Dark mode selection */
 .dark ::selection {
-    background: var(--fluent-blue);
+    background: var(--fabric-green);
     color: white;
 }
 
 .dark ::-moz-selection {
-    background: var(--fluent-blue);
+    background: var(--fabric-green);
     color: white;
 }
 
-/* ===== FLUENT LINK STYLES ===== */
+/* ===== FABRIC LINK STYLES WITH GREEN ===== */
 
 .post-content a,
 .post-meta a,
 .toc a:hover {
-    color: var(--fluent-blue);
+    color: var(--fabric-green);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color 0.1s;
 }
 
 .post-content a:hover {
-    border-bottom-color: var(--fluent-blue);
+    border-bottom-color: var(--fabric-green);
 }
 
 /* ===== FLUENT LOADING STATE ===== */
@@ -734,12 +844,32 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
 .fluent-card {
     background: var(--entry);
     border: 1px solid var(--border);
+    border-left: 3px solid var(--fabric-green);
     border-radius: var(--radius);
     padding: 16px;
     box-shadow: var(--shadow-2);
 }
 
-.fluent-button-primary {
+.fabric-button-primary {
+    background: var(--fabric-green);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.fabric-button-primary:hover {
+    background: var(--fabric-green-hover);
+}
+
+.fabric-button-primary:active {
+    background: var(--fabric-green-pressed);
+}
+
+.fabric-button-secondary {
     background: var(--fluent-blue);
     color: white;
     border: none;
@@ -750,12 +880,57 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
     transition: all 0.1s;
 }
 
-.fluent-button-primary:hover {
+.fabric-button-secondary:hover {
     background: var(--fluent-blue-hover);
 }
 
-.fluent-button-primary:active {
+.fabric-button-secondary:active {
     background: var(--fluent-blue-pressed);
 }
 
-/* ===== MICROSOFT FLUENT COMPLETE ===== */
+/* ===== FABRIC SUCCESS INDICATORS ===== */
+
+.fabric-success {
+    border-left: 4px solid var(--fabric-success);
+    background: var(--fabric-green-lighter);
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin: 16px 0;
+}
+
+.fabric-warning {
+    border-left: 4px solid var(--fabric-warning);
+    background: #FFF4E5;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin: 16px 0;
+}
+
+.fabric-error {
+    border-left: 4px solid var(--fabric-error);
+    background: #FEF0F1;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin: 16px 0;
+}
+
+/* ===== FABRIC BREADCRUMBS WITH GREEN ACCENT ===== */
+
+.breadcrumbs a:hover {
+    color: var(--fabric-green);
+}
+
+.breadcrumbs .active {
+    color: var(--fabric-green);
+    font-weight: 600;
+}
+
+/* ===== FABRIC ACCENT BORDERS - MINIMAL ===== */
+
+.post-single .post-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+}
+
+/* ===== MICROSOFT FABRIC DESIGN COMPLETE ===== */

@@ -41,18 +41,18 @@ params:
   googleAnalyticsID: "G-R3817JRRRG"
   DateFormat: "January 2006"
   defaultTheme: auto
-  hideFooter: true
+  hideFooter: false
   disableThemeToggle: false
   ShowShareButtons: true
   ShowReadingTime: true
   disableSpecial1stPost: true
-  disableAnchoredHeadings: true
+  disableAnchoredHeadings: false
   ShowPostNavLinks: true
-  ShowBreadCrumbs: false
+  ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowRssButtonInSectionTermList: true
   ShowToc: true
-  disableScrollToTop: true
+  disableScrollToTop: false
   TocOpen: true
   ShowWordCount: false
   UseHugoToc: true

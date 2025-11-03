@@ -1,0 +1,36 @@
+{{ define "main" }}
+  {{/* Profile header from theme */}}
+  {{ partial "index_profile.html" . }}
+
+  <section class="home-recent">
+    <h2>Recent Posts</h2>
+    <div class="recent-grid">
+      {{ $pages := where site.RegularPages "Section" "blog" }}
+      {{ range first 6 (sort $pages "Date" "desc") }}
+        <article class="post-entry">
+          <header class="entry-header">
+            <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          </header>
+          {{ with .Params.cover.image }}
+            <div class="entry-cover">
+              <a href="{{ $.Permalink }}">
+                <img src="{{ . | absURL }}" alt="{{ $.Params.cover.alt }}" loading="lazy" />
+              </a>
+            </div>
+          {{ end }}
+          <div class="entry-content">
+            {{ .Summary }}
+          </div>
+          <footer class="entry-footer">
+            {{ partial "post_meta.html" . }}
+          </footer>
+          <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .Permalink }}"></a>
+        </article>
+      {{ end }}
+    </div>
+
+    <div class="home-actions">
+      <a class="fluent-button-primary" href="/blog/">View all posts</a>
+    </div>
+  </section>
+{{ end }}

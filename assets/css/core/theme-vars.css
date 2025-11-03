@@ -1,23 +1,23 @@
 :root {
-    --gap: 24px;
-    --content-gap: 20px;
+    --gap: 32px;
+    --content-gap: 24px;
     --nav-width: 1280px;
-    --main-width: 1024px;
-    --header-height: 48px;
-    --footer-height: 70px;
-    --radius: 4px;
+    --main-width: 1200px;
+    --header-height: 60px;
+    --footer-height: 80px;
+    --radius: 2px;
     
-    /* Microsoft Fluent Light Theme Colors */
+    /* Microsoft Fabric Light Theme Colors */
     --theme: #FFFFFF;
     --entry: #FFFFFF;
-    --primary: #323130;
+    --primary: #242424;
     --secondary: #605E5C;
     --tertiary: #F3F2F1;
     --gray: #8A8886;
-    --content: #201F1E;
-    --hljs-bg: #282C34;
-    --code-bg: #FAF9F8;
-    --border: #EDEBE9;
+    --content: #242424;
+    --hljs-bg: #F5F5F5;
+    --code-bg: #F8F8F8;
+    --border: #E1DFDD;
     
     /* Microsoft Fluent Accent Colors */
     --fluent-blue: #0078D4;
@@ -25,6 +25,18 @@
     --fluent-blue-pressed: #005A9E;
     --fluent-blue-light: #DEECF9;
     --fluent-blue-lighter: #EFF6FC;
+    
+    /* Microsoft Fabric Green Accents */
+    --fabric-green: #107C10;
+    --fabric-green-hover: #0E700E;
+    --fabric-green-pressed: #0C5E0C;
+    --fabric-green-light: #DFF6DD;
+    --fabric-green-lighter: #F0FBF0;
+    
+    /* Fabric Success/Status Colors */
+    --fabric-success: #107C10;
+    --fabric-warning: #F7630C;
+    --fabric-error: #D13438;
     
     /* Fluent Neutral Colors */
     --neutral-light: #FAF9F8;
@@ -43,14 +55,14 @@
     /* Typography */
     --semibold: 600;
     --homesize: 16px;
-    --textsize: 16px;
-    --h1size: 28px;
-    --entrysize: 14px;
+    --textsize: 15px;
+    --h1size: 32px;
+    --entrysize: 15px;
     --headersize: 14px;
-    --footersize: 12px;
-    --lineheight: 1.5;
+    --footersize: 13px;
+    --lineheight: 1.6;
     --lineclamp: 8;
-    --marginleft: 26px;
+    --marginleft: 32px;
     
     /* Fluent Typography Scale */
     --font-family-base: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
@@ -76,6 +88,18 @@
     --fluent-blue-pressed: #2DB7FF;
     --fluent-blue-light: #0E3A52;
     --fluent-blue-lighter: #082338;
+    
+    /* Dark theme Fabric Green */
+    --fabric-green: #7FBA00;
+    --fabric-green-hover: #8BC700;
+    --fabric-green-pressed: #6FAC00;
+    --fabric-green-light: #1A3A0A;
+    --fabric-green-lighter: #0F2205;
+    
+    /* Dark Fabric Status Colors */
+    --fabric-success: #7FBA00;
+    --fabric-warning: #FCE100;
+    --fabric-error: #F1707B;
     
     /* Dark Neutral Colors */
     --neutral-light: #252423;

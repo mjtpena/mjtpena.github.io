@@ -13,9 +13,8 @@
 {{- print " dark" }}
 {{- end -}}
 " id="top">
-    {{- if not .IsHome  }}
+    {{- /* Always show header, including on homepage */}}
     {{- partialCached "header.html" . .Page -}}
-    {{- end }}
     <main class="main">
         {{- block "main" . }}{{ end }}
     </main>
