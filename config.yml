@@ -1,6 +1,7 @@
 baseURL: "https://michaeljohnpena.com/"
 title: Michael John Peña
-paginate: 20
+pagination:
+  pagerSize: 20
 theme: PaperMod
 
 enableInlineShortcodes: true
