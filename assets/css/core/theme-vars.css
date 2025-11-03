@@ -1,10 +1,10 @@
 :root {
-    --gap: 32px;
-    --content-gap: 24px;
-    --nav-width: 1280px;
-    --main-width: 1200px;
-    --header-height: 60px;
-    --footer-height: 80px;
+    --gap: 40px;
+    --content-gap: 32px;
+    --nav-width: 1400px;
+    --main-width: 1140px;
+    --header-height: 64px;
+    --footer-height: 100px;
     --radius: 2px;
     
     /* Microsoft Fabric Light Theme Colors */
@@ -54,15 +54,15 @@
     
     /* Typography */
     --semibold: 600;
-    --homesize: 16px;
-    --textsize: 15px;
-    --h1size: 32px;
-    --entrysize: 15px;
-    --headersize: 14px;
-    --footersize: 13px;
-    --lineheight: 1.6;
+    --homesize: 17px;
+    --textsize: 16px;
+    --h1size: 36px;
+    --entrysize: 16px;
+    --headersize: 15px;
+    --footersize: 14px;
+    --lineheight: 1.7;
     --lineclamp: 8;
-    --marginleft: 32px;
+    --marginleft: 0;
     
     /* Fluent Typography Scale */
     --font-family-base: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;

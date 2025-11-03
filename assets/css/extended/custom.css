@@ -18,21 +18,25 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--primary);
+    line-height: 1.3;
 }
 
 h1 {
     border-left: none;
     padding-left: 0;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 600;
+    margin-bottom: 16px;
 }
 
 h2 {
-    font-size: 26px;
+    font-size: 28px;
+    margin-bottom: 14px;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 22px;
+    margin-bottom: 12px;
 }
 
 /* Code font - Cascadia Code (Microsoft) */
@@ -48,7 +52,8 @@ code, pre {
     border-radius: 2px;
     border: 1px solid var(--border);
     background: var(--entry);
-    padding: 32px 24px;
+    padding: 40px 32px;
+    margin-bottom: 32px;
 }
 
 .post-entry:hover {
@@ -63,16 +68,16 @@ code, pre {
 
 /* Fabric card spacing - clean and spacious */
 .entry-header h2 {
-    font-size: 24px;
-    line-height: 1.3;
-    margin-bottom: 12px;
+    font-size: 26px;
+    line-height: 1.25;
+    margin-bottom: 14px;
     font-weight: 600;
     color: var(--primary);
-    margin-top: 8px;
+    margin-top: 0;
 }
 
 .post-entry + .post-entry {
-    margin-top: 24px;
+    margin-top: 0;
 }
 
 /* Post meta styling */
@@ -80,15 +85,16 @@ code, pre {
 .post-meta {
     font-size: 14px;
     color: var(--secondary);
-    margin-top: 12px;
+    margin-top: 0;
+    margin-bottom: 12px;
 }
 
 /* Post summary/excerpt */
 .entry-content {
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.7;
     color: var(--secondary);
-    margin-top: 12px;
+    margin-top: 14px;
 }
 
 /* ===== FABRIC BUTTONS - CLEAN & SIMPLE ===== */
@@ -137,6 +143,7 @@ code, pre {
     background: var(--theme);
     border-bottom: 1px solid var(--border);
     box-shadow: none;
+    padding: 0 32px;
 }
 
 .dark .nav {
@@ -144,13 +151,17 @@ code, pre {
 }
 
 /* Fabric menu items - subtle hover */
+#menu {
+    gap: 8px;
+}
+
 #menu a {
     transition: all 0.15s ease;
     position: relative;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 2px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--primary);
 }
 
@@ -192,8 +203,8 @@ button#theme-toggle:active {
 
 /* Wider content for modern displays */
 :root {
-    --main-width: 1200px;
-    --reading-width: 800px;
+    --main-width: 1140px;
+    --reading-width: 820px;
 }
 
 .post-content {
@@ -203,81 +214,98 @@ button#theme-toggle:active {
 }
 
 .main {
-    padding: 32px 24px;
+    padding: 48px 32px;
 }
 
 /* List view spacing */
 .main.list {
-    padding: 40px 24px;
+    padding: 56px 32px;
 }
 
 .list .top-link {
     font-size: 14px;
-    padding: 10px;
+    padding: 12px;
+}
+
+/* Archive and list pages */
+.archive-year,
+.archive-month {
+    margin-bottom: 40px;
+}
+
+.archive-month-header {
+    margin-bottom: 24px;
+}
+
+.archive-entry {
+    margin-bottom: 20px;
 }
 
 /* ===== HOME: RECENT POSTS GRID ===== */
 .home-recent {
-    margin-top: 32px;
+    margin-top: 48px;
 }
 
 .home-recent h2 {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 .recent-grid {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 16px;
+    gap: 24px;
 }
 
 @media (min-width: 700px) {
     .recent-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px;
     }
 }
 
 @media (min-width: 1024px) {
     .recent-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 32px;
     }
 }
 
 .home-actions {
     display: flex;
     justify-content: center;
-    margin-top: 16px;
+    margin-top: 32px;
 }
 
-/* Fluent paragraph spacing */
+/* Fabric paragraph spacing */
 .post-content p {
-    margin-bottom: 1em;
-    line-height: 1.6;
+    margin-bottom: 1.25em;
+    line-height: 1.7;
 }
 
-/* Fluent list styling */
+/* Fabric list styling */
 .post-content ul, 
 .post-content ol {
-    margin: 1em 0;
-    padding-left: 1.5em;
+    margin: 1.25em 0;
+    padding-left: 2em;
 }
 
 .post-content li {
-    margin-bottom: 0.5em;
-    line-height: 1.6;
+    margin-bottom: 0.75em;
+    line-height: 1.7;
 }
 
 /* Fabric blockquote design - minimal with subtle green */
 .post-content blockquote {
     border-left: 3px solid var(--fabric-green);
-    padding: 16px 20px;
-    margin: 24px 0;
+    padding: 20px 24px;
+    margin: 32px 0;
     background: var(--neutral-light);
     border-radius: 0;
     font-style: italic;
     box-shadow: none;
+    font-size: 17px;
 }
 
 .post-content blockquote p {
@@ -290,12 +318,14 @@ button#theme-toggle:active {
 /* Microsoft-style code blocks - minimal */
 .post-content pre {
     border-radius: 2px;
-    padding: 20px;
+    padding: 24px;
     overflow-x: auto;
-    margin: 20px 0;
+    margin: 28px 0;
     border: 1px solid var(--border);
     box-shadow: none;
     background: var(--code-bg);
+    font-size: 14px;
+    line-height: 1.6;
 }
 
 .dark .post-content pre {
@@ -304,7 +334,7 @@ button#theme-toggle:active {
 
 /* Inline code - clean style */
 .post-content code {
-    padding: 2px 6px;
+    padding: 3px 7px;
     border-radius: 2px;
     font-size: 0.9em;
     font-weight: 400;
@@ -561,11 +591,17 @@ pre:hover .copy-code {
 
 /* ===== FABRIC PROFILE MODE - CLEAN ===== */
 
+.profile {
+    padding: 64px 32px;
+}
+
 .profile img {
     border-radius: 50%;
     border: 3px solid var(--border);
     transition: all 0.2s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    width: 140px;
+    height: 140px;
 }
 
 .profile img:hover {
@@ -575,28 +611,37 @@ pre:hover .copy-code {
 }
 
 .profile .profile_inner h1 {
-    font-size: 36px;
+    font-size: 42px;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    margin-top: 24px;
     color: var(--primary);
+}
+
+.profile .profile_inner .subtitle {
+    font-size: 18px;
+    color: var(--secondary);
+    margin-bottom: 24px;
+    line-height: 1.6;
 }
 
 .profile .buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
     justify-content: center;
-    margin-top: 24px;
+    margin-top: 32px;
 }
 
 .profile .buttons a {
-    padding: 12px 28px;
+    padding: 14px 32px;
     border-radius: 2px;
     background: var(--fabric-green);
     color: white;
     border: none;
     transition: all 0.15s ease;
     font-weight: 600;
+    font-size: 15px;
     box-shadow: none;
 }
 
@@ -656,12 +701,13 @@ footer {
     :root {
         --main-width: 100%;
         --reading-width: 100%;
-        --gap: 20px;
-        --content-gap: 16px;
+        --gap: 24px;
+        --content-gap: 20px;
     }
     
     .post-entry {
-        padding: 24px 20px;
+        padding: 28px 24px;
+        margin-bottom: 24px;
     }
     
     .post-entry:hover {
@@ -669,11 +715,45 @@ footer {
     }
     
     .entry-header h2 {
-        font-size: 20px;
+        font-size: 22px;
+    }
+    
+    .profile {
+        padding: 48px 24px;
     }
     
     .profile .profile_inner h1 {
-        font-size: 28px;
+        font-size: 32px;
+    }
+    
+    .profile img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .main {
+        padding: 32px 20px;
+    }
+    
+    .main.list {
+        padding: 40px 20px;
+    }
+    
+    .nav {
+        padding: 0 20px;
+    }
+    
+    #menu a {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 30px;
+    }
+    
+    h2 {
+        font-size: 24px;
     }
 }
 
@@ -929,8 +1009,19 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
 
 .post-single .post-header {
     border-bottom: 1px solid var(--border);
-    padding-bottom: 24px;
-    margin-bottom: 32px;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+}
+
+.post-single .post-title {
+    font-size: 36px;
+    line-height: 1.25;
+    margin-bottom: 20px;
+}
+
+.post-single .post-meta {
+    font-size: 15px;
+    color: var(--secondary);
 }
 
 /* ===== MICROSOFT FABRIC DESIGN COMPLETE ===== */
