@@ -1,46 +1,95 @@
 :root {
     --gap: 24px;
     --content-gap: 20px;
-    --nav-width: 1024px;
-    --main-width: 720px;
-    --header-height: 44px;
+    --nav-width: 1280px;
+    --main-width: 1024px;
+    --header-height: 48px;
     --footer-height: 70px;
-    --radius: 8px;
-    --theme: rgb(255, 255, 255);
-    --entry: rgb(255, 255, 255);
-    --primary: rgb(30, 30, 30);
-    --secondary: rgb(108, 108, 108);
-    --tertiary: rgb(214, 214, 214);
-    --gray: rgb(165, 165, 165);
-    --content: rgb(30, 30, 30);
-    --hljs-bg: rgb(28, 29, 33);
-    --code-bg: rgb(245, 245, 245);
-    --border: rgb(238, 238, 238);
-    --darkpurple: #8e7bd0;
-    --midpurple:#c0b5e5;
-    --lightpurple: #e5e1f4;
-    --semibold: 500;
+    --radius: 4px;
+    
+    /* Microsoft Fluent Light Theme Colors */
+    --theme: #FFFFFF;
+    --entry: #FFFFFF;
+    --primary: #323130;
+    --secondary: #605E5C;
+    --tertiary: #F3F2F1;
+    --gray: #8A8886;
+    --content: #201F1E;
+    --hljs-bg: #282C34;
+    --code-bg: #FAF9F8;
+    --border: #EDEBE9;
+    
+    /* Microsoft Fluent Accent Colors */
+    --fluent-blue: #0078D4;
+    --fluent-blue-hover: #106EBE;
+    --fluent-blue-pressed: #005A9E;
+    --fluent-blue-light: #DEECF9;
+    --fluent-blue-lighter: #EFF6FC;
+    
+    /* Fluent Neutral Colors */
+    --neutral-light: #FAF9F8;
+    --neutral-lighter: #F3F2F1;
+    --neutral-lightest: #EDEBE9;
+    --neutral-dark: #605E5C;
+    --neutral-darker: #323130;
+    
+    /* Fluent Shadow tokens */
+    --shadow-2: 0 0.3px 0.9px rgba(0, 0, 0, 0.1), 0 1.6px 3.6px rgba(0, 0, 0, 0.13);
+    --shadow-4: 0 1.6px 3.6px rgba(0, 0, 0, 0.13), 0 0.3px 0.9px rgba(0, 0, 0, 0.1);
+    --shadow-8: 0 3.2px 7.2px rgba(0, 0, 0, 0.13), 0 0.6px 1.8px rgba(0, 0, 0, 0.11);
+    --shadow-16: 0 6.4px 14.4px rgba(0, 0, 0, 0.13), 0 1.2px 3.6px rgba(0, 0, 0, 0.11);
+    --shadow-64: 0 25.6px 57.6px rgba(0, 0, 0, 0.22), 0 4.8px 14.4px rgba(0, 0, 0, 0.18);
+    
+    /* Typography */
+    --semibold: 600;
     --homesize: 16px;
-    --textsize: 18px;
-    --h1size: 25px;
-    --entrysize: 15px;
-    --headersize: 16px;
-    --footersize: 13px;
-    --lineheight: 1.45;
+    --textsize: 16px;
+    --h1size: 28px;
+    --entrysize: 14px;
+    --headersize: 14px;
+    --footersize: 12px;
+    --lineheight: 1.5;
     --lineclamp: 8;
     --marginleft: 26px;
+    
+    /* Fluent Typography Scale */
+    --font-family-base: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+    --font-family-monospace: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
 }
 
 .dark {
-    --theme: rgb(29, 30, 32);
-    --entry: rgb(46, 46, 51);
-    --primary: rgb(218, 218, 219);
-    --secondary: rgb(155, 156, 157);
-    --tertiary: rgb(65, 66, 68);
-    --content: rgb(196, 196, 197);
-    --hljs-bg: rgb(46, 46, 51);
-    --code-bg: rgb(55, 56, 62);
-    --border: rgb(51, 51, 51);
+    /* Microsoft Fluent Dark Theme Colors */
+    --theme: #1B1A19;
+    --entry: #252423;
+    --primary: #FFFFFF;
+    --secondary: #D2D0CE;
+    --tertiary: #3B3A39;
+    --content: #F3F2F1;
+    --hljs-bg: #1E1E1E;
+    --code-bg: #252423;
+    --border: #3B3A39;
+    --gray: #A19F9D;
+    
+    /* Dark theme Fluent colors */
+    --fluent-blue: #4CC2FF;
+    --fluent-blue-hover: #6BD3FF;
+    --fluent-blue-pressed: #2DB7FF;
+    --fluent-blue-light: #0E3A52;
+    --fluent-blue-lighter: #082338;
+    
+    /* Dark Neutral Colors */
+    --neutral-light: #252423;
+    --neutral-lighter: #292827;
+    --neutral-lightest: #323130;
+    --neutral-dark: #D2D0CE;
+    --neutral-darker: #F3F2F1;
+    
+    /* Dark mode shadows */
+    --shadow-2: 0 0.3px 0.9px rgba(0, 0, 0, 0.2), 0 1.6px 3.6px rgba(0, 0, 0, 0.26);
+    --shadow-4: 0 1.6px 3.6px rgba(0, 0, 0, 0.26), 0 0.3px 0.9px rgba(0, 0, 0, 0.2);
+    --shadow-8: 0 3.2px 7.2px rgba(0, 0, 0, 0.26), 0 0.6px 1.8px rgba(0, 0, 0, 0.22);
+    --shadow-16: 0 6.4px 14.4px rgba(0, 0, 0, 0.26), 0 1.2px 3.6px rgba(0, 0, 0, 0.22);
+    --shadow-64: 0 25.6px 57.6px rgba(0, 0, 0, 0.44), 0 4.8px 14.4px rgba(0, 0, 0, 0.36);
 }
 
 .list {

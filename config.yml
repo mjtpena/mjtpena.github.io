@@ -106,8 +106,8 @@ params:
   # SEO & Social sharing
   images: ["/mjtpena.png"]
   
-  # Enable social share buttons
-  ShareButtons: ["linkedin", "twitter", "facebook", "reddit", "whatsapp", "email"]
+  # Microsoft Fluent Design share buttons
+  ShareButtons: ["linkedin", "twitter", "facebook", "reddit", "email"]
 
 markup:
   goldmark:

@@ -1,63 +1,156 @@
 /* ========================================
-   UI/UX ENHANCEMENTS
-   Custom styling to improve visual design
+   MICROSOFT FLUENT DESIGN UI/UX
+   Modern, clean design with Fluent principles
    ======================================== */
 
-/* ===== TYPOGRAPHY IMPROVEMENTS ===== */
+/* ===== TYPOGRAPHY - FLUENT STYLE ===== */
 
-/* Better font stack with system fonts */
+/* Segoe UI font family - Microsoft's design language */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-family: var(--font-family-base);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
 }
 
-/* Improved heading hierarchy */
+/* Fluent heading hierarchy */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+    color: var(--primary);
 }
 
-/* Better code font */
+/* Code font - Cascadia Code (Microsoft) */
 code, pre {
-    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-family: var(--font-family-monospace);
 }
 
-/* ===== ENHANCED POST CARDS ===== */
+/* ===== FLUENT CARDS & SURFACES ===== */
 
 .post-entry {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+    box-shadow: var(--shadow-2);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--entry);
 }
 
 .post-entry:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-8);
+    border-color: var(--fluent-blue);
 }
 
-.dark .post-entry:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+.post-entry:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-4);
 }
 
-/* Better spacing for post entry headers */
+/* Fluent card spacing */
 .entry-header h2 {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.4;
     margin-bottom: 8px;
     font-weight: 600;
+    color: var(--primary);
 }
 
-/* Subtle divider between posts */
 .post-entry + .post-entry {
-    margin-top: 24px;
+    margin-top: 16px;
 }
 
-/* ===== IMPROVED READING EXPERIENCE ===== */
+/* ===== FLUENT BUTTONS & INTERACTIVE ELEMENTS ===== */
 
-/* Wider content for better readability */
+/* Primary Fluent button style */
+.profile .buttons a,
+.pagination a {
+    background: var(--fluent-blue);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.1s cubic-bezier(0.1, 0.9, 0.2, 1);
+    box-shadow: var(--shadow-2);
+}
+
+.profile .buttons a:hover,
+.pagination a:hover {
+    background: var(--fluent-blue-hover);
+    box-shadow: var(--shadow-4);
+    transform: translateY(-1px);
+}
+
+.profile .buttons a:active,
+.pagination a:active {
+    background: var(--fluent-blue-pressed);
+    transform: translateY(0);
+    box-shadow: var(--shadow-2);
+}
+
+/* ===== FLUENT NAVIGATION ===== */
+
+.nav {
+    backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-2);
+}
+
+.dark .nav {
+    background: rgba(27, 26, 25, 0.8);
+}
+
+/* Fluent menu items */
+#menu a {
+    transition: all 0.1s ease;
+    position: relative;
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    color: var(--primary);
+}
+
+#menu a:hover {
+    background: var(--neutral-lighter);
+    color: var(--fluent-blue);
+}
+
+#menu .active {
+    background: var(--fluent-blue-lighter);
+    color: var(--fluent-blue);
+    border-bottom: 2px solid var(--fluent-blue);
+}
+
+/* Remove the sliding underline animation, use Fluent style */
+#menu a::after {
+    display: none;
+}
+
+/* ===== FLUENT THEME TOGGLE ===== */
+
+button#theme-toggle {
+    transition: all 0.1s;
+    border-radius: var(--radius);
+    padding: 6px;
+    background: transparent;
+}
+
+button#theme-toggle:hover {
+    background: var(--neutral-lighter);
+}
+
+button#theme-toggle:active {
+    background: var(--neutral-lightest);
+}
+
+/* ===== FLUENT READING EXPERIENCE ===== */
+
+/* Wider content for modern displays */
 :root {
-    --main-width: 800px;
-    --reading-width: 680px;
+    --main-width: 1024px;
+    --reading-width: 800px;
 }
 
 .post-content {
@@ -66,348 +159,309 @@ code, pre {
     margin-right: auto;
 }
 
-/* Better paragraph spacing */
+/* Fluent paragraph spacing */
 .post-content p {
-    margin-bottom: 1.5em;
-    line-height: 1.7;
+    margin-bottom: 1em;
+    line-height: 1.6;
 }
 
-/* Improved list styling */
+/* Fluent list styling */
 .post-content ul, 
 .post-content ol {
-    margin: 1.5em 0;
+    margin: 1em 0;
     padding-left: 1.5em;
 }
 
 .post-content li {
     margin-bottom: 0.5em;
-    line-height: 1.7;
+    line-height: 1.6;
 }
 
-/* Better blockquote design */
+/* Fluent blockquote design */
 .post-content blockquote {
-    border-left: 4px solid var(--darkpurple);
-    padding: 1em 1.5em;
-    margin: 2em 0;
-    background: var(--code-bg);
-    border-radius: 0 8px 8px 0;
-    font-style: italic;
+    border-left: 4px solid var(--fluent-blue);
+    padding: 16px 20px;
+    margin: 24px 0;
+    background: var(--neutral-light);
+    border-radius: var(--radius);
+    font-style: normal;
+    box-shadow: var(--shadow-2);
 }
 
 .post-content blockquote p {
     margin: 0;
+    color: var(--secondary);
 }
 
-/* ===== CODE BLOCKS ENHANCEMENT ===== */
+/* ===== FLUENT CODE BLOCKS ===== */
 
-/* Better code block styling */
+/* Microsoft-style code blocks */
 .post-content pre {
-    border-radius: 12px;
-    padding: 1.5em;
+    border-radius: var(--radius);
+    padding: 16px;
     overflow-x: auto;
-    margin: 2em 0;
+    margin: 20px 0;
     border: 1px solid var(--border);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-2);
+    background: var(--code-bg);
 }
 
 .dark .post-content pre {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-4);
 }
 
-/* Inline code improvement */
+/* Inline code - Fluent style */
 .post-content code {
-    padding: 0.2em 0.4em;
-    border-radius: 4px;
+    padding: 2px 6px;
+    border-radius: 3px;
     font-size: 0.9em;
-    font-weight: 500;
+    font-weight: 400;
+    background: var(--neutral-lighter);
+    color: var(--fluent-blue);
+    border: 1px solid var(--border);
 }
 
-/* Copy code button enhancement */
+/* Copy code button - Fluent design */
 .copy-code {
     opacity: 0;
-    transition: opacity 0.2s;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-weight: 500;
+    transition: opacity 0.1s;
+    border-radius: var(--radius);
+    padding: 4px 12px;
+    font-weight: 600;
     cursor: pointer;
+    background: var(--fluent-blue);
+    color: white;
+    border: none;
+    font-size: 12px;
 }
 
 .copy-code:hover {
-    background: rgba(78, 78, 78, 1);
+    background: var(--fluent-blue-hover);
+    opacity: 1;
 }
 
 div.highlight:hover .copy-code,
 pre:hover .copy-code {
-    opacity: 1;
+    opacity: 0.9;
 }
 
-/* ===== IMAGES ENHANCEMENT ===== */
+/* ===== FLUENT IMAGES ===== */
 
-/* Better image display */
 .post-content img {
-    border-radius: 12px;
-    margin: 2em auto;
+    border-radius: var(--radius);
+    margin: 24px auto;
     display: block;
     max-width: 100%;
     height: auto;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-4);
+    border: 1px solid var(--border);
 }
 
 .dark .post-content img {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-8);
 }
 
-/* Featured image enhancement */
+/* Featured image - Fluent card style */
 .post-cover img {
-    border-radius: 16px;
-    margin: 2em 0;
+    border-radius: var(--radius);
+    margin: 20px 0;
+    box-shadow: var(--shadow-8);
 }
 
-/* ===== TABLE OF CONTENTS STYLING ===== */
+/* ===== FLUENT TABLE OF CONTENTS ===== */
 
 .toc {
-    background: var(--code-bg);
-    border-radius: 12px;
-    padding: 1.5em;
-    margin: 2em 0;
-    border: 2px solid var(--border);
+    background: var(--neutral-light);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-2);
 }
 
 .toc summary {
     cursor: pointer;
     font-weight: 600;
-    font-size: 1.1em;
-    padding: 0.5em 0;
+    font-size: 16px;
+    padding: 8px 0;
+    color: var(--primary);
 }
 
 .toc ul {
-    margin-top: 1em;
+    margin-top: 12px;
 }
 
 .toc li {
-    margin: 0.5em 0;
+    margin: 8px 0;
 }
 
 .toc a {
-    transition: all 0.2s;
+    transition: all 0.1s;
     display: inline-block;
+    color: var(--secondary);
+    padding: 4px 8px;
+    border-radius: var(--radius);
 }
 
 .toc a:hover {
+    background: var(--fluent-blue-lighter);
+    color: var(--fluent-blue);
     transform: translateX(4px);
-    color: var(--darkpurple);
 }
 
-/* ===== HEADER IMPROVEMENTS ===== */
-
-.nav {
-    backdrop-filter: blur(10px);
-    background: rgba(245, 245, 245, 0.9);
-    border-bottom: 1px solid var(--border);
-}
-
-.dark .nav {
-    background: rgba(46, 46, 51, 0.9);
-}
-
-/* Better menu hover effects */
-#menu a {
-    transition: all 0.2s;
-    position: relative;
-}
-
-#menu a:hover {
-    color: var(--darkpurple);
-}
-
-#menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--darkpurple);
-    transition: width 0.3s;
-}
-
-#menu a:hover::after {
-    width: 100%;
-}
-
-/* Theme toggle button enhancement */
-button#theme-toggle {
-    transition: all 0.3s;
-    border-radius: 8px;
-    padding: 4px 8px;
-}
-
-button#theme-toggle:hover {
-    background: var(--border);
-    transform: rotate(180deg);
-}
-
-/* ===== TAG & CATEGORY PILLS ===== */
+/* ===== FLUENT TAGS & PILLS ===== */
 
 .post-tags li {
     display: inline-block;
 }
 
 .post-tags a {
-    background: var(--code-bg);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.2s;
-    border: 2px solid var(--border);
+    background: var(--neutral-lighter);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.1s;
+    border: 1px solid var(--border);
     display: inline-block;
+    color: var(--secondary);
 }
 
 .post-tags a:hover {
-    background: var(--darkpurple);
+    background: var(--fluent-blue);
     color: white;
-    border-color: var(--darkpurple);
+    border-color: var(--fluent-blue);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(142, 123, 208, 0.3);
+    box-shadow: var(--shadow-4);
 }
 
-/* ===== SOCIAL SHARE BUTTONS ===== */
+/* ===== FLUENT SHARE BUTTONS ===== */
 
 .share-buttons {
-    margin: 3em 0;
-    padding: 2em 0;
-    border-top: 2px solid var(--border);
-    border-bottom: 2px solid var(--border);
+    margin: 32px 0;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 .share-buttons a {
-    transition: all 0.2s;
+    transition: all 0.1s;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
-    border-radius: 8px;
-    background: var(--code-bg);
+    border-radius: var(--radius);
+    background: var(--neutral-lighter);
     margin: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--primary);
+    border: 1px solid var(--border);
 }
 
 .share-buttons a:hover {
+    background: var(--fluent-blue);
+    color: white;
+    border-color: var(--fluent-blue);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-4);
 }
 
-/* ===== POST NAVIGATION ENHANCEMENT ===== */
+/* ===== FLUENT POST NAVIGATION ===== */
 
 .post-footer {
-    margin-top: 4em;
+    margin-top: 48px;
 }
 
 .paginav {
-    margin: 3em 0;
+    margin: 32px 0;
     display: flex;
-    gap: 1em;
+    gap: 16px;
 }
 
 .paginav a {
     flex: 1;
-    padding: 1.5em;
+    padding: 16px 20px;
     background: var(--entry);
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    transition: all 0.3s;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all 0.1s;
+    box-shadow: var(--shadow-2);
+    font-weight: 600;
 }
 
 .paginav a:hover {
-    border-color: var(--darkpurple);
+    border-color: var(--fluent-blue);
+    box-shadow: var(--shadow-8);
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== SEARCH PAGE ENHANCEMENT ===== */
+.paginav a:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-4);
+}
+
+/* ===== FLUENT SEARCH PAGE ===== */
 
 #searchInput {
     width: 100%;
-    padding: 1em 1.5em;
-    font-size: 18px;
+    padding: 12px 16px;
+    font-size: 16px;
     border: 2px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius);
     background: var(--entry);
     color: var(--primary);
-    transition: all 0.3s;
+    transition: all 0.1s;
+    font-family: var(--font-family-base);
+    box-shadow: var(--shadow-2);
 }
 
 #searchInput:focus {
     outline: none;
-    border-color: var(--darkpurple);
-    box-shadow: 0 0 0 4px rgba(142, 123, 208, 0.1);
+    border-color: var(--fluent-blue);
+    box-shadow: 0 0 0 1px var(--fluent-blue);
+}
+
+#searchInput:hover {
+    border-color: var(--neutral-dark);
 }
 
 #searchResults li {
-    padding: 1.5em;
-    margin: 1em 0;
+    padding: 16px;
+    margin: 12px 0;
     background: var(--entry);
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    transition: all 0.2s;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all 0.1s;
+    box-shadow: var(--shadow-2);
 }
 
 #searchResults li:hover {
-    border-color: var(--midpurple);
+    border-color: var(--fluent-blue);
+    box-shadow: var(--shadow-4);
     transform: translateX(4px);
 }
 
-/* ===== FOOTER ENHANCEMENT ===== */
-
-footer {
-    border-top: 1px solid var(--border);
-    padding: 2em 0;
-    margin-top: 4em;
-}
-
-/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
-
-/* Better focus states */
-a:focus,
-button:focus,
-input:focus {
-    outline: 2px solid var(--darkpurple);
-    outline-offset: 2px;
-}
-
-/* Skip to content link */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--darkpurple);
-    color: white;
-    padding: 8px;
-    text-decoration: none;
-    z-index: 100;
-}
-
-.skip-link:focus {
-    top: 0;
-}
-
-/* ===== PROFILE MODE ENHANCEMENT ===== */
+/* ===== FLUENT PROFILE MODE ===== */
 
 .profile img {
     border-radius: 50%;
-    border: 4px solid var(--border);
-    transition: all 0.3s;
+    border: 3px solid var(--border);
+    transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+    box-shadow: var(--shadow-8);
 }
 
 .profile img:hover {
     transform: scale(1.05);
-    border-color: var(--darkpurple);
+    border-color: var(--fluent-blue);
+    box-shadow: var(--shadow-16);
 }
 
 .profile .profile_inner h1 {
-    font-size: 2.5em;
-    font-weight: 700;
-    margin-bottom: 0.5em;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--primary);
 }
 
 .profile .buttons {
@@ -415,26 +469,71 @@ input:focus {
     flex-wrap: wrap;
     gap: 12px;
     justify-content: center;
+    margin-top: 24px;
 }
 
 .profile .buttons a {
-    padding: 12px 24px;
-    border-radius: 8px;
-    background: var(--entry);
-    border: 2px solid var(--border);
-    transition: all 0.3s;
-    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: var(--radius);
+    background: var(--fluent-blue);
+    color: white;
+    border: none;
+    transition: all 0.1s cubic-bezier(0.1, 0.9, 0.2, 1);
+    font-weight: 600;
+    box-shadow: var(--shadow-2);
 }
 
 .profile .buttons a:hover {
-    background: var(--darkpurple);
-    color: white;
-    border-color: var(--darkpurple);
+    background: var(--fluent-blue-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(142, 123, 208, 0.3);
+    box-shadow: var(--shadow-8);
 }
 
-/* ===== RESPONSIVE IMPROVEMENTS ===== */
+.profile .buttons a:active {
+    background: var(--fluent-blue-pressed);
+    transform: translateY(0);
+    box-shadow: var(--shadow-2);
+}
+
+/* ===== FLUENT ACCESSIBILITY ===== */
+
+/* Fluent focus states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--fluent-blue);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+}
+
+/* Skip to content link - Fluent style */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--fluent-blue);
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 100;
+    border-radius: var(--radius);
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 8px;
+}
+
+/* ===== FLUENT FOOTER ===== */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    margin-top: 48px;
+    background: var(--neutral-light);
+}
+
+/* ===== FLUENT RESPONSIVE DESIGN ===== */
 
 @media (max-width: 768px) {
     :root {
@@ -444,6 +543,7 @@ input:focus {
     
     .post-entry:hover {
         transform: none;
+        box-shadow: var(--shadow-2);
     }
     
     .paginav {
@@ -456,15 +556,24 @@ input:focus {
     
     .profile .buttons a {
         width: 100%;
+        text-align: center;
+    }
+    
+    /* Reduce shadows on mobile for performance */
+    .post-entry,
+    .post-content img,
+    #searchInput {
+        box-shadow: var(--shadow-2);
     }
 }
 
-/* ===== ANIMATION UTILITIES ===== */
+/* ===== FLUENT ANIMATIONS ===== */
 
-@keyframes fadeIn {
+/* Reveal animation - Microsoft style */
+@keyframes reveal {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(8px);
     }
     to {
         opacity: 1;
@@ -472,42 +581,74 @@ input:focus {
     }
 }
 
-.post-entry,
-.post-content > * {
-    animation: fadeIn 0.5s ease-out;
+.post-entry {
+    animation: reveal 0.3s cubic-bezier(0.1, 0.9, 0.2, 1) backwards;
 }
 
-/* ===== SMOOTH SCROLLING ===== */
+.post-entry:nth-child(1) { animation-delay: 0ms; }
+.post-entry:nth-child(2) { animation-delay: 50ms; }
+.post-entry:nth-child(3) { animation-delay: 100ms; }
+.post-entry:nth-child(4) { animation-delay: 150ms; }
+.post-entry:nth-child(5) { animation-delay: 200ms; }
+
+/* ===== FLUENT SCROLL BEHAVIOR ===== */
 
 html {
     scroll-behavior: smooth;
 }
 
-/* Scroll margin for anchored headings */
+/* Scroll margin for anchored headings - Fluent spacing */
 h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 64px;
 }
 
-/* ===== SELECTION HIGHLIGHT ===== */
+/* ===== FLUENT SELECTION HIGHLIGHT ===== */
 
 ::selection {
-    background: var(--midpurple);
-    color: white;
+    background: var(--fluent-blue-lighter);
+    color: var(--fluent-blue);
 }
 
 ::-moz-selection {
-    background: var(--midpurple);
+    background: var(--fluent-blue-lighter);
+    color: var(--fluent-blue);
+}
+
+/* Dark mode selection */
+.dark ::selection {
+    background: var(--fluent-blue);
     color: white;
 }
 
-/* ===== LOADING STATE ===== */
+.dark ::-moz-selection {
+    background: var(--fluent-blue);
+    color: white;
+}
+
+/* ===== FLUENT LINK STYLES ===== */
+
+.post-content a,
+.post-meta a,
+.toc a:hover {
+    color: var(--fluent-blue);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.1s;
+}
+
+.post-content a:hover {
+    border-bottom-color: var(--fluent-blue);
+}
+
+/* ===== FLUENT LOADING STATE ===== */
 
 .loading {
     opacity: 0.6;
     pointer-events: none;
+    filter: grayscale(0.3);
 }
 
-/* ===== PRINT STYLES ===== */
+/* ===== FLUENT PRINT STYLES ===== */
 
 @media print {
     .nav,
@@ -522,7 +663,99 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
     }
     
     .post-content a {
-        color: #000;
+        color: #0078D4;
         text-decoration: underline;
     }
+    
+    /* Remove shadows for print */
+    * {
+        box-shadow: none !important;
+    }
 }
+
+/* ===== FLUENT ACRYLIC EFFECT (Subtle) ===== */
+
+.nav {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.dark .nav {
+    background: rgba(27, 26, 25, 0.7);
+}
+
+/* ===== FLUENT HOVER REVEAL EFFECT ===== */
+
+.post-entry::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(0, 120, 212, 0.05) 0%, 
+                transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    border-radius: var(--radius);
+}
+
+.post-entry:hover::before {
+    opacity: 1;
+}
+
+/* ===== FLUENT ELEVATION SYSTEM ===== */
+
+.elevation-2 {
+    box-shadow: var(--shadow-2);
+}
+
+.elevation-4 {
+    box-shadow: var(--shadow-4);
+}
+
+.elevation-8 {
+    box-shadow: var(--shadow-8);
+}
+
+.elevation-16 {
+    box-shadow: var(--shadow-16);
+}
+
+.elevation-64 {
+    box-shadow: var(--shadow-64);
+}
+
+/* ===== FLUENT UTILITY CLASSES ===== */
+
+.fluent-card {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow-2);
+}
+
+.fluent-button-primary {
+    background: var(--fluent-blue);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.fluent-button-primary:hover {
+    background: var(--fluent-blue-hover);
+}
+
+.fluent-button-primary:active {
+    background: var(--fluent-blue-pressed);
+}
+
+/* ===== MICROSOFT FLUENT COMPLETE ===== */
