@@ -1,0 +1,7 @@
+fonts:
+  font_family:
+    primary: "Heebo:wght@400;600;700"
+    secondary: ""
+  font_size:
+    base: "16"
+    scale: "1.250"

@@ -1,20 +1,30 @@
 {
   "name": "mjtpena.github.io",
   "version": "1.0.0",
-  "description": "",
+  "description": "Michael John Peña's personal website and blog",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm tinacms dev -c \"hugo server\"",
+    "dev": "hugo server",
+    "build": "hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic",
+    "preview": "hugo server --disableFastRender --navigateToChanged --templateMetrics --templateMetricsHints --watch --forceSyncStatic -e production --minify",
+    "format": "prettier -w .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Michael John Peña",
   "license": "ISC",
   "dependencies": {
     "tinacms": "^2.1.1"
   },
   "devDependencies": {
     "@tinacms/cli": "^0.60.5",
-    "@types/node": "^22.5.4"
+    "@types/node": "^22.5.4",
+    "@tailwindcss/cli": "^4.1.14",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.19",
+    "prettier": "^3.6.2",
+    "prettier-plugin-go-template": "0.0.15",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "tailwindcss": "^4.1.14"
   }
 }
