@@ -1,0 +1,104 @@
+######################## default configuration ####################
+# The base URL of your site (required). This will be prepended to all relative URLs.
+baseURL = "https://michaeljohnpena.com/"
+# Title of your website (required).
+title = "Michael John Peña"
+# Default time zone for time stamps
+timeZone = "America/New_York"
+# post excerpt
+summaryLength = 20
+# disable language
+disableLanguages = []
+hasCJKLanguage = false
+# default language
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
+
+# Enable robots.txt and inline shortcodes
+enableRobotsTXT = true
+enableInlineShortcodes = true
+
+########################### Services #############################
+[services]
+[services.googleAnalytics]
+ID = 'G-R3817JRRRG'
+
+########################## Pagination ############################
+[pagination]
+disableAliases = false
+pagerSize = 20
+path = 'page'
+
+############################# Build ##############################
+[build]
+[build.buildStats]
+enable = true
+[[build.cachebusters]]
+source = 'assets/notwatching/hugo_stats\.json'
+target = 'css'
+
+############################# Modules ############################
+[module]
+[[module.mounts]]
+source = 'assets'
+target = 'assets'
+[[module.mounts]]
+disableWatch = true
+source = 'hugo_stats.json'
+target = 'assets/notwatching/hugo_stats.json'
+
+############################# Outputs ############################
+[outputs]
+home = ["HTML", "RSS", "JSON", "WebAppManifest", "SearchIndex"]
+
+########################### Output Formats #######################
+[outputFormats]
+[outputFormats.SearchIndex]
+mediaType = "application/json"
+baseName = "searchindex"
+isPlainText = true
+notAlternative = true
+
+[outputFormats.WebAppManifest]
+mediaType = "application/manifest+json"
+rel = "manifest"
+
+############################# Imaging ############################
+[imaging]
+quality = 80
+resampleFilter = "Lanczos"
+
+############################ Caches ##############################
+[caches]
+[caches.images]
+dir = ":resourceDir/_gen"
+maxAge = "720h"
+
+[caches.assets]
+dir = ":resourceDir/_gen"
+maxAge = "720h"
+
+############################ Markup ##############################
+[markup]
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+guessSyntax = true
+style = 'monokai'
+lineNumbersInTable = false
+
+[markup.tableOfContents]
+startLevel = 2
+endLevel = 5
+ordered = false
+
+########################### Media types ###########################
+[mediaTypes]
+[mediaTypes."application/manifest+json"]
+suffixes = ["webmanifest"]
+
+########################### Taxonomies ###########################
+[taxonomies]
+tag = "tags"
+category = "categories"

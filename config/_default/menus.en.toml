@@ -1,0 +1,53 @@
+############# English navigation ##############
+
+# main menu
+[[main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[main]]
+name = "Blog"
+url = "/blog/"
+weight = 2
+
+[[main]]
+name = "Projects"
+url = "/projects/"
+weight = 3
+
+[[main]]
+name = "Talks"
+url = "/talks/"
+weight = 4
+
+[[main]]
+name = "Newsletter"
+url = "https://www.linkedin.com/newsletters/7099185972998799360/"
+weight = 5
+
+[[main]]
+name = "Search"
+url = "/search/"
+weight = 6
+
+# footer menu
+[[footer]]
+name = "Blog"
+url = "/blog/"
+weight = 1
+
+[[footer]]
+name = "Projects"
+url = "/projects/"
+weight = 2
+
+[[footer]]
+name = "Talks"
+url = "/talks/"
+weight = 3
+
+[[footer]]
+name = "Contact"
+url = "mailto:michael@datachain.consulting"
+weight = 4

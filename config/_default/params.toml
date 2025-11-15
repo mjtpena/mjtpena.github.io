@@ -1,0 +1,124 @@
+#################### default parameters ############################
+# favicon
+favicon = "images/favicon.png"
+# logo
+logo = "images/logo.png"
+logo_darkmode = "images/logo-darkmode.png"
+logo_width = "160px"
+logo_height = "160px"
+logo_webp = true
+logo_text = "Michael John Peña"
+# navbar fixed to top
+navbar_fixed = true
+# theme-mode
+theme_switcher = true
+theme_default = "system"
+# Main Sections
+mainSections = ["blog"]
+# contact form action
+contact_form_action = "#"
+# google tag manager
+google_tag_manager = ""
+google_adsense = ""
+custom_script = ""
+# copyright
+copyright = "© 2025 Michael John Peña. All rights reserved."
+
+# Plugins
+[[plugins.css]]
+link = "css/custom.css"
+lazy = false
+attributes = ""
+
+# Preloader
+[preloader]
+enable = false
+preloader = ""
+
+# Navigation button
+[navigation_button]
+enable = true
+label = "Newsletter"
+link = "https://www.linkedin.com/newsletters/7099185972998799360/"
+
+# search
+[search]
+enable = true
+primary_color = "#121212"
+include_sections = ["blog"]
+show_image = true
+show_description = true
+show_tags = true
+show_categories = true
+
+# announcement
+[announcement]
+enable = false
+expire_days = 7
+content = ""
+
+# seo meta data for OpenGraph / Twitter Card
+[metadata]
+keywords = ["Data Engineering", "Cloud Platforms", "Applications Development", "Technology", "Michael John Peña"]
+description = "I am a Technologist with background in Applications Development, Data Engineering, and Cloud Platforms. I am passionate about emerging data technologies."
+author = "Michael John Peña"
+twitter = ""
+image = "images/logo.png"
+
+# site verifications
+[site_verification]
+google = ""
+bing = ""
+baidu = ""
+facebook = ""
+mastodon = ""
+
+# cookies
+[cookies]
+enable = false
+expire_days = 60
+content = "This site uses cookies. By continuing to use this website, you agree to their use."
+button = "I Accept"
+
+# diagrams
+[mermaid]
+js_url = 'https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.esm.min.mjs'
+
+######################## sidebar widgets #########################
+[widgets]
+sidebar = ["categories", "tags"]
+
+# google map
+[google_map]
+enable = false
+
+# Social media links
+[[social]]
+name = "LinkedIn"
+icon = "fab fa-linkedin"
+url = "https://www.linkedin.com/in/michaeljohnpena/"
+
+[[social]]
+name = "GitHub"
+icon = "fab fa-github"
+url = "https://github.com/mjtpena"
+
+[[social]]
+name = "YouTube"
+icon = "fab fa-youtube"
+url = "https://www.youtube.com/@mjtpena"
+
+[[social]]
+name = "Medium"
+icon = "fab fa-medium"
+url = "https://medium.com/@mjtpena"
+
+[[social]]
+name = "Instagram"
+icon = "fab fa-instagram"
+url = "https://www.instagram.com/mjtpena"
+
+[[social]]
+name = "Email"
+icon = "fas fa-envelope"
+url = "mailto:michael@datachain.consulting"

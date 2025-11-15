@@ -9,3 +9,10 @@ linkmap
 
 node_modules
 .env
+
+# Hugo build artifacts
+hugo_stats.json
+.hugo_build.lock
+
+# Go modules cache
+go.sum
