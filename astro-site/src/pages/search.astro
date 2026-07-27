@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchModal from '../components/SearchModal.astro';
+---
+
+<BaseLayout title="Search" description="Search through all blog posts and content.">
+  <section class="pt-20 pb-12 md:pt-28 md:pb-20 px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto">
+      <!-- Header -->
+      <header class="text-center mb-12">
+        <span class="section-label justify-center">
+          <span class="glow-dot"></span>
+          Find Content
+        </span>
+        <h1 class="section-title">Search</h1>
+        <p class="text-zinc-500">
+          Find posts by title or content
+        </p>
+      </header>
+
+      <!-- Search -->
+      <SearchModal />
+
+      <!-- Tips -->
+      <div class="mt-8 md:mt-12">
+        <div class="card p-4 sm:p-6">
+          <h2 class="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Search Tips</h2>
+          <ul class="space-y-3 text-zinc-400 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="text-[#0078D4] mt-0.5">•</span>
+              <span>Use keywords from the title or description</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#0078D4] mt-0.5">•</span>
+              <span>Try searching for technologies like "Azure", "Databricks", or "Python"</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#0078D4] mt-0.5">•</span>
+              <span>Use <kbd class="px-1.5 py-0.5 bg-zinc-800 rounded text-xs font-mono">⌘ K</kbd> or <kbd class="px-1.5 py-0.5 bg-zinc-800 rounded text-xs font-mono">Ctrl K</kbd> to quickly focus the search</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <div class="card p-4 sm:p-6">
+          <h2 class="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Browse by Category</h2>
+          <div class="flex flex-wrap gap-2 sm:gap-3">
+            <a href="/blog?tag=Azure" class="btn-secondary text-xs sm:text-sm px-4 py-2">Azure</a>
+            <a href="/blog?tag=AI" class="btn-secondary text-xs sm:text-sm px-4 py-2">AI</a>
+            <a href="/blog?tag=Python" class="btn-secondary text-xs sm:text-sm px-4 py-2">Python</a>
+            <a href="/blog?tag=Data" class="btn-secondary text-xs sm:text-sm px-4 py-2">Data</a>
+            <a href="/blog" class="text-[#00B7C3] hover:text-[#0078D4] text-xs sm:text-sm px-4 py-2 self-center">View all posts →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: 'Microsoft Fabric Lakehouse Implementation',
+    description: 'Designed and implemented enterprise-scale Lakehouse architecture on Microsoft Fabric, enabling unified analytics across structured and unstructured data with OneLake as the foundation.',
+    tags: ['Microsoft Fabric', 'Lakehouse', 'OneLake', 'PySpark'],
+    github: 'https://github.com/mjtpena/fabric-lakehouse-implementation',
+    featured: true,
+  },
+  {
+    title: 'Azure Synapse Analytics Platform',
+    description: 'Architected a modern data warehouse solution using Azure Synapse Analytics with dedicated SQL pools, Spark pools, and integrated Power BI reporting for real-time business intelligence.',
+    tags: ['Azure Synapse', 'SQL', 'Power BI', 'Data Warehouse'],
+    github: 'https://github.com/mjtpena/azure-synapse-analytics-platform',
+    featured: true,
+  },
+  {
+    title: 'DeltaLens',
+    description: 'VS Code extension for inspecting, querying, and visualizing Delta Lake tables locally. Browse table schemas, run SQL queries, and explore data without cloud infrastructure.',
+    tags: ['VS Code', 'Delta Lake', 'TypeScript', 'Developer Tools'],
+    github: null,
+    status: 'coming-soon',
+    featured: true,
+  },
+  {
+    title: 'Databricks Delta Lake Migration',
+    description: 'Led migration of legacy data pipelines to Azure Databricks with Delta Lake, achieving 10TB+ daily ingestion with ACID transactions and time-travel capabilities.',
+    tags: ['Databricks', 'Delta Lake', 'PySpark', 'Azure'],
+    github: 'https://github.com/mjtpena/databricks-delta-lake-migration',
+    featured: false,
+  },
+  {
+    title: 'Fabric Real-Time Intelligence',
+    description: 'Implemented real-time streaming analytics using Microsoft Fabric Real-Time Intelligence with KQL databases and Eventstream for IoT and telemetry data processing.',
+    tags: ['Microsoft Fabric', 'KQL', 'Real-Time', 'Eventstream'],
+    github: 'https://github.com/mjtpena/fabric-realtime-intelligence',
+    featured: false,
+  },
+  {
+    title: 'ClarityDQ',
+    description: 'Native Microsoft Fabric workload for automated data quality management, lineage tracking, and governance. Ensures data reliability across your lakehouse.',
+    tags: ['Microsoft Fabric', 'Data Quality', 'Governance', 'Python'],
+    github: 'https://github.com/mjtpena/ClarityDQ',
+    featured: false,
+  },
+  {
+    title: 'Faborite',
+    description: 'Sync Microsoft Fabric lakehouse data locally for faster development. Enables offline development and testing workflows with Fabric data.',
+    tags: ['Microsoft Fabric', 'Developer Tools', 'CLI', 'Python'],
+    github: 'https://github.com/mjtpena/faborite',
+    featured: false,
+  },
+  {
+    title: 'Foundz.NET',
+    description: 'Production-ready Azure AI Foundry CLI agent with multi-model support. Build and deploy AI agents with Azure AI services.',
+    tags: ['Azure AI', '.NET', 'CLI', 'Agents'],
+    github: 'https://github.com/mjtpena/foundz.net',
+    featured: false,
+  },
+  {
+    title: 'Azure Databricks Demos',
+    description: 'Comprehensive tutorials and best practices for integrating Azure Databricks with enterprise Azure services. Hands-on notebooks and IaC examples.',
+    tags: ['Databricks', 'Azure', 'Tutorials', 'IaC'],
+    github: 'https://github.com/mjtpena/azure-databricks-demos',
+    featured: false,
+  },
+  {
+    title: 'Synapse Data Factory Orchestration',
+    description: 'Built enterprise data integration pipelines using Azure Data Factory and Synapse Pipelines, orchestrating complex ETL workflows across multiple data sources.',
+    tags: ['Data Factory', 'Azure Synapse', 'ETL', 'Pipelines'],
+    github: 'https://github.com/mjtpena/synapse-datafactory-orchestration',
+    featured: false,
+  },
+  {
+    title: 'Power BI Enterprise Deployment',
+    description: 'Deployed organization-wide Power BI solution with row-level security, incremental refresh, and DirectQuery optimization for large-scale analytics.',
+    tags: ['Power BI', 'DAX', 'Analytics', 'Governance'],
+    github: 'https://github.com/mjtpena/powerbi-enterprise-deployment',
+    featured: false,
+  },
+  {
+    title: 'Cosmos DB Data Architecture',
+    description: 'Designed globally distributed NoSQL data layer using Azure Cosmos DB with optimized partition strategies and multi-region replication.',
+    tags: ['Cosmos DB', 'NoSQL', 'Azure', 'Architecture'],
+    github: 'https://github.com/mjtpena/cosmosdb-data-architecture',
+    featured: false,
+  },
+  {
+    title: 'MLOps with Databricks & Azure ML',
+    description: 'Established MLOps practices combining Databricks MLflow with Azure Machine Learning for model training, versioning, and deployment automation.',
+    tags: ['Databricks', 'Azure ML', 'MLOps', 'Python'],
+    github: 'https://github.com/mjtpena/mlops-databricks-azureml',
+    featured: false,
+  },
+  {
+    title: 'Azure Security Demos',
+    description: 'Hands-on Azure security demos covering Compute, Network, and Data security with Microsoft Defender, NSGs, Key Vault, and more.',
+    tags: ['Azure', 'Security', 'Defender', 'IaC'],
+    github: 'https://github.com/mjtpena/azure-security-demos',
+    featured: false,
+  },
+  {
+    title: 'Azure Container Demos',
+    description: 'Hands-on demos for deploying containerized applications to Azure using Container Apps, AKS, and ACR.',
+    tags: ['Azure', 'Containers', 'AKS', 'Docker'],
+    github: 'https://github.com/mjtpena/azure-container-demos',
+    featured: false,
+  },
+  {
+    title: 'Azure Database Migration Demos',
+    description: 'Complete demos for migrating SQL Server and PostgreSQL databases to Azure using Terraform and best practices.',
+    tags: ['Azure', 'Database', 'Migration', 'Terraform'],
+    github: 'https://github.com/mjtpena/azure-database-migration-demos',
+    featured: false,
+  },
+];
+
+const featuredProjects = projects.filter((p) => p.featured);
+const otherProjects = projects.filter((p) => !p.featured);
+---
+
+<BaseLayout title="Projects" description="Microsoft Fabric, Azure Synapse, and Databricks data platform solutions.">
+  <section class="pt-20 pb-12 md:pt-28 md:pb-20 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <header class="mb-8 md:mb-16">
+        <span class="section-label">
+          <span class="glow-dot"></span>
+          Portfolio
+        </span>
+        <h1 class="section-title">Projects</h1>
+        <p class="text-zinc-500 max-w-2xl">
+          Enterprise data platform implementations using Microsoft Fabric, Azure Synapse Analytics, and Azure Databricks.
+        </p>
+      </header>
+
+      <!-- Featured Projects -->
+      <div class="mb-8 md:mb-16">
+        <h2 class="text-sm font-mono text-zinc-500 uppercase tracking-wider mb-4 md:mb-6">Featured Work</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          {featuredProjects.map((project) => (
+            <div class="card card-hover p-4 sm:p-6 group relative overflow-hidden">
+              <div class="absolute top-0 left-0 w-full h-0.5 bg-[#0078D4]"></div>
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-semibold text-white group-hover:text-[#00B7C3] transition-colors duration-300 flex-1">
+                  {project.title}
+                </h3>
+                {project.github ? (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-zinc-500 hover:text-[#00B7C3] transition-colors ml-3 flex-shrink-0"
+                    aria-label="View on GitHub"
+                  >
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                    </svg>
+                  </a>
+                ) : (
+                  <span class="text-xs font-mono text-zinc-600 border border-zinc-700 rounded px-2 py-1 ml-3 flex-shrink-0">soon</span>
+                )}
+              </div>
+              <p class="text-zinc-500 text-sm mb-4 leading-relaxed">{project.description}</p>
+              <div class="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span class="tag text-xs">{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Other Projects -->
+      <div>
+        <h2 class="text-sm font-mono text-zinc-500 uppercase tracking-wider mb-4 md:mb-6">Other Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {otherProjects.map((project) => (
+            <div class="card card-hover p-4 sm:p-5 group">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-lg font-semibold text-white group-hover:text-[#00B7C3] transition-colors duration-300 flex-1">
+                  {project.title}
+                </h3>
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-zinc-500 hover:text-[#00B7C3] transition-colors ml-2 flex-shrink-0"
+                    aria-label="View on GitHub"
+                  >
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+              <p class="text-zinc-500 text-sm mb-4">{project.description}</p>
+              <div class="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span class="tag text-xs">{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 md:mt-16 text-center">
+        <div class="card p-6 sm:p-8 w-full sm:inline-block">
+          <p class="text-zinc-400 mb-4">Want to see more of my work?</p>
+          <a
+            href="https://github.com/mjtpena"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+            </svg>
+            View GitHub Profile
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

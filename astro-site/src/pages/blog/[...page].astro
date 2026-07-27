@@ -1,0 +1,311 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+  const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return paginate(sortedPosts, { pageSize: 24 });
+};
+
+type Props = { page: Page<CollectionEntry<'blog'>> };
+const { page } = Astro.props as Props;
+
+// Tags and years from the current page for local filtering
+const allTags = [...new Set(page.data.flatMap((post) => post.data.tags || []))].sort();
+const allYears = [...new Set(page.data.map((post) => post.data.date.getFullYear()))].sort((a, b) => b - a);
+
+const estimateReadingTime = (body: string) => {
+  const plainContent = body
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`[^`]*`/g, ' ')
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, ' $1 ')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, ' $1 ')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/[#>*_~\-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const words = plainContent ? plainContent.split(' ').length : 0;
+  return Math.max(1, Math.ceil(words / 220));
+};
+
+const postsWithReadingTime = page.data.map((post) => ({
+  post,
+  readingTime: estimateReadingTime(post.body || ''),
+}));
+
+const featuredPost = page.currentPage === 1 ? postsWithReadingTime[0] : undefined;
+const listPosts = page.currentPage === 1 ? postsWithReadingTime.slice(1) : postsWithReadingTime;
+const pageNumbers = Array.from({ length: page.lastPage }, (_, index) => index + 1);
+const getPageHref = (pageNumber: number) => (pageNumber === 1 ? '/blog' : `/blog/${pageNumber}`);
+---
+
+<BaseLayout
+  title={page.currentPage === 1 ? 'Blog' : `Blog — Page ${page.currentPage}`}
+  description={`Thoughts on data engineering, cloud architecture, and technology. ${page.total} articles.`}
+>
+  <section class="pt-20 pb-12 md:pt-28 md:pb-20 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Header -->
+      <header class="mb-10">
+        <span class="section-label">
+          <span class="glow-dot"></span>
+          Articles
+        </span>
+        <h1 class="section-title">Blog</h1>
+        <p class="text-zinc-500 max-w-2xl">
+          Thoughts on data engineering, cloud architecture, and technology.
+          <span class="font-mono text-zinc-400">{page.total}</span> articles and counting.
+        </p>
+      </header>
+
+      <!-- Filters -->
+      <div class="card p-3 sm:p-4 mb-8">
+        <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+          <!-- Search — redirects to /search for full-text across all posts -->
+          <form action="/search" method="get" class="relative w-full lg:w-72">
+            <input
+              type="text"
+              name="q"
+              placeholder="Search all posts..."
+              class="w-full px-4 py-2.5 pl-10 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-[#0078D4]/50 transition-colors duration-300 text-sm"
+            />
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </form>
+
+          <!-- Year filter (filters current page) -->
+          <div class="flex items-center gap-2 flex-wrap overflow-x-auto pb-1">
+            <span class="text-zinc-500 text-sm font-mono">Year:</span>
+            <button class="year-filter tag text-xs py-1.5 min-h-[36px] border-[#0078D4] text-[#00B7C3]" data-year="all">All</button>
+            {allYears.map((year) => (
+              <button class="year-filter tag text-xs py-1.5 min-h-[36px]" data-year={year.toString()}>
+                {year}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="mt-4 pt-4 border-t border-zinc-800">
+          <button id="toggle-tags" class="text-sm text-zinc-500 hover:text-white transition-colors duration-300 flex items-center gap-2">
+            <span>Filter by tags</span>
+            <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div id="tags-container" class="hidden mt-3 flex flex-wrap gap-2 max-w-full overflow-hidden">
+            {allTags.slice(0, 20).map((tag) => (
+              <button class="tag-filter tag text-xs" data-tag={tag}>
+                {tag}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Results count -->
+      <p id="results-count" class="text-zinc-500 text-sm mb-6 font-mono">
+        Showing {page.data.length} of {page.total} posts
+        {page.lastPage > 1 && <span>— page {page.currentPage} of {page.lastPage}</span>}
+      </p>
+
+      <!-- Posts Grid -->
+      <div id="posts-grid" class="space-y-6">
+        {featuredPost && (
+          <div
+            class="post-item"
+            data-title={featuredPost.post.data.title.toLowerCase()}
+            data-tags={(featuredPost.post.data.tags || []).join(',').toLowerCase()}
+            data-year={featuredPost.post.data.date.getFullYear().toString()}
+          >
+            <PostCard
+              title={featuredPost.post.data.title}
+              description={featuredPost.post.data.description}
+              date={featuredPost.post.data.date}
+              slug={featuredPost.post.slug}
+              tags={featuredPost.post.data.tags}
+              image={featuredPost.post.data.image || featuredPost.post.data.cover}
+              featured={true}
+              readingTime={featuredPost.readingTime}
+            />
+          </div>
+        )}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {listPosts.map(({ post, readingTime }) => (
+            <div
+              class="post-item"
+              data-title={post.data.title.toLowerCase()}
+              data-tags={(post.data.tags || []).join(',').toLowerCase()}
+              data-year={post.data.date.getFullYear().toString()}
+            >
+              <PostCard
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.date}
+                slug={post.slug}
+                tags={post.data.tags}
+                image={post.data.image || post.data.cover}
+                readingTime={readingTime}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- No results -->
+      <div id="no-results" class="hidden text-center py-16">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-zinc-800 mb-4">
+          <svg class="w-8 h-8 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <p class="text-zinc-400">No posts found on this page</p>
+        <a href="/search" class="text-[#00B7C3] text-sm mt-2 inline-block hover:underline">Search all {page.total} posts →</a>
+      </div>
+
+      <!-- Pagination -->
+      {page.lastPage > 1 && (
+        <nav class="mt-12 flex items-center justify-between" aria-label="Blog pagination">
+          <div>
+            {page.url.prev ? (
+              <a href={page.url.prev} class="btn-secondary flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Newer posts
+              </a>
+            ) : (
+              <span></span>
+            )}
+          </div>
+
+          <div class="flex items-center gap-1">
+            {pageNumbers.map((pageNumber) => (
+              <a
+                href={getPageHref(pageNumber)}
+                class:list={[
+                  'w-8 h-8 inline-flex items-center justify-center rounded-md text-xs font-mono transition-colors duration-300',
+                  pageNumber === page.currentPage
+                    ? 'bg-[#0078D4] text-white'
+                    : 'text-zinc-400 hover:text-white hover:bg-zinc-800',
+                ]}
+                aria-current={pageNumber === page.currentPage ? 'page' : undefined}
+                aria-label={`Page ${pageNumber}`}
+              >
+                {pageNumber}
+              </a>
+            ))}
+          </div>
+
+          <div>
+            {page.url.next ? (
+              <a href={page.url.next} class="btn-secondary flex items-center gap-2">
+                Older posts
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            ) : (
+              <span></span>
+            )}
+          </div>
+        </nav>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const postsGrid = document.getElementById('posts-grid');
+  const noResults = document.getElementById('no-results');
+  const resultsCount = document.getElementById('results-count');
+  const yearFilters = document.querySelectorAll('.year-filter');
+  const tagFilters = document.querySelectorAll('.tag-filter');
+  const toggleTagsBtn = document.getElementById('toggle-tags');
+  const tagsContainer = document.getElementById('tags-container');
+
+  let activeYear = 'all';
+  let activeTag = '';
+
+  function filterPosts() {
+    const posts = document.querySelectorAll('.post-item');
+    let visibleCount = 0;
+
+    posts.forEach((post) => {
+      const postEl = post as HTMLElement;
+      const tags = postEl.dataset.tags || '';
+      const year = postEl.dataset.year || '';
+
+      const matchesYear = activeYear === 'all' || year === activeYear;
+      const matchesTag = !activeTag || tags.includes(activeTag.toLowerCase());
+
+      if (matchesYear && matchesTag) {
+        postEl.style.display = '';
+        visibleCount++;
+      } else {
+        postEl.style.display = 'none';
+      }
+    });
+
+    if (resultsCount) {
+      resultsCount.textContent = `Showing ${visibleCount} posts`;
+    }
+
+    if (noResults && postsGrid) {
+      noResults.classList.toggle('hidden', visibleCount > 0);
+      postsGrid.classList.toggle('hidden', visibleCount === 0);
+    }
+  }
+
+  // Year filter
+  yearFilters.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      yearFilters.forEach((b) => b.classList.remove('border-[#0078D4]', 'text-[#00B7C3]'));
+      btn.classList.add('border-[#0078D4]', 'text-[#00B7C3]');
+      activeYear = (btn as HTMLElement).dataset.year || 'all';
+      filterPosts();
+    });
+  });
+
+  // Tag filter
+  tagFilters.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tag = (btn as HTMLElement).dataset.tag || '';
+      if (activeTag === tag) {
+        btn.classList.remove('border-[#0078D4]', 'text-[#00B7C3]');
+        activeTag = '';
+      } else {
+        tagFilters.forEach((b) => b.classList.remove('border-[#0078D4]', 'text-[#00B7C3]'));
+        btn.classList.add('border-[#0078D4]', 'text-[#00B7C3]');
+        activeTag = tag;
+      }
+      filterPosts();
+    });
+  });
+
+  // Toggle tags panel
+  toggleTagsBtn?.addEventListener('click', () => {
+    tagsContainer?.classList.toggle('hidden');
+    toggleTagsBtn.querySelector('svg')?.classList.toggle('rotate-180');
+  });
+
+  // URL tag param (from PostCard tag links)
+  const tagParam = new URLSearchParams(window.location.search).get('tag');
+  if (tagParam) {
+    activeTag = tagParam;
+    tagsContainer?.classList.remove('hidden');
+    tagFilters.forEach((btn) => {
+      if ((btn as HTMLElement).dataset.tag === tagParam) {
+        btn.classList.add('border-[#0078D4]', 'text-[#00B7C3]');
+      }
+    });
+    filterPosts();
+  }
+</script>

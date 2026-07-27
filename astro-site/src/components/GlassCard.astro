@@ -1,0 +1,33 @@
+---
+interface Props {
+  class?: string;
+  hover?: boolean;
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+  as?: 'div' | 'article' | 'section';
+}
+
+const {
+  class: className = '',
+  hover = false,
+  padding = 'md',
+  as: Element = 'div'
+} = Astro.props as Props;
+
+const paddingClasses: Record<'none' | 'sm' | 'md' | 'lg', string> = {
+  none: '',
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+};
+---
+
+<Element
+  class:list={[
+    'card',
+    hover && 'card-hover',
+    paddingClasses[padding],
+    className,
+  ]}
+>
+  <slot />
+</Element>

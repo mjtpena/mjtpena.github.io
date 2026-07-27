@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title>Figure 3 — Context Richness vs. Proactivity Landscape</title>
+  <desc>Transition Intelligence Agent (TIA) occupies the proactive + context-rich quadrant</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="960" height="560" fill="url(#bg)" rx="16"/>
+  <text x="40" y="42" fill="#f8fafc" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="700">Figure 3 — Context Richness vs. Proactivity Landscape</text>
+  <text x="40" y="68" fill="#94a3b8" font-size="14" font-family="Inter, Arial, sans-serif">Transition Intelligence Agent (TIA) occupies the proactive + context-rich quadrant</text>
+  <rect x="120" y="120" width="700" height="330" fill="#0b1220" stroke="#334155" rx="10"/>
+  <line x1="470.0" y1="120" x2="470.0" y2="450" stroke="#334155"/>
+  <line x1="120" y1="285.0" x2="820" y2="285.0" stroke="#334155"/>
+  <text x="470.0" y="492" text-anchor="middle" fill="#cbd5e1" font-size="14" font-family="Inter, Arial, sans-serif">Context Richness →</text>
+  <text x="42" y="285.0" transform="rotate(-90 42 285.0)" text-anchor="middle" fill="#cbd5e1" font-size="14" font-family="Inter, Arial, sans-serif">Proactivity →</text>
+  <text x="130" y="138" fill="#64748b" font-size="12" font-family="Inter, Arial, sans-serif">High proactivity</text>
+  <text x="130" y="440" fill="#64748b" font-size="12" font-family="Inter, Arial, sans-serif">Low proactivity</text>
+  <text x="125" y="472" fill="#64748b" font-size="12" font-family="Inter, Arial, sans-serif">Low context</text>
+  <text x="815" y="472" text-anchor="end" fill="#64748b" font-size="12" font-family="Inter, Arial, sans-serif">High context</text>
+  <circle cx="260.0" cy="252.0" r="7" fill="#38bdf8"/>
+  <text x="272.0" y="256.0" fill="#cbd5e1" font-size="13" font-family="Inter, Arial, sans-serif">Calendar</text>
+  <circle cx="680.0" cy="384.0" r="7" fill="#38bdf8"/>
+  <text x="692.0" y="388.0" fill="#cbd5e1" font-size="13" font-family="Inter, Arial, sans-serif">Notes app</text>
+  <circle cx="540.0" cy="268.5" r="7" fill="#38bdf8"/>
+  <text x="552.0" y="272.5" fill="#cbd5e1" font-size="13" font-family="Inter, Arial, sans-serif">CRM</text>
+  <circle cx="505.0" cy="367.5" r="7" fill="#38bdf8"/>
+  <text x="517.0" y="371.5" fill="#cbd5e1" font-size="13" font-family="Inter, Arial, sans-serif">Chat assistant</text>
+  <circle cx="736.0" cy="159.6" r="9" fill="#f97316"/>
+  <text x="748.0" y="163.6" fill="#fde68a" font-size="13" font-family="Inter, Arial, sans-serif">TIA</text>
+</svg>

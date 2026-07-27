@@ -1,0 +1,277 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  prevPost?: CollectionEntry<'blog'> | null;
+  nextPost?: CollectionEntry<'blog'> | null;
+  headings?: { depth: number; slug: string; text: string }[];
+}
+
+const { post, prevPost = null, nextPost = null, headings = [] } = Astro.props as Props;
+const { title, date, author, tags = [], image, cover, description } = post.data;
+
+// Table of contents: use h2/h3 headings; only show the sidebar when there's enough structure
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const hasToc = tocHeadings.length >= 3;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Calculate reading time
+const content = (post.body || '')
+  .replace(/```[\s\S]*?```/g, ' ')
+  .replace(/`[^`]*`/g, ' ')
+  .replace(/!\[([^\]]*)\]\([^)]*\)/g, ' $1 ')
+  .replace(/\[([^\]]+)\]\([^)]*\)/g, ' $1 ')
+  .replace(/<[^>]*>/g, ' ')
+  .replace(/[#>*_~\-]/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim();
+const wordCount = content ? content.split(' ').length : 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 220));
+
+const coverImage = image || cover;
+const postDescription = description || `${title} - A blog post by ${author}`;
+const siteURL = Astro.site ?? Astro.url;
+const articleStructuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: postDescription,
+  datePublished: date.toISOString(),
+  dateModified: date.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: author,
+  },
+  mainEntityOfPage: new URL(Astro.url.pathname, siteURL).toString(),
+  ...(coverImage ? { image: new URL(coverImage, siteURL).toString() } : {}),
+});
+---
+
+<BaseLayout
+  title={title}
+  description={postDescription}
+  image={coverImage}
+  type="article"
+  publishedTime={date.toISOString()}
+  authorName={author}
+  articleTags={tags}
+>
+  <script slot="head" type="application/ld+json" set:html={articleStructuredData}></script>
+
+  <div
+    id="reading-progress"
+    aria-hidden="true"
+    class="fixed top-0 left-0 z-50 h-[3px] w-full bg-gradient-to-r from-[#0078D4] to-[#00B7C3] origin-left"
+    style="transform: scaleX(0);"
+  ></div>
+
+  <article id="blog-article" class="pt-20 pb-12 md:pt-28 md:pb-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="lg:flex lg:justify-center lg:gap-10 xl:gap-14">
+        <!-- Main column (readable measure) -->
+        <div class="w-full min-w-0 lg:max-w-3xl">
+          <!-- Header -->
+          <header class="mb-10 md:mb-14">
+            <!-- Back link -->
+            <a
+              href="/blog"
+              class="inline-flex items-center gap-2 text-zinc-500 hover:text-[#00B7C3] transition-colors duration-300 mb-8 text-sm py-1 -ml-1"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Blog
+            </a>
+
+            <!-- Meta -->
+            <div class="flex flex-wrap items-center gap-3 text-sm text-zinc-500 mb-6 font-mono">
+              <time datetime={date.toISOString()}>{formattedDate}</time>
+              <span aria-hidden="true">&middot;</span>
+              <span>{readingTime} min read</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-6 leading-tight">
+              {title}
+            </h1>
+
+            <!-- Tags -->
+            {tags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <a href={`/blog?tag=${encodeURIComponent(tag)}`} class="tag text-xs">
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            )}
+          </header>
+
+          <!-- Cover Image -->
+          {coverImage && (
+            <div class="mb-12 md:mb-14">
+              <div class="card p-0 overflow-hidden">
+                <img
+                  src={coverImage}
+                  alt={title}
+                  class="w-full h-auto max-h-[200px] sm:max-h-[350px] md:max-h-[500px] object-cover"
+                />
+              </div>
+            </div>
+          )}
+
+          <!-- Content -->
+          <div class="card p-5 sm:p-7 md:p-10 lg:p-12 prose-custom">
+            <slot />
+          </div>
+
+          <!-- Footer -->
+          <footer class="mt-14">
+            <div class="card p-4 sm:p-6">
+              <div class="flex flex-col sm:flex-row items-center gap-4">
+                <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-zinc-700 shrink-0">
+                  <img
+                    src="/profile.webp"
+                    alt={author}
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p class="font-semibold text-white">{author}</p>
+                  <p class="text-zinc-500 text-sm">
+                    Senior Data Engineer based in Sydney. Writing about data, cloud, and technology.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </footer>
+
+          <!-- Navigation -->
+          <nav class="mt-10" aria-label="Article navigation">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {prevPost ? (
+                <a href={`/blog/${prevPost.slug}`} class="card card-hover p-4 group">
+                  <span class="text-xs text-zinc-500 font-mono block mb-1">Older post</span>
+                  <span class="text-sm text-white group-hover:text-[#00B7C3] transition-colors duration-300 line-clamp-2 font-display font-semibold">
+                    {prevPost.data.title}
+                  </span>
+                </a>
+              ) : (
+                <span class="hidden sm:block"></span>
+              )}
+
+              {nextPost ? (
+                <a href={`/blog/${nextPost.slug}`} class="card card-hover p-4 group sm:text-right">
+                  <span class="text-xs text-zinc-500 font-mono block mb-1">Newer post</span>
+                  <span class="text-sm text-white group-hover:text-[#00B7C3] transition-colors duration-300 line-clamp-2 font-display font-semibold">
+                    {nextPost.data.title}
+                  </span>
+                </a>
+              ) : (
+                <span class="hidden sm:block"></span>
+              )}
+            </div>
+
+            <div class="mt-4 flex justify-center">
+              <a href="/blog" class="btn-secondary">
+                View All Posts
+              </a>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Table of contents sidebar -->
+        {hasToc && (
+          <aside class="hidden lg:block w-64 shrink-0" aria-label="Table of contents">
+            <div class="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-6">
+              <p class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-zinc-500 mb-4">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h10M4 18h7" />
+                </svg>
+                On this page
+              </p>
+              <nav class="border-l border-zinc-800">
+                <ul class="space-y-0.5 text-sm">
+                  {tocHeadings.map((h) => (
+                    <li>
+                      <a
+                        href={`#${h.slug}`}
+                        data-toc-link={h.slug}
+                        class:list={["toc-link", h.depth === 3 && "toc-h3"]}
+                      >
+                        {h.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          </aside>
+        )}
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  const progressBar = document.getElementById('reading-progress');
+  const article = document.getElementById('blog-article');
+
+  const updateProgress = () => {
+    if (!progressBar || !article) return;
+    const { top, height } = article.getBoundingClientRect();
+    const maxScrollable = Math.max(1, height - window.innerHeight);
+    const progress = Math.min(1, Math.max(0, -top / maxScrollable));
+    progressBar.style.transform = `scaleX(${progress})`;
+  };
+
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+
+  document.addEventListener('astro:before-swap', () => {
+    window.removeEventListener('scroll', updateProgress);
+    window.removeEventListener('resize', updateProgress);
+  }, { once: true });
+</script>
+
+<script>
+  // Highlight the current section in the table of contents while scrolling
+  const tocLinks = Array.from(document.querySelectorAll('[data-toc-link]'));
+  if (tocLinks.length) {
+    const targets: HTMLElement[] = [];
+    tocLinks.forEach((l) => {
+      const el = document.getElementById(l.getAttribute('data-toc-link') || '');
+      if (el) targets.push(el);
+    });
+
+    let current = '';
+    const setActive = (id: string) => {
+      if (id === current) return;
+      current = id;
+      tocLinks.forEach((l) =>
+        l.classList.toggle('is-active', l.getAttribute('data-toc-link') === id)
+      );
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length) setActive(visible[0].target.id);
+      },
+      { rootMargin: '-96px 0px -65% 0px', threshold: 0 }
+    );
+
+    targets.forEach((t) => observer.observe(t));
+    if (targets.length) setActive(targets[0].id);
+  }
+</script>

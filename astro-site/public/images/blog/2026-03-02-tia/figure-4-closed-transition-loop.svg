@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title>Figure 4 — Closed Transition Loop</title>
+  <desc>Each interaction updates memory, improving the next transition</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="960" height="560" fill="url(#bg)" rx="16"/>
+  <text x="40" y="42" fill="#f8fafc" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="700">Figure 4 — Closed Transition Loop</text>
+  <text x="40" y="68" fill="#94a3b8" font-size="14" font-family="Inter, Arial, sans-serif">Each interaction updates memory, improving the next transition</text>
+  <rect x="320" y="120" width="320" height="52" rx="10" fill="#0b1220" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="480" y="152" text-anchor="middle" fill="#e2e8f0" font-size="14" font-family="Inter, Arial, sans-serif">1) Upcoming commitment detected</text>
+  <rect x="320" y="200" width="320" height="52" rx="10" fill="#0b1220" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="480" y="232" text-anchor="middle" fill="#e2e8f0" font-size="14" font-family="Inter, Arial, sans-serif">2) Pre-brief assembled from live context</text>
+  <rect x="320" y="280" width="320" height="52" rx="10" fill="#0b1220" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="480" y="312" text-anchor="middle" fill="#e2e8f0" font-size="14" font-family="Inter, Arial, sans-serif">3) Interaction occurs (meeting/call/review)</text>
+  <rect x="320" y="360" width="320" height="52" rx="10" fill="#0b1220" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="480" y="392" text-anchor="middle" fill="#e2e8f0" font-size="14" font-family="Inter, Arial, sans-serif">4) Commitments and decisions captured</text>
+  <rect x="320" y="440" width="320" height="52" rx="10" fill="#0b1220" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="480" y="472" text-anchor="middle" fill="#e2e8f0" font-size="14" font-family="Inter, Arial, sans-serif">5) Relationship memory updated</text>
+  <line x1="480" y1="172" x2="480" y2="194" stroke="#f97316" stroke-width="2.5"/>
+  <polygon points="480,200 474,190 486,190" fill="#f97316"/>
+  <line x1="480" y1="252" x2="480" y2="274" stroke="#f97316" stroke-width="2.5"/>
+  <polygon points="480,280 474,270 486,270" fill="#f97316"/>
+  <line x1="480" y1="332" x2="480" y2="354" stroke="#f97316" stroke-width="2.5"/>
+  <polygon points="480,360 474,350 486,350" fill="#f97316"/>
+  <line x1="480" y1="412" x2="480" y2="434" stroke="#f97316" stroke-width="2.5"/>
+  <polygon points="480,440 474,430 486,430" fill="#f97316"/>
+  <path d="M 660 466 C 800 466, 860 260, 720 140" fill="none" stroke="#f97316" stroke-width="2.5" stroke-dasharray="8 6"/>
+  <polygon points="714,142 726,138 722,150" fill="#f97316"/>
+  <text x="760" y="300" fill="#fbbf24" font-size="13" font-family="Inter, Arial, sans-serif">Feedback loop</text>
+</svg>

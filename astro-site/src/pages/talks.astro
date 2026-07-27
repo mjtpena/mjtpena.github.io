@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const talks = [
+  {
+    title: 'Building Intelligent Data Pipelines with Azure OpenAI',
+    event: 'Microsoft Build',
+    date: '2024',
+    location: 'Seattle, USA',
+    description: 'Exploring the integration of LLMs into data pipelines for automated data transformation and quality checks.',
+    tags: ['AI', 'Azure', 'Data Engineering'],
+  },
+  {
+    title: 'Scaling Data Platforms with Databricks',
+    event: 'NDC Sydney',
+    date: '2023',
+    location: 'Sydney, Australia',
+    description: 'Best practices for building enterprise-scale data lakehouse architectures using Databricks and Delta Lake.',
+    tags: ['Databricks', 'Data Lakehouse', 'Azure'],
+  },
+  {
+    title: 'Real-time Data Streaming with Kafka',
+    event: 'Data Engineering Meetup',
+    date: '2023',
+    location: 'Melbourne, Australia',
+    description: 'Designing reliable real-time data streaming architectures for high-throughput use cases.',
+    tags: ['Kafka', 'Streaming', 'Architecture'],
+  },
+  {
+    title: 'MLOps for Data Engineers',
+    event: 'Global Azure Bootcamp',
+    date: '2022',
+    location: 'Virtual',
+    description: 'How data engineers can contribute to ML workflows and implement MLOps practices.',
+    tags: ['MLOps', 'Azure ML', 'Data Engineering'],
+  },
+  {
+    title: 'Cost-Effective Data Architecture on Azure',
+    event: 'Azure User Group',
+    date: '2022',
+    location: 'Sydney, Australia',
+    description: 'Strategies for optimizing data infrastructure costs while maintaining performance.',
+    tags: ['Azure', 'FinOps', 'Architecture'],
+  },
+];
+---
+
+<BaseLayout title="Talks" description="Speaking engagements on data engineering, cloud architecture, and AI/ML.">
+  <section class="pt-20 pb-12 md:pt-28 md:pb-20 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <header class="mb-8 md:mb-16">
+        <span class="section-label">
+          <span class="glow-dot"></span>
+          Speaking
+        </span>
+        <h1 class="section-title">Talks</h1>
+        <p class="text-zinc-500 max-w-2xl">
+          I enjoy sharing knowledge at conferences and meetups. Here are some recent talks.
+        </p>
+      </header>
+
+      <!-- Speaker Bio -->
+      <div class="card p-4 sm:p-6 mb-8 md:mb-16">
+        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-gradient-to-br from-[#0078D4] to-[#00B7C3] flex items-center justify-center shrink-0">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+            </svg>
+          </div>
+          <div class="text-center sm:text-left">
+            <h2 class="text-lg font-semibold text-white mb-2">Speaker Profile</h2>
+            <p class="text-zinc-500 text-sm mb-4">
+              Microsoft MVP and certified trainer specializing in Microsoft Fabric, Azure Synapse, and Databricks.
+              Available for conferences, meetups, corporate training, and workshops.
+            </p>
+            <a
+              href="mailto:michael@datachain.consulting?subject=Speaking%20Inquiry"
+              class="text-[#00B7C3] hover:text-[#0078D4] transition-colors text-sm"
+            >
+              Invite me to speak →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Talks grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+        {talks.map((talk) => (
+          <div class="card card-hover p-5 h-full flex flex-col">
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
+              <span class="text-xs sm:text-sm font-mono text-[#00B7C3]">{talk.date}</span>
+              <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+              <span class="text-xs sm:text-sm text-zinc-500">{talk.location}</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-1">{talk.title}</h3>
+            <p class="text-zinc-500 text-xs sm:text-sm mb-3">{talk.event}</p>
+            <p class="text-zinc-400 text-xs sm:text-sm mb-4 flex-grow">{talk.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {talk.tags.map((tag) => (
+                <span class="tag text-xs">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10 md:mt-16">
+        <div class="card p-4 sm:p-6">
+          <h2 class="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Topics I Speak About</h2>
+          <div class="flex flex-wrap gap-2">
+            {['Microsoft Fabric', 'Azure Synapse Analytics', 'Azure Databricks', 'Lakehouse Architecture', 'Power BI', 'Real-Time Intelligence', 'Data Engineering', 'MLOps'].map((topic) => (
+              <span class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-zinc-800 text-zinc-300 text-xs sm:text-sm border border-zinc-700">
+                {topic}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

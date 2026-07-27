@@ -1,0 +1,125 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  authorName?: string;
+  articleTags?: string[];
+}
+
+const {
+  title,
+  description = 'Michael John Peña - Software Engineer, Cloud Architect, and Tech Speaker based in Sydney. Specializing in Azure, .NET, AI/ML, and blockchain technologies.',
+  image = '/images/og-default.jpg',
+  type = 'website',
+  publishedTime,
+  authorName,
+  articleTags = [],
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+const personStructuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Michael John Peña',
+  url: (Astro.site ?? Astro.url).toString(),
+  sameAs: [
+    'https://twitter.com/maboroshi_au',
+    'https://www.linkedin.com/in/mjtpena/',
+  ],
+});
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title} | Michael John Peña</title>
+    <meta name="title" content={`${title} | Michael John Peña`} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Michael John Peña — Blog" href="/rss.xml" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://images.credly.com" />
+    <link rel="dns-prefetch" href="https://learn.microsoft.com" />
+    <link rel="dns-prefetch" href="https://learning.oreilly.com" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | Michael John Peña`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_AU" />
+    {type === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {type === 'article' && authorName && <meta property="article:author" content={authorName} />}
+    {type === 'article' && articleTags.map((tag) => <meta property="article:tag" content={tag} />)}
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={`${title} | Michael John Peña`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+    <meta name="twitter:creator" content="@maboroshi_au" />
+    <script type="application/ld+json" set:html={personStructuredData}></script>
+
+    <!-- Theme Script (runs before render to prevent flash) -->
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+
+      if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+
+    <!-- Page-specific head content (preloads, etc.) -->
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-zinc-900 focus:text-white focus:rounded-md focus:border focus:border-[#0078D4]"
+    >
+      Skip to content
+    </a>
+    <Header />
+    <main id="main-content" class="flex-grow page-enter">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

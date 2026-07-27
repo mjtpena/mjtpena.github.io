@@ -1,0 +1,516 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  name: string;
+  title: string;
+  description: string;
+}
+
+const { name, title, description } = Astro.props;
+
+// Latest post (build-time)
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPost = [...allPosts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+
+const stats = [
+  { value: '10+', label: 'Years Experience' },
+  { value: 'MVP', label: 'Microsoft MVP' },
+  { value: 'MCT', label: 'Certified Trainer' },
+];
+---
+
+<section class="relative min-h-screen flex items-center pt-20 pb-12 overflow-hidden">
+  <!-- ANIMATION BACKGROUND (desktop only) -->
+  <div class="hidden md:block absolute inset-0 overflow-hidden pointer-events-none" style="contain: strict;">
+    <!-- Animated gradient mesh -->
+    <div class="absolute inset-0 opacity-30">
+      <div class="absolute top-0 left-1/4 w-[400px] h-[400px] bg-gradient-radial from-[#0078D4]/30 via-[#0078D4]/10 to-transparent rounded-full blur-2xl animate-pulse-slow"></div>
+      <div class="absolute bottom-0 right-1/4 w-[350px] h-[350px] bg-gradient-radial from-[#00B7C3]/20 via-[#00B7C3]/10 to-transparent rounded-full blur-2xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-radial from-[#50E6FF]/10 via-transparent to-transparent rounded-full blur-2xl animate-pulse-slow" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- 3D Data Grid -->
+    <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="grid-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#0078D4" stop-opacity="0.1"/>
+          <stop offset="50%" stop-color="#00B7C3" stop-opacity="0.05"/>
+          <stop offset="100%" stop-color="#50E6FF" stop-opacity="0.1"/>
+        </linearGradient>
+        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="url(#grid-gradient)" stroke-width="0.5"/>
+        </pattern>
+        <!-- Glowing node gradient -->
+        <radialGradient id="node-glow">
+          <stop offset="0%" stop-color="#00B7C3" stop-opacity="1"/>
+          <stop offset="50%" stop-color="#0078D4" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#0078D4" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Perspective grid -->
+      <g class="animate-grid-move" style="transform-origin: center; transform: perspective(1000px) rotateX(60deg) scale(2);">
+        <rect width="100%" height="100%" fill="url(#grid)" opacity="0.4"/>
+      </g>
+    </svg>
+
+    <!-- Floating Data Nodes Container -->
+    <div class="data-nodes-container absolute inset-0">
+      <!-- Large glowing orbs -->
+      <div class="data-orb data-orb-1"></div>
+      <div class="data-orb data-orb-2"></div>
+      <div class="data-orb data-orb-3"></div>
+      <div class="data-orb data-orb-4"></div>
+      <div class="data-orb data-orb-5"></div>
+
+      <!-- Small particles (6 max for performance) -->
+      <div class="particle particle-1"></div>
+      <div class="particle particle-2"></div>
+      <div class="particle particle-3"></div>
+      <div class="particle particle-4"></div>
+      <div class="particle particle-5"></div>
+      <div class="particle particle-6"></div>
+    </div>
+
+    <!-- Data flow streams -->
+    <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="stream-1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0078D4" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#00B7C3" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#50E6FF" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="stream-2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#50E6FF" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#0078D4" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#00B7C3" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Animated data streams -->
+      <g filter="url(#glow)">
+        <path class="data-stream stream-1" d="M-100,200 Q400,100 900,250 T1900,200" stroke="url(#stream-1)" stroke-width="2" fill="none"/>
+        <path class="data-stream stream-2" d="M-100,400 Q300,300 700,450 T1900,350" stroke="url(#stream-2)" stroke-width="1.5" fill="none"/>
+        <path class="data-stream stream-3" d="M-100,600 Q500,500 1000,650 T1900,550" stroke="url(#stream-1)" stroke-width="1" fill="none"/>
+      </g>
+    </svg>
+
+    <!-- Neural Network Connections -->
+    <canvas id="neural-canvas" class="absolute inset-0 w-full h-full opacity-40"></canvas>
+
+    <!-- Hex pattern overlay -->
+    <div class="absolute inset-0 hex-pattern opacity-[0.03]"></div>
+
+    <!-- Scan line effect -->
+    <div class="scan-line"></div>
+  </div>
+
+  <!-- Mobile-only: simple static gradient (no GPU animations) -->
+  <div class="md:hidden absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-0 w-64 h-64 bg-[#0078D4]/10 rounded-full blur-xl"></div>
+    <div class="absolute bottom-0 right-0 w-48 h-48 bg-[#00B7C3]/10 rounded-full blur-xl"></div>
+  </div>
+
+  <!-- Content layer -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full">
+    <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
+      <!-- Left: Content -->
+      <div>
+        <!-- Status badge -->
+        <div class="animate-in flex items-center gap-3 mb-6 sm:mb-8">
+          <span class="mvp-badge">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+            Microsoft MVP
+          </span>
+          <span class="text-sm text-zinc-400 font-mono">Data Platform & Fabric</span>
+        </div>
+
+        <!-- Name -->
+        <h1 class="animate-in delay-100 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 tracking-tight">
+          {name}
+        </h1>
+
+        <!-- Title with accent -->
+        <p class="animate-in delay-200 text-lg sm:text-xl md:text-2xl text-zinc-400 mb-4 sm:mb-6">
+          <span class="text-[#00B7C3]">{title}</span>
+        </p>
+
+        <!-- Description -->
+        <p class="animate-in delay-300 text-zinc-500 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-lg">
+          {description}
+        </p>
+
+        <!-- CTAs -->
+        <div class="animate-in delay-400 flex flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12">
+          <a href="/blog" class="btn-primary">
+            Read Articles
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="/projects" class="btn-secondary">
+            View Work
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="animate-in delay-500 flex gap-6 sm:gap-8 md:gap-12">
+          {stats.map((stat) => (
+            <div>
+              <div class="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">{stat.value}</div>
+              <div class="text-xs text-zinc-500 font-mono uppercase tracking-wider">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: Profile + Terminal -->
+      <div class="animate-in delay-300 relative hidden sm:block">
+        <div class="relative">
+          <!-- Terminal window -->
+          <div class="card p-0 overflow-hidden backdrop-blur-xl bg-zinc-900/80 border-zinc-700/50">
+            <!-- Terminal header -->
+            <div class="flex items-center gap-2 px-4 py-3 bg-zinc-900/90 border-b border-zinc-800">
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+              </div>
+              <span class="text-xs text-zinc-500 font-mono ml-2">mj@fabric ~ %</span>
+            </div>
+
+            <!-- Terminal content -->
+            <div class="p-6 font-mono text-sm space-y-3">
+              <div class="flex items-start gap-2">
+                <span class="text-[#00B7C3]">$</span>
+                <span class="text-zinc-400">whoami</span>
+              </div>
+              <div class="text-zinc-300 pl-4">
+                Michael John Peña<br/>
+                <span class="text-zinc-500">Data & AI Director @ Playtime Solutions</span>
+              </div>
+
+              <div class="flex items-start gap-2 mt-4">
+                <span class="text-[#00B7C3]">$</span>
+                <span class="text-zinc-400">cat expertise.json</span>
+              </div>
+              <div class="pl-4 text-zinc-500">
+                <span class="text-zinc-600">{"{"}</span><br/>
+                <span class="pl-4">"<span class="text-[#00B7C3]">fabric</span>": ["Lakehouse", "Data Factory", "Real-Time"],</span><br/>
+                <span class="pl-4">"<span class="text-[#00B7C3]">azure</span>": ["Synapse", "Databricks", "Cosmos DB"],</span><br/>
+                <span class="pl-4">"<span class="text-[#00B7C3]">languages</span>": ["Python", "PySpark", "SQL", "KQL"]</span><br/>
+                <span class="text-zinc-600">{"}"}</span>
+              </div>
+
+              <div class="flex items-center gap-2 mt-4">
+                <span class="text-[#00B7C3]">$</span>
+                <span class="text-zinc-400 typing-animation">_</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile image overlay -->
+          <div class="absolute -top-6 -right-6 w-24 h-24 rounded-xl overflow-hidden border-4 border-[#0a0a0f] shadow-2xl ring-2 ring-[#00B7C3]/30">
+            <picture>
+              <source srcset="/profile.webp" type="image/webp" />
+              <img src="/profile.png" alt={name} width="96" height="96" class="w-full h-full object-cover" fetchpriority="high" decoding="sync" />
+            </picture>
+          </div>
+
+          <!-- Latest post link -->
+          {latestPost && (
+            <a href={`/blog/${latestPost.slug}`} class="absolute -bottom-4 -left-4 card px-4 py-2 backdrop-blur-xl bg-zinc-900/90 max-w-[240px] block hover:border-[#00B7C3]/40 transition-colors duration-300">
+              <div class="text-xs text-zinc-600 font-mono mb-1">latest_post</div>
+              <div class="text-sm text-white font-medium truncate">{latestPost.data.title}</div>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+    <div class="flex flex-col items-center gap-2 text-zinc-500">
+      <span class="text-xs font-mono">scroll</span>
+      <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  .typing-animation {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Pulse slow animation */
+  .animate-pulse-slow {
+    will-change: transform, opacity;
+    animation: pulse-slow 8s ease-in-out infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
+  }
+
+  /* Data orbs - large floating spheres */
+  .data-orb {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 183, 195, 0.4), rgba(0, 120, 212, 0.1), transparent);
+    will-change: transform;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .data-orb-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    right: 15%;
+    animation-delay: 0s;
+  }
+
+  .data-orb-2 {
+    width: 200px;
+    height: 200px;
+    top: 60%;
+    left: 10%;
+    animation-delay: -5s;
+  }
+
+  .data-orb-3 {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    right: 25%;
+    animation-delay: -10s;
+  }
+
+  .data-orb-4 {
+    width: 100px;
+    height: 100px;
+    top: 30%;
+    left: 30%;
+    animation-delay: -15s;
+  }
+
+  .data-orb-5 {
+    width: 80px;
+    height: 80px;
+    bottom: 40%;
+    right: 10%;
+    animation-delay: -8s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(30px, -30px) rotate(5deg); }
+    50% { transform: translate(-20px, 20px) rotate(-5deg); }
+    75% { transform: translate(40px, 10px) rotate(3deg); }
+  }
+
+  /* Small particles */
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #00B7C3;
+    border-radius: 50%;
+    will-change: transform, opacity;
+    animation: particle-float 15s linear infinite;
+  }
+
+  .particle-1 { top: 20%; left: 10%; animation-delay: 0s; animation-duration: 18s; }
+  .particle-2 { top: 40%; left: 85%; animation-delay: -2s; animation-duration: 22s; }
+  .particle-3 { top: 70%; left: 20%; animation-delay: -4s; animation-duration: 20s; }
+  .particle-4 { top: 15%; left: 60%; animation-delay: -6s; animation-duration: 16s; }
+  .particle-5 { top: 80%; left: 70%; animation-delay: -8s; animation-duration: 24s; }
+  .particle-6 { top: 50%; left: 5%; animation-delay: -10s; animation-duration: 19s; }
+
+  @keyframes particle-float {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(50px) scale(0.5); opacity: 0; }
+  }
+
+  /* Data streams animation */
+  .data-stream {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: stream-flow 8s linear infinite;
+  }
+
+  .stream-1 { animation-delay: 0s; }
+  .stream-2 { animation-delay: -2.5s; }
+  .stream-3 { animation-delay: -5s; }
+
+  @keyframes stream-flow {
+    0% { stroke-dashoffset: 1000; }
+    100% { stroke-dashoffset: -1000; }
+  }
+
+  /* Grid animation */
+  .animate-grid-move {
+    animation: grid-move 30s linear infinite;
+  }
+
+  @keyframes grid-move {
+    0% { transform: perspective(1000px) rotateX(60deg) scale(2) translateY(0); }
+    100% { transform: perspective(1000px) rotateX(60deg) scale(2) translateY(-60px); }
+  }
+
+  /* Hex pattern */
+  .hex-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2300B7C3' fill-opacity='1'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Scan line — uses transform only (no layout triggers) */
+  .scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 183, 195, 0.5), transparent);
+    will-change: transform, opacity;
+    animation: scan 4s ease-in-out infinite;
+  }
+
+  @keyframes scan {
+    0%   { transform: translateY(0);    opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+  }
+
+  /* Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pulse-slow,
+    .data-orb,
+    .particle,
+    .data-stream,
+    .animate-grid-move,
+    .scan-line,
+    .animate-in {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+  }
+</style>
+
+<script>
+  // Neural network canvas animation — desktop only
+  const canvas = document.getElementById('neural-canvas') as HTMLCanvasElement;
+  if (canvas && window.innerWidth >= 768) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      const resizeCanvas = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      interface Node {
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+        radius: number;
+        color: string;
+      }
+
+      const nodes: Node[] = [];
+      const nodeCount = 25;
+      const connectionDistance = 150;
+      const colors = ['#0078D4', '#00B7C3', '#50E6FF'];
+
+      // Create nodes
+      for (let i = 0; i < nodeCount; i++) {
+        nodes.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          radius: Math.random() * 2 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+
+      let rafId = 0;
+      let isVisible = true;
+
+      const observer = new IntersectionObserver(
+        (entries) => { isVisible = entries[0].isIntersecting; },
+        { threshold: 0 }
+      );
+      observer.observe(canvas);
+
+      const animate = () => {
+        rafId = requestAnimationFrame(animate);
+        if (!isVisible) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw connections first (each pair once)
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[j].x - nodes[i].x;
+            const dy = nodes[j].y - nodes[i].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < connectionDistance) {
+              const opacity = (1 - dist / connectionDistance) * 0.5;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.strokeStyle = `rgba(0, 183, 195, ${opacity})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Update and draw nodes
+        nodes.forEach((node) => {
+          node.x += node.vx;
+          node.y += node.vy;
+          if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+          if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.fillStyle = node.color;
+          ctx.fill();
+        });
+      };
+
+      animate();
+
+      // Cleanup on page navigation
+      document.addEventListener('astro:before-swap', () => {
+        cancelAnimationFrame(rafId);
+        observer.disconnect();
+        window.removeEventListener('resize', resizeCanvas);
+      }, { once: true });
+    }
+  }
+</script>

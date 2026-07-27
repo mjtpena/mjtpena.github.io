@@ -1,0 +1,277 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+// Get recent blog posts
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 6);
+
+const techStack = [
+  { name: 'Microsoft Fabric', category: 'Platform', icon: '/icons/fabric.svg' },
+  { name: 'Azure Synapse Analytics', category: 'Analytics', icon: '/icons/azure-synapse.svg' },
+  { name: 'Azure Databricks', category: 'Data', icon: '/icons/azure-databricks.svg' },
+  { name: 'Azure OpenAI', category: 'AI', icon: '/icons/azure-openai.svg' },
+  { name: 'Microsoft Foundry', category: 'Platform', icon: '/icons/foundry.svg' },
+  { name: 'Claude Anthropic', category: 'AI', icon: '/icons/anthropic.svg' },
+  { name: 'Power BI', category: 'Analytics', icon: '/icons/power-bi.svg' },
+  { name: 'Python', category: 'Language', icon: '/icons/python.svg' },
+  { name: 'Apache Spark', category: 'Processing', icon: '/icons/spark.svg' },
+  { name: '.NET', category: 'Framework', icon: '/icons/dotnet.svg' },
+  { name: 'C#', category: 'Language', icon: '/icons/csharp.svg' },
+  { name: 'Azure Cosmos DB', category: 'Database', icon: '/icons/azure-cosmos-db.svg' },
+  { name: 'Azure Kubernetes', category: 'Infra', icon: '/icons/azure-kubernetes.svg' },
+];
+
+const certifications = {
+  mvp: {
+    badge: 'https://images.credly.com/images/8f11d73e-9c33-4788-a602-88c761957c90/blob.png',
+    title: 'Microsoft MVP',
+    items: ['Microsoft Most Valuable Professional (MVP)']
+  },
+  mct: {
+    badge: 'https://images.credly.com/images/fd6bb2af-2f05-4d9b-a23e-39f8e309a82d/image.png',
+    title: 'Microsoft Certified Trainer',
+    items: ['Microsoft Certified Trainer (MCT)']
+  },
+  expert: {
+    badge: 'https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-expert-badge.svg',
+    title: 'Expert',
+    items: ['Azure Solutions Architect Expert', 'Azure DevOps Engineer Expert']
+  },
+  associate: {
+    badge: 'https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg',
+    title: 'Associate',
+    items: ['Fabric Analytics Engineer', 'Fabric Data Engineer', 'Azure Data Engineer Associate', 'Azure AI Engineer Associate', 'Azure Administrator Associate', 'Power BI Data Analyst Associate']
+  }
+};
+
+const services = [
+  {
+    title: 'Microsoft Fabric',
+    description: 'End-to-end analytics platform expertise including Lakehouses, Data Factory, Real-Time Intelligence, and OneLake architecture.',
+    iconImg: '/icons/fabric.svg',
+  },
+  {
+    title: 'Azure Data Platform',
+    description: 'Designing and implementing enterprise data solutions on Azure including Synapse, Databricks, Data Factory, and Cosmos DB.',
+    iconImg: '/icons/azure-synapse.svg',
+  },
+  {
+    title: 'AI & Analytics',
+    description: 'Integrating AI/ML capabilities with Azure OpenAI, building analytics solutions with Power BI, and implementing MLOps best practices.',
+    iconImg: '/icons/azure-openai.svg',
+  },
+];
+---
+
+<BaseLayout title="Home">
+  <!-- LCP image preload for Hero profile -->
+  <link slot="head" rel="preload" as="image" href="/profile.webp" type="image/webp" />
+
+  <!-- Hero Section -->
+  <Hero
+    name="Michael John Peña"
+    title="Data & AI Director"
+    description="Technologist specializing in Microsoft Fabric, Azure data platforms, and cloud architecture. Microsoft MVP and certified trainer helping organizations unlock the power of their data."
+  />
+
+  <!-- Services Section -->
+  <section class="py-16 md:py-24 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-12">
+        <span class="section-label">
+          <span class="glow-dot"></span>
+          Expertise
+        </span>
+        <h2 class="section-title">What I Do</h2>
+        <p class="text-zinc-500 max-w-2xl">
+          Specialized in the Microsoft data ecosystem. From Fabric lakehouses to real-time analytics, I help teams build modern data platforms.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {services.map((service, index) => (
+          <div class="card card-hover p-6 group" style={`animation-delay: ${index * 0.1}s`}>
+            <div class="w-12 h-12 rounded-lg bg-zinc-800/50 border border-zinc-700/50 flex items-center justify-center mb-4 group-hover:border-[#0078D4]/30 transition-colors duration-300">
+              <img src={service.iconImg} alt={service.title} class="w-8 h-8 object-contain" />
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2">{service.title}</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed">{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Book Callout -->
+  <section class="py-8 md:py-12 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <a href="https://www.oreilly.com/library/view/azure-data-fundamentals/9781098164720/" target="_blank" rel="noopener noreferrer" class="block card card-hover p-6 md:p-8 border-[#0078D4]/30 group">
+        <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+          <div class="w-32 shrink-0 group-hover:scale-105 transition-transform duration-300">
+            <img
+              src="https://learning.oreilly.com/library/cover/9781098164720/250w/"
+              alt="Azure Data Fundamentals Book Cover"
+              width="128"
+              height="171"
+              class="w-full rounded-lg shadow-lg"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="text-center md:text-left flex-1">
+            <div class="text-xs text-[#00B7C3] font-mono uppercase tracking-wider mb-2">Published by O'Reilly Media</div>
+            <h3 class="text-xl font-semibold text-white mb-3 group-hover:text-[#00B7C3] transition-colors duration-300">Azure Data Fundamentals</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed">Learn essential cloud data skills with this practical guide. Covers leveraging Azure services including Azure Cosmos DB, Azure Storage, Azure SQL, and Microsoft Fabric to create, store, process, analyze, and visualize data.</p>
+          </div>
+          <svg class="w-5 h-5 text-zinc-500 group-hover:text-[#00B7C3] transition-colors duration-300 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section class="py-12 md:py-16 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="section-label justify-center">
+          <span class="glow-dot"></span>
+          Credentials
+        </span>
+        <h2 class="section-title">Microsoft Certifications</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {Object.entries(certifications).map(([key, tier]) => (
+          <div class="card p-6 group">
+            <div class="flex flex-col items-center text-center">
+              <img
+                src={tier.badge}
+                alt={tier.title}
+                width="80"
+                height="80"
+                class="w-20 h-20 object-contain mb-4"
+                loading="lazy"
+                decoding="async"
+              />
+              <h3 class="text-sm font-semibold text-[#0078D4] uppercase tracking-wider mb-3">{tier.title}</h3>
+              <ul class="space-y-2">
+                {tier.items.map((cert) => (
+                  <li class="text-sm text-zinc-400">{cert}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section class="py-16 md:py-24 px-4 sm:px-6 border-y border-zinc-800">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label justify-center">
+          <span class="glow-dot"></span>
+          Tech Stack
+        </span>
+        <h2 class="section-title">Tools I Work With</h2>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        {techStack.map((tech) => (
+          <div class="card card-hover px-5 py-4 group cursor-default">
+            <div class="flex items-center gap-4">
+              <img src={tech.icon} alt={tech.name} class="w-8 h-8 object-contain" loading="lazy" />
+              <div>
+                <span class="block text-white font-medium group-hover:text-[#00B7C3] transition-colors duration-300">{tech.name}</span>
+                <span class="text-xs text-zinc-600 font-mono">{tech.category}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Posts Section -->
+  <section class="py-16 md:py-24 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <span class="section-label">
+            <span class="glow-dot"></span>
+            Latest Articles
+          </span>
+          <h2 class="section-title">From the Blog</h2>
+          <p class="text-zinc-500">Thoughts on data engineering, Azure, and technology</p>
+        </div>
+        <a href="/blog" class="btn-secondary hidden sm:flex">
+          View All
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recentPosts.map((post, index) => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            slug={post.slug}
+            tags={post.data.tags}
+            image={post.data.image || post.data.cover}
+            featured={index === 0}
+          />
+        ))}
+      </div>
+
+      <div class="mt-8 text-center sm:hidden">
+        <a href="/blog" class="btn-secondary">View all posts</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 md:py-24 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="card p-6 sm:p-8 md:p-12 text-center relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-[#0078D4]/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-[#00B7C3]/5 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10">
+          <span class="section-label justify-center">
+            <span class="glow-dot"></span>
+            Get in Touch
+          </span>
+          <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-4">
+            Let's Build Something Together
+          </h2>
+          <p class="text-zinc-500 mb-8 max-w-lg mx-auto">
+            Looking for Fabric expertise or Azure data architecture guidance? I'm available for consulting, training, and speaking engagements.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="mailto:michael@datachain.consulting" class="btn-primary">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Get in Touch
+            </a>
+            <a href="/talks" class="btn-secondary">
+              Speaking Inquiries
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

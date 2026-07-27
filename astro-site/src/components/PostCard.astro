@@ -1,0 +1,95 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  date: Date;
+  slug: string;
+  tags?: string[];
+  image?: string;
+  featured?: boolean;
+  readingTime?: number;
+}
+
+const { title, description, date, slug, tags = [], image, featured = false, readingTime } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<article class:list={['group card card-hover p-0 overflow-hidden h-full relative', featured && 'lg:col-span-2 lg:grid lg:grid-cols-2']}>
+  {image && (
+    <div class:list={['relative overflow-hidden aspect-video', featured && 'lg:aspect-auto lg:h-full']}>
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 will-change-transform"
+        loading={featured ? 'eager' : 'lazy'}
+        fetchpriority={featured ? 'high' : 'auto'}
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-60"></div>
+    </div>
+  )}
+
+  <div class:list={['p-5', featured && 'lg:p-7 lg:flex lg:flex-col lg:justify-center']}>
+    <!-- Date -->
+    <div class="flex items-center gap-2 text-xs text-zinc-500 mb-3 font-mono">
+      <time datetime={date.toISOString()}>{formattedDate}</time>
+      {readingTime && (
+        <>
+          <span aria-hidden="true">&middot;</span>
+          <span>{readingTime} min read</span>
+        </>
+      )}
+    </div>
+
+    <!-- Title -->
+    <h3 class:list={['font-display font-semibold text-white mb-2 group-hover:text-[#00B7C3] transition-colors duration-300', featured ? 'text-2xl sm:text-3xl line-clamp-3' : 'line-clamp-2']}>
+      <a
+        href={`/blog/${slug}`}
+        class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00B7C3] rounded-sm after:content-[''] after:absolute after:inset-0 after:z-0"
+      >
+        <span>{title}</span>
+      </a>
+    </h3>
+
+    <!-- Description -->
+    {description && (
+      <p class:list={['text-zinc-500 text-sm mb-4', featured ? 'line-clamp-3' : 'line-clamp-2']}>
+        {description}
+      </p>
+    )}
+
+    <!-- Tags -->
+    {tags.length > 0 && (
+      <div class="relative z-10 flex flex-wrap gap-2">
+        {tags.slice(0, featured ? 4 : 3).map((tag) => (
+          <a href={`/blog?tag=${encodeURIComponent(tag)}`} class="tag text-xs" onclick="event.stopPropagation()">
+            {tag}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <!-- Hover indicator -->
+  <div class="h-0.5 bg-[#0078D4] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left lg:col-span-2"></div>
+</article>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

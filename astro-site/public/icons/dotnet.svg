@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <linearGradient id="dotnet-grad" x1="64" y1="128" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#512BD4"/>
+    <stop offset="1" stop-color="#7B3FF2"/>
+  </linearGradient>
+  <rect fill="url(#dotnet-grad)" width="128" height="128" rx="16"/>
+  <path fill="#fff" d="M35.5,80.7c-1.5,0-2.7-0.5-3.7-1.5c-1-1-1.5-2.2-1.5-3.7c0-1.5,0.5-2.7,1.5-3.7c1-1,2.2-1.5,3.7-1.5c1.5,0,2.7,0.5,3.7,1.5c1,1,1.5,2.2,1.5,3.7c0,1.5-0.5,2.7-1.5,3.7C38.2,80.2,37,80.7,35.5,80.7z"/>
+  <path fill="#fff" d="M65.5,80V47.2h4.3l18.1,25.4V47.2h4.4V80h-4.3L69.9,54.5V80H65.5z"/>
+  <path fill="#fff" d="M47.5,80V47.2h14.2v3.8H51.9v10.2h9.1v3.8h-9.1v11.2h10v3.8H47.5z"/>
+  <path fill="#fff" d="M95.3,51V47.2h19.5V51h-7.4V80h-4.6V51H95.3z"/>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title>Figure 1 — Daily Transition Overhead by Meeting Density</title>
+  <desc>Estimated minutes lost per day from cognitive reload between meetings</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="960" height="560" fill="url(#bg)" rx="16"/>
+  <text x="40" y="42" fill="#f8fafc" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="700">Figure 1 — Daily Transition Overhead by Meeting Density</text>
+  <text x="40" y="68" fill="#94a3b8" font-size="14" font-family="Inter, Arial, sans-serif">Estimated minutes lost per day from cognitive reload between meetings</text>
+  <line x1="90" y1="490.0" x2="910" y2="490.0" stroke="#334155" stroke-width="1"/>
+  <text x="78" y="495.0" text-anchor="end" fill="#94a3b8" font-size="12" font-family="Inter, Arial, sans-serif">0</text>
+  <line x1="90" y1="395.0" x2="910" y2="395.0" stroke="#334155" stroke-width="1"/>
+  <text x="78" y="400.0" text-anchor="end" fill="#94a3b8" font-size="12" font-family="Inter, Arial, sans-serif">50</text>
+  <line x1="90" y1="300.0" x2="910" y2="300.0" stroke="#334155" stroke-width="1"/>
+  <text x="78" y="305.0" text-anchor="end" fill="#94a3b8" font-size="12" font-family="Inter, Arial, sans-serif">100</text>
+  <line x1="90" y1="205.0" x2="910" y2="205.0" stroke="#334155" stroke-width="1"/>
+  <text x="78" y="210.0" text-anchor="end" fill="#94a3b8" font-size="12" font-family="Inter, Arial, sans-serif">150</text>
+  <line x1="90" y1="110.0" x2="910" y2="110.0" stroke="#334155" stroke-width="1"/>
+  <text x="78" y="115.0" text-anchor="end" fill="#94a3b8" font-size="12" font-family="Inter, Arial, sans-serif">200</text>
+  <line x1="90.0" y1="110" x2="90.0" y2="490" stroke="#1e293b" stroke-width="1"/>
+  <text x="90.0" y="516" text-anchor="middle" fill="#94a3b8" font-size="13" font-family="Inter, Arial, sans-serif">2 meetings</text>
+  <line x1="363.3" y1="110" x2="363.3" y2="490" stroke="#1e293b" stroke-width="1"/>
+  <text x="363.3" y="516" text-anchor="middle" fill="#94a3b8" font-size="13" font-family="Inter, Arial, sans-serif">4 meetings</text>
+  <line x1="636.7" y1="110" x2="636.7" y2="490" stroke="#1e293b" stroke-width="1"/>
+  <text x="636.7" y="516" text-anchor="middle" fill="#94a3b8" font-size="13" font-family="Inter, Arial, sans-serif">6 meetings</text>
+  <line x1="910.0" y1="110" x2="910.0" y2="490" stroke="#1e293b" stroke-width="1"/>
+  <text x="910.0" y="516" text-anchor="middle" fill="#94a3b8" font-size="13" font-family="Inter, Arial, sans-serif">8 meetings</text>
+  <polyline points="90.0,452.0 363.3,414.0 636.7,376.0 910.0,338.0" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="90.0" cy="452.0" r="5" fill="#38bdf8"/>
+  <circle cx="363.3" cy="414.0" r="5" fill="#38bdf8"/>
+  <circle cx="636.7" cy="376.0" r="5" fill="#38bdf8"/>
+  <circle cx="910.0" cy="338.0" r="5" fill="#38bdf8"/>
+  <polyline points="90.0,425.4 363.3,360.8 636.7,296.2 910.0,231.6" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="90.0" cy="425.4" r="5" fill="#22d3ee"/>
+  <circle cx="363.3" cy="360.8" r="5" fill="#22d3ee"/>
+  <circle cx="636.7" cy="296.2" r="5" fill="#22d3ee"/>
+  <circle cx="910.0" cy="231.6" r="5" fill="#22d3ee"/>
+  <polyline points="90.0,395.0 363.3,300.0 636.7,205.0 910.0,110.0" fill="none" stroke="#f97316" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="90.0" cy="395.0" r="5" fill="#f97316"/>
+  <circle cx="363.3" cy="300.0" r="5" fill="#f97316"/>
+  <circle cx="636.7" cy="205.0" r="5" fill="#f97316"/>
+  <circle cx="910.0" cy="110.0" r="5" fill="#f97316"/>
+  <line x1="110" y1="546" x2="138" y2="546" stroke="#38bdf8" stroke-width="4"/>
+  <circle cx="124" cy="546" r="4" fill="#38bdf8"/>
+  <text x="148" y="551" fill="#cbd5e1" font-size="13" font-family="Inter, Arial, sans-serif">Low (10 min reload)</text>
+  <line x1="360" y1="546" x2="388" y2="546" stroke="#22d3ee" stroke-width="4"/>
+  <circle cx="374" cy="546" r="4" fill="#22d3ee"/>
+  <text x="398" y="551" fill="#cbd5e1" font-size="13" font-family="Inter, Arial, sans-serif">Midpoint (17 min reload)</text>
+  <line x1="650" y1="546" x2="678" y2="546" stroke="#f97316" stroke-width="4"/>
+  <circle cx="664" cy="546" r="4" fill="#f97316"/>
+  <text x="688" y="551" fill="#cbd5e1" font-size="13" font-family="Inter, Arial, sans-serif">High (25 min reload)</text>
+</svg>

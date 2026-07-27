@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+  <defs>
+    <linearGradient id="pbi-a" x1="6.267" y1="1.347" x2="6.267" y2="17.478" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6ad10"/>
+      <stop offset="1" stop-color="#c87e0e"/>
+    </linearGradient>
+    <linearGradient id="pbi-b" x1="10.092" y1="1.347" x2="10.092" y2="17.478" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f6d751"/>
+      <stop offset="1" stop-color="#e6ad10"/>
+    </linearGradient>
+  </defs>
+  <rect fill="url(#pbi-a)" x="3.534" y="5.347" width="5.467" height="12.131" rx=".733"/>
+  <rect fill="url(#pbi-b)" x="7.359" y="1.347" width="5.467" height="16.131" rx=".733"/>
+  <rect fill="#f9e589" x="11.184" y="7.347" width="5.467" height="10.131" rx=".733"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+  <defs>
+    <linearGradient id="foundry-a" x1="9" y1="18" x2="9" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0078D4"/>
+      <stop offset="0.5" stop-color="#50E6FF"/>
+      <stop offset="1" stop-color="#C3F1FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Foundry anvil/factory shape with AI sparkle -->
+  <path fill="url(#foundry-a)" d="M9,1L2,5v3l2,1v6h10v-6l2-1V5L9,1z M9,2.5l5,2.8v1.9l-5,2.3L4,7.2V5.3L9,2.5z"/>
+  <circle fill="#50E6FF" cx="9" cy="7" r="1.5"/>
+  <circle fill="#fff" cx="9" cy="7" r="0.5"/>
+  <!-- AI nodes -->
+  <circle fill="#50E6FF" cx="5" cy="6" r="0.7"/>
+  <circle fill="#50E6FF" cx="13" cy="6" r="0.7"/>
+  <circle fill="#50E6FF" cx="6" cy="12" r="0.7"/>
+  <circle fill="#50E6FF" cx="12" cy="12" r="0.7"/>
+  <!-- Connecting lines -->
+  <path fill="none" stroke="#50E6FF" stroke-width="0.3" d="M5,6L9,7L13,6 M6,12L9,7L12,12"/>
+</svg>

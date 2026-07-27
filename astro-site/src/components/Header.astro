@@ -1,0 +1,119 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/talks', label: 'Talks' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="max-w-7xl mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 group">
+        <span class="text-lg font-display font-bold text-white group-hover:text-[#00B7C3] transition-colors duration-300">MJP</span>
+        <span class="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#00B7C3]"></span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300',
+              currentPath === link.href
+                ? 'text-white bg-zinc-800'
+                : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2">
+        <a href="/search" class="btn-ghost p-2 rounded-lg hover:bg-zinc-800/50" aria-label="Search">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden btn-ghost p-2 rounded-lg hover:bg-zinc-800/50"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <svg class="w-5 h-5 menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="w-5 h-5 close-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-zinc-800 bg-[#0a0a0f]/95 backdrop-blur-md rounded-b-xl">
+      <div class="flex flex-col gap-1 pt-4">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'px-4 py-3 rounded-lg font-medium transition-all duration-300',
+              currentPath === link.href
+                ? 'text-white bg-zinc-800'
+                : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const header = document.getElementById('header');
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = menuBtn?.querySelector('.menu-icon');
+  const closeIcon = menuBtn?.querySelector('.close-icon');
+
+  // Scroll effect
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 50) {
+      header?.classList.add('bg-[#0a0a0f]/90', 'backdrop-blur-md', 'border-b', 'border-zinc-800/50');
+    } else {
+      header?.classList.remove('bg-[#0a0a0f]/90', 'backdrop-blur-md', 'border-b', 'border-zinc-800/50');
+    }
+  });
+
+  // Mobile menu toggle
+  menuBtn?.addEventListener('click', () => {
+    const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', String(!isExpanded));
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!menuBtn?.contains(e.target as Node) && !mobileMenu?.contains(e.target as Node)) {
+      mobileMenu?.classList.add('hidden');
+      menuBtn?.setAttribute('aria-expanded', 'false');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    }
+  });
+</script>
