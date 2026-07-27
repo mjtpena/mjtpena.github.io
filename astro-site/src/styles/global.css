@@ -326,3 +326,176 @@
     @apply border-zinc-800 my-12;
   }
 }
+
+/* =========================================================================
+   Blog visual system: inline icons, designed figures, callouts, code titles,
+   and tables. Plain CSS (outside @layer) so it reliably wins over prose-custom.
+   ========================================================================= */
+
+/* Inline product icons (Fabric/Azure) in body text and table cells must render
+   inline and flush — override the generic .prose-custom img { my-8 } rule. */
+.prose-custom img[src*="/icons/"] {
+  display: inline-block;
+  margin: 0 0.4rem 0 0;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+  vertical-align: -0.18em;
+  width: auto;
+}
+
+/* ---- Designed figure system (SVG diagrams) ---- */
+.prose-custom figure.ff { margin: 2.25rem 0; }
+.ff-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid #20262d;
+  background:
+    radial-gradient(1200px 240px at 50% -40%, rgba(0, 120, 212, 0.10), transparent 60%),
+    linear-gradient(180deg, #0e1114, #0a0c0f);
+}
+.prose-custom figure.ff figcaption { @apply mt-4 text-left; }
+.prose-custom figure.ff figcaption b,
+.prose-custom figure.ff figcaption strong { color: #d5dbe0; font-weight: 600; }
+
+/* zones */
+.ff-zone { stroke-width: 1.2; stroke-dasharray: 5 5; }
+.ff-zone-read    { fill: rgba(0, 183, 195, 0.055); stroke: rgba(0, 183, 195, 0.34); }
+.ff-zone-write   { fill: rgba(224, 160, 74, 0.055); stroke: rgba(224, 160, 74, 0.34); }
+.ff-zone-flow    { fill: rgba(0, 120, 212, 0.055); stroke: rgba(0, 120, 212, 0.34); }
+.ff-zone-danger  { fill: rgba(224, 85, 74, 0.06);  stroke: rgba(224, 85, 74, 0.40); }
+.ff-zone-neutral { fill: rgba(255, 255, 255, 0.018); stroke: #262d34; }
+
+/* nodes */
+.ff-node    { fill: #14181d; stroke: #2c343c; stroke-width: 1.3; }
+.ff-node-cy { fill: #0c2327; stroke: #00B7C3; stroke-width: 1.4; }
+.ff-node-az { fill: #0b1b2c; stroke: #0078D4; stroke-width: 1.4; }
+.ff-node-am { fill: #251d12; stroke: #e0a04a; stroke-width: 1.4; }
+.ff-node-pu { fill: #191233; stroke: #8a63e0; stroke-width: 1.4; }
+.ff-node-dn { fill: #241416; stroke: #e0554a; stroke-width: 1.4; }
+
+/* text */
+.ff-title  { fill: #e8ecef; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 14px; font-weight: 600; }
+.ff-sub    { fill: #98a2ab; font-family: 'Inter', system-ui, sans-serif; font-size: 11px; }
+.ff-tok    { fill: #7fd8cf; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; }
+.ff-zlabel { fill: #6f787f; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; }
+.ff-elabel { fill: #c2c9cf; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+.ff-elabel-bg { fill: #0c0d11; }
+.ff-amt { fill: #e0a04a; }
+.ff-cyt { fill: #00B7C3; }
+
+/* edges + arrowheads */
+.ff-edge      { stroke: #48525c; stroke-width: 1.8; fill: none; }
+.ff-edge-read { stroke: #00B7C3; stroke-width: 1.8; fill: none; }
+.ff-edge-write{ stroke: #e0a04a; stroke-width: 1.9; fill: none; }
+.ff-edge-flow { stroke: #0078D4; stroke-width: 1.9; fill: none; }
+.ff-edge-dash { stroke: #6d757d; stroke-width: 1.5; fill: none; stroke-dasharray: 5 5; }
+.ff-ah      { fill: #48525c; }
+.ff-ah-read { fill: #00B7C3; }
+.ff-ah-write{ fill: #e0a04a; }
+.ff-ah-flow { fill: #0078D4; }
+.ff-ah-dash { fill: #6d757d; }
+.ff-lgd { fill: #98a2ab; font-family: 'Inter', system-ui, sans-serif; font-size: 10.5px; }
+
+/* ---- Callouts ---- */
+.prose-custom .cl {
+  display: flex;
+  gap: 12px;
+  margin: 1.75rem 0;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid #2a323a;
+  border-left-width: 3px;
+  background: #101317;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.prose-custom .cl > .cl-body { flex: 1 1 auto; min-width: 0; }
+.prose-custom .cl > .cl-body > :first-child { margin-top: 0; }
+.prose-custom .cl > .cl-body > :last-child { margin-bottom: 0; }
+.prose-custom .cl p { margin: 0.4rem 0; color: #c4ccd2; }
+.prose-custom .cl-tag {
+  flex: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-top: 3px;
+  white-space: nowrap;
+}
+.prose-custom .cl-note { border-left-color: #00B7C3; }
+.prose-custom .cl-note .cl-tag { color: #35c9d6; }
+.prose-custom .cl-warn { border-left-color: #e0a04a; background: #15130e; }
+.prose-custom .cl-warn .cl-tag { color: #e6ab57; }
+.prose-custom .cl-key  { border-left-color: #8a63e0; background: #120f1c; }
+.prose-custom .cl-key .cl-tag { color: #a98af0; }
+
+/* ---- Titled code blocks: <div class="code-title">file</div> before a ``` fence ---- */
+.prose-custom .code-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: #aab3ba;
+  background: #0f1216;
+  border: 1px solid #262d34;
+  border-radius: 8px;
+  padding: 7px 14px;
+  margin: 1.5rem 0 0;
+}
+.prose-custom .code-title::before {
+  content: "";
+  width: 8px; height: 8px; border-radius: 2px;
+  background: #00B7C3; opacity: 0.8;
+}
+/* When the title is immediately followed by a code block, weld them together. */
+.prose-custom .code-title:has(+ pre) {
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.prose-custom .code-title + pre {
+  margin-top: 0 !important;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* ---- Tables (markdown tables in prose pick these up; inline-styled tables keep their own look) ---- */
+.prose-custom .table-wrap { margin: 1.75rem 0; border: 1px solid #262d34; border-radius: 12px; overflow: hidden; }
+.prose-custom .table-wrap > table { margin: 0; border: 0; }
+.prose-custom table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+  font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;
+}
+.prose-custom thead th {
+  text-align: left;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #eef2f4;
+  background: #15181c;
+  padding: 11px 15px;
+  border-bottom: 1px solid #2a323a;
+  white-space: nowrap;
+}
+.prose-custom tbody td {
+  padding: 11px 15px;
+  vertical-align: top;
+  border-top: 1px solid #1b2127;
+  color: #c4ccd2;
+  line-height: 1.5;
+}
+.prose-custom tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.015); }
+.prose-custom tbody td:first-child { color: #e8ecef; font-weight: 600; }
+
+@media (max-width: 640px) {
+  .prose-custom .cl { flex-direction: column; gap: 6px; }
+}

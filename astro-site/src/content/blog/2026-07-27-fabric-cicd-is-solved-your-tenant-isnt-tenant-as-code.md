@@ -87,6 +87,15 @@ Every option above moves **item definitions**. Git integration operates at the w
 - **Connections and gateways.** References to Connections don't auto-bind on deployment; Microsoft's guidance is to "use Variable Libraries with environment-specific value sets to manage connection references across environments" ([cross-workspace dependency binding](https://learn.microsoft.com/en-us/fabric/cicd/cross-workspace-dependency-binding)). The connection object itself is out-of-band state.
 - **Roles and access.** Workspace role assignments — who is Admin, Member, Contributor, Viewer — are not carried in item definitions.
 
+<div class="cl cl-key">
+<div class="cl-tag">The boundary</div>
+<div class="cl-body">
+
+Git integration versions **item definitions**. Everything that makes those items usable in production — the workspace itself, its capacity and domain, its connections, and who can touch it — lives *outside* Git unless you put it there.
+
+</div>
+</div>
+
 There is a subtler failure mode even within item deployment. Some items store dependencies as **object IDs** (workspace-specific GUIDs) rather than **logical IDs** (portable identifiers in the `.platform` file). Items using logical IDs bind to the target workspace; items using object IDs "remain pointed at the source workspace, which breaks the deployment" ([cross-workspace dependency binding](https://learn.microsoft.com/en-us/fabric/cicd/cross-workspace-dependency-binding)). Even Option 1 warns that some dependencies "require these post-deployment updates" through additional API calls ([manage-deployment](https://learn.microsoft.com/en-us/fabric/cicd/manage-deployment)). The item pipeline is not self-sufficient; it assumes a governed platform already exists around it.
 
 ## The declarative model: manifest → PR → service principal → provisioning
@@ -95,57 +104,49 @@ The missing layer has a reference implementation: Microsoft's [frontier-fabric-g
 
 > Treat the Fabric tenant as **declarative infrastructure**. Nothing exists unless a YAML manifest for it lives in `main`, was reviewed via Pull Request, and was provisioned by a service principal through GitHub Actions.
 
-<figure>
-<svg viewBox="0 0 760 268" role="img" aria-label="Governance loop: a YAML manifest in main flows through a pull request and validate gate, then on merge an OIDC token authorizes a service principal that provisions Fabric tenant state; a nightly drift job compares live state to the manifests and opens a GitHub issue on divergence, reconciled via a new PR." style="width:100%;height:auto;background:#0c0c11;border-radius:10px">
-<style>
-.g-t{fill:#e4e4e7;font-family:'Space Grotesk',system-ui,sans-serif;font-size:12.5px}
-.g-tm{fill:#a1a1aa;font-family:'Space Grotesk',system-ui,sans-serif;font-size:10.5px}
-.g-mo{fill:#7fd8cf;font-family:'JetBrains Mono',monospace;font-size:10px}
-.g-lb{fill:#8a939b;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.03em}
-.g-box{fill:#15151b;stroke:#3f3f46;stroke-width:1.3}
-.g-cy{fill:#0b2b2e;stroke:#00B7C3;stroke-width:1.4}
-.g-az{fill:#0a1f33;stroke:#0078D4;stroke-width:1.4}
-.g-ed{stroke:#0078D4;stroke-width:1.6;fill:none}
-.g-ef{fill:#0078D4}
-.g-dash{stroke:#6d757d;stroke-width:1.4;fill:none;stroke-dasharray:5 5}
-</style>
-<defs><marker id="gah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" class="g-ef"/></marker>
-<marker id="gahd" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6d757d"/></marker></defs>
-<!-- main pipeline row -->
-<rect x="14" y="52" width="142" height="56" rx="9" class="g-box"/>
-<text x="85" y="77" text-anchor="middle" class="g-t">Manifest (YAML)</text>
-<text x="85" y="93" text-anchor="middle" class="g-mo">in main</text>
-<rect x="170" y="52" width="150" height="56" rx="9" class="g-cy"/>
-<text x="245" y="77" text-anchor="middle" class="g-t">PR + validate gate</text>
-<text x="245" y="93" text-anchor="middle" class="g-tm">schema + policy</text>
-<rect x="334" y="52" width="126" height="56" rx="9" class="g-cy"/>
-<text x="397" y="77" text-anchor="middle" class="g-t">OIDC &rarr; token</text>
-<text x="397" y="93" text-anchor="middle" class="g-tm">no stored secret</text>
-<rect x="474" y="52" width="126" height="56" rx="9" class="g-box"/>
-<text x="537" y="77" text-anchor="middle" class="g-t">Service principal</text>
-<text x="537" y="93" text-anchor="middle" class="g-tm">provisions</text>
-<rect x="614" y="52" width="132" height="56" rx="9" class="g-az"/>
-<image href="/icons/fabric/group_workspace_48_non-item.svg" x="633" y="57" width="18" height="18"/>
-<image href="/icons/fabric/lakehouse_48_item.svg" x="655" y="57" width="18" height="18"/>
-<image href="/icons/fabric/data_warehouse_48_item.svg" x="677" y="57" width="18" height="18"/>
-<image href="/icons/fabric/semantic_model_48_item.svg" x="699" y="57" width="18" height="18"/>
-<text x="680" y="90" text-anchor="middle" class="g-t">Fabric tenant</text>
-<text x="680" y="102" text-anchor="middle" class="g-mo">ws·cap·domain·roles</text>
-<!-- arrows -->
-<line x1="156" y1="80" x2="168" y2="80" class="g-ed" marker-end="url(#gah)"/>
-<line x1="320" y1="80" x2="332" y2="80" class="g-ed" marker-end="url(#gah)"/>
-<line x1="460" y1="80" x2="472" y2="80" class="g-ed" marker-end="url(#gah)"/>
-<line x1="600" y1="80" x2="612" y2="80" class="g-ed" marker-end="url(#gah)"/>
-<text x="397" y="44" text-anchor="middle" class="g-lb">on merge to main</text>
-<!-- drift node -->
-<rect x="250" y="196" width="270" height="48" rx="9" class="g-box"/>
-<text x="385" y="217" text-anchor="middle" class="g-t">Nightly drift job (cron)</text>
-<text x="385" y="233" text-anchor="middle" class="g-tm">opens a GitHub issue on divergence</text>
-<!-- tenant -> drift -->
-<path d="M680,108 C 680,170 590,220 522,220" class="g-ed" marker-end="url(#gah)"/>
-<!-- drift -> manifest (dashed reconcile) -->
-<path d="M250,220 C 120,220 85,168 85,110" class="g-dash" marker-end="url(#gahd)"/>
-<text x="150" y="168" text-anchor="middle" class="g-lb">reconcile via new PR</text>
+<figure class="ff">
+<svg class="ff-svg" viewBox="0 0 900 308" role="img" aria-label="Governance loop: a YAML manifest in main flows through a pull request and validate gate, then on merge an OIDC token authorizes a service principal that provisions Fabric tenant state; a nightly drift job compares live state to the manifests and opens a GitHub issue on divergence, reconciled via a new PR.">
+<defs>
+<marker id="tcF" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah-flow"/></marker>
+<marker id="tcN" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah"/></marker>
+<marker id="tcD" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah-dash"/></marker>
+</defs>
+<rect x="20" y="44" width="860" height="120" rx="16" class="ff-zone ff-zone-flow"/>
+<text x="40" y="66" class="ff-zlabel">PR → PROVISION · ON MERGE TO MAIN</text>
+<rect x="40" y="80" width="150" height="68" rx="11" class="ff-node"/>
+<text x="115" y="112" text-anchor="middle" class="ff-title">Manifest (YAML)</text>
+<text x="115" y="130" text-anchor="middle" class="ff-tok">in main</text>
+<rect x="208" y="80" width="158" height="68" rx="11" class="ff-node ff-node-cy"/>
+<text x="287" y="112" text-anchor="middle" class="ff-title">PR + validate gate</text>
+<text x="287" y="130" text-anchor="middle" class="ff-sub">schema + policy</text>
+<rect x="384" y="80" width="140" height="68" rx="11" class="ff-node ff-node-cy"/>
+<text x="454" y="112" text-anchor="middle" class="ff-title">OIDC &rarr; token</text>
+<text x="454" y="130" text-anchor="middle" class="ff-sub">no stored secret</text>
+<rect x="542" y="80" width="150" height="68" rx="11" class="ff-node"/>
+<text x="617" y="112" text-anchor="middle" class="ff-title">Service principal</text>
+<text x="617" y="130" text-anchor="middle" class="ff-sub">provisions</text>
+<rect x="710" y="80" width="150" height="68" rx="11" class="ff-node ff-node-az"/>
+<image href="/icons/fabric/group_workspace_48_non-item.svg" x="735" y="88" width="22" height="22"/>
+<image href="/icons/fabric/lakehouse_48_item.svg" x="761" y="88" width="22" height="22"/>
+<image href="/icons/fabric/data_warehouse_48_item.svg" x="787" y="88" width="22" height="22"/>
+<image href="/icons/fabric/semantic_model_48_item.svg" x="813" y="88" width="22" height="22"/>
+<text x="785" y="128" text-anchor="middle" class="ff-title">Fabric tenant</text>
+<text x="785" y="142" text-anchor="middle" class="ff-tok">ws · cap · domain · roles</text>
+<line x1="192" y1="114" x2="206" y2="114" class="ff-edge-flow" marker-end="url(#tcF)"/>
+<line x1="368" y1="114" x2="382" y2="114" class="ff-edge-flow" marker-end="url(#tcF)"/>
+<line x1="526" y1="114" x2="540" y2="114" class="ff-edge-flow" marker-end="url(#tcF)"/>
+<line x1="694" y1="114" x2="708" y2="114" class="ff-edge-flow" marker-end="url(#tcF)"/>
+<rect x="300" y="212" width="300" height="54" rx="11" class="ff-node"/>
+<text x="450" y="236" text-anchor="middle" class="ff-title">Nightly drift job (cron)</text>
+<text x="450" y="254" text-anchor="middle" class="ff-sub">opens a GitHub issue on divergence</text>
+<path d="M785,148 C 785,196 660,239 602,239" class="ff-edge" marker-end="url(#tcN)"/>
+<path d="M300,239 C 160,239 115,196 115,150" class="ff-edge-dash" marker-end="url(#tcD)"/>
+<text x="182" y="200" text-anchor="middle" class="ff-lgd" style="fill:#8a939b">reconcile via new PR</text>
+<line x1="30" y1="290" x2="58" y2="290" class="ff-edge-flow"/>
+<text x="65" y="294" class="ff-lgd">provision on merge</text>
+<line x1="182" y1="290" x2="210" y2="290" class="ff-edge-dash"/>
+<text x="217" y="294" class="ff-lgd">reconcile via PR</text>
+<text x="352" y="294" class="ff-lgd" style="fill:#6f787f">· official Microsoft Fabric icons</text>
 </svg>
 <figcaption><strong>Figure 1.</strong> The tenant-as-code loop. A manifest change is reviewed and validated, then on merge a federated (secret-free) service principal provisions the tenant. A scheduled drift job reconciles live state against the manifests and raises a tracked issue when they diverge — closing the loop through another PR.</figcaption>
 </figure>
@@ -189,6 +190,8 @@ These apply in Option 3. When promoting between stages you "configure deployment
 
 Build-time transforms in Option 2. fabric-cicd performs a full deployment on every run — it "does not inspect commit history or compute diffs," so "the target workspace always reflects the repository and converges to the desired state… preventing environment drift" ([deployment overview](https://microsoft.github.io/fabric-cicd/latest/how_to/deployment_overview/)). The `environment` argument selects which environment key is applied. The library exposes a small, keyword-only API — note `token_credential` is now **required**:
 
+<div class="code-title">publish_items.py</div>
+
 ```python
 from azure.identity import AzureCliCredential
 from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan_items
@@ -208,6 +211,8 @@ unpublish_all_orphan_items(target_workspace)
 `item_type_in_scope` accepts the [29 supported types](https://microsoft.github.io/fabric-cicd/latest/reference/item_types/) in exact casing: `Notebook`, `DataPipeline`, `Lakehouse`, `Warehouse`, `SemanticModel`, `Report`, `Environment`, `Eventhouse`, `Eventstream`, `KQLDatabase`, `KQLQueryset`, `KQLDashboard`, `Dataflow`, `CopyJob`, `SparkJobDefinition`, `MirroredDatabase`, `GraphQLApi`, `SQLDatabase`, `UserDataFunction`, `VariableLibrary`, `MLExperiment`, `DataAgent`, `ApacheAirflowJob`, `DataBuildToolJob`, `MountedDataFactory`, `Map`, `PaginatedReport`, `Reflex`, and `Ontology`. Omitting the argument defaults to all types.
 
 A `parameter.yml` at the repo root drives the transform. Current fields are `find_value`, `replace_value` (an environment-keyed dict), and optional `is_regex` / `ignore_case` plus `item_type` / `item_name` / `file_path` filters — there is no `input_type` field:
+
+<div class="code-title">parameter.yml</div>
 
 ```yaml
 find_replace:
@@ -232,6 +237,8 @@ key_value_replace:
 ## A concrete GitHub Actions reference flow
 
 The flow that ties this together: OIDC login (no stored secret), install tooling, a validation gate that fails the PR before anything touches the tenant, and a deploy job gated behind an environment approval on merge to `main`.
+
+<div class="code-title">.github/workflows/fabric-deploy.yml</div>
 
 ```yaml
 name: fabric-deploy

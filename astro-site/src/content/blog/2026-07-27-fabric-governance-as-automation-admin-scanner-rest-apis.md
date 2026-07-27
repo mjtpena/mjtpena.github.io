@@ -14,66 +14,53 @@ tags:
 
 The Fabric admin portal is one interface over the governance model — not the model itself. Every toggle, workspace listing, and scan result it renders is backed by REST and admin APIs that a service principal can call directly. Governance automation should therefore treat the portal as a human-readable view and operate on the same underlying endpoints: the Power BI/Fabric admin APIs, the scanner (WorkspaceInfo) APIs, and ARM for capacity. This article shows how to build governance-as-automation on those APIs, with least-privilege identity separation as a first-class design constraint.
 
-<figure>
-<svg viewBox="0 0 760 300" role="img" aria-label="Governance-as-automation reconciliation: a read-only service principal reads the Fabric tenant estate (workspaces, lakehouses, warehouses, semantic models, notebooks) via admin, scanner, and ARM APIs into an actual-state store; a Git manifest supplies intended state; drift detection produces a control catalogue; remediation runs through a separately scoped update service principal." style="width:100%;height:auto;background:#0c0c11;border-radius:10px">
-<style>
-.gg-t{fill:#e4e4e7;font-family:'Space Grotesk',system-ui,sans-serif;font-size:12.5px}
-.gg-tm{fill:#a1a1aa;font-family:'Space Grotesk',system-ui,sans-serif;font-size:10.5px}
-.gg-mo{fill:#7fd8cf;font-family:'JetBrains Mono',monospace;font-size:9.5px}
-.gg-cyt{fill:#00B7C3;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.03em}
-.gg-amt{fill:#e0a04a;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.03em}
-.gg-box{fill:#15151b;stroke:#3f3f46;stroke-width:1.3}
-.gg-cy{fill:#0b2b2e;stroke:#00B7C3;stroke-width:1.4}
-.gg-am{fill:#2a2113;stroke:#e0a04a;stroke-width:1.4}
-.gg-ed{stroke:#00B7C3;stroke-width:1.6;fill:none}
-.gg-ef{fill:#00B7C3}
-.gg-eda{stroke:#e0a04a;stroke-width:1.7;fill:none}
-.gg-efa{fill:#e0a04a}
-.gg-en{stroke:#6d757d;stroke-width:1.5;fill:none}
-.gg-enf{fill:#6d757d}
-</style>
+<figure class="ff">
+<svg class="ff-svg" viewBox="0 0 900 366" role="img" aria-label="Governance-as-automation reconciliation: a read-only service principal reads the Fabric tenant estate (workspaces, lakehouses, warehouses, semantic models, notebooks) via admin, scanner, and ARM APIs into an actual-state store; a Git manifest supplies intended state; drift detection produces a control catalogue; remediation runs through a separately scoped update service principal.">
 <defs>
-<marker id="ggc" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" class="gg-ef"/></marker>
-<marker id="gga" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" class="gg-efa"/></marker>
-<marker id="ggn" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" class="gg-enf"/></marker>
+<marker id="ggR" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah-read"/></marker>
+<marker id="ggN" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah"/></marker>
+<marker id="ggW" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah-write"/></marker>
 </defs>
-<!-- estate -->
-<rect x="16" y="36" width="212" height="118" rx="10" class="gg-box"/>
-<text x="122" y="58" text-anchor="middle" class="gg-t">Fabric tenant estate</text>
-<image href="/icons/fabric/group_workspace_48_non-item.svg" x="24" y="74" width="26" height="26"/>
-<image href="/icons/fabric/lakehouse_48_item.svg" x="62" y="74" width="26" height="26"/>
-<image href="/icons/fabric/data_warehouse_48_item.svg" x="100" y="74" width="26" height="26"/>
-<image href="/icons/fabric/semantic_model_48_item.svg" x="138" y="74" width="26" height="26"/>
-<image href="/icons/fabric/notebook_48_item.svg" x="176" y="74" width="26" height="26"/>
-<text x="122" y="122" text-anchor="middle" class="gg-tm">workspaces · items · capacities</text>
-<text x="122" y="138" text-anchor="middle" class="gg-tm">domains · owners · sensitivity</text>
-<!-- manifest -->
-<rect x="16" y="200" width="212" height="64" rx="10" class="gg-box"/>
-<text x="122" y="226" text-anchor="middle" class="gg-t">Git manifest</text>
-<text x="122" y="246" text-anchor="middle" class="gg-cyt">INTENDED STATE</text>
-<!-- actual -->
-<rect x="300" y="40" width="180" height="82" rx="10" class="gg-cy"/>
-<image href="/icons/fabric/lakehouse_48_item.svg" x="312" y="50" width="22" height="22"/>
-<text x="398" y="66" text-anchor="middle" class="gg-t">Actual state</text>
-<text x="390" y="86" text-anchor="middle" class="gg-tm">inventory · scan · capacity</text>
-<text x="390" y="104" text-anchor="middle" class="gg-mo">FUAM Lakehouse</text>
-<!-- diff -->
-<rect x="300" y="180" width="180" height="84" rx="10" class="gg-box"/>
-<text x="390" y="208" text-anchor="middle" class="gg-t">Drift detection</text>
-<text x="390" y="228" text-anchor="middle" class="gg-tm">actual vs intended</text>
-<text x="390" y="248" text-anchor="middle" class="gg-cyt">→ CONTROL CATALOGUE</text>
-<!-- remediation -->
-<rect x="552" y="106" width="192" height="92" rx="10" class="gg-am"/>
-<text x="648" y="134" text-anchor="middle" class="gg-t">Remediation</text>
-<text x="648" y="154" text-anchor="middle" class="gg-amt">SCOPED UPDATE SPN</text>
-<text x="648" y="174" text-anchor="middle" class="gg-tm">tightly bounded · audited</text>
-<!-- edges -->
-<path d="M228,86 C 262,84 268,80 300,80" class="gg-ed" marker-end="url(#ggc)"/>
-<text x="264" y="72" text-anchor="middle" class="gg-cyt">read-only SPN</text>
-<path d="M228,232 C 262,232 270,224 300,222" class="gg-en" marker-end="url(#ggn)"/>
-<path d="M390,122 L390,178" class="gg-en" marker-end="url(#ggn)"/>
-<text x="404" y="152" text-anchor="start" class="gg-tm">diff</text>
-<path d="M480,222 C 516,222 522,158 552,152" class="gg-eda" marker-end="url(#gga)"/>
+<rect x="22" y="64" width="536" height="272" rx="16" class="ff-zone ff-zone-read"/>
+<text x="40" y="86" class="ff-zlabel">READ-ONLY PATH · INVENTORY / SCAN / RECONCILE</text>
+<rect x="592" y="150" width="286" height="132" rx="16" class="ff-zone ff-zone-write"/>
+<text x="610" y="172" class="ff-zlabel">UPDATE · SCOPED</text>
+<rect x="42" y="100" width="232" height="112" rx="12" class="ff-node"/>
+<text x="158" y="124" text-anchor="middle" class="ff-title">Fabric tenant estate</text>
+<image href="/icons/fabric/group_workspace_48_non-item.svg" x="54" y="136" width="30" height="30"/>
+<image href="/icons/fabric/lakehouse_48_item.svg" x="96" y="136" width="30" height="30"/>
+<image href="/icons/fabric/data_warehouse_48_item.svg" x="138" y="136" width="30" height="30"/>
+<image href="/icons/fabric/semantic_model_48_item.svg" x="180" y="136" width="30" height="30"/>
+<image href="/icons/fabric/notebook_48_item.svg" x="222" y="136" width="30" height="30"/>
+<text x="158" y="188" text-anchor="middle" class="ff-sub">workspaces · items · capacities</text>
+<text x="158" y="204" text-anchor="middle" class="ff-sub">domains · owners · sensitivity</text>
+<rect x="42" y="248" width="232" height="76" rx="12" class="ff-node ff-node-az"/>
+<text x="158" y="280" text-anchor="middle" class="ff-title">Git manifest</text>
+<text x="158" y="302" text-anchor="middle" class="ff-tok" style="fill:#5aa2ea">intended state</text>
+<rect x="330" y="100" width="210" height="94" rx="12" class="ff-node ff-node-cy"/>
+<image href="/icons/fabric/lakehouse_48_item.svg" x="346" y="116" width="30" height="30"/>
+<text x="448" y="128" text-anchor="middle" class="ff-title">Actual state</text>
+<text x="437" y="150" text-anchor="middle" class="ff-sub">inventory · scan · capacity</text>
+<text x="437" y="172" text-anchor="middle" class="ff-tok">FUAM Lakehouse</text>
+<rect x="330" y="228" width="210" height="96" rx="12" class="ff-node"/>
+<text x="435" y="258" text-anchor="middle" class="ff-title">Drift detection</text>
+<text x="435" y="280" text-anchor="middle" class="ff-sub">actual vs intended</text>
+<text x="435" y="302" text-anchor="middle" class="ff-tok">→ control catalogue</text>
+<rect x="612" y="186" width="246" height="84" rx="12" class="ff-node ff-node-am"/>
+<text x="735" y="216" text-anchor="middle" class="ff-title">Remediation</text>
+<text x="735" y="238" text-anchor="middle" class="ff-tok" style="fill:#e0a04a">scoped update SPN</text>
+<text x="735" y="258" text-anchor="middle" class="ff-sub">tightly bounded · audited</text>
+<path d="M274,156 C 300,150 308,143 330,143" class="ff-edge-read" marker-end="url(#ggR)"/>
+<path d="M274,286 C 300,284 308,278 330,278" class="ff-edge" marker-end="url(#ggN)"/>
+<path d="M446,194 L446,228" class="ff-edge" marker-end="url(#ggN)"/>
+<rect x="452" y="203" width="34" height="15" rx="7" class="ff-elabel-bg"/>
+<text x="469" y="214" text-anchor="middle" class="ff-elabel">diff</text>
+<path d="M540,276 C 578,276 584,228 612,228" class="ff-edge-write" marker-end="url(#ggW)"/>
+<line x1="30" y1="348" x2="58" y2="348" class="ff-edge-read"/>
+<text x="65" y="352" class="ff-lgd">read-only path</text>
+<line x1="176" y1="348" x2="204" y2="348" class="ff-edge-write"/>
+<text x="211" y="352" class="ff-lgd">update path (scoped SPN)</text>
+<text x="392" y="352" class="ff-lgd" style="fill:#6f787f">· official Microsoft Fabric icons</text>
 </svg>
 <figcaption><strong>Figure 1.</strong> Governance as a reconciliation loop. A <em>read-only</em> service principal reads the Fabric estate through the admin, scanner (WorkspaceInfo), and ARM APIs into an actual-state store (here, a FUAM Lakehouse); a Git manifest defines intended state; drift detection yields a control catalogue; and remediation runs through a <em>separately scoped</em> update service principal. Icons: official Microsoft Fabric icons.</figcaption>
 </figure>
@@ -89,6 +76,15 @@ The second is [**Service principals can access admin APIs used for updates**](ht
 Each toggle is configured with a **Specific security groups** radio button and an explicit group [added under it](https://learn.microsoft.com/en-us/fabric/admin/enable-service-principal-admin-apis). Fabric admin rights are required to change either setting, and — importantly — an app used for service principal authentication against read-only admin APIs [must not have any admin-consent-required Power BI permissions](https://learn.microsoft.com/en-us/fabric/admin/enable-service-principal-admin-apis) set on it in the Azure portal. Both service-principal settings' notes add that each is also required to run Fabric data risk assessments in Microsoft Purview DSPM for AI.
 
 The design principle follows directly: create **two distinct Entra security groups**, one per toggle, and put different service principals in each. A read-only inventory/scanner SPN never belongs in the update group. An update-capable SPN — which can restore (and by extension manipulate) workspaces tenant-wide — is a far larger blast radius and should be tightly scoped, separately credentialed, and used only by the specific remediation jobs that need it. The read-only grant is already broad ("all information … current and future"); the update grant is the one that changes the world.
+
+<div class="cl cl-warn">
+<div class="cl-tag">Blast radius</div>
+<div class="cl-body">
+
+An update-capable admin service principal can restore and manipulate workspaces **tenant-wide**. Keep it in a separate Entra group and a separate identity from the read-only scanner SPN, so a compromised inventory credential leaks *disclosure*, never *modification*.
+
+</div>
+</div>
 
 Separately, calling *Fabric* APIs (as opposed to the Power BI admin surface) via the CLI requires the [**Allow service principals to use Fabric APIs**](https://microsoft.github.io/fabric-cli/commands/auth/) tenant switch. Keep this distinct from the two admin-API toggles above.
 
@@ -108,6 +104,8 @@ Authorization: Bearer <token>
 ### Step 2 — Trigger
 
 Divide the IDs into chunks and call `PostWorkspaceInfo`. The `workspaces` array [supports 1 to 100 workspace IDs](https://learn.microsoft.com/en-us/rest/api/power-bi/admin/workspace-info-post-workspace-info) per call — so batch in groups of at most 100. The five boolean query params control depth: `lineage`, `datasourceDetails`, `datasetSchema` (tables, columns, measures), `datasetExpressions` (DAX and Mashup/M queries), and `getArtifactUsers`.
+
+<div class="code-title">POST /admin/workspaces/getInfo</div>
 
 ```http
 POST https://api.powerbi.com/v1.0/myorg/admin/workspaces/getInfo?lineage=true&datasourceDetails=true&datasetSchema=true&datasetExpressions=true&getArtifactUsers=true
@@ -176,6 +174,8 @@ The [Fabric CLI](https://microsoft.github.io/fabric-cli/commands/api/) (`fab`) m
 
 In CI (for example GitHub Actions), prefer an OIDC [federated token](https://microsoft.github.io/fabric-cli/examples/auth_examples/) over a stored secret:
 
+<div class="code-title">Fabric CLI · authenticate</div>
+
 ```bash
 # Federated credential (no secret at rest)
 fab auth login -u <client_id> --federated-token <token> --tenant <tenant_id>
@@ -217,6 +217,8 @@ fab api -A powerbi groups/<workspaceId>
 ### Scheduling governance scans
 
 The scan flow above is what you schedule — a recurring job (Fabric Pipeline/Notebook, or an external scheduler) that runs `GetModifiedWorkspaces` incrementally with `modifiedSince` set to the last run, chunks into 100-workspace batches, triggers `getInfo`, polls, and persists each `GetScanResult` within its 24-hour availability window. Raw REST for the trigger, if you are not using the CLI:
+
+<div class="code-title">schedule: trigger a scan (cron)</div>
 
 ```bash
 curl -X POST \

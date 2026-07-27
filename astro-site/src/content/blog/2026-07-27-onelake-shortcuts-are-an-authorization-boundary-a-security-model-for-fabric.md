@@ -33,6 +33,8 @@ Every shortcut has two paths. The **shortcut path** is where the shortcut appear
 
 That intersection cuts both ways. A user with read+write in the consumer lakehouse but only read at the target cannot write to the target; a user with only read at the shortcut path but read+write at the target also cannot write ([Secure and manage OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security#accessing-shortcuts)). Neither path can grant more than it holds, and neither can rescue a deficiency in the other.
 
+<div class="code-title">most-restrictive-wins · conceptual</div>
+
 ```text
 effective(user, shortcut) = min(
     onelake_perm(user, shortcut.path),     # layer 1 — where the shortcut lives
@@ -108,62 +110,50 @@ Which identities can back a delegated internal shortcut? The security page names
 
 The permission consequence is the crux. Under pass-through, **each caller needs their own permission at the target path**. Under delegation, the *configured connection identity* needs target access, not each user; the caller instead sees "the intersection of their security and the security that applies to the delegated identity" ([Delegated OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security#delegated-onelake-shortcuts)). Row-level security is enforceable on the producer side of a delegated shortcut but cannot be set on the consumer side; column-level security is supported on both sides.
 
-<figure>
-<svg viewBox="0 0 760 524" role="img" aria-label="Decision flow: a caller passes the shortcut-path gate, then branches into pass-through (caller identity reaches target) or delegated (connection identity reaches target); a Direct Lake over SQL delegated-mode exception overrides the default." style="width:100%;height:auto;background:#0c0c11;border-radius:10px">
-<style>
-.o-t{fill:#e4e4e7;font-family:'Space Grotesk',system-ui,sans-serif;font-size:13px}
-.o-tm{fill:#a1a1aa;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11.5px}
-.o-mo{fill:#e4e4e7;font-family:'JetBrains Mono',monospace;font-size:12.5px}
-.o-ac{fill:#00B7C3;font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:.04em}
-.o-dg{fill:#f87171;font-family:'Space Grotesk',system-ui,sans-serif;font-size:12.5px;font-weight:600}
-.o-lb{fill:#71717a;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em}
-.o-box{fill:#15151b;stroke:#3f3f46;stroke-width:1.4}
-.o-bar{fill:#101014;stroke:#27272a;stroke-width:1.2}
-.o-cy{fill:#0b2b2e;stroke:#00B7C3;stroke-width:1.4}
-.o-az{fill:#0a1f33;stroke:#0078D4;stroke-width:1.4}
-.o-dn{fill:#2a1315;stroke:#ef4444;stroke-width:1.4}
-.o-ed{stroke:#52525b;stroke-width:1.6;fill:none}
-.o-ef{fill:#52525b}
-</style>
-<defs><marker id="oah1" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" class="o-ef"/></marker></defs>
-<rect x="300" y="12" width="160" height="40" rx="9" class="o-box"/>
-<text x="380" y="37" text-anchor="middle" class="o-t">Calling user</text>
-<line x1="380" y1="52" x2="380" y2="72" class="o-ed" marker-end="url(#oah1)"/>
-<rect x="70" y="78" width="620" height="48" rx="9" class="o-bar"/>
-<text x="380" y="99" text-anchor="middle" class="o-t">Layer 1 · Shortcut-path gate (OneLake security)</text>
-<text x="380" y="116" text-anchor="middle" class="o-tm">Denies here if the caller lacks Read on the shortcut path</text>
-<line x1="380" y1="126" x2="380" y2="146" class="o-ed" marker-end="url(#oah1)"/>
-<rect x="70" y="150" width="620" height="38" rx="9" class="o-bar"/>
-<text x="380" y="174" text-anchor="middle" class="o-tm">Layer 2 · Authentication model selects the identity that reaches the target</text>
-<path d="M320,188 C 300,200 250,202 228,212" class="o-ed" marker-end="url(#oah1)"/>
-<path d="M440,188 C 460,200 510,202 532,212" class="o-ed" marker-end="url(#oah1)"/>
-<rect x="108" y="212" width="234" height="28" rx="14" class="o-cy"/>
-<text x="225" y="230" text-anchor="middle" class="o-ac">PASS-THROUGH · INTERNAL DEFAULT</text>
-<rect x="418" y="212" width="234" height="28" rx="14" class="o-cy"/>
-<text x="535" y="230" text-anchor="middle" class="o-ac">DELEGATED · EXTERNAL ALWAYS</text>
-<rect x="110" y="256" width="230" height="46" rx="9" class="o-box"/>
-<text x="225" y="284" text-anchor="middle" class="o-t">Caller's identity → target</text>
-<line x1="225" y1="302" x2="225" y2="320" class="o-ed" marker-end="url(#oah1)"/>
-<rect x="110" y="324" width="230" height="52" rx="9" class="o-box"/>
-<text x="225" y="347" text-anchor="middle" class="o-t">Target-path permissions</text>
-<text x="225" y="364" text-anchor="middle" class="o-t">checked for the caller</text>
-<line x1="225" y1="376" x2="225" y2="394" class="o-ed" marker-end="url(#oah1)"/>
-<rect x="110" y="398" width="230" height="52" rx="9" class="o-az"/>
-<text x="225" y="420" text-anchor="middle" class="o-tm">Effective access =</text>
-<text x="225" y="438" text-anchor="middle" class="o-mo">min(shortcut, target)</text>
-<rect x="420" y="256" width="230" height="46" rx="9" class="o-box"/>
-<text x="535" y="284" text-anchor="middle" class="o-t">Connection identity → target</text>
-<line x1="535" y1="302" x2="535" y2="320" class="o-ed" marker-end="url(#oah1)"/>
-<rect x="420" y="324" width="230" height="52" rx="9" class="o-box"/>
-<text x="535" y="347" text-anchor="middle" class="o-t">Target permissions checked</text>
-<text x="535" y="364" text-anchor="middle" class="o-t">for the connection identity</text>
-<line x1="535" y1="376" x2="535" y2="394" class="o-ed" marker-end="url(#oah1)"/>
-<rect x="420" y="398" width="230" height="52" rx="9" class="o-az"/>
-<text x="535" y="420" text-anchor="middle" class="o-tm">Caller sees</text>
-<text x="535" y="438" text-anchor="middle" class="o-mo">own ∩ delegated security</text>
-<rect x="70" y="464" width="620" height="48" rx="9" class="o-dn"/>
-<text x="380" y="485" text-anchor="middle" class="o-dg">Exception — Direct Lake over SQL / T-SQL in Delegated identity mode</text>
-<text x="380" y="502" text-anchor="middle" class="o-tm">the item owner's identity replaces the caller's; OneLake roles still filter the result</text>
+<figure class="ff">
+<svg class="ff-svg" viewBox="0 0 800 542" role="img" aria-label="Decision flow: a caller passes the shortcut-path gate, then branches into pass-through (caller identity reaches target) or delegated (connection identity reaches target); a Direct Lake over SQL delegated-mode exception overrides the default.">
+<defs><marker id="olN" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah"/></marker></defs>
+<rect x="320" y="16" width="160" height="44" rx="10" class="ff-node"/>
+<text x="400" y="43" text-anchor="middle" class="ff-title">Calling user</text>
+<line x1="400" y1="60" x2="400" y2="80" class="ff-edge" marker-end="url(#olN)"/>
+<rect x="60" y="84" width="680" height="54" rx="11" class="ff-node"/>
+<image href="/icons/fabric/one_lake_48_color.svg" x="78" y="97" width="30" height="30"/>
+<text x="408" y="110" text-anchor="middle" class="ff-title">Layer 1 · Shortcut-path gate (OneLake security)</text>
+<text x="408" y="128" text-anchor="middle" class="ff-sub">Denies here if the caller lacks Read on the shortcut path</text>
+<line x1="400" y1="138" x2="400" y2="152" class="ff-edge" marker-end="url(#olN)"/>
+<rect x="60" y="156" width="680" height="40" rx="11" class="ff-node"/>
+<text x="400" y="181" text-anchor="middle" class="ff-title" style="font-size:12.5px">Layer 2 · Authentication model selects the identity that reaches the target</text>
+<path d="M360,196 C 320,206 250,208 225,222" class="ff-edge" marker-end="url(#olN)"/>
+<path d="M440,196 C 480,206 550,208 575,222" class="ff-edge" marker-end="url(#olN)"/>
+<rect x="78" y="214" width="294" height="248" rx="16" class="ff-zone ff-zone-read"/>
+<rect x="428" y="214" width="294" height="248" rx="16" class="ff-zone ff-zone-flow"/>
+<rect x="100" y="222" width="250" height="28" rx="14" class="ff-node ff-node-cy"/>
+<text x="225" y="240" text-anchor="middle" class="ff-tok" style="font-weight:600;letter-spacing:.03em">PASS-THROUGH · INTERNAL DEFAULT</text>
+<rect x="450" y="222" width="250" height="28" rx="14" class="ff-node ff-node-cy"/>
+<text x="575" y="240" text-anchor="middle" class="ff-tok" style="font-weight:600;letter-spacing:.03em">DELEGATED · EXTERNAL ALWAYS</text>
+<rect x="100" y="266" width="250" height="44" rx="10" class="ff-node"/>
+<text x="225" y="292" text-anchor="middle" class="ff-title">Caller's identity → target</text>
+<line x1="225" y1="310" x2="225" y2="325" class="ff-edge" marker-end="url(#olN)"/>
+<rect x="100" y="326" width="250" height="50" rx="10" class="ff-node"/>
+<text x="225" y="350" text-anchor="middle" class="ff-title">Target-path permissions</text>
+<text x="225" y="367" text-anchor="middle" class="ff-title">checked for the caller</text>
+<line x1="225" y1="376" x2="225" y2="391" class="ff-edge" marker-end="url(#olN)"/>
+<rect x="100" y="392" width="250" height="52" rx="10" class="ff-node ff-node-az"/>
+<text x="225" y="414" text-anchor="middle" class="ff-sub">Effective access =</text>
+<text x="225" y="433" text-anchor="middle" class="ff-tok">min(shortcut, target)</text>
+<rect x="450" y="266" width="250" height="44" rx="10" class="ff-node"/>
+<text x="575" y="292" text-anchor="middle" class="ff-title">Connection identity → target</text>
+<line x1="575" y1="310" x2="575" y2="325" class="ff-edge" marker-end="url(#olN)"/>
+<rect x="450" y="326" width="250" height="50" rx="10" class="ff-node"/>
+<text x="575" y="350" text-anchor="middle" class="ff-title">Target permissions checked</text>
+<text x="575" y="367" text-anchor="middle" class="ff-title">for the connection identity</text>
+<line x1="575" y1="376" x2="575" y2="391" class="ff-edge" marker-end="url(#olN)"/>
+<rect x="450" y="392" width="250" height="52" rx="10" class="ff-node ff-node-az"/>
+<text x="575" y="414" text-anchor="middle" class="ff-sub">Caller sees</text>
+<text x="575" y="433" text-anchor="middle" class="ff-tok">own ∩ delegated security</text>
+<rect x="60" y="478" width="680" height="52" rx="11" class="ff-node ff-node-dn"/>
+<text x="400" y="500" text-anchor="middle" class="ff-title" style="fill:#f0a49d">Exception — Direct Lake over SQL / T-SQL in Delegated identity mode</text>
+<text x="400" y="518" text-anchor="middle" class="ff-sub">the item owner's identity replaces the caller's; OneLake roles still filter the result</text>
 </svg>
 <figcaption><strong>Figure 1.</strong> Two-layer evaluation and the identity branch. The shortcut-path gate always applies; the authentication model decides whether the caller's identity or a fixed connection identity reaches the target. The delegated-mode query-engine exception (§3) overrides the pass-through default.</figcaption>
 </figure>
@@ -177,6 +167,15 @@ The documented exception:
 > When users access shortcuts through Power BI semantic models using Direct Lake over SQL or T-SQL engines in Delegated identity mode, the calling user's identity isn't passed through to the shortcut target. Instead, the calling item's owner's identity is passed.
 
 The concrete consequences: the target is accessed with the item owner's permissions (not the end user's), OneLake security roles still filter what the end user reads, and "any permissions configured directly at the shortcut target path for the end user are bypassed" ([Secure and manage OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security#accessing-shortcuts)).
+
+<div class="cl cl-warn">
+<div class="cl-tag">Watch</div>
+<div class="cl-body">
+
+In **Delegated identity mode** the querying user's *own* permissions on the shortcut target are never consulted — the item owner's identity reaches the data and only OneLake security roles filter the result. Use **User identity mode**, or **Direct Lake over OneLake**, when callers must be evaluated at the target.
+
+</div>
+</div>
 
 Be precise about the trigger. This is **not** a blanket property of "Direct Lake over SQL." It is conditional on the SQL analytics endpoint's *access mode*. In **User identity mode**, the endpoint passes the signed-in user's Entra identity to OneLake and read access is governed by OneLake rules. In **Delegated identity mode**, the endpoint "connects to OneLake using the identity of the workspace or item owner" — the item account, not the signed-in user ([OneLake security for the SQL analytics endpoint](https://learn.microsoft.com/en-us/fabric/onelake/security/sql-analytics-endpoint-onelake-security)). Newly created items with a SQL endpoint start in User identity mode by default, and Admins or Members can change the mode at any time in the endpoint settings. Because the mode is a per-endpoint setting an administrator can flip — and older endpoints may predate that default — treat the current mode as something to verify, not assume.
 
@@ -239,52 +238,50 @@ Two cross-cutting rules matter. First, rules defined only inside a Direct Lake s
 
 The durable pattern is a **domain-owned curated lakehouse** as producer, with **shortcut-only consumer workspaces** that hold no copy of the data and no direct grant on the source.
 
-<figure>
-<svg viewBox="0 0 760 348" role="img" aria-label="A domain-owned producer workspace containing a curated lakehouse governed by OneLake security fans out shortcuts across an authorization boundary to consumer workspaces A, B, and N, each holding only a shortcut with no copy and no direct grant." style="width:100%;height:auto;background:#0c0c11;border-radius:10px">
-<style>
-.p-t{fill:#e4e4e7;font-family:'Space Grotesk',system-ui,sans-serif;font-size:13px}
-.p-tm{fill:#a1a1aa;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11.5px}
-.p-mo{fill:#e4e4e7;font-family:'JetBrains Mono',monospace;font-size:11.5px}
-.p-lb{fill:#71717a;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em}
-.p-box{fill:#15151b;stroke:#3f3f46;stroke-width:1.4}
-.p-cy{fill:#0b2b2e;stroke:#00B7C3;stroke-width:1.4}
-.p-ed{stroke:#0078D4;stroke-width:1.7;fill:none}
-.p-ef{fill:#0078D4}
-.p-bd{stroke:#52525b;stroke-width:1.3;stroke-dasharray:5 5;opacity:.7;fill:none}
-</style>
-<defs><marker id="pah2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" class="p-ef"/></marker></defs>
-<line x1="398" y1="34" x2="398" y2="330" class="p-bd"/>
-<text x="398" y="24" text-anchor="middle" class="p-lb">AUTHORIZATION BOUNDARY</text>
-<rect x="28" y="62" width="266" height="228" rx="12" class="p-box"/>
-<text x="161" y="86" text-anchor="middle" class="p-lb">PRODUCER · DOMAIN-OWNED</text>
-<rect x="50" y="104" width="222" height="166" rx="10" class="p-cy"/>
-<image href="/icons/fabric/lakehouse_48_item.svg" x="147" y="111" width="28" height="28"/>
-<text x="161" y="158" text-anchor="middle" class="p-t" style="font-size:15px;font-weight:700;fill:#fff">Curated Lakehouse</text>
-<text x="161" y="176" text-anchor="middle" class="p-tm">OneLake security</text>
-<text x="161" y="188" text-anchor="middle" class="p-mo" style="fill:#00B7C3">OLS · RLS · CLS</text>
-<line x1="76" y1="208" x2="246" y2="208" stroke="#00B7C3" stroke-width="1" opacity="0.4"/>
-<text x="161" y="230" text-anchor="middle" class="p-tm">Single source of</text>
-<text x="161" y="248" text-anchor="middle" class="p-tm">authorization truth</text>
-<rect x="512" y="40" width="220" height="72" rx="10" class="p-box"/>
-<image href="/icons/fabric/group_workspace_48_non-item.svg" x="524" y="53" width="24" height="24"/>
-<text x="632" y="70" text-anchor="middle" class="p-t">Consumer workspace A</text>
-<text x="622" y="90" text-anchor="middle" class="p-tm">shortcut only — no copy, no grant</text>
-<rect x="512" y="144" width="220" height="72" rx="10" class="p-box"/>
-<image href="/icons/fabric/group_workspace_48_non-item.svg" x="524" y="157" width="24" height="24"/>
-<text x="632" y="174" text-anchor="middle" class="p-t">Consumer workspace B</text>
-<text x="622" y="194" text-anchor="middle" class="p-tm">shortcut only — no copy, no grant</text>
-<rect x="512" y="248" width="220" height="72" rx="10" class="p-box"/>
-<image href="/icons/fabric/group_workspace_48_non-item.svg" x="524" y="261" width="24" height="24"/>
-<text x="632" y="278" text-anchor="middle" class="p-t">Consumer workspace N</text>
-<text x="622" y="298" text-anchor="middle" class="p-tm">shortcut only — no copy, no grant</text>
-<path d="M272,168 C 360,120 440,86 510,78" class="p-ed" marker-end="url(#pah2)"/>
-<path d="M272,186 C 380,184 430,182 510,180" class="p-ed" marker-end="url(#pah2)"/>
-<path d="M272,204 C 360,252 440,278 510,284" class="p-ed" marker-end="url(#pah2)"/>
-<text x="360" y="112" text-anchor="middle" class="p-lb">shortcut</text>
-<text x="360" y="176" text-anchor="middle" class="p-lb">shortcut</text>
-<text x="360" y="266" text-anchor="middle" class="p-lb">shortcut</text>
+<figure class="ff">
+<svg class="ff-svg" viewBox="0 0 900 388" role="img" aria-label="A domain-owned producer workspace containing a curated lakehouse governed by OneLake security fans out shortcuts across an authorization boundary to shortcut-only consumer workspaces A, B, and N, each holding no copy and no direct grant.">
+<defs><marker id="l2read" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah-read"/></marker></defs>
+<rect x="24" y="54" width="340" height="290" rx="16" class="ff-zone ff-zone-flow"/>
+<text x="44" y="80" class="ff-zlabel">PRODUCER · DOMAIN-OWNED</text>
+<rect x="424" y="54" width="452" height="290" rx="16" class="ff-zone ff-zone-read"/>
+<text x="446" y="80" class="ff-zlabel">SHORTCUT-ONLY CONSUMERS</text>
+<line x1="394" y1="58" x2="394" y2="340" class="ff-edge-dash"/>
+<rect x="54" y="100" width="280" height="196" rx="14" class="ff-node ff-node-cy"/>
+<image href="/icons/fabric/lakehouse_48_item.svg" x="170" y="116" width="48" height="48"/>
+<text x="194" y="192" text-anchor="middle" class="ff-title" style="font-size:16px;fill:#ffffff">Curated Lakehouse</text>
+<text x="194" y="213" text-anchor="middle" class="ff-sub">OneLake security</text>
+<text x="194" y="233" text-anchor="middle" class="ff-tok">OLS · RLS · CLS</text>
+<line x1="88" y1="251" x2="300" y2="251" stroke="#00B7C3" stroke-width="1" opacity="0.28"/>
+<text x="194" y="273" text-anchor="middle" class="ff-sub">Single source of</text>
+<text x="194" y="289" text-anchor="middle" class="ff-sub">authorization truth</text>
+<rect x="448" y="88" width="404" height="70" rx="12" class="ff-node"/>
+<image href="/icons/fabric/group_workspace_48_non-item.svg" x="466" y="103" width="40" height="40"/>
+<text x="522" y="119" class="ff-title">Consumer workspace A</text>
+<text x="522" y="139" class="ff-sub">shortcut only — no copy, no grant</text>
+<rect x="448" y="174" width="404" height="70" rx="12" class="ff-node"/>
+<image href="/icons/fabric/group_workspace_48_non-item.svg" x="466" y="189" width="40" height="40"/>
+<text x="522" y="205" class="ff-title">Consumer workspace B</text>
+<text x="522" y="225" class="ff-sub">shortcut only — no copy, no grant</text>
+<rect x="448" y="260" width="404" height="70" rx="12" class="ff-node"/>
+<image href="/icons/fabric/group_workspace_48_non-item.svg" x="466" y="275" width="40" height="40"/>
+<text x="522" y="291" class="ff-title">Consumer workspace N</text>
+<text x="522" y="311" class="ff-sub">shortcut only — no copy, no grant</text>
+<path d="M334,176 C 392,150 402,123 448,123" class="ff-edge-read" marker-end="url(#l2read)"/>
+<path d="M334,198 C 392,203 402,209 448,209" class="ff-edge-read" marker-end="url(#l2read)"/>
+<path d="M334,220 C 392,250 402,295 448,295" class="ff-edge-read" marker-end="url(#l2read)"/>
+<rect x="379" y="115" width="56" height="16" rx="8" class="ff-elabel-bg"/>
+<text x="407" y="127" text-anchor="middle" class="ff-elabel">shortcut</text>
+<rect x="379" y="201" width="56" height="16" rx="8" class="ff-elabel-bg"/>
+<text x="407" y="213" text-anchor="middle" class="ff-elabel">shortcut</text>
+<rect x="379" y="287" width="56" height="16" rx="8" class="ff-elabel-bg"/>
+<text x="407" y="299" text-anchor="middle" class="ff-elabel">shortcut</text>
+<line x1="30" y1="366" x2="58" y2="366" class="ff-edge-read"/>
+<text x="65" y="370" class="ff-lgd">shortcut path</text>
+<line x1="168" y1="366" x2="196" y2="366" class="ff-edge-dash"/>
+<text x="203" y="370" class="ff-lgd">authorization boundary</text>
+<text x="372" y="370" class="ff-lgd" style="fill:#6f787f">· official Microsoft Fabric icons</text>
 </svg>
-<figcaption><strong>Figure 2.</strong> Producer / consumer fan-out. Policy lives once, at the producer, in OneLake security. Consumers hold only shortcuts — no replicated data and no independent grant to keep in sync. The choice of pass-through vs delegated for these shortcuts turns on the consumer topology below.</figcaption>
+<figcaption><strong>Figure 2.</strong> Producer / consumer fan-out. Policy lives once, at the producer, in OneLake security; consumers hold only shortcuts — no replicated data and no independent grant to keep in sync. Every read crosses the authorization boundary, and whether it carries the caller's identity or a connection identity is exactly the pass-through vs delegated choice below.</figcaption>
 </figure>
 
 ### When pass-through is correct
