@@ -198,32 +198,32 @@ OneLake security "is the data plane security model for data in OneLake" and enfo
 </thead>
 <tbody>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600">Lakehouse Delta tables via Spark / OneLake API</td>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/lakehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Lakehouse Delta tables via Spark / OneLake API</td>
 <td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#00B7C3">OneLake security</strong> (table/folder, RLS, CLS)</td>
 <td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Enforced consistently across engines; roles bind Viewers / Read-permission users, not Admin/Member/Contributor.</td>
 </tr>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600">Lakehouse via SQL analytics endpoint</td>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/lakehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Lakehouse via SQL analytics endpoint</td>
 <td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#00B7C3">OneLake security</strong> (User identity mode) <strong style="color:#fff">or</strong> <strong style="color:#0aa5d6">SQL permissions</strong> (Delegated identity mode)</td>
 <td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">User mode enforces OneLake roles natively and ignores table GRANT/REVOKE; Delegated mode governs by SQL alone and does <em>not</em> carry OneLake roles for table data.</td>
 </tr>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600">Warehouse (native tables)</td>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/data_warehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Warehouse (native tables)</td>
 <td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#0aa5d6">SQL security</strong> (GRANT/DENY, OLS, RLS, CLS, DDM)</td>
 <td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Enforced only within the SQL/TDS execution context; <strong style="color:#f0a49d">not</strong> translated into OneLake policies. Warehouse is not among the items that support OneLake security roles.</td>
 </tr>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600">KQL / Eventhouse database</td>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/event_house_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>KQL / Eventhouse database</td>
 <td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#744EC2">KQL / Kusto RBAC</strong> (hybrid Fabric + Kusto roles)</td>
 <td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Union of Fabric-granted and Kusto-command-granted roles, inherited top-down; roles include Admin, User, Viewer, Unrestrictedviewer, Ingestor, Monitor.</td>
 </tr>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600">Power BI semantic model (Import)</td>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/semantic_model_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Power BI semantic model (Import)</td>
 <td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#744EC2">Semantic-model security</strong> (DAX RLS/OLS)</td>
 <td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Data is imported into the model; DAX RLS applies to Viewers only, not Admin/Member/Contributor.</td>
 </tr>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;font-family:'Space Grotesk',sans-serif;font-weight:600">Direct Lake</td>
+<td style="padding:12px 16px;color:#e4e4e7;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/semantic_model_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Direct Lake</td>
 <td style="padding:12px 16px;color:#d4d4d8"><strong style="color:#00B7C3">OneLake security</strong> (over OneLake) <strong style="color:#fff">or</strong> <strong style="color:#0aa5d6">SQL-endpoint model</strong> (over SQL) + model-level DAX</td>
 <td style="padding:12px 16px;color:#a1a1aa">Direct Lake on OneLake checks permissions via OneLake APIs; Direct Lake on SQL checks via the SQL endpoint and can fall back to DirectQuery under RLS, whereas Direct Lake on OneLake errors instead of falling back.</td>
 </tr>
@@ -258,20 +258,24 @@ The durable pattern is a **domain-owned curated lakehouse** as producer, with **
 <rect x="28" y="62" width="266" height="228" rx="12" class="p-box"/>
 <text x="161" y="86" text-anchor="middle" class="p-lb">PRODUCER · DOMAIN-OWNED</text>
 <rect x="50" y="104" width="222" height="166" rx="10" class="p-cy"/>
-<text x="161" y="144" text-anchor="middle" class="p-t" style="font-size:15px;font-weight:700;fill:#fff">Curated Lakehouse</text>
-<text x="161" y="170" text-anchor="middle" class="p-tm">OneLake security</text>
+<image href="/icons/fabric/lakehouse_48_item.svg" x="147" y="111" width="28" height="28"/>
+<text x="161" y="158" text-anchor="middle" class="p-t" style="font-size:15px;font-weight:700;fill:#fff">Curated Lakehouse</text>
+<text x="161" y="176" text-anchor="middle" class="p-tm">OneLake security</text>
 <text x="161" y="188" text-anchor="middle" class="p-mo" style="fill:#00B7C3">OLS · RLS · CLS</text>
 <line x1="76" y1="208" x2="246" y2="208" stroke="#00B7C3" stroke-width="1" opacity="0.4"/>
 <text x="161" y="230" text-anchor="middle" class="p-tm">Single source of</text>
 <text x="161" y="248" text-anchor="middle" class="p-tm">authorization truth</text>
 <rect x="512" y="40" width="220" height="72" rx="10" class="p-box"/>
-<text x="622" y="70" text-anchor="middle" class="p-t">Consumer workspace A</text>
+<image href="/icons/fabric/group_workspace_48_non-item.svg" x="524" y="53" width="24" height="24"/>
+<text x="632" y="70" text-anchor="middle" class="p-t">Consumer workspace A</text>
 <text x="622" y="90" text-anchor="middle" class="p-tm">shortcut only — no copy, no grant</text>
 <rect x="512" y="144" width="220" height="72" rx="10" class="p-box"/>
-<text x="622" y="174" text-anchor="middle" class="p-t">Consumer workspace B</text>
+<image href="/icons/fabric/group_workspace_48_non-item.svg" x="524" y="157" width="24" height="24"/>
+<text x="632" y="174" text-anchor="middle" class="p-t">Consumer workspace B</text>
 <text x="622" y="194" text-anchor="middle" class="p-tm">shortcut only — no copy, no grant</text>
 <rect x="512" y="248" width="220" height="72" rx="10" class="p-box"/>
-<text x="622" y="278" text-anchor="middle" class="p-t">Consumer workspace N</text>
+<image href="/icons/fabric/group_workspace_48_non-item.svg" x="524" y="261" width="24" height="24"/>
+<text x="632" y="278" text-anchor="middle" class="p-t">Consumer workspace N</text>
 <text x="622" y="298" text-anchor="middle" class="p-tm">shortcut only — no copy, no grant</text>
 <path d="M272,168 C 360,120 440,86 510,78" class="p-ed" marker-end="url(#pah2)"/>
 <path d="M272,186 C 380,184 430,182 510,180" class="p-ed" marker-end="url(#pah2)"/>

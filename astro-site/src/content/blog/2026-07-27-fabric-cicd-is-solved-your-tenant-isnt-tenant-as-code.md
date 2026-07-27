@@ -125,8 +125,12 @@ The missing layer has a reference implementation: Microsoft's [frontier-fabric-g
 <text x="537" y="77" text-anchor="middle" class="g-t">Service principal</text>
 <text x="537" y="93" text-anchor="middle" class="g-tm">provisions</text>
 <rect x="614" y="52" width="132" height="56" rx="9" class="g-az"/>
-<text x="680" y="76" text-anchor="middle" class="g-t">Fabric tenant</text>
-<text x="680" y="92" text-anchor="middle" class="g-mo">ws·cap·domain·roles</text>
+<image href="/icons/fabric/group_workspace_48_non-item.svg" x="633" y="57" width="18" height="18"/>
+<image href="/icons/fabric/lakehouse_48_item.svg" x="655" y="57" width="18" height="18"/>
+<image href="/icons/fabric/data_warehouse_48_item.svg" x="677" y="57" width="18" height="18"/>
+<image href="/icons/fabric/semantic_model_48_item.svg" x="699" y="57" width="18" height="18"/>
+<text x="680" y="90" text-anchor="middle" class="g-t">Fabric tenant</text>
+<text x="680" y="102" text-anchor="middle" class="g-mo">ws·cap·domain·roles</text>
 <!-- arrows -->
 <line x1="156" y1="80" x2="168" y2="80" class="g-ed" marker-end="url(#gah)"/>
 <line x1="320" y1="80" x2="332" y2="80" class="g-ed" marker-end="url(#gah)"/>
