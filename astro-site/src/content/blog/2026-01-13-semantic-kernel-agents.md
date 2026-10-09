@@ -1,376 +1,224 @@
 ---
-title: "Semantic Kernel: Building Production AI Agents"
-description: "After building agents with LangChain, AutoGen, and custom solutions, I finally gave Semantic Kernel a proper try. Here's what I learned building production…"
+title: "Semantic Kernel Agents in Production: What's Stable, What Isn't"
+description: "Running Semantic Kernel agents in production in early 2026: which APIs are GA, which are preview, how to guard tool calls, and where Agent Framework fits."
 author: Michael John Peña
 draft: false
 date: 2026-01-13
 tags:
-  - AI
-  - Semantic-Kernel
-  - Agents
-  - Microsoft
+  - Semantic Kernel
+  - AI Agents
+  - .NET
+  - Azure OpenAI
+  - Multi-Agent
 ---
 
-After building agents with LangChain, AutoGen, and custom solutions, I finally gave Semantic Kernel a proper try. Here's what I learned building production agents with Microsoft's framework.
+Semantic Kernel agents are easy to demo. Coming from LangChain, AutoGen, and hand-rolled agent loops, I find the hard part is knowing which pieces are stable enough to put behind a production SLA, and which tool calls you should never let a model make unsupervised. That question got harder in October 2025, when Microsoft announced Agent Framework as Semantic Kernel's successor, so this post is about building on Semantic Kernel agents today without boxing yourself in.
 
-## Why Semantic Kernel?
+I covered the multi-agent design side in [Building Multi-Agent Systems with Semantic Kernel](/blog/2025-08-31-august-ai-topic/). This one is about production readiness: status, guardrails, observability, and the exit plan.
 
-If you're in the Microsoft ecosystem, Semantic Kernel makes sense:
-- First-class .NET support
-- Azure integration is seamless
-- Enterprise-ready patterns
-- Good documentation (mostly)
+## What's stable as of January 2026
 
-If you're Python-only or multi-cloud, maybe look elsewhere.
+Before writing any code, check the release status of every package you'll depend on. Semantic Kernel's .NET packages carry a `-preview` or `-alpha` suffix, or an `[Experimental]` attribute (with an `SKEXP` diagnostic code) when an API can still change. As of Semantic Kernel .NET 1.68.0 (released early December 2025), this is where things sit:
 
-## Basic Agent Setup
+| Piece | Package | Status |
+|---|---|---|
+| `ChatCompletionAgent`, `ChatHistoryAgentThread` | `Microsoft.SemanticKernel.Agents.Core` | GA |
+| Plugins, function calling, filters | `Microsoft.SemanticKernel` | GA |
+| `AgentGroupChat` | `Microsoft.SemanticKernel.Agents.Core` | Experimental (`SKEXP0110`), superseded |
+| Sequential, Concurrent, Handoff, Group Chat orchestrations | `Microsoft.SemanticKernel.Agents.Orchestration` | Preview |
+| Magentic orchestration | `Microsoft.SemanticKernel.Agents.Magentic` | Preview |
+| In-process agent runtime | `Microsoft.SemanticKernel.Agents.Runtime.InProcess` | Preview |
+| `ISemanticTextMemory` and the old memory stores | `Microsoft.SemanticKernel.Abstractions` | Experimental, superseded by vector store connectors |
+
+The practical rule I follow: the agent itself, its plugins, and its filters can carry a production workload. Multi-agent orchestration is experimental and ships as preview packages, so it goes behind a feature flag or into internal tools until it stabilises.
+
+## A single agent with narrow tools
+
+Most production agents I'd sign off on are a single `ChatCompletionAgent` with a small number of narrow, typed tools. Here's a complete console app against Azure OpenAI, using Microsoft Entra ID authentication instead of an API key.
+
+```bash
+dotnet add package Microsoft.SemanticKernel
+dotnet add package Microsoft.SemanticKernel.Agents.Core
+dotnet add package Azure.Identity
+```
 
 ```csharp
+using System.ComponentModel;
+using Azure.Identity;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents;
 
-var builder = Kernel.CreateBuilder();
+IKernelBuilder builder = Kernel.CreateBuilder();
 builder.AddAzureOpenAIChatCompletion(
-    deploymentName: "gpt-4o",
-    endpoint: config["AzureOpenAI:Endpoint"],
-    apiKey: config["AzureOpenAI:ApiKey"]
-);
+    deploymentName: "<your-chat-deployment>",
+    endpoint: "https://<your-resource-name>.openai.azure.com/",
+    credentials: new DefaultAzureCredential());
+builder.Plugins.AddFromType<OrdersPlugin>("Orders");
+Kernel kernel = builder.Build();
 
-var kernel = builder.Build();
-
-// Create agent with plugins
-var agent = new ChatCompletionAgent
+ChatCompletionAgent agent = new()
 {
-    Name = "DataAnalyst",
+    Name = "OrderSupport",
     Instructions = """
-        You are a data analysis expert.
-        Use available tools to answer questions about data.
-        Be precise and cite your sources.
+        You answer questions about customer orders.
+        Use the Orders tools to look up facts. Never guess an order status.
+        If a tool returns no data, say so plainly.
         """,
-    Kernel = kernel
-};
-```
-
-## Adding Tools (Plugins in SK Terms)
-
-Semantic Kernel calls them "plugins." They're functions the agent can call.
-
-```csharp
-public class DataPlugin
-{
-    [KernelFunction, Description("Query the sales database")]
-    public async Task<string> QuerySalesData(
-        [Description("SQL query to execute")] string query
-    )
+    Kernel = kernel,
+    Arguments = new KernelArguments(new PromptExecutionSettings
     {
-        // Validate query (important!)
-        if (!IsSelectQuery(query))
-        {
-            return "Error: Only SELECT queries allowed";
-        }
-        
-        using var connection = new SqlConnection(connectionString);
-        var result = await connection.QueryAsync(query);
-        return JsonSerializer.Serialize(result);
-    }
-    
-    [KernelFunction, Description("Get product information")]
-    public async Task<string> GetProductInfo(
-        [Description("Product ID")] string productId
-    )
-    {
-        // Implementation
-        var product = await productService.GetProduct(productId);
-        return JsonSerializer.Serialize(product);
-    }
-    
-    private bool IsSelectQuery(string query)
-    {
-        var normalized = query.Trim().ToUpperInvariant();
-        return normalized.StartsWith("SELECT") &&
-               !normalized.Contains("DROP") &&
-               !normalized.Contains("DELETE") &&
-               !normalized.Contains("UPDATE") &&
-               !normalized.Contains("INSERT");
-    }
-}
-
-// Add plugin to kernel
-kernel.Plugins.AddFromType<DataPlugin>("Data");
-```
-
-## The Agent Loop
-
-```csharp
-public class AgentOrchestrator
-{
-    private readonly ChatCompletionAgent agent;
-    private readonly AgentGroupChat chat;
-    
-    public async Task<string> ProcessQuery(string userQuery)
-    {
-        // Add user message
-        chat.AddChatMessage(new ChatMessageContent(
-            AuthorRole.User,
-            userQuery
-        ));
-        
-        // Agent processes with tool calling
-        await foreach (var message in chat.InvokeAsync())
-        {
-            // Log each step
-            logger.LogInformation(
-                "Agent: {Name}, Message: {Content}",
-                message.AuthorName,
-                message.Content
-            );
-            
-            // Check if done
-            if (message.AuthorName == agent.Name && 
-                !message.Items.Any(i => i is FunctionCallContent))
-            {
-                return message.Content;
-            }
-        }
-        
-        throw new InvalidOperationException("Agent didn't complete");
-    }
-}
-```
-
-## Multi-Agent Patterns
-
-Where Semantic Kernel shines: orchestrating multiple agents.
-
-```csharp
-// Create specialized agents
-var researchAgent = new ChatCompletionAgent
-{
-    Name = "Researcher",
-    Instructions = "Research information and gather facts",
-    Kernel = researchKernel
+        FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+    })
 };
 
-var writerAgent = new ChatCompletionAgent
-{
-    Name = "Writer",
-    Instructions = "Write clear, engaging content based on research",
-    Kernel = writerKernel
-};
+AgentThread thread = new ChatHistoryAgentThread();
 
-var editorAgent = new ChatCompletionAgent
+foreach (string question in new[] { "Where is order 1001?", "And order 1002?" })
 {
-    Name = "Editor",
-    Instructions = "Review and improve content for clarity",
-    Kernel = editorKernel
-};
-
-// Orchestrate them
-var workflow = new SequentialAgentGroupChat(
-    researchAgent,
-    writerAgent,
-    editorAgent
-)
-{
-    ExecutionSettings = new()
+    await foreach (AgentResponseItem<ChatMessageContent> response in agent.InvokeAsync(question, thread))
     {
-        TerminationStrategy = new ApprovalTerminationStrategy
-        {
-            Agents = new[] { editorAgent },
-            MaximumIterations = 10
-        }
+        Console.WriteLine($"{response.Message.AuthorName}: {response.Message.Content}");
+        thread = response.Thread;
     }
-};
-
-// Run the workflow
-await foreach (var message in workflow.InvokeAsync(userTask))
-{
-    Console.WriteLine($"{message.AuthorName}: {message.Content}");
 }
-```
 
-## Memory and Context
-
-Agents need memory. Semantic Kernel has built-in support:
-
-```csharp
-using Microsoft.SemanticKernel.Memory;
-
-// Setup memory
-var memoryBuilder = new MemoryBuilder();
-memoryBuilder.WithAzureOpenAITextEmbeddingGeneration(
-    deploymentName: "text-embedding-ada-002",
-    endpoint: config["AzureOpenAI:Endpoint"],
-    apiKey: config["AzureOpenAI:ApiKey"]
-);
-memoryBuilder.WithMemoryStore(new AzureAISearchMemoryStore(
-    searchServiceEndpoint,
-    searchApiKey
-));
-
-var memory = memoryBuilder.Build();
-
-// Store facts
-await memory.SaveInformationAsync(
-    collection: "customer-interactions",
-    id: interaction.Id,
-    text: interaction.Summary,
-    description: interaction.Type
-);
-
-// Recall relevant context
-var memories = memory.SearchAsync(
-    collection: "customer-interactions",
-    query: currentQuery,
-    limit: 5
-);
-
-await foreach (var item in memories)
+public sealed class OrdersPlugin
 {
-    context.Add(item.Metadata.Text);
-}
-```
-
-## Error Handling and Retries
-
-Production agents need resilience:
-
-```csharp
-public class ResilientAgent
-{
-    private readonly ChatCompletionAgent agent;
-    private readonly ILogger logger;
-    
-    public async Task<string> ExecuteWithRetry(
-        string query,
-        int maxRetries = 3
-    )
+    private static readonly Dictionary<string, string> Orders = new()
     {
-        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        ["1001"] = "Shipped on 8 January, tracking AU123456",
+        ["1002"] = "Awaiting stock, expected dispatch 20 January"
+    };
+
+    [KernelFunction("get_order_status")]
+    [Description("Gets the current status of a single order by its order number.")]
+    public string GetOrderStatus(
+        [Description("The order number, digits only.")] string orderId) =>
+        Orders.TryGetValue(orderId, out string? status)
+            ? status
+            : $"No order found with number {orderId}.";
+}
+```
+
+An earlier version of this post showed a `QuerySalesData(string query)` tool that runs model-written SQL after a `StartsWith("SELECT")` check. Don't. A string blocklist doesn't stop a `SELECT` that reads a table the user shouldn't see, and it doesn't stop a query that scans a billion rows. If an agent needs data, give it typed functions with parameters you validate, run them under an identity with read access to exactly what it needs, and keep free-form SQL for analysts.
+
+## Guard the tool loop with a filter
+
+With `FunctionChoiceBehavior.Auto()`, Semantic Kernel runs the model, executes the tool calls it asks for, feeds the results back, and repeats. That loop is where production incidents come from: a model that calls the same tool twenty times, or calls a write operation nobody approved.
+
+[Filters](https://learn.microsoft.com/en-us/semantic-kernel/concepts/enterprise-readiness/filters) are the GA way to intercept it. An `IAutoFunctionInvocationFilter` sees every automatic tool call before it runs, so it's the right place for logging, a call budget, and approval gates.
+
+```csharp
+using Microsoft.Extensions.Logging;
+using Microsoft.SemanticKernel;
+
+public sealed class ToolGuardFilter(ILogger<ToolGuardFilter> logger) : IAutoFunctionInvocationFilter
+{
+    private const int MaxModelRoundTrips = 5;
+    private static readonly HashSet<string> RequiresApproval = ["cancel_order", "issue_refund"];
+
+    public async Task OnAutoFunctionInvocationAsync(
+        AutoFunctionInvocationContext context,
+        Func<AutoFunctionInvocationContext, Task> next)
+    {
+        string name = context.Function.Name;
+        logger.LogInformation(
+            "Tool call {Plugin}.{Function} (round trip {Round})",
+            context.Function.PluginName, name, context.RequestSequenceIndex);
+
+        if (context.RequestSequenceIndex >= MaxModelRoundTrips)
         {
-            try
-            {
-                return await agent.InvokeAsync(query);
-            }
-            catch (HttpRequestException ex) when (attempt < maxRetries)
-            {
-                logger.LogWarning(
-                    "Attempt {Attempt} failed: {Error}. Retrying...",
-                    attempt,
-                    ex.Message
-                );
-                
-                await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, attempt)));
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Agent execution failed");
-                throw;
-            }
+            // No Terminate here: the model reads this result and writes the final answer.
+            context.Result = new FunctionResult(context.Function,
+                "Tool budget exhausted. Answer with the information you already have.");
+            return;
         }
-        
-        throw new InvalidOperationException("Max retries exceeded");
+
+        if (RequiresApproval.Contains(name))
+        {
+            context.Result = new FunctionResult(context.Function,
+                "This action needs human approval. Tell the user a request has been raised.");
+            return;
+        }
+
+        await next(context);
     }
 }
 ```
 
-## Cost Tracking
-
-Track every agent interaction:
+Register it on the kernel the agent uses, before invoking the agent. This is a fragment for the program above: add `using Microsoft.Extensions.Logging;` to its usings and the `Microsoft.Extensions.Logging.Console` package for `AddConsole`. The `using` declaration disposes the factory at the end of the program, which flushes the console logger before the process exits.
 
 ```csharp
-public class CostTrackingAgent : ChatCompletionAgent
-{
-    private readonly ICostTracker costTracker;
-    
-    public override async Task<ChatMessageContent> GetChatMessageContentAsync(
-        ChatHistory history,
-        PromptExecutionSettings settings,
-        Kernel kernel,
-        CancellationToken cancellationToken
-    )
-    {
-        var startTime = DateTime.UtcNow;
-        
-        var result = await base.GetChatMessageContentAsync(
-            history,
-            settings,
-            kernel,
-            cancellationToken
-        );
-        
-        // Track usage
-        var usage = result.Metadata?["Usage"] as Usage;
-        if (usage != null)
-        {
-            await costTracker.TrackUsage(new UsageRecord
-            {
-                Timestamp = startTime,
-                Model = settings.ModelId,
-                PromptTokens = usage.PromptTokens,
-                CompletionTokens = usage.CompletionTokens,
-                Duration = DateTime.UtcNow - startTime
-            });
-        }
-        
-        return result;
-    }
-}
+using ILoggerFactory loggerFactory = LoggerFactory.Create(b => b.AddConsole());
+kernel.AutoFunctionInvocationFilters.Add(
+    new ToolGuardFilter(loggerFactory.CreateLogger<ToolGuardFilter>()));
 ```
 
-## What Works Well
+Two design choices are worth explaining. The first is that the filter returns a result to the model instead of throwing. An exception ends the run with a stack trace; a returned message lets the agent explain to the user what happened. That's also why the budget branch doesn't set `context.Terminate = true`. Terminating stops the loop before the model sees the message, and `ChatCompletionAgent` hands back the raw tool-result message, whose `Content` is empty. If you do want a hard stop, keep `Terminate` and have the caller detect the terminated run and write the user-facing message itself. With the soft version, the model gets one more round trip to answer, and the next filter call sees an index over the budget, so a model that ignores the instruction gets the same message back instead of running another real tool.
 
-**Azure integration.** Connections to Azure OpenAI, AI Search, Cosmos DB—all straightforward.
+The second choice is that the approval gate doesn't execute anything. In a real system that branch writes a request to a queue or a ticketing system and a person approves it outside the agent loop. I don't let an agent hold a conversation open while waiting for a human, because threads, tokens, and user patience all expire.
 
-**Plugin system.** Clean way to give agents capabilities.
+## Retries: be careful what you repeat
 
-**Type safety.** Being in C# means compile-time checks. Fewer runtime surprises.
+Don't wrap the whole agent call in a retry loop. The Azure OpenAI client underneath Semantic Kernel already retries transient HTTP failures with backoff. If you pass your own `HttpClient` (for example from `IHttpClientFactory` in ASP.NET Core), Semantic Kernel turns the SDK's retries off, so add a resilience handler such as `Microsoft.Extensions.Http.Resilience` at that layer. Retrying the entire agent invocation on top of that can re-run tool calls that already happened. That's harmless for `get_order_status` and very harmful for anything that sends an email or moves money.
 
-**Multi-agent orchestration.** Sequential and parallel agent workflows work well.
+My rule of thumb: retries belong at the HTTP layer and inside individual idempotent tools. Non-idempotent tools need an idempotency key, or they belong behind the approval gate above. Derive the key from something stable in the business request (order id plus action, or a request id your app assigns before invoking the agent), not from the tool-call id, which changes every time the model re-plans. `AutoFunctionInvocationContext.ToolCallId` is still useful for correlating the call in logs and traces. At the agent level, fail fast and return a clear message.
 
-## What's Painful
+## Multi-agent orchestration is preview, and should feel like it
 
-**Python support lags behind .NET.** If you're Python-first, LangChain is probably easier.
+The old pattern of `AgentGroupChat` with custom selection and termination strategies is still in the package, still experimental, and no longer where the team is investing. Microsoft introduced a new orchestration model in May 2025 with sequential, concurrent, handoff, group chat, and Magentic patterns that all share one invocation shape. The [agent orchestration docs](https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/agent-orchestration/) cover each pattern. These packages are preview, so you install them with `--prerelease`:
 
-**Documentation gaps.** Some advanced scenarios lack examples.
+```bash
+dotnet add package Microsoft.SemanticKernel.Agents.Orchestration --prerelease
+dotnet add package Microsoft.SemanticKernel.Agents.Runtime.InProcess --prerelease
+```
 
-**Learning curve.** The abstraction levels can be confusing at first.
+A sequential pipeline looks like this. It's a fragment that assumes three `ChatCompletionAgent` instances built as above, and you'll need to suppress the `SKEXP0110` diagnostic to compile it:
 
-**Debugging.** When agents misbehave, tracing through the framework layers is tedious.
+```csharp
+using Microsoft.SemanticKernel.Agents.Orchestration;
+using Microsoft.SemanticKernel.Agents.Orchestration.Sequential;
+using Microsoft.SemanticKernel.Agents.Runtime.InProcess;
 
-## When to Use Semantic Kernel
+#pragma warning disable SKEXP0110
+SequentialOrchestration orchestration = new(researchAgent, writerAgent, editorAgent);
 
-**Good fit:**
-- .NET applications
-- Azure-heavy infrastructure
-- Enterprise scenarios needing strong typing
-- Teams comfortable with Microsoft stack
+InProcessRuntime runtime = new();
+await runtime.StartAsync();
 
-**Not ideal:**
-- Python-only projects
-- Need maximum flexibility
-- Want cutting-edge features first
-- Multi-cloud requirements
+OrchestrationResult<string> result = await orchestration.InvokeAsync(
+    "Summarise the open supplier incidents for this week", runtime);
+string output = await result.GetValueAsync(TimeSpan.FromMinutes(2));
+Console.WriteLine(output);
 
-## Production Checklist
+await runtime.RunUntilIdleAsync();
+#pragma warning restore SKEXP0110
+```
 
-- [ ] Implement proper error handling and retries
-- [ ] Add cost tracking and monitoring
-- [ ] Set up observability (logging, traces)
-- [ ] Implement rate limiting
-- [ ] Add security checks on tool usage
-- [ ] Test agent behavior extensively
-- [ ] Document agent capabilities and limitations
-- [ ] Set up alerting for failures
-- [ ] Implement graceful degradation
-- [ ] Add human-in-the-loop for critical actions
+Before reaching for this, ask whether three agents in sequence are really doing anything that three prompt calls in ordinary code wouldn't. A fixed sequence is a workflow, and a workflow you write yourself is easier to test, retry, and explain. I'd only use the orchestration packages when the routing is dynamic (handoff, group chat) and the result can tolerate preview API churn.
 
-## The Verdict
+## Observability and cost
 
-Semantic Kernel is solid for building production agents in the Microsoft ecosystem. It's not perfect, but it's improving rapidly.
+You can't run an agent you can't see. Semantic Kernel emits OpenTelemetry traces and metrics, and the [observability docs](https://learn.microsoft.com/en-us/semantic-kernel/concepts/enterprise-readiness/observability/) show how to export them to Application Insights or the Aspire dashboard. Subscribe to the `Microsoft.SemanticKernel*` activity sources and meters. The GenAI semantic-convention attributes, including model and token usage, are behind the `Microsoft.SemanticKernel.Experimental.GenAI.EnableOTelDiagnostics` app switch. That switch is experimental too. Token counts are also emitted without the switch, as the `semantic_kernel.connectors.openai.tokens.prompt` and `.completion` counters on the `Microsoft.SemanticKernel.Connectors.OpenAI` meter; base cost tracking on those, and treat the span attributes as debugging detail.
 
-If you're building AI agents with .NET and Azure, give it a serious look. If you're Python-first or multi-cloud, maybe explore alternatives first.
+A tempting shortcut is to subclass `ChatCompletionAgent` to track costs; that doesn't compile, because the class is sealed. Telemetry is the supported route. Those counters aren't tagged by agent, so record token counts per agent yourself (tag your own metric with the agent name, or use separate kernels and services per agent), count tool calls per tool from the filter, and alert on the round-trip budget from the filter. A model that keeps hitting the budget is telling you its instructions or tools are wrong.
 
-For my use case—Azure-based enterprise clients using .NET—it's become my default agent framework.
+## Memory: skip the old APIs
 
-Your mileage may vary. Test it with your specific requirements before committing.
+If you find a tutorial using `MemoryBuilder`, `SaveInformationAsync`, and `AzureAISearchMemoryStore`, it's out of date. Those memory APIs were experimental, and Semantic Kernel moved to vector store connectors built on `Microsoft.Extensions.VectorData`. The abstraction to code against now is `VectorStoreCollection<TKey, TRecord>`; the Azure AI Search connector implements it as `AzureAISearchCollection<TKey, TRecord>`, with typed record classes instead of the old string-and-metadata records.
+
+For an agent, the simplest durable pattern is still retrieval through a tool: a plugin that searches that collection with the caller's permissions applied, rather than a hidden memory layer the agent writes to freely. A tool call shows up in your traces and goes through your filter; a hidden layer doesn't. I'd only accept agent-written memory when the agent genuinely needs to remember things across sessions that no system of record holds, such as a user's stated preferences, and even then I'd scope it per user, give it a retention period, and let the user see and delete it.
+
+## Where Agent Framework fits
+
+Microsoft announced Agent Framework in public preview on 1 October 2025, built by the Semantic Kernel and AutoGen teams as the successor to both. Semantic Kernel still gets critical bug and security fixes, and the Semantic Kernel team has [committed to supporting it for at least a year after Agent Framework reaches GA](https://devblogs.microsoft.com/semantic-kernel/semantic-kernel-and-microsoft-agent-framework/), but most new features are landing in Agent Framework. As of this month, Agent Framework for .NET is still shipping preview builds.
+
+That gives a clear decision:
+
+- **Existing Semantic Kernel agents in production:** keep them. Stick to the GA packages, add filters and telemetry, and read the [migration guide](https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-semantic-kernel) so you know the mapping (`ChatCompletionAgent` becomes `ChatClientAgent`, and messages move to `Microsoft.Extensions.AI` types).
+- **New single-agent work that must ship this quarter on GA bits:** Semantic Kernel's `ChatCompletionAgent` is a reasonable choice. Keep your tools as plain classes with clear contracts so they move cleanly.
+- **New multi-agent or workflow-heavy work:** I'd prototype on Agent Framework rather than adopt Semantic Kernel's preview orchestration packages. You'd be taking on preview risk either way, so take it on the framework that's getting the investment.
+
+## The short version
+
+For Azure-based enterprise clients on .NET, Semantic Kernel became my default agent framework, and the GA core (one agent, typed tools, filters, telemetry) is still a sound production base in January 2026. The parts I'd keep out of customer-facing paths are the preview orchestration packages and anything marked `SKEXP`. Treat the tool loop as the risk surface: narrow tools, a filter that enforces a budget and approval, and no blanket retries. Plan the move to Agent Framework once it reaches GA rather than rushing it. For the wider question of when an agent is the right tool at all, see [AI Agents in 2026: Where They Earn Their Keep and Where They Don't](/blog/2026-01-02-ai-agents-reality-vs-hype/).

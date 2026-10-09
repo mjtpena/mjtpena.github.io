@@ -1,58 +1,231 @@
 ---
-title: "Optimizing AI Cost Per Query"
-description: "Started at $0.08 per query. Too high for our user volume. Switched simple queries from GPT-4o to GPT-4o-mini."
+title: "Cost Per Query: Measure the Unit Cost Before You Cut It"
+description: "Treat cost per query as the unit metric for an LLM app: decompose it from the usage object, then cut it in order with model choice, caching, context and batch."
 author: Michael John Peña
 draft: false
 date: 2026-01-18
 tags:
-  - AI
-  - Cost
-  - Optimization
-  - Azure
+  - Azure OpenAI
+  - Cost Optimization
+  - FinOps
+  - LLM
 ---
 
-## The Baseline
+A monthly Azure OpenAI bill tells you that you spent money. It doesn't tell you whether the product can afford to grow. The number that does is cost per query: what one user question costs end to end, across every model call, retrieval step and retry it triggers. One system I worked on started at about $0.08 per query, which was too high for the user volume we expected, and the work to bring it down to $0.024 was mostly about finding waste rather than squeezing prices.
 
-Started at $0.08 per query. Too high for our user volume.
+For where the bill drifts from the estimate, see [Azure OpenAI hidden costs](/blog/2026-01-04-azure-openai-hidden-costs/); this one is about turning cost into a unit you can manage.
 
-## Optimization 1: Model Selection
+## Why per query, not per month
 
-Switched simple queries from GPT-4o to GPT-4o-mini.
+Monthly spend mixes two things you need to keep apart: how many queries you served and how expensive each one was. When spend goes up 30%, you want to know immediately whether that's growth (good) or a prompt change that doubled the system message (bad). A per-query number separates them.
 
-**Savings: 40%**
+It also gives product owners something to reason with. "We spend $X a month on AI" leads to arguments about the budget. "A query costs 2.4 cents and a user asks about 40 a month" leads to a conversation about pricing, quotas and which features are worth their cost.
 
-## Optimization 2: Aggressive Caching
+My rule is that the unit should match what the user experiences as one action. For a chat assistant that's one user turn. For a document pipeline it's one document. If a single user question fans out into a planner call, three tool calls and a final answer, all of those belong to the one query.
+
+## Measure it from the usage object, not from estimates
+
+Every chat completion response from Azure OpenAI includes a `usage` block with prompt tokens, completion tokens and, for models that support it, a breakdown of cached prompt tokens under `prompt_tokens_details.cached_tokens` and reasoning tokens under `completion_tokens_details.reasoning_tokens`. That is the meter. Log it per call, tag each call with a query ID, and sum per query.
+
+The fragment below wraps a call and records what it actually cost. It uses the `openai` Python package against the Azure OpenAI v1 endpoint. The prices are placeholders on purpose: copy the current per-million-token rates for your model and deployment type from the [Azure OpenAI pricing page](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/), because they differ by model, region type and over time.
 
 ```python
-from functools import lru_cache
-import hashlib
+import logging
+import os
+import time
+import uuid
+from dataclasses import dataclass, field
 
-@lru_cache(maxsize=1000)
-def cached_embedding(text):
-    return get_embedding(text)
+from openai import APIConnectionError, InternalServerError, OpenAI, RateLimitError
 
-def cache_key(query):
-    return hashlib.sha256(query.encode()).hexdigest()
+log = logging.getLogger("cost_ledger")
+
+client = OpenAI(
+    base_url="https://<your-resource-name>.openai.azure.com/openai/v1/",
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    max_retries=0,  # retry in answer(), where the ledger can see every attempt
+    timeout=60,
+)
+
+# USD per 1M tokens, keyed on response.model: the versioned model name that
+# served the request, not the deployment name. Placeholders: fill in from the
+# pricing page.
+PRICES = {
+    "<versioned-model-name, e.g. gpt-4o-mini-2024-07-18>": {
+        "input": 0.0, "cached_input": 0.0, "output": 0.0,
+    },
+    "<versioned-model-name, e.g. gpt-4o-2024-11-20>": {
+        "input": 0.0, "cached_input": 0.0, "output": 0.0,
+    },
+}
+
+
+@dataclass
+class QueryLedger:
+    query_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    calls: list = field(default_factory=list)
+
+    def record(self, deployment: str, model: str, usage, step: str) -> float | None:
+        details = getattr(usage, "prompt_tokens_details", None)
+        cached = (getattr(details, "cached_tokens", 0) or 0) if details else 0
+        completion_details = getattr(usage, "completion_tokens_details", None)
+        reasoning = (
+            (getattr(completion_details, "reasoning_tokens", 0) or 0)
+            if completion_details
+            else 0
+        )
+        # Embeddings usage has no completion_tokens, so default it to zero.
+        completion = getattr(usage, "completion_tokens", 0) or 0
+        uncached = usage.prompt_tokens - cached
+
+        price = PRICES.get(model)
+        if price is None:
+            # The call is already billed; log it as unpriced rather than crash.
+            log.warning("unpriced model %s in query %s", model, self.query_id)
+            cost = None
+        else:
+            cost = (
+                uncached * price["input"]
+                + cached * price["cached_input"]
+                + completion * price["output"]
+            ) / 1_000_000
+
+        self.calls.append(
+            {
+                "step": step,
+                "deployment": deployment,
+                "model": model,
+                "prompt_tokens": usage.prompt_tokens,
+                "cached_tokens": cached,
+                "completion_tokens": completion,
+                "reasoning_tokens": reasoning,
+                "cost_usd": cost,
+            }
+        )
+        return cost
+
+    def record_failure(self, deployment: str, step: str, error: Exception) -> None:
+        # No usage object comes back, so the tokens are unknown. Count the attempt
+        # anyway so reconciliation against Azure Monitor has something to match.
+        self.calls.append(
+            {"step": step, "deployment": deployment, "error": type(error).__name__,
+             "cost_usd": None}
+        )
+
+    @property
+    def total_cost(self) -> float:
+        return sum(c["cost_usd"] or 0.0 for c in self.calls)
+
+    @property
+    def unpriced_calls(self) -> int:
+        return sum(1 for c in self.calls if c["cost_usd"] is None)
+
+
+def answer(
+    question: str,
+    context: str,
+    deployment: str,
+    ledger: QueryLedger,
+    attempts: int = 3,
+    max_completion_tokens: int = 800,
+) -> str:
+    messages = [
+        {"role": "system", "content": "Answer using only the provided context."},
+        {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {question}"},
+    ]
+    for attempt in range(1, attempts + 1):
+        step = f"answer#{attempt}"
+        try:
+            response = client.chat.completions.create(
+                model=deployment,
+                messages=messages,
+                max_completion_tokens=max_completion_tokens,
+            )
+        except (RateLimitError, InternalServerError, APIConnectionError) as exc:
+            # Transient (APITimeoutError is an APIConnectionError): back off and retry.
+            ledger.record_failure(deployment, step, exc)
+            time.sleep(2**attempt)
+            continue
+
+        if response.usage:
+            ledger.record(deployment, response.model, response.usage, step)
+        choice = response.choices[0]
+        if choice.finish_reason == "stop" and choice.message.content:
+            return choice.message.content
+        if choice.finish_reason == "content_filter":
+            # Same input, same verdict: a retry only pays for the refusal twice.
+            raise RuntimeError("Response was filtered; not retrying")
+        if choice.finish_reason == "length":
+            # An identical retry truncates again; give it room (or lower reasoning_effort).
+            max_completion_tokens *= 2
+        # Anything else (e.g. empty content) is treated as transient and retried.
+    raise RuntimeError(f"No usable answer after {attempts} attempts")
 ```
 
-**Savings: 20%**
+Completion tokens already include reasoning tokens for reasoning models, so they're billed at the output rate even though the user never sees them. Prices are keyed on `response.model` rather than the deployment name because with model router one deployment serves several underlying models, and a price looked up by deployment would be wrong for most of its calls. Azure returns the versioned name there (`gpt-4o-mini-2024-07-18`, not `gpt-4o-mini`), so key the table the same way, and treat an unpriced model as a warning: by the time you look up the price, the call has already been billed.
 
-## Optimization 3: Context Compression
+Two things to include that people usually forget. Embedding calls for the query (and re-ranking, if you pay for it) are part of the query; embeddings report only prompt tokens, which is why `record()` defaults `completion_tokens` to zero. And retries cost money, which is why the retry logic lives in `answer()` and not in the SDK. The `openai` client retries rate limits, server errors and timeouts on its own (`max_retries` defaults to 2), and a usage-based ledger never sees those attempts. Setting `max_retries=0` makes every attempt visible, but it doesn't make every attempt measurable: a call your client timed out on may still have consumed tokens on the service, and no usage object comes back for it. The ledger can count that attempt, not price it. Retry only what is plausibly transient: an identical request after a `length` or `content_filter` finish usually pays twice for the same result.
 
-Send only relevant context, not entire documents.
+### Reconcile at the gateway
 
-**Savings: 15%**
+For what the ledger can't see, reconcile against what the platform metered. Azure Monitor reports processed prompt tokens and generated completion tokens per deployment, which is enough to check that the ledger's daily totals land within a few percent of reality. If several apps share a deployment behind API Management, the [`llm-emit-token-metric` policy](https://learn.microsoft.com/en-us/azure/api-management/llm-emit-token-metric-policy) (or its older `azure-openai-emit-token-metric` sibling) emits token counts to Application Insights with up to five custom dimensions, such as subscription ID or an app name. That beats in-app ledgers for chargeback: no team can forget to instrument. It won't give you a per-query or per-step breakdown: API Management tracks at most 100 unique values per dimension and silently drops the rest, so a query ID is the wrong dimension. I use the gateway to attribute cost to apps and the ledger to explain it.
 
-## Optimization 4: Batch Processing
+## Decompose before you optimise
 
-Group similar queries when possible.
+Once you have a ledger per query, look at the distribution, not the average. In most systems a minority of queries carries a disproportionate share of cost: long conversations re-sending their history, questions that pull huge retrieved contexts, or agent loops that call tools several times. The average hides them.
 
-**Savings: 10%**
+I break each query down along three axes:
 
-## Final Cost
+| Axis | Question it answers | Typical lever |
+|---|---|---|
+| Which model | Is an expensive model doing work a cheaper one could do? | Routing, smaller models |
+| Input vs output | Are we paying for what we send or what we generate? | Context trimming, caching, output limits |
+| Which step | Is it the answer, the planner, the retries or retrieval? | Fewer calls, batching, fixing failure loops |
 
-$0.024 per query. 70% reduction.
+Input tokens usually dominate in retrieval-augmented apps because every call carries a system prompt plus retrieved chunks. Output usually dominates in generation-heavy apps and anything using a reasoning model. The table tells you where to spend effort first.
 
-## The Lesson
+## The levers, in the order I'd pull them
 
-Most AI costs come from waste. Cut the waste first.
+### 1. Match the model to the query
+
+The biggest single change in the system I mentioned was moving simple queries from GPT-4o to GPT-4o-mini. Lookups, classification, short factual answers and reformatting rarely need the large model, and the per-token price difference between those two is large enough that this one change moved the number more than anything else.
+
+By January 2026 the menu is wider: the GPT-4.1 family and the GPT-5 family both have mini and nano sizes, and Microsoft Foundry's [model router](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/model-router), announced as generally available at Ignite in November 2025, will pick a model per request for you. I still prefer explicit routing rules for anything with a quality bar I have to defend, because a rule I wrote is a rule I can test. Use the router when the query mix is broad and you can evaluate it against your own test set, not on faith. Check the router's own charge for input tokens on the pricing page too: it is billed on top of the model it selects, so it belongs in the per-query ledger.
+
+When not to do this: if a wrong answer is expensive (compliance, financial advice, anything a person acts on without checking), the saving from a smaller model can disappear in one bad outcome. Route on evaluated quality, never on price alone.
+
+### 2. Stop paying twice for the same thing
+
+There are two different kinds of caching and they solve different problems.
+
+Application caching means you don't call the model at all. An exact-match cache on the normalised question, keyed together with the model and a prompt version, is simple and safe. Include the prompt version in the key, or a prompt change will keep serving stale answers. Caching query embeddings is also worthwhile, because the same questions get embedded again and again. Semantic caching (matching similar but not identical questions) saves more but can return a confidently wrong answer to a subtly different question, so I only use it for content that isn't personalised or time-sensitive.
+
+[Prompt caching](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/prompt-caching) is the service-side kind, and it's on by default for supported models. Prompts of at least 1,024 tokens whose opening tokens match a recent request get those tokens billed at a discounted cached-input rate, and the hit shows up in `cached_tokens`. The design implication is simple: put the stable parts first (system prompt, tool definitions, fixed instructions) and the variable parts last (retrieved chunks, the user's question). A timestamp at the top of the system prompt quietly defeats it. Caches are typically cleared after a few minutes of inactivity, so the benefit is greatest on steady traffic.
+
+### 3. Send less context
+
+Retrieval systems tend to over-fetch because more context feels safer. Sending only the relevant chunks rather than whole documents was one of the steps in the system I worked on, and it is usually the cheapest change to make. Practical moves: retrieve fewer, better chunks (a re-ranker helps here), trim chat history to a window or a running summary instead of re-sending every turn, and cap `max_completion_tokens` for responses that should be short. With reasoning models the cap includes reasoning tokens, so a tight cap can produce an empty, still-billed response; lower `reasoning_effort` instead.
+
+Measure answer quality while you do it. Context cuts are where cost work most often degrades the product unnoticed.
+
+### 4. Move work off the interactive path
+
+Anything that doesn't need an answer in seconds (nightly enrichment, document classification, evaluation runs, backfills) can go through [Global Batch](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/batch), which is priced at 50% less than Global Standard with a 24-hour target turnaround and its own quota. It doesn't help a live chat query, but it often removes a large chunk of total spend. Grouping similar queries where latency allows, which was the last step in that system, is the same idea at a smaller scale.
+
+## When the number is wrong to chase
+
+Cost per query is a unit metric, not a goal. Three cases where I'd stop optimising it:
+
+- **The query is cheap relative to its value.** If a query replaces ten minutes of an analyst's time, shaving a cent off it is not where your effort belongs.
+- **Volume is low.** At a few thousand queries a month, the engineering time costs more than the tokens. Measure, but don't build a routing layer yet.
+- **The saving costs quality you can't measure.** If you don't have an evaluation set, you can't tell whether the cheaper configuration is equivalent. Build the evaluation first.
+
+## The takeaway
+
+Instrument first: per-call usage, tagged by query, including retries, reasoning tokens and embeddings, reconciled against what Azure metered. Then let the decomposition decide where to start:
+
+- **Input dominates** (most retrieval apps): prompt caching and context trimming, which cost the least engineering and rarely change answer quality.
+- **Output dominates** (especially reasoning models): the model choice and its reasoning effort, where the per-token price and the hidden tokens sit.
+- **One step dominates:** fix that step before touching anything global.
+
+The drop from $0.08 to $0.024 per query came from this kind of work: finding waste, not squeezing prices.

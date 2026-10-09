@@ -1,95 +1,94 @@
 ---
-title: "The Weekend I Finally Said No"
-description: "Saturday morning. My phone buzzed. Slack message: \"Hey MJ, quick question about the deployment...\""
+title: "The Weekend I Stopped Answering Slack"
+description: "How I went from working every weekend to zero weekend work: the setup, the team pushback, what changed after eight weeks, and the exceptions I still allow."
 author: Michael John Peña
 draft: false
 date: 2026-01-12
 tags:
   - Personal
   - Work-Life
-  - Boundaries
   - Career
+  - Parenting
+  - Productivity
 ---
 
-Saturday morning. My phone buzzed. Slack message: "Hey MJ, quick question about the deployment..."
+Saturday morning. My phone buzzed. A Slack message: "Hey MJ, quick question about the deployment..."
 
-I put the phone down. Didn't respond.
+I put the phone down and didn't respond. That sounds trivial. For me it was the first visible proof that I'd actually changed how I work, after years of telling myself weekend availability was part of the job.
 
-This might not sound revolutionary to you. For me, it was.
+## The pattern I called dedication
 
-## The Pattern
+For years, my weekends looked like this:
 
-For years, weekends looked like this:
+| When | What I was doing |
+|---|---|
+| Saturday morning | Catching up on email |
+| Saturday afternoon | A "quick fix" that took three hours |
+| Sunday morning | Reviewing pull requests |
+| Sunday afternoon | Planning Monday |
+| Sunday evening | Anxiety about the week ahead |
 
-**Saturday morning:** Catch up on emails
-**Saturday afternoon:** "Quick fix" that takes 3 hours
-**Sunday morning:** Review PRs
-**Sunday afternoon:** Plan for Monday
-**Sunday evening:** Anxiety about the week ahead
+I called it dedication. Professionalism. Being a good team player. It was poor boundaries dressed up as work ethic.
 
-I told myself this was dedication. Professionalism. Being a good team player.
+Weekend protection is one of the rules in [The Tech Parent's Dilemma](/blog/2026-01-06-parenting-in-tech/). This post is how that rule started and what enforcing it actually looked like.
 
-It was actually just poor boundaries dressed up as work ethic.
+## The moment it stopped being abstract
 
-## The Breaking Point
-
-Last weekend, Archael asked if we could go to the park.
+Archael asked if we could go to the park.
 
 "After I finish this, bud."
 
-Two hours later, he'd given up asking. Went to play alone in his room.
+Two hours later he'd stopped asking and gone to play alone in his room. My son had learned not to expect me to show up.
 
-That moment hit different. My son had learned not to expect my presence.
+That evening, after the kids were asleep, I decided: no more weekend work. Not "try to reduce it". Not "only emergencies". Zero.
 
-## The Decision
+My wife looked sceptical. "You've said this before."
 
-That evening, after the kids were asleep, I made a decision.
+She was right. I had. I'd just never committed to it in a way anyone else could see.
 
-No more weekend work. Not "try to reduce it." Not "only emergencies." Zero.
+## What I set up on Monday
 
-My wife looked skeptical. "You've said this before."
+Willpower alone hadn't worked before, so I made the boundary public and made the tools enforce it.
 
-She was right. I had. But I'd never actually committed.
+### 1. A Slack status that answers the question before it's asked
 
-## Setting Up for Success
-
-Monday morning, I did three things:
-
-**1. Updated my Slack status**
-```
-🏠 Off on weekends
-Available Monday-Friday 9 AM - 6 PM AEST
+```text
+Off on weekends
+Available Monday-Friday 9 AM - 6 PM Sydney time
 For emergencies: [phone number]
 ```
 
-**2. Email autoresponder for weekends**
-```
+The phone number matters. It changes the question from "is MJ around?" to "is this worth a phone call?", and most things aren't. If you want the tool to do the work, Slack also lets you [set a notification schedule](https://slack.com/help/articles/214908388-Pause-your-Slack-notifications) so notifications pause outside the days and hours you pick. While they're paused, someone sending a direct message can still choose to notify you about something urgent, which is a sensible escape hatch.
+
+### 2. A weekend autoresponder
+
+```text
 I'm offline for the weekend. I'll respond to your email on Monday.
 
 For urgent issues, contact [on-call person].
 ```
 
-**3. Told my team directly**
+Note what it does: it routes urgent issues to whoever is actually on call, not to me by default.
 
-"I'm not available on weekends anymore. This isn't about dedication—I work hard during the week. It's about sustainability. I need this boundary to be effective long-term."
+### 3. Telling my team directly
 
-## The First Weekend
+"I'm not available on weekends anymore. This isn't about dedication. I work hard during the week. It's about sustainability. I need this boundary to be effective long-term."
 
-Saturday morning. Phone buzzed. Slack message. I looked at it. Put the phone in a drawer.
+Saying it out loud did more than the status and autoresponder combined. A status can be ignored. A conversation sets an expectation.
 
-Kept checking mentally. "Is it urgent?" "Should I just quickly respond?" "What if they're blocked?"
+## The first weekend
 
-Caught myself. Closed the drawer.
+Saturday morning. Phone buzzed. Slack message. I looked at it and put the phone in a drawer.
 
-Took Archael to the park. Was actually present. Didn't check my phone.
+My head kept checking anyway. Is it urgent? Should I just quickly respond? What if they're blocked? I caught myself and closed the drawer.
 
-Sunday. No work. Felt weird. Like I was forgetting something important.
+I took Archael to the park and was actually present. I didn't check my phone.
 
-I wasn't. Everything was fine.
+Sunday, no work. It felt like I was forgetting something important. I wasn't. Everything was fine.
 
-## The Pushback
+## The pushback
 
-Monday morning, one team member seemed annoyed. "I was blocked on Saturday."
+On Monday, one team member seemed annoyed. "I was blocked on Saturday."
 
 "What was the blocker?"
 
@@ -99,82 +98,67 @@ Monday morning, one team member seemed annoyed. "I was blocked on Saturday."
 
 "Well, no, but I thought I'd just ask you."
 
-This was the problem. I'd made myself too available. People weren't even trying to solve problems independently first.
+That exchange told me the real problem. I'd made myself so available that people asked me before they looked anywhere else. My constant availability wasn't helping the team. It was stopping them from building their own ways of getting unblocked.
 
-## What Changed
+If you lead a team, this is the uncomfortable bit: every weekend reply you send trains people to route around the documentation, the runbook and each other.
 
-**Week 1:** Felt guilty. Checked Slack occasionally. Didn't respond but felt anxious.
+## How it played out
 
-**Week 2:** Still guilty but stuck to it. Team adapted. Found answers elsewhere.
+- **Week 1:** Guilty. I checked Slack occasionally. I didn't respond, but I felt anxious.
+- **Week 2:** Still guilty, but I stuck to it. The team adapted and found answers elsewhere.
+- **Week 3:** The guilt faded. I started enjoying weekends again.
+- **Week 4:** It became normal. The team stopped expecting weekend replies.
+- **Week 8:** Someone new joined and asked if I'd seen their Saturday message. I said, "I don't work weekends." They said, "Oh, okay!" and figured it out.
 
-**Week 3:** Guilt fading. Started enjoying weekends again.
+By then the new norm was the default, so the new starter never learned the old one.
 
-**Week 4:** Normalized. Team stopped expecting weekend responses.
+## What actually changed
 
-**Week 8:** Someone new joined. Asked if I saw their Saturday message. I said "I don't work weekends." They said "Oh, okay!" and figured it out.
+- **My stress:** way down.
+- **My relationship with my kids:** noticeably better.
+- **My work during the week:** better, because I'm less burned out.
+- **My team's independence:** they solve more problems on their own.
+- **Project delivery:** unchanged. Nothing broke because I wasn't available on Saturdays.
 
-## The Real Results
+If a sceptical manager reads one line, it should be that one. The cost I'd been afraid of never showed up.
 
-**My stress levels:** Way down
+The biggest lesson was that availability feeds itself. The more available I was, the more people expected it, and the more I expected it of myself. My kids had learned that work came first, and I'm teaching them something different now. The boundary also needs maintaining: every weekend reply I send makes the old norm a little more normal again.
 
-**My relationship with my kids:** Noticeably better
+## Give the team somewhere else to go first
 
-**My work quality during the week:** Actually improved—I'm less burned out
+People do adapt, but only if there's somewhere else to go. Pulling yourself out of the weekend without replacing what you were doing just moves the frustration onto your team. If you are setting this up, these are the two things I would put in place first:
 
-**My team's independence:** They solve more problems on their own
+- **A runbook or FAQ for the questions that keep coming to you.** The Saturday message about the authentication flow wasn't an emergency. It was a gap in the documentation that I'd been papering over by answering. If the same question reaches you twice, write the answer down where the team can find it and point people there.
+- **A named on-call rota.** "Contact the on-call person" only works if everyone knows who that is this weekend and how to reach them. The autoresponder and the Slack status both depend on it.
 
-**Project delivery:** Unchanged. Nothing broke because I wasn't available Saturdays.
+The trade-off is effort up front: writing a runbook entry takes longer than answering the question once. It pays off because you stop answering the same question every weekend.
 
-## What I Learned
+## Most urgency is manufactured, but not all of it
 
-**Availability is addictive.** The more available you are, the more people expect it.
+Most "urgent" things can wait until Monday. True emergencies still exist: production down, a data breach, an actual crisis.
 
-**Urgency is often manufactured.** Most "urgent" things can wait until Monday.
+I've had two in six months. Both times I got a phone call, not a Slack message. Both times I responded, and both times it was genuinely urgent.
 
-**Your presence teaches lessons.** My kids learned that work is more important than them. I'm teaching them something different now.
+The other 47 Slack messages? None were emergencies. All of them could wait.
 
-**Boundaries require defending.** You can't just set them and forget them. You have to maintain them.
+My rule of thumb now: if it's worth interrupting my weekend, it's worth a phone call. That rule only works if there's a real on-call arrangement behind it.
 
-**People adapt.** Your team will adjust. Give them time.
+Time zones complicate this. Saturday morning in Sydney is still Friday afternoon in the US, so a US-based colleague or client sending a message then is just finishing their week. I put my handover time in my status ("back Monday 9 AM Sydney time") and let the notification schedule follow Sydney hours, not the sender's. Anything that genuinely can't wait for my Monday goes to the on-call person, the same as a local message would.
 
-## The Exceptions
+### When zero contact is the wrong goal
 
-True emergencies exist. Production down. Data breach. Actual crisis.
+Some roles shouldn't aim for zero weekend contact. If you're the single point of failure for production, you can't opt out on your own. Raise it with your manager as a staffing gap and get a second person trained up before you go dark. If weekend availability is part of the job, such as an on-call allowance, a support roster or an incident-commander rotation, you're being paid to be reachable for those weekends. There the answer is a fair rota, so that each person's on-call weekends are known in advance and the rest are genuinely off, rather than nobody ever being on call.
 
-I've had two in six months. Both times, I got a phone call (not Slack). Both times, I responded. Both times, it was actually urgent.
+It's also worth knowing where you stand if you work in Australia. The [right to disconnect](https://www.fairwork.gov.au/employment-conditions/hours-of-work-breaks-and-rosters/right-to-disconnect) in the Fair Work Act lets employees refuse to monitor, read or respond to contact outside working hours unless the refusal is unreasonable. It has applied to non-small business employers since 26 August 2024 and [to small business employers since 26 August 2025](https://www.fairwork.gov.au/newsroom/media-releases/2025-media-releases/august-2025/20250826-right-to-disconnect-starts-for-small-business-employees-media-release). It doesn't stop anyone from sending you a message, and whether a refusal is unreasonable depends on things like the reason for the contact, how it disrupts you, whether you're paid to be available, your role and level of responsibility, and your personal circumstances, including caring responsibilities. That "paid to be available" factor is the on-call case above. I'd treat the law as a backstop. The boundary that actually holds is the one your team has agreed to.
 
-The other 47 Slack messages? None were emergencies. All could wait.
+## If you want to try it
 
-## To My Fellow Always-On Developers
+You don't get extra points for weekend availability. You don't advance faster. You don't build better products. You burn out faster.
 
-You don't get extra points for weekend availability. You don't advance faster. You don't build better products.
+I spent years optimising my code, my tools and my workflows. I never optimised my boundaries, and that turned out to be the real bottleneck.
 
-You just burn out faster.
+Start with one weekend that is truly off, with a named on-call person your team knows to call instead of you. It'll feel uncomfortable and you'll want to check. Don't. Monday will come, the work will be there, and you'll be in better shape to handle it.
 
-I spent years optimizing my code, my tools, my workflows. But I never optimized my boundaries. That was the real performance bottleneck.
+Nobody remembers the Saturday Slack replies. My kids will remember whether I showed up.
 
-## The Challenge
-
-Try it. One weekend. Truly off.
-
-Turn off notifications. Put the phone away. Be present with your family, your hobbies, your rest.
-
-It'll feel uncomfortable. You'll want to check. Don't.
-
-Monday will come. The work will be there. You'll be better equipped to handle it.
-
-## What Actually Matters
-
-I've realized something: No one on their deathbed wishes they'd responded to more Slack messages on Saturdays.
-
-They wish they'd been present for their kids. For their partners. For their life outside of work.
-
-I'm trying to live accordingly.
-
-This weekend, Archael asked if we could go to the park.
-
-I said yes immediately. We went. I was there—fully there.
-
-My phone stayed home.
-
-That's the success metric that actually matters.
+This weekend, Archael asked if we could go to the park. I said yes straight away. We went, and I was fully there. My phone stayed home. That's the success metric I care about now.

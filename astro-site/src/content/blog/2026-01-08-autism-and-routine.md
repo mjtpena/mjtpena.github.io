@@ -1,6 +1,6 @@
 ---
-title: "What Autism Taught Me About Systems Design"
-description: "Andriel needs structure. Not wants—needs. His autism means unpredictability causes genuine distress. Over the years, I've realized he's taught me more about…"
+title: "What My Son's Autism Taught Me About Predictable Systems"
+description: "Andriel needs routine, not just likes it. Living with that has changed how I design functions, error messages, API deprecations and team change."
 author: Michael John Peña
 draft: false
 date: 2026-01-08
@@ -8,126 +8,173 @@ tags:
   - Personal
   - Parenting
   - Autism
-  - Systems
+  - Engineering
+  - API Design
 ---
 
-Andriel needs structure. Not wants—needs. His autism means unpredictability causes genuine distress. Over the years, I've realized he's taught me more about good systems design than any tech book.
+Andriel needs structure. Not wants it: needs it. His autism means unpredictability causes him genuine distress, and over the years I've realised that living with that has changed how I design software more than most of what I've read about it.
 
-## The Morning Routine
+This isn't a claim that software users are autistic. It's about what designing a household for someone who can't fill in gaps has taught me, and why the same discipline helps people who can.
 
-Andriel's morning: wake up, bathroom, breakfast (same bowl, same spoon), get dressed (clothes laid out in order), check his train schedule, brush teeth, shoes, backpack. Every day. Same order.
+## The morning routine
+
+Andriel's morning goes like this: wake up, bathroom, breakfast (same bowl, same spoon), get dressed (clothes laid out in order), check his train schedule, brush teeth, shoes, backpack. Every day. Same order.
 
 Miss a step? He knows. Change the order? Meltdown.
 
-At first, I saw this as rigidity. Now I see it as clarity.
+For a long time I saw this as rigidity. Now I see it as clarity. The routine is a contract. Each step has a defined input and a defined output, and he can rely on it. When the contract holds, he has the capacity for everything else the day throws at him. When it breaks, all his energy goes into coping with the break.
 
-## Systems Should Be Predictable
+Most of the systems I've worked on behave the same way from the user's side. People can tolerate a lot of complexity if it's consistent. What wears them out is surprise.
 
-Good code is boring. It does what you expect. Every time.
+## Predictable functions are boring, and that's the point
 
-Bad code surprises you. A function that sometimes returns null, sometimes throws, sometimes returns an empty array—that's the software equivalent of changing Andriel's morning routine without warning.
+Good code is boring. It does what you expect, every time.
+
+Bad code surprises you. A function that sometimes returns `None`, sometimes raises, and sometimes returns an empty dict is the software version of reshuffling Andriel's morning without warning. Every caller now has to defend against three outcomes, and most of them will only defend against one.
 
 ```python
-# Bad: Unpredictable
-def get_user(id):
-    if id < 0:
-        return None
-    if id == 0:
-        raise ValueError()
-    user = db.query(id)
-    return user if user else {}  # Sometimes None, sometimes empty dict
+from dataclasses import dataclass
 
-# Good: Predictable
-def get_user(id: int) -> Optional[User]:
-    if id <= 0:
+
+@dataclass
+class User:
+    id: int
+    name: str
+
+
+USERS = {1: User(1, "Andriel"), 2: User(2, "Michael")}
+
+
+# Unpredictable: three different "nothing" results depending on the input
+def get_user_unpredictable(user_id):
+    if user_id < 0:
         return None
-    return db.query(id)  # Always Optional[User]
+    if user_id == 0:
+        raise ValueError()
+    user = USERS.get(user_id)
+    return user if user else {}
+
+
+# Predictable: one contract, stated in the signature
+def get_user(user_id: int) -> User | None:
+    """Return the user with this ID, or None if there isn't one."""
+    if user_id <= 0:
+        return None
+    return USERS.get(user_id)
+
+
+print(get_user(1))   # User(id=1, name='Andriel')
+print(get_user(99))  # None
+print(get_user(0))   # None
 ```
 
-## Error Messages Should Be Clear
+The second version isn't clever. It just makes one promise and keeps it, and the [`User | None` union type](https://docs.python.org/3/library/stdtypes.html#types-union) (Python 3.10+) tells the caller what that promise is before they read a line of the body.
+
+There is a trade-off. Collapsing every "not found" case into `None` can hide a genuine bug: a negative ID is probably a caller error, not a missing user. If that distinction matters in your system, raise a specific exception for invalid input and return `None` only for "valid but absent". What matters is that the rule is written down and never varies.
+
+## Error messages should say what happens next
 
 When something goes wrong in Andriel's routine, vague explanations don't work.
 
 "We can't do that today" triggers panic.
 
-"We can't go to the train station today because it's closed for repairs. We'll go on Saturday instead when it reopens" gives him the structure to understand and adjust.
+"We can't go to the train station today because it's closed for repairs. We'll go on Saturday instead when it reopens" gives him enough structure to understand and adjust. It says what changed, why, and what the new plan is.
 
-Your error messages should do the same.
+Error messages should do the same. The `int` annotation below documents the contract, but type hints aren't enforced at runtime, so the function still validates the type at the boundary (and rejects `bool`, which Python treats as a subclass of `int`).
 
 ```python
-# Bad
-raise Exception("Invalid input")
+MAX_USER_ID = 1_000_000
 
-# Good
-raise ValueError(
-    f"User ID must be positive integer, got {user_id}. "
-    f"Valid range: 1 to {MAX_USER_ID}"
-)
+
+# Vague: tells the caller something is wrong, not what or how to fix it.
+#     raise Exception("Invalid input")
+
+
+# Clear: what was wrong, what was received, what is valid
+def validate_user_id(user_id: int) -> None:
+    if not isinstance(user_id, int) or isinstance(user_id, bool):
+        raise TypeError(f"User ID must be an int, got {type(user_id).__name__}.")
+    if not 1 <= user_id <= MAX_USER_ID:
+        raise ValueError(
+            f"User ID must be an integer from 1 to {MAX_USER_ID}, got {user_id}."
+        )
+
+
+for value in (42, 3.5, -5):
+    try:
+        validate_user_id(value)
+        print(f"{value!r}: ok")
+    except (TypeError, ValueError) as exc:
+        print(f"{value!r}: {type(exc).__name__}: {exc}")
+
+# 42: ok
+# 3.5: TypeError: User ID must be an int, got float.
+# -5: ValueError: User ID must be an integer from 1 to 1000000, got -5.
 ```
 
-## Transitions Need Warnings
+For HTTP APIs, the same principle already has a standard: [RFC 9457, Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html), gives you a consistent JSON shape for errors with a type, title, status and detail. I'd use it rather than inventing yet another error envelope, because consistency across endpoints matters as much as the wording of any one message.
 
-You can't just switch contexts on Andriel. "Five more minutes until we leave" gives him time to mentally prepare.
+## Transitions need warnings
 
-Your APIs should do the same. Deprecation warnings. Migration paths. Not just "this endpoint is gone."
+You can't just switch contexts on Andriel. "Five more minutes until we leave" gives him time to prepare mentally. Without the warning, the transition itself becomes the problem, regardless of where we're going.
 
-## Documentation Is Not Optional
+APIs are no different. Removing an endpoint without notice is the "we're leaving now" of software. The tools for giving notice exist and are cheap:
 
-I can't assume Andriel knows the plan. I tell him. Every morning: "Today we're going to school, then after school we're coming home, then dinner, then bedtime."
+- In Python libraries, emit a [`DeprecationWarning`](https://docs.python.org/3/library/warnings.html) before you remove anything.
+- In HTTP APIs, send the [`Deprecation` response header (RFC 9745, published March 2025)](https://www.rfc-editor.org/rfc/rfc9745.html) to say when a resource was or will be deprecated, and the [`Sunset` header (RFC 8594)](https://www.rfc-editor.org/rfc/rfc8594.html) to say when it will stop responding.
+- Publish the migration path at the same time as the warning, not after.
 
-Even though it's the same every day, the confirmation matters. It reduces anxiety.
+One gotcha with the two headers: they don't use the same date format. `Deprecation` takes a Structured Fields date (an `@` followed by Unix seconds), while `Sunset` takes a classic HTTP-date. RFC 9745 also defines a `deprecation` link relation, which is where the migration path goes:
 
-Your team members aren't mind readers either. Document the obvious. Future you will thank present you.
+```http
+Deprecation: @1767225600
+Sunset: Wed, 30 Jun 2027 23:59:59 GMT
+Link: <https://example.com/docs/migrate-v2>; rel="deprecation"
+```
 
-## Change Requires Extra Communication
+That response says the endpoint was deprecated at midnight UTC on 1 January 2026, will stop responding after 30 June 2027, and points to the migration guide.
 
-Want to change Andriel's routine? You need to:
-1. Explain the change in advance
-2. Explain why it's changing
-3. Walk through the new routine
-4. Check understanding
-5. Provide support during the transition
-6. Be patient with adjustment
+The warning alone isn't enough. "Five more minutes" works for Andriel because the next step is already known. A deprecation notice with no replacement is just a countdown to breakage.
 
-Sounds familiar? That's a change management process. Most teams skip steps 1-4 and wonder why adoption fails.
+## Say the plan out loud, even when it's obvious
 
-## Consistency Builds Trust
+I can't assume Andriel knows the plan, so I tell him. Every morning: "Today we're going to school, then after school we're coming home, then dinner, then bedtime."
 
-Andriel trusts his routines because they're consistent. Break that consistency, and trust erodes.
+It's the same every day, and the confirmation still matters. It reduces anxiety because it turns an assumption into a fact.
 
-Your system's behavior should be consistent. If an endpoint returns data one way, all endpoints should follow that pattern. Don't make users guess.
+Teams need the same thing. The runbook step everyone "just knows", the reason a service is configured the way it is, the order in which things deploy: write them down. A "How this deploys" section in the README, or a short architecture decision record (ADR) explaining why a setting was chosen, is enough. Documentation of the obvious is what the next person, including future you, actually needs when something is on fire.
 
-## The Gift of Clarity
+## Change needs more communication than you think
 
-Neurotypical people tolerate ambiguity. We fill in gaps, assume context, adapt on the fly.
+When we need to change Andriel's routine, the process looks like this:
 
-Andriel can't. He needs clarity. Precision. Predictability.
+1. Explain the change in advance.
+2. Explain why it's changing.
+3. Walk through the new routine.
+4. Check he understands.
+5. Support him during the transition.
+6. Be patient while he adjusts.
 
-And you know what? That's not a limitation. That's a feature.
+That's a change management process. Most technology rollouts I see skip steps 1 to 4: they announce a go-live date and then wonder why adoption stalls. Steps 1 to 4 feel slow, but they're where trust is built. Skip them and you pay for it in support tickets and workarounds.
 
-My best code has come from asking "Would this make sense to Andriel?" If the behavior is clear enough for him, it's clear enough for any developer.
+Sometimes the full process is too much, such as a security fix that has to ship today. Then shorten it: skip the advance notice and the walkthrough if you must, but never skip explaining why (step 2) or supporting people through the change (step 5).
 
-## What I've Learned
+## Consistency is what builds trust
 
-- **Explicit is better than implicit** - Don't make users guess
-- **Consistency reduces cognitive load** - Patterns matter
-- **Clear errors prevent panic** - Help people understand what went wrong
-- **Transitions need support** - Change is hard, make it easier
-- **Documentation isn't optional** - Reduce uncertainty
-- **Predictability builds confidence** - Systems should be boring
+Andriel trusts his routines because they're consistent. Break that consistency often enough and the trust goes, and getting it back takes far longer than losing it.
 
-## To Other Parent Developers
+Systems work the same way. If one endpoint paginates with `page` and another with `offset`, if one returns dates as ISO 8601 strings and another as epoch seconds, every consumer has to learn each endpoint separately. Pick a convention and hold to it, and enforce it with a shared API style guide plus a linter that checks every OpenAPI definition against a ruleset, such as Spectral, so the rule doesn't depend on reviewers remembering it. Inconsistency is a tax every user pays on every call.
 
-If you have a child with autism, you're learning systems thinking whether you realize it or not. The patience you develop, the clarity you practice, the structure you provide—these are all skills that make you a better developer.
+## When not to design for rigid predictability
 
-Andriel has made me a better engineer. Not in spite of his autism, but because of it.
+I don't want to overstate this. Not every system should behave like a fixed morning routine. Exploratory tools, search, and anything built on a language model have useful variability by design, and forcing them into rigid determinism can make them worse.
 
-## The Broader Lesson
+The lesson I take is narrower: be predictable about the **contract**, even when the content varies. A search result can differ every time; the shape of the response, the error format and the deprecation policy shouldn't. Andriel's day isn't identical either. What stays fixed is the structure that tells him what to expect.
 
-We build systems for humans. Humans want predictability, clarity, and consistency—even if they don't have autism.
+## What Andriel has taught me
 
-Good design serves everyone. But designing for those with the greatest need for clarity creates systems that work better for all users.
+A test I use on my own work is simple: would this make sense to Andriel? If the behaviour is clear enough for him, it's clear enough for any developer reading it at 2 am.
 
-Andriel taught me that. He teaches me something new every day.
+If you're a parent of an autistic child working in tech, you're probably already practising this: the advance warnings, the explicit plans, the patient walkthroughs of change. Those habits transfer directly. I wrote about the other side of the work-family balance in [The Tech Parent's Dilemma](/blog/2026-01-06-parenting-in-tech/).
 
-And I'm grateful.
+Designing for the people with the greatest need for clarity produces systems that work better for everyone. Andriel taught me that. He teaches me something new every day, and I'm grateful.

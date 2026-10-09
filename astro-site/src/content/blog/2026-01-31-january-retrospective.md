@@ -1,88 +1,83 @@
 ---
-title: "January 2026: Month in Review"
-description: "Made several commitments at the start of the month. Time to be honest about how I did. Only worked one Saturday. Actual production emergency. Otherwise…"
+title: "January 2026 Closed Out: What Held, and Three Experiments That Didn't"
+description: "The final tally on January: 31 posts in 31 days, one working Saturday, three habit experiments that failed, and the short list I'm taking into February."
 author: Michael John Peña
 draft: false
 date: 2026-01-31
 tags:
   - Personal
   - Retrospective
-  - Career
   - Reflection
+  - Productivity
+  - Career
 ---
 
-## The Commitments
+Four days ago I graded my January commitments while there was still time to act on the grades. That was the [mid-course report card](/blog/2026-01-27-honest-retro/). This is the other half: the month is closed, the numbers are final, and I want to look at the experiments I ran alongside those commitments, because that's where most of the failures were.
 
-Made several commitments at the start of the month. Time to be honest about how I did.
+I'm not repeating the letter grades here. The short version is that the commitments mostly held, and the extra habits I bolted on mostly didn't. That gap is the useful part.
 
-### Weekend Boundaries: Held Strong
+## The final numbers
 
-Only worked one Saturday. Actual production emergency. Otherwise, weekends were for family.
+| Commitment | Final result |
+|---|---|
+| Weekend boundaries | One Saturday worked, for an actual production emergency |
+| Being present | Better than before, still drifting mentally during family time |
+| Writing daily | 31 posts in 31 days |
+| AI project focus | Mostly held, still distracted by new model releases |
 
-This felt good. Kids noticed. Wife noticed. I noticed.
+### Weekend boundaries held
 
-Keeping this in February.
+Apart from that one emergency, every weekend was for family. The kids noticed. My wife noticed. I noticed. That's a better measure than any tracker. I described how this started in [The Weekend I Stopped Answering Slack](/blog/2026-01-12-weekend-work-boundaries/). It's staying in February, no debate.
 
-### Being Present: Mixed Results
+### Being present: mixed
 
-Better than before. But still catch myself mentally drifting to work during family time.
+I said on the 27th that this is harder than it looks because there's no object to put away, and four more days didn't change that. I still catch myself thinking about work while I'm sitting with the kids. Progress, not perfection, and this one is going to be a long project.
 
-Progress, not perfection.
+### Writing daily: done
 
-### Writing Daily: Succeeded
+Some posts were technical, some personal, some short, some long. The consistency mattered more than any single post. Writing every day clarified my thinking on several topics, mostly because a daily deadline doesn't leave room to keep a thought half-formed. Being more open in my writing also felt liberating: less polished advice, more of what actually happened, including the parts that didn't go well. I explained why I still bother in [Why I Still Blog in 2026](/blog/2026-01-10-why-i-still-blog/).
 
-31 posts in 31 days. Some technical, some personal, some short, some long.
+### AI project focus: mostly held
 
-Felt good to write consistently. Clarified my thinking on several topics.
+I turned down projects that didn't fit and kept my work centred on Azure OpenAI and Microsoft Fabric. Where I slipped was the same place as always: a new model drops and I lose an afternoon to it. Old habits. Curiosity is part of the job, but the commitment was depth over breadth, and every hour spent on a launch is an hour not spent getting better at the tools I actually deliver with.
 
-### AI Project Focus: Mostly Held
+## Three experiments that didn't stick
 
-Turned down projects that didn't fit. Focused on Azure OpenAI and Fabric work.
+Alongside the commitments, I tried three habits that productivity advice tends to treat as universal. All three failed for me this month.
 
-Still got distracted by new model releases. Old habits.
+**Meditation.** I tried it for a week and struggled with it. I'm not writing it off. The thing it's meant to help with, being present, is exactly my weakest result above, which is why it's still on February's list in a different form: five minutes a day rather than whatever I attempted this month.
 
-## What Worked
+**Time-blocking.** I tried batching work into fixed blocks. It didn't stick. My read is that a rigid calendar is fragile when the work itself is unpredictable, but I'll be honest that one month isn't enough evidence to say why it failed, only that it did.
 
-**Routines.** Having consistent boundaries made decisions easier.
+**5 AM starts.** I tried waking at 5 AM. My body said no. I'm not going to fight that one. A habit that depends on overriding sleep is a habit I'll abandon the first busy week, so it isn't worth building.
 
-**Honesty.** Being more transparent in my writing felt liberating.
+## Why the subtractions won
 
-**Saying no.** Turning down work to protect time.
+The pattern across all three experiments: they were additions. Each one asked for new time or new willpower on top of everything else. What held were subtractions: stop working weekends, stop taking projects that don't fit. Saying no to something is a single decision. Adding a habit is a decision you have to remake every day. That's why the fixed boundaries made life easier rather than harder. "Do I work this Saturday?" stopped being a question I had to answer each week, and turning down work that didn't fit is the least glamorous thing I did in January and probably the one doing the most.
 
-## What Didn't Work
+## What January taught me
 
-**Meditation.** Tried it for a week. Struggled with it. Might try again differently.
+**Small changes compound.** Not working weekends improved everything else. One boundary changed more than any new habit I tried.
 
-**Batch processing.** Attempted time-blocking. Didn't stick.
+**Presence takes constant effort.** It isn't a switch you flip once. It's something I have to choose again every time I sit down with the family.
 
-**Early mornings.** Tried waking at 5 AM. My body said no.
+**Better counts.** Even when it isn't perfect.
 
-## Lessons Learned
+## February, kept short
 
-**Small changes compound.** Not working weekends improved everything else.
+The [report card](/blog/2026-01-27-honest-retro/) already set three specific goals for February: five minutes of meditation a day, a weekly phones-away family activity and a monthly no-tech day. The list below is the wider view of what I'm continuing, starting and stopping:
 
-**Writing helps thinking.** Regular blogging clarified a lot of fuzzy thoughts.
+- **Continue:** weekend boundaries, daily writing, being selective with work.
+- **Start:** a monthly no-tech day with the family.
+- **Stop:** feeling guilty about what I'm not doing.
+- **Focus:** being present, not just productive.
 
-**Presence is hard.** Being mentally present requires constant effort.
+The "stop" line matters more than it looks. A month of commitments makes it easy to keep a running list of everything I'm falling short on, and that guilt eats the same attention I'm trying to give my family.
 
-**Progress over perfection.** Better counts, even if not perfect.
+## Good, not perfect
 
-## February Plans
+January was good, not perfect. I made progress on what matters and there's still work to do.
 
-**Continue:** Weekend boundaries, daily writing, being selective with work
+If you're doing your own January review this weekend, I'd suggest one thing: split your results into what you stopped doing and what you tried to add. My guess is the subtractions held up better. If they did, February's plan should probably have more of them and fewer new habits.
 
-**Start:** Monthly no-tech day with family
-
-**Stop:** Feeling guilty about what I'm not doing
-
-**Focus:** Being present, not just productive
-
-## The Honest Assessment
-
-January was good, not perfect. Made progress on what matters. Still work to do.
-
-But I'm heading in the right direction.
-
-That's enough for now.
-
-Here's to February.
+I'm heading in the right direction. That's enough for now. Here's to February.

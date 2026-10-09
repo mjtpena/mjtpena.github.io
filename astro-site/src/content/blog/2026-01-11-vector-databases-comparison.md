@@ -1,246 +1,153 @@
 ---
-title: "Vector Databases: What I Learned From Using 5 Different Ones"
-description: "I've deployed vector databases for RAG systems across 5 different projects. Each project chose a different solution. Here's what I actually learned."
+title: "Five Vector Stores for RAG and Where Each One Hurts"
+description: "Azure AI Search, Azure DocumentDB, pgvector, Pinecone and Redis each fail differently in RAG. Here is where each one hurts as of January 2026."
 author: Michael John Peña
 draft: false
 date: 2026-01-11
 tags:
   - AI
-  - Vector
-  - Database
-  - Azure
+  - Vector Database
+  - RAG
+  - Azure AI Search
+  - PostgreSQL
 ---
 
-I've deployed vector databases for RAG systems across 5 different projects. Each project chose a different solution. Here's what I actually learned.
+I've used five different vector stores across RAG projects: Azure AI Search, the MongoDB-compatible vCore flavour of Cosmos DB, PostgreSQL with pgvector, Pinecone and Redis. Each project picked a different one, and they all work on the happy path. The differences show up at the filtered query that returns too few results, the keyword query vectors can't answer, and the invoice nobody modelled. Feature checklists don't separate them any more, so this post is about where each one hurts. I've also covered Azure Cosmos DB for NoSQL as the greenfield alternative to DocumentDB.
 
-## What I've Used
+For a side-by-side of the Azure-native options, see [comparing Azure AI Search, Cosmos DB and PostgreSQL](/blog/2025-11-20-november-ai-topic/). For Pinecone against Weaviate, see [this comparison](/blog/2025-12-09-december-ai-topic/). This one is about failure modes.
 
-1. Azure AI Search (formerly Cognitive Search)
-2. Azure Cosmos DB (MongoDB vCore with vector)
-3. PostgreSQL with pgvector
-4. Pinecone
-5. Redis with vector search
+## First, the January 2026 landscape
 
-Each has trade-offs. None is perfect for everything.
+Some names and statuses moved in 2025, so older posts (including some of mine) are out of date:
 
-## Azure AI Search
+| Option | Status in January 2026 | What changed recently |
+|---|---|---|
+| Azure AI Search | GA vector, hybrid and semantic ranker | Agentic retrieval (knowledge bases) is still preview |
+| Azure DocumentDB | GA (Nov 2025) | New name for Azure Cosmos DB for MongoDB (vCore), announced at Ignite 2025 |
+| Azure Cosmos DB for NoSQL (alternative to DocumentDB) | Vector, full-text and hybrid search GA | Full-text and hybrid search went GA at Build 2025 |
+| PostgreSQL + pgvector | pgvector 0.8.x; DiskANN GA on Azure Database for PostgreSQL | `pg_diskann` went GA in May 2025 |
+| Pinecone | Serverless is the default | Pod-based indexes closed to new customers since August 2025 |
+| Redis | Azure Managed Redis GA (May 2025) | Azure Cache for Redis tiers are scheduled for retirement |
 
-**Best for:** All-in-one RAG systems on Azure
+If your shortlist still says "Cosmos DB MongoDB vCore" or "Pinecone p1 pods", update it before you take it to an architecture review.
 
-**Pros:**
-- Native Azure integration
-- Hybrid search built-in (vector + keyword)
-- Semantic ranking included
-- Good monitoring and logging
-- Handles indexing for you
+## Azure AI Search: it hurts on the invoice and on control
 
-**Cons:**
-- Can get expensive at scale
-- Less control over vector algorithm
-- Somewhat slower than specialized solutions
-- Limited to Azure ecosystem
+AI Search is still my default for RAG on Azure, because it has the most retrieval features in one box. You get BM25 and vector queries fused with Reciprocal Rank Fusion, hybrid search in one request, semantic ranking on top, and integrated vectorisation that chunks and embeds documents during indexing. Most RAG quality problems are retrieval problems, and AI Search fixes many without a custom pipeline.
 
-**When I use it:** Client wants fully managed, integrated with Azure services, doesn't want to manage infrastructure.
+Where it hurts:
 
-**Real cost:** ~$300/month for 1M vectors with S1 tier.
+- **Capacity is billed by the search unit, not by usage.** You pay for replicas × partitions around the clock. Vector indexes live in memory-bound quotas per partition, so a large embedding collection can force you up a tier long before query volume justifies it. Quantisation and narrower dimensions help, but you have to plan for them.
+- **Less control over the index.** You choose HNSW or exhaustive KNN and tune a few parameters. You don't control storage layout, and you can't join to your operational data.
+- **It's a copy.** Your source of truth lives somewhere else, so you own an indexing pipeline and its freshness lag.
 
-## Cosmos DB with MongoDB vCore
+Avoid it when the corpus is small and the team already runs PostgreSQL. A dedicated search service is a lot of fixed cost for ten thousand chunks.
 
-**Best for:** Global distribution needs
+## Azure DocumentDB (formerly Cosmos DB for MongoDB vCore): it hurts when you aren't already there
 
-**Pros:**
-- Global replication built-in
-- Familiar MongoDB interface
-- Good Azure integration
-- Scales horizontally well
+The only good reason I've found to pick this service is that the application data already lives in the MongoDB API. Keeping vectors next to the documents removes a sync pipeline, and that's worth a lot. Since Ignite 2025 the service is Azure DocumentDB. It runs on the open-source DocumentDB engine. Existing clusters were renamed without any changes.
 
-**Cons:**
-- More expensive than alternatives
-- Vector search is newer, less mature
-- Query performance varies
-- Can be complex to optimize
+It supports HNSW, IVF and DiskANN vector indexes through `cosmosSearch`. Hybrid search is possible, but you build it in the aggregation pipeline: a `$search` stage using `cosmosSearch` for vectors, a `$match` with `$text` for keywords, and RRF scoring computed in later stages, as the Learn sample shows. That works, but it's more query plumbing than AI Search asks of you.
 
-**When I use it:** App needs global distribution, already using Cosmos DB, willing to pay for convenience.
+Where it hurts:
 
-**Real cost:** ~$500/month for similar workload.
+- **vCore sizing is a cluster decision.** You pick compute and storage tiers up front. IVF runs on any tier, but HNSW and DiskANN need a larger cluster tier, and the [DocumentDB vector search docs](https://learn.microsoft.com/en-us/azure/documentdb/vector-search) list the minimum for each index type. So a vector workload has a real floor cost and doesn't scale smoothly from zero.
+- **Hybrid relevance is your code.** Tuning the fusion and the weighting is on you.
 
-## PostgreSQL + pgvector
+My rule: choose it because your documents are already there, not for vector search on its own.
 
-**Best for:** Cost-conscious projects with SQL needs
+### If you're greenfield: Cosmos DB for NoSQL
 
-**Pros:**
-- It's PostgreSQL—reliable, well-understood
-- Cheap (can run on existing infrastructure)
-- SQL queries alongside vector search
-- Mature ecosystem
-- Full control
+If you're starting fresh on Cosmos DB, look at Azure Cosmos DB for NoSQL instead. It has DiskANN-based vector indexing and BM25 full-text search, [hybrid search](https://learn.microsoft.com/en-us/azure/cosmos-db/gen-ai/hybrid-search) went GA at Build in May 2025, and you also get its global distribution story. It's a separate recommendation from DocumentDB, with its own pain points:
 
-**Cons:**
-- You manage everything
-- Scaling requires work
-- Performance optimization is manual
-- Less optimized for pure vector workloads
+- **Retrieval costs request units.** Vector and full-text queries consume RUs, so heavy retrieval shows up directly in your RU bill.
+- **The vector embedding policy is fixed at creation.** You set dimensions and distance function when you create the container. Changing embedding models later means a new container and a data migration.
 
-**When I use it:** Budget-constrained, team knows PostgreSQL, already have relational data.
+Avoid it when you expect to swap embedding models often, or when retrieval volume would dominate the RU budget.
 
-**Real cost:** ~$50/month on managed PostgreSQL.
+## PostgreSQL with pgvector: it hurts on filtered queries and on tuning
 
-## Pinecone
+pgvector is the option I'd recommend most often to teams with a relational schema. You get SQL joins, row-level security, transactions, and one backup strategy covering both the data and its embeddings. On Azure Database for PostgreSQL flexible server you also get [`pg_diskann`](https://learn.microsoft.com/en-us/azure/postgresql/extensions/how-to-use-pgdiskann), which went GA in May 2025, alongside pgvector's HNSW and IVFFlat.
 
-**Best for:** Purpose-built vector search
+The classic pain point is filtered search. An approximate index returns the nearest `ef_search` candidates first and applies your `WHERE` clause afterwards. A selective tenant filter can then leave you with three results when you asked for ten. Before pgvector 0.8.0 the usual workarounds were partial indexes or partitioning. Version 0.8.0 added iterative index scans, which keep scanning until enough rows pass the filter:
 
-**Pros:**
-- Fast. Really fast.
-- Purpose-built for vectors
-- Simple API
-- Good filtering
-- Handles scale well
+```sql
+-- Requires pgvector 0.8.0 or later.
+-- Run each statement separately on the same connection (or use your driver's
+-- transaction API); $1 (query embedding) and $2 (tenant) are driver-bound parameters.
+BEGIN;
+SET LOCAL hnsw.iterative_scan = relaxed_order;
+SET LOCAL hnsw.ef_search = 100;
+SET LOCAL hnsw.max_scan_tuples = 20000; -- default; raise if filtered queries still return too few rows
 
-**Cons:**
-- Another service to manage
-- Vendor lock-in concerns
-- Can get expensive
-- Less flexibility than general databases
+SELECT id, title, embedding <=> $1::vector AS distance
+FROM document_chunks
+WHERE tenant_id = $2
+ORDER BY embedding <=> $1::vector
+LIMIT 10;
+COMMIT;
+```
 
-**When I use it:** Performance is critical, budget allows for specialized service, don't need co-located data.
+`SET LOCAL` keeps the settings inside the transaction, which matters with a connection pool: a plain `SET` follows the connection to whichever request borrows it next. `relaxed_order` lets results come back slightly out of distance order in exchange for better recall. If ordering matters, use `strict_order`, or wrap the query in a `WITH ... AS MATERIALIZED` CTE and re-sort outside it, as the pgvector README shows:
 
-**Real cost:** ~$200/month for p1 pod.
+```sql
+-- Run inside the same transaction, after the SET LOCAL statements above.
+WITH r AS MATERIALIZED (
+    SELECT id, title, embedding <=> $1::vector AS distance
+    FROM document_chunks
+    WHERE tenant_id = $2
+    ORDER BY distance
+    LIMIT 10
+)
+SELECT * FROM r ORDER BY distance + 0;
+```
 
-## Redis Vector Search
+The `MATERIALIZED` keyword stops the planner from inlining the CTE, and `+ 0` stops PostgreSQL 17 and later from reusing the inner sort.
 
-**Best for:** Low-latency, cached searches
+Other places it hurts:
 
-**Pros:**
-- Extremely fast
-- Already using Redis for caching
-- Simple to add vectors to existing Redis
-- Good for real-time applications
-- Affordable
+- **Index builds are memory-hungry.** HNSW builds on millions of rows need `maintenance_work_mem` sized for them, or they crawl.
+- **Hybrid search is DIY.** You combine `tsvector` ranking and vector distance yourself, usually with an RRF query. It's another thing to maintain.
+- **Scaling out is your problem.** One flexible server scales a long way vertically. Past that, you need a sharding strategy.
 
-**Cons:**
-- In-memory costs add up at scale
-- Not designed for massive vector storage
-- Limited advanced features
-- Less mature than alternatives
+Avoid it when nobody on the team is comfortable owning PostgreSQL performance. A cheap database is only cheap if you can operate it.
 
-**When I use it:** Low-latency requirements, smaller datasets, already have Redis infrastructure.
+## Pinecone: it hurts on data gravity and pricing shape
 
-**Real cost:** ~$100/month added to existing Redis.
+Pinecone is the simplest of the five to reason about. It does one job, the API is small, and serverless indexes separate storage from compute, so you don't size pods any more. As of August 2025, [new customers can't create pod-based indexes](https://docs.pinecone.io/guides/indexes/pods/understanding-pod-based-indexes) at all. Advice about "p1 pods" is legacy now. Pinecone handles keyword-style relevance with sparse vectors, either from its hosted `pinecone-sparse-english-v0` model or from your own encoder, so hybrid search no longer means running a separate BM25 engine. Pinecone now recommends separate dense and sparse indexes that you query and fuse yourself; a single sparse-dense index with the `dotproduct` metric is still supported, with less flexibility.
 
-## The Real Comparison
+Where it hurts:
 
-Let me share actual numbers from a production RAG system with 500K documents:
+- **Data leaves your cloud boundary.** For a lot of regulated workloads in Australia, residency and private networking requirements end the conversation before performance comes up. Pinecone runs serverless indexes in Azure regions and offers private networking on Enterprise plans. BYOC puts the data plane in your own cloud account but keeps the control plane with Pinecone, so check which clouds it supports and whether that split satisfies your residency rules.
+- **Usage-based billing is harder to forecast.** Serverless bills read units, write units and storage. An agent that retrieves five times per turn costs five times as much. Paid plans also carry a monthly minimum.
+- **Metadata is a filter, not a database.** You'll still need a system of record for the documents themselves.
 
-| Solution | Search Latency | Index Time | Monthly Cost | Setup Complexity |
-|----------|---------------|------------|--------------|------------------|
-| AI Search | 150-300ms | 2 hours | $300 | Low |
-| Cosmos DB | 200-400ms | 3 hours | $500 | Medium |
-| PostgreSQL | 100-200ms | 1 hour | $50 | Medium |
-| Pinecone | 50-100ms | 30 mins | $200 | Low |
-| Redis | 20-50ms | 15 mins | $100 | Low |
+Avoid it when governance requires every part of the service, control plane included, to sit inside your Azure tenant, or when the retrieval layer needs joins.
 
-These are approximate. Your mileage will vary.
+## Redis: it hurts on memory and on platform churn
 
-## What Actually Matters
+Redis earns its place when latency matters and the working set is small: semantic caching of LLM responses, session-scoped retrieval, recommendation lookups. The Redis query engine supports HNSW and flat vector indexes, plus tag, numeric and full-text fields in the same index. Filtering is better than its reputation suggests.
 
-After deploying these systems, here's what I've learned matters:
+Where it hurts:
 
-### 1. Query Performance vs. Storage Size
+- **Everything is in memory.** Cost scales with vectors × dimensions × replicas, and a 3,072-dimension embedding at float32 is about 12 KB per vector before overhead.
+- **Platform choices on Azure are in flux.** Vector search needs the RediSearch module. On Azure Managed Redis, which went GA in May 2025, you have to enable it when you create the cache, and the Flash Optimized tier doesn't support it. Microsoft has also announced [retirement of the Azure Cache for Redis tiers](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/retirement-faq): Enterprise in March 2027, and Basic, Standard and Premium in September 2028. Don't start a new vector workload on Azure Cache for Redis.
 
-Different databases scale differently:
-- **Redis:** Fast queries, expensive storage
-- **PostgreSQL:** Moderate queries, cheap storage
-- **Pinecone:** Fast queries, moderate storage cost
-- **AI Search:** Moderate queries, expensive storage
-- **Cosmos DB:** Variable queries, expensive storage
+Avoid it as the primary store for a large document corpus. Use it as a cache in front of one of the others.
 
-### 2. Integration Complexity
+## Why I'm not publishing a latency table
 
-**Easiest integration:**
-1. Azure AI Search (if on Azure)
-2. Redis (if already using it)
-3. PostgreSQL (if using PostgreSQL)
-4. Pinecone
-5. Cosmos DB
+Latency and cost numbers rarely transfer. They depend on dimensions, index parameters, filter selectivity and region. In a typical RAG request, the embedding and LLM calls take far longer than the vector lookup. Measure with your own data and filters before you let a benchmark choose for you.
 
-### 3. Filtering Capabilities
+## How I decide
 
-Not all vector databases handle filters equally:
+I ask four questions, in this order:
 
-**Strong filtering:** AI Search, Cosmos DB, PostgreSQL
-**Moderate filtering:** Pinecone
-**Weak filtering:** Redis
+1. **Where does the source data already live?** If it's in PostgreSQL, DocumentDB or Cosmos DB, try vectors there first. Removing a sync pipeline beats almost any performance gain.
+2. **Do users search with exact terms?** Product codes, policy numbers and people's names need keyword matching. If hybrid retrieval quality decides success, Azure AI Search does the most for you.
+3. **What does governance allow?** Data residency and private networking rule out options faster than benchmarks do.
+4. **What can the team operate?** A managed service you understand beats a cheaper one nobody can tune at 2am.
 
-If you need complex filters alongside vector search, choose accordingly.
+For a new Azure RAG project in January 2026, I start with Azure AI Search when retrieval quality is the product. I use pgvector on Azure Database for PostgreSQL when the data is relational and the corpus is moderate, DocumentDB only when the documents already live in the MongoDB API, and Cosmos DB for NoSQL for greenfield Cosmos DB work. Redis is the cache, and Pinecone is for teams that are not bound to Azure and want a vector service with no other jobs.
 
-### 4. Hybrid Search
-
-**Native hybrid search:**
-- Azure AI Search (excellent)
-- PostgreSQL (good with tsvector)
-
-**Roll your own:**
-- Pinecone (need separate BM25)
-- Redis (need separate full-text)
-- Cosmos DB (possible but complex)
-
-## My Decision Framework
-
-When starting a new project, I ask:
-
-**1. What's already in the stack?**
-- Using Azure heavily? → AI Search
-- Using PostgreSQL? → pgvector
-- Using Redis? → Redis vectors
-- Using MongoDB? → Cosmos DB
-
-**2. What's the budget?**
-- Tight budget → PostgreSQL
-- Moderate budget → Redis or Pinecone
-- Flexible budget → AI Search or Cosmos DB
-
-**3. What's the scale?**
-- < 100K vectors → Any will work
-- 100K - 1M vectors → PostgreSQL, Pinecone, or AI Search
-- > 1M vectors → Pinecone or AI Search with partitioning
-
-**4. What's the latency requirement?**
-- < 50ms → Redis
-- < 100ms → Pinecone
-- < 200ms → PostgreSQL or AI Search
-- > 200ms → Any
-
-**5. Global distribution needed?**
-- Yes → Cosmos DB
-- No → Others are simpler
-
-## What I'd Choose Today
-
-For a new Azure-based RAG project:
-
-**If budget allows:** Azure AI Search
-- Integrated, managed, good enough performance
-
-**If budget is tight:** PostgreSQL + pgvector
-- Reliable, cheap, you control everything
-
-**If performance is critical:** Pinecone
-- Fastest, simplest for vector-only workloads
-
-I wouldn't choose Cosmos DB for vector search unless I already had a strong Cosmos DB presence.
-
-I wouldn't choose Redis unless the dataset is small or I need sub-50ms latency.
-
-## The Bottom Line
-
-There's no universally "best" vector database. There's the best one for your situation.
-
-Most projects overthink this. Pick something that:
-1. Integrates with your stack
-2. Fits your budget
-3. Meets your performance needs
-4. Your team can support
-
-Then move on to more important problems, like actually building value for users.
-
-The vector database is infrastructure. It should be boring and reliable. Don't let perfect be the enemy of good enough.
+The vector store should be the boring part of a RAG system. Pick the one whose pain point you can live with. Then spend your effort on chunking, hybrid queries and evaluation, which is where [most RAG failures actually come from](/blog/2026-01-07-rag-patterns-production/).

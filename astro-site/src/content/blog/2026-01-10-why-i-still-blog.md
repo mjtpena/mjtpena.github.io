@@ -1,129 +1,109 @@
 ---
-title: "Why I Still Blog in 2026"
-description: "Someone asked me why I still maintain a blog. \"Doesn't everyone just use LinkedIn or Twitter now?\""
+title: "Why I Still Blog in 2026: Owning the Place I Think Out Loud"
+description: "Why I still keep a blog when everyone posts on LinkedIn and X: ownership, clearer thinking, and a searchable record of my work."
 author: Michael John Peña
 draft: false
 date: 2026-01-10
 tags:
   - Personal
-  - Blogging
   - Writing
   - Career
 ---
 
-Someone asked me why I still maintain a blog. "Doesn't everyone just use LinkedIn or Twitter now?"
+Someone asked me why I still maintain a blog. "Doesn't everyone just use LinkedIn or Twitter now?" It's a fair question, and the honest answer is that social platforms are where my writing gets noticed, but this blog is where it lives.
 
-Fair question. Let me explain.
+## The short answer
 
-## The Short Answer
+This is my space. I own it and I control it. Nobody can shut it down, change the algorithm under me, or monetise my writing without my consent.
 
-This is my space. I own it. I control it. Nobody can shut it down, change the algorithm, or monetize my content without my consent.
+That was the reason I gave myself in August 2020, when I wrote [I'm going to start writing again!](/blog/2020-08-26-writing-again/) and said I wanted "a space on the internet that I can say is mine". More than five years on, the reason hasn't changed.
 
-## The Longer Answer
+If anything, it's been proven. When Twitter became X in July 2023, people scrambled to work out what would happen to their accounts, their handles and years of threads. When LinkedIn changes a feature, people adapt, because they have no other option. My blog will be here for as long as I want it to be, at the same address, with the same posts.
 
-### 1. Permanence
+## Six reasons it's still worth it
 
-I've been blogging since 2020. Six years of thoughts, experiments, tutorials, and reflections. It's all here.
+### 1. Permanence, or the closest thing to it
 
-You know what's not here? My old MySpace posts. My early tweets before I deleted them. That forum post from 2008 on a site that no longer exists.
+I've been blogging here since 2020. That's more than five years of thoughts, experiments, tutorials and reflections, and it's all still here.
 
-Digital permanence is an illusion, but owning your platform gets you closer than renting space on someone else's.
+You know what isn't? My old MySpace posts. My early tweets, before I deleted them. That forum post from 2008 on a site that no longer exists.
 
-### 2. Writing Clarifies Thinking
+Digital permanence is an illusion. Owning the platform gets you closer to it than renting space on someone else's.
 
-I don't fully understand something until I try to explain it. Writing forces me to organize thoughts, identify gaps, and articulate clearly.
+### 2. Writing clarifies thinking
 
-Half my blog posts teach me more than they teach readers.
+I don't fully understand something until I try to explain it. Writing forces me to organise my thoughts, find the gaps, and say the thing plainly. In my head I can skip from problem to answer; on the page I have to write the step in between, and that's usually where the gap shows up.
 
-### 3. Search Works
+Half my posts teach me more than they teach readers.
 
-Need to remember how I solved that Azure Function issue last year? I search my own blog.
+The habit also carries over to emails, proposals and architecture documents, which is where most of a director's writing actually goes. Explaining a design to strangers on a blog is good practice for explaining it to a steering committee.
 
-It's my external brain. Better organized than my notes app, more permanent than Slack messages.
+### 3. Search works
 
-### 4. Portfolio
+When I need to remember how I solved an Azure Functions problem, I search my own blog first, and posts like [the one on dependency injection in Azure Functions](/blog/2020-11-06-azure-functions-dependency-injection/) are usually what I land on.
 
-When someone asks "Can you help with Azure OpenAI?" I send them three blog posts. They get to see:
-- My depth of knowledge
-- My communication style
-- My approach to problems
+It works better than my notes app or old Slack threads because I wrote the post for someone without my context, and years later that someone is me.
 
-That's worth more than a resume.
+### 4. A portfolio that does the talking
 
-### 5. Community
+When someone asks, "Can you help with Azure OpenAI?", I send them three blog posts, such as [what a token estimate misses on Azure OpenAI costs](/blog/2026-01-04-azure-openai-hidden-costs/). They get to see:
 
-The most interesting conversations happen in blog comments and emails. Not Twitter arguments, not LinkedIn humble-brags. Actual thoughtful exchanges.
+- the depth of what I know
+- how I communicate
+- how I approach a problem
 
-### 6. No Algorithm
+That's worth more than a résumé. Multiple clients have found me through blog posts, which is the same idea working without me having to send the link. Conference organisers read my blog to vet topics, so it's also how speaking opportunities start.
 
-I don't have to game engagement. No clickbait titles (okay, sometimes). No posting at "optimal times." No worrying about shadowbans.
+And it compounds. Posts get shared years after I publish them, long after anything I posted on a feed has scrolled away. A résumé only works when I hand it over; the archive keeps working when I'm not paying attention.
 
-I write what's useful. If people find it, great. If not, it's still here for future me.
+### 5. Better conversations
 
-### 7. Long-Form Thinking
+The most interesting conversations I have come from blog comments and emails, from people who read the whole thing. Someone who reaches the end of a long post has already followed the reasoning, so their question starts where the argument ends rather than at the headline.
 
-Twitter taught us to think in sound bites. LinkedIn taught us to perform professional-ness. Blogs let you actually develop ideas.
+### 6. Room for long-form thinking, with no algorithm to feed
 
-Some things need more than 280 characters.
+Twitter trained us to think in 140-character (later 280) sound bites. LinkedIn trained us to perform professionalism. A blog lets you actually develop an idea, with the caveats and trade-offs that make it worth reading.
 
-### 8. It's Mine
+It also means I don't have to game engagement. No clickbait titles (okay, sometimes). No posting at the "optimal time". No worrying about shadowbans.
 
-When Twitter became X, people scrambled. When LinkedIn changes features, people adapt. When Medium adjusts its paywall, writers migrate.
+That has a real cost. A post on my blog doesn't get pushed into anyone's feed, so on day one it reaches far fewer people than the same idea posted on LinkedIn at 8am on a Tuesday. I accept that trade. The feed rewards what's engaging this hour; search rewards what's still useful next year, and the second is the kind of writing I want to do. If people find it, great. If not, it's still here for future me.
 
-My blog? It's mine. It'll be here as long as I want it to be.
+## How I write, and where AI fits
 
-## The Process
+I don't have a content calendar. I don't batch-write posts. I write when I have something to say. Sometimes that's daily, sometimes weekly, and sometimes I go a month without posting. That's the luxury of owning the platform: there's no feed punishing me for a quiet month.
 
-I don't have a content calendar. I don't batch-write posts. I don't use AI to generate outlines (though I use it to edit).
+Could I use AI to write my blog posts? Sure. Plenty of people do. I don't use it to generate outlines or drafts, though I do use it to edit.
 
-I write when I have something to say. Sometimes daily. Sometimes weekly. Sometimes I go a month without posting.
+The reason is simple: I write to think, to learn, and to share my actual experiences and opinions. If a model writes the post, I've skipped the part that was doing me any good. AI helps with editing, structure and clarity. It can't have my experiences or form my opinions for me, and it can't tell you which of your opinions you'd actually defend in a design review.
 
-That's the luxury of owning your platform.
+## What five years have taught me
 
-## What I've Learned
+**Published beats perfect.** I've published posts with typos. Posts that aged badly. Posts I'd write differently now. They're all still up, and that's fine. A record of how your thinking changed is more useful than a curated highlight reel.
 
-**Consistency beats perfection.** I've published posts with typos. Posts that aged poorly. Posts I'd write differently now. They're all still up. That's fine.
+**Shorter posts get read more, longer posts get referenced more.** Write both. The quick fix gets the search traffic; the long explanation is what people link to in a design review.
 
-**Shorter posts get read more.** But longer posts get referenced more. Write both.
+**Technical posts bring traffic. Personal posts start conversations.** The balance matters. A blog that's only tutorials reads like documentation; one that's only reflection doesn't help anyone fix anything.
 
-**Technical posts bring traffic.** Personal posts start conversations. Balance matters.
+**Nobody cares about your setup.** Except the 50 people who care intensely. Write for those people.
 
-**Nobody cares about your setup.** Except the 50 people who do, intensely. Write for those people.
+## When a blog isn't the right call
 
-## The Unexpected Benefits
+I'm not going to pretend everyone needs one. If your goal is reach this month, a LinkedIn post will beat a blog post every time. If you'd only ever publish to promote yourself, skip it; that shows. And if you can't commit to owning the thing (the domain, the hosting, the occasional broken build), a hosted platform is a perfectly sensible trade.
 
-**Job offers.** Multiple clients found me through blog posts.
+What I'd push back on is treating social media as the *only* place your writing lives. Post there for distribution. Keep the original somewhere you control.
 
-**Speaking opportunities.** Conference organizers read my blog to vet topics.
+## To other developers
 
-**Better communication.** Writing regularly makes you a better writer. Who knew?
+You don't need to be a "content creator". You don't need viral posts or thousands of followers.
 
-**Network effects.** Blog posts get shared years after publishing. Good content compounds.
+But a place where you document what you're learning is valuable: for future you, for people facing the same problem, and as evidence of how you think. It doesn't have to be daily. It doesn't have to be long. It just has to be yours.
 
-## The AI Question
+If you take one practical step, buy your own domain on day one, before you pick a platform. Hosts come and go, and you'll probably change static site generators at least once. If your posts live at your own domain, you can move them and keep every URL and every inbound link; if they live on a platform's subdomain, moving means starting your links from zero. Pick the simplest host you can, and spend the energy on the second and third posts instead of the theme.
 
-Could I use AI to write blog posts? Sure. Many do.
+## Why I'll keep going
 
-But that misses the point. I write to think. I write to learn. I write to communicate my actual experiences and opinions.
+The industry moves fast, and it's useful to have a record of the journey. I learn by writing. And sometimes people tell me a post helped them.
 
-AI can help with editing, structure, and clarity. But it can't have my experiences or form my opinions.
+But mostly, I keep blogging because it's mine. In 2026, with every platform's rules one product decision away from changing, that still matters.
 
-## To Other Developers
-
-You don't need to be a "content creator." You don't need viral posts. You don't need thousands of followers.
-
-But having a space where you document your learning? That's valuable.
-
-For future you. For people facing similar problems. For showcasing your thinking.
-
-It doesn't have to be daily. It doesn't have to be long. It just has to be yours.
-
-## Why I'll Keep Blogging
-
-Because in an industry that moves fast, it's useful to have a record of the journey. Because I learn by writing. Because sometimes people find my posts helpful.
-
-But mostly? Because it's mine. And in 2026, that still matters.
-
-Start a blog. Write when you have something to say. Don't overthink it.
-
-The best time to start was six years ago. The second-best time is today.
+Start a blog. Write when you have something to say. If you're waiting for the right moment, don't. I restarted in August 2020 after years of excuses.
