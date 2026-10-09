@@ -3,6 +3,7 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches: [master, main]
+  pull_request:
   workflow_dispatch:
 
 # Publish to GitHub Pages via the official deployment (Pages source = GitHub Actions).
@@ -11,10 +12,10 @@ permissions:
   pages: write
   id-token: write
 
-# Serialize Pages deployments; don't cancel an in-progress deploy.
+# Serialize Pages deployments; don't cancel an in-progress deploy. PR builds get their own group.
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.ref) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -34,16 +35,22 @@ jobs:
         working-directory: ./astro-site
         run: npm ci
 
+      - name: Lint content
+        working-directory: ./astro-site
+        run: npm run lint:content
+
       - name: Build with Astro
         working-directory: ./astro-site
         run: npm run build
 
       - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./astro-site/dist
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
