@@ -1,0 +1,822 @@
+# Content review
+
+Editorial decisions left after the automated cleanup. Nothing here was deleted or rewritten automatically.
+
+Run `npm run lint:content -- --verbose` in `astro-site/` to re-check; CI fails on placeholder text, literal `\n` escapes, unclosed code fences, body H1s and inconsistent tag casing.
+
+## 1. Truncated posts (52)
+
+These ended mid-code-block (the original text appears cut off before the placeholder was appended). A closing fence was added so the page renders, but each needs its ending rewritten.
+
+- [`2020-10-08-azure-kubernetes-service-basics`](astro-site/src/content/blog/2020-10-08-azure-kubernetes-service-basics.md) — Azure Kubernetes Service: Managed Kubernetes
+- [`2020-12-04-azure-cognitive-services-containers`](astro-site/src/content/blog/2020-12-04-azure-cognitive-services-containers.md) — Azure Cognitive Services Containers: AI On-Premises
+- [`2021-01-06-azure-container-apps-preview`](astro-site/src/content/blog/2021-01-06-azure-container-apps-preview.md) — Azure Kubernetes Service: Simplifying Container Orchestration
+- [`2021-03-01-azure-kubernetes-service-networking`](astro-site/src/content/blog/2021-03-01-azure-kubernetes-service-networking.md) — Azure Kubernetes Service Networking Deep Dive
+- [`2021-03-02-aks-windows-containers`](astro-site/src/content/blog/2021-03-02-aks-windows-containers.md) — Running Windows Containers on Azure Kubernetes Service
+- [`2021-05-06-gpt3-api-exploration`](astro-site/src/content/blog/2021-05-06-gpt3-api-exploration.md) — Exploring the OpenAI GPT-3 API: Practical Patterns and Techniques
+- [`2021-05-13-influxdb-on-azure`](astro-site/src/content/blog/2021-05-13-influxdb-on-azure.md) — InfluxDB on Azure: Deploying Time-Series Infrastructure
+- [`2021-06-21-microservices-patterns-azure`](astro-site/src/content/blog/2021-06-21-microservices-patterns-azure.md) — Microservices Patterns on Azure
+- [`2021-06-29-kubernetes-operators-azure`](astro-site/src/content/blog/2021-06-29-kubernetes-operators-azure.md) — Kubernetes Operators for Azure Resources
+- [`2021-09-11-cognitive-services-containers`](astro-site/src/content/blog/2021-09-11-cognitive-services-containers.md) — Running Azure Cognitive Services in Containers
+- [`2021-09-30-azure-stack-edge`](astro-site/src/content/blog/2021-09-30-azure-stack-edge.md) — Edge Computing with Azure Stack Edge
+- [`2021-10-05-aks-pod-identity`](astro-site/src/content/blog/2021-10-05-aks-pod-identity.md) — Secure Azure Access with AKS Pod Identity
+- [`2021-11-10-power-bi-premium-capacities`](astro-site/src/content/blog/2021-11-10-power-bi-premium-capacities.md) — Power BI Premium Capacities: Scaling Enterprise Analytics
+- [`2021-11-17-arc-enabled-kubernetes`](astro-site/src/content/blog/2021-11-17-arc-enabled-kubernetes.md) — Azure Arc-Enabled Kubernetes: Manage Kubernetes Clusters Anywhere
+- [`2021-12-04-kubernetes-adoption-enterprise`](astro-site/src/content/blog/2021-12-04-kubernetes-adoption-enterprise.md) — Kubernetes Adoption in the Enterprise: Lessons from 2021
+- [`2021-12-13-gitops-practices-kubernetes`](astro-site/src/content/blog/2021-12-13-gitops-practices-kubernetes.md) — GitOps Practices: Declarative Infrastructure and Application Delivery
+- [`2021-12-14-zero-trust-security-azure`](astro-site/src/content/blog/2021-12-14-zero-trust-security-azure.md) — Zero Trust Security in Azure: Trust Nothing, Verify Everything
+- [`2021-12-20-carbon-aware-computing`](astro-site/src/content/blog/2021-12-20-carbon-aware-computing.md) — Carbon-Aware Computing: Building Climate-Conscious Applications
+- [`2022-01-04-aks-2022-updates`](astro-site/src/content/blog/2022-01-04-aks-2022-updates.md) — Azure Kubernetes Service in 2022: New Features and Best Practices
+- [`2022-02-12-workload-identity-federation`](astro-site/src/content/blog/2022-02-12-workload-identity-federation.md) — Workload Identity Federation: Keyless Authentication from Anywhere
+- [`2022-02-14-keyless-authentication`](astro-site/src/content/blog/2022-02-14-keyless-authentication.md) — Keyless Authentication: The Future of Cloud Security
+- [`2022-02-17-secrets-management-patterns`](astro-site/src/content/blog/2022-02-17-secrets-management-patterns.md) — Secrets Management Patterns: Best Practices for Azure
+- [`2022-06-01-azure-kubernetes-124`](astro-site/src/content/blog/2022-06-01-azure-kubernetes-124.md) — Azure Kubernetes Service 1.24: New Features and Breaking Changes
+- [`2022-06-02-kubernetes-124-features`](astro-site/src/content/blog/2022-06-02-kubernetes-124-features.md) — Kubernetes 1.24 Features: Deep Dive into New Capabilities
+- [`2022-06-14-istio-on-aks`](astro-site/src/content/blog/2022-06-14-istio-on-aks.md) — Istio on AKS: Complete Service Mesh Implementation
+- [`2022-06-16-open-service-mesh`](astro-site/src/content/blog/2022-06-16-open-service-mesh.md) — Open Service Mesh: Azure's SMI-Compatible Mesh
+- [`2022-10-02-azure-arc-updates`](astro-site/src/content/blog/2022-10-02-azure-arc-updates.md) — Azure Arc Updates - Hybrid Cloud Management
+- [`2022-10-04-multi-cloud-management`](astro-site/src/content/blog/2022-10-04-multi-cloud-management.md) — Multi-Cloud Management with Azure
+- [`2022-10-05-azure-stack-updates`](astro-site/src/content/blog/2022-10-05-azure-stack-updates.md) — Azure Stack Updates - Edge and Hybrid Computing
+- [`2022-10-07-azure-5g-operators`](astro-site/src/content/blog/2022-10-07-azure-5g-operators.md) — 5G and Azure for Operators
+- [`2022-11-07-grpc-json-transcoding`](astro-site/src/content/blog/2022-11-07-grpc-json-transcoding.md) — gRPC JSON Transcoding in .NET 7: REST and gRPC from One Service
+- [`2022-12-12-cloud-native-maturity`](astro-site/src/content/blog/2022-12-12-cloud-native-maturity.md) — Cloud Native Maturity: Where Organizations Stand in 2022
+- [`2022-12-21-spot-instance-strategies`](astro-site/src/content/blog/2022-12-21-spot-instance-strategies.md) — Azure Spot Instance Strategies for Cost Savings
+- [`2022-12-30-containerization-kubernetes-lessons`](astro-site/src/content/blog/2022-12-30-containerization-kubernetes-lessons.md) — Containerization and Kubernetes: Lessons Learned in 2022
+- [`2023-01-17-completion-vs-chat-apis`](astro-site/src/content/blog/2023-01-17-completion-vs-chat-apis.md) — Completion vs Chat APIs in Azure OpenAI: Choosing the Right Approach
+- [`2023-02-07-tdd-python`](astro-site/src/content/blog/2023-02-07-tdd-python.md) — TDD (Test-Driven Development) Overview with Python Example
+- [`2023-03-07-azure-cognitive-services-containers`](astro-site/src/content/blog/2023-03-07-azure-cognitive-services-containers.md) — Running Azure Cognitive Services in Containers
+- [`2023-03-19-gpt4-coding-assistant-patterns`](astro-site/src/content/blog/2023-03-19-gpt4-coding-assistant-patterns.md) — Building GPT-4 Powered Coding Assistants
+- [`2023-04-16-notebook-ai-assistants`](astro-site/src/content/blog/2023-04-16-notebook-ai-assistants.md) — AI Assistants in Jupyter and Databricks Notebooks
+- [`2023-08-15-small-language-models`](astro-site/src/content/blog/2023-08-15-small-language-models.md) — Small Language Models: When Bigger Isn't Better
+- [`2023-09-17-meeting-summarization`](astro-site/src/content/blog/2023-09-17-meeting-summarization.md) — Meeting Summarization with Azure AI
+- [`2023-12-08-ai-compliance-considerations`](astro-site/src/content/blog/2023-12-08-ai-compliance-considerations.md) — AI Compliance Considerations: Navigating the Regulatory Landscape
+- [`2024-05-18-azure-ai-studio-updates`](astro-site/src/content/blog/2024-05-18-azure-ai-studio-updates.md) — Azure AI Studio Updates at Build 2024
+- [`2024-05-30-ai-agent-best-practices`](astro-site/src/content/blog/2024-05-30-ai-agent-best-practices.md) — AI Agent Best Practices: Lessons from Production
+- [`2024-09-10-coding-with-o1`](astro-site/src/content/blog/2024-09-10-coding-with-o1.md) — Advanced Coding Techniques with GPT-4o and Claude 3.5 Sonnet
+- [`2024-10-26-transactional-analytical-unified`](astro-site/src/content/blog/2024-10-26-transactional-analytical-unified.md) — Unifying Transactional and Analytical Workloads in Fabric
+- [`2024-11-09-custom-model-deployment`](astro-site/src/content/blog/2024-11-09-custom-model-deployment.md) — Custom Model Deployment on Azure: From Fine-Tuning to Production
+- [`2024-12-07-scaling-ai-systems`](astro-site/src/content/blog/2024-12-07-scaling-ai-systems.md) — Scaling AI Systems: From Prototype to Enterprise
+- [`2025-01-24-documentation-with-ai`](astro-site/src/content/blog/2025-01-24-documentation-with-ai.md) — Documentation with AI: Automating Technical Writing for Data Projects
+- [`2025-02-07-edge-ai-improvements`](astro-site/src/content/blog/2025-02-07-edge-ai-improvements.md) — Edge AI Improvements: Deploying Intelligence at the Data Source
+- [`2025-11-28-november-ai-topic`](astro-site/src/content/blog/2025-11-28-november-ai-topic.md) — AI-Powered Code Review: Integrating LLMs into Development Workflows
+- [`2025-12-14-december-ai-topic`](astro-site/src/content/blog/2025-12-14-december-ai-topic.md) — Azure Container Apps vs Azure Kubernetes Service: When to Use Each
+
+## 2. Duplicate titles (20)
+
+Merge each group into one post (and add a redirect from the others), or retitle them if they genuinely differ.
+
+- **Azure Bastion: Secure VM Access Without Public IPs**: [`2020-09-16-azure-bastion-secure-vm-access`](astro-site/src/content/blog/2020-09-16-azure-bastion-secure-vm-access.md), [`2020-12-21-azure-bastion-secure-access`](astro-site/src/content/blog/2020-12-21-azure-bastion-secure-access.md)
+- **Power BI Embedded: Analytics in Your Applications**: [`2020-11-23-power-bi-embedded`](astro-site/src/content/blog/2020-11-23-power-bi-embedded.md), [`2022-04-19-power-bi-embedded-overview`](astro-site/src/content/blog/2022-04-19-power-bi-embedded-overview.md)
+- **Intelligent Document Processing with Azure Form Recognizer**: [`2021-01-18-azure-form-recognizer-document-processing`](astro-site/src/content/blog/2021-01-18-azure-form-recognizer-document-processing.md), [`2021-03-30-form-recognizer`](astro-site/src/content/blog/2021-03-30-form-recognizer.md), [`2023-03-08-azure-form-recognizer-document-processing`](astro-site/src/content/blog/2023-03-08-azure-form-recognizer-document-processing.md)
+- **Running Azure Cognitive Services in Containers**: [`2021-09-11-cognitive-services-containers`](astro-site/src/content/blog/2021-09-11-cognitive-services-containers.md), [`2023-03-07-azure-cognitive-services-containers`](astro-site/src/content/blog/2023-03-07-azure-cognitive-services-containers.md)
+- **Prompt Engineering Fundamentals for Azure OpenAI**: [`2023-01-12-prompt-engineering-fundamentals`](astro-site/src/content/blog/2023-01-12-prompt-engineering-fundamentals.md), [`2023-03-02-prompt-engineering-fundamentals`](astro-site/src/content/blog/2023-03-02-prompt-engineering-fundamentals.md)
+- **Building Semantic Search with Azure OpenAI Embeddings**: [`2023-01-24-semantic-search-embeddings`](astro-site/src/content/blog/2023-01-24-semantic-search-embeddings.md), [`2023-03-01-azure-openai-embeddings-semantic-search`](astro-site/src/content/blog/2023-03-01-azure-openai-embeddings-semantic-search.md)
+- **Document Chunking Strategies for RAG Systems**: [`2023-02-02-document-chunking-strategies`](astro-site/src/content/blog/2023-02-02-document-chunking-strategies.md), [`2023-10-26-chunking-strategies`](astro-site/src/content/blog/2023-10-26-chunking-strategies.md)
+- **Multi-Agent Systems: Orchestrating Specialized AI Agents**: [`2024-01-09-multi-agent-systems`](astro-site/src/content/blog/2024-01-09-multi-agent-systems.md), [`2025-09-14-september-ai-topic`](astro-site/src/content/blog/2025-09-14-september-ai-topic.md)
+- **Data Quality Automation with AI: Beyond Rule-Based Validation**: [`2025-01-22-data-quality-automation-ai`](astro-site/src/content/blog/2025-01-22-data-quality-automation-ai.md), [`2025-03-07-data-quality-ai-automation`](astro-site/src/content/blog/2025-03-07-data-quality-ai-automation.md)
+- **Implementing Guardrails for Production LLM Applications**: [`2025-07-16-july-ai-topic`](astro-site/src/content/blog/2025-07-16-july-ai-topic.md), [`2025-11-21-november-ai-topic`](astro-site/src/content/blog/2025-11-21-november-ai-topic.md)
+- **Semantic Caching for LLM Applications: Reducing Costs and Latency**: [`2025-09-18-september-ai-topic`](astro-site/src/content/blog/2025-09-18-september-ai-topic.md), [`2025-11-22-november-ai-topic`](astro-site/src/content/blog/2025-11-22-november-ai-topic.md)
+- **Microsoft Fabric: Six Months In Production**: [`2026-01-05-microsoft-fabric-reality-check`](astro-site/src/content/blog/2026-01-05-microsoft-fabric-reality-check.md), [`2026-02-09-fabric-six-months-in`](astro-site/src/content/blog/2026-02-09-fabric-six-months-in.md)
+- **The Microsoft Agent Framework: What You Need to Know**: [`2026-02-15-microsoft-agent-framework`](astro-site/src/content/blog/2026-02-15-microsoft-agent-framework.md), [`2026-02-15-semantic-kernel-ai-apps`](astro-site/src/content/blog/2026-02-15-semantic-kernel-ai-apps.md)
+- **Keeping OneLake Clean Under Delivery Pressure: why governance has to be designed before scale**: [`2026-03-04-keeping-onelake-clean-under-delivery-pressure-why-governance-has-to-be-designed-before-scale`](astro-site/src/content/blog/2026-03-04-keeping-onelake-clean-under-delivery-pressure-why-governance-has-to-be-designed-before-scale.md), [`2026-03-26-keeping-onelake-clean-under-delivery-pressure-why-governance-has-to-be-designed-before-scale`](astro-site/src/content/blog/2026-03-26-keeping-onelake-clean-under-delivery-pressure-why-governance-has-to-be-designed-before-scale.md)
+- **Building Useful AI Agents: tool access policies that improve reliability**: [`2026-03-11-building-useful-ai-agents-tool-access-policies-that-improve-reliability`](astro-site/src/content/blog/2026-03-11-building-useful-ai-agents-tool-access-policies-that-improve-reliability.md), [`2026-04-02-building-useful-ai-agents-tool-access-policies-that-improve-reliability`](astro-site/src/content/blog/2026-04-02-building-useful-ai-agents-tool-access-policies-that-improve-reliability.md)
+- **Data Quality Work That Actually Sticks: choosing the minimum useful set of quality signals**: [`2026-03-12-data-quality-work-that-actually-sticks-choosing-the-minimum-useful-set-of-quality-signals`](astro-site/src/content/blog/2026-03-12-data-quality-work-that-actually-sticks-choosing-the-minimum-useful-set-of-quality-signals.md), [`2026-04-03-data-quality-work-that-actually-sticks-choosing-the-minimum-useful-set-of-quality-signals`](astro-site/src/content/blog/2026-04-03-data-quality-work-that-actually-sticks-choosing-the-minimum-useful-set-of-quality-signals.md)
+- **Fabric Lakehouse Patterns: turning messy raw zones into reliable products**: [`2026-03-25-fabric-lakehouse-patterns-turning-messy-raw-zones-into-reliable-products`](astro-site/src/content/blog/2026-03-25-fabric-lakehouse-patterns-turning-messy-raw-zones-into-reliable-products.md), [`2026-04-05-fabric-lakehouse-patterns-turning-messy-raw-zones-into-reliable-products`](astro-site/src/content/blog/2026-04-05-fabric-lakehouse-patterns-turning-messy-raw-zones-into-reliable-products.md)
+- **Warehouse Modeling in Fabric: preventing metric drift through ownership rules**: [`2026-03-28-warehouse-modeling-in-fabric-preventing-metric-drift-through-ownership-rules`](astro-site/src/content/blog/2026-03-28-warehouse-modeling-in-fabric-preventing-metric-drift-through-ownership-rules.md), [`2026-04-08-warehouse-modeling-in-fabric-preventing-metric-drift-through-ownership-rules`](astro-site/src/content/blog/2026-04-08-warehouse-modeling-in-fabric-preventing-metric-drift-through-ownership-rules.md)
+- **Orchestration Lessons in Fabric: debugging pipeline latency before it becomes a fire drill**: [`2026-04-07-orchestration-lessons-in-fabric-debugging-pipeline-latency-before-it-becomes-a-fire-drill`](astro-site/src/content/blog/2026-04-07-orchestration-lessons-in-fabric-debugging-pipeline-latency-before-it-becomes-a-fire-drill.md), [`2026-04-29-orchestration-lessons-in-fabric-debugging-pipeline-latency-before-it-becomes-a-fire-drill`](astro-site/src/content/blog/2026-04-29-orchestration-lessons-in-fabric-debugging-pipeline-latency-before-it-becomes-a-fire-drill.md)
+- **LLM Cost and Latency Notes: using caching where it actually pays off**: [`2026-04-15-llm-cost-and-latency-notes-using-caching-where-it-actually-pays-off`](astro-site/src/content/blog/2026-04-15-llm-cost-and-latency-notes-using-caching-where-it-actually-pays-off.md), [`2026-05-07-llm-cost-and-latency-notes-using-caching-where-it-actually-pays-off`](astro-site/src/content/blog/2026-05-07-llm-cost-and-latency-notes-using-caching-where-it-actually-pays-off.md)
+
+## 3. Possibly anachronistic dates
+
+These mention a product before its public announcement. Some may be legitimate (private preview, a later edit), but a reader who notices will distrust the archive. Fix the date, add an `updated:` date, or reword.
+
+- **Microsoft Fabric** (announced 23 May 2023): [`2022-01-01-azure-predictions-2022`](astro-site/src/content/blog/2022-01-01-azure-predictions-2022.md), [`2023-05-02-fabric-unified-analytics-platform`](astro-site/src/content/blog/2023-05-02-fabric-unified-analytics-platform.md), [`2023-05-03-onelake-introduction`](astro-site/src/content/blog/2023-05-03-onelake-introduction.md), [`2023-05-04-fabric-lakehouse`](astro-site/src/content/blog/2023-05-04-fabric-lakehouse.md), [`2023-05-05-data-factory-in-fabric`](astro-site/src/content/blog/2023-05-05-data-factory-in-fabric.md), [`2023-05-06-synapse-data-engineering-fabric`](astro-site/src/content/blog/2023-05-06-synapse-data-engineering-fabric.md), [`2023-05-07-synapse-data-science-fabric`](astro-site/src/content/blog/2023-05-07-synapse-data-science-fabric.md), [`2023-05-08-synapse-data-warehouse-fabric`](astro-site/src/content/blog/2023-05-08-synapse-data-warehouse-fabric.md), [`2023-05-09-synapse-real-time-analytics-fabric`](astro-site/src/content/blog/2023-05-09-synapse-real-time-analytics-fabric.md), [`2023-05-10-power-bi-in-fabric`](astro-site/src/content/blog/2023-05-10-power-bi-in-fabric.md), [`2023-05-11-fabric-capacities`](astro-site/src/content/blog/2023-05-11-fabric-capacities.md), [`2023-05-12-fabric-licensing`](astro-site/src/content/blog/2023-05-12-fabric-licensing.md), [`2023-05-13-fabric-workspace`](astro-site/src/content/blog/2023-05-13-fabric-workspace.md), [`2023-05-14-fabric-vs-synapse-comparison`](astro-site/src/content/blog/2023-05-14-fabric-vs-synapse-comparison.md), [`2023-05-15-migration-to-fabric`](astro-site/src/content/blog/2023-05-15-migration-to-fabric.md)
+- **GPT-4** (released 14 Mar 2023): [`2022-12-11-ai-ml-milestones-2022`](astro-site/src/content/blog/2022-12-11-ai-ml-milestones-2022.md), [`2022-12-31-predictions-2023-azure-ai-data`](astro-site/src/content/blog/2022-12-31-predictions-2023-azure-ai-data.md), [`2023-01-07-azure-openai-vs-openai-api`](astro-site/src/content/blog/2023-01-07-azure-openai-vs-openai-api.md), [`2023-01-17-completion-vs-chat-apis`](astro-site/src/content/blog/2023-01-17-completion-vs-chat-apis.md), [`2023-02-24-azure-cognitive-services-updates`](astro-site/src/content/blog/2023-02-24-azure-cognitive-services-updates.md), [`2023-03-10-azure-openai-cost-optimization`](astro-site/src/content/blog/2023-03-10-azure-openai-cost-optimization.md), [`2023-03-13-pre-gpt4-preparing-for-the-future`](astro-site/src/content/blog/2023-03-13-pre-gpt4-preparing-for-the-future.md)
+- **Azure OpenAI** (announced 2 Nov 2021): [`2021-05-05-azure-openai-service-preview`](astro-site/src/content/blog/2021-05-05-azure-openai-service-preview.md)
+- **ChatGPT** (launched 30 Nov 2022): [`2022-03-01-azure-openai-service-expansion`](astro-site/src/content/blog/2022-03-01-azure-openai-service-expansion.md)
+- **Agent Framework** (announced Oct 2025): [`2024-01-10-autogen-introduction`](astro-site/src/content/blog/2024-01-10-autogen-introduction.md), [`2024-01-11-crewai-introduction`](astro-site/src/content/blog/2024-01-11-crewai-introduction.md), [`2024-01-12-agent-frameworks-comparison`](astro-site/src/content/blog/2024-01-12-agent-frameworks-comparison.md), [`2024-11-11-multi-agent-framework`](astro-site/src/content/blog/2024-11-11-multi-agent-framework.md), [`2024-12-01-ai-year-in-review-2024`](astro-site/src/content/blog/2024-12-01-ai-year-in-review-2024.md), [`2025-03-30-q1-retrospective`](astro-site/src/content/blog/2025-03-30-q1-retrospective.md)
+- **Copilot Studio** (announced 15 Nov 2023): [`2023-04-08-power-platform-copilot`](astro-site/src/content/blog/2023-04-08-power-platform-copilot.md)
+
+## 4. Thin posts under 250 words (277)
+
+Candidates to expand, merge into a related post, or set `draft: true`. Shortest first.
+
+<details><summary>Show list</summary>
+
+- 20 words — [`2024-10-26-transactional-analytical-unified`](astro-site/src/content/blog/2024-10-26-transactional-analytical-unified.md) — Unifying Transactional and Analytical Workloads in Fabric
+- 41 words — [`2022-10-07-azure-5g-operators`](astro-site/src/content/blog/2022-10-07-azure-5g-operators.md) — 5G and Azure for Operators
+- 59 words — [`2021-11-10-power-bi-premium-capacities`](astro-site/src/content/blog/2021-11-10-power-bi-premium-capacities.md) — Power BI Premium Capacities: Scaling Enterprise Analytics
+- 71 words — [`2022-06-14-istio-on-aks`](astro-site/src/content/blog/2022-06-14-istio-on-aks.md) — Istio on AKS: Complete Service Mesh Implementation
+- 75 words — [`2022-06-16-open-service-mesh`](astro-site/src/content/blog/2022-06-16-open-service-mesh.md) — Open Service Mesh: Azure's SMI-Compatible Mesh
+- 78 words — [`2025-06-08-streaming-inference`](astro-site/src/content/blog/2025-06-08-streaming-inference.md) — Streaming Inference: Building Modern AI Systems
+- 78 words — [`2025-06-09-websocket-ai`](astro-site/src/content/blog/2025-06-09-websocket-ai.md) — Websocket Ai: Building Modern AI Systems
+- 78 words — [`2025-06-11-kafka-ai`](astro-site/src/content/blog/2025-06-11-kafka-ai.md) — Kafka Ai: Building Modern AI Systems
+- 78 words — [`2025-06-13-serverless-ai`](astro-site/src/content/blog/2025-06-13-serverless-ai.md) — Serverless Ai: Building Modern AI Systems
+- 78 words — [`2025-06-17-kubernetes-ai`](astro-site/src/content/blog/2025-06-17-kubernetes-ai.md) — Kubernetes Ai: Building Modern AI Systems
+- 78 words — [`2025-06-18-gpu-optimization`](astro-site/src/content/blog/2025-06-18-gpu-optimization.md) — Gpu Optimization: Building Modern AI Systems
+- 78 words — [`2025-06-19-model-serving`](astro-site/src/content/blog/2025-06-19-model-serving.md) — Model Serving: Building Modern AI Systems
+- 78 words — [`2025-06-21-caching-strategies`](astro-site/src/content/blog/2025-06-21-caching-strategies.md) — Caching Strategies: Building Modern AI Systems
+- 78 words — [`2025-06-22-batch-processing`](astro-site/src/content/blog/2025-06-22-batch-processing.md) — Batch Processing: Building Modern AI Systems
+- 78 words — [`2025-06-25-iceberg-ai`](astro-site/src/content/blog/2025-06-25-iceberg-ai.md) — Iceberg Ai: Building Modern AI Systems
+- 78 words — [`2025-06-26-unity-catalog`](astro-site/src/content/blog/2025-06-26-unity-catalog.md) — Unity Catalog: Building Modern AI Systems
+- 78 words — [`2025-06-27-data-governance`](astro-site/src/content/blog/2025-06-27-data-governance.md) — Data Governance: Building Modern AI Systems
+- 78 words — [`2025-06-28-metadata-management`](astro-site/src/content/blog/2025-06-28-metadata-management.md) — Metadata Management: Building Modern AI Systems
+- 78 words — [`2025-06-29-data-lineage`](astro-site/src/content/blog/2025-06-29-data-lineage.md) — Data Lineage: Building Modern AI Systems
+- 78 words — [`2025-06-30-june-recap`](astro-site/src/content/blog/2025-06-30-june-recap.md) — June Recap: Building Modern AI Systems
+- 80 words — [`2025-06-07-real-time-ai`](astro-site/src/content/blog/2025-06-07-real-time-ai.md) — Real Time Ai: Building Modern AI Systems
+- 80 words — [`2025-06-10-event-driven-ai`](astro-site/src/content/blog/2025-06-10-event-driven-ai.md) — Event Driven Ai: Building Modern AI Systems
+- 80 words — [`2025-06-14-azure-functions-ai`](astro-site/src/content/blog/2025-06-14-azure-functions-ai.md) — Azure Functions Ai: Building Modern AI Systems
+- 80 words — [`2025-06-15-durable-functions-ai`](astro-site/src/content/blog/2025-06-15-durable-functions-ai.md) — Durable Functions Ai: Building Modern AI Systems
+- 80 words — [`2025-06-16-container-apps-ai`](astro-site/src/content/blog/2025-06-16-container-apps-ai.md) — Container Apps Ai: Building Modern AI Systems
+- 80 words — [`2025-06-20-load-balancing-ai`](astro-site/src/content/blog/2025-06-20-load-balancing-ai.md) — Load Balancing Ai: Building Modern AI Systems
+- 80 words — [`2025-06-23-data-lakehouse-ai`](astro-site/src/content/blog/2025-06-23-data-lakehouse-ai.md) — Data Lakehouse Ai: Building Modern AI Systems
+- 80 words — [`2025-06-24-delta-lake-ai`](astro-site/src/content/blog/2025-06-24-delta-lake-ai.md) — Delta Lake Ai: Building Modern AI Systems
+- 82 words — [`2020-10-08-azure-kubernetes-service-basics`](astro-site/src/content/blog/2020-10-08-azure-kubernetes-service-basics.md) — Azure Kubernetes Service: Managed Kubernetes
+- 82 words — [`2025-06-12-azure-event-grid-ai`](astro-site/src/content/blog/2025-06-12-azure-event-grid-ai.md) — Azure Event Grid Ai: Building Modern AI Systems
+- 91 words — [`2025-02-27-ai-orchestration-frameworks`](astro-site/src/content/blog/2025-02-27-ai-orchestration-frameworks.md) — AI Orchestration Frameworks: Building Complex AI Workflows
+- 99 words — [`2026-01-18-cost-per-query-optimization`](astro-site/src/content/blog/2026-01-18-cost-per-query-optimization.md) — Optimizing AI Cost Per Query
+- 101 words — [`2022-10-23-azure-devops-deployment-gates`](astro-site/src/content/blog/2022-10-23-azure-devops-deployment-gates.md) — Deployment Gates in Azure DevOps
+- 102 words — [`2025-02-23-fabric-ai-deep-integration`](astro-site/src/content/blog/2025-02-23-fabric-ai-deep-integration.md) — Fabric AI Deep Integration: Advanced Patterns
+- 103 words — [`2025-02-22-ai-data-pipeline-patterns`](astro-site/src/content/blog/2025-02-22-ai-data-pipeline-patterns.md) — AI Data Pipeline Patterns: Intelligent ETL and Processing
+- 105 words — [`2025-02-25-semantic-kernel-patterns`](astro-site/src/content/blog/2025-02-25-semantic-kernel-patterns.md) — Semantic Kernel Patterns: Building AI Applications with Microsoft's SDK
+- 106 words — [`2022-01-04-aks-2022-updates`](astro-site/src/content/blog/2022-01-04-aks-2022-updates.md) — Azure Kubernetes Service in 2022: New Features and Best Practices
+- 112 words — [`2020-09-05-azure-event-hubs-kafka-api`](astro-site/src/content/blog/2020-09-05-azure-event-hubs-kafka-api.md) — Azure Event Hubs with Kafka API
+- 114 words — [`2022-10-21-azure-pipelines-improvements`](astro-site/src/content/blog/2022-10-21-azure-pipelines-improvements.md) — Azure Pipelines Improvements
+- 117 words — [`2022-06-19-apim-graphql`](astro-site/src/content/blog/2022-06-19-apim-graphql.md) — Azure API Management GraphQL: Modern API Gateway
+- 119 words — [`2022-10-28-azure-devops-secure-files`](astro-site/src/content/blog/2022-10-28-azure-devops-secure-files.md) — Secure Files in Azure DevOps
+- 120 words — [`2022-06-10-azure-cni-overlay`](astro-site/src/content/blog/2022-06-10-azure-cni-overlay.md) — Azure CNI Overlay: Scalable Pod Networking
+- 120 words — [`2022-10-22-azure-devops-environments`](astro-site/src/content/blog/2022-10-22-azure-devops-environments.md) — Azure DevOps Environments and Deployments
+- 120 words — [`2026-01-15-learning-burnout`](astro-site/src/content/blog/2026-01-15-learning-burnout.md) — The Myth of Continuous Learning
+- 123 words — [`2025-02-24-building-ai-copilots`](astro-site/src/content/blog/2025-02-24-building-ai-copilots.md) — Building AI Copilots: From Concept to Production
+- 125 words — [`2022-10-24-azure-devops-approvals`](astro-site/src/content/blog/2022-10-24-azure-devops-approvals.md) — Approvals and Checks in Azure DevOps
+- 125 words — [`2022-10-29-azure-devops-agent-pools`](astro-site/src/content/blog/2022-10-29-azure-devops-agent-pools.md) — Azure DevOps Agent Pools
+- 126 words — [`2022-06-12-ebpf-kubernetes`](astro-site/src/content/blog/2022-06-12-ebpf-kubernetes.md) — eBPF in Kubernetes: The Technology Behind Modern Networking
+- 126 words — [`2022-10-27-azure-devops-variable-groups`](astro-site/src/content/blog/2022-10-27-azure-devops-variable-groups.md) — Variable Groups in Azure DevOps
+- 127 words — [`2025-02-28-february-ai-recap`](astro-site/src/content/blog/2025-02-28-february-ai-recap.md) — February 2025 AI Recap: Key Developments and Trends
+- 128 words — [`2022-10-19-github-oidc-tokens`](astro-site/src/content/blog/2022-10-19-github-oidc-tokens.md) — OIDC Tokens in GitHub Actions
+- 132 words — [`2022-06-11-cilium-preview`](astro-site/src/content/blog/2022-06-11-cilium-preview.md) — Cilium Preview on AKS: eBPF-Based Networking
+- 132 words — [`2022-06-15-linkerd-lightweight-mesh`](astro-site/src/content/blog/2022-06-15-linkerd-lightweight-mesh.md) — Linkerd: Lightweight Service Mesh for Kubernetes
+- 132 words — [`2025-02-26-langchain-vs-semantic-kernel`](astro-site/src/content/blog/2025-02-26-langchain-vs-semantic-kernel.md) — LangChain vs Semantic Kernel: Choosing Your AI Framework
+- 137 words — [`2022-10-20-azure-devops-updates`](astro-site/src/content/blog/2022-10-20-azure-devops-updates.md) — Azure DevOps Updates - October 2022
+- 138 words — [`2022-10-25-azure-devops-checks`](astro-site/src/content/blog/2022-10-25-azure-devops-checks.md) — Advanced Checks in Azure DevOps Pipelines
+- 138 words — [`2025-01-24-documentation-with-ai`](astro-site/src/content/blog/2025-01-24-documentation-with-ai.md) — Documentation with AI: Automating Technical Writing for Data Projects
+- 140 words — [`2022-06-09-calico-on-aks`](astro-site/src/content/blog/2022-06-09-calico-on-aks.md) — Calico on AKS: Advanced Network Policies
+- 140 words — [`2022-10-15-github-composite-actions`](astro-site/src/content/blog/2022-10-15-github-composite-actions.md) — Building GitHub Composite Actions
+- 140 words — [`2022-10-26-azure-devops-service-connections`](astro-site/src/content/blog/2022-10-26-azure-devops-service-connections.md) — Service Connections in Azure DevOps
+- 142 words — [`2022-06-28-reference-data-join`](astro-site/src/content/blog/2022-06-28-reference-data-join.md) — Reference Data Joins in Stream Analytics
+- 142 words — [`2025-02-21-event-driven-ai-integration`](astro-site/src/content/blog/2025-02-21-event-driven-ai-integration.md) — Event-Driven AI Integration: Connecting AI to Business Events
+- 144 words — [`2021-12-04-kubernetes-adoption-enterprise`](astro-site/src/content/blog/2021-12-04-kubernetes-adoption-enterprise.md) — Kubernetes Adoption in the Enterprise: Lessons from 2021
+- 144 words — [`2026-01-16-llm-observability`](astro-site/src/content/blog/2026-01-16-llm-observability.md) — LLM Observability: What Actually Matters
+- 145 words — [`2020-08-28-azure-functions-durable-entities`](astro-site/src/content/blog/2020-08-28-azure-functions-durable-entities.md) — Azure Functions Durable Entities for Stateful Serverless
+- 146 words — [`2020-09-19-databricks-mlflow-tracking`](astro-site/src/content/blog/2020-09-19-databricks-mlflow-tracking.md) — MLflow on Azure Databricks: Experiment Tracking
+- 146 words — [`2026-01-20-fabric-capacity-planning`](astro-site/src/content/blog/2026-01-20-fabric-capacity-planning.md) — Fabric Capacity Planning: Lessons from Production
+- 147 words — [`2022-06-26-real-time-analytics`](astro-site/src/content/blog/2022-06-26-real-time-analytics.md) — Real-Time Analytics on Azure: Building Live Dashboards
+- 149 words — [`2022-06-27-stream-analytics-updates`](astro-site/src/content/blog/2022-06-27-stream-analytics-updates.md) — Azure Stream Analytics Updates: No-Code Editor and More
+- 151 words — [`2020-08-30-power-automate-custom-connectors`](astro-site/src/content/blog/2020-08-30-power-automate-custom-connectors.md) — Building Power Automate Custom Connectors
+- 151 words — [`2022-10-18-github-artifact-management`](astro-site/src/content/blog/2022-10-18-github-artifact-management.md) — GitHub Actions Artifact Management
+- 152 words — [`2022-06-22-server-sent-events`](astro-site/src/content/blog/2022-06-22-server-sent-events.md) — Server-Sent Events: Simple Real-Time Updates
+- 152 words — [`2025-08-09-august-ai-topic`](astro-site/src/content/blog/2025-08-09-august-ai-topic.md) — Building Production MLOps Pipelines with Azure Machine Learning
+- 155 words — [`2026-01-19-technical-writing-tips`](astro-site/src/content/blog/2026-01-19-technical-writing-tips.md) — What Makes Technical Writing Actually Useful
+- 157 words — [`2026-04-05-fabric-lakehouse-patterns-turning-messy-raw-zones-into-reliable-products`](astro-site/src/content/blog/2026-04-05-fabric-lakehouse-patterns-turning-messy-raw-zones-into-reliable-products.md) — Fabric Lakehouse Patterns: turning messy raw zones into reliable products
+- 157 words — [`2026-04-17-onelake-shortcuts-in-practice-balancing-speed-and-access-boundaries`](astro-site/src/content/blog/2026-04-17-onelake-shortcuts-in-practice-balancing-speed-and-access-boundaries.md) — OneLake Shortcuts in Practice: balancing speed and access boundaries
+- 158 words — [`2022-06-24-signalr-scaling`](astro-site/src/content/blog/2022-06-24-signalr-scaling.md) — SignalR Scaling: Building Scalable Real-Time Applications
+- 158 words — [`2026-03-19-microsoft-foundry-build-notes-moving-from-model-demos-to-governed-operations`](astro-site/src/content/blog/2026-03-19-microsoft-foundry-build-notes-moving-from-model-demos-to-governed-operations.md) — Microsoft Foundry Build Notes: moving from model demos to governed operations
+- 160 words — [`2022-06-08-network-policies`](astro-site/src/content/blog/2022-06-08-network-policies.md) — Kubernetes Network Policies: Securing Pod Communication
+- 160 words — [`2022-06-13-service-mesh-comparison`](astro-site/src/content/blog/2022-06-13-service-mesh-comparison.md) — Service Mesh Comparison: Istio vs Linkerd vs Open Service Mesh
+- 160 words — [`2022-10-17-github-action-caching`](astro-site/src/content/blog/2022-10-17-github-action-caching.md) — GitHub Actions Caching Strategies
+- 160 words — [`2026-04-06-onelake-shortcuts-in-practice-why-governance-has-to-be-designed-before-scale`](astro-site/src/content/blog/2026-04-06-onelake-shortcuts-in-practice-why-governance-has-to-be-designed-before-scale.md) — OneLake Shortcuts in Practice: why governance has to be designed before scale
+- 160 words — [`2026-05-09-onelake-discipline-building-discoverability-into-workspace-design`](astro-site/src/content/blog/2026-05-09-onelake-discipline-building-discoverability-into-workspace-design.md) — OneLake Discipline: building discoverability into workspace design
+- 161 words — [`2026-04-27-designing-better-lakehouse-flows-in-fabric-why-table-contracts-matter-before-notebooks-scale`](astro-site/src/content/blog/2026-04-27-designing-better-lakehouse-flows-in-fabric-why-table-contracts-matter-before-notebooks-scale.md) — Designing Better Lakehouse Flows in Fabric: why table contracts matter before notebooks scale
+- 162 words — [`2022-10-30-azure-devops-self-hosted-agents`](astro-site/src/content/blog/2022-10-30-azure-devops-self-hosted-agents.md) — Self-Hosted Agents in Azure DevOps
+- 162 words — [`2026-04-28-onelake-discipline-why-governance-has-to-be-designed-before-scale`](astro-site/src/content/blog/2026-04-28-onelake-discipline-why-governance-has-to-be-designed-before-scale.md) — OneLake Discipline: why governance has to be designed before scale
+- 163 words — [`2026-03-15-keeping-onelake-clean-under-delivery-pressure-balancing-speed-and-access-boundaries`](astro-site/src/content/blog/2026-03-15-keeping-onelake-clean-under-delivery-pressure-balancing-speed-and-access-boundaries.md) — Keeping OneLake Clean Under Delivery Pressure: balancing speed and access boundaries
+- 163 words — [`2026-03-30-operating-ai-apps-with-foundry-using-foundry-for-safer-model-lifecycle-management`](astro-site/src/content/blog/2026-03-30-operating-ai-apps-with-foundry-using-foundry-for-safer-model-lifecycle-management.md) — Operating AI Apps with Foundry: using Foundry for safer model lifecycle management
+- 163 words — [`2026-04-14-observability-for-data-products-using-failure-budgets-for-data-reliability`](astro-site/src/content/blog/2026-04-14-observability-for-data-products-using-failure-budgets-for-data-reliability.md) — Observability for Data Products: using failure budgets for data reliability
+- 164 words — [`2026-03-04-keeping-onelake-clean-under-delivery-pressure-why-governance-has-to-be-designed-before-scale`](astro-site/src/content/blog/2026-03-04-keeping-onelake-clean-under-delivery-pressure-why-governance-has-to-be-designed-before-scale.md) — Keeping OneLake Clean Under Delivery Pressure: why governance has to be designed before scale
+- 164 words — [`2026-03-05-pipelines-i-trust-in-fabric-reducing-brittle-dependencies-in-daily-loads`](astro-site/src/content/blog/2026-03-05-pipelines-i-trust-in-fabric-reducing-brittle-dependencies-in-daily-loads.md) — Pipelines I Trust in Fabric: reducing brittle dependencies in daily loads
+- 164 words — [`2026-03-18-real-time-signals-that-actually-help-building-alerting-that-avoids-fatigue`](astro-site/src/content/blog/2026-03-18-real-time-signals-that-actually-help-building-alerting-that-avoids-fatigue.md) — Real-Time Signals That Actually Help: building alerting that avoids fatigue
+- 164 words — [`2026-04-29-orchestration-lessons-in-fabric-debugging-pipeline-latency-before-it-becomes-a-fire-drill`](astro-site/src/content/blog/2026-04-29-orchestration-lessons-in-fabric-debugging-pipeline-latency-before-it-becomes-a-fire-drill.md) — Orchestration Lessons in Fabric: debugging pipeline latency before it becomes a fire drill
+- 164 words — [`2026-05-01-streaming-design-notes-in-fabric-keeping-streaming-dashboards-useful-after-week-one`](astro-site/src/content/blog/2026-05-01-streaming-design-notes-in-fabric-keeping-streaming-dashboards-useful-after-week-one.md) — Streaming Design Notes in Fabric: keeping streaming dashboards useful after week one
+- 165 words — [`2026-03-17-sql-in-fabric-working-notes-building-models-analysts-can-trust-without-constant-hand-holding`](astro-site/src/content/blog/2026-03-17-sql-in-fabric-working-notes-building-models-analysts-can-trust-without-constant-hand-holding.md) — SQL in Fabric: Working Notes: building models analysts can trust without constant hand-holding
+- 165 words — [`2026-03-22-agent-workflows-in-practice-state-handling-patterns-that-reduce-agent-confusion`](astro-site/src/content/blog/2026-03-22-agent-workflows-in-practice-state-handling-patterns-that-reduce-agent-confusion.md) — Agent Workflows in Practice: state handling patterns that reduce agent confusion
+- 165 words — [`2026-04-07-orchestration-lessons-in-fabric-debugging-pipeline-latency-before-it-becomes-a-fire-drill`](astro-site/src/content/blog/2026-04-07-orchestration-lessons-in-fabric-debugging-pipeline-latency-before-it-becomes-a-fire-drill.md) — Orchestration Lessons in Fabric: debugging pipeline latency before it becomes a fire drill
+- 166 words — [`2026-03-06-fabric-warehouse-tradeoffs-choosing-model-grain-before-performance-tuning`](astro-site/src/content/blog/2026-03-06-fabric-warehouse-tradeoffs-choosing-model-grain-before-performance-tuning.md) — Fabric Warehouse Tradeoffs: choosing model grain before performance tuning
+- 166 words — [`2026-04-09-streaming-design-notes-in-fabric-using-kql-to-separate-noise-from-meaningful-changes`](astro-site/src/content/blog/2026-04-09-streaming-design-notes-in-fabric-using-kql-to-separate-noise-from-meaningful-changes.md) — Streaming Design Notes in Fabric: using KQL to separate noise from meaningful changes
+- 166 words — [`2026-04-18-orchestration-lessons-in-fabric-how-i-keep-orchestration-readable-over-time`](astro-site/src/content/blog/2026-04-18-orchestration-lessons-in-fabric-how-i-keep-orchestration-readable-over-time.md) — Orchestration Lessons in Fabric: how I keep orchestration readable over time
+- 166 words — [`2026-04-19-making-fabric-warehouse-boring-and-reliable-when-i-use-warehouse-tables-vs-lakehouse-shortcuts`](astro-site/src/content/blog/2026-04-19-making-fabric-warehouse-boring-and-reliable-when-i-use-warehouse-tables-vs-lakehouse-shortcuts.md) — Making Fabric Warehouse Boring and Reliable: when I use warehouse tables vs lakehouse shortcuts
+- 166 words — [`2026-04-20-real-time-intelligence-in-fabric-aligning-action-thresholds-with-business-impact`](astro-site/src/content/blog/2026-04-20-real-time-intelligence-in-fabric-aligning-action-thresholds-with-business-impact.md) — Real-Time Intelligence in Fabric: aligning action thresholds with business impact
+- 166 words — [`2026-04-26-practical-ai-performance-tuning-setting-latency-budgets-per-user-journey`](astro-site/src/content/blog/2026-04-26-practical-ai-performance-tuning-setting-latency-budgets-per-user-journey.md) — Practical AI Performance Tuning: setting latency budgets per user journey
+- 166 words — [`2026-04-30-fabric-warehouse-tradeoffs-building-models-analysts-can-trust-without-constant-hand-holding`](astro-site/src/content/blog/2026-04-30-fabric-warehouse-tradeoffs-building-models-analysts-can-trust-without-constant-hand-holding.md) — Fabric Warehouse Tradeoffs: building models analysts can trust without constant hand-holding
+- 167 words — [`2020-09-06-power-bi-dataflows`](astro-site/src/content/blog/2020-09-06-power-bi-dataflows.md) — Power BI Dataflows: Self-Service ETL
+- 167 words — [`2025-05-02-build-2025-ai-platform`](astro-site/src/content/blog/2025-05-02-build-2025-ai-platform.md) — Build 2025: Azure AI Platform Deep Dive
+- 167 words — [`2026-03-08-foundry-decisions-i-stand-behind-how-project-boundaries-change-delivery-speed`](astro-site/src/content/blog/2026-03-08-foundry-decisions-i-stand-behind-how-project-boundaries-change-delivery-speed.md) — Foundry Decisions I Stand Behind: how project boundaries change delivery speed
+- 167 words — [`2026-03-26-keeping-onelake-clean-under-delivery-pressure-why-governance-has-to-be-designed-before-scale`](astro-site/src/content/blog/2026-03-26-keeping-onelake-clean-under-delivery-pressure-why-governance-has-to-be-designed-before-scale.md) — Keeping OneLake Clean Under Delivery Pressure: why governance has to be designed before scale
+- 167 words — [`2026-03-29-kql-and-operational-awareness-using-kql-to-separate-noise-from-meaningful-changes`](astro-site/src/content/blog/2026-03-29-kql-and-operational-awareness-using-kql-to-separate-noise-from-meaningful-changes.md) — KQL and Operational Awareness: using KQL to separate noise from meaningful changes
+- 167 words — [`2026-04-02-building-useful-ai-agents-tool-access-policies-that-improve-reliability`](astro-site/src/content/blog/2026-04-02-building-useful-ai-agents-tool-access-policies-that-improve-reliability.md) — Building Useful AI Agents: tool access policies that improve reliability
+- 167 words — [`2026-04-03-data-quality-work-that-actually-sticks-choosing-the-minimum-useful-set-of-quality-signals`](astro-site/src/content/blog/2026-04-03-data-quality-work-that-actually-sticks-choosing-the-minimum-useful-set-of-quality-signals.md) — Data Quality Work That Actually Sticks: choosing the minimum useful set of quality signals
+- 167 words — [`2026-04-10-foundry-in-daily-engineering-work-moving-from-model-demos-to-governed-operations`](astro-site/src/content/blog/2026-04-10-foundry-in-daily-engineering-work-moving-from-model-demos-to-governed-operations.md) — Foundry in Daily Engineering Work: moving from model demos to governed operations
+- 167 words — [`2026-05-02-foundry-in-daily-engineering-work-using-foundry-for-safer-model-lifecycle-management`](astro-site/src/content/blog/2026-05-02-foundry-in-daily-engineering-work-using-foundry-for-safer-model-lifecycle-management.md) — Foundry in Daily Engineering Work: using Foundry for safer model lifecycle management
+- 168 words — [`2020-08-31-azure-data-explorer-basics`](astro-site/src/content/blog/2020-08-31-azure-data-explorer-basics.md) — Azure Data Explorer: Fast Analytics on Log Data
+- 168 words — [`2026-03-03-lakehouse-decisions-i-made-this-week-turning-messy-raw-zones-into-reliable-products`](astro-site/src/content/blog/2026-03-03-lakehouse-decisions-i-made-this-week-turning-messy-raw-zones-into-reliable-products.md) — Lakehouse Decisions I Made This Week: turning messy raw zones into reliable products
+- 168 words — [`2026-03-21-rag-systems-that-hold-up-using-reranking-only-where-it-changes-outcomes`](astro-site/src/content/blog/2026-03-21-rag-systems-that-hold-up-using-reranking-only-where-it-changes-outcomes.md) — RAG Systems That Hold Up: using reranking only where it changes outcomes
+- 168 words — [`2026-04-22-how-i-evaluate-llm-changes-building-eval-sets-from-real-user-queries`](astro-site/src/content/blog/2026-04-22-how-i-evaluate-llm-changes-building-eval-sets-from-real-user-queries.md) — How I Evaluate LLM Changes: building eval sets from real user queries
+- 168 words — [`2026-05-10-fabric-data-factory-notes-designing-pipelines-for-failure-not-the-happy-path`](astro-site/src/content/blog/2026-05-10-fabric-data-factory-notes-designing-pipelines-for-failure-not-the-happy-path.md) — Fabric Data Factory Notes: designing pipelines for failure, not the happy path
+- 169 words — [`2026-03-24-llm-cost-and-latency-notes-reducing-token-waste-without-hurting-answer-quality`](astro-site/src/content/blog/2026-03-24-llm-cost-and-latency-notes-reducing-token-waste-without-hurting-answer-quality.md) — LLM Cost and Latency Notes: reducing token waste without hurting answer quality
+- 169 words — [`2026-03-28-warehouse-modeling-in-fabric-preventing-metric-drift-through-ownership-rules`](astro-site/src/content/blog/2026-03-28-warehouse-modeling-in-fabric-preventing-metric-drift-through-ownership-rules.md) — Warehouse Modeling in Fabric: preventing metric drift through ownership rules
+- 169 words — [`2026-04-16-fabric-architecture-notes-where-i-separate-ingestion-from-curation`](astro-site/src/content/blog/2026-04-16-fabric-architecture-notes-where-i-separate-ingestion-from-curation.md) — Fabric Architecture Notes: where I separate ingestion from curation
+- 170 words — [`2022-06-07-pod-security-admission`](astro-site/src/content/blog/2022-06-07-pod-security-admission.md) — Pod Security Admission: Replacing Pod Security Policies
+- 170 words — [`2025-07-10-july-ai-topic`](astro-site/src/content/blog/2025-07-10-july-ai-topic.md) — Fabric Data Pipelines: Orchestrating ML Feature Engineering at Scale
+- 170 words — [`2026-03-11-building-useful-ai-agents-tool-access-policies-that-improve-reliability`](astro-site/src/content/blog/2026-03-11-building-useful-ai-agents-tool-access-policies-that-improve-reliability.md) — Building Useful AI Agents: tool access policies that improve reliability
+- 170 words — [`2026-03-14-fabric-architecture-notes-turning-messy-raw-zones-into-reliable-products`](astro-site/src/content/blog/2026-03-14-fabric-architecture-notes-turning-messy-raw-zones-into-reliable-products.md) — Fabric Architecture Notes: turning messy raw zones into reliable products
+- 170 words — [`2026-03-27-orchestration-lessons-in-fabric-designing-pipelines-for-failure-not-the-happy-path`](astro-site/src/content/blog/2026-03-27-orchestration-lessons-in-fabric-designing-pipelines-for-failure-not-the-happy-path.md) — Orchestration Lessons in Fabric: designing pipelines for failure, not the happy path
+- 170 words — [`2026-04-11-improving-model-quality-without-guesswork-tracking-groundedness-before-celebrating-fluency`](astro-site/src/content/blog/2026-04-11-improving-model-quality-without-guesswork-tracking-groundedness-before-celebrating-fluency.md) — Improving Model Quality Without Guesswork: tracking groundedness before celebrating fluency
+- 170 words — [`2026-04-13-where-agent-systems-break-tool-access-policies-that-improve-reliability`](astro-site/src/content/blog/2026-04-13-where-agent-systems-break-tool-access-policies-that-improve-reliability.md) — Where Agent Systems Break: tool access policies that improve reliability
+- 170 words — [`2026-04-21-foundry-decisions-i-stand-behind-using-foundry-for-safer-model-lifecycle-management`](astro-site/src/content/blog/2026-04-21-foundry-decisions-i-stand-behind-using-foundry-for-safer-model-lifecycle-management.md) — Foundry Decisions I Stand Behind: using Foundry for safer model lifecycle management
+- 170 words — [`2026-05-05-agent-design-notes-designing-fallback-behavior-before-launch`](astro-site/src/content/blog/2026-05-05-agent-design-notes-designing-fallback-behavior-before-launch.md) — Agent Design Notes: designing fallback behavior before launch
+- 170 words — [`2026-05-06-data-quality-work-that-actually-sticks-separating-incident-response-from-root-cause-fixes`](astro-site/src/content/blog/2026-05-06-data-quality-work-that-actually-sticks-separating-incident-response-from-root-cause-fixes.md) — Data Quality Work That Actually Sticks: separating incident response from root-cause fixes
+- 170 words — [`2026-05-07-llm-cost-and-latency-notes-using-caching-where-it-actually-pays-off`](astro-site/src/content/blog/2026-05-07-llm-cost-and-latency-notes-using-caching-where-it-actually-pays-off.md) — LLM Cost and Latency Notes: using caching where it actually pays off
+- 171 words — [`2022-06-25-azure-web-pubsub`](astro-site/src/content/blog/2022-06-25-azure-web-pubsub.md) — Azure Web PubSub: Native WebSocket at Scale
+- 171 words — [`2026-03-23-operational-data-quality-notes-separating-incident-response-from-root-cause-fixes`](astro-site/src/content/blog/2026-03-23-operational-data-quality-notes-separating-incident-response-from-root-cause-fixes.md) — Operational Data Quality Notes: separating incident response from root-cause fixes
+- 171 words — [`2026-04-08-warehouse-modeling-in-fabric-preventing-metric-drift-through-ownership-rules`](astro-site/src/content/blog/2026-04-08-warehouse-modeling-in-fabric-preventing-metric-drift-through-ownership-rules.md) — Warehouse Modeling in Fabric: preventing metric drift through ownership rules
+- 171 words — [`2026-04-12-what-improved-my-rag-pipeline-deciding-where-hybrid-search-is-worth-the-complexity`](astro-site/src/content/blog/2026-04-12-what-improved-my-rag-pipeline-deciding-where-hybrid-search-is-worth-the-complexity.md) — What Improved My RAG Pipeline: deciding where hybrid search is worth the complexity
+- 171 words — [`2026-04-15-llm-cost-and-latency-notes-using-caching-where-it-actually-pays-off`](astro-site/src/content/blog/2026-04-15-llm-cost-and-latency-notes-using-caching-where-it-actually-pays-off.md) — LLM Cost and Latency Notes: using caching where it actually pays off
+- 171 words — [`2026-04-23-what-improved-my-rag-pipeline-why-citation-ux-matters-as-much-as-relevance`](astro-site/src/content/blog/2026-04-23-what-improved-my-rag-pipeline-why-citation-ux-matters-as-much-as-relevance.md) — What Improved My RAG Pipeline: why citation UX matters as much as relevance
+- 171 words — [`2026-04-24-where-agent-systems-break-state-handling-patterns-that-reduce-agent-confusion`](astro-site/src/content/blog/2026-04-24-where-agent-systems-break-state-handling-patterns-that-reduce-agent-confusion.md) — Where Agent Systems Break: state handling patterns that reduce agent confusion
+- 171 words — [`2026-04-25-observability-for-data-products-turning-data-quality-from-blame-into-process`](astro-site/src/content/blog/2026-04-25-observability-for-data-products-turning-data-quality-from-blame-into-process.md) — Observability for Data Products: turning data quality from blame into process
+- 172 words — [`2025-03-01-rag-advanced-patterns`](astro-site/src/content/blog/2025-03-01-rag-advanced-patterns.md) — RAG Advanced Patterns: Beyond Basic Retrieval
+- 172 words — [`2026-01-17-autism-meltdown-management`](astro-site/src/content/blog/2026-01-17-autism-meltdown-management.md) — Managing Meltdowns: What We've Learned
+- 172 words — [`2026-03-09-how-i-evaluate-llm-changes-tracking-groundedness-before-celebrating-fluency`](astro-site/src/content/blog/2026-03-09-how-i-evaluate-llm-changes-tracking-groundedness-before-celebrating-fluency.md) — How I Evaluate LLM Changes: tracking groundedness before celebrating fluency
+- 172 words — [`2026-03-12-data-quality-work-that-actually-sticks-choosing-the-minimum-useful-set-of-quality-signals`](astro-site/src/content/blog/2026-03-12-data-quality-work-that-actually-sticks-choosing-the-minimum-useful-set-of-quality-signals.md) — Data Quality Work That Actually Sticks: choosing the minimum useful set of quality signals
+- 172 words — [`2026-05-04-rag-systems-that-hold-up-deciding-where-hybrid-search-is-worth-the-complexity`](astro-site/src/content/blog/2026-05-04-rag-systems-that-hold-up-deciding-where-hybrid-search-is-worth-the-complexity.md) — RAG Systems That Hold Up: deciding where hybrid search is worth the complexity
+- 173 words — [`2025-08-12-august-ai-topic`](astro-site/src/content/blog/2025-08-12-august-ai-topic.md) — Implementing Hybrid Search in Azure AI Search
+- 173 words — [`2026-03-13-cost-discipline-for-llm-apps-reducing-token-waste-without-hurting-answer-quality`](astro-site/src/content/blog/2026-03-13-cost-discipline-for-llm-apps-reducing-token-waste-without-hurting-answer-quality.md) — Cost Discipline for LLM Apps: reducing token waste without hurting answer quality
+- 173 words — [`2026-03-20-llm-reliability-in-practice-treating-quality-as-a-product-metric`](astro-site/src/content/blog/2026-03-20-llm-reliability-in-practice-treating-quality-as-a-product-metric.md) — LLM Reliability in Practice: treating quality as a product metric
+- 173 words — [`2026-03-31-llm-evaluation-journal-reducing-hallucinations-through-better-test-design`](astro-site/src/content/blog/2026-03-31-llm-evaluation-journal-reducing-hallucinations-through-better-test-design.md) — LLM Evaluation Journal: reducing hallucinations through better test design
+- 173 words — [`2026-04-01-rag-engineering-log-fixing-retrieval-before-touching-prompts`](astro-site/src/content/blog/2026-04-01-rag-engineering-log-fixing-retrieval-before-touching-prompts.md) — RAG Engineering Log: fixing retrieval before touching prompts
+- 174 words — [`2020-09-13-azure-key-vault-secrets-management`](astro-site/src/content/blog/2020-09-13-azure-key-vault-secrets-management.md) — Azure Key Vault: Secrets Management Best Practices
+- 174 words — [`2026-03-10-rag-tradeoffs-i-keep-seeing-fixing-retrieval-before-touching-prompts`](astro-site/src/content/blog/2026-03-10-rag-tradeoffs-i-keep-seeing-fixing-retrieval-before-touching-prompts.md) — RAG Tradeoffs I Keep Seeing: fixing retrieval before touching prompts
+- 174 words — [`2026-03-16-data-movement-without-drama-designing-pipelines-for-failure-not-the-happy-path`](astro-site/src/content/blog/2026-03-16-data-movement-without-drama-designing-pipelines-for-failure-not-the-happy-path.md) — Data Movement Without Drama: designing pipelines for failure, not the happy path
+- 174 words — [`2026-05-03-llm-evaluation-journal-treating-quality-as-a-product-metric`](astro-site/src/content/blog/2026-05-03-llm-evaluation-journal-treating-quality-as-a-product-metric.md) — LLM Evaluation Journal: treating quality as a product metric
+- 174 words — [`2026-05-08-designing-better-lakehouse-flows-in-fabric-turning-messy-raw-zones-into-reliable-products`](astro-site/src/content/blog/2026-05-08-designing-better-lakehouse-flows-in-fabric-turning-messy-raw-zones-into-reliable-products.md) — Designing Better Lakehouse Flows in Fabric: turning messy raw zones into reliable products
+- 176 words — [`2022-06-20-graphql-subscriptions`](astro-site/src/content/blog/2022-06-20-graphql-subscriptions.md) — GraphQL Subscriptions: Real-Time Data with Azure
+- 176 words — [`2026-04-04-keeping-ai-workloads-economical-setting-latency-budgets-per-user-journey`](astro-site/src/content/blog/2026-04-04-keeping-ai-workloads-economical-setting-latency-budgets-per-user-journey.md) — Keeping AI Workloads Economical: setting latency budgets per user journey
+- 177 words — [`2026-03-25-fabric-lakehouse-patterns-turning-messy-raw-zones-into-reliable-products`](astro-site/src/content/blog/2026-03-25-fabric-lakehouse-patterns-turning-messy-raw-zones-into-reliable-products.md) — Fabric Lakehouse Patterns: turning messy raw zones into reliable products
+- 178 words — [`2020-09-20-azure-service-bus-queues-topics`](astro-site/src/content/blog/2020-09-20-azure-service-bus-queues-topics.md) — Azure Service Bus: Queues and Topics Patterns
+- 178 words — [`2022-06-29-temporal-joins`](astro-site/src/content/blog/2022-06-29-temporal-joins.md) — Temporal Joins: Correlating Events Across Time
+- 178 words — [`2025-03-11-vector-search-optimization`](astro-site/src/content/blog/2025-03-11-vector-search-optimization.md) — Vector Search Optimization: Scaling to Billions of Vectors
+- 179 words — [`2026-03-07-real-time-signals-that-actually-help-keeping-streaming-dashboards-useful-after-week-one`](astro-site/src/content/blog/2026-03-07-real-time-signals-that-actually-help-keeping-streaming-dashboards-useful-after-week-one.md) — Real-Time Signals That Actually Help: keeping streaming dashboards useful after week one
+- 181 words — [`2022-10-14-github-reusable-workflows`](astro-site/src/content/blog/2022-10-14-github-reusable-workflows.md) — GitHub Reusable Workflows Patterns
+- 181 words — [`2025-03-03-graphrag-implementation`](astro-site/src/content/blog/2025-03-03-graphrag-implementation.md) — GraphRAG Implementation: Combining Graphs with Retrieval
+- 182 words — [`2021-03-14-how-to-disable-auto-locking-of-macos-keychains`](astro-site/src/content/blog/2021-03-14-how-to-disable-auto-locking-of-macos-keychains.md) — How to disable auto-locking of MacOS Keychains
+- 182 words — [`2025-07-17-july-ai-topic`](astro-site/src/content/blog/2025-07-17-july-ai-topic.md) — Azure Machine Learning Managed Endpoints: Deploying Models with Zero Downtime
+- 184 words — [`2025-06-01-post-build-implementation`](astro-site/src/content/blog/2025-06-01-post-build-implementation.md) — Post-Build 2025: Implementing New Features
+- 185 words — [`2020-10-09-azure-active-directory-b2c`](astro-site/src/content/blog/2020-10-09-azure-active-directory-b2c.md) — Azure AD B2C: Customer Identity Management
+- 186 words — [`2022-10-16-github-custom-actions`](astro-site/src/content/blog/2022-10-16-github-custom-actions.md) — Creating Custom GitHub Actions
+- 186 words — [`2025-03-02-knowledge-graphs-ai-integration`](astro-site/src/content/blog/2025-03-02-knowledge-graphs-ai-integration.md) — Knowledge Graphs and AI: Building Intelligent Data Structures
+- 186 words — [`2025-07-07-july-ai-topic`](astro-site/src/content/blog/2025-07-07-july-ai-topic.md) — Real-Time AI Inference with Azure Container Apps: Dynamic Scaling Patterns
+- 187 words — [`2025-08-07-august-ai-topic`](astro-site/src/content/blog/2025-08-07-august-ai-topic.md) — AI Observability with Azure Monitor and Application Insights
+- 189 words — [`2020-09-10-azure-sql-managed-instance`](astro-site/src/content/blog/2020-09-10-azure-sql-managed-instance.md) — Azure SQL Managed Instance: SQL Server in the Cloud
+- 190 words — [`2020-10-04-azure-blueprints-environment-templates`](astro-site/src/content/blog/2020-10-04-azure-blueprints-environment-templates.md) — Azure Blueprints: Repeatable Environment Templates
+- 192 words — [`2025-03-04-data-mesh-ai-integration`](astro-site/src/content/blog/2025-03-04-data-mesh-ai-integration.md) — Data Mesh and AI: Decentralized Intelligence at Scale
+- 192 words — [`2025-08-25-august-ai-topic`](astro-site/src/content/blog/2025-08-25-august-ai-topic.md) — Medallion Architecture in Microsoft Fabric: Bronze, Silver, Gold Explained
+- 193 words — [`2025-07-04-july-ai-topic`](astro-site/src/content/blog/2025-07-04-july-ai-topic.md) — GPT-4o Vision for Document Intelligence: Building Smart OCR Pipelines
+- 194 words — [`2021-06-29-kubernetes-operators-azure`](astro-site/src/content/blog/2021-06-29-kubernetes-operators-azure.md) — Kubernetes Operators for Azure Resources
+- 194 words — [`2022-06-06-seccomp-default`](astro-site/src/content/blog/2022-06-06-seccomp-default.md) — Seccomp by Default: Kubernetes Container Security
+- 194 words — [`2022-06-18-grpc-on-azure`](astro-site/src/content/blog/2022-06-18-grpc-on-azure.md) — gRPC on Azure: High-Performance API Communication
+- 195 words — [`2022-02-14-keyless-authentication`](astro-site/src/content/blog/2022-02-14-keyless-authentication.md) — Keyless Authentication: The Future of Cloud Security
+- 195 words — [`2022-06-17-dapr-vs-service-mesh`](astro-site/src/content/blog/2022-06-17-dapr-vs-service-mesh.md) — Dapr vs Service Mesh: Choosing the Right Approach
+- 195 words — [`2025-07-29-july-ai-topic`](astro-site/src/content/blog/2025-07-29-july-ai-topic.md) — Building AI-Powered Search with Azure AI Search and Semantic Ranker
+- 196 words — [`2025-08-08-august-ai-topic`](astro-site/src/content/blog/2025-08-08-august-ai-topic.md) — Cost Optimization Strategies for Azure OpenAI Workloads
+- 197 words — [`2022-06-04-containerd-runtime`](astro-site/src/content/blog/2022-06-04-containerd-runtime.md) — containerd Runtime: Understanding the Container Engine
+- 197 words — [`2025-08-14-august-ai-topic`](astro-site/src/content/blog/2025-08-14-august-ai-topic.md) — Apache Iceberg on Microsoft Fabric: Open Table Format Integration
+- 197 words — [`2025-08-22-august-ai-topic`](astro-site/src/content/blog/2025-08-22-august-ai-topic.md) — Vector Database Selection: Comparing Azure AI Search, Pinecone, and Qdrant
+- 198 words — [`2022-10-31-azure-devops-best-practices`](astro-site/src/content/blog/2022-10-31-azure-devops-best-practices.md) — Azure DevOps Best Practices - October 2022 Summary
+- 199 words — [`2025-07-08-july-ai-topic`](astro-site/src/content/blog/2025-07-08-july-ai-topic.md) — Cosmos DB Vector Search: Implementing Semantic Search at Global Scale
+- 200 words — [`2020-09-16-azure-bastion-secure-vm-access`](astro-site/src/content/blog/2020-09-16-azure-bastion-secure-vm-access.md) — Azure Bastion: Secure VM Access Without Public IPs
+- 201 words — [`2020-08-29-cosmos-db-change-feed-patterns`](astro-site/src/content/blog/2020-08-29-cosmos-db-change-feed-patterns.md) — Azure Cosmos DB Change Feed Patterns
+- 201 words — [`2020-10-06-power-platform-dataverse`](astro-site/src/content/blog/2020-10-06-power-platform-dataverse.md) — Microsoft Dataverse: The Power Platform Database
+- 201 words — [`2025-08-02-august-ai-topic`](astro-site/src/content/blog/2025-08-02-august-ai-topic.md) — Building RAG Applications with Azure AI Search and GPT-4o
+- 204 words — [`2025-05-05-semantic-kernel-2`](astro-site/src/content/blog/2025-05-05-semantic-kernel-2.md) — Semantic Kernel 2.0: Major Updates and New Features
+- 204 words — [`2025-08-15-august-ai-topic`](astro-site/src/content/blog/2025-08-15-august-ai-topic.md) — Semantic Kernel Memory: Building Persistent AI Context
+- 204 words — [`2025-08-29-august-ai-topic`](astro-site/src/content/blog/2025-08-29-august-ai-topic.md) — Semantic Kernel Filters: Intercepting and Modifying AI Operations
+- 205 words — [`2020-09-14-azure-private-link`](astro-site/src/content/blog/2020-09-14-azure-private-link.md) — Azure Private Link: Secure Access to PaaS Services
+- 205 words — [`2021-01-06-azure-container-apps-preview`](astro-site/src/content/blog/2021-01-06-azure-container-apps-preview.md) — Azure Kubernetes Service: Simplifying Container Orchestration
+- 205 words — [`2025-03-08-testing-ai-applications`](astro-site/src/content/blog/2025-03-08-testing-ai-applications.md) — Testing AI Applications: Strategies for Non-Deterministic Systems
+- 205 words — [`2025-03-10-semantic-layer-ai`](astro-site/src/content/blog/2025-03-10-semantic-layer-ai.md) — Semantic Layer for AI: Building Business-Ready Data Interfaces
+- 205 words — [`2025-07-13-july-ai-topic`](astro-site/src/content/blog/2025-07-13-july-ai-topic.md) — Evaluating RAG Systems: Metrics and Automated Testing with Azure AI
+- 205 words — [`2025-07-20-july-ai-topic`](astro-site/src/content/blog/2025-07-20-july-ai-topic.md) — Data Lakehouse Architecture with Microsoft Fabric: Medallion Pattern Implementation
+- 206 words — [`2025-07-12-july-ai-topic`](astro-site/src/content/blog/2025-07-12-july-ai-topic.md) — Semantic Kernel v2: Building Composable AI Applications in C#
+- 207 words — [`2020-09-07-azure-machine-learning-designer`](astro-site/src/content/blog/2020-09-07-azure-machine-learning-designer.md) — Azure Machine Learning Designer for No-Code ML
+- 207 words — [`2025-05-01-build-2025-day-one`](astro-site/src/content/blog/2025-05-01-build-2025-day-one.md) — Build 2025 Day One: Major Announcements and Developer Impact
+- 207 words — [`2025-07-11-july-ai-topic`](astro-site/src/content/blog/2025-07-11-july-ai-topic.md) — Building Multi-Agent Systems with Azure AI Foundry Orchestration
+- 207 words — [`2025-07-14-july-ai-topic`](astro-site/src/content/blog/2025-07-14-july-ai-topic.md) — Fine-Tuning GPT-4o for Domain-Specific Tasks on Azure
+- 208 words — [`2020-09-01-azure-cognitive-search-indexers`](astro-site/src/content/blog/2020-09-01-azure-cognitive-search-indexers.md) — Azure Cognitive Search Indexers for Document Processing
+- 208 words — [`2020-09-26-azure-blob-storage-lifecycle`](astro-site/src/content/blog/2020-09-26-azure-blob-storage-lifecycle.md) — Azure Blob Storage Lifecycle Management
+- 208 words — [`2023-02-07-tdd-python`](astro-site/src/content/blog/2023-02-07-tdd-python.md) — TDD (Test-Driven Development) Overview with Python Example
+- 208 words — [`2026-01-23-fabric-migration-lessons`](astro-site/src/content/blog/2026-01-23-fabric-migration-lessons.md) — Migrating to Fabric: 5 Things I Wish I Knew
+- 211 words — [`2025-03-05-ai-assisted-data-modeling`](astro-site/src/content/blog/2025-03-05-ai-assisted-data-modeling.md) — AI-Assisted Data Modeling: Accelerating Schema Design
+- 212 words — [`2025-03-07-data-quality-ai-automation`](astro-site/src/content/blog/2025-03-07-data-quality-ai-automation.md) — Data Quality Automation with AI: Beyond Rule-Based Validation
+- 212 words — [`2025-08-16-august-ai-topic`](astro-site/src/content/blog/2025-08-16-august-ai-topic.md) — GPT-4o Vision: Building Image Analysis Applications
+- 213 words — [`2025-08-05-august-ai-topic`](astro-site/src/content/blog/2025-08-05-august-ai-topic.md) — Implementing Semantic Kernel Plugins for Enterprise Applications
+- 213 words — [`2025-08-21-august-ai-topic`](astro-site/src/content/blog/2025-08-21-august-ai-topic.md) — Building TypeScript AI Applications with Vercel AI SDK
+- 214 words — [`2025-07-27-july-ai-topic`](astro-site/src/content/blog/2025-07-27-july-ai-topic.md) — Azure API Management for AI APIs: Rate Limiting and Cost Control
+- 215 words — [`2020-09-15-azure-monitor-alerts`](astro-site/src/content/blog/2020-09-15-azure-monitor-alerts.md) — Azure Monitor Alerts and Action Groups
+- 215 words — [`2025-07-06-july-ai-topic`](astro-site/src/content/blog/2025-07-06-july-ai-topic.md) — Azure AI Search Vector Optimization: Reducing Costs While Improving Recall
+- 215 words — [`2025-07-30-july-ai-topic`](astro-site/src/content/blog/2025-07-30-july-ai-topic.md) — Observability for LLM Applications: Tracing, Metrics, and Debugging
+- 216 words — [`2025-03-12-chunking-strategies`](astro-site/src/content/blog/2025-03-12-chunking-strategies.md) — Chunking Strategies for RAG: Finding the Right Granularity
+- 216 words — [`2026-01-22-building-for-maintenance`](astro-site/src/content/blog/2026-01-22-building-for-maintenance.md) — Building Software I Want to Maintain
+- 217 words — [`2025-07-05-july-ai-topic`](astro-site/src/content/blog/2025-07-05-july-ai-topic.md) — Copilot Extensibility: Building Custom Plugins for Microsoft 365 Copilot
+- 217 words — [`2025-08-03-august-ai-topic`](astro-site/src/content/blog/2025-08-03-august-ai-topic.md) — Microsoft Fabric Lakehouse: Unified Analytics for the Modern Data Stack
+- 217 words — [`2025-08-11-august-ai-topic`](astro-site/src/content/blog/2025-08-11-august-ai-topic.md) — Microsoft Ignite 2025 Preview: AI and Data Platform Expectations
+- 217 words — [`2025-08-26-august-ai-topic`](astro-site/src/content/blog/2025-08-26-august-ai-topic.md) — Structured Output with Azure OpenAI: JSON Mode and Response Formats
+- 218 words — [`2020-09-30-azure-data-lake-storage-gen2`](astro-site/src/content/blog/2020-09-30-azure-data-lake-storage-gen2.md) — Azure Data Lake Storage Gen2: Foundation of Modern Data Platforms
+- 219 words — [`2024-05-18-azure-ai-studio-updates`](astro-site/src/content/blog/2024-05-18-azure-ai-studio-updates.md) — Azure AI Studio Updates at Build 2024
+- 219 words — [`2025-03-09-ai-documentation-generation`](astro-site/src/content/blog/2025-03-09-ai-documentation-generation.md) — AI-Powered Documentation: Keeping Docs in Sync with Code
+- 219 words — [`2025-08-01-august-ai-topic`](astro-site/src/content/blog/2025-08-01-august-ai-topic.md) — Getting Started with Semantic Kernel 2.x: A Practical Introduction
+- 219 words — [`2025-08-18-august-ai-topic`](astro-site/src/content/blog/2025-08-18-august-ai-topic.md) — Real-Time Data Processing with Microsoft Fabric Eventstreams
+- 219 words — [`2025-08-27-august-ai-topic`](astro-site/src/content/blog/2025-08-27-august-ai-topic.md) — Building Data Pipelines with Microsoft Fabric Data Factory
+- 222 words — [`2025-08-24-august-ai-topic`](astro-site/src/content/blog/2025-08-24-august-ai-topic.md) — Function Calling Patterns in Azure OpenAI
+- 222 words — [`2025-10-07-october-ai-topic`](astro-site/src/content/blog/2025-10-07-october-ai-topic.md) — Real-Time Streaming Analytics with Azure Stream Analytics and Event Hubs
+- 223 words — [`2026-01-24-present-moment-parenting`](astro-site/src/content/blog/2026-01-24-present-moment-parenting.md) — The Five-Minute Father
+- 224 words — [`2020-09-03-azure-devops-yaml-pipelines`](astro-site/src/content/blog/2020-09-03-azure-devops-yaml-pipelines.md) — Azure DevOps YAML Pipelines for Data Projects
+- 224 words — [`2025-05-04-build-2025-developer-tools`](astro-site/src/content/blog/2025-05-04-build-2025-developer-tools.md) — Build 2025: Developer Tools and AI Integration
+- 226 words — [`2020-09-11-azure-api-management`](astro-site/src/content/blog/2020-09-11-azure-api-management.md) — Azure API Management: API Gateway Patterns
+- 229 words — [`2022-06-05-ephemeral-containers`](astro-site/src/content/blog/2022-06-05-ephemeral-containers.md) — Ephemeral Containers: Debugging Kubernetes Pods
+- 229 words — [`2025-08-28-august-ai-topic`](astro-site/src/content/blog/2025-08-28-august-ai-topic.md) — Embedding Models: Choosing Between OpenAI, Azure, and Open Source
+- 230 words — [`2025-08-04-august-ai-topic`](astro-site/src/content/blog/2025-08-04-august-ai-topic.md) — Azure OpenAI o1 Models: Reasoning at Scale for Complex Problems
+- 231 words — [`2022-07-01-azure-cosmos-db-for-postgresql-introduction`](astro-site/src/content/blog/2022-07-01-azure-cosmos-db-for-postgresql-introduction.md) — Getting Started with Azure Cosmos DB for PostgreSQL
+- 231 words — [`2022-08-08-my-tools-list`](astro-site/src/content/blog/2022-08-08-my-tools-list.md) — My Tech List 2022
+- 232 words — [`2025-09-02-september-ai-topic`](astro-site/src/content/blog/2025-09-02-september-ai-topic.md) — Azure AI Document Intelligence: Extracting Structured Data from Invoices
+- 233 words — [`2020-09-18-azure-front-door-global-loadbalancing`](astro-site/src/content/blog/2020-09-18-azure-front-door-global-loadbalancing.md) — Azure Front Door: Global Load Balancing and CDN
+- 234 words — [`2020-09-21-azure-sql-elastic-pools`](astro-site/src/content/blog/2020-09-21-azure-sql-elastic-pools.md) — Azure SQL Elastic Pools: Cost-Effective Multi-Tenancy
+- 234 words — [`2020-09-25-power-bi-row-level-security`](astro-site/src/content/blog/2020-09-25-power-bi-row-level-security.md) — Power BI Row-Level Security: Data Access Control
+- 234 words — [`2020-10-05-azure-resource-graph`](astro-site/src/content/blog/2020-10-05-azure-resource-graph.md) — Azure Resource Graph: Query All Your Azure Resources
+- 234 words — [`2025-03-22-ai-observability`](astro-site/src/content/blog/2025-03-22-ai-observability.md) — AI Observability: Monitoring LLM Applications in Production
+- 234 words — [`2025-07-09-july-ai-topic`](astro-site/src/content/blog/2025-07-09-july-ai-topic.md) — Prompt Caching with Claude and Azure OpenAI: Reducing Latency and Costs
+- 235 words — [`2025-08-06-august-ai-topic`](astro-site/src/content/blog/2025-08-06-august-ai-topic.md) — Delta Lake Optimization: VACUUM, OPTIMIZE, and Z-ORDER Explained
+- 235 words — [`2025-08-13-august-ai-topic`](astro-site/src/content/blog/2025-08-13-august-ai-topic.md) — LLMOps: Operationalizing Large Language Models in Production
+- 236 words — [`2025-04-03-windows-ai-features`](astro-site/src/content/blog/2025-04-03-windows-ai-features.md) — Windows AI Features: Building for the AI PC
+- 236 words — [`2025-09-01-september-ai-topic`](astro-site/src/content/blog/2025-09-01-september-ai-topic.md) — Enterprise AI Adoption: Building Your Center of Excellence
+- 237 words — [`2020-09-04-databricks-delta-lake-intro`](astro-site/src/content/blog/2020-09-04-databricks-delta-lake-intro.md) — Introduction to Delta Lake on Azure Databricks
+- 237 words — [`2024-02-22-text-to-video-implications`](astro-site/src/content/blog/2024-02-22-text-to-video-implications.md) — Text-to-Video AI: Implications for Content Creation
+- 239 words — [`2025-07-01-july-ai-topic`](astro-site/src/content/blog/2025-07-01-july-ai-topic.md) — Building AI Agents with Azure AI Foundry: A Post-Build 2025 Implementation Guide
+- 239 words — [`2025-07-15-july-ai-topic`](astro-site/src/content/blog/2025-07-15-july-ai-topic.md) — GitHub Copilot Workspace: AI-Powered Development Environment Deep Dive
+- 239 words — [`2025-08-23-august-ai-topic`](astro-site/src/content/blog/2025-08-23-august-ai-topic.md) — Data Quality for AI: Ensuring Clean Data for ML and LLM Applications
+- 240 words — [`2025-05-07-mcp-integration`](astro-site/src/content/blog/2025-05-07-mcp-integration.md) — Model Context Protocol in Azure: Standardized Tool Integration
+- 240 words — [`2025-07-16-july-ai-topic`](astro-site/src/content/blog/2025-07-16-july-ai-topic.md) — Implementing Guardrails for Production LLM Applications
+- 240 words — [`2025-10-17-october-ai-topic`](astro-site/src/content/blog/2025-10-17-october-ai-topic.md) — Azure Machine Learning Pipelines: Orchestrating ML Workflows
+- 240 words — [`2026-01-30-simple-deployment`](astro-site/src/content/blog/2026-01-30-simple-deployment.md) — Keeping Deployments Simple
+- 241 words — [`2020-09-22-azure-cosmos-db-consistency-levels`](astro-site/src/content/blog/2020-09-22-azure-cosmos-db-consistency-levels.md) — Azure Cosmos DB Consistency Levels Explained
+- 241 words — [`2021-05-13-influxdb-on-azure`](astro-site/src/content/blog/2021-05-13-influxdb-on-azure.md) — InfluxDB on Azure: Deploying Time-Series Infrastructure
+- 242 words — [`2025-04-02-copilot-extensibility`](astro-site/src/content/blog/2025-04-02-copilot-extensibility.md) — Copilot Extensibility: Building Custom Copilot Experiences
+- 243 words — [`2020-09-02-terraform-azure-provider-basics`](astro-site/src/content/blog/2020-09-02-terraform-azure-provider-basics.md) — Terraform Azure Provider: Infrastructure as Code Basics
+- 243 words — [`2025-03-06-dbt-ai-integration`](astro-site/src/content/blog/2025-03-06-dbt-ai-integration.md) — dbt and AI: Intelligent Data Transformations
+- 243 words — [`2025-05-27-enterprise-ai-adoption`](astro-site/src/content/blog/2025-05-27-enterprise-ai-adoption.md) — Enterprise AI Adoption: Strategies for Organizational Success
+- 243 words — [`2025-10-09-october-ai-topic`](astro-site/src/content/blog/2025-10-09-october-ai-topic.md) — Edge AI Deployment: Running ML Models on Azure IoT Edge
+- 244 words — [`2025-10-02-october-ai-topic`](astro-site/src/content/blog/2025-10-02-october-ai-topic.md) — Azure Machine Learning Managed Endpoints: Advanced Deployment Patterns
+- 246 words — [`2020-09-08-azure-logic-apps-enterprise-integration`](astro-site/src/content/blog/2020-09-08-azure-logic-apps-enterprise-integration.md) — Azure Logic Apps for Enterprise Integration
+- 246 words — [`2022-07-02-hyperscale-citus-architecture`](astro-site/src/content/blog/2022-07-02-hyperscale-citus-architecture.md) — Understanding Hyperscale Citus Architecture
+- 247 words — [`2025-03-27-multi-modal-applications`](astro-site/src/content/blog/2025-03-27-multi-modal-applications.md) — Multi-Modal AI Applications: Beyond Text
+- 248 words — [`2025-07-22-july-ai-topic`](astro-site/src/content/blog/2025-07-22-july-ai-topic.md) — Azure Functions with AI: Serverless Inference Patterns
+- 248 words — [`2025-07-31-july-ai-topic`](astro-site/src/content/blog/2025-07-31-july-ai-topic.md) — End-to-End MLOps with Azure Machine Learning and GitHub Actions
+- 248 words — [`2025-11-01-november-ai-topic`](astro-site/src/content/blog/2025-11-01-november-ai-topic.md) — Building Production-Ready AI Pipelines with Azure Machine Learning
+
+</details>
+
+## 5. No description (404)
+
+A description was generated from the opening paragraph for 1,698 posts; these had no usable prose near the top (they open with code or lists), so pages fall back to an auto-excerpt. Add a one-sentence `description:` when you next touch them.
+
+<details><summary>Show list</summary>
+
+- [`2020-10-08-azure-kubernetes-service-basics`](astro-site/src/content/blog/2020-10-08-azure-kubernetes-service-basics.md)
+- [`2020-11-17-azure-load-testing`](astro-site/src/content/blog/2020-11-17-azure-load-testing.md)
+- [`2021-01-06-azure-container-apps-preview`](astro-site/src/content/blog/2021-01-06-azure-container-apps-preview.md)
+- [`2021-02-04-power-bi-dataflows-best-practices`](astro-site/src/content/blog/2021-02-04-power-bi-dataflows-best-practices.md)
+- [`2021-02-05-azure-defender-for-cloud`](astro-site/src/content/blog/2021-02-05-azure-defender-for-cloud.md)
+- [`2021-02-10-azure-private-link-security`](astro-site/src/content/blog/2021-02-10-azure-private-link-security.md)
+- [`2021-02-12-azure-virtual-wan`](astro-site/src/content/blog/2021-02-12-azure-virtual-wan.md)
+- [`2021-02-13-azure-firewall-manager`](astro-site/src/content/blog/2021-02-13-azure-firewall-manager.md)
+- [`2021-02-16-azure-hdinsight-overview`](astro-site/src/content/blog/2021-02-16-azure-hdinsight-overview.md)
+- [`2021-02-19-azure-container-registry`](astro-site/src/content/blog/2021-02-19-azure-container-registry.md)
+- [`2021-02-22-azure-monitor-alerts`](astro-site/src/content/blog/2021-02-22-azure-monitor-alerts.md)
+- [`2021-03-02-aks-windows-containers`](astro-site/src/content/blog/2021-03-02-aks-windows-containers.md)
+- [`2021-03-04-azure-app-configuration`](astro-site/src/content/blog/2021-03-04-azure-app-configuration.md)
+- [`2021-03-09-azure-synapse-dedicated-sql-pools`](astro-site/src/content/blog/2021-03-09-azure-synapse-dedicated-sql-pools.md)
+- [`2021-03-10-synapse-data-flows`](astro-site/src/content/blog/2021-03-10-synapse-data-flows.md)
+- [`2021-03-12-power-bi-paginated-reports`](astro-site/src/content/blog/2021-03-12-power-bi-paginated-reports.md)
+- [`2021-03-13-azure-analysis-services`](astro-site/src/content/blog/2021-03-13-azure-analysis-services.md)
+- [`2021-03-18-event-hubs-kafka`](astro-site/src/content/blog/2021-03-18-event-hubs-kafka.md)
+- [`2021-03-21-azure-sphere`](astro-site/src/content/blog/2021-03-21-azure-sphere.md)
+- [`2021-03-22-azure-rtos`](astro-site/src/content/blog/2021-03-22-azure-rtos.md)
+- [`2021-03-23-cognitive-services-speech`](astro-site/src/content/blog/2021-03-23-cognitive-services-speech.md)
+- [`2021-03-25-qna-maker`](astro-site/src/content/blog/2021-03-25-qna-maker.md)
+- [`2021-03-26-luis-language-understanding`](astro-site/src/content/blog/2021-03-26-luis-language-understanding.md)
+- [`2021-04-10-azure-search-indexers-data-ingestion`](astro-site/src/content/blog/2021-04-10-azure-search-indexers-data-ingestion.md)
+- [`2021-04-11-blob-storage-indexing-cognitive-search`](astro-site/src/content/blog/2021-04-11-blob-storage-indexing-cognitive-search.md)
+- [`2021-04-19-pyspark-best-practices-production`](astro-site/src/content/blog/2021-04-19-pyspark-best-practices-production.md)
+- [`2021-04-20-databricks-notebooks-collaborative-data-science`](astro-site/src/content/blog/2021-04-20-databricks-notebooks-collaborative-data-science.md)
+- [`2021-04-22-azure-ml-automl-automated-machine-learning`](astro-site/src/content/blog/2021-04-22-azure-ml-automl-automated-machine-learning.md)
+- [`2021-04-27-azure-vmware-solution-hybrid-cloud`](astro-site/src/content/blog/2021-04-27-azure-vmware-solution-hybrid-cloud.md)
+- [`2021-04-29-azure-database-migration-service-strategies`](astro-site/src/content/blog/2021-04-29-azure-database-migration-service-strategies.md)
+- [`2021-05-11-postgresql-hyperscale-citus`](astro-site/src/content/blog/2021-05-11-postgresql-hyperscale-citus.md)
+- [`2021-05-13-influxdb-on-azure`](astro-site/src/content/blog/2021-05-13-influxdb-on-azure.md)
+- [`2021-05-16-container-monitoring-azure`](astro-site/src/content/blog/2021-05-16-container-monitoring-azure.md)
+- [`2021-05-18-azure-security-center-defender`](astro-site/src/content/blog/2021-05-18-azure-security-center-defender.md)
+- [`2021-05-19-microsoft-defender-for-identity`](astro-site/src/content/blog/2021-05-19-microsoft-defender-for-identity.md)
+- [`2021-05-23-microsoft-identity-platform`](astro-site/src/content/blog/2021-05-23-microsoft-identity-platform.md)
+- [`2021-05-24-msal-libraries-deep-dive`](astro-site/src/content/blog/2021-05-24-msal-libraries-deep-dive.md)
+- [`2021-05-25-oauth2-flows-azure-ad`](astro-site/src/content/blog/2021-05-25-oauth2-flows-azure-ad.md)
+- [`2021-05-26-azure-key-vault-certificates`](astro-site/src/content/blog/2021-05-26-azure-key-vault-certificates.md)
+- [`2021-05-27-azure-managed-hsm`](astro-site/src/content/blog/2021-05-27-azure-managed-hsm.md)
+- [`2021-05-28-azure-ddos-protection`](astro-site/src/content/blog/2021-05-28-azure-ddos-protection.md)
+- [`2021-05-29-azure-waf-policies`](astro-site/src/content/blog/2021-05-29-azure-waf-policies.md)
+- [`2021-06-02-blazor-webassembly-azure-deployment`](astro-site/src/content/blog/2021-06-02-blazor-webassembly-azure-deployment.md)
+- [`2021-06-06-azure-devops-yaml-pipelines`](astro-site/src/content/blog/2021-06-06-azure-devops-yaml-pipelines.md)
+- [`2021-06-07-azure-pipelines-templates`](astro-site/src/content/blog/2021-06-07-azure-pipelines-templates.md)
+- [`2021-06-11-bicep-modules-azure`](astro-site/src/content/blog/2021-06-11-bicep-modules-azure.md)
+- [`2021-06-12-arm-template-specs`](astro-site/src/content/blog/2021-06-12-arm-template-specs.md)
+- [`2021-06-15-azure-lighthouse`](astro-site/src/content/blog/2021-06-15-azure-lighthouse.md)
+- [`2021-06-17-azure-cost-management-budgets`](astro-site/src/content/blog/2021-06-17-azure-cost-management-budgets.md)
+- [`2021-06-21-microservices-patterns-azure`](astro-site/src/content/blog/2021-06-21-microservices-patterns-azure.md)
+- [`2021-06-22-cqrs-azure-implementation`](astro-site/src/content/blog/2021-06-22-cqrs-azure-implementation.md)
+- [`2021-06-23-event-sourcing-patterns`](astro-site/src/content/blog/2021-06-23-event-sourcing-patterns.md)
+- [`2021-06-25-circuit-breaker-pattern`](astro-site/src/content/blog/2021-06-25-circuit-breaker-pattern.md)
+- [`2021-06-26-azure-service-fabric`](astro-site/src/content/blog/2021-06-26-azure-service-fabric.md)
+- [`2021-06-27-dapr-azure-integration`](astro-site/src/content/blog/2021-06-27-dapr-azure-integration.md)
+- [`2021-06-28-azure-container-apps-concepts`](astro-site/src/content/blog/2021-06-28-azure-container-apps-concepts.md)
+- [`2021-06-29-kubernetes-operators-azure`](astro-site/src/content/blog/2021-06-29-kubernetes-operators-azure.md)
+- [`2021-06-30-helm-charts-azure`](astro-site/src/content/blog/2021-06-30-helm-charts-azure.md)
+- [`2021-07-01-azure-synapse-spark-3`](astro-site/src/content/blog/2021-07-01-azure-synapse-spark-3.md)
+- [`2021-07-02-delta-lake-merge-operations`](astro-site/src/content/blog/2021-07-02-delta-lake-merge-operations.md)
+- [`2021-07-03-databricks-sql-analytics-ga`](astro-site/src/content/blog/2021-07-03-databricks-sql-analytics-ga.md)
+- [`2021-07-04-power-bi-premium-gen2`](astro-site/src/content/blog/2021-07-04-power-bi-premium-gen2.md)
+- [`2021-07-06-azure-purview-data-lineage`](astro-site/src/content/blog/2021-07-06-azure-purview-data-lineage.md)
+- [`2021-07-07-azure-data-share`](astro-site/src/content/blog/2021-07-07-azure-data-share.md)
+- [`2021-07-08-azure-data-box`](astro-site/src/content/blog/2021-07-08-azure-data-box.md)
+- [`2021-07-09-expressroute-direct`](astro-site/src/content/blog/2021-07-09-expressroute-direct.md)
+- [`2021-07-11-azure-load-balancer`](astro-site/src/content/blog/2021-07-11-azure-load-balancer.md)
+- [`2021-07-12-azure-nat-gateway`](astro-site/src/content/blog/2021-07-12-azure-nat-gateway.md)
+- [`2021-07-13-private-dns-zones`](astro-site/src/content/blog/2021-07-13-private-dns-zones.md)
+- [`2021-07-14-background-processing-patterns`](astro-site/src/content/blog/2021-07-14-background-processing-patterns.md)
+- [`2021-07-15-consumption-vs-premium-functions`](astro-site/src/content/blog/2021-07-15-consumption-vs-premium-functions.md)
+- [`2021-07-17-network-security-groups`](astro-site/src/content/blog/2021-07-17-network-security-groups.md)
+- [`2021-07-18-application-security-groups`](astro-site/src/content/blog/2021-07-18-application-security-groups.md)
+- [`2021-07-19-azure-monitor-metrics`](astro-site/src/content/blog/2021-07-19-azure-monitor-metrics.md)
+- [`2021-07-20-azure-custom-metrics`](astro-site/src/content/blog/2021-07-20-azure-custom-metrics.md)
+- [`2021-07-21-diagnostic-settings`](astro-site/src/content/blog/2021-07-21-diagnostic-settings.md)
+- [`2021-07-22-activity-logs`](astro-site/src/content/blog/2021-07-22-activity-logs.md)
+- [`2021-07-23-developing-macos-apps-using-net`](astro-site/src/content/blog/2021-07-23-developing-macos-apps-using-net.md)
+- [`2021-07-23-resource-health`](astro-site/src/content/blog/2021-07-23-resource-health.md)
+- [`2021-07-24-service-health-alerts`](astro-site/src/content/blog/2021-07-24-service-health-alerts.md)
+- [`2021-07-25-azure-automation-runbooks`](astro-site/src/content/blog/2021-07-25-azure-automation-runbooks.md)
+- [`2021-07-26-azure-update-management`](astro-site/src/content/blog/2021-07-26-azure-update-management.md)
+- [`2021-07-27-azure-dsc`](astro-site/src/content/blog/2021-07-27-azure-dsc.md)
+- [`2021-07-29-azure-webjobs`](astro-site/src/content/blog/2021-07-29-azure-webjobs.md)
+- [`2021-07-31-timer-triggers`](astro-site/src/content/blog/2021-07-31-timer-triggers.md)
+- [`2021-09-11-cognitive-services-containers`](astro-site/src/content/blog/2021-09-11-cognitive-services-containers.md)
+- [`2021-09-30-azure-stack-edge`](astro-site/src/content/blog/2021-09-30-azure-stack-edge.md)
+- [`2021-11-10-power-bi-premium-capacities`](astro-site/src/content/blog/2021-11-10-power-bi-premium-capacities.md)
+- [`2021-11-17-arc-enabled-kubernetes`](astro-site/src/content/blog/2021-11-17-arc-enabled-kubernetes.md)
+- [`2021-12-04-kubernetes-adoption-enterprise`](astro-site/src/content/blog/2021-12-04-kubernetes-adoption-enterprise.md)
+- [`2021-12-13-gitops-practices-kubernetes`](astro-site/src/content/blog/2021-12-13-gitops-practices-kubernetes.md)
+- [`2021-12-14-zero-trust-security-azure`](astro-site/src/content/blog/2021-12-14-zero-trust-security-azure.md)
+- [`2021-12-20-carbon-aware-computing`](astro-site/src/content/blog/2021-12-20-carbon-aware-computing.md)
+- [`2022-01-04-aks-2022-updates`](astro-site/src/content/blog/2022-01-04-aks-2022-updates.md)
+- [`2022-01-05-aks-cost-optimization`](astro-site/src/content/blog/2022-01-05-aks-cost-optimization.md)
+- [`2022-02-12-workload-identity-federation`](astro-site/src/content/blog/2022-02-12-workload-identity-federation.md)
+- [`2022-02-14-keyless-authentication`](astro-site/src/content/blog/2022-02-14-keyless-authentication.md)
+- [`2022-02-17-secrets-management-patterns`](astro-site/src/content/blog/2022-02-17-secrets-management-patterns.md)
+- [`2022-03-04-azure-cognitive-services-updates`](astro-site/src/content/blog/2022-03-04-azure-cognitive-services-updates.md)
+- [`2022-03-05-form-recognizer-v3`](astro-site/src/content/blog/2022-03-05-form-recognizer-v3.md)
+- [`2022-03-06-custom-neural-voice`](astro-site/src/content/blog/2022-03-06-custom-neural-voice.md)
+- [`2022-03-08-immersive-reader-accessibility`](astro-site/src/content/blog/2022-03-08-immersive-reader-accessibility.md)
+- [`2022-03-09-metrics-advisor-anomaly-detection`](astro-site/src/content/blog/2022-03-09-metrics-advisor-anomaly-detection.md)
+- [`2022-03-11-databricks-data-governance`](astro-site/src/content/blog/2022-03-11-databricks-data-governance.md)
+- [`2022-03-13-databricks-sql-warehouse`](astro-site/src/content/blog/2022-03-13-databricks-sql-warehouse.md)
+- [`2022-03-15-databricks-ml-overview`](astro-site/src/content/blog/2022-03-15-databricks-ml-overview.md)
+- [`2022-03-17-databricks-model-serving`](astro-site/src/content/blog/2022-03-17-databricks-model-serving.md)
+- [`2022-03-18-mlflow-model-registry`](astro-site/src/content/blog/2022-03-18-mlflow-model-registry.md)
+- [`2022-03-19-databricks-automl`](astro-site/src/content/blog/2022-03-19-databricks-automl.md)
+- [`2022-03-20-databricks-workflows`](astro-site/src/content/blog/2022-03-20-databricks-workflows.md)
+- [`2022-03-21-delta-live-tables-intro`](astro-site/src/content/blog/2022-03-21-delta-live-tables-intro.md)
+- [`2022-03-24-dlt-streaming-tables`](astro-site/src/content/blog/2022-03-24-dlt-streaming-tables.md)
+- [`2022-03-25-dlt-materialized-views`](astro-site/src/content/blog/2022-03-25-dlt-materialized-views.md)
+- [`2022-03-27-azure-private-endpoints-everywhere`](astro-site/src/content/blog/2022-03-27-azure-private-endpoints-everywhere.md)
+- [`2022-03-28-azure-private-link-service`](astro-site/src/content/blog/2022-03-28-azure-private-link-service.md)
+- [`2022-03-30-dns-forwarding-azure-hybrid`](astro-site/src/content/blog/2022-03-30-dns-forwarding-azure-hybrid.md)
+- [`2022-04-01-power-platform-updates-april`](astro-site/src/content/blog/2022-04-01-power-platform-updates-april.md)
+- [`2022-04-02-power-apps-cards`](astro-site/src/content/blog/2022-04-02-power-apps-cards.md)
+- [`2022-04-03-power-automate-cloud-connectors`](astro-site/src/content/blog/2022-04-03-power-automate-cloud-connectors.md)
+- [`2022-04-04-power-automate-custom-connectors`](astro-site/src/content/blog/2022-04-04-power-automate-custom-connectors.md)
+- [`2022-04-06-rpa-with-azure`](astro-site/src/content/blog/2022-04-06-rpa-with-azure.md)
+- [`2022-04-07-ai-builder-overview`](astro-site/src/content/blog/2022-04-07-ai-builder-overview.md)
+- [`2022-04-08-ai-builder-document-processing`](astro-site/src/content/blog/2022-04-08-ai-builder-document-processing.md)
+- [`2022-04-09-ai-builder-receipt-processing`](astro-site/src/content/blog/2022-04-09-ai-builder-receipt-processing.md)
+- [`2022-04-10-ai-builder-business-card-reader`](astro-site/src/content/blog/2022-04-10-ai-builder-business-card-reader.md)
+- [`2022-04-11-ai-builder-form-processing`](astro-site/src/content/blog/2022-04-11-ai-builder-form-processing.md)
+- [`2022-04-12-ai-builder-object-detection`](astro-site/src/content/blog/2022-04-12-ai-builder-object-detection.md)
+- [`2022-04-13-ai-builder-text-recognition`](astro-site/src/content/blog/2022-04-13-ai-builder-text-recognition.md)
+- [`2022-04-15-ai-builder-category-classification`](astro-site/src/content/blog/2022-04-15-ai-builder-category-classification.md)
+- [`2022-04-16-ai-builder-entity-extraction`](astro-site/src/content/blog/2022-04-16-ai-builder-entity-extraction.md)
+- [`2022-04-17-ai-builder-key-phrase-extraction`](astro-site/src/content/blog/2022-04-17-ai-builder-key-phrase-extraction.md)
+- [`2022-04-18-ai-builder-language-detection`](astro-site/src/content/blog/2022-04-18-ai-builder-language-detection.md)
+- [`2022-04-19-power-bi-embedded-overview`](astro-site/src/content/blog/2022-04-19-power-bi-embedded-overview.md)
+- [`2022-04-20-power-bi-embed-for-customers`](astro-site/src/content/blog/2022-04-20-power-bi-embed-for-customers.md)
+- [`2022-04-21-power-bi-embed-for-organization`](astro-site/src/content/blog/2022-04-21-power-bi-embed-for-organization.md)
+- [`2022-04-22-power-bi-row-level-security`](astro-site/src/content/blog/2022-04-22-power-bi-row-level-security.md)
+- [`2022-04-23-power-bi-object-level-security`](astro-site/src/content/blog/2022-04-23-power-bi-object-level-security.md)
+- [`2022-04-24-power-bi-rest-api`](astro-site/src/content/blog/2022-04-24-power-bi-rest-api.md)
+- [`2022-04-25-power-bi-dotnet-sdk`](astro-site/src/content/blog/2022-04-25-power-bi-dotnet-sdk.md)
+- [`2022-04-26-power-bi-deployment-pipelines`](astro-site/src/content/blog/2022-04-26-power-bi-deployment-pipelines.md)
+- [`2022-04-27-power-bi-xmla-endpoints`](astro-site/src/content/blog/2022-04-27-power-bi-xmla-endpoints.md)
+- [`2022-04-28-power-bi-tabular-editor`](astro-site/src/content/blog/2022-04-28-power-bi-tabular-editor.md)
+- [`2022-04-29-power-bi-alm-toolkit`](astro-site/src/content/blog/2022-04-29-power-bi-alm-toolkit.md)
+- [`2022-04-30-power-bi-external-tools`](astro-site/src/content/blog/2022-04-30-power-bi-external-tools.md)
+- [`2022-05-06-azure-static-web-apps-updates`](astro-site/src/content/blog/2022-05-06-azure-static-web-apps-updates.md)
+- [`2022-05-07-azure-functions-nodejs-18`](astro-site/src/content/blog/2022-05-07-azure-functions-nodejs-18.md)
+- [`2022-05-08-dotnet-7-preview-features`](astro-site/src/content/blog/2022-05-08-dotnet-7-preview-features.md)
+- [`2022-05-09-maui-preview-cross-platform`](astro-site/src/content/blog/2022-05-09-maui-preview-cross-platform.md)
+- [`2022-05-10-azure-communication-services`](astro-site/src/content/blog/2022-05-10-azure-communication-services.md)
+- [`2022-05-11-teams-apps-integration`](astro-site/src/content/blog/2022-05-11-teams-apps-integration.md)
+- [`2022-05-12-microsoft-graph-updates`](astro-site/src/content/blog/2022-05-12-microsoft-graph-updates.md)
+- [`2022-05-13-microsoft-365-development`](astro-site/src/content/blog/2022-05-13-microsoft-365-development.md)
+- [`2022-05-14-power-platform-connectors`](astro-site/src/content/blog/2022-05-14-power-platform-connectors.md)
+- [`2022-05-15-dataverse-web-api`](astro-site/src/content/blog/2022-05-15-dataverse-web-api.md)
+- [`2022-05-16-dataverse-virtual-tables`](astro-site/src/content/blog/2022-05-16-dataverse-virtual-tables.md)
+- [`2022-05-17-dataverse-elastic-tables`](astro-site/src/content/blog/2022-05-17-dataverse-elastic-tables.md)
+- [`2022-05-18-dataverse-business-events`](astro-site/src/content/blog/2022-05-18-dataverse-business-events.md)
+- [`2022-05-19-dataverse-plugins`](astro-site/src/content/blog/2022-05-19-dataverse-plugins.md)
+- [`2022-05-20-dataverse-custom-apis`](astro-site/src/content/blog/2022-05-20-dataverse-custom-apis.md)
+- [`2022-05-21-azure-synapse-analytics-updates`](astro-site/src/content/blog/2022-05-21-azure-synapse-analytics-updates.md)
+- [`2022-05-23-log-analytics-integration`](astro-site/src/content/blog/2022-05-23-log-analytics-integration.md)
+- [`2022-05-24-azure-orbital-ground-station`](astro-site/src/content/blog/2022-05-24-azure-orbital-ground-station.md)
+- [`2022-05-25-space-apis-satellite-data`](astro-site/src/content/blog/2022-05-25-space-apis-satellite-data.md)
+- [`2022-05-26-azure-quantum-introduction`](astro-site/src/content/blog/2022-05-26-azure-quantum-introduction.md)
+- [`2022-05-28-qsharp-programming`](astro-site/src/content/blog/2022-05-28-qsharp-programming.md)
+- [`2022-05-29-quantum-simulators`](astro-site/src/content/blog/2022-05-29-quantum-simulators.md)
+- [`2022-05-30-quantum-optimization-problems`](astro-site/src/content/blog/2022-05-30-quantum-optimization-problems.md)
+- [`2022-05-31-build-2022-recap`](astro-site/src/content/blog/2022-05-31-build-2022-recap.md)
+- [`2022-06-01-azure-kubernetes-124`](astro-site/src/content/blog/2022-06-01-azure-kubernetes-124.md)
+- [`2022-06-02-kubernetes-124-features`](astro-site/src/content/blog/2022-06-02-kubernetes-124-features.md)
+- [`2022-06-05-ephemeral-containers`](astro-site/src/content/blog/2022-06-05-ephemeral-containers.md)
+- [`2022-06-07-pod-security-admission`](astro-site/src/content/blog/2022-06-07-pod-security-admission.md)
+- [`2022-06-08-network-policies`](astro-site/src/content/blog/2022-06-08-network-policies.md)
+- [`2022-06-09-calico-on-aks`](astro-site/src/content/blog/2022-06-09-calico-on-aks.md)
+- [`2022-06-13-service-mesh-comparison`](astro-site/src/content/blog/2022-06-13-service-mesh-comparison.md)
+- [`2022-06-14-istio-on-aks`](astro-site/src/content/blog/2022-06-14-istio-on-aks.md)
+- [`2022-06-15-linkerd-lightweight-mesh`](astro-site/src/content/blog/2022-06-15-linkerd-lightweight-mesh.md)
+- [`2022-06-16-open-service-mesh`](astro-site/src/content/blog/2022-06-16-open-service-mesh.md)
+- [`2022-06-17-dapr-vs-service-mesh`](astro-site/src/content/blog/2022-06-17-dapr-vs-service-mesh.md)
+- [`2022-06-18-grpc-on-azure`](astro-site/src/content/blog/2022-06-18-grpc-on-azure.md)
+- [`2022-06-19-apim-graphql`](astro-site/src/content/blog/2022-06-19-apim-graphql.md)
+- [`2022-06-20-graphql-subscriptions`](astro-site/src/content/blog/2022-06-20-graphql-subscriptions.md)
+- [`2022-06-22-server-sent-events`](astro-site/src/content/blog/2022-06-22-server-sent-events.md)
+- [`2022-06-24-signalr-scaling`](astro-site/src/content/blog/2022-06-24-signalr-scaling.md)
+- [`2022-06-25-azure-web-pubsub`](astro-site/src/content/blog/2022-06-25-azure-web-pubsub.md)
+- [`2022-06-26-real-time-analytics`](astro-site/src/content/blog/2022-06-26-real-time-analytics.md)
+- [`2022-06-27-stream-analytics-updates`](astro-site/src/content/blog/2022-06-27-stream-analytics-updates.md)
+- [`2022-06-28-reference-data-join`](astro-site/src/content/blog/2022-06-28-reference-data-join.md)
+- [`2022-06-29-temporal-joins`](astro-site/src/content/blog/2022-06-29-temporal-joins.md)
+- [`2022-06-30-pattern-matching-streams`](astro-site/src/content/blog/2022-06-30-pattern-matching-streams.md)
+- [`2022-10-01-microsoft-ignite-2022-preview`](astro-site/src/content/blog/2022-10-01-microsoft-ignite-2022-preview.md)
+- [`2022-10-02-azure-arc-updates`](astro-site/src/content/blog/2022-10-02-azure-arc-updates.md)
+- [`2022-10-04-multi-cloud-management`](astro-site/src/content/blog/2022-10-04-multi-cloud-management.md)
+- [`2022-10-07-azure-5g-operators`](astro-site/src/content/blog/2022-10-07-azure-5g-operators.md)
+- [`2022-11-02-csharp-11-features`](astro-site/src/content/blog/2022-11-02-csharp-11-features.md)
+- [`2022-11-03-azure-functions-dotnet-7-isolated`](astro-site/src/content/blog/2022-11-03-azure-functions-dotnet-7-isolated.md)
+- [`2022-11-04-minimal-apis-dotnet-7`](astro-site/src/content/blog/2022-11-04-minimal-apis-dotnet-7.md)
+- [`2022-11-05-rate-limiting-aspnet-core`](astro-site/src/content/blog/2022-11-05-rate-limiting-aspnet-core.md)
+- [`2022-11-11-dalle-2-azure-image-generation`](astro-site/src/content/blog/2022-11-11-dalle-2-azure-image-generation.md)
+- [`2022-11-12-azure-machine-learning-updates`](astro-site/src/content/blog/2022-11-12-azure-machine-learning-updates.md)
+- [`2022-11-13-prompt-flow-preview`](astro-site/src/content/blog/2022-11-13-prompt-flow-preview.md)
+- [`2022-11-14-foundation-models-azure`](astro-site/src/content/blog/2022-11-14-foundation-models-azure.md)
+- [`2022-11-15-azure-cognitive-services-updates`](astro-site/src/content/blog/2022-11-15-azure-cognitive-services-updates.md)
+- [`2022-11-16-azure-bot-service-updates`](astro-site/src/content/blog/2022-11-16-azure-bot-service-updates.md)
+- [`2022-11-17-power-virtual-agents-updates`](astro-site/src/content/blog/2022-11-17-power-virtual-agents-updates.md)
+- [`2022-11-18-microsoft-syntex-content-ai`](astro-site/src/content/blog/2022-11-18-microsoft-syntex-content-ai.md)
+- [`2022-11-19-sharepoint-syntex-document-processing`](astro-site/src/content/blog/2022-11-19-sharepoint-syntex-document-processing.md)
+- [`2022-11-20-azure-synapse-analytics-updates`](astro-site/src/content/blog/2022-11-20-azure-synapse-analytics-updates.md)
+- [`2022-11-21-synapse-pathway-migration`](astro-site/src/content/blog/2022-11-21-synapse-pathway-migration.md)
+- [`2022-11-22-ssis-migration-azure`](astro-site/src/content/blog/2022-11-22-ssis-migration-azure.md)
+- [`2022-11-23-ssrs-migration-power-bi`](astro-site/src/content/blog/2022-11-23-ssrs-migration-power-bi.md)
+- [`2022-11-25-azure-black-friday-cost-optimization`](astro-site/src/content/blog/2022-11-25-azure-black-friday-cost-optimization.md)
+- [`2022-11-26-azure-cosmos-db-best-practices`](astro-site/src/content/blog/2022-11-26-azure-cosmos-db-best-practices.md)
+- [`2022-11-27-azure-devops-github-actions-comparison`](astro-site/src/content/blog/2022-11-27-azure-devops-github-actions-comparison.md)
+- [`2022-11-29-azure-container-apps-production`](astro-site/src/content/blog/2022-11-29-azure-container-apps-production.md)
+- [`2022-12-06-ai-ethics-responsible-ai`](astro-site/src/content/blog/2022-12-06-ai-ethics-responsible-ai.md)
+- [`2022-12-07-ai-governance-enterprise`](astro-site/src/content/blog/2022-12-07-ai-governance-enterprise.md)
+- [`2022-12-08-model-cards-ai-transparency`](astro-site/src/content/blog/2022-12-08-model-cards-ai-transparency.md)
+- [`2022-12-09-year-end-azure-recap`](astro-site/src/content/blog/2022-12-09-year-end-azure-recap.md)
+- [`2022-12-10-data-platform-evolution-2022`](astro-site/src/content/blog/2022-12-10-data-platform-evolution-2022.md)
+- [`2022-12-12-cloud-native-maturity`](astro-site/src/content/blog/2022-12-12-cloud-native-maturity.md)
+- [`2022-12-13-devops-practices-2022`](astro-site/src/content/blog/2022-12-13-devops-practices-2022.md)
+- [`2022-12-15-developer-productivity-tools`](astro-site/src/content/blog/2022-12-15-developer-productivity-tools.md)
+- [`2022-12-16-finops-adoption-azure`](astro-site/src/content/blog/2022-12-16-finops-adoption-azure.md)
+- [`2022-12-17-sustainability-green-software`](astro-site/src/content/blog/2022-12-17-sustainability-green-software.md)
+- [`2022-12-18-serverless-benefits-2022`](astro-site/src/content/blog/2022-12-18-serverless-benefits-2022.md)
+- [`2022-12-19-azure-cost-optimization-tips`](astro-site/src/content/blog/2022-12-19-azure-cost-optimization-tips.md)
+- [`2022-12-20-reserved-capacity-planning`](astro-site/src/content/blog/2022-12-20-reserved-capacity-planning.md)
+- [`2022-12-21-spot-instance-strategies`](astro-site/src/content/blog/2022-12-21-spot-instance-strategies.md)
+- [`2022-12-22-auto-scaling-best-practices`](astro-site/src/content/blog/2022-12-22-auto-scaling-best-practices.md)
+- [`2022-12-23-rightsizing-azure-resources`](astro-site/src/content/blog/2022-12-23-rightsizing-azure-resources.md)
+- [`2022-12-25-christmas-automation-gift`](astro-site/src/content/blog/2022-12-25-christmas-automation-gift.md)
+- [`2022-12-26-azure-security-year-in-review`](astro-site/src/content/blog/2022-12-26-azure-security-year-in-review.md)
+- [`2022-12-27-infrastructure-as-code-maturity`](astro-site/src/content/blog/2022-12-27-infrastructure-as-code-maturity.md)
+- [`2022-12-28-data-engineering-patterns-2022`](astro-site/src/content/blog/2022-12-28-data-engineering-patterns-2022.md)
+- [`2022-12-29-observability-monitoring-practices`](astro-site/src/content/blog/2022-12-29-observability-monitoring-practices.md)
+- [`2022-12-30-containerization-kubernetes-lessons`](astro-site/src/content/blog/2022-12-30-containerization-kubernetes-lessons.md)
+- [`2023-01-02-gpt-35-on-azure`](astro-site/src/content/blog/2023-01-02-gpt-35-on-azure.md)
+- [`2023-01-08-responsible-ai-azure-openai`](astro-site/src/content/blog/2023-01-08-responsible-ai-azure-openai.md)
+- [`2023-01-10-rate-limiting-azure-openai`](astro-site/src/content/blog/2023-01-10-rate-limiting-azure-openai.md)
+- [`2023-01-11-token-management-azure-openai`](astro-site/src/content/blog/2023-01-11-token-management-azure-openai.md)
+- [`2023-01-13-few-shot-learning-azure-openai`](astro-site/src/content/blog/2023-01-13-few-shot-learning-azure-openai.md)
+- [`2023-01-15-system-prompts-azure-openai`](astro-site/src/content/blog/2023-01-15-system-prompts-azure-openai.md)
+- [`2023-01-16-temperature-top-p-parameters`](astro-site/src/content/blog/2023-01-16-temperature-top-p-parameters.md)
+- [`2023-01-17-completion-vs-chat-apis`](astro-site/src/content/blog/2023-01-17-completion-vs-chat-apis.md)
+- [`2023-01-19-azure-openai-dotnet-sdk`](astro-site/src/content/blog/2023-01-19-azure-openai-dotnet-sdk.md)
+- [`2023-01-21-azure-openai-rest-api`](astro-site/src/content/blog/2023-01-21-azure-openai-rest-api.md)
+- [`2023-01-22-streaming-responses-azure-openai`](astro-site/src/content/blog/2023-01-22-streaming-responses-azure-openai.md)
+- [`2023-01-23-embeddings-introduction`](astro-site/src/content/blog/2023-01-23-embeddings-introduction.md)
+- [`2023-01-24-semantic-search-embeddings`](astro-site/src/content/blog/2023-01-24-semantic-search-embeddings.md)
+- [`2023-01-26-pinecone-basics`](astro-site/src/content/blog/2023-01-26-pinecone-basics.md)
+- [`2023-01-27-weaviate-basics`](astro-site/src/content/blog/2023-01-27-weaviate-basics.md)
+- [`2023-01-28-milvus-basics`](astro-site/src/content/blog/2023-01-28-milvus-basics.md)
+- [`2023-01-29-qdrant-basics`](astro-site/src/content/blog/2023-01-29-qdrant-basics.md)
+- [`2023-01-30-azure-cognitive-search-vectors`](astro-site/src/content/blog/2023-01-30-azure-cognitive-search-vectors.md)
+- [`2023-02-01-rag-architecture-patterns`](astro-site/src/content/blog/2023-02-01-rag-architecture-patterns.md)
+- [`2023-02-02-document-chunking-strategies`](astro-site/src/content/blog/2023-02-02-document-chunking-strategies.md)
+- [`2023-02-03-embedding-best-practices`](astro-site/src/content/blog/2023-02-03-embedding-best-practices.md)
+- [`2023-02-04-hybrid-search`](astro-site/src/content/blog/2023-02-04-hybrid-search.md)
+- [`2023-02-05-reranking-results`](astro-site/src/content/blog/2023-02-05-reranking-results.md)
+- [`2023-02-14-langchain-introduction`](astro-site/src/content/blog/2023-02-14-langchain-introduction.md)
+- [`2023-02-16-semantic-kernel-introduction`](astro-site/src/content/blog/2023-02-16-semantic-kernel-introduction.md)
+- [`2023-02-17-semantic-kernel-plugins`](astro-site/src/content/blog/2023-02-17-semantic-kernel-plugins.md)
+- [`2023-02-18-semantic-kernel-planners`](astro-site/src/content/blog/2023-02-18-semantic-kernel-planners.md)
+- [`2023-02-19-semantic-kernel-memory`](astro-site/src/content/blog/2023-02-19-semantic-kernel-memory.md)
+- [`2023-02-20-azure-document-intelligence`](astro-site/src/content/blog/2023-02-20-azure-document-intelligence.md)
+- [`2023-02-21-azure-form-recognizer-custom`](astro-site/src/content/blog/2023-02-21-azure-form-recognizer-custom.md)
+- [`2023-02-22-azure-form-recognizer-prebuilt`](astro-site/src/content/blog/2023-02-22-azure-form-recognizer-prebuilt.md)
+- [`2023-02-23-layout-table-extraction`](astro-site/src/content/blog/2023-02-23-layout-table-extraction.md)
+- [`2023-02-24-azure-cognitive-services-updates`](astro-site/src/content/blog/2023-02-24-azure-cognitive-services-updates.md)
+- [`2023-02-25-responsible-ai-tools`](astro-site/src/content/blog/2023-02-25-responsible-ai-tools.md)
+- [`2023-02-26-content-safety-azure`](astro-site/src/content/blog/2023-02-26-content-safety-azure.md)
+- [`2023-02-27-ai-ethics-enterprise`](astro-site/src/content/blog/2023-02-27-ai-ethics-enterprise.md)
+- [`2023-02-28-bias-detection-fairness`](astro-site/src/content/blog/2023-02-28-bias-detection-fairness.md)
+- [`2023-03-07-azure-cognitive-services-containers`](astro-site/src/content/blog/2023-03-07-azure-cognitive-services-containers.md)
+- [`2023-03-12-azure-openai-enterprise-patterns`](astro-site/src/content/blog/2023-03-12-azure-openai-enterprise-patterns.md)
+- [`2023-05-31-build-2023-summary`](astro-site/src/content/blog/2023-05-31-build-2023-summary.md)
+- [`2023-06-30-circuit-breakers-ai`](astro-site/src/content/blog/2023-06-30-circuit-breakers-ai.md)
+- [`2023-07-06-lakehouse-creation`](astro-site/src/content/blog/2023-07-06-lakehouse-creation.md)
+- [`2023-07-08-spark-in-fabric`](astro-site/src/content/blog/2023-07-08-spark-in-fabric.md)
+- [`2023-07-11-fabric-data-factory`](astro-site/src/content/blog/2023-07-11-fabric-data-factory.md)
+- [`2023-07-17-cross-database-queries`](astro-site/src/content/blog/2023-07-17-cross-database-queries.md)
+- [`2023-07-18-query-insights`](astro-site/src/content/blog/2023-07-18-query-insights.md)
+- [`2023-07-21-eventstreams`](astro-site/src/content/blog/2023-07-21-eventstreams.md)
+- [`2023-07-22-real-time-dashboards`](astro-site/src/content/blog/2023-07-22-real-time-dashboards.md)
+- [`2023-07-24-ml-models-in-fabric`](astro-site/src/content/blog/2023-07-24-ml-models-in-fabric.md)
+- [`2023-07-26-experiments-tracking`](astro-site/src/content/blog/2023-07-26-experiments-tracking.md)
+- [`2023-07-27-azure-openai-code-interpreter`](astro-site/src/content/blog/2023-07-27-azure-openai-code-interpreter.md)
+- [`2023-08-02-lora-and-qlora`](astro-site/src/content/blog/2023-08-02-lora-and-qlora.md)
+- [`2023-08-03-parameter-efficient-fine-tuning`](astro-site/src/content/blog/2023-08-03-parameter-efficient-fine-tuning.md)
+- [`2023-08-04-peft-libraries`](astro-site/src/content/blog/2023-08-04-peft-libraries.md)
+- [`2023-08-06-model-hub`](astro-site/src/content/blog/2023-08-06-model-hub.md)
+- [`2023-08-07-transformers-library`](astro-site/src/content/blog/2023-08-07-transformers-library.md)
+- [`2023-08-08-accelerate-library`](astro-site/src/content/blog/2023-08-08-accelerate-library.md)
+- [`2023-08-10-model-optimization`](astro-site/src/content/blog/2023-08-10-model-optimization.md)
+- [`2023-08-11-quantization-basics`](astro-site/src/content/blog/2023-08-11-quantization-basics.md)
+- [`2023-08-12-int8-quantization`](astro-site/src/content/blog/2023-08-12-int8-quantization.md)
+- [`2023-08-13-model-distillation`](astro-site/src/content/blog/2023-08-13-model-distillation.md)
+- [`2023-08-14-knowledge-distillation`](astro-site/src/content/blog/2023-08-14-knowledge-distillation.md)
+- [`2023-08-15-small-language-models`](astro-site/src/content/blog/2023-08-15-small-language-models.md)
+- [`2023-08-16-efficient-inference`](astro-site/src/content/blog/2023-08-16-efficient-inference.md)
+- [`2023-08-17-batching-strategies`](astro-site/src/content/blog/2023-08-17-batching-strategies.md)
+- [`2023-08-18-gpu-optimization`](astro-site/src/content/blog/2023-08-18-gpu-optimization.md)
+- [`2023-08-20-spot-instances-for-ml`](astro-site/src/content/blog/2023-08-20-spot-instances-for-ml.md)
+- [`2023-08-22-azure-openai-quotas`](astro-site/src/content/blog/2023-08-22-azure-openai-quotas.md)
+- [`2023-08-23-rate-limit-management`](astro-site/src/content/blog/2023-08-23-rate-limit-management.md)
+- [`2023-08-24-token-estimation`](astro-site/src/content/blog/2023-08-24-token-estimation.md)
+- [`2023-08-25-prompt-compression`](astro-site/src/content/blog/2023-08-25-prompt-compression.md)
+- [`2023-08-26-semantic-compression`](astro-site/src/content/blog/2023-08-26-semantic-compression.md)
+- [`2023-08-27-context-caching`](astro-site/src/content/blog/2023-08-27-context-caching.md)
+- [`2023-08-29-memory-management`](astro-site/src/content/blog/2023-08-29-memory-management.md)
+- [`2024-01-02-gpt4-turbo-production`](astro-site/src/content/blog/2024-01-02-gpt4-turbo-production.md)
+- [`2024-02-03-multi-llm-strategies`](astro-site/src/content/blog/2024-02-03-multi-llm-strategies.md)
+- [`2024-02-04-llm-routing`](astro-site/src/content/blog/2024-02-04-llm-routing.md)
+- [`2024-02-05-model-selection-criteria`](astro-site/src/content/blog/2024-02-05-model-selection-criteria.md)
+- [`2024-02-06-cost-optimization-llms`](astro-site/src/content/blog/2024-02-06-cost-optimization-llms.md)
+- [`2024-02-07-token-cost-analysis`](astro-site/src/content/blog/2024-02-07-token-cost-analysis.md)
+- [`2024-02-08-caching-cost-reduction`](astro-site/src/content/blog/2024-02-08-caching-cost-reduction.md)
+- [`2024-02-09-prompt-caching`](astro-site/src/content/blog/2024-02-09-prompt-caching.md)
+- [`2024-02-10-semantic-caching`](astro-site/src/content/blog/2024-02-10-semantic-caching.md)
+- [`2024-02-11-azure-openai-ptu`](astro-site/src/content/blog/2024-02-11-azure-openai-ptu.md)
+- [`2024-02-12-provisioned-throughput`](astro-site/src/content/blog/2024-02-12-provisioned-throughput.md)
+- [`2024-02-13-capacity-planning-ai`](astro-site/src/content/blog/2024-02-13-capacity-planning-ai.md)
+- [`2024-02-15-document-understanding`](astro-site/src/content/blog/2024-02-15-document-understanding.md)
+- [`2024-02-16-invoice-processing`](astro-site/src/content/blog/2024-02-16-invoice-processing.md)
+- [`2024-02-17-receipt-analysis`](astro-site/src/content/blog/2024-02-17-receipt-analysis.md)
+- [`2024-02-18-multi-image-analysis`](astro-site/src/content/blog/2024-02-18-multi-image-analysis.md)
+- [`2024-02-19-video-understanding`](astro-site/src/content/blog/2024-02-19-video-understanding.md)
+- [`2024-02-20-azure-ai-vision-updates`](astro-site/src/content/blog/2024-02-20-azure-ai-vision-updates.md)
+- [`2024-02-21-sora-announcement-impact`](astro-site/src/content/blog/2024-02-21-sora-announcement-impact.md)
+- [`2024-02-22-text-to-video-implications`](astro-site/src/content/blog/2024-02-22-text-to-video-implications.md)
+- [`2024-02-23-ai-video-generation`](astro-site/src/content/blog/2024-02-23-ai-video-generation.md)
+- [`2024-02-25-image-generation-enterprise`](astro-site/src/content/blog/2024-02-25-image-generation-enterprise.md)
+- [`2024-02-26-ai-art-ethics`](astro-site/src/content/blog/2024-02-26-ai-art-ethics.md)
+- [`2024-02-27-copyright-considerations`](astro-site/src/content/blog/2024-02-27-copyright-considerations.md)
+- [`2024-02-28-watermarking-ai-content`](astro-site/src/content/blog/2024-02-28-watermarking-ai-content.md)
+- [`2024-02-29-ai-content-detection`](astro-site/src/content/blog/2024-02-29-ai-content-detection.md)
+- [`2024-05-01-gpt4o-announcement-microsoft-build`](astro-site/src/content/blog/2024-05-01-gpt4o-announcement-microsoft-build.md)
+- [`2024-05-05-gpt4o-multimodal-conversations`](astro-site/src/content/blog/2024-05-05-gpt4o-multimodal-conversations.md)
+- [`2024-05-06-azure-openai-gpt4o-deployment`](astro-site/src/content/blog/2024-05-06-azure-openai-gpt4o-deployment.md)
+- [`2024-05-18-azure-ai-studio-updates`](astro-site/src/content/blog/2024-05-18-azure-ai-studio-updates.md)
+- [`2024-05-20-evaluation-improvements-azure-ai`](astro-site/src/content/blog/2024-05-20-evaluation-improvements-azure-ai.md)
+- [`2024-05-22-azure-ai-agent-service-preview`](astro-site/src/content/blog/2024-05-22-azure-ai-agent-service-preview.md)
+- [`2024-05-30-ai-agent-best-practices`](astro-site/src/content/blog/2024-05-30-ai-agent-best-practices.md)
+- [`2024-06-05-data-activator-ga`](astro-site/src/content/blog/2024-06-05-data-activator-ga.md)
+- [`2024-06-15-data-mesh-fabric`](astro-site/src/content/blog/2024-06-15-data-mesh-fabric.md)
+- [`2024-07-08-quality-based-llm-routing`](astro-site/src/content/blog/2024-07-08-quality-based-llm-routing.md)
+- [`2024-07-09-latency-based-llm-routing`](astro-site/src/content/blog/2024-07-09-latency-based-llm-routing.md)
+- [`2024-07-13-graph-based-ai-agents`](astro-site/src/content/blog/2024-07-13-graph-based-ai-agents.md)
+- [`2024-07-15-conditional-edges-langgraph`](astro-site/src/content/blog/2024-07-15-conditional-edges-langgraph.md)
+- [`2024-07-16-cycles-in-agent-graphs`](astro-site/src/content/blog/2024-07-16-cycles-in-agent-graphs.md)
+- [`2024-07-17-human-in-the-loop-agents`](astro-site/src/content/blog/2024-07-17-human-in-the-loop-agents.md)
+- [`2024-07-18-agent-memory-patterns`](astro-site/src/content/blog/2024-07-18-agent-memory-patterns.md)
+- [`2024-07-20-long-term-agent-memory`](astro-site/src/content/blog/2024-07-20-long-term-agent-memory.md)
+- [`2024-07-21-episodic-memory-agents`](astro-site/src/content/blog/2024-07-21-episodic-memory-agents.md)
+- [`2024-07-22-semantic-memory-agents`](astro-site/src/content/blog/2024-07-22-semantic-memory-agents.md)
+- [`2024-07-23-procedural-memory-agents`](astro-site/src/content/blog/2024-07-23-procedural-memory-agents.md)
+- [`2024-07-24-memory-consolidation-agents`](astro-site/src/content/blog/2024-07-24-memory-consolidation-agents.md)
+- [`2024-07-26-improved-vector-search-azure`](astro-site/src/content/blog/2024-07-26-improved-vector-search-azure.md)
+- [`2024-07-28-scalar-quantization-vectors`](astro-site/src/content/blog/2024-07-28-scalar-quantization-vectors.md)
+- [`2024-07-29-product-quantization-vectors`](astro-site/src/content/blog/2024-07-29-product-quantization-vectors.md)
+- [`2024-07-30-hnsw-tuning-azure-search`](astro-site/src/content/blog/2024-07-30-hnsw-tuning-azure-search.md)
+- [`2024-08-02-fabric-mirroring-ga`](astro-site/src/content/blog/2024-08-02-fabric-mirroring-ga.md)
+- [`2024-08-03-azure-sql-mirroring-fabric`](astro-site/src/content/blog/2024-08-03-azure-sql-mirroring-fabric.md)
+- [`2024-08-04-cosmos-db-mirroring-fabric`](astro-site/src/content/blog/2024-08-04-cosmos-db-mirroring-fabric.md)
+- [`2024-08-06-open-mirroring-fabric`](astro-site/src/content/blog/2024-08-06-open-mirroring-fabric.md)
+- [`2024-08-07-real-time-sync-patterns`](astro-site/src/content/blog/2024-08-07-real-time-sync-patterns.md)
+- [`2024-08-08-cdc-in-fabric`](astro-site/src/content/blog/2024-08-08-cdc-in-fabric.md)
+- [`2024-08-09-data-virtualization-fabric`](astro-site/src/content/blog/2024-08-09-data-virtualization-fabric.md)
+- [`2024-08-10-lakehouse-federation`](astro-site/src/content/blog/2024-08-10-lakehouse-federation.md)
+- [`2024-08-11-cross-cloud-analytics`](astro-site/src/content/blog/2024-08-11-cross-cloud-analytics.md)
+- [`2024-08-12-fabric-and-databricks`](astro-site/src/content/blog/2024-08-12-fabric-and-databricks.md)
+- [`2024-08-13-onelake-interoperability`](astro-site/src/content/blog/2024-08-13-onelake-interoperability.md)
+- [`2024-08-14-delta-lake-everywhere`](astro-site/src/content/blog/2024-08-14-delta-lake-everywhere.md)
+- [`2024-08-15-parquet-optimization`](astro-site/src/content/blog/2024-08-15-parquet-optimization.md)
+- [`2024-08-16-file-compaction-strategies`](astro-site/src/content/blog/2024-08-16-file-compaction-strategies.md)
+- [`2024-08-17-optimized-writes-delta`](astro-site/src/content/blog/2024-08-17-optimized-writes-delta.md)
+- [`2024-08-19-zorder-vs-vorder`](astro-site/src/content/blog/2024-08-19-zorder-vs-vorder.md)
+- [`2024-08-20-query-performance-tuning`](astro-site/src/content/blog/2024-08-20-query-performance-tuning.md)
+- [`2024-08-21-spark-optimization-fabric`](astro-site/src/content/blog/2024-08-21-spark-optimization-fabric.md)
+- [`2024-08-23-fabric-capacity-optimization`](astro-site/src/content/blog/2024-08-23-fabric-capacity-optimization.md)
+- [`2024-08-24-autoscale-fabric`](astro-site/src/content/blog/2024-08-24-autoscale-fabric.md)
+- [`2024-08-26-cost-management-fabric`](astro-site/src/content/blog/2024-08-26-cost-management-fabric.md)
+- [`2024-08-27-finops-for-fabric`](astro-site/src/content/blog/2024-08-27-finops-for-fabric.md)
+- [`2024-08-28-chargeback-models-fabric`](astro-site/src/content/blog/2024-08-28-chargeback-models-fabric.md)
+- [`2024-08-29-cost-allocation-fabric`](astro-site/src/content/blog/2024-08-29-cost-allocation-fabric.md)
+- [`2024-08-30-usage-reporting-fabric`](astro-site/src/content/blog/2024-08-30-usage-reporting-fabric.md)
+- [`2024-08-31-fabric-governance-summary`](astro-site/src/content/blog/2024-08-31-fabric-governance-summary.md)
+- [`2024-09-04-o1-vs-gpt4o-comparison`](astro-site/src/content/blog/2024-09-04-o1-vs-gpt4o-comparison.md)
+- [`2024-09-12-openai-api-updates-september`](astro-site/src/content/blog/2024-09-12-openai-api-updates-september.md)
+- [`2024-10-26-transactional-analytical-unified`](astro-site/src/content/blog/2024-10-26-transactional-analytical-unified.md)
+- [`2024-12-07-scaling-ai-systems`](astro-site/src/content/blog/2024-12-07-scaling-ai-systems.md)
+- [`2024-12-18-fabric-year-review`](astro-site/src/content/blog/2024-12-18-fabric-year-review.md)
+- [`2024-12-31-year-end-reflections`](astro-site/src/content/blog/2024-12-31-year-end-reflections.md)
+- [`2025-01-10-microsoft-fabric-2025-roadmap`](astro-site/src/content/blog/2025-01-10-microsoft-fabric-2025-roadmap.md)
+- [`2025-01-24-documentation-with-ai`](astro-site/src/content/blog/2025-01-24-documentation-with-ai.md)
+- [`2025-02-07-edge-ai-improvements`](astro-site/src/content/blog/2025-02-07-edge-ai-improvements.md)
+- [`2025-02-28-february-ai-recap`](astro-site/src/content/blog/2025-02-28-february-ai-recap.md)
+- [`2025-03-31-march-recap`](astro-site/src/content/blog/2025-03-31-march-recap.md)
+- [`2025-04-30-april-recap`](astro-site/src/content/blog/2025-04-30-april-recap.md)
+- [`2025-05-01-build-2025-day-one`](astro-site/src/content/blog/2025-05-01-build-2025-day-one.md)
+- [`2025-05-31-may-recap`](astro-site/src/content/blog/2025-05-31-may-recap.md)
+- [`2025-12-14-december-ai-topic`](astro-site/src/content/blog/2025-12-14-december-ai-topic.md)
+- [`2025-12-31-december-ai-topic`](astro-site/src/content/blog/2025-12-31-december-ai-topic.md)
+
+</details>
+
+## 6. Missing legacy images (12)
+
+The `images:` frontmatter from the old site points at files that were never migrated (and the field is not rendered). Restore them into `astro-site/public/` and set `image:` to use one as the cover/social image, or delete the field.
+
+- [`2020-08-26-writing-again`](astro-site/src/content/blog/2020-08-26-writing-again.md) → `/2020/08/mike-tinnion-3ym6i13Y9LU-unsplash-scaled.jpg`
+- [`2020-09-09-5-years-of-being-a-microsoft-mvp`](astro-site/src/content/blog/2020-09-09-5-years-of-being-a-microsoft-mvp.md) → `/2020/12/20200826_005156926_iOS-940x510.jpg`
+- [`2021-07-14-my-ultimate-windows-and-mac-setup`](astro-site/src/content/blog/2021-07-14-my-ultimate-windows-and-mac-setup.md) → `/2021/07/Battle-station-2021.jpeg`
+- [`2021-07-15-getting-started-with-defi`](astro-site/src/content/blog/2021-07-15-getting-started-with-defi.md) → `/2021/07/crypto.jpg`
+- [`2021-07-21-message-to-the-young`](astro-site/src/content/blog/2021-07-21-message-to-the-young.md) → `/2021/07/success.jpg`
+- [`2021-07-23-developing-macos-apps-using-net`](astro-site/src/content/blog/2021-07-23-developing-macos-apps-using-net.md) → `/2021/07/maui.png`
+- [`2021-08-10-blockchain-tokens`](astro-site/src/content/blog/2021-08-10-blockchain-tokens.md) → `/2021/08/coins.jpg`
+- [`2021-08-15-blockchain-wsl2`](astro-site/src/content/blog/2021-08-15-blockchain-wsl2.md) → `/2021/08/wsl.jpg`
+- [`2021-08-28-hybrid-cloud`](astro-site/src/content/blog/2021-08-28-hybrid-cloud.md) → `/2021/08/AzureHybrid-featured.png`
+- [`2021-09-04-planning-your-week-ahead`](astro-site/src/content/blog/2021-09-04-planning-your-week-ahead.md) → `/2021/09/planning-banner.png`
+- [`2021-09-13-accountability-partner`](astro-site/src/content/blog/2021-09-13-accountability-partner.md) → `/2021/09/accountability-partner-banner.png`
+- [`2021-11-08-run-for-autism-2021`](astro-site/src/content/blog/2021-11-08-run-for-autism-2021.md) → `/2021/11/running.jpg`
+
+## 7. Other follow-ups
+
+- **Social links**: the footer links LinkedIn `/in/michaeljohnpena/`, while structured data (`BaseLayout.astro`) uses `/in/mjtpena/` and Twitter `@maboroshi_au`. Confirm which are current.
+- **Legacy URL clash**: two posts both claim `url: /blog/azure-hybrid-benefit/`; the redirect points at the later file.
+- **Per-post social images**: every post still shares `og-default.jpg`. Generating OG images at build time (e.g. satori + sharp) is the next biggest sharing win.
+- **Templated structure**: ~550 posts share the same "Best Practices / Conclusion / Resources" skeleton and 300+ say "Tomorrow, I will cover…" with no link. Linking series posts together, and adding related-post links, would help readers and SEO.
+- **Syntax highlighting**: Prism has no grammar for `kql`, `powerfx`, `m`/`powerquery-m`; those ~230 blocks render unhighlighted. Switching to Shiki would cover KQL and Power Query.
