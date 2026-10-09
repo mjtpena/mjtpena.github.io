@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { AUTHOR_BIO } from '../utils/posts';
 
 interface Props {
   title: string;
@@ -11,16 +12,18 @@ interface Props {
   publishedTime?: string;
   authorName?: string;
   articleTags?: string[];
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = 'Michael John Peña - Software Engineer, Cloud Architect, and Tech Speaker based in Sydney. Specializing in Azure, .NET, AI/ML, and blockchain technologies.',
+  description = AUTHOR_BIO,
   image = '/images/og-default.jpg',
   type = 'website',
   publishedTime,
   authorName,
   articleTags = [],
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -38,19 +41,20 @@ const personStructuredData = JSON.stringify({
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en-AU" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <meta name="color-scheme" content="dark" />
 
     <!-- Primary Meta Tags -->
     <title>{title} | Michael John Peña</title>
     <meta name="title" content={`${title} | Michael John Peña`} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -84,27 +88,6 @@ const personStructuredData = JSON.stringify({
     <meta property="twitter:image" content={ogImage} />
     <meta name="twitter:creator" content="@maboroshi_au" />
     <script type="application/ld+json" set:html={personStructuredData}></script>
-
-    <!-- Theme Script (runs before render to prevent flash) -->
-    <script is:inline>
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'dark';
-        }
-        return 'light';
-      })();
-
-      if (theme === 'light') {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-      } else {
-        document.documentElement.classList.remove('light');
-        document.documentElement.classList.add('dark');
-      }
-    </script>
 
     <!-- Page-specific head content (preloads, etc.) -->
     <slot name="head" />

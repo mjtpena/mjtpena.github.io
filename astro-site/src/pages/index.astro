@@ -2,13 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import PostCard from '../components/PostCard.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedPosts, postDescription, readingTime } from '../utils/posts';
 
-// Get recent blog posts
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const recentPosts = allPosts
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 6);
+const recentPosts = (await getPublishedPosts()).slice(0, 6);
 
 const techStack = [
   { name: 'Microsoft Fabric', category: 'Platform', icon: '/icons/fabric.svg' },
@@ -68,7 +64,7 @@ const services = [
 ];
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title="Data & AI Director, Microsoft MVP">
   <!-- LCP image preload for Hero profile -->
   <link slot="head" rel="preload" as="image" href="/profile.webp" type="image/webp" />
 
@@ -224,12 +220,13 @@ const services = [
         {recentPosts.map((post, index) => (
           <PostCard
             title={post.data.title}
-            description={post.data.description}
+            description={postDescription(post)}
             date={post.data.date}
             slug={post.slug}
             tags={post.data.tags}
             image={post.data.image || post.data.cover}
             featured={index === 0}
+            readingTime={readingTime(post.body)}
           />
         ))}
       </div>

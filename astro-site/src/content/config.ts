@@ -6,6 +6,7 @@ const blogCollection = defineCollection({
     title: z.string(),
     author: z.string().optional().default('Michael John Peña'),
     date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
     description: z.string().optional(),
     tags: z.array(z.string()).optional().default([]),
     categories: z.array(z.string()).optional().default([]),

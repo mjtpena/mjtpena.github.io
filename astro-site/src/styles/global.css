@@ -75,10 +75,7 @@
     box-shadow: 0 8px 30px rgba(0, 120, 212, 0.1);
   }
 
-  /* Performance: promote animated cards to own layer */
-  .card-hover {
-    will-change: transform;
-  }
+
 
   /* Data line animation - Azure themed */
   .data-line {
@@ -499,3 +496,6 @@
 @media (max-width: 640px) {
   .prose-custom .cl { flex-direction: column; gap: 6px; }
 }
+
+/* Posts often open with a heading; don't stack its top margin on the card padding. */
+.prose-custom > :first-child { margin-top: 0; }
