@@ -816,7 +816,6 @@ The `images:` frontmatter from the old site points at files that were never migr
 ## 7. Other follow-ups
 
 - **Social links**: the footer links LinkedIn `/in/michaeljohnpena/`, while structured data (`BaseLayout.astro`) uses `/in/mjtpena/` and Twitter `@maboroshi_au`. Confirm which are current.
-- **Legacy URL clash**: two posts both claim `url: /blog/azure-hybrid-benefit/`; the redirect points at the later file.
 - **Per-post social images**: every post still shares `og-default.jpg`. Generating OG images at build time (e.g. satori + sharp) is the next biggest sharing win.
 - **Templated structure**: ~550 posts share the same "Best Practices / Conclusion / Resources" skeleton and 300+ say "Tomorrow, I will cover…" with no link. Linking series posts together, and adding related-post links, would help readers and SEO.
 - **Syntax highlighting**: Prism has no grammar for `kql`, `powerfx`, `m`/`powerquery-m`; those ~230 blocks render unhighlighted. Switching to Shiki would cover KQL and Power Query.

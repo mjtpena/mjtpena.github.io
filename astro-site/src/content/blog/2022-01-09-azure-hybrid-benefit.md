@@ -4,7 +4,6 @@ description: "If you have Windows Server or SQL Server licenses with Software As
 author: Michael John Peña
 draft: false
 date: 2022-01-09
-url: /blog/azure-hybrid-benefit/
 tags:
   - Azure
   - Licensing

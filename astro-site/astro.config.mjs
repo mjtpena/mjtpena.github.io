@@ -17,7 +17,11 @@ function legacyRedirects() {
     if (!legacy) continue;
     const from = legacy.replace(/\/+$/, '');
     const to = `/blog/${file.replace(/\.mdx?$/, '')}/`;
-    if (from && from !== to.replace(/\/$/, '')) redirects[from] = to;
+    if (!from || from === to.replace(/\/$/, '')) continue;
+    if (redirects[from] && redirects[from] !== to) {
+      throw new Error(`Legacy url ${legacy} is claimed by both ${redirects[from]} and ${to}; keep it on one post.`);
+    }
+    redirects[from] = to;
   }
   return redirects;
 }
