@@ -1,5 +1,6 @@
 ---
 title: "GPT-3 Models on Azure: Understanding text-davinci-002 and Codex"
+description: "Provide the optimized query with explanations.\"\"\" ERRORDIAGNOSIS = \"\"\"Diagnose this error: Error: {error} Context: {context}"
 author: Michael John Peña
 draft: false
 date: 2022-11-09
@@ -9,10 +10,7 @@ tags:
   - GPT-3
   - AI
   - Machine Learning
-
 ---
-
-I wrote "GPT-3 Models on Azure: Understanding text-davinci-002 and Codex" to share practical, production-minded guidance on this topic.
 
 ## Understanding the GPT-3 Model Family
 
@@ -381,7 +379,7 @@ Provide:
 2. Solution steps
 3. Prevention measures"""
 
-# Usage
+## Usage
 def get_architecture_review(architecture_description: str) -> str:
     prompt = AzurePromptLibrary.ARCHITECTURE_REVIEW.format(
         architecture=architecture_description
@@ -497,4 +495,3 @@ GPT-3 models on Azure provide powerful capabilities for text and code generation
 - [Azure OpenAI Models](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models)
 - [Best Practices for Prompt Engineering](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/prompt-engineering)
 - [OpenAI Tokenizer](https://platform.openai.com/tokenizer)
-

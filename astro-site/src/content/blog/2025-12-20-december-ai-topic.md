@@ -1,5 +1,6 @@
 ---
 title: "Building a Personal AI Assistant with Semantic Kernel"
+description: "This foundation can be extended with calendar integration, email access, and more plugins. Perfect for a holiday coding project!"
 author: Michael John Peña
 draft: false
 date: 2025-12-20
@@ -9,10 +10,7 @@ tags:
   - Personal-Assistant
   - Tutorial
   - Python
-
 ---
-
-I wrote "Building a Personal AI Assistant with Semantic Kernel" to share practical, production-minded guidance on this topic.
 
 ## Architecture Overview
 
@@ -156,4 +154,4 @@ Assistant: 85.50 * 0.15 = 12.825
 A 15% tip on $85.50 would be $12.83
 ```
 
-This foundation can be extended with calendar integration, email access, and more plugins. Perfect for a holiday coding project!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+This foundation can be extended with calendar integration, email access, and more plugins. Perfect for a holiday coding project!

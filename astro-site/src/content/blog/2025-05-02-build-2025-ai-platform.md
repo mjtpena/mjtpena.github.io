@@ -1,5 +1,6 @@
 ---
 title: "Build 2025: Azure AI Platform Deep Dive"
+description: "The new orchestration engine supports complex multi-agent workflows with built-in state management."
 author: Michael John Peña
 draft: false
 date: 2025-05-02
@@ -9,10 +10,7 @@ tags:
   - Azure
   - AI
   - Platform
-
 ---
-
-I wrote "Build 2025: Azure AI Platform Deep Dive" to share practical, production-minded guidance on this topic.
 
 ## Azure AI Foundry Enhancements
 
@@ -81,4 +79,4 @@ print(f"Average scores: {results.average_scores}")
 - Gemini 2 support
 - Expanded Phi-4 capabilities
 
-These updates position Azure AI Foundry as the comprehensive platform for enterprise AI development.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These updates position Azure AI Foundry as the comprehensive platform for enterprise AI development.

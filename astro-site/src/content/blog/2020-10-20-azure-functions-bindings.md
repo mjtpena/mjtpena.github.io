@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions Input/Output Bindings: Declarative Data Access"
+description: "Bindings let you focus on business logic, not plumbing."
 author: Michael John Peña
 draft: false
 date: 2020-10-20
@@ -8,10 +9,7 @@ tags:
   - Functions
   - Serverless
   - Bindings
-
 ---
-
-I wrote "Azure Functions Input/Output Bindings: Declarative Data Access" to share practical, production-minded guidance on this topic.
 
 ## Binding Types
 
@@ -172,4 +170,4 @@ public static void DynamicBinding(
 }
 ```
 
-Bindings let you focus on business logic, not plumbing.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Bindings let you focus on business logic, not plumbing.

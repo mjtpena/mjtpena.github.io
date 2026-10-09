@@ -9,10 +9,7 @@ tags:
   - GPT-4
   - Microsoft Build
   - Azure
-
 ---
-
-I wrote "Microsoft Build 2024 Preview: What to Expect for AI" to share practical, production-minded guidance on this topic.
 
 ## Expected AI Announcements
 
@@ -163,4 +160,3 @@ Build 2024 promises to be significant for AI developers. Prepare your infrastruc
 - [Microsoft Build 2024](https://build.microsoft.com/)
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
 - [OpenAI Platform Updates](https://platform.openai.com/)
-

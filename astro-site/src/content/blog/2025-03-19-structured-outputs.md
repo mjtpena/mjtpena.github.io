@@ -1,5 +1,6 @@
 ---
 title: "Structured Outputs: Getting Reliable Data from LLMs"
+description: "Structured outputs enable reliable integration of LLM capabilities into data pipelines."
 author: Michael John Peña
 draft: false
 date: 2025-03-19
@@ -9,10 +10,7 @@ tags:
   - JSON
   - Parsing
   - Best Practices
-
 ---
-
-I wrote "Structured Outputs: Getting Reliable Data from LLMs" to share practical, production-minded guidance on this topic.
 
 ## Structured Output Patterns
 
@@ -97,4 +95,4 @@ result = await agent.extract_with_schema(article_text, ExtractionResult)
 print(f"Found {len(result.entities)} entities, sentiment: {result.sentiment}")
 ```
 
-Structured outputs enable reliable integration of LLM capabilities into data pipelines.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Structured outputs enable reliable integration of LLM capabilities into data pipelines.

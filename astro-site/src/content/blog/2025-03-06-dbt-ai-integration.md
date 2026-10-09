@@ -1,5 +1,6 @@
 ---
 title: "dbt and AI: Intelligent Data Transformations"
+description: "AI supercharges dbt workflows with intelligent generation and optimization."
 author: Michael John Peña
 draft: false
 date: 2025-03-06
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Transformations
   - Automation
-
 ---
-
-I wrote "dbt and AI: Intelligent Data Transformations" to share practical, production-minded guidance on this topic.
 
 ## AI-Enhanced dbt Workflows
 
@@ -90,4 +88,4 @@ class DbtAIHelper:
         return response.choices[0].message.content
 ```
 
-AI supercharges dbt workflows with intelligent generation and optimization.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI supercharges dbt workflows with intelligent generation and optimization.

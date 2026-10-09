@@ -10,10 +10,7 @@ tags:
   - Kafka
   - Streaming
   - Messaging
-
 ---
-
-I wrote "2021-03-18-event-hubs-kafka" to share practical, production-minded guidance on this topic.
 
 ## Why Event Hubs for Kafka?
 
@@ -459,4 +456,3 @@ Event Hubs with Kafka protocol provides:
 - **Cost efficiency**: Pay only for what you use
 
 For teams with Kafka expertise wanting to reduce operational burden, Event Hubs Kafka endpoint is an excellent choice.
-

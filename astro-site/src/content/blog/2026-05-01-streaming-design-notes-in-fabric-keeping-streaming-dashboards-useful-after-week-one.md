@@ -1,5 +1,6 @@
 ---
 title: "Streaming Design Notes in Fabric: keeping streaming dashboards useful after week one"
+description: "I focused on making delivery decisions auditable and repeatable—documenting intent, success criteria, and rollback paths to reduce tribal knowledge."
 author: Michael John Peña
 draft: false
 date: 2026-05-01
@@ -36,4 +37,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [Fabric Real-Time Intelligence](https://learn.microsoft.com/fabric/real-time-intelligence/)
 - [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

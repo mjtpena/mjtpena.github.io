@@ -1,5 +1,6 @@
 ---
 title: Environment Governance with Azure Blueprints
+description: "The first time I helped a platform team stand up a new environment from scratch, we got it right on the third try. The first two tries had a RBAC assignment…"
 author: Michael John Peña
 draft: false
 date: 2021-02-07

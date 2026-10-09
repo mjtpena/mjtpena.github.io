@@ -1,13 +1,11 @@
 ---
 title: "Sharding Strategies for Distributed PostgreSQL"
+description: "The distribution column (also called the shard key) determines how data is partitioned across nodes. Citus uses consistent hashing on this column to assign…"
 author: "Michael John Peña"
 draft: false
 date: 2022-07-03
 tags: ["Azure", "PostgreSQL", "Sharding", "Distributed Databases", "Data Modeling"]
-
 ---
-
-I wrote "Sharding Strategies for Distributed PostgreSQL" to share practical, production-minded guidance on this topic.
 
 ## Understanding Distribution Columns
 
@@ -104,4 +102,4 @@ FROM run_command_on_shards(
 );
 ```
 
-Choosing the right sharding strategy upfront saves significant refactoring effort later.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choosing the right sharding strategy upfront saves significant refactoring effort later.

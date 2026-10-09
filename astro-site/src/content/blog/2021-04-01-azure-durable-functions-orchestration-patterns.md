@@ -1,5 +1,6 @@
 ---
 title: Azure Durable Functions Orchestration Patterns
+description: "The magic happens through the Durable Task Framework, which handles state persistence, checkpointing, and replay automatically."
 author: Michael John Peña
 draft: false
 date: 2021-04-01
@@ -10,10 +11,7 @@ tags:
   - Durable Functions
   - Serverless
   - Cloud Architecture
-
 ---
-
-I wrote "2021-04-01-azure-durable-functions-orchestration-patterns" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Basics
 
@@ -246,4 +244,3 @@ await context.CallActivityWithRetryAsync("UnreliableActivity", retryOptions, inp
 Durable Functions provide powerful primitives for building complex, stateful serverless applications. Whether you need simple chaining, parallel processing, or human-in-the-loop workflows, these patterns give you the building blocks for robust orchestrations. The automatic checkpointing and replay semantics mean you can focus on business logic rather than infrastructure concerns.
 
 In my next post, I'll dive deeper into Durable Entities for actor-model patterns in serverless computing.
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure Cognitive Search Vector Search: Building Semantic Search Applications"
+description: "Vector search enables powerful semantic search capabilities. Tomorrow, I will cover hybrid retrieval patterns in more detail."
 author: Michael John Peña
 draft: false
 date: 2023-05-24
@@ -9,10 +10,7 @@ tags:
   - Embeddings
   - Semantic Search
   - AI
-
 ---
-
-I wrote "Azure Cognitive Search Vector Search: Building Semantic Search Applications" to share practical, production-minded guidance on this topic.
 
 ## What is Vector Search?
 
@@ -453,4 +451,4 @@ Vector search enables powerful semantic search capabilities. Tomorrow, I will co
 
 - [Vector Search Documentation](https://learn.microsoft.com/en-us/azure/search/vector-search-overview)
 - [Hybrid Search](https://learn.microsoft.com/en-us/azure/search/hybrid-search-overview)
-- [Semantic Search](https://learn.microsoft.com/en-us/azure/search/semantic-search-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Semantic Search](https://learn.microsoft.com/en-us/azure/search/semantic-search-overview)

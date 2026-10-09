@@ -1,5 +1,6 @@
 ---
 title: "Agent Orchestration Patterns for Production"
+description: "Building single agents is one thing. Orchestrating multiple agents for complex workflows is another. Today I'm exploring production-ready orchestration…"
 author: Michael John Peña
 draft: false
 date: 2024-05-24
@@ -497,4 +498,4 @@ Tomorrow I'll cover tool use patterns for AI agents.
 
 - [LangGraph](https://python.langchain.com/docs/langgraph)
 - [CrewAI](https://github.com/joaomdmoura/crewAI)
-- [AutoGen](https://github.com/microsoft/autogen)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AutoGen](https://github.com/microsoft/autogen)

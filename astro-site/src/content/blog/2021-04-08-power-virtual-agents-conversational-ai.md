@@ -1,5 +1,6 @@
 ---
 title: Power Virtual Agents - Building Conversational AI Without Code
+description: "Topics are the building blocks of your bot. Each topic handles a specific intent."
 author: Michael John Peña
 draft: false
 date: 2021-04-08
@@ -10,10 +11,7 @@ tags:
   - Chatbots
   - Conversational AI
   - Microsoft 365
-
 ---
-
-I wrote "2021-04-08-power-virtual-agents-conversational-ai" to share practical, production-minded guidance on this topic.
 
 ## Understanding Power Virtual Agents
 
@@ -401,4 +399,3 @@ Review Process:
 ## Conclusion
 
 Power Virtual Agents makes conversational AI accessible to everyone. By combining intuitive topic design with Power Automate integration, you can create sophisticated chatbots that automate customer service, streamline internal processes, and provide 24/7 support. The key is starting with well-defined topics and continuously improving based on analytics and user feedback.
-

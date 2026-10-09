@@ -1,5 +1,6 @@
 ---
 title: "Claude Extended Thinking: Solving Complex Reasoning Problems"
+description: "Enable extended thinking for mathematical proofs, code analysis, strategic planning, and multi-constraint optimization problems. For simple queries…"
 author: Michael John Peña
 draft: false
 date: 2025-07-21
@@ -9,10 +10,7 @@ tags:
   - Reasoning
   - AI
   - Python
-
 ---
-
-I wrote "Claude Extended Thinking: Solving Complex Reasoning Problems" to share practical, production-minded guidance on this topic.
 
 ## Enabling Extended Thinking
 
@@ -97,4 +95,4 @@ result = solve_complex_problem(debug_problem)
 
 ## When to Use Extended Thinking
 
-Enable extended thinking for mathematical proofs, code analysis, strategic planning, and multi-constraint optimization problems. For simple queries, standard responses are faster and more cost-effective.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Enable extended thinking for mathematical proofs, code analysis, strategic planning, and multi-constraint optimization problems. For simple queries, standard responses are faster and more cost-effective.

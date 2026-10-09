@@ -1,5 +1,6 @@
 ---
 title: Power Apps Canvas Apps - Building Mobile-First Experiences
+description: "Canvas apps are where I've seen Power Apps deliver the most visible value to end users: a field inspection app for a construction site, a stock-take app…"
 author: Michael John Peña
 draft: false
 date: 2021-04-06

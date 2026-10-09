@@ -1,5 +1,6 @@
 ---
 title: "Data Loss Prevention in Microsoft Fabric"
+description: "Data Loss Prevention (DLP) helps prevent accidental data exposure and ensures compliance. Today I'm exploring DLP implementation in Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-26
@@ -600,4 +601,4 @@ Tomorrow I'll cover conditional access policies for Fabric.
 
 - [DLP in Fabric](https://learn.microsoft.com/fabric/governance/data-loss-prevention)
 - [Microsoft Purview DLP](https://learn.microsoft.com/purview/dlp-learn-about-dlp)
-- [Sensitive Information Types](https://learn.microsoft.com/purview/sensitive-information-type-learn-about)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Sensitive Information Types](https://learn.microsoft.com/purview/sensitive-information-type-learn-about)

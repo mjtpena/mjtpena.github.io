@@ -1,13 +1,11 @@
 ---
 title: "Cost Optimization with AKS Spot Node Pools"
+description: "AKS Spot node pools are the cost reduction lever that can cut compute spend by up to 90%—at the cost of accepting that Azure may evict spot nodes with a…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-03
 tags: ["Azure", "Kubernetes", "AKS", "Cost Optimization"]
-
 ---
-
-I wrote "Cost Optimization with AKS Spot Node Pools" to share practical, production-minded guidance on this topic.
 
 AKS Spot node pools are the cost reduction lever that can cut compute spend by up to 90%—at the cost of accepting that Azure may evict spot nodes with a two-minute warning when it needs the capacity back. The deal: Azure Spot VMs use excess Azure capacity at heavily discounted prices, but that capacity can be reclaimed. The right workload types: batch processing jobs with checkpointing (can restart from last checkpoint if interrupted), CI/CD agents (new builds can retry), stateless worker pods with queue-based work distribution (incomplete work returns to the queue on eviction). The wrong workload types: stateful databases, anything that can't tolerate interruption mid-operation, user-facing services without equivalent non-spot fallback capacity. The standard pattern is a non-spot node pool with minimum capacity for critical services, plus spot node pools for burst and batch work.
 
@@ -264,4 +262,3 @@ def calculate_savings(regular_price, spot_price, hours_per_month=730):
 Spot node pools are an excellent way to reduce Kubernetes costs for appropriate workloads. By designing for interruption and implementing proper failover strategies, you can achieve significant savings while maintaining reliability.
 
 Tomorrow, we'll explore virtual nodes for serverless Kubernetes scaling.
-

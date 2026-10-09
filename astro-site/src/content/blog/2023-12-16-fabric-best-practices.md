@@ -1,13 +1,11 @@
 ---
 title: "Microsoft Fabric Best Practices for Production"
+description: "Shipping Fabric into production exposes common anti-patterns — unbounded capacity use, duplicated data copies, and insufficient observability. The best…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-16
 tags: ["Microsoft Fabric", "Best Practices", "Production", "Data Engineering", "Architecture"]
-
 ---
-
-I wrote "Microsoft Fabric Best Practices for Production" to share practical, production-minded guidance on this topic.
 
 Shipping Fabric into production exposes common anti-patterns — unbounded capacity use, duplicated data copies, and insufficient observability. The best practices below are battle-tested and oriented to keeping costs predictable while enabling scale.
 
@@ -328,4 +326,4 @@ security_best_practices = {
 }
 ```
 
-Tomorrow, we'll explore Fabric architecture patterns in depth!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Fabric architecture patterns in depth!

@@ -9,10 +9,7 @@ tags:
   - AutoML
   - Machine Learning
   - AI
-
 ---
-
-I wrote "AutoML in Databricks: Automated Machine Learning Made Simple" to share practical, production-minded guidance on this topic.
 
 ## What AutoML Provides
 
@@ -376,4 +373,3 @@ Use AutoML to quickly establish baselines, then iterate using the generated note
 - [Databricks AutoML Documentation](https://docs.databricks.com/machine-learning/automl/index.html)
 - [AutoML Python API](https://docs.databricks.com/machine-learning/automl/python-api.html)
 - [AutoML Best Practices](https://docs.databricks.com/machine-learning/automl/best-practices.html)
-

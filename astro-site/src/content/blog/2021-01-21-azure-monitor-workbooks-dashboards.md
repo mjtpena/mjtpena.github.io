@@ -1,5 +1,6 @@
 ---
 title: Building Interactive Dashboards with Azure Monitor Workbooks
+description: "Operational dashboards in Azure used to mean Power BI, a custom data export, and a refresh schedule nobody could remember. Workbooks killed all of that for…"
 author: Michael John Pena
 draft: false
 date: 2021-01-21
@@ -361,4 +362,4 @@ Create drill-down experiences with links:
 5. **Documentation**: Include text blocks explaining metrics and thresholds
 6. **Version Control**: Export workbooks as JSON and store in Git
 
-Azure Monitor Workbooks bridge the gap between static dashboards and full analytics platforms. They provide the interactivity needed for troubleshooting while being shareable and maintainable as code.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Monitor Workbooks bridge the gap between static dashboards and full analytics platforms. They provide the interactivity needed for troubleshooting while being shareable and maintainable as code.

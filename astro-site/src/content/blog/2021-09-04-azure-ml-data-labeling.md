@@ -1,5 +1,6 @@
 ---
 title: Data Labeling Projects in Azure Machine Learning
+description: "Data labeling in Azure ML streamlines the process of creating high-quality training data, essential for building accurate machine learning models."
 author: Michael John Pena
 draft: false
 date: 2021-09-04
@@ -9,10 +10,7 @@ tags:
   - Data Labeling
   - Computer Vision
   - NLP
-
 ---
-
-I wrote "2021-09-04-azure-ml-data-labeling" to share practical, production-minded guidance on this topic.
 
 ## Types of Labeling Projects
 
@@ -265,4 +263,4 @@ consensus:
 4. **Use consensus for quality**: Multiple labelers catch errors
 5. **Monitor labeler agreement**: Track inter-annotator agreement scores
 
-Data labeling in Azure ML streamlines the process of creating high-quality training data, essential for building accurate machine learning models.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Data labeling in Azure ML streamlines the process of creating high-quality training data, essential for building accurate machine learning models.

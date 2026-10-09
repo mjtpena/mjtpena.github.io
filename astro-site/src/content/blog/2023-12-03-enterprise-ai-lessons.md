@@ -1,13 +1,11 @@
 ---
 title: "Enterprise AI Lessons: What We Learned in 2023"
+description: "Working with teams across finance, healthcare and retail this year, the same practical lessons come up: start with the business question, instrument for…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-03
 tags: ["AI", "Enterprise", "Lessons Learned", "Best Practices", "Strategy"]
-
 ---
-
-I wrote "Enterprise AI Lessons: What We Learned in 2023" to share practical, production-minded guidance on this topic.
 
 Working with teams across finance, healthcare and retail this year, the same practical lessons come up: start with the business question, instrument for measurement before you ship, and treat governance and observability as first-class requirements. The top ten lessons below are grounded in real deployments, not theory.
 
@@ -277,4 +275,4 @@ organizational_lessons = {
 }
 ```
 
-Tomorrow, we'll dive into AI governance frameworks for the enterprise!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll dive into AI governance frameworks for the enterprise!

@@ -1,13 +1,11 @@
 ---
 title: "Automated Machine Learning with Azure ML AutoML"
+description: "AutoML accelerates model development while maintaining production-quality results."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-21
 tags: ["Azure", "Machine Learning", "AutoML", "Automation", "Model Selection"]
-
 ---
-
-I wrote "Automated Machine Learning with Azure ML AutoML" to share practical, production-minded guidance on this topic.
 
 ## AutoML Classification
 
@@ -290,4 +288,4 @@ pipeline_job = ml_client.jobs.create_or_update(
 )
 ```
 
-AutoML accelerates model development while maintaining production-quality results.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AutoML accelerates model development while maintaining production-quality results.

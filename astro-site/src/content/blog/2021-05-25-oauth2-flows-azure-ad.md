@@ -9,10 +9,7 @@ tags:
   - OAuth
   - Security
   - Authentication
-
 ---
-
-I wrote "OAuth 2.0 Flows with Azure AD: Choosing the Right Flow" to share practical, production-minded guidance on this topic.
 
 ## Flow Overview
 
@@ -410,4 +407,4 @@ def on_behalf_of_flow(client_id, client_secret, tenant_id, user_token, scopes):
 
 - [OAuth 2.0 Flows](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow)
 - [PKCE RFC 7636](https://tools.ietf.org/html/rfc7636)
-- [Device Code Flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Device Code Flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code)

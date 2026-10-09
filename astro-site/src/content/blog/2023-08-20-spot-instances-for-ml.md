@@ -8,10 +8,7 @@ tags:
   - Cost Optimization
   - Azure
   - Machine Learning
-
 ---
-
-I wrote "Spot Instances for ML: Cost-Effective Training at Scale" to share practical, production-minded guidance on this topic.
 
 ## Understanding Spot Instances
 
@@ -218,4 +215,4 @@ Tomorrow we'll explore cost optimization strategies for AI workloads.
 
 - [Azure Spot VMs](https://learn.microsoft.com/en-us/azure/virtual-machines/spot-vms)
 - [Checkpointing Best Practices](https://pytorch.org/tutorials/recipes/recipes/saving_and_loading_a_general_checkpoint.html)
-- [Azure ML Cost Management](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-optimize-cost)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure ML Cost Management](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-optimize-cost)

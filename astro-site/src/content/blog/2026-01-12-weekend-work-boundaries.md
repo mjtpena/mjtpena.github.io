@@ -1,5 +1,6 @@
 ---
 title: "The Weekend I Finally Said No"
+description: "Saturday morning. My phone buzzed. Slack message: \"Hey MJ, quick question about the deployment...\""
 author: Michael John Peña
 draft: false
 date: 2026-01-12
@@ -176,4 +177,4 @@ I said yes immediately. We went. I was there—fully there.
 
 My phone stayed home.
 
-That's the success metric that actually matters.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+That's the success metric that actually matters.

@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions Custom Handlers: Any Language"
+description: "Functions has supported \"any language\" via the worker model for a while, but custom handlers are the cleaner option when your runtime isn't on the supported…"
 author: Michael John Peña
 draft: false
 date: 2020-12-11
@@ -216,4 +217,4 @@ az functionapp deployment source config-zip \
     --src ./deploy.zip
 ```
 
-Custom handlers: bring any language to serverless.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Custom handlers: bring any language to serverless.

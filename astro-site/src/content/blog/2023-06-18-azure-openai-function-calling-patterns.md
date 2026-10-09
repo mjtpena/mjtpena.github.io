@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Function Calling Patterns: Building Intelligent Agents"
+description: "Function calling patterns enable sophisticated AI agents. Tomorrow, I will cover building AI agents in more depth."
 author: Michael John Peña
 draft: false
 date: 2023-06-18
@@ -9,10 +10,7 @@ tags:
   - AI Agents
   - GPT-4
   - Patterns
-
 ---
-
-I wrote "Azure OpenAI Function Calling Patterns: Building Intelligent Agents" to share practical, production-minded guidance on this topic.
 
 ## Function Calling Architecture
 
@@ -408,4 +406,4 @@ Function calling patterns enable sophisticated AI agents. Tomorrow, I will cover
 
 - [Function Calling Guide](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/function-calling)
 - [OpenAI Cookbook](https://github.com/openai/openai-cookbook)
-- [Azure OpenAI Best Practices](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/advanced-prompt-engineering)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure OpenAI Best Practices](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/advanced-prompt-engineering)

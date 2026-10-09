@@ -1,21 +1,19 @@
 ---
 title: "Implementing Redis Caching Patterns with Azure Functions"
+description: "Redis is a popular in-memory data store that can be used as a cache. Azure Functions is a serverless compute service that can be used to run code on-demand…"
 author: Michael John Peña
 draft: false
 date: 2023-01-03
 url: /blog/azure-functions-redis-cache-patterns/
 tags:
-  - redis
-  - cache
-  - functions
-  - patterns
-  - azure
-
+  - Redis
+  - Cache
+  - Functions
+  - Patterns
+  - Azure
 ---
 
-I wrote "Implementing Redis Caching Patterns with Azure Functions" to share practical, production-minded guidance on this topic.
-
-# What are the different caching patterns?
+## What are the different caching patterns?
 
 There are several different caching patterns that can be used to improve the performance of an application. Some of the most common caching patterns include:
 
@@ -24,7 +22,7 @@ There are several different caching patterns that can be used to improve the per
 3.  **Write-Behind**: In this pattern, data is written to the cache and then asynchronously written to the backing store at a later time. This can improve write performance, but there is a risk of data loss if the cache goes down before the data is written to the backing store.
 4.  **Refresh-ahead**: In this pattern, cache is pre-populated with data for clients to use. A scheduled job is triggered to request the cache data for clients in advanced.
 
-# How can these patterns be implemented on Redis with Azure Functions?
+## How can these patterns be implemented on Redis with Azure Functions?
 
 Redis is a popular in-memory data store that can be used as a cache. Azure Functions is a serverless compute service that can be used to run code on-demand in response to a variety of triggers.
 
@@ -77,7 +75,7 @@ Then in your local.settings.json file, add the following:
 }
 ```
 
-# Cache-Aside
+## Cache-Aside
 
 The cache-aside pattern is a common approach to caching that involves checking the cache for a requested value, and if it is not present, retrieving it from the source and storing it in the cache before returning it to the client. This pattern is useful for maintaining a consistent cache and avoiding stale data.
 
@@ -191,7 +189,7 @@ public class WriteThroughFunction
 
 In this example, we first get the key and value from the request. We then use the `StringSet` method to write the value to the cache, and the `WriteValueToDatabase` method to write the value to the source. Finally, we return a success message to the client using the `OkObjectResult` class.
 
-# Write-Behind
+## Write-Behind
 
 The write-behind cache pattern is a common approach to caching that involves writing data to the cache and asynchronously updating the source at a later time. This pattern is useful for reducing the load on the source data store and improving the performance of write operations.
 
@@ -246,7 +244,7 @@ In this example, we first get the key and value from the request. We then use th
 
 Note that you can even improve this by creating an Event Hub Output binding from this function. And then create another Event Hub Trigger function to react on the published message, and save it to the database like CosmosDB.
 
-# Refresh-Ahead
+## Refresh-Ahead
 
 Read-Through pattern is a similar concept with Cache-Aside, except that it's specific for Reading data. There are a lot of variations on Read-Through as there are different techniques on how to serve "hot" data to clients as fast as possible. One of the trivial and popular pattern is Refresh-ahead.
 
@@ -339,7 +337,7 @@ The second function, `Refresh`, is a timer trigger that runs every 5 minutes. If
 
 This way, the cache is continually refreshed with the latest data from the original source, ensuring that the next time the data is needed, it will already be in the cache and can be retrieved more quickly. This is beneficial if you're trying to serve the same set of information to a lot of users.
 
-# Conclusion
+## Conclusion
 
 In this blog post, we looked at four cache patterns: Cache-Aside, Write-Through, Write-Behind, and Refresh-Ahead. We implemented these patterns using Azure Functions (ISOLATED process), .NET 7, C#, and Azure Redis. These patterns can be used to improve the performance of an application by temporarily storing frequently accessed data.
 
@@ -347,4 +345,3 @@ In this blog post, we looked at four cache patterns: Cache-Aside, Write-Through,
 I hope this helps! Let me know if you have any questions.
 
 For the code above, refer to this repository: [AzureFunctions.Samples/RedisCachePatterns at main · mjtpena/AzureFunctions.Samples (github.com)](https://github.com/mjtpena/AzureFunctions.Samples/tree/main/RedisCachePatterns)
-

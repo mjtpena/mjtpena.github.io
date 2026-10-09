@@ -10,10 +10,7 @@ tags:
   - AI Safety
   - Defense
   - AI
-
 ---
-
-I wrote "Jailbreak Prevention Strategies for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -541,4 +538,3 @@ for result in report["results"]:
 ## Conclusion
 
 Jailbreak prevention requires multiple layers of defense including pattern detection, hardened system prompts, conversation-level monitoring, and response validation. Regular testing against known attack patterns and continuous monitoring help maintain robust safety boundaries as new jailbreak techniques emerge.
-

@@ -1,5 +1,6 @@
 ---
 title: "Open Source AI Progress: The Democratization of Foundation Models"
+description: "Open source AI is no longer a compromise - it's a strategic option. Evaluate based on your specific requirements, not assumptions."
 author: Michael John Peña
 draft: false
 date: 2024-12-12
@@ -9,10 +10,7 @@ tags:
   - Llama
   - Mistral
   - Community
-
 ---
-
-I wrote "Open Source AI Progress: The Democratization of Foundation Models" to share practical, production-minded guidance on this topic.
 
 ## The Open Source AI Landscape
 
@@ -303,4 +301,4 @@ Open source AI is no longer a compromise - it's a strategic option. Evaluate bas
 - [Llama 3.1 Model Card](https://llama.meta.com/)
 - [Hugging Face Model Hub](https://huggingface.co/models)
 - [vLLM Documentation](https://docs.vllm.ai/)
-- [Ollama](https://ollama.ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Ollama](https://ollama.ai/)

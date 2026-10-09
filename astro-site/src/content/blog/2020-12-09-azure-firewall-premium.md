@@ -1,5 +1,6 @@
 ---
 title: "Azure Firewall: Network Security Fundamentals"
+description: "Azure Firewall: cloud-native network security without the complexity."
 author: Michael John Peña
 draft: false
 date: 2020-12-09
@@ -8,10 +9,7 @@ tags:
   - Firewall
   - Security
   - Networking
-
 ---
-
-I wrote "Azure Firewall: Network Security Fundamentals" to share practical, production-minded guidance on this topic.
 
 ## Core Features
 
@@ -255,4 +253,4 @@ Azure Firewall: cloud-native network security without the complexity.
 
 - [Azure Firewall Documentation](https://docs.microsoft.com/en-us/azure/firewall/)
 - [Azure Firewall FAQ](https://docs.microsoft.com/en-us/azure/firewall/firewall-faq)
-- [Azure Network Security Best Practices](https://docs.microsoft.com/en-us/azure/security/fundamentals/network-best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Network Security Best Practices](https://docs.microsoft.com/en-us/azure/security/fundamentals/network-best-practices)

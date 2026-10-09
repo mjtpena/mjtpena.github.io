@@ -1,5 +1,6 @@
 ---
 title: "Azure Cost Management: Control Cloud Spending"
+description: "Every cloud bill story I've heard starts the same way: \"we didn't realise it was running.\" A test VM left on over a long weekend, a Premium SSD attached to…"
 author: Michael John Peña
 draft: false
 date: 2020-11-07
@@ -162,4 +163,4 @@ in
 - [ ] Implement resource lifecycle policies
 - [ ] Set up budget alerts
 
-Cost Management: visibility is the first step to optimization.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Cost Management: visibility is the first step to optimization.

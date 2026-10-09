@@ -1,5 +1,6 @@
 ---
 title: "Real-Time Dashboards in Microsoft Fabric"
+description: "Real-time dashboards bring your streaming data to life. Today I'm exploring how to build effective real-time visualizations in Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-04
@@ -411,4 +412,4 @@ Tomorrow I'll cover Data Activator GA and automated actions.
 
 - [Real-Time Dashboards](https://learn.microsoft.com/fabric/real-time-intelligence/dashboards)
 - [KQL Visualization](https://learn.microsoft.com/kusto/query/render-operator)
-- [Dashboard Best Practices](https://learn.microsoft.com/fabric/real-time-intelligence/dashboard-best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Dashboard Best Practices](https://learn.microsoft.com/fabric/real-time-intelligence/dashboard-best-practices)

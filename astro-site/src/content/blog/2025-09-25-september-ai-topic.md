@@ -1,5 +1,6 @@
 ---
 title: "Responsible AI: Content Safety Filters for LLM Applications"
+description: "Content safety is non-negotiable for production AI applications. Implement multiple layers of filtering for both inputs and outputs to protect users and…"
 author: Michael John Peña
 draft: false
 date: 2025-09-25
@@ -9,10 +10,7 @@ tags:
   - Azure AI
   - Moderation
   - LLM
-
 ---
-
-I wrote "Responsible AI: Content Safety Filters for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Implementing Content Safety
 
@@ -155,4 +153,4 @@ class SafeLLMWrapper:
         }
 ```
 
-Content safety is non-negotiable for production AI applications. Implement multiple layers of filtering for both inputs and outputs to protect users and maintain trust.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Content safety is non-negotiable for production AI applications. Implement multiple layers of filtering for both inputs and outputs to protect users and maintain trust.

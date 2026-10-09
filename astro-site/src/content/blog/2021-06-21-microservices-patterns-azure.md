@@ -9,10 +9,7 @@ tags:
   - Microservices
   - Architecture
   - Patterns
-
 ---
-
-I wrote "2021-06-21-microservices-patterns-azure" to share practical, production-minded guidance on this topic.
 
 ## Service Decomposition
 
@@ -288,4 +285,5 @@ spec:
     - name: connectionString
       secretKeyRef:
         name: servicebus-secret
-        key: connectionString\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+        key: connectionString
+```

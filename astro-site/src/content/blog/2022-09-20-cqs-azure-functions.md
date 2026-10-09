@@ -1,5 +1,6 @@
 ---
 title: “CQS (Command Query Separation) in Azure Functions”
+description: "Applying CQS (Command Query Separation) in Azure Functions is a pattern I've found genuinely useful for keeping serverless code maintainable as the number…"
 author: Michael John Peña
 draft: false
 date: 2022-09-20
@@ -7,8 +8,8 @@ url: /blog/cqs-azure-functions/
 tags:
   - csharp
   - dotnet
-  - azure
-  - functions
+  - Azure
+  - Functions
   - CQS
   - mediatr
 ---

@@ -1,13 +1,11 @@
 ---
 title: "Databricks Genie Spaces: Natural Language Data Exploration"
+description: "Genie Spaces enable non-technical users to explore data using natural language. This guide covers setting up and optimizing Genie Spaces for your organization."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-19
 tags: ["Databricks", "Genie", "AI", "Natural Language", "Analytics"]
-
 ---
-
-I wrote "Databricks Genie Spaces: Natural Language Data Exploration" to share practical, production-minded guidance on this topic.
 
 Genie Spaces enable non-technical users to explore data using natural language. This guide covers setting up and optimizing Genie Spaces for your organization.
 
@@ -343,4 +341,3 @@ class GenieUsageAnalytics:
 ## Conclusion
 
 Genie Spaces democratize data access by enabling natural language exploration. Invest in clear instructions, comprehensive column descriptions, and sample questions to maximize accuracy and user adoption.
-

@@ -1,5 +1,6 @@
 ---
 title: "Data Governance Best Practices: From Policy to Practice"
+description: "Data governance in 2021 moved from documentation exercise to operational capability. Azure Purview provides the foundation; success depends on…"
 author: Michael John Pena
 draft: false
 date: 2021-12-16
@@ -9,10 +10,7 @@ tags:
   - Data Catalog
   - Compliance
   - Data Management
-
 ---
-
-I wrote "Data Governance Best Practices: From Policy to Practice" to share practical, production-minded guidance on this topic.
 
 ## Azure Purview Setup
 
@@ -480,4 +478,4 @@ Data governance in 2021 moved from documentation exercise to operational capabil
 
 - [Azure Purview Documentation](https://docs.microsoft.com/en-us/azure/purview/)
 - [Data Governance Framework](https://www.dama.org/cpages/body-of-knowledge)
-- [Data Mesh and Governance](https://martinfowler.com/articles/data-mesh-principles.html)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data Mesh and Governance](https://martinfowler.com/articles/data-mesh-principles.html)

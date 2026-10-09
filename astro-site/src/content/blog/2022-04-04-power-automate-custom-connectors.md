@@ -9,10 +9,7 @@ tags:
   - Custom Connectors
   - API
   - Integration
-
 ---
-
-I wrote "Building Custom Connectors for Power Automate" to share practical, production-minded guidance on this topic.
 
 ## Custom Connector Basics
 
@@ -547,4 +544,3 @@ With custom connectors, there's no API that Power Automate can't integrate with.
 - [Custom Connector Documentation](https://docs.microsoft.com/en-us/connectors/custom-connectors/)
 - [OpenAPI Specification](https://swagger.io/specification/)
 - [Connector Certification](https://docs.microsoft.com/en-us/connectors/custom-connectors/submit-certification)
-

@@ -1,5 +1,6 @@
 ---
 title: "Dynamics 365 Copilot: AI for Business Applications"
+description: "Dynamics 365 Copilot transforms business applications from data systems into intelligent assistants that augment human decision-making."
 author: Michael John Pena
 draft: false
 date: 2023-04-09
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - Dynamics 365
   - CRM
-
 ---
-
-I wrote "Dynamics 365 Copilot: AI for Business Applications" to share practical, production-minded guidance on this topic.
 
 ## Sales Copilot
 
@@ -318,4 +316,4 @@ Recommend:
         return {"recommendations": response.content}
 ```
 
-Dynamics 365 Copilot transforms business applications from data systems into intelligent assistants that augment human decision-making.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dynamics 365 Copilot transforms business applications from data systems into intelligent assistants that augment human decision-making.

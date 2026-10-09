@@ -1,5 +1,6 @@
 ---
 title: "Azure Media Services: Video Streaming Platform"
+description: "Azure Media Services: broadcast-quality video for everyone."
 author: Michael John Peña
 draft: false
 date: 2020-12-17
@@ -8,10 +9,7 @@ tags:
   - Media Services
   - Video
   - Streaming
-
 ---
-
-I wrote "Azure Media Services: Video Streaming Platform" to share practical, production-minded guidance on this topic.
 
 ## Creating Media Services
 
@@ -213,4 +211,4 @@ policy = client.content_key_policies.create_or_update(
 </script>
 ```
 
-Azure Media Services: broadcast-quality video for everyone.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Media Services: broadcast-quality video for everyone.

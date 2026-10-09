@@ -1,5 +1,6 @@
 ---
 title: Exploring .NET 6 Preview Features for Azure Development
+description: ".NET 6 Preview 4 in June 2021 was the point where I started genuinely excited about the November GA. Minimal APIs, Blazor improvements, native AOT…"
 author: Michael John Peña
 draft: false
 date: 2021-06-04

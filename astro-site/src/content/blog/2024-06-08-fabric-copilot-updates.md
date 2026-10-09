@@ -1,5 +1,6 @@
 ---
 title: "Fabric Copilot Updates: AI-Powered Data Analytics"
+description: "Fabric Copilot has received significant updates. Today I'm exploring how AI assistants are transforming data work in Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-08
@@ -348,4 +349,4 @@ Tomorrow I'll cover Copilot for Notebooks in more depth.
 
 - [Fabric Copilot Overview](https://learn.microsoft.com/fabric/get-started/copilot-fabric-overview)
 - [Copilot for Notebooks](https://learn.microsoft.com/fabric/data-engineering/copilot-notebooks)
-- [Copilot for SQL](https://learn.microsoft.com/fabric/data-warehouse/copilot)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Copilot for SQL](https://learn.microsoft.com/fabric/data-warehouse/copilot)

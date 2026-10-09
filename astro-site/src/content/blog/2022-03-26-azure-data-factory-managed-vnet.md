@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Factory Managed Virtual Network: Secure Data Integration"
+description: "Data Flows automatically use the managed VNet when connected to private endpoints."
 author: Michael John Peña
 draft: false
 date: 2022-03-26
@@ -9,10 +10,7 @@ tags:
   - Networking
   - Security
   - Data Engineering
-
 ---
-
-I wrote "Azure Data Factory Managed Virtual Network: Secure Data Integration" to share practical, production-minded guidance on this topic.
 
 ## Understanding Managed VNet
 
@@ -398,4 +396,3 @@ For organizations requiring private data access without network complexity, mana
 - [Managed Virtual Network Documentation](https://docs.microsoft.com/en-us/azure/data-factory/managed-virtual-network-private-endpoint)
 - [Managed Private Endpoints](https://docs.microsoft.com/en-us/azure/data-factory/managed-virtual-network-private-endpoint#managed-private-endpoints)
 - [Data Flow Network Security](https://docs.microsoft.com/en-us/azure/data-factory/data-flow-private-link)
-

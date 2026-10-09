@@ -1,5 +1,6 @@
 ---
 title: Global Load Balancing with Azure Traffic Manager
+description: "Traffic Manager keeps showing up in my designs because it's cheap, simple, and works at the layer most failover stories actually need: DNS. The catch is…"
 author: Michael John Pena
 draft: false
 date: 2021-01-31
@@ -644,4 +645,4 @@ resource trafficManagerOrigin 'Microsoft.Cdn/profiles/originGroups/origins@2021-
 6. **DNS Propagation**: Account for DNS caching in clients
 7. **Geographic Routing**: Use for compliance or data sovereignty requirements
 
-Azure Traffic Manager enables sophisticated global load balancing strategies. Combined with proper health checks and monitoring, it ensures your applications remain available and performant for users worldwide.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Traffic Manager enables sophisticated global load balancing strategies. Combined with proper health checks and monitoring, it ensures your applications remain available and performant for users worldwide.

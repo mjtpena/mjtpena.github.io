@@ -1,13 +1,11 @@
 ---
 title: "Mastering Azure SQL Elastic Pools for Cost-Effective Multi-Tenant Solutions"
+description: "The key benefit of elastic pools is resource sharing. If you have 100 databases that each spike at different times, you don't need to provision for 100…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-02
 tags: ["Azure", "SQL", "Elastic Pools", "Multi-Tenant", "Database"]
-
 ---
-
-I wrote "Mastering Azure SQL Elastic Pools for Cost-Effective Multi-Tenant Solutions" to share practical, production-minded guidance on this topic.
 
 ## Understanding Elastic Pool Economics
 
@@ -184,4 +182,4 @@ def scale_pool(client, resource_group, server, pool_name, vcores):
 3. **Consider zone redundancy**: Only for production workloads
 4. **Use reserved capacity**: Save up to 33% with 1-year commitment
 
-Elastic pools remain one of the most effective ways to optimize costs in multi-tenant SaaS applications while maintaining performance isolation between tenants.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Elastic pools remain one of the most effective ways to optimize costs in multi-tenant SaaS applications while maintaining performance isolation between tenants.

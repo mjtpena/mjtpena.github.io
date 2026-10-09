@@ -1,5 +1,6 @@
 ---
 title: "Stateful AI Agents: Managing Context and Memory"
+description: "All require state management beyond simple request-response."
 author: Michael John Peña
 draft: false
 date: 2024-07-14
@@ -9,10 +10,7 @@ tags:
   - State Management
   - LangGraph
   - Memory
-
 ---
-
-I wrote "Stateful AI Agents: Managing Context and Memory" to share practical, production-minded guidance on this topic.
 
 ## The State Challenge
 
@@ -477,4 +475,3 @@ class SecureStateManager:
 Stateful agents enable sophisticated AI applications that maintain context and accumulate knowledge. The key is thoughtful state design and appropriate persistence strategies.
 
 Start with simple in-memory state, add persistence as needed, and always consider security and isolation in production deployments.
-

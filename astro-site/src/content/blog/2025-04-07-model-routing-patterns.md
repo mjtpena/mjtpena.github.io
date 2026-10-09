@@ -1,5 +1,6 @@
 ---
 title: "Model Routing Patterns: Smart Query Distribution"
+description: "Smart routing can reduce AI costs by 50-70% while maintaining quality."
 author: Michael John Peña
 draft: false
 date: 2025-04-07
@@ -9,10 +10,7 @@ tags:
   - Architecture
   - Optimization
   - Cost
-
 ---
-
-I wrote "Model Routing Patterns: Smart Query Distribution" to share practical, production-minded guidance on this topic.
 
 ## Intelligent Model Routing
 
@@ -131,4 +129,4 @@ class QueryClassifier:
         return float(response.choices[0].message.content)
 ```
 
-Smart routing can reduce AI costs by 50-70% while maintaining quality.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Smart routing can reduce AI costs by 50-70% while maintaining quality.

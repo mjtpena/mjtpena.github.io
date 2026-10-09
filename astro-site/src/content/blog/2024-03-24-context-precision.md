@@ -1,13 +1,11 @@
 ---
 title: "Context Precision in RAG: Evaluating Retrieval Quality"
+description: "Context precision measures whether the retrieved documents are actually relevant to answering the question. High precision means less noise for the…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-24
 tags: ["AI", "RAG", "Retrieval", "Evaluation", "Search"]
-
 ---
-
-I wrote "Context Precision in RAG: Evaluating Retrieval Quality" to share practical, production-minded guidance on this topic.
 
 Context precision measures whether the retrieved documents are actually relevant to answering the question. High precision means less noise for the generator to filter through.
 
@@ -325,4 +323,3 @@ for doc_score in result['per_document_scores']:
 ## Conclusion
 
 Context precision helps identify whether your retrieval system is returning relevant documents. Low precision means the generator must work harder to filter noise, potentially leading to worse answers. Monitor precision at different K values to understand ranking quality.
-

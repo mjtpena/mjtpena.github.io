@@ -1,13 +1,11 @@
 ---
 title: "Model Evaluation Frameworks: A Comprehensive Guide"
+description: "Rigorous model evaluation is critical for production AI systems. This guide covers the major evaluation frameworks and how to implement comprehensive…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-13
 tags: ["AI", "Machine Learning", "Evaluation", "MLOps", "Testing"]
-
 ---
-
-I wrote "Model Evaluation Frameworks: A Comprehensive Guide" to share practical, production-minded guidance on this topic.
 
 Rigorous model evaluation is critical for production AI systems. This guide covers the major evaluation frameworks and how to implement comprehensive testing pipelines.
 
@@ -294,4 +292,3 @@ def log_evaluation_results(
 ## Conclusion
 
 A comprehensive evaluation framework combining traditional metrics, semantic similarity, and LLM-based judgment provides the most complete picture of model performance. Always evaluate across multiple dimensions before production deployment.
-

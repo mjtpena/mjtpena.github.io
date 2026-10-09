@@ -1,5 +1,6 @@
 ---
 title: "Data Mesh: Federated Computational Governance"
+description: "Computational governance scales where manual review cannot. Embed policies in CI/CD pipelines to catch issues before they reach production."
 author: Michael John Peña
 draft: false
 date: 2025-09-24
@@ -9,10 +10,7 @@ tags:
   - Data Quality
   - Policy as Code
   - Automation
-
 ---
-
-I wrote "Data Mesh: Federated Computational Governance" to share practical, production-minded guidance on this topic.
 
 ## Policy as Code
 
@@ -154,4 +152,4 @@ class FederatedGovernance:
         }
 ```
 
-Computational governance scales where manual review cannot. Embed policies in CI/CD pipelines to catch issues before they reach production.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Computational governance scales where manual review cannot. Embed policies in CI/CD pipelines to catch issues before they reach production.

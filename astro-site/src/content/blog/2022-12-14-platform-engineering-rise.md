@@ -1,5 +1,6 @@
 ---
 title: "The Rise of Platform Engineering in 2022"
+description: "Platform engineering is the practice of building and maintaining internal developer platforms (IDPs) that enable self-service capabilities for development…"
 author: Michael John Peña
 draft: false
 date: 2022-12-14
@@ -9,10 +10,7 @@ tags:
   - Developer Experience
   - Internal Developer Platform
   - Cloud Native
-
 ---
-
-I wrote "The Rise of Platform Engineering in 2022" to share practical, production-minded guidance on this topic.
 
 ## What is Platform Engineering?
 
@@ -409,4 +407,3 @@ Platform engineering represents the evolution of DevOps at scale. By providing s
 - [Backstage](https://backstage.io/)
 - [Team Topologies](https://teamtopologies.com/)
 - [Internal Developer Platform](https://internaldeveloperplatform.org/)
-

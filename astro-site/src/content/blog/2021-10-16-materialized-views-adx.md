@@ -1,13 +1,11 @@
 ---
 title: "Materialized Views in Azure Data Explorer"
+description: "Materialized views in ADX pre-aggregate data according to a defined query, updating continuously as new data is ingested—so when you query the view, you're…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-16
 tags: ["Azure", "Azure Data Explorer", "ADX", "Performance", "Kusto"]
-
 ---
-
-I wrote "Materialized Views in Azure Data Explorer" to share practical, production-minded guidance on this topic.
 
 Materialized views in ADX pre-aggregate data according to a defined query, updating continuously as new data is ingested—so when you query the view, you're reading pre-computed results rather than scanning and aggregating the raw table at query time. The performance gain is significant for common aggregation patterns: `summarize count() by bin(Timestamp, 1h), Region` over billions of rows returns in milliseconds from a materialized view versus seconds from the raw table. The practical use cases: hourly/daily rollups of high-cardinality event streams, distinct count approximations (using HyperLogLog) that would be expensive to recompute, and filtered subsets of large tables that multiple queries need frequently. The tradeoff: materialized views consume cluster resources continuously for the aggregation computation, and the initial backfill of a new view over existing data can be resource-intensive.
 
@@ -328,4 +326,3 @@ HourlyMetrics
 Materialized views are a powerful optimization technique for Azure Data Explorer. By pre-computing aggregations, you can dramatically improve query performance and reduce costs for common monitoring scenarios.
 
 Tomorrow, we'll explore external tables in ADX for querying data stored outside the cluster.
-

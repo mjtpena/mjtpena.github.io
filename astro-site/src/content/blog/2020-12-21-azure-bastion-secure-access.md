@@ -1,5 +1,6 @@
 ---
 title: "Azure Bastion: Secure VM Access Without Public IPs"
+description: "Jump boxes are one of those legacy patterns I keep finding in environments I inherit. A Windows VM with RDP open to the internet, \"for admin access only,\"…"
 author: Michael John Peña
 draft: false
 date: 2020-12-21
@@ -165,4 +166,4 @@ AzureDiagnostics
 4. Rotate shareable links regularly
 5. Monitor failed connection attempts
 
-Azure Bastion: secure, private VM access made simple.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Bastion: secure, private VM access made simple.

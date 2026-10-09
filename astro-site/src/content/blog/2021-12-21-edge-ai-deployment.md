@@ -1,5 +1,6 @@
 ---
 title: "Edge AI: Deploying Machine Learning at the Edge"
+description: "Edge AI in 2021 became accessible to mainstream developers. Azure IoT Edge, ONNX Runtime, and improved hardware made edge deployment practical for real…"
 author: Michael John Pena
 draft: false
 date: 2021-12-21
@@ -9,10 +10,7 @@ tags:
   - IoT
   - Azure IoT Edge
   - ONNX
-
 ---
-
-I wrote "Edge AI: Deploying Machine Learning at the Edge" to share practical, production-minded guidance on this topic.
 
 ## Why Edge AI?
 
@@ -471,4 +469,4 @@ Edge AI in 2021 became accessible to mainstream developers. Azure IoT Edge, ONNX
 - [Azure IoT Edge](https://docs.microsoft.com/en-us/azure/iot-edge/)
 - [ONNX Runtime](https://onnxruntime.ai/)
 - [TensorFlow Lite](https://www.tensorflow.org/lite)
-- [Edge Impulse](https://www.edgeimpulse.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Edge Impulse](https://www.edgeimpulse.com/)

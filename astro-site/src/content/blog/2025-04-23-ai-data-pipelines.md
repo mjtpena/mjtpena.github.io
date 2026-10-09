@@ -1,5 +1,6 @@
 ---
 title: "AI in Data Pipelines: Intelligent ETL and ELT"
+description: "AI-enhanced pipelines handle complex transformations and quality issues automatically."
 author: Michael John Peña
 draft: false
 date: 2025-04-23
@@ -9,10 +10,7 @@ tags:
   - ETL
   - Data Engineering
   - Automation
-
 ---
-
-I wrote "AI in Data Pipelines: Intelligent ETL and ELT" to share practical, production-minded guidance on this topic.
 
 ## AI-Enhanced Data Pipeline
 
@@ -129,4 +127,4 @@ Data types: {df.dtypes.to_dict()}"""
         return df
 ```
 
-AI-enhanced pipelines handle complex transformations and quality issues automatically.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI-enhanced pipelines handle complex transformations and quality issues automatically.

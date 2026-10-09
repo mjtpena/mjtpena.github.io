@@ -1,5 +1,6 @@
 ---
 title: "Building FAQ Bots with Azure Bot Service and QnA Maker"
+description: "\"Customers ask us the same five questions over and over.\" Every support team I've worked with has said this. Before LLMs ate the world, QnA Maker was the…"
 author: Michael John Peña
 draft: false
 date: 2020-08-24
@@ -342,4 +343,4 @@ az bot webchat create --name faq-bot-2020 --resource-group rg-bots
 
 FAQ bots built with QnA Maker can handle a significant portion of support queries, freeing up human agents for complex issues.
 
-The honest measurement: at one client, deflection from a well-tuned QnA bot landed around 30-40% of inbound chats — useful, but a long way from "replace the support team." Treat it as a top-of-funnel filter, not a replacement, and always make the "talk to a human" path obvious. The quickest way to lose customer trust is to trap them in a confused bot loop.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The honest measurement: at one client, deflection from a well-tuned QnA bot landed around 30-40% of inbound chats — useful, but a long way from "replace the support team." Treat it as a top-of-funnel filter, not a replacement, and always make the "talk to a human" path obvious. The quickest way to lose customer trust is to trap them in a confused bot loop.

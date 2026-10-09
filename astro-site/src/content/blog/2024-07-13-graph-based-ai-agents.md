@@ -9,10 +9,7 @@ tags:
   - LangGraph
   - Architecture
   - Design Patterns
-
 ---
-
-I wrote "Graph-Based AI Agents: Design Patterns and Architecture" to share practical, production-minded guidance on this topic.
 
 ## The Graph Mental Model
 
@@ -497,4 +494,3 @@ def route_decision(state: State) -> str:
 Graph-based agents provide the flexibility needed for real-world AI applications. Master these patterns, and you can build agents that handle complex, multi-step tasks reliably.
 
 Start with simple patterns, combine as needed, and always keep your graphs testable and observable.
-

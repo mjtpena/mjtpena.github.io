@@ -10,10 +10,7 @@ tags:
   - Docker
   - DevOps
   - ACR
-
 ---
-
-I wrote "2021-02-19-azure-container-registry" to share practical, production-minded guidance on this topic.
 
 ## Creating an Azure Container Registry
 
@@ -368,4 +365,3 @@ cleanup_old_images("https://myregistryacr2021.azurecr.io", days_old=30, keep_lat
 Azure Container Registry provides a secure, scalable platform for managing container images and OCI artifacts. Its tight integration with Azure services and enterprise features like geo-replication and vulnerability scanning make it an excellent choice for containerized applications.
 
 Start with the Basic SKU for development and upgrade to Premium for production workloads requiring advanced features.
-

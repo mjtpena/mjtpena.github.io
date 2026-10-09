@@ -1,18 +1,16 @@
 ---
 title: "Power BI Hybrid Tables: Real-Time Meets Historical"
+description: "Hybrid tables provide the perfect balance between real-time data freshness and historical data performance."
 author: Michael John Peña
 draft: false
 date: 2022-01-29
 url: /blog/power-bi-hybrid-tables/
 tags:
   - power-bi
-  - real-time
-  - analytics
+  - Real-Time
+  - Analytics
   - data-modeling
-
 ---
-
-I wrote "Power BI Hybrid Tables: Real-Time Meets Historical" to share practical, production-minded guidance on this topic.
 
 ## Understanding Hybrid Tables
 
@@ -247,4 +245,4 @@ class HybridTableMonitor:
 4. **Optimize source** - Index columns used in partition filters
 5. **Test thoroughly** - Ensure DAX works across partition boundaries
 
-Hybrid tables provide the perfect balance between real-time data freshness and historical data performance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hybrid tables provide the perfect balance between real-time data freshness and historical data performance.

@@ -1,5 +1,6 @@
 ---
 title: "GPT-4o Released: OpenAI's Fastest and Most Capable Multimodal Model"
+description: "Today OpenAI announced GPT-4o (the \"o\" stands for \"omni\") - their new flagship model that can reason across audio, vision, and text in real time. This is…"
 author: Michael John Peña
 draft: false
 date: 2024-05-13

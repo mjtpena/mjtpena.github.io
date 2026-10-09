@@ -1,5 +1,6 @@
 ---
 title: "Copilot Extensibility: Building Custom Copilot Experiences"
+description: "Custom Copilot plugins bring your business data into the AI conversation."
 author: Michael John Peña
 draft: false
 date: 2025-04-02
@@ -9,10 +10,7 @@ tags:
   - Extensibility
   - Plugins
   - Development
-
 ---
-
-I wrote "Copilot Extensibility: Building Custom Copilot Experiences" to share practical, production-minded guidance on this topic.
 
 ## Copilot Plugin Development
 
@@ -90,4 +88,4 @@ async def process_business_query(query: str, context: dict) -> dict:
 3. **Error handling** - Graceful failures with helpful messages
 4. **Authentication** - Secure access to business data
 
-Custom Copilot plugins bring your business data into the AI conversation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Custom Copilot plugins bring your business data into the AI conversation.

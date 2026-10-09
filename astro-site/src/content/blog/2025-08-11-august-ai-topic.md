@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Ignite 2025 Preview: AI and Data Platform Expectations"
+description: "Ignite remains the premier event for understanding Microsoft's enterprise AI direction. Planning your learning path around expected announcements helps…"
 author: Michael John Peña
 draft: false
 date: 2025-08-11
@@ -9,10 +10,7 @@ tags:
   - AI
   - Microsoft Fabric
   - Predictions
-
 ---
-
-I wrote "Microsoft Ignite 2025 Preview: AI and Data Platform Expectations" to share practical, production-minded guidance on this topic.
 
 ## Expected Fabric Enhancements
 
@@ -55,4 +53,4 @@ Watch for improvements in:
 - GitHub Copilot integration with Azure services
 - New Visual Studio Code extensions for AI development
 
-Ignite remains the premier event for understanding Microsoft's enterprise AI direction. Planning your learning path around expected announcements helps maximize the event's value.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Ignite remains the premier event for understanding Microsoft's enterprise AI direction. Planning your learning path around expected announcements helps maximize the event's value.

@@ -10,12 +10,9 @@ tags:
   - Databricks
   - SQL
   - Analytics
-
 ---
 
-I wrote "2021-07-03-databricks-sql-analytics-ga" to share practical, production-minded guidance on this topic.
-
-# What is Databricks SQL Analytics?
+## What is Databricks SQL Analytics?
 
 Databricks SQL Analytics provides:
 
@@ -25,7 +22,7 @@ Databricks SQL Analytics provides:
 - Integration with popular BI tools like Power BI and Tableau
 - Query history and performance monitoring
 
-# Setting Up SQL Endpoints
+## Setting Up SQL Endpoints
 
 Create a SQL Endpoint using the Azure Databricks workspace:
 
@@ -66,7 +63,7 @@ resource "databricks_sql_endpoint" "analytics" {
 }
 ```
 
-# Querying Delta Lake Tables
+## Querying Delta Lake Tables
 
 Write standard SQL to query your data lake:
 
@@ -117,7 +114,7 @@ WHERE date >= DATE_SUB(CURRENT_DATE(), 30)
 ORDER BY date DESC, product_category;
 ```
 
-# Creating Visualizations
+## Creating Visualizations
 
 Build visualizations directly in the SQL Analytics interface:
 
@@ -154,7 +151,7 @@ GROUP BY product_category
 ORDER BY total_sales DESC;
 ```
 
-# Photon Engine Performance
+## Photon Engine Performance
 
 Photon is a vectorized query engine that dramatically improves performance:
 
@@ -202,7 +199,7 @@ WHERE category_rank <= 5
 ORDER BY date DESC, region, category_rank;
 ```
 
-# Connecting Power BI
+## Connecting Power BI
 
 Connect Power BI to Databricks SQL Analytics:
 
@@ -240,7 +237,7 @@ in
     sales_summary
 ```
 
-# Creating Dashboards
+## Creating Dashboards
 
 Build operational dashboards with scheduled refreshes:
 
@@ -274,7 +271,7 @@ ORDER BY total_sales DESC
 LIMIT 10;
 ```
 
-# Access Control
+## Access Control
 
 Implement fine-grained access control:
 
@@ -304,9 +301,8 @@ SELECT * FROM analytics.sales_summary
 WHERE region = current_user_region();
 ```
 
-# Conclusion
+## Conclusion
 
 Databricks SQL Analytics GA brings enterprise-grade SQL analytics to the lakehouse. With Photon engine performance, native BI tool connectivity, and built-in dashboarding, data teams can now serve analytics directly from Delta Lake without data movement or duplication.
 
 This represents a significant step forward in unifying data engineering and analytics on a single platform, reducing complexity and enabling faster insights from your data lake investments.
-

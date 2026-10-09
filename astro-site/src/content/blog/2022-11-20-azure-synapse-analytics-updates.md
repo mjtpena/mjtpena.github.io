@@ -9,10 +9,7 @@ tags:
   - Data Engineering
   - Data Warehouse
   - Microsoft Ignite
-
 ---
-
-I wrote "Azure Synapse Analytics Updates: Ignite 2022 Highlights" to share practical, production-minded guidance on this topic.
 
 ## Serverless SQL Pool Enhancements
 
@@ -383,4 +380,3 @@ Azure Synapse Analytics continues to mature as a comprehensive analytics platfor
 - [Serverless SQL Best Practices](https://docs.microsoft.com/en-us/azure/synapse-analytics/sql/best-practices-serverless-sql-pool)
 - [Synapse Link](https://docs.microsoft.com/en-us/azure/cosmos-db/synapse-link)
 - [Data Integration](https://docs.microsoft.com/en-us/azure/data-factory/concepts-data-flow-overview)
-

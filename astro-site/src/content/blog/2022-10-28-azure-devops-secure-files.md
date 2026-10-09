@@ -1,13 +1,11 @@
 ---
 title: "Secure Files in Azure DevOps"
+description: "Secure Files protect sensitive credentials while enabling automated pipelines."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-28
 tags: ["Azure", "Azure DevOps", "Security", "Files"]
-
 ---
-
-I wrote "Secure Files in Azure DevOps" to share practical, production-minded guidance on this topic.
 
 ## Using Secure Files
 
@@ -65,4 +63,4 @@ steps:
     kubectl get pods
 ```
 
-Secure Files protect sensitive credentials while enabling automated pipelines.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Secure Files protect sensitive credentials while enabling automated pipelines.

@@ -9,10 +9,7 @@ tags:
   - Embeddings
   - Semantic Search
   - AI
-
 ---
-
-I wrote "Building Semantic Search with Azure OpenAI Embeddings" to share practical, production-minded guidance on this topic.
 
 ## The Problem with Keyword Search
 
@@ -527,4 +524,4 @@ class FAISSSearchEngine:
 
 - [FAISS Library](https://github.com/facebookresearch/faiss)
 - [Azure Cognitive Search](https://learn.microsoft.com/azure/search/vector-search-overview)
-- [Embedding Best Practices](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Embedding Best Practices](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings)

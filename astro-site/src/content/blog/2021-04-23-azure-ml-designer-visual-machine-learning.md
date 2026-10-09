@@ -1,5 +1,6 @@
 ---
 title: Azure ML Designer - Visual Machine Learning Pipeline Development
+description: "Azure ML Designer is the no-code visual pipeline builder for ML, and its place in the toolbox is narrower than the marketing suggests. It's genuinely useful…"
 author: Michael John Peña
 draft: false
 date: 2021-04-23

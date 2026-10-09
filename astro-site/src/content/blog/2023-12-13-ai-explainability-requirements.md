@@ -1,13 +1,11 @@
 ---
 title: "AI Explainability: Making the Black Box Transparent"
+description: "Explainability techniques are not one-size-fits-all: explanations that help a clinician are different from what helps a product manager. My rule is to pick…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-13
 tags: ["AI", "Explainability", "XAI", "Interpretability", "Machine Learning"]
-
 ---
-
-I wrote "AI Explainability: Making the Black Box Transparent" to share practical, production-minded guidance on this topic.
 
 Explainability techniques are not one-size-fits-all: explanations that help a clinician are different from what helps a product manager. My rule is to pick the modality that solves the stakeholder's question — feature attribution for debugging, counterfactuals for recourse, and example-based explanations for sanity checks.
 
@@ -402,4 +400,4 @@ class ExplanationEvaluator:
         }
 ```
 
-Tomorrow, we'll explore Microsoft Fabric adoption strategies!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Microsoft Fabric adoption strategies!

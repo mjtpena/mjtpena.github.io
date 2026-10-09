@@ -1,5 +1,6 @@
 ---
 title: Disaster Recovery with Azure Site Recovery
+description: "Disaster recovery is the topic everyone agrees is important and nobody wants to be assigned. ASR is the service that turns \"we should test my DR\" from a…"
 author: Michael John Pena
 draft: false
 date: 2021-01-30
@@ -10,9 +11,7 @@ tags:
   - Disaster Recovery
   - Business Continuity
   - High Availability
-
 ---
-
 
 Disaster recovery is the topic everyone agrees is important and nobody wants to be assigned. ASR is the service that turns "we should test my DR" from a six-month project into a recovery plan you can actually run on a Tuesday afternoon. Replicate VMs cross-region, define a recovery plan that orders the dependencies, and—the part most teams skip—run a non-disruptive test failover quarterly. Today's post is the end-to-end implementation, plus the automation I bolt on so the DR drill happens whether or not anyone remembers.
 
@@ -597,5 +596,4 @@ $report | ConvertTo-Json | Out-File "dr-drill-report-$(Get-Date -Format 'yyyyMMd
 6. **Documentation**: Maintain runbooks for manual failover steps
 7. **Network Planning**: Ensure IP address and DNS strategies are documented
 
-Azure Site Recovery provides enterprise-grade disaster recovery capabilities. Combined with proper planning, automation, and regular testing, it ensures business continuity when disaster strikes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+Azure Site Recovery provides enterprise-grade disaster recovery capabilities. Combined with proper planning, automation, and regular testing, it ensures business continuity when disaster strikes.

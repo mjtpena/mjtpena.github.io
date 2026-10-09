@@ -1,13 +1,11 @@
 ---
 title: "LLM Benchmarking: Evaluating Models for Your Use Case"
+description: "LLM benchmarking methodology matters more than the benchmark scores themselves, because the standard public benchmarks (MMLU for general knowledge…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-23
 tags: ["AI", "LLM", "Benchmarking", "Evaluation", "Machine Learning"]
-
 ---
-
-I wrote "LLM Benchmarking: Evaluating Models for Your Use Case" to share practical, production-minded guidance on this topic.
 
 LLM benchmarking methodology matters more than the benchmark scores themselves, because the standard public benchmarks (MMLU for general knowledge, HumanEval for code generation, HellaSwag for commonsense reasoning, TruthfulQA for accuracy) measure specific capabilities in specific formats that may not reflect your application's actual requirements. A model that tops MMLU may still fail on your specific domain because the evaluation questions are multiple-choice academic problems, not the open-ended extraction tasks your application performs. The evaluation methodology I recommend building before making a model selection decision: a representative sample of 50-200 real examples from your use case, evaluated on the dimensions that matter for your application (accuracy, format adherence, latency, cost), run consistently across candidate models. This is task-based evaluation, not benchmark-based selection, and it's the only approach that gives you reliable signal for the specific deployment context.
 
@@ -345,4 +343,4 @@ results = compare_models(models, eval_set, evaluator)
 4. **Blind evaluation** - Remove model names during human review
 5. **Continuously update** - Add examples from production failures
 
-Tomorrow, we'll explore Azure OpenAI updates and the Assistants API on Azure!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Azure OpenAI updates and the Assistants API on Azure!

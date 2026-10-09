@@ -1,13 +1,11 @@
 ---
 title: "Azure ML Managed Online Endpoints for Model Deployment"
+description: "Managed online endpoints simplify model deployment while providing enterprise-grade reliability and scalability."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-08
 tags: ["Azure", "Machine Learning", "Deployment", "MLOps", "Endpoints"]
-
 ---
-
-I wrote "Azure ML Managed Online Endpoints for Model Deployment" to share practical, production-minded guidance on this topic.
 
 ## Creating a Managed Online Endpoint
 
@@ -256,4 +254,4 @@ ml_client.online_endpoints.begin_delete(
 ).result()
 ```
 
-Managed online endpoints simplify model deployment while providing enterprise-grade reliability and scalability.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Managed online endpoints simplify model deployment while providing enterprise-grade reliability and scalability.

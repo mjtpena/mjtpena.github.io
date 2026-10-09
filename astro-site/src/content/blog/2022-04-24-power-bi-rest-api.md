@@ -9,10 +9,7 @@ tags:
   - Automation
   - DevOps
   - Administration
-
 ---
-
-I wrote "Power BI REST API: Automating Analytics Operations" to share practical, production-minded guidance on this topic.
 
 ## API Overview
 
@@ -277,4 +274,3 @@ The Power BI REST API enables:
 
 - [REST API Reference](https://docs.microsoft.com/en-us/rest/api/power-bi/)
 - [Admin API](https://docs.microsoft.com/en-us/rest/api/power-bi/admin)
-

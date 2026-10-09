@@ -10,10 +10,7 @@ tags:
   - Performance
   - LLM
   - Async
-
 ---
-
-I wrote "Parallel Execution in LangChain: Optimizing LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -416,4 +413,3 @@ print(f"Average: {metrics.avg_time_per_item:.2f}s per item")
 ## Conclusion
 
 Parallel execution is essential for building performant LLM applications. By leveraging RunnableParallel, async operations, batch processing, and proper rate limiting, you can significantly improve response times while respecting API limits. Always monitor performance and adjust concurrency levels based on your specific use case and API quotas.
-

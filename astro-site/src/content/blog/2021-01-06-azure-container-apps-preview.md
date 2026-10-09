@@ -8,10 +8,7 @@ tags:
   - Kubernetes
   - Containers
   - AKS
-
 ---
-
-I wrote "Azure Kubernetes Service: Simplifying Container Orchestration" to share practical, production-minded guidance on this topic.
 
 ## Why AKS in 2021?
 
@@ -83,4 +80,5 @@ spec:
           valueFrom:
             secretKeyRef:
               name: app-secrets
-              key: connection-string\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+              key: connection-string
+```

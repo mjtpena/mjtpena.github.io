@@ -1,5 +1,6 @@
 ---
 title: "Securing AI Applications: Authentication and Authorization Patterns"
+description: "AI applications face unique security concerns: protecting training data, controlling model access, securing inference endpoints, and preventing prompt…"
 author: Michael John Peña
 draft: false
 date: 2025-11-10
@@ -9,10 +10,7 @@ tags:
   - Authentication
   - AI Applications
   - Best Practices
-
 ---
-
-I wrote "Securing AI Applications: Authentication and Authorization Patterns" to share practical, production-minded guidance on this topic.
 
 ## Security Challenges for AI
 
@@ -133,4 +131,4 @@ class SecureRAGService:
         return await self.llm_client.generate(question, context)
 ```
 
-Security for AI applications must be designed in from the start. Retrofitting security after deployment is significantly more difficult and error-prone.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Security for AI applications must be designed in from the start. Retrofitting security after deployment is significantly more difficult and error-prone.

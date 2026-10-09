@@ -9,10 +9,7 @@ tags:
   - DevOps
   - Architecture
   - Maturity
-
 ---
-
-I wrote "Cloud Native Maturity: Where Organizations Stand in 2022" to share practical, production-minded guidance on this topic.
 
 ## Cloud Native Maturity Model
 
@@ -331,4 +328,5 @@ spec:
     - payment-api
   dependsOn:
     - resource:default/orders-db
-    - resource:default/orders-cache\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    - resource:default/orders-cache
+```

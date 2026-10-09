@@ -1,5 +1,6 @@
 ---
 title: "Vector Databases for AI Applications"
+description: "Vectors (embeddings) represent meaning in high-dimensional space. Similar items have similar vectors."
 author: Michael John Pena
 draft: false
 date: 2023-03-09
@@ -9,10 +10,7 @@ tags:
   - Embeddings
   - Architecture
   - Azure
-
 ---
-
-I wrote "Vector Databases for AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Why Vector Databases?
 
@@ -413,4 +411,4 @@ class VectorStoreOptimizer:
         return quantized.tolist()
 ```
 
-Vector databases are the foundation for modern AI applications. Choose based on your scale, filtering needs, and Azure integration requirements. For most Azure-centric applications, start with Azure Cognitive Search for its native integration, then evaluate specialized options as needs grow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Vector databases are the foundation for modern AI applications. Choose based on your scale, filtering needs, and Azure integration requirements. For most Azure-centric applications, start with Azure Cognitive Search for its native integration, then evaluate specialized options as needs grow.

@@ -1,5 +1,6 @@
 ---
 title: "Reranking Strategies: Improving RAG Precision"
+description: "Cross-encoder reranking typically improves RAG precision by 10-20%."
 author: Michael John Peña
 draft: false
 date: 2025-03-14
@@ -9,10 +10,7 @@ tags:
   - AI
   - Search
   - Precision
-
 ---
-
-I wrote "Reranking Strategies: Improving RAG Precision" to share practical, production-minded guidance on this topic.
 
 ## Reranking Implementation
 
@@ -81,4 +79,4 @@ class RerankerPipeline:
         return sorted(scores.keys(), key=lambda x: scores[x], reverse=True)
 ```
 
-Cross-encoder reranking typically improves RAG precision by 10-20%.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Cross-encoder reranking typically improves RAG precision by 10-20%.

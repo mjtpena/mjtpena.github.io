@@ -1,5 +1,6 @@
 ---
 title: "Azure Cache for Redis Enterprise: High Performance Caching"
+description: "Redis Enterprise: when standard caching isn't enough."
 author: Michael John Peña
 draft: false
 date: 2020-09-09
@@ -8,10 +9,7 @@ tags:
   - Redis
   - Caching
   - Enterprise
-
 ---
-
-I wrote "Azure Cache for Redis Enterprise: High Performance Caching" to share practical, production-minded guidance on this topic.
 
 ## Enterprise Tiers
 
@@ -168,4 +166,4 @@ az monitor metrics list \
     --metric "cacheRead" "cacheWrite" "connectedclients" "usedmemory"
 ```
 
-Redis Enterprise: when standard caching isn't enough.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Redis Enterprise: when standard caching isn't enough.

@@ -9,10 +9,7 @@ tags:
   - OCR
   - Text Recognition
   - Automation
-
 ---
-
-I wrote "Text Recognition with AI Builder: OCR for the Power Platform" to share practical, production-minded guidance on this topic.
 
 ## Text Recognition Capabilities
 
@@ -322,4 +319,3 @@ Combined with other AI Builder capabilities, it forms the foundation for intelli
 
 - [Text Recognition Documentation](https://docs.microsoft.com/en-us/ai-builder/prebuilt-text-recognition)
 - [OCR Best Practices](https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/concept-recognizing-text)
-

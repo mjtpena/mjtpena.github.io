@@ -10,10 +10,7 @@ tags:
   - AI Alignment
   - Machine Learning
   - AI
-
 ---
-
-I wrote "Direct Preference Optimization (DPO): A Simpler Alternative to RLHF" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -440,4 +437,3 @@ for practice in DPOBestPractices.get_recommendations():
 ## Conclusion
 
 DPO provides a simpler, more stable alternative to RLHF for aligning language models with human preferences. By directly optimizing on preference pairs without a separate reward model, DPO reduces complexity while achieving comparable results. Choose DPO when you have clean preference pairs and want straightforward training.
-

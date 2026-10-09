@@ -1,13 +1,11 @@
 ---
 title: "Claude Computer Use Preview: AI That Can Control Your Desktop"
+description: "Computer Use is a significant step toward truly autonomous AI agents. Use it responsibly with appropriate safety controls."
 author: "Michael John Peña"
 draft: false
 date: 2024-10-01
 tags: ["Anthropic", "Claude", "Computer Use", "AI Agents", "Automation"]
-
 ---
-
-I wrote "Claude Computer Use Preview: AI That Can Control Your Desktop" to share practical, production-minded guidance on this topic.
 
 ## What is Computer Use?
 
@@ -295,4 +293,4 @@ Computer Use opens up exciting possibilities:
 4. **Process Automation**: Complete multi-step workflows
 5. **Training Data Collection**: Record human-like interactions
 
-Computer Use is a significant step toward truly autonomous AI agents. Use it responsibly with appropriate safety controls.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Computer Use is a significant step toward truly autonomous AI agents. Use it responsibly with appropriate safety controls.

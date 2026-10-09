@@ -1,5 +1,6 @@
 ---
 title: I’m going to start writing again!
+description: "I have been meaning to write a blog post for an awfully long time, but it has blocked me for so many reasons. There are many reasons I stopped writing. I…"
 author: Michael John Peña
 draft: false
 date: 2020-08-26
@@ -23,4 +24,4 @@ I need a space on the internet that I can say is mine. No ads. No promotions. No
 
 All the tools needed in writing and sharing content are there. You'll just have to start somewhere. There is an art and beauty in creating authentic content - just like any other industry or discipline. All we just need is to spend time and effort on it.
 
-One thing I’ve learned through the books I’ve read in the past years, time is always the most valuable asset. Not money or career success, but time. Having the notion you have control of your time and have the freedom on where to spend it. I want to spend a lot of time writing and I am doing it now.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+One thing I’ve learned through the books I’ve read in the past years, time is always the most valuable asset. Not money or career success, but time. Having the notion you have control of your time and have the freedom on where to spend it. I want to spend a lot of time writing and I am doing it now.

@@ -1,5 +1,6 @@
 ---
 title: "My Tech List 2022"
+description: "Here is a list of all the relevant technology set up that I use personally at work, home, and everything in between. I grouped them on different groups…"
 draft: false
 date: 2022-08-08
 url: /tools/2022/
@@ -56,4 +57,4 @@ Here is a list of all the relevant technology set up that I use personally at wo
 - Audible, 12 Min, Kindle, and Goodreads
 - Banking & Crypto Apps
 - SnoreLab and SnoreGym
-- Life\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- Life

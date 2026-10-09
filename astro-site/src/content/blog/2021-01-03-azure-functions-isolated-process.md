@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions with .NET 5: Modernizing Serverless Development"
+description: ".NET 5 is out, and Functions has a new hosting model in flight: isolated process. Instead of running inside the Functions host, your function runs in its…"
 author: Michael John Peña
 draft: false
 date: 2021-01-03
@@ -392,4 +393,4 @@ func azure functionapp publish myFunctionApp
 | Durable Functions | In-process |
 | Maximum performance | In-process |
 
-The isolated process model is still in preview but shows promise for future .NET versions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The isolated process model is still in preview but shows promise for future .NET versions.

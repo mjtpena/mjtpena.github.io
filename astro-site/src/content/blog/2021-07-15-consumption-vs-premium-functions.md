@@ -10,12 +10,9 @@ tags:
   - Azure Functions
   - Architecture
   - Cost Optimization
-
 ---
 
-I wrote "2021-07-15-consumption-vs-premium-functions" to share practical, production-minded guidance on this topic.
-
-# Plan Comparison Overview
+## Plan Comparison Overview
 
 | Feature | Consumption | Premium |
 |---------|-------------|---------|
@@ -26,7 +23,7 @@ I wrote "2021-07-15-consumption-vs-premium-functions" to share practical, produc
 | Max memory | 1.5 GB | 14 GB |
 | Pricing | Per execution + GB-s | Per core-hour |
 
-# Consumption Plan Details
+## Consumption Plan Details
 
 The Consumption plan is ideal for:
 
@@ -65,7 +62,7 @@ public class ConsumptionFunctions
 }
 ```
 
-# Cold Start Impact
+## Cold Start Impact
 
 Cold starts affect Consumption plan performance:
 
@@ -110,7 +107,7 @@ def measure_cold_start(function_url, samples=50):
 # Warm responses: avg=50ms, stdev=15ms
 ```
 
-# Premium Plan Details
+## Premium Plan Details
 
 Premium plan is ideal for:
 
@@ -156,7 +153,7 @@ public class PremiumFunctions
 }
 ```
 
-# Cost Comparison Calculator
+## Cost Comparison Calculator
 
 Calculate costs for different scenarios:
 
@@ -237,7 +234,7 @@ for name, executions, duration in scenarios:
     print(f"  Recommendation: {result['recommendation']}")
 ```
 
-# Decision Framework
+## Decision Framework
 
 Use this decision tree:
 
@@ -293,7 +290,7 @@ print(f"Recommended: {plan}")
 print(f"Reason: {reason}")
 ```
 
-# Hybrid Approach
+## Hybrid Approach
 
 Use both plans for different workloads:
 
@@ -363,7 +360,7 @@ resource "azurerm_app_service_plan" "premium" {
 }
 ```
 
-# Migration Strategies
+## Migration Strategies
 
 Moving between plans:
 
@@ -411,9 +408,8 @@ public class AdaptiveProcessor
 }
 ```
 
-# Conclusion
+## Conclusion
 
 Choosing between Consumption and Premium plans depends on your specific requirements around cost, performance, and capabilities. Consumption is ideal for variable workloads and cost optimization, while Premium excels for consistent performance, VNet connectivity, and long-running processes.
 
 Many organizations benefit from a hybrid approach, using Consumption for lightweight, variable workloads and Premium for critical, performance-sensitive functions. Design your code for portability between plans, and regularly review your usage patterns to optimize costs.
-

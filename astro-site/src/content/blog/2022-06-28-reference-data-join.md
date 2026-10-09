@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-28
 tags:
-  - azure
+  - Azure
   - stream-analytics
-  - data
+  - Data
   - joins
-
 ---
-
-I wrote "Reference Data Joins in Stream Analytics" to share practical, production-minded guidance on this topic.
 
 ## Reference Data Sources
 
@@ -83,5 +80,3 @@ ON s.sensorId = d.sensorId
 ## Summary
 
 Reference data joins combine streaming data with dimension data for enriched, contextual analytics.
-
-

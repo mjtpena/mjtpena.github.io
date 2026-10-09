@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Factory Web Activity: Integrating REST APIs in Data Pipelines"
+description: "The Web activity in ADF is the HTTP client that lets your pipeline call external REST APIs—triggering a Logic App, posting a Teams notification, calling a…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-30
@@ -395,4 +396,4 @@ The Web activity in ADF is the HTTP client that lets your pipeline call external
 4. **Secure sensitive data**: Use secureInput/secureOutput
 5. **Implement retry logic**: Handle transient failures
 
-The Web Activity opens up endless integration possibilities, allowing Azure Data Factory to orchestrate workflows across diverse systems and services through REST APIs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Web Activity opens up endless integration possibilities, allowing Azure Data Factory to orchestrate workflows across diverse systems and services through REST APIs.

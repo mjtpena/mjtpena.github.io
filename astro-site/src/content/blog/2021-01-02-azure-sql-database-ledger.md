@@ -1,5 +1,6 @@
 ---
 title: "Azure SQL Database Ledger: Tamper-Proof Data"
+description: "SQL Ledger: trust through cryptographic verification."
 author: Michael John Peña
 draft: false
 date: 2021-01-02
@@ -8,10 +9,7 @@ tags:
   - SQL
   - Ledger
   - Security
-
 ---
-
-I wrote "Azure SQL Database Ledger: Tamper-Proof Data" to share practical, production-minded guidance on this topic.
 
 ## Ledger Tables Types
 
@@ -160,4 +158,4 @@ SET LEDGER_DIGEST_STORAGE =
 3. **External verification** - Digests stored outside SQL
 4. **No blockchain complexity** - Standard SQL interfaces
 
-SQL Ledger: trust through cryptographic verification.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+SQL Ledger: trust through cryptographic verification.

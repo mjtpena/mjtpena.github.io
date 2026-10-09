@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering: Structured Output with JSON Mode"
+description: "For even stricter control, use the structured outputs feature with a JSON schema. JSON mode transforms LLMs from conversational tools into reliable data…"
 author: Michael John Peña
 draft: false
 date: 2025-09-13
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Structured Output
   - API Design
-
 ---
-
-I wrote "Prompt Engineering: Structured Output with JSON Mode" to share practical, production-minded guidance on this topic.
 
 ## Enabling JSON Mode
 
@@ -127,4 +125,4 @@ def safe_json_extract(text: str, schema_description: str) -> dict:
         return {"success": False, "error": str(e)}
 ```
 
-JSON mode transforms LLMs from conversational tools into reliable data extraction engines. Always validate outputs against expected schemas before passing data to downstream systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+JSON mode transforms LLMs from conversational tools into reliable data extraction engines. Always validate outputs against expected schemas before passing data to downstream systems.

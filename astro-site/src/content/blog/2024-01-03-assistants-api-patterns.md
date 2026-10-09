@@ -1,5 +1,6 @@
 ---
 title: "OpenAI Assistants API: Production Patterns and Best Practices"
+description: "I started building with the Assistants API in late 2023. In production it rewarded strict state management, clear tool contracts, and thoughtful thread…"
 author: Michael John Peña
 draft: false
 date: 2024-01-03

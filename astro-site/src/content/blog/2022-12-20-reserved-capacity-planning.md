@@ -9,10 +9,7 @@ tags:
   - Cost Optimization
   - Planning
   - FinOps
-
 ---
-
-I wrote "Reserved Capacity Planning for Azure" to share practical, production-minded guidance on this topic.
 
 ## Understanding Reserved Capacity
 
@@ -335,4 +332,3 @@ Reserved capacity offers significant savings but requires careful analysis. Focu
 - [Azure Reservations](https://docs.microsoft.com/azure/cost-management-billing/reservations/)
 - [VM Size Flexibility](https://docs.microsoft.com/azure/virtual-machines/reserved-vm-instance-size-flexibility)
 - [Reservation Recommendations](https://docs.microsoft.com/azure/cost-management-billing/reservations/reserved-instance-purchase-recommendations)
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Search Updates: January 2024 Features and Capabilities"
+description: "I've been integrating Azure AI Search into RAG systems; the January 2024 updates simplify common workflows. Below are the changes I judged most impactful…"
 author: Michael John Peña
 draft: false
 date: 2024-01-23

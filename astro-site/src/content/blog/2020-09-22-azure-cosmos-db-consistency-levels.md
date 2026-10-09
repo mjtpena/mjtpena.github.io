@@ -1,5 +1,6 @@
 ---
 title: "Azure Cosmos DB Consistency Levels Explained"
+description: "Strong and Bounded Staleness cost double because reads wait for quorum. Start with Session - it provides intuitive consistency for users while maintaining…"
 author: Michael John Peña
 draft: false
 date: 2020-09-22
@@ -8,10 +9,7 @@ tags:
   - Cosmos DB
   - Distributed Systems
   - Database
-
 ---
-
-I wrote "Azure Cosmos DB Consistency Levels Explained" to share practical, production-minded guidance on this topic.
 
 ## The Five Levels
 
@@ -72,4 +70,4 @@ Strong and Bounded Staleness cost double because reads wait for quorum.
 
 ## Practical Guidance
 
-Start with Session - it provides intuitive consistency for users while maintaining good performance. Only go stronger when you have proven requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Start with Session - it provides intuitive consistency for users while maintaining good performance. Only go stronger when you have proven requirements.

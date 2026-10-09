@@ -1,5 +1,6 @@
 ---
 title: "ChatGPT in Developer Workflows: Practical Applications"
+description: "Twenty-four hours after ChatGPT launched, my developer group chats were a stream of screenshots—developers sharing prompts and responses the way we used to…"
 author: Michael John Peña
 draft: false
 date: 2022-12-01

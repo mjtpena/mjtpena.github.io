@@ -1,18 +1,16 @@
 ---
 title: "Power BI 2022 Features: What's New and Exciting"
+description: "Power BI in 2022 offers unprecedented flexibility for enterprise analytics with features that scale from simple reports to complex enterprise deployments."
 author: Michael John Peña
 draft: false
 date: 2022-01-26
 url: /blog/power-bi-2022-features/
 tags:
   - power-bi
-  - analytics
-  - data
-  - visualization
-
+  - Analytics
+  - Data
+  - Visualization
 ---
-
-I wrote "Power BI 2022 Features: What's New and Exciting" to share practical, production-minded guidance on this topic.
 
 ## Composite Models - Connect Everything
 
@@ -270,4 +268,4 @@ result = pipeline.deploy_to_stage(
 </Report>
 ```
 
-Power BI in 2022 offers unprecedented flexibility for enterprise analytics with features that scale from simple reports to complex enterprise deployments.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Power BI in 2022 offers unprecedented flexibility for enterprise analytics with features that scale from simple reports to complex enterprise deployments.

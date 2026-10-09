@@ -1,13 +1,11 @@
 ---
 title: "Function Calling Updates: What's New in September 2024"
+description: "Function calling is the foundation of agentic AI. These patterns help you build reliable, type-safe tool integrations that scale."
 author: "Michael John Peña"
 draft: false
 date: 2024-09-18
 tags: ["OpenAI", "Function Calling", "AI", "API", "Tools"]
-
 ---
-
-I wrote "Function Calling Updates: What's New in September 2024" to share practical, production-minded guidance on this topic.
 
 ## Updated Function Calling Syntax
 
@@ -356,4 +354,4 @@ def safe_tool_execution(tool_call, max_retries: int = 3) -> str:
             })
 ```
 
-Function calling is the foundation of agentic AI. These patterns help you build reliable, type-safe tool integrations that scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Function calling is the foundation of agentic AI. These patterns help you build reliable, type-safe tool integrations that scale.

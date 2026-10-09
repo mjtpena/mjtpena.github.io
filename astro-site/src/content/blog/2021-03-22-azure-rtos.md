@@ -10,10 +10,7 @@ tags:
   - IoT
   - Embedded Systems
   - ThreadX
-
 ---
-
-I wrote "2021-03-22-azure-rtos" to share practical, production-minded guidance on this topic.
 
 ## Azure RTOS Components
 
@@ -521,4 +518,3 @@ Azure RTOS provides:
 - **Rich ecosystem**: Network, file system, USB, and graphics components
 
 It's ideal for resource-constrained devices requiring real-time performance and Azure connectivity.
-

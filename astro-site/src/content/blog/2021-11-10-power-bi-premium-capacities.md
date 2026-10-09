@@ -9,10 +9,7 @@ tags:
   - Microsoft
   - Data
   - Enterprise
-
 ---
-
-I wrote "Power BI Premium Capacities: Scaling Enterprise Analytics" to share practical, production-minded guidance on this topic.
 
 ## Understanding Premium Capacities
 
@@ -29,4 +26,5 @@ Premium capacities offer:
 
 ```plaintext
 SKU        V-Cores    Memory    Max Dataset Size    Price/Month (approx)
---------------------------------------------------------------------\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+--------------------------------------------------------------------
+```

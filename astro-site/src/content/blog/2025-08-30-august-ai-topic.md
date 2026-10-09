@@ -1,5 +1,6 @@
 ---
 title: "AI-Powered Data Exploration with Microsoft Fabric Copilot"
+description: "Ask questions about your data in natural language and get executable code. Generate complex SQL from natural language descriptions."
 author: Michael John Peña
 draft: false
 date: 2025-08-30
@@ -9,10 +10,7 @@ tags:
   - Data Analysis
   - Natural Language
   - Power BI
-
 ---
-
-I wrote "AI-Powered Data Exploration with Microsoft Fabric Copilot" to share practical, production-minded guidance on this topic.
 
 ## Copilot in Notebooks
 
@@ -80,4 +78,4 @@ Create visuals by describing what you want to see. Copilot suggests appropriate 
 
 ## Best Practices
 
-Be specific in your prompts. Review generated code before executing. Use Copilot to learn new techniques, then refine based on your domain knowledge. Copilot accelerates exploration but doesn't replace understanding your data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Be specific in your prompts. Review generated code before executing. Use Copilot to learn new techniques, then refine based on your domain knowledge. Copilot accelerates exploration but doesn't replace understanding your data.

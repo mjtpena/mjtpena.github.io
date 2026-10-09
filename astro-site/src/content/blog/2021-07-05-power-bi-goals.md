@@ -1,5 +1,6 @@
 ---
 title: Introducing Power BI Goals for OKR and KPI Tracking
+description: "Power BI Goals arrived in 2021 as Microsoft's answer to OKR tracking inside the BI platform, and I think it was better conceived than it might sound. The…"
 author: Michael John Peña
 draft: false
 date: 2021-07-05
@@ -14,7 +15,7 @@ tags:
 
 Power BI Goals arrived in 2021 as Microsoft's answer to OKR tracking inside the BI platform, and I think it was better conceived than it might sound. The core idea: instead of leadership reading dashboard numbers and manually updating a spreadsheet OKR tracker, connect goals directly to Power BI measures. A revenue target connects to the actual revenue measure in your dataset; the scorecard turns red or green based on live data, not manual updates. Goals can have sub-goals with cascading relationships. For organisations already running their analytics on Power BI, keeping performance management in the same platform reduces the context switching that makes OKR reviews feel like extra overhead.
 
-# Understanding Power BI Goals
+## Understanding Power BI Goals
 
 Power BI Goals provides:
 
@@ -25,7 +26,7 @@ Power BI Goals provides:
 - Mobile-friendly goal tracking
 - Integration with Microsoft Teams
 
-# Creating Your First Scorecard
+## Creating Your First Scorecard
 
 Set up a scorecard programmatically using the REST API:
 
@@ -58,7 +59,7 @@ scorecard_id = scorecard["id"]
 print(f"Created scorecard: {scorecard_id}")
 ```
 
-# Defining Goals
+## Defining Goals
 
 Create goals with targets and owners:
 
@@ -114,7 +115,7 @@ nps_goal = create_goal(scorecard_id, {
 })
 ```
 
-# Connecting Goals to Data
+## Connecting Goals to Data
 
 Link goals to existing Power BI datasets:
 
@@ -155,7 +156,7 @@ connect_goal_to_data(scorecard_id, sales_goal["id"], {
 })
 ```
 
-# Creating Goal Hierarchies
+## Creating Goal Hierarchies
 
 Build hierarchical goal structures for OKRs:
 
@@ -219,7 +220,7 @@ key_results = [
 create_okr_structure(scorecard_id, objective, key_results)
 ```
 
-# Manual Check-ins
+## Manual Check-ins
 
 Record manual updates for goals:
 
@@ -248,7 +249,7 @@ record_checkin(scorecard_id, nps_goal["id"], {
 })
 ```
 
-# Embedding Goals in Reports
+## Embedding Goals in Reports
 
 Embed scorecards in Power BI reports:
 
@@ -280,7 +281,7 @@ scorecard.on('goalSelected', function(event) {
 });
 ```
 
-# Teams Integration
+## Teams Integration
 
 Add scorecards to Microsoft Teams:
 
@@ -312,7 +313,7 @@ async function subscribeToGoalUpdates(goalId: string) {
 }
 ```
 
-# Automating Goal Updates
+## Automating Goal Updates
 
 Create automated check-ins with Power Automate:
 
@@ -367,7 +368,7 @@ Create automated check-ins with Power Automate:
 }
 ```
 
-# Conclusion
+## Conclusion
 
 Power BI Goals brings OKR and KPI tracking directly into your business intelligence platform. By connecting goals to existing datasets, you can automate progress tracking while providing manual check-in capabilities for qualitative updates.
 

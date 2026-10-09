@@ -9,10 +9,7 @@ tags:
   - Database
   - Real-Time
   - OneLake
-
 ---
-
-I wrote "Fabric Mirroring GA: Real-Time Database Replication" to share practical, production-minded guidance on this topic.
 
 ## What is Mirroring?
 
@@ -332,4 +329,3 @@ Consider alternatives when:
 Mirroring simplifies the data pipeline from operational databases to analytics. With GA, it's ready for production use with Azure SQL Database and related sources.
 
 Start by identifying tables that would benefit from near real-time analytics access, set up change tracking, and create your first mirror. The reduction in ETL complexity alone makes it worthwhile.
-

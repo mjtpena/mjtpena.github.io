@@ -1,13 +1,11 @@
 ---
 title: "Natural Language to SQL: Building Intelligent Query Interfaces"
+description: "Natural language to SQL (NL2SQL) transforms how users interact with databases. This guide covers implementation strategies, from simple approaches to…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-03
 tags: ["AI", "SQL", "Natural Language", "LLM", "Data"]
-
 ---
-
-I wrote "Natural Language to SQL: Building Intelligent Query Interfaces" to share practical, production-minded guidance on this topic.
 
 Natural language to SQL (NL2SQL) transforms how users interact with databases. This guide covers implementation strategies, from simple approaches to production-ready systems.
 
@@ -360,4 +358,3 @@ Return JSON:
 ## Conclusion
 
 NL2SQL bridges the gap between business users and data. Start with a robust schema representation, add few-shot examples for accuracy, and implement validation to catch errors before execution.
-

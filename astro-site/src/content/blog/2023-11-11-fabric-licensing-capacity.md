@@ -1,13 +1,11 @@
 ---
 title: "Microsoft Fabric Licensing and Capacity Planning Guide"
+description: "Fabric licensing is genuinely different from the Azure pay-as-you-go mental model that most Azure practitioners are familiar with, and understanding the…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-11
 tags: ["Microsoft Fabric", "Licensing", "Capacity", "Azure", "Planning"]
-
 ---
-
-I wrote "Microsoft Fabric Licensing and Capacity Planning Guide" to share practical, production-minded guidance on this topic.
 
 Fabric licensing is genuinely different from the Azure pay-as-you-go mental model that most Azure practitioners are familiar with, and understanding the capacity model upfront saves significant planning pain later. Fabric runs on a reservation model: you purchase a Fabric Capacity (F-SKU) that provides a fixed number of Capacity Units (CUs) per hour, and all Fabric workloads in workspaces assigned to that capacity share those CUs. The SKUs range from F2 (2 CUs, minimum viable for development) to F2048 (2048 CUs, large enterprise). The critical behaviour: Fabric uses a smoothing algorithm that allows short bursts above capacity to be absorbed by unused capacity from adjacent periods, but sustained over-consumption causes throttling. The right sizing approach: instrument your workloads in the Capacity Metrics app during a representative load period, then purchase the F-SKU that keeps peak consumption within a comfortable margin of your reserved CUs.
 
@@ -257,4 +255,4 @@ def calculate_burst_availability(
 4. **Monitor capacity metrics** in the Fabric admin portal
 5. **Consider multi-region** for global deployments
 
-Tomorrow, we'll explore Fabric Governance and how to manage your data platform securely.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Fabric Governance and how to manage your data platform securely.

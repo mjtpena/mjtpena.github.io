@@ -1,5 +1,6 @@
 ---
 title: "ONNX Runtime: Optimizing Model Inference"
+description: "ONNX Runtime is the inference engine I reach for when a Python-trained model needs to be deployed somewhere other than a Python service — a .NET…"
 author: Michael John Peña
 draft: false
 date: 2023-08-09
@@ -290,4 +291,4 @@ Tomorrow we'll explore model optimization techniques in detail.
 
 - [ONNX Runtime Documentation](https://onnxruntime.ai/docs/)
 - [Optimum Library](https://huggingface.co/docs/optimum/onnxruntime/overview)
-- [ONNX Model Zoo](https://github.com/onnx/models)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [ONNX Model Zoo](https://github.com/onnx/models)

@@ -1,13 +1,11 @@
 ---
 title: "Mastering the Query Editor in Azure Data Studio"
+description: "The query editor in Azure Data Studio provides everything needed for efficient SQL development."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-25
 tags: ["Azure", "Azure Data Studio", "SQL", "Query Editor"]
-
 ---
-
-I wrote "Mastering the Query Editor in Azure Data Studio" to share practical, production-minded guidance on this topic.
 
 ## Query Editor Features
 
@@ -300,4 +298,4 @@ JOIN InventoryDB.dbo.Products p ON s.ProductID = p.ProductID;
 4. **Learn shortcuts** - Invest time in keyboard shortcuts
 5. **Use history** - Re-run queries from query history
 
-The query editor in Azure Data Studio provides everything needed for efficient SQL development.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The query editor in Azure Data Studio provides everything needed for efficient SQL development.

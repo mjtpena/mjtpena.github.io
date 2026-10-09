@@ -1,5 +1,6 @@
 ---
 title: "Power BI in Microsoft Fabric: Unified Business Intelligence"
+description: "Power BI in Fabric provides seamless BI capabilities that connect directly to your unified data layer. Tomorrow, I will cover Fabric Capacities and pricing."
 author: Michael John Peña
 draft: false
 date: 2023-05-10
@@ -9,10 +10,7 @@ tags:
   - Business Intelligence
   - Data Visualization
   - Direct Lake
-
 ---
-
-I wrote "Power BI in Microsoft Fabric: Unified Business Intelligence" to share practical, production-minded guidance on this topic.
 
 ## Power BI in Fabric
 
@@ -294,4 +292,4 @@ Power BI in Fabric provides seamless BI capabilities that connect directly to yo
 
 - [Power BI in Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/datasets)
 - [Direct Lake Mode](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview)
-- [DAX Reference](https://learn.microsoft.com/en-us/dax/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [DAX Reference](https://learn.microsoft.com/en-us/dax/)

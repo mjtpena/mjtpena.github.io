@@ -1,18 +1,16 @@
 ---
 title: "Azure Confidential Ledger: Tamper-Proof Record Keeping"
+description: "Azure Confidential Ledger provides cryptographically verifiable, tamper-proof record keeping for compliance-critical scenarios."
 author: Michael John Peña
 draft: false
 date: 2022-02-19
 url: /blog/azure-confidential-ledger/
 tags:
-  - azure
-  - blockchain
-  - security
-  - compliance
-
+  - Azure
+  - Blockchain
+  - Security
+  - Compliance
 ---
-
-I wrote "Azure Confidential Ledger: Tamper-Proof Record Keeping" to share practical, production-minded guidance on this topic.
 
 ## Understanding Confidential Ledger
 
@@ -285,4 +283,4 @@ public async Task<List<AuditEntry>> GetAuditTrailAsync(
 }
 ```
 
-Azure Confidential Ledger provides cryptographically verifiable, tamper-proof record keeping for compliance-critical scenarios.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Confidential Ledger provides cryptographically verifiable, tamper-proof record keeping for compliance-critical scenarios.

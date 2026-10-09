@@ -1,5 +1,6 @@
 ---
 title: "Azure Synapse Dedicated SQL Pools (Preview): Enterprise Data Warehousing"
+description: "Note: While dedicated SQL pools are mature (evolved from Azure SQL DW), the Synapse unified experience is still in preview."
 author: Michael John Peña
 draft: false
 date: 2020-10-25
@@ -8,10 +9,7 @@ tags:
   - Synapse
   - SQL
   - Data Warehouse
-
 ---
-
-I wrote "Azure Synapse Dedicated SQL Pools (Preview): Enterprise Data Warehousing" to share practical, production-minded guidance on this topic.
 
 **Note**: While dedicated SQL pools are mature (evolved from Azure SQL DW), the Synapse unified experience is still in preview.
 
@@ -195,4 +193,4 @@ az synapse sql pool pause --name mypool --workspace-name myws --resource-group m
 az synapse sql pool resume --name mypool --workspace-name myws --resource-group myRG
 ```
 
-Dedicated SQL pools deliver warehouse-scale analytics performance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dedicated SQL pools deliver warehouse-scale analytics performance.

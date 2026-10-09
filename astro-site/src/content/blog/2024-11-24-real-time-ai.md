@@ -1,5 +1,6 @@
 ---
 title: "Real-Time AI in Microsoft Fabric: Patterns and Practices"
+description: "Real-time AI enables immediate, intelligent responses to streaming data. Start with well-defined use cases and gradually increase complexity."
 author: Michael John Peña
 draft: false
 date: 2024-11-24
@@ -9,10 +10,7 @@ tags:
   - Real-Time AI
   - Streaming ML
   - AI
-
 ---
-
-I wrote "Real-Time AI in Microsoft Fabric: Patterns and Practices" to share practical, production-minded guidance on this topic.
 
 ## Real-Time AI Architecture
 
@@ -546,4 +544,4 @@ Real-time AI enables immediate, intelligent responses to streaming data. Start w
 - [Spark Structured Streaming](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)
 - [MLflow Model Serving](https://mlflow.org/docs/latest/models.html)
 - [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
-- [Redis for Feature Stores](https://redis.io/docs/stack/search/reference/vectors/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Redis for Feature Stores](https://redis.io/docs/stack/search/reference/vectors/)

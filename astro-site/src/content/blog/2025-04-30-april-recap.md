@@ -9,10 +9,7 @@ tags:
   - April
   - "2025"
   - Summary
-
 ---
-
-I wrote "April 2025 Recap: Build Preparation and Platform Integration" to share practical, production-minded guidance on this topic.
 
 ## Key Topics This Month
 
@@ -95,4 +92,3 @@ May brings Microsoft Build 2025 with expected announcements on:
 - Developer tooling improvements
 
 Stay tuned for Build coverage and deep dives into new features!
-

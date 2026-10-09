@@ -9,10 +9,7 @@ tags:
   - Blazor
   - WebAssembly
   - .NET
-
 ---
-
-I wrote "2021-06-02-blazor-webassembly-azure-deployment" to share practical, production-minded guidance on this topic.
 
 ## Creating a Blazor WebAssembly Project
 
@@ -355,4 +352,3 @@ Blazor WebAssembly on Azure offers multiple deployment paths, each suited for di
 
 - [Blazor WebAssembly Documentation](https://docs.microsoft.com/en-us/aspnet/core/blazor/)
 - [Azure Static Web Apps with Blazor](https://docs.microsoft.com/en-us/azure/static-web-apps/deploy-blazor)
-

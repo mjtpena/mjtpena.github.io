@@ -1,5 +1,6 @@
 ---
 title: "Fabric Deployment Pipelines: Promoting Content Across Environments"
+description: "Deployment Pipelines provide controlled, auditable content promotion across environments. Tomorrow, I will cover Fabric Monitoring."
 author: Michael John Peña
 draft: false
 date: 2023-06-11
@@ -8,11 +9,8 @@ tags:
   - Deployment Pipelines
   - DevOps
   - CI/CD
-  - ALM
-
+  - alm
 ---
-
-I wrote "Fabric Deployment Pipelines: Promoting Content Across Environments" to share practical, production-minded guidance on this topic.
 
 ## Deployment Pipeline Concept
 
@@ -332,4 +330,4 @@ Deployment Pipelines provide controlled, auditable content promotion across envi
 
 - [Deployment Pipelines Overview](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines)
 - [Deployment Rules](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/create-rules)
-- [Deployment Pipeline API](https://learn.microsoft.com/en-us/rest/api/fabric/deploymentpipelines)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Deployment Pipeline API](https://learn.microsoft.com/en-us/rest/api/fabric/deploymentpipelines)

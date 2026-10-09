@@ -1,5 +1,6 @@
 ---
 title: "Azure Cognitive Services: AI APIs for Every Developer"
+description: "\"We want AI in my app\" is a sentence I hear at least twice a month. Eight times out of ten the answer isn't \"train a custom model\" — it's \"use Cognitive…"
 author: Michael John Peña
 draft: false
 date: 2020-10-07
@@ -8,9 +9,7 @@ tags:
   - Cognitive Services
   - AI
   - APIs
-
 ---
-
 
 "We want AI in my app" is a sentence I hear at least twice a month. Eight times out of ten the answer isn't "train a custom model" — it's "use Cognitive Services for the bit you need and ship next week." Vision, speech, language, and decision APIs that are good enough for most production use cases, billed per call, no model training required. Where the prebuilt model doesn't fit the domain, the conversation gets longer; until then, this is the lowest-friction way to add useful AI to a product.
 
@@ -82,5 +81,4 @@ Most services offer:
 
 Example: Text Analytics sentiment = $0.50 per 1,000 text records
 
-Cognitive Services democratize AI for application developers.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+Cognitive Services democratize AI for application developers.

@@ -1,5 +1,6 @@
 ---
 title: "November 2025 Recap: Ignite Announcements and AI Progress"
+description: "Azure AI Foundry unified the AI development experience, combining model catalog, deployment tools, and prompt management into a single platform. This…"
 author: Michael John Peña
 draft: false
 date: 2025-11-30
@@ -9,10 +10,7 @@ tags:
   - Azure AI
   - Microsoft Fabric
   - Copilot
-
 ---
-
-I wrote "November 2025 Recap: Ignite Announcements and AI Progress" to share practical, production-minded guidance on this topic.
 
 ## Ignite 2025 Highlights
 
@@ -98,4 +96,4 @@ November reinforced that AI implementation success depends on:
 
 The pace of AI advancement shows no signs of slowing. Organizations that build strong foundations now will be best positioned to leverage future capabilities. December offers an opportunity to consolidate gains and prepare for an even more transformative 2026.
 
-Thank you for following along this month. The journey continues.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Thank you for following along this month. The journey continues.

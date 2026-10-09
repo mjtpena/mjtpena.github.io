@@ -1,13 +1,11 @@
 ---
 title: "Custom Model Deployment on Azure: From Training to Production"
+description: "Deploying custom AI models to production requires careful consideration of scalability, reliability, and cost. This guide covers the complete journey from…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-12
 tags: ["Azure", "Machine Learning", "MLOps", "Deployment", "AI"]
-
 ---
-
-I wrote "Custom Model Deployment on Azure: From Training to Production" to share practical, production-minded guidance on this topic.
 
 Deploying custom AI models to production requires careful consideration of scalability, reliability, and cost. This guide covers the complete journey from trained model to production endpoint.
 
@@ -314,4 +312,3 @@ scaling_config = {
 ## Conclusion
 
 Azure provides multiple paths for deploying custom models. Choose Managed Online Endpoints for simplicity, AKS for control, or Azure Functions for lightweight scenarios. Always implement proper monitoring and gradual rollout strategies.
-

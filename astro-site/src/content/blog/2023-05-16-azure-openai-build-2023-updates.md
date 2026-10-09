@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Updates at Build 2023: What Developers Need to Know"
+description: "Azure OpenAI is becoming the enterprise-grade platform for building generative AI applications. Tomorrow, I will cover building plugins for ChatGPT."
 author: Michael John Peña
 draft: false
 date: 2023-05-16
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - AI
   - Microsoft
-
 ---
-
-I wrote "Azure OpenAI Updates at Build 2023: What Developers Need to Know" to share practical, production-minded guidance on this topic.
 
 ## Key Announcements
 
@@ -360,4 +358,4 @@ Azure OpenAI is becoming the enterprise-grade platform for building generative A
 
 - [Azure OpenAI Documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 - [Function Calling Guide](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/function-calling)
-- [Azure AI Studio](https://ai.azure.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure AI Studio](https://ai.azure.com/)

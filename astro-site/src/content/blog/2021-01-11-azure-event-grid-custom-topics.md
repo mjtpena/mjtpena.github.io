@@ -1,5 +1,6 @@
 ---
 title: "Azure Event Grid Custom Topics: Event-Driven Architecture"
+description: "Service Bus is fine for service-to-service messaging, but when you want \"anything in the system can listen for the order created event,\" Service Bus topics…"
 author: Michael John Peña
 draft: false
 date: 2021-01-11
@@ -198,4 +199,4 @@ var client = new EventGridPublisherClient(endpoint, credential);
 await client.SendEventAsync(cloudEvent);
 ```
 
-Event Grid: reliable event delivery at massive scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Event Grid: reliable event delivery at massive scale.

@@ -9,10 +9,7 @@ tags:
   - AI
   - OpenAI
   - Vision
-
 ---
-
-I wrote "Azure Cognitive Services Updates: OpenAI Integration and More" to share practical, production-minded guidance on this topic.
 
 ## Azure OpenAI Integration
 
@@ -392,4 +389,3 @@ Azure Cognitive Services is becoming more powerful with OpenAI integration while
 - [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 - [Vision API Reference](https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/)
 - [Language Service](https://learn.microsoft.com/en-us/azure/cognitive-services/language-service/)
-

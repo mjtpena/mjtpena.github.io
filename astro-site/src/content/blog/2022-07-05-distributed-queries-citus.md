@@ -1,13 +1,11 @@
 ---
 title: "Mastering Distributed Queries in Citus"
+description: "Understanding these query patterns helps you leverage Citus effectively for high-performance distributed PostgreSQL applications."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-05
 tags: ["Azure", "Citus", "PostgreSQL", "Distributed Queries", "Performance"]
-
 ---
-
-I wrote "Mastering Distributed Queries in Citus" to share practical, production-minded guidance on this topic.
 
 ## Types of Distributed Queries
 
@@ -132,4 +130,4 @@ ORDER BY total_time DESC
 LIMIT 10;
 ```
 
-Understanding these query patterns helps you leverage Citus effectively for high-performance distributed PostgreSQL applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Understanding these query patterns helps you leverage Citus effectively for high-performance distributed PostgreSQL applications.

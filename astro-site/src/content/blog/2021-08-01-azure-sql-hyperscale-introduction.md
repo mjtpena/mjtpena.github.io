@@ -1,13 +1,11 @@
 ---
 title: "Azure SQL Hyperscale: The Ultimate Database Scaling Solution"
+description: "Traditional database architectures couple compute and storage tightly together. Hyperscale breaks this coupling by introducing a distributed storage…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-01
 tags: ["Azure", "SQL", "Hyperscale", "Database", "Cloud"]
-
 ---
-
-I wrote "Azure SQL Hyperscale: The Ultimate Database Scaling Solution" to share practical, production-minded guidance on this topic.
 
 ## What Makes Hyperscale Different?
 
@@ -141,4 +139,4 @@ SELECT
 FROM sys.dm_hadr_database_replica_states;
 ```
 
-Hyperscale transforms how enterprises approach database scalability, offering cloud-native features that were previously impossible with traditional SQL Server deployments.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hyperscale transforms how enterprises approach database scalability, offering cloud-native features that were previously impossible with traditional SQL Server deployments.

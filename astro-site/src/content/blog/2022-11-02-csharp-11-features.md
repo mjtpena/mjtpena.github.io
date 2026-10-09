@@ -8,10 +8,7 @@ tags:
   - .NET
   - Programming
   - Development
-
 ---
-
-I wrote "C# 11 Features: Raw String Literals, Required Members, and More" to share practical, production-minded guidance on this topic.
 
 ## Raw String Literals
 
@@ -293,4 +290,3 @@ C# 11 brings features that make everyday coding more pleasant. Raw string litera
 
 - [What's New in C# 11](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11)
 - [C# Language Reference](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/)
-

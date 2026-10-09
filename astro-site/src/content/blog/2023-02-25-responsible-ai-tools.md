@@ -9,10 +9,7 @@ tags:
   - Ethics
   - AI Safety
   - Fairness
-
 ---
-
-I wrote "Responsible AI Tools and Practices for Azure Applications" to share practical, production-minded guidance on this topic.
 
 ## Azure Responsible AI Dashboard
 
@@ -410,4 +407,4 @@ RESPONSIBLE_AI_CHECKLIST = {
 
 - [Microsoft Responsible AI](https://www.microsoft.com/ai/responsible-ai)
 - [Fairlearn Documentation](https://fairlearn.org/)
-- [Azure Content Safety](https://azure.microsoft.com/products/cognitive-services/content-safety/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Content Safety](https://azure.microsoft.com/products/cognitive-services/content-safety/)

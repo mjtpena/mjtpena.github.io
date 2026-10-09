@@ -9,10 +9,7 @@ tags:
   - AI
   - Document Processing
   - Content Understanding
-
 ---
-
-I wrote "Microsoft Syntex: Content AI for the Enterprise" to share practical, production-minded guidance on this topic.
 
 ## What is Microsoft Syntex?
 
@@ -382,4 +379,3 @@ Microsoft Syntex transforms content management by bringing AI to everyday docume
 - [AI Builder Form Processing](https://docs.microsoft.com/en-us/ai-builder/form-processing-model-overview)
 - [Syntex Licensing](https://docs.microsoft.com/en-us/microsoft-365/contentunderstanding/syntex-licensing)
 - [Content Center Overview](https://docs.microsoft.com/en-us/microsoft-365/contentunderstanding/create-a-content-center)
-

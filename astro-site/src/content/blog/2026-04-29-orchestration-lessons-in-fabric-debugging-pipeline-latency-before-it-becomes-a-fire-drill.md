@@ -1,5 +1,6 @@
 ---
 title: "Orchestration Lessons in Fabric: debugging pipeline latency before it becomes a fire drill"
+description: "I worked on smoothing the handoff between data engineering and AI teams—standardizing feature contracts, embedding validation, and adding lightweight…"
 author: Michael John Peña
 draft: false
 date: 2026-04-29
@@ -36,4 +37,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [Fabric Data Factory](https://learn.microsoft.com/fabric/data-factory/)
 - [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

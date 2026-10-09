@@ -1,5 +1,6 @@
 ---
 title: "Azure Document Intelligence: Extracting Structured Data from Documents"
+description: "Document Intelligence automates data extraction from complex business documents."
 author: Michael John Peña
 draft: false
 date: 2025-04-19
@@ -9,10 +10,7 @@ tags:
   - OCR
   - Extraction
   - AI
-
 ---
-
-I wrote "Azure Document Intelligence: Extracting Structured Data from Documents" to share practical, production-minded guidance on this topic.
 
 ## Document Intelligence Integration
 
@@ -135,4 +133,4 @@ class DocumentProcessor:
         return items
 ```
 
-Document Intelligence automates data extraction from complex business documents.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Document Intelligence automates data extraction from complex business documents.

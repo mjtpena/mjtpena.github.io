@@ -9,10 +9,7 @@ tags:
   - March
   - "2025"
   - Summary
-
 ---
-
-I wrote "March 2025 Recap: Advanced Patterns and Production Readiness" to share practical, production-minded guidance on this topic.
 
 ## Key Topics This Month
 
@@ -84,4 +81,4 @@ April kicks off Q2 with focus on:
 - Windows AI features
 - On-device model deployment
 
-Stay tuned for more practical AI content in April!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Stay tuned for more practical AI content in April!

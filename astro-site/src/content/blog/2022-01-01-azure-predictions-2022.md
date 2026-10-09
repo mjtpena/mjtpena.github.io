@@ -1,13 +1,14 @@
 ---
 title: "Azure Predictions for 2022: What to Expect"
+description: "Predicting Azure's direction for 2022 from the vantage point of January 1st: the Container Apps/serverless container narrative continues to mature (Azure…"
 author: Michael John Peña
 draft: false
 date: 2022-01-01
 url: /blog/azure-predictions-2022/
 tags:
-  - azure
-  - cloud
-  - predictions
+  - Azure
+  - Cloud
+  - Predictions
 ---
 
 Predicting Azure's direction for 2022 from the vantage point of January 1st: the Container Apps/serverless container narrative continues to mature (Azure filling the gap between App Service and AKS); Azure OpenAI Service exits waitlist and becomes broadly accessible, changing the enterprise AI conversation significantly; Microsoft Fabric (then still Azure Synapse + Power BI + Purview on separate roadmaps) takes steps toward unification; Arc-enabled data services expand their supported workload types; and the developer experience investments (Azure Developer CLI, Bicep, Container Apps) converge into a coherent story for the path from code to cloud. The underlying theme I expect: Microsoft consolidating its service portfolio—retiring overlapping services, merging UIs, and making the "what service do I use for this?" question easier to answer than it was in 2021.
@@ -80,4 +81,4 @@ Microsoft will push sustainability metrics into Azure, helping organizations tra
 
 With economic uncertainty, expect better cost management tools, improved Azure Advisor recommendations, and more aggressive Spot VM pricing strategies.
 
-The year 2022 promises to be transformative for Azure. Whether you're focusing on containers, data, security, or cost optimization, there's something exciting on the horizon for everyone.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The year 2022 promises to be transformative for Azure. Whether you're focusing on containers, data, security, or cost optimization, there's something exciting on the horizon for everyone.

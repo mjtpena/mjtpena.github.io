@@ -8,10 +8,7 @@ tags:
   - .NET
   - Serverless
   - Azure
-
 ---
-
-I wrote "Azure Functions with .NET 7: Isolated Worker Process Model" to share practical, production-minded guidance on this topic.
 
 ## Why Isolated Process?
 
@@ -398,4 +395,3 @@ The isolated worker process model is the future of .NET Azure Functions. With .N
 - [.NET Isolated Process Guide](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide)
 - [Azure Functions .NET Worker](https://github.com/Azure/azure-functions-dotnet-worker)
 - [Middleware in Isolated Functions](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide#middleware)
-

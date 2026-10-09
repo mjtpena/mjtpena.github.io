@@ -1,5 +1,6 @@
 ---
 title: "Edge AI Architecture: Designing for On-Device Intelligence"
+description: "Edge AI architecture balances latency, privacy, and capability across processing tiers."
 author: Michael John Peña
 draft: false
 date: 2025-04-09
@@ -9,10 +10,7 @@ tags:
   - On-Device
   - IoT
   - Design
-
 ---
-
-I wrote "Edge AI Architecture: Designing for On-Device Intelligence" to share practical, production-minded guidance on this topic.
 
 ## Edge AI Design Patterns
 
@@ -119,4 +117,4 @@ class HybridInference:
         return self.combine_results(local_result, cloud_result)
 ```
 
-Edge AI architecture balances latency, privacy, and capability across processing tiers.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Edge AI architecture balances latency, privacy, and capability across processing tiers.

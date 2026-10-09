@@ -1,5 +1,6 @@
 ---
 title: "API-First Data: Treating Data as a Service"
+description: "API-first data design treats data products as services with well-defined interfaces. Today I'm exploring how to build data APIs in Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-20
@@ -446,4 +447,4 @@ Tomorrow I'll cover data marketplace concepts.
 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [OpenAPI Specification](https://swagger.io/specification/)
-- [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)

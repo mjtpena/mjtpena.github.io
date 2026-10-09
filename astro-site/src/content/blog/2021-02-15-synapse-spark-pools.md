@@ -1,5 +1,6 @@
 ---
 title: Big Data Processing with Azure Synapse Spark Pools
+description: "Synapse Spark pools are the feature that stops the \"should I use Databricks or Synapse?\" question from being purely a product choice and makes it an…"
 author: Michael John Peña
 draft: false
 date: 2021-02-15

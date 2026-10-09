@@ -1,13 +1,11 @@
 ---
 title: "Data Colocation in Citus for Optimal Join Performance"
+description: "When two distributed tables share the same distribution column and colocation group, their corresponding shards are placed on the same worker node."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-06
 tags: ["Azure", "Citus", "PostgreSQL", "Colocation", "Performance"]
-
 ---
-
-I wrote "Data Colocation in Citus for Optimal Join Performance" to share practical, production-minded guidance on this topic.
 
 ## Understanding Colocation
 
@@ -133,4 +131,4 @@ WHERE a.logicalrelid = 'orders'::regclass
   AND b.logicalrelid = 'order_items'::regclass;
 ```
 
-Proper colocation design is essential for building high-performance multi-tenant applications on Citus.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper colocation design is essential for building high-performance multi-tenant applications on Citus.

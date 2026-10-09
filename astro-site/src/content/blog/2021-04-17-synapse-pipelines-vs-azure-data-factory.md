@@ -1,5 +1,6 @@
 ---
 title: Synapse Pipelines vs Azure Data Factory - Making the Right Choice
+description: "The Synapse Pipelines vs. ADF question comes up in almost every Synapse project I start. The honest answer depends on where the rest of your data platform…"
 author: Michael John Peña
 draft: false
 date: 2021-04-17

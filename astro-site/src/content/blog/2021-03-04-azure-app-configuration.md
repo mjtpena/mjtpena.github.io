@@ -10,10 +10,7 @@ tags:
   - Feature Flags
   - .NET
   - DevOps
-
 ---
-
-I wrote "2021-03-04-azure-app-configuration" to share practical, production-minded guidance on this topic.
 
 ## Why Azure App Configuration?
 
@@ -343,4 +340,3 @@ Azure App Configuration simplifies configuration management for modern applicati
 - Powerful feature flag capabilities for progressive rollouts
 
 Start with basic key-value storage and gradually adopt feature flags and Key Vault integration as your needs grow.
-

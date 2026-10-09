@@ -1,18 +1,16 @@
 ---
 title: "Azure Sustainability: Building a Greener Cloud"
+description: "Microsoft has committed to being carbon negative by 2030. Azure regions are increasingly powered by renewable energy, and new tools help customers measure…"
 author: Michael John Peña
 draft: false
 date: 2022-01-25
 url: /blog/azure-sustainability/
 tags:
-  - azure
-  - sustainability
+  - Azure
+  - Sustainability
   - green-computing
-  - cloud
-
+  - Cloud
 ---
-
-I wrote "Azure Sustainability: Building a Greener Cloud" to share practical, production-minded guidance on this topic.
 
 ## Microsoft's Sustainability Commitment
 
@@ -236,4 +234,4 @@ AzureMetrics
 5. **Monitor and measure** - Track carbon impact
 6. **Batch workloads** - Run during low-carbon periods
 
-Building sustainable cloud solutions is not just good for the planet - it often results in cost savings and operational efficiency.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Building sustainable cloud solutions is not just good for the planet - it often results in cost savings and operational efficiency.

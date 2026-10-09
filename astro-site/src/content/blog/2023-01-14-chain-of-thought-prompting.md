@@ -1,5 +1,6 @@
 ---
 title: "Chain-of-Thought Prompting: Making LLMs Reason Step by Step"
+description: "Chain-of-thought prompting encourages models to break down problems into intermediate reasoning steps before giving a final answer."
 author: Michael John Peña
 draft: false
 date: 2023-01-14
@@ -9,10 +10,7 @@ tags:
   - Prompt Engineering
   - AI
   - Reasoning
-
 ---
-
-I wrote "Chain-of-Thought Prompting: Making LLMs Reason Step by Step" to share practical, production-minded guidance on this topic.
 
 ## What is Chain-of-Thought?
 
@@ -521,4 +519,4 @@ class CoTEvaluator:
 
 - [Chain-of-Thought Paper](https://arxiv.org/abs/2201.11903)
 - [Self-Consistency Paper](https://arxiv.org/abs/2203.11171)
-- [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/advanced-prompt-engineering)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/advanced-prompt-engineering)

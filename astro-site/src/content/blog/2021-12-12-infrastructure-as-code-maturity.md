@@ -1,5 +1,6 @@
 ---
 title: "Infrastructure as Code Maturity: Beyond the Basics"
+description: "IaC maturity in 2021 meant treating infrastructure code with the same rigor as application code. The tools support it; the discipline makes it work."
 author: Michael John Pena
 draft: false
 date: 2021-12-12
@@ -9,10 +10,7 @@ tags:
   - Bicep
   - Azure
   - DevOps
-
 ---
-
-I wrote "Infrastructure as Code Maturity: Beyond the Basics" to share practical, production-minded guidance on this topic.
 
 ## The IaC Maturity Model
 
@@ -559,4 +557,4 @@ IaC maturity in 2021 meant treating infrastructure code with the same rigor as a
 
 - [Terraform Best Practices](https://www.terraform-best-practices.com/)
 - [Bicep Documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Infrastructure Testing](https://terratest.gruntwork.io/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Infrastructure Testing](https://terratest.gruntwork.io/)

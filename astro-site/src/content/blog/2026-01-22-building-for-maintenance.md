@@ -1,5 +1,6 @@
 ---
 title: "Building Software I Want to Maintain"
+description: "I'm tired of clever code. I want boring, maintainable code. Early career: \"Look at this elegant one-liner!\""
 author: Michael John Peña
 draft: false
 date: 2026-01-22
@@ -66,4 +67,4 @@ Before merging code:
 
 You'll spend more time reading code than writing it. Write code you want to read.
 
-Future you will thank you. So will your team.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Future you will thank you. So will your team.

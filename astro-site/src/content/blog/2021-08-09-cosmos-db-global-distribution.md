@@ -1,13 +1,11 @@
 ---
 title: "Cosmos DB Global Distribution: Building Planet-Scale Applications"
+description: "Global distribution in Cosmos DB provides the foundation for building truly global, resilient applications that serve users with consistent low latency…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-09
 tags: ["Azure", "Cosmos DB", "Global Distribution", "Multi-Region", "High Availability"]
-
 ---
-
-I wrote "Cosmos DB Global Distribution: Building Planet-Scale Applications" to share practical, production-minded guidance on this topic.
 
 ## Adding Regions to Your Account
 
@@ -260,4 +258,4 @@ az cosmosdb failover-priority-change \
 4. **Monitor replication metrics**: Watch for lag spikes
 5. **Use service-managed failover**: Unless you need manual control
 
-Global distribution in Cosmos DB provides the foundation for building truly global, resilient applications that serve users with consistent low latency regardless of their location.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Global distribution in Cosmos DB provides the foundation for building truly global, resilient applications that serve users with consistent low latency regardless of their location.

@@ -1,13 +1,11 @@
 ---
 title: "Building Custom LLM Observability: DIY Solutions"
+description: "Building custom observability gives you full control over your data and features. Start simple and add complexity as your needs grow."
 author: "Michael John Peña"
 draft: false
 date: 2024-10-20
 tags: ["Observability", "LLM", "DIY", "Custom", "Monitoring"]
-
 ---
-
-I wrote "Building Custom LLM Observability: DIY Solutions" to share practical, production-minded guidance on this topic.
 
 ## Custom Observability Stack
 
@@ -441,4 +439,4 @@ import schedule
 schedule.every(5).minutes.do(alert_manager.check_alerts)
 ```
 
-Building custom observability gives you full control over your data and features. Start simple and add complexity as your needs grow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Building custom observability gives you full control over your data and features. Start simple and add complexity as your needs grow.

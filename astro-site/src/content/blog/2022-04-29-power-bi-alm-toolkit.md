@@ -9,10 +9,7 @@ tags:
   - DevOps
   - Deployment
   - Schema Management
-
 ---
-
-I wrote "ALM Toolkit for Power BI: Schema Comparison and Deployment" to share practical, production-minded guidance on this topic.
 
 ## Core Features
 
@@ -126,4 +123,3 @@ ALM Toolkit is essential for Power BI DevOps:
 
 - [ALM Toolkit on GitHub](https://github.com/Microsoft/Analysis-Services)
 - [Documentation](https://docs.microsoft.com/en-us/analysis-services/tools/alm-toolkit)
-

@@ -10,10 +10,7 @@ tags:
   - Content Moderation
   - Microsoft Azure
   - AI Safety
-
 ---
-
-I wrote "Azure AI Content Safety: Comprehensive Content Moderation" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -582,4 +579,3 @@ print(f"Block rate: {stats['block_rate']:.1%}")
 ## Conclusion
 
 Azure AI Content Safety provides powerful tools for implementing comprehensive content moderation. By combining severity-based thresholds, custom blocklists, batch processing, and integration with LLM applications, organizations can build robust safety systems. Regular monitoring and analytics help maintain effectiveness and identify emerging risks.
-

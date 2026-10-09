@@ -1,5 +1,6 @@
 ---
 title: "Dynamic Content in Azure Data Factory: Expressions and Functions"
+description: "Dynamic content in ADF is the expression system that makes pipelines adaptive rather than static—generating file paths from date parameters, constructing…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-26
@@ -395,4 +396,4 @@ class ADFExpressionBuilder:
 4. **Test expressions**: Use the expression builder in ADF UI
 5. **Document complex logic**: Add comments in pipeline descriptions
 
-Dynamic content transforms Azure Data Factory from a simple copy tool into a powerful, flexible data integration platform capable of handling complex, data-driven workflows.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dynamic content transforms Azure Data Factory from a simple copy tool into a powerful, flexible data integration platform capable of handling complex, data-driven workflows.

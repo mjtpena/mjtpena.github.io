@@ -1,13 +1,11 @@
 ---
 title: "SQL Database in Microsoft Fabric: Deep Dive"
+description: "SQL Database in Fabric brings enterprise-grade transactional capabilities to the unified data platform, with seamless integration to analytical workloads…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-23
 tags: ["SQL Database", "Microsoft Fabric", "Azure", "T-SQL", "Database"]
-
 ---
-
-I wrote "SQL Database in Microsoft Fabric: Deep Dive" to share practical, production-minded guidance on this topic.
 
 ## SQL Database Architecture in Fabric
 
@@ -358,4 +356,4 @@ GRANT SELECT, INSERT, UPDATE ON SCHEMA::sales TO sales_writer;
 ALTER ROLE sales_reader ADD MEMBER [user@domain.com];
 ```
 
-SQL Database in Fabric brings enterprise-grade transactional capabilities to the unified data platform, with seamless integration to analytical workloads through automatic mirroring.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+SQL Database in Fabric brings enterprise-grade transactional capabilities to the unified data platform, with seamless integration to analytical workloads through automatic mirroring.

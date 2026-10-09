@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering Best Practices for Enterprise Applications"
+description: "A well-structured prompt includes context, instructions, examples, and output format specifications."
 author: Michael John Peña
 draft: false
 date: 2025-08-19
@@ -9,10 +10,7 @@ tags:
   - AI
   - Best Practices
   - Enterprise
-
 ---
-
-I wrote "Prompt Engineering Best Practices for Enterprise Applications" to share practical, production-minded guidance on this topic.
 
 ## Structure Your Prompts
 
@@ -72,4 +70,4 @@ Ask for JSON, markdown tables, or specific formats to get machine-parseable resp
 ### Chain of Thought
 For complex reasoning, prompt the model to "think step by step" before providing the final answer.
 
-Invest time in prompt development. A 10% improvement in prompt quality often delivers a 50% improvement in application reliability.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Invest time in prompt development. A 10% improvement in prompt quality often delivers a 50% improvement in application reliability.

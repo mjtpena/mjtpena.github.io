@@ -1,5 +1,6 @@
 ---
 title: "Data Governance with Microsoft Purview: Implementing Data Lineage Tracking"
+description: "Purview captures lineage automatically from supported sources and allows custom lineage submission via APIs. The lineage graph shows how data flows from…"
 author: Michael John Peña
 draft: false
 date: 2025-10-06
@@ -9,10 +10,7 @@ tags:
   - Data Lineage
   - Compliance
   - Data Catalog
-
 ---
-
-I wrote "Data Governance with Microsoft Purview: Implementing Data Lineage Tracking" to share practical, production-minded guidance on this topic.
 
 ## Understanding Purview Lineage Architecture
 
@@ -111,4 +109,4 @@ def add_lineage_annotations(
 
 ## Querying Lineage for Impact Analysis
 
-Before modifying source systems, query lineage to understand downstream impacts. This prevents unintended data quality issues and helps communicate changes to data consumers.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Before modifying source systems, query lineage to understand downstream impacts. This prevents unintended data quality issues and helps communicate changes to data consumers.

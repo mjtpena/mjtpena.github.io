@@ -1,13 +1,11 @@
 ---
 title: "Cost Optimization in Microsoft Fabric"
+description: "Cost optimisation isn't about cutting features — it's about aligning spend with business value. During holiday slowdowns I help teams identify idle…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-25
 tags: ["Microsoft Fabric", "Cost Optimization", "FinOps", "Cost Management", "Cloud Economics"]
-
 ---
-
-I wrote "Cost Optimization in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 Cost optimisation isn't about cutting features — it's about aligning spend with business value. During holiday slowdowns I help teams identify idle capacities, ineffective autoscale rules, and costly query patterns. These tactics reduce spend immediately without harming throughput.
 
@@ -297,4 +295,4 @@ class CostDashboard:
         return "\n".join(lines)
 ```
 
-Tomorrow, we'll look at 2024 predictions for AI and data!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll look at 2024 predictions for AI and data!

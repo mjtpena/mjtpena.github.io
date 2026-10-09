@@ -1,5 +1,6 @@
 ---
 title: "Output Caching in ASP.NET Core 7: A Complete Guide"
+description: "Output caching stores the complete HTTP response and serves it directly for subsequent identical requests, bypassing the entire request pipeline. Unlike…"
 author: Michael John Peña
 draft: false
 date: 2022-11-06
@@ -9,10 +10,7 @@ tags:
   - Performance
   - Caching
   - Azure
-
 ---
-
-I wrote "Output Caching in ASP.NET Core 7: A Complete Guide" to share practical, production-minded guidance on this topic.
 
 ## What is Output Caching?
 
@@ -416,4 +414,3 @@ Output caching in ASP.NET Core 7 is a powerful, flexible solution for improving 
 - [Output Caching Middleware](https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output)
 - [Distributed Caching](https://learn.microsoft.com/en-us/aspnet/core/performance/caching/distributed)
 - [Response Caching](https://learn.microsoft.com/en-us/aspnet/core/performance/caching/response)
-

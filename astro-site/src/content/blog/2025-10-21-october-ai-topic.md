@@ -1,5 +1,6 @@
 ---
 title: "Monitoring AI Applications with Azure Monitor and Application Insights"
+description: "Configure alerts for latency spikes, error rate increases, and token usage anomalies to catch issues before they impact users."
 author: Michael John Peña
 draft: false
 date: 2025-10-21
@@ -9,10 +10,7 @@ tags:
   - Observability
   - AI Applications
   - MLOps
-
 ---
-
-I wrote "Monitoring AI Applications with Azure Monitor and Application Insights" to share practical, production-minded guidance on this topic.
 
 ## Implementing Custom AI Metrics
 
@@ -137,4 +135,4 @@ class MonitoredAIService:
 
 ## Setting Up Alerts
 
-Configure alerts for latency spikes, error rate increases, and token usage anomalies to catch issues before they impact users.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Configure alerts for latency spikes, error rate increases, and token usage anomalies to catch issues before they impact users.

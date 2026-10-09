@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Service GA Announcement: A New Era for Enterprise AI"
+description: "2023 is going to be the year AI goes mainstream in enterprise applications. Azure OpenAI Service removes the last major barrier - security and compliance…"
 author: Michael John Peña
 draft: false
 date: 2023-01-01
@@ -9,10 +10,7 @@ tags:
   - AI
   - Enterprise
   - GPT
-
 ---
-
-I wrote "Azure OpenAI Service GA Announcement: A New Era for Enterprise AI" to share practical, production-minded guidance on this topic.
 
 ## What This Means for Enterprises
 
@@ -173,4 +171,4 @@ The teams that start experimenting now will have a significant advantage when th
 
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 - [Apply for Access](https://aka.ms/oai/access)
-- [Pricing Information](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Pricing Information](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/)

@@ -1,18 +1,16 @@
 ---
 title: "Azure Managed Grafana Preview: Enterprise Observability"
+description: "Azure Managed Grafana provides enterprise observability with seamless Azure integration and reduced operational overhead."
 author: Michael John Peña
 draft: false
 date: 2022-02-20
 url: /blog/azure-managed-grafana/
 tags:
-  - azure
-  - grafana
-  - monitoring
-  - observability
-
+  - Azure
+  - Grafana
+  - Monitoring
+  - Observability
 ---
-
-I wrote "Azure Managed Grafana Preview: Enterprise Observability" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Managed Grafana?
 
@@ -272,4 +270,4 @@ resource "azurerm_role_assignment" "grafana_monitor_reader" {
 }
 ```
 
-Azure Managed Grafana provides enterprise observability with seamless Azure integration and reduced operational overhead.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Managed Grafana provides enterprise observability with seamless Azure integration and reduced operational overhead.

@@ -1,5 +1,6 @@
 ---
 title: Mastering Azure CDN Caching Rules and Optimization
+description: "CDN caching rules are the configuration that determines how long cached content stays at the edge before the CDN checks with the origin for updates—and…"
 author: Michael John Pena
 draft: false
 date: 2021-09-29
@@ -486,4 +487,4 @@ class AssetLoader {
 5. **Purge Selectively**: Avoid purging entire cache
 6. **Monitor Hit Ratio**: Target >90% for static content
 
-Proper caching strategy dramatically improves performance and reduces origin load, making your application faster and more cost-effective.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper caching strategy dramatically improves performance and reduces origin load, making your application faster and more cost-effective.

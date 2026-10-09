@@ -9,10 +9,7 @@ tags:
   - API
   - Architecture
   - AI
-
 ---
-
-I wrote "Completion vs Chat APIs in Azure OpenAI: Choosing the Right Approach" to share practical, production-minded guidance on this topic.
 
 ## API Comparison
 
@@ -450,4 +447,5 @@ class MigrationHelper:
 # Example migration
 old_code = {
     "engine": "text-davinci-003",
-    "prompt": """System: You are a helpful assistant.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    "prompt": """System: You are a helpful assistant.
+```

@@ -1,5 +1,6 @@
 ---
 title: "The Serverless Evolution: Where We Landed in 2021"
+description: "Serverless in 2021 proved it's not just for simple APIs. Complex, stateful, event-driven applications are running successfully in production. The technology…"
 author: Michael John Pena
 draft: false
 date: 2021-12-05
@@ -9,10 +10,7 @@ tags:
   - Event-Driven
   - Cloud
   - FaaS
-
 ---
-
-I wrote "The Serverless Evolution: Where We Landed in 2021" to share practical, production-minded guidance on this topic.
 
 ## Azure Functions Durable Entities
 
@@ -300,4 +298,4 @@ Serverless in 2021 proved it's not just for simple APIs. Complex, stateful, even
 
 - [Azure Functions Documentation](https://docs.microsoft.com/en-us/azure/azure-functions/)
 - [Durable Functions Patterns](https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview)
-- [Azure Container Apps](https://docs.microsoft.com/en-us/azure/container-apps/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Container Apps](https://docs.microsoft.com/en-us/azure/container-apps/)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Cache for Redis: Caching Patterns"
+description: "Redis caching transforms application performance at scale."
 author: Michael John Peña
 draft: false
 date: 2020-10-24
@@ -8,10 +9,7 @@ tags:
   - Redis
   - Caching
   - Performance
-
 ---
-
-I wrote "Azure Cache for Redis: Caching Patterns" to share practical, production-minded guidance on this topic.
 
 ## Creating Redis Cache
 
@@ -197,4 +195,4 @@ var topPlayers = await db.SortedSetRangeByRankWithScoresAsync(
 var rank = await db.SortedSetRankAsync("leaderboard", "player1", Order.Descending);
 ```
 
-Redis caching transforms application performance at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Redis caching transforms application performance at scale.

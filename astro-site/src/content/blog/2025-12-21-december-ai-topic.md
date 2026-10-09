@@ -1,5 +1,6 @@
 ---
 title: "Winter Solstice Code Review: My Most Impactful Refactors of 2025"
+description: "On the longest night of the year, let's reflect on code improvements. Here are the refactoring patterns that delivered the biggest impact in my projects…"
 author: Michael John Peña
 draft: false
 date: 2025-12-21
@@ -148,4 +149,4 @@ public void ProcessOrder(OrderId orderId, Email email, Money amount) { }
 
 The best refactors aren't about clever code - they're about making the wrong thing impossible to do. Each of these patterns moved validation and constraints from runtime to compile time, catching bugs before they reach production.
 
-Happy Winter Solstice! May your code grow cleaner as the days grow longer.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Happy Winter Solstice! May your code grow cleaner as the days grow longer.

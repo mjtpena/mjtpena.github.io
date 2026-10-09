@@ -1,5 +1,6 @@
 ---
 title: "Building Useful AI Agents: tool access policies that improve reliability"
+description: "I worked on smoothing the handoff between data engineering and AI teams—standardizing feature contracts, embedding validation, and adding lightweight…"
 author: Michael John Peña
 draft: false
 date: 2026-03-11
@@ -36,4 +37,4 @@ Tomorrow I will apply the same rule to a second workflow to check repeatability.
 
 - [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
 - [Copilot in Fabric overview](https://learn.microsoft.com/fabric/fundamentals/copilot-fabric-overview)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

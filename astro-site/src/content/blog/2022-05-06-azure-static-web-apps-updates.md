@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-05-06
 tags:
-  - azure
+  - Azure
   - static-web-apps
-  - jamstack
-  - serverless
-
+  - JAMstack
+  - Serverless
 ---
-
-I wrote "Azure Static Web Apps: New Features at Build 2022" to share practical, production-minded guidance on this topic.
 
 ## New Features Overview
 
@@ -408,5 +405,3 @@ Azure Static Web Apps at Build 2022 offers:
 - Seamless GitHub/Azure DevOps integration
 
 It remains an excellent choice for JAMstack applications with serverless backends.
-
-

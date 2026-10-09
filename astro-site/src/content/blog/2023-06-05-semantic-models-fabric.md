@@ -1,5 +1,6 @@
 ---
 title: "Semantic Models in Microsoft Fabric: Building the Analytics Layer"
+description: "Semantic models provide the business logic layer that enables self-service analytics. Tomorrow, I will cover Fabric Notebooks."
 author: Michael John Peña
 draft: false
 date: 2023-06-05
@@ -9,10 +10,7 @@ tags:
   - Power BI
   - DAX
   - Analytics
-
 ---
-
-I wrote "Semantic Models in Microsoft Fabric: Building the Analytics Layer" to share practical, production-minded guidance on this topic.
 
 ## What is a Semantic Model?
 
@@ -367,4 +365,4 @@ Semantic models provide the business logic layer that enables self-service analy
 
 - [Semantic Models](https://learn.microsoft.com/en-us/power-bi/connect-data/service-datasets-understand)
 - [DAX Reference](https://learn.microsoft.com/en-us/dax/)
-- [Model Best Practices](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Model Best Practices](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema)

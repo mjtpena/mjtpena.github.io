@@ -1,5 +1,6 @@
 ---
 title: "Online Inference Patterns: Low-Latency ML Predictions at Scale"
+description: "Online inference requires careful attention to latency, reliability, and scalability. Choose patterns based on your specific requirements and constraints."
 author: Michael John Peña
 draft: false
 date: 2024-11-26
@@ -9,10 +10,7 @@ tags:
   - Online Inference
   - MLOps
   - Performance
-
 ---
-
-I wrote "Online Inference Patterns: Low-Latency ML Predictions at Scale" to share practical, production-minded guidance on this topic.
 
 ## Online Inference Architecture
 
@@ -439,4 +437,4 @@ Online inference requires careful attention to latency, reliability, and scalabi
 
 - [Azure ML Online Endpoints](https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-online)
 - [Feast Feature Store](https://docs.feast.dev/)
-- [Model Serving Best Practices](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-online-endpoints)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Model Serving Best Practices](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-online-endpoints)

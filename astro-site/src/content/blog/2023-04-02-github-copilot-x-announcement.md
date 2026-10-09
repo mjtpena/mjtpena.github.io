@@ -1,5 +1,6 @@
 ---
 title: "GitHub Copilot X: The Next Generation of AI-Powered Development"
+description: "Commit messages: {commitsstr} {f'Related issues: {issuesstr}' if issuesstr else ''} response = await self.client.chatcompletion( model=\"gpt-4\"…"
 author: Michael John Pena
 draft: false
 date: 2023-04-02
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - Development
   - GPT-4
-
 ---
-
-I wrote "GitHub Copilot X: The Next Generation of AI-Powered Development" to share practical, production-minded guidance on this topic.
 
 ## What's New in Copilot X
 
@@ -422,4 +420,4 @@ Provide:
 3. **Enable chat** - Enable Copilot Chat in settings
 4. **Experiment** - Try different interaction patterns
 
-GitHub Copilot X represents a major evolution in AI-assisted development. It's not just about code completion anymore - it's a comprehensive AI partner throughout the development lifecycle.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GitHub Copilot X represents a major evolution in AI-assisted development. It's not just about code completion anymore - it's a comprehensive AI partner throughout the development lifecycle.

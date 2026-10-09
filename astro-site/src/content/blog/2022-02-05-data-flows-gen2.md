@@ -1,18 +1,16 @@
 ---
 title: "Data Flows Gen2: Visual Data Transformation at Scale"
+description: "Data Flows Gen2 democratize data transformation, enabling both developers and data analysts to build scalable ETL solutions."
 author: Michael John Peña
 draft: false
 date: 2022-02-05
 url: /blog/data-flows-gen2/
 tags:
-  - azure
+  - Azure
   - data-factory
-  - synapse
-  - etl
-
+  - Synapse
+  - ETL
 ---
-
-I wrote "Data Flows Gen2: Visual Data Transformation at Scale" to share practical, production-minded guidance on this topic.
 
 ## Data Flow Architecture
 
@@ -271,4 +269,4 @@ ADFActivityRun
 | order by TimeGenerated desc
 ```
 
-Data Flows Gen2 democratize data transformation, enabling both developers and data analysts to build scalable ETL solutions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Data Flows Gen2 democratize data transformation, enabling both developers and data analysts to build scalable ETL solutions.

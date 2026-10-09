@@ -1,17 +1,15 @@
 ---
 title: "Microsoft Dev Box Preview: Cloud-Based Developer Workstations"
+description: "Microsoft Dev Box provides self-service, high-performance, cloud-based workstations pre-configured with project-specific tools, source code, and settings.…"
 author: Michael John Peña
 draft: false
 date: 2022-05-01
 tags:
-  - azure
+  - Azure
   - dev-box
   - developer-tools
-  - cloud
-
+  - Cloud
 ---
-
-I wrote "Microsoft Dev Box Preview: Cloud-Based Developer Workstations" to share practical, production-minded guidance on this topic.
 
 ## What is Microsoft Dev Box?
 
@@ -189,5 +187,3 @@ Microsoft Dev Box addresses the long-standing challenge of developer environment
 - Optimize costs with auto-shutdown capabilities
 
 As we approach Build 2022, expect more details on pricing, availability, and integration with other Azure services.
-
-

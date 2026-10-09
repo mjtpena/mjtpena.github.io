@@ -1,13 +1,11 @@
 ---
 title: "Causal Inference in Machine Learning with Azure ML"
+description: "Causal inference enables data-driven decision making by understanding the true impact of interventions."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-07
 tags: ["Azure", "Machine Learning", "Causal Inference", "Statistics", "AI"]
-
 ---
-
-I wrote "Causal Inference in Machine Learning with Azure ML" to share practical, production-minded guidance on this topic.
 
 ## Correlation vs Causation
 
@@ -249,4 +247,4 @@ results = tester.analyze_experiment(
 print(f"A/B Test ATE: {results['ate']:.4f}")
 ```
 
-Causal inference enables data-driven decision making by understanding the true impact of interventions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Causal inference enables data-driven decision making by understanding the true impact of interventions.

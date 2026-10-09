@@ -1,13 +1,11 @@
 ---
 title: "Using Reference Tables in Citus for Efficient Joins"
+description: "Reference tables eliminate network round-trips for joins, significantly improving query performance in distributed setups."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-04
 tags: ["Azure", "Citus", "PostgreSQL", "Reference Tables", "Performance"]
-
 ---
-
-I wrote "Using Reference Tables in Citus for Efficient Joins" to share practical, production-minded guidance on this topic.
 
 ## What are Reference Tables?
 
@@ -114,4 +112,4 @@ CREATE INDEX idx_countries_code ON countries(code);
 CREATE INDEX idx_categories_name ON product_categories(name);
 ```
 
-Reference tables eliminate network round-trips for joins, significantly improving query performance in distributed setups.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Reference tables eliminate network round-trips for joins, significantly improving query performance in distributed setups.

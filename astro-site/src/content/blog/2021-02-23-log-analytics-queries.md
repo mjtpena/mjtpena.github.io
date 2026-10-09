@@ -1,5 +1,6 @@
 ---
 title: Mastering Log Analytics Queries with KQL
+description: "KQL is the query language I've spent the most hours in this year that most developers have never heard of. If you use Log Analytics, Sentinel, Application…"
 author: Michael John Peña
 draft: false
 date: 2021-02-23

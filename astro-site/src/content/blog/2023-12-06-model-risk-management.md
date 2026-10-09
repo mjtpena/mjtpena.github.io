@@ -1,13 +1,11 @@
 ---
 title: "Model Risk Management for Large Language Models"
+description: "LLMs are different beasts: unpredictable, context‑sensitive, and often opaque. Model risk management for LLMs needs to emphasise provenance, prompt…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-06
 tags: ["AI", "LLM", "Risk Management", "Model Governance", "MLOps"]
-
 ---
-
-I wrote "Model Risk Management for Large Language Models" to share practical, production-minded guidance on this topic.
 
 LLMs are different beasts: unpredictable, context‑sensitive, and often opaque. Model risk management for LLMs needs to emphasise provenance, prompt engineering controls, robustness testing and continuous monitoring — not just a one-time validation step.
 
@@ -326,4 +324,4 @@ class LLMObservability:
         return alerts
 ```
 
-Tomorrow, we'll explore operational risk in AI systems!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore operational risk in AI systems!

@@ -1,5 +1,6 @@
 ---
 title: Scaling Machine Learning with Azure ML Compute Clusters
+description: "Compute clusters are essential for production ML workloads. Their ability to scale dynamically and support distributed training makes them the backbone of…"
 author: Michael John Pena
 draft: false
 date: 2021-09-02
@@ -9,10 +10,7 @@ tags:
   - Azure ML
   - MLOps
   - Distributed Computing
-
 ---
-
-I wrote "2021-09-02-azure-ml-compute-clusters" to share practical, production-minded guidance on this topic.
 
 ## Understanding Compute Clusters
 
@@ -188,4 +186,4 @@ for job in jobs:
         print(f"Running job: {job.name}")
 ```
 
-Compute clusters are essential for production ML workloads. Their ability to scale dynamically and support distributed training makes them the backbone of enterprise machine learning operations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Compute clusters are essential for production ML workloads. Their ability to scale dynamically and support distributed training makes them the backbone of enterprise machine learning operations.

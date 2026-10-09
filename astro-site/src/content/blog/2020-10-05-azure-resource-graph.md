@@ -1,5 +1,6 @@
 ---
 title: "Azure Resource Graph: Query All Your Azure Resources"
+description: "Resource Graph is essential for understanding your Azure estate at scale."
 author: Michael John Peña
 draft: false
 date: 2020-10-05
@@ -8,10 +9,7 @@ tags:
   - Resource Graph
   - KQL
   - Inventory
-
 ---
-
-I wrote "Azure Resource Graph: Query All Your Azure Resources" to share practical, production-minded guidance on this topic.
 
 ## Basic Queries
 
@@ -90,4 +88,4 @@ Resource Graph integrates with:
 - Power BI for executive reports
 - Azure Monitor for alerting
 
-Resource Graph is essential for understanding your Azure estate at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Resource Graph is essential for understanding your Azure estate at scale.

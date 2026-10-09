@@ -1,5 +1,6 @@
 ---
 title: "GPT-4o: Multimodal AI Gets Real-Time"
+description: "Total latency: 2-5 seconds. GPT-4o processes audio natively - 232ms average response time. That's human conversational speed. The model understands tone…"
 author: Michael John Peña
 draft: false
 date: 2024-05-15
@@ -9,10 +10,7 @@ tags:
   - GPT-4o
   - Azure OpenAI
   - Multimodal
-
 ---
-
-I wrote "GPT-4o: Multimodal AI Gets Real-Time" to share practical, production-minded guidance on this topic.
 
 ## What Makes GPT-4o Different
 
@@ -243,4 +241,4 @@ Start experimenting now. The capabilities are here - the creative applications a
 - [GPT-4o Announcement](https://openai.com/index/hello-gpt-4o/)
 - [Azure OpenAI GPT-4o](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4o-and-gpt-4-turbo)
 - [Realtime API Documentation](https://platform.openai.com/docs/guides/realtime)
-- [OpenAI Pricing](https://openai.com/pricing)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [OpenAI Pricing](https://openai.com/pricing)

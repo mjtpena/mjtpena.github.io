@@ -1,13 +1,11 @@
 ---
 title: "Parallel Jobs in Azure ML for Large-Scale Processing"
+description: "Parallel jobs enable processing datasets of any size by distributing work across your compute cluster."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-20
 tags: ["Azure", "Machine Learning", "Parallel Processing", "Batch", "Scalability"]
-
 ---
-
-I wrote "Parallel Jobs in Azure ML for Large-Scale Processing" to share practical, production-minded guidance on this topic.
 
 ## Parallel Run Configuration
 
@@ -335,4 +333,4 @@ high_throughput_job = parallel_run_function(
 )
 ```
 
-Parallel jobs enable processing datasets of any size by distributing work across your compute cluster.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Parallel jobs enable processing datasets of any size by distributing work across your compute cluster.

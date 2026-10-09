@@ -1,5 +1,6 @@
 ---
 title: "AI Safety Progress: From Research to Practice"
+description: "AI safety is no longer optional. Build safety into your AI systems from the start, not as an afterthought."
 author: Michael John Peña
 draft: false
 date: 2024-12-14
@@ -9,10 +10,7 @@ tags:
   - Responsible AI
   - Ethics
   - Governance
-
 ---
-
-I wrote "AI Safety Progress: From Research to Practice" to share practical, production-minded guidance on this topic.
 
 ## Safety Landscape Evolution
 
@@ -372,4 +370,4 @@ AI safety is no longer optional. Build safety into your AI systems from the star
 - [Microsoft Responsible AI](https://www.microsoft.com/en-us/ai/responsible-ai)
 - [OpenAI Safety](https://openai.com/safety)
 - [EU AI Act](https://artificialintelligenceact.eu/)
-- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)

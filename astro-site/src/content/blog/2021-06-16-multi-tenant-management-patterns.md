@@ -1,5 +1,6 @@
 ---
 title: Multi-Tenant Management Patterns in Azure
+description: "Multi-tenant Azure management is the architecture problem I've spent more time on this year than any other. The patterns matter because the wrong choice…"
 author: Michael John Peña
 draft: false
 date: 2021-06-16

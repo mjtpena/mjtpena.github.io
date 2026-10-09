@@ -1,5 +1,6 @@
 ---
 title: MLOps Best Practices with Azure Machine Learning
+description: "MLOps transforms ML from an experimental practice to a reliable engineering discipline. Azure ML provides the tools to implement these practices at scale."
 author: Michael John Pena
 draft: false
 date: 2021-09-06
@@ -9,10 +10,7 @@ tags:
   - MLOps
   - DevOps
   - CI/CD
-
 ---
-
-I wrote "2021-09-06-mlops-azure-ml" to share practical, production-minded guidance on this topic.
 
 ## The MLOps Lifecycle
 
@@ -357,4 +355,4 @@ resource "azurerm_machine_learning_workspace" "ml" {
 4. **Model Monitoring**: Track drift and performance degradation
 5. **Rollback Strategy**: Blue-green deployments for safe updates
 
-MLOps transforms ML from an experimental practice to a reliable engineering discipline. Azure ML provides the tools to implement these practices at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+MLOps transforms ML from an experimental practice to a reliable engineering discipline. Azure ML provides the tools to implement these practices at scale.

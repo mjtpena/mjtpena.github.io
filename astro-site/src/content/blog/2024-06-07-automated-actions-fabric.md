@@ -1,5 +1,6 @@
 ---
 title: "Automated Actions in Microsoft Fabric"
+description: "Automated actions are what make Data Activator powerful. Today I'm exploring all the ways you can respond to data conditions automatically."
 author: Michael John Peña
 draft: false
 date: 2024-06-07
@@ -596,4 +597,4 @@ Tomorrow I'll cover Fabric Copilot updates.
 
 - [Data Activator Actions](https://learn.microsoft.com/fabric/data-activator/data-activator-actions)
 - [Power Automate Connectors](https://learn.microsoft.com/connectors/)
-- [Adaptive Cards](https://adaptivecards.io/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Adaptive Cards](https://adaptivecards.io/)

@@ -10,10 +10,7 @@ tags:
   - Document Processing
   - Text Splitting
   - AI
-
 ---
-
-I wrote "Document Chunking Strategies for RAG Systems" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -674,4 +671,3 @@ print(f"Completeness: {metrics['completeness']['completeness_rate']:.1%}")
 ## Conclusion
 
 Effective chunking is essential for RAG performance. Fixed-size chunking provides simplicity, semantic chunking preserves meaning, recursive chunking respects text hierarchy, and document-aware chunking leverages structure. Evaluate chunking quality using coverage, size distribution, and completeness metrics to optimize for your specific use case.
-

@@ -1,5 +1,6 @@
 ---
 title: "Agent Workflows in Practice: state handling patterns that reduce agent confusion"
+description: "I tightened system boundaries so quality checks trigger earlier, catching regressions before downstream systems consume bad data."
 author: Michael John Peña
 draft: false
 date: 2026-03-22
@@ -36,4 +37,4 @@ Tomorrow I will review this with the team so the decision is shared, not persona
 
 - [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
 - [Copilot in Fabric overview](https://learn.microsoft.com/fabric/fundamentals/copilot-fabric-overview)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

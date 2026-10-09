@@ -1,5 +1,6 @@
 ---
 title: "Implementing Data Quality Checks in Microsoft Fabric Lakehouses"
+description: "Poor data quality leads to incorrect business decisions, failed ML models, and eroded trust in analytics platforms. A proactive approach to data validation…"
 author: Michael John Peña
 draft: false
 date: 2025-11-02
@@ -9,10 +10,7 @@ tags:
   - Lakehouse
   - Data Engineering
   - PySpark
-
 ---
-
-I wrote "Implementing Data Quality Checks in Microsoft Fabric Lakehouses" to share practical, production-minded guidance on this topic.
 
 ## Why Data Quality Matters
 
@@ -104,4 +102,4 @@ validator.save_results("quality.validation_results")
 
 Integrate these checks into Fabric Data Factory pipelines to create automated quality gates. Failed checks can trigger alerts or halt downstream processing, ensuring only validated data flows through your analytics platform.
 
-Building data quality into your lakehouse architecture from the start prevents the accumulation of technical debt that becomes increasingly difficult to address over time.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Building data quality into your lakehouse architecture from the start prevents the accumulation of technical debt that becomes increasingly difficult to address over time.

@@ -1,5 +1,6 @@
 ---
 title: "Real-Time Analytics in Fabric: Architecture Patterns and Implementation"
+description: "Real-time analytics in Fabric provides a powerful, integrated solution for streaming data. Start with simple patterns and evolve to more complex scenarios…"
 author: Michael John Peña
 draft: false
 date: 2025-01-12
@@ -9,10 +10,7 @@ tags:
   - Streaming
   - KQL
   - Azure
-
 ---
-
-I wrote "Real-Time Analytics in Fabric: Architecture Patterns and Implementation" to share practical, production-minded guidance on this topic.
 
 ## Real-Time Intelligence Components
 
@@ -438,4 +436,4 @@ HourlyMetrics
 | summarize daily_avg = avg(avg_temp) by device_id, bin(timestamp, 1d)
 ```
 
-Real-time analytics in Fabric provides a powerful, integrated solution for streaming data. Start with simple patterns and evolve to more complex scenarios as your needs grow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Real-time analytics in Fabric provides a powerful, integrated solution for streaming data. Start with simple patterns and evolve to more complex scenarios as your needs grow.

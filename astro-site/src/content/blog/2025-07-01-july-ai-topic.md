@@ -1,5 +1,6 @@
 ---
 title: "Building AI Agents with Azure AI Foundry: A Post-Build 2025 Implementation Guide"
+description: "The new agent framework introduces several critical improvements. First, native multi-agent orchestration allows agents to collaborate without custom…"
 author: Michael John Peña
 draft: false
 date: 2025-07-01
@@ -9,10 +10,7 @@ tags:
   - Build 2025
   - Python
   - Enterprise AI
-
 ---
-
-I wrote "Building AI Agents with Azure AI Foundry: A Post-Build 2025 Implementation Guide" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Your AI Foundry Project
 
@@ -63,4 +61,4 @@ The new agent framework introduces several critical improvements. First, native 
 
 When deploying agents to production, configure proper authentication scopes, set up monitoring through Azure Monitor, and implement retry logic for transient failures. The new SDK handles connection pooling and rate limiting automatically, but you should still implement application-level circuit breakers for critical paths.
 
-Azure AI Foundry represents a significant step forward in enterprise AI development, making it easier than ever to build reliable, scalable AI agents.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure AI Foundry represents a significant step forward in enterprise AI development, making it easier than ever to build reliable, scalable AI agents.

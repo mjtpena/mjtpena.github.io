@@ -1,18 +1,16 @@
 ---
 title: "Model Fine-Tuning on Azure: When and How to Customize LLMs"
+description: "Fine-tuning makes sense when you need consistent style, specialized terminology, or improved performance on specific tasks that prompt engineering cannot…"
 author: Michael John Peña
 draft: false
 date: 2025-11-14
 tags:
-  - Fine-tuning
+  - Fine-Tuning
   - Azure OpenAI
   - Machine Learning
   - LLM
   - Customization
-
 ---
-
-I wrote "Model Fine-Tuning on Azure: When and How to Customize LLMs" to share practical, production-minded guidance on this topic.
 
 ## When to Fine-Tune
 
@@ -171,4 +169,4 @@ def evaluate_model(model_name: str, test_cases: list[dict]) -> dict:
     }
 ```
 
-Fine-tuning is a powerful tool but requires careful data preparation and evaluation. Start with prompt engineering and only fine-tune when you have clear evidence of improvement needs and sufficient quality training data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fine-tuning is a powerful tool but requires careful data preparation and evaluation. Start with prompt engineering and only fine-tune when you have clear evidence of improvement needs and sufficient quality training data.

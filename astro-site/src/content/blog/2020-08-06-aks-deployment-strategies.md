@@ -1,5 +1,6 @@
 ---
 title: "Deployment Strategies for Azure Kubernetes Service"
+description: "\"How do we deploy a new version without downtime?\" That's the conversation that got me writing this post. AKS gives you the primitives, but the choice…"
 author: Michael John Peña
 draft: false
 date: 2020-08-06
@@ -304,4 +305,4 @@ kubectl logs -f deployment/myapp
 - **Blue-green**: when the cost of a bad deployment is high and the application can't tolerate two versions running at once. Database schema changes are the classic case — although those still need backwards-compatible migrations underneath.
 - **Canary**: when I genuinely want to measure the new version against the old before committing. Honest take: pure replica-count canary like above is crude. If you care about real canarying, you want a service mesh (Linkerd or Istio) doing weighted traffic split, plus an automated promote/rollback driven by metrics. Without that, "canary" is just a slow blue-green.
 
-The probe configuration matters more than the strategy. A misconfigured `livenessProbe` can take down a healthy pod faster than any deployment mistake. Tune the readiness path to actually reflect "ready to serve traffic" — including warm caches, JIT, and dependent connections — and the rest of this gets a lot easier.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The probe configuration matters more than the strategy. A misconfigured `livenessProbe` can take down a healthy pod faster than any deployment mistake. Tune the readiness path to actually reflect "ready to serve traffic" — including warm caches, JIT, and dependent connections — and the rest of this gets a lot easier.

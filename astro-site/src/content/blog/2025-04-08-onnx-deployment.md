@@ -1,5 +1,6 @@
 ---
 title: "ONNX Deployment: Cross-Platform AI Model Deployment"
+description: "ONNX enables train-once-deploy-anywhere for AI models across diverse hardware."
 author: Michael John Peña
 draft: false
 date: 2025-04-08
@@ -9,10 +10,7 @@ tags:
   - Cross-Platform
   - AI
   - Models
-
 ---
-
-I wrote "ONNX Deployment: Cross-Platform AI Model Deployment" to share practical, production-minded guidance on this topic.
 
 ## ONNX Deployment Pipeline
 
@@ -127,4 +125,4 @@ class ONNXInference:
         return dict(zip(output_names, outputs))
 ```
 
-ONNX enables train-once-deploy-anywhere for AI models across diverse hardware.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+ONNX enables train-once-deploy-anywhere for AI models across diverse hardware.

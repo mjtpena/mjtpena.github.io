@@ -1,5 +1,6 @@
 ---
 title: "Structured Output with Azure OpenAI: JSON Mode and Response Formats"
+description: "JSON mode guarantees the model outputs valid JSON, though you still need to specify the schema in your prompt."
 author: Michael John Peña
 draft: false
 date: 2025-08-26
@@ -9,10 +10,7 @@ tags:
   - JSON Mode
   - API Development
   - Python
-
 ---
-
-I wrote "Structured Output with Azure OpenAI: JSON Mode and Response Formats" to share practical, production-minded guidance on this topic.
 
 ## JSON Mode
 
@@ -91,4 +89,4 @@ def analyze_review(review_text: str) -> ProductReview:
 
 Always validate output even with structured modes. Handle edge cases where the model might return unexpected values within the schema. Use Pydantic or similar libraries for type-safe parsing in Python applications.
 
-Structured outputs transform unpredictable LLM responses into reliable API-compatible data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Structured outputs transform unpredictable LLM responses into reliable API-compatible data.

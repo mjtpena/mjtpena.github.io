@@ -7,11 +7,8 @@ tags:
   - service-mesh
   - istio
   - linkerd
-  - kubernetes
-
+  - Kubernetes
 ---
-
-I wrote "Service Mesh Comparison: Istio vs Linkerd vs Open Service Mesh" to share practical, production-minded guidance on this topic.
 
 ## Feature Comparison
 
@@ -81,5 +78,3 @@ spec:
 ## Summary
 
 Choose based on your needs: Linkerd for simplicity, Istio for features, OSM for Azure integration.
-
-

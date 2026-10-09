@@ -1,13 +1,11 @@
 ---
 title: "SQL Agent Jobs in Azure SQL Managed Instance"
+description: "SQL Agent in Managed Instance provides enterprise-grade job scheduling without managing infrastructure."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-21
 tags: ["Azure", "SQL Managed Instance", "SQL Agent", "Automation"]
-
 ---
-
-I wrote "SQL Agent Jobs in Azure SQL Managed Instance" to share practical, production-minded guidance on this topic.
 
 ## Creating SQL Agent Jobs
 
@@ -395,4 +393,4 @@ EXEC msdb.dbo.sp_add_notification
     @notification_method = 1;  -- Email
 ```
 
-SQL Agent in Managed Instance provides enterprise-grade job scheduling without managing infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+SQL Agent in Managed Instance provides enterprise-grade job scheduling without managing infrastructure.

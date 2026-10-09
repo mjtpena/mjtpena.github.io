@@ -1,5 +1,6 @@
 ---
 title: "Implementing Hybrid Search in Azure AI Search"
+description: "Keyword search excels at exact matches and rare terms. Vector search captures semantic similarity. Combining them leverages both strengths while mitigating…"
 author: Michael John Peña
 draft: false
 date: 2025-08-12
@@ -9,10 +10,7 @@ tags:
   - Vector Search
   - RAG
   - Information Retrieval
-
 ---
-
-I wrote "Implementing Hybrid Search in Azure AI Search" to share practical, production-minded guidance on this topic.
 
 ## Understanding Hybrid Search
 
@@ -85,4 +83,4 @@ def hybrid_search(query: str, query_embedding: list[float], top_k: int = 5):
     return list(results)
 ```
 
-Hybrid search with semantic ranking typically improves retrieval relevance by 15-30% compared to vector-only approaches, making it the recommended pattern for production RAG systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hybrid search with semantic ranking typically improves retrieval relevance by 15-30% compared to vector-only approaches, making it the recommended pattern for production RAG systems.

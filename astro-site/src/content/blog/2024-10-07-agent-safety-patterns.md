@@ -1,13 +1,11 @@
 ---
 title: "Agent Safety Patterns: Building Trustworthy AI Systems"
+description: "Safety in AI agents is not optional - it's foundational. Build safety in from the start, and your agents will be both powerful and trustworthy."
 author: "Michael John Peña"
 draft: false
 date: 2024-10-07
 tags: ["AI Safety", "Agents", "Security", "Best Practices", "Production"]
-
 ---
-
-I wrote "Agent Safety Patterns: Building Trustworthy AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Safety Architecture
 
@@ -394,4 +392,4 @@ class SafetyMonitor:
         }
 ```
 
-Safety in AI agents is not optional - it's foundational. Build safety in from the start, and your agents will be both powerful and trustworthy.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Safety in AI agents is not optional - it's foundational. Build safety in from the start, and your agents will be both powerful and trustworthy.

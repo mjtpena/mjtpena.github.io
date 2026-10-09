@@ -1,5 +1,6 @@
 ---
 title: "Identity-First Security: The New Perimeter"
+description: "Identity-first security in 2021 meant rethinking how we control access. The tools are mature; the challenge is implementation discipline."
 author: Michael John Pena
 draft: false
 date: 2021-12-15
@@ -9,10 +10,7 @@ tags:
   - Azure AD
   - Authentication
   - Authorization
-
 ---
-
-I wrote "Identity-First Security: The New Perimeter" to share practical, production-minded guidance on this topic.
 
 ## Azure AD as the Identity Foundation
 
@@ -442,4 +440,4 @@ Identity-first security in 2021 meant rethinking how we control access. The tool
 
 - [Microsoft Identity Platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/)
 - [Azure AD Best Practices](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-ops-guide-intro)
-- [MSAL Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [MSAL Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-overview)

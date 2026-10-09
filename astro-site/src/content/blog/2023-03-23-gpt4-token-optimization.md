@@ -1,5 +1,6 @@
 ---
 title: "Token Optimization Strategies for GPT-4"
+description: "Output tokens cost 2x input tokens. This changes optimization strategy. With systematic token optimization, you can reduce GPT-4 costs by 50-70% while…"
 author: Michael John Pena
 draft: false
 date: 2023-03-23
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Optimization
   - Cost
-
 ---
-
-I wrote "Token Optimization Strategies for GPT-4" to share practical, production-minded guidance on this topic.
 
 ## Understanding Token Costs
 
@@ -550,4 +548,4 @@ class TokenOptimizationDashboard:
         }
 ```
 
-With systematic token optimization, you can reduce GPT-4 costs by 50-70% while maintaining quality. Track your savings and continuously refine your strategies.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+With systematic token optimization, you can reduce GPT-4 costs by 50-70% while maintaining quality. Track your savings and continuously refine your strategies.

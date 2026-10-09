@@ -1,13 +1,11 @@
 ---
 title: "Microsoft Fabric April 2024 Updates: What's New"
+description: "Microsoft Fabric continues to evolve as a unified analytics platform. April 2024 brings significant updates across data engineering, science, and business…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-01
 tags: ["Microsoft Fabric", "Azure", "Data", "Analytics", "Updates"]
-
 ---
-
-I wrote "Microsoft Fabric April 2024 Updates: What's New" to share practical, production-minded guidance on this topic.
 
 Microsoft Fabric continues to evolve as a unified analytics platform. April 2024 brings significant updates across data engineering, science, and business intelligence capabilities.
 
@@ -235,4 +233,3 @@ print(f"Created semantic model: {response.json()}")
 ## Conclusion
 
 Microsoft Fabric's April 2024 updates strengthen its position as a unified analytics platform. The improvements in Copilot, data engineering, and semantic models make it easier to build end-to-end analytics solutions.
-

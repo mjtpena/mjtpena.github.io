@@ -1,5 +1,6 @@
 ---
 title: ASP.NET Core Best Practices on Azure App Service
+description: "ASP.NET Core on Azure App Service is the combination I've deployed more than any other in the past three years, and the relationship between the .NET…"
 author: Michael John Peña
 draft: false
 date: 2021-06-03

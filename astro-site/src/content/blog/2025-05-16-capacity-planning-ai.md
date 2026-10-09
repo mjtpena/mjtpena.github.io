@@ -1,5 +1,6 @@
 ---
 title: "Capacity Planning for AI: Scaling AI Infrastructure"
+description: "Strategic capacity planning ensures AI systems can scale efficiently within budget."
 author: Michael John Peña
 draft: false
 date: 2025-05-16
@@ -9,10 +10,7 @@ tags:
   - Infrastructure
   - Scaling
   - Operations
-
 ---
-
-I wrote "Capacity Planning for AI: Scaling AI Infrastructure" to share practical, production-minded guidance on this topic.
 
 ## AI Capacity Planning
 
@@ -123,4 +121,4 @@ class AICapacityPlanner:
         }
 ```
 
-Strategic capacity planning ensures AI systems can scale efficiently within budget.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Strategic capacity planning ensures AI systems can scale efficiently within budget.

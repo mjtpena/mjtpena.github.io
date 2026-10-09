@@ -10,10 +10,7 @@ tags:
   - Document Retrieval
   - LlamaIndex
   - AI
-
 ---
-
-I wrote "Parent-Child Retrieval for RAG Systems" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -659,4 +656,3 @@ print(f"Sources used: {len(result['sources'])}")
 ## Conclusion
 
 Parent-child retrieval improves RAG systems by enabling precise matching on small chunks while providing comprehensive context from larger parent chunks. This approach balances retrieval accuracy with context richness, leading to better generation quality. Hierarchical structures can extend this pattern to multiple levels for even finer control over context granularity.
-

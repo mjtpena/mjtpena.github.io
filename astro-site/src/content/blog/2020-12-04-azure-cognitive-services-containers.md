@@ -1,5 +1,6 @@
 ---
 title: "Azure Cognitive Services Containers: AI On-Premises"
+description: "\"Can I use Cognitive Services if my data can never leave the country?\" I get this question from public-sector and healthcare clients constantly. The answer…"
 author: Michael John Peña
 draft: false
 date: 2020-12-04
@@ -8,9 +9,7 @@ tags:
   - Cognitive Services
   - Containers
   - AI
-
 ---
-
 
 "Can I use Cognitive Services if my data can never leave the country?" I get this question from public-sector and healthcare clients constantly. The answer is yes—containers. Microsoft ships several Cognitive Services as Docker images you run on your own infrastructure, billed via a metering connection to Azure. Same APIs, same SDKs, your data stays put. It's also the cleanest answer for low-latency edge inferencing.
 
@@ -165,4 +164,4 @@ spec:
           limits:
             memory: "8Gi"
             cpu: "4"
-
+```

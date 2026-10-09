@@ -1,5 +1,6 @@
 ---
 title: "The Code Review That Rewired How I Think"
+description: "Seven years ago, a senior engineer reviewed my code and said nothing about the code. I've thought about that review almost every week since."
 author: Michael John Peña
 draft: false
 date: 2026-02-24
@@ -84,4 +85,4 @@ If you're reviewing code—ask the human question, not just the technical one.
 
 If your code is being reviewed—be able to answer who it's for and why it matters.
 
-Everything else follows from that.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Everything else follows from that.

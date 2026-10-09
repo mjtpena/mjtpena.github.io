@@ -1,5 +1,6 @@
 ---
 title: "Delta Sharing: Secure Data Exchange Across Organizations"
+description: "The protocol is open source, meaning recipients don't need Databricks to access shared data."
 author: Michael John Peña
 draft: false
 date: 2022-03-12
@@ -9,10 +10,7 @@ tags:
   - Delta Sharing
   - Data Exchange
   - Open Source
-
 ---
-
-I wrote "Delta Sharing: Secure Data Exchange Across Organizations" to share practical, production-minded guidance on this topic.
 
 ## What is Delta Sharing?
 
@@ -492,4 +490,3 @@ Whether sharing with partners, customers, or between internal teams, Delta Shari
 - [Delta Sharing Documentation](https://docs.databricks.com/data-sharing/index.html)
 - [Delta Sharing Protocol](https://github.com/delta-io/delta-sharing)
 - [Delta Sharing Python Client](https://pypi.org/project/delta-sharing/)
-

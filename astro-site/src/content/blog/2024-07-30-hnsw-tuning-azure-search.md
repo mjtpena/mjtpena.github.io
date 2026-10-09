@@ -9,10 +9,7 @@ tags:
   - HNSW
   - Performance
   - Tuning
-
 ---
-
-I wrote "HNSW Tuning for Azure AI Search: A Practical Guide" to share practical, production-minded guidance on this topic.
 
 ## HNSW Fundamentals
 
@@ -428,4 +425,3 @@ print(f"Estimated index size: {size['total_gb']:.1f} GB")
 HNSW tuning is about finding the right balance for your specific workload. Start with balanced settings, measure recall and latency on representative queries, and adjust based on your priorities.
 
 The best configuration is workload-specific - there's no universal "best" setting. Invest time in benchmarking with your actual data.
-

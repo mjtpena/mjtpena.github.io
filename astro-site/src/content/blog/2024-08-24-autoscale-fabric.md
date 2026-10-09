@@ -9,10 +9,7 @@ tags:
   - Capacity
   - Cost Management
   - Performance
-
 ---
-
-I wrote "Autoscale in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## How Autoscale Works
 
@@ -514,4 +511,3 @@ for item in get_autoscale_checklist():
 Autoscale in Microsoft Fabric provides the flexibility to handle variable workloads while optimizing costs. Configure base capacity for typical load, allow burst for peaks, and use schedules for predictable patterns.
 
 Regular monitoring ensures your autoscale configuration remains optimal as workload patterns evolve.
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure Deployment Environments: Self-Service Infrastructure for Developers"
+description: "Deployment Environments enables platform engineering teams to provide governed self-service infrastructure to developers. Tomorrow, I will cover Azure…"
 author: Michael John Peña
 draft: false
 date: 2023-05-27
@@ -9,10 +10,7 @@ tags:
   - IaC
   - DevOps
   - Platform Engineering
-
 ---
-
-I wrote "Azure Deployment Environments: Self-Service Infrastructure for Developers" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Deployment Environments?
 
@@ -403,4 +401,4 @@ Deployment Environments enables platform engineering teams to provide governed s
 
 - [Deployment Environments Documentation](https://learn.microsoft.com/en-us/azure/deployment-environments/)
 - [Environment Definitions](https://learn.microsoft.com/en-us/azure/deployment-environments/configure-environment-definition)
-- [Developer Portal](https://learn.microsoft.com/en-us/azure/deployment-environments/quickstart-create-access-environments)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Developer Portal](https://learn.microsoft.com/en-us/azure/deployment-environments/quickstart-create-access-environments)

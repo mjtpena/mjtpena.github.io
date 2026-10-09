@@ -10,10 +10,7 @@ tags:
   - Python
   - LLM
   - Architecture
-
 ---
-
-I wrote "Understanding Runnable Interfaces in LangChain" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -406,4 +403,3 @@ result = pipeline.invoke({"input": "  Some text to analyze...  "})
 ## Conclusion
 
 Understanding the Runnable interface is crucial for building sophisticated LangChain applications. By implementing custom Runnables, you can add specialized functionality like rate limiting, caching, retries, and logging while maintaining compatibility with the LCEL ecosystem.
-

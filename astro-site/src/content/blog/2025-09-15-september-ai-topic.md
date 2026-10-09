@@ -1,5 +1,6 @@
 ---
 title: "Data Mesh: Implementing Self-Serve Data Infrastructure"
+description: "A data platform that enables self-service must provide templates, guardrails, and automation while maintaining governance."
 author: Michael John Peña
 draft: false
 date: 2025-09-15
@@ -9,10 +10,7 @@ tags:
   - Platform Engineering
   - Data Infrastructure
   - Developer Experience
-
 ---
-
-I wrote "Data Mesh: Implementing Self-Serve Data Infrastructure" to share practical, production-minded guidance on this topic.
 
 ## The Self-Serve Platform
 
@@ -133,4 +131,4 @@ datamesh deploy --environment dev
 datamesh promote --from dev --to prod
 ```
 
-Self-serve infrastructure removes bottlenecks while maintaining standards. The platform handles complexity; domain teams focus on delivering value through data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Self-serve infrastructure removes bottlenecks while maintaining standards. The platform handles complexity; domain teams focus on delivering value through data.

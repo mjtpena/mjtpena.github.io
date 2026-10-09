@@ -9,10 +9,7 @@ tags:
   - Data Lake
   - Open Source
   - Table Format
-
 ---
-
-I wrote "Delta Lake Everywhere: The Universal Table Format" to share practical, production-minded guidance on this topic.
 
 ## Why Delta Lake?
 
@@ -588,4 +585,3 @@ Delta Lake provides a reliable, performant foundation for modern data platforms.
 In Microsoft Fabric, Delta Lake is the native format, ensuring compatibility with the broader Delta ecosystem while providing tight integration with Fabric services like Direct Lake and SQL endpoints.
 
 Embrace Delta Lake as your standard table format across all your data platforms for maximum interoperability and data reliability.
-

@@ -1,5 +1,6 @@
 ---
 title: "Real-Time Data Processing with Microsoft Fabric Eventstreams"
+description: "Eventstreams support multiple source types including Azure Event Hubs, Azure IoT Hub, and custom applications. The visual designer makes it easy to…"
 author: Michael John Peña
 draft: false
 date: 2025-08-18
@@ -9,10 +10,7 @@ tags:
   - Real-Time Analytics
   - Streaming
   - Data Engineering
-
 ---
-
-I wrote "Real-Time Data Processing with Microsoft Fabric Eventstreams" to share practical, production-minded guidance on this topic.
 
 ## Creating an Eventstream
 
@@ -71,4 +69,4 @@ async def send_telemetry(device_id: str, readings: dict):
 
 ## Real-Time Dashboards
 
-Connect Eventstreams to Power BI for live dashboards that update as events flow through the system. The combination of Eventstreams, Eventhouse, and Power BI creates a complete real-time analytics solution within Fabric.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Connect Eventstreams to Power BI for live dashboards that update as events flow through the system. The combination of Eventstreams, Eventhouse, and Power BI creates a complete real-time analytics solution within Fabric.

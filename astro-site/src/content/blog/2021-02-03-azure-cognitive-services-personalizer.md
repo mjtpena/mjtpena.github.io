@@ -1,5 +1,6 @@
 ---
 title: Building Personalized Experiences with Azure Cognitive Services Personalizer
+description: "Most recommendation systems I've seen in enterprise settings are either \"sort by recency\" in a trench coat, or a Spark job that runs weekly and calls itself…"
 author: Michael John Peña
 draft: false
 date: 2021-02-03

@@ -4,10 +4,7 @@ author: "Michael John Peña"
 draft: false
 date: 2022-10-01
 tags: ["Azure", "Microsoft Ignite", "Cloud", "AI"]
-
 ---
-
-I wrote "Microsoft Ignite 2022 Preview - What to Expect" to share practical, production-minded guidance on this topic.
 
 ## Expected Announcements
 
@@ -280,4 +277,4 @@ immediate_actions:
 - **Learn**: learn.microsoft.com
 - **YouTube**: Microsoft Mechanics channel
 
-Stay tuned for detailed coverage of all major announcements from Microsoft Ignite 2022.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Stay tuned for detailed coverage of all major announcements from Microsoft Ignite 2022.

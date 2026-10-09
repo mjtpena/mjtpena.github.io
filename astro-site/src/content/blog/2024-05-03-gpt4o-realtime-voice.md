@@ -1,5 +1,6 @@
 ---
 title: "Building Voice AI Applications with Azure OpenAI"
+description: "Voice AI is transforming how we interact with applications. Today I'm exploring how to build voice-enabled AI applications using Azure's current capabilities."
 author: Michael John Peña
 draft: false
 date: 2024-05-03
@@ -279,4 +280,4 @@ Tomorrow I'll cover vision capabilities and document understanding.
 
 - [Azure Speech Services](https://learn.microsoft.com/azure/ai-services/speech-service/)
 - [Azure OpenAI Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
-- [Audio Processing Basics](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Audio Processing Basics](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)

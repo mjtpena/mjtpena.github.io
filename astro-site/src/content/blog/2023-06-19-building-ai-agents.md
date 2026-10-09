@@ -1,5 +1,6 @@
 ---
 title: "Building AI Agents: From Chatbots to Autonomous Assistants"
+description: "Function calling, released last week with the 0613 model versions, gives AI agents a proper foundation — and I've been rebuilding some agent prototypes to…"
 author: Michael John Peña
 draft: false
 date: 2023-06-19
@@ -411,4 +412,4 @@ Building effective AI agents requires careful architecture. Tomorrow, I will cov
 
 - [ReAct Paper](https://arxiv.org/abs/2210.03629)
 - [LangChain Agents](https://python.langchain.com/docs/modules/agents/)
-- [OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)

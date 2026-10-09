@@ -1,5 +1,6 @@
 ---
 title: "Evaluation Metrics for AI: Measuring What Matters"
+description: "Regular evaluation with consistent metrics drives continuous improvement in AI quality."
 author: Michael John Peña
 draft: false
 date: 2025-03-23
@@ -9,10 +10,7 @@ tags:
   - Metrics
   - Quality
   - Best Practices
-
 ---
-
-I wrote "Evaluation Metrics for AI: Measuring What Matters" to share practical, production-minded guidance on this topic.
 
 ## AI Evaluation Framework
 
@@ -104,4 +102,4 @@ class AIEvaluator:
         return 1 - faithfulness
 ```
 
-Regular evaluation with consistent metrics drives continuous improvement in AI quality.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Regular evaluation with consistent metrics drives continuous improvement in AI quality.

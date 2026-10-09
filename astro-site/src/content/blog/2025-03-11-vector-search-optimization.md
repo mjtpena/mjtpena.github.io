@@ -1,5 +1,6 @@
 ---
 title: "Vector Search Optimization: Scaling to Billions of Vectors"
+description: "Quantization and HNSW tuning enable vector search at billion-scale with reasonable latency."
 author: Michael John Peña
 draft: false
 date: 2025-03-11
@@ -9,10 +10,7 @@ tags:
   - AI
   - Performance
   - Scale
-
 ---
-
-I wrote "Vector Search Optimization: Scaling to Billions of Vectors" to share practical, production-minded guidance on this topic.
 
 ## Vector Search at Scale
 
@@ -93,4 +91,4 @@ class OptimizedVectorSearch:
         )
 ```
 
-Quantization and HNSW tuning enable vector search at billion-scale with reasonable latency.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Quantization and HNSW tuning enable vector search at billion-scale with reasonable latency.

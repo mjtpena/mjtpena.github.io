@@ -1,13 +1,11 @@
 ---
 title: "Always Encrypted in Azure SQL Database"
+description: "Always Encrypted uses column encryption keys (CEKs) protected by column master keys (CMKs) to encrypt sensitive columns. The database engine never has…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-14
 tags: ["Azure", "SQL Database", "Security", "Encryption"]
-
 ---
-
-I wrote "Always Encrypted in Azure SQL Database" to share practical, production-minded guidance on this topic.
 
 ## Understanding Always Encrypted
 
@@ -395,4 +393,4 @@ public class EncryptedColumnInfo
 3. **Key management** - Store CMKs securely in Azure Key Vault
 4. **Supported operations** - Limited query operations on encrypted columns without enclaves
 
-Always Encrypted provides defense-in-depth for your most sensitive data columns.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Always Encrypted provides defense-in-depth for your most sensitive data columns.

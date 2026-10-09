@@ -1,13 +1,16 @@
 ---
 title: "Azure OpenAI Fine-Tuning GA: Production-Ready Customization"
+description: "Azure OpenAI fine-tuning is now generally available, bringing enterprise-grade model customization to the Azure platform. This comprehensive guide covers…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-11
-tags: ["Azure", "OpenAI", "Fine-tuning", "Machine Learning", "AI"]
-
+tags:
+  - Azure
+  - OpenAI
+  - Fine-Tuning
+  - Machine Learning
+  - AI
 ---
-
-I wrote "Azure OpenAI Fine-Tuning GA: Production-Ready Customization" to share practical, production-minded guidance on this topic.
 
 Azure OpenAI fine-tuning is now generally available, bringing enterprise-grade model customization to the Azure platform. This comprehensive guide covers everything you need to get started.
 
@@ -286,4 +289,3 @@ print(f"Monthly inference: ${costs['monthly_inference_cost']:.2f}")
 ## Conclusion
 
 Azure OpenAI fine-tuning provides a production-ready path to customizing GPT models for your specific use cases. With proper data preparation and monitoring, you can achieve significant improvements in task-specific performance.
-

@@ -4,10 +4,7 @@ author: "Michael John Peña"
 draft: false
 date: 2024-09-04
 tags: ["OpenAI", "Claude", "GPT-4o", "Comparison", "AI"]
-
 ---
-
-I wrote "Choosing the Right Model: GPT-4o vs Claude 3.5 Sonnet for Different Tasks" to share practical, production-minded guidance on this topic.
 
 ## Current Model Landscape
 
@@ -287,4 +284,3 @@ The best strategy is often multi-provider, using each model for its strengths.
 - [OpenAI API Documentation](https://platform.openai.com/docs/)
 - [Anthropic API Documentation](https://docs.anthropic.com/)
 - [Model Benchmarks](https://artificialanalysis.ai/)
-

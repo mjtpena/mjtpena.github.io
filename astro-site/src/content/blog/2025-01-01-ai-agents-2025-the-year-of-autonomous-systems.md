@@ -1,5 +1,6 @@
 ---
 title: "AI Agents 2025: The Year of Autonomous Systems"
+description: "The age of autonomous AI is here. Let's build responsibly."
 author: Michael John Peña
 draft: false
 date: 2025-01-01
@@ -9,10 +10,7 @@ tags:
   - Azure
   - Autonomous Systems
   - 2025 Trends
-
 ---
-
-I wrote "AI Agents 2025: The Year of Autonomous Systems" to share practical, production-minded guidance on this topic.
 
 ## The Evolution of AI Agents
 
@@ -225,4 +223,4 @@ If you're new to AI agents, start here:
 4. Define clear boundaries for autonomous action
 5. Build human escalation paths from day one
 
-The age of autonomous AI is here. Let's build responsibly.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The age of autonomous AI is here. Let's build responsibly.

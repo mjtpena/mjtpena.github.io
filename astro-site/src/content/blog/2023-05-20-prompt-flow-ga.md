@@ -1,5 +1,6 @@
 ---
 title: "Prompt Flow General Availability: Building Production LLM Applications"
+description: "Prompt Flow provides the foundation for building production-grade LLM applications. Tomorrow, I will cover Azure Machine Learning updates from Build 2023."
 author: Michael John Peña
 draft: false
 date: 2023-05-20
@@ -9,10 +10,7 @@ tags:
   - LLM
   - AI Development
   - MLOps
-
 ---
-
-I wrote "Prompt Flow General Availability: Building Production LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Why Prompt Flow?
 
@@ -424,4 +422,4 @@ Prompt Flow provides the foundation for building production-grade LLM applicatio
 
 - [Prompt Flow Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/prompt-flow/)
 - [Prompt Flow SDK](https://microsoft.github.io/promptflow/)
-- [GitHub Repository](https://github.com/microsoft/promptflow)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [GitHub Repository](https://github.com/microsoft/promptflow)

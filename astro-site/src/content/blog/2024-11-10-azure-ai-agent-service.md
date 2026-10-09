@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Agent Service: Building Autonomous AI Agents"
+description: "Azure AI Agent Service provides the foundation for building sophisticated AI systems that can reason, plan, and act autonomously. Start with simple agents…"
 author: Michael John Peña
 draft: false
 date: 2024-11-10
@@ -9,10 +10,7 @@ tags:
   - AI Agents
   - Azure AI Agent Service
   - Automation
-
 ---
-
-I wrote "Azure AI Agent Service: Building Autonomous AI Agents" to share practical, production-minded guidance on this topic.
 
 ## What Makes an AI Agent?
 
@@ -391,4 +389,4 @@ Azure AI Agent Service provides the foundation for building sophisticated AI sys
 
 - [AI Agent Service Documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/)
 - [Agent Design Patterns](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/patterns)
-- [Tool Development Guide](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/tools)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Tool Development Guide](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/tools)

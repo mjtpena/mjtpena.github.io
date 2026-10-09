@@ -1,5 +1,6 @@
 ---
 title: "Practical AI Performance Tuning: setting latency budgets per user journey"
+description: "I turned implicit processes into explicit operating rules—defining owners, acceptance tests, and lightweight runbooks so teams can move confidently and…"
 author: Michael John Peña
 draft: false
 date: 2026-04-26
@@ -36,4 +37,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
 - [RAG design and evaluation guide](https://learn.microsoft.com/azure/architecture/ai-ml/guide/rag/rag-solution-design-and-evaluation-guide)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

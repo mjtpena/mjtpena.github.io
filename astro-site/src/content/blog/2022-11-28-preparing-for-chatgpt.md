@@ -1,5 +1,6 @@
 ---
 title: "Advanced GPT-3 Prompt Engineering: Preparing for the Next Wave of AI"
+description: "The trend is clear: models are becoming more capable at following instructions and engaging in dialogue-like interactions."
 author: Michael John Peña
 draft: false
 date: 2022-11-28
@@ -9,10 +10,7 @@ tags:
   - GPT-3
   - Machine Learning
   - Prompt Engineering
-
 ---
-
-I wrote "Advanced GPT-3 Prompt Engineering: Preparing for the Next Wave of AI" to share practical, production-minded guidance on this topic.
 
 ## The Evolution of GPT-3 Models
 
@@ -286,4 +284,3 @@ The AI landscape is evolving rapidly. GPT-3 models are becoming more capable, an
 - [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/)
 - [Prompt Engineering Guide](https://platform.openai.com/docs/guides/completion/prompt-design)
 - [Responsible AI Principles](https://www.microsoft.com/en-us/ai/responsible-ai)
-

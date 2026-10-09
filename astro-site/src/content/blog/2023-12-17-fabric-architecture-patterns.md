@@ -1,13 +1,11 @@
 ---
 title: "Fabric Architecture Patterns: Designing for Scale"
+description: "Designing for scale in Fabric is about decomposition and clear contracts between layers. The medallion architecture works well: small, composable…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-17
 tags: ["Microsoft Fabric", "Architecture", "Data Engineering", "Design Patterns", "Lakehouse"]
-
 ---
-
-I wrote "Fabric Architecture Patterns: Designing for Scale" to share practical, production-minded guidance on this topic.
 
 Designing for scale in Fabric is about decomposition and clear contracts between layers. The medallion architecture works well: small, composable transformations, clear ownership, and idempotent jobs. Below are patterns I've seen succeed at scale.
 
@@ -385,4 +383,4 @@ External Sources
 """
 ```
 
-Tomorrow, we'll explore Lakehouse vs Warehouse in detail!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Lakehouse vs Warehouse in detail!

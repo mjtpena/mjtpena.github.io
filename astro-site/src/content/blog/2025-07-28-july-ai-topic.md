@@ -1,5 +1,6 @@
 ---
 title: "Multimodal RAG: Combining Text, Images, and Tables for Enhanced Search"
+description: "Multimodal RAG ensures users find relevant information regardless of how it's represented in the source documents."
 author: Michael John Peña
 draft: false
 date: 2025-07-28
@@ -9,10 +10,7 @@ tags:
   - Computer Vision
   - Azure AI Search
   - Python
-
 ---
-
-I wrote "Multimodal RAG: Combining Text, Images, and Tables for Enhanced Search" to share practical, production-minded guidance on this topic.
 
 ## Processing Multimodal Documents
 
@@ -119,4 +117,4 @@ async def create_multimodal_index(self, processed_doc: dict) -> list[dict]:
     return index_entries
 ```
 
-Multimodal RAG ensures users find relevant information regardless of how it's represented in the source documents.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multimodal RAG ensures users find relevant information regardless of how it's represented in the source documents.

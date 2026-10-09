@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Build 2021: GPT-3 in Power Apps and Azure AI Updates"
+description: "The headline announcement for me was the integration of GPT-3 into Power Apps. You can now describe what you want in plain English, and GPT-3 generates the…"
 author: Michael John Peña
 draft: false
 date: 2021-05-28
@@ -10,10 +11,7 @@ tags:
   - Power Platform
   - Build
   - Microsoft
-
 ---
-
-I wrote "Microsoft Build 2021: GPT-3 in Power Apps and Azure AI Updates" to share practical, production-minded guidance on this topic.
 
 ## GPT-3 Powers Natural Language to Code in Power Apps
 
@@ -179,4 +177,4 @@ The pace of innovation in Azure data and AI services continues to accelerate. Fo
 - [Microsoft Build 2021 Book of News](https://news.microsoft.com/build-2021-book-of-news/)
 - [Azure Machine Learning Managed Endpoints](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-managed-online-endpoints)
 - [Power Apps GPT-3 Integration](https://powerapps.microsoft.com/en-us/blog/introducing-power-fx-the-low-code-programming-language-for-everyone/)
-- [Azure Video Analyzer](https://docs.microsoft.com/en-us/azure/azure-video-analyzer/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Video Analyzer](https://docs.microsoft.com/en-us/azure/azure-video-analyzer/)

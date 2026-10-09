@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Document Intelligence: Automated Document Processing at Scale"
+description: "For high-volume scenarios, implement batch processing with proper error handling and retry logic to ensure reliable document processing at scale."
 author: Michael John Peña
 draft: false
 date: 2025-10-15
@@ -9,10 +10,7 @@ tags:
   - OCR
   - Form Recognition
   - Automation
-
 ---
-
-I wrote "Azure AI Document Intelligence: Automated Document Processing at Scale" to share practical, production-minded guidance on this topic.
 
 ## Using Pre-Built Models
 
@@ -120,4 +118,4 @@ class CustomModelTrainer:
 
 ## Batch Processing Pipeline
 
-For high-volume scenarios, implement batch processing with proper error handling and retry logic to ensure reliable document processing at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+For high-volume scenarios, implement batch processing with proper error handling and retry logic to ensure reliable document processing at scale.

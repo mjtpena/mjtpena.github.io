@@ -10,12 +10,9 @@ tags:
   - DNS
   - Private Link
   - Infrastructure
-
 ---
 
-I wrote "2021-07-13-private-dns-zones" to share practical, production-minded guidance on this topic.
-
-# Creating Private DNS Zones
+## Creating Private DNS Zones
 
 Set up a private DNS zone for your organization:
 
@@ -46,7 +43,7 @@ az network private-dns record-set a add-record \
     --ipv4-address 10.0.1.10
 ```
 
-# Terraform Configuration
+## Terraform Configuration
 
 Complete Private DNS setup with Terraform:
 
@@ -122,7 +119,7 @@ resource "azurerm_private_dns_cname_record" "aliases" {
 }
 ```
 
-# Private DNS Zones for Private Link
+## Private DNS Zones for Private Link
 
 Create DNS zones for Azure Private Link services:
 
@@ -171,7 +168,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "private_link" {
 }
 ```
 
-# Creating Private Endpoints with DNS
+## Creating Private Endpoints with DNS
 
 Integrate private endpoints with DNS zones:
 
@@ -240,7 +237,7 @@ storage_pe = create_private_endpoint_with_dns({
 })
 ```
 
-# Auto-Registration
+## Auto-Registration
 
 Enable automatic DNS registration for VMs:
 
@@ -271,7 +268,7 @@ resource "azurerm_linux_virtual_machine" "example" {
 }
 ```
 
-# DNS Forwarding
+## DNS Forwarding
 
 Set up DNS forwarding for hybrid scenarios:
 
@@ -328,7 +325,7 @@ def create_dns_resolver(resource_group, name, vnet_id, location):
     return resolver
 ```
 
-# Querying DNS Records
+## Querying DNS Records
 
 Manage DNS records programmatically:
 
@@ -385,7 +382,7 @@ srv_record = dns_client.record_sets.create_or_update(
 )
 ```
 
-# Monitoring DNS
+## Monitoring DNS
 
 Monitor DNS zone activity:
 
@@ -432,9 +429,8 @@ def query_dns_changes(workspace_id, zone_name, days=7):
     return result
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Private DNS zones are fundamental for internal name resolution and Private Link integration. They provide a managed DNS solution that eliminates the need for custom DNS infrastructure while supporting advanced scenarios like auto-registration and hybrid DNS forwarding.
 
 Key points to remember: each zone can be linked to multiple VNets, only one VNet link per zone can have auto-registration enabled, and Private Link services require specific DNS zone names to work correctly. Proper DNS planning is essential for a well-functioning Azure network architecture.
-

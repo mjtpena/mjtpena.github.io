@@ -1,13 +1,11 @@
 ---
 title: "Azure Stack Updates - Edge and Hybrid Computing"
+description: "Azure Stack HCI is a hyperconverged infrastructure solution for running virtualized workloads on-premises with Azure integration."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-05
 tags: ["Azure", "Azure Stack", "Edge Computing", "HCI"]
-
 ---
-
-I wrote "Azure Stack Updates - Edge and Hybrid Computing" to share practical, production-minded guidance on this topic.
 
 ## Azure Stack Portfolio
 
@@ -227,4 +225,5 @@ metadata:
 data:
   environment: "edge"
   location: "factory-floor"
-  connectivity: "intermittent"\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+  connectivity: "intermittent"
+```

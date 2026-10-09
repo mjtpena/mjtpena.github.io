@@ -1,5 +1,6 @@
 ---
 title: Using WSL2 (Windows Subsystem for Linux) for Blockchain Development
+description: "In the past, I've been using my Macbook Pro to do all things blockchain and smart contracts development. One of the hurdles I encountered in the past is…"
 author: Michael John Peña
 draft: false
 date: 2021-08-15

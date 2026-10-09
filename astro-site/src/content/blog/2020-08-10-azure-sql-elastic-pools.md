@@ -1,5 +1,6 @@
 ---
 title: "Cost Optimization with Azure SQL Elastic Pools"
+description: "SaaS clients with per-tenant database isolation hit the same wall once they cross about 20 customers: the bill for a hundred half-idle Standard tier…"
 author: Michael John Peña
 draft: false
 date: 2020-08-10
@@ -228,4 +229,4 @@ For 10 databases with varying loads:
 | 1 x 100 eDTU Pool | ~$112 |
 | Savings | ~25% |
 
-The thing nobody tells you: pools work brilliantly when tenants have *uncorrelated* peak times. They work badly when everyone hits 9am and again at 4pm. Before recommending a pool, I always check `sys.resource_stats` and look for whether peaks overlap. If the answer is "yes, everyone hits at once," a pool just makes you size for the simultaneous peak — at which point you might as well use individual databases on a smaller tier.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The thing nobody tells you: pools work brilliantly when tenants have *uncorrelated* peak times. They work badly when everyone hits 9am and again at 4pm. Before recommending a pool, I always check `sys.resource_stats` and look for whether peaks overlap. If the answer is "yes, everyone hits at once," a pool just makes you size for the simultaneous peak — at which point you might as well use individual databases on a smaller tier.

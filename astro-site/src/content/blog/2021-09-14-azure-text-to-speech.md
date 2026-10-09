@@ -1,5 +1,6 @@
 ---
 title: Creating Natural Voice Experiences with Azure Text-to-Speech
+description: "Azure Text-to-Speech enables natural voice experiences across applications, from virtual assistants to accessibility features."
 author: Michael John Pena
 draft: false
 date: 2021-09-14
@@ -9,10 +10,7 @@ tags:
   - Text-to-Speech
   - AI
   - Voice Synthesis
-
 ---
-
-I wrote "2021-09-14-azure-text-to-speech" to share practical, production-minded guidance on this topic.
 
 ## Neural Voice Features
 
@@ -376,4 +374,4 @@ if __name__ == '__main__':
 5. **Handle long text**: Break into segments for better quality
 6. **Monitor usage**: Track API calls for cost management
 
-Azure Text-to-Speech enables natural voice experiences across applications, from virtual assistants to accessibility features.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Text-to-Speech enables natural voice experiences across applications, from virtual assistants to accessibility features.

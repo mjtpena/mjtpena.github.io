@@ -1,13 +1,11 @@
 ---
 title: "Comprehensive AKS Monitoring with Container Insights"
+description: "Container Insights is the Azure Monitor feature that closes the observability gap for AKS clusters—without it, you have Kubernetes metrics available in the…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-07
 tags: ["Azure", "Kubernetes", "AKS", "Monitoring", "Azure Monitor"]
-
 ---
-
-I wrote "Comprehensive AKS Monitoring with Container Insights" to share practical, production-minded guidance on this topic.
 
 Container Insights is the Azure Monitor feature that closes the observability gap for AKS clusters—without it, you have Kubernetes metrics available in the cluster but no persistent store, no alerting integration, and no correlation with Azure platform metrics. The omsagent DaemonSet collects container metrics (CPU/memory by pod, node, and namespace), container logs (stdout/stderr from every container), and Kubernetes events, forwarding them to a Log Analytics workspace. The Container Insights workbooks in the Azure portal provide the curated views: cluster health, node utilisation, pod inventory, deployment status, and container logs. For production AKS operations, the minimum viable monitoring baseline is Container Insights plus alerting on node CPU/memory saturation and pod restart count—everything else builds on that foundation.
 
@@ -268,4 +266,3 @@ az monitor log-analytics workspace update \
 Container Insights provides the foundation for observability in AKS. Combined with custom queries, alerts, and workbooks, you can maintain deep visibility into your Kubernetes workloads.
 
 Tomorrow, we'll explore Prometheus metrics collection for even more detailed application monitoring.
-

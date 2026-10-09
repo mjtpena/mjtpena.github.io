@@ -1,13 +1,11 @@
 ---
 title: "Azure Database for MySQL Flexible Server: A Complete Guide"
+description: "Flexible Server provides the enterprise features you need while maintaining the simplicity of a managed service."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-09
 tags: ["Azure", "MySQL", "Flexible Server", "Database", "Cloud"]
-
 ---
-
-I wrote "Azure Database for MySQL Flexible Server: A Complete Guide" to share practical, production-minded guidance on this topic.
 
 ## Key Features of Flexible Server
 
@@ -147,4 +145,4 @@ az monitor diagnostic-settings create \
     --workspace "/subscriptions/{sub}/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/myWorkspace"
 ```
 
-Flexible Server provides the enterprise features you need while maintaining the simplicity of a managed service.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Flexible Server provides the enterprise features you need while maintaining the simplicity of a managed service.

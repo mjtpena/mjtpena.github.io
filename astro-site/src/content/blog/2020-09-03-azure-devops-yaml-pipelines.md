@@ -1,5 +1,6 @@
 ---
 title: "Azure DevOps YAML Pipelines for Data Projects"
+description: "The Azure DevOps Classic editor is comfortable, and I've watched many teams resist moving away from it for that exact reason. Until they need to branch a…"
 author: Michael John Peña
 draft: false
 date: 2020-09-03
@@ -75,4 +76,4 @@ stages:
 3. **Secret variables** stored in pipeline variables, not YAML
 4. **Artifact publishing** for audit trails
 
-Pipeline-as-code means your deployment process is reviewed, versioned, and reproducible.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Pipeline-as-code means your deployment process is reviewed, versioned, and reproducible.

@@ -9,10 +9,7 @@ tags:
   - Embeddings
   - AI
   - Open Source
-
 ---
-
-I wrote "Weaviate Vector Database: Open Source Semantic Search" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -495,4 +492,4 @@ results = service.search(
 
 - [Weaviate Documentation](https://weaviate.io/developers/weaviate)
 - [Weaviate Python Client](https://github.com/weaviate/weaviate-python-client)
-- [Weaviate Cloud Services](https://weaviate.io/pricing)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Weaviate Cloud Services](https://weaviate.io/pricing)

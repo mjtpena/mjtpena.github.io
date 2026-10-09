@@ -1,5 +1,6 @@
 ---
 title: "Building Copilot Extensions with Azure OpenAI Assistants API"
+description: "The Assistants API provides the foundation for building powerful, context-aware AI assistants that integrate with enterprise systems."
 author: Michael John Peña
 draft: false
 date: 2025-10-26
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - Extensions
   - Enterprise AI
-
 ---
-
-I wrote "Building Copilot Extensions with Azure OpenAI Assistants API" to share practical, production-minded guidance on this topic.
 
 ## Creating an Assistant with Tools
 
@@ -154,4 +152,4 @@ class ConversationManager:
         return self.client.beta.threads.runs.submit_tool_outputs(thread_id=thread_id, run_id=run.id, tool_outputs=tool_outputs)
 ```
 
-The Assistants API provides the foundation for building powerful, context-aware AI assistants that integrate with enterprise systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Assistants API provides the foundation for building powerful, context-aware AI assistants that integrate with enterprise systems.

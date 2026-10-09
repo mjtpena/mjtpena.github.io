@@ -1,5 +1,6 @@
 ---
 title: "TDD (Test-Driven Development) Overview with NextJS Example"
+description: "This will create a new NextJS project with TypeScript in a directory named my-app. Change into the directory and run npm run dev to start the development…"
 author: Michael John Peña
 draft: false
 date: 2023-02-12
@@ -9,10 +10,7 @@ tags:
   - Testing
   - NextJS
   - Software
-
 ---
-
-I wrote "TDD (Test-Driven Development) Overview with NextJS Example" to share practical, production-minded guidance on this topic.
 
 I've also done similar posts in the past:
 
@@ -20,7 +18,7 @@ I've also done similar posts in the past:
 - [TypeScript](https://michaeljohnpena.com/blog/typescript-tdd/) (vanilla)
 - [Python](https://michaeljohnpena.com/blog/tdd-python/)
 
-# Prerequisites
+## Prerequisites
 
 Before we get started, you'll need to have a basic understanding of NextJS, TypeScript, and testing. You should also have the following tools installed on your machine:
 
@@ -29,7 +27,7 @@ Before we get started, you'll need to have a basic understanding of NextJS, Type
 - NextJS
 - TypeScript
 
-# Setting up a NextJS project with TypeScript
+## Setting up a NextJS project with TypeScript
 
 To set up a NextJS project with TypeScript, you can use the following command:
 
@@ -39,7 +37,7 @@ npx create-next-app my-app --use-npm --example with-typescript
 
 This will create a new NextJS project with TypeScript in a directory named my-app. Change into the directory and run npm run dev to start the development server. You should see the default NextJS landing page in your browser.
 
-# Setting up Jest for testing
+## Setting up Jest for testing
 
 [Jest](https://jestjs.io/) is a popular testing framework for JavaScript that provides a simple and intuitive API for writing tests. To set up Jest in a NextJS and TypeScript project, you need to install the following packages:
 
@@ -49,7 +47,7 @@ npm install --save-dev jest @types/jest ts-jest
 
 Then, create a jest.config.js file in the root of your project and add the following code:
 
-```TypeScript
+```typescript
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -58,11 +56,11 @@ module.exports = {
 
 This sets up Jest to use the TypeScript preset and runs tests in a Node environment.
 
-# Writing your first test
+## Writing your first test
 
 Now that we have Jest set up, let's write our first test. Create a **tests** directory in the root of your project and add a new file named hello.test.ts. In this file, we will write a test to check that the text "Hello, World!" is displayed on the page.
 
-```TypeScript
+```typescript
 import { render } from 'next/testing';
 
 describe('Hello', () => {
@@ -75,7 +73,7 @@ describe('Hello', () => {
 
 In this test, we use the render function from the next/testing module to render the default NextJS landing page. We then use the getByText function to find an element with the text "Hello, World!" on the page. Finally, we use Jest's expect function to check that the element is defined.
 
-# Running the test
+## Running the test
 
 To run the test, you can use the following command:
 
@@ -95,11 +93,11 @@ Tests:       1 passed, 1 total
 Snapshots:
 ```
 
-# Writing the code
+## Writing the code
 
 Now that we have written our first test, it's time to write the code to make it pass. Open the pages/index.tsx file and replace the existing code with the following:
 
-```TypeScript
+```typescript
 import React from 'react';
 
 const Home = () => <div>Hello, World!</div>;
@@ -109,7 +107,7 @@ export default Home;
 
 This code defines a simple React component that displays the text "Hello, World!".
 
-# Refreshing the test
+## Refreshing the test
 
 With the code in place, we can now rerun the test to see if it passes. Use the following command:
 
@@ -131,7 +129,6 @@ Time:        1.82s
 Ran all test suites.
 ```
 
-# Conclusion
+## Conclusion
 
 In this blog post, we have taken a look at how to get started with TDD in a NextJS and TypeScript project. By writing tests before writing code, we can catch bugs early and ensure that our code is maintainable, scalable, and well-documented. By using Jest and the next/testing module, we can easily write and run tests for NextJS components.
-

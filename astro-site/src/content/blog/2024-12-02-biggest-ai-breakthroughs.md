@@ -1,5 +1,6 @@
 ---
 title: "The Biggest AI Breakthroughs of 2024"
+description: "These breakthroughs collectively enable a new generation of AI applications that were impossible just a year ago."
 author: Michael John Peña
 draft: false
 date: 2024-12-02
@@ -9,10 +10,7 @@ tags:
   - Research
   - Machine Learning
   - Innovation
-
 ---
-
-I wrote "The Biggest AI Breakthroughs of 2024" to share practical, production-minded guidance on this topic.
 
 ## Breakthrough 1: Native Multimodal Understanding
 
@@ -302,4 +300,4 @@ These breakthroughs collectively enable a new generation of AI applications that
 
 - [OpenAI Research](https://openai.com/research)
 - [Microsoft Research AI](https://www.microsoft.com/en-us/research/research-area/artificial-intelligence/)
-- [AI Research Papers 2024](https://arxiv.org/list/cs.AI/recent)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AI Research Papers 2024](https://arxiv.org/list/cs.AI/recent)

@@ -1,5 +1,6 @@
 ---
 title: "AI ROI Analysis: Measuring the Real Value of Enterprise AI"
+description: "AI ROI is real and measurable, but requires disciplined baseline measurement and honest assessment of both costs and benefits."
 author: Michael John Peña
 draft: false
 date: 2024-12-04
@@ -9,10 +10,7 @@ tags:
   - Business Value
   - Analytics
   - Enterprise
-
 ---
-
-I wrote "AI ROI Analysis: Measuring the Real Value of Enterprise AI" to share practical, production-minded guidance on this topic.
 
 ## The AI ROI Framework
 
@@ -335,4 +333,4 @@ AI ROI is real and measurable, but requires disciplined baseline measurement and
 
 - [McKinsey AI Value Creation](https://www.mckinsey.com/capabilities/quantumblack/our-insights/ai-value-creation)
 - [Forrester AI ROI Calculator](https://www.forrester.com/roi-calculator/)
-- [Gartner AI Business Value](https://www.gartner.com/en/information-technology/insights/artificial-intelligence)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Gartner AI Business Value](https://www.gartner.com/en/information-technology/insights/artificial-intelligence)

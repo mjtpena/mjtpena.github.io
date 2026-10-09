@@ -1,13 +1,11 @@
 ---
 title: "Blue-Green Deployment for ML Models"
+description: "Blue-green deployment provides a safe, zero-downtime approach to updating ML models in production."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-09
 tags: ["Azure", "Machine Learning", "MLOps", "Deployment", "Blue-Green"]
-
 ---
-
-I wrote "Blue-Green Deployment for ML Models" to share practical, production-minded guidance on this topic.
 
 ## Understanding Blue-Green Deployment
 
@@ -279,4 +277,4 @@ def cleanup_old_deployment(ml_client, endpoint_name, deployment_name):
 # cleanup_old_deployment(ml_client, "model-endpoint", "blue")
 ```
 
-Blue-green deployment provides a safe, zero-downtime approach to updating ML models in production.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Blue-green deployment provides a safe, zero-downtime approach to updating ML models in production.

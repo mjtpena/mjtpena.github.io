@@ -1,5 +1,6 @@
 ---
 title: "Multi-Modal AI Applications: Beyond Text"
+description: "Multi-modal AI opens up applications from document processing to video analysis."
 author: Michael John Peña
 draft: false
 date: 2025-03-27
@@ -9,10 +10,7 @@ tags:
   - Vision
   - Audio
   - Applications
-
 ---
-
-I wrote "Multi-Modal AI Applications: Beyond Text" to share practical, production-minded guidance on this topic.
 
 ## Multi-Modal Pipeline
 
@@ -107,4 +105,4 @@ class MultiModalAgent:
         return response.choices[0].message.content
 ```
 
-Multi-modal AI opens up applications from document processing to video analysis.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multi-modal AI opens up applications from document processing to video analysis.

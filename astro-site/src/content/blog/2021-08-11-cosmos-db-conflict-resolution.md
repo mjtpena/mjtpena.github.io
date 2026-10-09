@@ -1,13 +1,11 @@
 ---
 title: "Implementing Conflict Resolution Policies in Cosmos DB"
+description: "Proper conflict resolution is essential for multi-region write scenarios. Choose the right strategy based on your data semantics and ensure thorough testing…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-11
 tags: ["Azure", "Cosmos DB", "Conflict Resolution", "Multi-Region", "Distributed Systems"]
-
 ---
-
-I wrote "Implementing Conflict Resolution Policies in Cosmos DB" to share practical, production-minded guidance on this topic.
 
 ## Conflict Resolution Modes
 
@@ -292,4 +290,4 @@ AzureDiagnostics
 | render timechart
 ```
 
-Proper conflict resolution is essential for multi-region write scenarios. Choose the right strategy based on your data semantics and ensure thorough testing of edge cases.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper conflict resolution is essential for multi-region write scenarios. Choose the right strategy based on your data semantics and ensure thorough testing of edge cases.

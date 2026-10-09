@@ -1,13 +1,11 @@
 ---
 title: "ADX Continuous Export for Data Archival and Compliance"
+description: "ADX Continuous Export is the managed pipeline that continuously moves data from ADX tables to Azure Blob Storage or ADLS Gen2—useful for archiving cold data…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-14
 tags: ["Azure", "Azure Data Explorer", "ADX", "Data Archival", "Compliance"]
-
 ---
-
-I wrote "ADX Continuous Export for Data Archival and Compliance" to share practical, production-minded guidance on this topic.
 
 ADX Continuous Export is the managed pipeline that continuously moves data from ADX tables to Azure Blob Storage or ADLS Gen2—useful for archiving cold data beyond the ADX cluster's hot cache window, feeding a data lake with ADX-processed telemetry, or exporting data for compliance record-keeping without running scheduled export jobs manually. The continuous export job queries the ADX table on a schedule, writing incremental results to external storage in Parquet, CSV, or JSON format. The `over()` cursor tracks which data has been exported, preventing duplicates without requiring watermark logic in the export query. For monitoring pipelines that need to archive raw telemetry beyond ADX's cost-effective retention window while keeping recent data in ADX for fast queries, continuous export is the bridge between hot analytics and cold archival storage.
 
@@ -297,4 +295,3 @@ resource "azurerm_role_assignment" "adx_storage" {
 Continuous export enables cost-effective long-term data retention while maintaining query capability. By combining hot ADX storage with cold blob storage, you can meet compliance requirements without breaking the budget.
 
 Tomorrow, we'll explore Kusto functions for reusable query patterns and automation.
-

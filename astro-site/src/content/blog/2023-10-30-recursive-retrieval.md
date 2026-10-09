@@ -10,10 +10,7 @@ tags:
   - Complex Queries
   - Multi-step Reasoning
   - AI
-
 ---
-
-I wrote "Recursive Retrieval for Complex RAG Queries" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -733,4 +730,3 @@ print(f"Answer: {result['answer']}")
 ## Conclusion
 
 Recursive retrieval enables RAG systems to handle complex queries requiring multiple steps, reference following, or multi-hop reasoning. By decomposing queries, following references, and iteratively retrieving until sufficient information is gathered, recursive retrieval significantly extends the capabilities of RAG systems for answering complex, real-world questions.
-

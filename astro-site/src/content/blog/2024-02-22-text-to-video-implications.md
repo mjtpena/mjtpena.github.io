@@ -9,10 +9,7 @@ tags:
   - Video Generation
   - Creative AI
   - Future Tech
-
 ---
-
-I wrote "Text-to-Video AI: Implications for Content Creation" to share practical, production-minded guidance on this topic.
 
 ## Current Landscape
 
@@ -94,4 +91,3 @@ content_strategy = {
 ## Conclusion
 
 Text-to-video AI will democratize video creation. Start experimenting with current tools while preparing governance and workflows for broader adoption.
-

@@ -1,5 +1,6 @@
 ---
 title: "Real-Time Signals That Actually Help: keeping streaming dashboards useful after week one"
+description: "I spent the day reducing cognitive overhead for engineers and analysts—introducing clearer table contracts, simpler failure modes, and concise runbooks that…"
 author: Michael John Peña
 draft: false
 date: 2026-03-07
@@ -36,4 +37,4 @@ Tomorrow I want to verify this pattern under a busier workload before I call it 
 
 - [Fabric Real-Time Intelligence](https://learn.microsoft.com/fabric/real-time-intelligence/)
 - [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

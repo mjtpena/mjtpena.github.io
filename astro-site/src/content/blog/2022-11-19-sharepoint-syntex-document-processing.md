@@ -4,15 +4,12 @@ author: Michael John Peña
 draft: false
 date: 2022-11-19
 tags:
-  - SharePoint
+  - sharepoint
   - Microsoft 365
   - Document Processing
   - AI
   - Automation
-
 ---
-
-I wrote "SharePoint Syntex Document Processing: Practical Implementation" to share practical, production-minded guidance on this topic.
 
 ## Scenario: Invoice Processing System
 
@@ -400,4 +397,3 @@ This practical implementation shows how SharePoint Syntex can transform document
 - [Document Understanding Models](https://docs.microsoft.com/en-us/microsoft-365/contentunderstanding/create-a-classifier)
 - [Extractor Best Practices](https://docs.microsoft.com/en-us/microsoft-365/contentunderstanding/create-an-extractor)
 - [Model Evaluation](https://docs.microsoft.com/en-us/microsoft-365/contentunderstanding/learn-about-document-understanding-models-through-the-sample-model)
-

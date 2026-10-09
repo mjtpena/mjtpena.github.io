@@ -9,10 +9,7 @@ tags:
   - Dapr
   - Microservices
   - Cloud-Native
-
 ---
-
-I wrote "2021-06-27-dapr-azure-integration" to share practical, production-minded guidance on this topic.
 
 ## Dapr Building Blocks
 
@@ -535,4 +532,3 @@ Dapr simplifies building cloud-native applications by providing consistent APIs 
 
 - [Dapr Documentation](https://docs.dapr.io/)
 - [Dapr Azure Components](https://docs.dapr.io/reference/components-reference/)
-

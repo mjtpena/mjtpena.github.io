@@ -10,10 +10,7 @@ tags:
   - LLM Training
   - AI Alignment
   - AI
-
 ---
-
-I wrote "RLHF Concepts: Reinforcement Learning from Human Feedback" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -402,4 +399,3 @@ for prompt, (response, score) in best.items():
 ## Conclusion
 
 RLHF is a powerful technique for aligning LLMs with human preferences through a three-stage process: supervised fine-tuning, reward model training, and PPO optimization. Understanding these concepts helps in building and improving AI systems that better serve user needs while maintaining safety and helpfulness.
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure SQL Managed Instance: Migration Patterns and Best Practices"
+description: "Azure SQL Managed Instance is the SQL Server target I recommend most for lift-and-shift migrations from on-premises SQL Server. It's PaaS—no OS to patch…"
 author: Michael John Peña
 draft: false
 date: 2021-05-09
@@ -321,4 +322,4 @@ az sql mi update \
 
 - [SQL Managed Instance Documentation](https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/)
 - [Migration Guide](https://docs.microsoft.com/en-us/azure/azure-sql/migration-guides/managed-instance/sql-server-to-managed-instance-guide)
-- [Networking Requirements](https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/connectivity-architecture-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Networking Requirements](https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/connectivity-architecture-overview)

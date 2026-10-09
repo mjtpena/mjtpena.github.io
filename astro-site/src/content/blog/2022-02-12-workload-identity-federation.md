@@ -5,14 +5,11 @@ draft: false
 date: 2022-02-12
 url: /blog/workload-identity-federation/
 tags:
-  - azure
-  - security
-  - identity
-  - federation
-
+  - Azure
+  - Security
+  - Identity
+  - Federation
 ---
-
-I wrote "Workload Identity Federation: Keyless Authentication from Anywhere" to share practical, production-minded guidance on this topic.
 
 ## How Federation Works
 
@@ -197,4 +194,5 @@ metadata:
   annotations:
     azure.workload.identity/client-id: "<CLIENT_ID>"
   labels:
-    azure.workload.identity/use: "true"\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    azure.workload.identity/use: "true"
+```

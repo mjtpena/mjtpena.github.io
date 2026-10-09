@@ -1,14 +1,15 @@
 ---
 title: "Cloud Adoption Framework: Your Guide to Azure Success"
+description: "The Microsoft Cloud Adoption Framework (CAF) is the comprehensive guidance body that addresses the full journey of cloud adoption—not just the technical…"
 author: Michael John Peña
 draft: false
 date: 2022-01-22
 url: /blog/cloud-adoption-framework/
 tags:
-  - azure
+  - Azure
   - cloud-adoption
-  - strategy
-  - best-practices
+  - Strategy
+  - Best-Practices
 ---
 
 The Microsoft Cloud Adoption Framework (CAF) is the comprehensive guidance body that addresses the full journey of cloud adoption—not just the technical "how do I deploy this service" questions but the organisational, strategic, and operational questions that determine whether a cloud adoption program succeeds or stalls. The CAF lifecycle: Strategy (define business justification and expected outcomes), Plan (align cloud adoption with business goals and build a skills readiness plan), Ready (prepare the Azure environment through Landing Zones), Adopt (migrate existing workloads and/or innovate with new cloud-native solutions), Govern (implement governance across cost, security, identity, and resource consistency), and Manage (establish operational baselines for cloud-hosted workloads). The CAF documentation includes decision trees, templates, implementation guides, and tool references for each phase. For organisations starting their Azure adoption, CAF provides the map; the Azure Landing Zone accelerator implements the destination that CAF's Ready phase describes.
@@ -267,4 +268,4 @@ resource vmAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-The Cloud Adoption Framework provides a structured approach to cloud adoption, ensuring you address all critical aspects of your journey to Azure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Cloud Adoption Framework provides a structured approach to cloud adoption, ensuring you address all critical aspects of your journey to Azure.

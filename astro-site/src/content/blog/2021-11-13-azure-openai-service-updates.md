@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Service Announced: What We Know About the Limited Preview"
+description: "This announcement is exciting for the enterprise AI space. The combination of OpenAI's powerful models with Azure's enterprise infrastructure addresses a…"
 author: Michael John Pena
 draft: false
 date: 2021-11-13
@@ -9,10 +10,7 @@ tags:
   - AI
   - Machine Learning
   - Cognitive Services
-
 ---
-
-I wrote "Azure OpenAI Service Announced: What We Know About the Limited Preview" to share practical, production-minded guidance on this topic.
 
 ## What Was Announced
 
@@ -178,4 +176,4 @@ In the meantime, focus on:
 - [Azure Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/)
 - [Responsible AI Principles](https://www.microsoft.com/en-us/ai/responsible-ai)
 
-The journey toward enterprise AI is accelerating. While Azure OpenAI Service is just beginning its preview, it represents an important step in making powerful AI accessible to organizations that need enterprise-grade security and compliance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The journey toward enterprise AI is accelerating. While Azure OpenAI Service is just beginning its preview, it represents an important step in making powerful AI accessible to organizations that need enterprise-grade security and compliance.

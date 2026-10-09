@@ -1,13 +1,11 @@
 ---
 title: "Azure AI Studio: Building Enterprise AI Applications"
+description: "Azure AI Studio arrived at Ignite 2023 as a significantly expanded platform — and \"expanded\" is the right word, because it builds on Azure ML Studio's…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-18
 tags: ["Azure", "AI Studio", "Machine Learning", "LLM", "Enterprise AI"]
-
 ---
-
-I wrote "Azure AI Studio: Building Enterprise AI Applications" to share practical, production-minded guidance on this topic.
 
 Azure AI Studio arrived at Ignite 2023 as a significantly expanded platform — and "expanded" is the right word, because it builds on Azure ML Studio's foundations but is oriented specifically toward generative AI application development rather than traditional ML model training and deployment. The key additions: a model catalog spanning Azure OpenAI models, open-source models (Llama 2, Mistral), and partner models (Stability AI, Cohere) in a single browsable catalog; Prompt Flow as a first-class feature for building, evaluating, and deploying LLM pipelines; and integrated evaluation tooling for testing AI application quality with configurable metrics. The design philosophy: Azure AI Studio is for the AI application developer building on top of foundation models, while Azure ML Studio remains the platform for teams doing custom model training and MLOps. In practice, the workflows overlap and Microsoft will likely continue merging them.
 
@@ -359,4 +357,4 @@ evaluator.add_test_case(
 4. **Monitor continuously** for model drift and quality
 5. **Version your prompts** and flows like code
 
-Tomorrow, we'll explore the Model Catalog in depth and how to choose the right model for your use case!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore the Model Catalog in depth and how to choose the right model for your use case!

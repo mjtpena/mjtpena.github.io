@@ -1,13 +1,11 @@
 ---
 title: "Fabric Domains: Organizing Your Data Mesh"
+description: "Fabric Domains are the tenant-level organisational construct that lets large enterprises apply data mesh principles to their Fabric deployment — grouping…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-13
 tags: ["Microsoft Fabric", "Domains", "Data Mesh", "Data Architecture", "Organization"]
-
 ---
-
-I wrote "Fabric Domains: Organizing Your Data Mesh" to share practical, production-minded guidance on this topic.
 
 Fabric Domains are the tenant-level organisational construct that lets large enterprises apply data mesh principles to their Fabric deployment — grouping workspaces by business domain (Finance, Sales, HR, Engineering) so that domain-level policies, ownership, and governance can be applied consistently without requiring a monolithic central IT team to own everything. The domain model in Fabric sits above workspaces in the hierarchy: a domain has an admin, can have associated workspaces, and can have domain-specific default settings that apply to all workspaces in the domain. The governance benefit: Capacity admins and workspace admins retain their local control; Domain admins get a cross-workspace view of their domain's data estate and can enforce domain-level policies. This is closer to true data mesh ownership than the old Synapse/Power BI model where "domain ownership" was largely a naming convention with no enforcement mechanism.
 
@@ -291,4 +289,4 @@ domain_checklist = {
 }
 ```
 
-Tomorrow, we'll explore Endorsement in Fabric - how to certify and promote trusted data products!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Endorsement in Fabric - how to certify and promote trusted data products!

@@ -8,10 +8,7 @@ tags:
   - Data Factory
   - ETL
   - Data Integration
-
 ---
-
-I wrote "Fabric Data Factory: Data Integration Reimagined" to share practical, production-minded guidance on this topic.
 
 ## Data Factory in Fabric Overview
 
@@ -389,4 +386,4 @@ Tomorrow we'll dive deeper into Copy Activity patterns.
 
 - [Data Factory in Fabric](https://learn.microsoft.com/en-us/fabric/data-factory/data-factory-overview)
 - [Data Pipeline Documentation](https://learn.microsoft.com/en-us/fabric/data-factory/create-first-pipeline)
-- [Pipeline Expressions](https://learn.microsoft.com/en-us/azure/data-factory/control-flow-expression-language-functions)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Pipeline Expressions](https://learn.microsoft.com/en-us/azure/data-factory/control-flow-expression-language-functions)

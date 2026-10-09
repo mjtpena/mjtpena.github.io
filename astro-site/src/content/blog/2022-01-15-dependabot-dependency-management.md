@@ -1,18 +1,16 @@
 ---
 title: "Dependabot: Automated Dependency Updates and Security"
+description: "Dependabot is an essential tool for maintaining secure and up-to-date dependencies."
 author: Michael John Peña
 draft: false
 date: 2022-01-15
 url: /blog/dependabot-dependency-management/
 tags:
-  - github
-  - security
+  - GitHub
+  - Security
   - dependencies
-  - automation
-
+  - Automation
 ---
-
-I wrote "Dependabot: Automated Dependency Updates and Security" to share practical, production-minded guidance on this topic.
 
 ## Configuring Dependabot
 
@@ -229,4 +227,4 @@ for critical in report['critical']:
 4. **Auto-merge patches** - If tests pass
 5. **Review major updates carefully** - Breaking changes require attention
 
-Dependabot is an essential tool for maintaining secure and up-to-date dependencies.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dependabot is an essential tool for maintaining secure and up-to-date dependencies.

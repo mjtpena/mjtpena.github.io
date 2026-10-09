@@ -1,5 +1,6 @@
 ---
 title: "September 2025 Recap: Key Takeaways for Enterprise AI"
+description: "The most successful AI implementations share common architectural patterns. Hybrid search combining vector and keyword retrieval consistently outperforms…"
 author: Michael John Peña
 draft: false
 date: 2025-09-30
@@ -9,10 +10,7 @@ tags:
   - Summary
   - Best Practices
   - Architecture
-
 ---
-
-I wrote "September 2025 Recap: Key Takeaways for Enterprise AI" to share practical, production-minded guidance on this topic.
 
 ## Architecture Patterns That Scale
 
@@ -108,4 +106,4 @@ def data_readiness_assessment(organization: Dict) -> Dict:
 
 October will explore advanced topics including evaluation frameworks for LLM applications, cost optimization strategies at scale, and emerging patterns for autonomous AI agents. The foundation built this month enables increasingly sophisticated AI capabilities.
 
-The key insight from September: successful enterprise AI is not just about models. It requires governance, security, and data infrastructure working in concert. Start with the fundamentals, measure everything, and iterate continuously.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The key insight from September: successful enterprise AI is not just about models. It requires governance, security, and data infrastructure working in concert. Start with the fundamentals, measure everything, and iterate continuously.

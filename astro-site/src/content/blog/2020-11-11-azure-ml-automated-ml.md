@@ -1,5 +1,6 @@
 ---
 title: "Azure Automated ML: Machine Learning for Everyone"
+description: "\"We have data and we want machine learning.\" I get this conversation often, and most of the time the team doesn't need a data scientist on day one—they need…"
 author: Michael John Peña
 draft: false
 date: 2020-11-11
@@ -179,4 +180,4 @@ prediction = json.loads(response.text)
 print(f"Prediction: {prediction['result'][0]}")
 ```
 
-AutoML: from data to deployed model in hours, not months.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AutoML: from data to deployed model in hours, not months.

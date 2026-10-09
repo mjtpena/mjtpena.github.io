@@ -1,5 +1,6 @@
 ---
 title: "Building AI Data Analysis Assistants"
+description: "AI data analysis assistants make insights accessible to everyone, regardless of technical expertise. The key is combining natural language understanding…"
 author: Michael John Pena
 draft: false
 date: 2023-04-15
@@ -9,10 +10,7 @@ tags:
   - OpenAI
   - Python
   - Analytics
-
 ---
-
-I wrote "Building AI Data Analysis Assistants" to share practical, production-minded guidance on this topic.
 
 ## Data Analysis Assistant
 
@@ -264,4 +262,4 @@ Format as Markdown with:
         return response.content
 ```
 
-AI data analysis assistants make insights accessible to everyone, regardless of technical expertise. The key is combining natural language understanding with proper data handling.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI data analysis assistants make insights accessible to everyone, regardless of technical expertise. The key is combining natural language understanding with proper data handling.

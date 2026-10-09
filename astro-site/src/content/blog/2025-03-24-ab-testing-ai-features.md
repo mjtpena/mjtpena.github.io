@@ -1,5 +1,6 @@
 ---
 title: "A/B Testing AI Features: Data-Driven AI Improvements"
+description: "Rigorous experimentation enables confident AI improvements based on real user impact."
 author: Michael John Peña
 draft: false
 date: 2025-03-24
@@ -9,10 +10,7 @@ tags:
   - Experimentation
   - Data Science
   - Best Practices
-
 ---
-
-I wrote "A/B Testing AI Features: Data-Driven AI Improvements" to share practical, production-minded guidance on this topic.
 
 ## AI A/B Testing Framework
 
@@ -101,4 +99,4 @@ response = generate_response(config)
 framework.log_metric("prompt_v2_test", user_id, "user_satisfaction", rating)
 ```
 
-Rigorous experimentation enables confident AI improvements based on real user impact.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Rigorous experimentation enables confident AI improvements based on real user impact.

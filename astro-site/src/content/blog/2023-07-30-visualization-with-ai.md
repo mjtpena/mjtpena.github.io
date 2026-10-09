@@ -1,5 +1,6 @@
 ---
 title: "AI-Powered Visualization: Creating Charts with Natural Language"
+description: "Visualization has always required a combination of skills that rarely all sit in the same person: data access, statistical understanding, and design…"
 author: Michael John Peña
 draft: false
 date: 2023-07-30
@@ -298,4 +299,4 @@ Tomorrow we'll explore file processing patterns with AI.
 
 - [Data Visualization Best Practices](https://www.tableau.com/learn/articles/data-visualization-tips)
 - [Color Brewer](https://colorbrewer2.org/) - Color schemes for maps and charts
-- [Matplotlib Gallery](https://matplotlib.org/stable/gallery/index.html)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Matplotlib Gallery](https://matplotlib.org/stable/gallery/index.html)

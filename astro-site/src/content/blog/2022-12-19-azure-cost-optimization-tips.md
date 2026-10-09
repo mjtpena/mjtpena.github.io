@@ -9,10 +9,7 @@ tags:
   - Cloud Economics
   - Best Practices
   - FinOps
-
 ---
-
-I wrote "Azure Cost Optimization Tips for 2023" to share practical, production-minded guidance on this topic.
 
 ## Quick Wins
 
@@ -350,4 +347,3 @@ Cost optimization is an ongoing practice, not a one-time project. The combinatio
 - [Azure Advisor](https://docs.microsoft.com/azure/advisor/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 - [Reserved Instance Guidance](https://docs.microsoft.com/azure/cost-management-billing/reservations/)
-

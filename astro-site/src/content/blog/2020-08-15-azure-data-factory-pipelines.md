@@ -1,5 +1,6 @@
 ---
 title: "Building Data Pipelines with Azure Data Factory"
+description: "A surprising number of \"modernise my reporting\" engagements I see start the same way: data scattered across an on-prem SQL Server, a SaaS CRM, three Excel…"
 author: Michael John Peña
 draft: false
 date: 2020-08-15
@@ -8,9 +9,7 @@ tags:
   - Data Factory
   - ETL
   - Data Engineering
-
 ---
-
 
 A surprising number of "modernise my reporting" engagements I see start the same way: data scattered across an on-prem SQL Server, a SaaS CRM, three Excel exports, and a CSV someone emails monthly. The first job is always to land that data somewhere queryable and keep it fresh. Data Factory is the orchestrator I reach for — managed, serverless, with connectors for the messy real-world sources you actually have. A working pipeline, plus the design choices I keep making the same way.
 
@@ -294,5 +293,4 @@ az monitor metrics alert create \
     --action-group ops-alerts
 ```
 
-Azure Data Factory provides a scalable, serverless platform for building enterprise data pipelines without managing infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+Azure Data Factory provides a scalable, serverless platform for building enterprise data pipelines without managing infrastructure.

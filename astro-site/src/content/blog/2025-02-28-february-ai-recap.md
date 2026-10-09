@@ -9,10 +9,7 @@ tags:
   - Trends
   - Azure
   - "2025"
-
 ---
-
-I wrote "February 2025 AI Recap: Key Developments and Trends" to share practical, production-minded guidance on this topic.
 
 ## Key Themes This Month
 
@@ -44,4 +41,4 @@ Expect focus on:
 - Enterprise AI adoption patterns
 - RAG 2.0 production deployments
 
-Stay tuned for more technical deep-dives in the coming month.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Stay tuned for more technical deep-dives in the coming month.

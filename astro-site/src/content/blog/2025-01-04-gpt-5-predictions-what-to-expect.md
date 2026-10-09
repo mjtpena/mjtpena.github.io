@@ -1,5 +1,6 @@
 ---
 title: "GPT-5 Predictions: What to Expect from OpenAI's Next Frontier Model"
+description: "The jump from GPT-4 to GPT-5 will likely be significant. Organizations that prepare now will be able to leverage new capabilities immediately upon release."
 author: Michael John Peña
 draft: false
 date: 2025-01-04
@@ -9,10 +10,7 @@ tags:
   - GPT-5
   - LLM
   - Predictions
-
 ---
-
-I wrote "GPT-5 Predictions: What to Expect from OpenAI's Next Frontier Model" to share practical, production-minded guidance on this topic.
 
 ## Expected Capabilities
 
@@ -248,4 +246,4 @@ Based on OpenAI's patterns:
 4. **Budget for increased compute costs** initially
 5. **Train teams on new capabilities** as they emerge
 
-The jump from GPT-4 to GPT-5 will likely be significant. Organizations that prepare now will be able to leverage new capabilities immediately upon release.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The jump from GPT-4 to GPT-5 will likely be significant. Organizations that prepare now will be able to leverage new capabilities immediately upon release.

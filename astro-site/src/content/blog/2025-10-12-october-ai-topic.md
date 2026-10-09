@@ -1,5 +1,6 @@
 ---
 title: "Azure Cosmos DB for AI Applications: Vector Search and Change Feed Patterns"
+description: "Use Change Feed to trigger embedding generation and synchronization with other AI services automatically when documents are created or updated."
 author: Michael John Peña
 draft: false
 date: 2025-10-12
@@ -9,10 +10,7 @@ tags:
   - NoSQL
   - AI Applications
   - Change Feed
-
 ---
-
-I wrote "Azure Cosmos DB for AI Applications: Vector Search and Change Feed Patterns" to share practical, production-minded guidance on this topic.
 
 ## Configuring Vector Search in Cosmos DB
 
@@ -130,4 +128,4 @@ class CosmosVectorSearch:
 
 ## Change Feed for Real-Time AI Pipelines
 
-Use Change Feed to trigger embedding generation and synchronization with other AI services automatically when documents are created or updated.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use Change Feed to trigger embedding generation and synchronization with other AI services automatically when documents are created or updated.

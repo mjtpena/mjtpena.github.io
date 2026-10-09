@@ -1,5 +1,6 @@
 ---
 title: "Conversation Management: Building Production Chat Systems"
+description: "Robust conversation management enables reliable production chat systems. Tomorrow, I will cover context pruning strategies."
 author: Michael John Peña
 draft: false
 date: 2023-06-22
@@ -9,10 +10,7 @@ tags:
   - Production Systems
   - State Management
   - Architecture
-
 ---
-
-I wrote "Conversation Management: Building Production Chat Systems" to share practical, production-minded guidance on this topic.
 
 ## Conversation Lifecycle
 
@@ -329,4 +327,4 @@ Robust conversation management enables reliable production chat systems. Tomorro
 ## Resources
 
 - [Conversation Design Best Practices](https://designguidelines.withgoogle.com/conversation/)
-- [Building Production Chat Systems](https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Building Production Chat Systems](https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/)

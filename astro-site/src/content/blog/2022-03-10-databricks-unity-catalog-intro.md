@@ -1,5 +1,6 @@
 ---
 title: "Azure Databricks Unity Catalog: Unified Data Governance at Scale"
+description: "Unity Catalog solves these problems with a unified approach."
 author: Michael John Peña
 draft: false
 date: 2022-03-10
@@ -9,10 +10,7 @@ tags:
   - Data Governance
   - Unity Catalog
   - Data Engineering
-
 ---
-
-I wrote "Azure Databricks Unity Catalog: Unified Data Governance at Scale" to share practical, production-minded guidance on this topic.
 
 ## Why Unity Catalog Matters
 
@@ -407,4 +405,3 @@ Key benefits:
 - [Unity Catalog Documentation](https://docs.databricks.com/data-governance/unity-catalog/index.html)
 - [Unity Catalog Best Practices](https://docs.databricks.com/data-governance/unity-catalog/best-practices.html)
 - [Migration Guide](https://docs.databricks.com/data-governance/unity-catalog/migrate.html)
-

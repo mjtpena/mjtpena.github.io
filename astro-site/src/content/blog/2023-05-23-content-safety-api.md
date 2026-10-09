@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Unveiled at Build 2023: The Future of Data Analytics"
+description: "All in ONE cohesive experience with ONE security model and ONE business model. At the heart of Fabric is OneLake - think of it as \"OneDrive for data.\" It's…"
 author: Michael John Peña
 draft: false
 date: 2023-05-23
@@ -10,10 +11,7 @@ tags:
   - Azure
   - Data Platform
   - OneLake
-
 ---
-
-I wrote "Microsoft Fabric Unveiled at Build 2023: The Future of Data Analytics" to share practical, production-minded guidance on this topic.
 
 ## What is Microsoft Fabric?
 
@@ -343,4 +341,4 @@ I'll be diving deep into Fabric over the coming weeks:
 - DirectLake optimization
 - Migration strategies from Synapse
 
-This is the most significant data platform announcement in years. Microsoft Fabric isn't just another product - it's a unification of the entire data estate. The future of enterprise analytics just got clearer.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+This is the most significant data platform announcement in years. Microsoft Fabric isn't just another product - it's a unification of the entire data estate. The future of enterprise analytics just got clearer.

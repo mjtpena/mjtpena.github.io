@@ -1,5 +1,6 @@
 ---
 title: "Azure Machine Learning Updates at Build 2023"
+description: "Azure ML continues to evolve as a comprehensive platform for both traditional ML and GenAI workloads. Tomorrow, I will cover Responsible AI improvements in…"
 author: Michael John Peña
 draft: false
 date: 2023-05-21
@@ -9,10 +10,7 @@ tags:
   - MLOps
   - Build 2023
   - Microsoft
-
 ---
-
-I wrote "Azure Machine Learning Updates at Build 2023" to share practical, production-minded guidance on this topic.
 
 ## Key Announcements
 
@@ -373,4 +371,4 @@ Azure ML continues to evolve as a comprehensive platform for both traditional ML
 
 - [Azure ML Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/)
 - [Feature Store](https://learn.microsoft.com/en-us/azure/machine-learning/concept-feature-store)
-- [Model Catalog](https://learn.microsoft.com/en-us/azure/machine-learning/concept-model-catalog)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Model Catalog](https://learn.microsoft.com/en-us/azure/machine-learning/concept-model-catalog)

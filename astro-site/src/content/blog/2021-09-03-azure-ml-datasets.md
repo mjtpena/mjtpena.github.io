@@ -1,5 +1,6 @@
 ---
 title: Managing Data with Azure ML Datasets
+description: "Proper data management with Azure ML Datasets is foundational to building reproducible, auditable machine learning pipelines."
 author: Michael John Pena
 draft: false
 date: 2021-09-03
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Azure ML
   - MLOps
-
 ---
-
-I wrote "2021-09-03-azure-ml-datasets" to share practical, production-minded guidance on this topic.
 
 ## Types of Data Assets
 
@@ -230,4 +228,4 @@ for job in jobs:
 4. **Store data in datastores**: Use Azure Blob Storage or ADLS Gen2
 5. **Document data sources**: Track where your data originates
 
-Proper data management with Azure ML Datasets is foundational to building reproducible, auditable machine learning pipelines.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper data management with Azure ML Datasets is foundational to building reproducible, auditable machine learning pipelines.

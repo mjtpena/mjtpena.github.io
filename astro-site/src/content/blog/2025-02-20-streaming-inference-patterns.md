@@ -1,5 +1,6 @@
 ---
 title: "Streaming Inference Patterns: Processing Data as It Flows"
+description: "Streaming inference brings AI insights to real-time data. Design for throughput, latency, and reliability from the start."
 author: Michael John Peña
 draft: false
 date: 2025-02-20
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Real-Time
   - Azure
-
 ---
-
-I wrote "Streaming Inference Patterns: Processing Data as It Flows" to share practical, production-minded guidance on this topic.
 
 ## Streaming Inference Architecture
 
@@ -358,4 +356,4 @@ class BackpressureManager:
 5. **Checkpoint properly**: Enable exactly-once semantics
 6. **Test with load**: Verify performance under realistic conditions
 
-Streaming inference brings AI insights to real-time data. Design for throughput, latency, and reliability from the start.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Streaming inference brings AI insights to real-time data. Design for throughput, latency, and reliability from the start.

@@ -1,13 +1,16 @@
 ---
 title: "Online Feature Serving in Databricks: Real-Time ML Features"
+description: "Online feature serving enables real-time ML inference by providing low-latency access to features. This guide covers setting up and using Databricks online…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-27
-tags: ["Databricks", "Feature Serving", "ML", "Real-time", "MLOps"]
-
+tags:
+  - Databricks
+  - Feature Serving
+  - ML
+  - Real-Time
+  - MLOps
 ---
-
-I wrote "Online Feature Serving in Databricks: Real-Time ML Features" to share practical, production-minded guidance on this topic.
 
 Online feature serving enables real-time ML inference by providing low-latency access to features. This guide covers setting up and using Databricks online feature serving.
 
@@ -404,4 +407,3 @@ class OnlineFeatureMonitor:
 ## Conclusion
 
 Online feature serving enables low-latency ML inference by providing millisecond access to pre-computed features. Design your feature pipeline with both offline training and online serving in mind for production ML systems.
-

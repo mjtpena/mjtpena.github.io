@@ -1,5 +1,6 @@
 ---
 title: "Creating MacOS universal apps in .NET"
+description: "Not to confuse yourself with Xamarin.Mac and MAUI for Mac Catalyst, they are different from this. Xamarin.Mac is an abstraction on a lot of Cocoa based…"
 author: Michael John Peña
 draft: false
 date: 2022-09-13
@@ -7,12 +8,9 @@ url: /blog/dotnet-macos-universal/
 tags:
   - csharp
   - dotnet
-  - azure
+  - Azure
   - macos
-
 ---
-
-I wrote "Creating MacOS universal apps in .NET" to share practical, production-minded guidance on this topic.
 
 Not to confuse yourself with Xamarin.Mac and MAUI for Mac Catalyst, they are different from this. Xamarin.Mac is an abstraction on a lot of Cocoa based framework and transpiles your app into native Swift/Objective-C code and creates an app. MAUI for Mac Catalyst is an abstraction on Apple's Mac Catalyst (and also a bunch of Swift/Objective-C libraries) which targets both iPadOS and MacOS. I'll probably cover these topics on a different blog post.
 
@@ -126,5 +124,3 @@ What are some of the real world things you can (and should) use this for?
 - You can create universal MacOS apps by targeting both arm64 and x64; and create a Fat framework.
 - You use the `--runtime osx.11.0-x64` or `--runtime osx.11.0-arm64` on your dotnet publish command to target the desired runtime.
 - There are a lot of things you can do by leveraging existing .NET libraries in to your Mac!
-
-

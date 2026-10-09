@@ -1,5 +1,6 @@
 ---
 title: "Conditional Access Policies for Microsoft Fabric"
+description: "Conditional Access enables Zero Trust security by controlling access based on conditions. Today I'm exploring how to implement Conditional Access for…"
 author: Michael John Peña
 draft: false
 date: 2024-06-27
@@ -611,4 +612,4 @@ Tomorrow I'll cover network security in Microsoft Fabric.
 
 - [Conditional Access for Power BI and Fabric](https://learn.microsoft.com/fabric/security/conditional-access)
 - [Microsoft Entra Conditional Access](https://learn.microsoft.com/entra/identity/conditional-access/)
-- [Zero Trust Security](https://learn.microsoft.com/security/zero-trust/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Zero Trust Security](https://learn.microsoft.com/security/zero-trust/)

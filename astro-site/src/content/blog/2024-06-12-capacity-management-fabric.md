@@ -1,5 +1,6 @@
 ---
 title: "Capacity Management in Microsoft Fabric"
+description: "Effective capacity management is crucial for Fabric performance and cost control. Today I'm diving deep into capacity planning and optimization."
 author: Michael John Peña
 draft: false
 date: 2024-06-12
@@ -385,4 +386,4 @@ Tomorrow I'll cover tenant settings in detail.
 
 - [Fabric Capacity](https://learn.microsoft.com/fabric/enterprise/capacity)
 - [Capacity Metrics](https://learn.microsoft.com/fabric/enterprise/metrics)
-- [Cost Management](https://learn.microsoft.com/fabric/enterprise/cost-management)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Cost Management](https://learn.microsoft.com/fabric/enterprise/cost-management)

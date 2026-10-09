@@ -9,10 +9,7 @@ tags:
   - MLOps
   - Microsoft Ignite
   - AI
-
 ---
-
-I wrote "Azure Machine Learning Updates from Microsoft Ignite 2022" to share practical, production-minded guidance on this topic.
 
 ## Managed Feature Store (Preview)
 
@@ -380,4 +377,3 @@ Azure Machine Learning continues to evolve with features that address real-world
 - [Responsible AI Dashboard](https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai-dashboard)
 - [Feature Store](https://learn.microsoft.com/en-us/azure/machine-learning/concept-feature-store)
 - [MLOps with Azure ML](https://learn.microsoft.com/en-us/azure/machine-learning/concept-model-management-and-deployment)
-

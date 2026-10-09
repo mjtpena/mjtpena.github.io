@@ -9,10 +9,7 @@ tags:
   - Embeddings
   - AI
   - Azure OpenAI
-
 ---
-
-I wrote "Pinecone Vector Database: Getting Started Guide" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -412,4 +409,4 @@ def estimate_pod_requirements(
 
 - [Pinecone Documentation](https://docs.pinecone.io/)
 - [Pinecone Python Client](https://github.com/pinecone-io/pinecone-python-client)
-- [Pricing Calculator](https://www.pinecone.io/pricing/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Pricing Calculator](https://www.pinecone.io/pricing/)

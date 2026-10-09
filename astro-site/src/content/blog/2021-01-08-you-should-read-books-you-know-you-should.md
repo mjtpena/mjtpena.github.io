@@ -1,5 +1,6 @@
 ---
 title: You should read books, you know you should
+description: "Before 2018, I was never a book reader. Reading a book seems like a chore to me. I can barely finish a chapter. I always had that internal conflict…"
 author: Michael John Peña
 draft: false
 date: 2021-01-08
@@ -49,4 +50,4 @@ There are a lot more reasons on why read books. I'm just adding a bit to that fo
 - Read books you enjoy or you know that can affect you. Don't think of it like the way it is in schools. A teacher won't give you a failed mark if you don't finish it.
 - It takes time to find the right book reading method that suites you. Also, maybe it keeps changing. What's important is you keep trying.
 
-What are the books that you would like to recommend? Let me know.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+What are the books that you would like to recommend? Let me know.

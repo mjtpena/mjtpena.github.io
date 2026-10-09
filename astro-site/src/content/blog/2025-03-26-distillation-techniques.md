@@ -1,5 +1,6 @@
 ---
 title: "Model Distillation: Creating Efficient Specialized Models"
+description: "Distillation enables production deployment with 10x cost reduction while maintaining quality."
 author: Michael John Peña
 draft: false
 date: 2025-03-26
@@ -9,10 +10,7 @@ tags:
   - Optimization
   - Models
   - Efficiency
-
 ---
-
-I wrote "Model Distillation: Creating Efficient Specialized Models" to share practical, production-minded guidance on this topic.
 
 ## Distillation Pipeline
 
@@ -126,4 +124,4 @@ class DistillationPipeline:
         return self.aggregate_results(results)
 ```
 
-Distillation enables production deployment with 10x cost reduction while maintaining quality.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Distillation enables production deployment with 10x cost reduction while maintaining quality.

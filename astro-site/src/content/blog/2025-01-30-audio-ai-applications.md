@@ -1,5 +1,6 @@
 ---
 title: "Audio AI: Speech Recognition, Synthesis, and Analysis for Data Applications"
+description: "Audio AI adds a new dimension to data applications. Start with transcription use cases and expand to voice interfaces as your needs evolve."
 author: Michael John Peña
 draft: false
 date: 2025-01-30
@@ -9,10 +10,7 @@ tags:
   - Speech Recognition
   - Azure
   - Cognitive Services
-
 ---
-
-I wrote "Audio AI: Speech Recognition, Synthesis, and Analysis for Data Applications" to share practical, production-minded guidance on this topic.
 
 ## Azure Speech Services Overview
 
@@ -408,4 +406,4 @@ class VoiceDataAssistant:
 4. **Cache transcriptions**: Store results to avoid re-processing
 5. **Handle silence**: Detect and handle empty audio gracefully
 
-Audio AI adds a new dimension to data applications. Start with transcription use cases and expand to voice interfaces as your needs evolve.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Audio AI adds a new dimension to data applications. Start with transcription use cases and expand to voice interfaces as your needs evolve.

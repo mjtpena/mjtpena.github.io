@@ -9,10 +9,7 @@ tags:
   - Azure IoT
   - ONNX
   - MLOps
-
 ---
-
-I wrote "Edge AI Improvements: Deploying Intelligence at the Data Source" to share practical, production-minded guidance on this topic.
 
 ## Edge AI Architecture
 
@@ -214,4 +211,5 @@ spec:
       volumes:
       - name: model-storage
         persistentVolumeClaim:
-          claimName: model-pvc\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+          claimName: model-pvc
+```

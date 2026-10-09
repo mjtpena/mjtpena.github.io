@@ -9,10 +9,7 @@ tags:
   - Provisioned Throughput
   - Enterprise AI
   - Capacity Planning
-
 ---
-
-I wrote "Azure OpenAI PTU: Provisioned Throughput Units Explained" to share practical, production-minded guidance on this topic.
 
 ## PTU vs Pay-As-You-Go
 
@@ -156,4 +153,3 @@ class PTUMonitor:
 ## Conclusion
 
 PTU provides predictable performance and costs for high-volume Azure OpenAI workloads. Evaluate based on your volume, latency requirements, and workload predictability.
-

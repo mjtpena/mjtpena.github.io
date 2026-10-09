@@ -1,13 +1,11 @@
 ---
 title: "RAGAS Framework: Automated RAG Evaluation"
+description: "RAGAS (Retrieval Augmented Generation Assessment) is an open-source framework for evaluating RAG pipelines. This guide covers how to implement and use RAGAS…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-19
 tags: ["AI", "RAG", "RAGAS", "Evaluation", "LLM"]
-
 ---
-
-I wrote "RAGAS Framework: Automated RAG Evaluation" to share practical, production-minded guidance on this topic.
 
 RAGAS (Retrieval Augmented Generation Assessment) is an open-source framework for evaluating RAG pipelines. This guide covers how to implement and use RAGAS for your RAG systems.
 
@@ -382,4 +380,3 @@ for metric, score in results.items():
 ## Conclusion
 
 RAGAS provides a standardized approach to RAG evaluation. Whether using the library directly or implementing the metrics yourself, consistent evaluation is key to improving RAG systems.
-

@@ -10,10 +10,7 @@ tags:
   - Indexers
   - Data Ingestion
   - ETL
-
 ---
-
-I wrote "2021-04-10-azure-search-indexers-data-ingestion" to share practical, production-minded guidance on this topic.
 
 ## Understanding Indexers
 
@@ -511,4 +508,3 @@ while True:
 ## Conclusion
 
 Azure Cognitive Search indexers provide powerful, automated data ingestion from multiple sources. By understanding change detection, field mappings, and optimization strategies, you can build efficient search solutions that stay synchronized with your source data. The key is choosing the right configuration for your data characteristics and freshness requirements.
-

@@ -9,10 +9,7 @@ tags:
   - Embeddings
   - AI
   - NLP
-
 ---
-
-I wrote "Introduction to Text Embeddings with Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## What Are Embeddings?
 
@@ -408,4 +405,4 @@ def find_outliers(documents: List[str], threshold: float = 0.5) -> List[int]:
 
 - [Azure OpenAI Embeddings](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings)
 - [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings)
-- [Embedding Use Cases](https://platform.openai.com/docs/guides/embeddings/use-cases)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Embedding Use Cases](https://platform.openai.com/docs/guides/embeddings/use-cases)

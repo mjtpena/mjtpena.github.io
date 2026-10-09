@@ -1,13 +1,11 @@
 ---
 title: "V-Order Optimization: Deep Dive into Fabric's Secret Weapon"
+description: "V-Order feels like a secret weapon because it's a write-time optimisation with outsized read-time benefits. In practice I enable V-Order on wide, heavily…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-22
 tags: ["Microsoft Fabric", "V-Order", "Performance", "Delta Lake", "Optimization"]
-
 ---
-
-I wrote "V-Order Optimization: Deep Dive into Fabric's Secret Weapon" to share practical, production-minded guidance on this topic.
 
 V-Order feels like a secret weapon because it's a write-time optimisation with outsized read-time benefits. In practice I enable V-Order on wide, heavily queried tables and measure the delta in report latency and I/O; here's how to apply it without breaking ingest performance.
 
@@ -287,4 +285,4 @@ class VOrderMonitor:
         return report
 ```
 
-Tomorrow, we'll explore query performance optimization in Fabric!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore query performance optimization in Fabric!

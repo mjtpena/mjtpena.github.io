@@ -1,5 +1,6 @@
 ---
 title: "Fabric Notebooks: Features and Productivity Tips"
+description: "Fabric Notebooks have some features I didn't notice until I'd been using them for a few weeks and wish someone had pointed out earlier. Inline data…"
 author: Michael John Peña
 draft: false
 date: 2023-07-09
@@ -347,4 +348,4 @@ Tomorrow we'll explore data wrangling techniques in Fabric notebooks.
 
 - [Fabric Notebooks Documentation](https://learn.microsoft.com/en-us/fabric/data-engineering/notebook-overview)
 - [MSSparkUtils](https://learn.microsoft.com/en-us/fabric/data-engineering/microsoft-spark-utilities)
-- [Notebook Best Practices](https://learn.microsoft.com/en-us/fabric/data-engineering/notebook-best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Notebook Best Practices](https://learn.microsoft.com/en-us/fabric/data-engineering/notebook-best-practices)

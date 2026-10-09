@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Security: Protecting Your Data Platform"
+description: "Security is an ongoing responsibility. Tomorrow, I will cover Workspace Roles in more detail."
 author: Michael John Peña
 draft: false
 date: 2023-06-14
@@ -9,10 +10,7 @@ tags:
   - Data Protection
   - Governance
   - Azure AD
-
 ---
-
-I wrote "Microsoft Fabric Security: Protecting Your Data Platform" to share practical, production-minded guidance on this topic.
 
 ## Fabric Security Model
 
@@ -358,4 +356,4 @@ Security is an ongoing responsibility. Tomorrow, I will cover Workspace Roles in
 
 - [Fabric Security Overview](https://learn.microsoft.com/en-us/fabric/security/security-overview)
 - [Row-Level Security](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls)
-- [Sensitivity Labels](https://learn.microsoft.com/en-us/power-bi/enterprise/service-security-sensitivity-label-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Sensitivity Labels](https://learn.microsoft.com/en-us/power-bi/enterprise/service-security-sensitivity-label-overview)

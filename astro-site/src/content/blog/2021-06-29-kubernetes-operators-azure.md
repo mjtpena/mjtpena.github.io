@@ -9,10 +9,7 @@ tags:
   - Kubernetes
   - Operators
   - AKS
-
 ---
-
-I wrote "2021-06-29-kubernetes-operators-azure" to share practical, production-minded guidance on this topic.
 
 ## Understanding Operators
 
@@ -75,4 +72,5 @@ spec:
   location: australiaeast
   tags:
     environment: production
-    managed-by: aso\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    managed-by: aso
+```

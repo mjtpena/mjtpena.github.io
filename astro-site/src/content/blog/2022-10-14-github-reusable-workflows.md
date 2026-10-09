@@ -1,13 +1,11 @@
 ---
 title: "GitHub Reusable Workflows Patterns"
+description: "Reusable workflows reduce duplication and improve maintainability across repositories."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-14
 tags: ["GitHub", "GitHub Actions", "CI/CD", "Best Practices"]
-
 ---
-
-I wrote "GitHub Reusable Workflows Patterns" to share practical, production-minded guidance on this topic.
 
 ## Creating Reusable Workflows
 
@@ -107,4 +105,4 @@ jobs:
       - run: npm ci && npm run build
 ```
 
-Reusable workflows reduce duplication and improve maintainability across repositories.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Reusable workflows reduce duplication and improve maintainability across repositories.

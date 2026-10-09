@@ -9,10 +9,7 @@ tags:
   - NoSQL
   - Database
   - Performance
-
 ---
-
-I wrote "Azure Cosmos DB Best Practices for 2022" to share practical, production-minded guidance on this topic.
 
 ## Partition Key Strategy
 
@@ -402,4 +399,3 @@ Cosmos DB success depends on thoughtful design decisions around partition keys, 
 - [Partition Key Selection](https://docs.microsoft.com/en-us/azure/cosmos-db/partitioning-overview)
 - [Indexing Policies](https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy)
 - [Change Feed](https://docs.microsoft.com/en-us/azure/cosmos-db/change-feed)
-

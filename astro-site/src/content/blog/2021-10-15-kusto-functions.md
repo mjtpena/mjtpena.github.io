@@ -1,13 +1,11 @@
 ---
 title: "Kusto Functions for Reusable Query Patterns"
+description: "KQL functions in Azure Data Explorer are the reusability mechanism that prevents the same complex query logic from being copy-pasted across dashboards…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-15
 tags: ["Azure", "Kusto", "KQL", "Azure Data Explorer", "Log Analytics"]
-
 ---
-
-I wrote "Kusto Functions for Reusable Query Patterns" to share practical, production-minded guidance on this topic.
 
 KQL functions in Azure Data Explorer are the reusability mechanism that prevents the same complex query logic from being copy-pasted across dashboards, alerts, and analysis notebooks. A stored function encapsulates a query pattern—a parameterised aggregation, a join template, a normalisation expression—and makes it callable by name across the cluster. The types: stored functions (persisted in the database schema, callable in queries), let-bound functions (inline, local to one query), and views (parameterless functions that act like virtual tables). For monitoring data, the patterns that benefit most from functions: normalising raw telemetry into a standard schema (so downstream consumers don't need to know the raw schema), defining organisation-standard alert threshold calculations, and building composable aggregation building blocks. Functions that reference other functions form query pipelines that are significantly easier to maintain than deeply nested inline KQL.
 
@@ -310,4 +308,3 @@ HighMemoryContainers(thresholdGB: real = 4.0) {
 Kusto functions are essential for building maintainable, reusable monitoring solutions. By encapsulating complex logic in well-designed functions, you can simplify queries and ensure consistency across your monitoring platform.
 
 Tomorrow, we'll explore materialized views for optimizing repeated query patterns.
-

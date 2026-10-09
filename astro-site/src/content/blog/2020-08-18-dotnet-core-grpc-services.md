@@ -1,5 +1,6 @@
 ---
 title: "Building gRPC Services with .NET Core 3.1"
+description: "Where I actually use gRPC: backend service-to-service in a Kubernetes cluster, where I control both ends and want strong typing across language boundaries.…"
 author: Michael John Peña
 draft: false
 date: 2020-08-18
@@ -8,10 +9,7 @@ tags:
   - gRPC
   - Microservices
   - API
-
 ---
-
-I wrote "Building gRPC Services with .NET Core 3.1" to share practical, production-minded guidance on this topic.
 
 ## Why gRPC?
 
@@ -334,4 +332,4 @@ services.AddGrpcHealthChecks()
 endpoints.MapGrpcHealthChecksService();
 ```
 
-Where I actually use gRPC: backend service-to-service in a Kubernetes cluster, where I control both ends and want strong typing across language boundaries. Where I don't: anything browser-facing (gRPC-Web exists, but it's a compromise), or for partner integrations where REST + OpenAPI is the universal currency. Pick gRPC when the perf and contract benefits outweigh the loss of curl-friendly debugging.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Where I actually use gRPC: backend service-to-service in a Kubernetes cluster, where I control both ends and want strong typing across language boundaries. Where I don't: anything browser-facing (gRPC-Web exists, but it's a compromise), or for partner integrations where REST + OpenAPI is the universal currency. Pick gRPC when the perf and contract benefits outweigh the loss of curl-friendly debugging.

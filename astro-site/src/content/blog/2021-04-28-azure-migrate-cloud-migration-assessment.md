@@ -1,5 +1,6 @@
 ---
 title: Azure Migrate - Planning and Executing Cloud Migrations
+description: "Azure Migrate is the tool that turns a migration conversation from \"we think we have about 300 servers\" to \"we have 287 servers, here's the dependency map…"
 author: Michael John Peña
 draft: false
 date: 2021-04-28

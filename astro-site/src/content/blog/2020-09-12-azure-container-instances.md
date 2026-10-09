@@ -1,5 +1,6 @@
 ---
 title: "Azure Container Instances: Serverless Containers"
+description: "For \"I need to run this container for an hour to crunch some data,\" ACI is the right answer roughly nine times out of ten. AKS is overkill, App Service for…"
 author: Michael John Peña
 draft: false
 date: 2020-09-12
@@ -88,4 +89,4 @@ properties:
 - Maximum 4 vCPUs, 16 GB RAM per container
 - Ephemeral by default (use Azure Files for persistence)
 
-ACI is perfect for short-lived, burst workloads where Kubernetes would be overkill.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+ACI is perfect for short-lived, burst workloads where Kubernetes would be overkill.

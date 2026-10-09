@@ -1,5 +1,6 @@
 ---
 title: Spark SQL Fundamentals and Best Practices
+description: "Spark SQL is where I've seen the highest productivity for data engineers who already know SQL but are new to distributed processing. You write familiar SQL…"
 author: Michael John Peña
 draft: false
 date: 2021-04-18

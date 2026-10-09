@@ -1,5 +1,6 @@
 ---
 title: "Fabric Monitoring: Observability for Your Data Platform"
+description: "One of my first questions when evaluating any data platform for enterprise use is \"how do I see what's actually running?\" — and in the early Fabric…"
 author: Michael John Peña
 draft: false
 date: 2023-06-12
@@ -370,4 +371,4 @@ Effective monitoring ensures your Fabric platform operates reliably. Tomorrow, I
 
 - [Monitoring Hub](https://learn.microsoft.com/en-us/fabric/admin/monitoring-hub)
 - [Capacity Metrics App](https://learn.microsoft.com/en-us/fabric/enterprise/capacity-metrics-app)
-- [Diagnostic Settings](https://learn.microsoft.com/en-us/fabric/admin/service-admin-premium-workloads)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Diagnostic Settings](https://learn.microsoft.com/en-us/fabric/admin/service-admin-premium-workloads)

@@ -1,5 +1,6 @@
 ---
 title: "Monitoring AI Applications: Observability Patterns for LLM Systems"
+description: "LLM systems have unique characteristics: non-deterministic outputs, variable latency, complex cost models, and quality metrics that require semantic…"
 author: Michael John Peña
 draft: false
 date: 2025-11-19
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Azure Monitor
   - OpenTelemetry
-
 ---
-
-I wrote "Monitoring AI Applications: Observability Patterns for LLM Systems" to share practical, production-minded guidance on this topic.
 
 ## The Observability Challenge
 
@@ -178,4 +176,4 @@ class QualityMonitor:
 
 Key metrics to track include token usage trends, cost by application or user, latency percentiles, error rates by type, and quality scores over time. Azure Monitor workbooks provide customizable dashboards for these AI-specific metrics.
 
-Comprehensive observability transforms AI operations from reactive troubleshooting to proactive optimization, enabling teams to improve quality while managing costs effectively.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Comprehensive observability transforms AI operations from reactive troubleshooting to proactive optimization, enabling teams to improve quality while managing costs effectively.

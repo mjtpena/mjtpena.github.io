@@ -1,5 +1,6 @@
 ---
 title: "Copilot for Pull Requests: AI-Enhanced Code Review"
+description: "Commit messages: {chr(10).join(f'- {c}' for c in commits)} response = await self.client.chatcompletion( model=\"gpt-4\", messages=[{\"role\": \"user\", \"content\"…"
 author: Michael John Pena
 draft: false
 date: 2023-04-04
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - Code Review
   - DevOps
-
 ---
-
-I wrote "Copilot for Pull Requests: AI-Enhanced Code Review" to share practical, production-minded guidance on this topic.
 
 ## Auto-Generated PR Descriptions
 
@@ -439,4 +437,4 @@ class CopilotPRWorkflow:
         }
 ```
 
-Copilot for Pull Requests streamlines code review while maintaining quality. The combination of auto-generated descriptions, intelligent reviewers, and AI-powered feedback makes the PR process faster and more thorough.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Copilot for Pull Requests streamlines code review while maintaining quality. The combination of auto-generated descriptions, intelligent reviewers, and AI-powered feedback makes the PR process faster and more thorough.

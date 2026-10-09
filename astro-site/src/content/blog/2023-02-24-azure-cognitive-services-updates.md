@@ -9,10 +9,7 @@ tags:
   - AI
   - Updates
   - Microsoft
-
 ---
-
-I wrote "Azure Cognitive Services Updates: What's New in Early 2023" to share practical, production-minded guidance on this topic.
 
 ## Vision Services Updates
 
@@ -362,4 +359,4 @@ class CognitiveServicesHub:
 
 - [What's New in Azure AI](https://learn.microsoft.com/azure/cognitive-services/whats-new)
 - [Azure AI Services Documentation](https://learn.microsoft.com/azure/cognitive-services/)
-- [Azure AI Blog](https://techcommunity.microsoft.com/t5/azure-ai/bg-p/AzureAIBlog)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure AI Blog](https://techcommunity.microsoft.com/t5/azure-ai/bg-p/AzureAIBlog)

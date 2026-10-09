@@ -8,10 +8,7 @@ tags:
   - Azure
   - AI
   - Machine Learning
-
 ---
-
-I wrote "Key Differences Between Azure Machine Learning and Azure Cognitive Services" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -51,4 +48,3 @@ Azure Machine Learning and Azure Cognitive Services are two powerful offerings f
 ## Conclusion
 
 Azure Machine Learning and Azure Cognitive Services are both integral parts of Microsoft's AI ecosystem, each serving unique purposes. Azure Machine Learning offers a robust platform for building custom machine learning models, while Azure Cognitive Services provides ready-to-use AI capabilities that can be easily integrated into applications. Understanding the key differences and use cases for each service can help organizations choose the right tool for their specific needs.
-

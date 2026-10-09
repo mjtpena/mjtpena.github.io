@@ -1,5 +1,6 @@
 ---
 title: "Content Filtering in Azure OpenAI: Implementing Safety Guardrails"
+description: "Each category has severity levels: safe, low, medium, high."
 author: Michael John Peña
 draft: false
 date: 2023-01-09
@@ -9,10 +10,7 @@ tags:
   - Content Safety
   - Security
   - AI
-
 ---
-
-I wrote "Content Filtering in Azure OpenAI: Implementing Safety Guardrails" to share practical, production-minded guidance on this topic.
 
 ## Understanding Content Filtering
 
@@ -451,4 +449,4 @@ def send_to_azure_monitor(event: dict):
 
 - [Azure OpenAI Content Filtering](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/content-filter)
 - [Azure Content Safety Service](https://azure.microsoft.com/products/cognitive-services/content-safety/)
-- [Responsible AI Dashboard](https://learn.microsoft.com/azure/machine-learning/concept-responsible-ai-dashboard)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Responsible AI Dashboard](https://learn.microsoft.com/azure/machine-learning/concept-responsible-ai-dashboard)

@@ -10,10 +10,7 @@ tags:
   - Analytics
   - ETL
   - Microsoft
-
 ---
-
-I wrote "2021-02-04-power-bi-dataflows-best-practices" to share practical, production-minded guidance on this topic.
 
 ## What are Power BI Dataflows?
 
@@ -326,4 +323,3 @@ $response.value | Format-Table startTime, endTime, status
 Power BI Dataflows are a powerful tool for creating reusable, self-service data preparation pipelines. By following best practices like using computed entities, implementing incremental refresh, and organizing your transformations logically, you can build scalable data solutions that serve your entire organization.
 
 The key is to think of dataflows as a shared data preparation layer, not just a means to load data into a single report.
-

@@ -1,5 +1,6 @@
 ---
 title: "Streaming LLM Responses: Patterns for Real-Time User Experience"
+description: "Add a blinking cursor effect while streaming to indicate ongoing generation. Users perceive streaming responses as 3-5x faster than equivalent non-streaming…"
 author: Michael John Peña
 draft: false
 date: 2025-07-19
@@ -9,10 +10,7 @@ tags:
   - User Experience
   - TypeScript
   - React
-
 ---
-
-I wrote "Streaming LLM Responses: Patterns for Real-Time User Experience" to share practical, production-minded guidance on this topic.
 
 ## Server-Side Streaming with Node.js
 
@@ -122,4 +120,4 @@ export function useStreamingChat() {
 
 ## Visual Feedback
 
-Add a blinking cursor effect while streaming to indicate ongoing generation. Users perceive streaming responses as 3-5x faster than equivalent non-streaming responses.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Add a blinking cursor effect while streaming to indicate ongoing generation. Users perceive streaming responses as 3-5x faster than equivalent non-streaming responses.

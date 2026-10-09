@@ -1,5 +1,6 @@
 ---
 title: "Using Codex Models for Azure Development Automation"
+description: "return self.generate(prompt, maxtokens=500, temperature=0.3) return self.generate(prompt, maxtokens=500, temperature=0.2)"
 author: Michael John Peña
 draft: false
 date: 2022-11-10
@@ -9,10 +10,7 @@ tags:
   - Codex
   - AI
   - Automation
-
 ---
-
-I wrote "Using Codex Models for Azure Development Automation" to share practical, production-minded guidance on this topic.
 
 ## Understanding Codex
 
@@ -323,7 +321,7 @@ class AzureCodeAssistant:
 {code}
 ```
 
-# Explanation:"""
+## Explanation:"""
 
         return self._generate(prompt, max_tokens=500, temperature=0.3)
 
@@ -334,7 +332,7 @@ class AzureCodeAssistant:
 {code}
 ```
 
-# Bugs and Issues:"""
+## Bugs and Issues:"""
 
         return self._generate(prompt, max_tokens=500, temperature=0.2)
 
@@ -345,7 +343,7 @@ class AzureCodeAssistant:
 {code}
 ```
 
-# Optimized code:"""
+## Optimized code:"""
 
         return self._generate(prompt, max_tokens=1500, temperature=0)
 
@@ -356,7 +354,7 @@ class AzureCodeAssistant:
 {code}
 ```
 
-# {to_lang} code:
+## {to_lang} code:
 ```{to_lang}"""
 
         return self._generate(prompt, max_tokens=1500, temperature=0)
@@ -368,7 +366,7 @@ class AzureCodeAssistant:
 {code}
 ```
 
-# Tests:
+## Tests:
 ```{language}"""
 
         return self._generate(prompt, max_tokens=1500, temperature=0.2)
@@ -416,4 +414,3 @@ Codex models are powerful tools for accelerating Azure development. From infrast
 - [Azure OpenAI Codex](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models#codex-models)
 - [GitHub Copilot](https://github.com/features/copilot)
 - [Prompt Engineering for Code](https://platform.openai.com/docs/guides/code)
-

@@ -10,10 +10,7 @@ tags:
   - Semantic Kernel
   - AI
   - .NET
-
 ---
-
-I wrote "Semantic Kernel: Building AI-Powered Applications with .NET" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -365,4 +362,3 @@ Semantic Kernel provides a powerful framework for building AI-powered applicatio
 - [Semantic Kernel GitHub](https://github.com/microsoft/semantic-kernel)
 - [Semantic Kernel Documentation](https://learn.microsoft.com/semantic-kernel/)
 - [Azure OpenAI Service](https://azure.microsoft.com/products/cognitive-services/openai-service/)
-

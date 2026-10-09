@@ -9,10 +9,7 @@ tags:
   - Azure
   - Trends
   - Analytics
-
 ---
-
-I wrote "Data Platform Evolution in 2022: Trends and Technologies" to share practical, production-minded guidance on this topic.
 
 ## The Lakehouse Wins
 
@@ -364,4 +361,3 @@ data_platform_lessons = {
 - [dbt](https://www.getdbt.com/)
 - [Great Expectations](https://greatexpectations.io/)
 - [Azure Synapse Analytics](https://azure.microsoft.com/en-us/products/synapse-analytics/)
-

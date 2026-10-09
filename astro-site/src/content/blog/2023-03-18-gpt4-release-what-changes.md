@@ -1,5 +1,6 @@
 ---
 title: "GPT-4 is Here: What Changes for Enterprise AI"
+description: "The revelation that landed with GPT-4's launch wasn't just the capability improvement—it was learning that Microsoft's new Bing Chat had been running on…"
 author: Michael John Peña
 draft: false
 date: 2023-03-18
@@ -212,4 +213,4 @@ Stay curious. Keep experimenting.
 - [OpenAI GPT-4 Technical Report](https://openai.com/research/gpt-4)
 - [GPT-4 API Documentation](https://platform.openai.com/docs/models/gpt-4)
 - [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/)
-- [GPT-4 Vision Capabilities](https://openai.com/blog/chatgpt-can-now-see-hear-and-speak)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [GPT-4 Vision Capabilities](https://openai.com/blog/chatgpt-can-now-see-hear-and-speak)

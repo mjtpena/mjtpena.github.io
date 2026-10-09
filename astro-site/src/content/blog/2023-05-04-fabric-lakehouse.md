@@ -1,5 +1,6 @@
 ---
 title: "Building with Fabric Lakehouse: The Best of Data Lakes and Warehouses"
+description: "The Lakehouse is where most of your Fabric data engineering work will happen. Tomorrow, I will cover Data Factory in Fabric for orchestrating data movement…"
 author: Michael John Peña
 draft: false
 date: 2023-05-04
@@ -9,10 +10,7 @@ tags:
   - Delta Lake
   - Data Engineering
   - Azure
-
 ---
-
-I wrote "Building with Fabric Lakehouse: The Best of Data Lakes and Warehouses" to share practical, production-minded guidance on this topic.
 
 ## What is a Lakehouse?
 
@@ -283,4 +281,4 @@ The Lakehouse is where most of your Fabric data engineering work will happen. To
 
 - [Lakehouse Tutorial](https://learn.microsoft.com/en-us/fabric/data-engineering/tutorial-lakehouse-introduction)
 - [Delta Lake in Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables)
-- [SQL Analytics Endpoint](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [SQL Analytics Endpoint](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint)

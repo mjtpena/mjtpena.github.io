@@ -9,10 +9,7 @@ tags:
   - HSM
   - Cryptography
   - Key Vault
-
 ---
-
-I wrote "Azure Managed HSM: FIPS 140-2 Level 3 Key Management" to share practical, production-minded guidance on this topic.
 
 ## Managed HSM vs Key Vault
 
@@ -336,4 +333,4 @@ AzureDiagnostics
 
 - [Managed HSM Documentation](https://docs.microsoft.com/en-us/azure/key-vault/managed-hsm/)
 - [Security Domain](https://docs.microsoft.com/en-us/azure/key-vault/managed-hsm/security-domain)
-- [Best Practices](https://docs.microsoft.com/en-us/azure/key-vault/managed-hsm/best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Best Practices](https://docs.microsoft.com/en-us/azure/key-vault/managed-hsm/best-practices)

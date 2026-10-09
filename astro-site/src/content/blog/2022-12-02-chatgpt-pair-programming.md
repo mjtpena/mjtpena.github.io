@@ -1,5 +1,6 @@
 ---
 title: "AI Pair Programming with ChatGPT: A New Development Paradigm"
+description: "Let's walk through building a REST API with ChatGPT as our pair. Me: \"I need to build a REST API for a task management system. The requirements are: users…"
 author: Michael John Peña
 draft: false
 date: 2022-12-02
@@ -9,10 +10,7 @@ tags:
   - Pair Programming
   - Development
   - Productivity
-
 ---
-
-I wrote "AI Pair Programming with ChatGPT: A New Development Paradigm" to share practical, production-minded guidance on this topic.
 
 ## The AI Pair Programming Experience
 
@@ -323,4 +321,3 @@ AI pair programming with ChatGPT is a powerful new tool in the developer toolkit
 
 - [ChatGPT](https://chat.openai.com/)
 - [Pair Programming Best Practices](https://martinfowler.com/articles/on-pair-programming.html)
-

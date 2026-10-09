@@ -10,10 +10,7 @@ tags:
   - Quality Assurance
   - AI
   - Metrics
-
 ---
-
-I wrote "Evaluation Frameworks for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -501,4 +498,3 @@ class TestLLMQuality:
 ## Conclusion
 
 Comprehensive evaluation frameworks are essential for maintaining LLM application quality. By implementing multiple evaluators covering relevance, coherence, groundedness, accuracy, and safety, you can systematically measure and improve your LLM applications. Integration with testing frameworks enables continuous quality assurance throughout development.
-

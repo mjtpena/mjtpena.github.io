@@ -1,5 +1,6 @@
 ---
 title: "Fabric Analytics Agents: Automated Data Analysis"
+description: "Analytics agents reduce manual toil while improving data reliability. Start with monitoring agents for quick wins, then expand to exploration and quality…"
 author: Michael John Peña
 draft: false
 date: 2024-11-21
@@ -9,10 +10,7 @@ tags:
   - Analytics Agents
   - Automation
   - Data Analysis
-
 ---
-
-I wrote "Fabric Analytics Agents: Automated Data Analysis" to share practical, production-minded guidance on this topic.
 
 ## Types of Analytics Agents
 
@@ -502,4 +500,4 @@ Analytics agents reduce manual toil while improving data reliability. Start with
 - [LangChain Agents](https://python.langchain.com/docs/modules/agents/)
 - [Semantic Kernel](https://learn.microsoft.com/semantic-kernel/)
 - [OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)
-- [LangGraph](https://langchain-ai.github.io/langgraph/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [LangGraph](https://langchain-ai.github.io/langgraph/)

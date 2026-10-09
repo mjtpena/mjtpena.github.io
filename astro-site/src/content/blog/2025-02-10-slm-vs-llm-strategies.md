@@ -1,5 +1,6 @@
 ---
 title: "SLM vs LLM: Choosing the Right Model Size Strategy"
+description: "The right model isn't always the biggest one. Match model capability to task requirements for optimal cost, latency, and quality."
 author: Michael John Peña
 draft: false
 date: 2025-02-10
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Model Selection
   - Architecture
-
 ---
-
-I wrote "SLM vs LLM: Choosing the Right Model Size Strategy" to share practical, production-minded guidance on this topic.
 
 ## The Model Size Spectrum
 
@@ -323,4 +321,4 @@ class ModelCascade:
 5. **Enable fallback**: Cascade to larger models when needed
 6. **Fine-tune when possible**: Custom small models often beat generic large ones
 
-The right model isn't always the biggest one. Match model capability to task requirements for optimal cost, latency, and quality.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The right model isn't always the biggest one. Match model capability to task requirements for optimal cost, latency, and quality.

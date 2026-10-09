@@ -1,5 +1,6 @@
 ---
 title: "Azure Container Registry: Private Docker Registry"
+description: "A second pass at ACR, this time with the lessons I've collected from running it for clients. Use the geo-replicated SKU only if you actually need…"
 author: Michael John Peña
 draft: false
 date: 2020-10-29
@@ -173,4 +174,4 @@ az network private-endpoint create \
     --connection-name acrConnection
 ```
 
-ACR is the secure home for your container images.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+ACR is the secure home for your container images.

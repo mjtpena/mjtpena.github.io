@@ -1,5 +1,6 @@
 ---
 title: ".NET 6 GA: The Long-Term Support Release That Changes Everything"
+description: "No Startup.cs, no Main method, no namespace declarations. This is possible thanks to C# 10's global usings and file-scoped namespaces."
 author: Michael John Pena
 draft: false
 date: 2021-11-01
@@ -9,10 +10,7 @@ tags:
   - Microsoft
   - Development
   - LTS
-
 ---
-
-I wrote ".NET 6 GA: The Long-Term Support Release That Changes Everything" to share practical, production-minded guidance on this topic.
 
 ## Why .NET 6 Matters
 
@@ -258,4 +256,4 @@ Migration is generally straightforward:
 
 - [.NET 6 Documentation](https://docs.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6)
 - [C# 10 Features](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10)
-- [Migration Guide](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Migration Guide](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60)

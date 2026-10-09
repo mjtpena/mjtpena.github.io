@@ -8,10 +8,7 @@ tags:
   - Inference
   - Performance
   - LLM
-
 ---
-
-I wrote "Batching Strategies for LLM Inference" to share practical, production-minded guidance on this topic.
 
 ## Static vs Dynamic Batching
 
@@ -235,4 +232,4 @@ Tomorrow we'll explore GPU optimization techniques.
 
 - [Continuous Batching Paper](https://arxiv.org/abs/2309.06180)
 - [vLLM Batching](https://docs.vllm.ai/en/latest/)
-- [Triton Inference Server](https://github.com/triton-inference-server/server)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Triton Inference Server](https://github.com/triton-inference-server/server)

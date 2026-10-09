@@ -1,5 +1,6 @@
 ---
 title: "Data Mesh Implementation: Domain-Oriented Data Products"
+description: "Data mesh rests on four pillars: domain ownership, data as a product, self-serve data platform, and federated computational governance."
 author: Michael John Peña
 draft: false
 date: 2025-09-06
@@ -9,10 +10,7 @@ tags:
   - Domain-Driven Design
   - Data Products
   - Decentralization
-
 ---
-
-I wrote "Data Mesh Implementation: Domain-Oriented Data Products" to share practical, production-minded guidance on this topic.
 
 ## Core Principles of Data Mesh
 
@@ -106,4 +104,4 @@ sales_orders = DataProduct(
 
 Governance in data mesh is collaborative, not dictatorial. Central teams define standards and policies; domain teams implement them.
 
-The success of data mesh depends on treating data consumers as customers and continuously improving data products based on their feedback.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The success of data mesh depends on treating data consumers as customers and continuously improving data products based on their feedback.

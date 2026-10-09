@@ -1,5 +1,6 @@
 ---
 title: "Azure Logic Apps: Enterprise Integration Patterns"
+description: "Logic Apps is the first thing I build in when a client says \"we need to integrate with Salesforce, then push to SAP, then notify the team in Teams.\"…"
 author: Michael John Peña
 draft: false
 date: 2020-11-28
@@ -372,4 +373,4 @@ Logic Apps: enterprise integration without the complexity.
 
 - [Logic Apps Documentation](https://docs.microsoft.com/en-us/azure/logic-apps/)
 - [Connector Reference](https://docs.microsoft.com/en-us/connectors/)
-- [Enterprise Integration Pack](https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-enterprise-integration-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Enterprise Integration Pack](https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-enterprise-integration-overview)

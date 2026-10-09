@@ -1,5 +1,6 @@
 ---
 title: "New Year, Same Foundation"
+description: "Another year begins, and I find myself less excited about \"new year, new me\" proclamations. Maybe it's age, or maybe it's finally understanding that real…"
 author: Michael John Peña
 draft: false
 date: 2026-01-01
@@ -53,4 +54,4 @@ At the end of 2026, I'll measure success by:
 
 The rest is noise.
 
-Here's to building on solid foundations rather than chasing shiny new starts. Happy 2026.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Here's to building on solid foundations rather than chasing shiny new starts. Happy 2026.

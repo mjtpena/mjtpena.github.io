@@ -1,13 +1,11 @@
 ---
 title: "Repos in Databricks: Managing Production Deployments"
+description: "Databricks Repos in production use means the code running in your prod workspace is explicitly linked to a specific Git commit—not \"whatever notebooks…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-31
 tags: ["Azure", "Databricks", "Repos", "Production", "DevOps", "MLOps"]
-
 ---
-
-I wrote "Repos in Databricks: Managing Production Deployments" to share practical, production-minded guidance on this topic.
 
 Databricks Repos in production use means the code running in your prod workspace is explicitly linked to a specific Git commit—not "whatever notebooks someone uploaded last week." The deployment pattern: a CI/CD pipeline (Azure DevOps or GitHub Actions) runs unit tests on the PR branch, merges to main after approval, then calls the Databricks Repos API to update the prod workspace Repo to the new main commit. The workspace contains no manually edited notebooks; all changes go through the Git workflow. Environment promotion (dev→test→prod) is repo branch promotion: the dev workspace tracks the `main` branch, prod uses tagged releases. This architecture makes rollback trivial (revert the Repo to the previous commit), makes the change history auditable (every code change has a Git commit, PR, and reviewer), and makes disaster recovery straightforward (the entire workspace code base exists in Git).
 
@@ -523,4 +521,3 @@ deployment_history = spark.sql("""
 Databricks Repos transforms how teams manage production deployments. By combining Git integration with proper CI/CD practices, you can achieve reliable, auditable, and reproducible deployments.
 
 This concludes our October 2021 series on Azure, Data, and AI topics. We've covered everything from AKS cluster management to Azure Data Explorer, Synapse Analytics, and Databricks best practices. Happy building!
-

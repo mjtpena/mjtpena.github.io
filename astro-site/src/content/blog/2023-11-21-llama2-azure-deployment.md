@@ -1,13 +1,11 @@
 ---
 title: "Llama 2 on Azure: Meta's Open-Source Models in Production"
+description: "Llama 2 on Azure arrived through the Azure Model Catalog as a managed deployment option, making Meta's open-source family — 7B, 13B, 70B, and their Chat…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-21
 tags: ["Azure", "Llama 2", "Meta", "AI", "Open Source"]
-
 ---
-
-I wrote "Llama 2 on Azure: Meta's Open-Source Models in Production" to share practical, production-minded guidance on this topic.
 
 Llama 2 on Azure arrived through the Azure Model Catalog as a managed deployment option, making Meta's open-source family — 7B, 13B, 70B, and their Chat variants — accessible through Azure's deployment infrastructure with VNET integration, RBAC, and managed compute rather than requiring you to provision your own GPU VMs and manage the model serving stack. The Llama 2 licensing situation is worth understanding: the model is available under Meta's custom Llama 2 Community Licence, which is open for most uses but has restrictions for organisations with more than 700 million monthly active users and requires a request from Meta if you're in that category. For enterprise use cases, the licence terms are permissive enough; the compliance concern for regulated industries is more about data handling during inference than the licence itself. The 70B Chat model offers the strongest capability; 7B Chat is the practical choice for latency-sensitive applications where inference speed matters more than maximum quality.
 
@@ -425,4 +423,4 @@ def fine_tune_llama(
 4. **Test thoroughly** - open models may need more guardrails
 5. **Monitor for hallucinations** - implement fact-checking
 
-Tomorrow, we'll explore open-source models more broadly and how to benchmark them!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore open-source models more broadly and how to benchmark them!

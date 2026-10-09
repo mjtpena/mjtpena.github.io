@@ -1,5 +1,6 @@
 ---
 title: "Understanding Microsoft Fabric as a Unified Analytics Platform"
+description: "This fragmentation creates operational overhead that Fabric aims to eliminate."
 author: Michael John Peña
 draft: false
 date: 2023-05-02
@@ -9,10 +10,7 @@ tags:
   - Analytics
   - Data Platform
   - SaaS
-
 ---
-
-I wrote "Understanding Microsoft Fabric as a Unified Analytics Platform" to share practical, production-minded guidance on this topic.
 
 ## The Problem Fabric Solves
 
@@ -175,4 +173,4 @@ Tomorrow, I will dive deep into OneLake - the storage foundation that makes all 
 
 - [Fabric Architecture Overview](https://learn.microsoft.com/en-us/fabric/get-started/fabric-architecture)
 - [Fabric Workloads](https://learn.microsoft.com/en-us/fabric/get-started/workloads)
-- [Pricing Calculator](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Pricing Calculator](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/)

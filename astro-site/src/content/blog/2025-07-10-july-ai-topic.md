@@ -1,5 +1,6 @@
 ---
 title: "Fabric Data Pipelines: Orchestrating ML Feature Engineering at Scale"
+description: "For real-time inference, query the feature store directly from your model serving endpoint. Fabric's query optimization ensures millisecond-level feature…"
 author: Michael John Peña
 draft: false
 date: 2025-07-10
@@ -9,10 +10,7 @@ tags:
   - Feature Engineering
   - MLOps
   - PySpark
-
 ---
-
-I wrote "Fabric Data Pipelines: Orchestrating ML Feature Engineering at Scale" to share practical, production-minded guidance on this topic.
 
 ## Building Feature Engineering Pipelines
 
@@ -91,4 +89,4 @@ Configure Data Factory pipelines for incremental feature updates:
 
 ## Real-Time Feature Serving
 
-For real-time inference, query the feature store directly from your model serving endpoint. Fabric's query optimization ensures millisecond-level feature retrieval.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+For real-time inference, query the feature store directly from your model serving endpoint. Fabric's query optimization ensures millisecond-level feature retrieval.

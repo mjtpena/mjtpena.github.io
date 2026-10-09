@@ -1,5 +1,6 @@
 ---
 title: "ChatGPT Code Interpreter: Data Analysis for Everyone"
+description: "OpenAI released Code Interpreter for ChatGPT Plus subscribers on July 6, 2023 — and within a week it had become my default tool for quick data exploration…"
 author: Michael John Peña
 draft: false
 date: 2023-07-28
@@ -310,4 +311,4 @@ Tomorrow we'll explore data analysis patterns with AI.
 
 - [ChatGPT Plus](https://openai.com/chatgpt)
 - [OpenAI Usage Policies](https://openai.com/policies/usage-policies)
-- [Data Analysis Best Practices](https://openai.com/blog/chatgpt-plugins#code-interpreter)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data Analysis Best Practices](https://openai.com/blog/chatgpt-plugins#code-interpreter)

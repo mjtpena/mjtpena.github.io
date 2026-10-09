@@ -1,5 +1,6 @@
 ---
 title: "Federated Learning: Privacy-Preserving Machine Learning"
+description: "Federated learning in 2021 moved from research to practical deployment. Healthcare, finance, and mobile applications led adoption where data privacy is…"
 author: Michael John Pena
 draft: false
 date: 2021-12-22
@@ -9,10 +10,7 @@ tags:
   - Machine Learning
   - Distributed Systems
   - Data Privacy
-
 ---
-
-I wrote "Federated Learning: Privacy-Preserving Machine Learning" to share practical, production-minded guidance on this topic.
 
 ## The Federated Learning Paradigm
 
@@ -423,4 +421,4 @@ Federated learning in 2021 moved from research to practical deployment. Healthca
 - [TensorFlow Federated](https://www.tensorflow.org/federated)
 - [PySyft](https://github.com/OpenMined/PySyft)
 - [Flower Framework](https://flower.dev/)
-- [Federated Learning Paper](https://arxiv.org/abs/1602.05629)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Federated Learning Paper](https://arxiv.org/abs/1602.05629)

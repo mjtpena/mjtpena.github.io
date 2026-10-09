@@ -10,12 +10,9 @@ tags:
   - ExpressRoute
   - Hybrid Cloud
   - Connectivity
-
 ---
 
-I wrote "2021-07-09-expressroute-direct" to share practical, production-minded guidance on this topic.
-
-# Understanding ExpressRoute Direct
+## Understanding ExpressRoute Direct
 
 ExpressRoute Direct offers:
 
@@ -26,7 +23,7 @@ ExpressRoute Direct offers:
 - MACsec encryption for Layer 2 security
 - QinQ VLAN tagging support
 
-# Creating an ExpressRoute Direct Resource
+## Creating an ExpressRoute Direct Resource
 
 Set up ExpressRoute Direct:
 
@@ -46,7 +43,7 @@ az network express-route port show \
     --query "{name: name, location: peeringLocation, bandwidth: bandwidthInGbps, provisionedBandwidth: provisionedBandwidthInGbps, etherType: etherType}"
 ```
 
-# Configuring ExpressRoute Direct with Terraform
+## Configuring ExpressRoute Direct with Terraform
 
 Infrastructure as code for ExpressRoute Direct:
 
@@ -132,7 +129,7 @@ resource "azurerm_express_route_circuit" "disaster_recovery" {
 }
 ```
 
-# Configuring MACsec Encryption
+## Configuring MACsec Encryption
 
 Enable Layer 2 encryption for enhanced security:
 
@@ -193,7 +190,7 @@ network_client.express_route_ports.begin_create_or_update(
 )
 ```
 
-# Creating Circuits on ExpressRoute Direct
+## Creating Circuits on ExpressRoute Direct
 
 Provision multiple circuits on your Direct ports:
 
@@ -257,7 +254,7 @@ microsoft_peering = network_client.express_route_circuit_peerings.begin_create_o
 ).result()
 ```
 
-# Connecting Virtual Networks
+## Connecting Virtual Networks
 
 Link VNets to your ExpressRoute circuit:
 
@@ -310,7 +307,7 @@ connection = network_client.virtual_network_gateway_connections.begin_create_or_
 ).result()
 ```
 
-# Monitoring ExpressRoute Direct
+## Monitoring ExpressRoute Direct
 
 Monitor port and circuit health:
 
@@ -378,7 +375,7 @@ alert_rule = {
 }
 ```
 
-# Bandwidth Management
+## Bandwidth Management
 
 Manage bandwidth allocation across circuits:
 
@@ -424,9 +421,8 @@ def resize_circuit(circuit_name, new_bandwidth_gbps):
 resize_circuit("er-circuit-production", 20)
 ```
 
-# Conclusion
+## Conclusion
 
 Azure ExpressRoute Direct provides the highest level of connectivity to Azure with dedicated 10 Gbps or 100 Gbps ports. This solution is ideal for organizations with massive data transfer requirements, strict compliance needs, or those wanting complete control over their Azure connectivity.
 
 With features like MACsec encryption, multiple circuit support, and flexible bandwidth allocation, ExpressRoute Direct enables enterprises to build robust, secure, and high-performance hybrid cloud architectures. While it requires more initial investment and network expertise, the benefits for large-scale workloads are substantial.
-

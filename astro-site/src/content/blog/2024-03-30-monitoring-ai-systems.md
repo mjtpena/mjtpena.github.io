@@ -1,13 +1,11 @@
 ---
 title: "Monitoring AI Systems in Production"
+description: "AI systems require specialized monitoring beyond traditional application metrics. This guide covers comprehensive observability for production AI."
 author: "Michael John Peña"
 draft: false
 date: 2024-03-30
 tags: ["AI", "Monitoring", "MLOps", "Observability", "Production"]
-
 ---
-
-I wrote "Monitoring AI Systems in Production" to share practical, production-minded guidance on this topic.
 
 AI systems require specialized monitoring beyond traditional application metrics. This guide covers comprehensive observability for production AI.
 
@@ -448,4 +446,3 @@ class AIAlertManager:
 ## Conclusion
 
 Comprehensive AI monitoring covers performance, quality, cost, safety, and reliability. Build monitoring into your AI service from the start and set up alerts for anomalies. Use dashboards to track trends and identify optimization opportunities.
-

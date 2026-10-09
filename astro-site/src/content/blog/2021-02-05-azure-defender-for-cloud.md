@@ -9,11 +9,8 @@ tags:
   - Security
   - Cloud Security
   - Azure Defender
-  - DevSecOps
-
+  - devsecops
 ---
-
-I wrote "2021-02-05-azure-defender-for-cloud" to share practical, production-minded guidance on this topic.
 
 ## Understanding Azure Defender
 
@@ -412,4 +409,3 @@ Azure Defender for Cloud provides comprehensive security for your Azure and hybr
 - Monitor compliance continuously
 
 Security is a journey, not a destination. Use Azure Defender as your foundation for a robust cloud security posture.
-

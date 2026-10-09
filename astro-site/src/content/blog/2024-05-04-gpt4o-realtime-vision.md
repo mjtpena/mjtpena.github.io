@@ -1,5 +1,6 @@
 ---
 title: "GPT-4o Real-Time Vision: Processing Images at Scale"
+description: "GPT-4o's vision capabilities are impressive, but what makes them practical for enterprise is the combination of quality, speed, and cost. Today I'm…"
 author: Michael John Peña
 draft: false
 date: 2024-05-04
@@ -329,4 +330,4 @@ Tomorrow we'll explore multimodal conversations combining text, voice, and visio
 
 - [Vision API Documentation](https://platform.openai.com/docs/guides/vision)
 - [Azure Blob Storage SDK](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-python)
-- [Image Token Calculator](https://platform.openai.com/tokenizer)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Image Token Calculator](https://platform.openai.com/tokenizer)

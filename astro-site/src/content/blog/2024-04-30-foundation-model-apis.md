@@ -1,13 +1,11 @@
 ---
 title: "Foundation Model APIs in Databricks: Enterprise LLM Access"
+description: "Databricks Foundation Model APIs provide enterprise-ready access to state-of-the-art LLMs. This guide covers using these APIs for building AI applications."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-30
 tags: ["Databricks", "Foundation Models", "LLM", "AI", "APIs"]
-
 ---
-
-I wrote "Foundation Model APIs in Databricks: Enterprise LLM Access" to share practical, production-minded guidance on this topic.
 
 Databricks Foundation Model APIs provide enterprise-ready access to state-of-the-art LLMs. This guide covers using these APIs for building AI applications.
 
@@ -452,4 +450,3 @@ class OptimizedFoundationModelClient:
 ## Conclusion
 
 Databricks Foundation Model APIs provide enterprise-ready access to state-of-the-art LLMs. Use them for building intelligent applications, RAG systems, and data analysis assistants with built-in governance and scalability.
-

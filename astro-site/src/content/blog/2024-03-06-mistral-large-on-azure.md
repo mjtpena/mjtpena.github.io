@@ -1,13 +1,11 @@
 ---
 title: "Mistral Large on Azure: Getting Started Guide"
+description: "Mistral Large is now available on Azure AI, bringing one of Europe's most capable AI models to the Azure ecosystem. This guide covers deployment, usage, and…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-06
 tags: ["Azure", "Mistral", "AI", "LLM", "Machine Learning"]
-
 ---
-
-I wrote "Mistral Large on Azure: Getting Started Guide" to share practical, production-minded guidance on this topic.
 
 Mistral Large is now available on Azure AI, bringing one of Europe's most capable AI models to the Azure ecosystem. This guide covers deployment, usage, and best practices.
 
@@ -242,4 +240,3 @@ print(response.content)
 ## Conclusion
 
 Mistral Large on Azure provides a powerful, cost-effective option for enterprise AI workloads. The serverless deployment option makes it easy to get started without infrastructure management.
-

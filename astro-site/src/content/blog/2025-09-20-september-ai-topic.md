@@ -1,5 +1,6 @@
 ---
 title: "Azure Document Intelligence: Table Extraction and Analysis"
+description: "Table extraction transforms static reports into queryable data. Combine extracted tables with LLM analysis to answer questions about financial statements…"
 author: Michael John Peña
 draft: false
 date: 2025-09-20
@@ -9,10 +10,7 @@ tags:
   - Table Extraction
   - Data Processing
   - Python
-
 ---
-
-I wrote "Azure Document Intelligence: Table Extraction and Analysis" to share practical, production-minded guidance on this topic.
 
 ## Table Extraction Basics
 
@@ -139,4 +137,4 @@ def extract_tables_with_context(document_url: str) -> List[dict]:
     return tables_with_context
 ```
 
-Table extraction transforms static reports into queryable data. Combine extracted tables with LLM analysis to answer questions about financial statements, research papers, and technical specifications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Table extraction transforms static reports into queryable data. Combine extracted tables with LLM analysis to answer questions about financial statements, research papers, and technical specifications.

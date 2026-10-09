@@ -1,5 +1,6 @@
 ---
 title: "Azure Databricks + OpenAI: LLMs for Data Engineering"
+description: "Azure Databricks with Azure OpenAI creates intelligent data platforms where natural language becomes the interface for data engineering tasks."
 author: Michael John Pena
 draft: false
 date: 2023-04-13
@@ -9,10 +10,7 @@ tags:
   - OpenAI
   - Data Engineering
   - AI
-
 ---
-
-I wrote "Azure Databricks + OpenAI: LLMs for Data Engineering" to share practical, production-minded guidance on this topic.
 
 ## Setting Up the Integration
 
@@ -305,4 +303,4 @@ notebook_code = gen.generate_etl_notebook(
 print(notebook_code)
 ```
 
-Azure Databricks with Azure OpenAI creates intelligent data platforms where natural language becomes the interface for data engineering tasks.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Databricks with Azure OpenAI creates intelligent data platforms where natural language becomes the interface for data engineering tasks.

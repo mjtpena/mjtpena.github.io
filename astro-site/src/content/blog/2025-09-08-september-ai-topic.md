@@ -1,5 +1,6 @@
 ---
 title: "Fine-Tuning GPT Models: When and How to Customize"
+description: "Fine-tuning makes sense when you need consistent formatting, domain-specific terminology, or significant behavior changes that prompting cannot achieve…"
 author: Michael John Peña
 draft: false
 date: 2025-09-08
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - LLM
   - Customization
-
 ---
-
-I wrote "Fine-Tuning GPT Models: When and How to Customize" to share practical, production-minded guidance on this topic.
 
 ## When to Fine-Tune
 
@@ -115,4 +113,4 @@ print(f"Fine-tuning job created: {job.id}")
 
 Always hold out a test set. Compare fine-tuned model performance against the base model with good prompts. Sometimes prompt engineering achieves 90% of the benefit at 10% of the cost.
 
-Fine-tuning is a powerful tool, but use it judiciously. Start with prompting, and only fine-tune when you have clear evidence it will provide meaningful improvement.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fine-tuning is a powerful tool, but use it judiciously. Start with prompting, and only fine-tune when you have clear evidence it will provide meaningful improvement.

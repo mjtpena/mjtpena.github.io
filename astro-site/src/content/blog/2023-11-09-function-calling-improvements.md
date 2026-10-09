@@ -1,13 +1,11 @@
 ---
 title: "Enhanced Function Calling in GPT-4 Turbo"
+description: "Parallel function calling in GPT-4 Turbo is the DevDay improvement to function calling that changes what's architecturally practical with AI agents.…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-09
 tags: ["OpenAI", "Function Calling", "API", "GPT-4", "Tools"]
-
 ---
-
-I wrote "Enhanced Function Calling in GPT-4 Turbo" to share practical, production-minded guidance on this topic.
 
 Parallel function calling in GPT-4 Turbo is the DevDay improvement to function calling that changes what's architecturally practical with AI agents. Previously, a model could call one function per response turn — so a task requiring three independent data lookups required three back-and-forth exchanges with the model. With parallel function calling (`gpt-4-1106-preview`), the model can return multiple function calls in a single response, each with their own arguments, and the application executes them concurrently before returning all results in the next turn. The impact: multi-step agent workflows run significantly faster because independent actions don't have to be serialised through the model. The requirement: the function calls must be genuinely independent.
 
@@ -282,4 +280,3 @@ def robust_function_execution(name: str, arguments: str) -> str:
 ## Conclusion
 
 Enhanced function calling in GPT-4 Turbo makes it easier to build powerful AI agents that can interact with external systems. Parallel calls improve efficiency, while better accuracy reduces errors. Tomorrow, we'll dive into Microsoft Fabric GA - the biggest announcement from Ignite 2023!
-

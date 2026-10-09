@@ -1,5 +1,6 @@
 ---
 title: "Row-Level Security in Fabric: Data Access at the Row Level"
+description: "RLS provides essential data security for multi-tenant and sensitive data scenarios. Tomorrow, I will cover Azure OpenAI function calling patterns."
 author: Michael John Peña
 draft: false
 date: 2023-06-17
@@ -9,10 +10,7 @@ tags:
   - Security
   - DAX
   - Power BI
-
 ---
-
-I wrote "Row-Level Security in Fabric: Data Access at the Row Level" to share practical, production-minded guidance on this topic.
 
 ## RLS Fundamentals
 
@@ -284,4 +282,4 @@ RLS provides essential data security for multi-tenant and sensitive data scenari
 
 - [RLS in Power BI](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls)
 - [Dynamic RLS](https://learn.microsoft.com/en-us/power-bi/guidance/rls-guidance)
-- [RLS Best Practices](https://learn.microsoft.com/en-us/power-bi/guidance/rls-guidance)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [RLS Best Practices](https://learn.microsoft.com/en-us/power-bi/guidance/rls-guidance)

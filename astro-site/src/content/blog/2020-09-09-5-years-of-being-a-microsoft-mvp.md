@@ -1,5 +1,6 @@
 ---
 title: 5 Years of being a Microsoft MVP!
+description: "Wow! It’s been 5 years since my first Microsoft MVP award. If you don’t know what the Microsoft MVP program is, check this site. Throughout the years, I…"
 author: Michael John Peña
 draft: false
 date: 2020-09-09
@@ -24,4 +25,4 @@ Being in this program provides me a pathway for continuous learning and continuo
 
 Where do I go from this? My career was born on the cloud. There’s just so much to learn, work on, collaborate, and share to the community. I was lucky that I’ve got to work on these different technologies and see them grow. Some of my focus for the next year ahead includes: Cloud Native (AKS and Terraform in particular), AI workloads on Cloud, and Edge computing.
 
-Since it's a new normal now to present at webinars and virtual events, I'll be taking part more into that space. I'm also co-authoring a new "hands-on" book. A podcast is also on the way. Last, I will do my best to write more technical blogs (coming soon).\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Since it's a new normal now to present at webinars and virtual events, I'll be taking part more into that space. I'm also co-authoring a new "hands-on" book. A podcast is also on the way. Last, I will do my best to write more technical blogs (coming soon).

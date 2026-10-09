@@ -1,13 +1,11 @@
 ---
 title: "Time-Series Data at Scale with Citus and TimescaleDB"
+description: "This architecture handles billions of time-series data points while maintaining query performance for both real-time and historical analysis."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-08
 tags: ["Azure", "Citus", "PostgreSQL", "Time-Series", "TimescaleDB", "IoT"]
-
 ---
-
-I wrote "Time-Series Data at Scale with Citus and TimescaleDB" to share practical, production-minded guidance on this topic.
 
 ## Designing Time-Series Tables
 
@@ -190,4 +188,4 @@ WHERE reading_time >= '2022-06-01'
 GROUP BY sensor_id, reading_time::date;
 ```
 
-This architecture handles billions of time-series data points while maintaining query performance for both real-time and historical analysis.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+This architecture handles billions of time-series data points while maintaining query performance for both real-time and historical analysis.

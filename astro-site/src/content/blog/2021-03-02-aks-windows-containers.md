@@ -10,10 +10,7 @@ tags:
   - AKS
   - Windows Containers
   - .NET
-
 ---
-
-I wrote "2021-03-02-aks-windows-containers" to share practical, production-minded guidance on this topic.
 
 ## Why Windows Containers on AKS?
 
@@ -141,4 +138,5 @@ spec:
             path: /ready
             port: 80
           initialDelaySeconds: 30
-          periodSeconds: 10\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+          periodSeconds: 10
+```

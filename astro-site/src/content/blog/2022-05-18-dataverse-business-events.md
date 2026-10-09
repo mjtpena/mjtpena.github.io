@@ -6,12 +6,9 @@ date: 2022-05-18
 tags:
   - dataverse
   - power-platform
-  - events
-  - integration
-
+  - Events
+  - Integration
 ---
-
-I wrote "Dataverse Business Events: Event-Driven Architecture" to share practical, production-minded guidance on this topic.
 
 ## Business Events Overview
 
@@ -406,5 +403,3 @@ Dataverse business events enable:
 - Real-time data synchronization
 
 Build reactive systems that respond to business changes instantly.
-
-

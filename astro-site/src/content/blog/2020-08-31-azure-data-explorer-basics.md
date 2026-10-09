@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Explorer: Fast Analytics on Log Data"
+description: "For log analytics at scale, ADX is hard to beat."
 author: Michael John Peña
 draft: false
 date: 2020-08-31
@@ -8,10 +9,7 @@ tags:
   - Azure Data Explorer
   - KQL
   - Log Analytics
-
 ---
-
-I wrote "Azure Data Explorer: Fast Analytics on Log Data" to share practical, production-minded guidance on this topic.
 
 ## Why ADX?
 
@@ -69,4 +67,4 @@ await client.IngestFromStreamAsync(
     });
 ```
 
-For log analytics at scale, ADX is hard to beat.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+For log analytics at scale, ADX is hard to beat.

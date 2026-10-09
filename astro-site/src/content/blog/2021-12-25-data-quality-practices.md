@@ -1,5 +1,6 @@
 ---
 title: "Data Quality Practices: Building Trust in Your Data"
+description: "Data quality in 2021 became an engineering discipline. The tools matured, but success requires organizational commitment to treating data as a product."
 author: Michael John Pena
 draft: false
 date: 2021-12-25
@@ -9,10 +10,7 @@ tags:
   - Great Expectations
   - Data Validation
   - Best Practices
-
 ---
-
-I wrote "Data Quality Practices: Building Trust in Your Data" to share practical, production-minded guidance on this topic.
 
 ## The Data Quality Dimensions
 
@@ -505,4 +503,4 @@ Data quality in 2021 became an engineering discipline. The tools matured, but su
 - [Great Expectations](https://greatexpectations.io/)
 - [dbt Tests](https://docs.getdbt.com/docs/build/tests)
 - [Data Quality at Airbnb](https://medium.com/airbnb-engineering/data-quality-at-airbnb-e582465f3ef7)
-- [Monte Carlo Data Observability](https://www.montecarlodata.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Monte Carlo Data Observability](https://www.montecarlodata.com/)

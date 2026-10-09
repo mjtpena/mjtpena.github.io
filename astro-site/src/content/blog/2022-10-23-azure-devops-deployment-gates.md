@@ -1,13 +1,11 @@
 ---
 title: "Deployment Gates in Azure DevOps"
+description: "Gates automate quality assurance in your deployment pipelines."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-23
 tags: ["Azure", "Azure DevOps", "Deployment", "Gates"]
-
 ---
-
-I wrote "Deployment Gates in Azure DevOps" to share practical, production-minded guidance on this topic.
 
 ## Gate Types
 
@@ -52,4 +50,4 @@ stages:
 - Azure Policy compliance
 - Security scan validation
 
-Gates automate quality assurance in your deployment pipelines.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Gates automate quality assurance in your deployment pipelines.

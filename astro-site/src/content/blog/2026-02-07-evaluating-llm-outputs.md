@@ -1,5 +1,6 @@
 ---
 title: "Evaluating LLM Outputs: Beyond Vibes"
+description: "Production AI needs real evaluation. Here's how I approach it. You test with 5 prompts. They look good. Ship it."
 author: Michael John Peña
 draft: false
 date: 2026-02-07
@@ -8,10 +9,7 @@ tags:
   - Engineering
   - Testing
   - Best-Practices
-
 ---
-
-I wrote "Evaluating LLM Outputs: Beyond Vibes" to share practical, production-minded guidance on this topic.
 
 Production AI needs real evaluation. Here's how I approach it.
 
@@ -139,4 +137,4 @@ If you can only do one thing: maintain a test dataset of 50+ examples and run it
 
 That alone puts you ahead of 90% of AI deployments.
 
-Vibes don't scale. Evals do.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Vibes don't scale. Evals do.

@@ -1,19 +1,17 @@
 ---
 title: "Azure Synapse Link for Dataverse: Real-Time Analytics on Business Data"
+description: "Azure Synapse Link for Dataverse eliminates the traditional barriers between operational and analytical systems. Business users get insights from live data…"
 author: Michael John Pena
 draft: false
 date: 2021-11-12
 tags:
   - Azure
   - Synapse
-  - Dataverse
+  - dataverse
   - Power Platform
   - Analytics
   - Data
-
 ---
-
-I wrote "Azure Synapse Link for Dataverse: Real-Time Analytics on Business Data" to share practical, production-minded guidance on this topic.
 
 ## What is Synapse Link for Dataverse?
 
@@ -451,4 +449,4 @@ Azure Synapse Link for Dataverse eliminates the traditional barriers between ope
 
 - [Synapse Link for Dataverse Documentation](https://docs.microsoft.com/en-us/powerapps/maker/data-platform/export-to-data-lake)
 - [Synapse Analytics Documentation](https://docs.microsoft.com/en-us/azure/synapse-analytics/)
-- [Dataverse Developer Guide](https://docs.microsoft.com/en-us/powerapps/developer/data-platform/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Dataverse Developer Guide](https://docs.microsoft.com/en-us/powerapps/developer/data-platform/)

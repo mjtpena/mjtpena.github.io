@@ -1,5 +1,6 @@
 ---
 title: "Real-Time AI: Streaming Inference for Live Data Applications"
+description: "Real-time AI requires careful architecture to balance latency, cost, and quality. Start with simple use cases and optimize based on actual performance data."
 author: Michael John Peña
 draft: false
 date: 2025-01-31
@@ -9,10 +10,7 @@ tags:
   - Streaming
   - Azure
   - Event-Driven
-
 ---
-
-I wrote "Real-Time AI: Streaming Inference for Live Data Applications" to share practical, production-minded guidance on this topic.
 
 ## Real-Time AI Architecture
 
@@ -386,4 +384,4 @@ class ModelRouter:
 5. **Monitor latency**: Track P99 latency and optimize bottlenecks
 6. **Scale horizontally**: Use multiple model endpoints for throughput
 
-Real-time AI requires careful architecture to balance latency, cost, and quality. Start with simple use cases and optimize based on actual performance data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Real-time AI requires careful architecture to balance latency, cost, and quality. Start with simple use cases and optimize based on actual performance data.

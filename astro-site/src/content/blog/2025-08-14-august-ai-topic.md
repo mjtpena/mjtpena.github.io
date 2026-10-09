@@ -1,5 +1,6 @@
 ---
 title: "Apache Iceberg on Microsoft Fabric: Open Table Format Integration"
+description: "Iceberg provides ACID transactions, schema evolution, time travel, and partition evolution for data lakes. Its format-agnostic design works with Spark…"
 author: Michael John Peña
 draft: false
 date: 2025-08-14
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Open Table Format
   - Lakehouse
-
 ---
-
-I wrote "Apache Iceberg on Microsoft Fabric: Open Table Format Integration" to share practical, production-minded guidance on this topic.
 
 ## Why Iceberg Matters
 
@@ -65,4 +63,4 @@ spark.sql("""
 
 Both formats provide similar core capabilities. Delta Lake has deeper Fabric integration through native OneLake support. Iceberg offers broader ecosystem compatibility. Many organizations use both, choosing based on specific workload requirements and existing tool investments.
 
-The ability to work with Iceberg in Fabric ensures you're not locked into a single format and can integrate with diverse data sources.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The ability to work with Iceberg in Fabric ensures you're not locked into a single format and can integrate with diverse data sources.

@@ -1,5 +1,6 @@
 ---
 title: "Azure Bot Service: Build Conversational AI"
+description: "Azure Bot Service bridges AI and conversation."
 author: Michael John Peña
 draft: false
 date: 2020-10-26
@@ -8,10 +9,7 @@ tags:
   - Bot Service
   - AI
   - Conversational
-
 ---
-
-I wrote "Azure Bot Service: Build Conversational AI" to share practical, production-minded guidance on this topic.
 
 ## Bot Framework SDK
 
@@ -214,4 +212,4 @@ Deploy to multiple platforms:
 - Facebook Messenger
 - SMS (Twilio)
 
-Azure Bot Service bridges AI and conversation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Bot Service bridges AI and conversation.

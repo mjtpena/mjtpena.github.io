@@ -1,5 +1,6 @@
 ---
 title: "Azure Site Recovery: Disaster Recovery as a Service"
+description: "DR planning is the part of every project that gets bumped to \"Sprint 9\" and then to \"next quarter.\" ASR is good enough that it makes the bump indefensible.…"
 author: Michael John Peña
 draft: false
 date: 2020-12-01
@@ -179,4 +180,4 @@ AzureDiagnostics
 | RPO | Near-zero (continuous replication) |
 | RTO | Minutes (automated failover) |
 
-Site Recovery: peace of mind for disaster recovery.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Site Recovery: peace of mind for disaster recovery.

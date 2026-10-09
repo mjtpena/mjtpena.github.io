@@ -1,5 +1,6 @@
 ---
 title: "Query Transformation Techniques: Improving RAG Recall"
+description: "Query transformation is a high-leverage improvement for RAG systems."
 author: Michael John Peña
 draft: false
 date: 2025-03-15
@@ -9,10 +10,7 @@ tags:
   - Transformation
   - AI
   - Search
-
 ---
-
-I wrote "Query Transformation Techniques: Improving RAG Recall" to share practical, production-minded guidance on this topic.
 
 ## Query Transformation Patterns
 
@@ -101,4 +99,4 @@ class QueryTransformer:
         return json.loads(response.choices[0].message.content)
 ```
 
-Query transformation is a high-leverage improvement for RAG systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Query transformation is a high-leverage improvement for RAG systems.

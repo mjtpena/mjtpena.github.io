@@ -1,5 +1,6 @@
 ---
 title: "LangChain with Azure OpenAI: Getting Started"
+description: "Combined with Azure OpenAI's enterprise security and compliance, it's a powerful combination."
 author: Michael John Pena
 draft: false
 date: 2023-03-04
@@ -9,10 +10,7 @@ tags:
   - AI
   - LangChain
   - Python
-
 ---
-
-I wrote "LangChain with Azure OpenAI: Getting Started" to share practical, production-minded guidance on this topic.
 
 ## Why LangChain?
 
@@ -91,7 +89,7 @@ Query:
 Provide specific optimization recommendations.""")
 ])
 
-# Use template
+## Use template
 messages = sql_review_template.format_messages(
     database_type="Azure SQL Database",
     query="SELECT * FROM orders WHERE customer_id IN (SELECT id FROM customers WHERE region = 'APAC')"
@@ -344,4 +342,4 @@ streaming_chat = AzureChatOpenAI(
 streaming_chat([HumanMessage(content="Explain Azure Event Hubs")])
 ```
 
-LangChain abstracts away much of the complexity of building LLM applications. Combined with Azure OpenAI's enterprise features, you get the best of both worlds.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+LangChain abstracts away much of the complexity of building LLM applications. Combined with Azure OpenAI's enterprise features, you get the best of both worlds.

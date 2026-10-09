@@ -1,5 +1,6 @@
 ---
 title: Batch Inference at Scale with Azure ML Batch Endpoints
+description: "Batch endpoints enable cost-effective, scalable inference for large datasets without the complexity of managing infrastructure."
 author: Michael John Pena
 draft: false
 date: 2021-09-10
@@ -9,10 +10,7 @@ tags:
   - Batch Processing
   - MLOps
   - Data Engineering
-
 ---
-
-I wrote "2021-09-10-azure-ml-batch-endpoints" to share practical, production-minded guidance on this topic.
 
 ## When to Use Batch Endpoints
 
@@ -353,4 +351,4 @@ print(f"Progress: {job.properties.get('progress', 'N/A')}")
 5. **Validate inputs**: Check data quality before processing
 6. **Log extensively**: Enable debugging for failed items
 
-Batch endpoints enable cost-effective, scalable inference for large datasets without the complexity of managing infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Batch endpoints enable cost-effective, scalable inference for large datasets without the complexity of managing infrastructure.

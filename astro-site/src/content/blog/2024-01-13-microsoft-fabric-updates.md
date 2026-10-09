@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric January 2024 Updates: What's New and What It Means"
+description: "I've been tracking Fabric updates closely since GA in November 2023. In January 2024 several features landed that change operational workflows; below are…"
 author: Michael John Peña
 draft: false
 date: 2024-01-13

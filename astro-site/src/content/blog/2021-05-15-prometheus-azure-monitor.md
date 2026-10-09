@@ -1,5 +1,6 @@
 ---
 title: "Prometheus with Azure Monitor: Unified Observability"
+description: "Azure Monitor for Prometheus addresses these while maintaining compatibility."
 author: Michael John Peña
 draft: false
 date: 2021-05-15
@@ -9,10 +10,7 @@ tags:
   - Monitoring
   - Kubernetes
   - Observability
-
 ---
-
-I wrote "Prometheus with Azure Monitor: Unified Observability" to share practical, production-minded guidance on this topic.
 
 ## The Challenge
 
@@ -404,4 +402,4 @@ remote_write:
 
 - [Azure Monitor Managed Prometheus](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/prometheus-metrics-overview)
 - [PromQL Documentation](https://prometheus.io/docs/prometheus/latest/querying/basics/)
-- [Prometheus Client Libraries](https://prometheus.io/docs/instrumenting/clientlibs/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Prometheus Client Libraries](https://prometheus.io/docs/instrumenting/clientlibs/)

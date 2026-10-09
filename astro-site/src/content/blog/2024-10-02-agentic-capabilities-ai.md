@@ -1,13 +1,11 @@
 ---
 title: "Agentic AI Capabilities: From Chatbots to Autonomous Agents"
+description: "Agentic capabilities transform AI from a question-answering system into an autonomous problem-solver. The key is combining planning, tools, memory, and…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-02
 tags: ["AI Agents", "Agentic AI", "Automation", "LLM", "Architecture"]
-
 ---
-
-I wrote "Agentic AI Capabilities: From Chatbots to Autonomous Agents" to share practical, production-minded guidance on this topic.
 
 ## What Makes AI "Agentic"?
 
@@ -389,4 +387,4 @@ class SelfReflectingAgent:
         return response.choices[0].message.content
 ```
 
-Agentic capabilities transform AI from a question-answering system into an autonomous problem-solver. The key is combining planning, tools, memory, and reflection into a coherent system.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Agentic capabilities transform AI from a question-answering system into an autonomous problem-solver. The key is combining planning, tools, memory, and reflection into a coherent system.

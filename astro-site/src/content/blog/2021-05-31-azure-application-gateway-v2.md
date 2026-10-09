@@ -1,5 +1,6 @@
 ---
 title: "Azure Application Gateway v2: Regional Load Balancing Deep Dive"
+description: "Application Gateway v2 is where the regional Layer 7 load balancer story became production-serious for enterprise workloads. Autoscaling means you don't…"
 author: Michael John Peña
 draft: false
 date: 2021-05-31
@@ -391,4 +392,4 @@ autoscale_config = {
 
 - [Application Gateway Documentation](https://docs.microsoft.com/en-us/azure/application-gateway/)
 - [Autoscaling](https://docs.microsoft.com/en-us/azure/application-gateway/application-gateway-autoscaling-zone-redundant)
-- [AGIC Documentation](https://docs.microsoft.com/en-us/azure/application-gateway/ingress-controller-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AGIC Documentation](https://docs.microsoft.com/en-us/azure/application-gateway/ingress-controller-overview)

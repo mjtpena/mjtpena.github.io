@@ -1,5 +1,6 @@
 ---
 title: "Power BI Copilot: Natural Language Analytics for Business Users"
+description: "Use descriptive table and column names that match business terminology. Add measure descriptions explaining what each calculation represents. Create…"
 author: Michael John Peña
 draft: false
 date: 2025-07-25
@@ -9,10 +10,7 @@ tags:
   - Business Intelligence
   - Analytics
   - Microsoft Fabric
-
 ---
-
-I wrote "Power BI Copilot: Natural Language Analytics for Business Users" to share practical, production-minded guidance on this topic.
 
 ## Optimizing Semantic Models
 
@@ -83,4 +81,4 @@ def enable_copilot_features(workspace_id: str, dataset_id: str, token: str):
 
 Use descriptive table and column names that match business terminology. Add measure descriptions explaining what each calculation represents. Create question examples that demonstrate common query patterns. The more context you provide in your model, the more accurate Copilot's responses become.
 
-Test Copilot with actual business questions your users ask and refine your model based on the results.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Test Copilot with actual business questions your users ask and refine your model based on the results.

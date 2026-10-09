@@ -1,5 +1,6 @@
 ---
 title: "Azure DevOps Pipeline Templates: Reusable CI/CD"
+description: "Templates transform pipeline chaos into maintainable, standardized CI/CD."
 author: Michael John Peña
 draft: false
 date: 2020-10-21
@@ -8,10 +9,7 @@ tags:
   - CI/CD
   - DevOps
   - Pipelines
-
 ---
-
-I wrote "Azure DevOps Pipeline Templates: Reusable CI/CD" to share practical, production-minded guidance on this topic.
 
 ## Template Types
 
@@ -202,4 +200,4 @@ stages:
           - task: PublishBuildArtifacts@1
 ```
 
-Templates transform pipeline chaos into maintainable, standardized CI/CD.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Templates transform pipeline chaos into maintainable, standardized CI/CD.

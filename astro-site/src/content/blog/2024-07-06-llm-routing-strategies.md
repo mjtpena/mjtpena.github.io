@@ -1,5 +1,6 @@
 ---
 title: "LLM Routing Strategies for Production Systems"
+description: "The simplest approach: fixed rules based on task type. Pros: Simple, predictable, easy to debug Cons: Doesn't adapt, requires manual tuning"
 author: Michael John Peña
 draft: false
 date: 2024-07-06
@@ -9,10 +10,7 @@ tags:
   - Architecture
   - Azure
   - Routing
-
 ---
-
-I wrote "LLM Routing Strategies for Production Systems" to share practical, production-minded guidance on this topic.
 
 ## The Routing Decision
 
@@ -577,4 +575,3 @@ class ABTestRouter:
 Good routing is the difference between an efficient multi-model system and a chaotic one. Start with clear routing rules, measure outcomes, and iterate based on data.
 
 The goal is maximizing value: right model, right task, right cost.
-

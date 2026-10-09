@@ -1,5 +1,6 @@
 ---
 title: "Copilot Agents: Declarative and Custom Engine Approaches"
+description: "Start with declarative agents for rapid prototyping and move to custom engines when you hit limitations."
 author: Michael John Peña
 draft: false
 date: 2024-11-18
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - AI Agents
   - Microsoft 365
-
 ---
-
-I wrote "Copilot Agents: Declarative and Custom Engine Approaches" to share practical, production-minded guidance on this topic.
 
 ## Agent Architecture Comparison
 
@@ -404,4 +402,4 @@ Start with declarative agents for rapid prototyping and move to custom engines w
 
 - [Declarative Agents Guide](https://learn.microsoft.com/en-us/copilot/extensibility/declarative-agents)
 - [Teams AI Library](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/teams-ai-library)
-- [Custom Engine Samples](https://github.com/microsoft/teams-ai)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Custom Engine Samples](https://github.com/microsoft/teams-ai)

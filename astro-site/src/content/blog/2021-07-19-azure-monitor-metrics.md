@@ -10,19 +10,16 @@ tags:
   - DevOps
   - Metrics
   - Observability
-
 ---
 
-I wrote "2021-07-19-azure-monitor-metrics" to share practical, production-minded guidance on this topic.
-
-# Understanding Azure Monitor Metrics
+## Understanding Azure Monitor Metrics
 
 Azure Monitor collects two types of metrics:
 
 - **Platform Metrics**: Automatically collected from Azure resources
 - **Custom Metrics**: Application-specific metrics you define
 
-# Querying Metrics with Azure CLI
+## Querying Metrics with Azure CLI
 
 Query metrics directly from the command line:
 
@@ -49,7 +46,7 @@ az monitor metrics list \
     --aggregation Average
 ```
 
-# Python SDK for Metrics
+## Python SDK for Metrics
 
 Query and analyze metrics programmatically:
 
@@ -108,7 +105,7 @@ cpu_stats = vm_metrics[vm_metrics["metric"] == "Percentage CPU"]["average"].desc
 print(f"\nCPU Statistics:\n{cpu_stats}")
 ```
 
-# Multi-Resource Metric Queries
+## Multi-Resource Metric Queries
 
 Query metrics across multiple resources:
 
@@ -158,7 +155,7 @@ print("VMs with highest CPU:")
 print(high_cpu_vms.sort_values(ascending=False).head(10))
 ```
 
-# Metric Dimensions
+## Metric Dimensions
 
 Work with dimensional metrics for detailed analysis:
 
@@ -211,7 +208,7 @@ pivot_table = transactions.pivot_table(
 print(pivot_table.tail())
 ```
 
-# Creating Metric Alerts
+## Creating Metric Alerts
 
 Set up alerts based on metric thresholds:
 
@@ -278,7 +275,7 @@ create_metric_alert(
 print("Alerts created successfully")
 ```
 
-# Dynamic Thresholds
+## Dynamic Thresholds
 
 Use machine learning-based dynamic thresholds:
 
@@ -329,7 +326,7 @@ create_dynamic_threshold_alert(
 )
 ```
 
-# Exporting Metrics to Storage
+## Exporting Metrics to Storage
 
 Export metrics for long-term retention:
 
@@ -375,7 +372,7 @@ export_metrics_to_blob(
 )
 ```
 
-# Metrics Dashboard
+## Metrics Dashboard
 
 Create a comprehensive metrics dashboard:
 
@@ -434,9 +431,8 @@ Create a comprehensive metrics dashboard:
 }
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Monitor Metrics provides comprehensive observability for your Azure resources. From automatic platform metrics to custom application metrics, you have the tools needed to understand system behavior and detect issues before they impact users.
 
 Key practices include using dimensional queries for detailed analysis, setting up both static and dynamic threshold alerts, and exporting metrics for long-term trend analysis. Combined with Log Analytics and Application Insights, metrics form the foundation of a complete monitoring strategy.
-

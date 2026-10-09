@@ -1,18 +1,16 @@
 ---
 title: "Syslog Collection with Azure Monitor: Linux Log Management"
+description: "Comprehensive syslog collection provides essential visibility into Linux system security and operations."
 author: Michael John Peña
 draft: false
 date: 2022-02-25
 url: /blog/syslog-collection-azure-monitor/
 tags:
-  - azure
-  - monitoring
-  - linux
+  - Azure
+  - Monitoring
+  - Linux
   - syslog
-
 ---
-
-I wrote "Syslog Collection with Azure Monitor: Linux Log Management" to share practical, production-minded guidance on this topic.
 
 ## Configuring Syslog Collection
 
@@ -325,4 +323,4 @@ resource sshBruteForceAlert 'Microsoft.Insights/scheduledQueryRules@2021-08-01' 
 }
 ```
 
-Comprehensive syslog collection provides essential visibility into Linux system security and operations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Comprehensive syslog collection provides essential visibility into Linux system security and operations.

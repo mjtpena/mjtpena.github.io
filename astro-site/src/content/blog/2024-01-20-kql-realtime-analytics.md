@@ -1,5 +1,6 @@
 ---
 title: "KQL for Real-Time Analytics: Patterns and Performance"
+description: "KQL is deceptively simple; over the years I've used it to squeeze sub-second insights from streaming data. Below are the query patterns and optimizations…"
 author: Michael John Peña
 draft: false
 date: 2024-01-20

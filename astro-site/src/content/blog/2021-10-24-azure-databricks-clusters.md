@@ -1,13 +1,11 @@
 ---
 title: "Azure Databricks Cluster Configuration Best Practices"
+description: "Azure Databricks cluster configuration is where cost and performance trade-offs become very concrete: the wrong cluster type for a workload is either money…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-24
 tags: ["Azure", "Databricks", "Spark", "Cluster Management", "Big Data"]
-
 ---
-
-I wrote "Azure Databricks Cluster Configuration Best Practices" to share practical, production-minded guidance on this topic.
 
 Azure Databricks cluster configuration is where cost and performance trade-offs become very concrete: the wrong cluster type for a workload is either money wasted (an oversized all-purpose cluster running a scheduled job) or time wasted (an undersized cluster that makes interactive development painful). The cluster runtime version determines the Spark version, library compatibility, and which Databricks Runtime features are available—staying one or two versions behind LTS releases is the safe production approach. Worker node count and VM SKU determine throughput; the autoscale feature adjusts worker count based on job backlog and active tasks. Memory-optimised VMs (E-series) suit wide shuffles and joins; compute-optimised VMs (F-series) suit CPU-bound transformations; GPU VMs are necessary for deep learning training. Getting the combination right before scaling a job to petabyte data volumes saves significant cost.
 
@@ -372,4 +370,3 @@ resource "databricks_cluster" "production" {
 Proper cluster configuration balances performance, cost, and reliability. By understanding the various configuration options, you can create clusters optimized for your specific workloads.
 
 Tomorrow, we'll explore cluster policies for governance and standardization.
-

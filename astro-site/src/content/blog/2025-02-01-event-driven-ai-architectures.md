@@ -1,5 +1,6 @@
 ---
 title: "Event-Driven AI: Building Reactive Intelligent Systems"
+description: "Event-driven AI enables responsive, intelligent systems. Start with simple event handlers and evolve to complex orchestration as needed."
 author: Michael John Peña
 draft: false
 date: 2025-02-01
@@ -9,10 +10,7 @@ tags:
   - Architecture
   - Azure
   - Serverless
-
 ---
-
-I wrote "Event-Driven AI: Building Reactive Intelligent Systems" to share practical, production-minded guidance on this topic.
 
 ## Event-Driven AI Patterns
 
@@ -407,4 +405,4 @@ class AINotificationEngine:
 4. **Cost awareness**: Monitor AI costs per event type
 5. **Observability**: Trace events through AI processing
 
-Event-driven AI enables responsive, intelligent systems. Start with simple event handlers and evolve to complex orchestration as needed.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Event-driven AI enables responsive, intelligent systems. Start with simple event handlers and evolve to complex orchestration as needed.

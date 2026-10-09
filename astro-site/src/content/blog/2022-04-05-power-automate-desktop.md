@@ -1,5 +1,6 @@
 ---
 title: "Power Automate Desktop: Robotic Process Automation for Everyone"
+description: "Power Automate Desktop is free for Windows 10/11 users. Premium features require a Power Automate license."
 author: Michael John Peña
 draft: false
 date: 2022-04-05
@@ -9,10 +10,7 @@ tags:
   - RPA
   - Desktop Automation
   - Low-Code
-
 ---
-
-I wrote "Power Automate Desktop: Robotic Process Automation for Everyone" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -348,4 +346,3 @@ It's particularly valuable for automating processes in applications without APIs
 - [Power Automate Desktop Documentation](https://docs.microsoft.com/en-us/power-automate/desktop-flows/)
 - [Desktop Flow Actions](https://docs.microsoft.com/en-us/power-automate/desktop-flows/actions-reference)
 - [RPA Best Practices](https://docs.microsoft.com/en-us/power-automate/desktop-flows/best-practices)
-

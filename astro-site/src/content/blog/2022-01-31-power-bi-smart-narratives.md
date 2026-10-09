@@ -1,18 +1,16 @@
 ---
 title: "Power BI Smart Narratives: AI-Generated Insights"
+description: "Smart narratives transform raw data into understandable stories, making Power BI reports more accessible to all users regardless of their analytical expertise."
 author: Michael John Peña
 draft: false
 date: 2022-01-31
 url: /blog/power-bi-smart-narratives/
 tags:
   - power-bi
-  - ai
-  - analytics
+  - AI
+  - Analytics
   - natural-language
-
 ---
-
-I wrote "Power BI Smart Narratives: AI-Generated Insights" to share practical, production-minded guidance on this topic.
 
 ## What Are Smart Narratives?
 
@@ -267,4 +265,4 @@ class SmartNarrativeGenerator:
         return ", ".join(parts) + "."
 ```
 
-Smart narratives transform raw data into understandable stories, making Power BI reports more accessible to all users regardless of their analytical expertise.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Smart narratives transform raw data into understandable stories, making Power BI reports more accessible to all users regardless of their analytical expertise.

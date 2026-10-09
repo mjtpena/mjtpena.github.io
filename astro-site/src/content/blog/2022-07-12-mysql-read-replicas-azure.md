@@ -1,5 +1,6 @@
 ---
 title: "Scaling Reads with MySQL Read Replicas on Azure"
+description: "Read replicas in Azure Database for MySQL Flexible Server enable scaling out read-heavy workloads by directing reporting queries, analytical queries, and…"
 author: "Michael John Peña"
 draft: false
 date: 2022-07-12
@@ -203,4 +204,4 @@ az mysql flexible-server replica stop-replication \
 # You'll need to update your application configuration
 ```
 
-Read replicas are essential for scaling read-heavy workloads while maintaining a single source of truth for writes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Read replicas are essential for scaling read-heavy workloads while maintaining a single source of truth for writes.

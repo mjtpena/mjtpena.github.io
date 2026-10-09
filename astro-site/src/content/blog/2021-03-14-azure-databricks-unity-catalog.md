@@ -1,5 +1,6 @@
 ---
 title: Azure Databricks Workspace Management and Data Governance Best Practices
+description: "Databricks workspace governance was the problem nobody thought about until there were thirty workspaces, fifteen clusters running overnight, and six teams…"
 author: Michael John Pena
 draft: false
 date: 2021-03-14

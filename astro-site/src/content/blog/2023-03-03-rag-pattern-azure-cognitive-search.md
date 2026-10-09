@@ -1,5 +1,6 @@
 ---
 title: "Implementing RAG with Azure Cognitive Search"
+description: "RAG is the bridge between general-purpose LLMs and your specific enterprise data. Get it right, and you unlock tremendous value."
 author: Michael John Pena
 draft: false
 date: 2023-03-03
@@ -9,10 +10,7 @@ tags:
   - AI
   - RAG
   - Cognitive Search
-
 ---
-
-I wrote "Implementing RAG with Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## The RAG Architecture
 
@@ -389,4 +387,4 @@ print(f"Sources: {result['sources']}")
 4. **Filtering**: Use metadata filters to scope searches
 5. **Evaluation**: Measure relevance, faithfulness, and coverage
 
-RAG is the bridge between general-purpose LLMs and your specific enterprise data. Get it right, and you unlock tremendous value.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+RAG is the bridge between general-purpose LLMs and your specific enterprise data. Get it right, and you unlock tremendous value.

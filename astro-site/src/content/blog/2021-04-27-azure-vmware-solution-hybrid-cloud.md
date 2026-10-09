@@ -10,10 +10,7 @@ tags:
   - Hybrid Cloud
   - Migration
   - Infrastructure
-
 ---
-
-I wrote "2021-04-27-azure-vmware-solution-hybrid-cloud" to share practical, production-minded guidance on this topic.
 
 ## Understanding Azure VMware Solution
 
@@ -407,4 +404,3 @@ Consider alternatives when:
 ## Conclusion
 
 Azure VMware Solution provides a seamless path to the cloud for VMware workloads, combining familiar tools with Azure's global infrastructure and services. Whether you're extending your datacenter, migrating workloads, or implementing disaster recovery, AVS offers the flexibility and integration capabilities needed for modern hybrid cloud architectures.
-

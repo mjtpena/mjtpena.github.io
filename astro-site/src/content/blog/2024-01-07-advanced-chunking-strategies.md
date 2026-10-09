@@ -1,5 +1,6 @@
 ---
 title: "Advanced Chunking Strategies for RAG: Beyond Fixed-Size Splits"
+description: "In projects I've worked on, chunking decisions alone changed retrieval quality more than model choice ever did. This deep dive pulls together advanced…"
 author: Michael John Peña
 draft: false
 date: 2024-01-07

@@ -1,5 +1,6 @@
 ---
 title: "Fine-Tuning with LoRA: Efficient Model Customization"
+description: "Instead of updating all model weights, LoRA injects trainable low-rank matrices into transformer layers. These adapters capture task-specific knowledge…"
 author: Michael John Peña
 draft: false
 date: 2025-09-17
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Efficient Training
   - PEFT
-
 ---
-
-I wrote "Fine-Tuning with LoRA: Efficient Model Customization" to share practical, production-minded guidance on this topic.
 
 ## Understanding LoRA
 
@@ -120,4 +118,4 @@ merged_model = lora_model.merge_and_unload()
 merged_model.save_pretrained("./merged-model")
 ```
 
-LoRA enables rapid experimentation with model customization. Train multiple adapters for different tasks and swap them at inference time without reloading the base model.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+LoRA enables rapid experimentation with model customization. Train multiple adapters for different tasks and swap them at inference time without reloading the base model.

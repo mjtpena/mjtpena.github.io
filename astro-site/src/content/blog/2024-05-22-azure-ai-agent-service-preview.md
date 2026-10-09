@@ -9,10 +9,7 @@ tags:
   - Azure AI
   - Autonomous AI
   - Microsoft Build
-
 ---
-
-I wrote "Azure AI Agent Service Preview: Building Intelligent Agents" to share practical, production-minded guidance on this topic.
 
 ## What is Azure AI Agent Service?
 
@@ -398,4 +395,4 @@ Tomorrow I'll dive deeper into building AI agents and orchestration patterns.
 
 - [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
 - [Agent Best Practices](https://learn.microsoft.com/azure/ai-services/agents/best-practices)
-- [OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)

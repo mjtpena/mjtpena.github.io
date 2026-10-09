@@ -10,12 +10,9 @@ tags:
   - Background Processing
   - WebJobs
   - Cloud
-
 ---
 
-I wrote "2021-07-29-azure-webjobs" to share practical, production-minded guidance on this topic.
-
-# WebJobs vs Azure Functions
+## WebJobs vs Azure Functions
 
 Understanding when to use each:
 
@@ -28,7 +25,7 @@ Understanding when to use each:
 | Continuous jobs | Supported | Not typical |
 | Best for | Long-running, continuous | Event-driven, short tasks |
 
-# Creating a WebJob
+## Creating a WebJob
 
 Build a .NET WebJob for background processing:
 
@@ -149,7 +146,7 @@ public class Functions
 }
 ```
 
-# Continuous WebJob
+## Continuous WebJob
 
 Create a continuously running WebJob:
 
@@ -210,7 +207,7 @@ public class ContinuousJob
 }
 ```
 
-# Deploying WebJobs
+## Deploying WebJobs
 
 Deploy WebJobs with your App Service:
 
@@ -254,7 +251,7 @@ Settings file for triggered WebJob:
 }
 ```
 
-# Terraform Deployment
+## Terraform Deployment
 
 Deploy WebJobs with Terraform:
 
@@ -301,7 +298,7 @@ resource "azurerm_app_service_plan" "main" {
 }
 ```
 
-# Error Handling and Retry
+## Error Handling and Retry
 
 Implement robust error handling:
 
@@ -372,7 +369,7 @@ public class ExponentialBackoffRetryAttribute : Attribute
 }
 ```
 
-# Monitoring WebJobs
+## Monitoring WebJobs
 
 Monitor WebJob health and performance:
 
@@ -431,9 +428,8 @@ customMetrics
 """
 ```
 
-# Conclusion
+## Conclusion
 
 Azure WebJobs remain a powerful option for background processing, especially when you want tight integration with your App Service application. They excel at continuous jobs, long-running processes, and scenarios where you need the simplicity of running alongside your web application.
 
 Key considerations include ensuring your App Service plan supports Always On for continuous jobs, implementing proper error handling and retry logic, and monitoring job health. For event-driven, independently scalable workloads, consider Azure Functions instead.
-

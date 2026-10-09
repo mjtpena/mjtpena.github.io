@@ -1,5 +1,6 @@
 ---
 title: "Power Query Online: Data Preparation in the Cloud"
+description: "Power Query Online democratizes data preparation, enabling business users and data professionals to prepare data without code."
 author: Michael John Peña
 draft: false
 date: 2022-02-06
@@ -8,11 +9,8 @@ tags:
   - power-query
   - data-preparation
   - power-bi
-  - dataflows
-
+  - Dataflows
 ---
-
-I wrote "Power Query Online: Data Preparation in the Cloud" to share practical, production-minded guidance on this topic.
 
 ## Understanding Power Query Online
 
@@ -213,4 +211,4 @@ in
 }
 ```
 
-Power Query Online democratizes data preparation, enabling business users and data professionals to prepare data without code.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Power Query Online democratizes data preparation, enabling business users and data professionals to prepare data without code.

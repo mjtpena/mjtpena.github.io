@@ -1,13 +1,11 @@
 ---
 title: "Building RAG Applications with Azure Cognitive Search and OpenAI"
+description: "RAG with Azure Cognitive Search and Azure OpenAI is the production architecture I recommend most often for enterprise knowledge retrieval — not because it's…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-04
 tags: ["Azure", "RAG", "OpenAI", "Cognitive Search", "AI"]
-
 ---
-
-I wrote "Building RAG Applications with Azure Cognitive Search and OpenAI" to share practical, production-minded guidance on this topic.
 
 RAG with Azure Cognitive Search and Azure OpenAI is the production architecture I recommend most often for enterprise knowledge retrieval — not because it's the newest or most sophisticated, but because it's the most supportable. Azure Cognitive Search (rebranded to Azure AI Search in 2023) has enterprise operational characteristics that vector database startups can't match yet: SLA, compliance certifications, Azure RBAC, and a hybrid retrieval mode that combines semantic vector search with keyword search (BM25) in a single query. The hybrid mode is the most important operational feature: it prevents the failure mode where vector similarity misses exact-match queries (product codes, reference numbers, names) that keyword search would have caught. Building RAG on Azure Cognitive Search means you're not managing a separate vector database service — the retrieval layer lives in the same Azure subscription with the same governance and monitoring tooling as everything else.
 
@@ -463,4 +461,3 @@ for source in result['sources']:
 ## Conclusion
 
 Building production RAG systems requires careful attention to chunking strategies, embedding quality, and retrieval techniques. Azure Cognitive Search's hybrid search capabilities combined with Azure OpenAI provide a powerful foundation. The key is balancing retrieval precision with generation quality while keeping costs manageable.
-

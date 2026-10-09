@@ -9,10 +9,7 @@ tags:
   - Delta Live Tables
   - ETL
   - Data Engineering
-
 ---
-
-I wrote "Delta Live Tables: Declarative Data Pipelines on Databricks" to share practical, production-minded guidance on this topic.
 
 ## The DLT Approach
 
@@ -443,4 +440,3 @@ DLT is particularly powerful for teams that want reliability without the complex
 - [DLT Documentation](https://docs.databricks.com/delta-live-tables/index.html)
 - [DLT Python Reference](https://docs.databricks.com/delta-live-tables/python-ref.html)
 - [Data Quality with Expectations](https://docs.databricks.com/delta-live-tables/expectations.html)
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Studio Preview: The Future of AI Application Development"
+description: "Azure AI Studio provides a comprehensive environment for building, testing, and deploying AI applications. Tomorrow, I will cover Prompt Flow in more detail."
 author: Michael John Peña
 draft: false
 date: 2023-05-19
@@ -9,10 +10,7 @@ tags:
   - Prompt Flow
   - AI Development
   - Microsoft
-
 ---
-
-I wrote "Azure AI Studio Preview: The Future of AI Application Development" to share practical, production-minded guidance on this topic.
 
 ## What is Azure AI Studio?
 
@@ -376,4 +374,4 @@ Azure AI Studio provides a comprehensive environment for building, testing, and 
 
 - [Azure AI Studio Documentation](https://learn.microsoft.com/en-us/azure/ai-studio/)
 - [Prompt Flow](https://learn.microsoft.com/en-us/azure/machine-learning/prompt-flow/)
-- [Model Catalog](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/model-catalog)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Model Catalog](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/model-catalog)

@@ -1,5 +1,6 @@
 ---
 title: "Data Factory in Microsoft Fabric: Modern Data Integration"
+description: "Data Pipelines in Fabric are similar to Azure Data Factory pipelines but with deeper Fabric integration."
 author: Michael John Peña
 draft: false
 date: 2023-05-05
@@ -9,10 +10,7 @@ tags:
   - ETL
   - Data Integration
   - Pipelines
-
 ---
-
-I wrote "Data Factory in Microsoft Fabric: Modern Data Integration" to share practical, production-minded guidance on this topic.
 
 ## Data Factory Components in Fabric
 
@@ -338,4 +336,4 @@ Data Factory in Fabric provides familiar orchestration capabilities with deeper 
 
 - [Data Factory in Fabric](https://learn.microsoft.com/en-us/fabric/data-factory/)
 - [Data Pipelines Tutorial](https://learn.microsoft.com/en-us/fabric/data-factory/create-first-pipeline-with-sample-data)
-- [Dataflows Gen2](https://learn.microsoft.com/en-us/fabric/data-factory/create-first-dataflow-gen2)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Dataflows Gen2](https://learn.microsoft.com/en-us/fabric/data-factory/create-first-dataflow-gen2)

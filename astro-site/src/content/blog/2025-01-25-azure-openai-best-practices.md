@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Best Practices: Production-Ready AI Applications"
+description: "Azure OpenAI provides enterprise capabilities, but you need to build robust infrastructure around it for production use."
 author: Michael John Peña
 draft: false
 date: 2025-01-25
@@ -9,10 +10,7 @@ tags:
   - AI
   - Best Practices
   - Enterprise
-
 ---
-
-I wrote "Azure OpenAI Best Practices: Production-Ready AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Deployment Architecture
 
@@ -408,4 +406,4 @@ print(f"Current costs: ${cost_tracker.get_cost()['total']:.4f}")
 6. **Content filtering**: Handle filtered responses gracefully
 7. **Cost tracking**: Monitor and budget for AI costs
 
-Azure OpenAI provides enterprise capabilities, but you need to build robust infrastructure around it for production use.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure OpenAI provides enterprise capabilities, but you need to build robust infrastructure around it for production use.

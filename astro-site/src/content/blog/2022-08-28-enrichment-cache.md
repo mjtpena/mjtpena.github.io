@@ -1,13 +1,11 @@
 ---
 title: "Enrichment Cache in Azure Cognitive Search"
+description: "Enrichment cache significantly reduces costs and improves performance for AI-enriched search solutions."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-28
 tags: ["Azure", "Cognitive Search", "Enrichment", "Cache", "Performance"]
-
 ---
-
-I wrote "Enrichment Cache in Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## Understanding Enrichment Cache
 
@@ -254,4 +252,4 @@ efficiency = optimizer.get_cache_efficiency()
 print(f"Cache efficiency: {efficiency:.1f}%")
 ```
 
-Enrichment cache significantly reduces costs and improves performance for AI-enriched search solutions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Enrichment cache significantly reduces costs and improves performance for AI-enriched search solutions.

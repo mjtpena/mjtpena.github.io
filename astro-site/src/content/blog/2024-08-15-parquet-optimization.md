@@ -9,10 +9,7 @@ tags:
   - Performance
   - Microsoft Fabric
   - Delta Lake
-
 ---
-
-I wrote "Parquet File Optimization for Analytics" to share practical, production-minded guidance on this topic.
 
 ## Parquet Architecture
 
@@ -575,4 +572,3 @@ for rec in recommendations:
 Parquet optimization is crucial for analytics performance. Focus on file sizes, compression, and column statistics to maximize query efficiency. In Microsoft Fabric, these optimizations work alongside Delta Lake features for the best results.
 
 Regular monitoring and maintenance ensure your Parquet files remain optimized as data grows and access patterns evolve.
-

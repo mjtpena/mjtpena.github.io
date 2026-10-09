@@ -1,13 +1,11 @@
 ---
 title: "Assistants Retrieval Tool: Building Knowledge Assistants"
+description: "For many teams, the Assistants API's Retrieval tool removes the most tedious parts of building a knowledge assistant — you upload documents and the…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-28
 tags: ["OpenAI", "Assistants API", "RAG", "Retrieval", "Knowledge Base"]
-
 ---
-
-I wrote "Assistants Retrieval Tool: Building Knowledge Assistants" to share practical, production-minded guidance on this topic.
 
 For many teams, the Assistants API's Retrieval tool removes the most tedious parts of building a knowledge assistant — you upload documents and the assistant handles chunking, indexing and retrieval behind the scenes. This is a fast path to a production-ready knowledge assistant: no separate embedding pipeline, no vector DB to manage, and integrated file management. The trade-offs are familiar — very large, frequently updated corpora still benefit from a dedicated vector store — but as a pragmatic, low-maintenance option, Retrieval is excellent.
 
@@ -320,4 +318,4 @@ retrieval_best_practices = {
 }
 ```
 
-Tomorrow, we'll explore the 2023 AI Year in Review and what we've learned from this transformative year!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore the 2023 AI Year in Review and what we've learned from this transformative year!

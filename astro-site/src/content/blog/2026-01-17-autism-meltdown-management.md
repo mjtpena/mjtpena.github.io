@@ -1,5 +1,6 @@
 ---
 title: "Managing Meltdowns: What We've Learned"
+description: "Remove triggers. Leave the situation when possible. Reduce stimulation. Quiet, dim, calm environment."
 author: Michael John Peña
 draft: false
 date: 2026-01-17
@@ -8,10 +9,7 @@ tags:
   - Parenting
   - Autism
   - Family
-
 ---
-
-I wrote "Managing Meltdowns: What We've Learned" to share practical, production-minded guidance on this topic.
 
 ## What Doesn't Help
 
@@ -52,4 +50,4 @@ Our job isn't to prevent all meltdowns. It's to support him through them.
 
 You're not failing. This is hard. You're doing your best.
 
-Your child needs understanding, not judgment. Give that to them. Give that to yourself.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Your child needs understanding, not judgment. Give that to them. Give that to yourself.

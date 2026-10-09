@@ -1,13 +1,11 @@
 ---
 title: "Query Performance Optimization in Microsoft Fabric"
+description: "Query performance is where UX and cost meet. My practical approach is to measure user-facing latency, inspect query plans, and prioritise optimisations that…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-23
 tags: ["Microsoft Fabric", "Performance", "Query Optimization", "SQL", "Spark"]
-
 ---
-
-I wrote "Query Performance Optimization in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 Query performance is where UX and cost meet. My practical approach is to measure user-facing latency, inspect query plans, and prioritise optimisations that reduce I/O and cost — broadcast joins, predicate pushdown and careful partitioning are usually first on my list.
 
@@ -309,4 +307,3 @@ class QueryTuner:
 ```
 
 Tomorrow, we'll explore capacity management in Fabric!
-

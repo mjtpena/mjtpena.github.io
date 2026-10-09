@@ -1,5 +1,6 @@
 ---
 title: "Azure Key Vault: Secrets Management Best Practices"
+description: "Secrets don't belong in code. Period."
 author: Michael John Peña
 draft: false
 date: 2020-09-13
@@ -8,10 +9,7 @@ tags:
   - Key Vault
   - Security
   - DevOps
-
 ---
-
-I wrote "Azure Key Vault: Secrets Management Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Basic Operations
 
@@ -91,4 +89,4 @@ az monitor diagnostic-settings create \
     --storage-account mystorageaccount
 ```
 
-Secrets don't belong in code. Period.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Secrets don't belong in code. Period.

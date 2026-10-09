@@ -1,13 +1,11 @@
 ---
 title: "Complex Problem Solving with o1: Practical Patterns"
+description: "o1's reasoning capabilities open up new possibilities for tackling complex problems that were previously difficult for AI to handle reliably."
 author: "Michael John Peña"
 draft: false
 date: 2024-09-07
 tags: ["OpenAI", "o1", "Problem Solving", "AI", "Engineering"]
-
 ---
-
-I wrote "Complex Problem Solving with o1: Practical Patterns" to share practical, production-minded guidance on this topic.
 
 ## Pattern 1: Multi-Constraint Optimization
 
@@ -269,4 +267,4 @@ def analyze_decision(decision: str, options: list, criteria: list) -> str:
 3. **Use appropriate token budgets** - Complex problems need more thinking tokens
 4. **Validate outputs** - o1 is better but not infallible
 
-o1's reasoning capabilities open up new possibilities for tackling complex problems that were previously difficult for AI to handle reliably.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+o1's reasoning capabilities open up new possibilities for tackling complex problems that were previously difficult for AI to handle reliably.

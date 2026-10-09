@@ -9,10 +9,7 @@ tags:
   - OpenAI
   - Plugins
   - AI
-
 ---
-
-I wrote "Semantic Kernel Plugins: Extending AI with Custom Skills" to share practical, production-minded guidance on this topic.
 
 ## Plugin Structure
 
@@ -328,4 +325,4 @@ class TestAzureServicesPlugin:
 
 - [Semantic Kernel Plugins](https://learn.microsoft.com/semantic-kernel/ai-orchestration/plugins)
 - [Native Functions Guide](https://learn.microsoft.com/semantic-kernel/ai-orchestration/native-functions)
-- [Plugin Samples](https://github.com/microsoft/semantic-kernel/tree/main/samples/skills)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Plugin Samples](https://github.com/microsoft/semantic-kernel/tree/main/samples/skills)

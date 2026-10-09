@@ -9,10 +9,7 @@ tags:
   - Latency
   - Azure OpenAI
   - Performance
-
 ---
-
-I wrote "Prompt Caching: Reducing Latency and Cost for Repetitive Contexts" to share practical, production-minded guidance on this topic.
 
 ## The Problem
 
@@ -138,4 +135,3 @@ result = measure_caching_benefit(500, 100, 10000)
 ## Conclusion
 
 Prompt caching is especially valuable for applications with long, consistent system prompts. Structure your prompts to maximize prefix sharing.
-

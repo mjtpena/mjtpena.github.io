@@ -1,13 +1,11 @@
 ---
 title: "Tracing Frameworks for AI: Distributed Tracing in LLM Applications"
+description: "Effective tracing reveals the inner workings of AI applications, helping you understand performance bottlenecks, cost drivers, and error sources across your…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-12
 tags: ["Tracing", "Distributed Systems", "AI", "Observability", "OpenTelemetry"]
-
 ---
-
-I wrote "Tracing Frameworks for AI: Distributed Tracing in LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Tracing Concepts for AI
 
@@ -416,4 +414,4 @@ class TraceAnalyzer:
         return by_model
 ```
 
-Effective tracing reveals the inner workings of AI applications, helping you understand performance bottlenecks, cost drivers, and error sources across your entire system.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Effective tracing reveals the inner workings of AI applications, helping you understand performance bottlenecks, cost drivers, and error sources across your entire system.

@@ -1,13 +1,11 @@
 ---
 title: "Advanced Coding Techniques with GPT-4o and Claude 3.5 Sonnet"
+description: "Refactoring Goals: {goalstext} Think through the design before implementing. \"\"\" response = client.chat.completions.create( model=\"gpt-4o\"…"
 author: "Michael John Peña"
 draft: false
 date: 2024-09-10
 tags: ["AI", "Coding", "Software Development", "GPT-4o", "Claude"]
-
 ---
-
-I wrote "Advanced Coding Techniques with GPT-4o and Claude 3.5 Sonnet" to share practical, production-minded guidance on this topic.
 
 ## Algorithm Design with Structured Prompts
 
@@ -159,7 +157,7 @@ Think through the design before implementing.
 
     return response.choices[0].message.content
 
-# Example: Refactor messy code
+## Example: Refactor messy code
 legacy_code = '''
 def proc(d):
     r = []
@@ -228,7 +226,7 @@ Think carefully through each step.
 
     return response.choices[0].message.content
 
-# Example: Code with subtle bugs
+## Example: Code with subtle bugs
 buggy_code = '''
 def binary_search(arr, target):
     left, right = 0, len(arr)
@@ -384,4 +382,4 @@ Effective AI-assisted coding requires clear prompts and structured requests. Use
 - [OpenAI Cookbook](https://cookbook.openai.com/)
 - [Anthropic Claude Documentation](https://docs.anthropic.com/)
 - [Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)
-
+```

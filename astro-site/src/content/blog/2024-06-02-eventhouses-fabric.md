@@ -1,5 +1,6 @@
 ---
 title: "Eventhouses in Microsoft Fabric: Deep Dive"
+description: "Eventhouses are the foundation of Real-Time Intelligence in Fabric. Today I'm exploring their architecture and capabilities in depth."
 author: Michael John Peña
 draft: false
 date: 2024-06-02
@@ -372,4 +373,4 @@ Tomorrow I'll cover KQL querysets and advanced querying patterns.
 
 - [Eventhouse Documentation](https://learn.microsoft.com/fabric/real-time-intelligence/eventhouse)
 - [KQL Quick Reference](https://learn.microsoft.com/kusto/query/kql-quick-reference)
-- [Data Ingestion Best Practices](https://learn.microsoft.com/azure/data-explorer/ingest-data-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data Ingestion Best Practices](https://learn.microsoft.com/azure/data-explorer/ingest-data-overview)

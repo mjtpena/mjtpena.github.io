@@ -1,5 +1,6 @@
 ---
 title: "Azure Batch: Large-Scale Parallel Computing"
+description: "Embarrassingly parallel workloads are the ones I most enjoy moving to Azure. Render farms, Monte Carlo simulations, batch image processing, genomic…"
 author: Michael John Peña
 draft: false
 date: 2020-12-02
@@ -202,4 +203,4 @@ pool = PoolAddParameter(
 )
 ```
 
-Azure Batch: unlimited compute on demand.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Batch: unlimited compute on demand.

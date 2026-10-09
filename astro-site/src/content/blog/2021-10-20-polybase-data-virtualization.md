@@ -1,13 +1,11 @@
 ---
 title: "PolyBase for Data Virtualization in Azure Synapse"
+description: "PolyBase is the T-SQL feature that makes Synapse Dedicated SQL Pool a data virtualisation engine, not just a data warehouse—it allows you to define external…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-20
 tags: ["Azure", "Synapse", "PolyBase", "Data Virtualization", "ETL"]
-
 ---
-
-I wrote "PolyBase for Data Virtualization in Azure Synapse" to share practical, production-minded guidance on this topic.
 
 PolyBase is the T-SQL feature that makes Synapse Dedicated SQL Pool a data virtualisation engine, not just a data warehouse—it allows you to define external tables pointing to data in ADLS Gen2, Azure Blob Storage, or other databases, and query them with the same T-SQL you use for internal tables. The loading pattern: `CREATE EXTERNAL TABLE` pointing to your ADLS Gen2 files, then `CREATE TABLE AS SELECT` (CTAS) to load data from the external table into a distributed internal table at full MPP speed. For data virtualisation scenarios (querying data lake files without staging), `SELECT` from external tables works directly. The performance consideration: PolyBase reads are distributed—each Synapse compute node reads a portion of the external data in parallel. Parquet format with good partitioning gives the best PolyBase read performance; CSV files without compression are the slowest option.
 
@@ -367,4 +365,3 @@ SELECT * FROM ext.Sales WHERE 1=0;
 PolyBase enables powerful data virtualization scenarios in Azure Synapse. By understanding how to create and optimize external tables, you can build efficient hybrid analytics solutions that span cloud storage and your data warehouse.
 
 Tomorrow, we'll explore the COPY command for high-performance data loading.
-

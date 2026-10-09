@@ -1,5 +1,6 @@
 ---
 title: "DALL-E 3 Patterns: Effective Image Generation for Enterprise"
+description: "I experimented with DALL‑E 3 for enterprise image generation; these patterns capture what scaled well and what to avoid."
 author: Michael John Peña
 draft: false
 date: 2024-02-24

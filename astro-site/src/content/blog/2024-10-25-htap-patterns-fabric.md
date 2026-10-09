@@ -1,13 +1,11 @@
 ---
 title: "HTAP Patterns in Microsoft Fabric: Unifying Transactions and Analytics"
+description: "HTAP in Microsoft Fabric enables unified transactional and analytical workloads without complex ETL pipelines. Design your schemas with both workloads in mind."
 author: "Michael John Peña"
 draft: false
 date: 2024-10-25
 tags: ["HTAP", "Microsoft Fabric", "Transactions", "Analytics", "Architecture"]
-
 ---
-
-I wrote "HTAP Patterns in Microsoft Fabric: Unifying Transactions and Analytics" to share practical, production-minded guidance on this topic.
 
 ## Understanding HTAP in Fabric
 
@@ -353,4 +351,4 @@ HTAP_BEST_PRACTICES = {
 }
 ```
 
-HTAP in Microsoft Fabric enables unified transactional and analytical workloads without complex ETL pipelines. Design your schemas with both workloads in mind.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+HTAP in Microsoft Fabric enables unified transactional and analytical workloads without complex ETL pipelines. Design your schemas with both workloads in mind.

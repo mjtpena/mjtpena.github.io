@@ -1,13 +1,11 @@
 ---
 title: "Fabric Git Integration: Version Control for Analytics"
+description: "Microsoft Fabric's Git integration brings modern version control practices to analytics. This guide covers setting up and using Git with Fabric workspaces."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-06
 tags: ["Microsoft Fabric", "Git", "DevOps", "Version Control", "Data"]
-
 ---
-
-I wrote "Fabric Git Integration: Version Control for Analytics" to share practical, production-minded guidance on this topic.
 
 Microsoft Fabric's Git integration brings modern version control practices to analytics. This guide covers setting up and using Git with Fabric workspaces.
 
@@ -333,4 +331,3 @@ GIT_INTEGRATION_BEST_PRACTICES = {
 ## Conclusion
 
 Git integration brings proper version control to Fabric analytics development. Use branching strategies, automated pipelines, and workspace synchronization for reliable analytics deployments.
-

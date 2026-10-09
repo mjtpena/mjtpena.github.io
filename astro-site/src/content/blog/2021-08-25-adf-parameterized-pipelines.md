@@ -1,13 +1,11 @@
 ---
 title: "Parameterized Pipelines in Azure Data Factory: Building Reusable Data Workflows"
+description: "Parameterized pipelines dramatically reduce maintenance overhead and enable rapid deployment of new data integration scenarios without code changes."
 author: "Michael John Peña"
 draft: false
 date: 2021-08-25
 tags: ["Azure", "Data Factory", "Parameters", "ETL", "Reusability"]
-
 ---
-
-I wrote "Parameterized Pipelines in Azure Data Factory: Building Reusable Data Workflows" to share practical, production-minded guidance on this topic.
 
 ## Defining Pipeline Parameters
 
@@ -406,4 +404,4 @@ runs = trigger.trigger_multiple_loads('ParameterizedCopyPipeline', configs)
 4. **Keep datasets generic**: Parameterize at the dataset level
 5. **Use metadata tables**: Store configuration externally
 
-Parameterized pipelines dramatically reduce maintenance overhead and enable rapid deployment of new data integration scenarios without code changes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Parameterized pipelines dramatically reduce maintenance overhead and enable rapid deployment of new data integration scenarios without code changes.

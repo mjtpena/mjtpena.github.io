@@ -1,5 +1,6 @@
 ---
 title: Azure Durable Entities - Stateful Actors in Serverless
+description: "Durable Entities are addressable units of state that process operations one at a time. Think of them as lightweight actors - each entity has a unique…"
 author: Michael John Peña
 draft: false
 date: 2021-04-02
@@ -10,10 +11,7 @@ tags:
   - Durable Entities
   - Actor Model
   - Serverless
-
 ---
-
-I wrote "2021-04-02-azure-durable-entities-stateful-actors" to share practical, production-minded guidance on this topic.
 
 ## What Are Durable Entities?
 
@@ -326,4 +324,3 @@ public static async Task DeleteEntity(
 Durable Entities provide a powerful abstraction for managing distributed state in serverless applications. By combining the actor model with Azure Functions' serverless benefits, you get the best of both worlds: fine-grained state management without the operational overhead of managing stateful infrastructure.
 
 The automatic serialization, persistence, and concurrency control mean you can focus on your domain logic rather than distributed systems complexities.
-

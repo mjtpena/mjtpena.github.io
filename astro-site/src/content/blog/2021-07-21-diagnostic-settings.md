@@ -10,12 +10,9 @@ tags:
   - Logging
   - DevOps
   - Observability
-
 ---
 
-I wrote "2021-07-21-diagnostic-settings" to share practical, production-minded guidance on this topic.
-
-# Understanding Diagnostic Data
+## Understanding Diagnostic Data
 
 Azure resources produce several types of diagnostic data:
 
@@ -23,7 +20,7 @@ Azure resources produce several types of diagnostic data:
 - **Resource Logs**: Detailed operational logs (formerly diagnostic logs)
 - **Activity Logs**: Subscription-level events
 
-# Creating Diagnostic Settings
+## Creating Diagnostic Settings
 
 Configure diagnostics using Azure CLI:
 
@@ -46,7 +43,7 @@ az monitor diagnostic-settings categories list \
     --resource /subscriptions/$SUBSCRIPTION_ID/resourceGroups/rg-sql/providers/Microsoft.Sql/servers/sqlserver/databases/mydb
 ```
 
-# Terraform Configuration
+## Terraform Configuration
 
 Comprehensive diagnostic settings with Terraform:
 
@@ -240,7 +237,7 @@ resource "azurerm_monitor_diagnostic_setting" "appservice" {
 }
 ```
 
-# Activity Log Configuration
+## Activity Log Configuration
 
 Configure subscription-level activity log export:
 
@@ -286,7 +283,7 @@ resource "azurerm_monitor_diagnostic_setting" "activity_log" {
 }
 ```
 
-# Automating Diagnostic Settings
+## Automating Diagnostic Settings
 
 Deploy diagnostic settings across all resources:
 
@@ -354,7 +351,7 @@ for resource in resources:
         print(f"Error configuring {resource.name}: {e}")
 ```
 
-# Azure Policy for Diagnostic Settings
+## Azure Policy for Diagnostic Settings
 
 Enforce diagnostic settings with Azure Policy:
 
@@ -435,7 +432,7 @@ Enforce diagnostic settings with Azure Policy:
 }
 ```
 
-# Querying Diagnostic Logs
+## Querying Diagnostic Logs
 
 Query logs in Log Analytics:
 
@@ -464,9 +461,8 @@ AzureDiagnostics
 | order by count_ desc
 ```
 
-# Conclusion
+## Conclusion
 
 Diagnostic settings are fundamental for observability in Azure. By routing logs and metrics to appropriate destinations, you enable troubleshooting, compliance auditing, and security monitoring across your infrastructure.
 
 Best practices include using Azure Policy to enforce diagnostic settings, choosing appropriate retention periods for different data types, and leveraging Log Analytics for cross-resource analysis. With proper diagnostic configuration, you have the visibility needed to operate reliable Azure solutions.
-

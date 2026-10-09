@@ -1,5 +1,6 @@
 ---
 title: "Azure DDoS Protection: Defend Against Attacks"
+description: "DDoS Protection Standard provides cost credits for attack-related scaling. Azure DDoS Protection: resilience against the largest attacks."
 author: Michael John Peña
 draft: false
 date: 2020-12-22
@@ -8,10 +9,7 @@ tags:
   - Security
   - DDoS
   - Networking
-
 ---
-
-I wrote "Azure DDoS Protection: Defend Against Attacks" to share practical, production-minded guidance on this topic.
 
 ## Protection Tiers
 
@@ -146,4 +144,4 @@ DDoS Protection Standard provides cost credits for attack-related scaling.
 4. Review attack reports
 5. Use Application Gateway WAF for L7
 
-Azure DDoS Protection: resilience against the largest attacks.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure DDoS Protection: resilience against the largest attacks.

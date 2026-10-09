@@ -1,5 +1,6 @@
 ---
 title: "Azure Private Link: Secure Access to PaaS Services"
+description: "By default, Azure PaaS services (Storage, SQL, Cosmos DB) have public endpoints. Even with firewall rules, data transits the public internet."
 author: Michael John Peña
 draft: false
 date: 2020-09-14
@@ -8,10 +9,7 @@ tags:
   - Networking
   - Security
   - Private Link
-
 ---
-
-I wrote "Azure Private Link: Secure Access to PaaS Services" to share practical, production-minded guidance on this topic.
 
 ## The Problem
 
@@ -75,4 +73,4 @@ az storage account update \
     --public-network-access Disabled
 ```
 
-Now the storage account is only accessible from within your VNet. Zero exposure to the internet.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Now the storage account is only accessible from within your VNet. Zero exposure to the internet.

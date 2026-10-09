@@ -1,5 +1,6 @@
 ---
 title: "Private Endpoints Deep Dive for Microsoft Fabric"
+description: "Private Endpoints enable secure, private connectivity to Microsoft Fabric. Today I'm taking a deep dive into implementing private endpoints."
 author: Michael John Peña
 draft: false
 date: 2024-06-29
@@ -697,4 +698,4 @@ Tomorrow I'll wrap up the Fabric series with a summary of key learnings.
 
 - [Private Endpoints for Fabric](https://learn.microsoft.com/fabric/security/security-private-links)
 - [Private Link DNS](https://learn.microsoft.com/azure/private-link/private-endpoint-dns)
-- [Hub-Spoke Network](https://learn.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Hub-Spoke Network](https://learn.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)

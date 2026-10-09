@@ -1,13 +1,11 @@
 ---
 title: "Azure HPC Cache: Accelerating High-Performance Computing Workloads"
+description: "Azure HPC Cache bridges the gap between cloud compute and existing storage investments, enabling organizations to run HPC workloads in Azure while…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-21
 tags: ["Azure", "HPC", "Cache", "High Performance Computing", "Storage"]
-
 ---
-
-I wrote "Azure HPC Cache: Accelerating High-Performance Computing Workloads" to share practical, production-minded guidance on this topic.
 
 ## Understanding HPC Cache Architecture
 
@@ -289,4 +287,4 @@ class HPCCacheMonitor:
 4. **Distribute load**: Use multiple mount addresses
 5. **Monitor cache efficiency**: Track hit rates and latency
 
-Azure HPC Cache bridges the gap between cloud compute and existing storage investments, enabling organizations to run HPC workloads in Azure while leveraging their existing data infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure HPC Cache bridges the gap between cloud compute and existing storage investments, enabling organizations to run HPC workloads in Azure while leveraging their existing data infrastructure.

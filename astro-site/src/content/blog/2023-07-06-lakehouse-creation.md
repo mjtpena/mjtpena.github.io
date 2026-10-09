@@ -8,10 +8,7 @@ tags:
   - Lakehouse
   - Data Engineering
   - Delta Lake
-
 ---
-
-I wrote "Creating Your First Fabric Lakehouse: Step-by-Step Guide" to share practical, production-minded guidance on this topic.
 
 ## What is a Fabric Lakehouse?
 
@@ -309,4 +306,4 @@ Tomorrow we'll dive deeper into Delta tables in Fabric and explore their unique 
 
 - [Lakehouse Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview)
 - [Lakehouse Tutorial](https://learn.microsoft.com/en-us/fabric/data-engineering/tutorial-lakehouse-get-started)
-- [Delta Lake in Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Delta Lake in Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake)

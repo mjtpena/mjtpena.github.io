@@ -1,5 +1,6 @@
 ---
 title: "Azure Arc-Enabled Data Services: Run Azure Data Anywhere"
+description: "Arc-enabled data services bring cloud-native database capabilities to any environment. Whether you need SQL Server or PostgreSQL, you can run managed…"
 author: Michael John Pena
 draft: false
 date: 2021-11-18
@@ -10,10 +11,7 @@ tags:
   - PostgreSQL
   - Data
   - Kubernetes
-
 ---
-
-I wrote "Azure Arc-Enabled Data Services: Run Azure Data Anywhere" to share practical, production-minded guidance on this topic.
 
 ## What Are Arc-Enabled Data Services?
 
@@ -457,4 +455,4 @@ Arc-enabled data services bring cloud-native database capabilities to any enviro
 
 - [Arc-Enabled Data Services Documentation](https://docs.microsoft.com/en-us/azure/azure-arc/data/overview)
 - [SQL Managed Instance](https://docs.microsoft.com/en-us/azure/azure-arc/data/managed-instance-overview)
-- [PostgreSQL Hyperscale](https://docs.microsoft.com/en-us/azure/azure-arc/data/what-is-azure-arc-enabled-postgres-hyperscale)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [PostgreSQL Hyperscale](https://docs.microsoft.com/en-us/azure/azure-arc/data/what-is-azure-arc-enabled-postgres-hyperscale)

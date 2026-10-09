@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Semantic Kernel 2.x: A Practical Introduction"
+description: "Semantic Kernel is an SDK that integrates Large Language Models (LLMs) with conventional programming languages. Version 2.x introduces a more streamlined…"
 author: Michael John Peña
 draft: false
 date: 2025-08-01
@@ -9,10 +10,7 @@ tags:
   - .NET
   - Microsoft
   - LLM
-
 ---
-
-I wrote "Getting Started with Semantic Kernel 2.x: A Practical Introduction" to share practical, production-minded guidance on this topic.
 
 ## What is Semantic Kernel 2.x?
 
@@ -65,4 +63,4 @@ public class WeatherPlugin
 }
 ```
 
-Semantic Kernel 2.x provides a solid foundation for building AI applications that combine the reasoning capabilities of LLMs with the precision of traditional code.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Semantic Kernel 2.x provides a solid foundation for building AI applications that combine the reasoning capabilities of LLMs with the precision of traditional code.

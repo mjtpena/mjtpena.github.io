@@ -9,10 +9,7 @@ tags:
   - Product Quantization
   - Scale
   - Machine Learning
-
 ---
-
-I wrote "Product Quantization for Extreme-Scale Vector Search" to share practical, production-minded guidance on this topic.
 
 ## Product Quantization Explained
 
@@ -426,4 +423,3 @@ class HybridAzurePQSearch:
 Product quantization enables vector search at scales that would otherwise be impractical. With compression ratios of 100-1000x, you can index billions of vectors on modest hardware.
 
 Use PQ when scalar quantization isn't enough, and combine with inverted file indices for the fastest large-scale search.
-

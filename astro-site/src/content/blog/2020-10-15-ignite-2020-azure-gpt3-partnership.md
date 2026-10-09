@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Ignite 2020: Azure, GPT-3, and the Future of AI"
+description: "Microsoft Ignite 2020 was different this year - a fully virtual 48-hour event instead of the usual 5-day in-person conference. Despite the condensed format…"
 author: Michael John Peña
 draft: false
 date: 2020-10-15
@@ -136,4 +137,4 @@ The rapid pace of innovation continues. Time to start experimenting with these n
 - [Microsoft Ignite 2020 Book of News](https://news.microsoft.com/ignite-2020-book-of-news/)
 - [Azure Cosmos DB Serverless Documentation](https://docs.microsoft.com/en-us/azure/cosmos-db/serverless)
 - [Azure VMware Solution Overview](https://docs.microsoft.com/en-us/azure/azure-vmware/)
-- [Azure Communication Services](https://docs.microsoft.com/en-us/azure/communication-services/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Communication Services](https://docs.microsoft.com/en-us/azure/communication-services/)

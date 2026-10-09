@@ -1,5 +1,6 @@
 ---
 title: "Real-Time Streaming Analytics with Azure Stream Analytics and Event Hubs"
+description: "Enrich streaming data with reference data lookups for context-aware processing and alerting in real-time scenarios."
 author: Michael John Peña
 draft: false
 date: 2025-10-07
@@ -9,10 +10,7 @@ tags:
   - Real-Time Analytics
   - Streaming
   - IoT
-
 ---
-
-I wrote "Real-Time Streaming Analytics with Azure Stream Analytics and Event Hubs" to share practical, production-minded guidance on this topic.
 
 ## Designing Event Hub Partitioning Strategy
 
@@ -98,4 +96,4 @@ GROUP BY UserId, SessionWindow(minute, 5, 30)
 
 ## Reference Data Joins
 
-Enrich streaming data with reference data lookups for context-aware processing and alerting in real-time scenarios.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Enrich streaming data with reference data lookups for context-aware processing and alerting in real-time scenarios.

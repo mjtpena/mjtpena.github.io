@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions Durable Entities for Stateful Serverless"
+description: "Durable Entities offer a middle ground. State is automatically persisted and scales across multiple instances. For our inventory tracking, response times…"
 author: Michael John Peña
 draft: false
 date: 2020-08-28
@@ -8,10 +9,7 @@ tags:
   - Azure Functions
   - Serverless
   - Durable Functions
-
 ---
-
-I wrote "Azure Functions Durable Entities for Stateful Serverless" to share practical, production-minded guidance on this topic.
 
 ## The Use Case
 
@@ -65,4 +63,4 @@ public static async Task UpdateInventory(
 }
 ```
 
-State is automatically persisted and scales across multiple instances. For our inventory tracking, response times dropped from 200ms to 15ms while maintaining consistency.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+State is automatically persisted and scales across multiple instances. For our inventory tracking, response times dropped from 200ms to 15ms while maintaining consistency.

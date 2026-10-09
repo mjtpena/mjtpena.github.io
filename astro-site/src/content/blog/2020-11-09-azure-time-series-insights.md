@@ -1,5 +1,6 @@
 ---
 title: "Azure Time Series Insights: IoT Analytics at Scale"
+description: "A general-purpose database can store time-stamped data. It just gets sad about it once you're past a few hundred million rows and someone wants a five-year…"
 author: Michael John Peña
 draft: false
 date: 2020-11-09
@@ -196,4 +197,4 @@ response = requests.post(query_url,
 | Fast queries | Lower cost |
 | Included in SKU | ADLS Gen2 |
 
-Time Series Insights: IoT analytics made accessible.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Time Series Insights: IoT analytics made accessible.

@@ -1,5 +1,6 @@
 ---
 title: "Azure AD B2C: Customer Identity Management"
+description: "B2C handles the complexity of customer identity so you can focus on your application."
 author: Michael John Peña
 draft: false
 date: 2020-10-09
@@ -8,10 +9,7 @@ tags:
   - Identity
   - Authentication
   - B2C
-
 ---
-
-I wrote "Azure AD B2C: Customer Identity Management" to share practical, production-minded guidance on this topic.
 
 ## Key Features
 
@@ -83,4 +81,4 @@ const token = await pca.acquireTokenSilent({ scopes: ["api://your-api/access"] }
 - $0.00325 per additional MAU
 - MFA: $0.03 per authentication
 
-B2C handles the complexity of customer identity so you can focus on your application.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+B2C handles the complexity of customer identity so you can focus on your application.

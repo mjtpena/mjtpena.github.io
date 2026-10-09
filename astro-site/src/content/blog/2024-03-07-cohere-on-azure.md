@@ -1,13 +1,11 @@
 ---
 title: "Cohere on Azure: Enterprise Search and RAG Solutions"
+description: "Cohere's models are now available on Azure AI, offering specialized capabilities for enterprise search and retrieval-augmented generation (RAG). This guide…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-07
 tags: ["Azure", "Cohere", "AI", "RAG", "Search", "Embeddings"]
-
 ---
-
-I wrote "Cohere on Azure: Enterprise Search and RAG Solutions" to share practical, production-minded guidance on this topic.
 
 Cohere's models are now available on Azure AI, offering specialized capabilities for enterprise search and retrieval-augmented generation (RAG). This guide covers how to leverage Cohere's unique features.
 
@@ -303,4 +301,3 @@ print(answer)
 ## Conclusion
 
 Cohere on Azure provides specialized tools for enterprise search and RAG. The combination of embeddings, reranking, and RAG-optimized generation makes it ideal for document-intensive applications.
-

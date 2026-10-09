@@ -1,13 +1,11 @@
 ---
 title: "Fabric Governance: Building a Secure Data Platform"
+description: "Fabric governance is where the platform's SaaS architecture creates both an advantage and a complication for enterprise security teams. The advantage…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-12
 tags: ["Microsoft Fabric", "Governance", "Security", "Data Management", "Compliance"]
-
 ---
-
-I wrote "Fabric Governance: Building a Secure Data Platform" to share practical, production-minded guidance on this topic.
 
 Fabric governance is where the platform's SaaS architecture creates both an advantage and a complication for enterprise security teams. The advantage: because Fabric is a unified platform, you have one governance layer to configure rather than separate security policies for Synapse, Power BI, Azure Data Factory, and Azure ML. The complication: Fabric's workspace model and item-level permissions interact with Microsoft 365 tenant settings and Entra ID in ways that require coordination between the Fabric admin and the Microsoft 365 admin — not all governance controls live in the Fabric admin portal. Row-Level Security for semantic models, sensitivity labels from Microsoft Purview Information Protection, and external sharing controls are three areas where getting the configuration right requires understanding how Fabric integrates with the broader Microsoft 365 ecosystem, not just Fabric-specific settings.
 
@@ -330,4 +328,4 @@ def analyze_audit_logs(logs: list) -> dict:
 5. **Use separate workspaces** for dev/test/prod
 6. **Regular access reviews** to maintain least privilege
 
-Tomorrow, we'll explore Fabric Domains and how to organize your data platform effectively.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Fabric Domains and how to organize your data platform effectively.

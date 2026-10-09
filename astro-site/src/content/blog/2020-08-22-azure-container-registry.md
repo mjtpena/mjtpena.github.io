@@ -1,5 +1,6 @@
 ---
 title: "Managing Container Images with Azure Container Registry"
+description: "Azure Container Registry provides a secure, scalable foundation for container-based deployments on Azure."
 author: Michael John Peña
 draft: false
 date: 2020-08-22
@@ -8,10 +9,7 @@ tags:
   - Containers
   - Docker
   - DevOps
-
 ---
-
-I wrote "Managing Container Images with Azure Container Registry" to share practical, production-minded guidance on this topic.
 
 ## Creating a Container Registry
 
@@ -278,4 +276,4 @@ az acr import \
 
 Azure Container Registry provides a secure, scalable foundation for container-based deployments on Azure.
 
-One often-missed lever: ACR Tasks. Instead of building images in a CI runner and pushing them, ACR Tasks build *inside* the registry — fast network, no egress, and you can trigger rebuilds on base-image updates so security patches flow through automatically. For teams that haven't already standardised on a CI builder, Tasks are a surprisingly clean place to land.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+One often-missed lever: ACR Tasks. Instead of building images in a CI runner and pushing them, ACR Tasks build *inside* the registry — fast network, no egress, and you can trigger rebuilds on base-image updates so security patches flow through automatically. For teams that haven't already standardised on a CI builder, Tasks are a surprisingly clean place to land.

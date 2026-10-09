@@ -1,5 +1,6 @@
 ---
 title: "Migrating to Microsoft Fabric: Strategies and Best Practices"
+description: "The fastest approach uses OneLake shortcuts to reference existing data without copying. Run Fabric alongside existing platform during transition."
 author: Michael John Peña
 draft: false
 date: 2023-05-15
@@ -9,10 +10,7 @@ tags:
   - Azure
   - Data Platform
   - Best Practices
-
 ---
-
-I wrote "Migrating to Microsoft Fabric: Strategies and Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Migration Approaches
 
@@ -360,4 +358,4 @@ Migration to Fabric requires planning but offers significant simplification bene
 
 - [Migration Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/migrate-synapse-overview)
 - [ADF to Fabric Migration](https://learn.microsoft.com/en-us/fabric/data-factory/compare-fabric-data-factory-and-azure-data-factory)
-- [Shortcuts Documentation](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Shortcuts Documentation](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Policy: Governance at Scale"
+description: "Every Azure environment I've inherited from someone else has the same three problems: storage accounts created without encryption-at-rest configuration…"
 author: Michael John Peña
 draft: false
 date: 2020-10-03
@@ -94,4 +95,4 @@ Azure Portal → Policy → Compliance shows:
 - Non-compliant resources
 - Remediation tasks
 
-Start with Audit effect, move to Deny once you understand impact.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Start with Audit effect, move to Deny once you understand impact.

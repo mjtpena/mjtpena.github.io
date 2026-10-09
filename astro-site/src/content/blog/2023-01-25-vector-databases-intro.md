@@ -1,5 +1,6 @@
 ---
 title: "Introduction to Vector Databases for AI Applications"
+description: "Traditional databases are optimized for exact matches and range queries. Vector search requires finding approximate nearest neighbors in high-dimensional…"
 author: Michael John Peña
 draft: false
 date: 2023-01-25
@@ -9,10 +10,7 @@ tags:
   - Embeddings
   - AI
   - Data
-
 ---
-
-I wrote "Introduction to Vector Databases for AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Why Vector Databases?
 
@@ -420,4 +418,4 @@ VECTOR_DB_CHARACTERISTICS = {
 - [Weaviate](https://weaviate.io/)
 - [Milvus](https://milvus.io/)
 - [Qdrant](https://qdrant.tech/)
-- [Azure Cognitive Search Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Cognitive Search Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview)

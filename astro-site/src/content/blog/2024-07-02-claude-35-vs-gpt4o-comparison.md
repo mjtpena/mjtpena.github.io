@@ -1,5 +1,6 @@
 ---
 title: "Claude 3.5 Sonnet vs GPT-4o: A Technical Comparison"
+description: "With Claude 3.5 Sonnet and GPT-4o both available, choosing the right model for your application requires understanding their differences. I've been testing…"
 author: Michael John Peña
 draft: false
 date: 2024-07-02

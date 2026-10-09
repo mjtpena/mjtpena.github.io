@@ -9,10 +9,7 @@ tags:
   - Event Streaming
   - CDC
   - Architecture
-
 ---
-
-I wrote "Real-Time Sync Patterns in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## The Real-Time Spectrum
 
@@ -398,4 +395,3 @@ class RealtimeMonitor:
 Real-time sync in Fabric isn't one-size-fits-all. Choose streaming for true real-time needs, mirroring for operational data, and batch for historical loads.
 
 The key is understanding your latency requirements and matching them to the appropriate pattern. Often, a hybrid approach serves organizations best.
-

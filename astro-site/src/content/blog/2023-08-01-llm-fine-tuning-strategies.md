@@ -1,5 +1,6 @@
 ---
 title: "LLM Fine-Tuning Strategies: When and How to Customize Models"
+description: "Fine-tuning is the right answer to fewer questions than the hype suggests, and I want to be precise about when it actually makes sense before diving into…"
 author: Michael John Peña
 draft: false
 date: 2023-08-01
@@ -333,4 +334,4 @@ Tomorrow we'll dive deep into LoRA and QLoRA techniques.
 
 - [Azure OpenAI Fine-Tuning](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning)
 - [OpenAI Fine-Tuning Guide](https://platform.openai.com/docs/guides/fine-tuning)
-- [Hugging Face PEFT](https://huggingface.co/docs/peft)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Hugging Face PEFT](https://huggingface.co/docs/peft)

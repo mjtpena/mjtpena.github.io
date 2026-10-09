@@ -9,10 +9,7 @@ tags:
   - Azure Stack Edge
   - IoT
   - Hybrid Cloud
-
 ---
-
-I wrote "2021-09-30-azure-stack-edge" to share practical, production-minded guidance on this topic.
 
 ## Azure Stack Edge Devices
 
@@ -273,4 +270,5 @@ spec:
       volumes:
       - name: data-volume
         persistentVolumeClaim:
-          claimName: edge-pvc\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+          claimName: edge-pvc
+```

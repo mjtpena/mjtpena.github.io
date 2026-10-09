@@ -1,5 +1,6 @@
 ---
 title: "Observability for Data Products: turning data quality from blame into process"
+description: "I spent the day reducing cognitive overhead for engineers and analysts—introducing clearer table contracts, simpler failure modes, and concise runbooks that…"
 author: Michael John Peña
 draft: false
 date: 2026-04-25
@@ -37,4 +38,4 @@ Tomorrow I will apply the same rule to a second workflow to check repeatability.
 
 - [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)
 - [Fabric Data Factory](https://learn.microsoft.com/fabric/data-factory/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

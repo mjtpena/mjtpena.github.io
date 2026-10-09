@@ -1,5 +1,6 @@
 ---
 title: Deploying Cognitive Services on Azure IoT Edge
+description: "IoT Edge with Cognitive Services enables intelligent edge scenarios, bringing AI capabilities directly to where data is generated."
 author: Michael John Pena
 draft: false
 date: 2021-09-12
@@ -9,10 +10,7 @@ tags:
   - Cognitive Services
   - Edge Computing
   - AI at the Edge
-
 ---
-
-I wrote "2021-09-12-cognitive-services-iot-edge" to share practical, production-minded guidance on this topic.
 
 ## IoT Edge Architecture
 
@@ -374,4 +372,4 @@ class OfflineQueue:
 5. **Security**: Use HSM for storing secrets on edge devices
 6. **Testing**: Test modules locally before edge deployment
 
-IoT Edge with Cognitive Services enables intelligent edge scenarios, bringing AI capabilities directly to where data is generated.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+IoT Edge with Cognitive Services enables intelligent edge scenarios, bringing AI capabilities directly to where data is generated.

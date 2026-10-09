@@ -1,13 +1,11 @@
 ---
 title: "Tool Choice Control: Fine-Tuning When and How AI Uses Tools"
+description: "Tool choice control is essential for building AI applications that are predictable, safe, and aligned with your business logic. Use these patterns to guide…"
 author: "Michael John Peña"
 draft: false
 date: 2024-09-20
 tags: ["OpenAI", "Tools", "Function Calling", "AI", "Control"]
-
 ---
-
-I wrote "Tool Choice Control: Fine-Tuning When and How AI Uses Tools" to share practical, production-minded guidance on this topic.
 
 ## Tool Choice Options
 
@@ -363,4 +361,4 @@ while workflow.can_proceed():
         workflow.transition(tool_name)
 ```
 
-Tool choice control is essential for building AI applications that are predictable, safe, and aligned with your business logic. Use these patterns to guide model behavior exactly as needed.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tool choice control is essential for building AI applications that are predictable, safe, and aligned with your business logic. Use these patterns to guide model behavior exactly as needed.

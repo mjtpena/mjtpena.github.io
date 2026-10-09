@@ -1,18 +1,16 @@
 ---
 title: "Infrastructure as Code Best Practices: Lessons from 100+ Deployments"
+description: "IaC is a skill that compounds. These practices become second nature and save countless hours of debugging and recovery."
 author: Michael John Peña
 draft: false
 date: 2025-12-28
 tags:
-  - Infrastructure-as-Code
+  - infrastructure-as-code
   - Terraform
   - Bicep
   - DevOps
   - Best-Practices
-
 ---
-
-I wrote "Infrastructure as Code Best Practices: Lessons from 100+ Deployments" to share practical, production-minded guidance on this topic.
 
 ## 1. Use Modules Religiously
 
@@ -181,4 +179,4 @@ resource "azurerm_key_vault_access_policy" "function" {
 4. **Test in lower environments** - Never apply to prod first
 5. **Document with comments** - Future you will thank present you
 
-IaC is a skill that compounds. These practices become second nature and save countless hours of debugging and recovery.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+IaC is a skill that compounds. These practices become second nature and save countless hours of debugging and recovery.

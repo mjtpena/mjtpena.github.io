@@ -1,5 +1,6 @@
 ---
 title: "Migrating to Fabric: 5 Things I Wish I Knew"
+description: "We migrated from Synapse to Fabric. It took twice as long as expected. Here's what I wish someone had told me."
 author: Michael John Peña
 draft: false
 date: 2026-01-23
@@ -62,4 +63,4 @@ We underestimated this. Cost us 2 weeks of confusion.
 
 Fabric is good. Migration is work. Plan accordingly.
 
-Budget 2x your initial estimate. You'll need it.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Budget 2x your initial estimate. You'll need it.

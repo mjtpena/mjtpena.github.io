@@ -1,13 +1,11 @@
 ---
 title: "Database Patterns for IoT Applications"
+description: "These patterns form the foundation for building scalable, performant IoT database solutions."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-20
 tags: ["IoT", "Database", "Azure", "Architecture", "Time-Series"]
-
 ---
-
-I wrote "Database Patterns for IoT Applications" to share practical, production-minded guidance on this topic.
 
 ## Pattern 1: Time-Series Data Model
 
@@ -253,4 +251,4 @@ def process_stream(stream, batch_size=10000):
         batch_insert_telemetry(batch)
 ```
 
-These patterns form the foundation for building scalable, performant IoT database solutions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These patterns form the foundation for building scalable, performant IoT database solutions.

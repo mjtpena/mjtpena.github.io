@@ -9,10 +9,7 @@ tags:
   - SQL
   - Data Warehouse
   - Analytics
-
 ---
-
-I wrote "Databricks SQL: Analytics Warehousing on the Lakehouse" to share practical, production-minded guidance on this topic.
 
 ## What is Databricks SQL?
 
@@ -425,4 +422,3 @@ Key advantages:
 - [Databricks SQL Documentation](https://docs.databricks.com/sql/index.html)
 - [SQL Warehouse Configuration](https://docs.databricks.com/sql/admin/sql-endpoints.html)
 - [Query Performance Tuning](https://docs.databricks.com/sql/admin/query-performance.html)
-

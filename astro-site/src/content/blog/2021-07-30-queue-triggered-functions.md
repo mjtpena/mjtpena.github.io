@@ -1,5 +1,6 @@
 ---
 title: Building Reliable Queue-Triggered Azure Functions
+description: "Queue-triggered Azure Functions are the pattern I recommend most often for decoupling work that doesn't need to happen synchronously. The model is simple…"
 author: Michael John Peña
 draft: false
 date: 2021-07-30
@@ -14,7 +15,7 @@ tags:
 
 Queue-triggered Azure Functions are the pattern I recommend most often for decoupling work that doesn't need to happen synchronously. The model is simple and reliable: a message arrives in a Storage Queue or Service Bus queue, the Functions runtime picks it up, invokes the function, and removes the message on successful completion. Failed executions put the message back in the queue for retry (up to a configurable maximum), then move it to the dead-letter queue for investigation. The scale-out behaviour is automatic—the runtime adds function instances based on queue depth, with no configuration required beyond the trigger binding. The choice between Storage Queue and Service Bus: Storage Queue for high-volume simple scenarios (cheap, 64KB message limit, at-least-once delivery); Service Bus for ordered messages, sessions, larger payloads, or dead-letter queue semantics you need to control precisely.
 
-# Storage Queue Trigger
+## Storage Queue Trigger
 
 Basic queue-triggered function:
 
@@ -79,7 +80,7 @@ public class OrderMessage
 }
 ```
 
-# Service Bus Queue Trigger
+## Service Bus Queue Trigger
 
 Using Service Bus for advanced scenarios:
 
@@ -180,7 +181,7 @@ public class ServiceBusFunctions
 }
 ```
 
-# Batch Processing
+## Batch Processing
 
 Process multiple messages in batches:
 
@@ -243,7 +244,7 @@ public class BatchProcessingFunctions
 }
 ```
 
-# Poison Message Handling
+## Poison Message Handling
 
 Handle messages that repeatedly fail:
 
@@ -315,7 +316,7 @@ public class PoisonMessageHandler
 }
 ```
 
-# Scaling Configuration
+## Scaling Configuration
 
 Configure function scaling for queues:
 
@@ -356,7 +357,7 @@ Configure function scaling for queues:
 }
 ```
 
-# Output Bindings
+## Output Bindings
 
 Chain queue processing with output bindings:
 
@@ -420,7 +421,7 @@ public class ChainedProcessing
 }
 ```
 
-# Monitoring Queue Functions
+## Monitoring Queue Functions
 
 Monitor queue depth and processing:
 
@@ -467,7 +468,7 @@ def get_function_metrics(function_app_name, function_name):
                 print(f"  {data.time_stamp}: {data.total or data.average}")
 ```
 
-# Conclusion
+## Conclusion
 
 Queue-triggered Azure Functions provide a reliable foundation for asynchronous processing. By properly handling retries, poison messages, and scaling, you can build systems that gracefully handle failures and variable loads.
 

@@ -9,10 +9,7 @@ tags:
   - Bias Detection
   - Machine Learning
   - Ethics
-
 ---
-
-I wrote "Bias Detection and Fairness Metrics for AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Understanding Bias in AI
 
@@ -502,4 +499,4 @@ def train_fair_model(X, y, sensitive, mitigation="reweighting"):
 
 - [Fairlearn Library](https://fairlearn.org/)
 - [AI Fairness 360](https://aif360.mybluemix.net/)
-- [Google ML Fairness](https://developers.google.com/machine-learning/fairness-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Google ML Fairness](https://developers.google.com/machine-learning/fairness-overview)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Service Connector: Simplified Service-to-Service Connections"
+description: "Azure Service Connector eliminates the boilerplate of connecting services while implementing security best practices. It's a significant productivity boost…"
 author: Michael John Pena
 draft: false
 date: 2021-11-25
@@ -9,10 +10,7 @@ tags:
   - DevOps
   - Cloud Native
   - Security
-
 ---
-
-I wrote "Azure Service Connector: Simplified Service-to-Service Connections" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Service Connector?
 
@@ -459,4 +457,4 @@ Azure Service Connector eliminates the boilerplate of connecting services while 
 
 - [Service Connector Documentation](https://docs.microsoft.com/en-us/azure/service-connector/overview)
 - [Supported Services](https://docs.microsoft.com/en-us/azure/service-connector/overview#supported-connections)
-- [DefaultAzureCredential](https://docs.microsoft.com/en-us/dotnet/api/azure.identity.defaultazurecredential)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [DefaultAzureCredential](https://docs.microsoft.com/en-us/dotnet/api/azure.identity.defaultazurecredential)

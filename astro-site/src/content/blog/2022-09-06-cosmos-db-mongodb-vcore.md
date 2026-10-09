@@ -1,13 +1,11 @@
 ---
 title: "Azure Cosmos DB API for MongoDB: Patterns and Best Practices"
+description: "Azure Cosmos DB's MongoDB API provides a powerful option for teams wanting MongoDB compatibility with Azure's enterprise-grade platform."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-06
 tags: ["Azure", "Cosmos DB", "MongoDB", "Database", "NoSQL"]
-
 ---
-
-I wrote "Azure Cosmos DB API for MongoDB: Patterns and Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Understanding Cosmos DB's MongoDB API
 
@@ -382,4 +380,4 @@ Azure Cosmos DB's MongoDB API provides a powerful option for teams wanting Mongo
 
 - [Azure Cosmos DB MongoDB API Documentation](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb/mongodb-introduction)
 - [MongoDB Driver Compatibility](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb/feature-support-40)
-- [Indexing in Cosmos DB MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb/mongodb-indexing)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Indexing in Cosmos DB MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb/mongodb-indexing)

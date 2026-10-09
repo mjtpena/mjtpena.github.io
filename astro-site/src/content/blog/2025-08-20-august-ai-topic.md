@@ -1,5 +1,6 @@
 ---
 title: "Implementing Guardrails for Production AI Systems"
+description: "Filter and sanitize user inputs before they reach the LLM. Verify AI responses before returning them to users."
 author: Michael John Peña
 draft: false
 date: 2025-08-20
@@ -9,10 +10,7 @@ tags:
   - Content Moderation
   - Production AI
   - Security
-
 ---
-
-I wrote "Implementing Guardrails for Production AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Input Validation
 
@@ -84,4 +82,4 @@ class OutputGuardrails:
 
 ## Defense in Depth
 
-Combine input validation, output filtering, rate limiting, and monitoring. No single guardrail is sufficient. Regularly test your guardrails with adversarial inputs and update them as new attack patterns emerge.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Combine input validation, output filtering, rate limiting, and monitoring. No single guardrail is sufficient. Regularly test your guardrails with adversarial inputs and update them as new attack patterns emerge.

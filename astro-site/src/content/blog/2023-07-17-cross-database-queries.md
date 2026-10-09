@@ -8,10 +8,7 @@ tags:
   - SQL
   - Cross-Database
   - Data Integration
-
 ---
-
-I wrote "Cross-Database Queries in Fabric: Unified Data Access" to share practical, production-minded guidance on this topic.
 
 ## Understanding Cross-Database Access
 
@@ -281,4 +278,4 @@ Tomorrow we'll explore Query Insights for monitoring and optimization.
 
 - [Cross-Database Queries](https://learn.microsoft.com/en-us/fabric/data-warehouse/query-cross-database)
 - [OneLake Shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts)
-- [Security Model](https://learn.microsoft.com/en-us/fabric/data-warehouse/security)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Security Model](https://learn.microsoft.com/en-us/fabric/data-warehouse/security)

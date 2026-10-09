@@ -1,5 +1,6 @@
 ---
 title: "LangChain vs Semantic Kernel: Choosing Your AI Framework"
+description: "Choose based on your ecosystem and team skills."
 author: Michael John Peña
 draft: false
 date: 2025-02-26
@@ -9,10 +10,7 @@ tags:
   - Semantic Kernel
   - Framework
   - Comparison
-
 ---
-
-I wrote "LangChain vs Semantic Kernel: Choosing Your AI Framework" to share practical, production-minded guidance on this topic.
 
 ## Framework Comparison
 
@@ -55,4 +53,4 @@ result = await kernel.invoke_prompt("Get sales data")
 | Learning Curve | Moderate | Easier |
 | Enterprise Support | Community | Microsoft |
 
-Choose based on your ecosystem and team skills.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose based on your ecosystem and team skills.

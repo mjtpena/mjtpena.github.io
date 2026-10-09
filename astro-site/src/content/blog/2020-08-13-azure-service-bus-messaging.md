@@ -1,5 +1,6 @@
 ---
 title: "Building Reliable Messaging with Azure Service Bus"
+description: "Two services that worked perfectly in isolation, plus an HTTP call between them, equals a system that occasionally drops orders. Every consultant has been…"
 author: Michael John Peña
 draft: false
 date: 2020-08-13
@@ -317,4 +318,4 @@ public class DeadLetterProcessor
 
 Azure Service Bus provides the reliability and features needed for enterprise messaging scenarios.
 
-The thing I drill into junior devs: dead-letter queues are not a failure mode, they're a feature. Inspect them. Alert on them. A growing DLQ is a quiet incident — the kind that's been broken for three weeks before anyone notices. Build a small admin page that surfaces DLQ message counts per subscription, and you'll catch integration bugs days before your customers do.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The thing I drill into junior devs: dead-letter queues are not a failure mode, they're a feature. Inspect them. Alert on them. A growing DLQ is a quiet incident — the kind that's been broken for three weeks before anyone notices. Build a small admin page that surfaces DLQ message counts per subscription, and you'll catch integration bugs days before your customers do.

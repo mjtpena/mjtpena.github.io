@@ -10,10 +10,7 @@ tags:
   - LLM
   - Vector Search
   - AI
-
 ---
-
-I wrote "RAG Improvements: Advanced Retrieval Techniques" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -627,4 +624,3 @@ Answer:"""
 ## Conclusion
 
 Advanced RAG techniques significantly improve retrieval quality and response accuracy. Key improvements include query optimization through expansion and decomposition, reranking for relevance, hybrid retrieval combining dense and sparse methods, context optimization for token efficiency, and mitigation of the lost-in-the-middle phenomenon. These techniques work together to create more accurate and reliable RAG systems.
-

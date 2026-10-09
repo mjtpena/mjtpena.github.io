@@ -1,5 +1,6 @@
 ---
 title: "GPT-4 Multimodal: Understanding Vision Capabilities"
+description: "GPT-4 Vision opens new categories of applications. Start planning your use cases now so you're ready when access becomes available."
 author: Michael John Pena
 draft: false
 date: 2023-03-16
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Vision
   - Multimodal
-
 ---
-
-I wrote "GPT-4 Multimodal: Understanding Vision Capabilities" to share practical, production-minded guidance on this topic.
 
 ## What GPT-4 Vision Can Do
 
@@ -416,4 +414,4 @@ class VisionPipeline:
         pass
 ```
 
-GPT-4 Vision opens new categories of applications. Start planning your use cases now so you're ready when access becomes available.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GPT-4 Vision opens new categories of applications. Start planning your use cases now so you're ready when access becomes available.

@@ -1,18 +1,16 @@
 ---
 title: "Kubernetes Cost Optimization on AKS: Lessons from 2025"
+description: "Kubernetes cost optimization is continuous. Review these metrics weekly and adjust based on actual usage patterns."
 author: Michael John Peña
 draft: false
 date: 2025-12-07
 tags:
   - Kubernetes
   - AKS
-  - Cost-Optimization
+  - cost-optimization
   - Azure
   - DevOps
-
 ---
-
-I wrote "Kubernetes Cost Optimization on AKS: Lessons from 2025" to share practical, production-minded guidance on this topic.
 
 ## Right-Sizing Workloads
 
@@ -146,4 +144,4 @@ by ContainerName, bin(TimeGenerated, 1h)
 3. **Spot vs on-demand ratio** - Aim for 40% spot for suitable workloads
 4. **Egress costs** - Often overlooked but significant
 
-Kubernetes cost optimization is continuous. Review these metrics weekly and adjust based on actual usage patterns.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Kubernetes cost optimization is continuous. Review these metrics weekly and adjust based on actual usage patterns.

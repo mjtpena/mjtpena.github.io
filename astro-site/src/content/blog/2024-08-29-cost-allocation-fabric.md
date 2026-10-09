@@ -9,10 +9,7 @@ tags:
   - FinOps
   - Governance
   - Budgeting
-
 ---
-
-I wrote "Cost Allocation Strategies for Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Cost Allocation Hierarchy
 
@@ -626,4 +623,3 @@ for cc, total in summary["by_cost_center"].items():
 Effective cost allocation in Microsoft Fabric requires a combination of direct attribution, shared cost distribution, and overhead allocation. Implement a strong tagging strategy and automate data collection for accurate, scalable cost allocation.
 
 Clear documentation and regular reviews ensure allocation methods remain fair and relevant as the organization evolves.
-

@@ -9,10 +9,7 @@ tags:
   - Language Detection
   - Multilingual
   - Automation
-
 ---
-
-I wrote "Language Detection with AI Builder: Routing Multilingual Content" to share practical, production-minded guidance on this topic.
 
 ## Capabilities
 
@@ -160,4 +157,3 @@ Language detection enables:
 ## Resources
 
 - [Language Detection Documentation](https://docs.microsoft.com/en-us/ai-builder/prebuilt-language-detection)
-

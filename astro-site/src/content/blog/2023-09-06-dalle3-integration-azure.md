@@ -10,10 +10,7 @@ tags:
   - DALL-E
   - Image Generation
   - AI
-
 ---
-
-I wrote "Image Generation with DALL-E 2 on Azure OpenAI Service" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -465,4 +462,3 @@ Looking ahead, we anticipate DALL-E 3 will bring even more impressive capabiliti
 - [Azure OpenAI DALL-E Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/dall-e-quickstart)
 - [DALL-E Prompt Guide](https://platform.openai.com/docs/guides/images)
 - [Azure OpenAI Content Filtering](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/content-filter)
-

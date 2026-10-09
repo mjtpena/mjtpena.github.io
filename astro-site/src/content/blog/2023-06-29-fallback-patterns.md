@@ -1,5 +1,6 @@
 ---
 title: "Fallback Patterns for AI Applications"
+description: "Fallback patterns ensure continuous service availability. Tomorrow, I will cover circuit breakers for AI applications."
 author: Michael John Peña
 draft: false
 date: 2023-06-29
@@ -9,10 +10,7 @@ tags:
   - Resilience
   - Architecture
   - Production
-
 ---
-
-I wrote "Fallback Patterns for AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Fallback Strategy Hierarchy
 
@@ -297,4 +295,4 @@ Fallback patterns ensure continuous service availability. Tomorrow, I will cover
 ## Resources
 
 - [Fallback Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/)
-- [Graceful Degradation](https://en.wikipedia.org/wiki/Graceful_degradation)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Graceful Degradation](https://en.wikipedia.org/wiki/Graceful_degradation)

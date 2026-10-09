@@ -1,13 +1,16 @@
 ---
 title: "Model Fine-Tuning Comparison: OpenAI vs Azure vs Open Source"
+description: "Fine-tuning allows you to customize LLMs for specific tasks. This guide compares the major approaches available today."
 author: "Michael John Peña"
 draft: false
 date: 2024-03-10
-tags: ["AI", "Fine-tuning", "Azure", "OpenAI", "Machine Learning"]
-
+tags:
+  - AI
+  - Fine-Tuning
+  - Azure
+  - OpenAI
+  - Machine Learning
 ---
-
-I wrote "Model Fine-Tuning Comparison: OpenAI vs Azure vs Open Source" to share practical, production-minded guidance on this topic.
 
 Fine-tuning allows you to customize LLMs for specific tasks. This guide compares the major approaches available today.
 
@@ -327,4 +330,3 @@ for platform in fine_tuning_costs.keys():
 | Open Source | Full control, high volume | High | Variable |
 
 Choose based on your data sensitivity requirements, volume, and team expertise.
-

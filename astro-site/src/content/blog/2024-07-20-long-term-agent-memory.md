@@ -9,10 +9,7 @@ tags:
   - Memory
   - Vector Database
   - Azure
-
 ---
-
-I wrote "Long-Term Agent Memory: Persistent Knowledge Storage" to share practical, production-minded guidance on this topic.
 
 ## Long-Term Memory Architecture
 
@@ -529,4 +526,3 @@ class MemoryMaintainer:
 Long-term memory is what makes agents truly intelligent assistants. They remember your preferences, learn from past interactions, and apply accumulated knowledge.
 
 Implement memory extraction early, maintain it regularly, and always respect user privacy. The investment pays off in dramatically better user experiences.
-

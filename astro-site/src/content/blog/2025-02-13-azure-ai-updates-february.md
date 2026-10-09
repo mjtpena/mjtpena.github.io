@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Updates: What's New in February 2025"
+description: "Stay current with Azure AI updates to leverage the latest capabilities for your data and AI applications."
 author: Michael John Peña
 draft: false
 date: 2025-02-13
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - Updates
   - What's New
-
 ---
-
-I wrote "Azure AI Updates: What's New in February 2025" to share practical, production-minded guidance on this topic.
 
 ## Azure OpenAI Service Updates
 
@@ -281,4 +279,4 @@ feature_set = FeatureSet(
 4. **Enable new monitoring**: Better observability for AI workloads
 5. **Update SDKs**: New features require latest SDK versions
 
-Stay current with Azure AI updates to leverage the latest capabilities for your data and AI applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Stay current with Azure AI updates to leverage the latest capabilities for your data and AI applications.

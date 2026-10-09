@@ -1,5 +1,6 @@
 ---
 title: "Testing AI Systems: What Actually Works"
+description: "Traditional testing assumes deterministic behavior. AI systems are probabilistic. Same input, different output."
 author: Michael John Peña
 draft: false
 date: 2026-01-21
@@ -8,10 +9,7 @@ tags:
   - Testing
   - Quality
   - Engineering
-
 ---
-
-I wrote "Testing AI Systems: What Actually Works" to share practical, production-minded guidance on this topic.
 
 ## The Challenge
 
@@ -143,4 +141,4 @@ You can't guarantee AI output quality like traditional software. But you can:
 - Track trends over time
 - Detect security issues
 
-That's good enough for production.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+That's good enough for production.

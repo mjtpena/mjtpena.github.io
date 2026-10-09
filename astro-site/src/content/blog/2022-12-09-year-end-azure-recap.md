@@ -9,10 +9,7 @@ tags:
   - Year Review
   - Cloud
   - Technology
-
 ---
-
-I wrote "2022 Azure Year in Review: Major Releases and Milestones" to share practical, production-minded guidance on this topic.
 
 ## AI and Machine Learning
 
@@ -205,4 +202,3 @@ Thank you for following along this year. Here's to an exciting 2023!
 - [.NET Blog](https://devblogs.microsoft.com/dotnet/)
 - [Azure Blog](https://azure.microsoft.com/en-us/blog/)
 - [Microsoft Ignite 2022](https://ignite.microsoft.com/)
-

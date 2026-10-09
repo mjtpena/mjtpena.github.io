@@ -1,13 +1,11 @@
 ---
 title: "GitHub Actions Caching Strategies"
+description: "Proper caching can reduce build times by 50-80% for dependency-heavy projects."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-17
 tags: ["GitHub", "GitHub Actions", "Performance", "Caching"]
-
 ---
-
-I wrote "GitHub Actions Caching Strategies" to share practical, production-minded guidance on this topic.
 
 ## Caching Fundamentals
 
@@ -79,4 +77,4 @@ jobs:
     key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
 ```
 
-Proper caching can reduce build times by 50-80% for dependency-heavy projects.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper caching can reduce build times by 50-80% for dependency-heavy projects.

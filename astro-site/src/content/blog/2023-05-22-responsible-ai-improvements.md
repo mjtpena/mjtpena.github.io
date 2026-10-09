@@ -1,5 +1,6 @@
 ---
 title: "Responsible AI Improvements in Azure: Building Trustworthy AI Systems"
+description: "Responsible AI is not optional - it is essential for building AI systems that users and organizations can trust. Tomorrow, I will cover the Azure Content…"
 author: Michael John Peña
 draft: false
 date: 2023-05-22
@@ -9,10 +10,7 @@ tags:
   - Ethics
   - ML Fairness
   - Content Safety
-
 ---
-
-I wrote "Responsible AI Improvements in Azure: Building Trustworthy AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Responsible AI Framework
 
@@ -362,4 +360,3 @@ Responsible AI is not optional - it is essential for building AI systems that us
 - [Responsible AI Overview](https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai)
 - [Fairlearn Documentation](https://fairlearn.org/)
 - [Content Safety API](https://learn.microsoft.com/en-us/azure/cognitive-services/content-safety/)
-

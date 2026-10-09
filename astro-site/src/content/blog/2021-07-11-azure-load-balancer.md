@@ -10,19 +10,16 @@ tags:
   - Load Balancer
   - High Availability
   - Infrastructure
-
 ---
 
-I wrote "2021-07-11-azure-load-balancer" to share practical, production-minded guidance on this topic.
-
-# Standard vs Basic Load Balancer
+## Standard vs Basic Load Balancer
 
 Azure offers two SKUs:
 
 - **Basic**: Free, limited features, no SLA
 - **Standard**: Zone-redundant, SLA-backed, supports availability zones
 
-# Creating a Public Load Balancer
+## Creating a Public Load Balancer
 
 Set up an internet-facing load balancer:
 
@@ -70,7 +67,7 @@ az network lb rule create \
     --enable-tcp-reset true
 ```
 
-# Terraform Configuration
+## Terraform Configuration
 
 Complete load balancer setup with Terraform:
 
@@ -178,7 +175,7 @@ resource "azurerm_lb_outbound_rule" "web" {
 }
 ```
 
-# Internal Load Balancer
+## Internal Load Balancer
 
 Create an internal load balancer for backend services:
 
@@ -233,7 +230,7 @@ resource "azurerm_lb_rule" "api" {
 }
 ```
 
-# Adding VMs to Backend Pool
+## Adding VMs to Backend Pool
 
 Associate virtual machines with the load balancer:
 
@@ -269,7 +266,7 @@ for i in range(3):
     print(f"Added vm-web-{i} to load balancer")
 ```
 
-# Session Persistence
+## Session Persistence
 
 Configure session affinity for stateful applications:
 
@@ -296,7 +293,7 @@ resource "azurerm_lb_rule" "stateful_app" {
 }
 ```
 
-# High Availability Ports
+## High Availability Ports
 
 Enable HA ports for internal load balancers (network virtual appliances):
 
@@ -330,7 +327,7 @@ resource "azurerm_lb_rule" "ha_ports" {
 }
 ```
 
-# Inbound NAT Rules
+## Inbound NAT Rules
 
 Create direct NAT rules for specific VMs:
 
@@ -364,7 +361,7 @@ az network nic ip-config inbound-nat-rule add \
     --inbound-nat-rule ssh-vm-0
 ```
 
-# Monitoring Load Balancer
+## Monitoring Load Balancer
 
 Monitor health and performance:
 
@@ -429,9 +426,8 @@ alert_rule = {
 }
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Load Balancer is essential for building highly available applications. Whether you need public internet-facing load balancing or internal traffic distribution, Standard Load Balancer provides the features needed for production workloads.
 
 Key considerations include choosing the right distribution mode for your application, configuring appropriate health probes, and properly managing SNAT ports for outbound connectivity. Combined with availability zones, Azure Load Balancer enables you to build resilient, scalable infrastructure.
-

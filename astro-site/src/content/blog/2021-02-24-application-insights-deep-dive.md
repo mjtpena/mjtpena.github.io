@@ -1,5 +1,6 @@
 ---
 title: Deep Dive into Application Insights
+description: "Application Insights is the monitoring tool that pays you back in proportion to how much you invest in it. Out of the box you get…"
 author: Michael John Peña
 draft: false
 date: 2021-02-24

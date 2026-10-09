@@ -1,5 +1,6 @@
 ---
 title: "Short-Term Agent Memory: Context Window Management"
+description: "Sounds like a lot, but it fills up quickly with conversation history, system prompts, tool outputs, and retrieved documents."
 author: Michael John Peña
 draft: false
 date: 2024-07-19
@@ -9,10 +10,7 @@ tags:
   - Memory
   - Context
   - LLM
-
 ---
-
-I wrote "Short-Term Agent Memory: Context Window Management" to share practical, production-minded guidance on this topic.
 
 ## The Context Window Challenge
 
@@ -427,4 +425,3 @@ class MemoryMonitor:
 Short-term memory management directly impacts agent quality. Too little context and the agent forgets; too much and you hit token limits or slow response times.
 
 Choose the right strategy for your use case, and always monitor actual usage in production.
-

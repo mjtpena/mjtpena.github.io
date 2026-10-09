@@ -1,5 +1,6 @@
 ---
 title: "Azure Bastion: Secure VM Access Without Public IPs"
+description: "The extra cost of Bastion is worth the security posture improvement."
 author: Michael John Peña
 draft: false
 date: 2020-09-16
@@ -8,10 +9,7 @@ tags:
   - Security
   - Bastion
   - VMs
-
 ---
-
-I wrote "Azure Bastion: Secure VM Access Without Public IPs" to share practical, production-minded guidance on this topic.
 
 ## The Security Problem
 
@@ -79,4 +77,4 @@ resource "azurerm_bastion_host" "main" {
 - File transfer
 - Shareable links
 
-The extra cost of Bastion is worth the security posture improvement.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The extra cost of Bastion is worth the security posture improvement.

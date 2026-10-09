@@ -1,5 +1,6 @@
 ---
 title: "Copilot Studio Deep Dive: Building Custom AI Assistants"
+description: "Copilot Studio bridges the gap between low-code simplicity and enterprise requirements. Start with templates and progressively add custom actions as needs…"
 author: Michael John Peña
 draft: false
 date: 2024-11-15
@@ -9,10 +10,7 @@ tags:
   - Copilot Studio
   - Low-Code
   - Enterprise AI
-
 ---
-
-I wrote "Copilot Studio Deep Dive: Building Custom AI Assistants" to share practical, production-minded guidance on this topic.
 
 ## Copilot Studio Architecture
 
@@ -440,4 +438,4 @@ Copilot Studio bridges the gap between low-code simplicity and enterprise requir
 
 - [Copilot Studio Documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
 - [Building Custom Topics](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-create-topics)
-- [Actions and Connectors](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-actions)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Actions and Connectors](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-actions)

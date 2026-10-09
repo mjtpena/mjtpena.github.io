@@ -1,5 +1,6 @@
 ---
 title: "Phi Model Family: Microsoft's Small Language Models Guide"
+description: "Phi models represent the future of practical AI - powerful enough for real tasks, small enough to deploy anywhere. Start with Phi-3-mini for most use cases…"
 author: Michael John Peña
 draft: false
 date: 2025-02-09
@@ -9,10 +10,7 @@ tags:
   - SLM
   - Microsoft
   - Azure
-
 ---
-
-I wrote "Phi Model Family: Microsoft's Small Language Models Guide" to share practical, production-minded guidance on this topic.
 
 ## The Phi Model Lineup
 
@@ -343,4 +341,4 @@ async def health():
 # Run: uvicorn app:app --host 0.0.0.0 --port 8000
 ```
 
-Phi models represent the future of practical AI - powerful enough for real tasks, small enough to deploy anywhere. Start with Phi-3-mini for most use cases and scale up only if needed.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Phi models represent the future of practical AI - powerful enough for real tasks, small enough to deploy anywhere. Start with Phi-3-mini for most use cases and scale up only if needed.

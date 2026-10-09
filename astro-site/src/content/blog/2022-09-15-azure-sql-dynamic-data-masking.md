@@ -1,13 +1,11 @@
 ---
 title: "Dynamic Data Masking in Azure SQL Database"
+description: "DDM is a policy-based security feature that hides sensitive data in query results. The data in the database is not modified, making it ideal for scenarios…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-15
 tags: ["Azure", "SQL Database", "Security", "Data Masking"]
-
 ---
-
-I wrote "Dynamic Data Masking in Azure SQL Database" to share practical, production-minded guidance on this topic.
 
 ## Understanding Dynamic Data Masking
 
@@ -309,4 +307,4 @@ PRINT @sql;
 4. **Regular review** - Periodically review masking policies
 5. **Defense in depth** - DDM is one layer; combine with encryption
 
-Dynamic Data Masking provides an easy way to limit sensitive data exposure without application changes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dynamic Data Masking provides an easy way to limit sensitive data exposure without application changes.

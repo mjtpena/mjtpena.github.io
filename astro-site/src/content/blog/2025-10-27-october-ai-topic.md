@@ -1,5 +1,6 @@
 ---
 title: "Data Mesh Architecture: Enabling AI at Scale with Decentralized Data"
+description: "Implement federated governance that balances domain autonomy with enterprise standards for AI-ready data products."
 author: Michael John Peña
 draft: false
 date: 2025-10-27
@@ -9,10 +10,7 @@ tags:
   - AI at Scale
   - Data Products
   - Enterprise Architecture
-
 ---
-
-I wrote "Data Mesh Architecture: Enabling AI at Scale with Decentralized Data" to share practical, production-minded guidance on this topic.
 
 ## Defining Data Products for AI
 
@@ -133,4 +131,4 @@ class DomainAIService:
 
 ## Federated Governance
 
-Implement federated governance that balances domain autonomy with enterprise standards for AI-ready data products.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Implement federated governance that balances domain autonomy with enterprise standards for AI-ready data products.

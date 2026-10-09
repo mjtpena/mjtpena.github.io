@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Cost Optimization Strategies"
+description: "One token is roughly 4 characters in English. A 1000-word document is about 1300 tokens. Start with these strategies and refine based on your usage…"
 author: Michael John Pena
 draft: false
 date: 2023-03-10
@@ -9,10 +10,7 @@ tags:
   - AI
   - Cost Optimization
   - FinOps
-
 ---
-
-I wrote "Azure OpenAI Cost Optimization Strategies" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Cost Model
 
@@ -496,4 +494,4 @@ class CostMonitor:
 7. Use shorter max_tokens where possible
 8. Leverage embeddings caching
 
-Start with these strategies and refine based on your usage patterns. A 50-70% cost reduction is achievable with proper optimization.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Start with these strategies and refine based on your usage patterns. A 50-70% cost reduction is achievable with proper optimization.

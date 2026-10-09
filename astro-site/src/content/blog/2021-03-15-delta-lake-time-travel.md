@@ -1,5 +1,6 @@
 ---
 title: Delta Lake Time Travel - Versioned Data Lake Queries
+description: "Delta Lake time travel is the feature that makes \"oops\" survivable. An engineer runs a DELETE with a typo in the WHERE clause. A batch job writes corrupt…"
 author: Michael John Pena
 draft: false
 date: 2021-03-15

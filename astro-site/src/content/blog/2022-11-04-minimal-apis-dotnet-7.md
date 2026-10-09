@@ -8,10 +8,7 @@ tags:
   - ASP.NET Core
   - Web API
   - Azure
-
 ---
-
-I wrote "Minimal APIs in .NET 7: Filters, Route Groups, and Typed Results" to share practical, production-minded guidance on this topic.
 
 ## Endpoint Filters
 
@@ -393,4 +390,3 @@ az containerapp create \
 - [Minimal APIs Overview](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/overview)
 - [Filters in Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/min-api-filters)
 - [Route Groups](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/route-handlers#route-groups)
-

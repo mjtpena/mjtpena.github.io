@@ -1,5 +1,6 @@
 ---
 title: Building Speech-to-Text Applications with Azure Cognitive Services
+description: "Azure Speech-to-Text is the service I've used in two distinct modes: real-time transcription for live meeting captions and voice-activated applications, and…"
 author: Michael John Pena
 draft: false
 date: 2021-09-13
@@ -406,4 +407,4 @@ def transcribe_audio(req: func.HttpRequest, audioBlob: bytes) -> func.HttpRespon
 5. **Streaming**: Use continuous recognition for long audio
 6. **Batch Processing**: Use batch API for large volumes
 
-Azure Speech-to-Text enables powerful voice-driven applications with industry-leading accuracy and flexibility.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Speech-to-Text enables powerful voice-driven applications with industry-leading accuracy and flexibility.

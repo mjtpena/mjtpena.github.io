@@ -1,5 +1,6 @@
 ---
 title: "Foundry in Daily Engineering Work: moving from model demos to governed operations"
+description: "I turned implicit processes into explicit operating rules—defining owners, acceptance tests, and lightweight runbooks so teams can move confidently and…"
 author: Michael John Peña
 draft: false
 date: 2026-04-10
@@ -36,4 +37,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [Microsoft Foundry overview](https://learn.microsoft.com/azure/ai-foundry/what-is-azure-ai-foundry)
 - [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

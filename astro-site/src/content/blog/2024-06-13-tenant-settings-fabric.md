@@ -1,5 +1,6 @@
 ---
 title: "Tenant Settings in Microsoft Fabric"
+description: "Tenant settings control what users can do in your Fabric environment. Today I'm covering the essential settings every admin should configure."
 author: Michael John Peña
 draft: false
 date: 2024-06-13
@@ -408,4 +409,4 @@ Tomorrow I'll cover workspace governance.
 
 - [Tenant Settings](https://learn.microsoft.com/fabric/admin/tenant-settings-index)
 - [Security Best Practices](https://learn.microsoft.com/fabric/security/)
-- [Admin Portal Guide](https://learn.microsoft.com/fabric/admin/admin-center)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Admin Portal Guide](https://learn.microsoft.com/fabric/admin/admin-center)

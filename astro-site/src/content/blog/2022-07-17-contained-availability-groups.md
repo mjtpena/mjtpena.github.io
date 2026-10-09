@@ -1,13 +1,11 @@
 ---
 title: "Contained Availability Groups in SQL Server 2022"
+description: "Contained AGs maintain their own system databases (master and msdb) within the AG, ensuring instance-level objects replicate automatically."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-17
 tags: ["SQL Server", "Availability Groups", "High Availability", "SQL Server 2022"]
-
 ---
-
-I wrote "Contained Availability Groups in SQL Server 2022" to share practical, production-minded guidance on this topic.
 
 ## The Problem with Traditional AGs
 
@@ -166,4 +164,4 @@ SELECT name FROM msdb.dbo.sysjobs;
 3. **Monitor synchronization**: Keep system databases in sync
 4. **Document external dependencies**: Some objects may still need manual sync
 
-Contained Availability Groups dramatically simplify high availability deployments by keeping everything your application needs within the AG itself.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Contained Availability Groups dramatically simplify high availability deployments by keeping everything your application needs within the AG itself.

@@ -1,5 +1,6 @@
 ---
 title: "Why I Still Blog in 2026"
+description: "Someone asked me why I still maintain a blog. \"Doesn't everyone just use LinkedIn or Twitter now?\""
 author: Michael John Peña
 draft: false
 date: 2026-01-10
@@ -125,4 +126,4 @@ But mostly? Because it's mine. And in 2026, that still matters.
 
 Start a blog. Write when you have something to say. Don't overthink it.
 
-The best time to start was six years ago. The second-best time is today.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The best time to start was six years ago. The second-best time is today.

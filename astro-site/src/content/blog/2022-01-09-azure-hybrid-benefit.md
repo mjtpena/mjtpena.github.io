@@ -1,18 +1,16 @@
 ---
 title: "Azure Hybrid Benefit: Maximize Your Existing Microsoft Licenses"
+description: "If you have Windows Server or SQL Server licenses with Software Assurance, you can bring them to Azure instead of paying for new licenses."
 author: Michael John Peña
 draft: false
 date: 2022-01-09
 url: /blog/azure-hybrid-benefit/
 tags:
-  - azure
-  - licensing
+  - Azure
+  - Licensing
   - cost-optimization
   - hybrid-benefit
-
 ---
-
-I wrote "Azure Hybrid Benefit: Maximize Your Existing Microsoft Licenses" to share practical, production-minded guidance on this topic.
 
 ## Understanding Azure Hybrid Benefit
 
@@ -179,4 +177,4 @@ Both combined:     $240/month (76% savings!)
 4. **Combine with RIs** - Stack discounts
 5. **Review regularly** - License needs change
 
-Azure Hybrid Benefit is one of the simplest ways to reduce Azure costs if you have existing Microsoft licenses.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Hybrid Benefit is one of the simplest ways to reduce Azure costs if you have existing Microsoft licenses.

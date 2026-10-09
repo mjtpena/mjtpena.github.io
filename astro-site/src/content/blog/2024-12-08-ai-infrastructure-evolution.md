@@ -1,5 +1,6 @@
 ---
 title: "AI Infrastructure Evolution: From GPUs to AI-Native Platforms"
+description: "Infrastructure will increasingly abstract away the complexity of AI, making it as easy to add AI as it is to add a database today."
 author: Michael John Peña
 draft: false
 date: 2024-12-08
@@ -9,10 +10,7 @@ tags:
   - Cloud
   - GPUs
   - Platform
-
 ---
-
-I wrote "AI Infrastructure Evolution: From GPUs to AI-Native Platforms" to share practical, production-minded guidance on this topic.
 
 ## The Infrastructure Timeline
 
@@ -348,4 +346,4 @@ Infrastructure will increasingly abstract away the complexity of AI, making it a
 
 - [Azure AI Infrastructure](https://azure.microsoft.com/en-us/solutions/ai/)
 - [GPU Availability Dashboard](https://azure.microsoft.com/en-us/explore/global-infrastructure/geographies/)
-- [AI Infrastructure Best Practices](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AI Infrastructure Best Practices](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/)

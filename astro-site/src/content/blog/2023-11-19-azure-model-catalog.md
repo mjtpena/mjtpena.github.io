@@ -1,13 +1,11 @@
 ---
 title: "Azure Model Catalog: Choosing the Right AI Model"
+description: "The Azure Model Catalog (available in Azure AI Studio and Azure ML) is where Microsoft is building the answer to the model selection question — \"which…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-19
 tags: ["Azure", "Model Catalog", "AI", "LLM", "Machine Learning"]
-
 ---
-
-I wrote "Azure Model Catalog: Choosing the Right AI Model" to share practical, production-minded guidance on this topic.
 
 The Azure Model Catalog (available in Azure AI Studio and Azure ML) is where Microsoft is building the answer to the model selection question — "which foundation model should I use for this task?" — by providing a browsable, filterable catalog of models from Azure OpenAI, Meta (Llama 2), Mistral AI, Stability AI, Cohere, and other providers, with standardised deployment options and benchmark comparisons. The practical value: instead of evaluating models across different APIs, documentation sets, and pricing models, you can evaluate and deploy models from the catalog through a unified interface. The operational benefit for enterprise: models deployed from the Azure Model Catalog come with Azure's RBAC, networking, and compliance controls regardless of the underlying model provider. The model selection decision isn't purely technical — licence terms, data residency, and cost per token are all in the catalog metadata.
 
@@ -318,4 +316,4 @@ print(create_decision_matrix(requirements))
 4. **Have fallback models** - Use routing for cost optimization
 5. **Monitor quality** - Model performance can vary over time
 
-Tomorrow, we'll explore Mistral models on Azure and their unique capabilities!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Mistral models on Azure and their unique capabilities!

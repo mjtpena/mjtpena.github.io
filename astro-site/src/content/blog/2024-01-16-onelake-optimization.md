@@ -1,5 +1,6 @@
 ---
 title: "OneLake Optimization: Storage Patterns and Best Practices"
+description: "OneLake is central to Fabric's promise. My teams reorganised storage layouts and saw query performance improvements — these patterns capture what worked and…"
 author: Michael John Peña
 draft: false
 date: 2024-01-16

@@ -9,10 +9,7 @@ tags:
   - AI
   - Ethics
   - Responsible AI
-
 ---
-
-I wrote "Responsible AI with Azure OpenAI: Building Ethical AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Microsoft's Responsible AI Principles
 
@@ -586,4 +583,4 @@ customer_support_model = ModelCard(
 
 - [Microsoft Responsible AI](https://www.microsoft.com/ai/responsible-ai)
 - [Azure AI Content Safety](https://azure.microsoft.com/services/cognitive-services/content-safety/)
-- [AI Fairness Checklist](https://www.microsoft.com/research/project/ai-fairness-checklist/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AI Fairness Checklist](https://www.microsoft.com/research/project/ai-fairness-checklist/)

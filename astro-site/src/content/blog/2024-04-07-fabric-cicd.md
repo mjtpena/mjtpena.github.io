@@ -1,13 +1,11 @@
 ---
 title: "Fabric CI/CD: Building Deployment Pipelines"
+description: "Implementing CI/CD for Microsoft Fabric ensures reliable, repeatable deployments of analytics artifacts. This guide covers building end-to-end deployment…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-07
 tags: ["Microsoft Fabric", "CI/CD", "DevOps", "Deployment", "Automation"]
-
 ---
-
-I wrote "Fabric CI/CD: Building Deployment Pipelines" to share practical, production-minded guidance on this topic.
 
 Implementing CI/CD for Microsoft Fabric ensures reliable, repeatable deployments of analytics artifacts. This guide covers building end-to-end deployment pipelines.
 
@@ -419,4 +417,3 @@ class FabricDeploymentTests:
 ## Conclusion
 
 CI/CD for Fabric enables reliable, automated deployments across environments. Combine deployment pipelines with Git integration and automated testing for a complete DevOps workflow.
-

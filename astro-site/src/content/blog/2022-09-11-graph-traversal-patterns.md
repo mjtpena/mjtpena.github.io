@@ -1,13 +1,11 @@
 ---
 title: "Graph Traversal Patterns in Azure Cosmos DB"
+description: "Exploring the local neighborhood of a vertex is one of the most common operations in graph databases."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-11
 tags: ["Azure", "Cosmos DB", "Graph", "Gremlin", "Patterns"]
-
 ---
-
-I wrote "Graph Traversal Patterns in Azure Cosmos DB" to share practical, production-minded guidance on this topic.
 
 ## Pattern 1: Neighborhood Exploration
 
@@ -423,4 +421,4 @@ g.V('user-1')
     .by(select('time'), desc)
 ```
 
-These traversal patterns form the foundation for building sophisticated graph-based applications on Azure Cosmos DB.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These traversal patterns form the foundation for building sophisticated graph-based applications on Azure Cosmos DB.

@@ -10,19 +10,16 @@ tags:
   - DevOps
   - Metrics
   - Application Insights
-
 ---
 
-I wrote "2021-07-20-azure-custom-metrics" to share practical, production-minded guidance on this topic.
-
-# Custom Metrics Overview
+## Custom Metrics Overview
 
 There are two ways to publish custom metrics:
 
 - **Application Insights SDK**: For application-level metrics
 - **Azure Monitor REST API**: For any metric source
 
-# Publishing via Application Insights
+## Publishing via Application Insights
 
 Use the Application Insights SDK for application metrics:
 
@@ -86,7 +83,7 @@ def process_order(order):
         raise
 ```
 
-# Publishing via REST API
+## Publishing via REST API
 
 Send custom metrics directly to Azure Monitor:
 
@@ -194,7 +191,7 @@ def publish_queue_metrics(resource_id, queue_name, depth, processing_rate):
     publish_custom_metric(resource_id, rate_metric)
 ```
 
-# Pre-Aggregated Metrics
+## Pre-Aggregated Metrics
 
 For high-volume scenarios, pre-aggregate before publishing:
 
@@ -288,7 +285,7 @@ for request in requests:
     aggregator.record("RequestCount", 1, {"Endpoint": request.endpoint, "StatusCode": str(response.status_code)})
 ```
 
-# Using OpenTelemetry
+## Using OpenTelemetry
 
 Modern approach with OpenTelemetry SDK:
 
@@ -355,7 +352,7 @@ def handle_request(request):
         raise
 ```
 
-# Querying Custom Metrics
+## Querying Custom Metrics
 
 Query your custom metrics from Azure Monitor:
 
@@ -411,7 +408,7 @@ for m in order_metrics:
     print(f"{m['timestamp']}: avg={m['average']:.2f}ms, count={m['count']}")
 ```
 
-# Alerting on Custom Metrics
+## Alerting on Custom Metrics
 
 Create alerts based on custom metrics:
 
@@ -459,9 +456,8 @@ create_custom_metric_alert(
 )
 ```
 
-# Conclusion
+## Conclusion
 
 Custom metrics extend Azure Monitor's capabilities to track application-specific KPIs and business metrics. Whether using Application Insights SDK for application code or the REST API for external systems, custom metrics provide flexibility in monitoring what matters most to your business.
 
 Best practices include pre-aggregating high-volume metrics, using meaningful dimensions for filtering, and setting up alerts on critical business thresholds. Combined with platform metrics, custom metrics give you complete observability of your Azure solutions.
-

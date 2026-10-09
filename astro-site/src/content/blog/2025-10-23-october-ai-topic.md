@@ -1,5 +1,6 @@
 ---
 title: "Implementing Retrieval-Augmented Generation with Microsoft Fabric"
+description: "Use Fabric notebooks to create interactive RAG applications that combine data exploration with AI-powered question answering over enterprise datasets."
 author: Michael John Peña
 draft: false
 date: 2025-10-23
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - AI Integration
   - Lakehouse
-
 ---
-
-I wrote "Implementing Retrieval-Augmented Generation with Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Setting Up the Data Foundation
 
@@ -128,4 +126,4 @@ class FabricSemanticSearch:
 
 ## Integrating with Fabric Notebooks
 
-Use Fabric notebooks to create interactive RAG applications that combine data exploration with AI-powered question answering over enterprise datasets.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use Fabric notebooks to create interactive RAG applications that combine data exploration with AI-powered question answering over enterprise datasets.

@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-05-23
 tags:
-  - azure
+  - Azure
   - log-analytics
-  - synapse
-  - monitoring
-
+  - Synapse
+  - Monitoring
 ---
-
-I wrote "Azure Log Analytics Integration with Synapse" to share practical, production-minded guidance on this topic.
 
 ## Exporting Logs to Synapse
 
@@ -273,5 +270,3 @@ Log Analytics integration enables:
 - Automated alerting
 
 Build comprehensive observability for your applications.
-
-

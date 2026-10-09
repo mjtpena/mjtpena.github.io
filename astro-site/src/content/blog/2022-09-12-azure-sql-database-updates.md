@@ -1,13 +1,11 @@
 ---
 title: "Azure SQL Database Updates - September 2022"
+description: "Azure SQL Database's continuous improvements make it an excellent choice for cloud-native applications requiring robust, scalable database capabilities."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-12
 tags: ["Azure", "SQL Database", "Database", "Cloud"]
-
 ---
-
-I wrote "Azure SQL Database Updates - September 2022" to share practical, production-minded guidance on this topic.
 
 ## New Features Overview
 
@@ -307,4 +305,4 @@ FROM sys.dm_db_resource_stats
 ORDER BY end_time DESC;
 ```
 
-Azure SQL Database's continuous improvements make it an excellent choice for cloud-native applications requiring robust, scalable database capabilities.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure SQL Database's continuous improvements make it an excellent choice for cloud-native applications requiring robust, scalable database capabilities.

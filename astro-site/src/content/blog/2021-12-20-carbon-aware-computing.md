@@ -9,10 +9,7 @@ tags:
   - Green Software
   - Azure
   - Climate Tech
-
 ---
-
-I wrote "Carbon-Aware Computing: Building Climate-Conscious Applications" to share practical, production-minded guidance on this topic.
 
 ## Understanding Grid Carbon Intensity
 
@@ -145,4 +142,5 @@ data:
     scheduling:
       enableDeferral: true
       maxDeferralHours: 6
-      preferLowCarbonRegions: true\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+      preferLowCarbonRegions: true
+```

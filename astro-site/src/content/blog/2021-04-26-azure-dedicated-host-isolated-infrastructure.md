@@ -1,5 +1,6 @@
 ---
 title: Azure Dedicated Host - Running VMs on Isolated Physical Servers
+description: "Azure Dedicated Host is the offering I typically reach for when a client's security or compliance team says \"I can't be on shared hardware.\" The use cases…"
 author: Michael John Peña
 draft: false
 date: 2021-04-26
@@ -10,9 +11,7 @@ tags:
   - Infrastructure
   - Compliance
   - Security
-
 ---
-
 
 Azure Dedicated Host is the offering I typically reach for when a client's security or compliance team says "I can't be on shared hardware." The use cases are specific: BYOL licensing that requires hardware affinity, compliance frameworks that mandate single-tenant compute (IRAP, some healthcare standards), or workloads where noisy-neighbour effects on CPU or memory bandwidth are an operational concern. Dedicated Hosts are priced per host SKU, not per VM, so the economics only work if you're filling the host with enough VMs to justify the flat cost. The operational benefit is predictable: you control which update domain and fault domain your VMs land on, and you can control when host maintenance happens.
 
@@ -460,4 +459,3 @@ def get_host_utilization(resource_group, host_group_name):
 ## Conclusion
 
 Azure Dedicated Host provides the physical isolation required for compliance-sensitive workloads while maintaining the flexibility of cloud infrastructure. By understanding capacity planning, maintenance control, and high availability patterns, you can deploy dedicated infrastructure that meets your organization's strictest requirements while optimizing costs.
-

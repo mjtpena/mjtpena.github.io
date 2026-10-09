@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Search Index Projections: Chunking Documents at Index Time"
+description: "Index projections let you chunk documents at index time — I used them to turn long manuals into searchable, LLM-friendly chunks. Here's a practical approach…"
 author: Michael John Peña
 draft: false
 date: 2024-01-29

@@ -10,10 +10,7 @@ tags:
   - Document Intelligence
   - AI
   - OCR
-
 ---
-
-I wrote "Building Document Intelligence Solutions with Azure Form Recognizer" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -469,4 +466,3 @@ Azure Form Recognizer provides powerful document intelligence capabilities for a
 - [Azure AI Document Intelligence Documentation](https://learn.microsoft.com/azure/ai-services/document-intelligence/)
 - [Pre-built Models Overview](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-model-overview)
 - [Custom Model Training](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-custom)
-

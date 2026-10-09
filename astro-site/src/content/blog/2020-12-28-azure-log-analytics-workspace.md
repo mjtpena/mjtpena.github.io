@@ -1,5 +1,6 @@
 ---
 title: "Azure Log Analytics: Central Logging Platform"
+description: "Log Analytics is the database I've spent the most hours in this year that nobody calls a database. It's where every Azure diagnostic, AppInsights trace…"
 author: Michael John Peña
 draft: false
 date: 2020-12-28
@@ -173,4 +174,4 @@ az monitor log-analytics workspace data-export create \
     --table-names Heartbeat Perf
 ```
 
-Log Analytics: insights from all your data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Log Analytics: insights from all your data.

@@ -8,10 +8,7 @@ tags:
   - Optimization
   - CUDA
   - Performance
-
 ---
-
-I wrote "GPU Optimization for LLM Workloads" to share practical, production-minded guidance on this topic.
 
 ## GPU Memory Management
 
@@ -233,4 +230,4 @@ Tomorrow we'll explore Azure ML compute options.
 
 - [PyTorch CUDA Semantics](https://pytorch.org/docs/stable/notes/cuda.html)
 - [Flash Attention](https://github.com/Dao-AILab/flash-attention)
-- [NVIDIA Optimization Guide](https://developer.nvidia.com/deep-learning-performance-training-inference)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [NVIDIA Optimization Guide](https://developer.nvidia.com/deep-learning-performance-training-inference)

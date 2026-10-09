@@ -1,5 +1,6 @@
 ---
 title: "Data Activator (Reflex) Alerts: Event-Driven Actions in Fabric"
+description: "Data Activator (Reflex) brought event-driven automation to Fabric. In projects where real-time alerts matter, I've used Reflex to reduce mean time to…"
 author: Michael John Peña
 draft: false
 date: 2024-01-21

@@ -1,5 +1,6 @@
 ---
 title: "Tool Use Patterns for AI Agents: Effective Function Design"
+description: "The most consequential design decision in a function-calling agent isn't the model you choose — it's how you write the tool definitions. The model selects…"
 author: Michael John Peña
 draft: false
 date: 2023-06-20
@@ -350,4 +351,4 @@ Well-designed tools enable reliable AI agent behavior. Tomorrow, I will cover mu
 
 - [Function Calling Best Practices](https://platform.openai.com/docs/guides/function-calling)
 - [OpenAPI Specification](https://swagger.io/specification/)
-- [JSON Schema](https://json-schema.org/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [JSON Schema](https://json-schema.org/)

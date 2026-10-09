@@ -9,10 +9,7 @@ tags:
   - Business Card
   - CRM
   - Automation
-
 ---
-
-I wrote "Business Card Reader with AI Builder: Digitizing Contact Information" to share practical, production-minded guidance on this topic.
 
 ## Extracted Fields
 
@@ -290,4 +287,3 @@ The business card reader streamlines contact digitization:
 
 - [Business Card Reader Documentation](https://docs.microsoft.com/en-us/ai-builder/prebuilt-business-card)
 - [CRM Integration Guide](https://docs.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-entities)
-

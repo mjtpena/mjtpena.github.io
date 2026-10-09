@@ -1,5 +1,6 @@
 ---
 title: "Building RAG Applications with Azure AI Search and GPT-4o"
+description: "RAG works by first retrieving relevant documents from a search index, then passing those documents as context to an LLM for generation. This approach…"
 author: Michael John Peña
 draft: false
 date: 2025-08-02
@@ -9,10 +10,7 @@ tags:
   - GPT-4o
   - Azure OpenAI
   - Python
-
 ---
-
-I wrote "Building RAG Applications with Azure AI Search and GPT-4o" to share practical, production-minded guidance on this topic.
 
 ## The RAG Architecture
 
@@ -71,4 +69,4 @@ def rag_query(user_question: str) -> str:
 
 The quality of your RAG system depends heavily on your chunking strategy and embedding model. Consider using semantic chunking to preserve context boundaries and hybrid search combining keyword and vector search for best results.
 
-Azure AI Search's built-in vector search capabilities make it straightforward to implement production-grade RAG applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure AI Search's built-in vector search capabilities make it straightforward to implement production-grade RAG applications.

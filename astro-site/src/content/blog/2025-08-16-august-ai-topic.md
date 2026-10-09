@@ -1,5 +1,6 @@
 ---
 title: "GPT-4o Vision: Building Image Analysis Applications"
+description: "GPT-4o vision provides remarkable understanding of images, but always validate outputs for critical applications. Combine with traditional computer vision…"
 author: Michael John Peña
 draft: false
 date: 2025-08-16
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - Multimodal
   - Computer Vision
-
 ---
-
-I wrote "GPT-4o Vision: Building Image Analysis Applications" to share practical, production-minded guidance on this topic.
 
 ## Basic Image Analysis
 
@@ -94,4 +92,4 @@ response = client.chat.completions.create(
 )
 ```
 
-GPT-4o vision provides remarkable understanding of images, but always validate outputs for critical applications. Combine with traditional computer vision for highest accuracy.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GPT-4o vision provides remarkable understanding of images, but always validate outputs for critical applications. Combine with traditional computer vision for highest accuracy.

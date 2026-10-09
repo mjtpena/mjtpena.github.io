@@ -8,11 +8,8 @@ tags:
   - Vector Database
   - Embeddings
   - AI
-  - Rust
-
+  - rust
 ---
-
-I wrote "Qdrant Vector Database: Fast and Efficient Similarity Search" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -474,4 +471,4 @@ results = service.search(
 
 - [Qdrant Documentation](https://qdrant.tech/documentation/)
 - [Qdrant Python Client](https://github.com/qdrant/qdrant-client)
-- [Qdrant Cloud](https://cloud.qdrant.io/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Qdrant Cloud](https://cloud.qdrant.io/)

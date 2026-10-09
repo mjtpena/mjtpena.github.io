@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Real-Time Intelligence: Patterns for Streaming Analytics"
+description: "Microsoft Fabric's Real-Time Intelligence workload has matured significantly since GA. We've implemented several production streaming scenarios, and I want…"
 author: Michael John Peña
 draft: false
 date: 2025-06-18

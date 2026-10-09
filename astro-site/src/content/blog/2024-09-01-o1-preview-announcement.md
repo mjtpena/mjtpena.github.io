@@ -1,13 +1,11 @@
 ---
 title: "The Future of Reasoning in AI: What's Coming Next"
+description: "This could dramatically improve performance on complex tasks. The next breakthrough in AI capabilities is likely to come from better reasoning, not just…"
 author: "Michael John Peña"
 draft: false
 date: 2024-09-01
 tags: ["OpenAI", "AI", "Reasoning", "LLM", "Future"]
-
 ---
-
-I wrote "The Future of Reasoning in AI: What's Coming Next" to share practical, production-minded guidance on this topic.
 
 ## Current State: GPT-4o and Claude 3.5
 
@@ -179,4 +177,4 @@ The AI landscape evolves quickly. Stay curious, keep building, and be ready to a
 
 - [OpenAI Research](https://openai.com/research)
 - [Chain-of-Thought Prompting Paper](https://arxiv.org/abs/2201.11903)
-- [GPT-4o Documentation](https://platform.openai.com/docs/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [GPT-4o Documentation](https://platform.openai.com/docs/)

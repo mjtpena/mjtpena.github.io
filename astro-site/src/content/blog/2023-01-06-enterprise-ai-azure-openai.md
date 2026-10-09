@@ -1,5 +1,6 @@
 ---
 title: "Enterprise AI with Azure OpenAI: Security, Compliance, and Governance"
+description: "The question I kept hearing from enterprise clients in January 2023 was some variation of: \"We've seen what ChatGPT can do—how do we get that capability…"
 author: Michael John Peña
 draft: false
 date: 2023-01-06
@@ -9,9 +10,7 @@ tags:
   - Enterprise
   - Security
   - Compliance
-
 ---
-
 
 The question I kept hearing from enterprise clients in January 2023 was some variation of: "We've seen what ChatGPT can do—how do we get that capability without putting my confidential data through OpenAI's servers?" Azure OpenAI Service is the answer to that specific question, and it's worth being precise about what the enterprise features actually provide. The data privacy commitment: prompts and completions sent to Azure OpenAI endpoints associated with your Azure subscription are not used by Microsoft or OpenAI to train the underlying models—this is the contractual commitment that distinguishes Azure OpenAI from the consumer ChatGPT API or OpenAI's direct API. The network isolation: Azure OpenAI supports Private Endpoints (deploying the Azure OpenAI resource's endpoint into a customer VNet so that all API traffic stays on private network paths, never traversing the public internet). The compliance posture: Azure OpenAI is covered under Azure's SOC 1/2/3, ISO 27001, HIPAA BAA, and EU Model Clauses compliance certifications—the same compliance framework that makes Azure acceptable for regulated data processing applies to Azure OpenAI.
 
@@ -424,5 +423,4 @@ class CostGovernor:
 
 - [Azure OpenAI Security Baseline](https://learn.microsoft.com/security/benchmark/azure/baselines/cognitive-services-security-baseline)
 - [Private Endpoints for Cognitive Services](https://learn.microsoft.com/azure/cognitive-services/cognitive-services-virtual-networks)
-- [RBAC Roles](https://learn.microsoft.com/azure/cognitive-services/openai/how-to/role-based-access-control)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+- [RBAC Roles](https://learn.microsoft.com/azure/cognitive-services/openai/how-to/role-based-access-control)

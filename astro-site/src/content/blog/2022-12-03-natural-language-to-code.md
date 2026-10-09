@@ -1,5 +1,6 @@
 ---
 title: "Natural Language to Code: The Future of Programming"
+description: "Input: \"Create a Python script that reads a CSV file, filters rows where the 'status' column equals 'active', and exports the result to a new CSV file.\""
 author: Michael John Peña
 draft: false
 date: 2022-12-03
@@ -9,10 +10,7 @@ tags:
   - Code Generation
   - Natural Language
   - Future
-
 ---
-
-I wrote "Natural Language to Code: The Future of Programming" to share practical, production-minded guidance on this topic.
 
 ## The Evolution of Programming Interfaces
 
@@ -377,4 +375,3 @@ Natural language to code is here, and it's remarkably capable. The developers wh
 - [ChatGPT](https://chat.openai.com/)
 - [GitHub Copilot](https://github.com/features/copilot)
 - [OpenAI Codex](https://openai.com/blog/openai-codex/)
-

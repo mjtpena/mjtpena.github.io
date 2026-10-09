@@ -1,5 +1,6 @@
 ---
 title: "Building Production AI Assistants: Architecture and Design Patterns"
+description: "Over the past year I've been part of several assistant projects that failed at scale not because the model was lacking, but because architecture and…"
 author: Michael John Peña
 draft: false
 date: 2024-01-04

@@ -1,5 +1,6 @@
 ---
 title: "Azure AD B2C Custom Policies: Advanced Identity Flows"
+description: "User Flows: Pre-built, configurable through portal Custom Policies: XML-based, fully customizable"
 author: Michael John Peña
 draft: false
 date: 2021-05-21
@@ -9,10 +10,7 @@ tags:
   - Azure AD B2C
   - Authentication
   - Security
-
 ---
-
-I wrote "Azure AD B2C Custom Policies: Advanced Identity Flows" to share practical, production-minded guidance on this topic.
 
 ## User Flows vs Custom Policies
 
@@ -381,4 +379,4 @@ az rest --method put \
 
 - [Custom Policy Documentation](https://docs.microsoft.com/en-us/azure/active-directory-b2c/custom-policy-overview)
 - [Starter Pack](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack)
-- [Community Samples](https://github.com/azure-ad-b2c/samples)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Community Samples](https://github.com/azure-ad-b2c/samples)

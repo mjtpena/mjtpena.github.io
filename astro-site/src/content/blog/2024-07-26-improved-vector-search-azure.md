@@ -9,10 +9,7 @@ tags:
   - AI Search
   - HNSW
   - Performance
-
 ---
-
-I wrote "Improved Vector Search in Azure AI Search: Deep Dive" to share practical, production-minded guidance on this topic.
 
 ## Vector Search Fundamentals
 
@@ -376,4 +373,3 @@ async def warm_up_index(sample_queries: list[str]):
 Vector search in Azure AI Search has matured significantly. Understanding HNSW parameters, multi-vector strategies, and performance optimization allows you to build highly effective search applications.
 
 Start with balanced settings, measure your specific workload, and tune from there.
-

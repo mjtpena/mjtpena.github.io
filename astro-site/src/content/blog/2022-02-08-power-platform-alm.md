@@ -1,5 +1,6 @@
 ---
 title: "Power Platform ALM: Application Lifecycle Management Best Practices"
+description: "Proper ALM ensures Power Platform solutions are reliable, maintainable, and can be safely deployed across environments."
 author: Michael John Peña
 draft: false
 date: 2022-02-08
@@ -7,12 +8,9 @@ url: /blog/power-platform-alm/
 tags:
   - power-platform
   - alm
-  - devops
-  - governance
-
+  - DevOps
+  - Governance
 ---
-
-I wrote "Power Platform ALM: Application Lifecycle Management Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Environment Strategy
 
@@ -273,4 +271,4 @@ Import-CrmDataFile -conn $targetConn `
     -DataFile ".\config\configuration-data.zip"
 ```
 
-Proper ALM ensures Power Platform solutions are reliable, maintainable, and can be safely deployed across environments.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper ALM ensures Power Platform solutions are reliable, maintainable, and can be safely deployed across environments.

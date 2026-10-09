@@ -1,5 +1,6 @@
 ---
 title: "Semantic Caching for LLM Applications: Reducing Costs and Latency"
+description: "Traditional caching requires exact matches. Users asking \"What is Azure?\" and \"Can you explain Azure?\" would generate two separate API calls. Semantic…"
 author: Michael John Peña
 draft: false
 date: 2025-11-22
@@ -9,10 +10,7 @@ tags:
   - Performance
   - Cost Optimization
   - Redis
-
 ---
-
-I wrote "Semantic Caching for LLM Applications: Reducing Costs and Latency" to share practical, production-minded guidance on this topic.
 
 ## Why Semantic Caching
 
@@ -185,4 +183,4 @@ class CachedLLMService:
         return result["response"]
 ```
 
-Semantic caching typically achieves 30-50% cache hit rates for customer-facing applications, significantly reducing costs while improving response latency for common queries.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Semantic caching typically achieves 30-50% cache hit rates for customer-facing applications, significantly reducing costs while improving response latency for common queries.

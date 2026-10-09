@@ -1,13 +1,11 @@
 ---
 title: "Azure OpenAI Enterprise Patterns: Lessons from Production Deployments"
+description: "After months of working with Azure OpenAI in enterprise environments, the patterns that separate solid deployments from problematic ones have become clear …"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-01
 tags: ["Azure", "OpenAI", "Enterprise", "Architecture", "Best Practices"]
-
 ---
-
-I wrote "Azure OpenAI Enterprise Patterns: Lessons from Production Deployments" to share practical, production-minded guidance on this topic.
 
 After months of working with Azure OpenAI in enterprise environments, the patterns that separate solid deployments from problematic ones have become clear — and they're almost never about model capability. Quota limits throttle applications that share a single deployment across teams without consumption monitoring. Missing retry and fallback logic causes hard failures on transient API errors during peak traffic. No per-request cost tracking means the monthly bill comes as a surprise rather than a projection. The infrastructure problems are solvable and well-understood; the organisational problems — getting teams to agree on shared services vs. per-team deployments, establishing consumption governance before it becomes a budget crisis — are where enterprise deployments actually earn their complexity.
 
@@ -423,4 +421,3 @@ print(f"P95 latency: {summary['p95_latency_ms']:.0f}ms")
 ## Conclusion
 
 Enterprise deployments of Azure OpenAI require careful attention to architecture, resilience, and observability. The patterns shared here come from real-world experience dealing with rate limits, failures, and scale challenges. Start with solid foundations, and your AI applications will be ready for production demands.
-

@@ -1,5 +1,6 @@
 ---
 title: "Migrating from LangChain to Semantic Kernel: A Practical Guide"
+description: "Many teams that started with LangChain in 2024 are now evaluating Semantic Kernel for its tighter Azure integration and production-ready features. Having…"
 author: Michael John Peña
 draft: false
 date: 2025-12-03
@@ -89,4 +90,4 @@ result = await kernel.invoke("rag", "answer_question", question="What is our ref
 4. **Test thoroughly** - Compare outputs between implementations
 5. **Update monitoring** - Adjust observability for SK patterns
 
-The migration effort is typically 2-4 weeks for a medium-sized project, with the investment paying off in long-term maintainability and Azure ecosystem integration.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The migration effort is typically 2-4 weeks for a medium-sized project, with the investment paying off in long-term maintainability and Azure ecosystem integration.

@@ -1,17 +1,15 @@
 ---
 title: "Dapr 1.7: New Features for Distributed Applications"
+description: "Dapr (Distributed Application Runtime) is a portable, event-driven runtime that makes it easy to build resilient, microservice applications. It provides…"
 author: Michael John Peña
 draft: false
 date: 2022-05-05
 tags:
-  - dapr
-  - microservices
-  - azure
+  - Dapr
+  - Microservices
+  - Azure
   - distributed-systems
-
 ---
-
-I wrote "Dapr 1.7: New Features for Distributed Applications" to share practical, production-minded guidance on this topic.
 
 ## What is Dapr?
 
@@ -381,5 +379,3 @@ Dapr 1.7 enhances distributed application development with:
 - Configuration API for external config stores
 
 These features help build more resilient and maintainable microservices.
-
-

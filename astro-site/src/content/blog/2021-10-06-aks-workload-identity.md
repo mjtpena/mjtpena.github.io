@@ -1,13 +1,11 @@
 ---
 title: "Azure AD Workload Identity for AKS: The Future of Pod Identity"
+description: "Azure AD Workload Identity is the architecture-level improvement over AAD Pod Identity that removes the NMI DaemonSet and uses Kubernetes native service…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-06
 tags: ["Azure", "Kubernetes", "AKS", "Security", "Identity", "OIDC"]
-
 ---
-
-I wrote "Azure AD Workload Identity for AKS: The Future of Pod Identity" to share practical, production-minded guidance on this topic.
 
 Azure AD Workload Identity is the architecture-level improvement over AAD Pod Identity that removes the NMI DaemonSet and uses Kubernetes native service account token projection with OIDC federation to obtain Azure AD tokens. The mechanism: Kubernetes projects a short-lived service account token into the pod; the Azure Identity SDK exchanges that token with Azure AD through a federated credential trust; Azure AD returns an Azure access token scoped to the Managed Identity. No DaemonSet, no IMDS interception, no privileged node-level component. The federation is configured by linking the AKS cluster's OIDC issuer URL to an Azure AD Managed Identity as a federated credential. In October 2021 this was in preview; it reached GA in late 2022 and became the recommended approach for all new AKS identity-to-Azure-resource patterns.
 
@@ -312,4 +310,3 @@ curl -H "Authorization: Bearer $(cat /var/run/secrets/azure/tokens/azure-identit
 Azure AD Workload Identity represents the future of identity management in AKS. Its use of standard Kubernetes features and Azure AD federation provides a more secure, portable, and efficient solution compared to traditional pod identity.
 
 Tomorrow, we'll explore Container Insights for comprehensive AKS monitoring.
-

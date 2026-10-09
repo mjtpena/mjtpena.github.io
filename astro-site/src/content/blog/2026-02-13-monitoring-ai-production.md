@@ -1,5 +1,6 @@
 ---
 title: "Monitoring AI Applications in Production"
+description: "This is how most AI deployments start. Here's how to fix it. Traditional apps: request comes in, response goes out. Monitor latency, errors, throughput. Done."
 author: Michael John Peña
 draft: false
 date: 2026-02-13
@@ -8,10 +9,7 @@ tags:
   - DevOps
   - Monitoring
   - Azure
-
 ---
-
-I wrote "Monitoring AI Applications in Production" to share practical, production-minded guidance on this topic.
 
 This is how most AI deployments start. Here's how to fix it.
 
@@ -147,4 +145,4 @@ You can't monitor AI quality the same way you monitor uptime. There's no binary 
 
 Accept the ambiguity. Build monitoring around it. Review regularly.
 
-Your AI app is only as good as your ability to know when it's not good.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Your AI app is only as good as your ability to know when it's not good.

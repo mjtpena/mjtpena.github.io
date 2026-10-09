@@ -1,5 +1,6 @@
 ---
 title: Building Custom Image Classifiers with Custom Vision
+description: "Custom Vision fills the gap that the general-purpose Computer Vision API can't: domain-specific image classification and object detection where the model…"
 author: Michael John Pena
 draft: false
 date: 2021-03-29

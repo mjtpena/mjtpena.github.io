@@ -1,5 +1,6 @@
 ---
 title: "Fabric AI Deep Integration: Advanced Patterns"
+description: "Fabric + AI creates a powerful platform for intelligent analytics. Leverage Spark's scale with AI's intelligence."
 author: Michael John Peña
 draft: false
 date: 2025-02-23
@@ -9,10 +10,7 @@ tags:
   - Integration
   - Data Platform
   - Azure
-
 ---
-
-I wrote "Fabric AI Deep Integration: Advanced Patterns" to share practical, production-minded guidance on this topic.
 
 ## Advanced Fabric + AI Patterns
 
@@ -47,4 +45,4 @@ def semantic_search(query_embedding, top_k=10):
     """)
 ```
 
-Fabric + AI creates a powerful platform for intelligent analytics. Leverage Spark's scale with AI's intelligence.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fabric + AI creates a powerful platform for intelligent analytics. Leverage Spark's scale with AI's intelligence.

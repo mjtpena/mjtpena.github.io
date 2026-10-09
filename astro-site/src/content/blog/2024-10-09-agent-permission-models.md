@@ -1,13 +1,11 @@
 ---
 title: "Permission Models for AI Agents: Fine-Grained Access Control"
+description: "Permission models for AI agents must be flexible yet secure. Combine RBAC for broad access patterns with capabilities for fine-grained, time-limited access."
 author: "Michael John Peña"
 draft: false
 date: 2024-10-09
 tags: ["Permissions", "AI Agents", "Access Control", "Security", "RBAC"]
-
 ---
-
-I wrote "Permission Models for AI Agents: Fine-Grained Access Control" to share practical, production-minded guidance on this topic.
 
 ## Role-Based Access Control
 
@@ -405,4 +403,4 @@ def write_data(agent_id: str, path: str, content: str, capability_id: str = None
     pass
 ```
 
-Permission models for AI agents must be flexible yet secure. Combine RBAC for broad access patterns with capabilities for fine-grained, time-limited access.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Permission models for AI agents must be flexible yet secure. Combine RBAC for broad access patterns with capabilities for fine-grained, time-limited access.

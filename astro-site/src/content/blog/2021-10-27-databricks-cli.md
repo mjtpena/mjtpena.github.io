@@ -1,13 +1,11 @@
 ---
 title: "Mastering the Databricks CLI for Automation"
+description: "The Databricks CLI is the command-line interface for Databricks workspace operations—running jobs, managing clusters, deploying libraries, uploading…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-27
 tags: ["Azure", "Databricks", "CLI", "Automation", "DevOps"]
-
 ---
-
-I wrote "Mastering the Databricks CLI for Automation" to share practical, production-minded guidance on this topic.
 
 The Databricks CLI is the command-line interface for Databricks workspace operations—running jobs, managing clusters, deploying libraries, uploading notebooks, and configuring secrets—that belongs in every data engineer's toolbox for automating repetitive workspace tasks and integrating Databricks into CI/CD pipelines. The setup: `pip install databricks-cli`, configure with `databricks configure --token` (personal access token) or profile-based authentication for multi-workspace environments. The commands that get the most use in practice: `databricks jobs run-now --job-id` for triggering pipeline jobs from external orchestration, `databricks fs cp` for uploading files to DBFS, `databricks secrets put` for managing secret scope values, and `databricks clusters list` for inventory scripting. For teams running multiple Databricks workspaces (dev/test/prod), the CLI's profile support makes scripting cross-workspace operations manageable.
 
@@ -463,4 +461,3 @@ steps:
 The Databricks CLI is essential for automation and DevOps practices. By mastering its commands and integrating it with CI/CD pipelines, you can achieve consistent, reproducible deployments.
 
 Tomorrow, we'll explore the Databricks REST API for even more advanced automation scenarios.
-

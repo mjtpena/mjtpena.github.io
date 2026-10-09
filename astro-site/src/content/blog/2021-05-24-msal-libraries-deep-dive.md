@@ -9,10 +9,7 @@ tags:
   - MSAL
   - Authentication
   - Development
-
 ---
-
-I wrote "MSAL Libraries Deep Dive: Cross-Platform Authentication" to share practical, production-minded guidance on this topic.
 
 ## MSAL Architecture
 
@@ -436,4 +433,4 @@ class OptimizedTokenProvider:
 
 - [MSAL Python Documentation](https://msal-python.readthedocs.io/)
 - [MSAL.NET Documentation](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet)
-- [MSAL.js Documentation](https://github.com/AzureAD/microsoft-authentication-library-for-js)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [MSAL.js Documentation](https://github.com/AzureAD/microsoft-authentication-library-for-js)

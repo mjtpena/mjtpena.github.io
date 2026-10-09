@@ -1,13 +1,11 @@
 ---
 title: "GitHub Actions Larger Runners Deep Dive"
+description: "Larger runners can dramatically reduce build times when used effectively with parallelizable workloads."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-12
 tags: ["GitHub", "GitHub Actions", "CI/CD", "Performance"]
-
 ---
-
-I wrote "GitHub Actions Larger Runners Deep Dive" to share practical, production-minded guidance on this topic.
 
 ## Understanding Larger Runners
 
@@ -312,4 +310,4 @@ jobs:
 4. **Right-size for task** - Match runner to workload
 5. **Monitor costs** - Track usage and optimize
 
-Larger runners can dramatically reduce build times when used effectively with parallelizable workloads.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Larger runners can dramatically reduce build times when used effectively with parallelizable workloads.

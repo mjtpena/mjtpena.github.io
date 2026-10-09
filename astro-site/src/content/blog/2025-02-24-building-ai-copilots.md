@@ -1,5 +1,6 @@
 ---
 title: "Building AI Copilots: From Concept to Production"
+description: "Build copilots that understand context, use tools effectively, and provide clear explanations."
 author: Michael John Peña
 draft: false
 date: 2025-02-24
@@ -9,10 +10,7 @@ tags:
   - Development
   - Azure
   - Enterprise
-
 ---
-
-I wrote "Building AI Copilots: From Concept to Production" to share practical, production-minded guidance on this topic.
 
 ## Copilot Architecture
 
@@ -54,4 +52,4 @@ class DataCopilot:
         pass
 ```
 
-Build copilots that understand context, use tools effectively, and provide clear explanations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Build copilots that understand context, use tools effectively, and provide clear explanations.

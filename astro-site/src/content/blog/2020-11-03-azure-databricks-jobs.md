@@ -1,5 +1,6 @@
 ---
 title: "Azure Databricks Jobs: Scheduled and Triggered Workflows"
+description: "Notebooks are great until you need them to run on Tuesday at 2am, retry on failure, and chain into the next step. That's where Databricks Jobs come in.…"
 author: Michael John Peña
 draft: false
 date: 2020-11-03
@@ -190,4 +191,4 @@ status = response.json()["state"]["life_cycle_state"]
 # PENDING, RUNNING, TERMINATED
 ```
 
-Databricks Jobs: production data workflows made simple.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Databricks Jobs: production data workflows made simple.

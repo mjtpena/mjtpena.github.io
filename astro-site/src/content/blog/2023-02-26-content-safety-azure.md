@@ -9,10 +9,7 @@ tags:
   - AI
   - Moderation
   - Security
-
 ---
-
-I wrote "Azure Content Safety: Protecting AI Applications from Harmful Content" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -388,4 +385,4 @@ class ContentSafetyLogger:
 
 - [Azure Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/)
 - [Content Safety API Reference](https://learn.microsoft.com/rest/api/contentsafety/)
-- [Best Practices](https://learn.microsoft.com/azure/ai-services/content-safety/concepts/content-moderation)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Best Practices](https://learn.microsoft.com/azure/ai-services/content-safety/concepts/content-moderation)

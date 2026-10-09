@@ -10,10 +10,7 @@ tags:
   - Design Patterns
   - LLM
   - Production
-
 ---
-
-I wrote "LCEL Design Patterns for Production LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -433,4 +430,3 @@ class TestLCELChains:
 ## Conclusion
 
 These LCEL patterns provide the foundation for building production-grade LLM applications. By implementing proper error handling, caching, composition patterns, and testing strategies, you can create robust systems that handle real-world challenges effectively.
-

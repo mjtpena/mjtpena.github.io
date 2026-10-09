@@ -1,5 +1,6 @@
 ---
 title: "Production AI Challenges: What They Don't Tell You in Tutorials"
+description: "Production AI is hard. These challenges require dedicated engineering effort, not just model selection. Plan for them from the start."
 author: Michael John Peña
 draft: false
 date: 2024-12-06
@@ -9,10 +10,7 @@ tags:
   - Challenges
   - MLOps
   - Enterprise
-
 ---
-
-I wrote "Production AI Challenges: What They Don't Tell You in Tutorials" to share practical, production-minded guidance on this topic.
 
 ## Challenge 1: Non-Deterministic Behavior
 
@@ -387,4 +385,4 @@ Production AI is hard. These challenges require dedicated engineering effort, no
 
 - [OpenAI Production Best Practices](https://platform.openai.com/docs/guides/production-best-practices)
 - [Azure AI Security](https://learn.microsoft.com/en-us/azure/ai-services/security-features)
-- [AI Incident Database](https://incidentdatabase.ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AI Incident Database](https://incidentdatabase.ai/)

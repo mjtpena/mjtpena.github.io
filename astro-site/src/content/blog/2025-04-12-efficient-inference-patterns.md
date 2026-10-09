@@ -1,5 +1,6 @@
 ---
 title: "Efficient Inference Patterns: Maximizing AI Throughput"
+description: "Efficient inference patterns can improve throughput by 5-10x while reducing costs."
 author: Michael John Peña
 draft: false
 date: 2025-04-12
@@ -9,10 +10,7 @@ tags:
   - Performance
   - Optimization
   - Throughput
-
 ---
-
-I wrote "Efficient Inference Patterns: Maximizing AI Throughput" to share practical, production-minded guidance on this topic.
 
 ## Inference Optimization Patterns
 
@@ -147,4 +145,4 @@ class KVCacheManager:
             del self.access_times[oldest]
 ```
 
-Efficient inference patterns can improve throughput by 5-10x while reducing costs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Efficient inference patterns can improve throughput by 5-10x while reducing costs.

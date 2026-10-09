@@ -1,5 +1,6 @@
 ---
 title: "The Art of Saying No to Projects"
+description: "Two years ago, I would have said yes without thinking. Here's what changed. Early in my consulting career, I said yes to everything. Every project. Every…"
 author: Michael John Peña
 draft: false
 date: 2026-02-12
@@ -8,10 +9,7 @@ tags:
   - Consulting
   - Personal
   - Lessons
-
 ---
-
-I wrote "The Art of Saying No to Projects" to share practical, production-minded guidance on this topic.
 
 I said no.
 
@@ -94,4 +92,4 @@ If it's not a clear yes, it's a no.
 
 Applies to projects. Applies to meetings. Applies to most decisions.
 
-Protect your time. It's the only resource you can't make more of.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Protect your time. It's the only resource you can't make more of.

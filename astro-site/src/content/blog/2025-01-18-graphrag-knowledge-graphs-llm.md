@@ -1,5 +1,6 @@
 ---
 title: "GraphRAG: Combining Knowledge Graphs with LLMs for Superior Retrieval"
+description: "Invest in GraphRAG when your use case demands deeper understanding beyond surface-level text matching."
 author: Michael John Peña
 draft: false
 date: 2025-01-18
@@ -9,10 +10,7 @@ tags:
   - Knowledge Graphs
   - RAG
   - Azure
-
 ---
-
-I wrote "GraphRAG: Combining Knowledge Graphs with LLMs for Superior Retrieval" to share practical, production-minded guidance on this topic.
 
 ## What is GraphRAG?
 
@@ -370,4 +368,4 @@ GraphRAG excels when:
 - You need to trace reasoning paths
 - Documents have rich interconnected concepts
 
-Invest in GraphRAG when your use case demands deeper understanding beyond surface-level text matching.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Invest in GraphRAG when your use case demands deeper understanding beyond surface-level text matching.

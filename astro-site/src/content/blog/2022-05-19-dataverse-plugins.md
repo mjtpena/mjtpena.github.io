@@ -6,12 +6,9 @@ date: 2022-05-19
 tags:
   - dataverse
   - power-platform
-  - plugins
+  - Plugins
   - csharp
-
 ---
-
-I wrote "Dataverse Plugins: Server-Side Business Logic" to share practical, production-minded guidance on this topic.
 
 ## Plugin Development Basics
 
@@ -504,5 +501,3 @@ Dataverse plugins provide:
 - Secure configuration storage
 
 Build robust business logic that enforces data integrity and automates processes.
-
-

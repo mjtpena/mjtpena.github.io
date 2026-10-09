@@ -1,5 +1,6 @@
 ---
 title: "Mobile AI Development: Building Intelligent Mobile Apps"
+description: "Mobile AI brings powerful intelligence to users while respecting privacy and working offline."
 author: Michael John Peña
 draft: false
 date: 2025-04-10
@@ -9,10 +10,7 @@ tags:
   - iOS
   - Android
   - Development
-
 ---
-
-I wrote "Mobile AI Development: Building Intelligent Mobile Apps" to share practical, production-minded guidance on this topic.
 
 ## Mobile AI Implementation
 
@@ -121,4 +119,4 @@ class AndroidAIService(private val context: Context) {
 }
 ```
 
-Mobile AI brings powerful intelligence to users while respecting privacy and working offline.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Mobile AI brings powerful intelligence to users while respecting privacy and working offline.

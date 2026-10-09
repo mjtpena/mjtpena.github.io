@@ -1,5 +1,6 @@
 ---
 title: "Digital Intentionalization: Don’t click that next button"
+description: "It's very tempting to click on \"that next button\" wether that is from YouTube, Netflix, Facebook videos or any endless buffet of consumption. You start…"
 author: Michael John Peña
 draft: false
 date: 2021-01-05
@@ -12,7 +13,7 @@ tags:
   - Facebook Vidoes
   - Netflix
   - Next Button
-  - productivity
+  - Productivity
   - YouTube
 ---
 
@@ -39,4 +40,4 @@ There are other tricks that you can pull up that might work for you, but these a
 
 [1]: https://www.facebook.com/help/android-app/1406493312950827
 [2]: https://help.netflix.com/en/node/2102
-[3]: https://support.google.com/youtube/answer/6327615?hl=en&co=GENIE.Platform%3DAndroid\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+[3]: https://support.google.com/youtube/answer/6327615?hl=en&co=GENIE.Platform%3DAndroid

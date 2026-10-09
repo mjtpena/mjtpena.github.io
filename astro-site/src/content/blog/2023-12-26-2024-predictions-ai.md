@@ -1,13 +1,11 @@
 ---
 title: "2024 Predictions: The Year Ahead in AI and Data"
+description: "Predictions are inherently risky, but after a year working closely with foundation models and platform teams, a few trends feel probable: larger context…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-26
 tags: ["2024 Predictions", "AI", "Data", "Trends", "Future"]
-
 ---
-
-I wrote "2024 Predictions: The Year Ahead in AI and Data" to share practical, production-minded guidance on this topic.
 
 Predictions are inherently risky, but after a year working closely with foundation models and platform teams, a few trends feel probable: larger context windows, more capable open-source models, and regulatory acceleration. Below are the predictions I think will shape 2024.
 
@@ -284,4 +282,4 @@ advice_2024 = {
 }
 ```
 
-Tomorrow, we'll explore AI trends to watch in 2024!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore AI trends to watch in 2024!

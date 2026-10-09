@@ -10,12 +10,9 @@ tags:
   - Security
   - ASG
   - Infrastructure
-
 ---
 
-I wrote "2021-07-18-application-security-groups" to share practical, production-minded guidance on this topic.
-
-# Why Application Security Groups?
+## Why Application Security Groups?
 
 Traditional NSG rules use IP addresses, which creates challenges:
 
@@ -29,7 +26,7 @@ ASGs solve these problems by:
 - Rules remain valid even when IPs change
 - New VMs automatically inherit rules when added to ASG
 
-# Creating Application Security Groups
+## Creating Application Security Groups
 
 Set up ASGs for a multi-tier application:
 
@@ -52,7 +49,7 @@ az network asg create \
     --name asg-management
 ```
 
-# Terraform Configuration
+## Terraform Configuration
 
 Complete ASG implementation with Terraform:
 
@@ -234,7 +231,7 @@ resource "azurerm_network_security_group" "application" {
 }
 ```
 
-# Associating NICs with ASGs
+## Associating NICs with ASGs
 
 Add VM network interfaces to ASGs:
 
@@ -298,7 +295,7 @@ resource "azurerm_network_interface_application_security_group_association" "dat
 }
 ```
 
-# Managing ASG Memberships Programmatically
+## Managing ASG Memberships Programmatically
 
 Add and remove VMs from ASGs dynamically:
 
@@ -393,7 +390,7 @@ for member in members:
     print(f"  {member['nic_name']}: {member['private_ip']}")
 ```
 
-# Multiple ASG Memberships
+## Multiple ASG Memberships
 
 VMs can belong to multiple ASGs:
 
@@ -424,7 +421,7 @@ resource "azurerm_network_interface_application_security_group_association" "mon
 }
 ```
 
-# ASG Best Practices
+## ASG Best Practices
 
 ```python
 # Best practices for ASG design
@@ -457,9 +454,8 @@ for category, items in best_practices.items():
         print(f"  - {item}")
 ```
 
-# Conclusion
+## Conclusion
 
 Application Security Groups transform network security management from IP-centric to application-centric. By grouping VMs logically based on their workload, you create more maintainable, readable security rules that automatically apply to new resources.
 
 The combination of ASGs with NSGs provides a powerful framework for implementing zero-trust networking and microsegmentation in Azure. As your infrastructure scales, ASGs ensure security policies remain consistent without constant manual updates.
-

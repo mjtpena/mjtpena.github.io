@@ -1,18 +1,16 @@
 ---
 title: "Debugging Azure Functions Blob Trigger Locally with Azurite"
+description: "This will install the Azurite package globally, allowing you to use it from the command line."
 author: Michael John Peña
 draft: false
 date: 2023-01-02
 url: /blog/azurite-functions-blob/
 tags:
   - blob
-  - functions
+  - Functions
   - file
-  - azure
-
+  - Azure
 ---
-
-I wrote "Debugging Azure Functions Blob Trigger Locally with Azurite" to share practical, production-minded guidance on this topic.
 
 ## Setting up Azurite
 
@@ -100,4 +98,3 @@ This will start the Azure Functions runtime and attach the debugger to your func
 In this blog post, we've covered how to set up and use Azurite to debug an Azure Functions Blob Trigger locally. By using a local emulator like Azurite, you can test and troubleshoot your code before deploying it to the cloud, saving you time and resources. Using the example C# code and Visual Studio Code screenshots provided, you should now be able to set up and debug your own Azure Functions Blob Trigger using Azurite.
 
 Sample code available: [AzureFunctions.Samples/BlobTrigger at main · mjtpena/AzureFunctions.Samples (github.com)](https://github.com/mjtpena/AzureFunctions.Samples/tree/main/BlobTrigger).
-

@@ -1,5 +1,6 @@
 ---
 title: "Power Platform Managed Environments: Enterprise Governance at Scale"
+description: "Managed Environments represent a significant maturation of Power Platform governance. For enterprises that want to enable citizen development while…"
 author: Michael John Pena
 draft: false
 date: 2021-11-07
@@ -9,10 +10,7 @@ tags:
   - Microsoft
   - Enterprise
   - Low Code
-
 ---
-
-I wrote "Power Platform Managed Environments: Enterprise Governance at Scale" to share practical, production-minded guidance on this topic.
 
 ## What Are Managed Environments?
 
@@ -354,4 +352,4 @@ Managed Environments represent a significant maturation of Power Platform govern
 
 - [Managed Environments Overview](https://docs.microsoft.com/en-us/power-platform/admin/managed-environment-overview)
 - [Power Platform DLP Policies](https://docs.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention)
-- [Power Platform Admin PowerShell](https://docs.microsoft.com/en-us/powershell/module/microsoft.powerapps.administration.powershell)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Power Platform Admin PowerShell](https://docs.microsoft.com/en-us/powershell/module/microsoft.powerapps.administration.powershell)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Explorer: Real-Time Analytics with Kusto"
+description: "If you've used Log Analytics or Sentinel, you've already used Azure Data Explorer—they're built on the same engine. ADX as a standalone product is the thing…"
 author: Michael John Peña
 draft: false
 date: 2021-01-14
@@ -193,4 +194,4 @@ in
     Filtered
 ```
 
-Azure Data Explorer: petabyte-scale analytics in seconds.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Data Explorer: petabyte-scale analytics in seconds.

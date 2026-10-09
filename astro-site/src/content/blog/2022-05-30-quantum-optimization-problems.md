@@ -5,13 +5,10 @@ draft: false
 date: 2022-05-30
 tags:
   - quantum
-  - optimization
-  - azure
+  - Optimization
+  - Azure
   - algorithms
-
 ---
-
-I wrote "Quantum Optimization: Solving Real-World Problems" to share practical, production-minded guidance on this topic.
 
 ## Optimization Problem Types
 
@@ -374,5 +371,3 @@ Quantum optimization enables:
 - Machine learning applications
 
 Azure Quantum provides accessible tools for these applications.
-
-

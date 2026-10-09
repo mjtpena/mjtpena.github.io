@@ -1,5 +1,6 @@
 ---
 title: "Fabric Warehouse: Cloud-Native SQL Analytics"
+description: "The Fabric Warehouse is the part of Microsoft Fabric that surprised me most in hands-on testing. I expected it to be the Lakehouse's SQL analytics endpoint…"
 author: Michael John Peña
 draft: false
 date: 2023-07-15
@@ -322,4 +323,4 @@ Tomorrow we'll dive deeper into T-SQL patterns specific to Fabric.
 
 - [Fabric Warehouse Documentation](https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing)
 - [T-SQL in Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area)
-- [Warehouse Best Practices](https://learn.microsoft.com/en-us/fabric/data-warehouse/guidelines-warehouse-performance)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Warehouse Best Practices](https://learn.microsoft.com/en-us/fabric/data-warehouse/guidelines-warehouse-performance)

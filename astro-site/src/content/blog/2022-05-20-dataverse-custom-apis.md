@@ -6,12 +6,9 @@ date: 2022-05-20
 tags:
   - dataverse
   - power-platform
-  - api
+  - API
   - csharp
-
 ---
-
-I wrote "Dataverse Custom APIs: Building Reusable Operations" to share practical, production-minded guidance on this topic.
 
 ## Custom API vs Custom Actions
 
@@ -441,5 +438,3 @@ Dataverse Custom APIs provide:
 - Better than custom actions
 
 Build maintainable APIs that encapsulate your business logic.
-
-

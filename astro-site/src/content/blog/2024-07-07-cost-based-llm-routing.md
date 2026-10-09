@@ -1,5 +1,6 @@
 ---
 title: "Cost-Based LLM Routing: Optimizing AI Spend"
+description: "The difference is dramatic. A 1000-token task costs $0.02 with GPT-4o but $0.0002 with GPT-4o-mini."
 author: Michael John Peña
 draft: false
 date: 2024-07-07
@@ -9,10 +10,7 @@ tags:
   - Cost Optimization
   - Azure
   - FinOps
-
 ---
-
-I wrote "Cost-Based LLM Routing: Optimizing AI Spend" to share practical, production-minded guidance on this topic.
 
 ## The Cost Landscape
 
@@ -270,7 +268,7 @@ def authenticate(username, password):
 Explain why each vulnerability is dangerous and provide corrected code.
 """)
 print(f"Model: {model}, Complexity: {complexity.score}")
-# Model: claude-3.5-sonnet, Complexity: 5
+## Model: claude-3.5-sonnet, Complexity: 5
 ```
 
 ## Cost Tracking and Alerts
@@ -531,4 +529,3 @@ else:
 Cost-based routing isn't about being cheap - it's about being efficient. Use the right model for each task, and you'll get better results for less money.
 
 The key insight: most tasks don't need GPT-4o. Reserve premium models for where they matter.
-

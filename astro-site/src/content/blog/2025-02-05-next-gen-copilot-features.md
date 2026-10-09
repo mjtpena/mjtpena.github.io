@@ -1,5 +1,6 @@
 ---
 title: "Next-Gen Copilot Features: What's Coming in 2025"
+description: "The next generation of Copilot will transform how we build software. Start exploring the current capabilities to be ready for what's coming."
 author: Michael John Peña
 draft: false
 date: 2025-02-05
@@ -9,10 +10,7 @@ tags:
   - AI
   - Productivity
   - GitHub
-
 ---
-
-I wrote "Next-Gen Copilot Features: What's Coming in 2025" to share practical, production-minded guidance on this topic.
 
 ## Copilot Evolution
 
@@ -298,4 +296,4 @@ SELECT * FROM customers_masked
 4. **Provide feedback**: Shape the product direction
 5. **Experiment**: Try new features as they release
 
-The next generation of Copilot will transform how we build software. Start exploring the current capabilities to be ready for what's coming.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The next generation of Copilot will transform how we build software. Start exploring the current capabilities to be ready for what's coming.

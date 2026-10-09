@@ -1,13 +1,11 @@
 ---
 title: "Azure IoT Hub Device Provisioning Service Deep Dive"
+description: "DPS is essential for deploying and managing IoT devices at scale across multiple regions and IoT Hubs."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-23
 tags: ["Azure", "IoT", "DPS", "Device Provisioning", "Security"]
-
 ---
-
-I wrote "Azure IoT Hub Device Provisioning Service Deep Dive" to share practical, production-minded guidance on this topic.
 
 ## Understanding DPS Architecture
 
@@ -266,4 +264,4 @@ async def check_and_reprovision():
         # Update connection to new hub
 ```
 
-DPS is essential for deploying and managing IoT devices at scale across multiple regions and IoT Hubs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+DPS is essential for deploying and managing IoT devices at scale across multiple regions and IoT Hubs.

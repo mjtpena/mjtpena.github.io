@@ -1,5 +1,6 @@
 ---
 title: "The Five-Minute Father"
+description: "Andriel showed me his new Pokemon drawing. I was looking at my phone. \"Mm-hmm, that's great, bud.\""
 author: Michael John Peña
 draft: false
 date: 2026-01-24
@@ -58,4 +59,4 @@ You deserve my full attention. I'm learning to give it.
 
 I love you. When I'm with you, I want to truly be WITH you.
 
-That's the goal I'm aiming for.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+That's the goal I'm aiming for.

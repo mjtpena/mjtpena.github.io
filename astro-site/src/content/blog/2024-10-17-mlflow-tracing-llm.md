@@ -1,13 +1,11 @@
 ---
 title: "MLflow Tracing for LLM Applications: Open Source Observability"
+description: "MLflow provides a solid open-source foundation for LLM observability. Its strength lies in the familiar MLOps workflow and integration with the broader ML…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-17
 tags: ["MLflow", "LLM", "Tracing", "Open Source", "MLOps"]
-
 ---
-
-I wrote "MLflow Tracing for LLM Applications: Open Source Observability" to share practical, production-minded guidance on this topic.
 
 ## Setting Up MLflow for LLMs
 
@@ -335,4 +333,4 @@ models = [
 results = compare_models(models, eval_data)
 ```
 
-MLflow provides a solid open-source foundation for LLM observability. Its strength lies in the familiar MLOps workflow and integration with the broader ML ecosystem.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+MLflow provides a solid open-source foundation for LLM observability. Its strength lies in the familiar MLOps workflow and integration with the broader ML ecosystem.

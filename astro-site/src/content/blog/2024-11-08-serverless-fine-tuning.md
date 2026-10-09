@@ -1,18 +1,16 @@
 ---
 title: "Serverless Fine-Tuning in Azure AI: Customizing Models Without Infrastructure"
+description: "Serverless fine-tuning removes the infrastructure barrier to custom model development. Start experimenting with your domain-specific use cases today."
 author: Michael John Peña
 draft: false
 date: 2024-11-08
 tags:
   - Azure
   - AI
-  - Fine-tuning
+  - Fine-Tuning
   - Serverless
   - Machine Learning
-
 ---
-
-I wrote "Serverless Fine-Tuning in Azure AI: Customizing Models Without Infrastructure" to share practical, production-minded guidance on this topic.
 
 ## Serverless vs Traditional Fine-Tuning
 
@@ -313,4 +311,4 @@ Serverless fine-tuning removes the infrastructure barrier to custom model develo
 
 - [Serverless Fine-Tuning Guide](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning)
 - [Training Data Best Practices](https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset)
-- [Cost Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Cost Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)

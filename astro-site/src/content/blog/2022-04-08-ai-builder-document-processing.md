@@ -9,10 +9,7 @@ tags:
   - Document Processing
   - OCR
   - Automation
-
 ---
-
-I wrote "Document Processing with AI Builder: From PDFs to Structured Data" to share practical, production-minded guidance on this topic.
 
 ## Pre-built Document Models
 
@@ -395,4 +392,3 @@ Start with pre-built models, then customize as needs evolve.
 - [Document Processing](https://docs.microsoft.com/en-us/ai-builder/form-processing-model-overview)
 - [Invoice Processing](https://docs.microsoft.com/en-us/ai-builder/prebuilt-invoice-processing)
 - [Receipt Processing](https://docs.microsoft.com/en-us/ai-builder/prebuilt-receipt-processing)
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure Database for MySQL: Flexible Server Deep Dive"
+description: "For larger databases, use Azure Database Migration Service."
 author: Michael John Peña
 draft: false
 date: 2021-05-10
@@ -9,10 +10,7 @@ tags:
   - Database
   - Cloud
   - Open Source
-
 ---
-
-I wrote "Azure Database for MySQL: Flexible Server Deep Dive" to share practical, production-minded guidance on this topic.
 
 ## Flexible Server vs Single Server
 
@@ -361,4 +359,4 @@ For larger databases, use Azure Database Migration Service.
 
 - [Flexible Server Documentation](https://docs.microsoft.com/en-us/azure/mysql/flexible-server/)
 - [High Availability](https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability)
-- [Migration Guide](https://docs.microsoft.com/en-us/azure/mysql/howto-migrate-single-flexible-minimum-downtime)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Migration Guide](https://docs.microsoft.com/en-us/azure/mysql/howto-migrate-single-flexible-minimum-downtime)

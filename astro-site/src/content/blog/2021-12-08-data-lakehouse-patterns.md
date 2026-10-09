@@ -1,5 +1,6 @@
 ---
 title: "Data Lakehouse Patterns: Best of Both Worlds"
+description: "The lakehouse architecture proved its value in 2021. Organizations are consolidating their data warehouses and data lakes into unified lakehouses, reducing…"
 author: Michael John Pena
 draft: false
 date: 2021-12-08
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Azure Synapse
   - Databricks
-
 ---
-
-I wrote "Data Lakehouse Patterns: Best of Both Worlds" to share practical, production-minded guidance on this topic.
 
 ## The Lakehouse Architecture
 
@@ -283,4 +281,4 @@ The lakehouse architecture proved its value in 2021. Organizations are consolida
 
 - [Delta Lake Documentation](https://docs.delta.io/)
 - [Azure Synapse Serverless](https://docs.microsoft.com/en-us/azure/synapse-analytics/sql/on-demand-workspace-overview)
-- [Lakehouse Architecture](https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Lakehouse Architecture](https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html)

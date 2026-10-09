@@ -1,13 +1,11 @@
 ---
 title: "Lakehouse vs Warehouse in Fabric: Making the Right Choice"
+description: "Choosing Lakehouse vs Warehouse is an architectural trade-off: for open-format, large-scale analytics and ML, Lakehouse is the better fit; for classic T-SQL…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-18
 tags: ["Microsoft Fabric", "Lakehouse", "Warehouse", "Architecture", "Data Platform"]
-
 ---
-
-I wrote "Lakehouse vs Warehouse in Fabric: Making the Right Choice" to share practical, production-minded guidance on this topic.
 
 Choosing Lakehouse vs Warehouse is an architectural trade-off: for open-format, large-scale analytics and ML, Lakehouse is the better fit; for classic T-SQL workloads and BI semantics, Warehouse often wins. I'll walk through decision factors and examples from live projects.
 
@@ -331,4 +329,4 @@ def recommend_pattern(requirements: Dict) -> str:
         return "lakehouse_with_sql_endpoint"
 ```
 
-Tomorrow, we'll explore when to use what in Fabric!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore when to use what in Fabric!

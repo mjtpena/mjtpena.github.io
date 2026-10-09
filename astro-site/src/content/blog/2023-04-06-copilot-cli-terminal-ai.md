@@ -1,5 +1,6 @@
 ---
 title: "Copilot CLI: AI in Your Terminal"
+description: "Copilot for the CLI—part of the GitHub Copilot X announcement—brought the natural language to shell command pattern into the terminal, addressing the…"
 author: Michael John Pena
 draft: false
 date: 2023-04-06
@@ -383,4 +384,4 @@ alias '?!'='copilot_explain'
 # ?! "tar -czvf archive.tar.gz ."
 ```
 
-Copilot CLI removes the friction of command-line work. Whether you're learning new tools or working with unfamiliar systems, AI assistance is just a keystroke away.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Copilot CLI removes the friction of command-line work. Whether you're learning new tools or working with unfamiliar systems, AI assistance is just a keystroke away.

@@ -1,13 +1,11 @@
 ---
 title: "Fairness Assessment for Machine Learning Models"
+description: "Fairness assessment ensures your ML models treat all groups equitably and comply with ethical standards."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-04
 tags: ["Azure", "Machine Learning", "Fairness", "Ethics", "AI Bias"]
-
 ---
-
-I wrote "Fairness Assessment for Machine Learning Models" to share practical, production-minded guidance on this topic.
 
 ## Understanding Fairness Metrics
 
@@ -262,4 +260,4 @@ class FairnessMonitor:
         return [h["results"][feature]["disparity"] for h in recent]
 ```
 
-Fairness assessment ensures your ML models treat all groups equitably and comply with ethical standards.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fairness assessment ensures your ML models treat all groups equitably and comply with ethical standards.

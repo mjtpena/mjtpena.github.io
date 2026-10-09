@@ -1,5 +1,6 @@
 ---
 title: "Semantic Kernel v2: Building Composable AI Applications in C#"
+description: "Semantic Kernel v2 brings enterprise-grade patterns to AI development, making it easier to build maintainable, testable AI applications."
 author: Michael John Peña
 draft: false
 date: 2025-07-12
@@ -9,10 +10,7 @@ tags:
   - .NET
   - AI Applications
   - Microsoft
-
 ---
-
-I wrote "Semantic Kernel v2: Building Composable AI Applications in C#" to share practical, production-minded guidance on this topic.
 
 ## Setting Up the Kernel
 
@@ -94,4 +92,4 @@ var plan = await planner.CreatePlanAsync(kernel,
 var result = await plan.InvokeAsync(kernel);
 ```
 
-Semantic Kernel v2 brings enterprise-grade patterns to AI development, making it easier to build maintainable, testable AI applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Semantic Kernel v2 brings enterprise-grade patterns to AI development, making it easier to build maintainable, testable AI applications.

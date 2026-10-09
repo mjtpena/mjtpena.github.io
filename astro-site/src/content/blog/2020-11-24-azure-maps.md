@@ -1,5 +1,6 @@
 ---
 title: "Azure Maps: Location Intelligence Platform"
+description: "Most location features I've shipped lived on Google Maps for one reason: nobody knew Azure had a maps service. Azure Maps is competitive now—routing…"
 author: Michael John Peña
 draft: false
 date: 2020-11-24
@@ -204,4 +205,4 @@ print(f"Temperature: {weather['temperature']['value']}°{weather['temperature'][
 print(f"Conditions: {weather['phrase']}")
 ```
 
-Azure Maps: location services at your fingertips.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Maps: location services at your fingertips.

@@ -1,5 +1,6 @@
 ---
 title: "Building Conversational AI with Azure Bot Service and GPT-4o"
+description: "Leverage Teams-specific capabilities like adaptive cards, task modules, and message extensions to create rich interactive experiences."
 author: Michael John Peña
 draft: false
 date: 2025-07-18
@@ -9,10 +10,7 @@ tags:
   - GPT-4o
   - Teams
   - C#
-
 ---
-
-I wrote "Building Conversational AI with Azure Bot Service and GPT-4o" to share practical, production-minded guidance on this topic.
 
 ## Bot Framework Integration
 
@@ -107,4 +105,4 @@ public class ConversationData
 
 ## Teams-Specific Features
 
-Leverage Teams-specific capabilities like adaptive cards, task modules, and message extensions to create rich interactive experiences.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Leverage Teams-specific capabilities like adaptive cards, task modules, and message extensions to create rich interactive experiences.

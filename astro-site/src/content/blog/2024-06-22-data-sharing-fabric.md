@@ -1,5 +1,6 @@
 ---
 title: "Data Sharing Patterns in Microsoft Fabric"
+description: "Data sharing enables collaboration while maintaining security. Today I'm exploring data sharing patterns in Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-22
@@ -448,4 +449,4 @@ Tomorrow I'll cover external data access patterns.
 
 - [Fabric Sharing](https://learn.microsoft.com/fabric/admin/sharing)
 - [OneLake Shortcuts](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts)
-- [Row-Level Security](https://learn.microsoft.com/fabric/security/row-level-security)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Row-Level Security](https://learn.microsoft.com/fabric/security/row-level-security)

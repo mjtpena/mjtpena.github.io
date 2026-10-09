@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions HTTP APIs: Building Serverless Backends"
+description: "Static Web Apps with the integrated Functions backend is the deployment story I keep recommending for small SaaS dashboards and internal tools. Static…"
 author: Michael John Peña
 draft: false
 date: 2020-10-27
@@ -250,4 +251,4 @@ jobs:
 | Monitoring | Enable Application Insights |
 | Versioning | Use route prefixes or API Management |
 
-Azure Functions HTTP triggers: the simplest path to serverless APIs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Functions HTTP triggers: the simplest path to serverless APIs.

@@ -1,5 +1,6 @@
 ---
 title: "Power BI Dataflows: Self-Service ETL"
+description: "Dataflows bridge the gap between self-service BI and governed enterprise data."
 author: Michael John Peña
 draft: false
 date: 2020-09-06
@@ -8,10 +9,7 @@ tags:
   - Dataflows
   - ETL
   - Self-Service
-
 ---
-
-I wrote "Power BI Dataflows: Self-Service ETL" to share practical, production-minded guidance on this topic.
 
 ## Creating a Dataflow
 
@@ -59,4 +57,4 @@ With Premium capacity:
 - DirectQuery for dataflows
 - Enhanced compute engine
 
-Dataflows bridge the gap between self-service BI and governed enterprise data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dataflows bridge the gap between self-service BI and governed enterprise data.

@@ -10,10 +10,7 @@ tags:
   - Computer Vision
   - Image Analysis
   - AI
-
 ---
-
-I wrote "Azure Cognitive Services for Computer Vision: Current Capabilities" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -486,4 +483,3 @@ Azure Cognitive Services Computer Vision provides robust, production-ready capab
 - [Computer Vision Documentation](https://learn.microsoft.com/azure/cognitive-services/computer-vision/)
 - [Custom Vision Documentation](https://learn.microsoft.com/azure/cognitive-services/custom-vision-service/)
 - [OCR Documentation](https://learn.microsoft.com/azure/cognitive-services/computer-vision/overview-ocr)
-

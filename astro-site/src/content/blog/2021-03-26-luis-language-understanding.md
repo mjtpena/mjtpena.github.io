@@ -10,10 +10,7 @@ tags:
   - NLP
   - Cognitive Services
   - AI
-
 ---
-
-I wrote "2021-03-26-luis-language-understanding" to share practical, production-minded guidance on this topic.
 
 ## LUIS Concepts
 
@@ -512,4 +509,3 @@ LUIS enables sophisticated natural language understanding:
 - **Seamless Bot Framework integration**
 
 It's the foundation for building conversational AI that truly understands users.
-

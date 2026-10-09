@@ -1,5 +1,6 @@
 ---
 title: "Claude 3.5 Sonnet for Code Review: Automated PR Analysis Patterns"
+description: "Claude 3.5 Sonnet has become my go-to model for automated code review workflows. Its exceptional ability to understand context across large codebases makes…"
 author: Michael John Peña
 draft: false
 date: 2025-07-03
@@ -9,9 +10,7 @@ tags:
   - Code Review
   - DevOps
   - Python
-
 ---
-
 
 Claude 3.5 Sonnet has become my go-to model for automated code review workflows. Its exceptional ability to understand context across large codebases makes it ideal for catching subtle bugs and suggesting improvements. Here's how I've integrated it into my CI/CD pipeline.
 
@@ -68,5 +67,4 @@ For PRs exceeding context limits, I implement a two-pass review: first analyzing
 
 ## Integration with GitHub Actions
 
-The reviewer runs on every PR, posting inline comments for critical issues and a summary review. Non-blocking suggestions go into a separate discussion thread, keeping the PR review focused on what matters most.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+The reviewer runs on every PR, posting inline comments for critical issues and a summary review. Non-blocking suggestions go into a separate discussion thread, keeping the PR review focused on what matters most.

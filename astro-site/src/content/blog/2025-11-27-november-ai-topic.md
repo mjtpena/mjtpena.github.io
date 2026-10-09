@@ -1,5 +1,6 @@
 ---
 title: "Data Governance in Microsoft Fabric: Purview Integration and Compliance"
+description: "Organizations struggle with data sprawl, unclear ownership, inconsistent definitions, and regulatory requirements. A unified governance approach addresses…"
 author: Michael John Peña
 draft: false
 date: 2025-11-27
@@ -9,10 +10,7 @@ tags:
   - Purview
   - Compliance
   - Data Catalog
-
 ---
-
-I wrote "Data Governance in Microsoft Fabric: Purview Integration and Compliance" to share practical, production-minded guidance on this topic.
 
 ## Governance Challenges
 
@@ -216,4 +214,4 @@ class GlossaryManager:
         )
 ```
 
-Data governance with Fabric and Purview creates a foundation for trusted analytics. Automated discovery, consistent definitions, and clear ownership enable self-service while maintaining control.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Data governance with Fabric and Purview creates a foundation for trusted analytics. Automated discovery, consistent definitions, and clear ownership enable self-service while maintaining control.

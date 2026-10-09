@@ -1,5 +1,6 @@
 ---
 title: "Data Engineering Trends That Defined 2021"
+description: "Data engineering in 2021 matured from a support function to a strategic capability. The tools improved, patterns solidified, and the role gained the…"
 author: Michael John Pena
 draft: false
 date: 2021-12-02
@@ -8,10 +9,7 @@ tags:
   - Azure
   - Delta Lake
   - Data Architecture
-
 ---
-
-I wrote "Data Engineering Trends That Defined 2021" to share practical, production-minded guidance on this topic.
 
 ## The Rise of the Modern Data Stack
 
@@ -226,4 +224,3 @@ Data engineering in 2021 matured from a support function to a strategic capabili
 - [The Data Engineering Cookbook](https://github.com/andkret/Cookbook)
 - [Delta Lake Documentation](https://docs.delta.io/latest/index.html)
 - [dbt Best Practices](https://docs.getdbt.com/guides/best-practices)
-

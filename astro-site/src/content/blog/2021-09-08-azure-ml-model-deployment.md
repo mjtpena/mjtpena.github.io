@@ -1,5 +1,6 @@
 ---
 title: Deploying Machine Learning Models with Azure ML
+description: "Model deployment is where your ML work delivers business value. Azure ML's managed endpoints make it straightforward to deploy, scale, and update models in…"
 author: Michael John Pena
 draft: false
 date: 2021-09-08
@@ -9,10 +10,7 @@ tags:
   - Model Deployment
   - MLOps
   - REST API
-
 ---
-
-I wrote "2021-09-08-azure-ml-model-deployment" to share practical, production-minded guidance on this topic.
 
 ## Deployment Options Overview
 
@@ -298,4 +296,4 @@ print(logs)
 5. **Monitor inference latency**: Set up alerts for performance degradation
 6. **Scale appropriately**: Use auto-scaling rules based on traffic
 
-Model deployment is where your ML work delivers business value. Azure ML's managed endpoints make it straightforward to deploy, scale, and update models in production.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Model deployment is where your ML work delivers business value. Azure ML's managed endpoints make it straightforward to deploy, scale, and update models in production.

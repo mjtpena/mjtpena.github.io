@@ -9,10 +9,7 @@ tags:
   - AI
   - Anomaly Detection
   - Monitoring
-
 ---
-
-I wrote "Azure Metrics Advisor: Intelligent Anomaly Detection for Time Series Data" to share practical, production-minded guidance on this topic.
 
 ## What Metrics Advisor Does
 
@@ -493,4 +490,3 @@ The service is particularly valuable for:
 - [Metrics Advisor Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/metrics-advisor/)
 - [Python SDK Reference](https://docs.microsoft.com/en-us/python/api/azure-ai-metricsadvisor/)
 - [Anomaly Detection Best Practices](https://docs.microsoft.com/en-us/azure/cognitive-services/metrics-advisor/how-tos/anomaly-detection)
-

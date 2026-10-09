@@ -1,13 +1,11 @@
 ---
 title: "Building Responsible AI with Azure ML's RAI Dashboard"
+description: "The RAI Dashboard enables you to build and deploy ML models that are fair, interpretable, and reliable."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-02
 tags: ["Azure", "Machine Learning", "Responsible AI", "Ethics", "ML Interpretability"]
-
 ---
-
-I wrote "Building Responsible AI with Azure ML's RAI Dashboard" to share practical, production-minded guidance on this topic.
 
 ## Understanding the RAI Dashboard
 
@@ -252,4 +250,4 @@ class ResponsibleMLPipeline:
         return recommendations
 ```
 
-The RAI Dashboard enables you to build and deploy ML models that are fair, interpretable, and reliable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The RAI Dashboard enables you to build and deploy ML models that are fair, interpretable, and reliable.

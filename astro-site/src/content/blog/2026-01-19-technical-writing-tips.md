@@ -1,5 +1,6 @@
 ---
 title: "What Makes Technical Writing Actually Useful"
+description: "I've read thousands of technical posts. Most are useless. Here's what makes docs actually helpful."
 author: Michael John Peña
 draft: false
 date: 2026-01-19
@@ -45,4 +46,4 @@ If someone can't use your doc to solve their problem, it's not good enough.
 
 Write for people who need to get work done, not people who want to learn theory.
 
-Be useful. That's all that matters.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Be useful. That's all that matters.

@@ -1,13 +1,11 @@
 ---
 title: "MMLU Scores Explained: What They Really Mean"
+description: "MMLU (Massive Multitask Language Understanding) is one of the most cited LLM benchmarks. Understanding what it measures and its limitations is crucial for…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-15
 tags: ["AI", "LLM", "MMLU", "Benchmarking", "Evaluation"]
-
 ---
-
-I wrote "MMLU Scores Explained: What They Really Mean" to share practical, production-minded guidance on this topic.
 
 MMLU (Massive Multitask Language Understanding) is one of the most cited LLM benchmarks. Understanding what it measures and its limitations is crucial for interpreting model comparisons.
 
@@ -323,4 +321,3 @@ print_limitations()
 ## Conclusion
 
 MMLU provides a useful signal for general knowledge capabilities, but it should be one of many factors in model evaluation. Always validate with domain-specific testing for production use cases.
-

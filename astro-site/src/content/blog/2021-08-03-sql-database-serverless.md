@@ -1,13 +1,11 @@
 ---
 title: "Azure SQL Database Serverless: Auto-Scaling and Auto-Pause for Variable Workloads"
+description: "Serverless is perfect for dev/test environments, infrequently used applications, and workloads with predictable quiet periods. For consistent…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-03
 tags: ["Azure", "SQL", "Serverless", "Auto-Scale", "Cost Optimization"]
-
 ---
-
-I wrote "Azure SQL Database Serverless: Auto-Scaling and Auto-Pause for Variable Workloads" to share practical, production-minded guidance on this topic.
 
 ## How Serverless Differs from Provisioned
 
@@ -215,4 +213,4 @@ services.AddDbContext<MyDbContext>(options =>
 });
 ```
 
-Serverless is perfect for dev/test environments, infrequently used applications, and workloads with predictable quiet periods. For consistent high-utilization workloads, provisioned compute remains more cost-effective.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Serverless is perfect for dev/test environments, infrequently used applications, and workloads with predictable quiet periods. For consistent high-utilization workloads, provisioned compute remains more cost-effective.

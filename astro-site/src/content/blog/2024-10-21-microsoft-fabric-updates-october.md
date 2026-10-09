@@ -1,13 +1,11 @@
 ---
 title: "Microsoft Fabric Updates: October 2024 Announcements"
+description: "Microsoft announced the preview of relational databases directly within Fabric, bringing transactional workloads into the unified platform."
 author: "Michael John Peña"
 draft: false
 date: 2024-10-21
 tags: ["Microsoft Fabric", "Azure", "Data Platform", "Analytics", "Updates"]
-
 ---
-
-I wrote "Microsoft Fabric Updates: October 2024 Announcements" to share practical, production-minded guidance on this topic.
 
 ## Key October 2024 Updates
 
@@ -346,4 +344,4 @@ class FabricMigrationAssessor:
         }
 ```
 
-Microsoft Fabric's October 2024 updates bring exciting capabilities for building unified data platforms. The addition of relational databases and enhanced real-time features make it an increasingly compelling choice.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Microsoft Fabric's October 2024 updates bring exciting capabilities for building unified data platforms. The addition of relational databases and enhanced real-time features make it an increasingly compelling choice.

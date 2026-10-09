@@ -1,5 +1,6 @@
 ---
 title: "AI Observability: Monitoring LLM Applications in Production"
+description: "Comprehensive observability enables continuous improvement of AI applications."
 author: Michael John Peña
 draft: false
 date: 2025-03-22
@@ -9,10 +10,7 @@ tags:
   - Monitoring
   - Production
   - DevOps
-
 ---
-
-I wrote "AI Observability: Monitoring LLM Applications in Production" to share practical, production-minded guidance on this topic.
 
 ## AI Observability Framework
 
@@ -102,4 +100,4 @@ with observability.trace_rag_pipeline("What are our Q3 sales?") as span:
     observability.track_llm_call(metrics)
 ```
 
-Comprehensive observability enables continuous improvement of AI applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Comprehensive observability enables continuous improvement of AI applications.

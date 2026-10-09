@@ -1,5 +1,6 @@
 ---
 title: "Azure Form Recognizer: Extract Data from Documents"
+description: "A second pass at Form Recognizer, focused on what's changed since I last wrote about it. The prebuilt invoice and receipt models keep getting better — the…"
 author: Michael John Peña
 draft: false
 date: 2020-10-28
@@ -153,4 +154,4 @@ foreach (var document in result.Documents)
 }
 ```
 
-Form Recognizer automates document processing at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Form Recognizer automates document processing at scale.

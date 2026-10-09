@@ -1,18 +1,16 @@
 ---
 title: "GitHub Advanced Security: Enterprise-Grade Security for Your Code"
+description: "GitHub Advanced Security transforms security from a gate to a continuous process integrated into your development workflow."
 author: Michael John Peña
 draft: false
 date: 2022-01-11
 url: /blog/github-advanced-security/
 tags:
-  - github
-  - security
-  - devops
+  - GitHub
+  - Security
+  - DevOps
   - devsecops
-
 ---
-
-I wrote "GitHub Advanced Security: Enterprise-Grade Security for Your Code" to share practical, production-minded guidance on this topic.
 
 ## What is GitHub Advanced Security?
 
@@ -218,4 +216,4 @@ jobs:
             }
 ```
 
-GitHub Advanced Security transforms security from a gate to a continuous process integrated into your development workflow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GitHub Advanced Security transforms security from a gate to a continuous process integrated into your development workflow.

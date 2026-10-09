@@ -5,13 +5,10 @@ draft: false
 date: 2022-06-14
 tags:
   - istio
-  - aks
+  - AKS
   - service-mesh
-  - kubernetes
-
+  - Kubernetes
 ---
-
-I wrote "Istio on AKS: Complete Service Mesh Implementation" to share practical, production-minded guidance on this topic.
 
 ## Installing Istio
 
@@ -47,4 +44,5 @@ spec:
     - destination:
         host: reviews
         subset: v2
-      weight: 20\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+      weight: 20
+```

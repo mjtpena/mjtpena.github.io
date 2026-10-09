@@ -1,5 +1,6 @@
 ---
 title: "GraphRAG: Combining Knowledge Graphs with Retrieval-Augmented Generation"
+description: "GraphRAG excels when your questions involve multi-hop reasoning, relationship discovery, or when entity connections matter more than document similarity."
 author: Michael John Peña
 draft: false
 date: 2025-10-29
@@ -9,10 +10,7 @@ tags:
   - RAG
   - Azure OpenAI
   - Neo4j
-
 ---
-
-I wrote "GraphRAG: Combining Knowledge Graphs with Retrieval-Augmented Generation" to share practical, production-minded guidance on this topic.
 
 ## Building the Knowledge Graph
 
@@ -140,4 +138,4 @@ Document Context:
 
 ## When to Use GraphRAG
 
-GraphRAG excels when your questions involve multi-hop reasoning, relationship discovery, or when entity connections matter more than document similarity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GraphRAG excels when your questions involve multi-hop reasoning, relationship discovery, or when entity connections matter more than document similarity.

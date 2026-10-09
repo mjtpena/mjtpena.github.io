@@ -1,13 +1,11 @@
 ---
 title: "Cross-Workspace Queries in Azure Monitor"
+description: "Cross-workspace queries in KQL let you write a single query that spans multiple Log Analytics workspaces—essential when your monitoring architecture splits…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-12
 tags: ["Azure", "Log Analytics", "Kusto", "Monitoring", "KQL"]
-
 ---
-
-I wrote "Cross-Workspace Queries in Azure Monitor" to share practical, production-minded guidance on this topic.
 
 Cross-workspace queries in KQL let you write a single query that spans multiple Log Analytics workspaces—essential when your monitoring architecture splits data across workspaces by team, region, or compliance boundary but you need a unified view for incident investigation or capacity reporting. The `workspace("workspace-name")` or `workspace("/subscriptions/.../workspaces/name")` syntax references another workspace in your query: `workspace("security-logs").SecurityEvent | where ... | union workspace("app-team-logs").AppException`. The limitation: cross-workspace queries don't automatically optimise across workspace boundaries; query performance depends on the size of each workspace's data being scanned. For dashboards that need to aggregate across workspaces, Azure Monitor Workbooks with cross-workspace queries work well; for high-frequency automated queries, consider consolidating the data into Azure Data Explorer for better query performance at scale.
 
@@ -263,4 +261,3 @@ Create an Azure Workbook with cross-workspace data:
 Cross-workspace queries unlock unified visibility across your distributed Log Analytics architecture. By understanding the syntax and optimization techniques, you can build powerful enterprise-wide monitoring solutions.
 
 Tomorrow, we'll explore Azure Data Explorer integration for advanced analytics on your operational data.
-

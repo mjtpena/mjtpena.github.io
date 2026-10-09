@@ -1,5 +1,6 @@
 ---
 title: "Azure Chaos Studio: Chaos Engineering for Resilient Applications"
+description: "Chaos engineering is the practice of experimenting on a system to build confidence in its ability to withstand turbulent conditions. Netflix pioneered this…"
 author: Michael John Pena
 draft: false
 date: 2021-11-21
@@ -9,10 +10,7 @@ tags:
   - Resilience
   - Testing
   - DevOps
-
 ---
-
-I wrote "Azure Chaos Studio: Chaos Engineering for Resilient Applications" to share practical, production-minded guidance on this topic.
 
 ## What is Chaos Engineering?
 
@@ -515,4 +513,4 @@ Azure Chaos Studio makes chaos engineering accessible and safe. By deliberately 
 
 - [Azure Chaos Studio Documentation](https://docs.microsoft.com/en-us/azure/chaos-studio/chaos-studio-overview)
 - [Chaos Engineering Principles](https://principlesofchaos.org/)
-- [Fault Library Reference](https://docs.microsoft.com/en-us/azure/chaos-studio/chaos-studio-fault-library)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fault Library Reference](https://docs.microsoft.com/en-us/azure/chaos-studio/chaos-studio-fault-library)

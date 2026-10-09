@@ -9,10 +9,7 @@ tags:
   - AI
   - Machine Learning
   - Low-Code
-
 ---
-
-I wrote "AI Builder: No-Code AI for the Power Platform" to share practical, production-minded guidance on this topic.
 
 ## AI Builder Capabilities
 
@@ -341,4 +338,3 @@ It's ideal for organizations wanting AI capabilities without building a data sci
 - [AI Builder Documentation](https://docs.microsoft.com/en-us/ai-builder/)
 - [Model Types](https://docs.microsoft.com/en-us/ai-builder/model-types)
 - [Best Practices](https://docs.microsoft.com/en-us/ai-builder/before-you-build-form-processing-model)
-

@@ -1,5 +1,6 @@
 ---
 title: "OneLake Explorer: Navigating Your Data Lake in Fabric"
+description: "OneLake Explorer is a Windows desktop application that lets you browse the contents of your organisation's OneLake the same way you'd navigate files in…"
 author: Michael John Peña
 draft: false
 date: 2023-07-05
@@ -311,4 +312,4 @@ Tomorrow we'll create our first Lakehouse and understand the structure in detail
 - [OneLake Documentation](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview)
 - [OneLake Explorer Download](https://www.microsoft.com/en-us/download/details.aspx?id=105367)
 - [OneLake Shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts)
-- [OneLake Security](https://learn.microsoft.com/en-us/fabric/onelake/onelake-security)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [OneLake Security](https://learn.microsoft.com/en-us/fabric/onelake/onelake-security)

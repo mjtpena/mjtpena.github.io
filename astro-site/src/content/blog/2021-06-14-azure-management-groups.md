@@ -1,5 +1,6 @@
 ---
 title: Azure Management Groups for Enterprise Hierarchy
+description: "Azure Management Groups are the first thing I help clients set up when their Azure estate starts involving more than two or three subscriptions. Without…"
 author: Michael John Peña
 draft: false
 date: 2021-06-14

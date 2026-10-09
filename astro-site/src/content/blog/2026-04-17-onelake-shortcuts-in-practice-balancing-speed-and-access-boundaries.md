@@ -1,5 +1,6 @@
 ---
 title: "OneLake Shortcuts in Practice: balancing speed and access boundaries"
+description: "I worked on smoothing the handoff between data engineering and AI teams—standardizing feature contracts, embedding validation, and adding lightweight…"
 author: Michael John Peña
 draft: false
 date: 2026-04-17
@@ -36,4 +37,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [OneLake overview](https://learn.microsoft.com/fabric/onelake/)
 - [OneLake shortcuts](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts)
-- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)

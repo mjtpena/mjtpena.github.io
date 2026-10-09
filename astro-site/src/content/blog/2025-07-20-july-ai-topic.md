@@ -1,5 +1,6 @@
 ---
 title: "Data Lakehouse Architecture with Microsoft Fabric: Medallion Pattern Implementation"
+description: "Use Delta Lake constraints and expectations to ensure data quality at each layer. Fabric's Data Quality monitoring provides visibility into quality metrics…"
 author: Michael John Peña
 draft: false
 date: 2025-07-20
@@ -9,10 +10,7 @@ tags:
   - Medallion Architecture
   - Delta Lake
   - Data Engineering
-
 ---
-
-I wrote "Data Lakehouse Architecture with Microsoft Fabric: Medallion Pattern Implementation" to share practical, production-minded guidance on this topic.
 
 ## Setting Up the Lakehouse Structure
 
@@ -94,4 +92,4 @@ def create_gold_aggregation():
 
 ## Data Quality Enforcement
 
-Use Delta Lake constraints and expectations to ensure data quality at each layer. Fabric's Data Quality monitoring provides visibility into quality metrics across your entire lakehouse.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use Delta Lake constraints and expectations to ensure data quality at each layer. Fabric's Data Quality monitoring provides visibility into quality metrics across your entire lakehouse.

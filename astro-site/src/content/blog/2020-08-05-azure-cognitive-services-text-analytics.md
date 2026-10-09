@@ -1,5 +1,6 @@
 ---
 title: "Analyzing Text with Azure Cognitive Services Text Analytics"
+description: "A retail client this week handed me six months of customer feedback in a CSV and asked the question I get every couple of months: \"what are people actually…"
 author: Michael John Peña
 draft: false
 date: 2020-08-05
@@ -211,4 +212,4 @@ public class FeedbackAnalyzer
 - **Sentiment confidence scores beat the label.** A "neutral" document at 0.45/0.45/0.10 is interesting in a way "neutral" alone isn't. Always log all three confidences.
 - **Don't use NER as your primary entity store.** It will hallucinate "Apple" as a person sometimes, and miss internal product names entirely. It's a starting point, not a source of truth.
 
-For "what are customers saying about us" dashboards, this is genuinely 80% of what you need. The remaining 20% — domain-specific entities, custom intents — is where you graduate to LUIS or roll your own model. But you don't start there. You start here.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+For "what are customers saying about us" dashboards, this is genuinely 80% of what you need. The remaining 20% — domain-specific entities, custom intents — is where you graduate to LUIS or roll your own model. But you don't start there. You start here.

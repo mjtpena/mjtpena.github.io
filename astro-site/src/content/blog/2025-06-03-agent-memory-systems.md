@@ -1,5 +1,6 @@
 ---
 title: "Agent Memory Systems: Building Persistent AI Memory"
+description: "Sophisticated memory systems enable agents to learn and improve over time."
 author: Michael John Peña
 draft: false
 date: 2025-06-03
@@ -9,10 +10,7 @@ tags:
   - Memory
   - Persistence
   - Architecture
-
 ---
-
-I wrote "Agent Memory Systems: Building Persistent AI Memory" to share practical, production-minded guidance on this topic.
 
 ## Agent Memory Implementation
 
@@ -124,4 +122,4 @@ class AgentMemory:
         return np.exp(-age_hours / 168)  # 1-week half-life
 ```
 
-Sophisticated memory systems enable agents to learn and improve over time.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Sophisticated memory systems enable agents to learn and improve over time.

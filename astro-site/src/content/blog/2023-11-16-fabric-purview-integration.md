@@ -1,13 +1,11 @@
 ---
 title: "Microsoft Purview and Fabric: Enterprise Data Governance"
+description: "Microsoft Purview and Fabric integration is the enterprise governance story that matters most for regulated industries and large organisations where data…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-16
 tags: ["Microsoft Fabric", "Purview", "Data Governance", "Data Catalog", "Compliance"]
-
 ---
-
-I wrote "Microsoft Purview and Fabric: Enterprise Data Governance" to share practical, production-minded guidance on this topic.
 
 Microsoft Purview and Fabric integration is the enterprise governance story that matters most for regulated industries and large organisations where data governance isn't an afterthought but a compliance requirement. Purview Data Catalog automatically scans Fabric workspaces and registers Lakehouse tables, Warehouse schemas, semantic models, and Dataflow lineage as assets in the enterprise data catalog — no manual registration required. Purview Information Protection sensitivity labels apply to Fabric items through the same label taxonomy used for Microsoft 365 documents, so a dataset labelled "Confidential" in Purview carries that label into downstream reports. And Purview Data Policy (in preview as of late 2023) allows defining data access policies at the Purview level that enforce in Fabric — centralising access governance rather than having each Fabric workspace admin manage permissions independently.
 
@@ -335,4 +333,4 @@ dq.add_rule(DataQualityRule(
 4. **Regular data quality monitoring** with alerts
 5. **Use lineage for compliance** documentation
 
-Tomorrow, we'll explore Copilot in Fabric and how AI enhances your analytics workflow!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Copilot in Fabric and how AI enhances your analytics workflow!

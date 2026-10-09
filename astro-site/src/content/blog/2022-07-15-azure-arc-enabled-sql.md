@@ -1,13 +1,11 @@
 ---
 title: "Azure Arc-Enabled SQL Managed Instance"
+description: "Azure Arc-enabled SQL Managed Instance delivers enterprise SQL Server capabilities with cloud-native operations on any infrastructure."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-15
 tags: ["Azure", "Azure Arc", "SQL Server", "Hybrid Cloud", "Kubernetes"]
-
 ---
-
-I wrote "Azure Arc-Enabled SQL Managed Instance" to share practical, production-minded guidance on this topic.
 
 ## Benefits of Arc-Enabled SQL MI
 
@@ -190,4 +188,4 @@ az sql mi-arc failover \
     --use-k8s
 ```
 
-Azure Arc-enabled SQL Managed Instance delivers enterprise SQL Server capabilities with cloud-native operations on any infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Arc-enabled SQL Managed Instance delivers enterprise SQL Server capabilities with cloud-native operations on any infrastructure.

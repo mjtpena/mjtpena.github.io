@@ -1,5 +1,6 @@
 ---
 title: "Function Calling Patterns in Azure OpenAI"
+description: "Functions are defined as JSON schemas that describe parameters and their types. Well-designed function schemas and clear descriptions ensure the model calls…"
 author: Michael John Peña
 draft: false
 date: 2025-08-24
@@ -9,10 +10,7 @@ tags:
   - Tool Use
   - API Design
   - Python
-
 ---
-
-I wrote "Function Calling Patterns in Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Defining Functions
 
@@ -112,4 +110,4 @@ def process_with_functions(user_message: str):
     return message.content
 ```
 
-Well-designed function schemas and clear descriptions ensure the model calls the right functions with correct parameters.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Well-designed function schemas and clear descriptions ensure the model calls the right functions with correct parameters.

@@ -9,10 +9,7 @@ tags:
   - Content Authenticity
   - Digital Provenance
   - C2PA
-
 ---
-
-I wrote "Watermarking AI-Generated Content: Techniques and Standards" to share practical, production-minded guidance on this topic.
 
 ## Watermarking Approaches
 
@@ -168,4 +165,3 @@ class ContentWatermarkingPipeline:
 ## Conclusion
 
 Watermarking is essential for AI content provenance. Implement multiple layers and follow emerging standards like C2PA.
-

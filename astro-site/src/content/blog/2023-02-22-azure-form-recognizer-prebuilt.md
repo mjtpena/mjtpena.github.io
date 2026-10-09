@@ -9,10 +9,7 @@ tags:
   - Document Intelligence
   - Prebuilt Models
   - AI
-
 ---
-
-I wrote "Azure Form Recognizer Prebuilt Models: Quick Document Processing" to share practical, production-minded guidance on this topic.
 
 ## Available Prebuilt Models
 
@@ -369,4 +366,4 @@ class DocumentProcessingPipeline:
 
 - [Prebuilt Models Overview](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-model-overview)
 - [Invoice Model](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-invoice)
-- [Receipt Model](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-receipt)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Receipt Model](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-receipt)

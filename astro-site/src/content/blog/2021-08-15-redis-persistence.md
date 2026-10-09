@@ -1,5 +1,6 @@
 ---
 title: "Redis Persistence Options in Azure: RDB and AOF Explained"
+description: "Redis persistence is the configuration choice that determines what happens to your cache data when the instance restarts—and for most Azure Cache for Redis…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-15
@@ -316,4 +317,4 @@ temp-cache:
 4. **Test recovery procedures**: Regularly verify backup integrity
 5. **Size storage appropriately**: AOF files grow over time
 
-Redis persistence transforms an in-memory cache into a durable data store, providing the reliability needed for critical applications while maintaining Redis's performance characteristics.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Redis persistence transforms an in-memory cache into a durable data store, providing the reliability needed for critical applications while maintaining Redis's performance characteristics.

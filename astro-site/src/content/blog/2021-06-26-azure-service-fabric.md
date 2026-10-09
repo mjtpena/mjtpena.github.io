@@ -9,10 +9,7 @@ tags:
   - Service Fabric
   - Microservices
   - Containers
-
 ---
-
-I wrote "2021-06-26-azure-service-fabric" to share practical, production-minded guidance on this topic.
 
 ## Service Fabric Programming Models
 
@@ -446,4 +443,3 @@ Azure Service Fabric provides a mature platform for building microservices with 
 
 - [Service Fabric Documentation](https://docs.microsoft.com/en-us/azure/service-fabric/)
 - [Reliable Services Programming Model](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-services-introduction)
-

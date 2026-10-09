@@ -1,5 +1,6 @@
 ---
 title: "Synapse Real-Time Analytics in Microsoft Fabric: Streaming at Scale"
+description: "Real-Time Analytics in Fabric provides powerful streaming capabilities for time-sensitive workloads. Tomorrow, I will cover Power BI integration in Fabric."
 author: Michael John Peña
 draft: false
 date: 2023-05-09
@@ -9,10 +10,7 @@ tags:
   - KQL
   - Streaming
   - Event Hubs
-
 ---
-
-I wrote "Synapse Real-Time Analytics in Microsoft Fabric: Streaming at Scale" to share practical, production-minded guidance on this topic.
 
 ## Real-Time Analytics Overview
 
@@ -289,4 +287,4 @@ Real-Time Analytics in Fabric provides powerful streaming capabilities for time-
 
 - [Real-Time Analytics in Fabric](https://learn.microsoft.com/en-us/fabric/real-time-analytics/)
 - [KQL Quick Reference](https://learn.microsoft.com/en-us/azure/data-explorer/kql-quick-reference)
-- [Eventstream](https://learn.microsoft.com/en-us/fabric/real-time-analytics/event-streams/overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Eventstream](https://learn.microsoft.com/en-us/fabric/real-time-analytics/event-streams/overview)

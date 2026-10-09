@@ -1,5 +1,6 @@
 ---
 title: Robotic Process Automation with Power Automate Desktop
+description: "Microsoft made Power Automate Desktop free for Windows 10 users in March, which quietly turned every back-office worker into a potential RPA developer. It's…"
 author: Michael John Pena
 draft: false
 date: 2021-01-23
@@ -459,4 +460,4 @@ Connect desktop flows with Power Automate cloud flows:
 6. **Test Incrementally**: Build and test flows step by step
 7. **Document Flows**: Add comments explaining complex logic
 
-Power Automate Desktop democratizes RPA by making it accessible to business users while providing the power needed for complex automation scenarios. Combined with cloud flows and AI Builder, it forms a comprehensive automation platform.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Power Automate Desktop democratizes RPA by making it accessible to business users while providing the power needed for complex automation scenarios. Combined with cloud flows and AI Builder, it forms a comprehensive automation platform.

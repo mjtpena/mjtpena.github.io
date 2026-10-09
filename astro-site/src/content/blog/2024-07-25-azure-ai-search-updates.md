@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Search Updates: What's New in Summer 2024"
+description: "Expanded Vector Dimensions Semantic Ranking Improvements Customer-Managed Keys for Vectors"
 author: Michael John Peña
 draft: false
 date: 2024-07-25
@@ -9,10 +10,7 @@ tags:
   - Vector Search
   - RAG
   - Search
-
 ---
-
-I wrote "Azure AI Search Updates: What's New in Summer 2024" to share practical, production-minded guidance on this topic.
 
 ## Vector Search Improvements
 
@@ -382,4 +380,3 @@ If upgrading from older versions:
 Azure AI Search's summer 2024 updates significantly improve vector search capabilities, hybrid retrieval, and operational efficiency. For RAG applications, the combination of larger vector support, better hybrid scoring, and integrated vectorization makes building production systems more straightforward.
 
 Upgrade to take advantage of these improvements, and review your HNSW parameters to optimize for your specific workload.
-

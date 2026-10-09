@@ -1,5 +1,6 @@
 ---
 title: "Building Plugins for ChatGPT: Extending AI with Custom Tools"
+description: "ChatGPT plugins extend AI capabilities with real-time data and actions. Tomorrow, I will cover function calling patterns in more depth."
 author: Michael John Peña
 draft: false
 date: 2023-05-17
@@ -9,10 +10,7 @@ tags:
   - OpenAI
   - AI
   - API Development
-
 ---
-
-I wrote "Building Plugins for ChatGPT: Extending AI with Custom Tools" to share practical, production-minded guidance on this topic.
 
 ## Plugin Architecture
 
@@ -438,4 +436,4 @@ ChatGPT plugins extend AI capabilities with real-time data and actions. Tomorrow
 
 - [ChatGPT Plugin Documentation](https://platform.openai.com/docs/plugins/)
 - [OpenAPI Specification](https://swagger.io/specification/)
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)

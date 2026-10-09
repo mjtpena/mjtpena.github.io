@@ -1,5 +1,6 @@
 ---
 title: "EU AI Act Practical Guide: What Enterprises Need to Do Now"
+description: "The EU AI Act is complex but manageable with systematic approach. Start your inventory now, prioritize high-risk systems, and build compliance into your…"
 author: Michael John Peña
 draft: false
 date: 2024-12-16
@@ -9,10 +10,7 @@ tags:
   - Compliance
   - Enterprise
   - Governance
-
 ---
-
-I wrote "EU AI Act Practical Guide: What Enterprises Need to Do Now" to share practical, production-minded guidance on this topic.
 
 ## Timeline and Deadlines
 
@@ -447,4 +445,4 @@ The EU AI Act is complex but manageable with systematic approach. Start your inv
 
 - [Official EU AI Act Text](https://eur-lex.europa.eu/eli/reg/2024/1689)
 - [European Commission AI Act Guide](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
-- [AI Act Compliance Checklist](https://artificialintelligenceact.eu/compliance-checker/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AI Act Compliance Checklist](https://artificialintelligenceact.eu/compliance-checker/)

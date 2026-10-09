@@ -1,5 +1,6 @@
 ---
 title: "Teaching My Kids About Technology"
+description: "Andriel asked me what I do at work. \"I work with computers\" wasn't cutting it anymore. So I tried to explain AI to a kid who thinks Siri is magic."
 author: Michael John Peña
 draft: false
 date: 2026-02-08
@@ -93,4 +94,4 @@ Kids who control their devices, not the other way around.
 
 We're not there yet. But we're having the right conversations.
 
-That's a start.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+That's a start.

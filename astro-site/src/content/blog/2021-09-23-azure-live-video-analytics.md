@@ -1,5 +1,6 @@
 ---
 title: Building Live Video Analytics Pipelines on Azure
+description: "Live Video Analytics enables real-time video intelligence at the edge, perfect for security, retail analytics, and industrial monitoring applications."
 author: Michael John Pena
 draft: false
 date: 2021-09-23
@@ -9,10 +10,7 @@ tags:
   - Live Streaming
   - Edge Computing
   - Computer Vision
-
 ---
-
-I wrote "2021-09-23-azure-live-video-analytics" to share practical, production-minded guidance on this topic.
 
 ## Live Video Analytics Architecture
 
@@ -424,4 +422,4 @@ def create_event_recording_topology():
 5. **Resource Management**: Monitor edge device CPU/memory
 6. **Inference Optimization**: Use INT8 quantized models for edge
 
-Live Video Analytics enables real-time video intelligence at the edge, perfect for security, retail analytics, and industrial monitoring applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Live Video Analytics enables real-time video intelligence at the edge, perfect for security, retail analytics, and industrial monitoring applications.

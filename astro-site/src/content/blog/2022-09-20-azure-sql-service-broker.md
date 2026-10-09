@@ -1,13 +1,11 @@
 ---
 title: "Service Broker in Azure SQL Managed Instance"
+description: "Service Broker provides queuing and messaging functionality within SQL Server, allowing for decoupled, asynchronous communication between services."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-20
 tags: ["Azure", "SQL Managed Instance", "Service Broker", "Messaging"]
-
 ---
-
-I wrote "Service Broker in Azure SQL Managed Instance" to share practical, production-minded guidance on this topic.
 
 ## Understanding Service Broker
 
@@ -395,4 +393,4 @@ FROM sys.conversation_endpoints ce
 JOIN sys.services s ON ce.service_id = s.service_id;
 ```
 
-Service Broker provides reliable messaging capabilities directly within Azure SQL Managed Instance for event-driven architectures.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Service Broker provides reliable messaging capabilities directly within Azure SQL Managed Instance for event-driven architectures.

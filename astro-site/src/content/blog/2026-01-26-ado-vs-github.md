@@ -1,5 +1,6 @@
 ---
 title: "Azure DevOps vs GitHub: My Take After Using Both"
+description: "Spent 3 years with Azure DevOps. Last year switched to GitHub. Here's my honest comparison."
 author: Michael John Peña
 draft: false
 date: 2026-01-26
@@ -86,4 +87,4 @@ If you're migrating:
 - Neither migration is trivial
 - Might be worth staying where you are
 
-Both are good tools. Pick based on your actual needs, not hype.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Both are good tools. Pick based on your actual needs, not hype.

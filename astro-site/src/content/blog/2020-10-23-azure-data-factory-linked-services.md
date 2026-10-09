@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Factory Linked Services: Connect Everything"
+description: "Best practice: use Managed Identity where supported. Linked Services are the foundation of Data Factory connectivity."
 author: Michael John Peña
 draft: false
 date: 2020-10-23
@@ -8,10 +9,7 @@ tags:
   - Data Factory
   - Data Engineering
   - Integration
-
 ---
-
-I wrote "Azure Data Factory Linked Services: Connect Everything" to share practical, production-minded guidance on this topic.
 
 ## Common Linked Services
 
@@ -187,4 +185,4 @@ Best practice: use Managed Identity where supported.
 3. Parameterize for multiple environments
 4. Use Self-Hosted IR for on-premises
 
-Linked Services are the foundation of Data Factory connectivity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Linked Services are the foundation of Data Factory connectivity.

@@ -1,5 +1,6 @@
 ---
 title: "AI Agents: Reality vs Hype in 2026"
+description: "The tech itself isn't revolutionary—it's the orchestration that's interesting. Code review automation. Agents can catch obvious issues, suggest…"
 author: Michael John Peña
 draft: false
 date: 2026-01-02
@@ -8,10 +9,7 @@ tags:
   - Agents
   - Azure
   - Opinion
-
 ---
-
-I wrote "AI Agents: Reality vs Hype in 2026" to share practical, production-minded guidance on this topic.
 
 ## What Are AI Agents Really?
 
@@ -95,4 +93,4 @@ They fail at:
 
 Build accordingly. Set realistic expectations. Measure actual business value, not just technical capability.
 
-The hype will fade. The useful implementations will remain. Focus on the latter.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The hype will fade. The useful implementations will remain. Focus on the latter.

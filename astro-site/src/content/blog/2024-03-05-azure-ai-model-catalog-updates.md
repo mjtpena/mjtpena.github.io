@@ -1,13 +1,11 @@
 ---
 title: "Azure AI Model Catalog: March 2024 Updates"
+description: "The Azure AI Model Catalog continues to expand with new models and capabilities. This month brings significant updates including new foundation models and…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-05
 tags: ["Azure", "AI", "Model Catalog", "Machine Learning", "LLM"]
-
 ---
-
-I wrote "Azure AI Model Catalog: March 2024 Updates" to share practical, production-minded guidance on this topic.
 
 The Azure AI Model Catalog continues to expand with new models and capabilities. This month brings significant updates including new foundation models and improved deployment options.
 
@@ -180,4 +178,3 @@ for row in response.tables[0].rows:
 ## Conclusion
 
 The Azure AI Model Catalog provides a comprehensive platform for accessing and deploying foundation models. The combination of serverless and dedicated options gives flexibility for any workload.
-

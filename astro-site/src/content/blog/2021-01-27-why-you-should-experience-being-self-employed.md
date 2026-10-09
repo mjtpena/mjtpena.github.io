@@ -1,5 +1,6 @@
 ---
 title: Why you should experience being self-employed
+description: "I believe that every person who dreamed of being self-employed should at least try it, given their circumstances. Obviously, I wouldn't advise people to…"
 author: Michael John Peña
 draft: false
 date: 2021-01-27
@@ -11,11 +12,7 @@ tags:
   - company
   - startup
   - work
-
 ---
-
-I wrote "2021-01-27-why-you-should-experience-being-self-employed" to share practical, production-minded guidance on this topic.
-
 
 I believe that every person who dreamed of being self-employed should at least try it, given their circumstances. Obviously, I wouldn't advise people to quit their job and start a poor-planned business if there is a financial or family obligation at stake. But given if you have the capability and capacity to do so; plan it properly and just go for it.
 
@@ -79,4 +76,3 @@ There is a common misconception that once you become self-employed, always plan 
 If you have the right resources and plans to start a business, just go for it. You'll learn the rest of it along the way. You will go pass by the "What if I...?". If it doesn't work, then at least you tried, maybe it's not yet the right time.
 
 Let me know your story. Have you started your own business? Do you want to start a business? What's holding you back?
-

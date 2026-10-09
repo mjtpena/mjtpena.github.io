@@ -1,5 +1,6 @@
 ---
 title: "Azure App Configuration: Centralized Settings Management"
+description: "\"Why is the staging environment talking to the production database?\" is a sentence I never want to hear again, and yet—when configuration lives in…"
 author: Michael John Peña
 draft: false
 date: 2020-12-13
@@ -206,4 +207,4 @@ az eventgrid event-subscription create \
     --included-event-types Microsoft.AppConfiguration.KeyValueModified
 ```
 
-App Configuration: dynamic settings without redeployment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+App Configuration: dynamic settings without redeployment.

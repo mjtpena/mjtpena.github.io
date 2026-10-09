@@ -1,13 +1,11 @@
 ---
 title: "Mistral 7B on Azure: Exploring Open-Source LLM Deployment"
+description: "Mistral 7B — released by Mistral AI on September 27, 2023 with a permissive Apache 2.0 licence — is the open-source model that forced a recalibration of…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-20
 tags: ["Azure", "Mistral", "AI", "LLM", "Open Source"]
-
 ---
-
-I wrote "Mistral 7B on Azure: Exploring Open-Source LLM Deployment" to share practical, production-minded guidance on this topic.
 
 Mistral 7B — released by Mistral AI on September 27, 2023 with a permissive Apache 2.0 licence — is the open-source model that forced a recalibration of what "7 billion parameters" means for language model quality. The original Llama 2 7B sets one baseline; Mistral 7B is meaningfully better on most benchmarks and approaches Llama 2 13B performance with fewer parameters. The architectural innovations behind this: sliding window attention (reduces the memory requirement for long-context inference by attending only to a local window of tokens rather than the full sequence) and grouped-query attention (reduces the KV cache memory footprint during generation). Mistral 7B on Azure — available through the Azure Model Catalog as a managed deployment — gives organisations an Apache-2.0-licensed model with Azure's enterprise operational characteristics, which is relevant for deployments where proprietary model licensing is a constraint or where fine-tuning on proprietary data and retaining the weights is a requirement.
 
@@ -460,4 +458,3 @@ print(f"Recommended: {config['instance']} at {config['cost_per_hour']}")
 Mistral 7B represents an excellent option for organizations looking to balance cost and performance. Its Apache 2.0 license, strong benchmark results, and efficient architecture make it a compelling choice for many production use cases. As open-source models continue to improve, expect Mistral and similar models to handle increasingly complex tasks.
 
 Stay tuned for coverage of larger models as they become available on Azure.
-

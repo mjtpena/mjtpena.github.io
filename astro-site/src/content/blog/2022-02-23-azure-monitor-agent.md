@@ -1,18 +1,16 @@
 ---
 title: "Azure Monitor Agent: The Future of Azure Monitoring"
+description: "Azure Monitor Agent provides a unified, secure, and flexible foundation for all monitoring needs."
 author: Michael John Peña
 draft: false
 date: 2022-02-23
 url: /blog/azure-monitor-agent/
 tags:
-  - azure
-  - monitoring
-  - agents
-  - observability
-
+  - Azure
+  - Monitoring
+  - Agents
+  - Observability
 ---
-
-I wrote "Azure Monitor Agent: The Future of Azure Monitoring" to share practical, production-minded guidance on this topic.
 
 ## Why Azure Monitor Agent?
 
@@ -278,4 +276,4 @@ journalctl -u azuremonitoragent -n 100
 cat /etc/opt/microsoft/azuremonitoragent/config-cache/configchunks/*
 ```
 
-Azure Monitor Agent provides a unified, secure, and flexible foundation for all monitoring needs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Monitor Agent provides a unified, secure, and flexible foundation for all monitoring needs.

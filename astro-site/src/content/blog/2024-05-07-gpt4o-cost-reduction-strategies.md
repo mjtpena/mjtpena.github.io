@@ -1,5 +1,6 @@
 ---
 title: "Cost Reduction Strategies with GPT-4o"
+description: "GPT-4o is already 50% cheaper than GPT-4 Turbo, but there are more ways to optimize costs. Here are practical strategies I use in production."
 author: Michael John Peña
 draft: false
 date: 2024-05-07

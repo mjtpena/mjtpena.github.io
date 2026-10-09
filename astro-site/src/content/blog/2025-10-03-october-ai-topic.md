@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Capacity Planning: Right-Sizing Your Data Platform"
+description: "For development and test environments, implement auto-pause policies to reduce costs during inactive periods. Monitor utilization patterns and adjust…"
 author: Michael John Peña
 draft: false
 date: 2025-10-03
@@ -9,10 +10,7 @@ tags:
   - Data Platform
   - Cost Management
   - Performance
-
 ---
-
-I wrote "Microsoft Fabric Capacity Planning: Right-Sizing Your Data Platform" to share practical, production-minded guidance on this topic.
 
 ## Understanding Fabric Capacity Units
 
@@ -109,4 +107,4 @@ class FabricCapacityMonitor:
 
 ## Implementing Auto-Pause for Cost Savings
 
-For development and test environments, implement auto-pause policies to reduce costs during inactive periods. Monitor utilization patterns and adjust capacity reservations quarterly based on actual usage data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+For development and test environments, implement auto-pause policies to reduce costs during inactive periods. Monitor utilization patterns and adjust capacity reservations quarterly based on actual usage data.

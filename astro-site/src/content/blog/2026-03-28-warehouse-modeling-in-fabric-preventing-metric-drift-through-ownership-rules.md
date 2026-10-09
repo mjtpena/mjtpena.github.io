@@ -1,5 +1,6 @@
 ---
 title: "Warehouse Modeling in Fabric: preventing metric drift through ownership rules"
+description: "I spent the day reducing cognitive overhead for engineers and analysts—introducing clearer table contracts, simpler failure modes, and concise runbooks that…"
 author: Michael John Peña
 draft: false
 date: 2026-03-28
@@ -37,4 +38,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [Fabric Data Warehouse](https://learn.microsoft.com/fabric/data-warehouse/)
 - [Lakehouse in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)
-- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)

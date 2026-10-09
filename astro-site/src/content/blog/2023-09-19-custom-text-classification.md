@@ -10,10 +10,7 @@ tags:
   - Text Classification
   - Machine Learning
   - AI
-
 ---
-
-I wrote "Custom Text Classification with Azure AI Language" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -493,4 +490,3 @@ evaluator.print_report(evaluation)
 ## Conclusion
 
 Custom text classification in Azure AI Language enables organizations to build domain-specific classifiers tailored to their unique categorization needs. By carefully preparing training data, validating project configuration, and evaluating model performance, you can create accurate and reliable classification systems for various business applications.
-

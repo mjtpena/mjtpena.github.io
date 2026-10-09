@@ -1,5 +1,6 @@
 ---
 title: "Azure Front Door WAF: Web Application Firewall"
+description: "A WAF in front of every public app is no longer a nice-to-have. Bots scan you within minutes of going live, and \"we'll add WAF later\" is how breaches…"
 author: Michael John Peña
 draft: false
 date: 2020-12-03
@@ -180,4 +181,4 @@ az network front-door waf-policy update \
 4. Switch to Prevention mode
 5. Monitor continuously
 
-Front Door WAF: your first line of defense.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Front Door WAF: your first line of defense.

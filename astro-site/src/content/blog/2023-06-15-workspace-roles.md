@@ -1,5 +1,6 @@
 ---
 title: "Fabric Workspace Roles: Managing Access and Collaboration"
+description: "Proper role management is essential for secure and efficient collaboration. Tomorrow, I will cover Item Permissions in more detail."
 author: Michael John Peña
 draft: false
 date: 2023-06-15
@@ -9,10 +10,7 @@ tags:
   - Workspace
   - RBAC
   - Governance
-
 ---
-
-I wrote "Fabric Workspace Roles: Managing Access and Collaboration" to share practical, production-minded guidance on this topic.
 
 ## Role Hierarchy
 
@@ -385,4 +383,4 @@ Proper role management is essential for secure and efficient collaboration. Tomo
 
 - [Workspace Roles](https://learn.microsoft.com/en-us/fabric/get-started/roles-workspaces)
 - [Azure AD Groups](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal)
-- [Access Management Best Practices](https://learn.microsoft.com/en-us/power-bi/admin/service-admin-role)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Access Management Best Practices](https://learn.microsoft.com/en-us/power-bi/admin/service-admin-role)

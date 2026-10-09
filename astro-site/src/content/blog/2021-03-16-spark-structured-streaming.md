@@ -1,5 +1,6 @@
 ---
 title: Real-Time Data Processing with Spark Structured Streaming
+description: "The appeal of Spark Structured Streaming is that you write it almost identically to a batch Spark job. Same DataFrame API, same transformations, same Spark…"
 author: Michael John Pena
 draft: false
 date: 2021-03-16

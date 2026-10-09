@@ -9,10 +9,7 @@ tags:
   - CI/CD
   - YAML
   - DevOps
-
 ---
-
-I wrote "2021-06-06-azure-devops-yaml-pipelines" to share practical, production-minded guidance on this topic.
 
 ## Basic Pipeline Structure
 
@@ -470,4 +467,3 @@ Azure DevOps YAML pipelines provide powerful, version-controlled CI/CD capabilit
 
 - [Azure Pipelines YAML Schema](https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema)
 - [Pipeline Templates](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates)
-

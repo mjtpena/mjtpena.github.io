@@ -1,13 +1,11 @@
 ---
 title: "Time-To-Live (TTL) in Azure Cosmos DB: Automatic Data Expiration"
+description: "TTL is a powerful feature for automatic data lifecycle management, reducing storage costs and ensuring compliance with data retention policies without…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-12
 tags: ["Azure", "Cosmos DB", "TTL", "Data Management", "NoSQL"]
-
 ---
-
-I wrote "Time-To-Live (TTL) in Azure Cosmos DB: Automatic Data Expiration" to share practical, production-minded guidance on this topic.
 
 ## Enabling TTL on a Container
 
@@ -298,4 +296,4 @@ class TieredDataManager {
 4. **Test expiration timing**: TTL isn't instantaneous
 5. **Consider RU impact**: Deletions consume throughput
 
-TTL is a powerful feature for automatic data lifecycle management, reducing storage costs and ensuring compliance with data retention policies without manual intervention.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+TTL is a powerful feature for automatic data lifecycle management, reducing storage costs and ensuring compliance with data retention policies without manual intervention.

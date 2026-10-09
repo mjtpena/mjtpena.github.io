@@ -1,5 +1,6 @@
 ---
 title: Implementing the Saga Pattern with Azure Services
+description: "The Saga pattern is how you handle distributed transactions—operations that span multiple microservices and need consistency guarantees—without two-phase…"
 author: Michael John Peña
 draft: false
 date: 2021-06-24

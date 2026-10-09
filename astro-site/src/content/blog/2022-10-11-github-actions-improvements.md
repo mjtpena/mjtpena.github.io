@@ -1,13 +1,11 @@
 ---
 title: "GitHub Actions Improvements - October 2022"
+description: "GitHub now offers larger hosted runners for more demanding workloads. Enforce workflows across all repositories in an organization."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-11
 tags: ["GitHub", "GitHub Actions", "CI/CD", "DevOps"]
-
 ---
-
-I wrote "GitHub Actions Improvements - October 2022" to share practical, production-minded guidance on this topic.
 
 ## Larger Runners
 
@@ -379,4 +377,4 @@ jobs:
 4. **Right-size runners** - Balance cost and performance
 5. **Use OIDC** - Avoid long-lived credentials
 
-GitHub Actions improvements make CI/CD more efficient, secure, and maintainable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GitHub Actions improvements make CI/CD more efficient, secure, and maintainable.

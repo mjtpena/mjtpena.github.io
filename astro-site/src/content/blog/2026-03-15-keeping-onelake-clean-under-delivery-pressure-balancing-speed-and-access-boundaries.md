@@ -1,5 +1,6 @@
 ---
 title: "Keeping OneLake Clean Under Delivery Pressure: balancing speed and access boundaries"
+description: "I focused on making delivery decisions auditable and repeatable—documenting intent, success criteria, and rollback paths to reduce tribal knowledge."
 author: Michael John Peña
 draft: false
 date: 2026-03-15
@@ -36,4 +37,4 @@ Tomorrow's focus is to stress-test this with less ideal inputs and see where it 
 
 - [OneLake overview](https://learn.microsoft.com/fabric/onelake/)
 - [OneLake shortcuts](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts)
-- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Communication Services: Voice, Video, Chat, SMS"
+description: "Azure Communication Services: Teams-grade communication in your apps."
 author: Michael John Peña
 draft: false
 date: 2020-12-20
@@ -8,10 +9,7 @@ tags:
   - Communication Services
   - Voice
   - Video
-
 ---
-
-I wrote "Azure Communication Services: Voice, Video, Chat, SMS" to share practical, production-minded guidance on this topic.
 
 ## Creating ACS Resource
 
@@ -183,4 +181,4 @@ const locator = { meetingLink: 'https://teams.microsoft.com/l/meetup-join/...' }
 const call = callAgent.join(locator);
 ```
 
-Azure Communication Services: Teams-grade communication in your apps.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Communication Services: Teams-grade communication in your apps.

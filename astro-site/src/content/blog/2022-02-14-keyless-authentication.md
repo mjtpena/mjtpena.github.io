@@ -5,14 +5,11 @@ draft: false
 date: 2022-02-14
 url: /blog/keyless-authentication/
 tags:
-  - azure
-  - security
-  - authentication
+  - Azure
+  - Security
+  - Authentication
   - zero-trust
-
 ---
-
-I wrote "Keyless Authentication: The Future of Cloud Security" to share practical, production-minded guidance on this topic.
 
 ## The Keyless Architecture
 
@@ -91,4 +88,5 @@ metadata:
   annotations:
     azure.workload.identity/client-id: "$CLIENT_ID"
   labels:
-    azure.workload.identity/use: "true"\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    azure.workload.identity/use: "true"
+```

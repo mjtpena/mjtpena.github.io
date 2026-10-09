@@ -1,5 +1,6 @@
 ---
 title: "Building Knowledge Graphs with Azure OpenAI and Neo4j"
+description: "Graph RAG significantly improves answers for questions involving relationships, hierarchies, and multi-hop reasoning."
 author: Michael John Peña
 draft: false
 date: 2025-07-23
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - Graph RAG
   - Python
-
 ---
-
-I wrote "Building Knowledge Graphs with Azure OpenAI and Neo4j" to share practical, production-minded guidance on this topic.
 
 ## Entity and Relationship Extraction
 
@@ -106,4 +104,4 @@ async def graph_rag_query(self, question: str) -> str:
     return response.choices[0].message.content
 ```
 
-Graph RAG significantly improves answers for questions involving relationships, hierarchies, and multi-hop reasoning.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Graph RAG significantly improves answers for questions involving relationships, hierarchies, and multi-hop reasoning.

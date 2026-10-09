@@ -1,5 +1,6 @@
 ---
 title: "Azure Application Gateway: Layer 7 Load Balancing"
+description: "\"Why don't I just use Azure Load Balancer?\" is the question I get most often when someone first sees Application Gateway in the architecture diagram. The…"
 author: Michael John Peña
 draft: false
 date: 2020-09-23
@@ -116,4 +117,4 @@ resource "azurerm_application_gateway" "main" {
 | WAF | Yes | No |
 | WebSockets | Yes | Yes |
 
-Use Application Gateway for web traffic, Load Balancer for everything else.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use Application Gateway for web traffic, Load Balancer for everything else.

@@ -1,17 +1,15 @@
 ---
 title: "Azure Container Apps GA: Serverless Containers Made Simple"
+description: "Unlike AKS where you manage the cluster, Container Apps abstracts away the infrastructure. You focus on your containers while Azure handles scaling, load…"
 author: Michael John Peña
 draft: false
 date: 2022-05-04
 tags:
-  - azure
+  - Azure
   - container-apps
-  - serverless
-  - kubernetes
-
+  - Serverless
+  - Kubernetes
 ---
-
-I wrote "Azure Container Apps GA: Serverless Containers Made Simple" to share practical, production-minded guidance on this topic.
 
 ## What Makes Container Apps Different?
 
@@ -364,5 +362,3 @@ Azure Container Apps provides:
 - Pay-per-use pricing model
 
 It is ideal for microservices, APIs, event-driven applications, and background processing jobs.
-
-

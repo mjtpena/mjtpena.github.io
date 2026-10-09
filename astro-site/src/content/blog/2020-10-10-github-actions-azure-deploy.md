@@ -1,5 +1,6 @@
 ---
 title: "GitHub Actions for Azure Deployments"
+description: "Azure DevOps Pipelines was the obvious answer for years. GitHub Actions in 2020 changed that calculus — for any project where the source already lives on…"
 author: Michael John Peña
 draft: false
 date: 2020-10-10
@@ -131,4 +132,4 @@ jobs:
           package: .
 ```
 
-GitHub Actions + Azure = streamlined DevOps.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GitHub Actions + Azure = streamlined DevOps.

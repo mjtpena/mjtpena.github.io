@@ -1,5 +1,6 @@
 ---
 title: "Boxing Day Deep Dive: Understanding Transformer Architecture"
+description: "Transformers solve a key problem: how do you process sequences while understanding relationships between all elements, not just adjacent ones?"
 author: Michael John Peña
 draft: false
 date: 2025-12-26
@@ -9,10 +10,7 @@ tags:
   - Deep-Learning
   - Education
   - Architecture
-
 ---
-
-I wrote "Boxing Day Deep Dive: Understanding Transformer Architecture" to share practical, production-minded guidance on this topic.
 
 ## Why Transformers Matter
 
@@ -138,4 +136,4 @@ Understanding transformers helps you:
 - Predict computational costs
 - Evaluate efficiency improvements in new models
 
-The transformer is the foundation of modern AI. Understanding it deeply pays dividends in every AI project you build.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The transformer is the foundation of modern AI. Understanding it deeply pays dividends in every AI project you build.

@@ -1,5 +1,6 @@
 ---
 title: "Differential Privacy in Machine Learning: Protecting Individual Data"
+description: "Differential privacy ensures that the output of a computation doesn't reveal whether any individual's data was included. The key insight: add calibrated…"
 author: Michael John Pena
 draft: false
 date: 2021-12-23
@@ -9,10 +10,7 @@ tags:
   - Machine Learning
   - Security
   - Data Protection
-
 ---
-
-I wrote "Differential Privacy in Machine Learning: Protecting Individual Data" to share practical, production-minded guidance on this topic.
 
 ## Understanding Differential Privacy
 
@@ -477,4 +475,4 @@ Differential privacy in 2021 became accessible through libraries like Opacus and
 - [Opacus (PyTorch DP)](https://opacus.ai/)
 - [Google DP Library](https://github.com/google/differential-privacy)
 - [The Algorithmic Foundations of DP](https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf)
-- [Apple's Local DP](https://www.apple.com/privacy/docs/Differential_Privacy_Overview.pdf)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Apple's Local DP](https://www.apple.com/privacy/docs/Differential_Privacy_Overview.pdf)

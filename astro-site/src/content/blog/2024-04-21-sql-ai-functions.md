@@ -1,13 +1,11 @@
 ---
 title: "SQL AI Functions in Databricks: LLMs Meet SQL"
+description: "Databricks SQL AI functions bring large language model capabilities directly into SQL queries. Process text, generate insights, and enrich data without…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-21
 tags: ["Databricks", "SQL", "AI", "LLM", "Data Engineering"]
-
 ---
-
-I wrote "SQL AI Functions in Databricks: LLMs Meet SQL" to share practical, production-minded guidance on this topic.
 
 Databricks SQL AI functions bring large language model capabilities directly into SQL queries. Process text, generate insights, and enrich data without leaving SQL.
 
@@ -333,4 +331,3 @@ COST_TIPS = [
 ## Conclusion
 
 SQL AI functions bring LLM capabilities directly into your data workflows. Use them for text analysis, content generation, and data enrichment while following best practices for performance and cost.
-

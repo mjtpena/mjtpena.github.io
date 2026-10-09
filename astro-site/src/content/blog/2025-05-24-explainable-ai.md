@@ -1,5 +1,6 @@
 ---
 title: "Explainable AI: Making AI Decisions Transparent"
+description: "Explainable AI builds trust and enables informed decision-making."
 author: Michael John Peña
 draft: false
 date: 2025-05-24
@@ -9,10 +10,7 @@ tags:
   - XAI
   - Transparency
   - Trust
-
 ---
-
-I wrote "Explainable AI: Making AI Decisions Transparent" to share practical, production-minded guidance on this topic.
 
 ## Explainable AI Implementation
 
@@ -122,4 +120,4 @@ Explain the connection briefly."""
         }
 ```
 
-Explainable AI builds trust and enables informed decision-making.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Explainable AI builds trust and enables informed decision-making.

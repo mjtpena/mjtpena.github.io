@@ -1,5 +1,6 @@
 ---
 title: "Intelligent Document Processing with Azure Form Recognizer"
+description: "Azure Form Recognizer transforms manual document processing into automated workflows. The combination of pre-built and custom models handles most document…"
 author: Michael John Pena
 draft: false
 date: 2023-03-08
@@ -9,10 +10,7 @@ tags:
   - Form Recognizer
   - Document Processing
   - OCR
-
 ---
-
-I wrote "Intelligent Document Processing with Azure Form Recognizer" to share practical, production-minded guidance on this topic.
 
 ## Form Recognizer Capabilities
 
@@ -423,4 +421,4 @@ class ERPIntegration:
         return response.json()
 ```
 
-Azure Form Recognizer transforms manual document processing into automated workflows. The combination of pre-built and custom models handles most document types, while confidence scores enable human-in-the-loop validation for edge cases.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Form Recognizer transforms manual document processing into automated workflows. The combination of pre-built and custom models handles most document types, while confidence scores enable human-in-the-loop validation for edge cases.

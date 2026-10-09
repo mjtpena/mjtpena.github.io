@@ -1,13 +1,14 @@
 ---
 title: "Long Polling: Real-Time Patterns for Legacy Systems"
+description: "Long polling is the workaround for near-real-time notifications in environments where WebSocket connections aren't available—the client sends an HTTP…"
 author: Michael John Peña
 draft: false
 date: 2022-06-23
 tags:
-  - polling
-  - real-time
-  - api
-  - patterns
+  - Polling
+  - Real-Time
+  - API
+  - Patterns
 ---
 
 Long polling is the workaround for near-real-time notifications in environments where WebSocket connections aren't available—the client sends an HTTP request to the server; the server holds the connection open until it has data to send (or a timeout occurs); the client receives the response and immediately sends another request, creating a continuous long-polling cycle. The implementation: the client sends a GET request with a `timeout` parameter; the server returns data when available or a "no data" response after the timeout; the client loops. Long polling works within standard HTTP infrastructure (firewalls, proxies, load balancers) that might block WebSocket connections, making it the fallback for enterprise environments with restrictive network policies. The operational downsides: each connected client holds a server thread (or async I/O slot) for the duration of the poll timeout; high-concurrency long-polling consumes significantly more server resources than WebSocket at equivalent scale; and the polling cycle introduces latency proportional to the timeout interval for events that arrive just after a poll completes. With WebSocket and SSE broadly supported in 2022, long polling is primarily a fallback mechanism rather than a first-choice architecture.

@@ -1,5 +1,6 @@
 ---
 title: "NPU Programming: Leveraging Neural Processing Units"
+description: "NPUs enable efficient on-device AI with 10-100x better power efficiency than CPUs."
 author: Michael John Peña
 draft: false
 date: 2025-04-04
@@ -9,10 +10,7 @@ tags:
   - AI
   - Performance
   - On-Device
-
 ---
-
-I wrote "NPU Programming: Leveraging Neural Processing Units" to share practical, production-minded guidance on this topic.
 
 ## NPU Development Patterns
 
@@ -119,4 +117,4 @@ class NPUOptimizedModel:
         return results
 ```
 
-NPUs enable efficient on-device AI with 10-100x better power efficiency than CPUs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+NPUs enable efficient on-device AI with 10-100x better power efficiency than CPUs.

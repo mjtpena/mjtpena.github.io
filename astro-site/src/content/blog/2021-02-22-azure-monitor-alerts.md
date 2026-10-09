@@ -10,10 +10,7 @@ tags:
   - Alerts
   - DevOps
   - Observability
-
 ---
-
-I wrote "2021-02-22-azure-monitor-alerts" to share practical, production-minded guidance on this topic.
 
 ## Types of Alerts
 
@@ -414,4 +411,3 @@ Create a workbook for alert visibility:
 Azure Monitor Alerts are essential for proactive system management. By combining metric, log, and activity log alerts with appropriate action groups and auto-remediation, you can maintain system health and minimize downtime.
 
 Start with essential alerts for your most critical resources and expand coverage as you understand your system's behavior patterns.
-

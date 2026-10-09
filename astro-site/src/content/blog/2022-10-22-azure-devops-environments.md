@@ -1,13 +1,15 @@
 ---
 title: "Azure DevOps Environments and Deployments"
+description: "Environments provide governance and visibility for deployments across your infrastructure."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-22
-tags: ["Azure", "Azure DevOps", "Environments", "Deployment"]
-
+tags:
+  - Azure
+  - Azure DevOps
+  - environments
+  - Deployment
 ---
-
-I wrote "Azure DevOps Environments and Deployments" to share practical, production-minded guidance on this topic.
 
 ## Configuring Environments
 
@@ -62,4 +64,4 @@ stages:
 - Exclusive locks
 - Business hours restrictions
 
-Environments provide governance and visibility for deployments across your infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Environments provide governance and visibility for deployments across your infrastructure.

@@ -1,5 +1,6 @@
 ---
 title: "Data Observability: Monitoring Your Data Pipelines"
+description: "Data observability is the capability that answers \"is my data healthy right now?\" the same way application observability answers \"is my application healthy…"
 author: Michael John Pena
 draft: false
 date: 2021-12-26
@@ -489,4 +490,4 @@ Data observability in 2021 became essential as organizations depended more on da
 - [Monte Carlo Data Observability](https://www.montecarlodata.com/)
 - [Great Expectations](https://greatexpectations.io/)
 - [OpenLineage](https://openlineage.io/)
-- [dbt Exposures](https://docs.getdbt.com/docs/build/exposures)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [dbt Exposures](https://docs.getdbt.com/docs/build/exposures)

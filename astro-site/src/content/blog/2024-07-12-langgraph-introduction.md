@@ -1,5 +1,6 @@
 ---
 title: "LangGraph Introduction: Building Stateful AI Agents"
+description: "LangGraph provides these capabilities through a graph-based execution model."
 author: Michael John Peña
 draft: false
 date: 2024-07-12
@@ -9,10 +10,7 @@ tags:
   - Agents
   - Python
   - LLM
-
 ---
-
-I wrote "LangGraph Introduction: Building Stateful AI Agents" to share practical, production-minded guidance on this topic.
 
 ## Why LangGraph?
 
@@ -492,4 +490,3 @@ app.get_graph().draw_png("agent_graph.png")
 LangGraph brings structure to complex AI workflows. When your application needs cycles, conditional logic, or persistent state, LangGraph provides the primitives to build reliably.
 
 Start with simple graphs, add complexity as needed, and always visualize your graph to understand the flow.
-

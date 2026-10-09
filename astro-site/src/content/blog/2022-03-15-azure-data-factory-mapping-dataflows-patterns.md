@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Factory Mapping Data Flows: ETL Patterns for the Modern Data Platform"
+description: "Think of it as the best of both worlds: visual design for maintainability, Spark for scale."
 author: Michael John Peña
 draft: false
 date: 2022-03-15
@@ -9,10 +10,7 @@ tags:
   - ETL
   - Data Engineering
   - Spark
-
 ---
-
-I wrote "Azure Data Factory Mapping Data Flows: ETL Patterns for the Modern Data Platform" to share practical, production-minded guidance on this topic.
 
 ## What Are Mapping Data Flows?
 
@@ -186,4 +184,3 @@ The patterns above cover probably 80% of what most data platforms need. Master t
 - [Mapping Data Flows Documentation](https://docs.microsoft.com/en-us/azure/data-factory/concepts-data-flow-overview)
 - [Data Flow Performance Guide](https://docs.microsoft.com/en-us/azure/data-factory/concepts-data-flow-performance)
 - [Mark Kromer's Book on Mapping Data Flows](https://www.amazon.com/Mapping-Data-Flows-Azure-Factory/dp/1484286111)
-

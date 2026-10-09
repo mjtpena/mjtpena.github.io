@@ -9,10 +9,7 @@ tags:
   - Runway
   - Stable Diffusion
   - Creative AI
-
 ---
-
-I wrote "AI Video Generation: Current Tools and Techniques" to share practical, production-minded guidance on this topic.
 
 ## Available Tools
 
@@ -120,4 +117,3 @@ def video_post_process(frames: list, output_path: str):
 ## Conclusion
 
 AI video generation is rapidly improving. Start with current tools, develop prompt expertise, and build workflows that can scale as technology advances.
-

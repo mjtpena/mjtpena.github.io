@@ -5,13 +5,10 @@ draft: false
 date: 2022-06-22
 tags:
   - sse
-  - real-time
-  - api
-  - azure
-
+  - Real-Time
+  - API
+  - Azure
 ---
-
-I wrote "Server-Sent Events: Simple Real-Time Updates" to share practical, production-minded guidance on this topic.
 
 ## SSE Endpoint in ASP.NET
 
@@ -75,5 +72,3 @@ window.addEventListener('beforeunload', () => {
 ## Summary
 
 SSE offers a simple, HTTP-based solution for server-to-client streaming, with automatic reconnection and broad browser support.
-
-

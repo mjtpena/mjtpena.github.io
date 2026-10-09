@@ -1,5 +1,6 @@
 ---
 title: "AI-Assisted Data Modeling: From Requirements to Schema"
+description: "AI-assisted data modeling accelerates the initial design phase but doesn't replace expertise. Use it to generate options quickly, then apply your domain…"
 author: Michael John Peña
 draft: false
 date: 2025-01-20
@@ -9,10 +10,7 @@ tags:
   - Database Design
   - Azure
   - Architecture
-
 ---
-
-I wrote "AI-Assisted Data Modeling: From Requirements to Schema" to share practical, production-minded guidance on this topic.
 
 ## The AI-Assisted Modeling Workflow
 
@@ -399,4 +397,4 @@ class ModelDocumenter:
 4. **Validate**: Check against known patterns and constraints
 5. **Document**: Generate documentation alongside the model
 
-AI-assisted data modeling accelerates the initial design phase but doesn't replace expertise. Use it to generate options quickly, then apply your domain knowledge to refine.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI-assisted data modeling accelerates the initial design phase but doesn't replace expertise. Use it to generate options quickly, then apply your domain knowledge to refine.

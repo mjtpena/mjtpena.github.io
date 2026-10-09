@@ -1,5 +1,6 @@
 ---
 title: "Semantic Kernel Filters: Intercepting and Modifying AI Operations"
+description: "Semantic Kernel supports several filter types: function invocation filters, prompt render filters, and auto function invocation filters. Each intercepts…"
 author: Michael John Peña
 draft: false
 date: 2025-08-29
@@ -9,10 +10,7 @@ tags:
   - Middleware
   - .NET
   - AI Architecture
-
 ---
-
-I wrote "Semantic Kernel Filters: Intercepting and Modifying AI Operations" to share practical, production-minded guidance on this topic.
 
 ## Understanding Filter Types
 
@@ -101,4 +99,4 @@ builder.Services.AddSingleton<IPromptRenderFilter, PromptEnhancementFilter>();
 var kernel = builder.Build();
 ```
 
-Filters enable clean separation of cross-cutting concerns from your core AI logic, making applications more maintainable and testable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Filters enable clean separation of cross-cutting concerns from your core AI logic, making applications more maintainable and testable.

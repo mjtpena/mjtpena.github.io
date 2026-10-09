@@ -9,10 +9,7 @@ tags:
   - Tokens
   - Cost Optimization
   - AI
-
 ---
-
-I wrote "Token Management in Azure OpenAI: Counting, Optimizing, and Budgeting" to share practical, production-minded guidance on this topic.
 
 ## What Are Tokens?
 
@@ -582,4 +579,4 @@ print(f"Available for next message: {context.get_available_tokens()}")
 
 - [OpenAI Tokenizer](https://platform.openai.com/tokenizer)
 - [tiktoken Library](https://github.com/openai/tiktoken)
-- [Azure OpenAI Pricing](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure OpenAI Pricing](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/)

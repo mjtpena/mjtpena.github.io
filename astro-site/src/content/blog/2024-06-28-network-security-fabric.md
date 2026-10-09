@@ -1,5 +1,6 @@
 ---
 title: "Network Security in Microsoft Fabric"
+description: "Network security provides defense in depth for your data platform. Today I'm exploring network security options in Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-28
@@ -623,4 +624,4 @@ Tomorrow I'll cover private endpoints in depth for Microsoft Fabric.
 
 - [Fabric Network Security](https://learn.microsoft.com/fabric/security/security-network)
 - [Private Endpoints](https://learn.microsoft.com/fabric/security/security-private-links)
-- [VNet Data Gateway](https://learn.microsoft.com/data-integration/vnet/overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [VNet Data Gateway](https://learn.microsoft.com/data-integration/vnet/overview)

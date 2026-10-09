@@ -1,5 +1,6 @@
 ---
 title: Azure Arc for Kubernetes - Managing Multi-Cloud Clusters
+description: "Most enterprises I work with have Kubernetes in three places they didn't plan for: an on-prem cluster the platform team built, an EKS estate from an…"
 author: Michael John Pena
 draft: false
 date: 2021-01-19
@@ -409,4 +410,4 @@ asyncio.run(deploy_to_clusters(
 4. **RBAC**: Use Azure RBAC for consistent access control across clusters
 5. **Secrets Management**: Use Azure Key Vault with the Secrets Store CSI Driver
 
-Azure Arc for Kubernetes provides a unified control plane for multi-cloud and hybrid Kubernetes environments. Combined with GitOps, it enables consistent, auditable deployments across your entire infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Arc for Kubernetes provides a unified control plane for multi-cloud and hybrid Kubernetes environments. Combined with GitOps, it enables consistent, auditable deployments across your entire infrastructure.

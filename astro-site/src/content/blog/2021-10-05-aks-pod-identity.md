@@ -1,13 +1,11 @@
 ---
 title: "Secure Azure Access with AKS Pod Identity"
+description: "AAD Pod Identity was the original mechanism for giving Kubernetes pods an Azure AD identity so they could access Azure resources—Key Vault secrets, Storage…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-05
 tags: ["Azure", "Kubernetes", "AKS", "Security", "Identity"]
-
 ---
-
-I wrote "Secure Azure Access with AKS Pod Identity" to share practical, production-minded guidance on this topic.
 
 AAD Pod Identity was the original mechanism for giving Kubernetes pods an Azure AD identity so they could access Azure resources—Key Vault secrets, Storage Accounts, Cosmos DB—without storing credentials anywhere. The architecture: a NMI DaemonSet intercepted IMDS requests from pods and exchanged them for tokens scoped to the pod's assigned Managed Identity. It worked, but the NMI DaemonSet approach added latency to identity requests and required privileged cluster access. By October 2021, Microsoft had already released the Workload Identity preview as the successor—it was worth understanding Pod Identity because most production clusters were still running it, but new deployments should have evaluated Workload Identity. The core concept both share—pods getting Managed Identity tokens without secrets—is the right security posture for AKS applications accessing Azure services.
 
@@ -94,4 +92,5 @@ metadata:
 spec:
   type: 0  # 0 = User Assigned, 1 = Service Principal
   resourceID: /subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myPodIdentity
-  clientID: {client-id-guid}\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+  clientID: {client-id-guid}
+```

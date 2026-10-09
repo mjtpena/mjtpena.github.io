@@ -10,10 +10,7 @@ tags:
   - Speech
   - AI
   - Voice
-
 ---
-
-I wrote "2021-03-23-cognitive-services-speech" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Speech Services
 
@@ -511,4 +508,3 @@ Azure Speech Services enable rich voice experiences:
 - **Speaker Recognition**: Voice-based identity verification
 
 These capabilities power virtual assistants, accessibility features, and multilingual applications.
-

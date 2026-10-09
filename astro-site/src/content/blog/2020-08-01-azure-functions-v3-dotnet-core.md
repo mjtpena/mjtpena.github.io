@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Azure Functions v3 and .NET Core 3.1"
+description: "A lot of the work landing on my desk this year has been \"we suddenly need this in the cloud, and we needed it last week.\" Azure Functions on .NET Core 3.1…"
 author: Michael John Peña
 draft: false
 date: 2020-08-01
@@ -137,4 +138,4 @@ func azure functionapp publish my-func-app-2020
 - **One function, one job.** I keep trying to be clever and combining triggers. It always ends with a deployment that I'm afraid to touch.
 - **Managed identity over connection strings.** Even for the storage account that backs the Function App. The first time you rotate a key by accident in production you'll agree.
 
-Functions v3 on .NET Core 3.1 is not a flashy stack, but it's the one I trust to be quietly running six months from now without me thinking about it. Which, for serverless, is exactly the bar.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Functions v3 on .NET Core 3.1 is not a flashy stack, but it's the one I trust to be quietly running six months from now without me thinking about it. Which, for serverless, is exactly the bar.

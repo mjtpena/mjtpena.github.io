@@ -1,5 +1,6 @@
 ---
 title: "Extracting Data from Documents with Azure Form Recognizer"
+description: "Every accounts payable team I've ever talked to has a person whose job is, in part, retyping data from PDF invoices into an ERP. It's exhausting work, the…"
 author: Michael John Peña
 draft: false
 date: 2020-08-17
@@ -300,4 +301,4 @@ public async Task<LayoutResult> AnalyzeLayoutAsync(Stream documentStream)
 - **Image quality is the silent killer.** Phone photos at an angle, faxed scans at 200dpi grayscale — accuracy collapses. Worth budgeting for a decent scanner or capture app.
 - **Stage the rollout.** Run Form Recognizer in shadow mode for a month — extract data, but compare against what humans typed. You learn the failure modes before you bet a process on them.
 
-Form Recognizer is one of the AI services with the clearest ROI, and the failure modes are well understood. Invoice processing was the first AI workload I deployed for a client where the savings were obvious within a month.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Form Recognizer is one of the AI services with the clearest ROI, and the failure modes are well understood. Invoice processing was the first AI workload I deployed for a client where the savings were obvious within a month.

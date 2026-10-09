@@ -1,5 +1,6 @@
 ---
 title: "Entity Extraction at Scale with LLMs"
+description: "Entity extraction at scale transforms unstructured text into structured knowledge. Combining LLM intelligence with distributed processing enables insights…"
 author: Michael John Pena
 draft: false
 date: 2023-04-25
@@ -9,10 +10,7 @@ tags:
   - Entity Extraction
   - Data Engineering
   - LLM
-
 ---
-
-I wrote "Entity Extraction at Scale with LLMs" to share practical, production-minded guidance on this topic.
 
 ## Scalable Entity Extraction Pipeline
 
@@ -623,4 +621,4 @@ count = pipeline.process_documents(
 print(f"Extracted entities from {count} documents")
 ```
 
-Entity extraction at scale transforms unstructured text into structured knowledge. Combining LLM intelligence with distributed processing enables insights from document collections of any size.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Entity extraction at scale transforms unstructured text into structured knowledge. Combining LLM intelligence with distributed processing enables insights from document collections of any size.

@@ -1,5 +1,6 @@
 ---
 title: "Vision-Language Models in Production: Practical Implementation Guide"
+description: "VLMs unlock powerful visual understanding capabilities. Deploy them thoughtfully with proper optimization and error handling."
 author: Michael John Peña
 draft: false
 date: 2025-02-17
@@ -9,10 +10,7 @@ tags:
   - Computer Vision
   - Production
   - Azure
-
 ---
-
-I wrote "Vision-Language Models in Production: Practical Implementation Guide" to share practical, production-minded guidance on this topic.
 
 ## Production Architecture
 
@@ -445,4 +443,4 @@ def select_detail_level(image_data: bytes, task: str) -> str:
 5. **Structured prompts**: Get consistent output formats
 6. **Handle failures**: Images may be filtered or rejected
 
-VLMs unlock powerful visual understanding capabilities. Deploy them thoughtfully with proper optimization and error handling.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+VLMs unlock powerful visual understanding capabilities. Deploy them thoughtfully with proper optimization and error handling.

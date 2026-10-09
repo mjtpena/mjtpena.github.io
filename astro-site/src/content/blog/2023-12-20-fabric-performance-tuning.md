@@ -1,13 +1,11 @@
 ---
 title: "Fabric Performance Tuning: Optimizing Your Data Platform"
+description: "Performance tuning in Fabric blends write-time optimisations (v-ordering, partitioning) with query-time strategies (predicate pushdown, materialised views).…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-20
 tags: ["Microsoft Fabric", "Performance", "Optimization", "Tuning", "Best Practices"]
-
 ---
-
-I wrote "Fabric Performance Tuning: Optimizing Your Data Platform" to share practical, production-minded guidance on this topic.
 
 Performance tuning in Fabric blends write-time optimisations (v-ordering, partitioning) with query-time strategies (predicate pushdown, materialised views). I'll share practical tuning steps I apply when customers complain that reports or queries are slow.
 
@@ -387,4 +385,3 @@ class PerformanceMonitor:
 ```
 
 Tomorrow, we'll dive into Direct Lake optimization!
-

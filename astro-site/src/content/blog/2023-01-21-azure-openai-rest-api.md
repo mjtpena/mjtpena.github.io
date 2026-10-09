@@ -9,10 +9,7 @@ tags:
   - REST API
   - Integration
   - HTTP
-
 ---
-
-I wrote "Azure OpenAI REST API: Direct Integration Without SDKs" to share practical, production-minded guidance on this topic.
 
 ## API Structure
 
@@ -548,4 +545,4 @@ PREVIEW_API_VERSION = "2023-06-01-preview"
 
 - [Azure OpenAI REST API Reference](https://learn.microsoft.com/azure/cognitive-services/openai/reference)
 - [API Versions](https://learn.microsoft.com/azure/cognitive-services/openai/reference#api-specs)
-- [Authentication](https://learn.microsoft.com/azure/cognitive-services/openai/reference#authentication)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Authentication](https://learn.microsoft.com/azure/cognitive-services/openai/reference#authentication)

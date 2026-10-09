@@ -1,5 +1,6 @@
 ---
 title: "Azure Confidential Computing: Encrypt Data in Use"
+description: "\"It can't be processed if it can't be decrypted, but you can't process encrypted data.\" That truism quietly stopped being true. Confidential Computing uses…"
 author: Michael John Peña
 draft: false
 date: 2020-12-06
@@ -174,4 +175,4 @@ SELECT * FROM Patients
 WHERE SSN = @ssn  -- Rich queries on encrypted columns
 ```
 
-Confidential computing: trust no one, protect everything.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Confidential computing: trust no one, protect everything.

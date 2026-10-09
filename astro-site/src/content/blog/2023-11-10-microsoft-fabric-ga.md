@@ -1,13 +1,11 @@
 ---
 title: "Microsoft Fabric GA: The Unified Data Platform Revolution"
+description: "Microsoft Fabric reaching General Availability at Ignite 2023 (November 15-17) is the milestone that transforms the six-month public preview from an…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-10
 tags: ["Microsoft Fabric", "Data Platform", "Analytics", "Azure", "Ignite 2023"]
-
 ---
-
-I wrote "Microsoft Fabric GA: The Unified Data Platform Revolution" to share practical, production-minded guidance on this topic.
 
 Microsoft Fabric reaching General Availability at Ignite 2023 (November 15-17) is the milestone that transforms the six-month public preview from an extended beta into a platform organisations can make long-term commitments to. Six months of preview is enough time to have done real work: I've built lakehouse pipelines on it, run notebooks on it, and watched the Capacity Metrics app tell me when I was over-consuming CUs during late-night data loads. GA doesn't mean complete — there are still roadmap items in preview within the GA platform — but it means Microsoft is committed to backward compatibility and production SLAs for the core platform items. The workloads reaching GA: Lakehouse, Spark (Data Engineering), Data Factory, Warehouse, Power BI, and Real-Time Analytics. The workloads still in preview at GA: some Copilot features, some data science capabilities, Fabric Real-Time hub.
 
@@ -209,4 +207,4 @@ Fabric GA is just the beginning. In the coming posts, we'll explore:
 - Copilot in Fabric
 - Migration best practices
 
-This is a transformative moment for data platforms. Whether you're currently on Azure Synapse, Databricks, or on-premises solutions, Fabric deserves serious consideration for your data strategy.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+This is a transformative moment for data platforms. Whether you're currently on Azure Synapse, Databricks, or on-premises solutions, Fabric deserves serious consideration for your data strategy.

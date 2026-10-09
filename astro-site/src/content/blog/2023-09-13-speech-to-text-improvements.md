@@ -10,10 +10,7 @@ tags:
   - AI
   - Transcription
   - NLP
-
 ---
-
-I wrote "Speech-to-Text Improvements in Azure AI: Accuracy and Performance" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -484,4 +481,3 @@ print(conversation)
 ## Conclusion
 
 The latest speech-to-text improvements in Azure AI provide significantly enhanced accuracy for real-world scenarios. By leveraging noise suppression, custom models, batch transcription, and speaker diarization, you can build robust transcription solutions for challenging use cases. The combination of real-time and batch processing options ensures flexibility for various application requirements.
-

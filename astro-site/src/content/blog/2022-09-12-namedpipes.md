@@ -1,5 +1,6 @@
 ---
 title: "Using named pipes for interprocess communication in C#"
+description: "Pipes - a communication channel between two processes. Streams - a data collection that moves from a source to a destination."
 author: Michael John Peña
 draft: false
 date: 2022-09-12
@@ -8,11 +9,8 @@ tags:
   - csharp
   - dotnet
   - pipe
-  - messaging
-
+  - Messaging
 ---
-
-I wrote "Using named pipes for interprocess communication in C#" to share practical, production-minded guidance on this topic.
 
 **Pipes** - a communication channel between two processes.
 
@@ -117,5 +115,3 @@ As you can see on the left (server) you can type in a message and the right (cli
 - Named Pipes is a simple way to communicate across processes.
 - It's not designed to store data. Use a messaging queue like Kafka or RabbitMQ.
 - If you have mobile clients such as mobile and websites, use HTTP, gRPC, and web sockets instead.
-
-

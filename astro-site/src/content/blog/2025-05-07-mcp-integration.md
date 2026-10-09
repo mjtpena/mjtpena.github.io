@@ -1,5 +1,6 @@
 ---
 title: "Model Context Protocol in Azure: Standardized Tool Integration"
+description: "MCP standardizes how AI systems connect to external tools and data sources."
 author: Michael John Peña
 draft: false
 date: 2025-05-07
@@ -9,10 +10,7 @@ tags:
   - AI
   - Integration
   - Tools
-
 ---
-
-I wrote "Model Context Protocol in Azure: Standardized Tool Integration" to share practical, production-minded guidance on this topic.
 
 ## MCP Integration
 
@@ -99,4 +97,4 @@ async def use_mcp_tools():
             print(f"Tool result: {result}")
 ```
 
-MCP standardizes how AI systems connect to external tools and data sources.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+MCP standardizes how AI systems connect to external tools and data sources.

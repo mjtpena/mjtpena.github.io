@@ -1,13 +1,11 @@
 ---
 title: "Azure Cosmos DB Updates - September 2022"
+description: "The latest updates bring significant performance enhancements to Cosmos DB, including optimized query execution and improved throughput management."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-01
 tags: ["Azure", "Cosmos DB", "NoSQL", "Database"]
-
 ---
-
-I wrote "Azure Cosmos DB Updates - September 2022" to share practical, production-minded guidance on this topic.
 
 ## Key Updates Overview
 
@@ -108,4 +106,4 @@ while (resultSetIterator.HasMoreResults)
 3. **Optimize partition keys** - Choose partition keys that distribute data evenly
 4. **Enable diagnostics** - Use built-in diagnostics for troubleshooting
 
-These updates make Cosmos DB an even more powerful choice for globally distributed applications requiring low latency and high availability.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These updates make Cosmos DB an even more powerful choice for globally distributed applications requiring low latency and high availability.

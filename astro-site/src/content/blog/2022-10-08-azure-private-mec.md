@@ -1,13 +1,11 @@
 ---
 title: "Azure Private Multi-Access Edge Compute (MEC)"
+description: "Azure Private MEC delivers cloud capabilities at the edge with enterprise-grade security and management."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-08
 tags: ["Azure", "MEC", "Edge Computing", "5G"]
-
 ---
-
-I wrote "Azure Private Multi-Access Edge Compute (MEC)" to share practical, production-minded guidance on this topic.
 
 ## Understanding Private MEC
 
@@ -312,4 +310,4 @@ EdgeDataFlow
 4. **Sports venues** - Fan engagement applications
 5. **Smart cities** - Traffic and safety monitoring
 
-Azure Private MEC delivers cloud capabilities at the edge with enterprise-grade security and management.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Private MEC delivers cloud capabilities at the edge with enterprise-grade security and management.

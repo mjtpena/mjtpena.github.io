@@ -9,10 +9,7 @@ tags:
   - Machine Learning
   - MLOps
   - AI
-
 ---
-
-I wrote "Databricks ML: End-to-End Machine Learning on the Lakehouse" to share practical, production-minded guidance on this topic.
 
 ## Databricks ML Components
 
@@ -388,4 +385,3 @@ The unified platform eliminates the friction of moving between data engineering 
 - [Databricks ML Documentation](https://docs.databricks.com/machine-learning/index.html)
 - [MLflow Documentation](https://mlflow.org/docs/latest/index.html)
 - [Spark ML Guide](https://spark.apache.org/docs/latest/ml-guide.html)
-

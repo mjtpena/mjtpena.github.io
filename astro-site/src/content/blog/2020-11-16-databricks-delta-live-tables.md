@@ -1,5 +1,6 @@
 ---
 title: "Databricks Delta Lake: Advanced Patterns"
+description: "Delta Lake: the foundation of the modern lakehouse."
 author: Michael John Peña
 draft: false
 date: 2020-11-16
@@ -8,10 +9,7 @@ tags:
   - Delta Lake
   - Data Engineering
   - Lakehouse
-
 ---
-
-I wrote "Databricks Delta Lake: Advanced Patterns" to share practical, production-minded guidance on this topic.
 
 ## Creating Delta Tables
 
@@ -179,4 +177,4 @@ DeltaTable.forPath(spark, "/delta/events").clone("/delta/events_backup", isShall
 | Z-Order | Columns frequently in WHERE clauses |
 | Vacuum | Run weekly, keep 7+ days history |
 
-Delta Lake: the foundation of the modern lakehouse.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Delta Lake: the foundation of the modern lakehouse.

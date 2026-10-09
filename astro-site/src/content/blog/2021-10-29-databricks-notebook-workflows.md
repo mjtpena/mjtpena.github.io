@@ -1,13 +1,11 @@
 ---
 title: "Databricks Notebook Workflows for Data Pipelines"
+description: "Databricks notebook workflows—chaining notebooks together using dbutils.notebook.run()—are the stepping stone between \"notebooks as scripts\" and proper…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-29
 tags: ["Azure", "Databricks", "Workflows", "Data Pipelines", "Orchestration"]
-
 ---
-
-I wrote "Databricks Notebook Workflows for Data Pipelines" to share practical, production-minded guidance on this topic.
 
 Databricks notebook workflows—chaining notebooks together using `dbutils.notebook.run()`—are the stepping stone between "notebooks as scripts" and proper pipeline orchestration. The pattern: an orchestrator notebook calls individual step notebooks with parameters, collects exit values, and handles branching logic based on results. Each step notebook handles a specific transformation stage (ingestion, cleaning, enrichment, aggregation), making the pipeline modular and testable in isolation. The limitations become apparent at production scale: `dbutils.notebook.run()` runs notebooks synchronously, maximum timeout is configurable but finite, error messages from child notebooks are serialised strings rather than rich exceptions, and testing notebook interactions requires running the full chain. For simple pipelines with linear step sequences, notebook workflows work well; for complex DAGs with parallelism and sophisticated error handling, Databricks Jobs with task-level dependencies is the better architecture.
 
@@ -386,4 +384,3 @@ log_path = logger.save_log()
 Notebook workflows provide a flexible way to orchestrate data pipelines in Databricks. By combining sequential and parallel execution with proper error handling, you can build robust production workflows.
 
 Tomorrow, we'll explore Git integration in Databricks for version control.
-

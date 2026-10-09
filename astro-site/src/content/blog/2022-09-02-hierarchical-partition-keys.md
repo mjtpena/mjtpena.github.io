@@ -1,13 +1,11 @@
 ---
 title: "Hierarchical Partition Keys in Azure Cosmos DB"
+description: "Traditional single partition keys can lead to hot partitions in scenarios where data is naturally hierarchical. Hierarchical partition keys solve this by…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-02
 tags: ["Azure", "Cosmos DB", "Partitioning", "Data Modeling"]
-
 ---
-
-I wrote "Hierarchical Partition Keys in Azure Cosmos DB" to share practical, production-minded guidance on this topic.
 
 ## Understanding Hierarchical Partition Keys
 
@@ -176,4 +174,4 @@ public async Task<List<Order>> GetTenantOrdersAsync(string tenantId)
 3. **E-commerce** - Partition by category, subcategory, then product ID
 4. **Gaming** - Partition by game, server region, then player ID
 
-Hierarchical partition keys provide the flexibility needed for complex data models while maintaining excellent performance characteristics.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hierarchical partition keys provide the flexibility needed for complex data models while maintaining excellent performance characteristics.

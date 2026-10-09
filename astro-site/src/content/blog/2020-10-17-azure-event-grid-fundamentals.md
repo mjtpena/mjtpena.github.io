@@ -1,5 +1,6 @@
 ---
 title: "Azure Event Grid: Event-Driven Architecture Made Simple"
+description: "Event Grid enables reactive, event-driven architectures at scale."
 author: Michael John Peña
 draft: false
 date: 2020-10-17
@@ -8,10 +9,7 @@ tags:
   - Event Grid
   - Serverless
   - Events
-
 ---
-
-I wrote "Azure Event Grid: Event-Driven Architecture Made Simple" to share practical, production-minded guidance on this topic.
 
 ## Core Concepts
 
@@ -154,4 +152,4 @@ az eventgrid event-subscription update \
     --deadletter-endpoint /subscriptions/{sub}/resourceGroups/myRG/providers/Microsoft.Storage/storageAccounts/mystorageaccount/blobServices/default/containers/deadletter
 ```
 
-Event Grid enables reactive, event-driven architectures at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Event Grid enables reactive, event-driven architectures at scale.

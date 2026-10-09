@@ -9,10 +9,7 @@ tags:
   - OpenAI
   - Memory
   - RAG
-
 ---
-
-I wrote "Semantic Kernel Memory: Building AI with Long-Term Context" to share practical, production-minded guidance on this topic.
 
 ## Memory Basics
 
@@ -345,4 +342,4 @@ class MemoryManager:
 
 - [SK Memory Documentation](https://learn.microsoft.com/semantic-kernel/memories/)
 - [Memory Connectors](https://learn.microsoft.com/semantic-kernel/memories/memory-connectors)
-- [RAG with Semantic Kernel](https://learn.microsoft.com/semantic-kernel/memories/semantic-memory)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [RAG with Semantic Kernel](https://learn.microsoft.com/semantic-kernel/memories/semantic-memory)

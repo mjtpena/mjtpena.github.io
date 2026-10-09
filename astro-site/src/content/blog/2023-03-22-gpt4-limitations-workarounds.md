@@ -1,5 +1,6 @@
 ---
 title: "GPT-4 Limitations and Workarounds"
+description: "GPT-4's training data ends in September 2021. It doesn't know about recent events, technologies, or updates."
 author: Michael John Pena
 draft: false
 date: 2023-03-22
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Limitations
   - Best Practices
-
 ---
-
-I wrote "GPT-4 Limitations and Workarounds" to share practical, production-minded guidance on this topic.
 
 ## Limitation 1: Knowledge Cutoff
 
@@ -529,4 +527,3 @@ Return ONLY the JSON, no other text."""
 | Format issues | Parsing with retry |
 
 Understanding limitations and implementing workarounds turns GPT-4 from a cool demo into a reliable production tool.
-

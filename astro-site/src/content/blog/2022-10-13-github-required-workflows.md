@@ -1,13 +1,11 @@
 ---
 title: "GitHub Required Workflows for Enterprise"
+description: "Required workflows ensure consistent security and quality standards across the enterprise."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-13
 tags: ["GitHub", "GitHub Actions", "Enterprise", "Security"]
-
 ---
-
-I wrote "GitHub Required Workflows for Enterprise" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Required Workflows
 
@@ -121,4 +119,4 @@ jobs:
 4. **Version workflows** - Use tags for stability
 5. **Monitor compliance** - Track enforcement across repos
 
-Required workflows ensure consistent security and quality standards across the enterprise.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Required workflows ensure consistent security and quality standards across the enterprise.

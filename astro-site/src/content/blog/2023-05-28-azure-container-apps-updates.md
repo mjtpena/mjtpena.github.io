@@ -1,5 +1,6 @@
 ---
 title: "Azure Container Apps Updates: Serverless Containers at Scale"
+description: "Container Apps provides a powerful, serverless container platform. Tomorrow, I will cover Jobs in Container Apps in more detail."
 author: Michael John Peña
 draft: false
 date: 2023-05-28
@@ -9,10 +10,7 @@ tags:
   - Kubernetes
   - Serverless
   - Azure
-
 ---
-
-I wrote "Azure Container Apps Updates: Serverless Containers at Scale" to share practical, production-minded guidance on this topic.
 
 ## Azure Container Apps Overview
 
@@ -466,4 +464,4 @@ Container Apps provides a powerful, serverless container platform. Tomorrow, I w
 
 - [Container Apps Documentation](https://learn.microsoft.com/en-us/azure/container-apps/)
 - [Container Apps Jobs](https://learn.microsoft.com/en-us/azure/container-apps/jobs)
-- [Dapr Integration](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Dapr Integration](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview)

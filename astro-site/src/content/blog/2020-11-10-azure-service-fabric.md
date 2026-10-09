@@ -1,5 +1,6 @@
 ---
 title: "Azure Service Fabric: Microservices Platform"
+description: "Service Fabric: enterprise microservices with built-in state management."
 author: Michael John Peña
 draft: false
 date: 2020-11-10
@@ -8,10 +9,7 @@ tags:
   - Service Fabric
   - Microservices
   - Containers
-
 ---
-
-I wrote "Azure Service Fabric: Microservices Platform" to share practical, production-minded guidance on this topic.
 
 ## Service Types
 
@@ -155,4 +153,4 @@ var healthInfo = new HealthInformation("OrderService", "ProcessingStatus", Healt
 Partition.ReportInstanceHealth(healthInfo);
 ```
 
-Service Fabric: enterprise microservices with built-in state management.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Service Fabric: enterprise microservices with built-in state management.

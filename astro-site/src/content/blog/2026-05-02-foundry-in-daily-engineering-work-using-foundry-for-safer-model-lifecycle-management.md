@@ -1,5 +1,6 @@
 ---
 title: "Foundry in Daily Engineering Work: using Foundry for safer model lifecycle management"
+description: "I tightened system boundaries so quality checks trigger earlier, catching regressions before downstream systems consume bad data."
 author: Michael John Peña
 draft: false
 date: 2026-05-02
@@ -36,4 +37,4 @@ Tomorrow I want to verify this pattern under a busier workload before I call it 
 
 - [Microsoft Foundry overview](https://learn.microsoft.com/azure/ai-foundry/what-is-azure-ai-foundry)
 - [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

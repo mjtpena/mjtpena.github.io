@@ -1,5 +1,6 @@
 ---
 title: "The Expert Trap: When Being Right Gets in the Way"
+description: "A client hired me for my Azure expertise. Six weeks in, I realized I was the least knowledgeable person in the room—and that was exactly as it should be."
 author: Michael John Peña
 draft: false
 date: 2026-02-17
@@ -72,4 +73,4 @@ Expert knowledge is a tool, not an identity. Use it to help people solve their p
 
 The moment being right matters more than solving the problem, you've become the problem.
 
-Stay curious. Stay humble. Know your lane and the limits of it.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Stay curious. Stay humble. Know your lane and the limits of it.

@@ -1,13 +1,11 @@
 ---
 title: "Multi-Step Reasoning Patterns with o1"
+description: "Multi-step reasoning is o1's superpower. Use these patterns to unlock its full potential."
 author: "Michael John Peña"
 draft: false
 date: 2024-09-08
 tags: ["OpenAI", "o1", "Reasoning", "AI", "Patterns"]
-
 ---
-
-I wrote "Multi-Step Reasoning Patterns with o1" to share practical, production-minded guidance on this topic.
 
 ## Understanding Multi-Step Reasoning
 
@@ -264,4 +262,4 @@ schedule = resolve_dependencies(tasks)
 3. **Multiple perspectives** - Parallel hypothesis testing leverages o1's ability to hold multiple ideas
 4. **Iteration improves quality** - Asking for refinement cycles produces better solutions
 
-Multi-step reasoning is o1's superpower. Use these patterns to unlock its full potential.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multi-step reasoning is o1's superpower. Use these patterns to unlock its full potential.

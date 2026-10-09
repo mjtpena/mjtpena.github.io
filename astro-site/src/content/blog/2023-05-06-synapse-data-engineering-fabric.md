@@ -1,5 +1,6 @@
 ---
 title: "Synapse Data Engineering in Microsoft Fabric: Spark at Scale"
+description: "Synapse Data Engineering in Fabric provides a managed Spark experience that removes infrastructure concerns while delivering the full power of Apache Spark.…"
 author: Michael John Peña
 draft: false
 date: 2023-05-06
@@ -9,10 +10,7 @@ tags:
   - Apache Spark
   - Data Engineering
   - PySpark
-
 ---
-
-I wrote "Synapse Data Engineering in Microsoft Fabric: Spark at Scale" to share practical, production-minded guidance on this topic.
 
 ## Data Engineering in Fabric
 
@@ -324,4 +322,4 @@ Synapse Data Engineering in Fabric provides a managed Spark experience that remo
 
 - [Data Engineering Tutorial](https://learn.microsoft.com/en-us/fabric/data-engineering/tutorial-lakehouse-introduction)
 - [Spark Notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook)
-- [Spark Job Definitions](https://learn.microsoft.com/en-us/fabric/data-engineering/spark-job-definition)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Spark Job Definitions](https://learn.microsoft.com/en-us/fabric/data-engineering/spark-job-definition)

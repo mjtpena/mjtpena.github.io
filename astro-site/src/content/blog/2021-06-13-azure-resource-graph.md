@@ -1,5 +1,6 @@
 ---
 title: Azure Resource Graph for Cross-Subscription Queries
+description: "Azure Resource Graph is the query service that answers \"what do we actually have in Azure?\" at enterprise scale in milliseconds. The ARM APIs query each…"
 author: Michael John Peña
 draft: false
 date: 2021-06-13

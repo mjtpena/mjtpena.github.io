@@ -1,5 +1,6 @@
 ---
 title: "Copilot for Notebooks: AI-Assisted Data Engineering"
+description: "Copilot for Notebooks transforms how data engineers write code. Today I'm exploring practical patterns for leveraging AI assistance in Fabric notebooks."
 author: Michael John Peña
 draft: false
 date: 2024-06-09
@@ -460,4 +461,4 @@ Tomorrow I'll cover Copilot for SQL in Fabric Data Warehouse.
 
 - [Copilot for Notebooks](https://learn.microsoft.com/fabric/data-engineering/copilot-notebooks)
 - [PySpark Reference](https://spark.apache.org/docs/latest/api/python/)
-- [Fabric Notebooks](https://learn.microsoft.com/fabric/data-engineering/how-to-use-notebook)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric Notebooks](https://learn.microsoft.com/fabric/data-engineering/how-to-use-notebook)

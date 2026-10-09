@@ -9,10 +9,7 @@ tags:
   - Reporting
   - Migration
   - Azure
-
 ---
-
-I wrote "SSRS to Power BI Migration: A Practical Guide" to share practical, production-minded guidance on this topic.
 
 ## Why Migrate to Power BI?
 
@@ -356,4 +353,3 @@ SSRS to Power BI migration requires careful planning but offers significant bene
 - [Power BI Paginated Reports](https://docs.microsoft.com/en-us/power-bi/paginated-reports/paginated-reports-report-builder-power-bi)
 - [On-premises Gateway](https://docs.microsoft.com/en-us/power-bi/connect-data/service-gateway-onprem)
 - [Power BI Report Server](https://docs.microsoft.com/en-us/power-bi/report-server/get-started)
-

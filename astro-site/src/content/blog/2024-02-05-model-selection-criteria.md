@@ -9,10 +9,7 @@ tags:
   - Decision Framework
   - Enterprise AI
   - Architecture
-
 ---
-
-I wrote "LLM Model Selection Criteria: A Decision Framework" to share practical, production-minded guidance on this topic.
 
 ## Selection Criteria
 
@@ -161,4 +158,3 @@ print(f"Selected model: {selected}")
 ## Conclusion
 
 Model selection should be systematic, not arbitrary. Define your requirements, score candidates objectively, and document decisions for future review.
-

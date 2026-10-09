@@ -1,18 +1,16 @@
 ---
 title: "Azure Container Apps Deep Dive: The Future of Serverless Containers"
+description: "Azure Container Apps is a fully managed serverless container service that enables you to run microservices and containerized applications without managing…"
 author: Michael John Peña
 draft: false
 date: 2022-01-02
 url: /blog/azure-container-apps-deep-dive/
 tags:
-  - azure
-  - containers
-  - serverless
-  - kubernetes
-
+  - Azure
+  - Containers
+  - Serverless
+  - Kubernetes
 ---
-
-I wrote "Azure Container Apps Deep Dive: The Future of Serverless Containers" to share practical, production-minded guidance on this topic.
 
 ## What Are Azure Container Apps?
 
@@ -156,4 +154,4 @@ template: {
 - APIs and web applications
 - When you want Kubernetes benefits without the complexity
 
-Azure Container Apps represents a significant step forward in making containerization accessible to all developers, not just Kubernetes experts.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Container Apps represents a significant step forward in making containerization accessible to all developers, not just Kubernetes experts.

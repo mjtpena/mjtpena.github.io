@@ -1,13 +1,11 @@
 ---
 title: "Vector Search in Databricks: Semantic Search at Scale"
+description: "Databricks Vector Search enables semantic similarity search over your lakehouse data. Build RAG applications, recommendation systems, and intelligent search…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-23
 tags: ["Databricks", "Vector Search", "Embeddings", "AI", "Search"]
-
 ---
-
-I wrote "Vector Search in Databricks: Semantic Search at Scale" to share practical, production-minded guidance on this topic.
 
 Databricks Vector Search enables semantic similarity search over your lakehouse data. Build RAG applications, recommendation systems, and intelligent search with managed vector indexes.
 
@@ -376,4 +374,3 @@ def sync_index(vsc, endpoint_name: str, index_name: str):
 ## Conclusion
 
 Databricks Vector Search provides managed semantic search infrastructure integrated with your lakehouse. Use it to build powerful RAG applications, recommendation systems, and intelligent search experiences.
-

@@ -1,5 +1,6 @@
 ---
 title: "Data Mesh and AI: Decentralized Intelligence at Scale"
+description: "Data mesh with AI enables domain teams to own both data and intelligence."
 author: Michael John Peña
 draft: false
 date: 2025-03-04
@@ -9,10 +10,7 @@ tags:
   - Architecture
   - Decentralization
   - Enterprise
-
 ---
-
-I wrote "Data Mesh and AI: Decentralized Intelligence at Scale" to share practical, production-minded guidance on this topic.
 
 ## AI-Enabled Data Products
 
@@ -78,4 +76,4 @@ class DataMeshPlatform:
         return results
 ```
 
-Data mesh with AI enables domain teams to own both data and intelligence.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Data mesh with AI enables domain teams to own both data and intelligence.

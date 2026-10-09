@@ -9,10 +9,7 @@ tags:
   - Memory
   - Knowledge Graph
   - Semantic
-
 ---
-
-I wrote "Semantic Memory for AI Agents: Knowledge Representation" to share practical, production-minded guidance on this topic.
 
 ## Semantic vs Episodic Memory
 
@@ -546,4 +543,3 @@ class DomainKnowledgeBuilder:
 Semantic memory gives agents persistent knowledge that transcends individual conversations. By structuring facts and concepts with relationships, agents can reason about their domain effectively.
 
 Build your knowledge base deliberately, update it as the domain evolves, and use it to provide informed, contextual responses.
-

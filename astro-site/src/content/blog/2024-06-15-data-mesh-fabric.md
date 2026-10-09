@@ -9,10 +9,7 @@ tags:
   - Architecture
   - Data Platform
   - Governance
-
 ---
-
-I wrote "Data Mesh with Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Data Mesh Principles
 
@@ -442,4 +439,4 @@ Tomorrow I'll cover domain-driven design for data.
 
 - [Data Mesh Principles](https://martinfowler.com/articles/data-mesh-principles.html)
 - [Fabric Domains](https://learn.microsoft.com/fabric/governance/domains)
-- [Data Products](https://learn.microsoft.com/fabric/governance/data-products)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data Products](https://learn.microsoft.com/fabric/governance/data-products)

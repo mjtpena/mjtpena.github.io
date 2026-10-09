@@ -1,18 +1,16 @@
 ---
 title: "Synapse Spark Pools: Optimization and Best Practices"
+description: "Properly optimized Spark pools can process petabytes of data efficiently and cost-effectively."
 author: Michael John Peña
 draft: false
 date: 2022-02-04
 url: /blog/synapse-spark-pools-optimization/
 tags:
-  - azure
-  - synapse
-  - spark
+  - Azure
+  - Synapse
+  - Spark
   - big-data
-
 ---
-
-I wrote "Synapse Spark Pools: Optimization and Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Spark Pool Configuration
 
@@ -237,4 +235,4 @@ spark.conf.set("spark.shuffle.spill.compress", "true")
 6. **Monitor with Spark UI** - Identify bottlenecks
 7. **Handle skew proactively** - Salt keys or use skew hints
 
-Properly optimized Spark pools can process petabytes of data efficiently and cost-effectively.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Properly optimized Spark pools can process petabytes of data efficiently and cost-effectively.

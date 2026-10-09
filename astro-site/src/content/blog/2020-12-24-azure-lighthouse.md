@@ -1,5 +1,6 @@
 ---
 title: "Azure Lighthouse: Multi-Tenant Management"
+description: "\"Can you log in to my tenant and fix it?\" used to mean a guest account, an awkward password share, and a privileged role for a partner that frequently…"
 author: Michael John Peña
 draft: false
 date: 2020-12-24
@@ -8,9 +9,7 @@ tags:
   - Lighthouse
   - Multi-Tenant
   - MSP
-
 ---
-
 
 "Can you log in to my tenant and fix it?" used to mean a guest account, an awkward password share, and a privileged role for a partner that frequently outlived the engagement. Lighthouse changes the model. Customers delegate scoped Azure roles to a partner tenant; the partner's engineers see the customer's resources alongside their own without a tenant switch. For MSPs and consultancies (the world I live in), it's the cleanest thing to happen to multi-tenant operations in years.
 
@@ -176,5 +175,4 @@ Remove-AzManagedServicesAssignment -Id assignment-id
 }
 ```
 
-Azure Lighthouse: scale your managed services business.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+Azure Lighthouse: scale your managed services business.

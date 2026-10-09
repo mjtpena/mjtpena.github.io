@@ -9,10 +9,7 @@ tags:
   - Transparency
   - Documentation
   - Best Practices
-
 ---
-
-I wrote "Model Cards: Documenting AI for Transparency and Trust" to share practical, production-minded guidance on this topic.
 
 ## What is a Model Card?
 
@@ -413,4 +410,3 @@ Model cards are essential for responsible AI deployment. They provide transparen
 - [Model Cards for Model Reporting (Paper)](https://arxiv.org/abs/1810.03993)
 - [Google Model Cards](https://modelcards.withgoogle.com/)
 - [Hugging Face Model Cards](https://huggingface.co/docs/hub/model-cards)
-

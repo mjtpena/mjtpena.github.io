@@ -1,5 +1,6 @@
 ---
 title: "Databricks Structured Streaming: Real-Time Data Processing"
+description: "Incrementally process files as they arrive. Structured Streaming makes real-time processing accessible with familiar DataFrame semantics."
 author: Michael John Peña
 draft: false
 date: 2020-10-18
@@ -8,10 +9,7 @@ tags:
   - Spark
   - Streaming
   - Data Engineering
-
 ---
-
-I wrote "Databricks Structured Streaming: Real-Time Data Processing" to share practical, production-minded guidance on this topic.
 
 ## Basic Stream
 
@@ -178,4 +176,4 @@ query = (df
 )
 ```
 
-Structured Streaming makes real-time processing accessible with familiar DataFrame semantics.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Structured Streaming makes real-time processing accessible with familiar DataFrame semantics.

@@ -1,5 +1,6 @@
 ---
 title: "Link Feature for Azure SQL Managed Instance"
+description: "The Link feature for Azure SQL Managed Instance enables replicating databases from SQL Server 2019 and SQL Server 2022 to Azure SQL Managed Instance in…"
 author: "Michael John Peña"
 draft: false
 date: 2022-07-18
@@ -193,4 +194,4 @@ ALTER AVAILABILITY GROUP [DAG_Link]
 -- Update connection strings in your applications
 ```
 
-The Link feature provides a low-risk path to cloud migration while enabling hybrid scenarios during the transition.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Link feature provides a low-risk path to cloud migration while enabling hybrid scenarios during the transition.

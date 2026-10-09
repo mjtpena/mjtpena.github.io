@@ -10,10 +10,7 @@ tags:
   - Cognitive Search
   - Document Processing
   - Knowledge Mining
-
 ---
-
-I wrote "2021-04-11-blob-storage-indexing-cognitive-search" to share practical, production-minded guidance on this topic.
 
 ## Understanding Blob Indexing
 
@@ -548,4 +545,3 @@ for facet in results.get_facets()['contentType']:
 ## Conclusion
 
 Blob storage indexing with Azure Cognitive Search enables powerful document search scenarios. By understanding the configuration options, handling different content types, and implementing proper change detection, you can build robust search solutions that keep your index synchronized with your document repository. The combination of document cracking, OCR, and AI enrichment makes it possible to search across any document type.
-

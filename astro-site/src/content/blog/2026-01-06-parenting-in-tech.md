@@ -1,5 +1,6 @@
 ---
 title: "The Tech Parent's Dilemma"
+description: "My son asked me today why I'm always on my computer. Fair question from a seven-year-old who doesn't understand why Dad's work doesn't end when he leaves…"
 author: Michael John Peña
 draft: false
 date: 2026-01-06
@@ -95,4 +96,4 @@ We chose careers in technology because we're problem-solvers. But somehow we've 
 
 The work will always be there. Our kids won't.
 
-Act accordingly.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Act accordingly.

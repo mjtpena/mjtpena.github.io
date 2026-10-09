@@ -1,5 +1,6 @@
 ---
 title: "Azure Synapse Analytics + OpenAI: Intelligent Data Warehousing"
+description: "Azure Synapse with OpenAI transforms data warehousing from technical SQL expertise to conversational data access. Business users can explore enterprise data…"
 author: Michael John Pena
 draft: false
 date: 2023-04-18
@@ -9,10 +10,7 @@ tags:
   - OpenAI
   - Data Warehousing
   - AI
-
 ---
-
-I wrote "Azure Synapse Analytics + OpenAI: Intelligent Data Warehousing" to share practical, production-minded guidance on this topic.
 
 ## Synapse OpenAI Integration
 
@@ -409,4 +407,4 @@ Provide:
         return stats
 ```
 
-Azure Synapse with OpenAI transforms data warehousing from technical SQL expertise to conversational data access. Business users can explore enterprise data using natural language.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Synapse with OpenAI transforms data warehousing from technical SQL expertise to conversational data access. Business users can explore enterprise data using natural language.

@@ -1,5 +1,6 @@
 ---
 title: "Azure Spring Cloud: Managed Spring Boot Platform"
+description: "Azure Spring Cloud: enterprise Java without infrastructure burden."
 author: Michael John Peña
 draft: false
 date: 2020-12-15
@@ -8,10 +9,7 @@ tags:
   - Spring Cloud
   - Java
   - Microservices
-
 ---
-
-I wrote "Azure Spring Cloud: Managed Spring Boot Platform" to share practical, production-minded guidance on this topic.
 
 ## Creating Spring Cloud Service
 
@@ -218,4 +216,4 @@ az spring-cloud certificate add \
     --vault-certificate-name my-cert
 ```
 
-Azure Spring Cloud: enterprise Java without infrastructure burden.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Spring Cloud: enterprise Java without infrastructure burden.

@@ -1,5 +1,6 @@
 ---
 title: "Building a Microsoft Teams Bot with Bot Framework"
+description: "My honest advice for anyone starting a Teams bot project: get the simplest possible echo bot deployed end-to-end first — local code → channel registration →…"
 author: Michael John Peña
 draft: false
 date: 2020-08-09
@@ -8,10 +9,7 @@ tags:
   - Bot Framework
   - .NET Core
   - Remote Work
-
 ---
-
-I wrote "Building a Microsoft Teams Bot with Bot Framework" to share practical, production-minded guidance on this topic.
 
 ## Prerequisites
 
@@ -271,4 +269,4 @@ ngrok http 3978
 # https://xxxxx.ngrok.io/api/messages
 ```
 
-My honest advice for anyone starting a Teams bot project: get the simplest possible echo bot deployed end-to-end *first* — local code → channel registration → Teams sideload — before you write a line of business logic. The plumbing is where the time goes. Once it's wired, the actual bot logic is the easy part.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+My honest advice for anyone starting a Teams bot project: get the simplest possible echo bot deployed end-to-end *first* — local code → channel registration → Teams sideload — before you write a line of business logic. The plumbing is where the time goes. Once it's wired, the actual bot logic is the easy part.

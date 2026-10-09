@@ -1,5 +1,6 @@
 ---
 title: "Understanding Smoothing and Bursting in Fabric"
+description: "Smoothing averages capacity consumption over a time window, allowing brief spikes without immediate throttling."
 author: Michael John Peña
 draft: false
 date: 2024-08-25
@@ -9,10 +10,7 @@ tags:
   - Smoothing
   - Bursting
   - Performance
-
 ---
-
-I wrote "Understanding Smoothing and Bursting in Fabric" to share practical, production-minded guidance on this topic.
 
 ## How Smoothing Works
 
@@ -518,4 +516,3 @@ print(f"Spikes absorbed by smoothing: {report['spikes_absorbed_by_smoothing']}")
 Smoothing and bursting provide flexibility in handling variable workloads without constant throttling. Understanding how these features work helps you design workloads that maximize their benefits while staying within capacity limits.
 
 Plan workloads to leverage smoothing for brief spikes and burst for sustained higher demand, while ensuring adequate recovery periods.
-

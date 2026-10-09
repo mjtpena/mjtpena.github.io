@@ -10,10 +10,7 @@ tags:
   - Python
   - Power BI
   - Data Science
-
 ---
-
-I wrote "SemPy Library: Python for Semantic Models in Fabric" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -541,4 +538,3 @@ print(explorer.explore_model_structure())
 ## Conclusion
 
 SemPy provides a powerful Python interface for working with Power BI semantic models in Microsoft Fabric. By mastering its table reading, measure evaluation, and DAX query capabilities, data scientists can seamlessly integrate business intelligence assets into their data science workflows while maintaining consistency with established business definitions.
-

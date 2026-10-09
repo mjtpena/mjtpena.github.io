@@ -1,5 +1,6 @@
 ---
 title: "Agentic RAG Patterns: Self-Correcting and Adaptive Retrieval"
+description: "When RAG systems can reason about what to retrieve, they stop failing silently. My implementations of agentic RAG show how to add evaluation and iterative…"
 author: Michael John Peña
 draft: false
 date: 2024-01-08

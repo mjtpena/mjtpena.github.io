@@ -9,10 +9,7 @@ tags:
   - Data Governance
   - Compliance
   - Security
-
 ---
-
-I wrote "Data Governance in Azure Databricks: Policies, Practices, and Implementation" to share practical, production-minded guidance on this topic.
 
 ## Governance Framework
 
@@ -472,4 +469,3 @@ The key is to automate as much as possible while maintaining human oversight for
 - [Databricks Data Governance](https://docs.databricks.com/data-governance/index.html)
 - [Unity Catalog Documentation](https://docs.databricks.com/data-governance/unity-catalog/index.html)
 - [GDPR Compliance Guide](https://docs.databricks.com/security/privacy/gdpr-delta.html)
-

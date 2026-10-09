@@ -1,5 +1,6 @@
 ---
 title: "Semantic Kernel: Building AI Orchestration with .NET"
+description: "Semantic Kernel provides a clean abstraction for building AI-powered features while maintaining flexibility to switch between different LLM providers."
 author: Michael John Peña
 draft: false
 date: 2025-10-14
@@ -9,10 +10,7 @@ tags:
   - AI Orchestration
   - Azure OpenAI
   - C#
-
 ---
-
-I wrote "Semantic Kernel: Building AI Orchestration with .NET" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Semantic Kernel
 
@@ -117,4 +115,4 @@ public async Task<string> ProcessWithFunctionsAsync(string userQuery)
 }
 ```
 
-Semantic Kernel provides a clean abstraction for building AI-powered features while maintaining flexibility to switch between different LLM providers.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Semantic Kernel provides a clean abstraction for building AI-powered features while maintaining flexibility to switch between different LLM providers.

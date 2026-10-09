@@ -1,5 +1,6 @@
 ---
 title: "Top 10 Azure Data Services Lessons from 2025"
+description: "After a year of implementing data solutions on Azure, I've compiled the most important lessons that can save you time, money, and headaches. These come from…"
 author: Michael John Peña
 draft: false
 date: 2025-12-04
@@ -83,4 +84,4 @@ Manual portal configurations don't scale. Every data service should be defined i
 
 Monte Carlo, Atlan, or Azure's native data quality features are not luxuries - they're requirements for maintaining trust in your data platform.
 
-These lessons represent millions of dollars in learning across the industry. Apply them to accelerate your 2026 data initiatives.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These lessons represent millions of dollars in learning across the industry. Apply them to accelerate your 2026 data initiatives.

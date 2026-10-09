@@ -1,5 +1,6 @@
 ---
 title: "Code Execution in AI Agents: Safe and Effective Patterns"
+description: "Code execution is one of the most powerful capabilities for AI agents - and one of the most dangerous. Today I'm exploring how to implement it safely."
 author: Michael John Peña
 draft: false
 date: 2024-05-26
@@ -515,4 +516,4 @@ Tomorrow I'll cover file handling in AI agents.
 
 - [Docker SDK for Python](https://docker-py.readthedocs.io/)
 - [RestrictedPython](https://restrictedpython.readthedocs.io/)
-- [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Application Gateway v2: Advanced Load Balancing"
+description: "App Gateway v1 was a credible Layer 7 load balancer. v2 is the upgrade that makes it the default I reach for in front of internal AKS clusters and App…"
 author: Michael John Peña
 draft: false
 date: 2020-12-27
@@ -184,4 +185,4 @@ az network application-gateway update \
     --connection-draining-timeout 60
 ```
 
-Application Gateway v2: enterprise-grade L7 load balancing.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Application Gateway v2: enterprise-grade L7 load balancing.

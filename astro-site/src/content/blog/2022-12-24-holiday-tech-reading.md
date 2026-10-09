@@ -1,10 +1,11 @@
 ---
 title: "Holiday Tech Reading List: Books for Azure and AI Enthusiasts"
+description: "The holidays are the reading catch-up opportunity I look forward to all year—the stack of technical books that accumulated while the project workload was…"
 author: Michael John Peña
 draft: false
 date: 2022-12-24
 tags:
-  - Books
+  - books
   - Learning
   - Career
   - Recommendations

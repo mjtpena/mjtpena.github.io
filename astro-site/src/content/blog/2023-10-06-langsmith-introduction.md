@@ -10,10 +10,7 @@ tags:
   - Debugging
   - LangChain
   - AI
-
 ---
-
-I wrote "LangSmith Introduction: Observability for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -392,4 +389,3 @@ class ExternalLoggingCallback(BaseCallbackHandler):
 ## Conclusion
 
 LangSmith provides essential observability for LLM applications. With automatic tracing, debugging tools, and performance monitoring, it becomes much easier to develop, test, and maintain production-quality LLM applications. Start by enabling tracing in development and gradually expand to full production monitoring.
-

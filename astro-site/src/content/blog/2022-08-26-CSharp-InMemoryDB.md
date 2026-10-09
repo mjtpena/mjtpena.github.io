@@ -1,5 +1,6 @@
 ---
 title: "In Memory SQLite database on C#"
+description: "One of the advantages of using SQLite is the ability to treat the data store just like a SQL database. You can perform simple T-SQL query statements and…"
 author: Michael John Peña
 draft: false
 date: 2022-08-26
@@ -9,10 +10,7 @@ tags:
   - SQLite
   - dotnet
   - Memory
-
 ---
-
-I wrote "In Memory SQLite database on C#" to share practical, production-minded guidance on this topic.
 
 There are multiple ways of implementing these:
 
@@ -86,4 +84,4 @@ masterConnection.Close();
 The most important bits:
 
 - Reference the `Microsoft.Data.Sqlite` nuget package.
-- In the connection string, add the following `Mode=Memory;Cache=Shared`\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- In the connection string, add the following `Mode=Memory;Cache=Shared`

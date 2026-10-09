@@ -1,13 +1,11 @@
 ---
 title: "Git Integration in Databricks for Version Control"
+description: "Databricks Git integration (Repos) connects the workspace directly to GitHub, GitLab, Azure DevOps, or Bitbucket, replacing the manual pattern of…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-30
 tags: ["Azure", "Databricks", "Git", "Version Control", "DevOps"]
-
 ---
-
-I wrote "Git Integration in Databricks for Version Control" to share practical, production-minded guidance on this topic.
 
 Databricks Git integration (Repos) connects the workspace directly to GitHub, GitLab, Azure DevOps, or Bitbucket, replacing the manual pattern of downloading notebook `.py` files and committing them outside the workspace. With Repos, notebooks live in the repository as source files; pulling changes, creating branches, and pushing commits happen in the workspace UI or via API. The collaborative development pattern: each engineer works in a personal branch of the repository, uses the workspace Repos UI to develop and test, and raises a PR when ready; the CI/CD pipeline runs automated tests against the PR branch before merging to main. The shift from "notebooks on DBFS" to "notebooks in Git" is a meaningful step toward treating data engineering like software engineering—it enables code review, history tracking, and branching strategies that DBFS notebook storage doesn't support.
 
@@ -427,4 +425,3 @@ sync_environment_repos(WORKSPACE_URL, TOKEN, repos)
 Git integration transforms Databricks into a proper development environment with version control, collaboration, and CI/CD capabilities. By following these practices, teams can maintain code quality and streamline deployments.
 
 Tomorrow, we'll wrap up the series with Repos in Databricks for managing production deployments.
-

@@ -1,13 +1,11 @@
 ---
 title: "Mastering Gremlin Query Language"
+description: "Mastering Gremlin opens up powerful graph analytics capabilities in Azure Cosmos DB."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-10
 tags: ["Azure", "Gremlin", "Graph Database", "Query Language"]
-
 ---
-
-I wrote "Mastering Gremlin Query Language" to share practical, production-minded guidance on this topic.
 
 ## Gremlin Fundamentals
 
@@ -367,4 +365,4 @@ var query = new GremlinQueryBuilder()
 4. **Use indexes** - Create indexes for filtered properties
 5. **Project only needed data** - Reduce data transfer
 
-Mastering Gremlin opens up powerful graph analytics capabilities in Azure Cosmos DB.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Mastering Gremlin opens up powerful graph analytics capabilities in Azure Cosmos DB.

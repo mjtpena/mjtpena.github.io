@@ -1,5 +1,6 @@
 ---
 title: Responsible AI Toolkit - Building Trustworthy ML Systems on Azure
+description: "Responsible AI went from a philosophy discussion to a practical engineering requirement in a short time. The catalysts I've seen in real projects: a loan…"
 author: Michael John Peña
 draft: false
 date: 2021-04-24

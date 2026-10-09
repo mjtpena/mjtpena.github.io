@@ -1,13 +1,11 @@
 ---
 title: "Creating Custom GitHub Actions"
+description: "Custom actions enable sophisticated automation tailored to your specific workflows."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-16
 tags: ["GitHub", "GitHub Actions", "JavaScript", "DevOps"]
-
 ---
-
-I wrote "Creating Custom GitHub Actions" to share practical, production-minded guidance on this topic.
 
 ## JavaScript Action Structure
 
@@ -91,4 +89,4 @@ runs:
 }
 ```
 
-Custom actions enable sophisticated automation tailored to your specific workflows.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Custom actions enable sophisticated automation tailored to your specific workflows.

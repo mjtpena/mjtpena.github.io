@@ -1,5 +1,6 @@
 ---
 title: "Building GPT-4 Powered Coding Assistants"
+description: "Provide 3 possible completions. Return ONLY the code to insert, no explanation. Format as JSON: [\"completion1\", \"completion2\", \"completion3\"]\"\"\""
 author: Michael John Pena
 draft: false
 date: 2023-03-19
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Coding
   - Developer Tools
-
 ---
-
-I wrote "Building GPT-4 Powered Coding Assistants" to share practical, production-minded guidance on this topic.
 
 ## Code Context Management
 
@@ -267,4 +265,5 @@ class CodeExplainer:
             "numpy": '''"""Short description.
 
     Parameters
-    -------\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    -------
+```

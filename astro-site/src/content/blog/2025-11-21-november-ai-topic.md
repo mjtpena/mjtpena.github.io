@@ -1,5 +1,6 @@
 ---
 title: "Implementing Guardrails for Production LLM Applications"
+description: "LLMs can generate harmful content, leak sensitive information, or be manipulated through prompt injection. A layered defense approach protects users and…"
 author: Michael John Peña
 draft: false
 date: 2025-11-21
@@ -9,10 +10,7 @@ tags:
   - Azure AI
   - Content Safety
   - Production
-
 ---
-
-I wrote "Implementing Guardrails for Production LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## The Need for Guardrails
 
@@ -166,4 +164,4 @@ class OutputConstraints:
         return topic_disclaimers.get(topic, "")
 ```
 
-Guardrails are essential for production LLM applications. Combining Azure AI Content Safety with custom rules creates a robust defense against misuse while maintaining a positive user experience.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Guardrails are essential for production LLM applications. Combining Azure AI Content Safety with custom rules creates a robust defense against misuse while maintaining a positive user experience.

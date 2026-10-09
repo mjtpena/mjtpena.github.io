@@ -9,10 +9,7 @@ tags:
   - Receipt Processing
   - Expense Management
   - Automation
-
 ---
-
-I wrote "Receipt Processing with AI Builder: Automating Expense Management" to share practical, production-minded guidance on this topic.
 
 ## Receipt Processing Capabilities
 
@@ -433,4 +430,3 @@ Combined with approval workflows, it creates a complete expense automation solut
 
 - [Receipt Processing Documentation](https://docs.microsoft.com/en-us/ai-builder/prebuilt-receipt-processing)
 - [Expense Report Template](https://powerusers.microsoft.com/t5/Power-Apps-Community-Blog/Building-an-Expense-Report-App-with-AI-Builder/ba-p/646267)
-

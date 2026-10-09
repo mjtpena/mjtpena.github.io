@@ -1,5 +1,6 @@
 ---
 title: "Publishing and Consuming Azure Event Hubs with AMQP and Rust"
+description: "In one of the small projects I'm working on Rust, I actually need to send huge amount of messages on to the cloud and Azure Event Hubs is my preferred…"
 author: Michael John Peña
 draft: false
 date: 2022-09-14
@@ -7,12 +8,9 @@ url: /blog/eventhubs-rust/
 tags:
   - rust
   - eventhubs
-  - azure
+  - Azure
   - amqp
-
 ---
-
-I wrote "Publishing and Consuming Azure Event Hubs with AMQP and Rust" to share practical, production-minded guidance on this topic.
 
 In one of the small projects I'm working on Rust, I actually need to send huge amount of messages on to the cloud and Azure Event Hubs is my preferred choice for this solution. This is because I've used Kafka in the past, and the managed aspect of partitioning and scalability of it, is something I really like about Event Hubs. Not to mention, once it's in Event Hubs; I can pretty much fan-out the messages to other Azure services.
 
@@ -134,5 +132,3 @@ As I was exploring this space, I also noticed that there's an [unofficial Azure 
 
 - Azure Event Hubs is a managed Kafka and uses AMQP 1.0 under the hood. Any AMQP 1.0 library in any language, should allow you to send and receive messages.
 - [fe2o3-amqp](https://github.com/minghuaw/fe2o3-amqp/tree/main/fe2o3-amqp "fe2o3-amqp") is a Rust library to consume and produce events from Azure Event Hubs.
-
-

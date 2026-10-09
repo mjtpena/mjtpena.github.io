@@ -1,5 +1,6 @@
 ---
 title: "Power BI Composite Models: The Best of Both Worlds"
+description: "Composite models let you use both in the same dataset. Composite models unlock new scenarios in Power BI, enabling enterprise-scale analytics with the…"
 author: Michael John Peña
 draft: false
 date: 2022-01-27
@@ -8,11 +9,8 @@ tags:
   - power-bi
   - data-modeling
   - directquery
-  - analytics
-
+  - Analytics
 ---
-
-I wrote "Power BI Composite Models: The Best of Both Worlds" to share practical, production-minded guidance on this topic.
 
 ## Understanding Composite Models
 
@@ -234,4 +232,4 @@ Use Performance Analyzer in Power BI Desktop to track:
 5. **Monitor performance** - Track DirectQuery vs Import query times
 6. **Test thoroughly** - Composite models add complexity
 
-Composite models unlock new scenarios in Power BI, enabling enterprise-scale analytics with the flexibility modern businesses need.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Composite models unlock new scenarios in Power BI, enabling enterprise-scale analytics with the flexibility modern businesses need.

@@ -1,5 +1,6 @@
 ---
 title: "LLM Observability: What Actually Matters"
+description: "Latency: P50, P95, P99 response times Cost: Per query, per user, per day Quality: Response relevance, accuracy"
 author: Michael John Peña
 draft: false
 date: 2026-01-16
@@ -8,10 +9,7 @@ tags:
   - Observability
   - LLM
   - Production
-
 ---
-
-I wrote "LLM Observability: What Actually Matters" to share practical, production-minded guidance on this topic.
 
 ## What to Track
 
@@ -71,4 +69,4 @@ def track_llm_call(func):
 
 ## The Key Insight
 
-You can't improve what you don't measure. Start logging everything from day one.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+You can't improve what you don't measure. Start logging everything from day one.

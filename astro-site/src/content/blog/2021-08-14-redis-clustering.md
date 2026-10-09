@@ -1,13 +1,11 @@
 ---
 title: "Redis Clustering in Azure: Scaling for High-Throughput Workloads"
+description: "Redis clustering provides the horizontal scalability needed for demanding workloads while maintaining Redis's sub-millisecond performance characteristics."
 author: "Michael John Peña"
 draft: false
 date: 2021-08-14
 tags: ["Azure", "Redis", "Clustering", "Scalability", "High Availability"]
-
 ---
-
-I wrote "Redis Clustering in Azure: Scaling for High-Throughput Workloads" to share practical, production-minded guidance on this topic.
 
 ## Creating a Clustered Redis Instance
 
@@ -363,4 +361,4 @@ public class ClusterHealthMonitor
 4. **Monitor slot distribution**: Watch for hot spots
 5. **Test failover scenarios**: Ensure client handles redirects
 
-Redis clustering provides the horizontal scalability needed for demanding workloads while maintaining Redis's sub-millisecond performance characteristics.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Redis clustering provides the horizontal scalability needed for demanding workloads while maintaining Redis's sub-millisecond performance characteristics.

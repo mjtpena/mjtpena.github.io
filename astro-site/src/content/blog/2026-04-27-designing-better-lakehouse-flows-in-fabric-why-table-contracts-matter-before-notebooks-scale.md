@@ -1,5 +1,6 @@
 ---
 title: "Designing Better Lakehouse Flows in Fabric: why table contracts matter before notebooks scale"
+description: "I worked on smoothing the handoff between data engineering and AI teams—standardizing feature contracts, embedding validation, and adding lightweight…"
 author: Michael John Peña
 draft: false
 date: 2026-04-27
@@ -36,4 +37,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/)
 - [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)
-- [Lakehouse in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Lakehouse in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)

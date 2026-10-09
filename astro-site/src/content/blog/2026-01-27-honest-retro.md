@@ -1,5 +1,6 @@
 ---
 title: "An Honest Retrospective"
+description: "January's almost over. Time for an honest look at how I'm doing with those commitments I made."
 author: Michael John Peña
 draft: false
 date: 2026-01-27
@@ -78,4 +79,4 @@ That's real life. Not the curated version. The actual, messy, imperfect version.
 
 And that's okay.
 
-Here's to February. Let's see what happens.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Here's to February. Let's see what happens.

@@ -9,10 +9,7 @@ tags:
   - Flux
   - ArgoCD
   - DevOps
-
 ---
-
-I wrote "GitOps Practices: Declarative Infrastructure and Application Delivery" to share practical, production-minded guidance on this topic.
 
 ## The GitOps Principles
 
@@ -164,4 +161,5 @@ spec:
   image: myregistry.azurecr.io/api-service
   interval: 5m
   secretRef:
-    name: acr-credentials\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    name: acr-credentials
+```

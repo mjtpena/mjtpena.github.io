@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Foundry: Getting Started Guide for Data Professionals"
+description: "Azure AI Foundry provides the foundation for enterprise AI applications. Start with simple use cases, measure results, and expand from there."
 author: Michael John Peña
 draft: false
 date: 2025-01-14
@@ -9,10 +10,7 @@ tags:
   - Azure AI Foundry
   - LLM
   - Enterprise AI
-
 ---
-
-I wrote "Azure AI Foundry: Getting Started Guide for Data Professionals" to share practical, production-minded guidance on this topic.
 
 ## What is Azure AI Foundry?
 
@@ -347,4 +345,4 @@ response = client.chat.complete(
 4. **Monitor costs**: Track token usage and optimize
 5. **Version prompts**: Treat prompts as code
 
-Azure AI Foundry provides the foundation for enterprise AI applications. Start with simple use cases, measure results, and expand from there.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure AI Foundry provides the foundation for enterprise AI applications. Start with simple use cases, measure results, and expand from there.

@@ -1,5 +1,6 @@
 ---
 title: "The Rise of AI PCs: NPUs and Local AI Processing"
+description: "NPU wins on efficiency, crucial for battery life."
 author: Michael John Peña
 draft: false
 date: 2024-05-09
@@ -9,10 +10,7 @@ tags:
   - Windows
   - NPU
   - Edge AI
-
 ---
-
-I wrote "The Rise of AI PCs: NPUs and Local AI Processing" to share practical, production-minded guidance on this topic.
 
 ## What is an NPU?
 
@@ -266,4 +264,3 @@ AI PCs with NPUs represent a significant shift toward local AI processing. Start
 - [DirectML Guide](https://learn.microsoft.com/windows/ai/directml/)
 - [ONNX Runtime](https://onnxruntime.ai/)
 - [Intel Core Ultra](https://www.intel.com/content/www/us/en/products/details/processors/core-ultra.html)
-

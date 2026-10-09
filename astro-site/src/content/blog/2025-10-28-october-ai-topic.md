@@ -1,5 +1,6 @@
 ---
 title: "Testing AI Applications: Strategies for LLM-Based Systems"
+description: "Test AI components within the full application context, including error handling, timeout behavior, and integration with downstream systems."
 author: Michael John Peña
 draft: false
 date: 2025-10-28
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Quality Assurance
   - MLOps
-
 ---
-
-I wrote "Testing AI Applications: Strategies for LLM-Based Systems" to share practical, production-minded guidance on this topic.
 
 ## Property-Based Testing for AI
 
@@ -147,4 +145,4 @@ class GoldenDatasetTester:
 
 ## Integration Testing
 
-Test AI components within the full application context, including error handling, timeout behavior, and integration with downstream systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Test AI components within the full application context, including error handling, timeout behavior, and integration with downstream systems.

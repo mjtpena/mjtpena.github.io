@@ -1,18 +1,16 @@
 ---
 title: "Azure Reserved Instances Planning: Strategic Cost Reduction"
+description: "RIs provide a billing discount in exchange for a commitment (1 or 3 years). They don't allocate capacity - they provide a discount on capacity you're…"
 author: Michael John Peña
 draft: false
 date: 2022-01-08
 url: /blog/azure-reserved-instances-planning/
 tags:
-  - azure
+  - Azure
   - cost-optimization
   - reserved-instances
-  - finops
-
+  - FinOps
 ---
-
-I wrote "Azure Reserved Instances Planning: Strategic Cost Reduction" to share practical, production-minded guidance on this topic.
 
 ## Understanding Reserved Instances
 
@@ -167,4 +165,4 @@ AzureActivity
 5. **Review monthly** - Ensure utilization stays high
 6. **Plan for changes** - RIs can be exchanged if needs change
 
-Reserved Instances are a powerful tool for cost optimization, but they require careful planning to maximize value.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Reserved Instances are a powerful tool for cost optimization, but they require careful planning to maximize value.

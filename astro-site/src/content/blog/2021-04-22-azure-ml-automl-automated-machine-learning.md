@@ -10,10 +10,7 @@ tags:
   - AutoML
   - Data Science
   - AI
-
 ---
-
-I wrote "2021-04-22-azure-ml-automl-automated-machine-learning" to share practical, production-minded guidance on this topic.
 
 ## Understanding AutoML
 
@@ -438,4 +435,3 @@ print(response.json())
 ## Conclusion
 
 Azure ML AutoML accelerates the machine learning process by automating repetitive tasks while maintaining transparency through explainability features. By understanding the configuration options and following best practices, you can leverage AutoML to quickly build high-quality models for classification, regression, and forecasting tasks.
-

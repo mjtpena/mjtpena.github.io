@@ -1,5 +1,6 @@
 ---
 title: "Q1 2025 AI Retrospective: Key Developments and Learnings"
+description: "Q1 laid the foundation for production AI. Q2 will be about scaling and governance."
 author: Michael John Peña
 draft: false
 date: 2025-03-30
@@ -9,10 +10,7 @@ tags:
   - "2025"
   - Trends
   - Summary
-
 ---
-
-I wrote "Q1 2025 AI Retrospective: Key Developments and Learnings" to share practical, production-minded guidance on this topic.
 
 ## Major Themes of Q1 2025
 
@@ -85,4 +83,4 @@ Key areas to watch:
 3. **Multimodal applications** going mainstream
 4. **AI governance frameworks** becoming requirements
 
-Q1 laid the foundation for production AI. Q2 will be about scaling and governance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Q1 laid the foundation for production AI. Q2 will be about scaling and governance.

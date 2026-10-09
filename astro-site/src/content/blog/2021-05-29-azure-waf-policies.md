@@ -9,10 +9,7 @@ tags:
   - WAF
   - Web Security
   - Application Gateway
-
 ---
-
-I wrote "Azure Web Application Firewall: Custom Rules and Policies" to share practical, production-minded guidance on this topic.
 
 ## WAF Deployment Options
 
@@ -389,4 +386,4 @@ az network application-gateway http-listener update \
 
 - [Azure WAF Documentation](https://docs.microsoft.com/en-us/azure/web-application-firewall/)
 - [OWASP Rule Set](https://docs.microsoft.com/en-us/azure/web-application-firewall/ag/application-gateway-crs-rulegroups-rules)
-- [Custom Rules](https://docs.microsoft.com/en-us/azure/web-application-firewall/ag/custom-waf-rules-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Custom Rules](https://docs.microsoft.com/en-us/azure/web-application-firewall/ag/custom-waf-rules-overview)

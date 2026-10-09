@@ -1,17 +1,15 @@
 ---
 title: "Synapse Data Explorer: Real-Time Analytics at Scale"
+description: "// Enable streaming ingestion .alter database SensorAnalytics policy streamingingestion enable"
 author: Michael John Peña
 draft: false
 date: 2022-05-22
 tags:
-  - azure
-  - synapse
+  - Azure
+  - Synapse
   - data-explorer
-  - kusto
-
+  - Kusto
 ---
-
-I wrote "Synapse Data Explorer: Real-Time Analytics at Scale" to share practical, production-minded guidance on this topic.
 
 ## Creating a Data Explorer Pool
 
@@ -285,5 +283,3 @@ Synapse Data Explorer provides:
 - Integration with Synapse ecosystem
 
 Perfect for IoT, logs, and telemetry analytics.
-
-

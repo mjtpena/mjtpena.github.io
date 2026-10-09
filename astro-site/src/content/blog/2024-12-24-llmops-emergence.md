@@ -1,5 +1,6 @@
 ---
 title: "LLMOps Emergence: Operating Large Language Models in Production"
+description: "LLMOps is essential for reliable LLM applications. Start with prompt management and evaluation, then add observability and cost tracking as you scale."
 author: Michael John Peña
 draft: false
 date: 2024-12-24
@@ -9,10 +10,7 @@ tags:
   - Operations
   - AI
   - Production
-
 ---
-
-I wrote "LLMOps Emergence: Operating Large Language Models in Production" to share practical, production-minded guidance on this topic.
 
 ## LLMOps vs Traditional MLOps
 
@@ -532,4 +530,4 @@ LLMOps is essential for reliable LLM applications. Start with prompt management 
 
 - [LangSmith](https://smith.langchain.com/)
 - [Weights & Biases Prompts](https://wandb.ai/site/prompts)
-- [Azure AI Foundry Tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure AI Foundry Tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/)

@@ -1,5 +1,6 @@
 ---
 title: Leveraging Azure Architecture Center Reference Architectures
+description: "The Azure Architecture Center is the reference resource I bookmark more than any other when I need to move from \"I know what I want to build\" to \"I know the…"
 author: Michael John Peña
 draft: false
 date: 2021-06-20
@@ -529,4 +530,4 @@ The Azure Architecture Center provides invaluable guidance for building cloud so
 
 - [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architecture/)
 - [Reference Architectures](https://docs.microsoft.com/en-us/azure/architecture/architectures/)
-- [Cloud Design Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Cloud Design Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/)

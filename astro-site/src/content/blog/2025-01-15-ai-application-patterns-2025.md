@@ -1,5 +1,6 @@
 ---
 title: "AI Application Patterns for 2025: Building Production-Ready AI Systems"
+description: "These patterns form the building blocks of production AI applications. Combine them based on your specific requirements, and always include proper error…"
 author: Michael John Peña
 draft: false
 date: 2025-01-15
@@ -9,10 +10,7 @@ tags:
   - Design Patterns
   - Azure
   - LLM
-
 ---
-
-I wrote "AI Application Patterns for 2025: Building Production-Ready AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Pattern 1: Retrieval-Augmented Generation (RAG)
 
@@ -451,4 +449,4 @@ class IterativeRefiner:
         return response.choices[0].message.content
 ```
 
-These patterns form the building blocks of production AI applications. Combine them based on your specific requirements, and always include proper error handling, logging, and monitoring.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These patterns form the building blocks of production AI applications. Combine them based on your specific requirements, and always include proper error handling, logging, and monitoring.

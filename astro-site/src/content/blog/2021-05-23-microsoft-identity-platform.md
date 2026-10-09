@@ -9,10 +9,7 @@ tags:
   - Authentication
   - OAuth
   - Development
-
 ---
-
-I wrote "Microsoft Identity Platform: Modern Authentication for Developers" to share practical, production-minded guidance on this topic.
 
 ## Platform Components
 
@@ -387,4 +384,4 @@ def create_api_registration():
 
 - [Microsoft Identity Platform Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/)
 - [MSAL Python](https://github.com/AzureAD/microsoft-authentication-library-for-python)
-- [MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Front Door: Global Load Balancing and CDN"
+description: "Front Door is the global entry point for serious production workloads."
 author: Michael John Peña
 draft: false
 date: 2020-09-18
@@ -8,10 +9,7 @@ tags:
   - Front Door
   - CDN
   - Performance
-
 ---
-
-I wrote "Azure Front Door: Global Load Balancing and CDN" to share practical, production-minded guidance on this topic.
 
 ## Key Features
 
@@ -108,4 +106,4 @@ resource "azurerm_frontdoor_firewall_policy" "main" {
 - **API acceleration** with caching
 - **Blue-green deployments** with traffic routing
 
-Front Door is the global entry point for serious production workloads.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Front Door is the global entry point for serious production workloads.

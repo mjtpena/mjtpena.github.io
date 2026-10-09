@@ -1,13 +1,11 @@
 ---
 title: "PostgreSQL in Microsoft Fabric: What to Expect"
+description: "PostgreSQL in Fabric will bring familiar PostgreSQL capabilities to the unified data platform. Start preparing now by designing schemas that work well with…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-24
 tags: ["PostgreSQL", "Microsoft Fabric", "Azure", "Database", "Preview"]
-
 ---
-
-I wrote "PostgreSQL in Microsoft Fabric: What to Expect" to share practical, production-minded guidance on this topic.
 
 ## PostgreSQL in Fabric Overview
 
@@ -370,4 +368,4 @@ events_with_props = events_df.withColumn(
 """
 ```
 
-PostgreSQL in Fabric will bring familiar PostgreSQL capabilities to the unified data platform. Start preparing now by designing schemas that work well with automatic mirroring.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+PostgreSQL in Fabric will bring familiar PostgreSQL capabilities to the unified data platform. Start preparing now by designing schemas that work well with automatic mirroring.

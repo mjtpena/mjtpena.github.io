@@ -1,5 +1,6 @@
 ---
 title: "dbt with AI: Accelerating Data Transformation Development"
+description: "AI accelerates dbt development but doesn't replace data engineering expertise. Use it to handle boilerplate and documentation while focusing your expertise…"
 author: Michael John Peña
 draft: false
 date: 2025-01-21
@@ -9,10 +10,7 @@ tags:
   - Data Transformation
   - Data Engineering
   - Azure
-
 ---
-
-I wrote "dbt with AI: Accelerating Data Transformation Development" to share practical, production-minded guidance on this topic.
 
 ## AI-Powered dbt Model Generation
 
@@ -411,4 +409,4 @@ class DBTAIWorkflow:
 4. **Iterate**: Use AI for quick iterations, refine manually
 5. **Version control**: Track AI-generated vs. human-modified code
 
-AI accelerates dbt development but doesn't replace data engineering expertise. Use it to handle boilerplate and documentation while focusing your expertise on business logic and optimization.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI accelerates dbt development but doesn't replace data engineering expertise. Use it to handle boilerplate and documentation while focusing your expertise on business logic and optimization.

@@ -1,5 +1,6 @@
 ---
 title: "Model Context Protocol (MCP): The Standard for AI-Application Integration"
+description: "MCP is becoming essential infrastructure for enterprise AI. Start building your MCP servers today."
 author: Michael John Peña
 draft: false
 date: 2025-01-07
@@ -9,10 +10,7 @@ tags:
   - Model Context Protocol
   - Integration
   - Standards
-
 ---
-
-I wrote "Model Context Protocol (MCP): The Standard for AI-Application Integration" to share practical, production-minded guidance on this topic.
 
 ## What is MCP?
 
@@ -327,4 +325,4 @@ server.add_middleware(
 4. Implement security and monitoring
 5. Iterate based on usage patterns
 
-MCP is becoming essential infrastructure for enterprise AI. Start building your MCP servers today.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+MCP is becoming essential infrastructure for enterprise AI. Start building your MCP servers today.

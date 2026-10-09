@@ -9,10 +9,7 @@ tags:
   - Year in Review
   - Analytics
   - "2024"
-
 ---
-
-I wrote "Microsoft Fabric Year in Review: From GA to Enterprise Standard" to share practical, production-minded guidance on this topic.
 
 ## The Fabric Timeline
 
@@ -312,4 +309,4 @@ Microsoft Fabric has become a credible enterprise data platform in 2024. The AI 
 
 - [Microsoft Fabric Documentation](https://learn.microsoft.com/en-us/fabric/)
 - [Fabric Community](https://community.fabric.microsoft.com/)
-- [Fabric Blog](https://blog.fabric.microsoft.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric Blog](https://blog.fabric.microsoft.com/)

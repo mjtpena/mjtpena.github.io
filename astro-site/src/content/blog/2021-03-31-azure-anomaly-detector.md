@@ -1,5 +1,6 @@
 ---
 title: Time Series Anomaly Detection with Azure Anomaly Detector
+description: "Anomaly Detector is the Cognitive Service I pull out when someone asks \"can you tell us when something goes wrong?\" and the answer is \"I don't know exactly…"
 author: Michael John Pena
 draft: false
 date: 2021-03-31

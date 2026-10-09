@@ -1,5 +1,6 @@
 ---
 title: "Azure SignalR Service: Real-Time Web at Scale"
+description: "SignalR Service: real-time made scalable."
 author: Michael John Peña
 draft: false
 date: 2020-11-04
@@ -8,10 +9,7 @@ tags:
   - SignalR
   - Real-Time
   - WebSockets
-
 ---
-
-I wrote "Azure SignalR Service: Real-Time Web at Scale" to share practical, production-minded guidance on this topic.
 
 ## Creating SignalR Service
 
@@ -188,4 +186,4 @@ az signalr update \
 | 10 | 10,000 | 10M |
 | 100 | 100,000 | 100M |
 
-SignalR Service: real-time made scalable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+SignalR Service: real-time made scalable.

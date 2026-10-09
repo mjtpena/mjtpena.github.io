@@ -1,13 +1,11 @@
 ---
 title: "JSON Mode: Reliable Structured Outputs from GPT-4"
+description: "JSON mode in GPT-4 Turbo (gpt-4-1106-preview) is a simple addition that solves a real, persistent annoyance in LLM application development: the model…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-07
 tags: ["OpenAI", "JSON", "API", "GPT-4", "Structured Data"]
-
 ---
-
-I wrote "JSON Mode: Reliable Structured Outputs from GPT-4" to share practical, production-minded guidance on this topic.
 
 JSON mode in GPT-4 Turbo (`gpt-4-1106-preview`) is a simple addition that solves a real, persistent annoyance in LLM application development: the model sometimes produces JSON with explanatory text around it, or adds trailing commas, or wraps the JSON in markdown code fences, or — most frustratingly — produces perfectly valid JSON for nine out of ten queries and then breaks your parser on the tenth. Setting `response_format: {"type": "json_object"}` instructs the model to return only parseable JSON with no surrounding text, which makes structured output pipelines substantially more reliable. The constraint to note: you still need to describe the expected JSON structure in your prompt — JSON mode doesn't infer the schema, it only guarantees the format is valid JSON. And the `json_object` response format requires that the word "json" appears somewhere in your prompt, or the API returns an error.
 
@@ -268,4 +266,3 @@ def safe_json_extract(prompt: str, max_retries: int = 3) -> dict:
 ## Conclusion
 
 JSON mode eliminates one of the biggest pain points in LLM application development - unreliable structured outputs. Combined with Pydantic validation, you can build robust, type-safe applications. Tomorrow, we'll explore the seed parameter for reproducible outputs!
-

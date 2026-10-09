@@ -1,5 +1,6 @@
 ---
 title: Implementing Speaker Recognition with Azure Cognitive Services
+description: "Speaker Recognition enables secure, frictionless authentication and personalized experiences based on voice identity."
 author: Michael John Pena
 draft: false
 date: 2021-09-15
@@ -9,10 +10,7 @@ tags:
   - Speaker Recognition
   - Biometrics
   - Security
-
 ---
-
-I wrote "2021-09-15-azure-speaker-recognition" to share practical, production-minded guidance on this topic.
 
 ## Speaker Recognition Modes
 
@@ -414,4 +412,4 @@ if __name__ == '__main__':
 5. **Multi-Factor**: Combine with other authentication methods
 6. **Liveness Detection**: Implement anti-spoofing measures
 
-Speaker Recognition enables secure, frictionless authentication and personalized experiences based on voice identity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Speaker Recognition enables secure, frictionless authentication and personalized experiences based on voice identity.

@@ -8,11 +8,8 @@ tags:
   - Databricks
   - Delta Live Tables
   - Streaming
-  - Real-time
-
+  - Real-Time
 ---
-
-I wrote "Streaming Tables in Delta Live Tables" to share practical, production-minded guidance on this topic.
 
 ## Streaming vs Materialized Tables
 
@@ -457,4 +454,3 @@ Whether processing IoT data, clickstreams, or CDC feeds, DLT streaming tables ma
 - [Streaming Tables Documentation](https://docs.databricks.com/delta-live-tables/transform.html)
 - [Watermarks and Late Data](https://docs.databricks.com/structured-streaming/watermarks.html)
 - [Auto Loader](https://docs.databricks.com/ingestion/auto-loader/index.html)
-

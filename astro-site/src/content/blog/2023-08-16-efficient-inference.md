@@ -8,10 +8,7 @@ tags:
   - Performance
   - LLM
   - Optimization
-
 ---
-
-I wrote "Efficient Inference: Optimizing LLM Response Times" to share practical, production-minded guidance on this topic.
 
 ## Inference Optimization Techniques
 
@@ -254,4 +251,4 @@ Tomorrow we'll explore batching strategies in detail.
 
 - [vLLM](https://github.com/vllm-project/vllm)
 - [TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM)
-- [Speculative Decoding Paper](https://arxiv.org/abs/2302.01318)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Speculative Decoding Paper](https://arxiv.org/abs/2302.01318)

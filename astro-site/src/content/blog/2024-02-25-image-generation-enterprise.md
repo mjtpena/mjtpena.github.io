@@ -9,10 +9,7 @@ tags:
   - Governance
   - DALL-E
   - Content Policy
-
 ---
-
-I wrote "Image Generation for Enterprise: Governance and Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Governance Framework
 
@@ -141,4 +138,3 @@ def apply_disclosure(image_path: str, output_path: str):
 ## Conclusion
 
 Enterprise image generation success requires balancing creativity with governance. Build policies, implement controls, and maintain transparency.
-

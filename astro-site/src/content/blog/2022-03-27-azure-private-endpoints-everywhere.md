@@ -9,10 +9,7 @@ tags:
   - Networking
   - Security
   - Data Engineering
-
 ---
-
-I wrote "Private Endpoints Everywhere: Securing Your Azure Data Platform" to share practical, production-minded guidance on this topic.
 
 ## Understanding Private Endpoints
 
@@ -406,4 +403,3 @@ Plan your private endpoint strategy early - retrofitting is possible but adds co
 - [Private Endpoint Documentation](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
 - [Private DNS Zones](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-dns)
 - [Azure Private Link](https://docs.microsoft.com/en-us/azure/private-link/)
-

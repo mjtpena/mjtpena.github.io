@@ -1,5 +1,6 @@
 ---
 title: "Love in the Age of Always-On"
+description: "Two years ago, my wife and I were at dinner. A rare date night. Kids with grandparents. Fancy restaurant."
 author: Michael John Peña
 draft: false
 date: 2026-02-14
@@ -8,10 +9,7 @@ tags:
   - Family
   - Relationships
   - Reflection
-
 ---
-
-I wrote "Love in the Age of Always-On" to share practical, production-minded guidance on this topic.
 
 ## The Notification That Changed Things
 
@@ -85,4 +83,4 @@ But it's a start.
 
 To my wife: thank you for being patient while I figure this out. I love you. I'm working on showing it better.
 
-Happy Valentine's Day.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Happy Valentine's Day.

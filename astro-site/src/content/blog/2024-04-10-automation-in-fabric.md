@@ -1,13 +1,11 @@
 ---
 title: "Automation in Fabric: Scheduling and Orchestration"
+description: "Automation is key to maintaining reliable data pipelines. This guide covers scheduling, orchestration, and automation patterns in Microsoft Fabric."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-10
 tags: ["Microsoft Fabric", "Automation", "Orchestration", "Data Engineering", "ETL"]
-
 ---
-
-I wrote "Automation in Fabric: Scheduling and Orchestration" to share practical, production-minded guidance on this topic.
 
 Automation is key to maintaining reliable data pipelines. This guide covers scheduling, orchestration, and automation patterns in Microsoft Fabric.
 
@@ -401,4 +399,3 @@ AUTOMATION_BEST_PRACTICES = {
 ## Conclusion
 
 Automation in Fabric combines built-in scheduling with external orchestration options. Use data pipelines for standard ETL, notebooks for complex logic, and event-driven patterns for real-time scenarios.
-

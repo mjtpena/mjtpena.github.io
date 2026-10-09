@@ -1,5 +1,6 @@
 ---
 title: "Azure SQL Elastic Pools: Cost-Effective Multi-Tenancy"
+description: "Elastic pools are ideal for SaaS multi-tenancy where tenant databases have varied, unpredictable loads."
 author: Michael John Peña
 draft: false
 date: 2020-09-21
@@ -8,10 +9,7 @@ tags:
   - SQL Database
   - Multi-Tenancy
   - Cost Optimization
-
 ---
-
-I wrote "Azure SQL Elastic Pools: Cost-Effective Multi-Tenancy" to share practical, production-minded guidance on this topic.
 
 ## The Problem
 
@@ -87,4 +85,4 @@ ORDER BY peak_cpu DESC;
 - All databases peak together (no sharing benefit)
 - Databases with widely different performance needs
 
-Elastic pools are ideal for SaaS multi-tenancy where tenant databases have varied, unpredictable loads.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Elastic pools are ideal for SaaS multi-tenancy where tenant databases have varied, unpredictable loads.

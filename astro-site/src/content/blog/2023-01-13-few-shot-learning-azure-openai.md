@@ -9,10 +9,7 @@ tags:
   - Few-Shot Learning
   - Prompt Engineering
   - AI
-
 ---
-
-I wrote "Few-Shot Learning with Azure OpenAI: Teaching by Example" to share practical, production-minded guidance on this topic.
 
 ## Understanding Few-Shot Learning
 
@@ -539,4 +536,4 @@ class FewShotBestPractices:
 
 - [Few-Shot Learning Paper](https://arxiv.org/abs/2005.14165)
 - [Azure OpenAI Examples](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/prompt-engineering)
-- [Prompt Engineering Guide](https://www.promptingguide.ai/techniques/fewshot)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Prompt Engineering Guide](https://www.promptingguide.ai/techniques/fewshot)

@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Real-Time Intelligence: Streaming Analytics at Scale"
+description: "Microsoft Fabric's Real-Time Intelligence workload has matured significantly since GA. Today I'm exploring how to build streaming analytics pipelines that…"
 author: Michael John Peña
 draft: false
 date: 2025-07-02
@@ -73,4 +74,4 @@ RawEvents
 
 ## Activator for Automated Response
 
-The Activator component triggers actions based on real-time conditions. Connect your KQL queries to automated workflows that respond instantly to anomalies, reducing mean time to resolution from hours to seconds. This integration with Power Automate and Azure Functions creates a complete observability and response platform within Fabric.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Activator component triggers actions based on real-time conditions. Connect your KQL queries to automated workflows that respond instantly to anomalies, reducing mean time to resolution from hours to seconds. This integration with Power Automate and Azure Functions creates a complete observability and response platform within Fabric.

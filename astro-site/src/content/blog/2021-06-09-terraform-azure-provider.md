@@ -1,5 +1,6 @@
 ---
 title: Terraform Azure Provider Fundamentals
+description: "Terraform with the AzureRM provider is the infrastructure-as-code choice I recommend to teams that need multi-cloud portability or already have Terraform…"
 author: Michael John Peña
 draft: false
 date: 2021-06-09

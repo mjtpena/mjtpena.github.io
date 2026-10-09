@@ -1,5 +1,6 @@
 ---
 title: "Thanksgiving Reflections: A Year of Azure Data and AI Progress"
+description: "Enterprise features like private endpoints, managed identity, and content filtering make these models production-ready."
 author: Michael John Peña
 draft: false
 date: 2022-11-24
@@ -9,10 +10,7 @@ tags:
   - Data
   - Reflection
   - Cloud
-
 ---
-
-I wrote "Thanksgiving Reflections: A Year of Azure Data and AI Progress" to share practical, production-minded guidance on this topic.
 
 ## Grateful for Azure OpenAI Service
 
@@ -228,4 +226,3 @@ Happy Thanksgiving!
 - [Microsoft Ignite 2022 Recap](https://ignite.microsoft.com/)
 - [.NET 7 Announcement](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/)
 - [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/)
-

@@ -1,5 +1,6 @@
 ---
 title: "Evaluating RAG Systems: Metrics and Automated Testing with Azure AI"
+description: "Fail builds when quality metrics drop below thresholds, catching regressions before they reach production."
 author: Michael John Peña
 draft: false
 date: 2025-07-13
@@ -9,10 +10,7 @@ tags:
   - Azure AI
   - Testing
   - Python
-
 ---
-
-I wrote "Evaluating RAG Systems: Metrics and Automated Testing with Azure AI" to share practical, production-minded guidance on this topic.
 
 ## Core Evaluation Metrics
 
@@ -104,4 +102,4 @@ async def run_evaluation_suite(rag_pipeline, test_cases):
 
 ## CI/CD Integration
 
-Fail builds when quality metrics drop below thresholds, catching regressions before they reach production.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fail builds when quality metrics drop below thresholds, catching regressions before they reach production.

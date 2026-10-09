@@ -9,10 +9,7 @@ tags:
   - Embeddings
   - RAG
   - AI
-
 ---
-
-I wrote "Hybrid Search: Combining Vector and Keyword Search" to share practical, production-minded guidance on this topic.
 
 ## Why Hybrid Search?
 
@@ -383,4 +380,4 @@ class HybridSearchEvaluator:
 
 - [Reciprocal Rank Fusion](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf)
 - [Azure Cognitive Search Hybrid](https://learn.microsoft.com/azure/search/hybrid-search-overview)
-- [BM25 Algorithm](https://en.wikipedia.org/wiki/Okapi_BM25)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [BM25 Algorithm](https://en.wikipedia.org/wiki/Okapi_BM25)

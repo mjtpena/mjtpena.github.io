@@ -1,5 +1,6 @@
 ---
 title: "Power Automate Expressions: Dynamic Flow Logic"
+description: "Expressions turn simple flows into powerful automation."
 author: Michael John Peña
 draft: false
 date: 2020-11-13
@@ -8,10 +9,7 @@ tags:
   - Power Platform
   - Low-Code
   - Automation
-
 ---
-
-I wrote "Power Automate Expressions: Dynamic Flow Logic" to share practical, production-minded guidance on this topic.
 
 ## Expression Basics
 
@@ -201,4 +199,4 @@ join(body('Get_approvers')?['value'], ';')
 last(split(triggerBody()?['Path'], '/'))
 ```
 
-Expressions turn simple flows into powerful automation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Expressions turn simple flows into powerful automation.

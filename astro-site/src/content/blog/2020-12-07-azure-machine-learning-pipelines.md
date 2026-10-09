@@ -1,5 +1,6 @@
 ---
 title: "Azure Machine Learning Pipelines: MLOps Workflows"
+description: "The first ML model I helped put into production was a notebook a data scientist ran by hand every Monday morning. That worked exactly as well as you'd…"
 author: Michael John Peña
 draft: false
 date: 2020-12-07
@@ -210,4 +211,4 @@ train_step = PythonScriptStep(
 )
 ```
 
-Azure ML Pipelines: reproducible ML at enterprise scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure ML Pipelines: reproducible ML at enterprise scale.

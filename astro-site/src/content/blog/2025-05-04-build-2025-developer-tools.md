@@ -1,5 +1,6 @@
 ---
 title: "Build 2025: Developer Tools and AI Integration"
+description: "Full agentic coding experience directly in VS. These tools transform the development experience with AI assistance at every step."
 author: Michael John Peña
 draft: false
 date: 2025-05-04
@@ -9,10 +10,7 @@ tags:
   - Developer Tools
   - Visual Studio
   - GitHub Copilot
-
 ---
-
-I wrote "Build 2025: Developer Tools and AI Integration" to share practical, production-minded guidance on this topic.
 
 ## Visual Studio 2025 Updates
 
@@ -68,4 +66,4 @@ devhome ai suggest-architecture --requirements "requirements.md"
 devhome ai generate-docs --project ./src
 ```
 
-These tools transform the development experience with AI assistance at every step.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These tools transform the development experience with AI assistance at every step.

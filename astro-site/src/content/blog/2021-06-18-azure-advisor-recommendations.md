@@ -1,5 +1,6 @@
 ---
 title: Implementing Azure Advisor Recommendations at Scale
+description: "Azure Advisor is the free recommendation service that surfaces findings your team should have already found—and usually hasn't. The five categories (Cost…"
 author: Michael John Peña
 draft: false
 date: 2021-06-18

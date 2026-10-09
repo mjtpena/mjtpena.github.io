@@ -1,5 +1,6 @@
 ---
 title: "Multi-Agent Orchestration Patterns for Enterprise AI"
+description: "Multi-agent systems address these by distributing work across specialized agents. Multi-agent systems are the future of enterprise AI. Choose patterns that…"
 author: Michael John Peña
 draft: false
 date: 2025-01-02
@@ -9,10 +10,7 @@ tags:
   - Azure
   - Architecture Patterns
   - AI Orchestration
-
 ---
-
-I wrote "Multi-Agent Orchestration Patterns for Enterprise AI" to share practical, production-minded guidance on this topic.
 
 ## Why Multi-Agent?
 
@@ -300,4 +298,4 @@ with tracer.span("multi_agent_task"):
 # View in Azure Monitor: agent calls, latencies, token usage, decisions
 ```
 
-Multi-agent systems are the future of enterprise AI. Choose patterns that match your problem structure, and build in observability from day one.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multi-agent systems are the future of enterprise AI. Choose patterns that match your problem structure, and build in observability from day one.

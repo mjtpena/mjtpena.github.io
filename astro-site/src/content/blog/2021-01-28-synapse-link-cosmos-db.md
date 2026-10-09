@@ -1,5 +1,6 @@
 ---
 title: Real-Time Analytics with Azure Synapse Link for Cosmos DB
+description: "\"Run analytics on Cosmos data without burning RU/s on the OLTP container\" used to mean ETL-by-night. Synapse Link makes the trade-off go away. A…"
 author: Michael John Pena
 draft: false
 date: 2021-01-28
@@ -465,4 +466,4 @@ query = realtime_metrics.writeStream \
 5. **Cost Management**: Monitor analytical storage and query costs
 6. **Latency**: Expect 2-5 minute sync latency for analytical store updates
 
-Synapse Link for Cosmos DB enables powerful real-time analytics without ETL pipelines or impacting operational workloads. This HTAP capability unlocks new possibilities for operational analytics and real-time decision making.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Synapse Link for Cosmos DB enables powerful real-time analytics without ETL pipelines or impacting operational workloads. This HTAP capability unlocks new possibilities for operational analytics and real-time decision making.

@@ -1,13 +1,11 @@
 ---
 title: "OpenAI DevDay 2023: Revolutionary Announcements for AI Developers"
+description: "OpenAI DevDay happened on November 6, 2023 in San Francisco — the first developer conference from a company that, two years ago, didn't exist as a…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-06
 tags: ["OpenAI", "DevDay", "GPT-4", "AI", "Announcements"]
-
 ---
-
-I wrote "OpenAI DevDay 2023: Revolutionary Announcements for AI Developers" to share practical, production-minded guidance on this topic.
 
 OpenAI DevDay happened on November 6, 2023 in San Francisco — the first developer conference from a company that, two years ago, didn't exist as a commercial entity and is now driving the most significant platform shift in enterprise software since cloud adoption. The lead announcement: GPT-4 Turbo (`gpt-4-1106-preview`) with a 128,000-token context window, knowledge cutoff of April 2023, and pricing that's 3x cheaper for input tokens and 2x cheaper for output tokens than GPT-4. Below GPT-4 Turbo: the Assistants API (stateful AI agents with built-in thread management, file handling, code execution, and retrieval — in beta), custom GPTs (no-code agent configuration with custom instructions and tools), JSON mode (guaranteed structured output), and a seed parameter for best-effort reproducibility. The pricing reduction alone changes the economics of many applications that were cost-constrained on GPT-4.
 
@@ -190,4 +188,4 @@ Stay tuned for detailed coverage of:
 - GPT-4 Turbo optimization strategies
 - Building with the Assistants API
 - GPT-4 Vision use cases
-- Migrating existing applications to take advantage of new features\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- Migrating existing applications to take advantage of new features

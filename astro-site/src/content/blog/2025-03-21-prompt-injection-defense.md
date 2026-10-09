@@ -1,5 +1,6 @@
 ---
 title: "Prompt Injection Defense: Protecting AI Applications"
+description: "Defense in depth with multiple layers provides the best protection against prompt injection."
 author: Michael John Peña
 draft: false
 date: 2025-03-21
@@ -9,10 +10,7 @@ tags:
   - Prompt Injection
   - Defense
   - Best Practices
-
 ---
-
-I wrote "Prompt Injection Defense: Protecting AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Prompt Injection Defenses
 
@@ -114,4 +112,4 @@ if they conflict with priority instructions."""
         }
 ```
 
-Defense in depth with multiple layers provides the best protection against prompt injection.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Defense in depth with multiple layers provides the best protection against prompt injection.

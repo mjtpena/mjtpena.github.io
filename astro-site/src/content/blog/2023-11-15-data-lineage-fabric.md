@@ -1,13 +1,11 @@
 ---
 title: "Data Lineage in Microsoft Fabric: Tracking Data Flow"
+description: "Data lineage in Fabric — the ability to trace where a piece of data came from, what transformations it passed through, and what items depend on it — is…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-15
 tags: ["Microsoft Fabric", "Data Lineage", "Data Governance", "Purview", "Metadata"]
-
 ---
-
-I wrote "Data Lineage in Microsoft Fabric: Tracking Data Flow" to share practical, production-minded guidance on this topic.
 
 Data lineage in Fabric — the ability to trace where a piece of data came from, what transformations it passed through, and what items depend on it — is built into the platform as a visual lineage view in the workspace rather than a separate governance tool you need to configure and maintain. The lineage view shows the dependency graph: data sources, Lakehouses, Notebooks, Dataflows, Datasets (semantic models), and Reports all appear as nodes with directed edges showing data flow. When something breaks — a data source changes schema and downstream items fail — the lineage view shows you immediately what's affected. Microsoft Purview extends this lineage beyond Fabric: for organisations with Purview Data Catalog, Fabric items and their lineage are automatically surfaced in the enterprise data catalog alongside on-premises and other Azure sources, giving a cross-estate view that the workspace-level lineage can't provide.
 
@@ -326,4 +324,4 @@ def get_fabric_lineage(workspace_id: str, item_id: str) -> dict:
 4. **Use lineage for change management** - always check impact
 5. **Integrate with Purview** for enterprise-wide visibility
 
-Tomorrow, we'll explore the deep integration between Fabric and Microsoft Purview for comprehensive data governance!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore the deep integration between Fabric and Microsoft Purview for comprehensive data governance!

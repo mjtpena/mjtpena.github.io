@@ -1,5 +1,6 @@
 ---
 title: Optimizing Cloud Spend with Azure Cost Management
+description: "Cloud bills have a way of arriving late and being everyone's problem at once. Cost Management is the tool that moves that conversation from quarterly shock…"
 author: Michael John Peña
 draft: false
 date: 2021-02-25

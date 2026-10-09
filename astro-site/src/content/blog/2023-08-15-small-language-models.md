@@ -8,10 +8,7 @@ tags:
   - SLM
   - AI
   - Edge Deployment
-
 ---
-
-I wrote "Small Language Models: When Bigger Isn't Better" to share practical, production-minded guidance on this topic.
 
 ## The Case for Small Models
 
@@ -177,4 +174,5 @@ def compare_models(models, test_prompts, task_evaluator):
 # Example results
 """
 Model          | Params | Latency | Quality
----------------|--------|---------|-----\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+---------------|--------|---------|-----
+```

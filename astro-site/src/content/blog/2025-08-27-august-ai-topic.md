@@ -1,5 +1,6 @@
 ---
 title: "Building Data Pipelines with Microsoft Fabric Data Factory"
+description: "Data Factory pipelines use a visual designer with activities that can be chained together."
 author: Michael John Peña
 draft: false
 date: 2025-08-27
@@ -9,10 +10,7 @@ tags:
   - ETL
   - Data Pipelines
   - Data Engineering
-
 ---
-
-I wrote "Building Data Pipelines with Microsoft Fabric Data Factory" to share practical, production-minded guidance on this topic.
 
 ## Creating a Basic Pipeline
 
@@ -97,4 +95,4 @@ df_transformed.write.format("delta").mode("append").saveAsTable("silver.sales")
 
 ## Scheduling and Triggers
 
-Configure time-based triggers for regular execution or event-based triggers that respond to data arrival. Monitor pipeline runs through the Fabric monitoring hub for visibility into execution history and failures.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Configure time-based triggers for regular execution or event-based triggers that respond to data arrival. Monitor pipeline runs through the Fabric monitoring hub for visibility into execution history and failures.

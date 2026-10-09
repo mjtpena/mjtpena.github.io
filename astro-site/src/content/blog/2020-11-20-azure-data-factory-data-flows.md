@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Factory Data Flows: Visual ETL"
+description: "I have a love-hate relationship with visual ETL tools. Drag-and-drop is wonderful right up until you need to diff two pipelines in source control. ADF Data…"
 author: Michael John Peña
 draft: false
 date: 2020-11-20
@@ -191,4 +192,4 @@ Rule-based mapping:
 }
 ```
 
-Data Flows: Spark power without Spark complexity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Data Flows: Spark power without Spark complexity.

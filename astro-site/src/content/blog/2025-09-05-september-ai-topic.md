@@ -1,5 +1,6 @@
 ---
 title: "Building AI Agents with Tool Use: A Practical Architecture"
+description: "At its core, an AI agent follows a simple loop: observe, think, act, repeat. Tools should be focused, well-documented, and handle errors gracefully."
 author: Michael John Peña
 draft: false
 date: 2025-09-05
@@ -9,10 +10,7 @@ tags:
   - Function Calling
   - Architecture
   - LLM
-
 ---
-
-I wrote "Building AI Agents with Tool Use: A Practical Architecture" to share practical, production-minded guidance on this topic.
 
 ## The Agent Loop
 
@@ -113,4 +111,4 @@ search_database.parameters = {
 
 Keep tools atomic and composable. Let the LLM orchestrate multiple simple tools rather than building complex mega-tools. This approach is more flexible and easier to debug.
 
-Always implement proper error handling and timeouts. Agents can get stuck in loops, so iteration limits are essential safeguards.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Always implement proper error handling and timeouts. Agents can get stuck in loops, so iteration limits are essential safeguards.

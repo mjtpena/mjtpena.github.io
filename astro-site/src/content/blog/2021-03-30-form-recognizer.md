@@ -1,5 +1,6 @@
 ---
 title: Intelligent Document Processing with Azure Form Recognizer
+description: "Form Recognizer is where I've seen the most immediate ROI from Cognitive Services in enterprise settings. Accounts payable teams manually keying invoice…"
 author: Michael John Pena
 draft: false
 date: 2021-03-30

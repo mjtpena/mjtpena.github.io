@@ -1,5 +1,6 @@
 ---
 title: "Implementing Feature Stores with Microsoft Fabric OneLake"
+description: "Without a feature store, teams often duplicate feature engineering work across projects. Features computed for training may differ from inference, causing…"
 author: Michael John Peña
 draft: false
 date: 2025-11-08
@@ -9,10 +10,7 @@ tags:
   - MLOps
   - Data Engineering
   - OneLake
-
 ---
-
-I wrote "Implementing Feature Stores with Microsoft Fabric OneLake" to share practical, production-minded guidance on this topic.
 
 ## Why Feature Stores Matter
 
@@ -138,4 +136,4 @@ feature_store.register_feature_group(
 
 Configure Fabric Data Factory pipelines to refresh features on schedules matching business requirements. Critical features may need hourly updates while others refresh daily.
 
-A well-designed feature store accelerates ML development by enabling feature reuse across teams and ensuring consistency between training and production environments.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A well-designed feature store accelerates ML development by enabling feature reuse across teams and ensuring consistency between training and production environments.

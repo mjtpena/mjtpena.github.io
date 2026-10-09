@@ -1,5 +1,6 @@
 ---
 title: "Token Budgeting: Cost-Effective LLM Applications"
+description: "Token costs for GPT-4 in mid-2023 are real enough to design around: roughly $0.03 per 1K input tokens and $0.06 per 1K output tokens for the 8K context…"
 author: Michael John Peña
 draft: false
 date: 2023-06-24
@@ -332,4 +333,4 @@ Effective token budgeting keeps costs under control. Tomorrow, I will cover cach
 ## Resources
 
 - [Azure OpenAI Pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)
-- [Token Counting](https://github.com/openai/tiktoken)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Token Counting](https://github.com/openai/tiktoken)

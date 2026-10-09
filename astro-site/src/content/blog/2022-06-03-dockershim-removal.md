@@ -1,17 +1,15 @@
 ---
 title: "Dockershim Removal: Migrating to containerd on AKS"
+description: "Dockershim was a Kubernetes component that translated Docker API calls to the Container Runtime Interface (CRI). With its removal, containerd communicates…"
 author: Michael John Peña
 draft: false
 date: 2022-06-03
 tags:
-  - kubernetes
-  - docker
+  - Kubernetes
+  - Docker
   - containerd
-  - aks
-
+  - AKS
 ---
-
-I wrote "Dockershim Removal: Migrating to containerd on AKS" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Change
 
@@ -258,5 +256,3 @@ Dockershim removal means:
 - Use crictl for debugging
 
 Plan your migration before upgrading to Kubernetes 1.24.
-
-

@@ -6,12 +6,9 @@ date: 2022-05-17
 tags:
   - dataverse
   - power-platform
-  - data
+  - Data
   - cosmos-db
-
 ---
-
-I wrote "Dataverse Elastic Tables: High-Volume Data Storage" to share practical, production-minded guidance on this topic.
 
 ## When to Use Elastic Tables
 
@@ -495,5 +492,3 @@ Dataverse elastic tables provide:
 - Integration with Power Platform
 
 Handle billions of records while maintaining Dataverse's security and integration capabilities.
-
-

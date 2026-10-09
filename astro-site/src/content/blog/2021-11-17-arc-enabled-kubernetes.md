@@ -9,10 +9,7 @@ tags:
   - Azure Arc
   - Containers
   - Hybrid Cloud
-
 ---
-
-I wrote "Azure Arc-Enabled Kubernetes: Manage Kubernetes Clusters Anywhere" to share practical, production-minded guidance on this topic.
 
 ## What is Arc-Enabled Kubernetes?
 
@@ -313,4 +310,5 @@ spec:
         - |
           objectName: api-key
           objectType: secret
-    tenantId: "your-tenant-id"\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    tenantId: "your-tenant-id"
+```

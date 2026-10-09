@@ -6,12 +6,9 @@ date: 2022-05-15
 tags:
   - dataverse
   - power-platform
-  - api
+  - API
   - dynamics-365
-
 ---
-
-I wrote "Dataverse Web API: Building Enterprise Data Solutions" to share practical, production-minded guidance on this topic.
 
 ## Understanding Dataverse
 
@@ -474,5 +471,3 @@ Dataverse Web API provides:
 - Relationship management
 
 Build enterprise-grade applications with Microsoft's data platform.
-
-

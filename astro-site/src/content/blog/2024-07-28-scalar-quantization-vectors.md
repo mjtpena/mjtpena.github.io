@@ -9,10 +9,7 @@ tags:
   - Quantization
   - Performance
   - Optimization
-
 ---
-
-I wrote "Scalar Quantization for Vector Search: A Practical Guide" to share practical, production-minded guidance on this topic.
 
 ## How Scalar Quantization Works
 
@@ -454,4 +451,3 @@ print(f"Quantized: {savings['quantized_storage_gb']:.1f} GB")
 Scalar quantization provides an excellent balance of compression and accuracy for most vector search applications. With proper configuration and rescoring, you can achieve 4x storage reduction with minimal impact on search quality.
 
 Enable it in Azure AI Search, monitor your recall metrics, and enjoy the cost savings.
-

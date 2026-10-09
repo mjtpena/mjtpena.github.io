@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Notebooks: Collaborative Data Science at Scale"
+description: "Fabric notebooks provide a seamless path from exploration to production, with built-in governance, collaboration, and scalable compute."
 author: Michael John Peña
 draft: false
 date: 2025-09-27
@@ -9,10 +10,7 @@ tags:
   - Data Science
   - PySpark
   - Collaboration
-
 ---
-
-I wrote "Microsoft Fabric Notebooks: Collaborative Data Science at Scale" to share practical, production-minded guidance on this topic.
 
 ## Environment Setup
 
@@ -134,4 +132,4 @@ with mlflow.start_run(run_name="rf_baseline"):
     mlflow.sklearn.log_model(model, "model")
 ```
 
-Fabric notebooks provide a seamless path from exploration to production, with built-in governance, collaboration, and scalable compute.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fabric notebooks provide a seamless path from exploration to production, with built-in governance, collaboration, and scalable compute.

@@ -9,10 +9,7 @@ tags:
   - Cost Optimization
   - Cloud Economics
   - Governance
-
 ---
-
-I wrote "FinOps for Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## FinOps Framework for Fabric
 
@@ -562,4 +559,3 @@ finops_team = {
 FinOps for Microsoft Fabric brings cloud financial management best practices to your analytics platform. The Inform-Optimize-Operate cycle ensures continuous improvement in cost efficiency while maintaining performance.
 
 Start with visibility, progress to optimization, and mature into automated governance for maximum value from your Fabric investment.
-

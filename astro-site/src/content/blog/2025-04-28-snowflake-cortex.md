@@ -1,5 +1,6 @@
 ---
 title: "Snowflake Cortex: AI Functions in the Data Cloud"
+description: "Snowflake Cortex makes AI accessible through familiar SQL without data movement."
 author: Michael John Peña
 draft: false
 date: 2025-04-28
@@ -9,10 +10,7 @@ tags:
   - AI
   - SQL
   - Data Cloud
-
 ---
-
-I wrote "Snowflake Cortex: AI Functions in the Data Cloud" to share practical, production-minded guidance on this topic.
 
 ## Snowflake Cortex AI
 
@@ -148,4 +146,4 @@ class SnowflakeCortexAI:
         return result[0]["ANSWER"]
 ```
 
-Snowflake Cortex makes AI accessible through familiar SQL without data movement.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Snowflake Cortex makes AI accessible through familiar SQL without data movement.

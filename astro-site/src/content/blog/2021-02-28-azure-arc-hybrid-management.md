@@ -1,5 +1,6 @@
 ---
 title: Extending Azure Management with Azure Arc
+description: "Azure Arc is the product I've recommended most in 2021 that clients are slowest to adopt. Not because they don't need it—they do—but because \"manage your…"
 author: Michael John Peña
 draft: false
 date: 2021-02-28
@@ -8,7 +9,7 @@ tags:
   - Azure
   - Azure Arc
   - Hybrid Cloud
-  - Multi-cloud
+  - Multi-Cloud
   - Kubernetes
 ---
 

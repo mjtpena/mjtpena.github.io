@@ -1,5 +1,6 @@
 ---
 title: "Setting Up Azure Static Web Apps (Preview) for Your Portfolio"
+description: "After committing to writing again, I needed to ensure my blog infrastructure was solid. Azure Static Web Apps, announced at Build 2020 in May, is currently…"
 author: Michael John Peña
 draft: false
 date: 2020-08-27
@@ -74,4 +75,4 @@ I am keeping an eye on this service for when it reaches GA. For now, my blog inf
 ## Resources
 
 - [Azure Static Web Apps Preview Documentation](https://docs.microsoft.com/en-us/azure/static-web-apps/)
-- [Build 2020 Announcement](https://azure.microsoft.com/en-us/blog/build-2020-azure-announcements/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Build 2020 Announcement](https://azure.microsoft.com/en-us/blog/build-2020-azure-announcements/)

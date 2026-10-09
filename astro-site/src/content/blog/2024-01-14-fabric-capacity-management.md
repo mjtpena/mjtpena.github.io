@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Capacity Management: Optimization Strategies"
+description: "Capacity choices in Fabric determine both performance and cost. From real projects, I'll share the monitoring signals and optimization steps that actually…"
 author: Michael John Peña
 draft: false
 date: 2024-01-14

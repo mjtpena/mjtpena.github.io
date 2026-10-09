@@ -1,13 +1,11 @@
 ---
 title: "Mathematical Reasoning with o1: From Basics to Proofs"
+description: "Mathematical reasoning is one of o1's strongest capabilities. Use it for problems that require genuine reasoning, not just computation."
 author: "Michael John Peña"
 draft: false
 date: 2024-09-09
 tags: ["OpenAI", "o1", "Mathematics", "AI", "Reasoning"]
-
 ---
-
-I wrote "Mathematical Reasoning with o1: From Basics to Proofs" to share practical, production-minded guidance on this topic.
 
 ## Basic Mathematical Operations
 
@@ -288,4 +286,3 @@ Please verify this solution:
 4. **Complex problems benefit most** - Simple arithmetic doesn't need o1's power
 
 Mathematical reasoning is one of o1's strongest capabilities. Use it for problems that require genuine reasoning, not just computation.
-

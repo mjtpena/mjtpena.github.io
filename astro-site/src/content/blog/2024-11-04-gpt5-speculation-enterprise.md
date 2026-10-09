@@ -1,5 +1,6 @@
 ---
 title: "GPT-5 Speculation: What Enterprise AI Teams Should Prepare For"
+description: "The best preparation is building flexible systems that can quickly adopt new models while maintaining production stability."
 author: Michael John Peña
 draft: false
 date: 2024-11-04
@@ -9,10 +10,7 @@ tags:
   - GPT-5
   - Enterprise AI
   - Future Tech
-
 ---
-
-I wrote "GPT-5 Speculation: What Enterprise AI Teams Should Prepare For" to share practical, production-minded guidance on this topic.
 
 ## What We Know (and Don't Know)
 
@@ -338,4 +336,4 @@ The best preparation is building flexible systems that can quickly adopt new mod
 
 - [Azure OpenAI Roadmap](https://learn.microsoft.com/en-us/azure/ai-services/openai/whats-new)
 - [OpenAI Research](https://openai.com/research)
-- [Microsoft AI Blog](https://blogs.microsoft.com/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Microsoft AI Blog](https://blogs.microsoft.com/ai/)

@@ -9,10 +9,7 @@ tags:
   - Hybrid Cloud
   - Networking
   - Architecture
-
 ---
-
-I wrote "DNS Forwarding Strategies for Azure Hybrid Architectures" to share practical, production-minded guidance on this topic.
 
 ## DNS Forwarding Patterns
 
@@ -416,4 +413,3 @@ Invest time in proper DNS design - it's foundational for hybrid cloud success.
 - [Azure DNS Forwarding](https://docs.microsoft.com/en-us/azure/dns/dns-private-resolver-overview)
 - [Private Endpoint DNS](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-dns)
 - [DNS Best Practices](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances)
-

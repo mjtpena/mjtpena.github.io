@@ -1,5 +1,6 @@
 ---
 title: "Mastering Function Calling in Azure OpenAI: A Deep Dive"
+description: "Function calling transforms GPT models into powerful agents that can interact with the real world. Tomorrow, I will cover Azure AI Studio in more detail."
 author: Michael John Peña
 draft: false
 date: 2023-05-18
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - AI
   - API Development
-
 ---
-
-I wrote "Mastering Function Calling in Azure OpenAI: A Deep Dive" to share practical, production-minded guidance on this topic.
 
 ## Understanding Function Calling
 
@@ -413,4 +411,4 @@ Function calling transforms GPT models into powerful agents that can interact wi
 
 - [Function Calling Documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/function-calling)
 - [OpenAI Cookbook](https://github.com/openai/openai-cookbook)
-- [Best Practices Guide](https://platform.openai.com/docs/guides/gpt-best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Best Practices Guide](https://platform.openai.com/docs/guides/gpt-best-practices)

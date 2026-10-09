@@ -1,5 +1,6 @@
 ---
 title: "Azure Backup: Protect Your Data"
+description: "Every backup conversation I've ever had eventually circles back to a story about someone restoring a tape only to discover it was empty. Azure Backup is the…"
 author: Michael John Peña
 draft: false
 date: 2020-11-29
@@ -194,4 +195,4 @@ az backup job list \
     --output table
 ```
 
-Azure Backup: simple protection for complex environments.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Backup: simple protection for complex environments.

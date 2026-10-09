@@ -1,18 +1,16 @@
 ---
 title: "HashiCorp Vault on Azure: Enterprise Secrets Management"
+description: "HashiCorp Vault provides enterprise-grade secrets management with dynamic credentials and multi-cloud support."
 author: Michael John Peña
 draft: false
 date: 2022-02-18
 url: /blog/hashicorp-vault-azure/
 tags:
-  - azure
+  - Azure
   - hashicorp
   - vault
   - secrets
-
 ---
-
-I wrote "HashiCorp Vault on Azure: Enterprise Secrets Management" to share practical, production-minded guidance on this topic.
 
 ## Why HashiCorp Vault?
 
@@ -261,4 +259,4 @@ vault audit enable file file_path=/vault/logs/audit.log
 # Configure fluentd/fluent-bit to ship logs
 ```
 
-HashiCorp Vault provides enterprise-grade secrets management with dynamic credentials and multi-cloud support.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+HashiCorp Vault provides enterprise-grade secrets management with dynamic credentials and multi-cloud support.

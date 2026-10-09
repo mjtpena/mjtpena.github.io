@@ -1,5 +1,6 @@
 ---
 title: "The Complete Guide to AI Model Fine-Tuning on Azure"
+description: "Fine-tuning is powerful but expensive. Validate the ROI before investing in training infrastructure."
 author: Michael John Peña
 draft: false
 date: 2025-12-15
@@ -9,10 +10,7 @@ tags:
   - OpenAI
   - AI
   - ML
-
 ---
-
-I wrote "The Complete Guide to AI Model Fine-Tuning on Azure" to share practical, production-minded guidance on this topic.
 
 ## When to Fine-Tune
 
@@ -149,4 +147,4 @@ print(response.choices[0].message.content)
 | Hosting | $1.70/hour (while deployed) |
 | Inference | 2-3x base model pricing |
 
-Fine-tuning is powerful but expensive. Validate the ROI before investing in training infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fine-tuning is powerful but expensive. Validate the ROI before investing in training infrastructure.

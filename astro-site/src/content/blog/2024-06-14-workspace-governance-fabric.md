@@ -1,5 +1,6 @@
 ---
 title: "Workspace Governance in Microsoft Fabric"
+description: "Workspaces are the containers for collaboration in Fabric. Effective governance ensures organization, security, and efficiency. Today I'm covering workspace…"
 author: Michael John Peña
 draft: false
 date: 2024-06-14
@@ -422,4 +423,4 @@ Tomorrow I'll start covering Data Mesh with Fabric.
 
 - [Workspace Governance](https://learn.microsoft.com/fabric/governance/)
 - [Access Management](https://learn.microsoft.com/fabric/admin/workspace-access)
-- [Best Practices](https://learn.microsoft.com/fabric/governance/best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Best Practices](https://learn.microsoft.com/fabric/governance/best-practices)

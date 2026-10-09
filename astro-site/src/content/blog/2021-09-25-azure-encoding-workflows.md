@@ -1,5 +1,6 @@
 ---
 title: Designing Video Encoding Workflows in Azure
+description: "Proper encoding workflow design ensures optimal video quality, efficient delivery, and cost-effective processing for your media applications."
 author: Michael John Pena
 draft: false
 date: 2021-09-25
@@ -9,10 +10,7 @@ tags:
   - Video Encoding
   - Media Processing
   - Cloud Computing
-
 ---
-
-I wrote "2021-09-25-azure-encoding-workflows" to share practical, production-minded guidance on this topic.
 
 ## Encoding Presets
 
@@ -440,4 +438,4 @@ print(f"Estimated cost for {duration} min video: ${cost:.2f}")
 5. **Thumbnail Strategy**: Generate sprites for timeline scrubbing
 6. **Job Prioritization**: Use priorities for urgent vs. batch encoding
 
-Proper encoding workflow design ensures optimal video quality, efficient delivery, and cost-effective processing for your media applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper encoding workflow design ensures optimal video quality, efficient delivery, and cost-effective processing for your media applications.

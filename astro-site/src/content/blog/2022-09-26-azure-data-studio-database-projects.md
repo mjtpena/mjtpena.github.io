@@ -1,13 +1,11 @@
 ---
 title: "Database Projects in Azure Data Studio"
+description: "Database Projects bring modern DevOps practices to database development."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-26
 tags: ["Azure", "Azure Data Studio", "Database Projects", "DevOps"]
-
 ---
-
-I wrote "Database Projects in Azure Data Studio" to share practical, production-minded guidance on this topic.
 
 ## Getting Started with Database Projects
 
@@ -306,4 +304,4 @@ stages:
 4. **Test before deploy** - Build validation catches errors
 5. **Automate deployments** - Use CI/CD pipelines
 
-Database Projects bring modern DevOps practices to database development.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Database Projects bring modern DevOps practices to database development.

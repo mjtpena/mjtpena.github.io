@@ -1,5 +1,6 @@
 ---
 title: "Securing AI Applications: A Comprehensive 2025 Checklist"
+description: "AI security is not optional. Implement these measures before going to production, and review them quarterly as threats evolve."
 author: Michael John Peña
 draft: false
 date: 2025-12-10
@@ -9,10 +10,7 @@ tags:
   - Best-Practices
   - Azure
   - Compliance
-
 ---
-
-I wrote "Securing AI Applications: A Comprehensive 2025 Checklist" to share practical, production-minded guidance on this topic.
 
 ## 1. Input Validation and Sanitization
 
@@ -138,4 +136,4 @@ async def log_ai_interaction(
 - [ ] Content moderation filters
 - [ ] Human review for high-risk outputs
 
-AI security is not optional. Implement these measures before going to production, and review them quarterly as threats evolve.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI security is not optional. Implement these measures before going to production, and review them quarterly as threats evolve.

@@ -1,5 +1,6 @@
 ---
 title: "Exploring the OpenAI GPT-3 API: Practical Patterns and Techniques"
+description: "This is direct OpenAI access - enterprise Azure integration may come in the future. response = openai.Completion.create( engine=\"text-davinci-002\"…"
 author: Michael John Peña
 draft: false
 date: 2021-05-06
@@ -9,10 +10,7 @@ tags:
   - OpenAI
   - NLP
   - Machine Learning
-
 ---
-
-I wrote "Exploring the OpenAI GPT-3 API: Practical Patterns and Techniques" to share practical, production-minded guidance on this topic.
 
 ## Getting Access to GPT-3
 
@@ -438,4 +436,5 @@ For now, developers interested in large language models should experiment with t
 
 - [OpenAI API Documentation](https://platform.openai.com/docs/)
 - [OpenAI Cookbook](https://github.com/openai/openai-cookbook)
-- [Best Practices for Prompt Engineering](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Best Practices for Prompt Engineering](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering)
+```

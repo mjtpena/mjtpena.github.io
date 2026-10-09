@@ -10,12 +10,9 @@ tags:
   - Data Share
   - Collaboration
   - Governance
-
 ---
 
-I wrote "2021-07-07-azure-data-share" to share practical, production-minded guidance on this topic.
-
-# Creating a Data Share Account
+## Creating a Data Share Account
 
 Set up the data sharing infrastructure:
 
@@ -38,7 +35,7 @@ az datashare share create \
     --description "Analytics data for partner integration"
 ```
 
-# Adding Datasets to Share
+## Adding Datasets to Share
 
 Configure datasets to be shared:
 
@@ -108,7 +105,7 @@ client.data_sets.create(
 )
 ```
 
-# Creating Share Invitations
+## Creating Share Invitations
 
 Invite consumers to access shared data:
 
@@ -157,7 +154,7 @@ for inv in invitations:
     print(f"Invitation: {inv.name}, Status: {inv.invitation_status}")
 ```
 
-# Configuring Snapshot Schedules
+## Configuring Snapshot Schedules
 
 Set up automated data synchronization:
 
@@ -195,7 +192,7 @@ client.share_synchronization_settings.create(
 )
 ```
 
-# Consumer Side: Accepting Share Invitations
+## Consumer Side: Accepting Share Invitations
 
 On the consumer side, accept and configure the share:
 
@@ -240,7 +237,7 @@ consumer_client.data_set_mappings.create(
 )
 ```
 
-# Triggering Synchronization
+## Triggering Synchronization
 
 Manually trigger or monitor sync operations:
 
@@ -278,7 +275,7 @@ monitor_sync(
 )
 ```
 
-# In-Place Sharing with Synapse
+## In-Place Sharing with Synapse
 
 Configure in-place sharing for Synapse Analytics:
 
@@ -312,7 +309,7 @@ client.data_sets.create(
 )
 ```
 
-# Monitoring and Auditing
+## Monitoring and Auditing
 
 Track sharing activity and usage:
 
@@ -365,7 +362,7 @@ diagnostic_settings = {
 }
 ```
 
-# Revoking Access
+## Revoking Access
 
 Manage and revoke share access:
 
@@ -400,9 +397,8 @@ for sub in subscriptions:
         )
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Data Share provides a secure, governed way to share data across organizational boundaries. Whether you need snapshot-based sharing for periodic data transfers or in-place sharing for real-time access, Data Share handles the complexity while maintaining security and compliance.
 
 The centralized management, automated synchronization, and detailed auditing make it ideal for B2B data sharing scenarios, internal data distribution, and data monetization use cases. Start using Azure Data Share to enable secure data collaboration with your partners and customers.
-

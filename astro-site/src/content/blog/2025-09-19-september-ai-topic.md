@@ -1,5 +1,6 @@
 ---
 title: "Enterprise AI: Building Secure API Gateways for LLM Access"
+description: "A well-designed gateway enables enterprise-wide AI adoption while maintaining security, compliance, and cost control."
 author: Michael John Peña
 draft: false
 date: 2025-09-19
@@ -9,10 +10,7 @@ tags:
   - Security
   - Rate Limiting
   - Azure API Management
-
 ---
-
-I wrote "Enterprise AI: Building Secure API Gateways for LLM Access" to share practical, production-minded guidance on this topic.
 
 ## Gateway Architecture
 
@@ -143,4 +141,4 @@ def generate_billing_report(gateway: LLMGateway, period_start: datetime) -> Dict
     return costs_by_dept
 ```
 
-A well-designed gateway enables enterprise-wide AI adoption while maintaining security, compliance, and cost control.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A well-designed gateway enables enterprise-wide AI adoption while maintaining security, compliance, and cost control.

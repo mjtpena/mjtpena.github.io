@@ -1,18 +1,16 @@
 ---
 title: "Managed Identities Everywhere: Eliminating Secrets in Azure"
+description: "Managed identities are the foundation of a zero-secrets architecture in Azure."
 author: Michael John Peña
 draft: false
 date: 2022-02-11
 url: /blog/managed-identities-everywhere/
 tags:
-  - azure
-  - security
+  - Azure
+  - Security
   - managed-identity
-  - authentication
-
+  - Authentication
 ---
-
-I wrote "Managed Identities Everywhere: Eliminating Secrets in Azure" to share practical, production-minded guidance on this topic.
 
 ## Types of Managed Identities
 
@@ -219,4 +217,4 @@ public async Task Run(
 4. **Use RBAC over access policies** - More granular control
 5. **Test locally with DefaultAzureCredential** - Works with Azure CLI auth
 
-Managed identities are the foundation of a zero-secrets architecture in Azure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Managed identities are the foundation of a zero-secrets architecture in Azure.

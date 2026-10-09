@@ -1,18 +1,16 @@
 ---
 title: "Azure Landing Zones: Enterprise-Scale Cloud Foundation"
+description: "Azure Landing Zones provide the foundation for a successful enterprise cloud journey, ensuring consistency, security, and governance from day one."
 author: Michael John Peña
 draft: false
 date: 2022-01-21
 url: /blog/azure-landing-zones/
 tags:
-  - azure
+  - Azure
   - landing-zones
-  - enterprise
-  - architecture
-
+  - Enterprise
+  - Architecture
 ---
-
-I wrote "Azure Landing Zones: Enterprise-Scale Cloud Foundation" to share practical, production-minded guidance on this topic.
 
 ## What Are Landing Zones?
 
@@ -310,4 +308,4 @@ resource requireTags 'Microsoft.Authorization/policyAssignments@2021-06-01' = {
 }
 ```
 
-Azure Landing Zones provide the foundation for a successful enterprise cloud journey, ensuring consistency, security, and governance from day one.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Landing Zones provide the foundation for a successful enterprise cloud journey, ensuring consistency, security, and governance from day one.

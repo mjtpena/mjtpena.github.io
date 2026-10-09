@@ -1,5 +1,6 @@
 ---
 title: "Optimizing GPU Utilization for AI Workloads on Azure"
+description: "Many organizations run GPU workloads at 30-40% utilization, paying for idle compute. Understanding workload patterns and implementing optimization…"
 author: Michael John Peña
 draft: false
 date: 2025-11-04
@@ -9,10 +10,7 @@ tags:
   - Infrastructure
   - Cost Optimization
   - Deep Learning
-
 ---
-
-I wrote "Optimizing GPU Utilization for AI Workloads on Azure" to share practical, production-minded guidance on this topic.
 
 ## The GPU Utilization Challenge
 
@@ -122,4 +120,4 @@ gpu_cluster = AmlCompute(
 )
 ```
 
-Implement checkpointing every epoch to resume training after spot evictions. The combination of proper monitoring, batch optimization, and spot instances can reduce GPU costs by 60-70% for many workloads.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Implement checkpointing every epoch to resume training after spot evictions. The combination of proper monitoring, batch optimization, and spot instances can reduce GPU costs by 60-70% for many workloads.

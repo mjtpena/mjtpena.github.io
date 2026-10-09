@@ -1,13 +1,11 @@
 ---
 title: "Assistants API Deep Dive: Threads and Messages"
+description: "Threads and Messages are the state management primitives in the Assistants API, and understanding how they work changes how you architect multi-turn…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-25
 tags: ["OpenAI", "Assistants API", "Threads", "Conversations", "AI"]
-
 ---
-
-I wrote "Assistants API Deep Dive: Threads and Messages" to share practical, production-minded guidance on this topic.
 
 Threads and Messages are the state management primitives in the Assistants API, and understanding how they work changes how you architect multi-turn conversational applications. A Thread is a persistent conversation history stored server-side by the Assistants API — you create it once, add Messages to it, and the API manages the context window as the conversation grows. Messages have a role (user or assistant) and content (text or files), and they accumulate in the Thread chronologically. When you create a Run against a Thread, the Assistants API retrieves the Thread history, constructs the prompt (respecting the model's context window limits through automatic truncation), and runs the model. The implication: you don't need to maintain conversation history in your application — the Thread is the conversation, and you only need to store the Thread ID to resume a conversation. The limitation to design around: Thread storage is per-OpenAI-organisation, not portable, and Threads expire after 30 days of inactivity (as of the current API).
 
@@ -392,4 +390,4 @@ class ConversationController:
 4. **Clean up old threads** to manage storage
 5. **Handle interruptions** gracefully with run cancellation
 
-Tomorrow, we'll explore file handling and the retrieval tool in the Assistants API!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore file handling and the retrieval tool in the Assistants API!

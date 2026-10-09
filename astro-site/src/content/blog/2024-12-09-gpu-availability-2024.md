@@ -1,5 +1,6 @@
 ---
 title: "GPU Availability in 2024: Navigating the AI Compute Crunch"
+description: "The GPU crunch will ease, but strategic capacity planning remains important. Use managed services where possible, and reserve capacity for predictable…"
 author: Michael John Peña
 draft: false
 date: 2024-12-09
@@ -9,10 +10,7 @@ tags:
   - Infrastructure
   - Cloud Computing
   - Hardware
-
 ---
-
-I wrote "GPU Availability in 2024: Navigating the AI Compute Crunch" to share practical, production-minded guidance on this topic.
 
 ## The GPU Landscape
 
@@ -314,4 +312,4 @@ The GPU crunch will ease, but strategic capacity planning remains important. Use
 
 - [Azure GPU VM Pricing](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/)
 - [NVIDIA Data Center GPUs](https://www.nvidia.com/en-us/data-center/)
-- [Cloud GPU Comparison](https://cloud-gpus.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Cloud GPU Comparison](https://cloud-gpus.com/)

@@ -9,10 +9,7 @@ tags:
   - FinOps
   - Budgeting
   - Optimization
-
 ---
-
-I wrote "Cost Management in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Fabric Pricing Model
 
@@ -553,4 +550,3 @@ for alert in triggered:
 Effective cost management in Microsoft Fabric requires understanding the pricing model, tracking usage, and implementing optimization strategies. Combine right-sizing, pause schedules, and workload optimization to maximize value while minimizing spend.
 
 Regular monitoring and alerts ensure you stay within budget while meeting performance requirements.
-

@@ -1,5 +1,6 @@
 ---
 title: "Building a Custom GPT for Your Documentation with Azure OpenAI"
+description: "This pattern works for any documentation. The key is good chunking, quality embeddings, and a well-crafted system prompt that keeps the bot focused on your…"
 author: Michael John Peña
 draft: false
 date: 2025-12-27
@@ -9,10 +10,7 @@ tags:
   - RAG
   - Tutorial
   - ChatGPT
-
 ---
-
-I wrote "Building a Custom GPT for Your Documentation with Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Architecture
 
@@ -188,4 +186,4 @@ async def chat(request: ChatRequest):
     return ChatResponse(answer=answer)
 ```
 
-This pattern works for any documentation. The key is good chunking, quality embeddings, and a well-crafted system prompt that keeps the bot focused on your content.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+This pattern works for any documentation. The key is good chunking, quality embeddings, and a well-crafted system prompt that keeps the bot focused on your content.

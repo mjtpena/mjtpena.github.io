@@ -9,10 +9,7 @@ tags:
   - Creative AI
   - Responsible AI
   - Copyright
-
 ---
-
-I wrote "AI Art Ethics: Navigating the Moral Landscape" to share practical, production-minded guidance on this topic.
 
 ## Key Ethical Considerations
 
@@ -118,4 +115,3 @@ class ResponsibleAIArtPolicy:
 ## Conclusion
 
 AI art ethics require ongoing attention. Build responsible practices that respect creators while leveraging technology's benefits.
-

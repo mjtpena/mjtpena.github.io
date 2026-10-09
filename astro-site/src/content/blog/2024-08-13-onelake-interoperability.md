@@ -9,10 +9,7 @@ tags:
   - Data Lake
   - Interoperability
   - Integration
-
 ---
-
-I wrote "OneLake Interoperability: Connecting Your Data Ecosystem" to share practical, production-minded guidance on this topic.
 
 ## OneLake Architecture
 
@@ -601,4 +598,3 @@ access_levels = {
 OneLake's ADLS Gen2 compatibility makes it interoperable with virtually any tool that can access Azure storage. Whether connecting from Databricks, external Spark clusters, or BI tools like Tableau, OneLake serves as a universal data layer.
 
 Use the appropriate authentication method for your use case, and leverage shortcuts to avoid unnecessary data movement.
-

@@ -1,13 +1,11 @@
 ---
 title: "End-to-End RAG Evaluation: Complete System Assessment"
+description: "Individual component metrics tell part of the story, but end-to-end evaluation measures how well your entire RAG pipeline performs as a system."
 author: "Michael John Peña"
 draft: false
 date: 2024-03-26
 tags: ["AI", "RAG", "Evaluation", "MLOps", "Testing"]
-
 ---
-
-I wrote "End-to-End RAG Evaluation: Complete System Assessment" to share practical, production-minded guidance on this topic.
 
 Individual component metrics tell part of the story, but end-to-end evaluation measures how well your entire RAG pipeline performs as a system.
 
@@ -453,4 +451,3 @@ Score:"""
 ## Conclusion
 
 End-to-end evaluation provides a complete picture of RAG system performance. Combine quality metrics, latency measurements, and regression testing for comprehensive assessment. Implement continuous monitoring for production systems.
-

@@ -1,5 +1,6 @@
 ---
 title: Message to the young
+description: "I recently gave a graduation speech to my high school alma matter. Compared to my usual technical talks, this time it's about inspiring the younger…"
 author: Michael John Peña
 draft: false
 date: 2021-07-21
@@ -17,7 +18,7 @@ I recently gave a graduation speech to my high school alma matter. Compared to m
 Below, I summarize my speech that is in a written medium. The words may not be the same, but the meaning are.
 
 
-# What is success?
+## What is success?
 
 What is success? Spoiler alert: It's relative. What it means is that success would mean differently to every individual. Other would consider having a lot of money as successful. For some, it's about having influence and fanbase. Others are about being a CEO or director of a company.
 
@@ -31,7 +32,7 @@ The world is full of influencers. Dangerous influencers. Most of the time, they 
 
 Next time, criticize. Ponder if it's legit. Does it apply to me? Add a comment to that post, share your insights, write about what you think, constantly redefine what is "success." Do you agree with what I am saying right now?
 
-# Passion, Profession, and Passion
+## Passion, Profession, and Passion
 
 Now, I want to tackle about finding a career for you. Spoiler alert again: There is no single answer. There are so many factors in play to find a fulfilling career, but let me explain some of the core parameters that you can look at.
 
@@ -43,7 +44,7 @@ But sometimes, there is "no calling". Unlike in those movies when it's the light
 
 Whatever happens, don't be in the "auto-pilot" mode. Don't make a career choice "just because" or because you have a fear of missing out. I know it's hard, but try to believe in to something, whatever "that" is. Believe that you'll do great things in this world. Believe that you'll be a successful entrepreneur, a world-class architect, a best-selling author, a loving family member of the community. Because you'll be needing that belief to fuel your every day with motivation.
 
-# Forever learning
+## Forever learning
 
 Now that you know what success could be and what purposeful profession you want to do, it's time to remember that the road is not a simple 10 meter straight line. The only proven way to guarantee outcome is to learn all the time from your experiences.
 
@@ -53,7 +54,7 @@ In order to fast track your career, find mentors. Get frequent feedback about th
 
 Learn by teaching. One of the easiest way to know if you really have mastery of the topic is, if you can simplify complex topics and share it with others. Contribute your knowledge and wisdom to others. Present at conferences, mentor people who need guidance, create a blog or website. Be a creator, not just a consumer.
 
-# Summary - Give yourself the permission to fail
+## Summary - Give yourself the permission to fail
 
 In summary, success is relative and not definitive. Find a purpose to your profession. Don't stop learning.
 

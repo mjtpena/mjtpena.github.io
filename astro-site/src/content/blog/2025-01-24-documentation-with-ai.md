@@ -9,10 +9,7 @@ tags:
   - Technical Writing
   - Data Engineering
   - Best Practices
-
 ---
-
-I wrote "Documentation with AI: Automating Technical Writing for Data Projects" to share practical, production-minded guidance on this topic.
 
 ## Documentation Types for Data Projects
 
@@ -79,4 +76,5 @@ class DocstringGenerator:
             Short description.
 
             Parameters
-            -------\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+            -------
+```

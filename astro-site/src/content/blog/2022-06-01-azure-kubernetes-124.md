@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-01
 tags:
-  - azure
-  - kubernetes
-  - aks
-  - containers
-
+  - Azure
+  - Kubernetes
+  - AKS
+  - Containers
 ---
-
-I wrote "Azure Kubernetes Service 1.24: New Features and Breaking Changes" to share practical, production-minded guidance on this topic.
 
 ## Key Changes in 1.24
 
@@ -277,4 +274,5 @@ parameters:
   skuName: Premium_LRS
   cachingMode: ReadOnly
 volumeBindingMode: WaitForFirstConsumer
-allowVolumeExpansion: true\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+allowVolumeExpansion: true
+```

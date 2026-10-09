@@ -1,5 +1,6 @@
 ---
 title: Document Translation at Scale with Azure Cognitive Services
+description: "Document Translation enables global content delivery by making document localization efficient and scalable."
 author: Michael John Pena
 draft: false
 date: 2021-09-21
@@ -9,10 +10,7 @@ tags:
   - Translation
   - Localization
   - AI
-
 ---
-
-I wrote "2021-09-21-azure-document-translation" to share practical, production-minded guidance on this topic.
 
 ## Document Translation Features
 
@@ -394,4 +392,4 @@ if __name__ == '__main__':
 5. **Handle Errors**: Some documents may fail; handle gracefully
 6. **Cost Management**: Large documents incur higher costs
 
-Document Translation enables global content delivery by making document localization efficient and scalable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Document Translation enables global content delivery by making document localization efficient and scalable.

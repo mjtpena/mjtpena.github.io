@@ -1,5 +1,6 @@
 ---
 title: "AI Observability with Azure Monitor and Application Insights"
+description: "Monitor these essential AI metrics: latency (p50, p95, p99), token consumption per request, error rates by model and endpoint, cache hit rates for…"
 author: Michael John Peña
 draft: false
 date: 2025-08-07
@@ -9,10 +10,7 @@ tags:
   - Application Insights
   - LLMOps
   - Monitoring
-
 ---
-
-I wrote "AI Observability with Azure Monitor and Application Insights" to share practical, production-minded guidance on this topic.
 
 ## Implementing AI Telemetry
 
@@ -72,4 +70,4 @@ Monitor these essential AI metrics: latency (p50, p95, p99), token consumption p
 
 ## Creating AI Dashboards
 
-Use Azure Workbooks to visualize AI performance trends, cost projections, and quality metrics over time. Correlate AI metrics with user satisfaction scores to understand the business impact of your AI systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use Azure Workbooks to visualize AI performance trends, cost projections, and quality metrics over time. Correlate AI metrics with user satisfaction scores to understand the business impact of your AI systems.

@@ -1,13 +1,11 @@
 ---
 title: "Azure Arc-Enabled PostgreSQL Hyperscale"
+description: "Azure Arc-enabled PostgreSQL Hyperscale brings the best of Azure's managed database services to wherever your data needs to live."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-14
 tags: ["Azure", "Azure Arc", "PostgreSQL", "Hybrid Cloud", "Kubernetes"]
-
 ---
-
-I wrote "Azure Arc-Enabled PostgreSQL Hyperscale" to share practical, production-minded guidance on this topic.
 
 ## Understanding Azure Arc Data Services
 
@@ -202,4 +200,4 @@ az postgres arc-server backup restore \
     --use-k8s
 ```
 
-Azure Arc-enabled PostgreSQL Hyperscale brings the best of Azure's managed database services to wherever your data needs to live.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Arc-enabled PostgreSQL Hyperscale brings the best of Azure's managed database services to wherever your data needs to live.

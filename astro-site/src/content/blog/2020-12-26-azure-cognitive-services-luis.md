@@ -1,5 +1,6 @@
 ---
 title: "Azure LUIS: Language Understanding for Bots"
+description: "LUIS: teaching machines to understand human language."
 author: Michael John Peña
 draft: false
 date: 2020-12-26
@@ -8,10 +9,7 @@ tags:
   - LUIS
   - AI
   - NLP
-
 ---
-
-I wrote "Azure LUIS: Language Understanding for Bots" to share practical, production-minded guidance on this topic.
 
 ## LUIS Concepts
 
@@ -201,4 +199,4 @@ for utterance in suggestions:
     print(f"Suggested intent: {utterance.predicted_intent}")
 ```
 
-LUIS: teaching machines to understand human language.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+LUIS: teaching machines to understand human language.

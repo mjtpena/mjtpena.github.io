@@ -1,5 +1,6 @@
 ---
 title: "Speculative Decoding: Accelerating LLM Generation"
+description: "Speculative decoding can achieve 2-3x speedup without any quality degradation."
 author: Michael John Peña
 draft: false
 date: 2025-04-14
@@ -9,10 +10,7 @@ tags:
   - Performance
   - Speculative Decoding
   - Optimization
-
 ---
-
-I wrote "Speculative Decoding: Accelerating LLM Generation" to share practical, production-minded guidance on this topic.
 
 ## Speculative Decoding Implementation
 
@@ -136,4 +134,4 @@ class SpeculativeDecoder:
         return draft_tokens, target_token
 ```
 
-Speculative decoding can achieve 2-3x speedup without any quality degradation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Speculative decoding can achieve 2-3x speedup without any quality degradation.

@@ -9,10 +9,7 @@ tags:
   - Containers
   - AKS
   - DevOps
-
 ---
-
-I wrote "Containerization and Kubernetes: Lessons Learned in 2022" to share practical, production-minded guidance on this topic.
 
 ## When to Use Kubernetes (and When Not To)
 
@@ -228,4 +225,5 @@ metadata:
   labels:
     pod-security.kubernetes.io/enforce: restricted
     pod-security.kubernetes.io/audit: restricted
-    pod-security.kubernetes.io/warn: restricted\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    pod-security.kubernetes.io/warn: restricted
+```

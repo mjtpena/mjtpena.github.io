@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-05-24
 tags:
-  - azure
+  - Azure
   - orbital
   - satellite
   - space
-
 ---
-
-I wrote "Azure Orbital: Ground Station as a Service" to share practical, production-minded guidance on this topic.
 
 ## Understanding Azure Orbital
 
@@ -386,5 +383,3 @@ Azure Orbital enables:
 - Space data democratization
 
 Access space capabilities without massive infrastructure investment.
-
-

@@ -1,5 +1,6 @@
 ---
 title: "Hybrid Search: Combining Vector and Keyword Search in Azure AI Search"
+description: "Vector search excels at semantic similarity but can miss exact matches. Keyword search finds precise terms but misses synonyms and context. Together, they…"
 author: Michael John Peña
 draft: false
 date: 2025-09-09
@@ -9,10 +10,7 @@ tags:
   - Vector Search
   - RAG
   - Information Retrieval
-
 ---
-
-I wrote "Hybrid Search: Combining Vector and Keyword Search in Azure AI Search" to share practical, production-minded guidance on this topic.
 
 ## Why Hybrid Search Wins
 
@@ -119,4 +117,4 @@ def hybrid_search(query: str, top_k: int = 10) -> list[dict]:
 
 Experiment with different weights between keyword and vector scores. For technical documentation, keyword matching often deserves higher weight. For conversational queries, lean toward semantic search.
 
-Hybrid search is not just an improvement; it is a fundamental shift toward more robust information retrieval.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hybrid search is not just an improvement; it is a fundamental shift toward more robust information retrieval.

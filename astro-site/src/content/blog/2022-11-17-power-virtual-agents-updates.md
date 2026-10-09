@@ -9,10 +9,7 @@ tags:
   - Conversational AI
   - Low-Code
   - Microsoft
-
 ---
-
-I wrote "Power Virtual Agents Updates: Low-Code Conversational AI" to share practical, production-minded guidance on this topic.
 
 ## What's New in Power Virtual Agents
 
@@ -418,4 +415,3 @@ Power Virtual Agents makes conversational AI accessible to citizen developers wh
 - [PVA + Power Automate](https://docs.microsoft.com/en-us/power-virtual-agents/advanced-flow)
 - [Teams Integration](https://docs.microsoft.com/en-us/power-virtual-agents/publication-add-bot-to-microsoft-teams)
 - [Analytics](https://docs.microsoft.com/en-us/power-virtual-agents/analytics-overview)
-

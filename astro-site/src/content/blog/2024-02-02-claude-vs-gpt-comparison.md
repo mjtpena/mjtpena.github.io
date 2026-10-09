@@ -1,5 +1,6 @@
 ---
 title: "Claude vs GPT: Choosing the Right LLM for Your Application"
+description: "Anthropic has hinted at Claude 3 coming soon, which promises even better performance across benchmarks. Meanwhile, OpenAI continues to iterate on GPT-4. The…"
 author: Michael John Peña
 draft: false
 date: 2024-02-02
@@ -9,10 +10,7 @@ tags:
   - Anthropic
   - LLM Comparison
   - AI
-
 ---
-
-I wrote "Claude vs GPT: Choosing the Right LLM for Your Application" to share practical, production-minded guidance on this topic.
 
 ## Model Comparison
 
@@ -175,4 +173,3 @@ Anthropic has hinted at Claude 3 coming soon, which promises even better perform
 ## Conclusion
 
 Both Claude 2.1 and GPT-4 are excellent choices. Claude offers longer context and stricter instruction following; GPT-4 provides broader ecosystem support and better tool use. Consider using both for their respective strengths.
-

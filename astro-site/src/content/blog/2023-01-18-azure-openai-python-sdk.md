@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Python SDK: A Complete Developer Guide"
+description: "The Python SDK for Azure OpenAI (openai package with Azure-specific configuration) is the de facto starting point for Azure OpenAI development—the largest…"
 author: Michael John Peña
 draft: false
 date: 2023-01-18
@@ -647,4 +648,4 @@ async def main():
 
 - [OpenAI Python Library](https://github.com/openai/openai-python)
 - [Azure OpenAI SDK Samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/openai)
-- [API Reference](https://learn.microsoft.com/azure/cognitive-services/openai/reference)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [API Reference](https://learn.microsoft.com/azure/cognitive-services/openai/reference)

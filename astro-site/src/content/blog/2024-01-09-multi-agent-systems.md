@@ -1,5 +1,6 @@
 ---
 title: "Multi-Agent Systems: Orchestrating Specialized AI Agents"
+description: "Complex enterprise tasks benefit from specialization. In my work, coordinating small specialist agents led to clearer reasoning, easier testing, and more…"
 author: Michael John Peña
 draft: false
 date: 2024-01-09

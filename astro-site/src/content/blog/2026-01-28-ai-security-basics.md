@@ -1,5 +1,6 @@
 ---
 title: "AI Security: The Basics Everyone Misses"
+description: "Most prompt injection attempts never get to your prompt if you filter input properly. Use managed identities. Always."
 author: Michael John Peña
 draft: false
 date: 2026-01-28
@@ -8,10 +9,7 @@ tags:
   - Security
   - Best-Practices
   - Azure
-
 ---
-
-I wrote "AI Security: The Basics Everyone Misses" to share practical, production-minded guidance on this topic.
 
 ## The Forgotten Fundamentals
 
@@ -147,4 +145,4 @@ Most AI security incidents aren't sophisticated attacks. They're:
 
 Fix the basics. They prevent 95% of actual problems.
 
-Prompt injection defenses? Sure, add them. But only after you've handled the fundamentals.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Prompt injection defenses? Sure, add them. But only after you've handled the fundamentals.

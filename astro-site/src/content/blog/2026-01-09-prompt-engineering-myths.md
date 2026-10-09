@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering Myths Killing Your AI Projects"
+description: "\"I need to be very detailed and explain everything thoroughly to get good results.\" No. You need to be clear, not verbose."
 author: Michael John Peña
 draft: false
 date: 2026-01-09
@@ -8,10 +9,7 @@ tags:
   - Prompts
   - LLM
   - Best-Practices
-
 ---
-
-I wrote "Prompt Engineering Myths Killing Your AI Projects" to share practical, production-minded guidance on this topic.
 
 ## Myth 1: Longer Prompts Are Better
 
@@ -227,4 +225,4 @@ Prompt engineering isn't rocket science. It's clear communication plus systemati
 
 Stop reading about prompt engineering. Start testing your prompts. Measure results. Iterate.
 
-The best prompt is the one that works reliably for your use case. Find it through experimentation, not theory.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The best prompt is the one that works reliably for your use case. Find it through experimentation, not theory.

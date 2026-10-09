@@ -1,5 +1,6 @@
 ---
 title: "Fabric Data Pipelines: Orchestration Patterns"
+description: "A Fabric pipeline isn't just a sequence of activities — it's an orchestration layer with conditional branching, parameter passing, loops, and error handling…"
 author: Michael John Peña
 draft: false
 date: 2023-07-14
@@ -380,4 +381,4 @@ Tomorrow we'll explore the Fabric Warehouse and its T-SQL capabilities.
 
 - [Data Pipeline Documentation](https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-overview)
 - [Pipeline Activities](https://learn.microsoft.com/en-us/fabric/data-factory/activity-overview)
-- [Pipeline Monitoring](https://learn.microsoft.com/en-us/fabric/data-factory/monitor-pipeline)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Pipeline Monitoring](https://learn.microsoft.com/en-us/fabric/data-factory/monitor-pipeline)

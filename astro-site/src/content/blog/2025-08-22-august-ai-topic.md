@@ -1,5 +1,6 @@
 ---
 title: "Vector Database Selection: Comparing Azure AI Search, Pinecone, and Qdrant"
+description: "Best for organizations already invested in Azure with hybrid search requirements. Pros: Hybrid search, semantic ranking, enterprise security, managed…"
 author: Michael John Peña
 draft: false
 date: 2025-08-22
@@ -9,10 +10,7 @@ tags:
   - Pinecone
   - Qdrant
   - RAG
-
 ---
-
-I wrote "Vector Database Selection: Comparing Azure AI Search, Pinecone, and Qdrant" to share practical, production-minded guidance on this topic.
 
 ## Azure AI Search
 
@@ -86,4 +84,4 @@ def qdrant_search(query_embedding: list[float], collection: str):
 **Pros**: Self-hostable, rich filtering, hybrid search, cost-effective
 **Cons**: Requires infrastructure management, smaller ecosystem
 
-Choose Azure AI Search for enterprise hybrid search, Pinecone for simplicity at scale, and Qdrant for self-hosted control.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose Azure AI Search for enterprise hybrid search, Pinecone for simplicity at scale, and Qdrant for self-hosted control.

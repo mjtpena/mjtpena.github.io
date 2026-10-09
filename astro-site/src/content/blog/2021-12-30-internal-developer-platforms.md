@@ -1,5 +1,6 @@
 ---
 title: "Internal Developer Platforms: Scaling Developer Self-Service"
+description: "IDPs in 2021 became the way to scale DevOps practices. They encode organizational knowledge into platforms that enable consistent, secure, and fast software…"
 author: Michael John Pena
 draft: false
 date: 2021-12-30
@@ -9,10 +10,7 @@ tags:
   - Self-Service
   - Developer Experience
   - DevOps
-
 ---
-
-I wrote "Internal Developer Platforms: Scaling Developer Self-Service" to share practical, production-minded guidance on this topic.
 
 ## What Makes an IDP?
 
@@ -583,4 +581,4 @@ IDPs in 2021 became the way to scale DevOps practices. They encode organizationa
 - [Humanitec](https://humanitec.com/)
 - [Backstage](https://backstage.io/)
 - [Port](https://www.getport.io/)
-- [Internal Developer Platform](https://internaldeveloperplatform.org/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Internal Developer Platform](https://internaldeveloperplatform.org/)

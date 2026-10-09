@@ -1,5 +1,6 @@
 ---
 title: "Building AI Agents with AutoGen and Azure OpenAI"
+description: "AutoGen enables building sophisticated AI systems that can decompose complex tasks and collaborate to find solutions."
 author: Michael John Peña
 draft: false
 date: 2025-10-20
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - Multi-Agent
   - Automation
-
 ---
-
-I wrote "Building AI Agents with AutoGen and Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Setting Up AutoGen Agents
 
@@ -133,4 +131,4 @@ register_function(
 )
 ```
 
-AutoGen enables building sophisticated AI systems that can decompose complex tasks and collaborate to find solutions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AutoGen enables building sophisticated AI systems that can decompose complex tasks and collaborate to find solutions.

@@ -1,5 +1,6 @@
 ---
 title: "Synapse Data Science in Microsoft Fabric: ML Made Simple"
+description: "Fabric's Data Science experience integrates seamlessly with the rest of the platform, allowing you to go from raw data in Lakehouse to deployed models in a…"
 author: Michael John Peña
 draft: false
 date: 2023-05-07
@@ -9,10 +10,7 @@ tags:
   - Machine Learning
   - MLflow
   - PySpark
-
 ---
-
-I wrote "Synapse Data Science in Microsoft Fabric: ML Made Simple" to share practical, production-minded guidance on this topic.
 
 ## Data Science Workload Overview
 
@@ -354,4 +352,4 @@ Fabric's Data Science experience integrates seamlessly with the rest of the plat
 
 - [Data Science in Fabric](https://learn.microsoft.com/en-us/fabric/data-science/)
 - [MLflow in Fabric](https://learn.microsoft.com/en-us/fabric/data-science/mlflow-autologging)
-- [Model Scoring](https://learn.microsoft.com/en-us/fabric/data-science/model-scoring)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Model Scoring](https://learn.microsoft.com/en-us/fabric/data-science/model-scoring)

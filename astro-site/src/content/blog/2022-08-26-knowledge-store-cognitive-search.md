@@ -1,13 +1,11 @@
 ---
 title: "Knowledge Store in Azure Cognitive Search"
+description: "Knowledge Store enables rich analytics and knowledge graph construction from AI-enriched content."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-26
 tags: ["Azure", "Cognitive Search", "Knowledge Store", "AI Enrichment", "Data"]
-
 ---
-
-I wrote "Knowledge Store in Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## Understanding Knowledge Store
 
@@ -320,4 +318,4 @@ def analyze_knowledge_store(table_service):
 analysis = analyze_knowledge_store(table_service)
 ```
 
-Knowledge Store enables rich analytics and knowledge graph construction from AI-enriched content.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Knowledge Store enables rich analytics and knowledge graph construction from AI-enriched content.

@@ -1,5 +1,6 @@
 ---
 title: "Security Fundamentals in Microsoft Fabric"
+description: "Security is foundational to any data platform. Today I'm exploring the security architecture and best practices in Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-24
@@ -487,4 +488,4 @@ Tomorrow I'll cover sensitivity labels and data classification.
 
 - [Fabric Security Overview](https://learn.microsoft.com/fabric/security/security-overview)
 - [Row-Level Security](https://learn.microsoft.com/fabric/security/row-level-security)
-- [Workspace Roles](https://learn.microsoft.com/fabric/get-started/roles-workspaces)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Workspace Roles](https://learn.microsoft.com/fabric/get-started/roles-workspaces)

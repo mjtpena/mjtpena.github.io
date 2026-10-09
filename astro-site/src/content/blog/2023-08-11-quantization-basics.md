@@ -8,10 +8,7 @@ tags:
   - Model Optimization
   - Performance
   - Machine Learning
-
 ---
-
-I wrote "Quantization Basics: Reducing Model Size and Improving Speed" to share practical, production-minded guidance on this topic.
 
 ## Understanding Quantization
 
@@ -278,4 +275,4 @@ Tomorrow we'll explore INT8 quantization in more detail.
 
 - [PyTorch Quantization](https://pytorch.org/docs/stable/quantization.html)
 - [bitsandbytes](https://github.com/TimDettmers/bitsandbytes)
-- [GPTQ Paper](https://arxiv.org/abs/2210.17323)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [GPTQ Paper](https://arxiv.org/abs/2210.17323)

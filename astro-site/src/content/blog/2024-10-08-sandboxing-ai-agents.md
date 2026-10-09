@@ -1,13 +1,11 @@
 ---
 title: "Sandboxing AI Agents: Isolation and Containment Strategies"
+description: "Sandboxing is your last line of defense. Even trusted agents can behave unexpectedly - proper isolation ensures that unexpected behavior doesn't become a…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-08
 tags: ["Sandboxing", "AI Agents", "Security", "Containers", "Isolation"]
-
 ---
-
-I wrote "Sandboxing AI Agents: Isolation and Containment Strategies" to share practical, production-minded guidance on this topic.
 
 ## Sandboxing Fundamentals
 
@@ -446,4 +444,4 @@ class SandboxManager:
         self.process_sandbox.cleanup()
 ```
 
-Sandboxing is your last line of defense. Even trusted agents can behave unexpectedly - proper isolation ensures that unexpected behavior doesn't become a catastrophe.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Sandboxing is your last line of defense. Even trusted agents can behave unexpectedly - proper isolation ensures that unexpected behavior doesn't become a catastrophe.

@@ -1,13 +1,11 @@
 ---
 title: "Thinking Tokens: Understanding o1's Hidden Reasoning Process"
+description: "Understanding thinking tokens helps you make informed decisions about when o1's extended reasoning is worth the investment."
 author: "Michael John Peña"
 draft: false
 date: 2024-09-06
 tags: ["OpenAI", "o1", "Thinking Tokens", "AI", "LLM"]
-
 ---
-
-I wrote "Thinking Tokens: Understanding o1's Hidden Reasoning Process" to share practical, production-minded guidance on this topic.
 
 ## What Are Thinking Tokens?
 
@@ -216,4 +214,3 @@ analyzer = ThinkingAnalyzer()
 4. **Monitor patterns** - Track thinking ratios to optimize model selection
 
 Understanding thinking tokens helps you make informed decisions about when o1's extended reasoning is worth the investment.
-

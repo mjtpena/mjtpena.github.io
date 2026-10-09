@@ -1,5 +1,6 @@
 ---
 title: Model Management with Azure ML Model Registry
+description: "The Model Registry is the cornerstone of production ML. It provides the governance and traceability needed to confidently deploy and manage models at scale."
 author: Michael John Pena
 draft: false
 date: 2021-09-07
@@ -9,10 +10,7 @@ tags:
   - MLOps
   - Model Registry
   - Model Versioning
-
 ---
-
-I wrote "2021-09-07-azure-ml-model-registry" to share practical, production-minded guidance on this topic.
 
 ## Why Use a Model Registry?
 
@@ -279,4 +277,4 @@ for m in production_models:
 5. **Link to Data**: Track which dataset version trained each model
 6. **Automate Registration**: Register models automatically from CI/CD
 
-The Model Registry is the cornerstone of production ML. It provides the governance and traceability needed to confidently deploy and manage models at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Model Registry is the cornerstone of production ML. It provides the governance and traceability needed to confidently deploy and manage models at scale.

@@ -1,5 +1,6 @@
 ---
 title: "Enabling Remote Work with Azure Virtual Desktop"
+description: "In the first six months of the pandemic, \"we need everyone working from home by Monday\" became a sentence I heard from clients more times than I can count.…"
 author: Michael John Peña
 draft: false
 date: 2020-08-16
@@ -231,4 +232,4 @@ az monitor diagnostic-settings create \
     --logs '[{"category":"Checkpoint","enabled":true},{"category":"Error","enabled":true},{"category":"Management","enabled":true},{"category":"Connection","enabled":true}]'
 ```
 
-The cost mistake I see most often: leaving session hosts running 24/7 because nobody set up scaling plans. AVD is one of the few Azure services where careful auto-scale (start hosts on weekday morning, drain and stop on evening) genuinely halves the bill. Build the scaling plan on day one, not after the first invoice arrives.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The cost mistake I see most often: leaving session hosts running 24/7 because nobody set up scaling plans. AVD is one of the few Azure services where careful auto-scale (start hosts on weekday morning, drain and stop on evening) genuinely halves the bill. Build the scaling plan on day one, not after the first invoice arrives.

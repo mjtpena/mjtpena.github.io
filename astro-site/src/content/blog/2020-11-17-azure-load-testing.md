@@ -8,10 +8,7 @@ tags:
   - Testing
   - Performance
   - DevOps
-
 ---
-
-I wrote "Load Testing Azure Applications with Apache JMeter" to share practical, production-minded guidance on this topic.
 
 ## Setting Up JMeter
 
@@ -225,4 +222,3 @@ requests
 Consider automating your load tests as part of your release pipeline. This ensures performance regressions are caught before reaching production.
 
 Load testing: find bottlenecks before your users do.
-

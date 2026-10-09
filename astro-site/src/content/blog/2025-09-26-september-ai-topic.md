@@ -1,5 +1,6 @@
 ---
 title: "Vector Database Selection: Choosing the Right Solution for RAG"
+description: "The best vector database depends on your specific requirements. Azure AI Search excels for hybrid search with integrated semantic ranking. Pinecone offers…"
 author: Michael John Peña
 draft: false
 date: 2025-09-26
@@ -9,10 +10,7 @@ tags:
   - Azure AI Search
   - Embeddings
   - Architecture
-
 ---
-
-I wrote "Vector Database Selection: Choosing the Right Solution for RAG" to share practical, production-minded guidance on this topic.
 
 ## Key Selection Criteria
 
@@ -157,4 +155,4 @@ def benchmark_vector_db(
     }
 ```
 
-The best vector database depends on your specific requirements. Azure AI Search excels for hybrid search with integrated semantic ranking. Pinecone offers the simplest serverless experience. Qdrant and Weaviate provide flexibility for self-hosted deployments.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The best vector database depends on your specific requirements. Azure AI Search excels for hybrid search with integrated semantic ranking. Pinecone offers the simplest serverless experience. Qdrant and Weaviate provide flexibility for self-hosted deployments.

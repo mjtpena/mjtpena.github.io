@@ -1,18 +1,16 @@
 ---
 title: "Implementing Zero-Trust Security for AI Workloads on Azure"
+description: "Zero-trust isn't optional for AI workloads handling sensitive data. Implement these patterns from day one to avoid costly retrofitting."
 author: Michael John Peña
 draft: false
 date: 2025-12-18
 tags:
   - Security
-  - Zero-Trust
+  - zero-trust
   - AI
   - Azure
   - Architecture
-
 ---
-
-I wrote "Implementing Zero-Trust Security for AI Workloads on Azure" to share practical, production-minded guidance on this topic.
 
 ## Zero-Trust Principles for AI
 
@@ -163,4 +161,4 @@ public class AIAuditLogger
 - [ ] Regular access reviews
 - [ ] Incident response procedures
 
-Zero-trust isn't optional for AI workloads handling sensitive data. Implement these patterns from day one to avoid costly retrofitting.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Zero-trust isn't optional for AI workloads handling sensitive data. Implement these patterns from day one to avoid costly retrofitting.

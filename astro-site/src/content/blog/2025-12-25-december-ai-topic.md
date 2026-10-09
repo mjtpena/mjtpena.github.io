@@ -1,5 +1,6 @@
 ---
 title: "Christmas Day Reflection: The Joy of Building Things That Help People"
+description: "Merry Christmas! Today, as we celebrate with family and friends, I want to share some thoughts on why we do what we do as technologists."
 author: Michael John Peña
 draft: false
 date: 2025-12-25
@@ -88,4 +89,4 @@ Merry Christmas. May your builds be green, your deploys be smooth, and your impa
 ```python
 def christmas_wish():
     return "Peace, joy, and successful deployments to all!"
-```\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+```

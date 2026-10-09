@@ -1,5 +1,6 @@
 ---
 title: "Cognitive Services in Azure Synapse: Built-in AI Capabilities"
+description: "Cognitive Services in Synapse brings AI capabilities directly into your data engineering workflows. Process millions of records with sentiment, entities…"
 author: Michael John Pena
 draft: false
 date: 2023-04-19
@@ -9,10 +10,7 @@ tags:
   - Cognitive Services
   - AI
   - Data Engineering
-
 ---
-
-I wrote "Cognitive Services in Azure Synapse: Built-in AI Capabilities" to share practical, production-minded guidance on this topic.
 
 ## Synapse Cognitive Services Setup
 
@@ -428,4 +426,4 @@ enriched_df = pipeline.process_social_media_posts(social_df)
 enriched_df.write.mode("overwrite").saveAsTable("silver.enriched_social_posts")
 ```
 
-Cognitive Services in Synapse brings AI capabilities directly into your data engineering workflows. Process millions of records with sentiment, entities, translation, and vision without leaving your Spark environment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Cognitive Services in Synapse brings AI capabilities directly into your data engineering workflows. Process millions of records with sentiment, entities, translation, and vision without leaving your Spark environment.

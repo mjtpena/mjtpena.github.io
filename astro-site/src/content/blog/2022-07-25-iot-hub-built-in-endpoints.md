@@ -1,13 +1,11 @@
 ---
 title: "Working with IoT Hub Built-in Endpoints"
+description: "The built-in endpoint provides a reliable, scalable way to consume IoT device telemetry for real-time processing."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-25
 tags: ["Azure", "IoT Hub", "Event Hub", "Endpoints", "Streaming"]
-
 ---
-
-I wrote "Working with IoT Hub Built-in Endpoints" to share practical, production-minded guidance on this topic.
 
 ## Understanding Built-in Endpoints
 
@@ -245,4 +243,4 @@ def query_endpoint_metrics():
         print(f"{metric.name}: {metric.timeseries[0].data}")
 ```
 
-The built-in endpoint provides a reliable, scalable way to consume IoT device telemetry for real-time processing.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The built-in endpoint provides a reliable, scalable way to consume IoT device telemetry for real-time processing.

@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Azure Spring Cloud for Java Microservices
+description: "If you're running Spring Boot applications, you've probably dealt with the complexity of setting up Kubernetes clusters, configuring service meshes, and…"
 author: Michael John Peña
 draft: false
 date: 2021-02-01
@@ -10,10 +11,7 @@ tags:
   - Java
   - Microservices
   - Cloud Native
-
 ---
-
-I wrote "2021-02-01-azure-spring-cloud-getting-started" to share practical, production-minded guidance on this topic.
 
 ## Why Azure Spring Cloud?
 
@@ -282,4 +280,3 @@ Azure Spring Cloud significantly simplifies the deployment and management of Spr
 In future posts, we'll explore more advanced topics like VNet integration, custom domains, and integrating with other Azure services like Azure Database for MySQL and Azure Redis Cache.
 
 Happy coding!
-

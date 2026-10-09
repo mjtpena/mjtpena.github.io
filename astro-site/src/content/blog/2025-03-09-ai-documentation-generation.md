@@ -1,5 +1,6 @@
 ---
 title: "AI-Powered Documentation: Keeping Docs in Sync with Code"
+description: "AI-generated documentation reduces maintenance burden while improving quality."
 author: Michael John Peña
 draft: false
 date: 2025-03-09
@@ -9,10 +10,7 @@ tags:
   - Automation
   - Developer Experience
   - Best Practices
-
 ---
-
-I wrote "AI-Powered Documentation: Keeping Docs in Sync with Code" to share practical, production-minded guidance on this topic.
 
 ## Automated Documentation System
 
@@ -92,4 +90,4 @@ class AIDocGenerator:
         return self.parse_drift_issues(response)
 ```
 
-AI-generated documentation reduces maintenance burden while improving quality.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI-generated documentation reduces maintenance burden while improving quality.

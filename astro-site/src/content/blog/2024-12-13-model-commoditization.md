@@ -1,5 +1,6 @@
 ---
 title: "Model Commoditization: When AI Models Become Utilities"
+description: "Commoditization is not a threat - it's an opportunity. As model costs approach zero, the winners will be those who use AI most effectively, not those with…"
 author: Michael John Peña
 draft: false
 date: 2024-12-13
@@ -9,10 +10,7 @@ tags:
   - Strategy
   - Enterprise
   - Trends
-
 ---
-
-I wrote "Model Commoditization: When AI Models Become Utilities" to share practical, production-minded guidance on this topic.
 
 ## The Commoditization Pattern
 
@@ -278,4 +276,4 @@ Commoditization is not a threat - it's an opportunity. As model costs approach z
 
 - [AI Index Report](https://aiindex.stanford.edu/)
 - [State of AI Report](https://www.stateof.ai/)
-- [Foundation Model Economics](https://a16z.com/generative-ai-enterprise-2024/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Foundation Model Economics](https://a16z.com/generative-ai-enterprise-2024/)

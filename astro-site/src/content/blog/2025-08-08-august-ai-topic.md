@@ -1,5 +1,6 @@
 ---
 title: "Cost Optimization Strategies for Azure OpenAI Workloads"
+description: "Semantic caching avoids redundant API calls for similar queries. Reduce prompt length by removing unnecessary context. Use batch processing with the Batch…"
 author: Michael John Peña
 draft: false
 date: 2025-08-08
@@ -9,10 +10,7 @@ tags:
   - FinOps
   - AI
   - Cloud Economics
-
 ---
-
-I wrote "Cost Optimization Strategies for Azure OpenAI Workloads" to share practical, production-minded guidance on this topic.
 
 ## Implement Prompt Caching
 
@@ -71,4 +69,4 @@ Use the right model for each task:
 
 Reduce prompt length by removing unnecessary context. Use batch processing with the Batch API for non-time-sensitive workloads at 50% cost reduction. Implement token budgets per user or application. Monitor costs daily with Azure Cost Management alerts.
 
-The combination of caching, model tiering, and monitoring typically reduces Azure OpenAI costs by 40-60% without sacrificing quality.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The combination of caching, model tiering, and monitoring typically reduces Azure OpenAI costs by 40-60% without sacrificing quality.

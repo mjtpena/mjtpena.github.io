@@ -1,5 +1,6 @@
 ---
 title: "Building Reliable Workflows with Durable Functions Orchestrations"
+description: "Durable Functions provide the reliability and coordination capabilities needed for complex serverless workflows, while maintaining the cost benefits of…"
 author: Michael John Peña
 draft: false
 date: 2020-08-25
@@ -8,10 +9,7 @@ tags:
   - Azure Functions
   - Durable Functions
   - Serverless
-
 ---
-
-I wrote "Building Reliable Workflows with Durable Functions Orchestrations" to share practical, production-minded guidance on this topic.
 
 ## What are Durable Functions?
 
@@ -327,4 +325,4 @@ public static async Task<IActionResult> GetStatus(
 
 Durable Functions provide the reliability and coordination capabilities needed for complex serverless workflows, while maintaining the cost benefits of serverless computing.
 
-The constraint people miss until they trip over it: orchestrator code must be *deterministic*. No `DateTime.Now`, no random numbers, no direct HTTP calls — those go in activity functions. The orchestrator is replayed from history on every step, so any non-determinism breaks the replay model. Read the constraint list once, internalise it, and you'll save yourself a confusing afternoon.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The constraint people miss until they trip over it: orchestrator code must be *deterministic*. No `DateTime.Now`, no random numbers, no direct HTTP calls — those go in activity functions. The orchestrator is replayed from history on every step, so any non-determinism breaks the replay model. Read the constraint list once, internalise it, and you'll save yourself a confusing afternoon.

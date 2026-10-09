@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering Fundamentals for Azure OpenAI"
+description: "Prompt engineering in January 2023 was the skill that separated AI features that worked in demos from AI features that worked in production. The gap: a demo…"
 author: Michael John Peña
 draft: false
 date: 2023-01-12
@@ -177,17 +178,17 @@ class PromptLibrary:
             for t in self.templates.values()
         ]
 
-# Usage
+## Usage
 library = PromptLibrary()
 
-# Generate a summary prompt
+## Generate a summary prompt
 summary_prompt = library.create_prompt(
     "summarize",
     text="Azure OpenAI Service provides REST API access to OpenAI's powerful language models...",
     length="2-3 sentences"
 )
 
-# Generate a SQL query prompt
+## Generate a SQL query prompt
 sql_prompt = library.create_prompt(
     "sql_generation",
     schema="""
@@ -540,4 +541,4 @@ def analyze_prompt(prompt: str) -> List[str]:
 
 - [Azure OpenAI Prompt Engineering](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/prompt-engineering)
 - [OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)
-- [Prompt Engineering Patterns](https://www.promptingguide.ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Prompt Engineering Patterns](https://www.promptingguide.ai/)

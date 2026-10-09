@@ -1,13 +1,11 @@
 ---
 title: "Open Source vs Proprietary LLMs: Making the Right Choice"
+description: "The choice between open-source and proprietary LLMs is one of the most important architectural decisions for AI projects. Let's analyze the tradeoffs…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-09
 tags: ["AI", "LLM", "Open Source", "Architecture", "Strategy"]
-
 ---
-
-I wrote "Open Source vs Proprietary LLMs: Making the Right Choice" to share practical, production-minded guidance on this topic.
 
 The choice between open-source and proprietary LLMs is one of the most important architectural decisions for AI projects. Let's analyze the tradeoffs systematically.
 
@@ -329,4 +327,3 @@ class MigrationManager:
 ## Conclusion
 
 The choice isn't binary - most production systems benefit from a hybrid approach that leverages the strengths of both open-source and proprietary models while managing costs and maintaining quality.
-

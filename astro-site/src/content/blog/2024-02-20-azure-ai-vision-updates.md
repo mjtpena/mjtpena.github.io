@@ -9,10 +9,7 @@ tags:
   - Azure
   - Image Analysis
   - Updates
-
 ---
-
-I wrote "Azure AI Vision Updates: New Features for 2024" to share practical, production-minded guidance on this topic.
 
 ## Image Analysis 4.0
 
@@ -130,4 +127,3 @@ def remove_background(image_url: str) -> bytes:
 ## Conclusion
 
 Azure AI Vision 4.0 brings powerful new features like dense captioning and smart cropping. Combine with GPT-4 Vision for comprehensive image understanding.
-

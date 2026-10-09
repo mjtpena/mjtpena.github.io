@@ -1,5 +1,6 @@
 ---
 title: "Understanding Microsoft Fabric Capacities and SKUs"
+description: "A Fabric Capacity is a pool of compute resources that powers all Fabric workloads in assigned workspaces. Unlike traditional Azure services where you…"
 author: Michael John Peña
 draft: false
 date: 2023-05-11
@@ -9,10 +10,7 @@ tags:
   - Capacity Planning
   - Pricing
   - SKU
-
 ---
-
-I wrote "Understanding Microsoft Fabric Capacities and SKUs" to share practical, production-minded guidance on this topic.
 
 ## What is a Fabric Capacity?
 
@@ -282,4 +280,4 @@ Tomorrow, I will cover Fabric licensing for users and organizations.
 
 - [Fabric Capacity](https://learn.microsoft.com/en-us/fabric/enterprise/licenses)
 - [Capacity SKUs](https://learn.microsoft.com/en-us/fabric/enterprise/fabric-capacity)
-- [Capacity Metrics](https://learn.microsoft.com/en-us/fabric/enterprise/capacity-metrics)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Capacity Metrics](https://learn.microsoft.com/en-us/fabric/enterprise/capacity-metrics)

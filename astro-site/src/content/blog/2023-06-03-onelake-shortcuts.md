@@ -1,5 +1,6 @@
 ---
 title: "OneLake Shortcuts: Connecting Data Without Copying"
+description: "Of everything announced at Build 2023, OneLake shortcuts might be the feature I find most architecturally elegant. A shortcut is not a copy, not a linked…"
 author: Michael John Peña
 draft: false
 date: 2023-06-03
@@ -354,4 +355,4 @@ Shortcuts enable powerful data federation scenarios in Fabric. Tomorrow, I will 
 
 - [OneLake Shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts)
 - [Create Shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/create-shortcuts)
-- [Shortcut Security](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts-security)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Shortcut Security](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts-security)

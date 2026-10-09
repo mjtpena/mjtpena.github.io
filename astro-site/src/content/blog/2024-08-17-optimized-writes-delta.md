@@ -9,10 +9,7 @@ tags:
   - Optimized Write
   - Performance
   - Data Engineering
-
 ---
-
-I wrote "Optimized Writes in Delta Lake" to share practical, production-minded guidance on this topic.
 
 ## What is Optimized Write?
 
@@ -517,4 +514,3 @@ def should_enable_optimized_write(
 Optimized writes are essential for maintaining healthy Delta tables without constant compaction overhead. Enable them for all analytical tables in Microsoft Fabric, and combine with auto-compact for streaming workloads.
 
 The small upfront cost in write time pays dividends in faster queries and reduced maintenance overhead.
-

@@ -10,10 +10,7 @@ tags:
   - Data Protection
   - Security
   - AI
-
 ---
-
-I wrote "PII Detection and Protection in AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -610,4 +607,3 @@ print(f"PII by type: {report['pii_by_type']}")
 ## Conclusion
 
 PII detection and protection is essential for privacy-preserving AI applications. A comprehensive approach includes pattern-based detection, validation, context-aware confidence boosting, and flexible protection modes. Compliance reporting and audit logging ensure regulatory requirements are met while maintaining user privacy.
-

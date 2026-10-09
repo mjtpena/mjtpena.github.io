@@ -1,5 +1,6 @@
 ---
 title: "Azure Year in Review: 2020 Highlights"
+description: "It's New Year's Eve, the kids are asleep, and I'm wrapping up a year that nobody planned for. 2020 was the year cloud stopped being a strategic conversation…"
 author: Michael John Peña
 draft: false
 date: 2020-12-31

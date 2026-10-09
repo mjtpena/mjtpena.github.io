@@ -1,5 +1,6 @@
 ---
 title: "Responsible AI in Practice: Building Ethical AI Systems"
+description: "Responsible AI isn't a one-time checkbox - it's an ongoing commitment that must be embedded in every stage of the AI lifecycle. Microsoft's tools and…"
 author: Michael John Pena
 draft: false
 date: 2021-11-14
@@ -9,10 +10,7 @@ tags:
   - Microsoft
   - Machine Learning
   - Responsible AI
-
 ---
-
-I wrote "Responsible AI in Practice: Building Ethical AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Microsoft's Responsible AI Principles
 
@@ -498,4 +496,4 @@ Responsible AI isn't a one-time checkbox - it's an ongoing commitment that must 
 - [Microsoft Responsible AI](https://www.microsoft.com/ai/responsible-ai)
 - [Fairlearn Documentation](https://fairlearn.org/)
 - [Azure ML Responsible AI](https://docs.microsoft.com/en-us/azure/machine-learning/concept-responsible-ml)
-- [InterpretML](https://interpret.ml/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [InterpretML](https://interpret.ml/)

@@ -1,5 +1,6 @@
 ---
 title: Advanced Azure Key Vault Patterns
+description: "\"Put it in Key Vault\" is the easy advice. The advanced game is rotation, lifecycle, and access patterns that don't break under pressure. Managed identity…"
 author: Michael John Pena
 draft: false
 date: 2021-01-25
@@ -506,4 +507,4 @@ AzureDiagnostics
 6. **Monitor Access**: Enable diagnostic logging and alerts
 7. **Version Secrets**: Leverage automatic versioning for audit trails
 
-Azure Key Vault is essential for secure secrets management in modern cloud architectures. Implementing these advanced patterns ensures your sensitive data remains protected while maintaining operational flexibility.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Key Vault is essential for secure secrets management in modern cloud architectures. Implementing these advanced patterns ensures your sensitive data remains protected while maintaining operational flexibility.

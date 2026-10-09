@@ -5,13 +5,10 @@ draft: false
 date: 2022-05-13
 tags:
   - microsoft-365
-  - azure
+  - Azure
   - office-addins
   - sharepoint
-
 ---
-
-I wrote "Microsoft 365 Development: Building Productivity Apps" to share practical, production-minded guidance on this topic.
 
 ## Office Add-ins Overview
 
@@ -457,5 +454,3 @@ Microsoft 365 development offers:
 - Marketplace distribution
 
 Build productivity-enhancing solutions that integrate seamlessly with Microsoft 365.
-
-

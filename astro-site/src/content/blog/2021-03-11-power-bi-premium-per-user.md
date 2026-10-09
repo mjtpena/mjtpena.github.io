@@ -1,5 +1,6 @@
 ---
 title: Power BI Premium Per User - Enterprise Features for Everyone
+description: "Power BI Premium Per User launched as the answer to \"my team needs paginated reports, deployment pipelines, and large dataset support but we don't have a…"
 author: Michael John Pena
 draft: false
 date: 2021-03-11

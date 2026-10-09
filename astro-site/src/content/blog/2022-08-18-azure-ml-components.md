@@ -1,13 +1,11 @@
 ---
 title: "Building Reusable Components in Azure ML"
+description: "Well-designed components enable team collaboration and accelerate ML development through reuse."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-18
 tags: ["Azure", "Machine Learning", "Components", "MLOps", "Reusability"]
-
 ---
-
-I wrote "Building Reusable Components in Azure ML" to share practical, production-minded guidance on this topic.
 
 ## Component Anatomy
 
@@ -352,4 +350,4 @@ pipeline_job = ml_client.jobs.create_or_update(
 )
 ```
 
-Well-designed components enable team collaboration and accelerate ML development through reuse.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Well-designed components enable team collaboration and accelerate ML development through reuse.

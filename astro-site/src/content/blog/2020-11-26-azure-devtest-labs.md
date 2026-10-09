@@ -1,5 +1,6 @@
 ---
 title: "Azure DevTest Labs: Managed Development Environments"
+description: "Every consultancy I've worked at has the same problem: developers need a sandbox, finance needs to not get a heart attack, and three months later there are…"
 author: Michael John Peña
 draft: false
 date: 2020-11-26
@@ -188,4 +189,4 @@ az lab vm start --lab-name my-devtest-lab --resource-group myRG --name my-vm
 az lab vm stop --lab-name my-devtest-lab --resource-group myRG --name my-vm
 ```
 
-DevTest Labs: self-service environments with guardrails.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+DevTest Labs: self-service environments with guardrails.

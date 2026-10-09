@@ -1,5 +1,6 @@
 ---
 title: "Streaming Inference: Building Modern AI Systems"
+description: "Understanding streaming inference is essential for production AI systems. Here's what you need to know."
 author: Michael John Peña
 draft: false
 date: 2025-06-08
@@ -9,10 +10,7 @@ tags:
   - Development
   - Best Practices
   - Architecture
-
 ---
-
-I wrote "Streaming Inference: Building Modern AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Key Concepts
 
@@ -40,4 +38,4 @@ class Service:
 3. Monitor performance metrics
 4. Scale appropriately
 
-These patterns form the foundation of reliable AI systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These patterns form the foundation of reliable AI systems.

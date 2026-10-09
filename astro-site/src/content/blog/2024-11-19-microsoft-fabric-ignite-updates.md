@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric at Ignite 2024: What's New for Data Professionals"
+description: "The Fabric platform continues to mature into a comprehensive, AI-native analytics solution."
 author: Michael John Peña
 draft: false
 date: 2024-11-19
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Ignite 2024
   - Analytics
-
 ---
-
-I wrote "Microsoft Fabric at Ignite 2024: What's New for Data Professionals" to share practical, production-minded guidance on this topic.
 
 ## Major Announcements
 
@@ -400,4 +398,4 @@ The Fabric platform continues to mature into a comprehensive, AI-native analytic
 
 - [Fabric Ignite Announcements](https://blog.fabric.microsoft.com/ignite-2024)
 - [AI Skills Documentation](https://learn.microsoft.com/en-us/fabric/ai-skills)
-- [Real-Time Intelligence](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Real-Time Intelligence](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/)

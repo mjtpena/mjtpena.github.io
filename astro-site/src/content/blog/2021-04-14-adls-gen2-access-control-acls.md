@@ -1,5 +1,6 @@
 ---
 title: ADLS Gen2 Access Control with ACLs - Fine-Grained Security
+description: "Both work together - a user needs both RBAC permission to access the storage account AND appropriate ACL permissions on the specific path."
 author: Michael John Peña
 draft: false
 date: 2021-04-14
@@ -10,10 +11,7 @@ tags:
   - Security
   - ACLs
   - Access Control
-
 ---
-
-I wrote "2021-04-14-adls-gen2-access-control-acls" to share practical, production-minded guidance on this topic.
 
 ## Understanding ADLS Gen2 Access Control
 
@@ -442,4 +440,3 @@ StorageBlobLogs
 ## Conclusion
 
 ADLS Gen2 ACLs provide the fine-grained access control needed for enterprise data lakes. By combining RBAC for broad access with ACLs for path-specific permissions, you can implement sophisticated security models that meet compliance requirements while enabling productive data access. The key is planning your ACL strategy upfront and automating its implementation for consistency.
-

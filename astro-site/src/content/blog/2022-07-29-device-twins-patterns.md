@@ -1,13 +1,11 @@
 ---
 title: "Device Twin Patterns for IoT Applications"
+description: "Device twins provide the foundation for managing device state, configuration, and organization in IoT solutions."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-29
 tags: ["Azure", "IoT Hub", "Device Twins", "IoT", "Patterns"]
-
 ---
-
-I wrote "Device Twin Patterns for IoT Applications" to share practical, production-minded guidance on this topic.
 
 ## Understanding Device Twin Structure
 
@@ -302,4 +300,4 @@ class ConfigVersionManager:
         }
 ```
 
-Device twins provide the foundation for managing device state, configuration, and organization in IoT solutions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Device twins provide the foundation for managing device state, configuration, and organization in IoT solutions.

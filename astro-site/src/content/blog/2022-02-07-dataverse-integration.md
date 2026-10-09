@@ -1,5 +1,6 @@
 ---
 title: "Dataverse Integration: Connecting Power Platform to Azure"
+description: "Dataverse integration enables a seamless data platform spanning Power Platform and Azure services."
 author: Michael John Peña
 draft: false
 date: 2022-02-07
@@ -7,12 +8,9 @@ url: /blog/dataverse-integration/
 tags:
   - dataverse
   - power-platform
-  - azure
-  - integration
-
+  - Azure
+  - Integration
 ---
-
-I wrote "Dataverse Integration: Connecting Power Platform to Azure" to share practical, production-minded guidance on this topic.
 
 ## Understanding Dataverse
 
@@ -261,4 +259,4 @@ var query = new QueryExpression("account")
 var results = await client.RetrieveMultipleAsync(query);
 ```
 
-Dataverse integration enables a seamless data platform spanning Power Platform and Azure services.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dataverse integration enables a seamless data platform spanning Power Platform and Azure services.

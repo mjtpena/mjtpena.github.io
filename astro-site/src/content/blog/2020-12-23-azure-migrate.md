@@ -1,5 +1,6 @@
 ---
 title: "Azure Migrate: Cloud Migration Made Simple"
+description: "Every migration project I've run has the same first two weeks: spreadsheet hell. What's running, what does it talk to, what's the dependency graph, what…"
 author: Michael John Peña
 draft: false
 date: 2020-12-23
@@ -172,4 +173,4 @@ Plan migrations in groups:
 3. Production workloads
 4. Business-critical systems
 
-Azure Migrate: your path to the cloud.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Migrate: your path to the cloud.

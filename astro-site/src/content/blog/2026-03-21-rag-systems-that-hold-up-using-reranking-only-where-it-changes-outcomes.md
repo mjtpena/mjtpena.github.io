@@ -1,5 +1,6 @@
 ---
 title: "RAG Systems That Hold Up: using reranking only where it changes outcomes"
+description: "I spent the day reducing cognitive overhead for engineers and analysts—introducing clearer table contracts, simpler failure modes, and concise runbooks that…"
 author: Michael John Peña
 draft: false
 date: 2026-03-21
@@ -37,4 +38,4 @@ Tomorrow I will review this with the team so the decision is shared, not persona
 
 - [RAG design and evaluation guide](https://learn.microsoft.com/azure/architecture/ai-ml/guide/rag/rag-solution-design-and-evaluation-guide)
 - [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)
-- [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)

@@ -1,5 +1,6 @@
 ---
 title: "Building Multi-Agent Systems with Semantic Kernel"
+description: "Define clear responsibilities for each agent to avoid confusion and improve reliability. Multi-agent architectures excel at complex workflows where…"
 author: Michael John Peña
 draft: false
 date: 2025-08-31
@@ -9,10 +10,7 @@ tags:
   - AI Agents
   - Orchestration
   - .NET
-
 ---
-
-I wrote "Building Multi-Agent Systems with Semantic Kernel" to share practical, production-minded guidance on this topic.
 
 ## Designing Agent Roles
 
@@ -105,4 +103,4 @@ public class AgentOrchestrator
 }
 ```
 
-Multi-agent architectures excel at complex workflows where different expertise is needed at different stages. Design your agents with clear boundaries and communication protocols for best results.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multi-agent architectures excel at complex workflows where different expertise is needed at different stages. Design your agents with clear boundaries and communication protocols for best results.

@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-05-25
 tags:
-  - azure
+  - Azure
   - space
   - satellite
-  - geospatial
-
+  - Geospatial
 ---
-
-I wrote "Space APIs: Working with Satellite Data on Azure" to share practical, production-minded guidance on this topic.
 
 ## Azure Space Data APIs
 
@@ -336,5 +333,3 @@ Space APIs and satellite data enable:
 - Environmental compliance
 
 Azure provides the infrastructure to process petabytes of satellite imagery.
-
-

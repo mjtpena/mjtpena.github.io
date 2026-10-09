@@ -1,5 +1,6 @@
 ---
 title: "Power Fx: The Low-Code Programming Language for Everyone"
+description: "Power Fx makes programming accessible to everyone who knows Excel. As it expands across the Power Platform and beyond, expect to see it become a standard…"
 author: Michael John Pena
 draft: false
 date: 2021-11-09
@@ -9,10 +10,7 @@ tags:
   - Low Code
   - Programming
   - Microsoft
-
 ---
-
-I wrote "Power Fx: The Low-Code Programming Language for Everyone" to share practical, production-minded guidance on this topic.
 
 ## Why Power Fx?
 
@@ -354,4 +352,4 @@ Power Fx makes programming accessible to everyone who knows Excel. As it expands
 
 - [Power Fx Overview](https://docs.microsoft.com/en-us/power-platform/power-fx/overview)
 - [Formula Reference](https://docs.microsoft.com/en-us/power-platform/power-fx/formula-reference)
-- [Power Fx on GitHub](https://github.com/microsoft/Power-Fx)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Power Fx on GitHub](https://github.com/microsoft/Power-Fx)

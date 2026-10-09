@@ -1,17 +1,15 @@
 ---
 title: "Code Signing and Notarizing your MacOS Apps"
+description: "Code Signing is verifying that you (or an entity) developed and owns the application. The way it works is by creating a “signature” on to the application to…"
 author: Michael John Peña
 draft: false
 date: 2022-09-18T21:52:19+00:00
 url: /blog/macos-codesign/
 tags:
   - macos
-  - security
+  - Security
   - certificate
-
 ---
-
-I wrote "Code Signing and Notarizing your MacOS Apps" to share practical, production-minded guidance on this topic.
 
 ## IntroductionEven after more than a decade of exposure in mobile and desktop development, it’s still a painful experience overall. On the flip side, there are reasons this is the case. From time to time, big companies like Apple have to refresh their security posture and that means developers have to follow those rules to maintain a secured and trusted platform. Code Signing and Notarization are some of them. This blog post will focus more on MacOS Desktop apps, and won’t directly apply to iOS and iPadOS.
 
@@ -180,5 +178,3 @@ spctl -vvv --assess --type exec MyApplication.app
 
 - Distributing apps to other devices requires code signing and notarization.
 - We want to code sign and notarize applications so that Apple can trust your app for re-distribution.
-
-

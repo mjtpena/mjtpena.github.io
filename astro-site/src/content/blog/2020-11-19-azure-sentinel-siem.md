@@ -1,5 +1,6 @@
 ---
 title: "Azure Sentinel: Cloud-Native SIEM"
+description: "SIEM used to mean a rack of appliances, a forwarder per data source, and a six-figure annual licence. Sentinel rewrites that economics. It's a SIEM that…"
 author: Michael John Peña
 draft: false
 date: 2020-11-19
@@ -177,4 +178,4 @@ SecurityEvent
 | project TimeGenerated, Computer, Account, CommandLine
 ```
 
-Sentinel: AI-powered security operations at cloud scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Sentinel: AI-powered security operations at cloud scale.

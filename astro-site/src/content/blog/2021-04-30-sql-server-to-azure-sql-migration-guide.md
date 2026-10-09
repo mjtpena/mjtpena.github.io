@@ -1,5 +1,6 @@
 ---
 title: SQL Server to Azure SQL Migration - A Complete Guide
+description: "SQL Server to Azure SQL migration is the database journey I've been on more times than any other, and the first decision that shapes everything else is…"
 author: Michael John Peña
 draft: false
 date: 2021-04-30

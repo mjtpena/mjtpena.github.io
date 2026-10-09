@@ -1,5 +1,6 @@
 ---
 title: "Application Insights: Full-Stack Application Monitoring"
+description: "Application Insights is essential for production observability."
 author: Michael John Peña
 draft: false
 date: 2020-10-22
@@ -8,10 +9,7 @@ tags:
   - Monitoring
   - Application Insights
   - DevOps
-
 ---
-
-I wrote "Application Insights: Full-Stack Application Monitoring" to share practical, production-minded guidance on this topic.
 
 ## SDK Setup (.NET)
 
@@ -176,4 +174,4 @@ Real-time telemetry:
 - Exceptions
 - Performance counters
 
-Application Insights is essential for production observability.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Application Insights is essential for production observability.

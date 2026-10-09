@@ -9,10 +9,7 @@ tags:
   - DALL-E
   - AI
   - Image Generation
-
 ---
-
-I wrote "DALL-E 2 on Azure: AI Image Generation for Enterprise" to share practical, production-minded guidance on this topic.
 
 ## What is DALL-E 2?
 
@@ -401,4 +398,3 @@ DALL-E 2 on Azure opens up powerful image generation capabilities for enterprise
 - [Azure OpenAI DALL-E](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models#dall-e-models)
 - [DALL-E API Reference](https://platform.openai.com/docs/api-reference/images)
 - [Content Safety API](https://learn.microsoft.com/en-us/azure/cognitive-services/content-safety/)
-

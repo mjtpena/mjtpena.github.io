@@ -1,5 +1,6 @@
 ---
 title: "Feature Engineering with LLMs: AI-Powered Feature Creation"
+description: "LLM-powered feature engineering unlocks value from unstructured data. Combine semantic understanding with traditional ML for more powerful predictive models."
 author: Michael John Pena
 draft: false
 date: 2023-04-22
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Machine Learning
   - Data Science
-
 ---
-
-I wrote "Feature Engineering with LLMs: AI-Powered Feature Creation" to share practical, production-minded guidance on this topic.
 
 ## LLM-Powered Feature Extraction
 
@@ -527,4 +525,4 @@ await store.register_llm_feature(
 df_with_features = store.compute_features(df, ["customer_sentiment"])
 ```
 
-LLM-powered feature engineering unlocks value from unstructured data. Combine semantic understanding with traditional ML for more powerful predictive models.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+LLM-powered feature engineering unlocks value from unstructured data. Combine semantic understanding with traditional ML for more powerful predictive models.

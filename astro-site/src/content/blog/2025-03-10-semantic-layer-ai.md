@@ -1,5 +1,6 @@
 ---
 title: "Semantic Layer for AI: Building Business-Ready Data Interfaces"
+description: "A semantic layer enables AI to understand business terminology and generate accurate queries."
 author: Michael John Peña
 draft: false
 date: 2025-03-10
@@ -9,10 +10,7 @@ tags:
   - Data
   - Business Intelligence
   - Architecture
-
 ---
-
-I wrote "Semantic Layer for AI: Building Business-Ready Data Interfaces" to share practical, production-minded guidance on this topic.
 
 ## AI-Ready Semantic Layer
 
@@ -82,4 +80,4 @@ class SemanticLayer:
         return self.llm_translate(question, context)
 ```
 
-A semantic layer enables AI to understand business terminology and generate accurate queries.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A semantic layer enables AI to understand business terminology and generate accurate queries.

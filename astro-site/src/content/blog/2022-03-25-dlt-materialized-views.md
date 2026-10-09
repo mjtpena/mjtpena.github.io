@@ -9,10 +9,7 @@ tags:
   - Delta Live Tables
   - Materialized Views
   - Data Engineering
-
 ---
-
-I wrote "Materialized Views in Delta Live Tables" to share practical, production-minded guidance on this topic.
 
 ## Understanding Materialized Views
 
@@ -415,4 +412,3 @@ They're essential for building performant analytics layers on top of your lakeho
 - [DLT Tables and Views](https://docs.databricks.com/delta-live-tables/transform.html)
 - [Performance Optimization](https://docs.databricks.com/delta-live-tables/performance.html)
 - [Delta Lake Optimization](https://docs.databricks.com/delta/optimizations/index.html)
-

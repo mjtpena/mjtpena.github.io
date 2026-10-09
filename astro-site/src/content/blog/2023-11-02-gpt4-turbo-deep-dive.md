@@ -1,13 +1,11 @@
 ---
 title: "Prompt Engineering Mastery: Advanced Techniques for GPT-4"
+description: "GPT-4 has been available since March 2023 and the gap between practitioners who've put in real work with it and those still writing prompts by intuition is…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-02
 tags: ["OpenAI", "GPT-4", "Prompt Engineering", "AI", "Best Practices"]
-
 ---
-
-I wrote "Prompt Engineering Mastery: Advanced Techniques for GPT-4" to share practical, production-minded guidance on this topic.
 
 GPT-4 has been available since March 2023 and the gap between practitioners who've put in real work with it and those still writing prompts by intuition is now visible. The patterns that consistently produce better outputs: structured reasoning scaffolding (explicit step-by-step instructions that mirror how a subject matter expert would approach the problem, not just "think step by step"), persona specificity (not "you are a helpful assistant" but "you are a senior data engineer at an Australian enterprise who prioritises data governance and pragmatic delivery over architectural elegance"), and output format control (specifying the exact structure of the response — not as a post-hoc instruction but as part of the initial prompt framing). These aren't tricks; they're prompt design principles that emerge from understanding how the model's training shapes its response patterns.
 
@@ -299,7 +297,7 @@ Important:
 
     return prompt
 
-# Example schema
+## Example schema
 from pydantic import BaseModel, Field
 from typing import List, Optional
 
@@ -387,4 +385,3 @@ Advanced prompt engineering is about creating structured, clear communication wi
 5. **Build in error recovery** mechanisms
 
 Experiment with these patterns and adapt them to your specific use cases.
-

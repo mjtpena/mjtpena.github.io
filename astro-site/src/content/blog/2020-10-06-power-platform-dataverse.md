@@ -1,17 +1,15 @@
 ---
 title: "Microsoft Dataverse: The Power Platform Database"
+description: "Dataverse is the glue that connects Power Platform components."
 author: Michael John Peña
 draft: false
 date: 2020-10-06
 tags:
   - Power Platform
-  - Dataverse
+  - dataverse
   - Low-Code
   - Database
-
 ---
-
-I wrote "Microsoft Dataverse: The Power Platform Database" to share practical, production-minded guidance on this topic.
 
 ## Key Features
 
@@ -88,4 +86,4 @@ Consider alternatives for:
 - High-volume transactional (use SQL)
 - Document storage (use SharePoint)
 
-Dataverse is the glue that connects Power Platform components.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dataverse is the glue that connects Power Platform components.

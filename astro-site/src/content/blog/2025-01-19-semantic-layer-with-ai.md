@@ -1,5 +1,6 @@
 ---
 title: "Semantic Layer with AI: Natural Language Analytics at Scale"
+description: "The AI-powered semantic layer makes data truly self-service. Users ask questions in their own words, and the system handles the translation to technical…"
 author: Michael John Peña
 draft: false
 date: 2025-01-19
@@ -9,10 +10,7 @@ tags:
   - Analytics
   - Microsoft Fabric
   - Power BI
-
 ---
-
-I wrote "Semantic Layer with AI: Natural Language Analytics at Scale" to share practical, production-minded guidance on this topic.
 
 ## What is an AI-Powered Semantic Layer?
 
@@ -396,4 +394,4 @@ class OptimizedSemanticAI:
 4. **Feedback loop**: Learn from user corrections
 5. **Guardrails**: Limit query complexity and data access
 
-The AI-powered semantic layer makes data truly self-service. Users ask questions in their own words, and the system handles the translation to technical queries.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The AI-powered semantic layer makes data truly self-service. Users ask questions in their own words, and the system handles the translation to technical queries.

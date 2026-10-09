@@ -1,5 +1,6 @@
 ---
 title: "Optimizing AI Cost Per Query"
+description: "Started at $0.08 per query. Too high for our user volume. Switched simple queries from GPT-4o to GPT-4o-mini."
 author: Michael John Peña
 draft: false
 date: 2026-01-18
@@ -8,10 +9,7 @@ tags:
   - Cost
   - Optimization
   - Azure
-
 ---
-
-I wrote "Optimizing AI Cost Per Query" to share practical, production-minded guidance on this topic.
 
 ## The Baseline
 
@@ -57,4 +55,4 @@ $0.024 per query. 70% reduction.
 
 ## The Lesson
 
-Most AI costs come from waste. Cut the waste first.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Most AI costs come from waste. Cut the waste first.

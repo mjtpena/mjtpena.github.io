@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Workspace: Organization and Collaboration"
+description: "A Fabric workspace is the collaboration boundary in Microsoft Fabric—the container where Fabric items (Lakehouses, Warehouses, Notebooks, Pipelines, KQL…"
 author: Michael John Peña
 draft: false
 date: 2023-05-13
@@ -325,4 +326,4 @@ Tomorrow, I will cover the comparison between Fabric and Azure Synapse Analytics
 
 - [Workspace Overview](https://learn.microsoft.com/en-us/fabric/get-started/workspaces)
 - [Workspace Roles](https://learn.microsoft.com/en-us/fabric/get-started/roles-workspaces)
-- [Workspace Settings](https://learn.microsoft.com/en-us/fabric/admin/workspace-tenant-settings)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Workspace Settings](https://learn.microsoft.com/en-us/fabric/admin/workspace-tenant-settings)

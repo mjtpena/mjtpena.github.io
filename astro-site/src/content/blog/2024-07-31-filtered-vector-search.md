@@ -1,5 +1,6 @@
 ---
 title: "Filtered Vector Search in Azure AI Search: Best Practices"
+description: "Pre-filtering: Filter before vector search Post-filtering: Filter after vector search Azure AI Search uses pre-filtering with automatic optimization."
 author: Michael John Peña
 draft: false
 date: 2024-07-31
@@ -9,10 +10,7 @@ tags:
   - Filtering
   - Performance
   - RAG
-
 ---
-
-I wrote "Filtered Vector Search in Azure AI Search: Best Practices" to share practical, production-minded guidance on this topic.
 
 ## The Filtering Challenge
 
@@ -478,4 +476,3 @@ class CachedFilteredSearch:
 Filtered vector search is where semantic similarity meets real-world requirements. Master the interplay between filters and vector search, optimize for your filter selectivity patterns, and always ensure security filters are applied.
 
 The combination of powerful semantic search with precise filtering makes Azure AI Search suitable for enterprise applications with complex requirements.
-

@@ -1,13 +1,11 @@
 ---
 title: "Vector Search Preview in Azure Cognitive Search"
+description: "Vector search enables powerful similarity-based retrieval that complements traditional keyword search."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-24
 tags: ["Azure", "Cognitive Search", "Vector Search", "Embeddings", "AI"]
-
 ---
-
-I wrote "Vector Search Preview in Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## Understanding Vector Search
 
@@ -300,4 +298,4 @@ for result in results:
     print(f"  Reranker Score: {result.get('@search.reranker_score', 'N/A')}")
 ```
 
-Vector search enables powerful similarity-based retrieval that complements traditional keyword search.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Vector search enables powerful similarity-based retrieval that complements traditional keyword search.

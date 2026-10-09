@@ -1,5 +1,6 @@
 ---
 title: "What My Son Taught Me About Debugging"
+description: "My son Andriel is nine. Last weekend he was building a LEGO set and got stuck. I watched him work through it for twenty minutes without knowing he was…"
 author: Michael John Peña
 draft: false
 date: 2026-02-19
@@ -73,4 +74,4 @@ The next time you're stuck debugging something at work, ask yourself: when did t
 
 Don't look at the last change first. Look at the last good state.
 
-My nine-year-old figured that out with LEGO. The principle scales.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+My nine-year-old figured that out with LEGO. The principle scales.

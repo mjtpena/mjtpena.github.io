@@ -10,10 +10,7 @@ tags:
   - Tabular
   - Data Modeling
   - Business Intelligence
-
 ---
-
-I wrote "2021-03-13-azure-analysis-services" to share practical, production-minded guidance on this topic.
 
 ## Understanding Semantic Models
 
@@ -437,4 +434,3 @@ Azure Analysis Services provides enterprise-grade semantic modeling for organiza
 - Familiar tooling for SQL Server Analysis Services users
 
 For new projects, also consider Power BI Premium datasets which offer similar capabilities with tighter Power BI integration.
-

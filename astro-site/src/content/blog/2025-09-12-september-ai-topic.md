@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Lakehouse: Medallion Architecture Implementation"
+description: "Bronze holds raw ingested data. Silver contains cleansed and conformed data. Gold presents business-level aggregates ready for consumption."
 author: Michael John Peña
 draft: false
 date: 2025-09-12
@@ -9,10 +10,7 @@ tags:
   - Medallion Architecture
   - Delta Lake
   - Data Engineering
-
 ---
-
-I wrote "Microsoft Fabric Lakehouse: Medallion Architecture Implementation" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Layers
 
@@ -124,4 +122,4 @@ def build_gold_aggregates(silver_table: str, gold_table: str):
         .saveAsTable(gold_table)
 ```
 
-The medallion architecture provides clear data lineage, enables incremental processing, and separates concerns between data engineering and analytics teams.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The medallion architecture provides clear data lineage, enables incremental processing, and separates concerns between data engineering and analytics teams.

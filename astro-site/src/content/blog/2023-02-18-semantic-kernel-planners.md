@@ -9,10 +9,7 @@ tags:
   - OpenAI
   - Planners
   - AI
-
 ---
-
-I wrote "Semantic Kernel Planners: Automatic AI Orchestration" to share practical, production-minded guidance on this topic.
 
 ## Types of Planners
 
@@ -306,4 +303,4 @@ PLANNER_COMPARISON = {
 ## Resources
 
 - [Semantic Kernel Planners](https://learn.microsoft.com/semantic-kernel/ai-orchestration/planners)
-- [Planner Samples](https://github.com/microsoft/semantic-kernel/tree/main/samples/dotnet/kernel-syntax-examples)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Planner Samples](https://github.com/microsoft/semantic-kernel/tree/main/samples/dotnet/kernel-syntax-examples)

@@ -1,5 +1,6 @@
 ---
 title: "Christmas Eve Automation: Building a Holiday Light Controller with Azure IoT"
+description: "A fun project that combines cloud, IoT, and holiday spirit. Merry Christmas Eve!"
 author: Michael John Peña
 draft: false
 date: 2025-12-24
@@ -9,10 +10,7 @@ tags:
   - Home-Automation
   - Raspberry-Pi
   - Holiday
-
 ---
-
-I wrote "Christmas Eve Automation: Building a Holiday Light Controller with Azure IoT" to share practical, production-minded guidance on this topic.
 
 ## Project Overview
 
@@ -167,4 +165,4 @@ public async Task<IActionResult> ControlLights(
 }
 ```
 
-A fun project that combines cloud, IoT, and holiday spirit. Merry Christmas Eve!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A fun project that combines cloud, IoT, and holiday spirit. Merry Christmas Eve!

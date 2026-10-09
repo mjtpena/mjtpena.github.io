@@ -1,5 +1,6 @@
 ---
 title: "Azure SQL Managed Instance: SQL Server in the Cloud"
+description: "Things you can't do in Azure SQL Database but can in Managed Instance. Real-time replication from on-premises SQL Server to Managed Instance - useful for…"
 author: Michael John Peña
 draft: false
 date: 2020-09-10
@@ -8,10 +9,7 @@ tags:
   - SQL Server
   - Database
   - Migration
-
 ---
-
-I wrote "Azure SQL Managed Instance: SQL Server in the Cloud" to share practical, production-minded guidance on this topic.
 
 ## Why Managed Instance?
 
@@ -66,4 +64,4 @@ Real-time replication from on-premises SQL Server to Managed Instance - useful f
 - Use Azure Hybrid Benefit if you have SQL licenses
 - Start with General Purpose, scale to Business Critical if needed
 
-Managed Instance is the best choice for lift-and-shift SQL Server migrations where full compatibility matters.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Managed Instance is the best choice for lift-and-shift SQL Server migrations where full compatibility matters.

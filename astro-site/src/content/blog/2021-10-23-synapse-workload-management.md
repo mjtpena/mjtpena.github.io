@@ -1,13 +1,11 @@
 ---
 title: "Workload Management in Azure Synapse"
+description: "Workload management in Synapse Dedicated SQL Pool is the resource governance system that prevents low-priority ad-hoc queries from consuming all compute and…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-23
 tags: ["Azure", "Synapse", "Workload Management", "Performance", "Resource Management"]
-
 ---
-
-I wrote "Workload Management in Azure Synapse" to share practical, production-minded guidance on this topic.
 
 Workload management in Synapse Dedicated SQL Pool is the resource governance system that prevents low-priority ad-hoc queries from consuming all compute and starving critical ETL jobs or executive dashboard queries during business hours. The three concepts: workload groups (define a minimum and maximum percentage of system resources), workload classifiers (route queries to workload groups based on user, label, or session context), and importance (prioritise resource access when multiple groups are competing). The practical configuration: a `critical_etl` group with 50% minimum resources and `HIGH` importance, a `reporting` group with 20% minimum and `NORMAL` importance, and a `adhoc` group with 5% minimum and `LOW` importance. When resource pressure exists, `HIGH` importance queries get resources first; `LOW` importance queries wait. Without workload management, every user and query competes equally—which means the 7pm data load competes with the overnight executive dashboard refresh.
 
@@ -326,4 +324,3 @@ OPTION (LABEL = 'CriticalQuery');
 Workload management enables fine-grained control over resource allocation in Synapse. By designing appropriate workload groups and classifiers, you can ensure critical workloads get the resources they need while maintaining overall system efficiency.
 
 Tomorrow, we'll shift focus to Azure Databricks clusters and configuration best practices.
-

@@ -10,10 +10,7 @@ tags:
   - Summarization
   - AI
   - Text Analytics
-
 ---
-
-I wrote "Text Summarization API in Azure AI Language" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -476,4 +473,3 @@ for section, summary in sectioned_summary['section_summaries'].items():
 ## Conclusion
 
 Azure AI Language's summarization capabilities enable efficient processing of large amounts of text content. By combining extractive and abstractive approaches, implementing hierarchical summarization for long documents, and preserving document structure, you can build robust summarization systems that help users quickly understand key information from any document.
-

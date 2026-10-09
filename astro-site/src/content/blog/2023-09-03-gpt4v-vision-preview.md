@@ -10,10 +10,7 @@ tags:
   - LangChain
   - Python
   - AI
-
 ---
-
-I wrote "LangChain with Azure OpenAI: Building Production AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -472,4 +469,3 @@ Key takeaways:
 - [LangChain Documentation](https://python.langchain.com/)
 - [Azure OpenAI Service](https://azure.microsoft.com/products/cognitive-services/openai-service/)
 - [LangChain Azure Integration](https://python.langchain.com/docs/integrations/llms/azure_openai)
-

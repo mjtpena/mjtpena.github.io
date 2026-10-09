@@ -1,5 +1,6 @@
 ---
 title: Azure Resource Manager Templates Best Practices
+description: "I've written a lot of ARM templates in the past three years, and I've also inherited a lot of ARM templates written by people who were having a bad day. The…"
 author: Michael John Peña
 draft: false
 date: 2021-02-21

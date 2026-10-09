@@ -1,13 +1,11 @@
 ---
 title: "Configuring Custom Endpoints in Azure IoT Hub"
+description: "Custom endpoints enable you to build flexible, scalable IoT data processing architectures tailored to your specific requirements."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-26
 tags: ["Azure", "IoT Hub", "Custom Endpoints", "Event Hub", "Service Bus", "Storage"]
-
 ---
-
-I wrote "Configuring Custom Endpoints in Azure IoT Hub" to share practical, production-minded guidance on this topic.
 
 ## Supported Endpoint Types
 
@@ -256,4 +254,4 @@ def read_archived_data(date, hour):
     return messages
 ```
 
-Custom endpoints enable you to build flexible, scalable IoT data processing architectures tailored to your specific requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Custom endpoints enable you to build flexible, scalable IoT data processing architectures tailored to your specific requirements.

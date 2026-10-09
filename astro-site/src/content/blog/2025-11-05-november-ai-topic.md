@@ -1,5 +1,6 @@
 ---
 title: "Testing LLM Applications: Strategies Beyond Traditional Unit Tests"
+description: "LLM outputs vary between runs and model versions. Testing must focus on behavioral properties rather than exact string matching, while still catching…"
 author: Michael John Peña
 draft: false
 date: 2025-11-05
@@ -9,10 +10,7 @@ tags:
   - AI Quality
   - DevOps
   - Python
-
 ---
-
-I wrote "Testing LLM Applications: Strategies Beyond Traditional Unit Tests" to share practical, production-minded guidance on this topic.
 
 ## The LLM Testing Challenge
 
@@ -120,4 +118,4 @@ test_cases = [
 
 Integrate LLM testing into CI/CD pipelines to catch regressions before deployment. Track metrics over time to identify gradual quality degradation that might not trigger immediate test failures.
 
-Combining automated testing with periodic human evaluation ensures AI applications maintain quality standards as models and prompts evolve.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Combining automated testing with periodic human evaluation ensures AI applications maintain quality standards as models and prompts evolve.

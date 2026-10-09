@@ -1,13 +1,11 @@
 ---
 title: "Error Analysis for Machine Learning Models"
+description: "Error analysis reveals the weaknesses in your model and guides targeted improvements."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-05
 tags: ["Azure", "Machine Learning", "Error Analysis", "Model Debugging", "AI"]
-
 ---
-
-I wrote "Error Analysis for Machine Learning Models" to share practical, production-minded guidance on this topic.
 
 ## Understanding Error Analysis
 
@@ -265,4 +263,4 @@ def generate_error_report(analyzer):
 print(generate_error_report(analyzer))
 ```
 
-Error analysis reveals the weaknesses in your model and guides targeted improvements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Error analysis reveals the weaknesses in your model and guides targeted improvements.

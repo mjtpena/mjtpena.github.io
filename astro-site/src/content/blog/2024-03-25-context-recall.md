@@ -1,13 +1,11 @@
 ---
 title: "Context Recall in RAG: Are You Finding All Relevant Documents?"
+description: "While context precision measures noise in retrieved results, context recall measures completeness. Are you retrieving all the documents needed to fully…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-25
 tags: ["AI", "RAG", "Retrieval", "Evaluation", "Search"]
-
 ---
-
-I wrote "Context Recall in RAG: Are You Finding All Relevant Documents?" to share practical, production-minded guidance on this topic.
 
 While context precision measures noise in retrieved results, context recall measures completeness. Are you retrieving all the documents needed to fully answer the question?
 
@@ -395,4 +393,3 @@ for missing in result['recall_details']['missing_info']:
 ## Conclusion
 
 Context recall ensures your RAG system retrieves all necessary information. Low recall means the generator cannot provide complete answers. Balance recall with precision to avoid overwhelming the generator with irrelevant documents.
-

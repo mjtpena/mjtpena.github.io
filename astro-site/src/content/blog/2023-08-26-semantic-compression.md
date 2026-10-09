@@ -8,10 +8,7 @@ tags:
   - NLP
   - LLM
   - Optimization
-
 ---
-
-I wrote "Semantic Compression: Preserving Meaning with Fewer Tokens" to share practical, production-minded guidance on this topic.
 
 ## Semantic vs Syntactic Compression
 
@@ -265,4 +262,4 @@ Tomorrow we'll explore context caching strategies.
 
 - [Text Summarization Survey](https://arxiv.org/abs/2202.06417)
 - [Sentence Transformers](https://www.sbert.net/)
-- [ROUGE Score](https://huggingface.co/spaces/evaluate-metric/rouge)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [ROUGE Score](https://huggingface.co/spaces/evaluate-metric/rouge)

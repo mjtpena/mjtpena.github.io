@@ -1,5 +1,6 @@
 ---
 title: Azure Backup Best Practices and Automation
+description: "Backup configurations have a way of looking fine until the day you need to restore. Default policies, retention that doesn't match the actual RPO…"
 author: Michael John Pena
 draft: false
 date: 2021-01-29
@@ -554,4 +555,4 @@ def restore_vm_to_new(
 7. **Encryption**: Use customer-managed keys for sensitive workloads
 8. **Cross-Region**: Configure cross-region restore for critical workloads
 
-Azure Backup provides comprehensive data protection capabilities. With proper automation and monitoring, you can ensure your organization's data is protected and recoverable when needed.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Backup provides comprehensive data protection capabilities. With proper automation and monitoring, you can ensure your organization's data is protected and recoverable when needed.

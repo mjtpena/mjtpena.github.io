@@ -1,13 +1,11 @@
 ---
 title: "The ai_query Function: Custom LLM Calls in Databricks SQL"
+description: "The aiquery() function enables custom LLM interactions directly in SQL. Unlike specialized functions, it allows you to craft any prompt and get intelligent…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-22
 tags: ["Databricks", "SQL", "AI", "LLM", "ai_query"]
-
 ---
-
-I wrote "The ai_query Function: Custom LLM Calls in Databricks SQL" to share practical, production-minded guidance on this topic.
 
 The `ai_query()` function enables custom LLM interactions directly in SQL. Unlike specialized functions, it allows you to craft any prompt and get intelligent responses.
 
@@ -283,4 +281,3 @@ AI_QUERY_BEST_PRACTICES = {
 ## Conclusion
 
 The `ai_query()` function is your gateway to custom LLM capabilities in SQL. Master prompt engineering and output parsing to unlock powerful data enrichment and analysis workflows.
-

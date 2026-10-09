@@ -1,5 +1,6 @@
 ---
 title: "Azure Stream Analytics: Real-Time Data Processing"
+description: "Stream Analytics is one of those services I keep recommending and clients keep being surprised by — SQL on top of an event firehose, with windowing and…"
 author: Michael John Peña
 draft: false
 date: 2020-09-29
@@ -91,4 +92,4 @@ SELECT * INTO BlobOutput FROM RawData
 SELECT * INTO EventHubOutput WHERE IsAnomaly = 1
 ```
 
-Stream Analytics bridges the gap between raw event streams and actionable insights.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Stream Analytics bridges the gap between raw event streams and actionable insights.

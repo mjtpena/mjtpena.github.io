@@ -1,13 +1,11 @@
 ---
 title: "Designing End-to-End IoT Solution Architecture on Azure"
+description: "This architecture provides a scalable, secure foundation for enterprise IoT solutions on Azure."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-31
 tags: ["Azure", "IoT", "Architecture", "Solution Design", "Best Practices"]
-
 ---
-
-I wrote "Designing End-to-End IoT Solution Architecture on Azure" to share practical, production-minded guidance on this topic.
 
 ## Reference Architecture
 
@@ -287,4 +285,4 @@ resource "azurerm_storage_account" "datalake" {
 }
 ```
 
-This architecture provides a scalable, secure foundation for enterprise IoT solutions on Azure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+This architecture provides a scalable, secure foundation for enterprise IoT solutions on Azure.

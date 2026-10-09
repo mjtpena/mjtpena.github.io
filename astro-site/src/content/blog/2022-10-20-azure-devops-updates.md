@@ -1,13 +1,11 @@
 ---
 title: "Azure DevOps Updates - October 2022"
+description: "Azure DevOps provides enterprise-grade DevOps capabilities with deep Azure integration."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-20
 tags: ["Azure", "Azure DevOps", "CI/CD", "DevOps"]
-
 ---
-
-I wrote "Azure DevOps Updates - October 2022" to share practical, production-minded guidance on this topic.
 
 ## Pipelines Improvements
 
@@ -71,4 +69,4 @@ stages:
 - Template expressions improvements
 - Agent pool management updates
 
-Azure DevOps provides enterprise-grade DevOps capabilities with deep Azure integration.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure DevOps provides enterprise-grade DevOps capabilities with deep Azure integration.

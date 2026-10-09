@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-08
 tags:
-  - kubernetes
-  - networking
-  - security
-  - aks
-
+  - Kubernetes
+  - Networking
+  - Security
+  - AKS
 ---
-
-I wrote "Kubernetes Network Policies: Securing Pod Communication" to share practical, production-minded guidance on this topic.
 
 ## Basic Network Policy
 
@@ -104,5 +101,3 @@ spec:
 ## Summary
 
 Network Policies provide essential microsegmentation for Kubernetes clusters. Enable a CNI that supports policies (like Azure CNI or Calico) to enforce them.
-
-

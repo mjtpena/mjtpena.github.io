@@ -1,13 +1,11 @@
 ---
 title: "Leveraging MySQL 8.0 Features on Azure"
+description: "MySQL 8.0 features significantly enhance your application capabilities on Azure Database for MySQL Flexible Server."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-10
 tags: ["Azure", "MySQL", "MySQL 8.0", "Database", "SQL"]
-
 ---
-
-I wrote "Leveraging MySQL 8.0 Features on Azure" to share practical, production-minded guidance on this topic.
 
 ## Window Functions
 
@@ -164,4 +162,4 @@ CREATE RESOURCE GROUP batch_processing
 SET RESOURCE GROUP batch_processing;
 ```
 
-MySQL 8.0 features significantly enhance your application capabilities on Azure Database for MySQL Flexible Server.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+MySQL 8.0 features significantly enhance your application capabilities on Azure Database for MySQL Flexible Server.

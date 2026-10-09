@@ -1,5 +1,6 @@
 ---
 title: "Windows AI Evolution: NPU, Recall, and On-Device Intelligence"
+description: "Windows AI brings intelligence to the edge. For data professionals, this means faster, more private analytics on your desktop."
 author: Michael John Peña
 draft: false
 date: 2025-02-06
@@ -9,10 +10,7 @@ tags:
   - NPU
   - Edge Computing
   - Microsoft
-
 ---
-
-I wrote "Windows AI Evolution: NPU, Recall, and On-Device Intelligence" to share practical, production-minded guidance on this topic.
 
 ## The Windows AI Stack
 
@@ -297,4 +295,4 @@ use_cases = {
 4. **Optimize for NPU**: Use quantization and optimization tools
 5. **Test offline**: Ensure graceful degradation
 
-Windows AI brings intelligence to the edge. For data professionals, this means faster, more private analytics on your desktop.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Windows AI brings intelligence to the edge. For data professionals, this means faster, more private analytics on your desktop.

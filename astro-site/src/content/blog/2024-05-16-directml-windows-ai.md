@@ -1,5 +1,6 @@
 ---
 title: "DirectML: Hardware-Accelerated AI on Windows"
+description: "DirectML is Microsoft's hardware-accelerated machine learning API that works across all DirectX 12 GPUs. Today I'm exploring how to leverage it for…"
 author: Michael John Peña
 draft: false
 date: 2024-05-16
@@ -411,4 +412,4 @@ Tomorrow I'll cover the Windows AI Recall feature and its implications.
 
 - [DirectML Documentation](https://learn.microsoft.com/windows/ai/directml/)
 - [ONNX Runtime DirectML](https://onnxruntime.ai/docs/execution-providers/DirectML-ExecutionProvider.html)
-- [PyTorch DirectML](https://github.com/microsoft/DirectML)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [PyTorch DirectML](https://github.com/microsoft/DirectML)

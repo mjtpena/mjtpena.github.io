@@ -9,10 +9,7 @@ tags:
   - RAG
   - Architecture
   - AI
-
 ---
-
-I wrote "RAG Architecture Patterns: Building Production-Ready Systems" to share practical, production-minded guidance on this topic.
 
 ## Pattern 1: Simple RAG
 
@@ -395,4 +392,4 @@ PATTERN_RECOMMENDATIONS = {
 ## Resources
 
 - [RAG Survey Paper](https://arxiv.org/abs/2312.10997)
-- [Advanced RAG Techniques](https://www.llamaindex.ai/blog/a-cheat-sheet-and-some-recipes-for-building-advanced-rag-803a9d94c41b)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Advanced RAG Techniques](https://www.llamaindex.ai/blog/a-cheat-sheet-and-some-recipes-for-building-advanced-rag-803a9d94c41b)

@@ -1,13 +1,11 @@
 ---
 title: "Dashboards in Databricks: Building Data Applications"
+description: "Databricks dashboards (including Lakeview) provide powerful visualization capabilities integrated with the lakehouse. This guide covers building effective…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-20
 tags: ["Databricks", "Dashboards", "Visualization", "Analytics", "BI"]
-
 ---
-
-I wrote "Dashboards in Databricks: Building Data Applications" to share practical, production-minded guidance on this topic.
 
 Databricks dashboards (including Lakeview) provide powerful visualization capabilities integrated with the lakehouse. This guide covers building effective dashboards.
 
@@ -364,4 +362,3 @@ class DashboardManager:
 ## Conclusion
 
 Databricks dashboards provide flexible options from quick Lakeview dashboards to sophisticated notebook-based visualizations. Choose the right type based on your audience and update requirements.
-

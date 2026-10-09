@@ -1,5 +1,6 @@
 ---
 title: "Minimal APIs in ASP.NET Core 6: Building Lightweight HTTP Services"
+description: "Minimal APIs in ASP.NET Core 6 are the answer to the question \"why do I need controllers, action filters, model binding, and routing tables just to expose a…"
 author: Michael John Pena
 draft: false
 date: 2021-11-03
@@ -399,4 +400,4 @@ Minimal APIs bring the simplicity of modern web frameworks to .NET while maintai
 ## Resources
 
 - [Minimal APIs Overview](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis)
-- [Tutorial: Create a minimal web API](https://docs.microsoft.com/en-us/aspnet/core/tutorials/min-web-api)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Tutorial: Create a minimal web API](https://docs.microsoft.com/en-us/aspnet/core/tutorials/min-web-api)

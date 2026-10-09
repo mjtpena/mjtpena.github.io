@@ -1,13 +1,11 @@
 ---
 title: "LLM Application Testing: Strategies and Frameworks"
+description: "Testing LLM applications is a problem that doesn't have a satisfying general-purpose solution yet, and that's worth acknowledging before diving into…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-05
 tags: ["LLM", "Testing", "AI", "Quality Assurance", "Best Practices"]
-
 ---
-
-I wrote "LLM Application Testing: Strategies and Frameworks" to share practical, production-minded guidance on this topic.
 
 Testing LLM applications is a problem that doesn't have a satisfying general-purpose solution yet, and that's worth acknowledging before diving into strategies. The fundamental difficulty: LLM outputs are natural language, correctness isn't binary, and the same input can produce different outputs across runs. Traditional unit testing (assert output == expected_output) is only useful for a narrow slice of LLM behaviour — structured extraction, function call parameter validation, classification tasks with a fixed output space. For everything else, you need evaluation approaches that accept the probabilistic nature of the output: LLM-as-judge evaluation against defined criteria, regression testing on a golden dataset where you detect significant distribution shifts rather than exact matches, and human review pipelines for the cases where automated evaluation has low confidence. The test suite isn't protecting against bugs; it's measuring quality and catching regressions.
 
@@ -489,4 +487,3 @@ Testing LLM applications requires a shift in mindset from exact matching to sema
 4. **Track metrics over time** to identify trends
 
 Build your test suite incrementally, starting with critical paths and expanding coverage as your application matures.
-

@@ -1,14 +1,15 @@
 ---
 title: "GitHub Copilot Preview: AI-Powered Code Completion"
+description: "GitHub Copilot in early 2022 was in a limited technical preview, available to a subset of developers who had requested access—and the developer reactions…"
 author: Michael John Peña
 draft: false
 date: 2022-01-12
 url: /blog/github-copilot-preview/
 tags:
-  - github
-  - ai
-  - copilot
-  - productivity
+  - GitHub
+  - AI
+  - Copilot
+  - Productivity
 ---
 
 GitHub Copilot in early 2022 was in a limited technical preview, available to a subset of developers who had requested access—and the developer reactions ranged from "this will replace programming" to "this is just autocomplete that sometimes writes bugs." The reality that emerged from the preview period was somewhere between those extremes: Copilot is genuinely useful for boilerplate code (writing unit test stubs, generating CRUD operations, scaffolding repetitive patterns), reduces the friction of working in unfamiliar languages or frameworks, and accelerates the "I know what I want to do but I can't remember the exact API syntax" moments. It is genuinely poor at business logic that depends on domain-specific context the model wasn't trained on, and it requires the developer to read and validate every suggestion rather than blindly accepting. The GitHub-commissioned study showing 55% faster task completion for developers using Copilot became a reference point in the industry conversation about AI-assisted development productivity.
@@ -183,4 +184,4 @@ resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
 4. **Iterate** - Press Tab to accept, Esc to dismiss, Alt+] for next suggestion
 5. **Learn from suggestions** - Discover new patterns and APIs
 
-GitHub Copilot is a glimpse into the future of software development where AI augments human creativity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GitHub Copilot is a glimpse into the future of software development where AI augments human creativity.

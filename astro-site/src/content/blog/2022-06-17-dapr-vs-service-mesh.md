@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-17
 tags:
-  - dapr
+  - Dapr
   - service-mesh
-  - microservices
-  - kubernetes
-
+  - Microservices
+  - Kubernetes
 ---
-
-I wrote "Dapr vs Service Mesh: Choosing the Right Approach" to share practical, production-minded guidance on this topic.
 
 ## Key Differences
 
@@ -88,5 +85,3 @@ annotations:
 ## Summary
 
 Use Dapr for application building blocks, service mesh for network security and traffic management. They complement each other well.
-
-

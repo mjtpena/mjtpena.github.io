@@ -9,10 +9,7 @@ tags:
   - Production
   - Azure AI
   - Architecture
-
 ---
-
-I wrote "AI Agent Best Practices: Lessons from Production" to share practical, production-minded guidance on this topic.
 
 ## Design Principles
 
@@ -368,4 +365,5 @@ spec:
             path: /ready
             port: 8080
           initialDelaySeconds: 5
-          periodSeconds: 10\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+          periodSeconds: 10
+```

@@ -1,13 +1,11 @@
 ---
 title: "Getting Started with Azure Cosmos DB for PostgreSQL"
+description: "Azure Cosmos DB for PostgreSQL is a managed database service that extends PostgreSQL with distributed capabilities. It uses the Citus extension to transform…"
 author: "Michael John Peña"
 draft: false
 date: 2022-07-01
 tags: ["Azure", "Cosmos DB", "PostgreSQL", "Distributed Databases"]
-
 ---
-
-I wrote "Getting Started with Azure Cosmos DB for PostgreSQL" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Cosmos DB for PostgreSQL?
 
@@ -64,4 +62,4 @@ Consider this service when:
 - Your dataset is growing beyond what a single server can handle
 - You want the familiarity of PostgreSQL with distributed capabilities
 
-In upcoming posts, we'll dive deeper into sharding strategies, distributed queries, and performance optimization techniques.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+In upcoming posts, we'll dive deeper into sharding strategies, distributed queries, and performance optimization techniques.

@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Ignite 2021 Recap: Looking Forward to the Intelligent Cloud"
+description: "Ignite Fall 2021 was dense with announcements—Azure Container Apps, Chaos Studio, Load Testing, Service Connector, Azure Developer CLI, Arc-enabled data…"
 author: Michael John Pena
 draft: false
 date: 2021-11-30
@@ -181,4 +182,4 @@ Ignite 2021 demonstrated Microsoft's commitment to making cloud development more
 - [.NET Blog](https://devblogs.microsoft.com/dotnet/)
 - [Azure Blog](https://azure.microsoft.com/blog/)
 
-Here's to building amazing things with these new capabilities in 2022 and beyond!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Here's to building amazing things with these new capabilities in 2022 and beyond!

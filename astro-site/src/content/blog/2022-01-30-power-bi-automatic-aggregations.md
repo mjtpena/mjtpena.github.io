@@ -1,18 +1,16 @@
 ---
 title: "Power BI Automatic Aggregations: AI-Powered Query Optimization"
+description: "Automatic aggregations bring AI-powered optimization to Power BI, making it easier than ever to achieve excellent query performance on large datasets."
 author: Michael John Peña
 draft: false
 date: 2022-01-30
 url: /blog/power-bi-automatic-aggregations/
 tags:
   - power-bi
-  - performance
-  - analytics
-  - ai
-
+  - Performance
+  - Analytics
+  - AI
 ---
-
-I wrote "Power BI Automatic Aggregations: AI-Powered Query Optimization" to share practical, production-minded guidance on this topic.
 
 ## How Automatic Aggregations Work
 
@@ -227,4 +225,4 @@ ROW(
 )
 ```
 
-Automatic aggregations bring AI-powered optimization to Power BI, making it easier than ever to achieve excellent query performance on large datasets.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Automatic aggregations bring AI-powered optimization to Power BI, making it easier than ever to achieve excellent query performance on large datasets.

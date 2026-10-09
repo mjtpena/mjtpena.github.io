@@ -1,13 +1,11 @@
 ---
 title: "Fabric Databases Preview: Relational Databases in Microsoft Fabric"
+description: "Fabric Databases bring operational database workloads into the unified Fabric platform, with automatic integration to OneLake."
 author: "Michael John Peña"
 draft: false
 date: 2024-10-22
 tags: ["Microsoft Fabric", "Databases", "SQL", "Azure", "Preview"]
-
 ---
-
-I wrote "Fabric Databases Preview: Relational Databases in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Understanding Fabric Databases
 
@@ -372,4 +370,4 @@ class FabricMigration:
         conn.commit()
 ```
 
-Fabric Databases bring operational workloads into the unified Fabric platform. The automatic mirroring to OneLake enables seamless integration between transactional and analytical workloads.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fabric Databases bring operational workloads into the unified Fabric platform. The automatic mirroring to OneLake enables seamless integration between transactional and analytical workloads.

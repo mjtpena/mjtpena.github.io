@@ -1,5 +1,6 @@
 ---
 title: "KQL Querysets in Microsoft Fabric"
+description: "KQL Querysets are the analysis layer of Real-Time Intelligence in Fabric. Today I'm exploring how to write effective KQL for real-time analytics."
 author: Michael John Peña
 draft: false
 date: 2024-06-03
@@ -350,4 +351,4 @@ Tomorrow I'll cover real-time dashboards in Fabric.
 
 - [KQL Reference](https://learn.microsoft.com/kusto/query/)
 - [Time Series Analysis](https://learn.microsoft.com/kusto/query/time-series-analysis)
-- [Query Best Practices](https://learn.microsoft.com/kusto/query/best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Query Best Practices](https://learn.microsoft.com/kusto/query/best-practices)

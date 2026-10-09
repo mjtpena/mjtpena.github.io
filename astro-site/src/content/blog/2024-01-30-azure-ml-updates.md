@@ -1,5 +1,6 @@
 ---
 title: "Azure Machine Learning Updates: January 2024 New Features"
+description: "Azure ML's new feature store and Prompt Flow integration changed how I structure ML pipelines in early 2024. Below are the updates that matter operationally…"
 author: Michael John Peña
 draft: false
 date: 2024-01-30

@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Ignite 2021: Data, AI, and the Intelligent Cloud"
+description: "Microsoft Ignite Fall 2021 brought a wave of announcements across Azure. While hybrid work and Microsoft Teams dominated the headlines, the data and AI…"
 author: Michael John Peña
 draft: false
 date: 2021-10-18
@@ -126,4 +127,4 @@ The pace of change in the Azure data platform requires constant learning, but th
 - [Microsoft Ignite 2021 Book of News](https://news.microsoft.com/ignite-november-2021-book-of-news/)
 - [Azure Synapse Link for SQL](https://docs.microsoft.com/en-us/azure/synapse-analytics/synapse-link/sql-synapse-link-overview)
 - [Power BI Datamarts](https://docs.microsoft.com/en-us/power-bi/transform-model/datamarts/datamarts-overview)
-- [Azure ML Responsible AI](https://docs.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure ML Responsible AI](https://docs.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai)

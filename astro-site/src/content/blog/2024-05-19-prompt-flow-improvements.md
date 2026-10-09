@@ -1,5 +1,6 @@
 ---
 title: "Prompt Flow Improvements: Building Production AI Pipelines"
+description: "Prompt Flow has evolved significantly since its introduction. Today I'm exploring the latest improvements for building production-ready AI pipelines."
 author: Michael John Peña
 draft: false
 date: 2024-05-19
@@ -481,4 +482,4 @@ Tomorrow I'll cover evaluation improvements in Azure AI Studio.
 
 - [Prompt Flow Documentation](https://microsoft.github.io/promptflow/)
 - [Prompty Specification](https://prompty.ai/)
-- [Azure AI Studio](https://ai.azure.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure AI Studio](https://ai.azure.com/)

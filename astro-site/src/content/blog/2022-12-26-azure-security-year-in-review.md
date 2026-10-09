@@ -9,10 +9,7 @@ tags:
   - Year in Review
   - Best Practices
   - Microsoft Defender
-
 ---
-
-I wrote "Azure Security: A Year in Review" to share practical, production-minded guidance on this topic.
 
 ## Major Security Releases in 2022
 
@@ -418,4 +415,3 @@ security_checklist_2023 = {
 - [Microsoft Defender for Cloud](https://docs.microsoft.com/azure/defender-for-cloud/)
 - [Zero Trust Security](https://docs.microsoft.com/security/zero-trust/)
 - [Azure Security Best Practices](https://docs.microsoft.com/azure/security/fundamentals/best-practices-and-patterns)
-

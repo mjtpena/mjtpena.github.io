@@ -1,5 +1,6 @@
 ---
 title: "Direct Lake Best Practices: Getting Import-Mode Performance Without the Import"
+description: "Direct Lake can feel like magic until you hit its limits. In production I've learnt which constraints matter and how to tune tables and reports to stay in…"
 author: Michael John Peña
 draft: false
 date: 2024-01-17

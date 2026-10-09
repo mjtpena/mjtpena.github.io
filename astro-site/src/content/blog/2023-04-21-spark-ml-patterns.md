@@ -1,5 +1,6 @@
 ---
 title: "Spark ML Patterns for Production Systems"
+description: "Spark ML provides battle-tested patterns for production machine learning. From feature engineering to model persistence, these patterns ensure reliable ML…"
 author: Michael John Pena
 draft: false
 date: 2023-04-21
@@ -9,10 +10,7 @@ tags:
   - MLOps
   - Data Engineering
   - Python
-
 ---
-
-I wrote "Spark ML Patterns for Production Systems" to share practical, production-minded guidance on this topic.
 
 ## Feature Engineering Patterns
 
@@ -589,4 +587,4 @@ count = inference.run_batch_inference(
 print(f"Processed {count} records")
 ```
 
-Spark ML provides battle-tested patterns for production machine learning. From feature engineering to model persistence, these patterns ensure reliable ML systems at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Spark ML provides battle-tested patterns for production machine learning. From feature engineering to model persistence, these patterns ensure reliable ML systems at scale.

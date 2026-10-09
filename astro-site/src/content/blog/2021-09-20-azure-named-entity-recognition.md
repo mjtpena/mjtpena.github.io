@@ -1,5 +1,6 @@
 ---
 title: Named Entity Recognition with Azure Cognitive Services
+description: "Named Entity Recognition is essential for extracting structured information from unstructured text, enabling applications from search enhancement to…"
 author: Michael John Pena
 draft: false
 date: 2021-09-20
@@ -9,10 +10,7 @@ tags:
   - NER
   - NLP
   - Information Extraction
-
 ---
-
-I wrote "2021-09-20-azure-named-entity-recognition" to share practical, production-minded guidance on this topic.
 
 ## Entity Categories
 
@@ -393,4 +391,4 @@ print(summary)
 5. **PII Handling**: Always detect and protect sensitive data
 6. **Domain Customization**: Consider custom entity types for specific domains
 
-Named Entity Recognition is essential for extracting structured information from unstructured text, enabling applications from search enhancement to automated data entry.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Named Entity Recognition is essential for extracting structured information from unstructured text, enabling applications from search enhancement to automated data entry.

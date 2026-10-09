@@ -1,13 +1,11 @@
 ---
 title: "Claude 2.1 vs GPT-4: A Technical Comparison While We Await Claude 3"
+description: "With Claude 3 expected soon, now is a good time to compare the current state of play between Claude 2.1 and GPT-4. Let's dive into a technical comparison of…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-02
 tags: ["AI", "Claude", "GPT-4", "OpenAI", "Anthropic", "LLM"]
-
 ---
-
-I wrote "Claude 2.1 vs GPT-4: A Technical Comparison While We Await Claude 3" to share practical, production-minded guidance on this topic.
 
 With Claude 3 expected soon, now is a good time to compare the current state of play between Claude 2.1 and GPT-4. Let's dive into a technical comparison of these two frontier models.
 
@@ -164,4 +162,3 @@ Choose based on your current needs:
 ## Conclusion
 
 Both models are excellent choices today. The best approach is often a multi-provider strategy, using each model for its strengths. Stay tuned for Claude 3's release, which could shift this comparison significantly.
-

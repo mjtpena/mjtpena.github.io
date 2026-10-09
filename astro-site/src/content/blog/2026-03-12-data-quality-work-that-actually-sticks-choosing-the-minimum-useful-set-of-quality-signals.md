@@ -1,5 +1,6 @@
 ---
 title: "Data Quality Work That Actually Sticks: choosing the minimum useful set of quality signals"
+description: "I worked on smoothing the handoff between data engineering and AI teams—standardizing feature contracts, embedding validation, and adding lightweight…"
 author: Michael John Peña
 draft: false
 date: 2026-03-12
@@ -37,4 +38,4 @@ Tomorrow I will review this with the team so the decision is shared, not persona
 
 - [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)
 - [Fabric Data Factory](https://learn.microsoft.com/fabric/data-factory/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

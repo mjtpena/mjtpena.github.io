@@ -1,5 +1,6 @@
 ---
 title: "Azure NetApp Files: Enterprise File Storage"
+description: "Azure NetApp Files: enterprise storage performance in the cloud."
 author: Michael John Peña
 draft: false
 date: 2020-12-18
@@ -8,10 +9,7 @@ tags:
   - NetApp
   - Storage
   - Files
-
 ---
-
-I wrote "Azure NetApp Files: Enterprise File Storage" to share practical, production-minded guidance on this topic.
 
 ## Service Tiers
 
@@ -174,4 +172,4 @@ az netappfiles volume update \
     ]'
 ```
 
-Azure NetApp Files: enterprise storage performance in the cloud.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure NetApp Files: enterprise storage performance in the cloud.

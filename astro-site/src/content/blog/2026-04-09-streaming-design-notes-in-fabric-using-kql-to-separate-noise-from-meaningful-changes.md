@@ -1,5 +1,6 @@
 ---
 title: "Streaming Design Notes in Fabric: using KQL to separate noise from meaningful changes"
+description: "I focused on making delivery decisions auditable and repeatable—documenting intent, success criteria, and rollback paths to reduce tribal knowledge."
 author: Michael John Peña
 draft: false
 date: 2026-04-09
@@ -37,4 +38,4 @@ Tomorrow's focus is to stress-test this with less ideal inputs and see where it 
 
 - [Fabric Real-Time Intelligence](https://learn.microsoft.com/fabric/real-time-intelligence/)
 - [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

@@ -1,13 +1,11 @@
 ---
 title: "Data-tier Applications (DACPAC) for Azure SQL"
+description: "DACPACs provide reliable, repeatable database deployments for enterprise applications."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-28
 tags: ["Azure", "SQL Database", "DACPAC", "DevOps"]
-
 ---
-
-I wrote "Data-tier Applications (DACPAC) for Azure SQL" to share practical, production-minded guidance on this topic.
 
 ## Understanding DACPACs
 
@@ -290,4 +288,4 @@ stages:
 4. **Backup before deploy** - Enable backup option
 5. **Review scripts** - Generate and review before applying
 
-DACPACs provide reliable, repeatable database deployments for enterprise applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+DACPACs provide reliable, repeatable database deployments for enterprise applications.

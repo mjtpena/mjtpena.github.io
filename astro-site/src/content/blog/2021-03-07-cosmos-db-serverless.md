@@ -1,5 +1,6 @@
 ---
 title: Azure Cosmos DB Serverless - Pay Per Request Database
+description: "We had a Cosmos DB Serverless conversation at the end of 2020 and I'm returning to it because the experience of using it in actual development over two…"
 author: Michael John Pena
 draft: false
 date: 2021-03-07

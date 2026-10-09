@@ -1,5 +1,6 @@
 ---
 title: Video Intelligence with Azure Video Analyzer
+description: "Azure Video Analyzer brings intelligent video analytics to both edge and cloud, enabling sophisticated spatial analysis and event detection for security…"
 author: Michael John Pena
 draft: false
 date: 2021-09-22
@@ -9,10 +10,7 @@ tags:
   - Computer Vision
   - AI
   - IoT
-
 ---
-
-I wrote "2021-09-22-azure-video-analyzer" to share practical, production-minded guidance on this topic.
 
 ## Video Analyzer Capabilities
 
@@ -410,4 +408,4 @@ def create_event_recording_topology():
 5. **Event Filtering**: Filter events to reduce noise
 6. **Storage Management**: Implement retention policies
 
-Azure Video Analyzer brings intelligent video analytics to both edge and cloud, enabling sophisticated spatial analysis and event detection for security, retail, and industrial applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Video Analyzer brings intelligent video analytics to both edge and cloud, enabling sophisticated spatial analysis and event detection for security, retail, and industrial applications.

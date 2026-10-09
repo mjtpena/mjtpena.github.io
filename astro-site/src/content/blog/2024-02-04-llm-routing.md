@@ -9,10 +9,7 @@ tags:
   - AI Architecture
   - GPT
   - Model Selection
-
 ---
-
-I wrote "LLM Routing: Intelligent Model Selection for Cost and Quality" to share practical, production-minded guidance on this topic.
 
 ## The Routing Problem
 
@@ -141,4 +138,3 @@ def analyze_routing_savings(queries: list[str], router: QueryRouter):
 ## Conclusion
 
 LLM routing can reduce costs by 50-70% without sacrificing quality. Start with rule-based routing and evolve to ML-based as you collect data.
-

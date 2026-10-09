@@ -1,5 +1,6 @@
 ---
 title: "Azure Notification Hubs: Push Notifications at Scale"
+description: "Push notifications look easy until you're maintaining four sets of credentials (APNs, FCM, WNS, ADM) and writing platform-specific payloads for each.…"
 author: Michael John Peña
 draft: false
 date: 2020-12-16
@@ -183,4 +184,4 @@ az monitor metrics list \
     --metric "incoming" "outgoing.allpns.success" "outgoing.allpns.pnserror"
 ```
 
-Notification Hubs: push to millions in seconds.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Notification Hubs: push to millions in seconds.

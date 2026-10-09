@@ -1,17 +1,15 @@
 ---
 title: "Cilium Preview on AKS: eBPF-Based Networking"
+description: "eBPF (Extended Berkeley Packet Filter) allows running sandboxed programs in the Linux kernel without changing kernel source code, enabling efficient…"
 author: Michael John Peña
 draft: false
 date: 2022-06-11
 tags:
   - cilium
   - ebpf
-  - kubernetes
-  - networking
-
+  - Kubernetes
+  - Networking
 ---
-
-I wrote "Cilium Preview on AKS: eBPF-Based Networking" to share practical, production-minded guidance on this topic.
 
 ## What is eBPF?
 
@@ -64,5 +62,3 @@ hubble observe --namespace production
 ## Summary
 
 Cilium represents the future of Kubernetes networking with eBPF, offering performance and features beyond traditional CNI plugins.
-
-

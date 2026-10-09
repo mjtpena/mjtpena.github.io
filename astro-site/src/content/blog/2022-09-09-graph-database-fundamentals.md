@@ -1,13 +1,11 @@
 ---
 title: "Graph Database Fundamentals for Azure Developers"
+description: "Graph databases unlock powerful relationship-based queries that would be complex or impossible with traditional relational approaches."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-09
 tags: ["Azure", "Graph Database", "Data Modeling", "Architecture"]
-
 ---
-
-I wrote "Graph Database Fundamentals for Azure Developers" to share practical, production-minded guidance on this topic.
 
 ## Understanding Graph Data Models
 
@@ -372,4 +370,3 @@ class GraphAlgorithms:
 5. **Leverage indexes** - Create indexes for frequently filtered properties
 
 Graph databases unlock powerful relationship-based queries that would be complex or impossible with traditional relational approaches.
-

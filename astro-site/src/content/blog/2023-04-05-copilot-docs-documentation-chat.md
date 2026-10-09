@@ -1,5 +1,6 @@
 ---
 title: "Copilot for Docs: Chat With Your Documentation"
+description: "Copilot for Docs is one of the most concrete RAG applications Microsoft shipped publicly in this period—a conversational interface over documentation that…"
 author: Michael John Pena
 draft: false
 date: 2023-04-05
@@ -441,4 +442,4 @@ Provide:
         return response.content
 ```
 
-Copilot for Docs transforms static documentation into an interactive knowledge base. Combined with proper indexing and retrieval, it makes documentation truly accessible.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Copilot for Docs transforms static documentation into an interactive knowledge base. Combined with proper indexing and retrieval, it makes documentation truly accessible.

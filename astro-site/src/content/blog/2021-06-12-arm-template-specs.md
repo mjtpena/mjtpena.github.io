@@ -9,10 +9,7 @@ tags:
   - ARM Templates
   - Infrastructure as Code
   - DevOps
-
 ---
-
-I wrote "2021-06-12-arm-template-specs" to share practical, production-minded guidance on this topic.
 
 ## Creating Template Specs
 
@@ -469,4 +466,3 @@ ARM Template Specs provide a governed, versioned approach to managing infrastruc
 
 - [ARM Template Specs Documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs)
 - [Template Specs with Linked Templates](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs-create-linked)
-

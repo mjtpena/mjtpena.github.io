@@ -1,5 +1,6 @@
 ---
 title: Advanced Azure API Management Policies
+description: "I revisit APIM policies on this blog roughly every six months because the patterns are how the service earns its keep. Rate limiting per subscription, JWT…"
 author: Michael John Pena
 draft: false
 date: 2021-01-24
@@ -404,4 +405,4 @@ Policies can be applied at four scopes:
 5. **Version Policies**: Store policies in source control
 6. **Use Named Values**: Externalize configuration for different environments
 
-Azure API Management policies provide a powerful declarative way to implement cross-cutting concerns. Mastering policies enables you to build robust, secure, and performant API gateways without modifying backend services.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure API Management policies provide a powerful declarative way to implement cross-cutting concerns. Mastering policies enables you to build robust, secure, and performant API gateways without modifying backend services.

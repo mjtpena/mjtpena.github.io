@@ -9,10 +9,7 @@ tags:
   - PowerShell
   - Scripts
   - Holidays
-
 ---
-
-I wrote "A Christmas Gift: Azure Automation Scripts for the New Year" to share practical, production-minded guidance on this topic.
 
 ## The Gift: Ready-to-Use Scripts
 
@@ -408,4 +405,3 @@ Merry Christmas and happy automating!
 - [Azure PowerShell Documentation](https://docs.microsoft.com/powershell/azure/)
 - [Azure Automation](https://docs.microsoft.com/azure/automation/)
 - [Azure CLI](https://docs.microsoft.com/cli/azure/)
-

@@ -10,10 +10,7 @@ tags:
   - ETL
   - Data Engineering
   - Spark
-
 ---
-
-I wrote "2021-03-10-synapse-data-flows" to share practical, production-minded guidance on this topic.
 
 ## Understanding Data Flows
 
@@ -429,4 +426,3 @@ Data flows are ideal for:
 - Rapid prototyping of ETL processes
 - Teams transitioning from SSIS or similar tools
 - Scenarios requiring visual documentation of data lineage
-

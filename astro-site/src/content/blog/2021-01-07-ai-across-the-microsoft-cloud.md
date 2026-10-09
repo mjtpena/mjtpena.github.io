@@ -1,5 +1,6 @@
 ---
 title: AI across the Microsoft Cloud
+description: "Artificial Intelligence (AI) and Machine Learning (ML) are trending topics right now. In 2021, there are countless of ways to have a form of \"AI\" in your…"
 author: Michael John Peña
 draft: false
 date: 2021-01-07
@@ -8,10 +9,10 @@ images:
      - /2021/01/Azure-AI-1-940x510.png
 tags:
   - artificial intelligence
-  - azure
+  - Azure
   - Data Science
   - Databricks
-  - machine learning
+  - Machine Learning
   - Microsoft Cloud
   - MLOps
   - Power Platform
@@ -219,4 +220,4 @@ I hope you enjoyed my rundown of all things AI and ML in the Microsoft Cloud. Di
 [20]: https://docs.microsoft.com/en-us/azure/data-factory/transform-data-machine-learning-service
 [21]: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-fpga-web-service
 [22]: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-custom-docker-image
-[23]: https://azure.microsoft.com/en-au/solutions/architecture/ai-at-the-edge/\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+[23]: https://azure.microsoft.com/en-au/solutions/architecture/ai-at-the-edge/

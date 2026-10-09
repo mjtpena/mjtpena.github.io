@@ -1,13 +1,11 @@
 ---
 title: "GDPR and AI: Practical Compliance for ML Systems"
+description: "GDPR's implications for AI are practical, not theoretical: logging decisions, maintaining provenance, and ensuring human review where necessary are the…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-09
 tags: ["GDPR", "AI", "Compliance", "Privacy", "Data Protection"]
-
 ---
-
-I wrote "GDPR and AI: Practical Compliance for ML Systems" to share practical, production-minded guidance on this topic.
 
 GDPR's implications for AI are practical, not theoretical: logging decisions, maintaining provenance, and ensuring human review where necessary are the mechanisms that keep systems both useful and compliant. This post focuses on pragmatic patterns teams can implement today.
 
@@ -306,4 +304,4 @@ class DataMinimizationFramework:
         return [{"technique": "Review required", "description": "Manual assessment needed"}]
 ```
 
-Tomorrow, we'll explore the EU AI Act and its implications!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore the EU AI Act and its implications!

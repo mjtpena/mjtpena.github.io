@@ -9,10 +9,7 @@ tags:
   - DAX Studio
   - Tabular Editor
   - Development
-
 ---
-
-I wrote "Power BI External Tools: Extending Desktop Capabilities" to share practical, production-minded guidance on this topic.
 
 ## Popular External Tools
 
@@ -147,4 +144,3 @@ External Tools transform Power BI Desktop into a professional development enviro
 - [DAX Studio](https://daxstudio.org/)
 - [Tabular Editor](https://tabulareditor.com/)
 - [Bravo](https://bravo.bi/)
-

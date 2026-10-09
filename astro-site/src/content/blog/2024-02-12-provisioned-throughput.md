@@ -9,10 +9,7 @@ tags:
   - Architecture
   - Performance
   - Scale
-
 ---
-
-I wrote "Provisioned Throughput Deep Dive: Architecture and Implementation" to share practical, production-minded guidance on this topic.
 
 ## Deployment Architecture
 
@@ -163,4 +160,3 @@ class PTUScaler:
 ## Conclusion
 
 Provisioned throughput requires careful planning and monitoring but delivers consistent performance for production workloads.
-

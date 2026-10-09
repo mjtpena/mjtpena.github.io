@@ -1,13 +1,11 @@
 ---
 title: "Fabric Endorsement: Certifying Trusted Data Products"
+description: "Fabric endorsement — the Promoted and Certified badge system for Fabric items — is a lightweight but important trust signal in a self-service analytics…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-14
 tags: ["Microsoft Fabric", "Endorsement", "Data Quality", "Certification", "Governance"]
-
 ---
-
-I wrote "Fabric Endorsement: Certifying Trusted Data Products" to share practical, production-minded guidance on this topic.
 
 Fabric endorsement — the Promoted and Certified badge system for Fabric items — is a lightweight but important trust signal in a self-service analytics environment. In a large organisation with hundreds of datasets, reports, and lakehouses in a shared Fabric tenant, users need a way to distinguish authoritative, reviewed data products from personal experiments and works-in-progress. Promoted items can be marked by workspace members; Certified items require a Certification reviewer role and represent a higher standard of quality assurance. The practical implementation: organisations need to define what Certified means — what criteria a dataset must meet (documentation, refresh schedule, data quality checks, business sign-off) before a Certification reviewer marks it as Certified. The badge without the criteria is just a sticker; the criteria make it a meaningful data governance control.
 
@@ -327,4 +325,4 @@ def generate_endorsement_badge(item: dict) -> str:
 4. **Document the criteria** - Make requirements transparent
 5. **Automate where possible** - Quality checks, freshness monitoring
 
-Tomorrow, we'll explore Data Lineage in Fabric and how it connects to Microsoft Purview!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Data Lineage in Fabric and how it connects to Microsoft Purview!

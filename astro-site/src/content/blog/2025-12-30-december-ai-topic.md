@@ -1,5 +1,6 @@
 ---
 title: "Preparing Your Codebase for 2026: A Technical Debt Audit Guide"
+description: "Technical debt compounds like financial debt. Regular audits and systematic paydown keep your codebase healthy and your team productive."
 author: Michael John Peña
 draft: false
 date: 2025-12-30
@@ -9,10 +10,7 @@ tags:
   - Best-Practices
   - Planning
   - "2026"
-
 ---
-
-I wrote "Preparing Your Codebase for 2026: A Technical Debt Audit Guide" to share practical, production-minded guidance on this topic.
 
 ## The Audit Framework
 
@@ -183,4 +181,4 @@ ORDER BY avg_elapsed_time DESC;
 3. **Q3:** Work through P2 items
 4. **Q4:** Continuous P3 improvements
 
-Technical debt compounds like financial debt. Regular audits and systematic paydown keep your codebase healthy and your team productive.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Technical debt compounds like financial debt. Regular audits and systematic paydown keep your codebase healthy and your team productive.

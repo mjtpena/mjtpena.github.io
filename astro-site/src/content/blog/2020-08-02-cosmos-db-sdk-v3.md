@@ -1,5 +1,6 @@
 ---
 title: "Working with Azure Cosmos DB SDK v3 for .NET"
+description: "SDK v3 has been out for about a year now and I've finally migrated all the Cosmos work I had on v2. The migration was less painful than I expected — the API…"
 author: Michael John Peña
 draft: false
 date: 2020-08-02
@@ -198,4 +199,4 @@ Console.WriteLine($"Request charge: {response.RequestCharge} RUs");
 - **Direct mode + TCP** is meaningfully faster than Gateway mode in production, but be aware it needs outbound TCP on a wider port range — that has caught me out behind a corporate firewall before.
 - **Watch the RU charge on every query.** `response.RequestCharge` is the number that tells you whether you've written a query you can afford to run a million times a day.
 
-Cosmos isn't the right database for everything — it's expensive when misused and the consistency model trips people up — but for the workloads where it fits, SDK v3 is the first version where the developer experience finally matches the platform.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Cosmos isn't the right database for everything — it's expensive when misused and the consistency model trips people up — but for the workloads where it fits, SDK v3 is the first version where the developer experience finally matches the platform.

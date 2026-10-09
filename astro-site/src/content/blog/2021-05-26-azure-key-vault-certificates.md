@@ -9,10 +9,7 @@ tags:
   - Key Vault
   - Certificates
   - PKI
-
 ---
-
-I wrote "Azure Key Vault Certificates: Complete Lifecycle Management" to share practical, production-minded guidance on this topic.
 
 ## Certificate Storage Concepts
 
@@ -362,4 +359,4 @@ for cert in expiring:
 
 - [Key Vault Certificates Documentation](https://docs.microsoft.com/en-us/azure/key-vault/certificates/)
 - [Certificate Client Library](https://docs.microsoft.com/en-us/python/api/overview/azure/keyvault-certificates-readme)
-- [Certificate Issuers](https://docs.microsoft.com/en-us/azure/key-vault/certificates/about-certificates)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Certificate Issuers](https://docs.microsoft.com/en-us/azure/key-vault/certificates/about-certificates)

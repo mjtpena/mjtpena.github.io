@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering Patterns for Enterprise Applications"
+description: "Include examples in prompts to guide model behavior for domain-specific tasks. This is especially effective for classification and formatting tasks where…"
 author: Michael John Peña
 draft: false
 date: 2025-10-11
@@ -9,10 +10,7 @@ tags:
   - LLM
   - AI Applications
   - Best Practices
-
 ---
-
-I wrote "Prompt Engineering Patterns for Enterprise Applications" to share practical, production-minded guidance on this topic.
 
 ## Structured Output Patterns
 
@@ -100,4 +98,4 @@ Format your response as JSON with keys: key_information, relevant_facts, reasoni
 
 ## Few-Shot Learning Templates
 
-Include examples in prompts to guide model behavior for domain-specific tasks. This is especially effective for classification and formatting tasks where the expected output pattern needs to match existing systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Include examples in prompts to guide model behavior for domain-specific tasks. This is especially effective for classification and formatting tasks where the expected output pattern needs to match existing systems.

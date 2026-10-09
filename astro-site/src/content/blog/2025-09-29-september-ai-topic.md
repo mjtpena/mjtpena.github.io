@@ -1,5 +1,6 @@
 ---
 title: "Retrieval-Augmented Generation: Chunking Strategies for Better Results"
+description: "The best chunking strategy depends on your document types. Technical documentation benefits from header-aware chunking. Conversational content works well…"
 author: Michael John Peña
 draft: false
 date: 2025-09-29
@@ -9,10 +10,7 @@ tags:
   - Embeddings
   - Document Processing
   - LLM
-
 ---
-
-I wrote "Retrieval-Augmented Generation: Chunking Strategies for Better Results" to share practical, production-minded guidance on this topic.
 
 ## Chunking Fundamentals
 
@@ -207,4 +205,4 @@ def hierarchical_chunks(self, text: str, doc_id: str) -> List[Chunk]:
     return chunks
 ```
 
-The best chunking strategy depends on your document types. Technical documentation benefits from header-aware chunking. Conversational content works well with semantic paragraph chunking. Experiment and measure retrieval quality to find the optimal approach.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The best chunking strategy depends on your document types. Technical documentation benefits from header-aware chunking. Conversational content works well with semantic paragraph chunking. Experiment and measure retrieval quality to find the optimal approach.

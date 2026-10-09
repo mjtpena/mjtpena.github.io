@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-24
 tags:
-  - signalr
-  - azure
-  - real-time
-  - scaling
-
+  - SignalR
+  - Azure
+  - Real-Time
+  - Scaling
 ---
-
-I wrote "SignalR Scaling: Building Scalable Real-Time Applications" to share practical, production-minded guidance on this topic.
 
 ## Azure SignalR Service Setup
 
@@ -90,5 +87,3 @@ await connection.invoke('SendMessage', 'User1', 'Hello!');
 ## Summary
 
 Azure SignalR Service scales real-time applications effortlessly, handling millions of connections with automatic load balancing.
-
-

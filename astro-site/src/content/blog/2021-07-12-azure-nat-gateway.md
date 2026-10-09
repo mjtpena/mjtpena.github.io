@@ -10,12 +10,9 @@ tags:
   - NAT Gateway
   - Security
   - Infrastructure
-
 ---
 
-I wrote "2021-07-12-azure-nat-gateway" to share practical, production-minded guidance on this topic.
-
-# Why NAT Gateway?
+## Why NAT Gateway?
 
 NAT Gateway solves several problems:
 
@@ -24,7 +21,7 @@ NAT Gateway solves several problems:
 - **Predictable Outbound IPs**: Known source IPs for firewall whitelisting
 - **High Availability**: Built-in zone redundancy
 
-# Creating NAT Gateway
+## Creating NAT Gateway
 
 Deploy NAT Gateway using Azure CLI:
 
@@ -59,7 +56,7 @@ az network vnet subnet update \
     --nat-gateway nat-gateway-main
 ```
 
-# Terraform Configuration
+## Terraform Configuration
 
 Complete NAT Gateway setup with Terraform:
 
@@ -131,7 +128,7 @@ resource "azurerm_subnet_nat_gateway_association" "compute" {
 }
 ```
 
-# Scaling Outbound Connections
+## Scaling Outbound Connections
 
 Add more public IPs to scale SNAT ports:
 
@@ -195,7 +192,7 @@ for i in range(4):
     print(f"Added nat-pip-{i+2}")
 ```
 
-# NAT Gateway vs Load Balancer Outbound
+## NAT Gateway vs Load Balancer Outbound
 
 Compare NAT Gateway with Load Balancer SNAT:
 
@@ -237,7 +234,7 @@ def compare_outbound_options():
 compare_outbound_options()
 ```
 
-# Monitoring NAT Gateway
+## Monitoring NAT Gateway
 
 Monitor SNAT usage and performance:
 
@@ -297,7 +294,7 @@ alert = {
 }
 ```
 
-# Diagnostic Logging
+## Diagnostic Logging
 
 Enable diagnostic logs for troubleshooting:
 
@@ -329,7 +326,7 @@ az monitor diagnostic-settings create \
     ]'
 ```
 
-# Multiple NAT Gateways
+## Multiple NAT Gateways
 
 Use multiple NAT Gateways for different subnets:
 
@@ -384,7 +381,7 @@ resource "azurerm_nat_gateway_public_ip_association" "env" {
 }
 ```
 
-# Best Practices
+## Best Practices
 
 Key recommendations for NAT Gateway:
 
@@ -424,9 +421,8 @@ for category, items in best_practices.items():
         print(f"  - {item}")
 ```
 
-# Conclusion
+## Conclusion
 
 Azure NAT Gateway simplifies outbound connectivity while providing superior scalability compared to other options. With dynamic SNAT port allocation and support for multiple public IPs, it eliminates port exhaustion issues that plague high-throughput applications.
 
 The key benefits include predictable outbound IPs for security whitelisting, built-in zone redundancy, and no impact on inbound connectivity. For any production workload requiring reliable outbound internet access, NAT Gateway should be your first choice.
-

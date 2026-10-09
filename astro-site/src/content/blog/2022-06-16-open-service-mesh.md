@@ -5,13 +5,10 @@ draft: false
 date: 2022-06-16
 tags:
   - osm
-  - azure
+  - Azure
   - service-mesh
-  - kubernetes
-
+  - Kubernetes
 ---
-
-I wrote "Open Service Mesh: Azure's SMI-Compatible Mesh" to share practical, production-minded guidance on this topic.
 
 ## Enabling OSM on AKS
 
@@ -47,4 +44,5 @@ spec:
   matches:
   - name: books
     pathRegex: /books
-    methods: ["GET"]\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    methods: ["GET"]
+```

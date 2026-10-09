@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Service Expansion: Bringing GPT Models to Enterprise"
+description: "This isn't just \"OpenAI but on Azure\" - it's OpenAI made enterprise-ready. The approval process exists because Microsoft wants to ensure responsible use. Be…"
 author: Michael John Peña
 draft: false
 date: 2022-03-01
@@ -9,10 +10,7 @@ tags:
   - AI
   - GPT-3
   - Enterprise
-
 ---
-
-I wrote "Azure OpenAI Service Expansion: Bringing GPT Models to Enterprise" to share practical, production-minded guidance on this topic.
 
 ## Why Azure OpenAI Matters
 
@@ -217,4 +215,3 @@ Start small - experiment with a single use case, measure the results, and expand
 - [Azure OpenAI Service Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/openai/)
 - [OpenAI API Reference](https://platform.openai.com/docs/api-reference)
 - [Responsible AI Guidelines](https://www.microsoft.com/en-us/ai/responsible-ai)
-

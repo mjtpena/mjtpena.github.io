@@ -1,5 +1,6 @@
 ---
 title: "Data Contracts: Agreements Between Data Producers and Consumers"
+description: "Data contracts formalize the agreement between data producers and consumers. Today I'm exploring how to implement effective data contracts in your data…"
 author: Michael John Peña
 draft: false
 date: 2024-06-19
@@ -475,4 +476,4 @@ Tomorrow I'll cover API-first data design.
 
 - [Data Contracts](https://datacontract.com/)
 - [Open Data Contract Standard](https://github.com/bitol-io/open-data-contract-standard)
-- [Great Expectations](https://greatexpectations.io/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Great Expectations](https://greatexpectations.io/)

@@ -1,5 +1,6 @@
 ---
 title: "Azure in 2021: Predictions and Trends"
+description: "First post of 2021. The kids are still on summer holidays here in Australia, the home office is half-disassembled for cleaning, and I'm sketching out what I…"
 author: Michael John Peña
 draft: false
 date: 2021-01-01
@@ -111,4 +112,4 @@ Happy New Year! Let's build something amazing.
 ```python
 print("Welcome to 2021!")
 print("Let's learn and grow together.")
-```\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+```

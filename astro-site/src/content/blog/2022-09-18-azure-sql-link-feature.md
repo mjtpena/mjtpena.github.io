@@ -1,13 +1,11 @@
 ---
 title: "Azure SQL Managed Instance Link Feature"
+description: "The Link creates a near real-time data replication from SQL Server (2016 or later) to Azure SQL Managed Instance using distributed availability groups…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-18
 tags: ["Azure", "SQL Managed Instance", "Hybrid", "Replication"]
-
 ---
-
-I wrote "Azure SQL Managed Instance Link Feature" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Link Feature
 
@@ -329,4 +327,4 @@ public class ReportData { }
 4. **Hybrid flexibility** - Keep primary on-premises, replica in Azure
 5. **Testing environment** - Test applications against cloud copy
 
-The Link feature bridges on-premises SQL Server with Azure SQL Managed Instance for flexible hybrid architectures.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Link feature bridges on-premises SQL Server with Azure SQL Managed Instance for flexible hybrid architectures.

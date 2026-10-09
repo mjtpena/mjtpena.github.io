@@ -8,10 +8,7 @@ tags:
   - Machine Learning
   - Model Compression
   - Deep Learning
-
 ---
-
-I wrote "Knowledge Distillation: Advanced Techniques and Applications" to share practical, production-minded guidance on this topic.
 
 ## Advanced Distillation Strategies
 
@@ -321,4 +318,4 @@ Tomorrow we'll explore small language models.
 
 - [Knowledge Distillation Survey](https://arxiv.org/abs/2006.05525)
 - [DistilBERT Paper](https://arxiv.org/abs/1910.01108)
-- [Self-Distillation](https://arxiv.org/abs/1905.08094)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Self-Distillation](https://arxiv.org/abs/1905.08094)

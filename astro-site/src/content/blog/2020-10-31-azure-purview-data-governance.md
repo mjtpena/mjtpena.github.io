@@ -1,5 +1,6 @@
 ---
 title: "Azure Purview (Preview): Unified Data Governance"
+description: "Microsoft announced Azure Purview at Ignite this week and the timing could not be better. Every consulting engagement I've been on this year has the same…"
 author: Michael John Peña
 draft: false
 date: 2020-10-31
@@ -177,4 +178,4 @@ Define business vocabulary:
 }
 ```
 
-Purview: know your data, govern your data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Purview: know your data, govern your data.

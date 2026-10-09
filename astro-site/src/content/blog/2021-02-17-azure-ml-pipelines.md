@@ -1,5 +1,6 @@
 ---
 title: Building ML Workflows with Azure Machine Learning Pipelines
+description: "The first ML pipeline I helped build was a series of Python scripts duct-taped together with a bash wrapper and a nightly cron job. It worked exactly as…"
 author: Michael John Peña
 draft: false
 date: 2021-02-17

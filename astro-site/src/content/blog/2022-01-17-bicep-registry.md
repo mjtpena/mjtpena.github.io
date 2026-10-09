@@ -1,18 +1,16 @@
 ---
 title: "Bicep Registry: Sharing and Reusing Infrastructure Modules"
+description: "The Bicep Registry is essential for scaling infrastructure as code across enterprise organizations."
 author: Michael John Peña
 draft: false
 date: 2022-01-17
 url: /blog/bicep-registry/
 tags:
-  - azure
-  - bicep
+  - Azure
+  - Bicep
   - infrastructure-as-code
   - modules
-
 ---
-
-I wrote "Bicep Registry: Sharing and Reusing Infrastructure Modules" to share practical, production-minded guidance on this topic.
 
 ## Setting Up a Bicep Registry
 
@@ -263,4 +261,4 @@ jobs:
           done
 ```
 
-The Bicep Registry is essential for scaling infrastructure as code across enterprise organizations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Bicep Registry is essential for scaling infrastructure as code across enterprise organizations.

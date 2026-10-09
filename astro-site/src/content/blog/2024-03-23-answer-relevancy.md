@@ -1,13 +1,11 @@
 ---
 title: "Answer Relevancy in RAG: Does the Response Address the Question?"
+description: "An answer can be factually correct and grounded in context but still fail to address what was actually asked. Answer relevancy measures how well the…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-23
 tags: ["AI", "RAG", "Evaluation", "Relevancy", "LLM"]
-
 ---
-
-I wrote "Answer Relevancy in RAG: Does the Response Address the Question?" to share practical, production-minded guidance on this topic.
 
 An answer can be factually correct and grounded in context but still fail to address what was actually asked. Answer relevancy measures how well the generated response addresses the user's question.
 
@@ -356,4 +354,3 @@ print(f"Coverage: {result['sub_questions_covered']} sub-questions addressed")
 ## Conclusion
 
 Answer relevancy ensures RAG systems actually address user questions. Combine multiple evaluation approaches for robust relevancy assessment, especially for complex questions with multiple information needs.
-

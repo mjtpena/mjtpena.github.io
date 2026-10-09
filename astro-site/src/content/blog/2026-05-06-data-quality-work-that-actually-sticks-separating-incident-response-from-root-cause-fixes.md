@@ -1,5 +1,6 @@
 ---
 title: "Data Quality Work That Actually Sticks: separating incident response from root-cause fixes"
+description: "I tightened system boundaries so quality checks trigger earlier, catching regressions before downstream systems consume bad data."
 author: Michael John Peña
 draft: false
 date: 2026-05-06
@@ -36,4 +37,4 @@ Tomorrow I will apply the same rule to a second workflow to check repeatability.
 
 - [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)
 - [Fabric Data Factory](https://learn.microsoft.com/fabric/data-factory/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

@@ -9,10 +9,7 @@ tags:
   - Cost Allocation
   - FinOps
   - Governance
-
 ---
-
-I wrote "Chargeback Models for Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Chargeback vs Showback
 
@@ -559,4 +556,3 @@ print(f"Total: ${invoice['total']:.2f}")
 Effective chargeback models drive accountability and efficient resource usage. Choose the model that fits your organization's culture and complexity, starting simple and evolving as needed.
 
 Clear allocation rules, automation, and regular communication ensure chargeback success without creating friction between teams.
-

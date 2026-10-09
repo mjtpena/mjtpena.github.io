@@ -1,13 +1,11 @@
 ---
 title: "Burst Capacity in Azure Cosmos DB"
+description: "When your Cosmos DB container isn't fully utilizing its provisioned throughput, the unused capacity accumulates as burst credits. These credits can be used…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-03
 tags: ["Azure", "Cosmos DB", "Performance", "Throughput"]
-
 ---
-
-I wrote "Burst Capacity in Azure Cosmos DB" to share practical, production-minded guidance on this topic.
 
 ## Understanding Burst Capacity
 
@@ -230,4 +228,3 @@ public class BurstCapacityOptimizer
 5. **Plan capacity** - Burst is temporary; size for sustained workloads
 
 Burst capacity makes Cosmos DB more cost-effective by allowing you to provision for average load while handling peaks automatically.
-

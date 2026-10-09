@@ -9,10 +9,7 @@ tags:
   - Query Optimization
   - SQL
   - Spark
-
 ---
-
-I wrote "Query Performance Tuning in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Understanding Query Execution
 
@@ -497,4 +494,3 @@ print(monitor.generate_report())
 Query performance optimization in Microsoft Fabric requires understanding both the data layout and query engine behavior. Combine storage optimizations (V-Order, file sizes) with query-level techniques (predicate pushdown, broadcast joins) for best results.
 
 Regular monitoring helps identify performance regressions before they impact users.
-

@@ -9,10 +9,7 @@ tags:
   - GPT-4o
   - Multimodal
   - Conversational AI
-
 ---
-
-I wrote "Multimodal Conversations with GPT-4o" to share practical, production-minded guidance on this topic.
 
 ## The Multimodal Conversation Flow
 
@@ -334,4 +331,4 @@ Tomorrow I'll cover Azure OpenAI GPT-4o deployment and configuration specifics.
 
 - [GPT-4o Multimodal Guide](https://platform.openai.com/docs/guides/vision)
 - [Conversation Best Practices](https://platform.openai.com/docs/guides/chat)
-- [Token Management](https://platform.openai.com/docs/guides/rate-limits)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Token Management](https://platform.openai.com/docs/guides/rate-limits)

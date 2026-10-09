@@ -1,5 +1,6 @@
 ---
 title: "Azure Monitor Alerts and Action Groups"
+description: "Alerts should be actionable. If you can't do anything about it, it's noise."
 author: Michael John Peña
 draft: false
 date: 2020-09-15
@@ -8,10 +9,7 @@ tags:
   - Monitoring
   - Alerts
   - DevOps
-
 ---
-
-I wrote "Azure Monitor Alerts and Action Groups" to share practical, production-minded guidance on this topic.
 
 ## Alert Types
 
@@ -78,4 +76,4 @@ az monitor scheduled-query create \
 4. **Suppress during maintenance windows**
 5. **Auto-remediate when possible**
 
-Alerts should be actionable. If you can't do anything about it, it's noise.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Alerts should be actionable. If you can't do anything about it, it's noise.

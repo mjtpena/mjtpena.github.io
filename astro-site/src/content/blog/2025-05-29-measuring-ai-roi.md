@@ -1,5 +1,6 @@
 ---
 title: "Measuring AI ROI: Quantifying AI Business Value"
+description: "Rigorous ROI measurement ensures AI investments deliver demonstrable business value."
 author: Michael John Peña
 draft: false
 date: 2025-05-29
@@ -9,10 +10,7 @@ tags:
   - Business Value
   - Metrics
   - Analytics
-
 ---
-
-I wrote "Measuring AI ROI: Quantifying AI Business Value" to share practical, production-minded guidance on this topic.
 
 ## AI ROI Framework
 
@@ -132,4 +130,4 @@ roi_categories = {
 }
 ```
 
-Rigorous ROI measurement ensures AI investments deliver demonstrable business value.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Rigorous ROI measurement ensures AI investments deliver demonstrable business value.

@@ -1,5 +1,6 @@
 ---
 title: "Second No-Tech Sunday: What Changed"
+description: "Last time I reached for my phone four times in the first hour. This time, twice. Progress. Small, but real."
 author: Michael John Peña
 draft: false
 date: 2026-02-21
@@ -8,10 +9,7 @@ tags:
   - Family
   - Mindfulness
   - Parenting
-
 ---
-
-I wrote "Second No-Tech Sunday: What Changed" to share practical, production-minded guidance on this topic.
 
 ## What Was Different
 
@@ -79,4 +77,4 @@ Might try adding a walk somewhere. Something with a destination that requires no
 
 The unstructured time is good. A bit of gentle structure might make it last longer.
 
-See you on the other side of it.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+See you on the other side of it.

@@ -10,10 +10,7 @@ tags:
   - Prompt Engineering
   - DALL-E
   - Azure
-
 ---
-
-I wrote "Prompt Engineering Patterns for AI Image Generation" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -402,4 +399,3 @@ Effective prompt engineering transforms AI image generation from hit-or-miss to 
 - [DALL-E Prompt Guide](https://platform.openai.com/docs/guides/images)
 - [Prompt Engineering Best Practices](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api)
 - [Azure OpenAI Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
-

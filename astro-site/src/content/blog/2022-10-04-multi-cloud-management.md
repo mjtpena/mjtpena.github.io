@@ -4,10 +4,7 @@ author: "Michael John Peña"
 draft: false
 date: 2022-10-04
 tags: ["Azure", "Multi-Cloud", "AWS", "GCP", "Management"]
-
 ---
-
-I wrote "Multi-Cloud Management with Azure" to share practical, production-minded guidance on this topic.
 
 ## Azure Arc for Multi-Cloud
 
@@ -186,4 +183,5 @@ spec:
   interval: 5m
   url: https://github.com/org/multi-cloud-k8s
   ref:
-    branch: main\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    branch: main
+```

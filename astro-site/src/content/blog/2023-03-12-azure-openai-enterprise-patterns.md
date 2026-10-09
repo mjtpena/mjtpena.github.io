@@ -9,10 +9,7 @@ tags:
   - AI
   - Enterprise
   - Architecture
-
 ---
-
-I wrote "Enterprise Patterns for Azure OpenAI Applications" to share practical, production-minded guidance on this topic.
 
 ## Architecture Overview
 
@@ -564,4 +561,3 @@ Enterprise Azure OpenAI deployments need:
 6. **Circuit breakers** for resilience
 
 These patterns transform AI experiments into production-ready systems. Start with the basics and layer on additional patterns as your deployment matures.
-

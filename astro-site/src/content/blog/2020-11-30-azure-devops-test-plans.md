@@ -1,5 +1,6 @@
 ---
 title: "Azure DevOps Test Plans: Quality Assurance at Scale"
+description: "Automated tests are the bulk of my testing pyramid, but there's a tier you can't replace: the human running through a workflow looking for the thing nobody…"
 author: Michael John Peña
 draft: false
 date: 2020-11-30
@@ -199,4 +200,4 @@ run = test_client.create_test_run(
     testConfiguration: 789
 ```
 
-Azure Test Plans: structured testing for quality delivery.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Test Plans: structured testing for quality delivery.

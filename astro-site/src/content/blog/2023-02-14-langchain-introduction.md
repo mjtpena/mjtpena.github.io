@@ -9,10 +9,7 @@ tags:
   - OpenAI
   - AI
   - Python
-
 ---
-
-I wrote "LangChain Introduction: Building AI Applications with Python" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -389,4 +386,3 @@ print(result["answer"])
 - [LangChain Documentation](https://python.langchain.com/)
 - [LangChain GitHub](https://github.com/langchain-ai/langchain)
 - [Azure OpenAI Integration](https://python.langchain.com/docs/integrations/llms/azure_openai)
-

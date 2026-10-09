@@ -1,5 +1,6 @@
 ---
 title: Power Apps Model-Driven Apps - Building Enterprise Solutions
+description: "Model-driven apps are the Power Apps surface that professional developers habitually underestimate. \"No-code\" suggests toylike; what you get with a…"
 author: Michael John Peña
 draft: false
 date: 2021-04-07
@@ -8,7 +9,7 @@ tags:
   - Power Platform
   - Power Apps
   - Model-Driven Apps
-  - Dataverse
+  - dataverse
   - Enterprise
 ---
 

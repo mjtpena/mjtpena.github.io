@@ -1,5 +1,6 @@
 ---
 title: "Azure Logic Apps Standard: Single-Tenant Workflows"
+description: "Logic Apps Consumption was great for \"wire up two SaaS apps quickly\" and increasingly painful at scale—shared multi-tenant runtime, no VNet integration…"
 author: Michael John Peña
 draft: false
 date: 2021-01-10
@@ -226,4 +227,4 @@ steps:
           --src $(Build.ArtifactStagingDirectory)/logicapp.zip
 ```
 
-Logic Apps Standard: enterprise integration with developer control.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Logic Apps Standard: enterprise integration with developer control.

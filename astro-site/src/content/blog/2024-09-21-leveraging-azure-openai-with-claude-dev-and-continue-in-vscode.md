@@ -1,5 +1,6 @@
 ---
 title: Leveraging Azure OpenAI with Claude Dev and Continue in VSCode
+description: "As a developer constantly evaluating new tools to enhance productivity, I've recently implemented a setup that combines Azure OpenAI with two VSCode…"
 date: 2024-09-21T14:00:00.000Z
 tags:
   - Claude
@@ -8,10 +9,7 @@ tags:
   - Copilot
   - VSCode
 author: Michael John Peña
-
 ---
-
-I wrote "" to share practical, production-minded guidance on this topic.
 
 As a developer constantly evaluating new tools to enhance productivity, I've recently implemented a setup that combines Azure OpenAI with two VSCode extensions: Continue and Claude Dev. This configuration has significantly improved my coding workflow, and I'd like to share the setup process and my experiences.
 
@@ -86,4 +84,4 @@ This setup has noticeably improved my coding efficiency. Continue handles quick 
 
 By utilizing resources available through my Visual Studio Enterprise subscription, I've created a powerful yet cost-effective development environment.
 
-For developers looking to optimize their coding setup, this configuration offers a compelling balance of functionality and resource utilization. It's worth considering if you're aiming to streamline your development process.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+For developers looking to optimize their coding setup, this configuration offers a compelling balance of functionality and resource utilization. It's worth considering if you're aiming to streamline your development process.

@@ -1,5 +1,6 @@
 ---
 title: "Fabric Capacity Planning: Lessons from Production"
+description: "Started with F64 because \"enterprise.\" Spent money we didn't need to. Lesson: Start smaller. F32 was enough. Can always scale up."
 author: Michael John Peña
 draft: false
 date: 2026-01-20
@@ -8,10 +9,7 @@ tags:
   - Azure
   - Planning
   - Cost
-
 ---
-
-I wrote "Fabric Capacity Planning: Lessons from Production" to share practical, production-minded guidance on this topic.
 
 ## Mistake 1: Starting Too Big
 
@@ -55,4 +53,4 @@ Current: F32 = $4,000/month, better utilized
 
 Don't guess at capacity. Start small, monitor, adjust.
 
-Fabric makes it easy to scale. Take advantage of that.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fabric makes it easy to scale. Take advantage of that.

@@ -9,10 +9,7 @@ tags:
   - Security
   - Azure
   - API
-
 ---
-
-I wrote "Rate Limiting Middleware in ASP.NET Core 7" to share practical, production-minded guidance on this topic.
 
 ## Why Rate Limiting?
 
@@ -395,4 +392,3 @@ ASP.NET Core 7's built-in rate limiting is a significant addition that eliminate
 - [Rate Limiting Middleware](https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit)
 - [System.Threading.RateLimiting](https://learn.microsoft.com/en-us/dotnet/api/system.threading.ratelimiting)
 - [API Management Rate Limiting](https://learn.microsoft.com/en-us/azure/api-management/api-management-sample-flexible-throttling)
-

@@ -9,10 +9,7 @@ tags:
   - Vector Search
   - Embeddings
   - AI
-
 ---
-
-I wrote "Azure Cognitive Search Vector Search Preview: Native Azure Vector DB" to share practical, production-minded guidance on this topic.
 
 ## Why Azure Cognitive Search for Vectors?
 
@@ -470,4 +467,4 @@ results = service.hybrid_search("serverless functions")
 
 - [Azure Cognitive Search Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview)
 - [Azure Search Python SDK](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/search/azure-search-documents)
-- [Cognitive Search Pricing](https://azure.microsoft.com/pricing/details/search/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Cognitive Search Pricing](https://azure.microsoft.com/pricing/details/search/)

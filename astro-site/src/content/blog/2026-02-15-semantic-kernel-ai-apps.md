@@ -1,5 +1,6 @@
 ---
 title: "The Microsoft Agent Framework: What You Need to Know"
+description: "It's Microsoft's opinionated framework for building production AI agents. Not just chatbots. Agents that reason, plan, use tools, and collaborate with other…"
 author: Michael John Peña
 draft: false
 date: 2026-02-15
@@ -8,10 +9,7 @@ tags:
   - Agents
   - Azure
   - dotnet
-
 ---
-
-I wrote "The Microsoft Agent Framework: What You Need to Know" to share practical, production-minded guidance on this topic.
 
 ## What Is the Microsoft Agent Framework?
 
@@ -165,4 +163,4 @@ The Agent Framework fills a real gap. Building multi-agent systems from scratch 
 
 It's not mature yet. But the direction is right. If you're building agents on Azure, this is worth investing in now.
 
-Start simple. One agent. Add complexity only when needed. The framework grows with you.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Start simple. One agent. Add complexity only when needed. The framework grows with you.

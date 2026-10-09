@@ -1,13 +1,11 @@
 ---
 title: "AI Transparency: Building Understandable AI Systems"
+description: "Transparency is a practical tool for trust: concise user-facing explanations, developer-oriented model cards, and automated provenance logs make AI systems…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-12
 tags: ["AI", "Transparency", "Explainability", "XAI", "Responsible AI"]
-
 ---
-
-I wrote "AI Transparency: Building Understandable AI Systems" to share practical, production-minded guidance on this topic.
 
 Transparency is a practical tool for trust: concise user-facing explanations, developer-oriented model cards, and automated provenance logs make AI systems understandable to users and auditors. This post lays out a transparency framework you can adopt today.
 
@@ -387,4 +385,4 @@ class TransparencyAuditLog:
         }
 ```
 
-Tomorrow, we'll explore explainability requirements in depth!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore explainability requirements in depth!

@@ -1,13 +1,11 @@
 ---
 title: "Automated Report Generation with AI"
+description: "AI can transform raw data into polished, narrative reports. This guide covers building automated report generation systems that combine data analysis with…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-05
 tags: ["AI", "Reporting", "Data", "Automation", "Microsoft Fabric"]
-
 ---
-
-I wrote "Automated Report Generation with AI" to share practical, production-minded guidance on this topic.
 
 AI can transform raw data into polished, narrative reports. This guide covers building automated report generation systems that combine data analysis with natural language generation.
 
@@ -441,4 +439,3 @@ class ReportScheduler:
 ## Conclusion
 
 AI-powered report generation automates the translation of data into actionable narratives. Combine data analysis, narrative generation, and templates for consistent, insightful reports.
-

@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering Basics: Getting Better Results from AI"
+description: "Poor prompt: \"Write code for a website\" Better prompt: \"Write HTML and CSS for a responsive landing page for a SaaS product. Include a hero section with…"
 author: Michael John Peña
 draft: false
 date: 2022-12-04
@@ -9,10 +10,7 @@ tags:
   - ChatGPT
   - OpenAI
   - Best Practices
-
 ---
-
-I wrote "Prompt Engineering Basics: Getting Better Results from AI" to share practical, production-minded guidance on this topic.
 
 ## Why Prompt Engineering Matters
 
@@ -287,4 +285,3 @@ Prompt engineering is a skill that improves with practice. Start with specific, 
 - [OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)
 - [ChatGPT](https://chat.openai.com/)
 - [Prompt Engineering Techniques](https://www.promptingguide.ai/)
-

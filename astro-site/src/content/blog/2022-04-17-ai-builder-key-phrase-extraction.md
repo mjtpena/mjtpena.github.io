@@ -9,10 +9,7 @@ tags:
   - Key Phrases
   - NLP
   - Text Analysis
-
 ---
-
-I wrote "Key Phrase Extraction with AI Builder: Identifying Important Concepts" to share practical, production-minded guidance on this topic.
 
 ## How It Works
 
@@ -204,4 +201,3 @@ It's a simple but powerful tool for understanding content at scale.
 ## Resources
 
 - [Key Phrase Extraction Documentation](https://docs.microsoft.com/en-us/ai-builder/prebuilt-key-phrase-extraction)
-

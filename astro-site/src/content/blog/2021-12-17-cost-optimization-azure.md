@@ -1,5 +1,6 @@
 ---
 title: "Cost Optimization Strategies for Azure Workloads"
+description: "Cost optimization in 2021 became a core cloud competency. The tools are powerful; success requires discipline and cultural change."
 author: Michael John Pena
 draft: false
 date: 2021-12-17
@@ -9,10 +10,7 @@ tags:
   - FinOps
   - Cloud Economics
   - Best Practices
-
 ---
-
-I wrote "Cost Optimization Strategies for Azure Workloads" to share practical, production-minded guidance on this topic.
 
 ## Understanding Your Costs
 
@@ -422,4 +420,4 @@ Cost optimization in 2021 became a core cloud competency. The tools are powerful
 
 - [Azure Cost Management](https://docs.microsoft.com/en-us/azure/cost-management-billing/)
 - [Azure Advisor](https://docs.microsoft.com/en-us/azure/advisor/)
-- [FinOps Foundation](https://www.finops.org/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [FinOps Foundation](https://www.finops.org/)

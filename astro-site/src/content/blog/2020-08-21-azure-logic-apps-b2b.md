@@ -1,5 +1,6 @@
 ---
 title: "B2B Integration Patterns with Azure Logic Apps"
+description: "Most Logic Apps content online is about Office 365 connectors and approval workflows — and that's fine, but the enterprise use case I keep running into is…"
 author: Michael John Peña
 draft: false
 date: 2020-08-21
@@ -382,4 +383,4 @@ az monitor diagnostic-settings create \
 
 Azure Logic Apps provides a comprehensive platform for B2B integration, enabling secure and compliant partner communication.
 
-A warning on the cost model: Integration Accounts are *not* cheap, and Standard tier is a meaningful monthly commitment even before you do any work. If you only need a couple of trading partners, calculate carefully — sometimes Logic Apps Standard with a custom AS2 connector ends up cheaper than full Integration Account licensing.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A warning on the cost model: Integration Accounts are *not* cheap, and Standard tier is a meaningful monthly commitment even before you do any work. If you only need a couple of trading partners, calculate carefully — sometimes Logic Apps Standard with a custom AS2 connector ends up cheaper than full Integration Account licensing.

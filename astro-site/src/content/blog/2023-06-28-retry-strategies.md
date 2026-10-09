@@ -1,5 +1,6 @@
 ---
 title: "Retry Strategies for AI Applications"
+description: "Azure OpenAI rate limits in mid-2023 are set per deployment per region, and hitting them is a normal operating condition rather than an exceptional one for…"
 author: Michael John Peña
 draft: false
 date: 2023-06-28
@@ -299,4 +300,4 @@ Proper retry strategies make AI applications reliable under various failure cond
 ## Resources
 
 - [Retry Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/retry)
-- [Circuit Breaker Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Circuit Breaker Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker)

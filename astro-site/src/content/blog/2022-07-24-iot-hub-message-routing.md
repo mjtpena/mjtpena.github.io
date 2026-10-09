@@ -1,13 +1,11 @@
 ---
 title: "IoT Hub Message Routing and Custom Endpoints"
+description: "Message routing is the foundation for building sophisticated, event-driven IoT architectures on Azure."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-24
 tags: ["Azure", "IoT Hub", "Message Routing", "Event Hub", "Service Bus"]
-
 ---
-
-I wrote "IoT Hub Message Routing and Custom Endpoints" to share practical, production-minded guidance on this topic.
 
 ## Understanding Message Sources
 
@@ -253,4 +251,4 @@ az iot hub message-route test \
     --app-properties '{"messageType": "telemetry"}'
 ```
 
-Message routing is the foundation for building sophisticated, event-driven IoT architectures on Azure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Message routing is the foundation for building sophisticated, event-driven IoT architectures on Azure.

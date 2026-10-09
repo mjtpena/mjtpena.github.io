@@ -1,13 +1,11 @@
 ---
 title: "Code Interpreter: AI-Powered Data Analysis"
+description: "Code Interpreter (Advanced Data Analysis) is the single most productive AI tool I've used for exploratory analysis — it runs Python in a sandbox, opens…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-27
 tags: ["OpenAI", "Code Interpreter", "Data Analysis", "Python", "AI"]
-
 ---
-
-I wrote "Code Interpreter: AI-Powered Data Analysis" to share practical, production-minded guidance on this topic.
 
 Code Interpreter (Advanced Data Analysis) is the single most productive AI tool I've used for exploratory analysis — it runs Python in a sandbox, opens uploaded files, produces visualisations, and returns reproducible scripts. For workflows where an analyst formerly iterated locally on CSVs and notebooks, Code Interpreter compresses that loop into a single conversation: upload a file, ask a question, and get back plots, summary statistics and actionable insights. It's not a replacement for rigorous production data engineering, but for rapid prototyping and insight discovery it's transformative.
 
@@ -361,4 +359,4 @@ outputs = session.download_outputs()
 4. **Download generated files** promptly
 5. **Use follow-up questions** to drill down into insights
 
-Tomorrow, we'll explore the Retrieval tool for building knowledge-based AI applications!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore the Retrieval tool for building knowledge-based AI applications!

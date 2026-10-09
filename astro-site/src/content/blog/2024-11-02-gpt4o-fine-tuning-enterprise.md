@@ -1,5 +1,6 @@
 ---
 title: "GPT-4o Fine-Tuning for Enterprise: A Practical Guide"
+description: "trainingjsonl = preparetrainingdata(trainingexamples) with open(\"trainingdata.jsonl\", \"w\") as f: f.write(trainingjsonl)"
 author: Michael John Peña
 draft: false
 date: 2024-11-02
@@ -7,12 +8,9 @@ tags:
   - Azure
   - AI
   - GPT-4o
-  - Fine-tuning
+  - Fine-Tuning
   - Machine Learning
-
 ---
-
-I wrote "GPT-4o Fine-Tuning for Enterprise: A Practical Guide" to share practical, production-minded guidance on this topic.
 
 ## When to Fine-Tune GPT-4o
 
@@ -231,4 +229,4 @@ Fine-tuning GPT-4o opens new possibilities for enterprise AI. The key is startin
 
 - [Fine-tuning Documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning)
 - [Data Preparation Guide](https://platform.openai.com/docs/guides/fine-tuning)
-- [Pricing Details](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Pricing Details](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)

@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Real-Time Analytics: Streaming Data Pipelines"
+description: "Eventhouse is the storage layer optimized for time-series and streaming data. It automatically indexes data for lightning-fast queries."
 author: Michael John Peña
 draft: false
 date: 2025-09-03
@@ -9,10 +10,7 @@ tags:
   - KQL
   - Event Streaming
   - Data Engineering
-
 ---
-
-I wrote "Microsoft Fabric Real-Time Analytics: Streaming Data Pipelines" to share practical, production-minded guidance on this topic.
 
 ## Creating an Eventhouse
 
@@ -92,4 +90,4 @@ Pre-compute expensive aggregations for dashboard queries.
 }
 ```
 
-Real-Time Analytics in Fabric eliminates the complexity of managing separate streaming and batch systems, providing a unified platform for all your time-sensitive data needs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Real-Time Analytics in Fabric eliminates the complexity of managing separate streaming and batch systems, providing a unified platform for all your time-sensitive data needs.

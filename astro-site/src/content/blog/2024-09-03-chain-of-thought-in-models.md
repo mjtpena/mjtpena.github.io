@@ -1,13 +1,11 @@
 ---
 title: "Chain-of-Thought Prompting: Improving AI Reasoning Today"
+description: "OpenAI and other labs are likely working on models with built-in reasoning capabilities. When these arrive, they may reduce the need for explicit CoT prompting."
 author: "Michael John Peña"
 draft: false
 date: 2024-09-03
 tags: ["OpenAI", "Chain-of-Thought", "Prompting", "AI", "GPT-4o"]
-
 ---
-
-I wrote "Chain-of-Thought Prompting: Improving AI Reasoning Today" to share practical, production-minded guidance on this topic.
 
 ## Traditional Chain-of-Thought Prompting
 
@@ -268,4 +266,3 @@ Chain-of-thought prompting significantly improves reasoning quality in current m
 - [Chain-of-Thought Paper](https://arxiv.org/abs/2201.11903)
 - [Self-Consistency Paper](https://arxiv.org/abs/2203.11171)
 - [OpenAI Prompting Guide](https://platform.openai.com/docs/guides/prompt-engineering)
-

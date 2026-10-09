@@ -1,13 +1,11 @@
 ---
 title: "Deep Dive into Azure Monitor for Containers"
+description: "Azure Monitor for Containers (the Container Insights feature) is the native Azure observability solution for AKS that doesn't require running your own…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-10
 tags: ["Azure", "Kubernetes", "AKS", "Azure Monitor", "Monitoring"]
-
 ---
-
-I wrote "Deep Dive into Azure Monitor for Containers" to share practical, production-minded guidance on this topic.
 
 Azure Monitor for Containers (the Container Insights feature) is the native Azure observability solution for AKS that doesn't require running your own Prometheus and Grafana—it's the right starting point for teams that want comprehensive cluster visibility with minimal operational overhead. The Log Analytics workspace receives container metrics and logs; the built-in workbooks surface cluster health, node utilisation, pod inventory, and failed pod events; Azure Monitor Alerts connect to the metrics for automated notifications. The tradeoff compared to self-managed Prometheus: Azure Monitor pricing at scale (high cardinality metrics and verbose logging volumes add up in Log Analytics) versus the operational overhead of managing your own Prometheus stack. The hybrid approach—Container Insights for platform metrics and logs, plus self-managed Prometheus for application-level metrics—is how many teams run it in practice.
 
@@ -304,4 +302,3 @@ metric-data-collection-settings: |
 Azure Monitor for Containers provides native, comprehensive monitoring for AKS clusters. Combined with custom queries, alerts, and workbooks, you can build a robust observability platform integrated with the Azure ecosystem.
 
 Tomorrow, we'll explore Log Analytics workspace design patterns for enterprise environments.
-

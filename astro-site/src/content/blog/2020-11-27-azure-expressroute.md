@@ -1,5 +1,6 @@
 ---
 title: "Azure ExpressRoute: Private Connectivity to Azure"
+description: "ExpressRoute: enterprise-grade private connectivity to Azure."
 author: Michael John Peña
 draft: false
 date: 2020-11-27
@@ -8,10 +9,7 @@ tags:
   - ExpressRoute
   - Networking
   - Hybrid
-
 ---
-
-I wrote "Azure ExpressRoute: Private Connectivity to Azure" to share practical, production-minded guidance on this topic.
 
 ## ExpressRoute Models
 
@@ -163,4 +161,4 @@ az network express-route peering show \
 | 1 Gbps | ~$1,100 |
 | 10 Gbps | ~$5,500 |
 
-ExpressRoute: enterprise-grade private connectivity to Azure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+ExpressRoute: enterprise-grade private connectivity to Azure.

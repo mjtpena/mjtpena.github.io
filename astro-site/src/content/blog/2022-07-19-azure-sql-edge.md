@@ -1,13 +1,11 @@
 ---
 title: "Azure SQL Edge for IoT and Edge Computing"
+description: "Azure SQL Edge enables intelligent edge computing with the familiar SQL Server programming model."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-19
 tags: ["Azure", "SQL Edge", "IoT", "Edge Computing", "Database"]
-
 ---
-
-I wrote "Azure SQL Edge for IoT and Edge Computing" to share practical, production-minded guidance on this topic.
 
 ## What is Azure SQL Edge?
 
@@ -232,4 +230,4 @@ SET (DATA_RETENTION_PERIOD = 7 DAYS);
 -- after being synced to the cloud
 ```
 
-Azure SQL Edge enables intelligent edge computing with the familiar SQL Server programming model.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure SQL Edge enables intelligent edge computing with the familiar SQL Server programming model.

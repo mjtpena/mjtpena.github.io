@@ -1,5 +1,6 @@
 ---
 title: "AI Regulation Updates: Navigating the 2024 Regulatory Landscape"
+description: "Regulation is here to stay. Treat compliance as a feature, not a burden, and build it into your AI development process."
 author: Michael John Peña
 draft: false
 date: 2024-12-15
@@ -9,10 +10,7 @@ tags:
   - Compliance
   - EU AI Act
   - Governance
-
 ---
-
-I wrote "AI Regulation Updates: Navigating the 2024 Regulatory Landscape" to share practical, production-minded guidance on this topic.
 
 ## Global Regulatory Overview
 
@@ -364,4 +362,4 @@ Regulation is here to stay. Treat compliance as a feature, not a burden, and bui
 
 - [EU AI Act Text](https://eur-lex.europa.eu/eli/reg/2024/1689)
 - [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)
-- [ISO/IEC 42001 AI Management](https://www.iso.org/standard/81230.html)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [ISO/IEC 42001 AI Management](https://www.iso.org/standard/81230.html)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Defender: Cloud Security Posture Management"
+description: "Azure Defender: security visibility across your entire estate."
 author: Michael John Peña
 draft: false
 date: 2020-11-08
@@ -8,10 +9,7 @@ tags:
   - Security
   - Azure Defender
   - Security Center
-
 ---
-
-I wrote "Azure Defender: Cloud Security Posture Management" to share practical, production-minded guidance on this topic.
 
 ## Secure Score
 
@@ -163,4 +161,4 @@ az security connector create \
     --offerings DefenderForServers
 ```
 
-Azure Defender: security visibility across your entire estate.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Defender: security visibility across your entire estate.

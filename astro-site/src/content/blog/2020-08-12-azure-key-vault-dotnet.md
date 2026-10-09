@@ -1,5 +1,6 @@
 ---
 title: "Secure Secret Management with Azure Key Vault in .NET"
+description: "A confession to start: I've shipped connection strings in appsettings.json more times than I'm proud of. The reasons are always the same — \"it's only dev\"…"
 author: Michael John Peña
 draft: false
 date: 2020-08-12
@@ -265,4 +266,4 @@ public class RotatingSecretService
 - **RBAC roles are now preferred over access policies.** New vaults default to RBAC; existing vaults can be migrated. RBAC integrates with Privileged Identity Management, which you'll want once auditors get involved.
 - **Don't read every secret on every request.** Cache (and refresh on a schedule), or use the Configuration Builder so secrets are loaded at startup.
 
-Key Vault is not interesting technology. It's invisible-when-it-works infrastructure, like good plumbing. Set it up once, with managed identity, RBAC, soft-delete, and purge protection, and never think about it again.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Key Vault is not interesting technology. It's invisible-when-it-works infrastructure, like good plumbing. Set it up once, with managed identity, RBAC, soft-delete, and purge protection, and never think about it again.

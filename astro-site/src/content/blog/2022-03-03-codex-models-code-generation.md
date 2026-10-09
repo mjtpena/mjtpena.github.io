@@ -1,5 +1,6 @@
 ---
 title: "Codex Models: AI-Powered Code Generation for Developers"
+description: "response = openai.Completion.create( engine=\"code-davinci-002\", prompt=prompt, maxtokens=300, temperature=0.3 )"
 author: Michael John Peña
 draft: false
 date: 2022-03-03
@@ -9,10 +10,7 @@ tags:
   - Codex
   - AI
   - Development
-
 ---
-
-I wrote "Codex Models: AI-Powered Code Generation for Developers" to share practical, production-minded guidance on this topic.
 
 ## Understanding Codex
 
@@ -453,4 +451,3 @@ The key is treating Codex as a capable but fallible assistant that still require
 - [OpenAI Codex Documentation](https://platform.openai.com/docs/guides/code)
 - [GitHub Copilot](https://github.com/features/copilot) (powered by Codex)
 - [Azure OpenAI Codex Models](https://docs.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models)
-

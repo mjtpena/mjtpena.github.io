@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-05
 tags:
-  - kubernetes
-  - debugging
-  - containers
-  - devops
-
+  - Kubernetes
+  - Debugging
+  - Containers
+  - DevOps
 ---
-
-I wrote "Ephemeral Containers: Debugging Kubernetes Pods" to share practical, production-minded guidance on this topic.
 
 ## Basic Usage
 
@@ -99,5 +96,3 @@ cat /proc/1/root/app/config.yaml
 ## Summary
 
 Ephemeral containers enable live debugging of production pods without disruption, making troubleshooting faster and safer.
-
-

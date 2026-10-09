@@ -1,5 +1,6 @@
 ---
 title: "Event-Driven Architecture Patterns for Modern Applications"
+description: "Event-driven architecture in 2021 moved from architectural pattern to practical implementation. The tools support it, the patterns are proven, and the…"
 author: Michael John Pena
 draft: false
 date: 2021-12-06
@@ -9,10 +10,7 @@ tags:
   - Azure
   - Messaging
   - Microservices
-
 ---
-
-I wrote "Event-Driven Architecture Patterns for Modern Applications" to share practical, production-minded guidance on this topic.
 
 ## Event Sourcing Done Right
 
@@ -376,4 +374,4 @@ Event-driven architecture in 2021 moved from architectural pattern to practical 
 
 - [Azure Event Grid Documentation](https://docs.microsoft.com/en-us/azure/event-grid/)
 - [Event Sourcing Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)
-- [CQRS Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [CQRS Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)

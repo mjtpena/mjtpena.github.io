@@ -5,13 +5,10 @@ draft: false
 date: 2022-05-12
 tags:
   - microsoft-graph
-  - azure
-  - api
+  - Azure
+  - API
   - microsoft-365
-
 ---
-
-I wrote "Microsoft Graph API: Latest Updates and Patterns" to share practical, production-minded guidance on this topic.
 
 ## Graph SDK Setup
 
@@ -475,5 +472,3 @@ Microsoft Graph provides:
 - SDKs for multiple languages
 
 Build connected experiences across the Microsoft ecosystem.
-
-

@@ -1,5 +1,6 @@
 ---
 title: "Building a Data Marketplace in Microsoft Fabric"
+description: "A data marketplace enables data discovery, sharing, and consumption across your organization. Today I'm exploring how to build one using Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-21
@@ -478,4 +479,4 @@ Tomorrow I'll cover data sharing patterns.
 
 - [Fabric OneLake Data Hub](https://learn.microsoft.com/fabric/governance/onelake-data-hub)
 - [Data Marketplace Patterns](https://www.datamesh-architecture.com/data-product-marketplace)
-- [Microsoft Purview](https://learn.microsoft.com/purview/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Microsoft Purview](https://learn.microsoft.com/purview/)

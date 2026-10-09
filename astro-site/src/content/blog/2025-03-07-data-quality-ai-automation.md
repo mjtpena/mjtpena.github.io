@@ -1,5 +1,6 @@
 ---
 title: "Data Quality Automation with AI: Beyond Rule-Based Validation"
+description: "AI-powered data quality catches issues that traditional rules miss."
 author: Michael John Peña
 draft: false
 date: 2025-03-07
@@ -9,10 +10,7 @@ tags:
   - Automation
   - Validation
   - ML
-
 ---
-
-I wrote "Data Quality Automation with AI: Beyond Rule-Based Validation" to share practical, production-minded guidance on this topic.
 
 ## AI-Powered Data Quality
 
@@ -83,4 +81,4 @@ class AIDataQuality:
         return self.parse_suggestions(response)
 ```
 
-AI-powered data quality catches issues that traditional rules miss.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI-powered data quality catches issues that traditional rules miss.

@@ -1,5 +1,6 @@
 ---
 title: "GPT-4 Vision Patterns: Building Visual AI Applications"
+description: "I've used GPT-4 Vision in real projects; these are the practical patterns that helped move visual AI from experiment to production."
 author: Michael John Peña
 draft: false
 date: 2024-02-14
