@@ -1,13 +1,11 @@
 ---
 title: "Azure SQL Bindings for Azure Functions"
+description: "Azure SQL bindings simplify serverless database applications significantly."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-30
 tags: ["Azure", "Azure Functions", "SQL Database", "Serverless"]
-
 ---
-
-I wrote "Azure SQL Bindings for Azure Functions" to share practical, production-minded guidance on this topic.
 
 ## Understanding SQL Bindings
 
@@ -336,4 +334,4 @@ public class RobustSqlFunction
 4. **Batch operations** - Use FlushAsync strategically
 5. **Monitor performance** - Track function execution times
 
-Azure SQL bindings simplify serverless database applications significantly.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure SQL bindings simplify serverless database applications significantly.

@@ -1,18 +1,16 @@
 ---
 title: "Azure Spot VMs: Massive Savings for Interruptible Workloads"
+description: "Spot VMs use Azure's spare capacity. When Azure needs the capacity for pay-as-you-go customers, Spot VMs receive a 30-second notice before eviction."
 author: Michael John Peña
 draft: false
 date: 2022-01-06
 url: /blog/azure-spot-vms/
 tags:
-  - azure
+  - Azure
   - virtual-machines
   - cost-optimization
   - spot-instances
-
 ---
-
-I wrote "Azure Spot VMs: Massive Savings for Interruptible Workloads" to share practical, production-minded guidance on this topic.
 
 ## Understanding Spot VMs
 
@@ -191,4 +189,4 @@ if __name__ == "__main__":
 - Video rendering
 - Big data analytics
 
-Spot VMs are a powerful tool for cost optimization when you design your applications to handle interruptions gracefully.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Spot VMs are a powerful tool for cost optimization when you design your applications to handle interruptions gracefully.

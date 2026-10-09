@@ -9,10 +9,7 @@ tags:
   - LLM
   - Azure OpenAI
   - Budgeting
-
 ---
-
-I wrote "Token Cost Analysis: Understanding and Managing LLM Expenses" to share practical, production-minded guidance on this topic.
 
 ## Token Basics
 
@@ -151,4 +148,3 @@ class TokenDashboard:
 ## Conclusion
 
 Token cost analysis enables informed decisions about LLM usage. Track, analyze, and optimize to keep costs predictable and manageable.
-

@@ -1,5 +1,6 @@
 ---
 title: GitHub Actions Workflows for Azure Deployments
+description: "GitHub Actions workflows for Azure deployment have become my default for any project that lives on GitHub and targets Azure. The Azure/login action with…"
 author: Michael John Peña
 draft: false
 date: 2021-06-08

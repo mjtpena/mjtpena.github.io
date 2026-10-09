@@ -1,5 +1,6 @@
 ---
 title: "GPT-4 vs GPT-3.5: A Practical Comparison"
+description: "After the first day of GPT-4 access, my comparison methodology was deliberately practical rather than benchmark-focused: I ran the same set of prompts—tasks…"
 author: Michael John Pena
 draft: false
 date: 2023-03-15
@@ -267,4 +268,4 @@ def select_model(
 4. **Monitor costs** closely - GPT-4 bills add up fast
 5. **Hybrid approach** - use GPT-3.5 for pre-processing, GPT-4 for final analysis
 
-The models complement each other. Use both strategically based on task requirements and budget constraints.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The models complement each other. Use both strategically based on task requirements and budget constraints.

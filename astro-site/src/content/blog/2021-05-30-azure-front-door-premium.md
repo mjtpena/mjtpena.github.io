@@ -1,5 +1,6 @@
 ---
 title: "Azure Front Door Standard/Premium: Global Application Delivery"
+description: "Azure Front Door Standard/Premium is the convergence I've been waiting for since the days when you had to choose between classic Front Door (global routing…"
 author: Michael John Peña
 draft: false
 date: 2021-05-30
@@ -440,4 +441,4 @@ resource "azurerm_cdn_frontdoor_route" "main" {
 
 - [Front Door Documentation](https://docs.microsoft.com/en-us/azure/frontdoor/)
 - [Rules Engine](https://docs.microsoft.com/en-us/azure/frontdoor/front-door-rules-engine)
-- [Private Link Origins](https://docs.microsoft.com/en-us/azure/frontdoor/private-link)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Private Link Origins](https://docs.microsoft.com/en-us/azure/frontdoor/private-link)

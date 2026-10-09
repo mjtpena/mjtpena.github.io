@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric: Six Months In Production"
+description: "OneLake is brilliant. One storage layer for everything. No more copying data between Synapse, Data Lake, and Power BI. It just works."
 author: Michael John Peña
 draft: false
 date: 2026-01-05
@@ -8,10 +9,7 @@ tags:
   - Azure
   - Data
   - Analytics
-
 ---
-
-I wrote "Microsoft Fabric: Six Months In Production" to share practical, production-minded guidance on this topic.
 
 ## What We're Running
 
@@ -101,4 +99,4 @@ For us? It's working. We're staying on Fabric. But we're also being realistic ab
 
 If you're considering Fabric, my advice: start a proof of concept with a non-critical workload. Learn the platform. Understand the costs. Then decide.
 
-The future of data platforms is unified experiences like Fabric. But the present still requires careful evaluation and planning.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The future of data platforms is unified experiences like Fabric. But the present still requires careful evaluation and planning.

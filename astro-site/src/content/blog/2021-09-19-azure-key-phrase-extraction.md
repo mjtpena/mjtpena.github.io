@@ -1,5 +1,6 @@
 ---
 title: Extracting Key Phrases from Text with Azure Cognitive Services
+description: "Key phrase extraction is a foundational NLP capability that enables efficient processing of large text collections and powers intelligent content management…"
 author: Michael John Pena
 draft: false
 date: 2021-09-19
@@ -9,10 +10,7 @@ tags:
   - NLP
   - Text Mining
   - AI
-
 ---
-
-I wrote "2021-09-19-azure-key-phrase-extraction" to share practical, production-minded guidance on this topic.
 
 ## Use Cases for Key Phrase Extraction
 
@@ -344,4 +342,4 @@ for cluster_id, topics in clusters["cluster_topics"].items():
 5. **Domain Adaptation**: Consider custom terminology
 6. **Combine Techniques**: Use with sentiment and NER for richer insights
 
-Key phrase extraction is a foundational NLP capability that enables efficient processing of large text collections and powers intelligent content management systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Key phrase extraction is a foundational NLP capability that enables efficient processing of large text collections and powers intelligent content management systems.

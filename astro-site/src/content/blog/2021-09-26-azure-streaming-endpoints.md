@@ -1,5 +1,6 @@
 ---
 title: Configuring Azure Media Services Streaming Endpoints
+description: "Proper streaming endpoint configuration ensures reliable, scalable content delivery to viewers worldwide."
 author: Michael John Pena
 draft: false
 date: 2021-09-26
@@ -9,10 +10,7 @@ tags:
   - Video Streaming
   - CDN
   - Content Delivery
-
 ---
-
-I wrote "2021-09-26-azure-streaming-endpoints" to share practical, production-minded guidance on this topic.
 
 ## Streaming Endpoint Types
 
@@ -454,4 +452,4 @@ class StreamingAutoScaler:
 5. **Regional Deployment**: Deploy endpoints near your audience
 6. **HTTPS Only**: Disable HTTP for security
 
-Proper streaming endpoint configuration ensures reliable, scalable content delivery to viewers worldwide.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper streaming endpoint configuration ensures reliable, scalable content delivery to viewers worldwide.

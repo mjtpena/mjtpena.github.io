@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Speech: Building Voice-Enabled AI Applications"
+description: "Voice interfaces make AI applications accessible to broader audiences and enable hands-free interaction scenarios."
 author: Michael John Peña
 draft: false
 date: 2025-10-24
@@ -9,10 +10,7 @@ tags:
   - Speech Recognition
   - Text-to-Speech
   - Accessibility
-
 ---
-
-I wrote "Azure AI Speech: Building Voice-Enabled AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Implementing Speech-to-Text
 
@@ -138,4 +136,4 @@ class VoiceAIAssistant:
         return answer
 ```
 
-Voice interfaces make AI applications accessible to broader audiences and enable hands-free interaction scenarios.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Voice interfaces make AI applications accessible to broader audiences and enable hands-free interaction scenarios.

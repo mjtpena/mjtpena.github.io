@@ -9,10 +9,7 @@ tags:
   - Best Practices
   - IDE
   - AI
-
 ---
-
-I wrote "Developer Productivity Tools and Practices for 2023" to share practical, production-minded guidance on this topic.
 
 ## AI-Assisted Development
 
@@ -395,4 +392,3 @@ Developer productivity in 2023 will be defined by effective use of AI tools, aut
 - [VS Code Tips and Tricks](https://code.visualstudio.com/docs/getstarted/tips-and-tricks)
 - [The Pragmatic Programmer](https://pragprog.com/titles/tpp20/)
 - [Deep Work by Cal Newport](https://www.calnewport.com/books/deep-work/)
-

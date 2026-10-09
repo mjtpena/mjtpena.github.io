@@ -1,5 +1,6 @@
 ---
 title: Azure Cognitive Search Custom Skills - Building Intelligent Search Pipelines
+description: "Custom skills are Azure Functions that implement a specific contract."
 author: Michael John Peña
 draft: false
 date: 2021-04-09
@@ -10,10 +11,7 @@ tags:
   - AI
   - Knowledge Mining
   - Search
-
 ---
-
-I wrote "2021-04-09-azure-cognitive-search-custom-skills" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Skillset Architecture
 
@@ -605,4 +603,3 @@ print(json.dumps(response.json(), indent=2))
 ## Conclusion
 
 Custom skills unlock unlimited possibilities in Azure Cognitive Search. Whether you need specialized entity extraction, industry-specific classification, or integration with external services, custom skills let you build exactly what your search solution needs. The combination of built-in cognitive skills with custom logic creates powerful knowledge mining pipelines.
-

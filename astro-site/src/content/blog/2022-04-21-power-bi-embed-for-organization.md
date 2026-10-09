@@ -9,10 +9,7 @@ tags:
   - Azure AD
   - Internal Apps
   - Enterprise
-
 ---
-
-I wrote "Power BI Embed for Organization: Internal Analytics Integration" to share practical, production-minded guidance on this topic.
 
 ## When to Use
 
@@ -256,4 +253,3 @@ It's ideal for internal applications requiring rich analytics.
 
 - [User Owns Data Documentation](https://docs.microsoft.com/en-us/power-bi/developer/embedded/embed-sample-for-your-organization)
 - [MSAL.js Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-overview)
-

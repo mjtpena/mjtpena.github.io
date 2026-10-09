@@ -1,13 +1,11 @@
 ---
 title: "Building Real-Time Dashboards with Citus"
+description: "Combining Citus's distributed query power with rollup tables and caching enables dashboards that handle millions of events per second."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-07
 tags: ["Azure", "Citus", "PostgreSQL", "Real-Time", "Dashboards", "Analytics"]
-
 ---
-
-I wrote "Building Real-Time Dashboards with Citus" to share practical, production-minded guidance on this topic.
 
 ## Architecture for Real-Time Analytics
 
@@ -166,4 +164,4 @@ def get_dashboard_data(tenant_id):
     return data
 ```
 
-Combining Citus's distributed query power with rollup tables and caching enables dashboards that handle millions of events per second.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Combining Citus's distributed query power with rollup tables and caching enables dashboards that handle millions of events per second.

@@ -1,13 +1,11 @@
 ---
 title: "Azure Data Factory Stored Procedure Activity: Database Logic in Pipelines"
+description: "The Stored Procedure Activity bridges the gap between data movement and data transformation, enabling complex database logic to be orchestrated as part of…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-31
 tags: ["Azure", "Data Factory", "Stored Procedure", "SQL", "ETL"]
-
 ---
-
-I wrote "Azure Data Factory Stored Procedure Activity: Database Logic in Pipelines" to share practical, production-minded guidance on this topic.
 
 ## Basic Stored Procedure Activity
 
@@ -429,4 +427,4 @@ GO
 4. **Parameterize everything**: Make procedures reusable
 5. **Log execution details**: Aid in troubleshooting
 
-The Stored Procedure Activity bridges the gap between data movement and data transformation, enabling complex database logic to be orchestrated as part of your Azure Data Factory pipelines.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Stored Procedure Activity bridges the gap between data movement and data transformation, enabling complex database logic to be orchestrated as part of your Azure Data Factory pipelines.

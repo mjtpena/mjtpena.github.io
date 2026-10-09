@@ -1,5 +1,6 @@
 ---
 title: Maximizing Savings with Azure Reservations
+description: "Reservations are the Azure cost conversation nobody has early enough. Pay-as-you-go is convenient; reserved instances are a commitment that rewards the…"
 author: Michael John Peña
 draft: false
 date: 2021-02-26

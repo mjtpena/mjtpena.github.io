@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Data Engineering: Best Practices After 6 Months in Production"
+description: "Avoid over-partitioning. If partitions have < 1GB of data, consolidate. Use Data Pipelines, Not Just Notebooks"
 author: Michael John Peña
 draft: false
 date: 2024-02-15
@@ -9,10 +10,7 @@ tags:
   - Spark
   - Lakehouse
   - Best Practices
-
 ---
-
-I wrote "Microsoft Fabric Data Engineering: Best Practices After 6 Months in Production" to share practical, production-minded guidance on this topic.
 
 ## Notebook Development Patterns
 
@@ -362,4 +360,3 @@ The platform is evolving monthly. Stay current with Fabric updates and adjust pa
 - [Fabric Data Engineering Documentation](https://learn.microsoft.com/en-us/fabric/data-engineering/)
 - [Delta Lake Best Practices](https://docs.delta.io/latest/best-practices.html)
 - [Fabric Capacity Metrics](https://learn.microsoft.com/en-us/fabric/enterprise/metrics-app)
-

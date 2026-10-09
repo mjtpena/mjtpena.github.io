@@ -1,5 +1,6 @@
 ---
 title: "Response Streaming: Real-Time LLM Output"
+description: "Streaming improves the user experience significantly. Tomorrow, I will cover error handling for AI applications."
 author: Michael John Peña
 draft: false
 date: 2023-06-26
@@ -9,10 +10,7 @@ tags:
   - Performance
   - UX
   - Real-Time
-
 ---
-
-I wrote "Response Streaming: Real-Time LLM Output" to share practical, production-minded guidance on this topic.
 
 ## Why Streaming Matters
 
@@ -331,4 +329,4 @@ Streaming improves the user experience significantly. Tomorrow, I will cover err
 ## Resources
 
 - [Azure OpenAI Streaming](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/streaming)
-- [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)

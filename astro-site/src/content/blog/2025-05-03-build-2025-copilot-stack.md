@@ -1,5 +1,6 @@
 ---
 title: "Build 2025: The Copilot Stack Deep Dive"
+description: "The Copilot Stack makes it straightforward to build AI-powered applications across the Microsoft ecosystem."
 author: Michael John Peña
 draft: false
 date: 2025-05-03
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - Development
   - Stack
-
 ---
-
-I wrote "Build 2025: The Copilot Stack Deep Dive" to share practical, production-minded guidance on this topic.
 
 ## Copilot Stack Architecture
 
@@ -96,4 +94,4 @@ class InventoryExtension extends CopilotExtension {
 }
 ```
 
-The Copilot Stack makes it straightforward to build AI-powered applications across the Microsoft ecosystem.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Copilot Stack makes it straightforward to build AI-powered applications across the Microsoft ecosystem.

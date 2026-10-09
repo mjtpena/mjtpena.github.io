@@ -10,10 +10,7 @@ tags:
   - SQL
   - Data Warehouse
   - Analytics
-
 ---
-
-I wrote "2021-03-09-azure-synapse-dedicated-sql-pools" to share practical, production-minded guidance on this topic.
 
 ## Understanding MPP Architecture
 
@@ -378,4 +375,3 @@ Key success factors:
 3. Leverage materialized views for common aggregations
 4. Monitor and optimize data movement operations
 5. Scale dynamically based on workload demands
-

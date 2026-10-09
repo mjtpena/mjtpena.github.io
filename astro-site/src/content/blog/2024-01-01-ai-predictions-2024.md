@@ -1,5 +1,6 @@
 ---
 title: "AI Predictions for 2024: What to Expect in Enterprise AI"
+description: "As we enter 2024, the AI landscape is evolving at an unprecedented pace. After a transformative 2023 that brought us GPT-4, the Assistants API, and…"
 author: Michael John Peña
 draft: false
 date: 2024-01-01

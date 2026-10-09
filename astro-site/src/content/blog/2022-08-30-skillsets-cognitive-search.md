@@ -1,13 +1,11 @@
 ---
 title: "Building Skillsets in Azure Cognitive Search"
+description: "Skillsets enable powerful AI-driven content enrichment during the indexing process."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-30
 tags: ["Azure", "Cognitive Search", "Skillsets", "AI Enrichment", "NLP"]
-
 ---
-
-I wrote "Building Skillsets in Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## Skillset Architecture
 
@@ -369,4 +367,4 @@ skillset = (SkillsetBuilder("my-skillset", cognitive_key)
 indexer_client.create_or_update_skillset(skillset)
 ```
 
-Skillsets enable powerful AI-driven content enrichment during the indexing process.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Skillsets enable powerful AI-driven content enrichment during the indexing process.

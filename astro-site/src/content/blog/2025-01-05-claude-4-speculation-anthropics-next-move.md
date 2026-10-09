@@ -1,5 +1,6 @@
 ---
 title: "Claude 4 Speculation: What Anthropic's Next Model Might Bring"
+description: "These priorities will shape Claude 4's development. Anthropic's commitment to safety and capability suggests Claude 4 will be a significant advancement.…"
 author: Michael John Peña
 draft: false
 date: 2025-01-05
@@ -9,10 +10,7 @@ tags:
   - Claude
   - LLM
   - Predictions
-
 ---
-
-I wrote "Claude 4 Speculation: What Anthropic's Next Model Might Bring" to share practical, production-minded guidance on this topic.
 
 ## Anthropic's Differentiation
 
@@ -277,4 +275,4 @@ def select_claude_model(task):
 4. **Plan for multi-model strategies** - use the right Claude for each task
 5. **Invest in evaluation** to measure improvements
 
-Anthropic's commitment to safety and capability suggests Claude 4 will be a significant advancement. Organizations using Claude should prepare for enhanced capabilities while maintaining the reliability and safety that define the Claude experience.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Anthropic's commitment to safety and capability suggests Claude 4 will be a significant advancement. Organizations using Claude should prepare for enhanced capabilities while maintaining the reliability and safety that define the Claude experience.

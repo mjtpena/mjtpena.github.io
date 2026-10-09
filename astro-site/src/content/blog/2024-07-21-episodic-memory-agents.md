@@ -9,10 +9,7 @@ tags:
   - Memory
   - Episodic Memory
   - Machine Learning
-
 ---
-
-I wrote "Episodic Memory for AI Agents: Learning from Experiences" to share practical, production-minded guidance on this topic.
 
 ## What is Episodic Memory?
 
@@ -499,4 +496,3 @@ Provide:
 Episodic memory enables agents to truly learn from experience. By recording what happened and analyzing outcomes, agents improve over time and avoid repeating mistakes.
 
 Start tracking episodes early, analyze them regularly, and use the insights to inform future task execution.
-

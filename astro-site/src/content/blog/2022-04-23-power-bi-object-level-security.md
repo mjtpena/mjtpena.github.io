@@ -9,10 +9,7 @@ tags:
   - OLS
   - Data Protection
   - Enterprise
-
 ---
-
-I wrote "Power BI Object-Level Security: Protecting Tables and Columns" to share practical, production-minded guidance on this topic.
 
 ## Understanding OLS
 
@@ -156,4 +153,3 @@ Object-Level Security provides an additional security layer:
 
 - [OLS Documentation](https://docs.microsoft.com/en-us/analysis-services/tabular-models/object-level-security)
 - [Tabular Editor](https://tabulareditor.com/)
-

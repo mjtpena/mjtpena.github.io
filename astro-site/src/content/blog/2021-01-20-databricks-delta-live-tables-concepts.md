@@ -1,5 +1,6 @@
 ---
 title: Building Data Pipelines with Delta Lake on Azure Databricks
+description: "Delta Lake has gone from \"interesting open source project\" to the default storage layer for data lakes inside about eighteen months. ACID, schema…"
 author: Michael John Pena
 draft: false
 date: 2021-01-20
@@ -10,9 +11,7 @@ tags:
   - Data Engineering
   - ETL
   - Streaming
-
 ---
-
 
 Delta Lake has gone from "interesting open source project" to the default storage layer for data lakes inside about eighteen months. ACID, schema enforcement, time travel, and the streaming/batch unification that took Lambda architectures off my whiteboard. Today I want to dig into the patterns that move you from "I use Delta tables" to "we have a production lakehouse"—medallion zoning, Z-ordering, OPTIMIZE/VACUUM cadence, and the structured streaming idioms that don't melt under load.
 
@@ -365,4 +364,3 @@ spark.sql("""
 ## Conclusion
 
 Delta Lake transforms data lakes into reliable data platforms. Combined with Azure Databricks, you can build scalable data pipelines that handle both batch and streaming workloads while maintaining data quality and enabling time travel capabilities.
-

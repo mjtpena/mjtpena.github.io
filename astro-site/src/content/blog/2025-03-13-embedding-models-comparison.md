@@ -1,5 +1,6 @@
 ---
 title: "Embedding Models Comparison: Choosing the Right Model for Your Use Case"
+description: "Balance quality, speed, and cost based on your specific retrieval needs."
 author: Michael John Peña
 draft: false
 date: 2025-03-13
@@ -9,10 +10,7 @@ tags:
   - Comparison
   - Azure
   - Models
-
 ---
-
-I wrote "Embedding Models Comparison: Choosing the Right Model for Your Use Case" to share practical, production-minded guidance on this topic.
 
 ## Embedding Model Analysis
 
@@ -82,4 +80,4 @@ class EmbeddingBenchmark:
 # | all-MiniLM-L6-v2         | 384        | OK      | Fastest| Free    |
 ```
 
-Balance quality, speed, and cost based on your specific retrieval needs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Balance quality, speed, and cost based on your specific retrieval needs.

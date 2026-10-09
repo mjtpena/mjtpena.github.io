@@ -1,13 +1,11 @@
 ---
 title: "Edge Computing with Azure"
+description: "Edge computing with Azure provides the foundation for intelligent, responsive, and resilient IoT solutions."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-06
 tags: ["Azure", "Edge Computing", "IoT", "AI"]
-
 ---
-
-I wrote "Edge Computing with Azure" to share practical, production-minded guidance on this topic.
 
 ## Azure IoT Edge
 
@@ -304,4 +302,4 @@ if __name__ == "__main__":
 4. **Real-time response** - Low-latency decision making
 5. **Privacy preservation** - Keep sensitive data local
 
-Edge computing with Azure provides the foundation for intelligent, responsive, and resilient IoT solutions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Edge computing with Azure provides the foundation for intelligent, responsive, and resilient IoT solutions.

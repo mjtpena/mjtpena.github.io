@@ -1,13 +1,11 @@
 ---
 title: "Open Source LLMs: Comparing Llama, Mistral, and Beyond"
+description: "The open-source LLM landscape in late 2023 is richer than most enterprise teams have had time to evaluate — and the pace of model releases (Llama 2 in July…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-22
 tags: ["AI", "LLM", "Open Source", "Llama", "Mistral", "Benchmarks"]
-
 ---
-
-I wrote "Open Source LLMs: Comparing Llama, Mistral, and Beyond" to share practical, production-minded guidance on this topic.
 
 The open-source LLM landscape in late 2023 is richer than most enterprise teams have had time to evaluate — and the pace of model releases (Llama 2 in July, Mistral 7B in September, Mixtral 8x7B in December) means that last quarter's comparison is already out of date. The relevant comparison for enterprise use cases isn't raw benchmark scores (MMLU, HumanEval) — it's the practical question of which model, deployed in your environment with your data, performs well enough on your tasks at an acceptable cost and latency. Llama 2 70B Chat is the strongest open-source model for general-purpose instruction following and reasoning. Mistral 7B punches above its weight in speed-to-quality trade-offs. The Code Llama variants (7B, 13B, 34B) are purpose-trained for code generation and significantly outperform the base Llama 2 models on coding tasks. The evaluation that matters is on your tasks, not on the benchmark leaderboard.
 
@@ -308,4 +306,4 @@ def compare_hosting_vs_api():
 4. **Plan for fine-tuning** - Choose models with permissive licenses
 5. **Monitor quality** - Set up evaluation pipelines
 
-Tomorrow, we'll dive into model benchmarking methodologies and how to evaluate models for your specific needs!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll dive into model benchmarking methodologies and how to evaluate models for your specific needs!

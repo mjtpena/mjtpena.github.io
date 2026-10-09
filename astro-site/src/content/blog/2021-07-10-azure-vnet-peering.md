@@ -1,5 +1,6 @@
 ---
 title: Azure Virtual Network Peering - Connecting Your Networks
+description: "VNet peering is the network connectivity primitive I configure in almost every Azure architecture. The pitch is simple: two virtual networks, connected via…"
 author: Michael John Peña
 draft: false
 date: 2021-07-10
@@ -14,14 +15,14 @@ tags:
 
 VNet peering is the network connectivity primitive I configure in almost every Azure architecture. The pitch is simple: two virtual networks, connected via Microsoft's backbone, with traffic that never traverses the public internet, at low latency and with no bandwidth limits per connection (you pay egress). The two variants—regional peering within the same region, and global peering across regions—have different latency profiles but otherwise behave identically from a routing perspective. The complexity arrives when you have more than a handful of VNets: the number of peering connections grows as O(n²), hub-spoke topologies avoid that with a central hub VNet, and Azure Virtual WAN extends the hub-spoke model to manage the routing automatically. This post covers the scenarios where direct peering is appropriate and the routing configuration that makes it work correctly.
 
-# Types of VNet Peering
+## Types of VNet Peering
 
 Azure supports two types of peering:
 
 - **Regional VNet Peering**: Connects VNets in the same Azure region
 - **Global VNet Peering**: Connects VNets across different Azure regions
 
-# Creating VNet Peering
+## Creating VNet Peering
 
 Set up peering between two virtual networks:
 
@@ -63,7 +64,7 @@ az network vnet peering create \
     --use-remote-gateways
 ```
 
-# Terraform Configuration for Hub-Spoke Topology
+## Terraform Configuration for Hub-Spoke Topology
 
 Implement a complete hub-spoke network architecture:
 
@@ -169,7 +170,7 @@ resource "azurerm_virtual_network_peering" "spoke_to_hub" {
 }
 ```
 
-# Global VNet Peering
+## Global VNet Peering
 
 Connect networks across regions:
 
@@ -216,7 +217,7 @@ create_global_peering(
 )
 ```
 
-# Route Tables for Spoke-to-Spoke Communication
+## Route Tables for Spoke-to-Spoke Communication
 
 Enable communication between spokes through the hub:
 
@@ -274,7 +275,7 @@ resource "azurerm_subnet_route_table_association" "spoke" {
 }
 ```
 
-# Cross-Subscription Peering
+## Cross-Subscription Peering
 
 Peer networks across different subscriptions:
 
@@ -326,7 +327,7 @@ print(f"Peering A status: {peering_a.peering_state}")
 print(f"Peering B status: {peering_b.peering_state}")
 ```
 
-# Monitoring VNet Peering
+## Monitoring VNet Peering
 
 Monitor peering health and traffic:
 
@@ -370,7 +371,7 @@ def get_vnet_metrics(resource_group, vnet_name):
 get_vnet_metrics("rg-networking", "vnet-hub")
 ```
 
-# Troubleshooting Peering Issues
+## Troubleshooting Peering Issues
 
 Diagnose and resolve common peering problems:
 
@@ -403,7 +404,7 @@ az network vnet list \
     --output table
 ```
 
-# Conclusion
+## Conclusion
 
 Azure VNet peering is a fundamental building block for cloud network architectures. Whether you are implementing a simple hub-spoke topology or complex multi-region, multi-subscription networks, understanding peering options and configurations is essential.
 

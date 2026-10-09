@@ -1,5 +1,6 @@
 ---
 title: "Multi-Agent Frameworks: Orchestrating AI Agent Collaboration"
+description: "Multi-agent systems unlock sophisticated automation capabilities. Start with simple patterns and evolve complexity as needed."
 author: Michael John Peña
 draft: false
 date: 2024-11-11
@@ -9,10 +10,7 @@ tags:
   - Multi-Agent
   - AI Agents
   - Orchestration
-
 ---
-
-I wrote "Multi-Agent Frameworks: Orchestrating AI Agent Collaboration" to share practical, production-minded guidance on this topic.
 
 ## Multi-Agent Architecture Patterns
 
@@ -423,4 +421,4 @@ Multi-agent systems unlock sophisticated automation capabilities. Start with sim
 
 - [Multi-Agent Patterns](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/multi-agent)
 - [AutoGen Framework](https://github.com/microsoft/autogen)
-- [Agent Communication Protocols](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/communication)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Agent Communication Protocols](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/communication)

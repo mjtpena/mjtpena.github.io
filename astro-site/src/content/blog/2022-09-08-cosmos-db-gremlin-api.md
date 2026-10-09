@@ -1,13 +1,11 @@
 ---
 title: "Azure Cosmos DB for Apache Gremlin"
+description: "Graph databases excel at representing relationships between entities. Unlike relational databases where joins can become expensive, graph databases traverse…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-08
 tags: ["Azure", "Cosmos DB", "Gremlin", "Graph Database", "NoSQL"]
-
 ---
-
-I wrote "Azure Cosmos DB for Apache Gremlin" to share practical, production-minded guidance on this topic.
 
 ## Introduction to Graph Databases
 
@@ -356,4 +354,4 @@ if __name__ == '__main__':
 4. **Knowledge graphs** - Model complex domain relationships
 5. **Network topology** - Map infrastructure dependencies
 
-Azure Cosmos DB for Apache Gremlin provides the scalability and global distribution needed for enterprise graph applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Cosmos DB for Apache Gremlin provides the scalability and global distribution needed for enterprise graph applications.

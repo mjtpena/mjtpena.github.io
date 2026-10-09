@@ -1,18 +1,16 @@
 ---
 title: "Log Analytics Agent Deprecation: Migration Planning"
+description: "Plan your migration early to ensure a smooth transition before the deprecation deadline."
 author: Michael John Peña
 draft: false
 date: 2022-02-24
 url: /blog/log-analytics-agent-deprecation/
 tags:
-  - azure
-  - monitoring
-  - migration
+  - Azure
+  - Monitoring
+  - Migration
   - deprecation
-
 ---
-
-I wrote "Log Analytics Agent Deprecation: Migration Planning" to share practical, production-minded guidance on this topic.
 
 ## Deprecation Timeline
 
@@ -253,4 +251,4 @@ foreach ($vm in $vms) {
 }
 ```
 
-Plan your migration early to ensure a smooth transition before the deprecation deadline.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Plan your migration early to ensure a smooth transition before the deprecation deadline.

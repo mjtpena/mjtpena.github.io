@@ -1,13 +1,11 @@
 ---
 title: "Azure IoT Security Best Practices"
+description: "Implementing these security best practices creates a defense-in-depth approach for your IoT solutions."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-30
 tags: ["Azure", "IoT", "Security", "Best Practices", "Authentication"]
-
 ---
-
-I wrote "Azure IoT Security Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Authentication Options
 
@@ -282,4 +280,4 @@ def query_security_events():
     return response.tables[0].rows
 ```
 
-Implementing these security best practices creates a defense-in-depth approach for your IoT solutions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Implementing these security best practices creates a defense-in-depth approach for your IoT solutions.

@@ -1,13 +1,11 @@
 ---
 title: "Hybrid Cloud Strategies with Azure"
+description: "Hybrid cloud strategies provide flexibility while meeting compliance and performance requirements."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-03
 tags: ["Azure", "Hybrid Cloud", "Architecture", "Strategy"]
-
 ---
-
-I wrote "Hybrid Cloud Strategies with Azure" to share practical, production-minded guidance on this topic.
 
 ## Hybrid Cloud Patterns
 
@@ -324,4 +322,4 @@ graph TD
 4. **Security first** - Extend identity and security controls
 5. **Monitor everything** - Centralize monitoring in Azure Monitor
 
-Hybrid cloud strategies provide flexibility while meeting compliance and performance requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hybrid cloud strategies provide flexibility while meeting compliance and performance requirements.

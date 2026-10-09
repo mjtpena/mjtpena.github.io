@@ -1,5 +1,6 @@
 ---
 title: "Azure Automanage: Automated VM Management Best Practices"
+description: "Azure Automanage transforms VM management from a series of manual tasks into an automated, best-practice-driven process. It's ideal for organizations that…"
 author: Michael John Pena
 draft: false
 date: 2021-11-20
@@ -9,10 +10,7 @@ tags:
   - Virtual Machines
   - Management
   - Best Practices
-
 ---
-
-I wrote "Azure Automanage: Automated VM Management Best Practices" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Automanage?
 
@@ -454,4 +452,4 @@ Azure Automanage transforms VM management from a series of manual tasks into an 
 
 - [Azure Automanage Documentation](https://docs.microsoft.com/en-us/azure/automanage/)
 - [Best Practices Profiles](https://docs.microsoft.com/en-us/azure/automanage/automanage-virtual-machines#configuration-profiles)
-- [Machine Configuration](https://docs.microsoft.com/en-us/azure/governance/machine-configuration/overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Machine Configuration](https://docs.microsoft.com/en-us/azure/governance/machine-configuration/overview)

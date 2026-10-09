@@ -9,10 +9,7 @@ tags:
   - Time Series
   - Monitoring
   - Data
-
 ---
-
-I wrote "InfluxDB on Azure: Deploying Time-Series Infrastructure" to share practical, production-minded guidance on this topic.
 
 ## Deployment Options
 
@@ -121,4 +118,5 @@ spec:
       storageClassName: managed-premium
       resources:
         requests:
-          storage: 100Gi\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+          storage: 100Gi
+```

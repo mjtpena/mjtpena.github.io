@@ -1,5 +1,6 @@
 ---
 title: "Building TypeScript AI Applications with Vercel AI SDK"
+description: "The SDK supports function calling with automatic TypeScript type inference, making it easy to extend your AI with custom capabilities."
 author: Michael John Peña
 draft: false
 date: 2025-08-21
@@ -9,10 +10,7 @@ tags:
   - React
   - Streaming
   - Web Development
-
 ---
-
-I wrote "Building TypeScript AI Applications with Vercel AI SDK" to share practical, production-minded guidance on this topic.
 
 ## Setting Up with Azure OpenAI
 
@@ -93,4 +91,4 @@ export function Chat() {
 
 The SDK supports function calling with automatic TypeScript type inference, making it easy to extend your AI with custom capabilities.
 
-The Vercel AI SDK abstracts away streaming complexity, letting you focus on building great user experiences.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Vercel AI SDK abstracts away streaming complexity, letting you focus on building great user experiences.

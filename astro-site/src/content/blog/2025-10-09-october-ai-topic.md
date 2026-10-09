@@ -1,5 +1,6 @@
 ---
 title: "Edge AI Deployment: Running ML Models on Azure IoT Edge"
+description: "Configure the edge deployment with appropriate resource limits and restart policies for reliable operation in edge environments with limited connectivity."
 author: Michael John Peña
 draft: false
 date: 2025-10-09
@@ -9,10 +10,7 @@ tags:
   - Machine Learning
   - ONNX
   - IoT
-
 ---
-
-I wrote "Edge AI Deployment: Running ML Models on Azure IoT Edge" to share practical, production-minded guidance on this topic.
 
 ## Preparing Models for Edge Deployment
 
@@ -111,4 +109,4 @@ class EdgeInferenceModule:
 
 ## Deployment Manifest
 
-Configure the edge deployment with appropriate resource limits and restart policies for reliable operation in edge environments with limited connectivity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Configure the edge deployment with appropriate resource limits and restart policies for reliable operation in edge environments with limited connectivity.

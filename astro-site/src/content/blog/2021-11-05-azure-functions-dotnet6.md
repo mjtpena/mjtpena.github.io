@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions with .NET 6: In-Process and Isolated Worker Models"
+description: "In-Process: Functions run in the same process as the Functions host Isolated Worker: Functions run in a separate worker process"
 author: Michael John Pena
 draft: false
 date: 2021-11-05
@@ -9,10 +10,7 @@ tags:
   - .NET
   - Serverless
   - Cloud
-
 ---
-
-I wrote "Azure Functions with .NET 6: In-Process and Isolated Worker Models" to share practical, production-minded guidance on this topic.
 
 ## In-Process vs Isolated Worker
 
@@ -474,4 +472,4 @@ func start
 ## Resources
 
 - [Azure Functions .NET 6 Guide](https://docs.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide)
-- [In-Process vs Isolated Comparison](https://docs.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-in-process-differences)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [In-Process vs Isolated Comparison](https://docs.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-in-process-differences)

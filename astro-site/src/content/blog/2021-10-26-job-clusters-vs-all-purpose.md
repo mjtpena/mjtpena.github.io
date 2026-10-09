@@ -1,13 +1,11 @@
 ---
 title: "Job Clusters vs All-Purpose Clusters: Choosing the Right Approach"
+description: "The job cluster versus all-purpose cluster decision in Databricks is primarily a cost decision: all-purpose clusters stay running between tasks (you pay for…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-26
 tags: ["Azure", "Databricks", "Spark", "Cost Optimization", "Best Practices"]
-
 ---
-
-I wrote "Job Clusters vs All-Purpose Clusters: Choosing the Right Approach" to share practical, production-minded guidance on this topic.
 
 The job cluster versus all-purpose cluster decision in Databricks is primarily a cost decision: all-purpose clusters stay running between tasks (you pay for idle time), while job clusters provision fresh at job start and terminate immediately on completion (you pay only for the job runtime). For production scheduled pipelines, job clusters are almost always the right choice—the few minutes of cluster startup time is acceptable latency for a job that runs once per hour or once per day. For interactive development where a data scientist is running notebook cells every few minutes, the startup latency of a job cluster is intolerable—an all-purpose cluster with a reasonable autotermination timeout (30-60 minutes of inactivity) is the right tool. The hybrid pattern for cost-sensitive teams: all-purpose clusters during business hours (shared, with cluster policies), job clusters for all automated pipelines.
 
@@ -331,4 +329,3 @@ Is this interactive work?
 Choosing the right cluster type is crucial for cost optimization. Use all-purpose clusters for interactive development and job clusters for production workloads. The hybrid approach with instance pools provides the best of both worlds.
 
 Tomorrow, we'll explore the Databricks CLI for automation and scripting.
-

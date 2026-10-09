@@ -1,25 +1,23 @@
 ---
 title: "Getting Started with GraphQL using TypeScript"
+description: "TypeScript is a statically typed language that is a popular choice for building large-scale applications. It provides improved reliability, maintainability…"
 author: Michael John Peña
 draft: false
 date: 2023-02-11
 url: /blog/graphql-ts/
 tags:
-  - GraphQL
+  - graphql
   - API
   - Backend
   - TypeScript
   - Software
-
 ---
-
-I wrote "Getting Started with GraphQL using TypeScript" to share practical, production-minded guidance on this topic.
 
 TypeScript is a statically typed language that is a popular choice for building large-scale applications. It provides improved reliability, maintainability, and readability compared to dynamically typed languages like JavaScript.
 
 In this blog post, we’ll show you how to get started with GraphQL and TypeScript by building a simple GraphQL server and client application. We’ll also introduce you to Apollo Client, a popular library for building GraphQL clients.
 
-# Building the GraphQL Server
+## Building the GraphQL Server
 
 First, let's start by setting up a GraphQL server. For this example, we’ll be using the express-graphql middleware, which allows us to easily add a GraphQL endpoint to an Express server.
 
@@ -84,7 +82,7 @@ query {
 }
 ```
 
-# Building the GraphQL Client
+## Building the GraphQL Client
 
 Now that our GraphQL server is up and running, let's create a client to consume the GraphQL service. To do this, we’ll use React and Apollo Client.
 
@@ -148,7 +146,7 @@ ReactDOM.render(
 
 In this code, we’re using the ApolloProvider component from the @apollo/react-hooks package to provide the ApolloClient instance to our React component.
 
-# Running and Testing the Application
+## Running and Testing the Application
 
 To run the application, you can use the following command in your terminal:
 
@@ -164,9 +162,8 @@ If everything is working correctly, you now have a working GraphQL server and cl
 
 To further test your GraphQL API, you can use tools like [GraphQL Playground](https://github.com/prisma-labs/graphql-playground) or [GraphiQL](https://github.com/graphql/graphiql). These tools provide a UI for you to send queries and mutations to your GraphQL API, which can be useful for testing and development purposes.
 
-# Conclusion
+## Conclusion
 
 In this blog post, we showed you how to get started with GraphQL and TypeScript by building a simple GraphQL server and client application. We also introduced you to Apollo Client, a popular library for building GraphQL clients.
 
 Whether you’re just starting out with GraphQL or looking to upgrade your existing APIs, I highly recommend giving it a try. With GraphQL, you can provide your clients with more control and efficiency, and with TypeScript, you can take advantage of its statically typed nature to write safer and more maintainable code.
-

@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-30
 tags:
-  - azure
+  - Azure
   - stream-analytics
-  - patterns
+  - Patterns
   - cep
-
 ---
-
-I wrote "Pattern Matching in Streaming Data: Detecting Complex Events" to share practical, production-minded guidance on this topic.
 
 ## Detecting Sequences
 
@@ -115,5 +112,3 @@ Pattern matching in streaming data enables:
 - Predictive maintenance
 
 Azure Stream Analytics provides built-in functions for complex event processing at scale.
-
-

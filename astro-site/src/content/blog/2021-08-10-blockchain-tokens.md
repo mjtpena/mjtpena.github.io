@@ -1,5 +1,6 @@
 ---
 title: What are these blockchain and crypto tokens?
+description: "So you keep hearing or reading about \"tokens\", these \"cryptos\", the \"blockchain bitcoins\", and so on. It's been quite some time now that it has involved me…"
 author: Michael John Peña
 draft: false
 date: 2021-08-10
@@ -124,4 +125,4 @@ One thing I can say is that there is no stopping on the growth of tokens whether
 
 The real value of tokens, in my opinion, is when you don't actually have to think the underlying technology around it whether what data is in blockchain. It's more around enabling **inclusive**, **secured**, and **private** transactions. It when participation across multiple parties is more efficient and optimizes for joint growth: no more haggling who owns and responsible to what at a specific point.
 
-If you need help on finding or "minting" your next token idea, just email me at: michael@datachain.consulting\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+If you need help on finding or "minting" your next token idea, just email me at: michael@datachain.consulting

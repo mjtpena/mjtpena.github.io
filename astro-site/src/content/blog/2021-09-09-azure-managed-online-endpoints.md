@@ -1,5 +1,6 @@
 ---
 title: Deep Dive into Azure ML Managed Online Endpoints
+description: "Managed online endpoints provide a robust, production-ready platform for serving ML models with enterprise-grade features out of the box."
 author: Michael John Pena
 draft: false
 date: 2021-09-09
@@ -9,10 +10,7 @@ tags:
   - REST API
   - Managed Endpoints
   - MLOps
-
 ---
-
-I wrote "2021-09-09-azure-managed-online-endpoints" to share practical, production-minded guidance on this topic.
 
 ## Key Features
 
@@ -326,4 +324,4 @@ asyncio.run(load_test(
 5. **Monitor P99 latency**: Track tail latency, not just averages
 6. **Use private endpoints**: For sensitive production workloads
 
-Managed online endpoints provide a robust, production-ready platform for serving ML models with enterprise-grade features out of the box.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Managed online endpoints provide a robust, production-ready platform for serving ML models with enterprise-grade features out of the box.

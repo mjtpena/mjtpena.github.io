@@ -1,13 +1,11 @@
 ---
 title: "2023 AI Year in Review: The Year Everything Changed (Part 1)"
+description: "2023 will be talked about for a long time in AI circles — the year foundation models moved from research labs into the backbone of enterprise software. From…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-29
 tags: ["AI", "2023 Review", "GPT-4", "LLM", "Generative AI"]
-
 ---
-
-I wrote "2023 AI Year in Review: The Year Everything Changed (Part 1)" to share practical, production-minded guidance on this topic.
 
 2023 will be talked about for a long time in AI circles — the year foundation models moved from research labs into the backbone of enterprise software. From GPT-4's release to the explosion of open-source models and the Microsoft–OpenAI partnership, the technical leaps accelerated adoption and the adoption accelerated expectations. In this two-part review I'll walk through the product milestones, open-source inflection points, and the practical consequences for teams building AI in production.
 
@@ -273,4 +271,4 @@ key_lessons_2023 = {
 }
 ```
 
-In Part 2 tomorrow, we'll dive deeper into the Microsoft and Azure ecosystem changes, including Fabric and Copilot!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+In Part 2 tomorrow, we'll dive deeper into the Microsoft and Azure ecosystem changes, including Fabric and Copilot!

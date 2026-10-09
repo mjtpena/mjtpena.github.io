@@ -1,13 +1,11 @@
 ---
 title: "Azure Data Explorer Integration for Advanced Analytics"
+description: "Azure Data Explorer is the analytics service that addresses a specific limitation of Log Analytics: KQL query performance on large historical datasets…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-13
 tags: ["Azure", "Azure Data Explorer", "ADX", "Analytics", "Big Data"]
-
 ---
-
-I wrote "Azure Data Explorer Integration for Advanced Analytics" to share practical, production-minded guidance on this topic.
 
 Azure Data Explorer is the analytics service that addresses a specific limitation of Log Analytics: KQL query performance on large historical datasets degrades when Log Analytics tables accumulate months or years of high-cardinality telemetry. ADX is purpose-built for time-series analytics on large, append-heavy datasets—the columnar storage and query engine handle billions of rows efficiently. For AKS monitoring, the pattern is exporting Log Analytics data to ADX for long-term retention and complex analytics: trend analysis over 12 months of cluster metrics, anomaly detection on multi-dimensional time series, and joining cluster telemetry with business metrics. ADX clusters are priced on cluster compute rather than ingestion volume, which changes the economics at scale—a cluster handling 50GB/day of telemetry can be more cost-effective in ADX than Log Analytics at high retention settings.
 
@@ -259,4 +257,3 @@ resource "azurerm_kusto_eventhub_data_connection" "logs" {
 Azure Data Explorer extends your monitoring capabilities with powerful analytics on large datasets. By integrating ADX with your Kubernetes monitoring, you unlock long-term analysis and advanced insights.
 
 Tomorrow, we'll dive into ADX continuous export for data archival and compliance.
-

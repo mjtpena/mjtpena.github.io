@@ -9,10 +9,7 @@ tags:
   - Defender
   - Cloud Security
   - CSPM
-
 ---
-
-I wrote "Azure Security Center and Microsoft Defender: Unified Cloud Security" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Components
 
@@ -389,4 +386,4 @@ az security automation create \
 
 - [Microsoft Defender for Cloud Documentation](https://docs.microsoft.com/en-us/azure/defender-for-cloud/)
 - [Security Benchmark](https://docs.microsoft.com/en-us/security/benchmark/azure/)
-- [Defender for Cloud REST API](https://docs.microsoft.com/en-us/rest/api/defenderforcloud/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Defender for Cloud REST API](https://docs.microsoft.com/en-us/rest/api/defenderforcloud/)

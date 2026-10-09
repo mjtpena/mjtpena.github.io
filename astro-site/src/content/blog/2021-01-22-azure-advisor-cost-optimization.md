@@ -1,5 +1,6 @@
 ---
 title: Cost Optimization with Azure Advisor
+description: "\"Where is the money going?\" is the most expensive question in cloud. Azure Advisor is the free service that answers a surprising amount of it for you.…"
 author: Michael John Pena
 draft: false
 date: 2021-01-22
@@ -453,4 +454,4 @@ Set up alerts when new high-impact recommendations appear:
 4. **Track Savings**: Measure actual savings after implementing recommendations
 5. **Integrate with FinOps**: Use Advisor data in your cost management dashboards
 
-Azure Advisor is a valuable tool in your FinOps toolkit. Combined with automation, it helps maintain cost efficiency as your cloud environment grows and evolves.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Advisor is a valuable tool in your FinOps toolkit. Combined with automation, it helps maintain cost efficiency as your cloud environment grows and evolves.

@@ -1,5 +1,6 @@
 ---
 title: "Prompt Injection Defense: Securing LLM Applications"
+description: "Prompt injection occurs when user input is interpreted as instructions rather than data. Attackers can attempt to override system prompts, extract…"
 author: Michael John Peña
 draft: false
 date: 2025-09-28
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Defense
   - Best Practices
-
 ---
-
-I wrote "Prompt Injection Defense: Securing LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Threat
 
@@ -170,4 +168,4 @@ SECURITY INSTRUCTIONS (always follow):
         return {"warnings": warnings}
 ```
 
-Defense in depth is essential. Combine input validation, prompt hardening, output checking, and monitoring to build resilient LLM applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Defense in depth is essential. Combine input validation, prompt hardening, output checking, and monitoring to build resilient LLM applications.

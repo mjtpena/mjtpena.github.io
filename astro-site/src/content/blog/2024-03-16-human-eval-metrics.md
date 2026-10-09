@@ -1,13 +1,11 @@
 ---
 title: "HumanEval Metrics: Measuring Code Generation Quality"
+description: "HumanEval is the standard benchmark for measuring LLM code generation capabilities. Understanding its methodology and limitations is essential for…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-16
 tags: ["AI", "LLM", "HumanEval", "Code Generation", "Benchmarking"]
-
 ---
-
-I wrote "HumanEval Metrics: Measuring Code Generation Quality" to share practical, production-minded guidance on this topic.
 
 HumanEval is the standard benchmark for measuring LLM code generation capabilities. Understanding its methodology and limitations is essential for evaluating coding assistants.
 
@@ -307,4 +305,3 @@ for name, info in extended_benchmarks.items():
 ## Conclusion
 
 HumanEval provides a standardized way to compare code generation capabilities, but production code assistants need evaluation on more realistic tasks like SWE-bench and real-world debugging scenarios.
-

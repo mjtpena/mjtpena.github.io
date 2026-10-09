@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric: Six Months In Production"
+description: "It worked, but managing five services with five billing models and five sets of credentials was painful."
 author: Michael John Peña
 draft: false
 date: 2026-02-09
@@ -8,10 +9,7 @@ tags:
   - Azure
   - Data
   - Engineering
-
 ---
-
-I wrote "Microsoft Fabric: Six Months In Production" to share practical, production-minded guidance on this topic.
 
 ## What We Migrated From
 
@@ -86,4 +84,4 @@ Six months in, I'd make the same choice again. The simplification is worth the t
 
 It's not perfect. But it solved the operational complexity problem we had.
 
-For Azure-first data teams, Fabric is the right direction. Just go in with realistic expectations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+For Azure-first data teams, Fabric is the right direction. Just go in with realistic expectations.

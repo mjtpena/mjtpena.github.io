@@ -1,18 +1,16 @@
 ---
 title: "Synapse Serverless SQL Performance: Optimization Strategies"
+description: "Serverless SQL charges based on data processed. Optimization reduces both cost and query time."
 author: Michael John Peña
 draft: false
 date: 2022-02-02
 url: /blog/synapse-serverless-sql-performance/
 tags:
-  - azure
-  - synapse
-  - serverless
-  - performance
-
+  - Azure
+  - Synapse
+  - Serverless
+  - Performance
 ---
-
-I wrote "Synapse Serverless SQL Performance: Optimization Strategies" to share practical, production-minded guidance on this topic.
 
 ## Understanding Serverless SQL Costs
 
@@ -222,4 +220,4 @@ ORDER BY data_processed_mb DESC;
 6. **Create statistics** - Better query plans
 7. **Monitor data processed** - Track costs
 
-Proper optimization can reduce serverless SQL costs by 80-90% while dramatically improving query performance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper optimization can reduce serverless SQL costs by 80-90% while dramatically improving query performance.

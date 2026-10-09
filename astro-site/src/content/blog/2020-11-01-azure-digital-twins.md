@@ -1,5 +1,6 @@
 ---
 title: "Azure Digital Twins: Model the Physical World"
+description: "A facility manager I worked with last year asked the same question every IoT pitch eventually triggers: \"great, you can stream sensor data—but can you tell…"
 author: Michael John Peña
 draft: false
 date: 2020-11-01
@@ -179,4 +180,4 @@ scene.onTwinSelected((twin) => {
 });
 ```
 
-Digital Twins bridge the physical and digital worlds.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Digital Twins bridge the physical and digital worlds.

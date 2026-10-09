@@ -1,5 +1,6 @@
 ---
 title: "GPT-3 for Enterprise: Practical Applications and Implementation Patterns"
+description: "One of the most immediate applications - turning lengthy documents into concise summaries."
 author: Michael John Peña
 draft: false
 date: 2022-03-02
@@ -9,10 +10,7 @@ tags:
   - GPT-3
   - Enterprise
   - AI
-
 ---
-
-I wrote "GPT-3 for Enterprise: Practical Applications and Implementation Patterns" to share practical, production-minded guidance on this topic.
 
 ## Pattern 1: Document Summarization
 
@@ -323,4 +321,3 @@ Start with a single, well-defined problem. Build a proof of concept. Measure the
 - [Azure OpenAI Best Practices](https://docs.microsoft.com/en-us/azure/cognitive-services/openai/concepts/best-practices)
 - [Prompt Engineering Guide](https://platform.openai.com/docs/guides/completion/prompt-design)
 - [Token Counting with tiktoken](https://github.com/openai/tiktoken)
-

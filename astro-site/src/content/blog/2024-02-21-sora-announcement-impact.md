@@ -9,10 +9,7 @@ tags:
   - Video Generation
   - AI
   - Enterprise
-
 ---
-
-I wrote "Sora Announcement Impact: What OpenAI's Video Model Means for Enterprise" to share practical, production-minded guidance on this topic.
 
 ## What is Sora?
 
@@ -112,4 +109,3 @@ challenges = {
 ## Conclusion
 
 Sora represents a significant leap in AI capabilities. Enterprises should prepare by establishing governance, identifying use cases, and building expertise with current video AI tools.
-

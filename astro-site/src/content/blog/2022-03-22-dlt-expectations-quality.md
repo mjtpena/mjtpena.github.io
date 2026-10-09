@@ -1,5 +1,6 @@
 ---
 title: "Data Quality with Delta Live Tables Expectations"
+description: "The expression must evaluate to true for valid records."
 author: Michael John Peña
 draft: false
 date: 2022-03-22
@@ -9,10 +10,7 @@ tags:
   - Delta Live Tables
   - Data Quality
   - Data Engineering
-
 ---
-
-I wrote "Data Quality with Delta Live Tables Expectations" to share practical, production-minded guidance on this topic.
 
 ## Understanding Expectations
 
@@ -404,4 +402,3 @@ By embedding quality rules directly in your pipeline definitions, you ensure dat
 - [DLT Expectations Documentation](https://docs.databricks.com/delta-live-tables/expectations.html)
 - [Data Quality Best Practices](https://docs.databricks.com/delta-live-tables/data-quality.html)
 - [System Tables for Monitoring](https://docs.databricks.com/delta-live-tables/system-tables.html)
-

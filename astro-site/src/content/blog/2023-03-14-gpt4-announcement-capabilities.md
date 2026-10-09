@@ -1,5 +1,6 @@
 ---
 title: "GPT-4 Is Here: Analyzing the Announcement"
+description: "This isn't just incremental improvement - it's a capability threshold crossing. The AI capability curve just jumped. Time to adapt."
 author: Michael John Pena
 draft: false
 date: 2023-03-14
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Azure
   - Machine Learning
-
 ---
-
-I wrote "GPT-4 Is Here: Analyzing the Announcement" to share practical, production-minded guidance on this topic.
 
 ## The Headlines
 
@@ -279,4 +277,4 @@ The AI capability curve just jumped. Time to adapt.
 
 - [GPT-4 Technical Report](https://openai.com/research/gpt-4)
 - [GPT-4 API Documentation](https://platform.openai.com/docs/models/gpt-4)
-- [GPT-4 System Card](https://cdn.openai.com/papers/gpt-4-system-card.pdf)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [GPT-4 System Card](https://cdn.openai.com/papers/gpt-4-system-card.pdf)

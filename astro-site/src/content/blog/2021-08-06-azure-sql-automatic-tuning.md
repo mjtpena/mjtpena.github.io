@@ -1,5 +1,6 @@
 ---
 title: "Azure SQL Automatic Tuning: Self-Healing Database Performance"
+description: "Azure SQL's Automatic Tuning is the machine learning system that acts on Query Store data to make index and query plan decisions that would otherwise…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-06
@@ -271,4 +272,4 @@ public class AutoTuningAlert
 3. **Combine with Query Store**: Use Query Store data for deeper analysis
 4. **Set up alerts**: Get notified when significant changes occur
 
-Automatic tuning reduces the operational burden of database performance management while ensuring your databases adapt to changing workload patterns.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Automatic tuning reduces the operational burden of database performance management while ensuring your databases adapt to changing workload patterns.

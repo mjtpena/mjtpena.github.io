@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-25
 tags:
-  - azure
+  - Azure
   - pubsub
   - websocket
-  - real-time
-
+  - Real-Time
 ---
-
-I wrote "Azure Web PubSub: Native WebSocket at Scale" to share practical, production-minded guidance on this topic.
 
 ## Service Creation
 
@@ -87,5 +84,3 @@ ws.onmessage = (event) => {
 ## Summary
 
 Azure Web PubSub offers native WebSocket support with powerful server-side messaging APIs, ideal for IoT, gaming, and collaboration apps.
-
-

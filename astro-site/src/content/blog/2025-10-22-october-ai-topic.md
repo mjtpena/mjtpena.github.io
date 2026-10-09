@@ -1,5 +1,6 @@
 ---
 title: "Cost Optimization Strategies for Azure OpenAI Deployments"
+description: "Balance cost and quality by routing requests to appropriate models based on task requirements."
 author: Michael John Peña
 draft: false
 date: 2025-10-22
@@ -9,10 +10,7 @@ tags:
   - FinOps
   - Token Management
   - Cloud Economics
-
 ---
-
-I wrote "Cost Optimization Strategies for Azure OpenAI Deployments" to share practical, production-minded guidance on this topic.
 
 ## Token Usage Optimization
 
@@ -143,4 +141,4 @@ class ModelSelector:
         return "gpt-4-turbo"
 ```
 
-Balance cost and quality by routing requests to appropriate models based on task requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Balance cost and quality by routing requests to appropriate models based on task requirements.

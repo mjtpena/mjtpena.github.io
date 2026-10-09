@@ -1,5 +1,6 @@
 ---
 title: "Azure Blob Storage Lifecycle Management"
+description: "Savings: $1,700/year for 1TB Set up lifecycle policies on day one. Future you will thank past you for the cost savings."
 author: Michael John Peña
 draft: false
 date: 2020-09-26
@@ -8,10 +9,7 @@ tags:
   - Storage
   - Cost Optimization
   - Lifecycle
-
 ---
-
-I wrote "Azure Blob Storage Lifecycle Management" to share practical, production-minded guidance on this topic.
 
 ## Storage Tiers
 
@@ -86,4 +84,4 @@ Savings: **$1,700/year** for 1TB
 - **Cool minimum**: 30-day minimum storage duration
 - **Version considerations**: Policies can apply to versions too
 
-Set up lifecycle policies on day one. Future you will thank past you for the cost savings.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Set up lifecycle policies on day one. Future you will thank past you for the cost savings.

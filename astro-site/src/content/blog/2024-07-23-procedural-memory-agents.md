@@ -9,10 +9,7 @@ tags:
   - Memory
   - Procedural
   - Automation
-
 ---
-
-I wrote "Procedural Memory for AI Agents: Learning How To Do Things" to share practical, production-minded guidance on this topic.
 
 ## What is Procedural Memory?
 
@@ -566,4 +563,3 @@ Return JSON with parameter values:
 Procedural memory enables agents to remember how to do things, not just what things are. By learning and refining procedures, agents become more efficient over time.
 
 Start by defining procedures for common tasks, track their performance, and let the agent learn from demonstrations to build its procedural knowledge.
-

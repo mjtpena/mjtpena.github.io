@@ -1,5 +1,6 @@
 ---
 title: "Azure Blueprints: Repeatable Environment Templates"
+description: "Blueprints ensure every environment starts from a known, compliant state."
 author: Michael John Peña
 draft: false
 date: 2020-10-04
@@ -8,10 +9,7 @@ tags:
   - Blueprints
   - Governance
   - DevOps
-
 ---
-
-I wrote "Azure Blueprints: Repeatable Environment Templates" to share practical, production-minded guidance on this topic.
 
 ## Blueprint Components
 
@@ -83,4 +81,4 @@ Blueprints support resource locking:
 - **Read Only**: Prevent modifications
 - **Do Not Delete**: Prevent deletion
 
-Blueprints ensure every environment starts from a known, compliant state.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Blueprints ensure every environment starts from a known, compliant state.

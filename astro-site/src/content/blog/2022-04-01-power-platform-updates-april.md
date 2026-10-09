@@ -9,10 +9,7 @@ tags:
   - Power Automate
   - Microsoft 365
   - Low-Code
-
 ---
-
-I wrote "Microsoft Power Platform Updates: What's New in Spring 2022" to share practical, production-minded guidance on this topic.
 
 ## Power Apps Updates
 
@@ -365,4 +362,3 @@ Whether you're a citizen developer or professional developer, these updates make
 - [Power Platform Release Notes](https://docs.microsoft.com/en-us/power-platform/released-versions/power-platform)
 - [Power Apps Documentation](https://docs.microsoft.com/en-us/powerapps/)
 - [Power Automate Documentation](https://docs.microsoft.com/en-us/power-automate/)
-

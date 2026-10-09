@@ -1,13 +1,11 @@
 ---
 title: "Debug Sessions for Cognitive Search Skillsets"
+description: "Debug sessions are essential for developing and troubleshooting complex AI enrichment pipelines efficiently."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-29
 tags: ["Azure", "Cognitive Search", "Debug Sessions", "Skillsets", "Development"]
-
 ---
-
-I wrote "Debug Sessions for Cognitive Search Skillsets" to share practical, production-minded guidance on this topic.
 
 ## Understanding Debug Sessions
 
@@ -287,4 +285,4 @@ def delete_debug_session(endpoint, api_key, session_id):
 delete_debug_session(endpoint, api_key, session_id)
 ```
 
-Debug sessions are essential for developing and troubleshooting complex AI enrichment pipelines efficiently.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Debug sessions are essential for developing and troubleshooting complex AI enrichment pipelines efficiently.

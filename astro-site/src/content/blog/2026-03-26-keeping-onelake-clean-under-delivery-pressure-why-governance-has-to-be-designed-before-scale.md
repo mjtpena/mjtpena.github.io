@@ -1,5 +1,6 @@
 ---
 title: "Keeping OneLake Clean Under Delivery Pressure: why governance has to be designed before scale"
+description: "I focused on making delivery decisions auditable and repeatable—documenting intent, success criteria, and rollback paths to reduce tribal knowledge."
 author: Michael John Peña
 draft: false
 date: 2026-03-26
@@ -37,4 +38,4 @@ Tomorrow I want to verify this pattern under a busier workload before I call it 
 
 - [OneLake overview](https://learn.microsoft.com/fabric/onelake/)
 - [OneLake shortcuts](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts)
-- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)

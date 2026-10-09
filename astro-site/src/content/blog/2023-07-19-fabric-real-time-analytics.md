@@ -1,5 +1,6 @@
 ---
 title: "Fabric Real-Time Analytics: Stream Processing at Scale"
+description: "'{' ' \"SoftDeletePeriod\": \"30.00:00:00\",' ' \"Recoverability\": \"Enabled\"' '}'"
 author: Michael John Peña
 draft: false
 date: 2023-07-19
@@ -8,10 +9,7 @@ tags:
   - Real-Time Analytics
   - Streaming
   - KQL
-
 ---
-
-I wrote "Fabric Real-Time Analytics: Stream Processing at Scale" to share practical, production-minded guidance on this topic.
 
 ## What is Real-Time Analytics?
 
@@ -306,4 +304,4 @@ Tomorrow we'll dive deeper into KQL databases and advanced patterns.
 
 - [Real-Time Analytics Documentation](https://learn.microsoft.com/en-us/fabric/real-time-analytics/overview)
 - [KQL Quick Reference](https://learn.microsoft.com/en-us/azure/data-explorer/kql-quick-reference)
-- [Eventstream Documentation](https://learn.microsoft.com/en-us/fabric/real-time-analytics/event-streams/overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Eventstream Documentation](https://learn.microsoft.com/en-us/fabric/real-time-analytics/event-streams/overview)

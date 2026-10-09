@@ -1,13 +1,11 @@
 ---
 title: "Azure Pipelines Improvements"
+description: "Azure Pipelines templates and stages enable maintainable, scalable CI/CD implementations."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-21
 tags: ["Azure", "Azure DevOps", "Pipelines", "CI/CD"]
-
 ---
-
-I wrote "Azure Pipelines Improvements" to share practical, production-minded guidance on this topic.
 
 ## Advanced Pipeline Features
 
@@ -67,4 +65,4 @@ stages:
                     appName: 'mywebapp'
 ```
 
-Azure Pipelines templates and stages enable maintainable, scalable CI/CD implementations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Pipelines templates and stages enable maintainable, scalable CI/CD implementations.

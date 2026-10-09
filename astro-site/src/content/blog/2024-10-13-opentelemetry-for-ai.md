@@ -1,13 +1,11 @@
 ---
 title: "OpenTelemetry for AI: Standard Observability for LLM Applications"
+description: "OpenTelemetry provides a standardized way to instrument AI applications, ensuring your observability data is portable across different backends and tools."
 author: "Michael John Peña"
 draft: false
 date: 2024-10-13
 tags: ["OpenTelemetry", "Observability", "AI", "Tracing", "Metrics"]
-
 ---
-
-I wrote "OpenTelemetry for AI: Standard Observability for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Setting Up OpenTelemetry for AI
 
@@ -349,4 +347,4 @@ def get_exporter():
         return OTLPSpanExporter()
 ```
 
-OpenTelemetry provides a standardized way to instrument AI applications, ensuring your observability data is portable across different backends and tools.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+OpenTelemetry provides a standardized way to instrument AI applications, ensuring your observability data is portable across different backends and tools.

@@ -10,12 +10,9 @@ tags:
   - Governance
   - Purview
   - Data Lineage
-
 ---
 
-I wrote "2021-07-06-azure-purview-data-lineage" to share practical, production-minded guidance on this topic.
-
-# Setting Up Azure Purview
+## Setting Up Azure Purview
 
 Create and configure an Azure Purview account:
 
@@ -37,7 +34,7 @@ az purview account show \
     --query "{catalog: endpoints.catalog, scan: endpoints.scan}"
 ```
 
-# Registering Data Sources
+## Registering Data Sources
 
 Register various data sources for lineage tracking:
 
@@ -103,7 +100,7 @@ synapse_source = {
 scanning_client.data_sources.create_or_update("analytics-synapse", synapse_source)
 ```
 
-# Configuring Scans
+## Configuring Scans
 
 Set up scans to discover and catalog data:
 
@@ -155,7 +152,7 @@ scanning_client.triggers.create_or_update(
 )
 ```
 
-# Data Factory Lineage Integration
+## Data Factory Lineage Integration
 
 Azure Data Factory automatically pushes lineage to Purview:
 
@@ -211,7 +208,7 @@ pipeline = PipelineResource(
 # Purview shows: SQL Table -> Copy Activity -> Parquet Files -> Data Flow -> Output
 ```
 
-# Querying Lineage
+## Querying Lineage
 
 Use the Purview API to query lineage information:
 
@@ -258,7 +255,7 @@ def get_downstream_impact(asset_guid):
     )
 ```
 
-# Custom Lineage with Apache Atlas API
+## Custom Lineage with Apache Atlas API
 
 Push custom lineage for non-Azure sources:
 
@@ -326,7 +323,7 @@ custom_type = {
 catalog_client.types.create_type_definitions(custom_type)
 ```
 
-# Synapse Spark Lineage
+## Synapse Spark Lineage
 
 Capture Spark job lineage in Synapse:
 
@@ -358,7 +355,7 @@ transformed_df.write \
 # raw/sales/orders/ (Parquet) -> Spark Notebook -> curated/sales/customer_summary/ (Delta)
 ```
 
-# Viewing Lineage in Purview Studio
+## Viewing Lineage in Purview Studio
 
 The Purview Studio provides a visual lineage graph:
 
@@ -418,9 +415,8 @@ report = generate_lineage_report("customer_summary")
 print(json.dumps(report, indent=2))
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Purview provides comprehensive data lineage tracking that is essential for data governance and compliance. By integrating with Azure Data Factory, Synapse Analytics, and other services, you get automatic lineage capture without additional development effort.
 
 The ability to query lineage programmatically enables impact analysis, helping you understand the downstream effects of data changes. Combined with Purview's data catalog and classification capabilities, lineage tracking gives you complete visibility into your data estate.
-

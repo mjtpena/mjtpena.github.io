@@ -9,10 +9,7 @@ tags:
   - RLS
   - Data Security
   - Enterprise
-
 ---
-
-I wrote "Power BI Row-Level Security: Securing Data at the Row Level" to share practical, production-minded guidance on this topic.
 
 ## RLS Concepts
 
@@ -225,4 +222,3 @@ Combined with proper testing and monitoring, RLS provides robust data security i
 - [RLS Documentation](https://docs.microsoft.com/en-us/power-bi/admin/service-admin-rls)
 - [RLS with Embedded](https://docs.microsoft.com/en-us/power-bi/developer/embedded/embedded-row-level-security)
 - [Dynamic RLS Patterns](https://docs.microsoft.com/en-us/power-bi/guidance/rls-guidance)
-

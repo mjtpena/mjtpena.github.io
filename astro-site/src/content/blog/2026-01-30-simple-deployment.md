@@ -1,5 +1,6 @@
 ---
 title: "Keeping Deployments Simple"
+description: "For an app with 100 users. Push to main. App deploys. Done. Don't add any of this on day one."
 author: Michael John Peña
 draft: false
 date: 2026-01-30
@@ -8,10 +9,7 @@ tags:
   - Deployment
   - Engineering
   - Simplicity
-
 ---
-
-I wrote "Keeping Deployments Simple" to share practical, production-minded guidance on this topic.
 
 ## The Over-Engineered Pipeline
 
@@ -96,4 +94,4 @@ Most apps don't need sophisticated deployment pipelines.
 
 They need reliable, repeatable deployments that the team understands.
 
-Simple beats sophisticated. Every time.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Simple beats sophisticated. Every time.

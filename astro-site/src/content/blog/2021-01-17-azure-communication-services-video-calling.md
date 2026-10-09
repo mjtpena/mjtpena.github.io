@@ -1,5 +1,6 @@
 ---
 title: Building Video Calling Apps with Azure Communication Services
+description: "Azure Communication Services launched late last year, and \"build your own video calling app on the same backbone as Teams\" is the pitch that makes it click…"
 author: Michael John Pena
 draft: false
 date: 2021-01-17
@@ -9,7 +10,7 @@ tags:
   - Communication Services
   - Video Calling
   - WebRTC
-  - Real-time
+  - Real-Time
 ---
 
 Azure Communication Services launched late last year, and "build your own video calling app on the same backbone as Teams" is the pitch that makes it click for most clients. Today I'm walking through what it actually takes to ship a working video call—identity, token issuance, the JS calling SDK, and the gotchas that don't show up in the quickstart. Expect this to feel familiar if you've used Twilio Video; the difference is identity, billing, and Teams interop coming for free in the Microsoft ecosystem.
@@ -309,4 +310,4 @@ When building video calling applications with ACS, consider the following:
 4. **Accessibility**: Provide keyboard navigation and screen reader support.
 5. **Testing**: Use the ACS Test Tool for debugging call quality issues.
 
-Azure Communication Services provides a robust foundation for building communication features. The integration with Azure ecosystem services like Event Grid for webhooks and Blob Storage for recordings makes it a compelling choice for enterprise applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Communication Services provides a robust foundation for building communication features. The integration with Azure ecosystem services like Event Grid for webhooks and Blob Storage for recordings makes it a compelling choice for enterprise applications.

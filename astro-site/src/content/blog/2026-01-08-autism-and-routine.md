@@ -1,5 +1,6 @@
 ---
 title: "What Autism Taught Me About Systems Design"
+description: "Andriel needs structure. Not wants—needs. His autism means unpredictability causes genuine distress. Over the years, I've realized he's taught me more about…"
 author: Michael John Peña
 draft: false
 date: 2026-01-08
@@ -129,4 +130,4 @@ Good design serves everyone. But designing for those with the greatest need for 
 
 Andriel taught me that. He teaches me something new every day.
 
-And I'm grateful.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+And I'm grateful.

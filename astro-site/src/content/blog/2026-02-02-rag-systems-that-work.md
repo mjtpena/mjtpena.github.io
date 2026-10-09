@@ -1,5 +1,6 @@
 ---
 title: "Building RAG Systems That Actually Work"
+description: "This works for demos. It fails in production. Chunking matters more than you think. Random 500-token chunks lose context. A sentence about \"the system\"…"
 author: Michael John Peña
 draft: false
 date: 2026-02-02
@@ -8,10 +9,7 @@ tags:
   - RAG
   - Azure
   - Engineering
-
 ---
-
-I wrote "Building RAG Systems That Actually Work" to share practical, production-minded guidance on this topic.
 
 ## The Common Approach
 
@@ -127,4 +125,4 @@ Good RAG isn't about the vector database or the embedding model. It's about the 
 
 Chunking, retrieval, re-ranking, and grounding matter more than which embedding model you pick.
 
-Get the fundamentals right. The fancy stuff is optional.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Get the fundamentals right. The fancy stuff is optional.

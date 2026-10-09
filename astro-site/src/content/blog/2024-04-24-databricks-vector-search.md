@@ -1,13 +1,11 @@
 ---
 title: "Databricks Vector Search Deep Dive: Production Patterns"
+description: "Taking Vector Search to production requires careful consideration of performance, reliability, and maintenance. This guide covers production-ready patterns."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-24
 tags: ["Databricks", "Vector Search", "Production", "ML", "Search"]
-
 ---
-
-I wrote "Databricks Vector Search Deep Dive: Production Patterns" to share practical, production-minded guidance on this topic.
 
 Taking Vector Search to production requires careful consideration of performance, reliability, and maintenance. This guide covers production-ready patterns.
 
@@ -402,4 +400,3 @@ class MonitoredVectorSearch:
 ## Conclusion
 
 Production vector search requires proper chunking strategies, filtering capabilities, caching, and monitoring. Build these patterns into your application from the start for reliable semantic search at scale.
-

@@ -1,13 +1,11 @@
 ---
 title: "Query Store Deep Dive: Your Database's Flight Recorder"
+description: "Query Store transforms database performance troubleshooting from guesswork into data-driven analysis, making it an indispensable tool for maintaining…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-05
 tags: ["Azure", "SQL", "Query Store", "Performance", "Monitoring"]
-
 ---
-
-I wrote "Query Store Deep Dive: Your Database's Flight Recorder" to share practical, production-minded guidance on this topic.
 
 ## Enabling and Configuring Query Store
 
@@ -231,4 +229,4 @@ SELECT
 FROM sys.database_query_store_options;
 ```
 
-Query Store transforms database performance troubleshooting from guesswork into data-driven analysis, making it an indispensable tool for maintaining optimal database performance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Query Store transforms database performance troubleshooting from guesswork into data-driven analysis, making it an indispensable tool for maintaining optimal database performance.

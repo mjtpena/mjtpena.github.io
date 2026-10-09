@@ -1,5 +1,6 @@
 ---
 title: "Azure Automation Runbooks for Cloud Operations"
+description: "Every cloud team eventually accumulates a folder full of \"scripts I run monthly\" — clean up old resource groups, rotate certificates, scale down dev…"
 author: Michael John Peña
 draft: false
 date: 2020-09-24
@@ -93,4 +94,4 @@ Invoke-RestMethod -Uri $webhookUri -Method POST -Body $alertData
 4. **Resource Cleanup** - Delete orphaned resources
 5. **Alert Response** - Auto-remediate common issues
 
-Azure Automation is the workhorse of cloud operations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Automation is the workhorse of cloud operations.

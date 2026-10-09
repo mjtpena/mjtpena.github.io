@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric AI Integration: Unified Analytics and Intelligence"
+description: "Microsoft Fabric integrates AI throughout the analytics lifecycle from ingestion to insights."
 author: Michael John Peña
 draft: false
 date: 2025-04-24
@@ -9,10 +10,7 @@ tags:
   - Analytics
   - Data Platform
   - Integration
-
 ---
-
-I wrote "Microsoft Fabric AI Integration: Unified Analytics and Intelligence" to share practical, production-minded guidance on this topic.
 
 ## Fabric AI Features
 
@@ -129,4 +127,4 @@ class FabricNotebookAI:
         return response.choices[0].message.content
 ```
 
-Microsoft Fabric integrates AI throughout the analytics lifecycle from ingestion to insights.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Microsoft Fabric integrates AI throughout the analytics lifecycle from ingestion to insights.

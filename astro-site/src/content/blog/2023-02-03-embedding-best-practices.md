@@ -9,10 +9,7 @@ tags:
   - Embeddings
   - Best Practices
   - AI
-
 ---
-
-I wrote "Embedding Best Practices for Production AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Choosing the Right Model
 
@@ -474,4 +471,4 @@ EMBEDDING_CHECKLIST = {
 
 - [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings)
 - [MTEB Benchmark](https://huggingface.co/spaces/mteb/leaderboard)
-- [Embedding Best Practices](https://www.pinecone.io/learn/series/nlp/dense-embeddings/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Embedding Best Practices](https://www.pinecone.io/learn/series/nlp/dense-embeddings/)

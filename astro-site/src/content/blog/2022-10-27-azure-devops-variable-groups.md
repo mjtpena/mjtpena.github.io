@@ -1,13 +1,11 @@
 ---
 title: "Variable Groups in Azure DevOps"
+description: "Variable groups simplify configuration management across multiple pipelines."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-27
 tags: ["Azure", "Azure DevOps", "Variables", "Configuration"]
-
 ---
-
-I wrote "Variable Groups in Azure DevOps" to share practical, production-minded guidance on this topic.
 
 ## Using Variable Groups
 
@@ -65,4 +63,4 @@ variable_group:
   secretsFilter: '*'  # Or specific: 'DbPassword,ApiKey'
 ```
 
-Variable groups simplify configuration management across multiple pipelines.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Variable groups simplify configuration management across multiple pipelines.

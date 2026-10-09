@@ -1,18 +1,16 @@
 ---
 title: "Azure Advisor Score: Measuring Your Cloud Excellence"
+description: "Azure Advisor Score provides actionable insights to continuously improve your Azure environment's health and efficiency."
 author: Michael John Peña
 draft: false
 date: 2022-01-24
 url: /blog/azure-advisor-score/
 tags:
-  - azure
-  - advisor
-  - optimization
-  - best-practices
-
+  - Azure
+  - Advisor
+  - Optimization
+  - Best-Practices
 ---
-
-I wrote "Azure Advisor Score: Measuring Your Cloud Excellence" to share practical, production-minded guidance on this topic.
 
 ## Understanding Advisor Score
 
@@ -261,4 +259,4 @@ resource schedule 'Microsoft.Automation/automationAccounts/schedules@2021-06-22'
 }
 ```
 
-Azure Advisor Score provides actionable insights to continuously improve your Azure environment's health and efficiency.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Advisor Score provides actionable insights to continuously improve your Azure environment's health and efficiency.

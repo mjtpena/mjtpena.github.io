@@ -9,10 +9,7 @@ tags:
   - Cost Optimization
   - Compute
   - Best Practices
-
 ---
-
-I wrote "Azure Spot Instance Strategies for Cost Savings" to share practical, production-minded guidance on this topic.
 
 ## Understanding Spot VMs
 
@@ -243,4 +240,5 @@ metadata:
 spec:
   scaleSetPriority: Spot
   scaleSetEvictionPolicy: Delete
-  spotMaxPrice: -1\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+  spotMaxPrice: -1
+```

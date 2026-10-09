@@ -1,13 +1,11 @@
 ---
 title: "Model Selection Strategies: Right-Sizing Your AI Workloads"
+description: "While the AI community anticipates Claude 3's tiered model approach, it's worth examining how to right-size your AI workloads today. Understanding when to…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-03
 tags: ["AI", "Claude", "GPT-4", "LLM", "Cost Optimization"]
-
 ---
-
-I wrote "Model Selection Strategies: Right-Sizing Your AI Workloads" to share practical, production-minded guidance on this topic.
 
 While the AI community anticipates Claude 3's tiered model approach, it's worth examining how to right-size your AI workloads today. Understanding when to use different capability levels can dramatically reduce costs while maintaining quality.
 
@@ -199,4 +197,3 @@ When Claude 3 releases (rumored soon), we expect:
 ## Conclusion
 
 Don't default to the most powerful model. Match your model to your task complexity to optimize both cost and latency while maintaining quality. Build flexible routing infrastructure now to easily incorporate new models like Claude 3 when they arrive.
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure Service Bus: Queues and Topics Patterns"
+description: "Service Bus is the backbone of reliable, decoupled architectures on Azure."
 author: Michael John Peña
 draft: false
 date: 2020-09-20
@@ -8,10 +9,7 @@ tags:
   - Service Bus
   - Messaging
   - Integration
-
 ---
-
-I wrote "Azure Service Bus: Queues and Topics Patterns" to share practical, production-minded guidance on this topic.
 
 ## Queue: Point-to-Point
 
@@ -93,4 +91,4 @@ sender.send_messages(message)
 session_receiver = client.get_queue_receiver(queue_name, session_id="customer-123")
 ```
 
-Service Bus is the backbone of reliable, decoupled architectures on Azure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Service Bus is the backbone of reliable, decoupled architectures on Azure.

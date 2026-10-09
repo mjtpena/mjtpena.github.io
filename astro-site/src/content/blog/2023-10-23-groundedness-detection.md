@@ -10,10 +10,7 @@ tags:
   - LLM Evaluation
   - Factual Accuracy
   - AI
-
 ---
-
-I wrote "Groundedness Detection for LLM Responses" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -541,4 +538,3 @@ print(f"Recommendation: {result['recommendation']}")
 ## Conclusion
 
 Groundedness detection is essential for ensuring LLM responses are factually accurate and supported by source documents. A comprehensive approach combines claim extraction, entity verification, overlap analysis, and optionally LLM-based evaluation. Regular groundedness checks help prevent hallucinations and maintain trust in AI-generated content.
-

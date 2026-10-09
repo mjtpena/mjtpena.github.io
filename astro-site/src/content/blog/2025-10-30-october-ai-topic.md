@@ -1,5 +1,6 @@
 ---
 title: "Batch Processing AI Workloads with Azure Batch and OpenAI"
+description: "Track job progress and handle failures with proper retry logic for robust batch AI processing at scale."
 author: Michael John Peña
 draft: false
 date: 2025-10-30
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - Scalability
   - Data Processing
-
 ---
-
-I wrote "Batch Processing AI Workloads with Azure Batch and OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Designing a Batch AI Pipeline
 
@@ -163,4 +161,4 @@ class RateLimitedProcessor:
 
 ## Monitoring Batch Progress
 
-Track job progress and handle failures with proper retry logic for robust batch AI processing at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Track job progress and handle failures with proper retry logic for robust batch AI processing at scale.

@@ -10,10 +10,7 @@ tags:
   - Model Deployment
   - Machine Learning
   - Data Science
-
 ---
-
-I wrote "ML Model Deployment Patterns in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -600,4 +597,3 @@ print(ab_code)
 ## Conclusion
 
 Microsoft Fabric offers flexible model deployment patterns to meet various business requirements. By understanding the trade-offs between batch, real-time, embedded, and streaming deployment patterns, you can choose the right approach for your use case. Combining these patterns with proper versioning and A/B testing enables robust MLOps practices that deliver reliable ML-powered insights.
-

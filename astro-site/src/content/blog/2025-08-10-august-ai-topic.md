@@ -1,5 +1,6 @@
 ---
 title: "RAG Chunking Strategies: Finding the Optimal Approach"
+description: "The simplest approach splits text at regular intervals with optional overlap. Semantic chunking respects content boundaries like paragraphs and sections."
 author: Michael John Peña
 draft: false
 date: 2025-08-10
@@ -9,10 +10,7 @@ tags:
   - Vector Search
   - NLP
   - AI Architecture
-
 ---
-
-I wrote "RAG Chunking Strategies: Finding the Optimal Approach" to share practical, production-minded guidance on this topic.
 
 ## Common Chunking Strategies
 
@@ -94,4 +92,4 @@ chunks = recursive_split(document, separators, chunk_size=500)
 
 ## Choosing the Right Strategy
 
-For structured documents, use semantic chunking. For code, chunk by functions or classes. For conversations, keep turns together. Test retrieval quality with representative queries to validate your chunking choice.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+For structured documents, use semantic chunking. For code, chunk by functions or classes. For conversations, keep turns together. Test retrieval quality with representative queries to validate your chunking choice.

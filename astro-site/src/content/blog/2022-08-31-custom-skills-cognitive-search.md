@@ -1,13 +1,11 @@
 ---
 title: "Building Custom Skills for Azure Cognitive Search"
+description: "Custom skills unlock unlimited possibilities for AI enrichment tailored to your specific business needs."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-31
 tags: ["Azure", "Cognitive Search", "Custom Skills", "Azure Functions", "AI"]
-
 ---
-
-I wrote "Building Custom Skills for Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## Custom Skill Architecture
 
@@ -437,4 +435,4 @@ def robust_skill(req: func.HttpRequest) -> func.HttpResponse:
     )
 ```
 
-Custom skills unlock unlimited possibilities for AI enrichment tailored to your specific business needs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Custom skills unlock unlimited possibilities for AI enrichment tailored to your specific business needs.

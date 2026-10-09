@@ -1,5 +1,6 @@
 ---
 title: How to beat procrastination
+description: "One of the colossal beasts that all knowledge workers fight time and time again is procrastination. This is when you know you should work, but you don't…"
 author: Michael John Peña
 draft: false
 date: 2021-01-14
@@ -10,7 +11,7 @@ tags:
   - lazy
   - mental
   - procrastination
-  - productivity
+  - Productivity
   - willpower
 ---
 
@@ -73,4 +74,4 @@ Even the really greats like Marcus Aurelius, Victor Hugo, and a lot of the Top 1
 
 I'd like to this with a quote I really like from Marcus Aurelius:
 
-> Concentrate every minute on doing what's in front of you with precise and genuine seriousness, tenderly, willingly, with justice. And on freeing yourself from all other distractions. Yes, you can, if you do everything as if it were the last thing you were doing in your life, and stop being aimless, stop letting your emotions override what your mind tells you, stop being hypocritical, self-centered, irritable. You see how few things you have to do to live a satisfying and reverent life? If you can manage this, that's all even the gods can ask of you. -Marcus Aurelius\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+> Concentrate every minute on doing what's in front of you with precise and genuine seriousness, tenderly, willingly, with justice. And on freeing yourself from all other distractions. Yes, you can, if you do everything as if it were the last thing you were doing in your life, and stop being aimless, stop letting your emotions override what your mind tells you, stop being hypocritical, self-centered, irritable. You see how few things you have to do to live a satisfying and reverent life? If you can manage this, that's all even the gods can ask of you. -Marcus Aurelius

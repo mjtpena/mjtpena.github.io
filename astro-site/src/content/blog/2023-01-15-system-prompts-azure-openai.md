@@ -9,10 +9,7 @@ tags:
   - System Prompts
   - Prompt Engineering
   - AI
-
 ---
-
-I wrote "System Prompts in Azure OpenAI: Controlling AI Behavior" to share practical, production-minded guidance on this topic.
 
 ## Understanding System Prompts
 
@@ -515,4 +512,4 @@ test_cases = [
 
 - [Azure OpenAI Chat Completion](https://learn.microsoft.com/azure/cognitive-services/openai/how-to/chatgpt)
 - [System Message Best Practices](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/system-message)
-- [Prompt Engineering Guide](https://www.promptingguide.ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Prompt Engineering Guide](https://www.promptingguide.ai/)

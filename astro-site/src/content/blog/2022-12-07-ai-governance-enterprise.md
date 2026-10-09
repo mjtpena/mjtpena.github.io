@@ -9,10 +9,7 @@ tags:
   - Enterprise
   - Compliance
   - Risk Management
-
 ---
-
-I wrote "AI Governance for Enterprise: Policies and Practices" to share practical, production-minded guidance on this topic.
 
 ## The Governance Challenge
 
@@ -381,4 +378,3 @@ AI governance isn't about blocking innovation - it's about enabling it safely. W
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - [EU AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 - [Microsoft Responsible AI Resources](https://www.microsoft.com/en-us/ai/responsible-ai-resources)
-

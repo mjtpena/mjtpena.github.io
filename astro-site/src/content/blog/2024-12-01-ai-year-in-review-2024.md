@@ -1,5 +1,6 @@
 ---
 title: "2024 AI Year in Review: The Year Enterprise AI Became Real"
+description: "2024 was transformational. 2025 will be about scaling what works and pushing the boundaries of what's possible."
 author: Michael John Peña
 draft: false
 date: 2024-12-01
@@ -9,10 +10,7 @@ tags:
   - Enterprise AI
   - Machine Learning
   - "2024"
-
 ---
-
-I wrote "2024 AI Year in Review: The Year Enterprise AI Became Real" to share practical, production-minded guidance on this topic.
 
 ## The Timeline of 2024
 
@@ -299,4 +297,4 @@ Level 4: Transformation (15% of enterprises)
 
 - [State of AI Report 2024](https://www.stateof.ai/)
 - [AI Index Report](https://aiindex.stanford.edu/)
-- [Microsoft AI Annual Report](https://microsoft.com/ai)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Microsoft AI Annual Report](https://microsoft.com/ai)

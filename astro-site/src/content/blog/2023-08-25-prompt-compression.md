@@ -8,10 +8,7 @@ tags:
   - Compression
   - Cost Optimization
   - LLM
-
 ---
-
-I wrote "Prompt Compression: Reducing Token Usage" to share practical, production-minded guidance on this topic.
 
 ## Why Compress Prompts?
 
@@ -243,4 +240,4 @@ Tomorrow we'll explore semantic compression techniques in more depth.
 
 - [LLMLingua](https://github.com/microsoft/LLMLingua)
 - [Prompt Compression Paper](https://arxiv.org/abs/2310.05736)
-- [Token Optimization Guide](https://platform.openai.com/docs/guides/prompt-engineering)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Token Optimization Guide](https://platform.openai.com/docs/guides/prompt-engineering)

@@ -1,5 +1,6 @@
 ---
 title: "Data Quality for AI: Ensuring Clean Data for ML and LLM Applications"
+description: "Quality encompasses completeness, accuracy, consistency, timeliness, and validity. Each dimension requires specific checks."
 author: Michael John Peña
 draft: false
 date: 2025-08-23
@@ -9,10 +10,7 @@ tags:
   - Machine Learning
   - LLM
   - Microsoft Fabric
-
 ---
-
-I wrote "Data Quality for AI: Ensuring Clean Data for ML and LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Data Quality Dimensions
 
@@ -95,4 +93,4 @@ if report["issues_found"] > 0:
     raise DataQualityError(f"Quality checks failed: {report['issues']}")
 ```
 
-Treat data quality as a first-class concern. The cost of bad data compounds exponentially through your AI systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Treat data quality as a first-class concern. The cost of bad data compounds exponentially through your AI systems.

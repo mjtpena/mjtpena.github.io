@@ -1,5 +1,6 @@
 ---
 title: "Vector Databases: What I Learned From Using 5 Different Ones"
+description: "I've deployed vector databases for RAG systems across 5 different projects. Each project chose a different solution. Here's what I actually learned."
 author: Michael John Peña
 draft: false
 date: 2026-01-11
@@ -242,4 +243,4 @@ Most projects overthink this. Pick something that:
 
 Then move on to more important problems, like actually building value for users.
 
-The vector database is infrastructure. It should be boring and reliable. Don't let perfect be the enemy of good enough.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The vector database is infrastructure. It should be boring and reliable. Don't let perfect be the enemy of good enough.

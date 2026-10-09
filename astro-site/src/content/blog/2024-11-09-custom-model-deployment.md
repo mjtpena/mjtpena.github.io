@@ -1,5 +1,6 @@
 ---
 title: "Custom Model Deployment on Azure: From Fine-Tuning to Production"
+description: "Best for: Variable workloads, quick start, minimal ops overhead Best for: Predictable workloads, SLA requirements, cost optimization"
 author: Michael John Peña
 draft: false
 date: 2024-11-09
@@ -9,10 +10,7 @@ tags:
   - Model Deployment
   - MLOps
   - Production
-
 ---
-
-I wrote "Custom Model Deployment on Azure: From Fine-Tuning to Production" to share practical, production-minded guidance on this topic.
 
 ## Deployment Options Overview
 
@@ -216,4 +214,5 @@ spec:
         livenessProbe:
           httpGet:
             path: /health
-            port: 8080\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+            port: 8080
+```

@@ -8,10 +8,7 @@ tags:
   - Apache Spark
   - Data Engineering
   - PySpark
-
 ---
-
-I wrote "Apache Spark in Microsoft Fabric: Getting Started" to share practical, production-minded guidance on this topic.
 
 ## Spark in Fabric Overview
 
@@ -321,4 +318,4 @@ Tomorrow we'll dive deeper into Fabric notebooks and their unique features.
 
 - [Spark in Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/spark-compute)
 - [PySpark Documentation](https://spark.apache.org/docs/latest/api/python/)
-- [Delta Lake + Spark](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Delta Lake + Spark](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake)

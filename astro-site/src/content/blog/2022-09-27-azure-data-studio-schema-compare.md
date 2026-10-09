@@ -1,13 +1,11 @@
 ---
 title: "Schema Compare in Azure Data Studio"
+description: "Schema Compare is essential for maintaining database consistency across environments."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-27
 tags: ["Azure", "Azure Data Studio", "Schema Compare", "Database"]
-
 ---
-
-I wrote "Schema Compare in Azure Data Studio" to share practical, production-minded guidance on this topic.
 
 ## Using Schema Compare
 
@@ -295,4 +293,4 @@ Write-Host "Comparison complete. Review generated scripts."
 4. **Use in CI/CD** - Automate schema validation
 5. **Exclude wisely** - Know what to include/exclude
 
-Schema Compare is essential for maintaining database consistency across environments.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Schema Compare is essential for maintaining database consistency across environments.

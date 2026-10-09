@@ -9,10 +9,7 @@ tags:
   - Memory
   - Consolidation
   - Architecture
-
 ---
-
-I wrote "Memory Consolidation for AI Agents: From Short-Term to Long-Term" to share practical, production-minded guidance on this topic.
 
 ## The Consolidation Pipeline
 
@@ -490,4 +487,3 @@ class ConsolidatingAgent:
 Memory consolidation is the bridge between fleeting interactions and lasting knowledge. Without it, agents either forget or drown in detail.
 
 Implement importance scoring, regular consolidation, and pattern extraction to build agents with effective long-term memory that improves over time.
-

@@ -1,5 +1,6 @@
 ---
 title: "Claude 3.5 Sonnet: Anthropic's New Benchmark in AI"
+description: "Performance That Competes Claude 3.5 Sonnet outperforms Claude 3 Opus on most benchmarks while being significantly faster and cheaper. It's positioned as a…"
 author: Michael John Peña
 draft: false
 date: 2024-07-01
@@ -9,10 +10,7 @@ tags:
   - Anthropic
   - LLM
   - Azure
-
 ---
-
-I wrote "Claude 3.5 Sonnet: Anthropic's New Benchmark in AI" to share practical, production-minded guidance on this topic.
 
 ## What Makes Claude 3.5 Sonnet Special
 
@@ -235,4 +233,4 @@ Claude 3.5 Sonnet hits a sweet spot. It's capable enough to handle complex reaso
 
 For data engineering tasks specifically - documentation, query optimization, error analysis - it performs excellently. The improved vision capabilities also open up interesting possibilities for processing diagrams, charts, and visual data.
 
-Start experimenting. The model is available now, and the API is straightforward. The AI landscape keeps advancing, and staying current with these capabilities is essential.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Start experimenting. The model is available now, and the API is straightforward. The AI landscape keeps advancing, and staying current with these capabilities is essential.

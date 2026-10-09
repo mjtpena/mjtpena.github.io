@@ -1,5 +1,6 @@
 ---
 title: "GPT-4 for Data Analysis: Practical Applications"
+description: "GPT-4 transforms data analysis from technical SQL writing to conversational exploration. The ability to interpret results and generate insights makes data…"
 author: Michael John Pena
 draft: false
 date: 2023-03-20
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Data Analysis
   - Analytics
-
 ---
-
-I wrote "GPT-4 for Data Analysis: Practical Applications" to share practical, production-minded guidance on this topic.
 
 ## Natural Language to SQL
 
@@ -478,4 +476,4 @@ class DataAnalysisPipeline:
         }
 ```
 
-GPT-4 transforms data analysis from technical SQL writing to conversational exploration. The ability to interpret results and generate insights makes data accessible to everyone.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GPT-4 transforms data analysis from technical SQL writing to conversational exploration. The ability to interpret results and generate insights makes data accessible to everyone.

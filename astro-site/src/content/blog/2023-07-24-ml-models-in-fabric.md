@@ -8,10 +8,7 @@ tags:
   - Machine Learning
   - Model Registry
   - MLOps
-
 ---
-
-I wrote "ML Models in Fabric: Training, Registry, and Deployment" to share practical, production-minded guidance on this topic.
 
 ## Model Lifecycle in Fabric
 
@@ -366,4 +363,4 @@ Tomorrow we'll explore MLflow integration in Fabric.
 
 - [Model Management in Fabric](https://learn.microsoft.com/en-us/fabric/data-science/model-management)
 - [MLflow Model Registry](https://mlflow.org/docs/latest/model-registry.html)
-- [Model Deployment Guide](https://learn.microsoft.com/en-us/fabric/data-science/model-scoring)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Model Deployment Guide](https://learn.microsoft.com/en-us/fabric/data-science/model-scoring)

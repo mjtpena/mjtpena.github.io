@@ -1,5 +1,6 @@
 ---
 title: "Azure IoT Edge: Intelligence at the Edge"
+description: "Streaming every sensor reading to the cloud sounds clean until you cost the bandwidth, or until the 4G link in the back of a truck drops for an hour. IoT…"
 author: Michael John Peña
 draft: false
 date: 2020-11-22
@@ -195,4 +196,4 @@ az iot hub monitor-events \
     --device-id myedgedevice
 ```
 
-IoT Edge: cloud intelligence where it matters most.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+IoT Edge: cloud intelligence where it matters most.

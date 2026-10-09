@@ -1,13 +1,11 @@
 ---
 title: "Building Intelligent Document Processing with Azure AI Services"
+description: "Intelligent document processing is where Azure AI Services earn their keep in enterprise settings — processing invoices, contracts, medical records, forms…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-03
 tags: ["Azure", "Document Intelligence", "AI", "Computer Vision", "OCR"]
-
 ---
-
-I wrote "Building Intelligent Document Processing with Azure AI Services" to share practical, production-minded guidance on this topic.
 
 Intelligent document processing is where Azure AI Services earn their keep in enterprise settings — processing invoices, contracts, medical records, forms, and correspondence at a scale and accuracy that would require hundreds of manual staff otherwise. Azure Document Intelligence (previously Form Recognizer) handles structured and semi-structured documents with prebuilt models for common document types; Azure AI Vision handles scene understanding and OCR for unstructured images; and combining either with Azure OpenAI adds the natural language layer for extracting intent and context that pure extraction models miss. The architecture decision that matters most: whether the document processing is synchronous (a user uploads a document and waits for a result) or asynchronous (documents are queued and processed in bulk) — because the service tier, retry strategy, and cost model are different for each.
 
@@ -449,4 +447,3 @@ matches = indexer.search_documents(
 ## Conclusion
 
 Azure's document processing capabilities enable powerful automation for invoice processing, receipt extraction, and document search. By combining Document Intelligence with Azure Cognitive Search, you can build comprehensive document management solutions. The key is building robust pipelines that handle errors gracefully and scale with your organization's needs.
-

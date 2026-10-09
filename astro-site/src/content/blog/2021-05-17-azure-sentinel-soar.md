@@ -1,5 +1,6 @@
 ---
 title: "Azure Sentinel SOAR: Automating Security Response"
+description: "In Sentinel, SOAR is implemented through Playbooks (Logic Apps) and Automation Rules."
 author: Michael John Peña
 draft: false
 date: 2021-05-17
@@ -9,10 +10,7 @@ tags:
   - Sentinel
   - SOAR
   - Automation
-
 ---
-
-I wrote "Azure Sentinel SOAR: Automating Security Response" to share practical, production-minded guidance on this topic.
 
 ## What is SOAR?
 
@@ -402,4 +400,4 @@ steps:
 
 - [Azure Sentinel Playbooks](https://docs.microsoft.com/en-us/azure/sentinel/tutorial-respond-threats-playbook)
 - [Automation Rules](https://docs.microsoft.com/en-us/azure/sentinel/automate-incident-handling-with-automation-rules)
-- [Sentinel Community Playbooks](https://github.com/Azure/Azure-Sentinel/tree/master/Playbooks)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Sentinel Community Playbooks](https://github.com/Azure/Azure-Sentinel/tree/master/Playbooks)

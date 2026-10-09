@@ -1,5 +1,6 @@
 ---
 title: "Azure DNS Private Resolver: Hybrid DNS for the Cloud Era"
+description: "DNS Private Resolver solves this without virtual machines."
 author: Michael John Peña
 draft: false
 date: 2022-03-29
@@ -9,10 +10,7 @@ tags:
   - Networking
   - Hybrid Cloud
   - Private Link
-
 ---
-
-I wrote "Azure DNS Private Resolver: Hybrid DNS for the Cloud Era" to share practical, production-minded guidance on this topic.
 
 ## The Hybrid DNS Challenge
 
@@ -372,4 +370,3 @@ For organizations with hybrid connectivity and private endpoints, DNS Private Re
 - [DNS Private Resolver Documentation](https://docs.microsoft.com/en-us/azure/dns/dns-private-resolver-overview)
 - [Hybrid DNS with Private Resolver](https://docs.microsoft.com/en-us/azure/dns/dns-private-resolver-get-started-portal)
 - [DNS Architecture Patterns](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-dns)
-

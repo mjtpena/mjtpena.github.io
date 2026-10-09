@@ -1,5 +1,6 @@
 ---
 title: "Hot Reload in .NET 6: Edit Code Without Restarting"
+description: "This is different from traditional \"Edit and Continue\" debugging - Hot Reload works with or without the debugger attached."
 author: Michael John Pena
 draft: false
 date: 2021-11-04
@@ -8,10 +9,7 @@ tags:
   - Visual Studio
   - Development
   - Productivity
-
 ---
-
-I wrote "Hot Reload in .NET 6: Edit Code Without Restarting" to share practical, production-minded guidance on this topic.
 
 ## What is Hot Reload?
 
@@ -355,4 +353,4 @@ Hot Reload transforms the development experience in .NET 6. The ability to see c
 ## Resources
 
 - [Hot Reload Documentation](https://docs.microsoft.com/en-us/visualstudio/debugger/hot-reload)
-- [dotnet watch Documentation](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-watch)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [dotnet watch Documentation](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-watch)

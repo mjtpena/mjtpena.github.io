@@ -1,5 +1,6 @@
 ---
 title: Multilingual Applications with Azure Translator
+description: "Azure Translator is one of the Cognitive Services that I've shipped most quietly—it tends to be a two-day integration rather than a headline feature, but…"
 author: Michael John Pena
 draft: false
 date: 2021-03-27

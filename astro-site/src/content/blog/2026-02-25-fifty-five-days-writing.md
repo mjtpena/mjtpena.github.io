@@ -1,5 +1,6 @@
 ---
 title: "Fifty-Five Days of Daily Writing"
+description: "I started this in January as an experiment. I keep doing it because it's become something I didn't expect."
 author: Michael John Peña
 draft: false
 date: 2026-02-25
@@ -8,10 +9,7 @@ tags:
   - Writing
   - Reflection
   - Career
-
 ---
-
-I wrote "Fifty-Five Days of Daily Writing" to share practical, production-minded guidance on this topic.
 
 I started this in January as an experiment. I keep doing it because it's become something I didn't expect.
 
@@ -87,4 +85,4 @@ The compounding happens quietly, then all at once.
 
 Day fifty-five doesn't look much different from day fifty-four. But it looks very different from day one.
 
-Start on day one.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Start on day one.

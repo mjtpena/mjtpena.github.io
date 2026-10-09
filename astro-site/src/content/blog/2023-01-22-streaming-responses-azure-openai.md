@@ -9,10 +9,7 @@ tags:
   - Streaming
   - Performance
   - UX
-
 ---
-
-I wrote "Streaming Responses with Azure OpenAI: Real-Time AI Output" to share practical, production-minded guidance on this topic.
 
 ## Why Streaming Matters
 
@@ -521,4 +518,4 @@ export default ChatComponent;
 
 - [OpenAI Streaming Guide](https://platform.openai.com/docs/api-reference/streaming)
 - [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
-- [Azure OpenAI Python SDK](https://github.com/openai/openai-python)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure OpenAI Python SDK](https://github.com/openai/openai-python)

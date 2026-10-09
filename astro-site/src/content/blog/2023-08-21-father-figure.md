@@ -1,5 +1,6 @@
 ---
 title: The Importance of a Father Figure
+description: "Throughout my life, \"Father Figure\" has been an evolving term. At nine, the loss of my biological father left me grappling with an abstract notion of…"
 author: Michael John Peña
 draft: false
 date: 2023-08-21T00:20:21.142Z
@@ -18,4 +19,4 @@ As I move ahead, I recognize my multi-faceted role in their lives. Beyond being 
 
 Their distinct personalities highlight the importance of recognizing individual strengths. Through these differences, they'll forge their paths. As their principal male role model, every day I'll work to ensure they appreciate their unique gifts as strengths.
 
-In my quest to understand "Father Figure," it's clear that its meaning refines daily through my interactions with Andriel and Archael. It's an expedition of love, growth, and legacy - a path I'm wholeheartedly committed to, building a foundation they can turn to in years to come.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+In my quest to understand "Father Figure," it's clear that its meaning refines daily through my interactions with Andriel and Archael. It's an expedition of love, growth, and legacy - a path I'm wholeheartedly committed to, building a foundation they can turn to in years to come.

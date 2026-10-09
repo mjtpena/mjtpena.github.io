@@ -1,5 +1,6 @@
 ---
 title: "Dataflows Gen2: Low-Code Data Transformation in Fabric"
+description: "Dataflows Gen2 provide an accessible way to build data transformations. Tomorrow, I will cover Mirroring in Fabric."
 author: Michael John Peña
 draft: false
 date: 2023-06-08
@@ -9,10 +10,7 @@ tags:
   - Power Query
   - ETL
   - Low-Code
-
 ---
-
-I wrote "Dataflows Gen2: Low-Code Data Transformation in Fabric" to share practical, production-minded guidance on this topic.
 
 ## Dataflows Gen2 Overview
 
@@ -289,4 +287,4 @@ Dataflows Gen2 provide an accessible way to build data transformations. Tomorrow
 
 - [Dataflows Gen2 Overview](https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview)
 - [Power Query M Reference](https://learn.microsoft.com/en-us/powerquery-m/)
-- [Dataflow Best Practices](https://learn.microsoft.com/en-us/power-query/best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Dataflow Best Practices](https://learn.microsoft.com/en-us/power-query/best-practices)

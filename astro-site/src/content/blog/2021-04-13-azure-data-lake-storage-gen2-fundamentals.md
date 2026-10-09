@@ -1,5 +1,6 @@
 ---
 title: Azure Data Lake Storage Gen2 - Building Modern Data Lakes
+description: "ADLS Gen2 is the storage layer that most enterprise data platforms in Australia are converging on. The combination of blob-scale storage (petabytes, low…"
 author: Michael John Peña
 draft: false
 date: 2021-04-13

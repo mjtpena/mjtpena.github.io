@@ -9,10 +9,7 @@ tags:
   - Model Serving
   - ML Inference
   - MLOps
-
 ---
-
-I wrote "Databricks Model Serving: Real-Time ML Inference at Scale" to share practical, production-minded guidance on this topic.
 
 ## Model Serving Overview
 
@@ -534,4 +531,3 @@ The integration with the broader Databricks ecosystem - MLflow, Feature Store, a
 - [Model Serving Documentation](https://docs.databricks.com/machine-learning/model-serving/index.html)
 - [Serving Endpoints API](https://docs.databricks.com/api/workspace/servingendpoints)
 - [Feature Store Serving](https://docs.databricks.com/machine-learning/feature-store/feature-serving.html)
-

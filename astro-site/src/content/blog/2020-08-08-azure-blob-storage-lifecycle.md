@@ -1,5 +1,6 @@
 ---
 title: "Managing Data with Azure Blob Storage Lifecycle Policies"
+description: "Storage bills creep. They never spike, they never alert, they just slowly become a line item somebody at finance asks about, and by then you've got several…"
 author: Michael John Peña
 draft: false
 date: 2020-08-08
@@ -239,4 +240,4 @@ Before implementing policies, estimate savings:
 - **Policies run once per day, on Microsoft's schedule.** Don't expect immediate transitions when you create a policy. It can take 24-48 hours for the first run.
 - **Test with a non-critical container first.** Once Archive happens, undoing it is a rehydrate, which costs money and time.
 
-For most clients, just moving anything older than 90 days into Cool produces visible savings within a billing cycle. Start there. Get fancier when you actually understand your access patterns.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+For most clients, just moving anything older than 90 days into Cool produces visible savings within a billing cycle. Start there. Get fancier when you actually understand your access patterns.

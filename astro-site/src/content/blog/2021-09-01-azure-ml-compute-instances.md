@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Azure Machine Learning Compute Instances
+description: "Azure ML Compute Instances are the development environment that removes the \"I can't reproduce the team's ML environment\" problem for data science teams.…"
 author: Michael John Pena
 draft: false
 date: 2021-09-01
@@ -120,4 +121,4 @@ for compute in computes:
 ml_client.compute.begin_stop("my-compute-instance").result()
 ```
 
-Compute instances are the perfect starting point for your Azure ML journey. They provide everything you need to explore data, build models, and collaborate with your team - all in a managed, secure environment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Compute instances are the perfect starting point for your Azure ML journey. They provide everything you need to explore data, build models, and collaborate with your team - all in a managed, secure environment.

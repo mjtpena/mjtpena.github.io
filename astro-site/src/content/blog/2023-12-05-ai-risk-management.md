@@ -1,13 +1,11 @@
 ---
 title: "AI Risk Management: Identifying and Mitigating AI Risks"
+description: "AI introduces risks that cut across data, models, operations and people. Over the past year I've helped teams map those risks to concrete controls — from…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-05
 tags: ["AI", "Risk Management", "Enterprise", "Security", "Governance"]
-
 ---
-
-I wrote "AI Risk Management: Identifying and Mitigating AI Risks" to share practical, production-minded guidance on this topic.
 
 AI introduces risks that cut across data, models, operations and people. Over the past year I've helped teams map those risks to concrete controls — from data lineage and model cards to runtime monitoring and human-in-the-loop checks — and this post explains the approach I find most practical.
 
@@ -368,4 +366,4 @@ class RiskMonitor:
         }
 ```
 
-Tomorrow, we'll explore model risk and how to manage it specifically for LLMs!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore model risk and how to manage it specifically for LLMs!

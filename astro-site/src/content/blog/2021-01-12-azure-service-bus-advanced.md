@@ -1,5 +1,6 @@
 ---
 title: "Azure Service Bus Advanced Patterns: Sessions, Transactions, and Dead-lettering"
+description: "Service Bus is the message broker I most often pull off the shelf in 2021, and it's the advanced patterns—not the basic queue—that earn it the spot.…"
 author: Michael John Peña
 draft: false
 date: 2021-01-12
@@ -206,4 +207,4 @@ az servicebus topic subscription rule create \
     --correlation-filter label=priority
 ```
 
-Service Bus: enterprise messaging patterns made simple.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Service Bus: enterprise messaging patterns made simple.

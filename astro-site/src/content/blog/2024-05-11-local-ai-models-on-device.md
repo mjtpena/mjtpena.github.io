@@ -1,5 +1,6 @@
 ---
 title: "Local AI Models: Running Intelligence On-Device"
+description: "Not every AI workload needs to call the cloud. Today I'm exploring when and how to run AI models locally on your device."
 author: Michael John Peña
 draft: false
 date: 2024-05-11
@@ -347,4 +348,4 @@ Tomorrow I'll dive into Microsoft's Phi-3 family of small language models.
 - [Hugging Face Model Hub](https://huggingface.co/models)
 - [ONNX Runtime](https://onnxruntime.ai/)
 - [llama.cpp](https://github.com/ggerganov/llama.cpp)
-- [Sentence Transformers](https://www.sbert.net/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Sentence Transformers](https://www.sbert.net/)

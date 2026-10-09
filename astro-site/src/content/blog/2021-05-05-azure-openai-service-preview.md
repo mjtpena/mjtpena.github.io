@@ -1,5 +1,6 @@
 ---
 title: "Azure Cognitive Services: Building Intelligent Applications"
+description: "Cognitive Services in mid-2021 is a sprawling catalogue—vision, speech, language, decision—that can be disorienting to navigate. Today's post is the…"
 author: Michael John Peña
 draft: false
 date: 2021-05-05

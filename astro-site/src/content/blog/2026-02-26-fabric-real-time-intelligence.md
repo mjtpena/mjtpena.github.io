@@ -1,5 +1,6 @@
 ---
 title: "Real-Time Intelligence in Microsoft Fabric: A Working Example"
+description: "Here's what it is, how it works, and a pattern that's running in production. Traditional analytics is batch-oriented. Data lands in storage, gets processed…"
 author: Michael John Peña
 draft: false
 date: 2026-02-26
@@ -8,10 +9,7 @@ tags:
   - Real-Time
   - Data
   - Engineering
-
 ---
-
-I wrote "Real-Time Intelligence in Microsoft Fabric: A Working Example" to share practical, production-minded guidance on this topic.
 
 Here's what it is, how it works, and a pattern that's running in production.
 
@@ -137,4 +135,4 @@ Real-Time Intelligence closes the gap between event-driven systems and analytica
 
 If you're running sensor networks, monitoring customer behaviour in real time, or building operational dashboards that need to reflect the current state of the world—this is the Fabric capability to invest in.
 
-Most teams haven't touched it yet. That's an opportunity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Most teams haven't touched it yet. That's an opportunity.

@@ -5,13 +5,10 @@ draft: false
 date: 2022-05-14
 tags:
   - power-platform
-  - connectors
-  - low-code
-  - azure
-
+  - Connectors
+  - Low-Code
+  - Azure
 ---
-
-I wrote "Power Platform Custom Connectors: Extending Low-Code Capabilities" to share practical, production-minded guidance on this topic.
 
 ## Custom Connector Overview
 
@@ -488,5 +485,3 @@ Power Platform custom connectors enable:
 - Policy-based request transformation
 
 Bridge your APIs to the low-code world and accelerate digital transformation.
-
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Factory Copy Activity: Moving Data at Scale"
+description: "The Copy Activity in Azure Data Factory is the activity I configure more than any other—it's the data movement primitive that connects over 90 source and…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-24
@@ -404,4 +405,4 @@ def analyze_copy_performance(client, resource_group, factory_name,
 4. **Handle errors gracefully**: Use skip incompatible rows
 5. **Monitor throughput**: Optimize based on metrics
 
-The Copy Activity is the foundation of data movement in Azure Data Factory, providing enterprise-grade data integration with extensive connector support and performance optimization capabilities.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Copy Activity is the foundation of data movement in Azure Data Factory, providing enterprise-grade data integration with extensive connector support and performance optimization capabilities.

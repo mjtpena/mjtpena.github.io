@@ -1,5 +1,6 @@
 ---
 title: "Ignite 2025 Day 1: Azure AI Foundry and New Model Capabilities"
+description: "The Azure AI Foundry represents Microsoft's vision for enterprise AI development - a unified platform that handles the complexity of model selection…"
 author: Michael John Peña
 draft: false
 date: 2025-11-15
@@ -9,10 +10,7 @@ tags:
   - Azure AI Foundry
   - GPT-4 Turbo
   - Announcements
-
 ---
-
-I wrote "Ignite 2025 Day 1: Azure AI Foundry and New Model Capabilities" to share practical, production-minded guidance on this topic.
 
 ## Azure AI Foundry
 
@@ -117,4 +115,4 @@ New content safety features include:
 - **Custom categories**: Define organization-specific content filters
 - **Automated red teaming**: Built-in adversarial testing tools
 
-The Azure AI Foundry represents Microsoft's vision for enterprise AI development - a unified platform that handles the complexity of model selection, deployment, and governance while maintaining flexibility for custom implementations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Azure AI Foundry represents Microsoft's vision for enterprise AI development - a unified platform that handles the complexity of model selection, deployment, and governance while maintaining flexibility for custom implementations.

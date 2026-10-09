@@ -1,5 +1,6 @@
 ---
 title: The Hybrid Cloud Journey with Microsoft Azure
+description: "Hybrid cloud is the trend right now I see in a lot of companies and enterprises. The term hybrid has grown too in the last couple of years. It used to be…"
 author: Michael John Peña
 draft: false
 date: 2021-08-28
@@ -101,7 +102,7 @@ Microsoft Arc allows you to have a single pane of glass for monitoring all of yo
 
 Hybrid cloud and Edge are the things that I'm really into right now. This will be my focus for the next few years to come.
 
-# Summary
+## Summary
 
 Microsoft Azure allows you to have a flexibility of your infrastructure:
 
@@ -115,7 +116,7 @@ Edge infrastructure allows you to run remote operations with high performance ha
 
 Azure arc allows you to centralize the management of your hybrid infrastructure.
 
-# Resources
+## Resources
 
 - [What is Hybrid Cloud?](https://azure.microsoft.com/en-gb/overview/what-is-hybrid-cloud-computing/)
 - [Multicloud and hybrid cloud solutions | Microsoft Azure](https://azure.microsoft.com/en-au/solutions/hybrid-cloud-app/#overview)

@@ -1,5 +1,6 @@
 ---
 title: "Fine-Tuning GPT-4o for Domain-Specific Tasks on Azure"
+description: "After training completes, evaluate on a held-out test set before deploying. Monitor the fine-tuned model's performance against the base model to ensure…"
 author: Michael John Peña
 draft: false
 date: 2025-07-14
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - MLOps
   - Python
-
 ---
-
-I wrote "Fine-Tuning GPT-4o for Domain-Specific Tasks on Azure" to share practical, production-minded guidance on this topic.
 
 ## Preparing Training Data
 
@@ -86,4 +84,4 @@ print(f"Fine-tuning job created: {job.id}")
 
 ## Evaluation and Deployment
 
-After training completes, evaluate on a held-out test set before deploying. Monitor the fine-tuned model's performance against the base model to ensure improvements justify the additional cost.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+After training completes, evaluate on a held-out test set before deploying. Monitor the fine-tuned model's performance against the base model to ensure improvements justify the additional cost.

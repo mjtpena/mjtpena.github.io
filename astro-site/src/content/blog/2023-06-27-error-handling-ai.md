@@ -1,5 +1,6 @@
 ---
 title: "Error Handling for AI Applications: Building Resilient Systems"
+description: "Robust error handling ensures AI applications remain useful even during failures. Tomorrow, I will cover retry strategies in more depth."
 author: Michael John Peña
 draft: false
 date: 2023-06-27
@@ -9,10 +10,7 @@ tags:
   - Resilience
   - Production
   - Best Practices
-
 ---
-
-I wrote "Error Handling for AI Applications: Building Resilient Systems" to share practical, production-minded guidance on this topic.
 
 ## Common Error Types
 
@@ -376,4 +374,4 @@ Robust error handling ensures AI applications remain useful even during failures
 ## Resources
 
 - [Azure OpenAI Error Codes](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference)
-- [Retry Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/retry)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Retry Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/retry)

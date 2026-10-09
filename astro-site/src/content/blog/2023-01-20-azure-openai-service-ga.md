@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Service is Now Generally Available"
+description: "Azure OpenAI Service gives you API access to OpenAI's models - GPT-3.5, Codex, and DALL-E - but running on Azure infrastructure with enterprise-grade security."
 author: Michael John Peña
 draft: false
 date: 2023-01-20
@@ -9,10 +10,7 @@ tags:
   - AI
   - GPT-3
   - Enterprise
-
 ---
-
-I wrote "Azure OpenAI Service is Now Generally Available" to share practical, production-minded guidance on this topic.
 
 ## What is Azure OpenAI Service?
 
@@ -197,4 +195,4 @@ This is a pivotal moment. The technology that powered ChatGPT is now available f
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 - [Azure OpenAI Pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)
 - [Responsible AI Practices](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/responsible-ai)
-- [Apply for Access](https://aka.ms/oai/access)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Apply for Access](https://aka.ms/oai/access)

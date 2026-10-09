@@ -1,5 +1,6 @@
 ---
 title: "Table Extraction with AI: From Images to Structured Data"
+description: "AI-powered table extraction handles complex layouts and normalizes data automatically."
 author: Michael John Peña
 draft: false
 date: 2025-04-20
@@ -9,10 +10,7 @@ tags:
   - Extraction
   - OCR
   - Data
-
 ---
-
-I wrote "Table Extraction with AI: From Images to Structured Data" to share practical, production-minded guidance on this topic.
 
 ## Table Extraction Pipeline
 
@@ -134,4 +132,4 @@ class TableExtractor:
         return pd.DataFrame(merged["data"])
 ```
 
-AI-powered table extraction handles complex layouts and normalizes data automatically.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI-powered table extraction handles complex layouts and normalizes data automatically.

@@ -10,10 +10,7 @@ tags:
   - Data Validation
   - Security
   - AI
-
 ---
-
-I wrote "Input Validation for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -600,4 +597,3 @@ print(f"Risk Score: {result['risk_score']:.2f}")
 ## Conclusion
 
 Input validation is critical for LLM application security. A comprehensive approach includes length and encoding checks, structure validation, content analysis, type-specific validation, context awareness, and rate limiting. Implementing these layers protects against injection attacks and abuse while ensuring data quality.
-

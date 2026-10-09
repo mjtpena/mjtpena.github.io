@@ -1,5 +1,6 @@
 ---
 title: "Multimodal RAG: Retrieval Across Text, Images, and Documents"
+description: "Multimodal RAG unlocks intelligence from documents containing text, tables, and images."
 author: Michael John Peña
 draft: false
 date: 2025-04-18
@@ -9,10 +10,7 @@ tags:
   - AI
   - Images
   - Documents
-
 ---
-
-I wrote "Multimodal RAG: Retrieval Across Text, Images, and Documents" to share practical, production-minded guidance on this topic.
 
 ## Multimodal RAG Pipeline
 
@@ -129,4 +127,4 @@ class MultimodalRAG:
         return response.choices[0].message.content
 ```
 
-Multimodal RAG unlocks intelligence from documents containing text, tables, and images.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multimodal RAG unlocks intelligence from documents containing text, tables, and images.

@@ -9,10 +9,7 @@ tags:
   - Docker
   - Containers
   - Edge Computing
-
 ---
-
-I wrote "2021-09-11-cognitive-services-containers" to share practical, production-minded guidance on this topic.
 
 ## Available Containerized Services
 
@@ -337,4 +334,5 @@ spec:
             path: /status
             port: 5000
           initialDelaySeconds: 10
-          periodSeconds: 5\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+          periodSeconds: 5
+```

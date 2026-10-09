@@ -1,5 +1,6 @@
 ---
 title: "Reflex Triggers: Building Automated Data Workflows"
+description: "Reflex triggers are the heart of Data Activator. Today I'm diving deep into building sophisticated automated workflows that respond to your data."
 author: Michael John Peña
 draft: false
 date: 2024-06-06
@@ -433,4 +434,4 @@ Tomorrow I'll cover automated actions in more depth.
 
 - [Data Activator Triggers](https://learn.microsoft.com/fabric/data-activator/data-activator-triggers)
 - [Condition Types](https://learn.microsoft.com/fabric/data-activator/data-activator-conditions)
-- [Best Practices](https://learn.microsoft.com/fabric/data-activator/data-activator-best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Best Practices](https://learn.microsoft.com/fabric/data-activator/data-activator-best-practices)

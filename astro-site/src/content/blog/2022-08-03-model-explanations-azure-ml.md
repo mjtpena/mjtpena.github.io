@@ -1,13 +1,11 @@
 ---
 title: "Model Explanations in Azure Machine Learning"
+description: "Model explanations build trust in AI systems and help identify areas for improvement."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-03
 tags: ["Azure", "Machine Learning", "Explainability", "Interpretability", "AI"]
-
 ---
-
-I wrote "Model Explanations in Azure Machine Learning" to share practical, production-minded guidance on this topic.
 
 ## Types of Explanations
 
@@ -241,4 +239,3 @@ if __name__ == "__main__":
 ```
 
 Model explanations build trust in AI systems and help identify areas for improvement.
-

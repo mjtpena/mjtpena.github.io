@@ -8,10 +8,7 @@ tags:
   - Knowledge Distillation
   - Machine Learning
   - Optimization
-
 ---
-
-I wrote "Model Distillation: Creating Efficient Student Models" to share practical, production-minded guidance on this topic.
 
 ## Distillation Overview
 
@@ -301,4 +298,4 @@ Tomorrow we'll dive deeper into knowledge distillation techniques.
 
 - [Distilling Knowledge in Neural Networks](https://arxiv.org/abs/1503.02531)
 - [TinyBERT](https://arxiv.org/abs/1909.10351)
-- [DistilBERT](https://arxiv.org/abs/1910.01108)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [DistilBERT](https://arxiv.org/abs/1910.01108)

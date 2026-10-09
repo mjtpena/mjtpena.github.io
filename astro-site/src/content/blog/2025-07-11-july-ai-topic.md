@@ -1,5 +1,6 @@
 ---
 title: "Building Multi-Agent Systems with Azure AI Foundry Orchestration"
+description: "Azure AI Foundry provides trace visualization showing the complete agent interaction graph, making it easy to debug complex workflows and optimize handoff…"
 author: Michael John Peña
 draft: false
 date: 2025-07-11
@@ -9,10 +10,7 @@ tags:
   - AI Orchestration
   - Python
   - Enterprise AI
-
 ---
-
-I wrote "Building Multi-Agent Systems with Azure AI Foundry Orchestration" to share practical, production-minded guidance on this topic.
 
 ## Defining Agent Roles
 
@@ -93,4 +91,4 @@ async def process_request(topic: str):
 
 ## Monitoring and Debugging
 
-Azure AI Foundry provides trace visualization showing the complete agent interaction graph, making it easy to debug complex workflows and optimize handoff conditions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure AI Foundry provides trace visualization showing the complete agent interaction graph, making it easy to debug complex workflows and optimize handoff conditions.

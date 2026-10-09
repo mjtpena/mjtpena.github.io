@@ -10,12 +10,9 @@ tags:
   - Security
   - NSG
   - Infrastructure
-
 ---
 
-I wrote "2021-07-17-network-security-groups" to share practical, production-minded guidance on this topic.
-
-# NSG Rule Basics
+## NSG Rule Basics
 
 NSG rules are evaluated by priority (100-4096, lower = higher priority):
 
@@ -26,7 +23,7 @@ NSG rules are evaluated by priority (100-4096, lower = higher priority):
 - **Port Range**: Single port, range, or * for all
 - **Action**: Allow or Deny
 
-# Creating NSGs with Terraform
+## Creating NSGs with Terraform
 
 Comprehensive NSG configuration:
 
@@ -227,7 +224,7 @@ resource "azurerm_subnet_network_security_group_association" "data" {
 }
 ```
 
-# Using Service Tags
+## Using Service Tags
 
 Leverage Azure service tags for dynamic rule updates:
 
@@ -317,7 +314,7 @@ resource "azurerm_network_security_group" "managed_services" {
 }
 ```
 
-# NSG Flow Logs
+## NSG Flow Logs
 
 Enable NSG flow logs for traffic analysis:
 
@@ -372,7 +369,7 @@ for nsg in ["nsg-web-tier", "nsg-api-tier", "nsg-data-tier"]:
     print(f"Enabled flow logs for {nsg}")
 ```
 
-# Diagnosing NSG Issues
+## Diagnosing NSG Issues
 
 Troubleshoot connectivity problems:
 
@@ -423,7 +420,7 @@ def diagnose_nsg_rules(resource_group, vm_name, direction, remote_ip, remote_por
 diagnose_nsg_rules("rg-compute", "vm-web-01", "Inbound", "0.0.0.0", 443)
 ```
 
-# Managing NSGs at Scale
+## Managing NSGs at Scale
 
 Automate NSG management across resources:
 
@@ -467,9 +464,8 @@ for issue in issues:
     print(f"NSG {issue['nsg']} missing rule for port {issue['missing_rule']['port']}")
 ```
 
-# Conclusion
+## Conclusion
 
 Network Security Groups are fundamental to Azure network security, providing stateful packet filtering at the subnet and NIC level. Effective NSG design follows the principle of least privilege, using explicit deny rules and service tags to maintain security while allowing necessary traffic.
 
 Enable NSG flow logs and traffic analytics to gain visibility into your network traffic patterns and quickly identify security issues. Regular auditing of NSG rules ensures compliance with security policies and helps identify overly permissive configurations.
-

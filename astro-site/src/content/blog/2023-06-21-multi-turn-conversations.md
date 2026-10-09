@@ -1,5 +1,6 @@
 ---
 title: "Multi-Turn Conversations: Managing State in AI Applications"
+description: "Multi-turn conversation management is essential for production chatbots. Tomorrow, I will cover conversation management strategies."
 author: Michael John Peña
 draft: false
 date: 2023-06-21
@@ -9,10 +10,7 @@ tags:
   - State Management
   - AI
   - Chatbots
-
 ---
-
-I wrote "Multi-Turn Conversations: Managing State in AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Conversation State Management
 
@@ -327,4 +325,4 @@ Multi-turn conversation management is essential for production chatbots. Tomorro
 
 - [Azure OpenAI Chat Completions](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt)
 - [Conversation Design](https://cloud.google.com/dialogflow/docs/conversation-design)
-- [Redis for Session Storage](https://redis.io/docs/data-types/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Redis for Session Storage](https://redis.io/docs/data-types/)

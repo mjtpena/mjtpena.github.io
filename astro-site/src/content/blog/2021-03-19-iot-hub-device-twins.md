@@ -1,5 +1,6 @@
 ---
 title: Azure IoT Hub Device Twins for State Management
+description: "Device twins are the feature in Azure IoT Hub that solved a problem I didn't fully appreciate until a client had 3,000 industrial sensors in two factories…"
 author: Michael John Pena
 draft: false
 date: 2021-03-19

@@ -1,5 +1,6 @@
 ---
 title: "Vision-Language Models: A Practical Guide for Data Applications"
+description: "Vision-language models transform how we interact with visual data. Start with simple use cases like dashboard analysis and expand to more complex document…"
 author: Michael John Peña
 draft: false
 date: 2025-01-29
@@ -9,10 +10,7 @@ tags:
   - VLM
   - Azure
   - GPT-4o
-
 ---
-
-I wrote "Vision-Language Models: A Practical Guide for Data Applications" to share practical, production-minded guidance on this topic.
 
 ## Understanding Vision-Language Models
 
@@ -411,4 +409,4 @@ def select_detail_level(image_path: str, task: str) -> str:
 4. **Use detail parameter**: Control cost vs. accuracy tradeoff
 5. **Batch when possible**: Process multiple images in one call
 
-Vision-language models transform how we interact with visual data. Start with simple use cases like dashboard analysis and expand to more complex document processing workflows.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Vision-language models transform how we interact with visual data. Start with simple use cases like dashboard analysis and expand to more complex document processing workflows.

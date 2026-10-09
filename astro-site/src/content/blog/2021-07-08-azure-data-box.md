@@ -10,12 +10,9 @@ tags:
   - Migration
   - Data Box
   - Storage
-
 ---
 
-I wrote "2021-07-08-azure-data-box" to share practical, production-minded guidance on this topic.
-
-# Data Box Family Overview
+## Data Box Family Overview
 
 Azure offers several Data Box options:
 
@@ -24,7 +21,7 @@ Azure offers several Data Box options:
 - **Data Box Heavy**: Up to 1 PB storage capacity
 - **Data Box Gateway**: Virtual appliance for ongoing transfers
 
-# Ordering a Data Box
+## Ordering a Data Box
 
 Create a Data Box order programmatically:
 
@@ -106,7 +103,7 @@ print(f"Order created: {result.name}")
 print(f"Status: {result.status}")
 ```
 
-# Preparing Data for Copy
+## Preparing Data for Copy
 
 Prepare your data for optimal transfer:
 
@@ -159,7 +156,7 @@ function Validate-DataStructure {
 Validate-DataStructure -SourcePath "D:\DataToMigrate" -ReportPath "C:\Reports\validation.json"
 ```
 
-# Copying Data to Data Box
+## Copying Data to Data Box
 
 Use robocopy or AzCopy for efficient data transfer:
 
@@ -198,7 +195,7 @@ switch ($exitCode) {
 }
 ```
 
-# Using AzCopy for Data Box
+## Using AzCopy for Data Box
 
 AzCopy provides better performance for large transfers:
 
@@ -225,7 +222,7 @@ azcopy jobs resume <job-id>
 azcopy jobs show <job-id>
 ```
 
-# Verifying Data Integrity
+## Verifying Data Integrity
 
 Validate data after copy:
 
@@ -301,7 +298,7 @@ else:
     print("All files verified successfully")
 ```
 
-# Monitoring Order Status
+## Monitoring Order Status
 
 Track your Data Box order:
 
@@ -336,7 +333,7 @@ for log in copy_logs:
     print(f"Copy Log: {log.job_secrets}")
 ```
 
-# Data Box Gateway for Ongoing Transfers
+## Data Box Gateway for Ongoing Transfers
 
 Set up Data Box Gateway for continuous migration:
 
@@ -372,9 +369,8 @@ Invoke-Command -Session $session -ScriptBlock {
 Get-DataBoxGatewaySyncStatus -GatewayName "DataBoxGateway" -ResourceGroupName "rg-databox"
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Data Box provides an essential solution for large-scale data migrations where network transfer is impractical. Whether you choose Data Box Disk for smaller datasets or Data Box Heavy for petabyte-scale migrations, the process is straightforward: order, copy, ship, and verify.
 
 The key to success is proper preparation: validate your data structure, create checksums for verification, and use tools like robocopy or AzCopy with appropriate settings for reliable data transfer. With proper planning, Data Box enables you to migrate massive datasets to Azure efficiently and securely.
-

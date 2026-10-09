@@ -1,5 +1,6 @@
 ---
 title: "Jobs in Azure Container Apps: Event-Driven Batch Processing"
+description: "Jobs in Container Apps provide flexible batch processing capabilities. Tomorrow, I will cover Dapr 1.11 updates."
 author: Michael John Peña
 draft: false
 date: 2023-05-29
@@ -9,10 +10,7 @@ tags:
   - Batch Processing
   - Event-Driven
   - Serverless
-
 ---
-
-I wrote "Jobs in Azure Container Apps: Event-Driven Batch Processing" to share practical, production-minded guidance on this topic.
 
 ## Job Types
 
@@ -426,4 +424,4 @@ Jobs in Container Apps provide flexible batch processing capabilities. Tomorrow,
 
 - [Container Apps Jobs](https://learn.microsoft.com/en-us/azure/container-apps/jobs)
 - [Job Tutorial](https://learn.microsoft.com/en-us/azure/container-apps/tutorial-jobs-github-actions)
-- [KEDA Scalers](https://keda.sh/docs/2.10/scalers/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [KEDA Scalers](https://keda.sh/docs/2.10/scalers/)

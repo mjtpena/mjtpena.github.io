@@ -1,5 +1,6 @@
 ---
 title: "Databricks Feature Store: Centralized Feature Management for ML"
+description: "The Feature Store solves these problems."
 author: Michael John Peña
 draft: false
 date: 2022-03-16
@@ -9,10 +10,7 @@ tags:
   - Feature Store
   - Machine Learning
   - MLOps
-
 ---
-
-I wrote "Databricks Feature Store: Centralized Feature Management for ML" to share practical, production-minded guidance on this topic.
 
 ## Why Feature Stores Matter
 
@@ -443,4 +441,3 @@ By investing in feature infrastructure, teams can iterate faster, avoid duplicat
 - [Feature Store Documentation](https://docs.databricks.com/machine-learning/feature-store/index.html)
 - [Feature Engineering Best Practices](https://docs.databricks.com/machine-learning/feature-store/best-practices.html)
 - [Online Feature Serving](https://docs.databricks.com/machine-learning/feature-store/online-feature-stores.html)
-

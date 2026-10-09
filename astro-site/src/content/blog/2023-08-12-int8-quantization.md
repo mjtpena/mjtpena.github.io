@@ -8,10 +8,7 @@ tags:
   - Quantization
   - Model Optimization
   - Inference
-
 ---
-
-I wrote "INT8 Quantization: Practical Implementation Guide" to share practical, production-minded guidance on this topic.
 
 ## INT8 Fundamentals
 
@@ -263,4 +260,4 @@ Tomorrow we'll explore model distillation techniques.
 
 - [LLM.int8() Paper](https://arxiv.org/abs/2208.07339)
 - [PyTorch Quantization](https://pytorch.org/docs/stable/quantization.html)
-- [ONNX Runtime Quantization](https://onnxruntime.ai/docs/performance/quantization.html)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [ONNX Runtime Quantization](https://onnxruntime.ai/docs/performance/quantization.html)

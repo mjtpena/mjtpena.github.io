@@ -1,15 +1,13 @@
 ---
 title: SSH Connect to Linux Server from a Mac using SOCKS5 Proxy
+description: "I've been spending a lot of time lately in setting up on-premises Linux Servers. There are a lot of reasons why you would like to SSH to a Linux server such…"
 author: Michael John Peña
 draft: false
 date: 2021-06-24
 url: /blog/ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy/
 tags:
   - Technology
-
 ---
-
-I wrote "2021-06-24-ssh-connect-to-linux-server-from-a-mac-using-socks5-proxy" to share practical, production-minded guidance on this topic.
 
 I've been spending a lot of time lately in setting up on-premises Linux Servers. There are a lot of reasons why you would like to SSH to a Linux server such as checking configuration files, copying files, or even port forwarding.
 
@@ -68,4 +66,3 @@ Note that it could also work the other way around (from Linux Server to MacOS lo
 The world of Linux and command lines are wonderful and very flexible. There are more things you can do once you're inside the server. Happy SSH-ing!
 
 [1]: https://github.com/gotoh/ssh-connect
-

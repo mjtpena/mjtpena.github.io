@@ -1,13 +1,11 @@
 ---
 title: "Notebooks in Azure Data Studio"
+description: "Notebooks consist of cells that can contain either code or markdown text. Code cells can execute SQL, Python, PowerShell, or other languages depending on…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-23
 tags: ["Azure", "Azure Data Studio", "Notebooks", "Documentation"]
-
 ---
-
-I wrote "Notebooks in Azure Data Studio" to share practical, production-minded guidance on this topic.
 
 ## Creating and Using Notebooks
 
@@ -284,4 +282,4 @@ azuredatastudio --run-notebook $notebookPath --connection $connectionString
 4. **Version control** - Track changes in Git
 5. **Test regularly** - Validate notebooks still work
 
-Notebooks transform how you document and share database knowledge.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Notebooks transform how you document and share database knowledge.

@@ -1,5 +1,6 @@
 ---
 title: "2025 AI Year in Review: The Year Agents Became Real"
+description: "The most significant shift this year was the maturation of autonomous AI agents. What started as experimental frameworks evolved into production-ready…"
 author: Michael John Peña
 draft: false
 date: 2025-12-01
@@ -9,10 +10,7 @@ tags:
   - Agents
   - LLM
   - "2025"
-
 ---
-
-I wrote "2025 AI Year in Review: The Year Agents Became Real" to share practical, production-minded guidance on this topic.
 
 ## The Agent Revolution
 
@@ -64,4 +62,4 @@ response = await agent.invoke("Analyze the impact of AI on healthcare in 2025")
 
 The biggest lesson from 2025: successful AI implementation isn't about the most advanced model - it's about robust orchestration, proper guardrails, and clear human-in-the-loop policies. Organizations that focused on these fundamentals outperformed those chasing the latest model releases.
 
-Looking ahead to 2026, we'll see agents become even more autonomous, but the winners will be those who master the balance between capability and control.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Looking ahead to 2026, we'll see agents become even more autonomous, but the winners will be those who master the balance between capability and control.

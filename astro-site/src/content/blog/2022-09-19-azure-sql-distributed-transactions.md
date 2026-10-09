@@ -1,13 +1,11 @@
 ---
 title: "Distributed Transactions in Azure SQL Managed Instance"
+description: "Distributed transactions coordinate changes across multiple databases using the two-phase commit protocol. Managed Instance supports both cross-database and…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-19
 tags: ["Azure", "SQL Managed Instance", "Transactions", "DTC"]
-
 ---
-
-I wrote "Distributed Transactions in Azure SQL Managed Instance" to share practical, production-minded guidance on this topic.
 
 ## Understanding Distributed Transactions
 
@@ -368,4 +366,4 @@ END CATCH
 4. **Isolation level** - Choose carefully for your consistency needs
 5. **Error handling** - Implement robust retry and compensation logic
 
-Distributed transactions in Azure SQL Managed Instance enable enterprise-grade data consistency across complex architectures.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Distributed transactions in Azure SQL Managed Instance enable enterprise-grade data consistency across complex architectures.

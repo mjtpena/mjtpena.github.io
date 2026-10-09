@@ -9,10 +9,7 @@ tags:
   - Container Apps
   - Containers
   - Serverless
-
 ---
-
-I wrote "2021-06-28-azure-container-apps-concepts" to share practical, production-minded guidance on this topic.
 
 ## Container Apps Architecture
 
@@ -499,4 +496,3 @@ Azure Container Apps combines the simplicity of serverless with the power of con
 
 - [Azure Container Apps Documentation](https://docs.microsoft.com/en-us/azure/container-apps/)
 - [KEDA Scalers](https://keda.sh/docs/scalers/)
-

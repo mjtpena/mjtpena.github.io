@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions with Python: Getting Started"
+description: ".NET on Functions is the default story Microsoft tells, but in practice the serverless workload that lands on my desk most often is a Python data scientist…"
 author: Michael John Peña
 draft: false
 date: 2020-09-27
@@ -111,4 +112,4 @@ scikit-learn
 func azure functionapp publish MyFunctionApp --python
 ```
 
-Python Functions unlock ML inference, data processing, and analytics at serverless scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Python Functions unlock ML inference, data processing, and analytics at serverless scale.

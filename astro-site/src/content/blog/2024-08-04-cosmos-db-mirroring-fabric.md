@@ -9,10 +9,7 @@ tags:
   - Mirroring
   - NoSQL
   - Analytics
-
 ---
-
-I wrote "Cosmos DB Mirroring to Fabric: Analytical Queries at Scale" to share practical, production-minded guidance on this topic.
 
 ## How Cosmos DB Mirroring Works
 
@@ -399,4 +396,3 @@ def check_analytical_store_health(cosmos_client, database_name: str):
 Cosmos DB mirroring brings your NoSQL data into the Fabric analytics ecosystem without ETL complexity. The integration through analytical store and Synapse Link provides a well-tested path to analytical workloads.
 
 Enable analytical store on your containers, create the mirror, and start querying your document data with SQL and Spark.
-

@@ -1,5 +1,6 @@
 ---
 title: "Document Summarization Patterns with GPT-4"
+description: "Effective summarization adapts to document type, size, and audience needs. These patterns provide a foundation for production-ready summarization systems."
 author: Michael John Pena
 draft: false
 date: 2023-03-25
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Summarization
   - NLP
-
 ---
-
-I wrote "Document Summarization Patterns with GPT-4" to share practical, production-minded guidance on this topic.
 
 ## Summarization Approaches
 
@@ -471,4 +469,3 @@ Return JSON with scores and explanations."""
 ```
 
 Effective summarization adapts to document type, size, and audience needs. These patterns provide a foundation for production-ready summarization systems.
-

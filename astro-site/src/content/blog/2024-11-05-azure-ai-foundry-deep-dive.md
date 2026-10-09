@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Foundry Deep Dive: Building Enterprise AI Applications"
+description: "Azure AI Foundry provides the foundation for building enterprise-grade AI applications with proper tooling, evaluation, and monitoring. The platform…"
 author: Michael John Peña
 draft: false
 date: 2024-11-05
@@ -9,10 +10,7 @@ tags:
   - Azure AI Foundry
   - Enterprise AI
   - Ignite 2024
-
 ---
-
-I wrote "Azure AI Foundry Deep Dive: Building Enterprise AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Your First AI Foundry Project
 
@@ -356,4 +354,4 @@ Azure AI Foundry provides the foundation for building enterprise-grade AI applic
 
 - [Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/)
 - [AI Foundry SDK Reference](https://learn.microsoft.com/en-us/python/api/azure-ai-foundry/)
-- [Best Practices Guide](https://learn.microsoft.com/en-us/azure/ai-foundry/best-practices/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Best Practices Guide](https://learn.microsoft.com/en-us/azure/ai-foundry/best-practices/)

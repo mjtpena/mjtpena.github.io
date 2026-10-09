@@ -1,5 +1,6 @@
 ---
 title: "Fine-Tuning vs RAG: The 2026 Decision Guide"
+description: "In 2024, the community consensus was \"RAG first, fine-tune never.\" In 2026, it's more nuanced."
 author: Michael John Peña
 draft: false
 date: 2026-02-20
@@ -8,10 +9,7 @@ tags:
   - RAG
   - Engineering
   - Architecture
-
 ---
-
-I wrote "Fine-Tuning vs RAG: The 2026 Decision Guide" to share practical, production-minded guidance on this topic.
 
 In 2024, the community consensus was "RAG first, fine-tune never." In 2026, it's more nuanced.
 
@@ -126,4 +124,4 @@ RAG is still the right starting point. It's faster to build, easier to update, a
 
 Fine-tuning earns its place when consistency, latency, or highly specialized behavior matters more than flexibility.
 
-Know what problem you're solving. The answer will follow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Know what problem you're solving. The answer will follow.

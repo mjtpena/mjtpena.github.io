@@ -1,17 +1,15 @@
 ---
 title: "Azure Deployment Environments: Infrastructure as Code for Dev Teams"
+description: "Azure Deployment Environments addresses these challenges with templated, self-service infrastructure."
 author: Michael John Peña
 draft: false
 date: 2022-05-02
 tags:
-  - azure
+  - Azure
   - deployment-environments
   - infrastructure-as-code
-  - devops
-
+  - DevOps
 ---
-
-I wrote "Azure Deployment Environments: Infrastructure as Code for Dev Teams" to share practical, production-minded guidance on this topic.
 
 ## The Problem It Solves
 
@@ -268,5 +266,3 @@ Azure Deployment Environments bridges the gap between developer agility and plat
 - Integration with existing DevOps workflows
 
 This service complements Microsoft Dev Box by providing the backend infrastructure that developers need alongside their cloud workstations.
-
-

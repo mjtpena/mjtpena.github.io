@@ -1,5 +1,6 @@
 ---
 title: "Embedding Power BI Reports in Your Applications"
+description: "A client this month wanted dashboards living inside their existing customer portal — \"looks like my app, not like Power BI.\" That's the embedded analytics…"
 author: Michael John Peña
 draft: false
 date: 2020-08-03
@@ -8,9 +9,7 @@ tags:
   - Azure
   - Analytics
   - Embedded
-
 ---
-
 
 A client this month wanted dashboards living inside their existing customer portal — "looks like my app, not like Power BI." That's the embedded analytics conversation, and with everyone working from home this year, I'm having it more often than ever. Here's the path I take when standing up Power BI Embedded with the App-Owns-Data pattern, which is the right shape for almost any SaaS scenario.
 
@@ -223,5 +222,4 @@ Embedded is capacity-based, which is a different mental model from per-user lice
 - **Dataset refresh time eats capacity too**, not just rendering. A handful of expensive nightly refreshes can starve daytime user requests on a small SKU.
 - **Premium Per User (PPU)** is the cheapest way to develop and test embedded scenarios without committing to a capacity.
 
-The thing I keep telling clients about embedded analytics: the technical embed is the easy part. The hard part is the data model and row-level security underneath it. Get that right and the rest is wiring.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+The thing I keep telling clients about embedded analytics: the technical embed is the easy part. The hard part is the data model and row-level security underneath it. Get that right and the rest is wiring.

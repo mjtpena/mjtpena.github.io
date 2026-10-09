@@ -1,5 +1,6 @@
 ---
 title: Advanced Traffic Management with Azure Front Door Rules Engine
+description: "Front Door's global load balancing and caching are easy to understand. The Rules Engine is the part that turns it into a real edge platform. Conditions on…"
 author: Michael John Peña
 draft: false
 date: 2021-02-09

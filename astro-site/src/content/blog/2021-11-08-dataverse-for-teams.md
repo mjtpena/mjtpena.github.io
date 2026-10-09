@@ -1,18 +1,16 @@
 ---
 title: "Dataverse for Teams: Building Data-Driven Apps Inside Microsoft Teams"
+description: "Dataverse for Teams democratizes data platform capabilities. Teams users can now build real applications with proper data management without needing IT…"
 author: Michael John Pena
 draft: false
 date: 2021-11-08
 tags:
-  - Dataverse
+  - dataverse
   - Microsoft Teams
   - Power Platform
   - Low Code
   - Data
-
 ---
-
-I wrote "Dataverse for Teams: Building Data-Driven Apps Inside Microsoft Teams" to share practical, production-minded guidance on this topic.
 
 ## What is Dataverse for Teams?
 
@@ -323,4 +321,4 @@ Dataverse for Teams democratizes data platform capabilities. Teams users can now
 
 - [Dataverse for Teams Overview](https://docs.microsoft.com/en-us/power-apps/teams/overview-data-platform)
 - [Build Apps in Teams](https://docs.microsoft.com/en-us/power-apps/teams/create-apps-overview)
-- [Power Fx Reference](https://docs.microsoft.com/en-us/power-platform/power-fx/overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Power Fx Reference](https://docs.microsoft.com/en-us/power-platform/power-fx/overview)

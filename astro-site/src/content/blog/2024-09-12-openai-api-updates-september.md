@@ -4,10 +4,7 @@ author: "Michael John Peña"
 draft: false
 date: 2024-09-12
 tags: ["OpenAI", "API", "Updates", "AI", "Development"]
-
 ---
-
-I wrote "OpenAI API Updates: September 2024 Changes You Need to Know" to share practical, production-minded guidance on this topic.
 
 ## New API Version
 
@@ -271,4 +268,3 @@ response = client.chat.completions.create(**params)
 | Context window | 128k | 128k |
 
 Stay updated with OpenAI's changelog for additional features as they're released throughout September and beyond.
-

@@ -1,5 +1,6 @@
 ---
 title: Azure Data Factory Triggers - Orchestrating Data Pipelines
+description: "ADF trigger design is where data pipeline reliability is won or lost. Schedule triggers are obvious—run at midnight, run every hour—but the interesting…"
 author: Michael John Peña
 draft: false
 date: 2021-04-15

@@ -1,13 +1,11 @@
 ---
 title: "SQLCMD Mode in Azure Data Studio"
+description: "SQLCMD mode transforms Azure Data Studio into a powerful deployment and scripting platform."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-29
 tags: ["Azure", "Azure Data Studio", "SQLCMD", "Scripting"]
-
 ---
-
-I wrote "SQLCMD Mode in Azure Data Studio" to share practical, production-minded guidance on this topic.
 
 ## Enabling SQLCMD Mode
 
@@ -308,4 +306,4 @@ PRINT 'Starting deployment at ' + CONVERT(VARCHAR, GETDATE(), 120);
 :r ".\04_PostDeployment.sql"
 ```
 
-SQLCMD mode transforms Azure Data Studio into a powerful deployment and scripting platform.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+SQLCMD mode transforms Azure Data Studio into a powerful deployment and scripting platform.

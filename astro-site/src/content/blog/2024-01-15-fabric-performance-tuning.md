@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Performance Tuning: From Notebooks to Reports"
+description: "When diagnosing Fabric performance, I've found the root cause can be anywhere from Spark configs to report visuals. This guide consolidates tuning…"
 author: Michael John Peña
 draft: false
 date: 2024-01-15

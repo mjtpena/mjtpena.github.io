@@ -1,18 +1,16 @@
 ---
 title: "Custom Logs in Azure Monitor: Ingesting Any Data Source"
+description: "Custom logs enable comprehensive observability across all your applications and services."
 author: Michael John Peña
 draft: false
 date: 2022-02-27
 url: /blog/custom-logs-azure-monitor/
 tags:
-  - azure
-  - monitoring
+  - Azure
+  - Monitoring
   - custom-logs
   - data-ingestion
-
 ---
-
-I wrote "Custom Logs in Azure Monitor: Ingesting Any Data Source" to share practical, production-minded guidance on this topic.
 
 ## Custom Table Setup
 
@@ -292,4 +290,4 @@ resource fileLogDCR 'Microsoft.Insights/dataCollectionRules@2021-09-01-preview' 
 }
 ```
 
-Custom logs enable comprehensive observability across all your applications and services.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Custom logs enable comprehensive observability across all your applications and services.

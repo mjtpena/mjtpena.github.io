@@ -1,13 +1,11 @@
 ---
 title: "Agent Reliability Patterns: Building Robust AI Systems"
+description: "Building reliable agents requires investment in error handling, recovery mechanisms, and observability. These patterns form the foundation for production AI…"
 author: "Michael John Peña"
 draft: false
 date: 2024-09-21
 tags: ["AI Agents", "Reliability", "Best Practices", "Architecture", "Production"]
-
 ---
-
-I wrote "Agent Reliability Patterns: Building Robust AI Systems" to share practical, production-minded guidance on this topic.
 
 ## The Reliability Stack
 
@@ -369,4 +367,4 @@ with agent_logger.session("Find a laptop under $1000"):
     pass
 ```
 
-Building reliable agents requires investment in error handling, recovery mechanisms, and observability. These patterns form the foundation for production AI systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Building reliable agents requires investment in error handling, recovery mechanisms, and observability. These patterns form the foundation for production AI systems.

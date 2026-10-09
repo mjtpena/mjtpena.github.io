@@ -1,13 +1,11 @@
 ---
 title: "Designing AKS Node Pools for Production Workloads"
+description: "Node pools are the AKS mechanism for running heterogeneous workloads on a single cluster—different VM SKUs, OS types, and node configurations within the…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-02
 tags: ["Azure", "Kubernetes", "AKS", "Infrastructure"]
-
 ---
-
-I wrote "Designing AKS Node Pools for Production Workloads" to share practical, production-minded guidance on this topic.
 
 Node pools are the AKS mechanism for running heterogeneous workloads on a single cluster—different VM SKUs, OS types, and node configurations within the same cluster namespace. The system node pool (required, Linux) runs critical cluster components: CoreDNS, metrics-server, and the AKS-managed system pods. User node pools run your application workloads. The design principle: isolate workloads with different hardware or OS requirements into separate node pools, use taints and tolerations to ensure pods schedule on the right pool, and size node pools for the expected workload shape. For a cluster running both web API pods (CPU-bound, benefit from burstable B-series VMs) and ML inference pods (GPU-required, need NC-series), two user node pools with distinct VM SKUs and taints is the correct architecture.
 
@@ -216,4 +214,3 @@ resource "azurerm_kubernetes_cluster_node_pool" "memory" {
 Thoughtful node pool design is crucial for running efficient, cost-effective Kubernetes workloads. By separating workloads and matching resources to requirements, you can optimize both performance and cost.
 
 Tomorrow, we'll explore spot node pools for cost optimization with interruptible workloads.
-

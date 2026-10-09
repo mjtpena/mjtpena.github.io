@@ -9,10 +9,7 @@ tags:
   - RPA
   - Automation
   - Enterprise
-
 ---
-
-I wrote "RPA with Azure: Scaling Robotic Process Automation in the Cloud" to share practical, production-minded guidance on this topic.
 
 ## Enterprise RPA Architecture
 
@@ -447,4 +444,3 @@ Combining Power Automate Desktop with Azure services enables organizations to sc
 - [Power Automate Desktop in Azure](https://docs.microsoft.com/en-us/power-automate/desktop-flows/run-desktop-flow)
 - [Unattended Desktop Flows](https://docs.microsoft.com/en-us/power-automate/desktop-flows/run-unattended-desktop-flows)
 - [Azure VM Best Practices](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/overview)
-

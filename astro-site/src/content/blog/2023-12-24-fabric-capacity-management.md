@@ -1,13 +1,11 @@
 ---
 title: "Fabric Capacity Management: Right-Sizing Your Platform"
+description: "Right-sizing Fabric capacity is a finance-and-engineering problem: choose a capacity SKU that matches peak loading patterns, instrument CU consumption, and…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-24
 tags: ["Microsoft Fabric", "Capacity", "Cost Management", "Planning", "Operations"]
-
 ---
-
-I wrote "Fabric Capacity Management: Right-Sizing Your Platform" to share practical, production-minded guidance on this topic.
 
 Right-sizing Fabric capacity is a finance-and-engineering problem: choose a capacity SKU that matches peak loading patterns, instrument CU consumption, and schedule heavy workloads. The strategies below come from real customers who avoided throttle-induced incidents.
 
@@ -279,4 +277,4 @@ class CapacityPlanner:
         return plan
 ```
 
-Tomorrow, we'll explore cost optimization strategies for Fabric!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore cost optimization strategies for Fabric!

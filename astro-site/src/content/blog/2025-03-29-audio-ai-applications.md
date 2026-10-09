@@ -1,5 +1,6 @@
 ---
 title: "Audio AI Applications: Speech, Music, and Sound Processing"
+description: "Audio AI enables hands-free interfaces and automated analysis of voice content."
 author: Michael John Peña
 draft: false
 date: 2025-03-29
@@ -9,10 +10,7 @@ tags:
   - Speech
   - Whisper
   - Applications
-
 ---
-
-I wrote "Audio AI Applications: Speech, Music, and Sound Processing" to share practical, production-minded guidance on this topic.
 
 ## Audio AI Pipeline
 
@@ -110,4 +108,4 @@ class AudioAIAgent:
         return assistant_text, audio_response
 ```
 
-Audio AI enables hands-free interfaces and automated analysis of voice content.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Audio AI enables hands-free interfaces and automated analysis of voice content.

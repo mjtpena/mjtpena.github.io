@@ -1,13 +1,11 @@
 ---
 title: "Understanding Hyperscale Citus Architecture"
+description: "Understanding this architecture helps you make informed decisions about data modeling and query optimization in your distributed PostgreSQL deployments."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-02
 tags: ["Azure", "Citus", "PostgreSQL", "Architecture", "Distributed Systems"]
-
 ---
-
-I wrote "Understanding Hyperscale Citus Architecture" to share practical, production-minded guidance on this topic.
 
 ## The Coordinator-Worker Model
 
@@ -83,4 +81,4 @@ After adding nodes, rebalance your shards:
 SELECT rebalance_table_shards();
 ```
 
-Understanding this architecture helps you make informed decisions about data modeling and query optimization in your distributed PostgreSQL deployments.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Understanding this architecture helps you make informed decisions about data modeling and query optimization in your distributed PostgreSQL deployments.

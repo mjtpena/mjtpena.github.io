@@ -5,14 +5,11 @@ draft: false
 date: 2025-12-14
 tags:
   - Azure
-  - Container-Apps
+  - container-apps
   - AKS
   - Kubernetes
   - Architecture
-
 ---
-
-I wrote "Azure Container Apps vs Azure Kubernetes Service: When to Use Each" to share practical, production-minded guidance on this topic.
 
 ## Quick Decision Framework
 
@@ -119,4 +116,5 @@ spec:
           valueFrom:
             secretKeyRef:
               name: db-secrets
-              key: connection-string\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+              key: connection-string
+```

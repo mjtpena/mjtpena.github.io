@@ -9,10 +9,7 @@ tags:
   - Human-in-the-Loop
   - LangGraph
   - Enterprise
-
 ---
-
-I wrote "Human-in-the-Loop AI Agents: Building Trust Through Oversight" to share practical, production-minded guidance on this topic.
 
 ## When to Use HITL
 
@@ -569,4 +566,3 @@ def get_audit(session_id: str):
 Human-in-the-loop patterns bridge the gap between AI capability and human accountability. For high-stakes operations, HITL provides the safety net that makes AI adoption possible.
 
 Start with simple approval flows, add complexity (multi-approval, escalation, timeouts) as your use cases require.
-

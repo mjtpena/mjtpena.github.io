@@ -1,5 +1,6 @@
 ---
 title: CosmosDB Change Feed Patterns for Event-Driven Architectures
+description: "Cosmos DB Change Feed is the feature most teams discover six months after they've already hand-rolled a polling loop they'll regret. It's a sorted…"
 author: Michael John Pena
 draft: false
 date: 2021-01-26
@@ -564,4 +565,4 @@ public class ChangeFeedMonitor : BackgroundService
 5. **Lease Management**: Monitor lease container for partition distribution
 6. **Batch Processing**: Process changes in batches for efficiency
 
-Cosmos DB Change Feed enables powerful event-driven architectures. Combined with Azure Functions or the Change Feed Processor, you can build reactive systems that respond to data changes in real-time.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Cosmos DB Change Feed enables powerful event-driven architectures. Combined with Azure Functions or the Change Feed Processor, you can build reactive systems that respond to data changes in real-time.

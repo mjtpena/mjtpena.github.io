@@ -1,13 +1,11 @@
 ---
 title: "Prometheus Metrics Collection in AKS"
+description: "Prometheus became the observability standard for Kubernetes because its data model—time-series metrics with labels—maps naturally to the dynamic…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-08
 tags: ["Azure", "Kubernetes", "AKS", "Prometheus", "Monitoring"]
-
 ---
-
-I wrote "Prometheus Metrics Collection in AKS" to share practical, production-minded guidance on this topic.
 
 Prometheus became the observability standard for Kubernetes because its data model—time-series metrics with labels—maps naturally to the dynamic, label-heavy nature of Kubernetes workloads. Every pod's metrics are queryable by namespace, deployment, node, or any label. The pull model means Prometheus scrapes `/metrics` endpoints on a configured interval; the push model (Pushgateway) handles short-lived jobs that complete before the scrape interval. On AKS, the common deployment path is the kube-prometheus-stack Helm chart (formerly prometheus-operator), which installs Prometheus, Alertmanager, and Grafana with Kubernetes-ready scrape configurations and dashboards pre-configured. The Azure Managed Prometheus option (launched in preview 2022) removes the self-managed Prometheus operational burden—worth evaluating for teams that don't want to manage Prometheus storage and retention themselves.
 
@@ -327,4 +325,3 @@ prometheus:
 Prometheus provides powerful metrics collection and alerting capabilities for Kubernetes workloads. Combined with Azure Monitor integration, you get the best of both worlds - detailed application metrics and centralized Azure monitoring.
 
 Tomorrow, we'll build Grafana dashboards to visualize these Prometheus metrics effectively.
-

@@ -1,5 +1,6 @@
 ---
 title: Understanding Feature Stores for Machine Learning
+description: "Feature stores are becoming essential infrastructure for production ML systems. Understanding these concepts will help you build more reliable and…"
 author: Michael John Pena
 draft: false
 date: 2021-09-05
@@ -9,10 +10,7 @@ tags:
   - Feature Engineering
   - MLOps
   - Data Engineering
-
 ---
-
-I wrote "2021-09-05-feature-stores-concepts" to share practical, production-minded guidance on this topic.
 
 ## What is a Feature Store?
 
@@ -238,4 +236,3 @@ class AzureFeatureStore:
 5. **Time-travel**: Point-in-time queries prevent data leakage
 
 Feature stores are becoming essential infrastructure for production ML systems. Understanding these concepts will help you build more reliable and maintainable ML pipelines.
-

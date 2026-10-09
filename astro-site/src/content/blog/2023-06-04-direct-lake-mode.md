@@ -1,5 +1,6 @@
 ---
 title: "Direct Lake Mode: Power BI Performance Without Import Overhead"
+description: "Direct Lake is the quiet superpower of Microsoft Fabric, and I think it's underexplained in most of the post-Build coverage. The classic Power BI trade-off…"
 author: Michael John Peña
 draft: false
 date: 2023-06-04
@@ -322,4 +323,4 @@ Direct Lake is a game-changer for Power BI performance on Fabric data. Tomorrow,
 
 - [Direct Lake Overview](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview)
 - [Direct Lake Best Practices](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-best-practices)
-- [V-Order Optimization](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [V-Order Optimization](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order)

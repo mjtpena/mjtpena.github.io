@@ -1,5 +1,6 @@
 ---
 title: Real-Time Web Applications with Azure SignalR Service
+description: "I've tried to roll my own WebSocket fanout exactly once. It worked beautifully for 200 concurrent connections and melted at 2,000. Azure SignalR Service…"
 author: Michael John Pena
 draft: false
 date: 2021-03-05

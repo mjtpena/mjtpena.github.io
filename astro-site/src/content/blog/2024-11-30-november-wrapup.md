@@ -1,5 +1,6 @@
 ---
 title: "November 2024 Wrap-Up: A Transformative Month for Enterprise AI"
+description: "Fabric AI Skills, Copilot for Microsoft 365, and Copilot Studio all contribute to this trend."
 author: Michael John Peña
 draft: false
 date: 2024-11-30
@@ -9,10 +10,7 @@ tags:
   - Microsoft Fabric
   - Review
   - Microsoft Ignite
-
 ---
-
-I wrote "November 2024 Wrap-Up: A Transformative Month for Enterprise AI" to share practical, production-minded guidance on this topic.
 
 ## Key Themes from November
 
@@ -221,4 +219,3 @@ See you in December for year-end reflections and 2025 planning.
 - [Azure AI Foundry](https://ai.azure.com)
 - [Microsoft Fabric Blog](https://blog.fabric.microsoft.com)
 - [AI Learning Path](https://learn.microsoft.com/en-us/training/paths/ai-fundamentals/)
-

@@ -1,13 +1,11 @@
 ---
 title: "Intelligent Query Processing in Azure SQL: Automatic Performance Optimization"
+description: "IQP represents a significant step toward self-tuning databases, reducing the manual effort required to optimize query performance while automatically…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-04
 tags: ["Azure", "SQL", "Query Processing", "Performance", "Optimization"]
-
 ---
-
-I wrote "Intelligent Query Processing in Azure SQL: Automatic Performance Optimization" to share practical, production-minded guidance on this topic.
 
 ## IQP Feature Overview
 
@@ -213,4 +211,4 @@ GROUP BY query_hash
 ORDER BY execution_count DESC;
 ```
 
-IQP represents a significant step toward self-tuning databases, reducing the manual effort required to optimize query performance while automatically adapting to changing data distributions and workload patterns.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+IQP represents a significant step toward self-tuning databases, reducing the manual effort required to optimize query performance while automatically adapting to changing data distributions and workload patterns.

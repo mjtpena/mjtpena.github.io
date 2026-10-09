@@ -1,5 +1,6 @@
 ---
 title: "Event-Driven Architecture with Azure Event Grid"
+description: "There's a recurring confusion among teams new to Azure: which messaging service do I use? Service Bus, Event Hubs, Event Grid, Storage Queues — they all…"
 author: Michael John Peña
 draft: false
 date: 2020-08-19
@@ -287,4 +288,4 @@ az eventgrid event-subscription create \
     --event-ttl 1440
 ```
 
-My one strong opinion on Event Grid: always configure dead-lettering, even in dev. Events are fire-and-forget by design — if a handler is down or buggy, those events are gone unless they land in DLQ storage. The first time a downstream system ate poison events for a week before anyone noticed is the last time you ship Event Grid without DLQ.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+My one strong opinion on Event Grid: always configure dead-lettering, even in dev. Events are fire-and-forget by design — if a handler is down or buggy, those events are gone unless they land in DLQ storage. The first time a downstream system ate poison events for a week before anyone noticed is the last time you ship Event Grid without DLQ.

@@ -1,5 +1,6 @@
 ---
 title: "Vision-Language Models: Understanding Images with AI"
+description: "Vision-language models enable applications from document understanding to visual inspection."
 author: Michael John Peña
 draft: false
 date: 2025-03-28
@@ -9,10 +10,7 @@ tags:
   - VLM
   - GPT-4V
   - Computer Vision
-
 ---
-
-I wrote "Vision-Language Models: Understanding Images with AI" to share practical, production-minded guidance on this topic.
 
 ## Vision-Language Applications
 
@@ -117,4 +115,4 @@ class VisionLanguageAgent:
         return results
 ```
 
-Vision-language models enable applications from document understanding to visual inspection.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Vision-language models enable applications from document understanding to visual inspection.

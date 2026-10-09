@@ -10,10 +10,7 @@ tags:
   - Language AI
   - Text Analytics
   - AI
-
 ---
-
-I wrote "Azure AI Language Updates: New NLP Capabilities" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -547,4 +544,3 @@ all_results = processor.parallel_analysis(
 ## Conclusion
 
 Azure AI Language provides comprehensive NLP capabilities for text analysis, from sentiment and entity extraction to PII detection and healthcare text understanding. The unified API makes it easy to integrate multiple language understanding features into applications, while batch processing enables efficient handling of large document collections.
-

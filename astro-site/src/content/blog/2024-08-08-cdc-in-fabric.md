@@ -9,10 +9,7 @@ tags:
   - Data Integration
   - ETL
   - Real-Time
-
 ---
-
-I wrote "Change Data Capture in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## CDC Fundamentals
 
@@ -322,4 +319,3 @@ class CDCStateManager:
 CDC in Fabric enables efficient incremental data processing. Whether through built-in mirroring, Data Factory, or custom implementations, understanding CDC patterns is essential for modern data platforms.
 
 Choose the approach that matches your latency requirements and operational capabilities.
-

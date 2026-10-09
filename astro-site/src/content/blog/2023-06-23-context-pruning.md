@@ -1,5 +1,6 @@
 ---
 title: "Context Pruning: Managing Token Limits in LLM Applications"
+description: "Effective context pruning ensures your LLM applications work reliably. Tomorrow, I will cover token budgeting strategies."
 author: Michael John Peña
 draft: false
 date: 2023-06-23
@@ -9,10 +10,7 @@ tags:
   - Context Window
   - Optimization
   - LLM
-
 ---
-
-I wrote "Context Pruning: Managing Token Limits in LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Understanding Context Limits
 
@@ -340,4 +338,4 @@ Effective context pruning ensures your LLM applications work reliably. Tomorrow,
 ## Resources
 
 - [Tiktoken Library](https://github.com/openai/tiktoken)
-- [Managing Token Limits](https://platform.openai.com/docs/guides/chat/managing-tokens)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Managing Token Limits](https://platform.openai.com/docs/guides/chat/managing-tokens)

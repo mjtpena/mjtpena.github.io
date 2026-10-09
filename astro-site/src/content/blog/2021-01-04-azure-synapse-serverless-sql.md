@@ -1,5 +1,6 @@
 ---
 title: "Azure Synapse Serverless SQL: Query Data Lake On-Demand"
+description: "Serverless SQL: query anything, pay for what you scan."
 author: Michael John Peña
 draft: false
 date: 2021-01-04
@@ -8,10 +9,7 @@ tags:
   - Synapse
   - SQL
   - Data Lake
-
 ---
-
-I wrote "Azure Synapse Serverless SQL: Query Data Lake On-Demand" to share practical, production-minded guidance on this topic.
 
 ## Query Parquet Files
 
@@ -179,4 +177,4 @@ GROUP BY CustomerID, YEAR(OrderDate), MONTH(OrderDate)
 | Select specific columns | Don't SELECT * |
 | Use external tables | Metadata caching |
 
-Serverless SQL: query anything, pay for what you scan.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Serverless SQL: query anything, pay for what you scan.

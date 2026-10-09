@@ -1,5 +1,6 @@
 ---
 title: "Azure Data and AI: March 2022 Recap and What's Ahead"
+description: "March 2022 was a productive month for the Azure data and AI ecosystem: the Azure OpenAI Service access expansion brought GPT-3 and Codex to more enterprise…"
 author: Michael John Peña
 draft: false
 date: 2022-03-31

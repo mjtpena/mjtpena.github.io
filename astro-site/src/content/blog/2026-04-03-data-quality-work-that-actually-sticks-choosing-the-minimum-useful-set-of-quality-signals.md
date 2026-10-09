@@ -1,5 +1,6 @@
 ---
 title: "Data Quality Work That Actually Sticks: choosing the minimum useful set of quality signals"
+description: "I focused on making delivery decisions auditable and repeatable—documenting intent, success criteria, and rollback paths to reduce tribal knowledge."
 author: Michael John Peña
 draft: false
 date: 2026-04-03
@@ -37,4 +38,4 @@ Tomorrow's focus is to stress-test this with less ideal inputs and see where it 
 
 - [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)
 - [Fabric Data Factory](https://learn.microsoft.com/fabric/data-factory/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

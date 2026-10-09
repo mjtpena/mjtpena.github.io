@@ -6,12 +6,9 @@ date: 2022-05-09
 tags:
   - dotnet
   - maui
-  - mobile
-  - cross-platform
-
+  - Mobile
+  - Cross-Platform
 ---
-
-I wrote ".NET MAUI Preview: Cross-Platform App Development" to share practical, production-minded guidance on this topic.
 
 ## Getting Started with MAUI
 
@@ -410,5 +407,3 @@ public partial class AppShell : Shell
 - Platform-specific customization
 
 MAUI is the evolution of Xamarin.Forms, making cross-platform development more accessible.
-
-

@@ -1,5 +1,6 @@
 ---
 title: Building Real-Time Applications with Azure SignalR Service
+description: "Azure Web PubSub is the lower-level real-time service that sits alongside SignalR. Where SignalR abstracts the transport and provides a hub model for your…"
 author: Michael John Pena
 draft: false
 date: 2021-03-06

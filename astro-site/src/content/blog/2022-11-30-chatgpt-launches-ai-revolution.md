@@ -1,5 +1,6 @@
 ---
 title: "ChatGPT Launches: The AI Revolution Begins Today"
+description: "ChatGPT launched on November 30, 2022, and I spent most of that day in a state of barely contained astonishment—not because a chatbot was impressive (I'd…"
 author: Michael John Peña
 draft: false
 date: 2022-11-30

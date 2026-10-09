@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Delta Lake on Azure Databricks"
+description: "Data lakes have a long-standing reputation problem: cheap to fill, painful to trust. Schema drift, half-written files from failed jobs, \"is this row a…"
 author: Michael John Peña
 draft: false
 date: 2020-11-16
@@ -223,4 +224,4 @@ Delta Lake brings data warehouse reliability to your data lake, enabling the mod
 
 - [Delta Lake Documentation](https://docs.delta.io/)
 - [Azure Databricks Delta Lake Guide](https://docs.microsoft.com/en-us/azure/databricks/delta/)
-- [Delta Lake GitHub](https://github.com/delta-io/delta)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Delta Lake GitHub](https://github.com/delta-io/delta)

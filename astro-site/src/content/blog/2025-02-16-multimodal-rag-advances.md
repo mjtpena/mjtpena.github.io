@@ -1,5 +1,6 @@
 ---
 title: "Multimodal RAG Advances: Images, Documents, and Beyond"
+description: "Multimodal RAG unlocks knowledge trapped in visual formats. Start with document-heavy use cases where diagrams and charts carry critical information."
 author: Michael John Peña
 draft: false
 date: 2025-02-16
@@ -9,10 +10,7 @@ tags:
   - Multimodal
   - Computer Vision
   - Azure
-
 ---
-
-I wrote "Multimodal RAG Advances: Images, Documents, and Beyond" to share practical, production-minded guidance on this topic.
 
 ## Multimodal Embedding Strategies
 
@@ -340,4 +338,4 @@ class LayoutAwareRAG:
 5. **Hybrid retrieval**: Combine visual and textual search
 6. **Quality filtering**: Filter low-quality or irrelevant images
 
-Multimodal RAG unlocks knowledge trapped in visual formats. Start with document-heavy use cases where diagrams and charts carry critical information.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multimodal RAG unlocks knowledge trapped in visual formats. Start with document-heavy use cases where diagrams and charts carry critical information.

@@ -9,10 +9,7 @@ tags:
   - Tables
   - Layout
   - AI
-
 ---
-
-I wrote "Document Layout Analysis and Table Extraction with Azure AI" to share practical, production-minded guidance on this topic.
 
 ## Layout Analysis Basics
 
@@ -391,4 +388,4 @@ def visualize_layout(file_path: str, output_path: str):
 
 - [Layout Model](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-layout)
 - [Table Extraction](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-layout#tables)
-- [Document Roles](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-layout#paragraph-roles)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Document Roles](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-layout#paragraph-roles)

@@ -1,5 +1,6 @@
 ---
 title: "Feature Engineering Best Practices for Production ML"
+description: "Feature engineering in 2021 became more systematic and production-oriented. The ad-hoc notebook approach is giving way to proper engineering practices."
 author: Michael John Pena
 draft: false
 date: 2021-12-09
@@ -9,10 +10,7 @@ tags:
   - MLOps
   - Azure ML
   - Data Science
-
 ---
-
-I wrote "Feature Engineering Best Practices for Production ML" to share practical, production-minded guidance on this topic.
 
 ## The Feature Store Pattern
 
@@ -308,4 +306,4 @@ Feature engineering in 2021 became more systematic and production-oriented. The 
 
 - [Feast Feature Store](https://feast.dev/)
 - [Azure ML Feature Store](https://docs.microsoft.com/en-us/azure/machine-learning/concept-what-is-managed-feature-store)
-- [Feature Engineering for ML](https://www.oreilly.com/library/view/feature-engineering-for/9781491953235/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Feature Engineering for ML](https://www.oreilly.com/library/view/feature-engineering-for/9781491953235/)

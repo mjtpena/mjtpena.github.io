@@ -1,5 +1,6 @@
 ---
 title: "Building Search Solutions with Azure Cognitive Search"
+description: "Azure Cognitive Search provides powerful search capabilities that can transform how users find and discover content in your applications."
 author: Michael John Peña
 draft: false
 date: 2020-08-20
@@ -8,10 +9,7 @@ tags:
   - Cognitive Search
   - Search
   - AI
-
 ---
-
-I wrote "Building Search Solutions with Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## Creating a Search Service
 
@@ -299,4 +297,4 @@ public async Task CreateSkillsetAsync()
 
 Azure Cognitive Search provides powerful search capabilities that can transform how users find and discover content in your applications.
 
-The pricing nuance worth knowing: search units multiply (replicas × partitions). A 3-replica, 3-partition Standard service is *9 search units*, not 6. Easy to misread, hard to explain on an invoice. Start at S1 with a single replica/partition for any project, and only scale up once you have real query volume to justify it.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The pricing nuance worth knowing: search units multiply (replicas × partitions). A 3-replica, 3-partition Standard service is *9 search units*, not 6. Easy to misread, hard to explain on an invoice. Start at S1 with a single replica/partition for any project, and only scale up once you have real query volume to justify it.

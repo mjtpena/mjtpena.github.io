@@ -1,13 +1,11 @@
 ---
 title: "Azure DevOps Agent Pools"
+description: "Agent pools provide flexible compute resources for diverse build requirements."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-29
 tags: ["Azure", "Azure DevOps", "Agents", "Infrastructure"]
-
 ---
-
-I wrote "Azure DevOps Agent Pools" to share practical, production-minded guidance on this topic.
 
 ## Pool Types
 
@@ -72,4 +70,4 @@ pipeline_demands:
   - dotnet7
 ```
 
-Agent pools provide flexible compute resources for diverse build requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Agent pools provide flexible compute resources for diverse build requirements.

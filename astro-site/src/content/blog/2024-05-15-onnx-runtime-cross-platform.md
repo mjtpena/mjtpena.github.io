@@ -1,5 +1,6 @@
 ---
 title: "ONNX Runtime: Cross-Platform AI Deployment"
+description: "ONNX Runtime is the unsung hero of AI deployment. Today I'm exploring how to use it for consistent AI inference across platforms."
 author: Michael John Peña
 draft: false
 date: 2024-05-15
@@ -428,4 +429,4 @@ Tomorrow I'll cover DirectML for Windows AI acceleration.
 
 - [ONNX Runtime Documentation](https://onnxruntime.ai/)
 - [ONNX Model Zoo](https://github.com/onnx/models)
-- [Optimum Library](https://huggingface.co/docs/optimum/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Optimum Library](https://huggingface.co/docs/optimum/)

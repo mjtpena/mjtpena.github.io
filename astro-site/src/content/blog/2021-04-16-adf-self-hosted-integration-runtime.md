@@ -1,5 +1,6 @@
 ---
 title: ADF Self-Hosted Integration Runtime - Connecting On-Premises Data
+description: "The Self-Hosted Integration Runtime is the component that makes ADF viable for the majority of real enterprise projects—the ones where the source database…"
 author: Michael John Peña
 draft: false
 date: 2021-04-16

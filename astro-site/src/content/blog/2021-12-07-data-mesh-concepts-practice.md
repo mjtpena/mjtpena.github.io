@@ -1,5 +1,6 @@
 ---
 title: "Data Mesh: From Concept to Practice"
+description: "Data mesh isn't a technology choice - it's an organizational paradigm shift. 2021 was about understanding it; 2022 will be about implementing it."
 author: Michael John Pena
 draft: false
 date: 2021-12-07
@@ -8,10 +9,7 @@ tags:
   - Data Architecture
   - Data Engineering
   - Domain-Driven Design
-
 ---
-
-I wrote "Data Mesh: From Concept to Practice" to share practical, production-minded guidance on this topic.
 
 ## The Four Principles
 
@@ -302,4 +300,4 @@ Data mesh isn't a technology choice - it's an organizational paradigm shift. 202
 
 - [Data Mesh - Zhamak Dehghani](https://martinfowler.com/articles/data-mesh-principles.html)
 - [Data Mesh Architecture](https://www.datamesh-architecture.com/)
-- [Azure Data Mesh Patterns](https://docs.microsoft.com/en-us/azure/architecture/example-scenario/data-warehouse/data-mesh)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Data Mesh Patterns](https://docs.microsoft.com/en-us/azure/architecture/example-scenario/data-warehouse/data-mesh)

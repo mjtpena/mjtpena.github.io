@@ -1,5 +1,6 @@
 ---
 title: "Azure ML Responsible AI: Build Trustworthy Models"
+description: "\"The model said no, and I can't tell why\" is the conversation that derails most ML deployments. Responsible AI in Azure ML is a set of tools designed to…"
 author: Michael John Peña
 draft: false
 date: 2021-01-07
@@ -178,4 +179,4 @@ print(f"View dashboard: {run.get_portal_url()}")
 4. Test edge cases
 5. Document model behavior
 
-Responsible AI: building ML systems we can trust.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Responsible AI: building ML systems we can trust.

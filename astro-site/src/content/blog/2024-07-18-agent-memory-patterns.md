@@ -9,10 +9,7 @@ tags:
   - Memory
   - LangChain
   - Architecture
-
 ---
-
-I wrote "Agent Memory Patterns: Beyond Simple Context" to share practical, production-minded guidance on this topic.
 
 ## Memory Types Overview
 
@@ -447,4 +444,3 @@ class MemoryConsolidator:
 Effective memory management transforms agents from stateless responders into knowledgeable assistants. The key is combining short-term context, long-term knowledge, and working memory appropriately for each task.
 
 Start simple with conversation history, add long-term storage as needed, and implement consolidation to keep things efficient.
-

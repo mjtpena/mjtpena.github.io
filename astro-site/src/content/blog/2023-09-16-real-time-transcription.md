@@ -10,10 +10,7 @@ tags:
   - Real-Time
   - Transcription
   - AI
-
 ---
-
-I wrote "Real-Time Transcription with Azure AI Speech" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -481,4 +478,3 @@ class OptimizedTranscriber:
 ## Conclusion
 
 Real-time transcription with Azure AI Speech enables powerful voice-enabled applications. By implementing proper streaming, WebSocket communication, and performance optimizations, you can build responsive transcription solutions for live captioning, meetings, and voice interfaces. The key is balancing latency with accuracy based on your specific use case requirements.
-

@@ -1,5 +1,6 @@
 ---
 title: "Delta Lake Optimization: VACUUM, OPTIMIZE, and Z-ORDER Explained"
+description: "VACUUM removes data files no longer referenced by the Delta log. Without regular vacuuming, your storage costs grow unbounded as old file versions accumulate."
 author: Michael John Peña
 draft: false
 date: 2025-08-06
@@ -9,10 +10,7 @@ tags:
   - Microsoft Fabric
   - Performance
   - Spark
-
 ---
-
-I wrote "Delta Lake Optimization: VACUUM, OPTIMIZE, and Z-ORDER Explained" to share practical, production-minded guidance on this topic.
 
 ## The VACUUM Operation
 
@@ -74,4 +72,4 @@ spark.sql("""
 
 Schedule OPTIMIZE jobs during off-peak hours as they can be resource-intensive. Choose Z-ORDER columns based on your most common filter patterns. Run VACUUM after OPTIMIZE to clean up the compacted small files. Aim to keep file sizes between 256MB and 1GB for optimal query performance.
 
-Regular maintenance is the difference between a sluggish data lake and a performant Lakehouse.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Regular maintenance is the difference between a sluggish data lake and a performant Lakehouse.

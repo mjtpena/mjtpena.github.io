@@ -1,13 +1,11 @@
 ---
 title: "AI Trends to Watch in 2024"
+description: "There are a few themes I'm watching closely for 2024 — practical agents, small-model efficiency gains, and tighter integration between data platforms and…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-27
 tags: ["AI", "Trends", "2024", "Technology", "Future"]
-
 ---
-
-I wrote "AI Trends to Watch in 2024" to share practical, production-minded guidance on this topic.
 
 There are a few themes I'm watching closely for 2024 — practical agents, small-model efficiency gains, and tighter integration between data platforms and LLMs. I'll summarise each trend with concrete examples of what teams should do now.
 
@@ -254,4 +252,4 @@ staying_current_advice = {
 }
 ```
 
-Tomorrow, we'll explore data platform evolution and what's coming next!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore data platform evolution and what's coming next!

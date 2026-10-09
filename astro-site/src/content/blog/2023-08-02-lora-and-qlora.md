@@ -8,10 +8,7 @@ tags:
   - QLoRA
   - Fine-Tuning
   - LLM
-
 ---
-
-I wrote "LoRA and QLoRA: Efficient Fine-Tuning for Large Language Models" to share practical, production-minded guidance on this topic.
 
 ## Understanding LoRA
 
@@ -309,4 +306,4 @@ Tomorrow we'll explore parameter-efficient fine-tuning methods in more depth.
 - [LoRA Paper](https://arxiv.org/abs/2106.09685)
 - [QLoRA Paper](https://arxiv.org/abs/2305.14314)
 - [PEFT Library](https://huggingface.co/docs/peft)
-- [Hugging Face LoRA Guide](https://huggingface.co/docs/peft/conceptual_guides/lora)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Hugging Face LoRA Guide](https://huggingface.co/docs/peft/conceptual_guides/lora)

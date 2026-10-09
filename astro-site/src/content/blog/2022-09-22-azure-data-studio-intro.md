@@ -1,13 +1,11 @@
 ---
 title: "Getting Started with Azure Data Studio"
+description: "Azure Data Studio offers a lightweight, customizable interface that combines the best features of modern code editors with database-specific functionality."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-22
 tags: ["Azure", "Azure Data Studio", "SQL", "Tools"]
-
 ---
-
-I wrote "Getting Started with Azure Data Studio" to share practical, production-minded guidance on this topic.
 
 ## Introduction to Azure Data Studio
 
@@ -276,4 +274,4 @@ FROM InventoryDB.dbo.Products;
 4. **Use notebooks** - Document queries with markdown
 5. **Install extensions** - Enhance functionality for your needs
 
-Azure Data Studio provides a modern, extensible environment for all your database development needs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Data Studio provides a modern, extensible environment for all your database development needs.

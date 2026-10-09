@@ -1,5 +1,6 @@
 ---
 title: "Azure Machine Learning Managed Endpoints: Advanced Deployment Patterns"
+description: "Configure autoscaling rules that balance responsiveness with cost for production deployments while maintaining service level objectives."
 author: Michael John Peña
 draft: false
 date: 2025-10-02
@@ -9,10 +10,7 @@ tags:
   - Model Deployment
   - Kubernetes
   - Managed Endpoints
-
 ---
-
-I wrote "Azure Machine Learning Managed Endpoints: Advanced Deployment Patterns" to share practical, production-minded guidance on this topic.
 
 ## Blue-Green Deployments with Traffic Splitting
 
@@ -111,4 +109,4 @@ def gradual_traffic_shift(
 
 ## Cost Optimization with Autoscaling
 
-Configure autoscaling rules that balance responsiveness with cost for production deployments while maintaining service level objectives.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Configure autoscaling rules that balance responsiveness with cost for production deployments while maintaining service level objectives.

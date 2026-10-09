@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering Patterns for Enterprise RAG Systems"
+description: "Poorly designed prompts lead to hallucinations, ignored context, or responses that fail to meet business requirements. A systematic approach to prompt…"
 author: Michael John Peña
 draft: false
 date: 2025-11-07
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - Enterprise AI
   - Best Practices
-
 ---
-
-I wrote "Prompt Engineering Patterns for Enterprise RAG Systems" to share practical, production-minded guidance on this topic.
 
 ## The RAG Prompt Challenge
 
@@ -126,4 +124,4 @@ def validate_response_against_context(response: str, context_docs: list[dict]) -
     pass
 ```
 
-Enterprise RAG systems require ongoing prompt refinement based on user feedback and accuracy metrics. Treating prompts as code with version control enables systematic improvement.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Enterprise RAG systems require ongoing prompt refinement based on user feedback and accuracy metrics. Treating prompts as code with version control enables systematic improvement.

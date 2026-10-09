@@ -1,5 +1,6 @@
 ---
 title: "Building Real-Time Dashboards with Azure SignalR and React"
+description: "Real-time dashboards are now straightforward with Azure SignalR. The serverless model means you only pay for messages, making it cost-effective for most…"
 author: Michael John Peña
 draft: false
 date: 2025-12-22
@@ -9,10 +10,7 @@ tags:
   - Real-Time
   - Azure
   - Dashboard
-
 ---
-
-I wrote "Building Real-Time Dashboards with Azure SignalR and React" to share practical, production-minded guidance on this topic.
 
 ## Architecture
 
@@ -174,4 +172,4 @@ az signalr create \
   --service-mode Serverless
 ```
 
-Real-time dashboards are now straightforward with Azure SignalR. The serverless model means you only pay for messages, making it cost-effective for most scenarios.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Real-time dashboards are now straightforward with Azure SignalR. The serverless model means you only pay for messages, making it cost-effective for most scenarios.

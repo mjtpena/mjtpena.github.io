@@ -10,10 +10,7 @@ tags:
   - AI
   - Speech Recognition
   - Text-to-Speech
-
 ---
-
-I wrote "Azure AI Speech Updates: Enhanced Recognition and Synthesis" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -492,4 +489,3 @@ synth.synthesize_with_ssml(ssml, "meeting_announcement.wav")
 ## Conclusion
 
 Azure AI Speech services provide comprehensive capabilities for both speech recognition and synthesis. With continuous improvements in accuracy, language support, and real-time processing, these services enable powerful voice-enabled applications. The combination of standard recognition, phrase hints, and SSML-based synthesis gives developers fine-grained control over speech interactions.
-

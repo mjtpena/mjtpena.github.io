@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Trial: What You Get and How to Maximize It"
+description: "The Fabric trial is one of the more generous evaluation paths Microsoft has offered for a data platform — a 60-day, F64-equivalent capacity for free is a…"
 author: Michael John Peña
 draft: false
 date: 2023-07-03
@@ -273,4 +274,4 @@ Tomorrow we'll dive into Fabric workspace setup and organization best practices.
 
 - [Start Fabric Trial](https://learn.microsoft.com/en-us/fabric/get-started/fabric-trial)
 - [Fabric Capacity Planning](https://learn.microsoft.com/en-us/fabric/enterprise/licenses)
-- [Fabric Community](https://community.fabric.microsoft.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric Community](https://community.fabric.microsoft.com/)

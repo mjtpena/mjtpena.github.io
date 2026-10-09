@@ -1,5 +1,6 @@
 ---
 title: "AI Data Pipeline Patterns: Intelligent ETL and Processing"
+description: "AI-powered pipelines transform raw data into intelligent, enriched datasets. Design for both batch and streaming scenarios."
 author: Michael John Peña
 draft: false
 date: 2025-02-22
@@ -9,10 +10,7 @@ tags:
   - ETL
   - Data Engineering
   - Azure
-
 ---
-
-I wrote "AI Data Pipeline Patterns: Intelligent ETL and Processing" to share practical, production-minded guidance on this topic.
 
 ## AI-Enhanced Pipeline Architecture
 
@@ -54,4 +52,4 @@ pipeline.add_stage(PipelineStage("load", load_to_warehouse))
 result = await pipeline.run(raw_data)
 ```
 
-AI-powered pipelines transform raw data into intelligent, enriched datasets. Design for both batch and streaming scenarios.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI-powered pipelines transform raw data into intelligent, enriched datasets. Design for both batch and streaming scenarios.

@@ -1,5 +1,6 @@
 ---
 title: "Prompt Caching: The Performance Win Nobody Talks About"
+description: "When you send the same prompt prefix repeatedly—system instructions, context documents, examples—the model recomputes them every time. Prompt caching stores…"
 author: Michael John Peña
 draft: false
 date: 2026-02-16
@@ -8,10 +9,7 @@ tags:
   - Azure
   - Performance
   - Engineering
-
 ---
-
-I wrote "Prompt Caching: The Performance Win Nobody Talks About" to share practical, production-minded guidance on this topic.
 
 That's a mistake. Prompt caching is one of the highest-leverage optimizations available for AI apps today.
 
@@ -121,4 +119,4 @@ Prompt caching is free performance. It requires prompt structure discipline, not
 
 Before adding more capacity, check your cache hit rate. There's likely latency and cost sitting on the table.
 
-Optimize the prompt structure first. Scale after.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Optimize the prompt structure first. Scale after.

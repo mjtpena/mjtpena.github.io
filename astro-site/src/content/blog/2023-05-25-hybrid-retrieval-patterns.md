@@ -1,5 +1,6 @@
 ---
 title: "Hybrid Retrieval Patterns for RAG Applications"
+description: "Hybrid retrieval improves RAG quality by combining the strengths of different search approaches. Tomorrow, I will cover Azure Dev Box and development…"
 author: Michael John Peña
 draft: false
 date: 2023-05-25
@@ -9,10 +10,7 @@ tags:
   - Hybrid Search
   - Azure Cognitive Search
   - AI
-
 ---
-
-I wrote "Hybrid Retrieval Patterns for RAG Applications" to share practical, production-minded guidance on this topic.
 
 ## Why Hybrid Retrieval?
 
@@ -415,4 +413,4 @@ Hybrid retrieval improves RAG quality by combining the strengths of different se
 
 - [Azure Search Hybrid](https://learn.microsoft.com/en-us/azure/search/hybrid-search-overview)
 - [RRF Algorithm](https://learn.microsoft.com/en-us/azure/search/hybrid-search-ranking)
-- [Semantic Ranking](https://learn.microsoft.com/en-us/azure/search/semantic-ranking)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Semantic Ranking](https://learn.microsoft.com/en-us/azure/search/semantic-ranking)

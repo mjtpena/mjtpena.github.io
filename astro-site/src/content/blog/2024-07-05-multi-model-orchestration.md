@@ -1,5 +1,6 @@
 ---
 title: "Multi-Model Orchestration: Using Multiple LLMs Effectively"
+description: "Different tasks need different capability levels. Using GPT-4o for simple classifications wastes money."
 author: Michael John Peña
 draft: false
 date: 2024-07-05
@@ -9,10 +10,7 @@ tags:
   - Architecture
   - Azure
   - Multi-Model
-
 ---
-
-I wrote "Multi-Model Orchestration: Using Multiple LLMs Effectively" to share practical, production-minded guidance on this topic.
 
 ## Why Multi-Model?
 
@@ -462,4 +460,3 @@ class OrchestrationMetrics:
 Multi-model orchestration isn't just about having options - it's about using each model optimally. The setup investment pays off in cost savings, reliability, and better results.
 
 Start with simple routing, add complexity as needed, and always measure the outcomes.
-

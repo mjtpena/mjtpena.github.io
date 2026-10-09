@@ -11,10 +11,7 @@ tags:
   - .NET
   - Mobile
   - Technology
-
 ---
-
-I wrote "2021-07-23-developing-macos-apps-using-net" to share practical, production-minded guidance on this topic.
 
 ## Mono and .NET
 
@@ -93,4 +90,3 @@ I wrote "2021-07-23-developing-macos-apps-using-net" to share practical, product
 - [.NET Blog (microsoft.com)](https://devblogs.microsoft.com/dotnet/)
 - [dotnet/maui-samples](https://github.com/dotnet/maui-samples)
 - [Mono Project](https://www.mono-project.com/)
-

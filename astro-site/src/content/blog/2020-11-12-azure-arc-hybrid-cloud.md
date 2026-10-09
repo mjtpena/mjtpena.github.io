@@ -1,5 +1,6 @@
 ---
 title: "Azure Arc: Manage Resources Anywhere"
+description: "Most enterprises I work with aren't \"going to the cloud\"—they're running half their estate on-prem, a slice on AWS, a dev environment on a colleague's…"
 author: Michael John Peña
 draft: false
 date: 2020-11-12
@@ -156,4 +157,4 @@ az connectedmachine extension create \
 └─────────────────────────────────────────────────┘
 ```
 
-Azure Arc: your hybrid cloud, unified.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Arc: your hybrid cloud, unified.

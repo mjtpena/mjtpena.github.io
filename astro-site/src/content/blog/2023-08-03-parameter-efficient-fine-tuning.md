@@ -8,10 +8,7 @@ tags:
   - Fine-Tuning
   - LLM
   - Machine Learning
-
 ---
-
-I wrote "Parameter-Efficient Fine-Tuning: A Comprehensive Guide" to share practical, production-minded guidance on this topic.
 
 ## PEFT Overview
 
@@ -302,4 +299,4 @@ Tomorrow we'll explore PEFT libraries and their practical usage.
 
 - [PEFT Library Documentation](https://huggingface.co/docs/peft)
 - [Adapter Transformers](https://adapterhub.ml/)
-- [PEFT Methods Survey](https://arxiv.org/abs/2303.15647)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [PEFT Methods Survey](https://arxiv.org/abs/2303.15647)

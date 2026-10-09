@@ -1,5 +1,6 @@
 ---
 title: "AI Use Case Prioritization: Selecting High-Impact Projects"
+description: "Systematic prioritization ensures AI investments focus on highest-impact opportunities."
 author: Michael John Peña
 draft: false
 date: 2025-05-30
@@ -9,10 +10,7 @@ tags:
   - Strategy
   - Use Cases
   - Planning
-
 ---
-
-I wrote "AI Use Case Prioritization: Selecting High-Impact Projects" to share practical, production-minded guidance on this topic.
 
 ## AI Use Case Prioritization Framework
 
@@ -124,4 +122,4 @@ class UseCasePrioritizer:
         return recommendations
 ```
 
-Systematic prioritization ensures AI investments focus on highest-impact opportunities.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Systematic prioritization ensures AI investments focus on highest-impact opportunities.

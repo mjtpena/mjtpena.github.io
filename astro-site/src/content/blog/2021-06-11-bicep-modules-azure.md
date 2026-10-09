@@ -9,10 +9,7 @@ tags:
   - Azure
   - Infrastructure as Code
   - ARM
-
 ---
-
-I wrote "2021-06-11-bicep-modules-azure" to share practical, production-minded guidance on this topic.
 
 ## Bicep Basics
 
@@ -547,4 +544,3 @@ Bicep modules enable clean, maintainable Azure infrastructure code. By separatin
 
 - [Bicep Documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Bicep Modules](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules)
-

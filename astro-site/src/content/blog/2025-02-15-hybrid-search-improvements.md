@@ -1,5 +1,6 @@
 ---
 title: "Hybrid Search Improvements: Latest Techniques for Better Retrieval"
+description: "Hybrid search continues to outperform pure vector or keyword approaches. Invest in tuning your fusion strategy for your specific domain."
 author: Michael John Peña
 draft: false
 date: 2025-02-15
@@ -9,10 +10,7 @@ tags:
   - RAG
   - AI
   - Azure
-
 ---
-
-I wrote "Hybrid Search Improvements: Latest Techniques for Better Retrieval" to share practical, production-minded guidance on this topic.
 
 ## The Hybrid Search Stack
 
@@ -352,4 +350,4 @@ class AdaptiveHybridSearch:
 5. **Query-adaptive**: Different queries benefit from different weights
 6. **Evaluate holistically**: Measure both precision and recall
 
-Hybrid search continues to outperform pure vector or keyword approaches. Invest in tuning your fusion strategy for your specific domain.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hybrid search continues to outperform pure vector or keyword approaches. Invest in tuning your fusion strategy for your specific domain.

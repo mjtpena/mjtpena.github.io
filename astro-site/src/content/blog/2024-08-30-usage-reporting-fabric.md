@@ -9,10 +9,7 @@ tags:
   - Monitoring
   - Analytics
   - Governance
-
 ---
-
-I wrote "Usage Reporting in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Usage Data Sources
 
@@ -630,4 +627,3 @@ print(f"Reports generated: {len(results)}")
 Effective usage reporting provides the visibility needed for informed decisions about Microsoft Fabric investments. Build reports that serve different audiences - executives need KPIs, teams need details, finance needs cost allocation.
 
 Automate report generation and distribution to ensure stakeholders always have current information without manual overhead.
-

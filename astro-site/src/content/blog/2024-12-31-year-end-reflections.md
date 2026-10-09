@@ -9,10 +9,7 @@ tags:
   - "2024"
   - "2025"
   - Career
-
 ---
-
-I wrote "Year-End Reflections: Lessons from 2024 and Intentions for 2025" to share practical, production-minded guidance on this topic.
 
 ## What 2024 Taught Us
 
@@ -251,4 +248,4 @@ As we enter 2025, I'm grateful for:
 - The opportunity to do meaningful work
 - The people who make this journey worthwhile
 
-Here's to a fantastic 2025 filled with learning, growth, and impact.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Here's to a fantastic 2025 filled with learning, growth, and impact.

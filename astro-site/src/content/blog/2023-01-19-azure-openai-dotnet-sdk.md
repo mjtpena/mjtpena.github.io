@@ -6,13 +6,10 @@ date: 2023-01-19
 tags:
   - Azure
   - OpenAI
-  - .NET
-  - CSharp
+  - ".NET"
+  - csharp
   - SDK
-
 ---
-
-I wrote "Azure OpenAI .NET SDK: Building Enterprise AI with C#" to share practical, production-minded guidance on this topic.
 
 ## Installation
 
@@ -625,4 +622,4 @@ public record ChatResponse
 
 - [Azure.AI.OpenAI NuGet](https://www.nuget.org/packages/Azure.AI.OpenAI)
 - [Azure SDK for .NET](https://github.com/Azure/azure-sdk-for-net)
-- [Samples Repository](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/openai)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Samples Repository](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/openai)

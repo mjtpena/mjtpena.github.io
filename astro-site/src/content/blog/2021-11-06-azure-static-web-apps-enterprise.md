@@ -1,5 +1,6 @@
 ---
 title: "Azure Static Web Apps Enterprise Features: Production-Ready JAMstack"
+description: "Azure Static Web Apps with enterprise features provides a production-ready platform for modern web applications. The combination of global distribution…"
 author: Michael John Pena
 draft: false
 date: 2021-11-06
@@ -9,10 +10,7 @@ tags:
   - JAMstack
   - Web Development
   - Enterprise
-
 ---
-
-I wrote "Azure Static Web Apps Enterprise Features: Production-Ready JAMstack" to share practical, production-minded guidance on this topic.
 
 ## What's New for Enterprise
 
@@ -518,4 +516,4 @@ Azure Static Web Apps with enterprise features provides a production-ready platf
 
 - [Static Web Apps Enterprise Features](https://docs.microsoft.com/en-us/azure/static-web-apps/enterprise-edge)
 - [Authentication Configuration](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-custom)
-- [Private Endpoints](https://docs.microsoft.com/en-us/azure/static-web-apps/private-endpoint)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Private Endpoints](https://docs.microsoft.com/en-us/azure/static-web-apps/private-endpoint)

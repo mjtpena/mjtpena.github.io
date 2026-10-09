@@ -1,5 +1,6 @@
 ---
 title: "Delta Lake Deep Dive: Time Travel and Schema Evolution in Fabric"
+description: "Every write operation to a Delta table creates a new version. This transaction log enables point-in-time queries and rollback capabilities essential for…"
 author: Michael John Peña
 draft: false
 date: 2025-11-06
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Lakehouse
   - Version Control
-
 ---
-
-I wrote "Delta Lake Deep Dive: Time Travel and Schema Evolution in Fabric" to share practical, production-minded guidance on this topic.
 
 ## Understanding Delta Lake Versioning
 
@@ -113,4 +111,4 @@ delta_table.restoreToVersion(10)
 delta_table.restoreToTimestamp("2025-11-05T14:30:00")
 ```
 
-Delta Lake's versioning capabilities transform data lakes from fragile file stores into robust, auditable data platforms suitable for enterprise workloads.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Delta Lake's versioning capabilities transform data lakes from fragile file stores into robust, auditable data platforms suitable for enterprise workloads.

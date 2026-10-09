@@ -1,5 +1,6 @@
 ---
 title: Azure Database for PostgreSQL Flexible Server - A Deep Dive
+description: "Flexible Server is the deployment option I now default to when a client asks \"which PostgreSQL on Azure should I use?\" The original Single Server mode…"
 author: Michael John Peña
 draft: false
 date: 2021-02-02

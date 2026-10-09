@@ -1,5 +1,6 @@
 ---
 title: "Azure AD Conditional Access: Zero Trust Authentication Policies"
+description: "Conditional Access is where the \"never trust, always verify\" principle of Zero Trust actually gets operationalised. Every sign-in to every app goes through…"
 author: Michael John Peña
 draft: false
 date: 2021-05-20
@@ -389,4 +390,4 @@ def deploy_policy_safely(policy):
 
 - [Conditional Access Documentation](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/)
 - [Policy Templates](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-policy-common)
-- [Troubleshooting Guide](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/troubleshoot-conditional-access)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Troubleshooting Guide](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/troubleshoot-conditional-access)

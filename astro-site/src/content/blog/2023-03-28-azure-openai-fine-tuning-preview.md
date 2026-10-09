@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Fine-Tuning: Preview and Patterns"
+description: "Fine-tuning is powerful but requires careful data preparation and evaluation. Start with prompt engineering, use RAG when you need sources, and fine-tune…"
 author: Michael John Pena
 draft: false
 date: 2023-03-28
@@ -9,10 +10,7 @@ tags:
   - AI
   - Fine-Tuning
   - Machine Learning
-
 ---
-
-I wrote "Azure OpenAI Fine-Tuning: Preview and Patterns" to share practical, production-minded guidance on this topic.
 
 ## When to Fine-Tune
 
@@ -418,4 +416,4 @@ Score:"""
 6. **Monitor training metrics for overfitting**
 7. **Compare against base model systematically**
 
-Fine-tuning is powerful but requires careful data preparation and evaluation. Start with prompt engineering, use RAG when you need sources, and fine-tune when you need consistent, formatted outputs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fine-tuning is powerful but requires careful data preparation and evaluation. Start with prompt engineering, use RAG when you need sources, and fine-tune when you need consistent, formatted outputs.

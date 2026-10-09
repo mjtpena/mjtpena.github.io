@@ -1,13 +1,11 @@
 ---
 title: "RAG Evaluation: Measuring Retrieval-Augmented Generation Quality"
+description: "Retrieval-Augmented Generation (RAG) systems combine retrieval and generation components, each requiring specific evaluation strategies. This guide covers…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-18
 tags: ["AI", "RAG", "Evaluation", "LLM", "Search"]
-
 ---
-
-I wrote "RAG Evaluation: Measuring Retrieval-Augmented Generation Quality" to share practical, production-minded guidance on this topic.
 
 Retrieval-Augmented Generation (RAG) systems combine retrieval and generation components, each requiring specific evaluation strategies. This guide covers comprehensive RAG evaluation approaches.
 
@@ -365,4 +363,3 @@ rag_evaluator = RAGEvaluator()
 ## Conclusion
 
 Comprehensive RAG evaluation requires measuring both retrieval quality and generation quality. Use a combination of automated metrics and LLM-based evaluation to get a complete picture of system performance.
-

@@ -1,5 +1,6 @@
 ---
 title: "Sensitivity Labels and Data Classification in Microsoft Fabric"
+description: "Sensitivity labels help classify and protect data based on its sensitivity level. Today I'm exploring how to implement data classification in Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-25
@@ -502,4 +503,4 @@ Tomorrow I'll cover data loss prevention in Microsoft Fabric.
 
 - [Sensitivity Labels in Fabric](https://learn.microsoft.com/fabric/governance/sensitivity-labels)
 - [Microsoft Purview](https://learn.microsoft.com/purview/sensitivity-labels)
-- [Auto-Labeling](https://learn.microsoft.com/purview/apply-sensitivity-label-automatically)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Auto-Labeling](https://learn.microsoft.com/purview/apply-sensitivity-label-automatically)

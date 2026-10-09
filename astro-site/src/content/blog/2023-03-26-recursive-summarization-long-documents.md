@@ -1,5 +1,6 @@
 ---
 title: "Recursive Summarization for Long Documents"
+description: "Recursive summarization enables processing of documents of any length while maintaining quality through iterative refinement."
 author: Michael John Pena
 draft: false
 date: 2023-03-26
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Summarization
   - Long Documents
-
 ---
-
-I wrote "Recursive Summarization for Long Documents" to share practical, production-minded guidance on this topic.
 
 ## The Recursive Pattern
 
@@ -489,4 +487,4 @@ class OptimizedRecursiveSummarizer:
         return chunks
 ```
 
-Recursive summarization enables processing of documents of any length while maintaining quality through iterative refinement.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Recursive summarization enables processing of documents of any length while maintaining quality through iterative refinement.

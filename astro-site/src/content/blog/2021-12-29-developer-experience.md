@@ -1,5 +1,6 @@
 ---
 title: "Developer Experience: Making Developers Productive and Happy"
+description: "Developer experience in 2021 became a competitive advantage. Organizations that invest in DevEx attract better talent and ship faster."
 author: Michael John Pena
 draft: false
 date: 2021-12-29
@@ -9,10 +10,7 @@ tags:
   - Productivity
   - Tooling
   - Engineering Culture
-
 ---
-
-I wrote "Developer Experience: Making Developers Productive and Happy" to share practical, production-minded guidance on this topic.
 
 ## Measuring Developer Experience
 
@@ -572,4 +570,4 @@ Developer experience in 2021 became a competitive advantage. Organizations that 
 - [DORA Research](https://www.devops-research.com/)
 - [Developer Experience at Spotify](https://engineering.atspotify.com/)
 - [The DevEx Framework](https://queue.acm.org/detail.cfm?id=3595878)
-- [Developer Productivity Engineering](https://gradle.com/developer-productivity-engineering/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Developer Productivity Engineering](https://gradle.com/developer-productivity-engineering/)

@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-07
 tags:
-  - kubernetes
-  - security
+  - Kubernetes
+  - Security
   - psa
   - pods
-
 ---
-
-I wrote "Pod Security Admission: Replacing Pod Security Policies" to share practical, production-minded guidance on this topic.
 
 ## Security Standards
 
@@ -81,5 +78,3 @@ kubectl label namespace myns pod-security.kubernetes.io/enforce=baseline
 ## Summary
 
 Pod Security Admission provides simpler, namespace-level security enforcement replacing the complex PSP system. Migrate before Kubernetes 1.25 when PSP is removed.
-
-

@@ -1,5 +1,6 @@
 ---
 title: "Building AI Agents: From Chatbots to Autonomous Systems"
+description: "AI agents represent the next evolution of AI systems. By combining planning, tool use, and memory, they can autonomously accomplish complex goals while…"
 author: Michael John Pena
 draft: false
 date: 2023-04-30
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Automation
   - Python
-
 ---
-
-I wrote "Building AI Agents: From Chatbots to Autonomous Systems" to share practical, production-minded guidance on this topic.
 
 ## Agent Architecture
 
@@ -660,4 +658,4 @@ result1 = await agent.run("Research the latest AI developments and summarize")
 result2 = await agent.run("Find recent breakthroughs in language models")
 ```
 
-AI agents represent the next evolution of AI systems. By combining planning, tool use, and memory, they can autonomously accomplish complex goals while adapting to new situations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI agents represent the next evolution of AI systems. By combining planning, tool use, and memory, they can autonomously accomplish complex goals while adapting to new situations.

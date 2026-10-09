@@ -5,14 +5,11 @@ draft: false
 date: 2022-01-05
 url: /blog/aks-cost-optimization/
 tags:
-  - azure
-  - kubernetes
-  - aks
+  - Azure
+  - Kubernetes
+  - AKS
   - cost-optimization
-
 ---
-
-I wrote "AKS Cost Optimization: Strategies for Reducing Kubernetes Spending" to share practical, production-minded guidance on this topic.
 
 ## Understanding AKS Costs
 
@@ -202,4 +199,3 @@ Key cost optimization strategies:
 6. Implement resource quotas and limit ranges
 
 A well-optimized AKS cluster can reduce costs by 50-70% without sacrificing performance.
-

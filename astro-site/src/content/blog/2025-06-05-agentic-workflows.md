@@ -1,5 +1,6 @@
 ---
 title: "Agentic Workflows: Designing Autonomous AI Systems"
+description: "Safe agentic workflows balance autonomy with appropriate controls."
 author: Michael John Peña
 draft: false
 date: 2025-06-05
@@ -9,10 +10,7 @@ tags:
   - Workflows
   - Autonomous
   - Design
-
 ---
-
-I wrote "Agentic Workflows: Designing Autonomous AI Systems" to share practical, production-minded guidance on this topic.
 
 ## Agentic Workflow Design
 
@@ -121,4 +119,4 @@ class AgenticWorkflow:
         return True
 ```
 
-Safe agentic workflows balance autonomy with appropriate controls.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Safe agentic workflows balance autonomy with appropriate controls.

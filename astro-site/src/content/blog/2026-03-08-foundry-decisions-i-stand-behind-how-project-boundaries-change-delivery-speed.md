@@ -1,5 +1,6 @@
 ---
 title: "Foundry Decisions I Stand Behind: how project boundaries change delivery speed"
+description: "I worked on smoothing the handoff between data engineering and AI teams—standardizing feature contracts, embedding validation, and adding lightweight…"
 author: Michael John Peña
 draft: false
 date: 2026-03-08
@@ -36,4 +37,4 @@ Tomorrow's focus is to stress-test this with less ideal inputs and see where it 
 
 - [Microsoft Foundry overview](https://learn.microsoft.com/azure/ai-foundry/what-is-azure-ai-foundry)
 - [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

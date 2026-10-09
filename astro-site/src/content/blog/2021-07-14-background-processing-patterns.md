@@ -10,12 +10,9 @@ tags:
   - Patterns
   - Messaging
   - Cloud
-
 ---
 
-I wrote "2021-07-14-background-processing-patterns" to share practical, production-minded guidance on this topic.
-
-# Queue-Based Load Leveling
+## Queue-Based Load Leveling
 
 Use queues to handle variable load:
 
@@ -99,7 +96,7 @@ public class OrderProcessor
 }
 ```
 
-# Competing Consumers Pattern
+## Competing Consumers Pattern
 
 Scale processing with multiple consumers:
 
@@ -153,7 +150,7 @@ public class ParallelProcessor
 }
 ```
 
-# Priority Queue Pattern
+## Priority Queue Pattern
 
 Process high-priority items first:
 
@@ -214,7 +211,7 @@ public class PriorityQueueProcessor
 }
 ```
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
 Coordinate long-running business processes:
 
@@ -309,7 +306,7 @@ public class OrderSaga
 }
 ```
 
-# Event-Driven Processing
+## Event-Driven Processing
 
 React to events asynchronously:
 
@@ -361,7 +358,7 @@ public class EventDrivenProcessor
 }
 ```
 
-# Scheduled Background Processing
+## Scheduled Background Processing
 
 Run tasks on a schedule:
 
@@ -411,7 +408,7 @@ public class ScheduledProcessing
 }
 ```
 
-# Circuit Breaker Pattern
+## Circuit Breaker Pattern
 
 Protect against cascading failures:
 
@@ -453,9 +450,8 @@ public class ResilientProcessor
 }
 ```
 
-# Conclusion
+## Conclusion
 
 Background processing patterns are essential for building scalable, resilient applications. Azure provides multiple services including Storage Queues, Service Bus, Event Grid, and Azure Functions that enable implementing these patterns effectively.
 
 Choose the right pattern based on your requirements: queue-based load leveling for variable loads, competing consumers for parallel processing, sagas for distributed transactions, and event-driven processing for reactive architectures. Combined with proper error handling and monitoring, these patterns help build robust cloud applications.
-

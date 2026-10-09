@@ -9,10 +9,7 @@ tags:
   - Embeddings
   - AI
   - High Performance
-
 ---
-
-I wrote "Milvus Vector Database: High-Performance Similarity Search" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -487,4 +484,4 @@ collection.search(
 
 - [Milvus Documentation](https://milvus.io/docs)
 - [PyMilvus](https://github.com/milvus-io/pymilvus)
-- [Zilliz Cloud](https://zilliz.com/) (Managed Milvus)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Zilliz Cloud](https://zilliz.com/) (Managed Milvus)

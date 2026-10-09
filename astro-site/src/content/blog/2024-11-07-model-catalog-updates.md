@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Model Catalog: Exploring the Latest Model Options"
+description: "The Model Catalog gives you flexibility to choose the right model for each use case while maintaining a consistent API. Experiment with different models to…"
 author: Michael John Peña
 draft: false
 date: 2024-11-07
@@ -9,10 +10,7 @@ tags:
   - Model Catalog
   - LLM
   - Open Source
-
 ---
-
-I wrote "Azure AI Model Catalog: Exploring the Latest Model Options" to share practical, production-minded guidance on this topic.
 
 ## The Model Catalog Landscape
 
@@ -296,4 +294,4 @@ The Model Catalog gives you flexibility to choose the right model for each use c
 
 - [Azure AI Model Catalog](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/model-catalog)
 - [Model Benchmarks](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/model-benchmarks)
-- [Deployment Guide](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/deploy-models)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Deployment Guide](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/deploy-models)

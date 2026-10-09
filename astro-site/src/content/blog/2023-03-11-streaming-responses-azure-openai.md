@@ -1,5 +1,6 @@
 ---
 title: "Streaming Responses with Azure OpenAI"
+description: "Streaming transforms AI applications from feeling sluggish to feeling responsive. The implementation adds complexity, but the UX improvement is substantial.…"
 author: Michael John Pena
 draft: false
 date: 2023-03-11
@@ -9,10 +10,7 @@ tags:
   - AI
   - Streaming
   - UX
-
 ---
-
-I wrote "Streaming Responses with Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Why Streaming?
 
@@ -480,4 +478,4 @@ print(f"Total time: {metrics.total_time:.2f}s")
 print(f"Tokens/second: {metrics.tokens_per_second:.1f}")
 ```
 
-Streaming transforms AI applications from feeling sluggish to feeling responsive. The implementation adds complexity, but the UX improvement is substantial. Start with basic streaming and add features like cancellation and metrics as needed.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Streaming transforms AI applications from feeling sluggish to feeling responsive. The implementation adds complexity, but the UX improvement is substantial. Start with basic streaming and add features like cancellation and metrics as needed.

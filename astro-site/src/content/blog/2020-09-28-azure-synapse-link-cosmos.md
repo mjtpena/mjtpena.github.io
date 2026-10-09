@@ -1,5 +1,6 @@
 ---
 title: "Azure Synapse Link for Cosmos DB: Real-Time Analytics"
+description: "Synapse Link: analytics without the pipeline complexity."
 author: Michael John Peña
 draft: false
 date: 2020-09-28
@@ -8,10 +9,7 @@ tags:
   - Synapse
   - Cosmos DB
   - Analytics
-
 ---
-
-I wrote "Azure Synapse Link for Cosmos DB: Real-Time Analytics" to share practical, production-minded guidance on this topic.
 
 ## How It Works
 
@@ -177,4 +175,4 @@ az cosmosdb sql container update \
 | Fraud detection | Analyze patterns instantly |
 | IoT analytics | Process device data |
 
-Synapse Link: analytics without the pipeline complexity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Synapse Link: analytics without the pipeline complexity.

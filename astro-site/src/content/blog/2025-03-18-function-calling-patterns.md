@@ -1,5 +1,6 @@
 ---
 title: "Function Calling Patterns: Building Reliable AI Tools"
+description: "Well-designed function calling creates powerful AI applications that interact safely with real systems."
 author: Michael John Peña
 draft: false
 date: 2025-03-18
@@ -9,10 +10,7 @@ tags:
   - Tools
   - Patterns
   - Best Practices
-
 ---
-
-I wrote "Function Calling Patterns: Building Reliable AI Tools" to share practical, production-minded guidance on this topic.
 
 ## Function Calling Best Practices
 
@@ -111,4 +109,4 @@ agent.register_tool(
 )
 ```
 
-Well-designed function calling creates powerful AI applications that interact safely with real systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Well-designed function calling creates powerful AI applications that interact safely with real systems.

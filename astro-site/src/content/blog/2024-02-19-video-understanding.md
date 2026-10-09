@@ -9,10 +9,7 @@ tags:
   - Computer Vision
   - AI
   - Multimodal
-
 ---
-
-I wrote "Video Understanding with AI: Frame Analysis and Summarization" to share practical, production-minded guidance on this topic.
 
 ## Frame Extraction
 
@@ -128,4 +125,3 @@ def detect_scenes(frames: list[str]) -> list[dict]:
 ## Conclusion
 
 Video understanding through frame analysis enables content summarization, scene detection, and visual search. Combine frame extraction with GPT-4 Vision for effective video AI.
-

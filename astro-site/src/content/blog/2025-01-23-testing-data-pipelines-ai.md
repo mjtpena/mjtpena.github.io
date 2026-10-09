@@ -1,5 +1,6 @@
 ---
 title: "Testing Data Pipelines with AI: From Unit Tests to Integration Testing"
+description: "AI-assisted testing catches more bugs earlier. Combine generated tests with manual review to ensure comprehensive coverage."
 author: Michael John Peña
 draft: false
 date: 2025-01-23
@@ -9,10 +10,7 @@ tags:
   - AI
   - Data Pipelines
   - Azure
-
 ---
-
-I wrote "Testing Data Pipelines with AI: From Unit Tests to Integration Testing" to share practical, production-minded guidance on this topic.
 
 ## The Testing Pyramid for Data Pipelines
 
@@ -431,4 +429,4 @@ class OutputValidator:
 4. **Version test data**: Keep synthetic data reproducible
 5. **Continuous testing**: Run tests on every pipeline change
 
-AI-assisted testing catches more bugs earlier. Combine generated tests with manual review to ensure comprehensive coverage.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI-assisted testing catches more bugs earlier. Combine generated tests with manual review to ensure comprehensive coverage.

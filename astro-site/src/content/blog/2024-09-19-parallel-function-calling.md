@@ -1,13 +1,11 @@
 ---
 title: "Parallel Function Calling: Execute Multiple Tools Simultaneously"
+description: "Parallel function calling dramatically improves response times when multiple independent operations are needed. Use it wisely to build faster, more…"
 author: "Michael John Peña"
 draft: false
 date: 2024-09-19
 tags: ["OpenAI", "Function Calling", "Parallel", "Performance", "AI"]
-
 ---
-
-I wrote "Parallel Function Calling: Execute Multiple Tools Simultaneously" to share practical, production-minded guidance on this topic.
 
 ## Understanding Parallel Calls
 
@@ -378,4 +376,4 @@ response = client.chat.completions.create(
 # - Debugging tool execution order
 ```
 
-Parallel function calling dramatically improves response times when multiple independent operations are needed. Use it wisely to build faster, more responsive AI applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Parallel function calling dramatically improves response times when multiple independent operations are needed. Use it wisely to build faster, more responsive AI applications.

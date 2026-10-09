@@ -1,5 +1,6 @@
 ---
 title: "Azure ML Compute: Choosing the Right Infrastructure"
+description: "Azure ML offers three distinct compute experiences, and choosing the right one makes a significant difference to both cost and development friction. For…"
 author: Michael John Peña
 draft: false
 date: 2023-08-19
@@ -238,4 +239,4 @@ Tomorrow we'll explore spot instances for ML workloads.
 
 - [Azure ML Compute](https://learn.microsoft.com/en-us/azure/machine-learning/concept-compute-target)
 - [GPU VM Sizes](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes-gpu)
-- [Cost Optimization](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-optimize-cost)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Cost Optimization](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-optimize-cost)

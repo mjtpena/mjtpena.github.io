@@ -1,5 +1,6 @@
 ---
 title: "Natural Language to SQL: Building Text-to-SQL Systems"
+description: "Text-to-SQL democratizes data access by enabling natural language queries."
 author: Michael John Peña
 draft: false
 date: 2025-04-22
@@ -9,10 +10,7 @@ tags:
   - Natural Language
   - Text-to-SQL
   - Database
-
 ---
-
-I wrote "Natural Language to SQL: Building Text-to-SQL Systems" to share practical, production-minded guidance on this topic.
 
 ## Text-to-SQL Implementation
 
@@ -133,4 +131,4 @@ Explain these results in natural language, answering the original question."""
         return response.choices[0].message.content
 ```
 
-Text-to-SQL democratizes data access by enabling natural language queries.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Text-to-SQL democratizes data access by enabling natural language queries.

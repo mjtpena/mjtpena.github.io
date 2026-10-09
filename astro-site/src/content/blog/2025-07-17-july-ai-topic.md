@@ -1,5 +1,6 @@
 ---
 title: "Azure Machine Learning Managed Endpoints: Deploying Models with Zero Downtime"
+description: "Configure Azure Monitor alerts on latency and error rates. Implement automatic rollback triggers when thresholds are breached."
 author: Michael John Peña
 draft: false
 date: 2025-07-17
@@ -9,10 +10,7 @@ tags:
   - Model Deployment
   - Blue-Green Deployment
   - Python
-
 ---
-
-I wrote "Azure Machine Learning Managed Endpoints: Deploying Models with Zero Downtime" to share practical, production-minded guidance on this topic.
 
 ## Creating Managed Endpoints
 
@@ -104,4 +102,4 @@ ml_client.online_deployments.begin_delete(
 
 ## Monitoring and Rollback
 
-Configure Azure Monitor alerts on latency and error rates. Implement automatic rollback triggers when thresholds are breached.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Configure Azure Monitor alerts on latency and error rates. Implement automatic rollback triggers when thresholds are breached.

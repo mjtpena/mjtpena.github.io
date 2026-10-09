@@ -1,18 +1,16 @@
 ---
 title: "GitHub Code Scanning: Finding Vulnerabilities Before They Ship"
+description: "Code scanning uses CodeQL, a semantic code analysis engine, to find security vulnerabilities, bugs, and other errors in your codebase."
 author: Michael John Peña
 draft: false
 date: 2022-01-13
 url: /blog/github-code-scanning/
 tags:
-  - github
-  - security
+  - GitHub
+  - Security
   - codeql
   - devsecops
-
 ---
-
-I wrote "GitHub Code Scanning: Finding Vulnerabilities Before They Ship" to share practical, production-minded guidance on this topic.
 
 ## Understanding Code Scanning
 
@@ -245,4 +243,4 @@ jobs:
             }
 ```
 
-Code scanning is essential for modern secure development practices.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Code scanning is essential for modern secure development practices.

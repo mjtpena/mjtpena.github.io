@@ -10,12 +10,9 @@ tags:
   - Analytics
   - Data
   - Business Intelligence
-
 ---
 
-I wrote "2021-07-04-power-bi-premium-gen2" to share practical, production-minded guidance on this topic.
-
-# Key Improvements in Gen2
+## Key Improvements in Gen2
 
 Premium Gen2 introduces several architectural improvements:
 
@@ -26,7 +23,7 @@ Premium Gen2 introduces several architectural improvements:
 - Enhanced dataflow performance
 - Paginated reports integration
 
-# Migrating to Premium Gen2
+## Migrating to Premium Gen2
 
 Check and enable Gen2 in the Admin portal:
 
@@ -56,7 +53,7 @@ $body = @{
 Invoke-PowerBIRestMethod -Url "capacities/$capacityId" -Method Patch -Body $body
 ```
 
-# Optimizing Datasets for Gen2
+## Optimizing Datasets for Gen2
 
 Take advantage of Gen2's improved engine:
 
@@ -89,7 +86,7 @@ SUMMARIZECOLUMNS(
 )
 ```
 
-# Enhanced Dataflows
+## Enhanced Dataflows
 
 Premium Gen2 improves dataflow performance:
 
@@ -129,7 +126,7 @@ in
     Expanded
 ```
 
-# Composite Models with DirectQuery
+## Composite Models with DirectQuery
 
 Gen2 supports enhanced composite models:
 
@@ -174,7 +171,7 @@ Gen2 supports enhanced composite models:
 }
 ```
 
-# Autoscale Configuration
+## Autoscale Configuration
 
 Configure autoscale for Gen2 capacity:
 
@@ -217,7 +214,7 @@ $profile = New-AzAutoscaleProfile -DefaultCapacity 2 `
     -Name "AutoscaleProfile"
 ```
 
-# Monitoring Premium Gen2
+## Monitoring Premium Gen2
 
 Use the Premium Capacity Metrics app:
 
@@ -261,7 +258,7 @@ foreach ($metric in $metrics.value) {
 }
 ```
 
-# Best Practices for Gen2
+## Best Practices for Gen2
 
 Configure datasets for optimal Gen2 performance:
 
@@ -293,9 +290,8 @@ SUMX(
 )
 ```
 
-# Conclusion
+## Conclusion
 
 Power BI Premium Gen2 delivers significant improvements in performance, scalability, and manageability. The autoscale architecture means you no longer need to carefully manage capacity utilization, and the enhanced engine provides faster query responses for your users.
 
 If you are running Premium workloads, migrating to Gen2 is a straightforward process that delivers immediate benefits. Take advantage of the improved dataflow performance, enhanced composite models, and better concurrent user handling to build more sophisticated BI solutions.
-

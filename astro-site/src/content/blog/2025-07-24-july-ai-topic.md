@@ -1,5 +1,6 @@
 ---
 title: "Implementing Semantic Caching for LLM Applications"
+description: "Use Redis Vector Search for efficient similarity matching at scale. Tune the similarity threshold based on your use case - higher values ensure more precise…"
 author: Michael John Peña
 draft: false
 date: 2025-07-24
@@ -9,10 +10,7 @@ tags:
   - Performance
   - Redis
   - Python
-
 ---
-
-I wrote "Implementing Semantic Caching for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Architecture Overview
 
@@ -112,4 +110,4 @@ async def cached_completion(self, query: str, **kwargs) -> str:
 
 ## Production Considerations
 
-Use Redis Vector Search for efficient similarity matching at scale. Tune the similarity threshold based on your use case - higher values ensure more precise matches, lower values increase cache hit rates.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use Redis Vector Search for efficient similarity matching at scale. Tune the similarity threshold based on your use case - higher values ensure more precise matches, lower values increase cache hit rates.

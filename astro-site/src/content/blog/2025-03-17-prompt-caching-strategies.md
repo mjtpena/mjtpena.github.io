@@ -1,5 +1,6 @@
 ---
 title: "Prompt Caching Strategies: Reducing Latency and Cost"
+description: "Smart caching can reduce AI costs by 30-50% for applications with repetitive queries."
 author: Michael John Peña
 draft: false
 date: 2025-03-17
@@ -9,10 +10,7 @@ tags:
   - Optimization
   - Performance
   - Cost
-
 ---
-
-I wrote "Prompt Caching Strategies: Reducing Latency and Cost" to share practical, production-minded guidance on this topic.
 
 ## Prompt Caching Implementation
 
@@ -101,4 +99,4 @@ class SemanticCache:
         return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 ```
 
-Smart caching can reduce AI costs by 30-50% for applications with repetitive queries.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Smart caching can reduce AI costs by 30-50% for applications with repetitive queries.

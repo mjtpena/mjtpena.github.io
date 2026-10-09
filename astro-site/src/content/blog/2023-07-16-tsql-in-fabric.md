@@ -1,5 +1,6 @@
 ---
 title: "T-SQL in Fabric: Patterns and Best Practices"
+description: "If you're coming to Fabric Warehouse from a SQL Server or Azure SQL Database background, the T-SQL compatibility is reassuring — CTEs, window functions…"
 author: Michael John Peña
 draft: false
 date: 2023-07-16
@@ -362,4 +363,4 @@ Tomorrow we'll explore cross-database queries in Fabric.
 
 - [T-SQL Surface Area in Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area)
 - [Query Performance](https://learn.microsoft.com/en-us/fabric/data-warehouse/query-insights)
-- [T-SQL Reference](https://learn.microsoft.com/en-us/sql/t-sql/language-reference)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [T-SQL Reference](https://learn.microsoft.com/en-us/sql/t-sql/language-reference)

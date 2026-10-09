@@ -9,10 +9,7 @@ tags:
   - Multi-Cloud
   - Analytics
   - Data Architecture
-
 ---
-
-I wrote "Cross-Cloud Analytics with Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## The Multi-Cloud Reality
 
@@ -604,4 +601,3 @@ def optimize_cross_cloud_joins(
 Cross-cloud analytics in Microsoft Fabric enables true multi-cloud data strategies. Use OneLake shortcuts to create a unified view of your data estate, but be mindful of data transfer costs and latency.
 
 Start with read-only analytics across clouds, then materialize high-value, frequently accessed data locally for optimal performance and cost.
-

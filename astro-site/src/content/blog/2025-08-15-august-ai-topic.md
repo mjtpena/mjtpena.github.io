@@ -1,5 +1,6 @@
 ---
 title: "Semantic Kernel Memory: Building Persistent AI Context"
+description: "Use retrieved memories to enrich the system prompt or provide context for the AI. This enables personalized responses without requiring the user to repeat…"
 author: Michael John Peña
 draft: false
 date: 2025-08-15
@@ -9,10 +10,7 @@ tags:
   - Vector Database
   - AI
   - .NET
-
 ---
-
-I wrote "Semantic Kernel Memory: Building Persistent AI Context" to share practical, production-minded guidance on this topic.
 
 ## Configuring Memory with Azure AI Search
 
@@ -80,4 +78,4 @@ await foreach (var mem in memories)
 
 Use retrieved memories to enrich the system prompt or provide context for the AI. This enables personalized responses without requiring the user to repeat preferences or context from previous sessions.
 
-Memory transforms stateless AI interactions into continuous, contextual conversations.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Memory transforms stateless AI interactions into continuous, contextual conversations.

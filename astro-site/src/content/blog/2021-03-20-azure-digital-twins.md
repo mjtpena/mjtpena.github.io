@@ -1,5 +1,6 @@
 ---
 title: Azure Digital Twins for Smart Environment Modeling
+description: "Azure Digital Twins was the service that reframed how I think about IoT data. Most IoT architectures I'd built treated device telemetry as a stream: events…"
 author: Michael John Pena
 draft: false
 date: 2021-03-20

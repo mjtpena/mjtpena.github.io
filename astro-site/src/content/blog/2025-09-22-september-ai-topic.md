@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering: System Prompts That Actually Work"
+description: "Invest time in crafting and testing your system prompts. They are the foundation of consistent, high-quality AI interactions."
 author: Michael John Peña
 draft: false
 date: 2025-09-22
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Best Practices
   - AI
-
 ---
-
-I wrote "Prompt Engineering: System Prompts That Actually Work" to share practical, production-minded guidance on this topic.
 
 ## Anatomy of an Effective System Prompt
 
@@ -129,4 +127,4 @@ def test_system_prompt(prompt: str, test_cases: List[dict], client) -> List[dict
     return results
 ```
 
-Invest time in crafting and testing your system prompts. They are the foundation of consistent, high-quality AI interactions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Invest time in crafting and testing your system prompts. They are the foundation of consistent, high-quality AI interactions.

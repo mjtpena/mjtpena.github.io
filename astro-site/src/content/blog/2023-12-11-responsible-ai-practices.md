@@ -1,13 +1,11 @@
 ---
 title: "Responsible AI Practices: Building Ethical AI Systems"
+description: "Responsible AI isn't merely compliance box-ticking; it's product design that protects people and preserves trust. In practice I've found that pairing…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-11
 tags: ["Responsible AI", "Ethics", "AI Governance", "Best Practices", "Microsoft"]
-
 ---
-
-I wrote "Responsible AI Practices: Building Ethical AI Systems" to share practical, production-minded guidance on this topic.
 
 Responsible AI isn't merely compliance box-ticking; it's product design that protects people and preserves trust. In practice I've found that pairing measurable fairness and safety checks with pragmatic rollout gates — A/B tests, canary releases and human-in-the-loop review — produces systems teams are willing to run in production.
 
@@ -398,4 +396,4 @@ example_card = ModelCard(
 )
 ```
 
-Tomorrow, we'll explore AI transparency requirements and implementation!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore AI transparency requirements and implementation!

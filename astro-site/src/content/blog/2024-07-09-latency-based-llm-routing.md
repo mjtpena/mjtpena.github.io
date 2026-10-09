@@ -9,10 +9,7 @@ tags:
   - Performance
   - Azure
   - Real-Time
-
 ---
-
-I wrote "Latency-Based LLM Routing: Real-Time AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Understanding LLM Latency
 
@@ -651,4 +648,3 @@ async def main():
 Latency-based routing is essential for real-time AI applications. Users expect responsive experiences, and the right routing strategy delivers that while still meeting quality requirements.
 
 Measure, stream, and always have a fast fallback ready.
-

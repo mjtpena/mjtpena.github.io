@@ -1,5 +1,6 @@
 ---
 title: "2023 Predictions: Azure, AI, and Data"
+description: "Closing out 2022 from Australia on New Year's Eve, the technical predictions for 2023 feel more consequential than they ever have—because November 30…"
 author: Michael John Peña
 draft: false
 date: 2022-12-31

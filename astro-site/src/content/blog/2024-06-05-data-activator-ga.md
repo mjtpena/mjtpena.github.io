@@ -9,10 +9,7 @@ tags:
   - Automation
   - Alerts
   - Real-Time
-
 ---
-
-I wrote "Data Activator GA: Automated Actions from Data" to share practical, production-minded guidance on this topic.
 
 ## What is Data Activator?
 
@@ -392,4 +389,4 @@ Tomorrow I'll cover Reflex triggers in more detail.
 
 - [Data Activator Documentation](https://learn.microsoft.com/fabric/data-activator/)
 - [Trigger Types](https://learn.microsoft.com/fabric/data-activator/data-activator-triggers)
-- [Action Configuration](https://learn.microsoft.com/fabric/data-activator/data-activator-actions)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Action Configuration](https://learn.microsoft.com/fabric/data-activator/data-activator-actions)

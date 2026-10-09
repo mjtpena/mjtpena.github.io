@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric: The Biggest Data Launch Since SQL Server"
+description: "At Microsoft Build 2023 on May 23, Satya Nadella announced Microsoft Fabric with the phrase \"perhaps the biggest launch of a data product from Microsoft…"
 author: Michael John Peña
 draft: false
 date: 2023-05-25
@@ -233,4 +234,4 @@ More deep dives coming as I explore each component.
 - [Microsoft Fabric Documentation](https://learn.microsoft.com/en-us/fabric/)
 - [Fabric Roadmap](https://roadmap.fabric.microsoft.com/)
 - [Get Started with Fabric](https://learn.microsoft.com/en-us/fabric/get-started/fabric-trial)
-- [James Serra's Fabric Overview](https://www.jamesserra.com/archive/2023/05/build-announcement-microsoft-fabric/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [James Serra's Fabric Overview](https://www.jamesserra.com/archive/2023/05/build-announcement-microsoft-fabric/)

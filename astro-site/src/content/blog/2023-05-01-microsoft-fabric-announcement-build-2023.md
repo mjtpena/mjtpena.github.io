@@ -1,5 +1,6 @@
 ---
 title: "Looking Ahead to Microsoft Build 2023: What to Expect for Data and AI"
+description: "Microsoft Build 2023 is scheduled for May 23–25, 2023, in Seattle—and based on the product roadmap signals Microsoft had been sending through Ignite 2022…"
 author: Michael John Peña
 draft: false
 date: 2023-05-01

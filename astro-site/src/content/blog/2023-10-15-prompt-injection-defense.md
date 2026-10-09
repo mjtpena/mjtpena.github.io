@@ -10,10 +10,7 @@ tags:
   - LLM
   - Defense
   - AI Safety
-
 ---
-
-I wrote "Prompt Injection Defense: Protecting LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -485,4 +482,3 @@ for result in report["results"]:
 ## Conclusion
 
 Prompt injection defense requires multiple layers of protection including detection, sanitization, prompt structure hardening, and output validation. Regular testing against known attack patterns and continuous monitoring help maintain security as new attack vectors emerge.
-

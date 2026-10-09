@@ -9,10 +9,7 @@ tags:
   - Machine Learning
   - Misinformation
   - Verification
-
 ---
-
-I wrote "AI Content Detection: Tools and Techniques" to share practical, production-minded guidance on this topic.
 
 ## Detection Approaches
 
@@ -178,4 +175,3 @@ detection_limitations = {
 ## Conclusion
 
 AI detection is an evolving challenge. Use multiple approaches, acknowledge limitations, and combine automated detection with human review for critical decisions.
-

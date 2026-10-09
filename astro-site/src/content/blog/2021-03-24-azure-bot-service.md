@@ -1,5 +1,6 @@
 ---
 title: Building Intelligent Bots with Azure Bot Service
+description: "I've built bot projects with the Bot Framework that I'm proud of, and bot projects that I wish I could forget. The difference is almost always scope…"
 author: Michael John Pena
 draft: false
 date: 2021-03-24

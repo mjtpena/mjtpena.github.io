@@ -6,12 +6,9 @@ date: 2022-06-20
 tags:
   - graphql
   - subscriptions
-  - real-time
-  - azure
-
+  - Real-Time
+  - Azure
 ---
-
-I wrote "GraphQL Subscriptions: Real-Time Data with Azure" to share practical, production-minded guidance on this topic.
 
 ## Schema Definition
 
@@ -102,5 +99,3 @@ client.subscribe(
 ## Summary
 
 GraphQL subscriptions provide elegant real-time communication, ideal for dashboards, notifications, and live updates.
-
-

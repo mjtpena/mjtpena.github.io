@@ -1,5 +1,6 @@
 ---
 title: "Guardrails for LLMs: Building Safe AI Applications"
+description: "Comprehensive guardrails are essential for responsible AI deployment."
 author: Michael John Peña
 draft: false
 date: 2025-03-20
@@ -9,10 +10,7 @@ tags:
   - Safety
   - Security
   - Best Practices
-
 ---
-
-I wrote "Guardrails for LLMs: Building Safe AI Applications" to share practical, production-minded guidance on this topic.
 
 ## LLM Guardrails Implementation
 
@@ -105,4 +103,4 @@ class GuardrailPipeline:
         return json.loads(result.choices[0].message.content)
 ```
 
-Comprehensive guardrails are essential for responsible AI deployment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Comprehensive guardrails are essential for responsible AI deployment.

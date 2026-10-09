@@ -1,5 +1,6 @@
 ---
 title: "Hybrid Search Implementation: Combining Vector and Keyword Search"
+description: "Hybrid search delivers better results than either approach alone. Implement it early in your RAG pipeline and tune the weights based on your specific use case."
 author: Michael John Peña
 draft: false
 date: 2025-01-27
@@ -9,10 +10,7 @@ tags:
   - AI
   - Azure
   - RAG
-
 ---
-
-I wrote "Hybrid Search Implementation: Combining Vector and Keyword Search" to share practical, production-minded guidance on this topic.
 
 ## Why Hybrid Search?
 
@@ -415,4 +413,4 @@ class HybridSearchEvaluator:
         return {k: np.mean(v) for k, v in metrics.items()}
 ```
 
-Hybrid search delivers better results than either approach alone. Implement it early in your RAG pipeline and tune the weights based on your specific use case.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hybrid search delivers better results than either approach alone. Implement it early in your RAG pipeline and tune the weights based on your specific use case.

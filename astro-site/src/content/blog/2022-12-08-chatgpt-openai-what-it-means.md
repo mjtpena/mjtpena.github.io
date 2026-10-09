@@ -1,5 +1,6 @@
 ---
 title: "ChatGPT: What OpenAI's New AI Chatbot Means for Developers"
+description: "One week after ChatGPT's launch and it had crossed one million users—a milestone that took Netflix 3.5 years, Facebook 10 months, and Instagram 2.5 months.…"
 author: Michael John Peña
 draft: false
 date: 2022-12-08

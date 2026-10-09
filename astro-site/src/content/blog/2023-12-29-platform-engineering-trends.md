@@ -1,13 +1,11 @@
 ---
 title: "Platform Engineering Trends: Building Internal Data Platforms"
+description: "Platform engineering is the pragmatic answer to scale: provide golden paths, self-service APIs and guardrails so teams move quickly without repeating…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-29
 tags: ["Platform Engineering", "DevOps", "Data Platform", "Internal Platform", "Trends"]
-
 ---
-
-I wrote "Platform Engineering Trends: Building Internal Data Platforms" to share practical, production-minded guidance on this topic.
 
 Platform engineering is the pragmatic answer to scale: provide golden paths, self-service APIs and guardrails so teams move quickly without repeating platform work. I've built internal platforms and will share the core principles that made them successful.
 
@@ -290,4 +288,4 @@ def calculate_platform_roi(metrics: Dict) -> Dict:
     }
 ```
 
-Tomorrow, we'll wrap up 2023 with a summary and key takeaways!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll wrap up 2023 with a summary and key takeaways!

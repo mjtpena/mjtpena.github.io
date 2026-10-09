@@ -1,5 +1,6 @@
 ---
 title: "File Processing with AI: Automating Data Workflows"
+description: "File processing — extracting structured data from PDFs, converting between formats, parsing inconsistent CSVs, pulling content from Excel sheets with…"
 author: Michael John Peña
 draft: false
 date: 2023-07-31
@@ -320,4 +321,4 @@ This concludes our July series on Microsoft Fabric and AI topics. Tomorrow we be
 
 - [Python File Processing](https://docs.python.org/3/library/filesys.html)
 - [Pandas IO Tools](https://pandas.pydata.org/docs/user_guide/io.html)
-- [Data Validation Libraries](https://great-expectations.io/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data Validation Libraries](https://great-expectations.io/)

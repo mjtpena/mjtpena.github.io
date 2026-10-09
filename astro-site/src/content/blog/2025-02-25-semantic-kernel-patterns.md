@@ -1,5 +1,6 @@
 ---
 title: "Semantic Kernel Patterns: Building AI Applications with Microsoft's SDK"
+description: "Semantic Kernel provides a clean abstraction for building AI applications with plugins and natural language orchestration."
 author: Michael John Peña
 draft: false
 date: 2025-02-25
@@ -9,10 +10,7 @@ tags:
   - Microsoft
   - SDK
   - Development
-
 ---
-
-I wrote "Semantic Kernel Patterns: Building AI Applications with Microsoft's SDK" to share practical, production-minded guidance on this topic.
 
 ## Semantic Kernel Fundamentals
 
@@ -51,4 +49,4 @@ result = await kernel.invoke_prompt(
 )
 ```
 
-Semantic Kernel provides a clean abstraction for building AI applications with plugins and natural language orchestration.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Semantic Kernel provides a clean abstraction for building AI applications with plugins and natural language orchestration.

@@ -1,5 +1,6 @@
 ---
 title: "Fabric Pipelines: Orchestrating Data Workflows"
+description: "Fabric Pipelines enable robust data orchestration with full control flow capabilities. Tomorrow, I will cover Dataflows Gen2."
 author: Michael John Peña
 draft: false
 date: 2023-06-07
@@ -9,10 +10,7 @@ tags:
   - ETL
   - Orchestration
   - Data Factory
-
 ---
-
-I wrote "Fabric Pipelines: Orchestrating Data Workflows" to share practical, production-minded guidance on this topic.
 
 ## Pipeline Architecture
 
@@ -439,4 +437,4 @@ Fabric Pipelines enable robust data orchestration with full control flow capabil
 
 - [Fabric Pipelines](https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-overview)
 - [Pipeline Activities](https://learn.microsoft.com/en-us/fabric/data-factory/activity-overview)
-- [Pipeline Monitoring](https://learn.microsoft.com/en-us/fabric/data-factory/monitor-pipeline-runs)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Pipeline Monitoring](https://learn.microsoft.com/en-us/fabric/data-factory/monitor-pipeline-runs)

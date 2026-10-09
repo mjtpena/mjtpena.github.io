@@ -1,5 +1,6 @@
 ---
 title: "Building Useful AI Agents: tool access policies that improve reliability"
+description: "I focused on making delivery decisions auditable and repeatable—documenting intent, success criteria, and rollback paths to reduce tribal knowledge."
 author: Michael John Peña
 draft: false
 date: 2026-04-02
@@ -36,4 +37,4 @@ Tomorrow I want to verify this pattern under a busier workload before I call it 
 
 - [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
 - [Copilot in Fabric overview](https://learn.microsoft.com/fabric/fundamentals/copilot-fabric-overview)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

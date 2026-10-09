@@ -1,5 +1,6 @@
 ---
 title: "Ignite 2025 Day 2: Microsoft Fabric Innovations and Real-Time Intelligence"
+description: "These Fabric updates demonstrate Microsoft's commitment to building a truly unified data platform that handles real-time and batch workloads while…"
 author: Michael John Peña
 draft: false
 date: 2025-11-16
@@ -9,10 +10,7 @@ tags:
   - Real-Time Intelligence
   - Data Engineering
   - Announcements
-
 ---
-
-I wrote "Ignite 2025 Day 2: Microsoft Fabric Innovations and Real-Time Intelligence" to share practical, production-minded guidance on this topic.
 
 ## Real-Time Intelligence GA
 
@@ -119,4 +117,4 @@ New shortcut capabilities enable seamless multi-cloud data access:
 - Google Cloud Storage with service account integration
 - Azure Data Lake cross-tenant access
 
-These Fabric updates demonstrate Microsoft's commitment to building a truly unified data platform that handles real-time and batch workloads while simplifying development through AI assistance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These Fabric updates demonstrate Microsoft's commitment to building a truly unified data platform that handles real-time and batch workloads while simplifying development through AI assistance.

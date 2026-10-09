@@ -1,13 +1,11 @@
 ---
 title: "Databricks AI/BI: Intelligent Analytics Platform"
+description: "Databricks AI/BI combines the power of the lakehouse with AI-driven analytics. This guide explores how to leverage AI/BI for intelligent data analysis."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-18
 tags: ["Databricks", "AI", "BI", "Analytics", "Data"]
-
 ---
-
-I wrote "Databricks AI/BI: Intelligent Analytics Platform" to share practical, production-minded guidance on this topic.
 
 Databricks AI/BI combines the power of the lakehouse with AI-driven analytics. This guide explores how to leverage AI/BI for intelligent data analysis.
 
@@ -369,4 +367,3 @@ class GenieConversation:
 ## Conclusion
 
 Databricks AI/BI brings intelligent analytics to the lakehouse. From natural language queries with Genie to AI-enhanced SQL functions, these capabilities make advanced analytics accessible to everyone.
-

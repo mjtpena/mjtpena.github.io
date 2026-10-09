@@ -1,5 +1,6 @@
 ---
 title: "Structured Output with JSON Mode: Reliable Data Extraction from LLMs"
+description: "Structured outputs eliminate parsing errors. Add business validation for semantic correctness - the schema ensures format, you ensure meaning."
 author: Michael John Peña
 draft: false
 date: 2025-07-26
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Data Extraction
   - Python
-
 ---
-
-I wrote "Structured Output with JSON Mode: Reliable Data Extraction from LLMs" to share practical, production-minded guidance on this topic.
 
 ## Using OpenAI Structured Outputs
 
@@ -115,4 +113,4 @@ async def extract_invoice(document_text: str) -> Invoice:
 
 ## Validation and Error Handling
 
-Structured outputs eliminate parsing errors. Add business validation for semantic correctness - the schema ensures format, you ensure meaning.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Structured outputs eliminate parsing errors. Add business validation for semantic correctness - the schema ensures format, you ensure meaning.

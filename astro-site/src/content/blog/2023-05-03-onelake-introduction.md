@@ -1,5 +1,6 @@
 ---
 title: "OneLake: The Foundation of Microsoft Fabric"
+description: "OneLake is a single, unified, logical data lake for your entire organization. Think of it as \"OneDrive for data\" - automatically provisioned when you enable…"
 author: Michael John Peña
 draft: false
 date: 2023-05-03
@@ -9,10 +10,7 @@ tags:
   - Data Lake
   - Azure
   - Data Architecture
-
 ---
-
-I wrote "OneLake: The Foundation of Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## What is OneLake?
 
@@ -238,4 +236,4 @@ OneLake is the foundation that makes Fabric's unified experience possible. Tomor
 
 - [OneLake Documentation](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview)
 - [OneLake Shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts)
-- [OneLake Security](https://learn.microsoft.com/en-us/fabric/onelake/onelake-security)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [OneLake Security](https://learn.microsoft.com/en-us/fabric/onelake/onelake-security)

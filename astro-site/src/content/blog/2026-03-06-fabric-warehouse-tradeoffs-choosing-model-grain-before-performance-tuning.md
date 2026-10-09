@@ -1,5 +1,6 @@
 ---
 title: "Fabric Warehouse Tradeoffs: choosing model grain before performance tuning"
+description: "I turned implicit processes into explicit operating rules—defining owners, acceptance tests, and lightweight runbooks so teams can move confidently and…"
 author: Michael John Peña
 draft: false
 date: 2026-03-06
@@ -37,4 +38,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [Fabric Data Warehouse](https://learn.microsoft.com/fabric/data-warehouse/)
 - [Lakehouse in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)
-- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)

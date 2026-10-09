@@ -1,5 +1,6 @@
 ---
 title: "Azure Machine Learning Pipelines: Orchestrating ML Workflows"
+description: "Configure pipelines to run on schedules or in response to data changes, enabling fully automated ML operations with minimal manual intervention."
 author: Michael John Peña
 draft: false
 date: 2025-10-17
@@ -9,10 +10,7 @@ tags:
   - Pipelines
   - Automation
   - Workflows
-
 ---
-
-I wrote "Azure Machine Learning Pipelines: Orchestrating ML Workflows" to share practical, production-minded guidance on this topic.
 
 ## Building Pipeline Components
 
@@ -121,4 +119,4 @@ submitted_job = ml_client.jobs.create_or_update(pipeline_job)
 
 ## Scheduling and Triggers
 
-Configure pipelines to run on schedules or in response to data changes, enabling fully automated ML operations with minimal manual intervention.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Configure pipelines to run on schedules or in response to data changes, enabling fully automated ML operations with minimal manual intervention.

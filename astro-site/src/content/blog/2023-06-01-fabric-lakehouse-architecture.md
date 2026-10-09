@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Lakehouse Architecture: Deep Dive"
+description: "A week after Build 2023, I'm still unpacking what Microsoft Fabric actually means for how we design data platforms. The Lakehouse is the centrepiece — but…"
 author: Michael John Peña
 draft: false
 date: 2023-06-01
@@ -363,4 +364,4 @@ The Lakehouse architecture provides the foundation for modern analytics in Fabri
 
 - [Lakehouse Tutorial](https://learn.microsoft.com/en-us/fabric/data-engineering/tutorial-lakehouse-introduction)
 - [Medallion Architecture](https://learn.microsoft.com/en-us/fabric/onelake/onelake-medallion-lakehouse-architecture)
-- [Delta Lake in Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Delta Lake in Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables)

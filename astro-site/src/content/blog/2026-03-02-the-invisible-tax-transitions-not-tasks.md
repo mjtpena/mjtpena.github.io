@@ -10,10 +10,7 @@ tags:
   - Productivity
   - Knowledge Work
   - Product Strategy
-
 ---
-
-I wrote "The Invisible Tax: Why the Future of AI Is About Transitions, Not Tasks" to share practical, production-minded guidance on this topic.
 
 There is a brief window between one meeting and the next where your brain is running two contexts at once: what just happened, and what needs to happen next. That transition is one of the most cognitively expensive parts of modern work. Most of us just push through and hope context loads quickly enough.
 
@@ -196,4 +193,4 @@ The technical window is open. The infrastructure is ready. The question is who w
 
 The next generation of AI products may not be remembered for writing faster emails or summarizing longer documents. They may be remembered for reducing the cognitive drag between commitments, where professional momentum is usually lost.
 
-Whoever solves that consistently will not just build a useful assistant. They will redefine the operating model of knowledge work.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Whoever solves that consistently will not just build a useful assistant. They will redefine the operating model of knowledge work.

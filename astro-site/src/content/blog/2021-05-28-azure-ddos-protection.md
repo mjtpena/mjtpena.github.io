@@ -9,10 +9,7 @@ tags:
   - DDoS
   - Networking
   - Protection
-
 ---
-
-I wrote "Azure DDoS Protection: Defending Against Volumetric Attacks" to share practical, production-minded guidance on this topic.
 
 ## DDoS Protection Tiers
 
@@ -331,4 +328,4 @@ def ddos_protection_checklist():
 
 - [Azure DDoS Protection Documentation](https://docs.microsoft.com/en-us/azure/ddos-protection/)
 - [Best Practices](https://docs.microsoft.com/en-us/azure/ddos-protection/fundamental-best-practices)
-- [Reference Architectures](https://docs.microsoft.com/en-us/azure/ddos-protection/ddos-protection-reference-architectures)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Reference Architectures](https://docs.microsoft.com/en-us/azure/ddos-protection/ddos-protection-reference-architectures)

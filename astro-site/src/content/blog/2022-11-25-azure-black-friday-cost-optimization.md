@@ -9,10 +9,7 @@ tags:
   - Scaling
   - Performance
   - Best Practices
-
 ---
-
-I wrote "Black Friday Azure Tips: Cost Optimization for Peak Traffic" to share practical, production-minded guidance on this topic.
 
 ## Pre-Scale Critical Resources
 
@@ -409,4 +406,3 @@ Black Friday success comes from preparation. Pre-scale resources, cache aggressi
 - [Auto-scaling Best Practices](https://docs.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling)
 - [Azure CDN](https://docs.microsoft.com/en-us/azure/cdn/)
 - [Cost Management](https://docs.microsoft.com/en-us/azure/cost-management-billing/)
-

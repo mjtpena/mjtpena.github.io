@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Graph Data Connect: Bulk Access to Microsoft 365 Data"
+description: "Graph Data Connect solves this by delivering bulk extracts of Microsoft 365 data directly to Azure Data Factory."
 author: Michael John Peña
 draft: false
 date: 2021-05-03
@@ -9,10 +10,7 @@ tags:
   - Data
   - Microsoft 365
   - Data Engineering
-
 ---
-
-I wrote "Microsoft Graph Data Connect: Bulk Access to Microsoft 365 Data" to share practical, production-minded guidance on this topic.
 
 ## The Challenge with Graph API at Scale
 
@@ -288,4 +286,4 @@ Graph Data Connect bridges the gap between Microsoft 365's rich data and enterpr
 
 - [Graph Data Connect Documentation](https://docs.microsoft.com/en-us/graph/data-connect-concept-overview)
 - [Azure Data Factory Office 365 Connector](https://docs.microsoft.com/en-us/azure/data-factory/connector-office-365)
-- [Data Privacy and Compliance](https://docs.microsoft.com/en-us/graph/data-connect-policies)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data Privacy and Compliance](https://docs.microsoft.com/en-us/graph/data-connect-policies)

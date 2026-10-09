@@ -1,5 +1,6 @@
 ---
 title: "Azure Cognitive Search Indexers for Document Processing"
+description: "Most \"search\" tutorials I see stop at \"create an index, push some JSON, query it.\" That's the easy 10%. The 90% that matters in real projects is the indexer…"
 author: Michael John Peña
 draft: false
 date: 2020-09-01
@@ -68,4 +69,4 @@ Data Source → Skillset (AI Enrichment) → Index → Search Queries
 }
 ```
 
-Now every document uploaded to blob storage is automatically indexed with AI-extracted metadata.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Now every document uploaded to blob storage is automatically indexed with AI-extracted metadata.

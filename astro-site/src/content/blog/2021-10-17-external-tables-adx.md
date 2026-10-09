@@ -1,13 +1,11 @@
 ---
 title: "External Tables in Azure Data Explorer"
+description: "External tables in ADX expose data in Azure Blob Storage or ADLS Gen2 as queryable tables without ingesting the data into ADX—useful when the data is too…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-17
 tags: ["Azure", "Azure Data Explorer", "ADX", "External Tables", "Data Lake"]
-
 ---
-
-I wrote "External Tables in Azure Data Explorer" to share practical, production-minded guidance on this topic.
 
 External tables in ADX expose data in Azure Blob Storage or ADLS Gen2 as queryable tables without ingesting the data into ADX—useful when the data is too large or too cold to justify ingestion costs, but you still want to run KQL queries against it. The schema is defined in ADX (column names, types, and the external storage URI and folder pattern); at query time, ADX reads the data from external storage and processes it. Parquet format gives the best query performance for external tables because ADX can leverage column pruning and predicate pushdown. The common pattern: ADX handles hot data (recent months) in internal tables for fast queries; external tables expose archived data in ADLS Gen2 Parquet for occasional historical analysis. Cross-table `union` queries combine current and historical data transparently, though with the expected performance difference between hot and cold storage access.
 
@@ -379,4 +377,3 @@ GetAllLogs(datetime(2021-01-01), now())
 External tables extend ADX's reach to data lakes and archives without ingestion costs. By combining internal and external tables, you can build efficient hybrid analytics solutions.
 
 Tomorrow, we'll shift focus to Azure Synapse serverless SQL pools for big data analytics.
-

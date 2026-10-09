@@ -1,5 +1,6 @@
 ---
 title: "AI Agents vs Workflows: Choosing the Right Pattern"
+description: "Workflow: Predefined steps. AI handles specific tasks within a fixed pipeline. Deterministic flow."
 author: Michael John Peña
 draft: false
 date: 2026-02-11
@@ -8,10 +9,7 @@ tags:
   - Architecture
   - Engineering
   - Agents
-
 ---
-
-I wrote "AI Agents vs Workflows: Choosing the Right Pattern" to share practical, production-minded guidance on this topic.
 
 ## Definitions
 
@@ -129,4 +127,4 @@ In production, reliable wins. Every time.
 
 Start with workflows. Graduate to agents only when you hit problems workflows can't solve.
 
-Your users don't care if an agent solved their problem. They care that their problem got solved.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Your users don't care if an agent solved their problem. They care that their problem got solved.

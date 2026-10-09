@@ -1,5 +1,6 @@
 ---
 title: "Azure Percept: Edge AI Development Made Simple"
+description: "Azure Percept makes edge AI accessible to developers without deep expertise in hardware or ML. Combined with Azure's cloud services, it enables…"
 author: Michael John Pena
 draft: false
 date: 2021-11-15
@@ -9,10 +10,7 @@ tags:
   - AI
   - IoT
   - Computer Vision
-
 ---
-
-I wrote "Azure Percept: Edge AI Development Made Simple" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Percept?
 
@@ -434,4 +432,4 @@ Azure Percept makes edge AI accessible to developers without deep expertise in h
 - [Azure Percept Documentation](https://docs.microsoft.com/en-us/azure/azure-percept/)
 - [Azure Percept Studio](https://ms.portal.azure.com/#blade/AzureEdgeDevices/Main)
 - [Custom Vision](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/)
-- [IoT Edge Modules](https://docs.microsoft.com/en-us/azure/iot-edge/module-development)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [IoT Edge Modules](https://docs.microsoft.com/en-us/azure/iot-edge/module-development)

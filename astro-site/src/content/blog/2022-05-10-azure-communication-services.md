@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-05-10
 tags:
-  - azure
-  - communication
-  - real-time
-  - webrtc
-
+  - Azure
+  - Communication
+  - Real-Time
+  - WebRTC
 ---
-
-I wrote "Azure Communication Services: Building Connected Experiences" to share practical, production-minded guidance on this topic.
 
 ## Core Capabilities
 
@@ -458,5 +455,3 @@ Azure Communication Services enables:
 - Enterprise-grade security and compliance
 
 Build rich communication experiences directly into your applications.
-
-

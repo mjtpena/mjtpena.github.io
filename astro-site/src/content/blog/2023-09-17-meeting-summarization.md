@@ -10,10 +10,7 @@ tags:
   - AI
   - Speech
   - OpenAI
-
 ---
-
-I wrote "Meeting Summarization with Azure AI" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -423,5 +420,4 @@ class MeetingReportGenerator:
 ## Next Steps
 
 {self._format_list(summary.next_steps)}
-
-
+```

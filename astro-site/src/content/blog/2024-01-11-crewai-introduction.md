@@ -1,5 +1,6 @@
 ---
 title: "CrewAI Introduction: Role-Based Multi-Agent Framework"
+description: "I started experimenting with CrewAI because I wanted clearer role definitions in multi-agent workflows. CrewAI's focus on roles, goals, and agent…"
 author: Michael John Peña
 draft: false
 date: 2024-01-11

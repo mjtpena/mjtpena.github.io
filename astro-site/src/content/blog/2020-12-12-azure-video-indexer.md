@@ -1,5 +1,6 @@
 ---
 title: "Azure Video Indexer: AI-Powered Video Analysis"
+description: "Video Indexer: unlock the content inside your videos."
 author: Michael John Peña
 draft: false
 date: 2020-12-12
@@ -8,10 +9,7 @@ tags:
   - AI
   - Video Indexer
   - Media
-
 ---
-
-I wrote "Azure Video Indexer: AI-Powered Video Analysis" to share practical, production-minded guidance on this topic.
 
 ## Video Indexer Insights
 
@@ -169,4 +167,4 @@ requests.post(
 </iframe>
 ```
 
-Video Indexer: unlock the content inside your videos.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Video Indexer: unlock the content inside your videos.

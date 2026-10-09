@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric June 2024: Month in Review"
+description: "This month we explored Microsoft Fabric comprehensively. Today I'm summarizing key learnings and best practices from my June 2024 deep dive."
 author: Michael John Peña
 draft: false
 date: 2024-06-30
@@ -9,9 +10,7 @@ tags:
   - Summary
   - Best Practices
   - Enterprise
-
 ---
-
 
 This month we explored Microsoft Fabric comprehensively. Today I'm summarizing key learnings and best practices from my June 2024 deep dive.
 
@@ -471,4 +470,3 @@ Thank you for following along this month!
 - [Fabric Community](https://community.fabric.microsoft.com/)
 - [Fabric Blog](https://blog.fabric.microsoft.com/)
 - [Fabric Samples](https://github.com/microsoft/fabric-samples)
-

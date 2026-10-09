@@ -9,10 +9,7 @@ tags:
   - AI
   - Document Processing
   - OCR
-
 ---
-
-I wrote "Form Recognizer v3: Intelligent Document Processing at Scale" to share practical, production-minded guidance on this topic.
 
 ## What's New in v3
 
@@ -466,4 +463,3 @@ Form Recognizer v3 significantly simplifies intelligent document processing. The
 - [Form Recognizer Documentation](https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/)
 - [Form Recognizer Studio](https://formrecognizer.appliedai.azure.com/)
 - [SDK Reference](https://docs.microsoft.com/en-us/python/api/azure-ai-formrecognizer/)
-

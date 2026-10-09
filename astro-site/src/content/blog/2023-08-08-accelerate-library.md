@@ -8,10 +8,7 @@ tags:
   - Distributed Training
   - PyTorch
   - Deep Learning
-
 ---
-
-I wrote "Accelerate Library: Distributed Training Made Simple" to share practical, production-minded guidance on this topic.
 
 ## Why Accelerate?
 
@@ -301,4 +298,4 @@ Tomorrow we'll explore ONNX Runtime for model optimization.
 
 - [Accelerate Documentation](https://huggingface.co/docs/accelerate)
 - [Accelerate GitHub](https://github.com/huggingface/accelerate)
-- [Distributed Training Guide](https://huggingface.co/docs/accelerate/basic_tutorials/launch)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Distributed Training Guide](https://huggingface.co/docs/accelerate/basic_tutorials/launch)

@@ -1,13 +1,11 @@
 ---
 title: "Fabric Components: When to Use What"
+description: "Fabric's component set is broad; the hard part is picking the minimal surface that solves your business need. This guide distils when to use Lakehouse…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-19
 tags: ["Microsoft Fabric", "Architecture", "Components", "Decision Guide", "Best Practices"]
-
 ---
-
-I wrote "Fabric Components: When to Use What" to share practical, production-minded guidance on this topic.
 
 Fabric's component set is broad; the hard part is picking the minimal surface that solves your business need. This guide distils when to use Lakehouse, Warehouse, Dataflows and more based on workload characteristics and operational constraints.
 
@@ -319,4 +317,4 @@ def generate_architecture_diagram(stack: List[tuple]) -> str:
     return diagram
 ```
 
-Tomorrow, we'll explore Fabric performance tuning techniques!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Fabric performance tuning techniques!

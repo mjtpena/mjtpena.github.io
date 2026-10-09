@@ -1,5 +1,6 @@
 ---
 title: "The Future of Multimodal AI: What's Next After GPT-4 Vision"
+description: "Each modality is handled separately, then combined. This works, but has latency and integration challenges."
 author: Michael John Peña
 draft: false
 date: 2024-05-02
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Multimodal
   - Azure OpenAI
-
 ---
-
-I wrote "The Future of Multimodal AI: What's Next After GPT-4 Vision" to share practical, production-minded guidance on this topic.
 
 ## Current Multimodal Architecture
 
@@ -231,4 +229,4 @@ Tomorrow I'll cover current best practices for voice AI integration.
 
 - [Vision API Documentation](https://platform.openai.com/docs/guides/vision)
 - [Azure Blob Storage SDK](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-python)
-- [Image Token Calculator](https://platform.openai.com/tokenizer)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Image Token Calculator](https://platform.openai.com/tokenizer)

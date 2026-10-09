@@ -1,5 +1,6 @@
 ---
 title: "Azure Synapse Analytics AI: Machine Learning at Scale"
+description: "Synapse enables AI at data warehouse scale with native ML integration."
 author: Michael John Peña
 draft: false
 date: 2025-04-26
@@ -9,10 +10,7 @@ tags:
   - AI
   - Machine Learning
   - Analytics
-
 ---
-
-I wrote "Azure Synapse Analytics AI: Machine Learning at Scale" to share practical, production-minded guidance on this topic.
 
 ## Synapse AI Patterns
 
@@ -138,4 +136,4 @@ df_with_sentiment = spark_ai.cognitive_services_in_spark(df_with_embeddings)
 df_with_sentiment.write.parquet("abfss://data@storage.dfs.core.windows.net/enriched/")
 ```
 
-Synapse enables AI at data warehouse scale with native ML integration.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Synapse enables AI at data warehouse scale with native ML integration.

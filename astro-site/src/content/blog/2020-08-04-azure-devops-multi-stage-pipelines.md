@@ -1,5 +1,6 @@
 ---
 title: "Building Multi-Stage YAML Pipelines in Azure DevOps"
+description: "Classic CI/CD pipelines as a clickable thing in a UI: I keep migrating clients off them. Half the time the original person who built the pipeline has left…"
 author: Michael John Peña
 draft: false
 date: 2020-08-04
@@ -219,4 +220,4 @@ variables:
         - script: npm run e2e
 ```
 
-Multi-stage YAML pipelines are not the most exciting thing I work on, but they're the thing that makes everything else possible. Worth the investment to get right early, because you only build the deployment pipeline once if you do it well — and three times if you don't.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multi-stage YAML pipelines are not the most exciting thing I work on, but they're the thing that makes everything else possible. Worth the investment to get right early, because you only build the deployment pipeline once if you do it well — and three times if you don't.

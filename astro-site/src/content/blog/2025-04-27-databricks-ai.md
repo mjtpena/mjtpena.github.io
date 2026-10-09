@@ -1,5 +1,6 @@
 ---
 title: "Databricks AI: Unified Data and AI Platform"
+description: "Databricks unifies data, ML, and AI on a single lakehouse platform."
 author: Michael John Peña
 draft: false
 date: 2025-04-27
@@ -9,10 +10,7 @@ tags:
   - Machine Learning
   - MLOps
   - Data Platform
-
 ---
-
-I wrote "Databricks AI: Unified Data and AI Platform" to share practical, production-minded guidance on this topic.
 
 ## Databricks AI Patterns
 
@@ -137,4 +135,4 @@ summary = automl.classify(
 best_model = summary.best_trial.load_model()
 ```
 
-Databricks unifies data, ML, and AI on a single lakehouse platform.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Databricks unifies data, ML, and AI on a single lakehouse platform.

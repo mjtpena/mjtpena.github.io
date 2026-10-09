@@ -1,18 +1,16 @@
 ---
 title: "Dapr on Azure: Building Distributed Applications Made Easy"
+description: "Dapr on Azure simplifies building resilient, scalable microservices while leveraging Azure's managed services. The combination provides both portability and…"
 author: Michael John Peña
 draft: false
 date: 2022-01-03
 url: /blog/dapr-on-azure/
 tags:
-  - azure
-  - dapr
-  - microservices
+  - Azure
+  - Dapr
+  - Microservices
   - distributed-systems
-
 ---
-
-I wrote "Dapr on Azure: Building Distributed Applications Made Easy" to share practical, production-minded guidance on this topic.
 
 ## What is Dapr?
 
@@ -172,4 +170,4 @@ spec:
       endpointAddress: "http://zipkin.default.svc.cluster.local:9411/api/v2/spans"
 ```
 
-Dapr on Azure simplifies building resilient, scalable microservices while leveraging Azure's managed services. The combination provides both portability and deep cloud integration.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dapr on Azure simplifies building resilient, scalable microservices while leveraging Azure's managed services. The combination provides both portability and deep cloud integration.

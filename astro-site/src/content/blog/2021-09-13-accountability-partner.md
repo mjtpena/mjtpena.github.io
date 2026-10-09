@@ -1,5 +1,6 @@
 ---
 title: Productive this Pandemic - Accountability Partner
+description: "For the longest of time, I would consider myself as the lone wolf at work. Most days, I'd rather stay alone and be in my world to get things done. I found…"
 author: Michael John Peña
 draft: false
 date: 2021-09-13
@@ -23,4 +24,4 @@ We're currently building a house and must undergo the end-to-end journey of it. 
 
 With all the startup ventures I'm involved with, I have at least one partner to collaborate and bounce ideas within. As much as I have hundreds of product ideas to work on, I know I will get de-motivated with it eventually and will just abandon the project. I need to keep on working towards shared goals. Having someone to peer-review your ideas and work would help you have an excellent product market fit. Sometimes what you think is great is not really that novel for someone else. You're building products not for yourself, but to solve other people's problems.
 
-The problem with modern "tasks" management is that all deadlines are just imaginary. There is no such thing as "it's done tomorrow", because we're living in a world where things are becoming increasingly "asynchronous." Asynchronous means we keep waiting for others to finish, before we can build on top of it, hence we perform things that someone on the other line is waiting for. Having an accountability partner allows you to move forward synchronously and take a solid path towards your combined goals. Also, as funny as it may sound, "peer pressure" is real and we rarely want to disappoint people- "the guilt is enough to keep you moving."\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The problem with modern "tasks" management is that all deadlines are just imaginary. There is no such thing as "it's done tomorrow", because we're living in a world where things are becoming increasingly "asynchronous." Asynchronous means we keep waiting for others to finish, before we can build on top of it, hence we perform things that someone on the other line is waiting for. Having an accountability partner allows you to move forward synchronously and take a solid path towards your combined goals. Also, as funny as it may sound, "peer pressure" is real and we rarely want to disappoint people- "the guilt is enough to keep you moving."

@@ -1,5 +1,6 @@
 ---
 title: "Vector Store Integrations: Choosing and Using Vector Databases"
+description: "This concludes our August 2023 series on LLM optimization and vector stores."
 author: Michael John Peña
 draft: false
 date: 2023-08-31
@@ -8,10 +9,7 @@ tags:
   - RAG
   - Embeddings
   - LLM
-
 ---
-
-I wrote "Vector Store Integrations: Choosing and Using Vector Databases" to share practical, production-minded guidance on this topic.
 
 ## Vector Store Comparison
 
@@ -498,4 +496,4 @@ This concludes our August 2023 series on LLM optimization and vector stores.
 - [Azure AI Search](https://learn.microsoft.com/en-us/azure/search/)
 - [Pinecone Documentation](https://docs.pinecone.io/)
 - [Weaviate Documentation](https://weaviate.io/developers/weaviate)
-- [LangChain Vector Stores](https://python.langchain.com/docs/modules/data_connection/vectorstores/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [LangChain Vector Stores](https://python.langchain.com/docs/modules/data_connection/vectorstores/)

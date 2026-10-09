@@ -1,5 +1,6 @@
 ---
 title: "Making Fabric Warehouse Boring and Reliable: when I use warehouse tables vs lakehouse shortcuts"
+description: "I worked on smoothing the handoff between data engineering and AI teams—standardizing feature contracts, embedding validation, and adding lightweight…"
 author: Michael John Peña
 draft: false
 date: 2026-04-19
@@ -36,4 +37,4 @@ Tomorrow I will review this with the team so the decision is shared, not persona
 
 - [Fabric Data Warehouse](https://learn.microsoft.com/fabric/data-warehouse/)
 - [Lakehouse in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)
-- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)

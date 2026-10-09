@@ -1,13 +1,11 @@
 ---
 title: "Fabric REST APIs: Programmatic Control of Your Analytics Platform"
+description: "Microsoft Fabric's REST APIs enable automation and integration with your existing tools. This guide covers the key APIs and common use cases."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-08
 tags: ["Microsoft Fabric", "REST API", "Automation", "Data", "Integration"]
-
 ---
-
-I wrote "Fabric REST APIs: Programmatic Control of Your Analytics Platform" to share practical, production-minded guidance on this topic.
 
 Microsoft Fabric's REST APIs enable automation and integration with your existing tools. This guide covers the key APIs and common use cases.
 
@@ -396,4 +394,3 @@ pipelines.run_pipeline(
 ## Conclusion
 
 The Fabric REST APIs provide comprehensive programmatic access to manage workspaces, items, and operations. Use these APIs to automate administrative tasks and integrate Fabric into your existing workflows.
-

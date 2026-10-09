@@ -1,18 +1,16 @@
 ---
 title: "Synapse Dedicated SQL Pools: Performance Tuning Guide"
+description: "These optimizations can dramatically improve dedicated SQL pool performance while reducing resource consumption."
 author: Michael John Peña
 draft: false
 date: 2022-02-03
 url: /blog/synapse-dedicated-sql-pools/
 tags:
-  - azure
-  - synapse
-  - sql
+  - Azure
+  - Synapse
+  - SQL
   - performance-tuning
-
 ---
-
-I wrote "Synapse Dedicated SQL Pools: Performance Tuning Guide" to share practical, production-minded guidance on this topic.
 
 ## Understanding Distribution
 
@@ -248,4 +246,4 @@ WHERE status = 'Completed'
 GROUP BY result_cache_hit;
 ```
 
-These optimizations can dramatically improve dedicated SQL pool performance while reducing resource consumption.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These optimizations can dramatically improve dedicated SQL pool performance while reducing resource consumption.

@@ -9,10 +9,7 @@ tags:
   - Shortcuts
   - OneLake
   - Federation
-
 ---
-
-I wrote "Data Virtualization in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## What is Data Virtualization?
 
@@ -395,4 +392,3 @@ security_model = {
 Data virtualization through shortcuts enables flexible, multi-cloud analytics without massive data movement. Use it to federate data across your cloud estate while maintaining a unified query interface.
 
 Start with shortcuts for exploratory work, then materialize frequently accessed data for production workloads.
-

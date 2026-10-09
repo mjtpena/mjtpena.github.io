@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Foundry Agents: Building Production AI Agents"
+description: "Azure AI Foundry simplifies the path from agent prototype to production deployment."
 author: Michael John Peña
 draft: false
 date: 2025-05-06
@@ -9,10 +10,7 @@ tags:
   - Agents
   - Production
   - Enterprise
-
 ---
-
-I wrote "Azure AI Foundry Agents: Building Production AI Agents" to share practical, production-minded guidance on this topic.
 
 ## AI Foundry Agent Development
 
@@ -111,4 +109,4 @@ deployment = client.deployments.create(
 endpoint_url = deployment.scoring_uri
 ```
 
-Azure AI Foundry simplifies the path from agent prototype to production deployment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure AI Foundry simplifies the path from agent prototype to production deployment.

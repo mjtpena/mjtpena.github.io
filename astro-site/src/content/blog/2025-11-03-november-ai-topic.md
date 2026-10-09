@@ -1,5 +1,6 @@
 ---
 title: "Copilot Studio: Building Custom AI Agents for Enterprise Workflows"
+description: "Traditional chatbots follow rigid conversation flows. AI agents powered by Copilot Studio understand intent, access knowledge bases, and execute multi-step…"
 author: Michael John Peña
 draft: false
 date: 2025-11-03
@@ -9,10 +10,7 @@ tags:
   - Microsoft 365
   - Enterprise
   - Low Code
-
 ---
-
-I wrote "Copilot Studio: Building Custom AI Agents for Enterprise Workflows" to share practical, production-minded guidance on this topic.
 
 ## From Chatbots to Agents
 
@@ -115,4 +113,4 @@ async function validateSoftwareLicense(context) {
 
 Copilot Studio includes built-in guardrails for content moderation, data loss prevention, and audit logging. Agents can be scoped to specific user groups and monitored through the admin center.
 
-Custom AI agents transform how enterprises handle routine processes, freeing human workers for higher-value tasks while maintaining consistency and compliance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Custom AI agents transform how enterprises handle routine processes, freeing human workers for higher-value tasks while maintaining consistency and compliance.

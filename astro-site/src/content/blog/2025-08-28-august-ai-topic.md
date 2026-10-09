@@ -1,5 +1,6 @@
 ---
 title: "Embedding Models: Choosing Between OpenAI, Azure, and Open Source"
+description: "The text-embedding-ada-002 and newer text-embedding-3 models provide high-quality embeddings with minimal setup."
 author: Michael John Peña
 draft: false
 date: 2025-08-28
@@ -9,10 +10,7 @@ tags:
   - OpenAI
   - RAG
   - Machine Learning
-
 ---
-
-I wrote "Embedding Models: Choosing Between OpenAI, Azure, and Open Source" to share practical, production-minded guidance on this topic.
 
 ## Azure OpenAI Embeddings
 
@@ -72,4 +70,4 @@ multilingual_model = SentenceTransformer('sentence-transformers/paraphrase-multi
 
 ## Selection Criteria
 
-Use Azure OpenAI embeddings when you need simplicity, consistent quality, and can afford API costs. Choose open source when you need to control costs at scale, require offline operation, or have specific domain requirements that benefit from fine-tuning.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use Azure OpenAI embeddings when you need simplicity, consistent quality, and can afford API costs. Choose open source when you need to control costs at scale, require offline operation, or have specific domain requirements that benefit from fine-tuning.

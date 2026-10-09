@@ -1,5 +1,6 @@
 ---
 title: "Azure 2021 Year in Review: The Platform That Kept Evolving"
+description: "Arc-enabled data services brought Azure SQL and PostgreSQL Hyperscale to any infrastructure, a game-changer for hybrid scenarios."
 author: Michael John Pena
 draft: false
 date: 2021-12-01
@@ -8,10 +9,7 @@ tags:
   - Cloud
   - Microsoft
   - Year in Review
-
 ---
-
-I wrote "Azure 2021 Year in Review: The Platform That Kept Evolving" to share practical, production-minded guidance on this topic.
 
 ## The Big Announcements
 
@@ -168,4 +166,4 @@ Trends to watch:
 
 - [Azure Updates Archive](https://azure.microsoft.com/en-us/updates/)
 - [Microsoft Ignite 2021 Announcements](https://news.microsoft.com/ignite-november-2021/)
-- [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architecture/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architecture/)

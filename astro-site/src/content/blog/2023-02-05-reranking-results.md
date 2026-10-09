@@ -9,10 +9,7 @@ tags:
   - RAG
   - Reranking
   - AI
-
 ---
-
-I wrote "Re-ranking Search Results for Better RAG Performance" to share practical, production-minded guidance on this topic.
 
 ## Why Re-ranking?
 
@@ -372,4 +369,4 @@ class ScoreFusionReranker:
 
 - [Cross-Encoders](https://www.sbert.net/examples/applications/cross-encoder/README.html)
 - [MS MARCO Benchmarks](https://microsoft.github.io/msmarco/)
-- [Cohere Rerank](https://docs.cohere.com/docs/rerank)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Cohere Rerank](https://docs.cohere.com/docs/rerank)

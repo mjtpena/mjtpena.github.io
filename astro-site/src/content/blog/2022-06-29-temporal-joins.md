@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-29
 tags:
-  - azure
+  - Azure
   - stream-analytics
   - temporal
-  - data
-
+  - Data
 ---
-
-I wrote "Temporal Joins: Correlating Events Across Time" to share practical, production-minded guidance on this topic.
 
 ## Time-Based Joins
 
@@ -72,5 +69,3 @@ HAVING MAX(temperature) - MIN(temperature) > 10
 ## Summary
 
 Temporal joins and windows enable sophisticated event correlation, essential for IoT analytics, fraud detection, and user behavior analysis.
-
-

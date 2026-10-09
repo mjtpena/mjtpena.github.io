@@ -1,5 +1,6 @@
 ---
 title: "Responsible AI: Implementing Explainability in Production Models"
+description: "SHAP (SHapley Additive exPlanations) provides consistent, theoretically grounded feature importance scores."
 author: Michael John Peña
 draft: false
 date: 2025-09-16
@@ -9,10 +10,7 @@ tags:
   - XAI
   - SHAP
   - Model Interpretability
-
 ---
-
-I wrote "Responsible AI: Implementing Explainability in Production Models" to share practical, production-minded guidance on this topic.
 
 ## SHAP Values for Feature Attribution
 
@@ -116,4 +114,4 @@ class ExplanationCache:
         return self.cache[cache_key]
 ```
 
-Explainability builds trust with users and satisfies regulatory requirements. Every production ML system should include explanation capabilities, even if not always surfaced to end users.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Explainability builds trust with users and satisfies regulatory requirements. Every production ML system should include explanation capabilities, even if not always surfaced to end users.

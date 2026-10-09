@@ -1,5 +1,6 @@
 ---
 title: "Fabric Lakehouse Patterns: turning messy raw zones into reliable products"
+description: "I tightened system boundaries so quality checks trigger earlier, catching regressions before downstream systems consume bad data."
 author: Michael John Peña
 draft: false
 date: 2026-04-05
@@ -36,4 +37,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/)
 - [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)
-- [Lakehouse in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Lakehouse in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)

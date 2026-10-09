@@ -1,19 +1,17 @@
 ---
 title: Dataverse Tables - Data Modeling for the Power Platform
+description: "Tables you create for your specific business needs. Connect to external data sources without importing data."
 author: Michael John Peña
 draft: false
 date: 2021-04-05
 url: /blog/dataverse-tables-data-modeling/
 tags:
   - Power Platform
-  - Dataverse
+  - dataverse
   - Data Modeling
   - Microsoft 365
   - Low-Code
-
 ---
-
-I wrote "2021-04-05-dataverse-tables-data-modeling" to share practical, production-minded guidance on this topic.
 
 ## Understanding Dataverse Tables
 
@@ -389,4 +387,3 @@ var response = (ExecuteMultipleResponse)service.Execute(request);
 ## Conclusion
 
 Dataverse provides a powerful, enterprise-grade data platform that integrates seamlessly with the Power Platform. By understanding table design, relationships, security, and the Web API, you can build robust data models that support your business applications. The built-in features like business rules, auditing, and security make it an excellent choice for business data management.
-

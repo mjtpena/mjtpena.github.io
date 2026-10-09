@@ -1,5 +1,6 @@
 ---
 title: "Power Platform Governance for Enterprise: DLP Policies and Environments"
+description: "Power Platform governance is the problem that doesn't announce itself until it's already serious. I've walked into tenants where three hundred flows were…"
 author: Michael John Peña
 draft: false
 date: 2021-05-02
@@ -221,4 +222,4 @@ Implementing governance is a journey, not a destination:
 
 - [Power Platform Center of Excellence](https://docs.microsoft.com/en-us/power-platform/guidance/coe/starter-kit)
 - [DLP Policy Documentation](https://docs.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention)
-- [Power Platform Admin PowerShell](https://docs.microsoft.com/en-us/power-platform/admin/powerapps-powershell)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Power Platform Admin PowerShell](https://docs.microsoft.com/en-us/power-platform/admin/powerapps-powershell)

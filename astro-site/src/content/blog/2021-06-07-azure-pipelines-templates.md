@@ -9,10 +9,7 @@ tags:
   - CI/CD
   - Templates
   - DevOps
-
 ---
-
-I wrote "2021-06-07-azure-pipelines-templates" to share practical, production-minded guidance on this topic.
 
 ## Template Types
 
@@ -514,4 +511,3 @@ Azure Pipelines templates are essential for maintaining DRY (Don't Repeat Yourse
 
 - [Azure Pipelines Template Reference](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates)
 - [Template Expressions](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/expressions)
-

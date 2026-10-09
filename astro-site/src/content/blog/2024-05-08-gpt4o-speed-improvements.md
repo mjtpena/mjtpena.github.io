@@ -1,5 +1,6 @@
 ---
 title: "GPT-4o Speed Improvements: Building Low-Latency Applications"
+description: "GPT-4o is 2x faster than GPT-4 Turbo. Today I'm exploring how to leverage this speed for responsive applications."
 author: Michael John Peña
 draft: false
 date: 2024-05-08

@@ -1,5 +1,6 @@
 ---
 title: "KQL: The Query Language You're Probably Ignoring"
+description: "That's a missed opportunity. Kusto Query Language. Developed by Microsoft. Used across Azure Monitor, Azure Data Explorer, Microsoft Sentinel, and now…"
 author: Michael John Peña
 draft: false
 date: 2026-02-22
@@ -8,10 +9,7 @@ tags:
   - Azure
   - Fabric
   - Data
-
 ---
-
-I wrote "KQL: The Query Language You're Probably Ignoring" to share practical, production-minded guidance on this topic.
 
 That's a missed opportunity.
 
@@ -144,4 +142,4 @@ One week of focused practice will make you fluent enough for 80% of use cases. T
 
 Start with Log Analytics. Write a real query. Find something useful in your own logs.
 
-You'll be surprised what was always there.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+You'll be surprised what was always there.

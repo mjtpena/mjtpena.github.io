@@ -9,10 +9,7 @@ tags:
   - Embeddings
   - Cost Optimization
   - Vector Search
-
 ---
-
-I wrote "Semantic Caching: Intelligent Response Reuse for LLMs" to share practical, production-minded guidance on this topic.
 
 ## How It Works
 
@@ -169,4 +166,3 @@ def evaluate_threshold(cache: SemanticCache, test_pairs: list[dict]) -> dict:
 ## Conclusion
 
 Semantic caching increases hit rates by 20-50% over exact matching. Balance threshold between hit rate and accuracy for your use case.
-

@@ -1,5 +1,6 @@
 ---
 title: "Terraform Azure Provider: Infrastructure as Code Basics"
+description: "After several years of writing ARM templates, picking up Terraform felt like getting glasses for the first time. The same infrastructure-as-code idea, but…"
 author: Michael John Peña
 draft: false
 date: 2020-09-02
@@ -77,4 +78,4 @@ terraform apply     # Apply changes
 terraform destroy   # Tear down (be careful!)
 ```
 
-The combination of declarative syntax and state management makes Terraform my go-to for Azure infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The combination of declarative syntax and state management makes Terraform my go-to for Azure infrastructure.

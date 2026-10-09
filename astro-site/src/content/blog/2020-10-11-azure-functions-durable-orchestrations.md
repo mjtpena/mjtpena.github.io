@@ -1,5 +1,6 @@
 ---
 title: "Azure Durable Functions: Orchestration Patterns"
+description: "Function chaining, fan-out/fan-in, human interaction, and eternal orchestrations — Durable Functions exposes a small set of patterns that cover most…"
 author: Michael John Peña
 draft: false
 date: 2020-10-11
@@ -144,4 +145,4 @@ public static async Task RunEternal(
 }
 ```
 
-Durable Functions make stateful serverless simple.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Durable Functions make stateful serverless simple.

@@ -1,5 +1,6 @@
 ---
 title: C# 10 Preview Features for Modern Development
+description: "C# 10 is the language release I've been most anticipating in a long time. Record structs, global usings, file-scoped namespaces, extended property…"
 author: Michael John Peña
 draft: false
 date: 2021-06-05

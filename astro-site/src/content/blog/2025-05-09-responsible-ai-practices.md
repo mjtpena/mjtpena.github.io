@@ -1,5 +1,6 @@
 ---
 title: "Responsible AI Practices: Implementing Ethical AI"
+description: "Responsible AI practices build trust and ensure ethical AI deployment."
 author: Michael John Peña
 draft: false
 date: 2025-05-09
@@ -9,10 +10,7 @@ tags:
   - Ethics
   - Fairness
   - Best Practices
-
 ---
-
-I wrote "Responsible AI Practices: Implementing Ethical AI" to share practical, production-minded guidance on this topic.
 
 ## Responsible AI Implementation
 
@@ -110,4 +108,4 @@ class ResponsibleAIPipeline:
         return any(re.search(p, text) for p in patterns.values())
 ```
 
-Responsible AI practices build trust and ensure ethical AI deployment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Responsible AI practices build trust and ensure ethical AI deployment.

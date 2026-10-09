@@ -1,17 +1,15 @@
 ---
 title: "eBPF in Kubernetes: The Technology Behind Modern Networking"
+description: "eBPF programs run in a sandboxed virtual machine within the Linux kernel, processing events without kernel modifications."
 author: Michael John Peña
 draft: false
 date: 2022-06-12
 tags:
   - ebpf
-  - kubernetes
-  - networking
-  - linux
-
+  - Kubernetes
+  - Networking
+  - Linux
 ---
-
-I wrote "eBPF in Kubernetes: The Technology Behind Modern Networking" to share practical, production-minded guidance on this topic.
 
 ## Understanding eBPF
 
@@ -50,5 +48,3 @@ int xdp_drop_all(struct xdp_md *ctx) {
 ## Summary
 
 eBPF enables next-generation Kubernetes infrastructure with improved performance, security, and observability at the kernel level.
-
-

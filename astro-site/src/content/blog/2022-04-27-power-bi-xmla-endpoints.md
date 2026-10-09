@@ -9,10 +9,7 @@ tags:
   - Dataset Management
   - Enterprise
   - Administration
-
 ---
-
-I wrote "Power BI XMLA Endpoints: Enterprise Dataset Management" to share practical, production-minded guidance on this topic.
 
 ## XMLA Capabilities
 
@@ -173,4 +170,3 @@ XMLA endpoints unlock enterprise capabilities:
 - [XMLA Endpoint Documentation](https://docs.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools)
 - [Tabular Editor](https://tabulareditor.com/)
 - [DAX Studio](https://daxstudio.org/)
-

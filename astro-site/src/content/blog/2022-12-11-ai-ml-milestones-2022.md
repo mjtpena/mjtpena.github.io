@@ -1,5 +1,6 @@
 ---
 title: "AI/ML Milestones of 2022: A Technical Retrospective"
+description: "Significant improvements in instruction following through RLHF. Art-focused generation with distinctive aesthetic quality."
 author: Michael John Peña
 draft: false
 date: 2022-12-11
@@ -9,10 +10,7 @@ tags:
   - Deep Learning
   - OpenAI
   - Technology
-
 ---
-
-I wrote "AI/ML Milestones of 2022: A Technical Retrospective" to share practical, production-minded guidance on this topic.
 
 ## Large Language Models
 
@@ -274,4 +272,3 @@ Expectations:
 - [Hugging Face](https://huggingface.co/)
 - [Papers With Code](https://paperswithcode.com/)
 - [The Batch (DeepLearning.AI)](https://www.deeplearning.ai/the-batch/)
-

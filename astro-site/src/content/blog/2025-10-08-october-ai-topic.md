@@ -1,5 +1,6 @@
 ---
 title: "Model Evaluation Techniques: Beyond Accuracy Metrics"
+description: "Always connect model metrics to business outcomes. A model with lower accuracy but better performance on high-value segments may deliver more business value…"
 author: Michael John Peña
 draft: false
 date: 2025-10-08
@@ -9,10 +10,7 @@ tags:
   - MLOps
   - Data Science
   - Metrics
-
 ---
-
-I wrote "Model Evaluation Techniques: Beyond Accuracy Metrics" to share practical, production-minded guidance on this topic.
 
 ## Comprehensive Evaluation Framework
 
@@ -105,4 +103,4 @@ def evaluate_fairness(self, sensitive_feature: np.ndarray, groups: list) -> Dict
 
 ## Business Impact Evaluation
 
-Always connect model metrics to business outcomes. A model with lower accuracy but better performance on high-value segments may deliver more business value than a higher-accuracy model that underperforms on critical use cases.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Always connect model metrics to business outcomes. A model with lower accuracy but better performance on high-value segments may deliver more business value than a higher-accuracy model that underperforms on critical use cases.

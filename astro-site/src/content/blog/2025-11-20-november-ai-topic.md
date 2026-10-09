@@ -1,5 +1,6 @@
 ---
 title: "Vector Database Selection: Comparing Azure AI Search, Cosmos DB, and PostgreSQL"
+description: "Azure AI Search, Cosmos DB with vector indexing, and Azure Database for PostgreSQL with pgvector each provide vector search capabilities with different…"
 author: Michael John Peña
 draft: false
 date: 2025-11-20
@@ -9,10 +10,7 @@ tags:
   - Cosmos DB
   - PostgreSQL
   - RAG
-
 ---
-
-I wrote "Vector Database Selection: Comparing Azure AI Search, Cosmos DB, and PostgreSQL" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Options
 
@@ -156,4 +154,4 @@ cursor.execute("""
 | Global Distribution | Limited | Excellent | Manual |
 | Learning Curve | Moderate | Low (if using Cosmos) | Low |
 
-Choose Azure AI Search for feature-rich RAG systems, Cosmos DB for globally distributed applications, and PostgreSQL for cost-sensitive workloads with simpler requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose Azure AI Search for feature-rich RAG systems, Cosmos DB for globally distributed applications, and PostgreSQL for cost-sensitive workloads with simpler requirements.

@@ -1,5 +1,6 @@
 ---
 title: "Azure Applied AI Services: Pre-Built AI for Common Scenarios"
+description: "Applied AI Services are Microsoft's answer to \"I need AI in this process, but I don't want to wire up five Cognitive Services and build the integration…"
 author: Michael John Peña
 draft: false
 date: 2021-05-01
@@ -219,4 +220,4 @@ These studios provide a no-code way to test the services with your own data befo
 
 - [Azure Applied AI Services Documentation](https://docs.microsoft.com/en-us/azure/applied-ai-services/)
 - [Form Recognizer Studio](https://formrecognizer.appliedai.azure.com/)
-- [Metrics Advisor Documentation](https://docs.microsoft.com/en-us/azure/applied-ai-services/metrics-advisor/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Metrics Advisor Documentation](https://docs.microsoft.com/en-us/azure/applied-ai-services/metrics-advisor/)

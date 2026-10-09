@@ -9,10 +9,7 @@ tags:
   - Azure AI
   - Microsoft Build
   - MLOps
-
 ---
-
-I wrote "Azure AI Studio Updates at Build 2024" to share practical, production-minded guidance on this topic.
 
 ## What's New in Azure AI Studio
 
@@ -120,4 +117,5 @@ outputs:
 ### Prompty Files
 
 ```yaml
-# generate.prompty\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+# generate.prompty
+```

@@ -1,5 +1,6 @@
 ---
 title: "OpenTelemetry with Azure: Vendor-Neutral Observability"
+description: "OpenTelemetry provides a future-proof approach to observability. By using vendor-neutral instrumentation with Azure Monitor as the backend, you get the…"
 author: Michael John Pena
 draft: false
 date: 2021-11-24
@@ -9,10 +10,7 @@ tags:
   - Observability
   - Monitoring
   - Distributed Tracing
-
 ---
-
-I wrote "OpenTelemetry with Azure: Vendor-Neutral Observability" to share practical, production-minded guidance on this topic.
 
 ## What is OpenTelemetry?
 
@@ -467,4 +465,4 @@ OpenTelemetry provides a future-proof approach to observability. By using vendor
 
 - [OpenTelemetry Documentation](https://opentelemetry.io/docs/)
 - [Azure Monitor OpenTelemetry](https://docs.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-overview)
-- [OpenTelemetry .NET](https://github.com/open-telemetry/opentelemetry-dotnet)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [OpenTelemetry .NET](https://github.com/open-telemetry/opentelemetry-dotnet)

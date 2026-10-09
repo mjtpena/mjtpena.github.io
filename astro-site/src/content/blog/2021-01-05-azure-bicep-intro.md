@@ -1,5 +1,6 @@
 ---
 title: "Azure Bicep: Infrastructure as Code Simplified"
+description: "ARM templates and I have a long, unhealthy relationship. Hundreds of lines of JSON to express what reads like fifteen lines of intent. Bicep is the cure…"
 author: Michael John Peña
 draft: false
 date: 2021-01-05
@@ -217,4 +218,4 @@ resource webApp 'Microsoft.Web/sites@2021-01-01' = {
 }
 ```
 
-Bicep: ARM templates you can actually read.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Bicep: ARM templates you can actually read.

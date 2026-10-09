@@ -1,13 +1,11 @@
 ---
 title: "Azure Synapse Dedicated SQL Pool Best Practices"
+description: "Synapse Dedicated SQL Pool (formerly Azure SQL Data Warehouse) is the massively parallel processing (MPP) engine for structured, petabyte-scale analytical…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-19
 tags: ["Azure", "Synapse", "SQL", "Data Warehouse", "Performance"]
-
 ---
-
-I wrote "Azure Synapse Dedicated SQL Pool Best Practices" to share practical, production-minded guidance on this topic.
 
 Synapse Dedicated SQL Pool (formerly Azure SQL Data Warehouse) is the massively parallel processing (MPP) engine for structured, petabyte-scale analytical workloads—and the configuration decisions made at design time have outsized impact on query performance and cost. The DWU (Data Warehouse Units) setting controls compute allocation and cost; the distribution strategy (hash, round-robin, or replicated) for each table controls how data is distributed across compute nodes and whether queries can avoid expensive data movement. Getting the distribution key right for fact tables—choosing a column with high cardinality that matches common join conditions—eliminates the skew and data shuffle that are the two most common causes of poor Synapse query performance. Row-count statistics, maintained by `CREATE STATISTICS` and `UPDATE STATISTICS`, are the input the query optimiser uses to choose efficient execution plans.
 
@@ -403,4 +401,3 @@ ORDER BY reserved_mb DESC;
 Synapse dedicated SQL pools provide powerful capabilities for enterprise data warehousing. By following these best practices for distribution, indexing, and workload management, you can achieve optimal performance for your analytical workloads.
 
 Tomorrow, we'll deep dive into PolyBase for data virtualization scenarios.
-

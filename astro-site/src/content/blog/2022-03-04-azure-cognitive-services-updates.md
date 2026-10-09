@@ -8,10 +8,7 @@ tags:
   - Cognitive Services
   - AI
   - Machine Learning
-
 ---
-
-I wrote "Azure Cognitive Services Updates: What's New in Early 2022" to share practical, production-minded guidance on this topic.
 
 ## Vision Services Enhancements
 
@@ -413,4 +410,3 @@ Key takeaways:
 - [Azure Cognitive Services Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/)
 - [What's New in Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/whats-new)
 - [Cognitive Services Pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/)
-

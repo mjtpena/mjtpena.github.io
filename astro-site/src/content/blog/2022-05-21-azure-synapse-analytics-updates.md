@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-05-21
 tags:
-  - azure
-  - synapse
+  - Azure
+  - Synapse
   - data-analytics
   - big-data
-
 ---
-
-I wrote "Azure Synapse Analytics: Build 2022 Updates" to share practical, production-minded guidance on this topic.
 
 ## Synapse Link Enhancements
 
@@ -329,5 +326,3 @@ Azure Synapse Analytics at Build 2022 delivers:
 - Optimized dedicated SQL pools
 
 Build unified analytics solutions across all your data.
-
-

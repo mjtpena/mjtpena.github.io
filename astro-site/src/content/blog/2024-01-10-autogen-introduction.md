@@ -1,5 +1,6 @@
 ---
 title: "AutoGen Introduction: Microsoft's Multi-Agent Framework"
+description: "I've used AutoGen to prototype multi-agent workflows that handle planning, tool use, and execution. This practical introduction focuses on the patterns that…"
 author: Michael John Peña
 draft: false
 date: 2024-01-10

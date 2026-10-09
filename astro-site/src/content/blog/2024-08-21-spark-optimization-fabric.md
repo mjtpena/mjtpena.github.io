@@ -9,10 +9,7 @@ tags:
   - Performance
   - Optimization
   - Data Engineering
-
 ---
-
-I wrote "Spark Optimization in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Spark Architecture in Fabric
 
@@ -615,4 +612,3 @@ print(f"Default Parallelism: {metrics['default_parallelism']}")
 Spark optimization in Microsoft Fabric combines proper configuration, smart data handling, and understanding of distributed computing principles. Start with AQE enabled, then tune based on your specific workload characteristics.
 
 Regular monitoring and iterative tuning ensure your Spark jobs remain efficient as data volumes and requirements evolve.
-

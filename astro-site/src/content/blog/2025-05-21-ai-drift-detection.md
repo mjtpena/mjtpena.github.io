@@ -1,5 +1,6 @@
 ---
 title: "AI Drift Detection: Monitoring Model Performance Over Time"
+description: "Proactive drift detection prevents silent AI performance degradation."
 author: Michael John Peña
 draft: false
 date: 2025-05-21
@@ -9,10 +10,7 @@ tags:
   - Monitoring
   - MLOps
   - Performance
-
 ---
-
-I wrote "AI Drift Detection: Monitoring Model Performance Over Time" to share practical, production-minded guidance on this topic.
 
 ## Drift Detection Implementation
 
@@ -131,4 +129,4 @@ class DriftDetector:
         return {"drift_detected": False}
 ```
 
-Proactive drift detection prevents silent AI performance degradation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proactive drift detection prevents silent AI performance degradation.

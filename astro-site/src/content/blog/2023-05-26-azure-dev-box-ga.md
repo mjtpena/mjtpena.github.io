@@ -1,5 +1,6 @@
 ---
 title: "Azure Dev Box GA: Cloud-Powered Developer Workstations"
+description: "Dev Box simplifies developer onboarding and ensures consistent development environments. Tomorrow, I will cover Azure Deployment Environments."
 author: Michael John Peña
 draft: false
 date: 2023-05-26
@@ -9,10 +10,7 @@ tags:
   - Cloud Development
   - Azure
   - DevOps
-
 ---
-
-I wrote "Azure Dev Box GA: Cloud-Powered Developer Workstations" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Dev Box?
 
@@ -392,4 +390,4 @@ Dev Box simplifies developer onboarding and ensures consistent development envir
 
 - [Dev Box Documentation](https://learn.microsoft.com/en-us/azure/dev-box/)
 - [Dev Box Quickstart](https://learn.microsoft.com/en-us/azure/dev-box/quickstart-create-dev-box)
-- [Custom Images](https://learn.microsoft.com/en-us/azure/dev-box/how-to-configure-dev-box-images)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Custom Images](https://learn.microsoft.com/en-us/azure/dev-box/how-to-configure-dev-box-images)

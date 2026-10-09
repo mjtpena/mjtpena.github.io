@@ -1,13 +1,11 @@
 ---
 title: "Azure SQL Managed Instance Updates - September 2022"
+description: "Instance pools allow you to host multiple Managed Instances with shared resources, optimizing costs for smaller workloads."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-17
 tags: ["Azure", "SQL Managed Instance", "Database", "Migration"]
-
 ---
-
-I wrote "Azure SQL Managed Instance Updates - September 2022" to share practical, production-minded guidance on this topic.
 
 ## New Features and Improvements
 
@@ -345,4 +343,4 @@ public class ReplicaInfo
 4. **Maintenance windows** - Configure preferred maintenance times
 5. **Backup retention** - Configure PITR retention (1-35 days)
 
-Azure SQL Managed Instance bridges the gap between on-premises SQL Server and fully managed cloud databases.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure SQL Managed Instance bridges the gap between on-premises SQL Server and fully managed cloud databases.

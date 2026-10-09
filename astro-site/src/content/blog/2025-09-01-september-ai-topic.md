@@ -1,5 +1,6 @@
 ---
 title: "Enterprise AI Adoption: Building Your Center of Excellence"
+description: "An AI CoE serves as the central hub for AI expertise, governance, and best practices. It prevents siloed implementations and ensures consistent quality…"
 author: Michael John Peña
 draft: false
 date: 2025-09-01
@@ -9,10 +10,7 @@ tags:
   - Strategy
   - Center of Excellence
   - Governance
-
 ---
-
-I wrote "Enterprise AI Adoption: Building Your Center of Excellence" to share practical, production-minded guidance on this topic.
 
 ## Why a Center of Excellence Matters
 
@@ -75,4 +73,4 @@ Create learning paths for different roles: data scientists need deep technical t
 
 Track metrics like time-to-deployment, model performance consistency, and reuse rates across projects. A mature CoE should demonstrate measurable improvements in AI project outcomes within 6-12 months.
 
-The investment in building an AI CoE pays dividends through reduced duplication, faster innovation, and lower risk across your entire AI portfolio.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The investment in building an AI CoE pays dividends through reduced duplication, faster innovation, and lower risk across your entire AI portfolio.

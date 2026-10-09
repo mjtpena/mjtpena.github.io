@@ -1,5 +1,6 @@
 ---
 title: "Implementing Semantic Kernel Plugins for Enterprise Applications"
+description: "Native plugins expose C# methods to the kernel, allowing the LLM to invoke them when appropriate."
 author: Michael John Peña
 draft: false
 date: 2025-08-05
@@ -9,10 +10,7 @@ tags:
   - .NET
   - Enterprise
   - AI Integration
-
 ---
-
-I wrote "Implementing Semantic Kernel Plugins for Enterprise Applications" to share practical, production-minded guidance on this topic.
 
 ## Creating Native Function Plugins
 
@@ -85,4 +83,4 @@ var result = await kernel.InvokePromptAsync(
     new KernelArguments(settings));
 ```
 
-Well-designed plugins make your AI applications genuinely useful by connecting natural language understanding to real business actions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Well-designed plugins make your AI applications genuinely useful by connecting natural language understanding to real business actions.

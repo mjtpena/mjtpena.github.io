@@ -9,10 +9,7 @@ tags:
   - DevOps
   - Bicep
   - Terraform
-
 ---
-
-I wrote "Infrastructure as Code Maturity: Where Are You on the Journey?" to share practical, production-minded guidance on this topic.
 
 ## IaC Maturity Model
 
@@ -587,4 +584,3 @@ IaC maturity is a journey, not a destination. Start where you are, establish goo
 - [Terraform Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
 - [Azure DevOps Pipelines](https://docs.microsoft.com/azure/devops/pipelines/)
 - [GitHub Actions for Azure](https://docs.microsoft.com/azure/developer/github/github-actions)
-

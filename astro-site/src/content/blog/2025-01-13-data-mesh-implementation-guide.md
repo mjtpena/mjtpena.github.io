@@ -1,5 +1,6 @@
 ---
 title: "Data Mesh Implementation: A Practical Guide for 2025"
+description: "Data mesh is a journey, not a destination. Start with a few high-value domains, prove the model, then expand. The technology enables data mesh, but success…"
 author: Michael John Peña
 draft: false
 date: 2025-01-13
@@ -9,10 +10,7 @@ tags:
   - Data Governance
   - Azure
   - Microsoft Fabric
-
 ---
-
-I wrote "Data Mesh Implementation: A Practical Guide for 2025" to share practical, production-minded guidance on this topic.
 
 ## Data Mesh Principles Recap
 
@@ -552,4 +550,4 @@ mesh_metrics = {
 }
 ```
 
-Data mesh is a journey, not a destination. Start with a few high-value domains, prove the model, then expand. The technology enables data mesh, but success requires organizational alignment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Data mesh is a journey, not a destination. Start with a few high-value domains, prove the model, then expand. The technology enables data mesh, but success requires organizational alignment.

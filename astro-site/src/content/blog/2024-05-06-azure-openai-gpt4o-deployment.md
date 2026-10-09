@@ -9,10 +9,7 @@ tags:
   - GPT-4o
   - Azure OpenAI
   - Deployment
-
 ---
-
-I wrote "Deploying GPT-4o on Azure OpenAI Service" to share practical, production-minded guidance on this topic.
 
 ## Creating a GPT-4o Deployment
 
@@ -322,4 +319,4 @@ Tomorrow I'll cover cost reduction strategies when using GPT-4o.
 
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
 - [Quotas and Limits](https://learn.microsoft.com/azure/ai-services/openai/quotas-limits)
-- [Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)

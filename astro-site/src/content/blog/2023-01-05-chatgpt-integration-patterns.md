@@ -1,5 +1,6 @@
 ---
 title: "ChatGPT Integration Patterns for Enterprise Applications"
+description: "Until then, these patterns will help you build production-ready chat experiences."
 author: Michael John Peña
 draft: false
 date: 2023-01-05
@@ -9,10 +10,7 @@ tags:
   - ChatGPT
   - AI
   - Architecture
-
 ---
-
-I wrote "ChatGPT Integration Patterns for Enterprise Applications" to share practical, production-minded guidance on this topic.
 
 ## The Chat Paradigm Shift
 
@@ -379,4 +377,4 @@ Until then, these patterns will help you build production-ready chat experiences
 
 - [Azure OpenAI Service](https://azure.microsoft.com/services/cognitive-services/openai-service/)
 - [Prompt Engineering Guide](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/prompt-engineering)
-- [Rate Limits and Quotas](https://learn.microsoft.com/azure/cognitive-services/openai/quotas-limits)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Rate Limits and Quotas](https://learn.microsoft.com/azure/cognitive-services/openai/quotas-limits)

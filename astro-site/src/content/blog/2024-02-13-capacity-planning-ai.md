@@ -9,10 +9,7 @@ tags:
   - Azure
   - Scaling
   - Enterprise AI
-
 ---
-
-I wrote "Capacity Planning for AI Workloads: A Practical Guide" to share practical, production-minded guidance on this topic.
 
 ## Capacity Dimensions
 
@@ -139,4 +136,3 @@ class CapacityPlanner:
 ## Conclusion
 
 AI capacity planning requires understanding compute, storage, and memory requirements. Start with estimates, validate with benchmarks, and continuously adjust based on monitoring.
-

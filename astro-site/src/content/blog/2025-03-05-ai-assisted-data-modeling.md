@@ -1,5 +1,6 @@
 ---
 title: "AI-Assisted Data Modeling: Accelerating Schema Design"
+description: "AI-assisted modeling reduces design time while improving schema quality."
 author: Michael John Peña
 draft: false
 date: 2025-03-05
@@ -9,10 +10,7 @@ tags:
   - Schema Design
   - Automation
   - Best Practices
-
 ---
-
-I wrote "AI-Assisted Data Modeling: Accelerating Schema Design" to share practical, production-minded guidance on this topic.
 
 ## AI-Powered Data Modeling
 
@@ -84,4 +82,4 @@ class AIDataModeler:
         )
 ```
 
-AI-assisted modeling reduces design time while improving schema quality.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI-assisted modeling reduces design time while improving schema quality.

@@ -1,5 +1,6 @@
 ---
 title: "Introduction to Azure Synapse Analytics"
+description: "\"We have a data warehouse and a Hadoop cluster and they don't talk to each other\" was a sentence I heard for years. Synapse is Microsoft's answer: a single…"
 author: Michael John Peña
 draft: false
 date: 2020-08-23
@@ -293,4 +294,4 @@ ADD FILTER PREDICATE dbo.fn_SecurityPredicate(Country) ON dbo.DimCustomer;
 
 Azure Synapse Analytics provides a unified platform for all your analytics needs, from data warehousing to big data processing.
 
-A practical note for anyone evaluating it: serverless SQL is the part of Synapse that surprises people most. You can point it at parquet files in ADLS, write SQL, and pay per TB scanned — no provisioning, no idle cost. For exploratory analytics over a data lake, it's frequently the right answer before you commit to a dedicated SQL pool's hourly cost. Start serverless, scale to dedicated only when query patterns and SLAs justify it.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A practical note for anyone evaluating it: serverless SQL is the part of Synapse that surprises people most. You can point it at parquet files in ADLS, write SQL, and pay per TB scanned — no provisioning, no idle cost. For exploratory analytics over a data lake, it's frequently the right answer before you commit to a dedicated SQL pool's hourly cost. Start serverless, scale to dedicated only when query patterns and SLAs justify it.

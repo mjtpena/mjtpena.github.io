@@ -1,59 +1,85 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SearchModal from '../components/SearchModal.astro';
+import { getPublishedPosts, buildTagIndex } from '../utils/posts';
+
+const topTags = buildTagIndex(await getPublishedPosts()).slice(0, 8);
 ---
 
-<BaseLayout title="Search" description="Search through all blog posts and content.">
+<BaseLayout title="Search" description="Full-text search across every blog post.">
+  <link slot="head" rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+
   <section class="pt-20 pb-12 md:pt-28 md:pb-20 px-4 sm:px-6">
     <div class="max-w-3xl mx-auto">
-      <!-- Header -->
       <header class="text-center mb-12">
         <span class="section-label justify-center">
           <span class="glow-dot"></span>
           Find Content
         </span>
         <h1 class="section-title">Search</h1>
-        <p class="text-zinc-500">
-          Find posts by title or content
-        </p>
+        <p class="text-zinc-500">Full-text search across every post. Press <kbd class="px-1.5 py-0.5 bg-zinc-800 rounded text-xs font-mono">/</kbd> to focus.</p>
       </header>
 
-      <!-- Search -->
-      <SearchModal />
+      <div id="search" class="pagefind-dark"></div>
+      <noscript>
+        <p class="text-zinc-400 text-center">Search needs JavaScript. You can still <a class="text-[#00B7C3] hover:underline" href="/blog/tags/">browse by topic</a>.</p>
+      </noscript>
 
-      <!-- Tips -->
-      <div class="mt-8 md:mt-12">
-        <div class="card p-4 sm:p-6">
-          <h2 class="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Search Tips</h2>
-          <ul class="space-y-3 text-zinc-400 text-sm">
-            <li class="flex items-start gap-3">
-              <span class="text-[#0078D4] mt-0.5">•</span>
-              <span>Use keywords from the title or description</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-[#0078D4] mt-0.5">•</span>
-              <span>Try searching for technologies like "Azure", "Databricks", or "Python"</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-[#0078D4] mt-0.5">•</span>
-              <span>Use <kbd class="px-1.5 py-0.5 bg-zinc-800 rounded text-xs font-mono">⌘ K</kbd> or <kbd class="px-1.5 py-0.5 bg-zinc-800 rounded text-xs font-mono">Ctrl K</kbd> to quickly focus the search</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="mt-4">
-        <div class="card p-4 sm:p-6">
-          <h2 class="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Browse by Category</h2>
-          <div class="flex flex-wrap gap-2 sm:gap-3">
-            <a href="/blog?tag=Azure" class="btn-secondary text-xs sm:text-sm px-4 py-2">Azure</a>
-            <a href="/blog?tag=AI" class="btn-secondary text-xs sm:text-sm px-4 py-2">AI</a>
-            <a href="/blog?tag=Python" class="btn-secondary text-xs sm:text-sm px-4 py-2">Python</a>
-            <a href="/blog?tag=Data" class="btn-secondary text-xs sm:text-sm px-4 py-2">Data</a>
-            <a href="/blog" class="text-[#00B7C3] hover:text-[#0078D4] text-xs sm:text-sm px-4 py-2 self-center">View all posts →</a>
-          </div>
+      <div class="mt-10 card p-4 sm:p-6">
+        <h2 class="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Browse by topic</h2>
+        <div class="flex flex-wrap gap-2 sm:gap-3">
+          {topTags.map((tag) => (
+            <a href={`/blog/tag/${tag.slug}/`} class="btn-secondary text-xs sm:text-sm px-4 py-2">{tag.name}</a>
+          ))}
+          <a href="/blog/tags/" class="text-[#00B7C3] hover:text-[#0078D4] text-xs sm:text-sm px-4 py-2 self-center">All topics →</a>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<script is:inline>
+  (function () {
+    if (typeof PagefindUI === 'undefined') {
+      document.getElementById('search').innerHTML =
+        '<p class="text-zinc-500 text-center text-sm">The search index is generated at build time (run <code>npm run build</code>).</p>';
+      return;
+    }
+    const ui = new PagefindUI({
+      element: '#search',
+      showSubResults: true,
+      showImages: false,
+      resetStyles: false,
+      pageSize: 10,
+    });
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q) ui.triggerSearch(q);
+
+    document.addEventListener('keydown', (e) => {
+      const target = e.target;
+      const typing = target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
+      if (e.key === '/' && !typing) {
+        e.preventDefault();
+        document.querySelector('#search input')?.focus();
+      }
+    });
+  })();
+</script>
+
+<style is:global>
+  .pagefind-dark {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: #00b7c3;
+    --pagefind-ui-text: #e4e4e7;
+    --pagefind-ui-background: #18181b;
+    --pagefind-ui-border: #3f3f46;
+    --pagefind-ui-tag: #27272a;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 12px;
+    --pagefind-ui-font: inherit;
+  }
+  .pagefind-dark .pagefind-ui__result-link { color: #fff; }
+  .pagefind-dark .pagefind-ui__result-excerpt,
+  .pagefind-dark .pagefind-ui__message { color: #a1a1aa; }
+  .pagefind-dark mark { background: rgba(0, 183, 195, 0.25); color: #fff; }
+</style>

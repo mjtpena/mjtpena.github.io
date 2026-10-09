@@ -10,10 +10,7 @@ tags:
   - Responsible AI
   - Security
   - AI
-
 ---
-
-I wrote "AI Safety Fundamentals for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -439,4 +436,3 @@ print(f"High severity: {report['by_severity'].get('high', 0)}")
 ## Conclusion
 
 AI safety requires a multi-layered approach combining input validation, model-level safeguards, output filtering, and continuous monitoring. By implementing comprehensive safety measures and maintaining vigilance through monitoring, organizations can deploy LLM applications responsibly while minimizing risks.
-

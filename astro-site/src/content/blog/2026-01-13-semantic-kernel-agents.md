@@ -1,5 +1,6 @@
 ---
 title: "Semantic Kernel: Building Production AI Agents"
+description: "After building agents with LangChain, AutoGen, and custom solutions, I finally gave Semantic Kernel a proper try. Here's what I learned building production…"
 author: Michael John Peña
 draft: false
 date: 2026-01-13
@@ -372,4 +373,4 @@ If you're building AI agents with .NET and Azure, give it a serious look. If you
 
 For my use case—Azure-based enterprise clients using .NET—it's become my default agent framework.
 
-Your mileage may vary. Test it with your specific requirements before committing.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Your mileage may vary. Test it with your specific requirements before committing.

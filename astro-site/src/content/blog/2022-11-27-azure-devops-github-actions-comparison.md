@@ -9,10 +9,7 @@ tags:
   - CI/CD
   - DevOps
   - Automation
-
 ---
-
-I wrote "Azure DevOps vs GitHub Actions: Choosing the Right CI/CD Platform" to share practical, production-minded guidance on this topic.
 
 ## Quick Comparison
 
@@ -411,4 +408,3 @@ Both platforms are excellent choices. Azure DevOps excels in enterprise scenario
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Azure DevOps Pipelines YAML](https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema)
 - [GitHub Actions Workflow Syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)
-

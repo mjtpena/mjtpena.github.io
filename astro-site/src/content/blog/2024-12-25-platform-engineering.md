@@ -1,5 +1,6 @@
 ---
 title: "Platform Engineering for Data and AI: Building Internal Developer Platforms"
+description: "Platform engineering enables scale while maintaining quality and consistency. Build platforms that make the right thing easy and the wrong thing hard."
 author: Michael John Peña
 draft: false
 date: 2024-12-25
@@ -9,10 +10,7 @@ tags:
   - Data Platform
   - AI Platform
   - Infrastructure
-
 ---
-
-I wrote "Platform Engineering for Data and AI: Building Internal Developer Platforms" to share practical, production-minded guidance on this topic.
 
 ## The Platform Engineering Approach
 
@@ -501,4 +499,4 @@ Platform engineering enables scale while maintaining quality and consistency. Bu
 
 - [Platform Engineering Guide](https://platformengineering.org/)
 - [Internal Developer Platforms](https://internaldeveloperplatform.org/)
-- [Team Topologies](https://teamtopologies.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Team Topologies](https://teamtopologies.com/)

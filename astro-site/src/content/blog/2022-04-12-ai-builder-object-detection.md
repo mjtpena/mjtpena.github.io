@@ -9,10 +9,7 @@ tags:
   - Object Detection
   - Computer Vision
   - AI
-
 ---
-
-I wrote "Object Detection with AI Builder: Computer Vision for Business" to share practical, production-minded guidance on this topic.
 
 ## Object Detection Use Cases
 
@@ -328,4 +325,3 @@ Object detection brings computer vision to business processes without requiring 
 
 - [Object Detection Documentation](https://docs.microsoft.com/en-us/ai-builder/object-detection-model-in-powerapps)
 - [Training Best Practices](https://docs.microsoft.com/en-us/ai-builder/collect-images)
-

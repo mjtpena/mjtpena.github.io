@@ -1,13 +1,11 @@
 ---
 title: "JSON Schema Enforcement in LLM Applications"
+description: "JSON schema enforcement transforms unpredictable LLM outputs into reliable, type-safe data that your applications can trust."
 author: "Michael John Peña"
 draft: false
 date: 2024-09-14
 tags: ["JSON Schema", "OpenAI", "AI", "Data Validation", "API"]
-
 ---
-
-I wrote "JSON Schema Enforcement in LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Understanding JSON Schema Basics
 
@@ -347,4 +345,4 @@ manager.register_migration("v1", "v2", migrate_v1_to_v2)
 5. **Version your schemas** for long-term maintenance
 6. **Validate both input and output** for complete safety
 
-JSON schema enforcement transforms unpredictable LLM outputs into reliable, type-safe data that your applications can trust.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+JSON schema enforcement transforms unpredictable LLM outputs into reliable, type-safe data that your applications can trust.

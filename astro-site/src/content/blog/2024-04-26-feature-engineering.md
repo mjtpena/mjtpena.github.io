@@ -1,13 +1,11 @@
 ---
 title: "Feature Engineering in Databricks: From Raw Data to ML Features"
+description: "Feature engineering transforms raw data into meaningful inputs for machine learning models. Databricks provides powerful tools for building and managing…"
 author: "Michael John Peña"
 draft: false
 date: 2024-04-26
 tags: ["Databricks", "Feature Engineering", "Machine Learning", "MLOps", "Data"]
-
 ---
-
-I wrote "Feature Engineering in Databricks: From Raw Data to ML Features" to share practical, production-minded guidance on this topic.
 
 Feature engineering transforms raw data into meaningful inputs for machine learning models. Databricks provides powerful tools for building and managing feature pipelines.
 
@@ -370,4 +368,3 @@ def train_model_with_features():
 ## Conclusion
 
 Feature engineering in Databricks provides end-to-end capabilities from computation to serving. Use feature tables for batch features, feature functions for real-time computation, and Unity Catalog for governance.
-

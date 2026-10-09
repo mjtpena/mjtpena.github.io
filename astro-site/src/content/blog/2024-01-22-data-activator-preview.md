@@ -1,5 +1,6 @@
 ---
 title: "Data Activator Preview: What to Expect and How to Prepare"
+description: "I reviewed Data Activator during its preview; understanding limits and capacity impact is critical before go-live. This post explains what to watch for…"
 author: Michael John Peña
 draft: false
 date: 2024-01-22

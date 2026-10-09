@@ -10,10 +10,7 @@ tags:
   - Machine Learning
   - Data Science
   - MLOps
-
 ---
-
-I wrote "AI Integration in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -515,4 +512,3 @@ print(batch_code)
 ## Conclusion
 
 Microsoft Fabric provides comprehensive AI and ML capabilities integrated directly into the analytics platform. From AutoML for rapid model development to Synapse ML for advanced deep learning and cognitive services integration, Fabric enables organizations to build intelligent analytics solutions without managing separate ML infrastructure.
-

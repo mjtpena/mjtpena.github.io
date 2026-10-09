@@ -1,13 +1,11 @@
 ---
 title: "Concept Drift Detection in Machine Learning"
+description: "Detecting concept drift enables timely model retraining to maintain prediction accuracy over time."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-14
 tags: ["Azure", "Machine Learning", "Concept Drift", "MLOps", "Monitoring"]
-
 ---
-
-I wrote "Concept Drift Detection in Machine Learning" to share practical, production-minded guidance on this topic.
 
 ## Understanding Concept Drift Types
 
@@ -336,4 +334,4 @@ fig = visualize_concept_drift(timestamps, error_rates, drift_points)
 plt.savefig("concept_drift.png")
 ```
 
-Detecting concept drift enables timely model retraining to maintain prediction accuracy over time.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Detecting concept drift enables timely model retraining to maintain prediction accuracy over time.

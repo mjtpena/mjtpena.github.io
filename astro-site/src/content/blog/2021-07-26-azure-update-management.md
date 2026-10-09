@@ -10,12 +10,9 @@ tags:
   - Security
   - DevOps
   - Patching
-
 ---
 
-I wrote "2021-07-26-azure-update-management" to share practical, production-minded guidance on this topic.
-
-# Enabling Update Management
+## Enabling Update Management
 
 Set up Update Management for your VMs:
 
@@ -44,7 +41,7 @@ az automation account update \
     --tags "linkedWorkspace=$WORKSPACE_ID"
 ```
 
-# Enabling VMs for Update Management
+## Enabling VMs for Update Management
 
 Onboard VMs to Update Management:
 
@@ -116,7 +113,7 @@ for vm in vms:
         print(f"Failed to enable for {vm.name}: {e}")
 ```
 
-# Creating Update Deployments
+## Creating Update Deployments
 
 Schedule update deployments:
 
@@ -227,7 +224,7 @@ linux_security = create_update_deployment(
 )
 ```
 
-# Pre and Post Scripts
+## Pre and Post Scripts
 
 Create maintenance scripts:
 
@@ -351,7 +348,7 @@ catch {
 }
 ```
 
-# Monitoring Update Compliance
+## Monitoring Update Compliance
 
 Query update compliance status:
 
@@ -387,7 +384,7 @@ UpdateRunProgress
 | order by TimeGenerated desc
 ```
 
-# Compliance Reporting
+## Compliance Reporting
 
 Generate compliance reports:
 
@@ -504,9 +501,8 @@ with open("compliance_report.html", "w") as f:
 print(f"Overall Compliance: {report['overall_compliance']}%")
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Update Management simplifies patch management across hybrid environments. By automating update assessments and deployments, you maintain security compliance while minimizing operational overhead.
 
 Key practices include creating maintenance windows that align with business requirements, using pre and post scripts for complex scenarios, and regularly reviewing compliance reports. Combined with proper testing in staging environments, Update Management helps you maintain secure, up-to-date infrastructure.
-

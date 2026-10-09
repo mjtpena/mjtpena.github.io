@@ -1,5 +1,6 @@
 ---
 title: "KQL Databases: Advanced Patterns and Techniques"
+description: "'{ \"SoftDeletePeriod\": \"90.00:00:00\", \"Recoverability\": \"Enabled\" }' '{ \"DataHotSpan\": \"7.00:00:00\", \"IndexHotSpan\": \"14.00:00:00\" }'"
 author: Michael John Peña
 draft: false
 date: 2023-07-20
@@ -8,10 +9,7 @@ tags:
   - KQL
   - Real-Time Analytics
   - Time Series
-
 ---
-
-I wrote "KQL Databases: Advanced Patterns and Techniques" to share practical, production-minded guidance on this topic.
 
 ## KQL Database Architecture
 
@@ -305,4 +303,4 @@ Tomorrow we'll explore Eventstreams for streaming data ingestion.
 
 - [KQL Reference](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/)
 - [KQL Database Management](https://learn.microsoft.com/en-us/fabric/real-time-analytics/create-database)
-- [Time Series Analysis](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/samples#time-series-analysis)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Time Series Analysis](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/samples#time-series-analysis)

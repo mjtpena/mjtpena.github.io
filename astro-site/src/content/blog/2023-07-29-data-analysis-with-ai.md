@@ -1,5 +1,6 @@
 ---
 title: "Data Analysis with AI: Practical Patterns and Techniques"
+description: "The Code Interpreter release this month changed how I approach quick data analysis tasks. Not the deep, production-grade EDA that belongs in a Fabric…"
 author: Michael John Peña
 draft: false
 date: 2023-07-29
@@ -347,4 +348,4 @@ Tomorrow we'll explore AI-powered visualization techniques.
 
 - [OpenAI Best Practices](https://platform.openai.com/docs/guides/gpt-best-practices)
 - [Prompt Engineering Guide](https://www.promptingguide.ai/)
-- [Data Analysis Patterns](https://learn.microsoft.com/en-us/azure/machine-learning/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data Analysis Patterns](https://learn.microsoft.com/en-us/azure/machine-learning/)

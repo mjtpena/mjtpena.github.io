@@ -1,13 +1,11 @@
 ---
 title: "Operational Risk in AI Systems: Keeping the Lights On"
+description: "Operational resilience is the unsung prerequisite for AI adoption. Practical SRE for AI means instrumenting model performance, bounding cost exposure, and…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-07
 tags: ["AI", "Operations", "Risk Management", "SRE", "Reliability"]
-
 ---
-
-I wrote "Operational Risk in AI Systems: Keeping the Lights On" to share practical, production-minded guidance on this topic.
 
 Operational resilience is the unsung prerequisite for AI adoption. Practical SRE for AI means instrumenting model performance, bounding cost exposure, and architecting graceful degradation — the techniques I outline come from production incidents I've investigated this year.
 
@@ -380,4 +378,4 @@ class SLAMonitor:
         }
 ```
 
-Tomorrow, we'll explore compliance considerations for AI systems!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore compliance considerations for AI systems!

@@ -1,5 +1,6 @@
 ---
 title: "Azure Monitor Workbooks: Custom Visualizations"
+description: "Every dashboard request that hit my inbox in 2019 had the same wishlist: parameters at the top, charts that talk to each other, KQL on the inside, and…"
 author: Michael John Peña
 draft: false
 date: 2020-12-10
@@ -197,4 +198,4 @@ Pre-built workbooks:
 - Network Insights
 - Storage Insights
 
-Workbooks: storytelling with your monitoring data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Workbooks: storytelling with your monitoring data.

@@ -1,5 +1,6 @@
 ---
 title: "GraphRAG Implementation: Combining Graphs with Retrieval"
+description: "GraphRAG excels at complex questions requiring synthesis across multiple documents."
 author: Michael John Peña
 draft: false
 date: 2025-03-03
@@ -9,10 +10,7 @@ tags:
   - RAG
   - Knowledge Graphs
   - Microsoft
-
 ---
-
-I wrote "GraphRAG Implementation: Combining Graphs with Retrieval" to share practical, production-minded guidance on this topic.
 
 ## GraphRAG Architecture
 
@@ -73,4 +71,4 @@ class GraphRAGSystem:
         return await self.generate_answer(question, context)
 ```
 
-GraphRAG excels at complex questions requiring synthesis across multiple documents.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GraphRAG excels at complex questions requiring synthesis across multiple documents.

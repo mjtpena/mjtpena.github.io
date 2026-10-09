@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions Dependency Injection: Clean Architecture"
+description: "The first Azure Function project I shipped used static everything. Static config, static SQL helpers, static logger. It worked—until I tried to write a unit…"
 author: Michael John Peña
 draft: false
 date: 2020-11-06
@@ -202,4 +203,4 @@ public class OrderFunctionsTests
 }
 ```
 
-DI makes Azure Functions enterprise-ready.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+DI makes Azure Functions enterprise-ready.

@@ -1,5 +1,6 @@
 ---
 title: "LLM-Powered SQL Generation: Patterns and Practices"
+description: "LLM-powered SQL generation democratizes data access. With proper validation and safety measures, it enables anyone to query databases using natural language."
 author: Michael John Pena
 draft: false
 date: 2023-04-14
@@ -9,10 +10,7 @@ tags:
   - OpenAI
   - Data
   - NLP
-
 ---
-
-I wrote "LLM-Powered SQL Generation: Patterns and Practices" to share practical, production-minded guidance on this topic.
 
 ## Core Pattern
 
@@ -295,4 +293,4 @@ class SQLSafetyGuard:
         return sql_upper.startswith("SELECT") or sql_upper.startswith("WITH")
 ```
 
-LLM-powered SQL generation democratizes data access. With proper validation and safety measures, it enables anyone to query databases using natural language.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+LLM-powered SQL generation democratizes data access. With proper validation and safety measures, it enables anyone to query databases using natural language.

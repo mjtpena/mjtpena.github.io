@@ -1,5 +1,6 @@
 ---
 title: "Cost Optimization for AI Workloads"
+description: "AI infrastructure costs compound quickly. A few patterns I've been applying with clients to bring Azure OpenAI and Azure ML spend under control: at the API…"
 author: Michael John Peña
 draft: false
 date: 2023-08-21
@@ -222,4 +223,4 @@ Tomorrow we'll explore Azure OpenAI quotas and rate limits.
 
 - [Azure Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/)
 - [OpenAI Pricing](https://openai.com/pricing)
-- [Azure ML Cost Optimization](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-optimize-cost)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure ML Cost Optimization](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-optimize-cost)

@@ -1,5 +1,6 @@
 ---
 title: "Streaming Machine Learning: Training and Inference on Real-Time Data"
+description: "Streaming ML enables intelligent real-time systems that continuously learn and adapt. Start with robust feature engineering and monitoring before enabling…"
 author: Michael John Peña
 draft: false
 date: 2024-11-25
@@ -9,10 +10,7 @@ tags:
   - Machine Learning
   - Streaming
   - MLOps
-
 ---
-
-I wrote "Streaming Machine Learning: Training and Inference on Real-Time Data" to share practical, production-minded guidance on this topic.
 
 ## Streaming ML Architecture
 
@@ -560,4 +558,4 @@ Streaming ML enables intelligent real-time systems that continuously learn and a
 - [MLflow Documentation](https://mlflow.org/docs/latest/index.html)
 - [Spark Structured Streaming](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)
 - [Azure ML Model Monitoring](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-monitor-model-performance)
-- [Feature Store Patterns](https://www.featurestore.org/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Feature Store Patterns](https://www.featurestore.org/)

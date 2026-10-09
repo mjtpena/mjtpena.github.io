@@ -1,5 +1,6 @@
 ---
 title: "Building Integrations with Power Automate HTTP Connector"
+description: "A pattern I keep seeing this year: the IT team has standardised on Power Automate for citizen-developer workflows, but the moment a flow needs to talk to an…"
 author: Michael John Peña
 draft: false
 date: 2020-08-07
@@ -187,4 +188,4 @@ Response action:
 3. **Batch requests** - When APIs support it
 4. **Set reasonable timeouts** - Default is 100 seconds
 
-A note for anyone treating this as a free pass: the HTTP connector is a Premium connector. It's licensed per user (or per flow), and the licensing question has killed more "we'll just use Power Automate" projects in my experience than any technical limitation. Check the licensing first. Then build the flow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A note for anyone treating this as a free pass: the HTTP connector is a Premium connector. It's licensed per user (or per flow), and the licensing question has killed more "we'll just use Power Automate" projects in my experience than any technical limitation. Check the licensing first. Then build the flow.

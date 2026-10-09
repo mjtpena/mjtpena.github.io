@@ -1,5 +1,6 @@
 ---
 title: "AI Monitoring Dashboards: Visualizing AI System Health"
+description: "Comprehensive monitoring dashboards enable proactive AI operations management."
 author: Michael John Peña
 draft: false
 date: 2025-05-14
@@ -9,10 +10,7 @@ tags:
   - Dashboards
   - Observability
   - Operations
-
 ---
-
-I wrote "AI Monitoring Dashboards: Visualizing AI System Health" to share practical, production-minded guidance on this topic.
 
 ## AI Monitoring Dashboard
 
@@ -118,4 +116,4 @@ class AIMonitoringDashboard:
         }
 ```
 
-Comprehensive monitoring dashboards enable proactive AI operations management.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Comprehensive monitoring dashboards enable proactive AI operations management.

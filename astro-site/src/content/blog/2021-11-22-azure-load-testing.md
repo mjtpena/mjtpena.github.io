@@ -1,5 +1,6 @@
 ---
 title: "Azure Load Testing: Cloud-Native Performance Testing"
+description: "Azure Load Testing makes performance validation accessible and integrated into modern DevOps workflows. By catching performance regressions early, you can…"
 author: Michael John Pena
 draft: false
 date: 2021-11-22
@@ -9,10 +10,7 @@ tags:
   - Load Testing
   - DevOps
   - Testing
-
 ---
-
-I wrote "Azure Load Testing: Cloud-Native Performance Testing" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Load Testing?
 
@@ -472,4 +470,4 @@ Azure Load Testing makes performance validation accessible and integrated into m
 
 - [Azure Load Testing Documentation](https://docs.microsoft.com/en-us/azure/load-testing/overview-what-is-azure-load-testing)
 - [JMeter Documentation](https://jmeter.apache.org/usermanual/index.html)
-- [CI/CD Integration](https://docs.microsoft.com/en-us/azure/load-testing/how-to-configure-load-test-cicd)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [CI/CD Integration](https://docs.microsoft.com/en-us/azure/load-testing/how-to-configure-load-test-cicd)

@@ -1,5 +1,6 @@
 ---
 title: "File Handling in AI Agents"
+description: "AI agents often need to work with files - reading documents, processing data, generating outputs. Today I'm exploring safe and effective file handling patterns."
 author: Michael John Peña
 draft: false
 date: 2024-05-27
@@ -560,4 +561,4 @@ Tomorrow I'll cover memory and state management in AI agents.
 
 - [Azure Blob Storage Python SDK](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-python)
 - [PyMuPDF Documentation](https://pymupdf.readthedocs.io/)
-- [python-docx](https://python-docx.readthedocs.io/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [python-docx](https://python-docx.readthedocs.io/)

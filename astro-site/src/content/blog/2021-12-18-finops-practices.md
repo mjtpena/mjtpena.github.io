@@ -1,5 +1,6 @@
 ---
 title: "FinOps Practices: Managing Cloud Financial Operations"
+description: "FinOps in 2021 grew from a niche practice to an organizational capability. The tools exist; success requires culture change and executive support."
 author: Michael John Pena
 draft: false
 date: 2021-12-18
@@ -9,10 +10,7 @@ tags:
   - Azure
   - Cost Management
   - DevOps
-
 ---
-
-I wrote "FinOps Practices: Managing Cloud Financial Operations" to share practical, production-minded guidance on this topic.
 
 ## The FinOps Framework
 
@@ -419,4 +417,4 @@ FinOps in 2021 grew from a niche practice to an organizational capability. The t
 
 - [FinOps Foundation](https://www.finops.org/)
 - [Azure Cost Management Best Practices](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/cost-mgt-best-practices)
-- [Cloud Financial Management](https://aws.amazon.com/aws-cost-management/cloud-financial-management/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Cloud Financial Management](https://aws.amazon.com/aws-cost-management/cloud-financial-management/)

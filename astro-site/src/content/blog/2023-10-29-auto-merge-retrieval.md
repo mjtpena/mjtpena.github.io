@@ -10,10 +10,7 @@ tags:
   - Retrieval
   - LlamaIndex
   - AI
-
 ---
-
-I wrote "Auto-Merge Retrieval for RAG Systems" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -716,4 +713,3 @@ for source in result['sources']:
 ## Conclusion
 
 Auto-merge retrieval intelligently combines related chunks to provide comprehensive context while avoiding redundancy. By understanding document hierarchy and chunk relationships, auto-merge ensures the generator receives coherent, complete information. Different merge strategies allow optimization for various use cases, from precision-focused leaf retrieval to comprehensive section-level context.
-

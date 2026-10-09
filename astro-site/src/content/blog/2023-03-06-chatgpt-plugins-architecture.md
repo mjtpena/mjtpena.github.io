@@ -1,5 +1,6 @@
 ---
 title: "Understanding ChatGPT Plugins Architecture"
+description: "The plugin ecosystem is just beginning. Now is the time to experiment and understand the patterns."
 author: Michael John Pena
 draft: false
 date: 2023-03-06
@@ -9,10 +10,7 @@ tags:
   - ChatGPT
   - Plugins
   - Architecture
-
 ---
-
-I wrote "Understanding ChatGPT Plugins Architecture" to share practical, production-minded guidance on this topic.
 
 ## What Are ChatGPT Plugins?
 
@@ -374,4 +372,4 @@ Plugins transform ChatGPT from a knowledge retrieval system to an action-executi
 3. Automating workflows through conversation
 4. Creating new interfaces for complex systems
 
-The plugin ecosystem is just beginning. Now is the time to experiment and understand the patterns.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The plugin ecosystem is just beginning. Now is the time to experiment and understand the patterns.

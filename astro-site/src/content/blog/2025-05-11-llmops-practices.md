@@ -1,5 +1,6 @@
 ---
 title: "LLMOps: Operationalizing Large Language Models"
+description: "LLMOps ensures reliable, cost-effective LLM operations at scale."
 author: Michael John Peña
 draft: false
 date: 2025-05-11
@@ -9,10 +10,7 @@ tags:
   - AI
   - Operations
   - Production
-
 ---
-
-I wrote "LLMOps: Operationalizing Large Language Models" to share practical, production-minded guidance on this topic.
 
 ## LLMOps Framework
 
@@ -119,4 +117,4 @@ class LLMOpsManager:
             self.log_rollback(deployment_id, reason)
 ```
 
-LLMOps ensures reliable, cost-effective LLM operations at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+LLMOps ensures reliable, cost-effective LLM operations at scale.

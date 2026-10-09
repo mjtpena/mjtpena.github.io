@@ -1,5 +1,6 @@
 ---
 title: "Azure Storage Account Security Best Practices"
+description: "Storage accounts are deceptively easy to deploy and easy to misconfigure into a leak. Public blob containers are still the most common \"how did this get…"
 author: Michael John Peña
 draft: false
 date: 2020-12-30
@@ -200,4 +201,4 @@ az monitor metrics alert create \
 - [ ] Use customer-managed keys
 - [ ] Configure firewall rules
 
-Storage security: protect your data at every layer.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Storage security: protect your data at every layer.

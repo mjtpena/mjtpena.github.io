@@ -9,10 +9,7 @@ tags:
   - Event Sourcing
   - Cosmos DB
   - Architecture
-
 ---
-
-I wrote "2021-06-23-event-sourcing-patterns" to share practical, production-minded guidance on this topic.
 
 ## Event Sourcing Fundamentals
 
@@ -616,4 +613,3 @@ Event Sourcing with Azure Cosmos DB provides a robust foundation for building sy
 
 - [Event Sourcing Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)
 - [Cosmos DB Change Feed](https://docs.microsoft.com/en-us/azure/cosmos-db/change-feed)
-

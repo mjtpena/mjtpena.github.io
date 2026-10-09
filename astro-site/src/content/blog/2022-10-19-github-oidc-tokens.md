@@ -1,13 +1,11 @@
 ---
 title: "OIDC Tokens in GitHub Actions"
+description: "OIDC eliminates the need for long-lived cloud credentials, improving security posture."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-19
 tags: ["GitHub", "GitHub Actions", "Security", "OIDC"]
-
 ---
-
-I wrote "OIDC Tokens in GitHub Actions" to share practical, production-minded guidance on this topic.
 
 ## OIDC with Azure
 
@@ -75,4 +73,4 @@ jobs:
       - run: gcloud run deploy myservice --source .
 ```
 
-OIDC eliminates the need for long-lived cloud credentials, improving security posture.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+OIDC eliminates the need for long-lived cloud credentials, improving security posture.

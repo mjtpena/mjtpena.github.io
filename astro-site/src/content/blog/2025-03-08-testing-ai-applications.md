@@ -1,5 +1,6 @@
 ---
 title: "Testing AI Applications: Strategies for Non-Deterministic Systems"
+description: "Robust AI testing combines deterministic checks with AI-powered evaluation."
 author: Michael John Peña
 draft: false
 date: 2025-03-08
@@ -9,10 +10,7 @@ tags:
   - Quality Assurance
   - Best Practices
   - DevOps
-
 ---
-
-I wrote "Testing AI Applications: Strategies for Non-Deterministic Systems" to share practical, production-minded guidance on this topic.
 
 ## AI Testing Framework
 
@@ -77,4 +75,4 @@ class AITestSuite:
             assert safety_check.is_safe, f"Safety violation: {safety_check.reason}"
 ```
 
-Robust AI testing combines deterministic checks with AI-powered evaluation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Robust AI testing combines deterministic checks with AI-powered evaluation.

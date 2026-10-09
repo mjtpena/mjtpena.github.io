@@ -1,13 +1,11 @@
 ---
 title: "Understanding Reasoning in AI: From Pattern Matching to Problem Solving"
+description: "Traditional LLMs like GPT-4o are sophisticated pattern matchers. They predict the next token based on learned patterns from training data. While incredibly…"
 author: "Michael John Peña"
 draft: false
 date: 2024-09-02
 tags: ["AI", "Reasoning", "Machine Learning", "LLM", "GPT-4o"]
-
 ---
-
-I wrote "Understanding Reasoning in AI: From Pattern Matching to Problem Solving" to share practical, production-minded guidance on this topic.
 
 ## The Evolution from Pattern Matching to Reasoning
 
@@ -220,4 +218,3 @@ For now, use techniques like chain-of-thought prompting and self-consistency to 
 - [Chain-of-Thought Paper](https://arxiv.org/abs/2201.11903)
 - [Self-Consistency Paper](https://arxiv.org/abs/2203.11171)
 - [OpenAI API Documentation](https://platform.openai.com/docs/)
-

@@ -10,10 +10,7 @@ tags:
   - Computer Vision
   - AI
   - Video Intelligence
-
 ---
-
-I wrote "Video Analysis with Azure AI: Frame-by-Frame Intelligence" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -491,4 +488,3 @@ print(summary)
 ## Conclusion
 
 Video analysis with Azure AI enables powerful content understanding at scale. By combining frame extraction, object detection, tracking, and scene detection, you can build sophisticated video intelligence applications. The integration with Azure OpenAI for summarization adds natural language understanding to the visual analysis, creating comprehensive video insights.
-

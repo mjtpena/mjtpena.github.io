@@ -9,10 +9,7 @@ tags:
   - Dataset Development
   - DAX
   - Modeling
-
 ---
-
-I wrote "Tabular Editor for Power BI: Advanced Dataset Development" to share practical, production-minded guidance on this topic.
 
 ## Why Tabular Editor
 
@@ -174,4 +171,3 @@ Tabular Editor transforms Power BI development:
 
 - [Tabular Editor Documentation](https://docs.tabulareditor.com/)
 - [Best Practice Analyzer Rules](https://github.com/TabularEditor/BestPracticeRules)
-

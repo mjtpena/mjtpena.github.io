@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering: Chain-of-Thought Techniques for Complex Reasoning"
+description: "When faced with multi-step problems, LLMs perform better when prompted to reason step-by-step rather than jump directly to answers."
 author: Michael John Peña
 draft: false
 date: 2025-09-04
@@ -9,10 +10,7 @@ tags:
   - Chain of Thought
   - AI
   - Best Practices
-
 ---
-
-I wrote "Prompt Engineering: Chain-of-Thought Techniques for Complex Reasoning" to share practical, production-minded guidance on this topic.
 
 ## The Power of Explicit Reasoning
 
@@ -100,4 +98,4 @@ def few_shot_cot(problem: str, examples: list[dict]) -> str:
 
 Chain-of-thought works best for mathematical reasoning, logical deduction, multi-step analysis, and problems requiring synthesis of multiple facts. For simple factual queries, it adds unnecessary overhead.
 
-The key insight: LLMs reason better when they write their reasoning explicitly, just like humans benefit from showing their work.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The key insight: LLMs reason better when they write their reasoning explicitly, just like humans benefit from showing their work.

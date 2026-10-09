@@ -1,5 +1,6 @@
 ---
 title: "Building Production RAG Systems: Best Practices for 2026"
+description: "Production RAG is iterative. Start simple, measure everything, and improve based on real user feedback."
 author: Michael John Peña
 draft: false
 date: 2025-12-05
@@ -9,10 +10,7 @@ tags:
   - Best-Practices
   - Vector-Search
   - Production
-
 ---
-
-I wrote "Building Production RAG Systems: Best Practices for 2026" to share practical, production-minded guidance on this topic.
 
 ## Architecture Fundamentals
 
@@ -115,4 +113,4 @@ def rerank_results(query: str, documents: list, top_n: int = 5):
 3. **Latency P95** - Keep under 3 seconds for good UX
 4. **Cost per Query** - Monitor embedding + LLM costs
 
-Production RAG is iterative. Start simple, measure everything, and improve based on real user feedback.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Production RAG is iterative. Start simple, measure everything, and improve based on real user feedback.

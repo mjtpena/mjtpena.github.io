@@ -1,13 +1,11 @@
 ---
 title: "Direct Lake Optimization: Maximizing Power BI Performance"
+description: "Direct Lake changes the Power BI performance story — but it's not automatic. Over the past months I've seen Direct Lake deliver dramatic improvements when…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-21
 tags: ["Microsoft Fabric", "Direct Lake", "Power BI", "Performance", "Optimization"]
-
 ---
-
-I wrote "Direct Lake Optimization: Maximizing Power BI Performance" to share practical, production-minded guidance on this topic.
 
 Direct Lake changes the Power BI performance story — but it's not automatic. Over the past months I've seen Direct Lake deliver dramatic improvements when tables are optimised for v-order, partitioning and query patterns; this post shows the steps I use to tune semantic models so reports stay snappy.
 
@@ -321,4 +319,3 @@ def generate_direct_lake_checklist(model_name: str) -> str:
 ```
 
 Tomorrow, we'll explore V-Order optimization in detail!
-

@@ -1,5 +1,6 @@
 ---
 title: "The Real Cost of Context Switching"
+description: "Last Tuesday I worked 10 hours. Got almost nothing done. Checked my calendar: 6 meetings scattered throughout the day. None longer than 30 minutes. Plenty…"
 author: Michael John Peña
 draft: false
 date: 2026-02-03
@@ -74,4 +75,4 @@ Being "available" and being "productive" are opposites for knowledge work.
 
 You can optimize for responsiveness or for output. Not both.
 
-Choose wisely.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose wisely.

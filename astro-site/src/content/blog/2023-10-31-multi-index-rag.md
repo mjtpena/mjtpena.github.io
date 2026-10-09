@@ -10,10 +10,7 @@ tags:
   - Knowledge Management
   - Information Retrieval
   - AI
-
 ---
-
-I wrote "Multi-Index RAG: Querying Across Multiple Knowledge Sources" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -702,4 +699,3 @@ print(f"Sources: {len(result['sources'])}")
 ## Conclusion
 
 Multi-index RAG enables querying across heterogeneous knowledge sources, combining results intelligently for comprehensive answers. Key components include diverse index types, smart query routing, result fusion strategies, and flexible architecture. This approach is essential for enterprise RAG systems that need to leverage multiple knowledge bases, document types, and retrieval strategies.
-

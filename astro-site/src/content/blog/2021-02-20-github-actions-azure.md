@@ -1,5 +1,6 @@
 ---
 title: CI/CD to Azure with GitHub Actions
+description: "GitHub Actions went from \"interesting alternative to Azure DevOps Pipelines\" to \"my default CI/CD choice for most new Azure projects\" in about twelve…"
 author: Michael John Peña
 draft: false
 date: 2021-02-20

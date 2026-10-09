@@ -10,12 +10,9 @@ tags:
   - Delta Lake
   - Databricks
   - ETL
-
 ---
 
-I wrote "2021-07-02-delta-lake-merge-operations" to share practical, production-minded guidance on this topic.
-
-# Basic MERGE Syntax
+## Basic MERGE Syntax
 
 The MERGE statement combines INSERT, UPDATE, and DELETE operations in a single atomic transaction:
 
@@ -46,7 +43,7 @@ target_table.alias("target").merge(
 }).execute()
 ```
 
-# Conditional MERGE with Multiple Conditions
+## Conditional MERGE with Multiple Conditions
 
 Handle complex business logic with conditional updates:
 
@@ -86,7 +83,7 @@ target_table.alias("t").merge(
 ).execute()
 ```
 
-# Implementing SCD Type 2
+## Implementing SCD Type 2
 
 Slowly Changing Dimension Type 2 maintains history by creating new records:
 
@@ -140,7 +137,7 @@ merge_scd2(
 )
 ```
 
-# Change Data Capture (CDC) Processing
+## Change Data Capture (CDC) Processing
 
 Process CDC events from sources like Debezium or Azure Data Factory:
 
@@ -205,7 +202,7 @@ cdc_events.writeStream \
     .start()
 ```
 
-# Performance Optimization
+## Performance Optimization
 
 Optimize MERGE performance with these techniques:
 
@@ -232,7 +229,7 @@ spark.conf.set("spark.databricks.delta.optimizeWrite.enabled", "true")
 spark.conf.set("spark.databricks.delta.autoCompact.enabled", "true")
 ```
 
-# SQL-Based MERGE
+## SQL-Based MERGE
 
 You can also use SQL syntax for MERGE operations:
 
@@ -251,9 +248,8 @@ WHEN NOT MATCHED THEN INSERT (
 )
 ```
 
-# Conclusion
+## Conclusion
 
 Delta Lake MERGE operations are fundamental for building reliable data pipelines. Whether you are implementing simple upserts, complex SCD Type 2 patterns, or processing CDC events, the MERGE command provides a transactional and performant solution.
 
 Remember to optimize your MERGE operations by leveraging partitioning, Z-Ordering, and broadcast joins for smaller source datasets. With these patterns, you can build robust data lakes that handle real-world data update scenarios effectively.
-

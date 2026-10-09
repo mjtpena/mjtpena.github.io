@@ -1,5 +1,6 @@
 ---
 title: "Preparing for GPT-4: What We Know So Far"
+description: "On March 13, 2023—the day before OpenAI announced GPT-4—the AI practitioner community was in an unusual state: highly confident that something significant…"
 author: Michael John Pena
 draft: false
 date: 2023-03-13
@@ -371,4 +372,4 @@ When GPT-4 drops:
 
 The AI landscape is evolving rapidly. Build flexible systems that can adopt new capabilities without major rewrites.
 
-Stay tuned for tomorrow's deep dive once GPT-4 is officially released.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Stay tuned for tomorrow's deep dive once GPT-4 is officially released.

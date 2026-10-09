@@ -1,5 +1,6 @@
 ---
 title: "Fabric Eventstreams Patterns: From Ingestion to Analytics"
+description: "Eventstreams lets teams deliver streaming analytics without managing complex infra. From deployments I've supported, these patterns make ingestion and…"
 author: Michael John Peña
 draft: false
 date: 2024-01-19

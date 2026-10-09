@@ -1,5 +1,6 @@
 ---
 title: The 3 Types of Blockchain and Cryptocurrencies people I’ve met
+description: "I've been in the crazy Blockchain space for quite a while now. I've had a lot of conversations and people I've met online and in-person to talk about it.…"
 author: Michael John Peña
 draft: false
 date: 2021-02-26
@@ -52,4 +53,4 @@ I get that in the future there would be more and more Blockchain use cases that 
 - There are those who are curious about the technology behind blockchains.
 - There are people who believes that Blockchain will change the world.
 
-Are you into Blockchain? Let me know if you want to have a chat.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Are you into Blockchain? Let me know if you want to have a chat.

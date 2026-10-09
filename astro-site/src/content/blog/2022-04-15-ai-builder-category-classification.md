@@ -9,10 +9,7 @@ tags:
   - Classification
   - NLP
   - Automation
-
 ---
-
-I wrote "Category Classification with AI Builder: Automating Text Categorization" to share practical, production-minded guidance on this topic.
 
 ## Use Cases
 
@@ -306,4 +303,3 @@ It's foundational for intelligent document and communication management.
 
 - [Category Classification Documentation](https://docs.microsoft.com/en-us/ai-builder/text-classification-overview)
 - [Training Best Practices](https://docs.microsoft.com/en-us/ai-builder/before-you-build-text-classification-model)
-

@@ -1,5 +1,6 @@
 ---
 title: "AI Agent Templates: Quick Start Patterns for Enterprise Use Cases"
+description: "Templates accelerate agent development by providing battle-tested patterns. Start with a template, customize for your needs, and iterate based on real usage."
 author: Michael John Peña
 draft: false
 date: 2024-11-12
@@ -9,10 +10,7 @@ tags:
   - AI Agents
   - Templates
   - Best Practices
-
 ---
-
-I wrote "AI Agent Templates: Quick Start Patterns for Enterprise Use Cases" to share practical, production-minded guidance on this topic.
 
 ## Available Agent Templates
 
@@ -341,4 +339,4 @@ Templates accelerate agent development by providing battle-tested patterns. Star
 
 - [Agent Templates Gallery](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/templates)
 - [Template Customization Guide](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/customization)
-- [Best Practices](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Best Practices](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/best-practices)

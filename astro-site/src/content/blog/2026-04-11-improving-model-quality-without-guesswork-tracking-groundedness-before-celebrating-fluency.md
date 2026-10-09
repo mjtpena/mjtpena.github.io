@@ -1,5 +1,6 @@
 ---
 title: "Improving Model Quality Without Guesswork: tracking groundedness before celebrating fluency"
+description: "I focused on making delivery decisions auditable and repeatable—documenting intent, success criteria, and rollback paths to reduce tribal knowledge."
 author: Michael John Peña
 draft: false
 date: 2026-04-11
@@ -36,4 +37,4 @@ Tomorrow I want to verify this pattern under a busier workload before I call it 
 
 - [RAG design and evaluation guide](https://learn.microsoft.com/azure/architecture/ai-ml/guide/rag/rag-solution-design-and-evaluation-guide)
 - [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)
-- [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)

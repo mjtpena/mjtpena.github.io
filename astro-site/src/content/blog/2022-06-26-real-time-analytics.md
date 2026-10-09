@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-26
 tags:
-  - azure
-  - analytics
-  - real-time
-  - streaming
-
+  - Azure
+  - Analytics
+  - Real-Time
+  - Streaming
 ---
-
-I wrote "Real-Time Analytics on Azure: Building Live Dashboards" to share practical, production-minded guidance on this topic.
 
 ## Architecture Overview
 
@@ -79,5 +76,3 @@ const response = await fetch(pushUrl, {
 ## Summary
 
 Azure's real-time analytics stack enables instant insights from millions of events per second, powering live dashboards and alerts.
-
-

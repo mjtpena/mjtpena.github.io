@@ -1,5 +1,6 @@
 ---
 title: "Building AI Agents with Semantic Kernel Planners"
+description: "Planners analyze a user's goal and create an execution plan using available plugins. The Handlebars planner generates a template-based plan, while function…"
 author: Michael John Peña
 draft: false
 date: 2025-08-17
@@ -9,10 +10,7 @@ tags:
   - Planners
   - Autonomous AI
   - .NET
-
 ---
-
-I wrote "Building AI Agents with Semantic Kernel Planners" to share practical, production-minded guidance on this topic.
 
 ## Understanding Planners
 
@@ -94,4 +92,4 @@ public class ResearchPlugin
 }
 ```
 
-Agents represent the next evolution of AI applications, moving from reactive assistants to proactive collaborators that can complete complex tasks with minimal human intervention.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Agents represent the next evolution of AI applications, moving from reactive assistants to proactive collaborators that can complete complex tasks with minimal human intervention.

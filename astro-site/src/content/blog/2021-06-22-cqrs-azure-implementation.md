@@ -9,10 +9,7 @@ tags:
   - CQRS
   - Architecture
   - Patterns
-
 ---
-
-I wrote "2021-06-22-cqrs-azure-implementation" to share practical, production-minded guidance on this topic.
 
 ## CQRS Architecture Overview
 
@@ -510,4 +507,3 @@ CQRS with Azure services enables building highly scalable applications with opti
 
 - [CQRS Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
 - [Event Sourcing Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)
-

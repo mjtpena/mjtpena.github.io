@@ -1,5 +1,6 @@
 ---
 title: "Enterprise Agent Patterns: Security, Governance, and Scale"
+description: "Enterprise agents require these patterns to ensure security, compliance, and reliable operation at scale. Implement them from the start rather than…"
 author: Michael John Peña
 draft: false
 date: 2024-11-13
@@ -9,10 +10,7 @@ tags:
   - AI Agents
   - Enterprise
   - Security
-
 ---
-
-I wrote "Enterprise Agent Patterns: Security, Governance, and Scale" to share practical, production-minded guidance on this topic.
 
 ## Security Patterns
 
@@ -413,4 +411,4 @@ Enterprise agents require these patterns to ensure security, compliance, and rel
 
 - [Enterprise AI Security](https://learn.microsoft.com/en-us/azure/ai-foundry/security/)
 - [AI Governance Framework](https://learn.microsoft.com/en-us/azure/ai-foundry/governance/)
-- [Scaling AI Applications](https://learn.microsoft.com/en-us/azure/ai-foundry/scaling/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Scaling AI Applications](https://learn.microsoft.com/en-us/azure/ai-foundry/scaling/)

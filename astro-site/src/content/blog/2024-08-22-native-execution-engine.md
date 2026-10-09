@@ -1,5 +1,6 @@
 ---
 title: "Native Execution Engine in Microsoft Fabric"
+description: "Native execution bypasses traditional JVM-based Spark execution to run queries using native code optimized for modern CPUs."
 author: Michael John Peña
 draft: false
 date: 2024-08-22
@@ -9,10 +10,7 @@ tags:
   - Performance
   - Spark
   - Query Engine
-
 ---
-
-I wrote "Native Execution Engine in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## What is Native Execution?
 
@@ -474,4 +472,3 @@ print(f"Native queries: {summary['native_queries']}/{summary['total_queries']}")
 Native execution in Microsoft Fabric provides significant performance improvements for analytical queries. Most workloads benefit automatically, but understanding which operations are optimized helps you write queries that fully leverage the native engine.
 
 Focus on using built-in functions, proper data layout, and monitoring to ensure you're getting the maximum performance benefit from native execution.
-

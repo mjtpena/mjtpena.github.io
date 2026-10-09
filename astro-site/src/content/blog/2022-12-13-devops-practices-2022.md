@@ -9,10 +9,7 @@ tags:
   - Automation
   - Best Practices
   - Platform Engineering
-
 ---
-
-I wrote "DevOps Practices That Defined 2022" to share practical, production-minded guidance on this topic.
 
 ## DORA Metrics Focus
 
@@ -438,4 +435,3 @@ DevOps in 2022 moved toward standardization and maturity. The practices that wor
 - [DevOps Handbook](https://itrevolution.com/the-devops-handbook/)
 - [Platform Engineering](https://platformengineering.org/)
 - [OpenTelemetry](https://opentelemetry.io/)
-

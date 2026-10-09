@@ -1,5 +1,6 @@
 ---
 title: SQL Database Indexing with Azure Cognitive Search
+description: "Azure SQL to Cognitive Search is a combination I've set up half a dozen times, and the reason it keeps appearing is that most enterprise organisations…"
 author: Michael John Peña
 draft: false
 date: 2021-04-12

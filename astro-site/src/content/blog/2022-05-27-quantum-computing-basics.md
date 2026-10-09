@@ -1,5 +1,6 @@
 ---
 title: "Quantum Computing Basics: Understanding Qubits and Gates"
+description: "Classical computers use bits that are either 0 or 1. Quantum computers use qubits that can exist in superposition - a combination of both states simultaneously."
 author: Michael John Peña
 draft: false
 date: 2022-05-27
@@ -7,11 +8,8 @@ tags:
   - quantum
   - computing
   - qubits
-  - education
-
+  - Education
 ---
-
-I wrote "Quantum Computing Basics: Understanding Qubits and Gates" to share practical, production-minded guidance on this topic.
 
 ## Classical vs Quantum Bits
 
@@ -290,5 +288,3 @@ Quantum computing fundamentals:
 - Entanglement creates correlated states
 
 These concepts form the foundation for quantum algorithms.
-
-

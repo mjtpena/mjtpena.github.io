@@ -9,10 +9,7 @@ tags:
   - Architecture
   - Lakehouse
   - Data Mesh
-
 ---
-
-I wrote "Data Engineering Patterns That Defined 2022" to share practical, production-minded guidance on this topic.
 
 ## The Lakehouse Architecture
 
@@ -528,4 +525,3 @@ data_engineering_patterns_2022:
 - [Data Mesh Principles](https://martinfowler.com/articles/data-mesh-principles.html)
 - [dbt Documentation](https://docs.getdbt.com/)
 - [Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/)
-

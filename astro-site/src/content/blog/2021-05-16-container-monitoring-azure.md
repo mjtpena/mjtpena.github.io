@@ -9,10 +9,7 @@ tags:
   - Monitoring
   - Containers
   - AKS
-
 ---
-
-I wrote "Container Monitoring on Azure: AKS Insights and Beyond" to share practical, production-minded guidance on this topic.
 
 ## Azure Monitor Container Insights
 
@@ -369,4 +366,4 @@ spec:
 
 - [Container Insights Documentation](https://docs.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview)
 - [Log Analytics Query Language](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial)
-- [Application Insights for Kubernetes](https://docs.microsoft.com/en-us/azure/azure-monitor/app/kubernetes-codeless)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Application Insights for Kubernetes](https://docs.microsoft.com/en-us/azure/azure-monitor/app/kubernetes-codeless)

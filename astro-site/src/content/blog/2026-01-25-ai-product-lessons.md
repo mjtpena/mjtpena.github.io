@@ -1,5 +1,6 @@
 ---
 title: "AI Products: What Users Actually Want"
+description: "Built AI features for 6 different products. Most failed. Here's what I learned. AI as assistant, not replacement."
 author: Michael John Peña
 draft: false
 date: 2026-01-25
@@ -81,4 +82,4 @@ If any answer is "no," rethink the feature.
 
 Good AI products make users more effective. They don't try to replace users.
 
-Build augmentation, not automation. Users will thank you.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Build augmentation, not automation. Users will thank you.

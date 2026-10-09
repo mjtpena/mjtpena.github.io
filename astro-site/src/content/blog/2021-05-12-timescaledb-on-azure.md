@@ -1,5 +1,6 @@
 ---
 title: "TimescaleDB on Azure: Time-Series Data at Scale"
+description: "TimescaleDB is the time-series database I recommend to teams that are already comfortable with PostgreSQL and don't want to learn a new query language or…"
 author: Michael John Peña
 draft: false
 date: 2021-05-12
@@ -359,4 +360,4 @@ SET max_parallel_workers_per_gather = 4;
 
 - [TimescaleDB Documentation](https://docs.timescale.com/)
 - [Azure PostgreSQL Extensions](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions)
-- [TimescaleDB Best Practices](https://docs.timescale.com/timescaledb/latest/how-to-guides/write-data/best-practices/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [TimescaleDB Best Practices](https://docs.timescale.com/timescaledb/latest/how-to-guides/write-data/best-practices/)

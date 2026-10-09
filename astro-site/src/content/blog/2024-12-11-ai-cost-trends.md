@@ -1,5 +1,6 @@
 ---
 title: "AI Cost Trends: The Economics of Enterprise AI in 2024"
+description: "AI costs are on a consistent downward trajectory. Plan for continuous cost reduction and reinvest savings into more sophisticated use cases."
 author: Michael John Peña
 draft: false
 date: 2024-12-11
@@ -9,10 +10,7 @@ tags:
   - Economics
   - Trends
   - Enterprise
-
 ---
-
-I wrote "AI Cost Trends: The Economics of Enterprise AI in 2024" to share practical, production-minded guidance on this topic.
 
 ## Cost Evolution Timeline
 
@@ -352,4 +350,4 @@ AI costs are on a consistent downward trajectory. Plan for continuous cost reduc
 
 - [Azure OpenAI Pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)
 - [OpenAI Pricing](https://openai.com/pricing)
-- [AI Cost Calculator](https://calculator.aws/#/addService/Bedrock)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AI Cost Calculator](https://calculator.aws/#/addService/Bedrock)

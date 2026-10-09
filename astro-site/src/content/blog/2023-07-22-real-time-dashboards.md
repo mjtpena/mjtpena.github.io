@@ -8,10 +8,7 @@ tags:
   - Dashboards
   - Real-Time Analytics
   - Visualization
-
 ---
-
-I wrote "Real-Time Dashboards in Fabric: Live Data Visualization" to share practical, production-minded guidance on this topic.
 
 ## Understanding Real-Time Dashboards
 
@@ -353,4 +350,4 @@ Tomorrow we'll explore Fabric Data Science capabilities.
 
 - [Real-Time Dashboard Documentation](https://learn.microsoft.com/en-us/fabric/real-time-analytics/dashboard-real-time-create)
 - [KQL Visualizations](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/renderoperator)
-- [Dashboard Best Practices](https://learn.microsoft.com/en-us/fabric/real-time-analytics/dashboard-best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Dashboard Best Practices](https://learn.microsoft.com/en-us/fabric/real-time-analytics/dashboard-best-practices)

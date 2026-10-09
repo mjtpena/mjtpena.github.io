@@ -9,10 +9,7 @@ tags:
   - AI
   - Text-to-Speech
   - Custom Voice
-
 ---
-
-I wrote "Custom Neural Voice: Creating Brand-Specific AI Voices" to share practical, production-minded guidance on this topic.
 
 ## Understanding Custom Neural Voice
 
@@ -478,4 +475,3 @@ Custom Neural Voice enables organizations to create distinctive, on-brand voice 
 - [Custom Neural Voice Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/custom-neural-voice)
 - [Speech Studio](https://speech.microsoft.com/)
 - [Responsible AI Guidelines](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/concepts-guidelines-responsible-deployment-synthetic)
-

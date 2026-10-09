@@ -1,5 +1,6 @@
 ---
 title: "Fabric Notebooks: Interactive Data Engineering and Science"
+description: "Notebooks are the primary development environment in Fabric. Tomorrow, I will cover Fabric Pipelines for orchestration."
 author: Michael John Peña
 draft: false
 date: 2023-06-06
@@ -9,10 +10,7 @@ tags:
   - PySpark
   - Data Engineering
   - Jupyter
-
 ---
-
-I wrote "Fabric Notebooks: Interactive Data Engineering and Science" to share practical, production-minded guidance on this topic.
 
 ## Notebook Fundamentals
 
@@ -339,4 +337,4 @@ Notebooks are the primary development environment in Fabric. Tomorrow, I will co
 
 - [Fabric Notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook)
 - [MSSparkUtils](https://learn.microsoft.com/en-us/fabric/data-engineering/microsoft-spark-utilities)
-- [Notebook Visualization](https://learn.microsoft.com/en-us/fabric/data-engineering/notebook-visualization)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Notebook Visualization](https://learn.microsoft.com/en-us/fabric/data-engineering/notebook-visualization)

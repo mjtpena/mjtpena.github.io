@@ -1,5 +1,6 @@
 ---
 title: "Photon Engine: Accelerating Spark Workloads on Databricks"
+description: "Photon is Databricks' native vectorised query execution engine written in C++—a replacement for the JVM-based Apache Spark execution engine for SQL and…"
 author: Michael John Peña
 draft: false
 date: 2022-03-14

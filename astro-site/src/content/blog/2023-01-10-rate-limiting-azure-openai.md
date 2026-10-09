@@ -9,10 +9,7 @@ tags:
   - Rate Limiting
   - Performance
   - Architecture
-
 ---
-
-I wrote "Rate Limiting and Throttling with Azure OpenAI Service" to share practical, production-minded guidance on this topic.
 
 ## Understanding Azure OpenAI Quotas
 
@@ -525,4 +522,4 @@ class MetricsCollector:
 
 - [Azure OpenAI Quotas and Limits](https://learn.microsoft.com/azure/cognitive-services/openai/quotas-limits)
 - [Request Quota Increase](https://learn.microsoft.com/azure/cognitive-services/openai/how-to/quota)
-- [Rate Limiting Best Practices](https://learn.microsoft.com/azure/architecture/patterns/rate-limiting-pattern)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Rate Limiting Best Practices](https://learn.microsoft.com/azure/architecture/patterns/rate-limiting-pattern)

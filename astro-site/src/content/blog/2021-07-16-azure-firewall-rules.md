@@ -1,5 +1,6 @@
 ---
 title: Configuring Azure Firewall Rules for Enterprise Security
+description: "Azure Firewall rules are the configuration work that determines whether your network security posture is genuinely restrictive or accidentally permissive.…"
 author: Michael John Peña
 draft: false
 date: 2021-07-16
@@ -14,7 +15,7 @@ tags:
 
 Azure Firewall rules are the configuration work that determines whether your network security posture is genuinely restrictive or accidentally permissive. Azure Firewall has three rule types with different evaluation orders and capabilities: Network rules (Layer 3/4, IP and port-based allow/deny), Application rules (Layer 7 FQDN-based filtering with TLS inspection for Premium), and NAT rules (DNAT for inbound traffic). The processing order matters: DNAT rules first, then Network rules, then Application rules, with deny-all as the implicit default. The mistake I've seen in multiple deployments is relying on application rules for non-HTTP traffic—application rules only work for HTTP/HTTPS/SQL; for everything else, network rules are what you need. Firewall Policy is the current management model; the legacy portal configuration is being deprecated.
 
-# Azure Firewall Rule Types
+## Azure Firewall Rule Types
 
 Azure Firewall supports three types of rules:
 
@@ -22,7 +23,7 @@ Azure Firewall supports three types of rules:
 - **Network Rules**: Filter traffic by IP, port, and protocol
 - **Application Rules**: Filter traffic by FQDN
 
-# Deploying Azure Firewall
+## Deploying Azure Firewall
 
 Set up Azure Firewall with Terraform:
 
@@ -81,7 +82,7 @@ resource "azurerm_firewall_policy" "main" {
 }
 ```
 
-# Network Rules
+## Network Rules
 
 Configure network-level filtering:
 
@@ -179,7 +180,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "network" {
 }
 ```
 
-# Application Rules
+## Application Rules
 
 Configure FQDN-based filtering:
 
@@ -308,7 +309,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "application" {
 }
 ```
 
-# NAT Rules (DNAT)
+## NAT Rules (DNAT)
 
 Configure inbound NAT rules:
 
@@ -360,7 +361,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "nat" {
 }
 ```
 
-# IP Groups for Rule Management
+## IP Groups for Rule Management
 
 Use IP Groups to simplify rule management:
 
@@ -433,7 +434,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "with_ip_groups" {
 }
 ```
 
-# Threat Intelligence
+## Threat Intelligence
 
 Configure threat intelligence-based filtering:
 
@@ -478,7 +479,7 @@ def configure_threat_intelligence(resource_group, policy_name, mode="Alert"):
 configure_threat_intelligence("rg-networking", "fw-policy-main", "Deny")
 ```
 
-# Monitoring Firewall Rules
+## Monitoring Firewall Rules
 
 Enable diagnostic logging and monitoring:
 
@@ -524,7 +525,7 @@ def query_firewall_denied_traffic(workspace_id, hours=24):
     return result
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Firewall provides comprehensive network security with multiple rule types for different filtering needs. Network rules filter by IP and port, application rules filter by FQDN, and NAT rules enable secure inbound access.
 

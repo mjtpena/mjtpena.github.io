@@ -1,5 +1,6 @@
 ---
 title: "Building Event-Driven Architectures with Azure Event Grid and Functions"
+description: "Event-driven architecture requires careful design but delivers superior scalability and resilience for distributed systems."
 author: Michael John Peña
 draft: false
 date: 2025-12-11
@@ -9,10 +10,7 @@ tags:
   - Event-Grid
   - Functions
   - Architecture
-
 ---
-
-I wrote "Building Event-Driven Architectures with Azure Event Grid and Functions" to share practical, production-minded guidance on this topic.
 
 ## Architecture Overview
 
@@ -156,4 +154,4 @@ public async Task ProcessDeadLetter(
 4. **Monitor dead letter queues** actively
 5. **Version your events** to support evolution
 
-Event-driven architecture requires careful design but delivers superior scalability and resilience for distributed systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Event-driven architecture requires careful design but delivers superior scalability and resilience for distributed systems.

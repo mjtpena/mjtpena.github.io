@@ -1,5 +1,6 @@
 ---
 title: "AI Safety Research: 2025 Priorities and Practical Applications"
+description: "AI safety isn't optional - it's a requirement for production AI. Build safety in from the start, not as an afterthought."
 author: Michael John Peña
 draft: false
 date: 2025-01-08
@@ -9,10 +10,7 @@ tags:
   - Responsible AI
   - Research
   - Enterprise AI
-
 ---
-
-I wrote "AI Safety Research: 2025 Priorities and Practical Applications" to share practical, production-minded guidance on this topic.
 
 ## The Safety Landscape in 2025
 
@@ -304,4 +302,4 @@ monitor.start(
 4. **Safety-capability balance** in training
 5. **Industry-wide safety standards**
 
-AI safety isn't optional - it's a requirement for production AI. Build safety in from the start, not as an afterthought.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI safety isn't optional - it's a requirement for production AI. Build safety in from the start, not as an afterthought.

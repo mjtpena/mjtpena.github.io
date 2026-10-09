@@ -1,5 +1,6 @@
 ---
 title: Implementing the Azure Well-Architected Framework
+description: "The Azure Well-Architected Framework is the document I send to clients at the start of every architecture engagement and the checklist I review before every…"
 author: Michael John Peña
 draft: false
 date: 2021-06-19

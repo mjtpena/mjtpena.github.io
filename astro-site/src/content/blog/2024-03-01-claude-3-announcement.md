@@ -1,13 +1,11 @@
 ---
 title: "Anticipating Claude 3: What We Know So Far"
+description: "Anthropic has been signaling that Claude 3 is on the horizon, and the AI community is buzzing with anticipation. Based on Anthropic's track record and hints…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-01
 tags: ["AI", "Claude", "Anthropic", "LLM", "GPT-4"]
-
 ---
-
-I wrote "Anticipating Claude 3: What We Know So Far" to share practical, production-minded guidance on this topic.
 
 Anthropic has been signaling that Claude 3 is on the horizon, and the AI community is buzzing with anticipation. Based on Anthropic's track record and hints from their team, here's what we might expect from the next generation of Claude models.
 
@@ -94,4 +92,3 @@ For enterprises using Azure and multi-cloud strategies:
 While Claude 3 hasn't been officially announced yet, preparing your infrastructure for model upgrades is always a good practice. The AI landscape moves fast, and organizations that build flexible architectures will adapt more quickly to new capabilities.
 
 Stay tuned for the official announcement, which could come any day now.
-

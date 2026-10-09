@@ -1,10 +1,11 @@
 ---
 title: "GitHub Copilot vs Cursor vs Claude Code: Developer AI Tools Compared"
+description: "AI coding assistants transformed developer productivity in 2025. After extensively using all three major tools, here's my detailed comparison to help you…"
 author: Michael John Peña
 draft: false
 date: 2025-12-12
 tags:
-  - Developer-Tools
+  - developer-tools
   - GitHub-Copilot
   - AI
   - Productivity
@@ -113,4 +114,4 @@ Use Claude Code. When you need to understand why something isn't working or desi
 **Best Practice:**
 Many developers use multiple tools. Copilot for completions, Cursor or Claude Code for complex tasks. The tools complement rather than replace each other.
 
-The AI coding assistant space will continue evolving rapidly in 2026. Stay flexible and adapt your toolchain as capabilities improve.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The AI coding assistant space will continue evolving rapidly in 2026. Stay flexible and adapt your toolchain as capabilities improve.

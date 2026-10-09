@@ -1,5 +1,6 @@
 ---
 title: "Ignite 2025 Day 3: Copilot Extensions and Agent Framework"
+description: "The Copilot agent framework represents a significant step toward enterprise AI automation, enabling organizations to build intelligent assistants that work…"
 author: Michael John Peña
 draft: false
 date: 2025-11-17
@@ -9,10 +10,7 @@ tags:
   - AI Agents
   - Microsoft 365
   - Announcements
-
 ---
-
-I wrote "Ignite 2025 Day 3: Copilot Extensions and Agent Framework" to share practical, production-minded guidance on this topic.
 
 ## Copilot Agent Framework
 
@@ -141,4 +139,4 @@ Copilot Studio now supports deploying agents across Microsoft 365:
 - SharePoint web part embedding
 - Power Platform connector
 
-The Copilot agent framework represents a significant step toward enterprise AI automation, enabling organizations to build intelligent assistants that work naturally within existing Microsoft 365 workflows.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Copilot agent framework represents a significant step toward enterprise AI automation, enabling organizations to build intelligent assistants that work naturally within existing Microsoft 365 workflows.

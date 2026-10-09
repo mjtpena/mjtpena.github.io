@@ -9,10 +9,7 @@ tags:
   - Enterprise
   - Responsible AI
   - Governance
-
 ---
-
-I wrote "AI Ethics in Enterprise: Building Trustworthy AI Systems" to share practical, production-minded guidance on this topic.
 
 ## AI Ethics Framework
 
@@ -430,4 +427,4 @@ AI_ETHICS_CHECKLIST = {
 
 - [Microsoft Responsible AI](https://www.microsoft.com/ai/responsible-ai)
 - [AI Ethics Guidelines](https://www.partnershiponai.org/)
-- [IEEE Ethics in AI](https://ethicsinaction.ieee.org/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [IEEE Ethics in AI](https://ethicsinaction.ieee.org/)

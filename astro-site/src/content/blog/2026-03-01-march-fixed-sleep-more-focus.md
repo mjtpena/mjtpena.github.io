@@ -1,5 +1,6 @@
 ---
 title: "March: Fixed Sleep, Fewer Tabs, More Focus"
+description: "February felt dense—lots of ideas, lots of output, slightly scattered. March is going to feel tighter."
 author: Michael John Peña
 draft: false
 date: 2026-03-01
@@ -8,10 +9,7 @@ tags:
   - Goals
   - Reflection
   - Career
-
 ---
-
-I wrote "March: Fixed Sleep, Fewer Tabs, More Focus" to share practical, production-minded guidance on this topic.
 
 February felt dense—lots of ideas, lots of output, slightly scattered. March is going to feel tighter.
 
@@ -77,4 +75,4 @@ Somewhere in the next few months it tips to practice.
 
 I'll keep going until it does.
 
-Here's to March.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Here's to March.

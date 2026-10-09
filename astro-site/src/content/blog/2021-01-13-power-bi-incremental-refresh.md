@@ -1,5 +1,6 @@
 ---
 title: "Power BI Incremental Refresh: Efficient Large Dataset Updates"
+description: "\"Why is the dataset refresh taking three hours?\" is the question that eventually leads every Power BI shop to incremental refresh. The first time I switched…"
 author: Michael John Peña
 draft: false
 date: 2021-01-13
@@ -160,4 +161,4 @@ With incremental refresh:
 - Publish from Desktop overwrites policy
 - Real-time data needs hybrid approach
 
-Incremental refresh: hours of refreshing reduced to minutes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Incremental refresh: hours of refreshing reduced to minutes.

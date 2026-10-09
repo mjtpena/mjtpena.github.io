@@ -1,13 +1,11 @@
 ---
 title: "Azure ML Pipelines v2: Modern ML Workflows"
+description: "Azure ML Pipelines v2 provides a modern, Pythonic way to build production-ready ML workflows."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-17
 tags: ["Azure", "Machine Learning", "Pipelines", "MLOps", "Workflows"]
-
 ---
-
-I wrote "Azure ML Pipelines v2: Modern ML Workflows" to share practical, production-minded guidance on this topic.
 
 ## Pipeline Basics
 
@@ -282,4 +280,4 @@ print(step_job.status)
 ml_client.jobs.stream(f"{pipeline_job.name}/train_step")
 ```
 
-Azure ML Pipelines v2 provides a modern, Pythonic way to build production-ready ML workflows.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure ML Pipelines v2 provides a modern, Pythonic way to build production-ready ML workflows.

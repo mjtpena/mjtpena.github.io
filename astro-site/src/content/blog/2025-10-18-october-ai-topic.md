@@ -1,5 +1,6 @@
 ---
 title: "Responsible AI: Implementing Fairness and Transparency in ML Models"
+description: "Create comprehensive model documentation including intended use cases, limitations, fairness assessments, and performance across demographic groups to…"
 author: Michael John Peña
 draft: false
 date: 2025-10-18
@@ -9,10 +10,7 @@ tags:
   - ML Ethics
   - Transparency
   - Azure Machine Learning
-
 ---
-
-I wrote "Responsible AI: Implementing Fairness and Transparency in ML Models" to share practical, production-minded guidance on this topic.
 
 ## Assessing Model Fairness
 
@@ -123,4 +121,4 @@ class FairModelTrainer:
 
 ## Model Cards and Documentation
 
-Create comprehensive model documentation including intended use cases, limitations, fairness assessments, and performance across demographic groups to ensure transparency for stakeholders.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Create comprehensive model documentation including intended use cases, limitations, fairness assessments, and performance across demographic groups to ensure transparency for stakeholders.

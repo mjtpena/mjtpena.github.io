@@ -1,5 +1,6 @@
 ---
 title: "Backup Azure SQL Database using Azure Data Studio on your Desktop"
+description: "I'm trying to backup our SQL Azure database, and to my surprise, it doesn't seem to be \"straight forward\". Officially, you have to do it via the Azure…"
 author: Michael John Peña
 draft: false
 date: 2022-08-22
@@ -7,10 +8,7 @@ url: /blog/azuresql-datastudio/
 tags:
   - SQL Azure
   - Azure Data Studio
-
 ---
-
-I wrote "Backup Azure SQL Database using Azure Data Studio on your Desktop" to share practical, production-minded guidance on this topic.
 
 ## Doing it via the Portal
 
@@ -66,4 +64,4 @@ It will then create a SQL script of your database.
 
 The good thing about this approach is that you can modify the script in case you have other features that are only applicable to certain SQL type such as Ledger capabilities.
 
-This is not recommended if your database is huge and contains a lot of data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+This is not recommended if your database is huge and contains a lot of data.

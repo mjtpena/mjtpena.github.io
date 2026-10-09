@@ -1,5 +1,6 @@
 ---
 title: "AI Documentation: Documenting AI Systems Effectively"
+description: "{promptconfig['template']} Comprehensive documentation ensures AI systems remain maintainable and understandable."
 author: Michael John Peña
 draft: false
 date: 2025-05-26
@@ -9,10 +10,7 @@ tags:
   - Best Practices
   - Maintenance
   - Knowledge
-
 ---
-
-I wrote "AI Documentation: Documenting AI Systems Effectively" to share practical, production-minded guidance on this topic.
 
 ## AI Documentation Framework
 
@@ -130,4 +128,4 @@ class AISystemDocumentation:
 """
 ```
 
-Comprehensive documentation ensures AI systems remain maintainable and understandable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Comprehensive documentation ensures AI systems remain maintainable and understandable.

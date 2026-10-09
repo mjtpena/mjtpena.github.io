@@ -1,5 +1,6 @@
 ---
 title: "Hugging Face + Azure: Running Open Source Models in the Cloud"
+description: "Hugging Face and Microsoft's partnership has made the model hub directly accessible from Azure ML, and in August 2023 this is meaningfully useful for Llama…"
 author: Michael John Peña
 draft: false
 date: 2023-08-05
@@ -311,4 +312,4 @@ Tomorrow we'll explore the Hugging Face Model Hub.
 
 - [Azure ML + Hugging Face](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-use-hugging-face)
 - [Hugging Face on Azure](https://huggingface.co/docs/hub/spaces-sdks-docker-azure)
-- [Azure ML Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure ML Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/)

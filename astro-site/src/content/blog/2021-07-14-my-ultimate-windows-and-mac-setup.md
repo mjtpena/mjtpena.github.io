@@ -1,5 +1,6 @@
 ---
 title: My Ultimate Windows and Mac Setup (2021 Edition)
+description: "In a parallel world, I'll be just using 1 device and 1 Operating system for all the things. However, given the nature of my work with mobile, web…"
 author: Michael John Peña
 draft: false
 date: 2021-07-13
@@ -12,11 +13,8 @@ tags:
   - Mobile
   - Web
   - Windows
-  - MacOS
-
+  - macos
 ---
-
-I wrote "2021-07-14-my-ultimate-windows-and-mac-setup" to share practical, production-minded guidance on this topic.
 
 **My Battle Station @ 2021**
 
@@ -26,7 +24,7 @@ I tried doing "Shared mouse and keyboard" in the past such as Synergy, but I dec
 
 This blog post is about how I use MacOS and Windows to various workflow that I do as a business owner and software engineer.
 
-# Hardware
+## Hardware
 
 - Desktop (i9, 128GB RAM, RTX 3080 ti, 2TB SSD) that runs Windows 10
 - Macbook Pro 16″ (i9, 32GB RAM, 1TB SSD) for main use
@@ -45,7 +43,7 @@ This blog post is about how I use MacOS and Windows to various workflow that I d
 - Mobile Phones (iPhones and Android phones) for testing purposes
 - A pen and a hard bound notebook if I need to draw something
 
-# Windows workflow
+## Windows workflow
 
 ## General Business and Office
 
@@ -112,7 +110,7 @@ I worked on a ML.NET project, and using a Windows machine works perfectly. Altho
 
 I used to bother installing Anaconda, Keras, TensorFlow, and all other Python dependencies on Windows (and tried on WSL), but I didn't find the experience pleasant. These days, I just use a managed server / cluster on cloud ie Jupyter kernel, Databricks, Azure ML, and Azure Synapse.
 
-# MacOS workflow
+## MacOS workflow
 
 ## Mobile Development
 
@@ -140,11 +138,10 @@ Also given that when I work on React Native, I do it on a Mac. The context switc
 
 Java is a programming language and platform that I didn't particularly prefer, but an inevitable thing that you see time and time again in your career. Given that my Android development workflow is in MacOS, all things Java related, I just do them on MacOS too.
 
-# Conclusion
+## Conclusion
 
 I prefer to use Windows for the "Office work", .NET & Azure Development, and my primary presenting device. WSL also brings a lot of flexibility to have Linux without the need of VMs or Dual Boot.
 
 I prefer to use MacOS for all things mobile and web front-end. Although a lot of these workflows can be done on Windows, the energy of iOS/MacOS/Swift just drags me back to sticking with MacOS.
 
 In an alternative universe, if XCode Tools and general iOS development becomes available as a Docker Container or WSM (Windows Subsystem for MacOS), then Windows will be my one and only device.
-

@@ -1,5 +1,6 @@
 ---
 title: "Building Data Products in Microsoft Fabric"
+description: "Data products are the deliverables of a data mesh. Today I'm exploring how to build, manage, and consume data products in Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-18
@@ -430,4 +431,4 @@ Tomorrow I'll cover data contracts.
 
 - [Data Products](https://www.datamesh-architecture.com/data-products)
 - [Fabric Catalog](https://learn.microsoft.com/fabric/governance/catalog)
-- [Data Quality](https://learn.microsoft.com/fabric/data-engineering/data-quality)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data Quality](https://learn.microsoft.com/fabric/data-engineering/data-quality)

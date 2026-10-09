@@ -1,5 +1,6 @@
 ---
 title: Azure Static Web Apps Custom Domains Configuration
+description: "Subdomains are the simplest to configure. You'll create a CNAME record pointing to your Static Web App's default hostname."
 author: Michael John Peña
 draft: false
 date: 2021-06-01
@@ -8,10 +9,7 @@ tags:
   - Azure
   - Static Web Apps
   - Web Development
-
 ---
-
-I wrote "2021-06-01-azure-static-web-apps-custom-domains" to share practical, production-minded guidance on this topic.
 
 ## Prerequisites
 
@@ -205,4 +203,3 @@ Custom domains transform your Azure Static Web App from a development prototype 
 
 - [Azure Static Web Apps Custom Domains Documentation](https://docs.microsoft.com/en-us/azure/static-web-apps/custom-domain)
 - [Azure DNS Documentation](https://docs.microsoft.com/en-us/azure/dns/)
-

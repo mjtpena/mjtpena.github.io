@@ -1,13 +1,11 @@
 ---
 title: "High Availability Architecture for MySQL on Azure"
+description: "Implementing these HA patterns ensures your MySQL applications remain resilient during infrastructure failures."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-11
 tags: ["Azure", "MySQL", "High Availability", "Disaster Recovery", "Architecture"]
-
 ---
-
-I wrote "High Availability Architecture for MySQL on Azure" to share practical, production-minded guidance on this topic.
 
 ## HA Architecture Options
 
@@ -181,4 +179,4 @@ def db_health():
         return jsonify({"status": "unhealthy", "error": str(e)}), 503
 ```
 
-Implementing these HA patterns ensures your MySQL applications remain resilient during infrastructure failures.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Implementing these HA patterns ensures your MySQL applications remain resilient during infrastructure failures.

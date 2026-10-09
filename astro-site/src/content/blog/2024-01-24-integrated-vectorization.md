@@ -1,5 +1,6 @@
 ---
 title: "Integrated Vectorization in Azure AI Search: Simplifying RAG Pipelines"
+description: "Integrated vectorization removed an entire pipeline step in a recent project. I'll show how it simplifies RAG pipelines and where to be cautious when…"
 author: Michael John Peña
 draft: false
 date: 2024-01-24

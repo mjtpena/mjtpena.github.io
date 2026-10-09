@@ -10,10 +10,7 @@ tags:
   - PREDICT
   - MLOps
   - Data Science
-
 ---
-
-I wrote "The PREDICT Function in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -547,4 +544,3 @@ print(perf.optimization_tips())
 ## Conclusion
 
 The PREDICT function in Microsoft Fabric provides a seamless way to apply machine learning models directly within your analytics workflows. By integrating predictions into Spark SQL and T-SQL queries, you can deliver ML-powered insights without complex deployment infrastructure, making it easier to operationalize your machine learning models at scale.
-

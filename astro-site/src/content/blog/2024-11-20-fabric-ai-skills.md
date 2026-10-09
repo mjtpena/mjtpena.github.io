@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric AI Skills: Natural Language Analytics"
+description: "AI Skills democratize data access while maintaining governance. Start with well-defined domains and expand based on user feedback."
 author: Michael John Peña
 draft: false
 date: 2024-11-20
@@ -9,10 +10,7 @@ tags:
   - AI Skills
   - Natural Language
   - Analytics
-
 ---
-
-I wrote "Microsoft Fabric AI Skills: Natural Language Analytics" to share practical, production-minded guidance on this topic.
 
 ## Understanding AI Skills
 
@@ -523,4 +521,4 @@ AI Skills democratize data access while maintaining governance. Start with well-
 
 - [AI Skills Documentation](https://learn.microsoft.com/en-us/fabric/ai-skills)
 - [Semantic Layer Guide](https://learn.microsoft.com/en-us/fabric/semantic-models)
-- [Best Practices](https://learn.microsoft.com/en-us/fabric/ai-skills/best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Best Practices](https://learn.microsoft.com/en-us/fabric/ai-skills/best-practices)

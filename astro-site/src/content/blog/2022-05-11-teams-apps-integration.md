@@ -5,13 +5,10 @@ draft: false
 date: 2022-05-11
 tags:
   - microsoft-teams
-  - azure
-  - bots
-  - collaboration
-
+  - Azure
+  - Bots
+  - Collaboration
 ---
-
-I wrote "Building Teams Apps: Integration Patterns and Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Teams App Components
 
@@ -489,5 +486,3 @@ Teams app development offers:
 - Comprehensive SDK support
 
 Build collaborative experiences that meet users where they work.
-
-

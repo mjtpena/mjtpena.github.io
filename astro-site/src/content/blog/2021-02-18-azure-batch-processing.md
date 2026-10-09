@@ -1,5 +1,6 @@
 ---
 title: Scalable Compute with Azure Batch
+description: "Batch is underused. Every time I describe it to an engineering team—\"managed pool of VMs, automatic scaling, job and task model, retry on failure…"
 author: Michael John Peña
 draft: false
 date: 2021-02-18

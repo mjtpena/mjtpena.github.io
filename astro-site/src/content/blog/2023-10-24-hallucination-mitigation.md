@@ -10,10 +10,7 @@ tags:
   - AI Safety
   - Mitigation
   - AI
-
 ---
-
-I wrote "Hallucination Mitigation Strategies for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -588,4 +585,3 @@ print(f"Hallucination rate: {stats.get('hallucination_rate', 0):.1%}")
 ## Conclusion
 
 Hallucination mitigation requires a multi-faceted approach combining detection, prevention, and verification. Key strategies include grounded prompting, self-consistency checking, retrieval augmentation with citations, and real-time monitoring. Regular evaluation and metrics tracking help maintain quality and identify areas for improvement.
-

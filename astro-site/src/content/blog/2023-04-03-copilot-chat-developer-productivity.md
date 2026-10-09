@@ -1,5 +1,6 @@
 ---
 title: "Copilot Chat: Transforming Developer Productivity"
+description: "{f'Stack trace: {stacktrace}' if stacktrace else ''} response = await self.client.chatcompletion( model=\"gpt-4\", messages=[ {\"role\": \"system\", \"content\"…"
 author: Michael John Pena
 draft: false
 date: 2023-04-03
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - Productivity
   - Development
-
 ---
-
-I wrote "Copilot Chat: Transforming Developer Productivity" to share practical, production-minded guidance on this topic.
 
 ## Effective Chat Patterns
 
@@ -301,4 +299,4 @@ class DeveloperWorkflow:
         }
 ```
 
-Copilot Chat transforms the IDE into an intelligent development environment. The key is learning to communicate effectively with your AI pair programmer.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Copilot Chat transforms the IDE into an intelligent development environment. The key is learning to communicate effectively with your AI pair programmer.

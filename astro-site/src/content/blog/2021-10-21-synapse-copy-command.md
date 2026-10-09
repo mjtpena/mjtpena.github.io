@@ -1,13 +1,11 @@
 ---
 title: "High-Performance Data Loading with COPY Command in Synapse"
+description: "The COPY command replaced PolyBase as the recommended data loading mechanism for Synapse Dedicated SQL Pool because it's simpler to use and performs at the…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-21
 tags: ["Azure", "Synapse", "ETL", "Data Loading", "Performance"]
-
 ---
-
-I wrote "High-Performance Data Loading with COPY Command in Synapse" to share practical, production-minded guidance on this topic.
 
 The COPY command replaced PolyBase as the recommended data loading mechanism for Synapse Dedicated SQL Pool because it's simpler to use and performs at the same level without requiring external table definitions and database-scoped credentials configured in advance. The syntax is a single T-SQL statement: `COPY INTO target_table FROM 'https://storage.blob.core.windows.net/...' WITH (...)`. It supports CSV, Parquet, ORC, and Delta format, handles authentication via Managed Identity or SAS tokens, and provides row error tolerance (skip malformed rows up to a configured threshold) that PolyBase doesn't support natively. For ELT pipelines where data lands in ADLS Gen2 and needs to be loaded into Synapse, COPY is the right starting point—the reduced setup complexity and equivalent throughput make it the better default for most teams.
 
@@ -372,4 +370,3 @@ COMMIT;
 The COPY command is the preferred method for loading data into Synapse dedicated SQL pools. Its combination of performance, simplicity, and robust error handling makes it the go-to choice for ETL workloads.
 
 Tomorrow, we'll explore result set caching for accelerating repeated queries.
-

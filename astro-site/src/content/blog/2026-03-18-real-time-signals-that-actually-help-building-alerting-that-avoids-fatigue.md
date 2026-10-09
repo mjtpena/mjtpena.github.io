@@ -1,5 +1,6 @@
 ---
 title: "Real-Time Signals That Actually Help: building alerting that avoids fatigue"
+description: "I turned implicit processes into explicit operating rules—defining owners, acceptance tests, and lightweight runbooks so teams can move confidently and…"
 author: Michael John Peña
 draft: false
 date: 2026-03-18
@@ -36,4 +37,4 @@ Tomorrow I will apply the same rule to a second workflow to check repeatability.
 
 - [Fabric Real-Time Intelligence](https://learn.microsoft.com/fabric/real-time-intelligence/)
 - [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

@@ -1,5 +1,6 @@
 ---
 title: "Edge Copilot: AI Built Into Your Browser"
+description: "Edge Copilot brings AI assistance to every webpage, transforming passive browsing into active learning and productivity."
 author: Michael John Pena
 draft: false
 date: 2023-04-12
@@ -9,10 +10,7 @@ tags:
   - Edge
   - Copilot
   - Browser
-
 ---
-
-I wrote "Edge Copilot: AI Built Into Your Browser" to share practical, production-minded guidance on this topic.
 
 ## Edge Copilot Features
 
@@ -246,4 +244,4 @@ Provide:
         return {"guidance": response.content}
 ```
 
-Edge Copilot brings AI assistance to every webpage, transforming passive browsing into active learning and productivity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Edge Copilot brings AI assistance to every webpage, transforming passive browsing into active learning and productivity.

@@ -1,13 +1,11 @@
 ---
 title: "Azure Data Lake Storage Gen2: Hierarchical Namespace for Big Data Analytics"
+description: "Azure Data Lake Storage Gen2 provides the foundation for modern data analytics, combining the best of blob storage scalability with the directory semantics…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-23
 tags: ["Azure", "Data Lake", "ADLS Gen2", "Big Data", "Analytics"]
-
 ---
-
-I wrote "Azure Data Lake Storage Gen2: Hierarchical Namespace for Big Data Analytics" to share practical, production-minded guidance on this topic.
 
 ## Enabling Hierarchical Namespace
 
@@ -325,4 +323,4 @@ def write_partitioned_data(df, account_name, file_system, path,
 4. **Implement ACLs**: For fine-grained access control
 5. **Monitor storage metrics**: Track capacity and transactions
 
-Azure Data Lake Storage Gen2 provides the foundation for modern data analytics, combining the best of blob storage scalability with the directory semantics required for efficient big data processing.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Data Lake Storage Gen2 provides the foundation for modern data analytics, combining the best of blob storage scalability with the directory semantics required for efficient big data processing.

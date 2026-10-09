@@ -1,5 +1,6 @@
 ---
 title: "Sentiment Analysis in Power Platform: Understanding Customer Emotions"
+description: "AI Builder's sentiment analysis capability classifies text into positive, negative, neutral, or mixed sentiment categories—the prebuilt model runs over…"
 author: Michael John Peña
 draft: false
 date: 2022-04-14

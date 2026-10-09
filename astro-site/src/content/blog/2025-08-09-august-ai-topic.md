@@ -1,5 +1,6 @@
 ---
 title: "Building Production MLOps Pipelines with Azure Machine Learning"
+description: "Automated pipelines ensure reproducibility, enable A/B testing, and provide audit trails for model governance."
 author: Michael John Peña
 draft: false
 date: 2025-08-09
@@ -9,10 +10,7 @@ tags:
   - CI/CD
   - Model Deployment
   - Python
-
 ---
-
-I wrote "Building Production MLOps Pipelines with Azure Machine Learning" to share practical, production-minded guidance on this topic.
 
 ## Defining a Training Pipeline
 
@@ -89,4 +87,4 @@ deployment = ManagedOnlineDeployment(
 ml_client.online_deployments.begin_create_or_update(deployment).result()
 ```
 
-Automated pipelines ensure reproducibility, enable A/B testing, and provide audit trails for model governance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Automated pipelines ensure reproducibility, enable A/B testing, and provide audit trails for model governance.

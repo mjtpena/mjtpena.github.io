@@ -1,13 +1,11 @@
 ---
 title: "A/B Testing for ML Models in Production"
+description: "A/B testing provides statistical evidence for model selection based on actual business outcomes."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-11
 tags: ["Azure", "Machine Learning", "A/B Testing", "MLOps", "Experimentation"]
-
 ---
-
-I wrote "A/B Testing for ML Models in Production" to share practical, production-minded guidance on this topic.
 
 ## A/B Testing vs Canary Deployment
 
@@ -327,4 +325,4 @@ print(f"P-value: {results['t_test']['p_value']:.4f}")
 print(f"Recommendation: {results['recommendation']}")
 ```
 
-A/B testing provides statistical evidence for model selection based on actual business outcomes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A/B testing provides statistical evidence for model selection based on actual business outcomes.

@@ -1,13 +1,11 @@
 ---
 title: "AI Adoption Patterns: What Separates Success from Failure"
+description: "After advising a range of enterprise AI programmes in 2023, the patterns are consistent: success comes from narrow business-first problem definition…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-02
 tags: ["AI", "Adoption", "Enterprise", "Strategy", "Best Practices"]
-
 ---
-
-I wrote "AI Adoption Patterns: What Separates Success from Failure" to share practical, production-minded guidance on this topic.
 
 After advising a range of enterprise AI programmes in 2023, the patterns are consistent: success comes from narrow business-first problem definition, cross-functional ownership, and investment in reliable data and monitoring rather than the latest model. This post outlines the practical adoption patterns that actually scale.
 
@@ -318,4 +316,4 @@ class OrganizationReadinessAssessment:
         return recommendations
 ```
 
-Tomorrow, we'll explore lessons learned from enterprise AI implementations!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore lessons learned from enterprise AI implementations!

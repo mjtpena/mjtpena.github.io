@@ -1,5 +1,6 @@
 ---
 title: "Azure AD B2B Collaboration: Secure Partner Access"
+description: "Guests appear in your directory but authenticate elsewhere."
 author: Michael John Peña
 draft: false
 date: 2021-05-22
@@ -9,10 +10,7 @@ tags:
   - Azure AD
   - B2B
   - Collaboration
-
 ---
-
-I wrote "Azure AD B2B Collaboration: Secure Partner Access" to share practical, production-minded guidance on this topic.
 
 ## What is Azure AD B2B?
 
@@ -424,4 +422,4 @@ SigninLogs
 
 - [B2B Documentation](https://docs.microsoft.com/en-us/azure/active-directory/external-identities/)
 - [Cross-Tenant Access](https://docs.microsoft.com/en-us/azure/active-directory/external-identities/cross-tenant-access-overview)
-- [Access Reviews](https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Access Reviews](https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview)

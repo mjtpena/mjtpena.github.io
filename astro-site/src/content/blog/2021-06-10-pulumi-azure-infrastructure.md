@@ -1,5 +1,6 @@
 ---
 title: Pulumi for Azure Infrastructure as Code
+description: "Pulumi is the infrastructure-as-code choice for teams where \"I don't want to learn another DSL\" is a genuine constraint. You write infrastructure in C#…"
 author: Michael John Peña
 draft: false
 date: 2021-06-10

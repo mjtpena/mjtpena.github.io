@@ -1,5 +1,6 @@
 ---
 title: "Semantic Caching for LLM Applications: Reducing Costs and Latency"
+description: "Unlike exact-match caching, semantic caching uses embeddings to find similar queries even when worded differently."
 author: Michael John Peña
 draft: false
 date: 2025-09-18
@@ -9,10 +10,7 @@ tags:
   - Vector Search
   - Performance
   - Cost Optimization
-
 ---
-
-I wrote "Semantic Caching for LLM Applications: Reducing Costs and Latency" to share practical, production-minded guidance on this topic.
 
 ## How Semantic Caching Works
 
@@ -133,4 +131,4 @@ def cached_completion(cache: SemanticCache, client: AzureOpenAI,
 
 Implement TTL-based eviction for time-sensitive content and LRU eviction when cache size exceeds limits.
 
-Semantic caching is especially powerful for customer support bots and FAQ systems where users ask similar questions in different ways. Monitor your cache hit rate to tune the similarity threshold.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Semantic caching is especially powerful for customer support bots and FAQ systems where users ask similar questions in different ways. Monitor your cache hit rate to tune the similarity threshold.

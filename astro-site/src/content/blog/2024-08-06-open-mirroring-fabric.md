@@ -9,10 +9,7 @@ tags:
   - Open Mirroring
   - Custom Integration
   - Delta Lake
-
 ---
-
-I wrote "Open Mirroring in Fabric: Build Custom Data Sources" to share practical, production-minded guidance on this topic.
 
 ## What is Open Mirroring?
 
@@ -418,4 +415,3 @@ orchestrator.run_sync_cycle()
 Open Mirroring provides flexibility when native connectors don't exist. It requires more work but gives you complete control over the data flow.
 
 Use it for custom sources, complex transformations, or when you need to consolidate multiple sources into a single mirrored database experience.
-

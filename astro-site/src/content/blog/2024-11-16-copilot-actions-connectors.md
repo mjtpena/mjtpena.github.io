@@ -1,5 +1,6 @@
 ---
 title: "Copilot Actions and Connectors: Extending AI Capabilities"
+description: "Actions in Copilot Studio are implemented using Power Automate flows or Azure Functions. Multi-step workflows are best implemented using Power Automate flows."
 author: Michael John Peña
 draft: false
 date: 2024-11-16
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - Connectors
   - Integration
-
 ---
-
-I wrote "Copilot Actions and Connectors: Extending AI Capabilities" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Action Framework
 
@@ -578,4 +576,4 @@ Actions and connectors are the bridge between conversational AI and enterprise s
 
 - [Copilot Studio Actions](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-actions)
 - [Connector Development](https://learn.microsoft.com/en-us/connectors/custom-connectors/)
-- [Power Platform Connectors](https://learn.microsoft.com/en-us/connectors/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Power Platform Connectors](https://learn.microsoft.com/en-us/connectors/)

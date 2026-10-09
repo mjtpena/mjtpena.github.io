@@ -9,10 +9,7 @@ tags:
   - Entity Extraction
   - NLP
   - Data Extraction
-
 ---
-
-I wrote "Entity Extraction with AI Builder: Mining Structured Data from Text" to share practical, production-minded guidance on this topic.
 
 ## Pre-built Entity Types
 
@@ -288,4 +285,3 @@ Combined with other AI Builder capabilities, it enables comprehensive text under
 
 - [Entity Extraction Documentation](https://docs.microsoft.com/en-us/ai-builder/prebuilt-entity-extraction)
 - [Custom Entity Extraction](https://docs.microsoft.com/en-us/ai-builder/entity-extraction-model)
-

@@ -1,13 +1,11 @@
 ---
 title: "Advanced Checks in Azure DevOps Pipelines"
+description: "Checks provide automated validation gates for enterprise deployments."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-25
 tags: ["Azure", "Azure DevOps", "Pipelines", "Security"]
-
 ---
-
-I wrote "Advanced Checks in Azure DevOps Pipelines" to share practical, production-minded guidance on this topic.
 
 ## Custom API Checks
 
@@ -65,4 +63,4 @@ check_config:
     - 'Require tags'
 ```
 
-Checks provide automated validation gates for enterprise deployments.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Checks provide automated validation gates for enterprise deployments.

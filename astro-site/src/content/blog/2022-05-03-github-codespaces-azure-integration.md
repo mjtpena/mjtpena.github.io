@@ -1,12 +1,13 @@
 ---
 title: "GitHub Codespaces: Cloud Development with Azure Integration"
+description: "GitHub Codespaces provides browser-accessible, cloud-hosted VS Code development environments where the development container (with all tools, extensions…"
 author: Michael John Peña
 draft: false
 date: 2022-05-03
 tags:
-  - github
+  - GitHub
   - codespaces
-  - azure
+  - Azure
   - developer-tools
 ---
 

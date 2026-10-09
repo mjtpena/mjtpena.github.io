@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI November 2024 Updates: What's New for Enterprise AI"
+description: "Batch processing can reduce costs by up to 50% for workloads that don't need immediate responses."
 author: Michael John Peña
 draft: false
 date: 2024-11-01
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - GPT-4o
   - Enterprise AI
-
 ---
-
-I wrote "Azure OpenAI November 2024 Updates: What's New for Enterprise AI" to share practical, production-minded guidance on this topic.
 
 ## New Model Deployments
 
@@ -178,4 +176,4 @@ The Azure AI landscape is evolving rapidly. Stay tuned for our Ignite coverage.
 
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
 - [What's New in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/whats-new)
-- [Pricing Calculator](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Pricing Calculator](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)

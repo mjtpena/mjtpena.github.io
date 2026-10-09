@@ -1,5 +1,6 @@
 ---
 title: "OneLake AI Workloads: Running AI Directly on Your Data Lake"
+description: "OneLake AI Workloads bring AI capabilities directly to your data, eliminating data movement and enabling efficient large-scale AI processing."
 author: Michael John Peña
 draft: false
 date: 2024-11-29
@@ -9,10 +10,7 @@ tags:
   - OneLake
   - AI
   - Vector Search
-
 ---
-
-I wrote "OneLake AI Workloads: Running AI Directly on Your Data Lake" to share practical, production-minded guidance on this topic.
 
 ## OneLake AI Architecture
 
@@ -466,4 +464,4 @@ OneLake AI Workloads bring AI capabilities directly to your data, eliminating da
 
 - [OneLake AI Workloads](https://learn.microsoft.com/en-us/fabric/onelake/ai-workloads)
 - [Vector Search in Fabric](https://learn.microsoft.com/en-us/fabric/ai/vector-search)
-- [Building RAG Applications](https://learn.microsoft.com/en-us/fabric/ai/rag-patterns)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Building RAG Applications](https://learn.microsoft.com/en-us/fabric/ai/rag-patterns)

@@ -1,5 +1,6 @@
 ---
 title: Data Transformation with Azure Data Factory Mapping Data Flows
+description: "Mapping Data Flows are the feature that ended most of my \"should I use PySpark or Spark SQL for this?\" debates. Visual, yes—but reviewable in JSON and…"
 author: Michael John Peña
 draft: false
 date: 2021-02-14
@@ -10,9 +11,7 @@ tags:
   - ETL
   - Data Engineering
   - Spark
-
 ---
-
 
 Mapping Data Flows are the feature that ended most of my "should I use PySpark or Spark SQL for this?" debates. Visual, yes—but reviewable in JSON and deployable via ARM, which means they can live in source control and be reviewed like code. The key distinction from ADF copy activities is that Mapping Data Flows are transformations, not movements—they run on managed Spark clusters that spin up, execute the flow, and shut down. Debug mode keeps a cluster warm so you can iterate quickly; turn it off when you're done or you'll pay for idle cluster time.
 
@@ -423,4 +422,3 @@ print(metrics_df)
 Mapping Data Flows in Azure Data Factory democratize data transformation by providing a visual interface backed by Spark's distributed computing power. Whether you're performing simple transformations or complex slowly changing dimension logic, data flows can handle it without requiring Spark expertise.
 
 Start with simple transformations and gradually add complexity as you become comfortable with the visual designer and data flow script syntax.
-

@@ -1,18 +1,16 @@
 ---
 title: "Azure Monitor Logs Dedicated Clusters: Enterprise-Scale Logging"
+description: "Dedicated clusters provide enterprise-grade security and scale for Azure Monitor Logs."
 author: Michael John Peña
 draft: false
 date: 2022-02-21
 url: /blog/azure-monitor-logs-dedicated-clusters/
 tags:
-  - azure
-  - monitoring
+  - Azure
+  - Monitoring
   - log-analytics
-  - enterprise
-
+  - Enterprise
 ---
-
-I wrote "Azure Monitor Logs Dedicated Clusters: Enterprise-Scale Logging" to share practical, production-minded guidance on this topic.
 
 ## Why Dedicated Clusters?
 
@@ -246,4 +244,4 @@ resource "azurerm_log_analytics_linked_service" "link" {
 }
 ```
 
-Dedicated clusters provide enterprise-grade security and scale for Azure Monitor Logs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Dedicated clusters provide enterprise-grade security and scale for Azure Monitor Logs.

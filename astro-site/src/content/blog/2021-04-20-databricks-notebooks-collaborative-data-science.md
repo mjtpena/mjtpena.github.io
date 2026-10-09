@@ -10,10 +10,7 @@ tags:
   - Data Science
   - Collaboration
   - Apache Spark
-
 ---
-
-I wrote "2021-04-20-databricks-notebooks-collaborative-data-science" to share practical, production-minded guidance on this topic.
 
 ## Understanding Databricks Notebooks
 
@@ -465,4 +462,3 @@ for stage, result in results.items():
 ## Conclusion
 
 Databricks notebooks provide a powerful environment for collaborative data work. By combining interactive development with production-ready features like parameterization, orchestration, and version control, you can build robust data pipelines that are both easy to develop and maintain. The key is structuring your notebooks for both exploration and automated execution.
-

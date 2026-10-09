@@ -1,5 +1,6 @@
 ---
 title: "DirectQuery for Power BI Datasets: Chaining Analytics"
+description: "DirectQuery for datasets enables a governed, scalable approach to enterprise analytics where teams can self-serve while building on trusted, certified data."
 author: Michael John Peña
 draft: false
 date: 2022-01-28
@@ -7,12 +8,9 @@ url: /blog/power-bi-directquery-datasets/
 tags:
   - power-bi
   - directquery
-  - analytics
-  - enterprise
-
+  - Analytics
+  - Enterprise
 ---
-
-I wrote "DirectQuery for Power BI Datasets: Chaining Analytics" to share practical, production-minded guidance on this topic.
 
 ## The Dataset Chaining Architecture
 
@@ -214,4 +212,4 @@ PowerBIDatasetQuery
 5. **Version carefully** - Changes propagate downstream
 6. **Test thoroughly** - Validate calculations work correctly
 
-DirectQuery for datasets enables a governed, scalable approach to enterprise analytics where teams can self-serve while building on trusted, certified data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+DirectQuery for datasets enables a governed, scalable approach to enterprise analytics where teams can self-serve while building on trusted, certified data.

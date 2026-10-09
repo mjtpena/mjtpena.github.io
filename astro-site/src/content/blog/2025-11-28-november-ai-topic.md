@@ -1,5 +1,6 @@
 ---
 title: "AI-Powered Code Review: Integrating LLMs into Development Workflows"
+description: "While linters catch syntax issues, AI reviewers understand context, identify logical errors, suggest architectural improvements, and explain complex code…"
 author: Michael John Peña
 draft: false
 date: 2025-11-28
@@ -9,10 +10,7 @@ tags:
   - GitHub
   - LLM
   - Automation
-
 ---
-
-I wrote "AI-Powered Code Review: Integrating LLMs into Development Workflows" to share practical, production-minded guidance on this topic.
 
 ## Beyond Linting
 
@@ -169,4 +167,5 @@ Respond in JSON format:
         return f"""
 {emoji.get(suggestion['severity'], '📝')} **{suggestion['category'].title()}** ({suggestion['severity']})
 
-{suggestion['comment']}\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+{suggestion['comment']}
+```

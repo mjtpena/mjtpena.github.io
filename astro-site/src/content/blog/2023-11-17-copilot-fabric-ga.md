@@ -1,13 +1,11 @@
 ---
 title: "Copilot in Microsoft Fabric: AI-Powered Analytics"
+description: "Copilot in Microsoft Fabric was announced at Ignite 2023 as the AI-powered natural language layer across the Fabric experience. The capabilities at launch…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-17
 tags: ["Microsoft Fabric", "Copilot", "AI", "Analytics", "Productivity"]
-
 ---
-
-I wrote "Copilot in Microsoft Fabric: AI-Powered Analytics" to share practical, production-minded guidance on this topic.
 
 Copilot in Microsoft Fabric was announced at Ignite 2023 as the AI-powered natural language layer across the Fabric experience. The capabilities at launch: Copilot in Power BI for generating DAX measures and report visuals from natural language descriptions; Copilot in Fabric notebooks for generating PySpark and SQL code from a description of the transformation you need; and Copilot in Data Factory for generating Dataflow transformations. The important operational note: Fabric Copilot requires a Fabric capacity of F64 or above and must be enabled by the Fabric admin — it's not available on all Fabric capacities by default. The model powering it is GPT-4. The early quality impression: notebook code generation is genuinely useful for boilerplate and common patterns; it struggles with complex multi-table joins and domain-specific business logic that isn't in the model's training distribution.
 
@@ -317,4 +315,4 @@ copilot_best_practices = {
 }
 ```
 
-Tomorrow, we'll explore Azure AI Studio updates and how they complement your Fabric analytics!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Azure AI Studio updates and how they complement your Fabric analytics!

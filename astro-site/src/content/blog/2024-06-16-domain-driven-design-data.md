@@ -1,5 +1,6 @@
 ---
 title: "Domain-Driven Design for Data"
+description: "Domain-Driven Design (DDD) principles apply to data architecture just as they do to software. Today I'm exploring how to design data systems around business…"
 author: Michael John Peña
 draft: false
 date: 2024-06-16
@@ -434,4 +435,4 @@ Tomorrow I'll cover federated governance for data mesh.
 
 - [Domain-Driven Design](https://dddcommunity.org/)
 - [Data Mesh Architecture](https://www.datamesh-architecture.com/)
-- [Fabric Domains](https://learn.microsoft.com/fabric/governance/domains)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric Domains](https://learn.microsoft.com/fabric/governance/domains)

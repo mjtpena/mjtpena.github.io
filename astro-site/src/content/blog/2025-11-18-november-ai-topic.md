@@ -1,5 +1,6 @@
 ---
 title: "Building Data Lakehouses: Medallion Architecture Best Practices"
+description: "Each layer serves a specific purpose in the data refinement pipeline. Bronze captures raw data, silver cleans and conforms it, and gold delivers…"
 author: Michael John Peña
 draft: false
 date: 2025-11-18
@@ -9,10 +10,7 @@ tags:
   - Microsoft Fabric
   - Delta Lake
   - Best Practices
-
 ---
-
-I wrote "Building Data Lakehouses: Medallion Architecture Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Layers
 
@@ -174,4 +172,4 @@ class GoldAggregation:
             .saveAsTable("gold.customer_360")
 ```
 
-The medallion architecture provides clear data lineage and quality gates. Each layer can be tested and validated independently, making the entire pipeline more maintainable and reliable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The medallion architecture provides clear data lineage and quality gates. Each layer can be tested and validated independently, making the entire pipeline more maintainable and reliable.

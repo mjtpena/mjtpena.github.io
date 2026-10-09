@@ -1,5 +1,6 @@
 ---
 title: "Building Resilient Microservices with Azure Service Bus"
+description: "Reliable messaging is the backbone of microservices architecture. Azure Service Bus provides enterprise-grade messaging, but using it effectively requires…"
 author: Michael John Peña
 draft: false
 date: 2025-12-16
@@ -160,4 +161,4 @@ by bin(TimeGenerated, 1h), EntityName_s
 | render timechart
 ```
 
-Service Bus is reliable when used correctly. Invest time in understanding these patterns before building your microservices.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Service Bus is reliable when used correctly. Invest time in understanding these patterns before building your microservices.

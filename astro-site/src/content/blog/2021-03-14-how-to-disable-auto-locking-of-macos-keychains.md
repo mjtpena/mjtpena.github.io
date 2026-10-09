@@ -1,5 +1,6 @@
 ---
 title: How to disable auto-locking of MacOS Keychains
+description: "We streamlined the configuration of our Mac Build agents to a repository where we can update our Provisioning Profiles, Keychains, etc."
 author: Michael John Peña
 draft: false
 date: 2021-03-14
@@ -10,12 +11,9 @@ tags:
   - Build Server
   - iOS Distribution
   - Keychain
-  - MacOS
+  - macos
   - Mobile Development
-
 ---
-
-I wrote "2021-03-14-how-to-disable-auto-locking-of-macos-keychains" to share practical, production-minded guidance on this topic.
 
 We streamlined the configuration of our Mac Build agents to a repository where we can update our Provisioning Profiles, Keychains, etc.
 
@@ -45,4 +43,4 @@ Here's a simple step by step process to remove that lock 🔐 .
 
 ![img](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fmjtpena%2FkSxnP7LbjR.png?alt=media&token=0bea0854-a54f-47e0-b69c-ef41654fc14a)
 
-5. Save all changes. Create a pull request. Merge the branch. Run the pipeline again.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+5. Save all changes. Create a pull request. Merge the branch. Run the pipeline again.

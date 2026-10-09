@@ -10,10 +10,7 @@ tags:
   - Networking
   - Private Link
   - Zero Trust
-
 ---
-
-I wrote "2021-02-10-azure-private-link-security" to share practical, production-minded guidance on this topic.
 
 ## Understanding Private Link
 
@@ -418,4 +415,3 @@ AzureNetworkAnalytics_CL
 Azure Private Link is essential for organizations implementing Zero Trust security models. By eliminating public internet exposure for Azure services, you significantly reduce your attack surface while maintaining seamless connectivity.
 
 Start with critical services like Azure SQL and Key Vault, then expand to other PaaS services as you mature your private networking strategy.
-

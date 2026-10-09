@@ -1,5 +1,6 @@
 ---
 title: "Agentic Workflows: Moving Beyond Chatbots to Autonomous Task Execution"
+description: "Start small: identify repetitive, well-defined tasks in your organization. Build agentic workflows for those first. As you gain confidence, expand to more…"
 author: Michael John Peña
 draft: false
 date: 2025-01-03
@@ -9,10 +10,7 @@ tags:
   - Azure
   - Automation
   - Enterprise AI
-
 ---
-
-I wrote "Agentic Workflows: Moving Beyond Chatbots to Autonomous Task Execution" to share practical, production-minded guidance on this topic.
 
 ## What Are Agentic Workflows?
 
@@ -298,4 +296,4 @@ Agentic workflows represent a fundamental shift in how we build AI systems:
 
 Start small: identify repetitive, well-defined tasks in your organization. Build agentic workflows for those first. As you gain confidence, expand to more complex scenarios.
 
-The organizations that master agentic workflows in 2025 will have a significant competitive advantage. The time to start is now.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The organizations that master agentic workflows in 2025 will have a significant competitive advantage. The time to start is now.

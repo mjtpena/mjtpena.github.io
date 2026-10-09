@@ -1,5 +1,6 @@
 ---
 title: Azure Confidential Computing - Protecting Data in Use
+description: "Confidential Computing addresses the attack surface that most cloud encryption doesn't touch: data while it's actively being processed in memory. Encryption…"
 author: Michael John Peña
 draft: false
 date: 2021-04-25

@@ -1,5 +1,6 @@
 ---
 title: "Conversation Summarization: Managing Long Chat Histories"
+description: "Conversation summarisation is the practical solution to the context window problem for long-running chat applications. The approach: when the accumulated…"
 author: Michael John Peña
 draft: false
 date: 2023-08-28
@@ -276,4 +277,4 @@ Tomorrow we'll explore memory management patterns for LLM applications.
 
 - [LangChain Memory](https://python.langchain.com/docs/modules/memory/)
 - [Summarization Techniques](https://arxiv.org/abs/2202.06417)
-- [Conversation AI Patterns](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Conversation AI Patterns](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/)

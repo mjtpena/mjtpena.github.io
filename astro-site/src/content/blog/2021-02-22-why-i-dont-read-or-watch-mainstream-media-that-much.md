@@ -1,5 +1,6 @@
 ---
 title: Why I don’t read or watch mainstream media that much
+description: "Ever since I was a kid, I was never really the person who watches the mainstream television to watch news. Watching news on a television is a culture that a…"
 author: Michael John Peña
 draft: false
 date: 2021-02-22
@@ -7,7 +8,7 @@ url: /blog/why-i-dont-read-or-watch-mainstream-media-that-much/
 images: 
      - /2021/02/jumpstory-download20210222-053810-940x510.jpg
 tags:
-  - media
+  - Media
   - news
   - reading
   - social media

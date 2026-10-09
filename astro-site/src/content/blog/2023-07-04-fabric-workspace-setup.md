@@ -1,5 +1,6 @@
 ---
 title: "Fabric Workspace Setup: Organization and Best Practices"
+description: "How you structure workspaces in Fabric matters more than most getting-started guides acknowledge. A workspace is the unit of security, capacity binding, and…"
 author: Michael John Peña
 draft: false
 date: 2023-07-04
@@ -346,4 +347,4 @@ Tomorrow we'll explore OneLake explorer and how to navigate your data across wor
 
 - [Fabric Workspace Documentation](https://learn.microsoft.com/en-us/fabric/get-started/workspaces)
 - [Workspace Roles](https://learn.microsoft.com/en-us/fabric/get-started/roles-workspaces)
-- [Governance Best Practices](https://learn.microsoft.com/en-us/fabric/governance/governance-compliance-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Governance Best Practices](https://learn.microsoft.com/en-us/fabric/governance/governance-compliance-overview)

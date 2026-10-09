@@ -1,13 +1,11 @@
 ---
 title: "A/B Testing AI Features: Data-Driven Model Selection"
+description: "A/B testing AI features requires special considerations beyond traditional web experiments. This guide covers how to design, implement, and analyze AI…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-27
 tags: ["AI", "A/B Testing", "MLOps", "Experimentation", "Data Science"]
-
 ---
-
-I wrote "A/B Testing AI Features: Data-Driven Model Selection" to share practical, production-minded guidance on this topic.
 
 A/B testing AI features requires special considerations beyond traditional web experiments. This guide covers how to design, implement, and analyze AI experiments.
 
@@ -356,4 +354,3 @@ AI_EXPERIMENT_METRICS = {
 ## Conclusion
 
 A/B testing AI features requires thoughtful experiment design, proper statistical analysis, and consideration of multiple metrics including cost and latency. Use adaptive methods like Thompson Sampling for faster convergence to optimal variants.
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure SQL Hyperscale: Massive Scale SQL"
+description: "There's a moment in any growing SaaS where someone runs spspaceused and the room goes quiet—the database is approaching the 4 TB ceiling and the migration…"
 author: Michael John Peña
 draft: false
 date: 2020-11-21
@@ -170,4 +171,4 @@ az sql db update \
 
 Note: Migration to Hyperscale is one-way.
 
-Hyperscale: SQL Server at cloud scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hyperscale: SQL Server at cloud scale.

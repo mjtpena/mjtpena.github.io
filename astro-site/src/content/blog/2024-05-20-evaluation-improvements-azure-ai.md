@@ -9,10 +9,7 @@ tags:
   - LLMOps
   - Quality Assurance
   - Azure AI
-
 ---
-
-I wrote "Evaluation Improvements in Azure AI Studio" to share practical, production-minded guidance on this topic.
 
 ## Why Evaluation Matters
 
@@ -439,4 +436,3 @@ Tomorrow I'll cover tracing and debugging for AI applications.
 - [Azure AI Evaluation SDK](https://learn.microsoft.com/azure/ai-studio/how-to/evaluate-sdk)
 - [Evaluation Best Practices](https://learn.microsoft.com/azure/ai-studio/concepts/evaluation-approach)
 - [Safety Evaluations](https://learn.microsoft.com/azure/ai-studio/how-to/evaluate-content-safety)
-

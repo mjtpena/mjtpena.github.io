@@ -1,13 +1,11 @@
 ---
 title: "Continuous Backup in Azure Cosmos DB"
+description: "Unlike periodic backup mode, continuous backup captures every change as it happens, allowing granular point-in-time recovery down to the second."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-04
 tags: ["Azure", "Cosmos DB", "Backup", "Disaster Recovery"]
-
 ---
-
-I wrote "Continuous Backup in Azure Cosmos DB" to share practical, production-minded guidance on this topic.
 
 ## Understanding Continuous Backup
 
@@ -244,4 +242,4 @@ public class BackupVerificationService
 4. **Self-service restore** - Restore via Azure Portal, CLI, or SDK
 5. **No performance impact** - Backups don't affect production throughput
 
-Continuous backup provides peace of mind for mission-critical applications where data loss is unacceptable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Continuous backup provides peace of mind for mission-critical applications where data loss is unacceptable.

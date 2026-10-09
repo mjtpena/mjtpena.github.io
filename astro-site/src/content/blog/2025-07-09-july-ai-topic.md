@@ -1,5 +1,6 @@
 ---
 title: "Prompt Caching with Claude and Azure OpenAI: Reducing Latency and Costs"
+description: "Track cache hit rates in your monitoring. Applications with high context reuse typically see 60-80% cache hit rates, dramatically reducing per-request costs."
 author: Michael John Peña
 draft: false
 date: 2025-07-09
@@ -9,10 +10,7 @@ tags:
   - Claude
   - Azure OpenAI
   - Python
-
 ---
-
-I wrote "Prompt Caching with Claude and Azure OpenAI: Reducing Latency and Costs" to share practical, production-minded guidance on this topic.
 
 ## Understanding Cache Mechanics
 
@@ -86,4 +84,4 @@ def get_completion(user_message: str, conversation_history: list):
 
 ## Measuring Impact
 
-Track cache hit rates in your monitoring. Applications with high context reuse typically see 60-80% cache hit rates, dramatically reducing per-request costs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Track cache hit rates in your monitoring. Applications with high context reuse typically see 60-80% cache hit rates, dramatically reducing per-request costs.

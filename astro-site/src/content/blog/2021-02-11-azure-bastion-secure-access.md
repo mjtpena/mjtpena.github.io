@@ -1,5 +1,6 @@
 ---
 title: Secure VM Access with Azure Bastion
+description: "I keep writing about Bastion because I keep finding jump boxes I have to replace. VM with a public IP, port 3389 open, \"admin\" password in a sticky note in…"
 author: Michael John Peña
 draft: false
 date: 2021-02-11

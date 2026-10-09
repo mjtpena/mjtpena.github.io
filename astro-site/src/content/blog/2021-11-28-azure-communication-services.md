@@ -1,5 +1,6 @@
 ---
 title: "Azure Communication Services: Build Communication Apps with Azure"
+description: "Azure Communication Services enables developers to build rich communication experiences that can interoperate with Microsoft Teams. Whether you need voice…"
 author: Michael John Pena
 draft: false
 date: 2021-11-28
@@ -10,10 +11,7 @@ tags:
   - Voice
   - Video
   - Chat
-
 ---
-
-I wrote "Azure Communication Services: Build Communication Apps with Azure" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Communication Services?
 
@@ -523,4 +521,4 @@ Azure Communication Services enables developers to build rich communication expe
 - [Azure Communication Services Documentation](https://docs.microsoft.com/en-us/azure/communication-services/)
 - [Calling SDK](https://docs.microsoft.com/en-us/azure/communication-services/concepts/voice-video-calling/calling-sdk-features)
 - [Chat SDK](https://docs.microsoft.com/en-us/azure/communication-services/concepts/chat/sdk-features)
-- [Teams Interop](https://docs.microsoft.com/en-us/azure/communication-services/concepts/teams-interop)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Teams Interop](https://docs.microsoft.com/en-us/azure/communication-services/concepts/teams-interop)

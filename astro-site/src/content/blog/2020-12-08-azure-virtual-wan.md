@@ -1,5 +1,6 @@
 ---
 title: "Azure Virtual WAN: Enterprise-Scale Networking"
+description: "The hub-and-spoke topology I've drawn on whiteboards for years is what Virtual WAN turns into a deployable resource. A managed hub per region, automatic…"
 author: Michael John Peña
 draft: false
 date: 2020-12-08
@@ -170,4 +171,4 @@ az network vwan update \
     --allow-branch-to-branch-traffic true
 ```
 
-Virtual WAN: software-defined WAN for the cloud era.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Virtual WAN: software-defined WAN for the cloud era.

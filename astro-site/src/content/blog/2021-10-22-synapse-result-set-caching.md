@@ -1,13 +1,11 @@
 ---
 title: "Result Set Caching for Query Acceleration in Synapse"
+description: "Result set caching in Synapse Dedicated SQL Pool stores the output of a query in the dedicated pool's storage and returns the cached result for subsequent…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-22
 tags: ["Azure", "Synapse", "Performance", "Caching", "Query Optimization"]
-
 ---
-
-I wrote "Result Set Caching for Query Acceleration in Synapse" to share practical, production-minded guidance on this topic.
 
 Result set caching in Synapse Dedicated SQL Pool stores the output of a query in the dedicated pool's storage and returns the cached result for subsequent identical queries—zero compute consumed for cache hits. For BI dashboards and reports where the same aggregate query runs dozens of times per day against slowly-changing data, result set caching can eliminate the query compute cost almost entirely. The cache is automatic when enabled: if the same query text is submitted and the underlying data hasn't changed since the result was cached, the cached result is returned. The cache lifetime is 48 hours and is invalidated automatically when the underlying table data changes. The caveat: result set caching is most valuable for expensive queries against stable data; for queries against frequently updated tables, cache hit rates will be low and the feature adds minimal value.
 
@@ -327,4 +325,3 @@ SELECT * FROM mv_DailySales WHERE SalesDate >= '2021-10-01';
 Result set caching is a powerful feature for accelerating dashboard and reporting workloads in Synapse. By understanding its behavior and limitations, you can design query patterns that maximize cache hits and deliver sub-second response times.
 
 Tomorrow, we'll explore workload management for balancing different types of queries.
-

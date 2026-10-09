@@ -1,13 +1,11 @@
 ---
 title: "EU AI Act: Preparing for the World's First AI Law"
+description: "The EU AI Act signals a shift from voluntary standards to enforceable obligations; product teams need a simple classification step (is this high-risk?) and…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-10
 tags: ["EU AI Act", "Regulation", "Compliance", "AI Governance", "Europe"]
-
 ---
-
-I wrote "EU AI Act: Preparing for the World's First AI Law" to share practical, production-minded guidance on this topic.
 
 The EU AI Act signals a shift from voluntary standards to enforceable obligations; product teams need a simple classification step (is this high-risk?) and a checklist of requirements for high-risk systems. Even non-EU deployments must assess exposure due to cross-border data flows.
 
@@ -358,4 +356,4 @@ def get_time_to_compliance(risk_level: AIActRiskLevel) -> str:
     return deadlines.get(risk_level, "Unknown")
 ```
 
-Tomorrow, we'll explore responsible AI practices and how to implement them!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore responsible AI practices and how to implement them!

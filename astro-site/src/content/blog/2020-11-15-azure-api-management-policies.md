@@ -1,5 +1,6 @@
 ---
 title: "Azure API Management: Policy Deep Dive"
+description: "API Management is one of those services I underestimated for years. \"It's a proxy, right?\" The penny drops when you realise policies are the product. Rate…"
 author: Michael John Peña
 draft: false
 date: 2020-11-15
@@ -198,4 +199,4 @@ API Management is one of those services I underestimated for years. "It's a prox
 </inbound>
 ```
 
-Policies make API Management a powerful gateway.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Policies make API Management a powerful gateway.

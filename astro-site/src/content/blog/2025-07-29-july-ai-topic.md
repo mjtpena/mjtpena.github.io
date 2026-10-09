@@ -1,5 +1,6 @@
 ---
 title: "Building AI-Powered Search with Azure AI Search and Semantic Ranker"
+description: "Monitor reranker scores and caption extraction quality. A/B test semantic ranking against pure vector or keyword search to quantify improvements for your…"
 author: Michael John Peña
 draft: false
 date: 2025-07-29
@@ -9,10 +10,7 @@ tags:
   - Search Relevance
   - Python
   - Enterprise Search
-
 ---
-
-I wrote "Building AI-Powered Search with Azure AI Search and Semantic Ranker" to share practical, production-minded guidance on this topic.
 
 ## Configuring Semantic Search
 
@@ -118,4 +116,4 @@ async def hybrid_search(query: str, query_embedding: list[float], top_k: int = 1
 
 ## Analyzing Search Quality
 
-Monitor reranker scores and caption extraction quality. A/B test semantic ranking against pure vector or keyword search to quantify improvements for your specific domain.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Monitor reranker scores and caption extraction quality. A/B test semantic ranking against pure vector or keyword search to quantify improvements for your specific domain.

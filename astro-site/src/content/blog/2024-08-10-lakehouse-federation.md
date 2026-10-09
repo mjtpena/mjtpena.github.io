@@ -9,10 +9,7 @@ tags:
   - Federation
   - OneLake
   - Data Architecture
-
 ---
-
-I wrote "Lakehouse Federation in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Federation Architecture
 
@@ -349,4 +346,3 @@ customer_360_config = optimizer.create_materialized_join(
 Lakehouse federation enables enterprise-scale analytics while respecting organizational boundaries. Use shortcuts for flexibility, materialized views for performance, and governance controls for security.
 
 Start with clear domain ownership, then layer in federation as cross-domain needs emerge.
-

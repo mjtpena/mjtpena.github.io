@@ -9,10 +9,7 @@ tags:
   - Performance
   - Cost Optimization
   - Best Practices
-
 ---
-
-I wrote "Auto-Scaling Best Practices in Azure" to share practical, production-minded guidance on this topic.
 
 ## Auto-Scaling Fundamentals
 
@@ -444,4 +441,3 @@ Auto-scaling is powerful but requires careful tuning. Start with conservative se
 - [VMSS Autoscale](https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-overview)
 - [AKS Autoscaler](https://docs.microsoft.com/azure/aks/cluster-autoscaler)
 - [KEDA](https://keda.sh/)
-

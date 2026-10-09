@@ -1,13 +1,11 @@
 ---
 title: "Assistants API: File Handling and Knowledge Retrieval"
+description: "I prefer the Assistants API's file-based retrieval when I need a fast, low-friction knowledge assistant — upload a set of documents and let the assistant…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-26
 tags: ["OpenAI", "Assistants API", "RAG", "File Handling", "AI"]
-
 ---
-
-I wrote "Assistants API: File Handling and Knowledge Retrieval" to share practical, production-minded guidance on this topic.
 
 I prefer the Assistants API's file-based retrieval when I need a fast, low-friction knowledge assistant — upload a set of documents and let the assistant handle chunking, indexing, and retrieval without standing up a dedicated vector DB. For many internal knowledge use cases this removes operational overhead: files stay attached to the assistant, access controls live with your tenancy, and iteration is fast. It's not a silver bullet — very large corpora or strict provenance requirements still favour a dedicated vector store — but as a pragmatic path to production, file handling is compelling.
 
@@ -364,4 +362,4 @@ file_handling_best_practices = {
 }
 ```
 
-Tomorrow, we'll explore the Code Interpreter tool and how to leverage it for data analysis!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore the Code Interpreter tool and how to leverage it for data analysis!

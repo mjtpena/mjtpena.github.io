@@ -1,5 +1,6 @@
 ---
 title: "Synthetic Data Generation: When Real Data Isn't Available"
+description: "Synthetic data in 2021 became practical for production use. The key is validating that synthetic data maintains the statistical properties needed for your…"
 author: Michael John Pena
 draft: false
 date: 2021-12-24
@@ -9,10 +10,7 @@ tags:
   - Data Privacy
   - Data Generation
   - Testing
-
 ---
-
-I wrote "Synthetic Data Generation: When Real Data Isn't Available" to share practical, production-minded guidance on this topic.
 
 ## Why Synthetic Data?
 
@@ -500,4 +498,4 @@ Synthetic data in 2021 became practical for production use. The key is validatin
 - [Synthetic Data Vault](https://sdv.dev/)
 - [Gretel.ai](https://gretel.ai/)
 - [Mostly AI](https://mostly.ai/)
-- [CTGAN Paper](https://arxiv.org/abs/1907.00503)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [CTGAN Paper](https://arxiv.org/abs/1907.00503)

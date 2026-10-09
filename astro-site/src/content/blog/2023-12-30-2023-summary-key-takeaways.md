@@ -1,13 +1,11 @@
 ---
 title: "2023 Summary: Key Takeaways for Data and AI Professionals"
+description: "From enterprise pilots to platform bets, 2023 was the year AI stopped being optional. These are the key takeaways I share with clients when they ask what's…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-30
 tags: ["2023 Summary", "AI", "Data", "Key Takeaways", "Year in Review"]
-
 ---
-
-I wrote "2023 Summary: Key Takeaways for Data and AI Professionals" to share practical, production-minded guidance on this topic.
 
 From enterprise pilots to platform bets, 2023 was the year AI stopped being optional. These are the key takeaways I share with clients when they ask what's fundamentally changed and what to prioritise in 2024.
 
@@ -241,4 +239,4 @@ looking_forward_advice = {
 
 Thank you for following along this year. The pace of change has been extraordinary, and 2024 promises to be even more exciting. Stay curious, keep learning, and build amazing things!
 
-Tomorrow, we'll close out 2023 with a final post looking at what's next!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll close out 2023 with a final post looking at what's next!

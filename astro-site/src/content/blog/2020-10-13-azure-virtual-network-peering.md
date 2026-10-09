@@ -1,5 +1,6 @@
 ---
 title: "Azure Virtual Network Peering: Connect VNets Seamlessly"
+description: "Share VPN/ExpressRoute gateway across peered VNets. VNet peering is the foundation of Azure network architecture."
 author: Michael John Peña
 draft: false
 date: 2020-10-13
@@ -8,10 +9,7 @@ tags:
   - Networking
   - VNet
   - Infrastructure
-
 ---
-
-I wrote "Azure Virtual Network Peering: Connect VNets Seamlessly" to share practical, production-minded guidance on this topic.
 
 ## Peering Types
 
@@ -135,4 +133,4 @@ az network vnet peering show \
 # Should return "Connected"
 ```
 
-VNet peering is the foundation of Azure network architecture.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+VNet peering is the foundation of Azure network architecture.

@@ -6,12 +6,9 @@ date: 2022-05-28
 tags:
   - quantum
   - qsharp
-  - azure
-  - programming
-
+  - Azure
+  - Programming
 ---
-
-I wrote "Q# Programming: Building Quantum Applications" to share practical, production-minded guidance on this topic.
 
 ## Q# Language Basics
 
@@ -396,5 +393,3 @@ Q# programming provides:
 - Unit testing support
 
 Master Q# to build practical quantum applications.
-
-

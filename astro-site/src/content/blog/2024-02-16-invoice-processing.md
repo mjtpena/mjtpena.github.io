@@ -9,10 +9,7 @@ tags:
   - Automation
   - AI
   - Enterprise
-
 ---
-
-I wrote "AI-Powered Invoice Processing: End-to-End Implementation" to share practical, production-minded guidance on this topic.
 
 ## Invoice Extraction Pipeline
 
@@ -133,4 +130,3 @@ def three_way_match(invoice: InvoiceData, po_data: dict, receipt_data: dict) -> 
 ## Conclusion
 
 AI-powered invoice processing reduces manual effort while improving accuracy. Combine extraction with validation and matching for end-to-end automation.
-

@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Search Vector Optimization: Reducing Costs While Improving Recall"
+description: "Vector search costs can spiral quickly at scale. After optimizing Azure AI Search deployments processing 50 million vectors, I've identified key patterns…"
 author: Michael John Peña
 draft: false
 date: 2025-07-06
@@ -80,4 +81,4 @@ Combine vector and keyword search with careful weight tuning. For technical docu
 
 ## Dimensionality Reduction
 
-Consider using smaller embedding models or applying PCA to reduce dimensions from 1536 to 512. Test recall on your specific dataset - many domains see less than 2% recall drop with 3x cost savings.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Consider using smaller embedding models or applying PCA to reduce dimensions from 1536 to 512. Test recall on your specific dataset - many domains see less than 2% recall drop with 3x cost savings.

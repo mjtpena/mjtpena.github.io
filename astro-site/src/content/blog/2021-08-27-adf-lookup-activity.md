@@ -1,13 +1,11 @@
 ---
 title: "Azure Data Factory Lookup Activity: Retrieving Metadata for Dynamic Pipelines"
+description: "The Lookup Activity is the foundation for building intelligent, data-driven pipelines that adapt their behavior based on configuration and runtime data."
 author: "Michael John Peña"
 draft: false
 date: 2021-08-27
 tags: ["Azure", "Data Factory", "Lookup", "ETL", "Metadata"]
-
 ---
-
-I wrote "Azure Data Factory Lookup Activity: Retrieving Metadata for Dynamic Pipelines" to share practical, production-minded guidance on this topic.
 
 ## Basic Lookup Activity
 
@@ -416,4 +414,4 @@ def validate_lookup_result(lookup_output, required_fields):
 4. **Cache when possible**: Avoid repeated lookups for static data
 5. **Use stored procedures**: For complex lookup logic
 
-The Lookup Activity is the foundation for building intelligent, data-driven pipelines that adapt their behavior based on configuration and runtime data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Lookup Activity is the foundation for building intelligent, data-driven pipelines that adapt their behavior based on configuration and runtime data.

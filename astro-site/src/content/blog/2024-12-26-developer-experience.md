@@ -1,5 +1,6 @@
 ---
 title: "Developer Experience for Data and AI Teams"
+description: "Great developer experience is an investment that pays dividends in productivity, quality, and retention. Measure it and improve it continuously."
 author: Michael John Peña
 draft: false
 date: 2024-12-26
@@ -9,10 +10,7 @@ tags:
   - AI
   - Productivity
   - Tools
-
 ---
-
-I wrote "Developer Experience for Data and AI Teams" to share practical, production-minded guidance on this topic.
 
 ## The DevEx Pyramid
 
@@ -424,4 +422,4 @@ Great developer experience is an investment that pays dividends in productivity,
 
 - [DORA Metrics](https://dora.dev/research/)
 - [Developer Experience Handbook](https://www.dx.tips/)
-- [Platform Engineering Guide](https://platformengineering.org/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Platform Engineering Guide](https://platformengineering.org/)

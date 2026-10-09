@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Build 2025 Preview: What to Expect for Data and AI"
+description: "Build 2025 promises to be significant for data and AI professionals. Stay tuned for the actual announcements and be ready to experiment with new capabilities."
 author: Michael John Peña
 draft: false
 date: 2025-02-04
@@ -9,10 +10,7 @@ tags:
   - AI
   - Microsoft Fabric
   - Predictions
-
 ---
-
-I wrote "Microsoft Build 2025 Preview: What to Expect for Data and AI" to share practical, production-minded guidance on this topic.
 
 ## Expected Themes
 
@@ -451,4 +449,4 @@ response = cost_client.chat_completion("gpt-4o-mini", messages=[...])
 4. **Skills assessment**: Will your team need training?
 5. **Watch sessions**: Plan which talks to attend
 
-Build 2025 promises to be significant for data and AI professionals. Stay tuned for the actual announcements and be ready to experiment with new capabilities.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Build 2025 promises to be significant for data and AI professionals. Stay tuned for the actual announcements and be ready to experiment with new capabilities.

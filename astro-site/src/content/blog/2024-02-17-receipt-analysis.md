@@ -9,10 +9,7 @@ tags:
   - Azure AI
   - Document Intelligence
   - Automation
-
 ---
-
-I wrote "Receipt Analysis with AI: Expense Management Automation" to share practical, production-minded guidance on this topic.
 
 ## Receipt Extraction
 
@@ -120,4 +117,3 @@ class ExpensePolicy:
 ## Conclusion
 
 AI-powered receipt analysis reduces manual data entry and improves compliance. Combine extraction with classification and validation for complete expense automation.
-

@@ -1,5 +1,6 @@
 ---
 title: "Multi-Agent Systems: Orchestrating Specialized AI Agents"
+description: "Multi-agent architectures shine for tasks requiring diverse expertise: research reports, code reviews, complex analysis, and creative projects. The key is…"
 author: Michael John Peña
 draft: false
 date: 2025-09-14
@@ -9,10 +10,7 @@ tags:
   - Orchestration
   - Architecture
   - LLM
-
 ---
-
-I wrote "Multi-Agent Systems: Orchestrating Specialized AI Agents" to share practical, production-minded guidance on this topic.
 
 ## The Orchestrator Pattern
 
@@ -145,4 +143,4 @@ Write for clarity and impact.""",
 }
 ```
 
-Multi-agent architectures shine for tasks requiring diverse expertise: research reports, code reviews, complex analysis, and creative projects. The key is clear role boundaries and effective context passing between agents.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multi-agent architectures shine for tasks requiring diverse expertise: research reports, code reviews, complex analysis, and creative projects. The key is clear role boundaries and effective context passing between agents.

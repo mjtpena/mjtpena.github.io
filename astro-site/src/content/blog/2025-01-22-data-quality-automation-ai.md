@@ -1,5 +1,6 @@
 ---
 title: "Data Quality Automation with AI: Beyond Rule-Based Validation"
+description: "AI transforms data quality from reactive checking to proactive management. Start with profiling and anomaly detection, then expand to automated rule…"
 author: Michael John Peña
 draft: false
 date: 2025-01-22
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Automation
   - Azure
-
 ---
-
-I wrote "Data Quality Automation with AI: Beyond Rule-Based Validation" to share practical, production-minded guidance on this topic.
 
 ## The Evolution of Data Quality
 
@@ -425,4 +423,4 @@ class DQMonitor:
 4. **Explainability**: Always understand why something is flagged
 5. **Gradual automation**: Start with detection, then move to remediation
 
-AI transforms data quality from reactive checking to proactive management. Start with profiling and anomaly detection, then expand to automated rule generation and remediation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI transforms data quality from reactive checking to proactive management. Start with profiling and anomaly detection, then expand to automated rule generation and remediation.

@@ -1,13 +1,11 @@
 ---
 title: "GitHub Universe 2022 Preview"
+description: "GitHub Universe 2022 promises significant advances in developer experience and platform capabilities."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-10
 tags: ["GitHub", "DevOps", "Developer Tools", "AI"]
-
 ---
-
-I wrote "GitHub Universe 2022 Preview" to share practical, production-minded guidance on this topic.
 
 ## Expected Announcements
 
@@ -331,4 +329,4 @@ const repositoryRuleset = {
 4. **Plan enterprise adoption** - Evaluate new enterprise features
 5. **Join the community** - Participate in Universe sessions
 
-GitHub Universe 2022 promises significant advances in developer experience and platform capabilities.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GitHub Universe 2022 promises significant advances in developer experience and platform capabilities.

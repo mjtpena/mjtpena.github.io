@@ -1,5 +1,6 @@
 ---
 title: "Implementing Guardrails for Production LLM Applications"
+description: "Guardrails are essential for enterprise AI deployments, protecting both users and your organization."
 author: Michael John Peña
 draft: false
 date: 2025-07-16
@@ -9,10 +10,7 @@ tags:
   - Production AI
   - Azure AI Content Safety
   - Python
-
 ---
-
-I wrote "Implementing Guardrails for Production LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Multi-Layer Safety Architecture
 
@@ -105,4 +103,4 @@ async def safe_completion(user_input: str) -> str:
     return response
 ```
 
-Guardrails are essential for enterprise AI deployments, protecting both users and your organization.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Guardrails are essential for enterprise AI deployments, protecting both users and your organization.

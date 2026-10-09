@@ -1,5 +1,6 @@
 ---
 title: "Data Wrangling in Microsoft Fabric: Practical Techniques"
+description: "Data wrangling — getting messy, inconsistent, real-world data into a reliable clean form — is where most data engineering hours actually go. In Fabric…"
 author: Michael John Peña
 draft: false
 date: 2023-07-10
@@ -343,4 +344,4 @@ Tomorrow we'll explore Fabric Data Factory and its data integration capabilities
 
 - [PySpark Functions](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html)
 - [Data Wrangling Best Practices](https://learn.microsoft.com/en-us/fabric/data-engineering/data-transformation)
-- [Spark SQL Guide](https://spark.apache.org/docs/latest/sql-programming-guide.html)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Spark SQL Guide](https://spark.apache.org/docs/latest/sql-programming-guide.html)

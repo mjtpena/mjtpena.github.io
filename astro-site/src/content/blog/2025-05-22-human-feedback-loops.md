@@ -1,5 +1,6 @@
 ---
 title: "Human Feedback Loops: Improving AI with User Input"
+description: "Systematic human feedback collection drives continuous AI improvement."
 author: Michael John Peña
 draft: false
 date: 2025-05-22
@@ -9,10 +10,7 @@ tags:
   - RLHF
   - Improvement
   - User Experience
-
 ---
-
-I wrote "Human Feedback Loops: Improving AI with User Input" to share practical, production-minded guidance on this topic.
 
 ## Human Feedback Implementation
 
@@ -124,4 +122,4 @@ class HumanFeedbackSystem:
                 await self.update_instructions(correction)
 ```
 
-Systematic human feedback collection drives continuous AI improvement.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Systematic human feedback collection drives continuous AI improvement.

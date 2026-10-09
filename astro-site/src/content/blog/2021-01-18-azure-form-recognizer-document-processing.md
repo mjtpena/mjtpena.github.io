@@ -1,5 +1,6 @@
 ---
 title: Intelligent Document Processing with Azure Form Recognizer
+description: "An accounts payable team I worked with last quarter was processing 4,000 invoices a month by hand—open the PDF, retype line items into the ERP, repeat. The…"
 author: Michael John Pena
 draft: false
 date: 2021-01-18
@@ -371,4 +372,4 @@ def process_with_confidence_check(result, confidence_threshold=0.8):
 3. **Image Quality**: Ensure documents are at least 50x50 pixels and less than 10,000x10,000
 4. **File Formats**: PDF, JPEG, PNG, BMP, and TIFF are supported
 
-Azure Form Recognizer significantly reduces the manual effort in document processing while maintaining high accuracy. Combined with Azure Functions and Logic Apps, you can build end-to-end intelligent document processing pipelines.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Form Recognizer significantly reduces the manual effort in document processing while maintaining high accuracy. Combined with Azure Functions and Logic Apps, you can build end-to-end intelligent document processing pipelines.

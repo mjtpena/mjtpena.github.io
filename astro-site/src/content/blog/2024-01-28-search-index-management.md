@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Search Index Management: Operations and Maintenance"
+description: "Production search indexes require operational discipline. From index versioning to blue-green deploys, these are the ops patterns I use to avoid downtime…"
 author: Michael John Peña
 draft: false
 date: 2024-01-28

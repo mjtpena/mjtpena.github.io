@@ -1,5 +1,6 @@
 ---
 title: "Windows AI Recall: Photographic Memory for Your PC"
+description: "Recall continuously captures screenshots of your activity and makes them searchable through AI. Think of it as a time machine for your digital life."
 author: Michael John Peña
 draft: false
 date: 2024-05-17
@@ -9,10 +10,7 @@ tags:
   - Recall
   - Copilot
   - Privacy
-
 ---
-
-I wrote "Windows AI Recall: Photographic Memory for Your PC" to share practical, production-minded guidance on this topic.
 
 ## What is Windows Recall?
 
@@ -342,4 +340,4 @@ Tomorrow I'll cover Azure AI Studio updates announced at Build 2024.
 
 - [Windows Recall Overview](https://support.microsoft.com/windows/recall)
 - [Privacy Settings Guide](https://support.microsoft.com/windows/privacy)
-- [Enterprise Configuration](https://learn.microsoft.com/windows/configuration/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Enterprise Configuration](https://learn.microsoft.com/windows/configuration/)

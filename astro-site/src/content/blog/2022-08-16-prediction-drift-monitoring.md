@@ -1,13 +1,11 @@
 ---
 title: "Prediction Drift Monitoring for ML Models"
+description: "Prediction drift monitoring provides early warning of model issues without waiting for ground truth labels."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-16
 tags: ["Azure", "Machine Learning", "Prediction Drift", "MLOps", "Monitoring"]
-
 ---
-
-I wrote "Prediction Drift Monitoring for ML Models" to share practical, production-minded guidance on this topic.
 
 ## Why Monitor Prediction Drift
 
@@ -307,4 +305,4 @@ class MonitoredModelEndpoint:
         # Send to monitoring system, Slack, etc.
 ```
 
-Prediction drift monitoring provides early warning of model issues without waiting for ground truth labels.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Prediction drift monitoring provides early warning of model issues without waiting for ground truth labels.

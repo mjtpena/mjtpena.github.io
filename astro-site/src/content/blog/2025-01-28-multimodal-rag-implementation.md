@@ -1,5 +1,6 @@
 ---
 title: "Multimodal RAG: Building Retrieval Systems for Images, Documents, and Text"
+description: "Multimodal RAG opens up new possibilities for enterprise knowledge systems. Start with your most valuable visual content and expand from there."
 author: Michael John Peña
 draft: false
 date: 2025-01-28
@@ -9,10 +10,7 @@ tags:
   - Multimodal
   - Computer Vision
   - Azure
-
 ---
-
-I wrote "Multimodal RAG: Building Retrieval Systems for Images, Documents, and Text" to share practical, production-minded guidance on this topic.
 
 ## Multimodal RAG Architecture
 
@@ -438,4 +436,4 @@ class ChartAnalyzer:
 4. **Source attribution**: Track which images/documents answers come from
 5. **Chunk wisely**: Keep related images with their context
 
-Multimodal RAG opens up new possibilities for enterprise knowledge systems. Start with your most valuable visual content and expand from there.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multimodal RAG opens up new possibilities for enterprise knowledge systems. Start with your most valuable visual content and expand from there.

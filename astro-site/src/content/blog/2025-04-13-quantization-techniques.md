@@ -1,5 +1,6 @@
 ---
 title: "Quantization Techniques: Shrinking Models Without Losing Quality"
+description: "Strategic quantization enables deploying large models on resource-constrained devices."
 author: Michael John Peña
 draft: false
 date: 2025-04-13
@@ -9,10 +10,7 @@ tags:
   - Optimization
   - Models
   - Efficiency
-
 ---
-
-I wrote "Quantization Techniques: Shrinking Models Without Losing Quality" to share practical, production-minded guidance on this topic.
 
 ## Quantization Methods
 
@@ -148,4 +146,4 @@ class QuantizationBenchmark:
 # | INT4   | 8x             | 3-5x              | 2-5%         |
 ```
 
-Strategic quantization enables deploying large models on resource-constrained devices.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Strategic quantization enables deploying large models on resource-constrained devices.

@@ -9,10 +9,7 @@ tags:
   - LLM
   - Redis
   - Performance
-
 ---
-
-I wrote "Caching Strategies for LLM Cost Reduction" to share practical, production-minded guidance on this topic.
 
 ## Exact Match Caching
 
@@ -145,4 +142,3 @@ class CacheAnalytics:
 ## Conclusion
 
 Caching is the fastest path to LLM cost reduction. Implement exact match caching first, then add semantic caching for additional savings.
-

@@ -1,13 +1,11 @@
 ---
 title: "Hybrid Search Patterns in Azure Cognitive Search"
+description: "Hybrid search patterns enable building search systems that handle diverse query types effectively."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-25
 tags: ["Azure", "Cognitive Search", "Hybrid Search", "Vector Search", "AI"]
-
 ---
-
-I wrote "Hybrid Search Patterns in Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## Why Hybrid Search
 
@@ -306,4 +304,4 @@ adaptive = AdaptiveHybridSearch(search_client, get_embedding)
 results = adaptive.search("How to implement neural networks?")
 ```
 
-Hybrid search patterns enable building search systems that handle diverse query types effectively.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hybrid search patterns enable building search systems that handle diverse query types effectively.

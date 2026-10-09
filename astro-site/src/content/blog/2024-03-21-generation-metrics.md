@@ -1,13 +1,11 @@
 ---
 title: "Generation Metrics for RAG: Measuring Answer Quality"
+description: "While retrieval metrics measure what documents are found, generation metrics evaluate the quality of the synthesized answer. This guide covers metrics…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-21
 tags: ["AI", "RAG", "NLG", "Evaluation", "LLM"]
-
 ---
-
-I wrote "Generation Metrics for RAG: Measuring Answer Quality" to share practical, production-minded guidance on this topic.
 
 While retrieval metrics measure what documents are found, generation metrics evaluate the quality of the synthesized answer. This guide covers metrics specific to RAG generation evaluation.
 
@@ -418,4 +416,3 @@ Respond with only the number."""
 ## Conclusion
 
 Generation metrics for RAG must evaluate both output quality and faithfulness to source documents. Combine lexical metrics with LLM-based semantic evaluation for comprehensive assessment.
-

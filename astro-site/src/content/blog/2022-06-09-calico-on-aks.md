@@ -5,13 +5,10 @@ draft: false
 date: 2022-06-09
 tags:
   - calico
-  - kubernetes
-  - networking
-  - aks
-
+  - Kubernetes
+  - Networking
+  - AKS
 ---
-
-I wrote "Calico on AKS: Advanced Network Policies" to share practical, production-minded guidance on this topic.
 
 ## Enabling Calico on AKS
 
@@ -86,5 +83,3 @@ spec:
 ## Summary
 
 Calico provides enterprise-grade network security for AKS with features beyond standard Kubernetes Network Policies.
-
-

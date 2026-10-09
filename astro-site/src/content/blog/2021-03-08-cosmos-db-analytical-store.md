@@ -1,5 +1,6 @@
 ---
 title: Real-Time Analytics with Cosmos DB Analytical Store
+description: "The question that sparked this post came from a data engineer on a client project: \"can we run Power BI reports against Cosmos DB without destroying the…"
 author: Michael John Pena
 draft: false
 date: 2021-03-08

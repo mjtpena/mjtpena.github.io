@@ -1,13 +1,11 @@
 ---
 title: "2023 AI Year in Review: Microsoft's AI Transformation (Part 2)"
+description: "Microsoft's 2023 felt like an all-in moment: platform bets, product integration, and commercial commitments that reshaped the enterprise AI landscape. From…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-30
 tags: ["Microsoft", "Azure", "Fabric", "Copilot", "2023 Review"]
-
 ---
-
-I wrote "2023 AI Year in Review: Microsoft's AI Transformation (Part 2)" to share practical, production-minded guidance on this topic.
 
 Microsoft's 2023 felt like an all-in moment: platform bets, product integration, and commercial commitments that reshaped the enterprise AI landscape. From Microsoft 365 Copilot to Fabric GA and deeper Azure OpenAI integration, the company pushed AI into the centre of its product strategy. In this second part I'll focus on Microsoft's strategic moves and what they mean for data platforms, governance and developer workflows — with candid notes on what's production-ready and what still needs engineering attention.
 
@@ -277,4 +275,4 @@ microsoft_ai_outlook_2024 = {
 }
 ```
 
-2023 was truly Microsoft's year of AI. The company successfully positioned itself at the center of the enterprise AI revolution. As we move into December, we'll explore practical guidance for implementing these technologies!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+2023 was truly Microsoft's year of AI. The company successfully positioned itself at the center of the enterprise AI revolution. As we move into December, we'll explore practical guidance for implementing these technologies!

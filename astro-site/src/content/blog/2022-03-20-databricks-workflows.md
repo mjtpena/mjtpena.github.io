@@ -9,10 +9,7 @@ tags:
   - Workflows
   - Orchestration
   - Data Engineering
-
 ---
-
-I wrote "Databricks Workflows: Orchestrating Data and ML Pipelines" to share practical, production-minded guidance on this topic.
 
 ## Workflows Overview
 
@@ -509,4 +506,3 @@ For most data engineering and ML workflows on Databricks, Workflows is the natur
 - [Workflows Documentation](https://docs.databricks.com/workflows/index.html)
 - [Jobs API Reference](https://docs.databricks.com/api/workspace/jobs)
 - [Task Types](https://docs.databricks.com/workflows/jobs/create-run-jobs.html)
-

@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering 2025: Advanced Techniques for Better AI Outputs"
+description: "Query: \"What's the average order value by customer segment?\" SQL: \"\"\" Effective prompt engineering is about clear communication. The better you describe…"
 author: Michael John Peña
 draft: false
 date: 2025-01-16
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Best Practices
   - Azure
-
 ---
-
-I wrote "Prompt Engineering 2025: Advanced Techniques for Better AI Outputs" to share practical, production-minded guidance on this topic.
 
 ## Foundation: The Anatomy of a Good Prompt
 
@@ -363,4 +361,4 @@ After your solution:
 "Support your recommendations with references to documentation or best practices"
 ```
 
-Effective prompt engineering is about clear communication. The better you describe what you want, the better results you'll get. Experiment with these techniques and combine them for your specific use cases.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Effective prompt engineering is about clear communication. The better you describe what you want, the better results you'll get. Experiment with these techniques and combine them for your specific use cases.

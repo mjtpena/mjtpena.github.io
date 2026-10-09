@@ -1,13 +1,11 @@
 ---
 title: "GitHub Actions Artifact Management"
+description: "Proper artifact management enables efficient multi-job pipelines and deployment workflows."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-18
 tags: ["GitHub", "GitHub Actions", "Artifacts", "DevOps"]
-
 ---
-
-I wrote "GitHub Actions Artifact Management" to share practical, production-minded guidance on this topic.
 
 ## Working with Artifacts
 
@@ -89,4 +87,4 @@ jobs:
           path: artifacts/
 ```
 
-Proper artifact management enables efficient multi-job pipelines and deployment workflows.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper artifact management enables efficient multi-job pipelines and deployment workflows.

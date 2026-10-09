@@ -1,13 +1,11 @@
 ---
 title: "Model Monitoring in Production with Azure ML"
+description: "Comprehensive monitoring ensures your ML models maintain their performance and reliability in production."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-12
 tags: ["Azure", "Machine Learning", "MLOps", "Monitoring", "Production"]
-
 ---
-
-I wrote "Model Monitoring in Production with Azure ML" to share practical, production-minded guidance on this topic.
 
 ## Why Model Monitoring Matters
 
@@ -348,4 +346,4 @@ class MonitoringAlertManager:
         self.email_client.begin_send(message)
 ```
 
-Comprehensive monitoring ensures your ML models maintain their performance and reliability in production.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Comprehensive monitoring ensures your ML models maintain their performance and reliability in production.

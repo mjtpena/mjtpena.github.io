@@ -1,5 +1,6 @@
 ---
 title: "Databricks SQL Analytics: BI on the Lakehouse"
+description: "SQL Analytics is Databricks' bid for the BI persona who never wanted to learn PySpark. A T-SQL endpoint over Delta Lake, a query editor that looks like…"
 author: Michael John Peña
 draft: false
 date: 2021-01-08
@@ -200,4 +201,4 @@ GRANT VIEW ON DASHBOARD `Sales Dashboard` TO `managers@company.com`;
 | Spot instances | Lower compute costs |
 | Query caching | Avoid redundant scans |
 
-Databricks SQL: warehouse speed on lakehouse data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Databricks SQL: warehouse speed on lakehouse data.

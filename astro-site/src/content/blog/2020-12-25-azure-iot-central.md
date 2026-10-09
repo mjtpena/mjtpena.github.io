@@ -1,5 +1,6 @@
 ---
 title: "Azure IoT Central: Managed IoT Platform"
+description: "Christmas Day, and a quiet thought from a quiet house: most \"IoT projects\" never get past slide three because the team doesn't have the platform to back the…"
 author: Michael John Peña
 draft: false
 date: 2020-12-25
@@ -217,4 +218,4 @@ curl -X POST \
     -d '{"request": {"delay": 5}}'
 ```
 
-IoT Central: from concept to connected solution in minutes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+IoT Central: from concept to connected solution in minutes.

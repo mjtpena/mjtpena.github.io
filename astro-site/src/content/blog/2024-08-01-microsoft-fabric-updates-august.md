@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Updates: August 2024 Highlights"
+description: "3. Create Lakehouse with Shortcuts"
 author: Michael John Peña
 draft: false
 date: 2024-08-01
@@ -9,10 +10,7 @@ tags:
   - Data Platform
   - Analytics
   - Updates
-
 ---
-
-I wrote "Microsoft Fabric Updates: August 2024 Highlights" to share practical, production-minded guidance on this topic.
 
 ## Major Announcements
 
@@ -272,4 +270,3 @@ def create_lakehouse_with_shortcuts(
 August 2024 brings Fabric closer to its vision of a unified analytics platform. Mirroring GA removes integration complexity, capacity features improve cost predictability, and OneLake continues to expand its reach.
 
 Evaluate these features for your workloads and start planning your Fabric journey if you haven't already.
-

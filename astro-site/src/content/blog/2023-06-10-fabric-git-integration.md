@@ -1,5 +1,6 @@
 ---
 title: "Fabric Git Integration: Version Control for Your Data Platform"
+description: "Git integration in Fabric is something I've been waiting for since the first preview. Power BI's lack of proper version control has been a persistent…"
 author: Michael John Peña
 draft: false
 date: 2023-06-10
@@ -366,4 +367,4 @@ Git integration enables proper version control and CI/CD for Fabric. Tomorrow, I
 
 - [Git Integration Overview](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration)
 - [Git Best Practices](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-best-practices)
-- [CI/CD with Fabric](https://learn.microsoft.com/en-us/fabric/cicd/cicd-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [CI/CD with Fabric](https://learn.microsoft.com/en-us/fabric/cicd/cicd-overview)

@@ -1,18 +1,16 @@
 ---
 title: "Azure Policy as Code: Governance at Scale"
+description: "Azure Policy as Code ensures consistent, auditable governance across your entire Azure estate."
 author: Michael John Peña
 draft: false
 date: 2022-01-19
 url: /blog/azure-policy-as-code/
 tags:
-  - azure
-  - governance
-  - policy
-  - compliance
-
+  - Azure
+  - Governance
+  - Policy
+  - Compliance
 ---
-
-I wrote "Azure Policy as Code: Governance at Scale" to share practical, production-minded guidance on this topic.
 
 ## Policy Structure
 
@@ -271,4 +269,4 @@ jobs:
             --template-file policies/assignments.bicep
 ```
 
-Azure Policy as Code ensures consistent, auditable governance across your entire Azure estate.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Policy as Code ensures consistent, auditable governance across your entire Azure estate.

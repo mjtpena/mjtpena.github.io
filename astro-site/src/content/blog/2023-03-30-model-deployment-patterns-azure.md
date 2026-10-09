@@ -1,5 +1,6 @@
 ---
 title: "Model Deployment Patterns for Azure OpenAI"
+description: "These deployment patterns enable safe, controlled rollouts of LLM application changes. Start with gateway and blue-green patterns, then add canary and A/B…"
 author: Michael John Pena
 draft: false
 date: 2023-03-30
@@ -9,10 +10,7 @@ tags:
   - AI
   - Deployment
   - Architecture
-
 ---
-
-I wrote "Model Deployment Patterns for Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Pattern 1: Gateway Pattern
 
@@ -494,4 +492,4 @@ class ShadowDeployer:
         }
 ```
 
-These deployment patterns enable safe, controlled rollouts of LLM application changes. Start with gateway and blue-green patterns, then add canary and A/B testing as your operations mature.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These deployment patterns enable safe, controlled rollouts of LLM application changes. Start with gateway and blue-green patterns, then add canary and A/B testing as your operations mature.

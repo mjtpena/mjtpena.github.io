@@ -9,10 +9,7 @@ tags:
   - Agents
   - Iteration
   - Design Patterns
-
 ---
-
-I wrote "Cycles in Agent Graphs: Iterative Refinement Patterns" to share practical, production-minded guidance on this topic.
 
 ## Why Cycles?
 
@@ -557,4 +554,3 @@ def safe_cycle_check(state: SafeCycleState) -> Literal["continue", "stop"]:
 Cycles enable agents to tackle problems that require iteration. From simple retries to complex self-correction loops, these patterns make agents more robust and capable.
 
 Always implement safety guards, and remember: the power of cycles comes with the responsibility of ensuring they terminate.
-

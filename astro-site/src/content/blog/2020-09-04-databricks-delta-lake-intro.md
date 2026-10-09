@@ -1,5 +1,6 @@
 ---
 title: "Introduction to Delta Lake on Azure Databricks"
+description: "Anyone who's run a \"data lake\" for any length of time has hit the same wall: parquet files everywhere, no transactional guarantees, partial-write disasters…"
 author: Michael John Peña
 draft: false
 date: 2020-09-04
@@ -79,4 +80,4 @@ df_yesterday = spark.read.format("delta") \
 deltaTable.restoreToVersion(5)
 ```
 
-Delta Lake transforms your data lake from a dumping ground into a reliable data platform.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Delta Lake transforms your data lake from a dumping ground into a reliable data platform.

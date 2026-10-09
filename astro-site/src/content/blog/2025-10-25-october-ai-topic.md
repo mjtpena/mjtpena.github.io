@@ -1,5 +1,6 @@
 ---
 title: "Implementing Zero-Trust Security for AI Applications"
+description: "Zero-Trust security ensures AI applications remain protected while enabling legitimate business use cases."
 author: Michael John Peña
 draft: false
 date: 2025-10-25
@@ -9,10 +10,7 @@ tags:
   - AI Applications
   - Azure Security
   - Identity
-
 ---
-
-I wrote "Implementing Zero-Trust Security for AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Securing API Access with Managed Identity
 
@@ -139,4 +137,4 @@ class AuditLogger:
         })
 ```
 
-Zero-Trust security ensures AI applications remain protected while enabling legitimate business use cases.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Zero-Trust security ensures AI applications remain protected while enabling legitimate business use cases.

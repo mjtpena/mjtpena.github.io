@@ -1,5 +1,6 @@
 ---
 title: "Power BI Incremental Refresh: Handle Large Datasets"
+description: "Right-click table → Incremental refresh Incremental refresh transforms multi-hour refreshes into minutes."
 author: Michael John Peña
 draft: false
 date: 2020-10-14
@@ -8,10 +9,7 @@ tags:
   - Data
   - Analytics
   - Performance
-
 ---
-
-I wrote "Power BI Incremental Refresh: Handle Large Datasets" to share practical, production-minded guidance on this topic.
 
 ## How It Works
 
@@ -138,4 +136,4 @@ WHERE [TableName] = 'Sales'
 - Date column required
 - Parameters must be DateTime type
 
-Incremental refresh transforms multi-hour refreshes into minutes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Incremental refresh transforms multi-hour refreshes into minutes.

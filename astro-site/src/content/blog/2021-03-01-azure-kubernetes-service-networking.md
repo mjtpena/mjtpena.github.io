@@ -1,5 +1,6 @@
 ---
 title: Azure Kubernetes Service Networking Deep Dive
+description: "AKS networking is the part of Kubernetes that looks like a detail until it becomes a blocker. \"I can't reach the on-prem database from the cluster\" is a…"
 author: Michael John Pena
 draft: false
 date: 2021-03-01
@@ -10,9 +11,7 @@ tags:
   - AKS
   - Networking
   - Cloud Native
-
 ---
-
 
 AKS networking is the part of Kubernetes that looks like a detail until it becomes a blocker. "I can't reach the on-prem database from the cluster" is a conversation that happens exactly once per project, usually at the worst possible moment. The choices made at cluster creation—CNI vs kubenet, the CIDR ranges, whether to use Azure CNI with overlay or not—can't be easily changed later. Today I'm walking through the key decisions, what each choice forecloses, and the private cluster + Private DNS Zone configuration I now use by default for anything production-bound.
 
@@ -73,4 +72,4 @@ spec:
   podSelector: {}
   policyTypes:
   - Ingress
-
+```

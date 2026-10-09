@@ -1,5 +1,6 @@
 ---
 title: "Continuous Evaluation: Monitoring AI Quality in Production"
+description: "Continuous evaluation maintains AI quality standards throughout the system lifecycle."
 author: Michael John Peña
 draft: false
 date: 2025-05-20
@@ -9,10 +10,7 @@ tags:
   - Monitoring
   - Quality
   - Production
-
 ---
-
-I wrote "Continuous Evaluation: Monitoring AI Quality in Production" to share practical, production-minded guidance on this topic.
 
 ## Continuous Evaluation System
 
@@ -130,4 +128,4 @@ class ContinuousEvaluator:
         }
 ```
 
-Continuous evaluation maintains AI quality standards throughout the system lifecycle.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Continuous evaluation maintains AI quality standards throughout the system lifecycle.

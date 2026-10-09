@@ -9,10 +9,7 @@ tags:
   - Microsoft Teams
   - Cards
   - Low-Code
-
 ---
-
-I wrote "Power Apps Cards: Micro-Apps for Microsoft Teams" to share practical, production-minded guidance on this topic.
 
 ## What Are Power Apps Cards?
 
@@ -459,4 +456,3 @@ They're perfect for repetitive tasks that don't warrant a full application.
 - [Power Apps Cards Documentation](https://docs.microsoft.com/en-us/power-apps/cards/overview)
 - [Adaptive Cards Designer](https://adaptivecards.io/designer/)
 - [Teams Card Reference](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference)
-

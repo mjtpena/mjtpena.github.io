@@ -1,5 +1,6 @@
 ---
 title: "Building Multi-Agent Systems with AutoGen and Azure"
+description: "Instead of a single LLM handling all tasks, multi-agent systems divide work among specialized agents that communicate and coordinate to achieve goals."
 author: Michael John Peña
 draft: false
 date: 2025-11-25
@@ -9,10 +10,7 @@ tags:
   - AI Agents
   - Azure OpenAI
   - Orchestration
-
 ---
-
-I wrote "Building Multi-Agent Systems with AutoGen and Azure" to share practical, production-minded guidance on this topic.
 
 ## Multi-Agent Architecture
 
@@ -171,4 +169,4 @@ data_analyst = AssistantAgent(
 )
 ```
 
-Multi-agent systems excel at complex tasks requiring diverse expertise. The agents provide checks and balances, with reviewers catching errors and writers ensuring clear communication of results.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multi-agent systems excel at complex tasks requiring diverse expertise. The agents provide checks and balances, with reviewers catching errors and writers ensuring clear communication of results.

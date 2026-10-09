@@ -1,13 +1,11 @@
 ---
 title: "Point-in-Time Restore in Azure Cosmos DB"
+description: "PITR works with the continuous backup feature to provide granular recovery options. You can restore entire accounts, specific databases, or individual…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-05
 tags: ["Azure", "Cosmos DB", "Backup", "Recovery", "PITR"]
-
 ---
-
-I wrote "Point-in-Time Restore in Azure Cosmos DB" to share practical, production-minded guidance on this topic.
 
 ## Understanding Point-in-Time Restore
 
@@ -290,4 +288,4 @@ public class ValidationResult
 4. **Validate after restore** - Always verify data integrity post-restore
 5. **Plan for RTO** - Restore time depends on data size
 
-Point-in-time restore is your safety net for protecting critical data in Azure Cosmos DB.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Point-in-time restore is your safety net for protecting critical data in Azure Cosmos DB.

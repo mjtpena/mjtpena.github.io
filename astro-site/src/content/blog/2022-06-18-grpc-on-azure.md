@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-18
 tags:
-  - grpc
-  - azure
-  - api
-  - microservices
-
+  - gRPC
+  - Azure
+  - API
+  - Microservices
 ---
-
-I wrote "gRPC on Azure: High-Performance API Communication" to share practical, production-minded guidance on this topic.
 
 ## Defining gRPC Services
 
@@ -101,5 +98,3 @@ spec:
 ## Summary
 
 gRPC offers binary serialization, HTTP/2 multiplexing, and streaming for high-performance microservices on Azure.
-
-

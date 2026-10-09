@@ -1,13 +1,11 @@
 ---
 title: "Arize AI for Production LLM Monitoring"
+description: "Arize provides comprehensive production monitoring for LLMs with enterprise features like drift detection, alerting, and detailed analytics. It's ideal for…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-19
 tags: ["Arize", "Production", "LLM", "Monitoring", "ML Observability"]
-
 ---
-
-I wrote "Arize AI for Production LLM Monitoring" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Arize
 
@@ -361,4 +359,4 @@ ALERT_CONFIG = {
 # - Webhooks
 ```
 
-Arize provides comprehensive production monitoring for LLMs with enterprise features like drift detection, alerting, and detailed analytics. It's ideal for teams running AI at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Arize provides comprehensive production monitoring for LLMs with enterprise features like drift detection, alerting, and detailed analytics. It's ideal for teams running AI at scale.

@@ -1,5 +1,6 @@
 ---
 title: "Anomaly Detection at Scale with AI"
+description: "Anomaly detection at scale combines statistical rigor with AI understanding. Systems that both detect and explain anomalies enable faster, more confident…"
 author: Michael John Pena
 draft: false
 date: 2023-04-24
@@ -9,10 +10,7 @@ tags:
   - Machine Learning
   - Data Engineering
   - Azure
-
 ---
-
-I wrote "Anomaly Detection at Scale with AI" to share practical, production-minded guidance on this topic.
 
 ## Scalable Anomaly Detection Framework
 
@@ -564,4 +562,4 @@ explainer = AnomalyExplainer(llm_client, spark)
 explanations = await explainer.explain_anomalies(anomalies, context_cols=["customer_id", "product_id"])
 ```
 
-Anomaly detection at scale combines statistical rigor with AI understanding. Systems that both detect and explain anomalies enable faster, more confident decision-making.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Anomaly detection at scale combines statistical rigor with AI understanding. Systems that both detect and explain anomalies enable faster, more confident decision-making.

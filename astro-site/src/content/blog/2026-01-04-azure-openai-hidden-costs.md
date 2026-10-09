@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI: The Hidden Costs Nobody Talks About"
+description: "Let me show you where the costs hide. Simple math, right? Wrong. Every chat conversation includes the entire history. That \"helpful\" feature where the AI…"
 author: Michael John Peña
 draft: false
 date: 2026-01-04
@@ -8,10 +9,7 @@ tags:
   - OpenAI
   - Cost
   - FinOps
-
 ---
-
-I wrote "Azure OpenAI: The Hidden Costs Nobody Talks About" to share practical, production-minded guidance on this topic.
 
 Let me show you where the costs hide.
 
@@ -284,4 +282,4 @@ Pay attention to:
 - Error handling
 - Development practices
 
-Your finance team will thank you.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Your finance team will thank you.

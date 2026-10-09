@@ -10,10 +10,7 @@ tags:
   - Observability
   - Production
   - AI
-
 ---
-
-I wrote "Tracing and Debugging LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -479,4 +476,3 @@ live_debugger.enable_for_request("problem-request-123")
 ## Conclusion
 
 Effective tracing and debugging of LLM applications requires a multi-layered approach: comprehensive tracing infrastructure, detailed logging, prompt analysis, response validation, and production debugging tools. By implementing these techniques, you can quickly identify and resolve issues in complex LLM systems.
-

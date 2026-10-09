@@ -1,5 +1,6 @@
 ---
 title: Azure Static Web Apps Custom Authentication
+description: "Static Web Apps shipped its preview late 2020 and has been quietly stealing front-end workloads from App Service ever since. Today I want to dig into the…"
 author: Michael John Pena
 draft: false
 date: 2021-01-16
@@ -220,4 +221,4 @@ When implementing custom authentication in Azure Static Web Apps, keep these bes
 4. **Rotate secrets regularly**: Use Azure Key Vault for secret management
 5. **Monitor authentication events**: Use Application Insights for tracking
 
-Azure Static Web Apps continues to evolve, and the authentication capabilities make it an excellent choice for building secure, scalable web applications without managing infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Static Web Apps continues to evolve, and the authentication capabilities make it an excellent choice for building secure, scalable web applications without managing infrastructure.

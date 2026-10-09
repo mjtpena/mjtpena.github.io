@@ -1,5 +1,6 @@
 ---
 title: "PostgreSQL with pgvector: Open Source Vector Search"
+description: "pgvector enables AI-ready applications using familiar PostgreSQL infrastructure."
 author: Michael John Peña
 draft: false
 date: 2025-04-17
@@ -9,10 +10,7 @@ tags:
   - Vector
   - Database
   - Open Source
-
 ---
-
-I wrote "PostgreSQL with pgvector: Open Source Vector Search" to share practical, production-minded guidance on this topic.
 
 ## pgvector Implementation
 
@@ -155,4 +153,4 @@ class PgVectorStore:
             return [{"id": r[0], "content": r[1], "score": r[2]} for r in cur.fetchall()]
 ```
 
-pgvector enables AI-ready applications using familiar PostgreSQL infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+pgvector enables AI-ready applications using familiar PostgreSQL infrastructure.

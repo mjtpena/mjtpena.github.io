@@ -1,18 +1,16 @@
 ---
 title: "Performance Optimization for .NET 9 Applications on Azure"
+description: "Results: Cold start reduced from 800ms to 150ms. These optimizations combined typically reduce Azure compute costs by 30-50% while improving response times.…"
 author: Michael John Peña
 draft: false
 date: 2025-12-06
 tags:
-  - DotNet
+  - dotnet
   - Performance
   - Azure
   - Optimization
   - Best-Practices
-
 ---
-
-I wrote "Performance Optimization for .NET 9 Applications on Azure" to share practical, production-minded guidance on this topic.
 
 ## Native AOT for Azure Functions
 
@@ -139,4 +137,4 @@ stopwatch.Stop();
 activity?.SetTag("duration.ms", stopwatch.ElapsedMilliseconds);
 ```
 
-These optimizations combined typically reduce Azure compute costs by 30-50% while improving response times. Start with profiling to identify your specific bottlenecks.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These optimizations combined typically reduce Azure compute costs by 30-50% while improving response times. Start with profiling to identify your specific bottlenecks.

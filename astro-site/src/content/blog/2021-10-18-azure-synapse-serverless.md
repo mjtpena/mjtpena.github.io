@@ -1,13 +1,11 @@
 ---
 title: "Azure Synapse Serverless SQL Pools for Big Data Analytics"
+description: "Synapse Serverless SQL Pool is the query engine that turned Azure Data Lake into an ad-hoc analytics platform—you write T-SQL, point it at files in ADLS…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-18
 tags: ["Azure", "Synapse", "SQL", "Serverless", "Big Data"]
-
 ---
-
-I wrote "Azure Synapse Serverless SQL Pools for Big Data Analytics" to share practical, production-minded guidance on this topic.
 
 Synapse Serverless SQL Pool is the query engine that turned Azure Data Lake into an ad-hoc analytics platform—you write T-SQL, point it at files in ADLS Gen2, and pay per terabyte of data scanned, with no cluster to provision or manage. The key insight is the separation of compute from storage: your data lives in ADLS Gen2 in Parquet, Delta, or CSV format; the serverless pool brings compute to that data on demand, without ingesting it into a managed database. The `OPENROWSET` function is the foundation—it reads files directly from storage with a defined schema. External tables and views built on top of `OPENROWSET` expose the data lake as a relational schema, so Power BI and other SQL-connected tools can query it without knowing about the underlying file structure. The cost model (per TB scanned) rewards columnar formats and partition pruning—wide CSV scans get expensive fast.
 
@@ -349,4 +347,3 @@ FROM OPENROWSET(
 Azure Synapse serverless SQL pools provide a cost-effective way to query data lake storage using familiar T-SQL. By following best practices for partitioning and column projection, you can build efficient analytics solutions without managing infrastructure.
 
 Tomorrow, we'll explore Synapse dedicated SQL pool best practices for high-performance data warehousing.
-

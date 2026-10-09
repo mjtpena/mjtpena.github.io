@@ -1,5 +1,6 @@
 ---
 title: "Semantic Router: Intent-Based LLM Routing"
+description: "Semantic routing compares the meaning of a user's query against a set of example utterances. When the query is semantically similar to examples for a…"
 author: Michael John Peña
 draft: false
 date: 2024-07-10
@@ -9,10 +10,7 @@ tags:
   - NLP
   - Semantic
   - Azure
-
 ---
-
-I wrote "Semantic Router: Intent-Based LLM Routing" to share practical, production-minded guidance on this topic.
 
 ## What is Semantic Routing?
 
@@ -620,4 +618,3 @@ class AzureSemanticRouter:
 Semantic routing brings intelligence to LLM orchestration. Instead of brittle keyword rules, you match meaning. This results in more natural interactions and better routing accuracy.
 
 Start with clear intent definitions, diverse examples, and iterate based on real usage patterns.
-

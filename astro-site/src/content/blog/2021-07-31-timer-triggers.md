@@ -10,12 +10,9 @@ tags:
   - Azure Functions
   - Scheduling
   - Automation
-
 ---
 
-I wrote "2021-07-31-timer-triggers" to share practical, production-minded guidance on this topic.
-
-# Basic Timer Trigger
+## Basic Timer Trigger
 
 Create a scheduled function:
 
@@ -83,7 +80,7 @@ public class ScheduledFunctions
 }
 ```
 
-# CRON Expression Reference
+## CRON Expression Reference
 
 Common CRON patterns:
 
@@ -121,7 +118,7 @@ public class CronExamples
 }
 ```
 
-# Handling Long-Running Tasks
+## Handling Long-Running Tasks
 
 Implement patterns for tasks that may exceed timeout:
 
@@ -205,7 +202,7 @@ public class LongRunningScheduledTasks
 }
 ```
 
-# Preventing Duplicate Executions
+## Preventing Duplicate Executions
 
 Ensure single instance execution:
 
@@ -259,7 +256,7 @@ public class SingletonTimerFunctions
 }
 ```
 
-# Dynamic Schedules
+## Dynamic Schedules
 
 Configure schedules from app settings:
 
@@ -308,7 +305,7 @@ public class DurableScheduledFunctions
 }
 ```
 
-# Error Handling and Retry
+## Error Handling and Retry
 
 Implement robust error handling:
 
@@ -388,7 +385,7 @@ public class RobustTimerFunctions
 }
 ```
 
-# Monitoring Timer Functions
+## Monitoring Timer Functions
 
 Monitor scheduled function execution:
 
@@ -448,7 +445,7 @@ public class MonitoredTimerFunction
 }
 ```
 
-# Best Practices
+## Best Practices
 
 Timer trigger recommendations:
 
@@ -485,11 +482,10 @@ for category, practices in best_practices.items():
         print(f"  - {practice}")
 ```
 
-# Conclusion
+## Conclusion
 
 Timer-triggered Azure Functions provide a powerful, serverless approach to scheduled tasks. From simple cleanup jobs to complex batch processing workflows, timer triggers enable you to run code reliably on a schedule without managing infrastructure.
 
 Key practices include handling late executions appropriately, implementing idempotency for reliability, and monitoring execution patterns. For tasks that may exceed function timeout limits, consider using timer triggers to initiate queue-based workflows that can process in parallel.
 
 Combined with other Azure services like Durable Functions for complex orchestrations or Logic Apps for visual workflow design, timer triggers are a versatile tool in your serverless toolkit.
-

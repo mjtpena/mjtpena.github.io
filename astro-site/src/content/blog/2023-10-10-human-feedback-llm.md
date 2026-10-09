@@ -10,10 +10,7 @@ tags:
   - RLHF
   - Quality Improvement
   - AI
-
 ---
-
-I wrote "Human Feedback in LLM Development" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -586,4 +583,3 @@ pipeline.assign_task(task_id, "expert-1")
 ## Conclusion
 
 Human feedback is invaluable for improving LLM applications. By implementing comprehensive feedback collection, analysis, and optimization systems, you can continuously improve response quality based on real user and expert input. The key is making feedback collection frictionless while ensuring the data is actionable for system improvements.
-

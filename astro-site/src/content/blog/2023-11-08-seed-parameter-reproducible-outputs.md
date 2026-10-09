@@ -1,13 +1,11 @@
 ---
 title: "Seed Parameter: Achieving Reproducible LLM Outputs"
+description: "The seed parameter introduced in GPT-4 Turbo at DevDay 2023 is a useful addition for testing and debugging, but it's important to understand what…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-08
 tags: ["OpenAI", "API", "Reproducibility", "GPT-4", "Testing"]
-
 ---
-
-I wrote "Seed Parameter: Achieving Reproducible LLM Outputs" to share practical, production-minded guidance on this topic.
 
 The seed parameter introduced in GPT-4 Turbo at DevDay 2023 is a useful addition for testing and debugging, but it's important to understand what "reproducibility" means here: best-effort, not guaranteed. Setting the same seed with the same inputs will return consistent outputs most of the time, but the API response includes a `system_fingerprint` field that captures the current model state — if that fingerprint changes (because OpenAI updated the model), the same seed with the same input may produce different output. This is the right design for a continuously improving commercial model, but it means seed-based reproducibility is useful for short-term development and testing workflows, not long-term reproducible research archives. For evaluation datasets and regression testing, storing the actual outputs alongside the inputs is more reliable than depending on seed-based reproduction.
 
@@ -242,4 +240,3 @@ LLM_CONFIG = {
 ## Conclusion
 
 The seed parameter transforms LLM development by enabling reproducibility. This is crucial for testing, debugging, and building reliable production systems. Tomorrow, we'll explore the enhanced function calling capabilities in GPT-4 Turbo!
-

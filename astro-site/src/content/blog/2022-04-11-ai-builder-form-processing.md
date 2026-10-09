@@ -9,10 +9,7 @@ tags:
   - Form Processing
   - Custom Models
   - Document AI
-
 ---
-
-I wrote "Custom Form Processing with AI Builder: Training Your Own Document Models" to share practical, production-minded guidance on this topic.
 
 ## When to Use Custom Models
 
@@ -298,4 +295,3 @@ Custom form processing enables document automation for any form type. With prope
 
 - [Create Form Processing Model](https://docs.microsoft.com/en-us/ai-builder/create-form-processing-model)
 - [Form Processing Best Practices](https://docs.microsoft.com/en-us/ai-builder/before-you-build-form-processing-model)
-

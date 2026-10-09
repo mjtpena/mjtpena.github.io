@@ -1,5 +1,6 @@
 ---
 title: "Item Permissions in Fabric: Granular Access Control"
+description: "Item permissions provide the flexibility to share specific artifacts securely. Tomorrow, I will cover Row-Level Security in Fabric."
 author: Michael John Peña
 draft: false
 date: 2023-06-16
@@ -9,10 +10,7 @@ tags:
   - Security
   - Data Access
   - Governance
-
 ---
-
-I wrote "Item Permissions in Fabric: Granular Access Control" to share practical, production-minded guidance on this topic.
 
 ## Item Permissions Overview
 
@@ -308,4 +306,4 @@ Item permissions provide the flexibility to share specific artifacts securely. T
 
 - [Share Items](https://learn.microsoft.com/en-us/fabric/get-started/share-items)
 - [Permission Model](https://learn.microsoft.com/en-us/fabric/get-started/permission-model)
-- [Sharing Best Practices](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-how-to-collaborate-distribute-dashboards-reports)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Sharing Best Practices](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-how-to-collaborate-distribute-dashboards-reports)

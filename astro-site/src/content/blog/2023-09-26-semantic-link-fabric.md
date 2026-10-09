@@ -10,10 +10,7 @@ tags:
   - Power BI
   - Data Science
   - Analytics
-
 ---
-
-I wrote "Semantic Link in Microsoft Fabric: Connecting Data and Analytics" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -489,4 +486,3 @@ print(time_intel_code)
 ## Conclusion
 
 Semantic Link in Microsoft Fabric bridges the gap between business intelligence and data science, enabling organizations to maintain consistency across their analytics workloads. By leveraging curated business logic from Power BI semantic models, data scientists can focus on building models rather than recreating calculations, while ensuring alignment with established business definitions.
-

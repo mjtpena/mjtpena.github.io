@@ -1,5 +1,6 @@
 ---
 title: "Azure API Management: API Gateway Patterns"
+description: "Three years ago a client asked me to \"put a gateway in front of my APIs.\" It turned into a six-month conversation about rate limiting, OAuth, partner…"
 author: Michael John Peña
 draft: false
 date: 2020-09-11
@@ -8,9 +9,7 @@ tags:
   - API Management
   - APIs
   - Security
-
 ---
-
 
 Three years ago a client asked me to "put a gateway in front of my APIs." It turned into a six-month conversation about rate limiting, OAuth, partner onboarding, versioning, and analytics. APIM is the answer to all of those at once — not just a reverse proxy, but the layer where you put policies, transformations, products, and a developer portal. It's also the layer that's hard to retrofit later, which is why I push clients to set it up early, even when they think they only need URL routing.
 
@@ -78,5 +77,4 @@ APIM includes a customizable developer portal where consumers can:
 - Register for API keys
 - View usage analytics
 
-For organizations exposing APIs to partners or developers, APIM is essential infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+For organizations exposing APIs to partners or developers, APIM is essential infrastructure.

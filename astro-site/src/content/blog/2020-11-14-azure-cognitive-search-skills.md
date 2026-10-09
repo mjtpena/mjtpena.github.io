@@ -1,5 +1,6 @@
 ---
 title: "Azure Cognitive Search: AI-Powered Skillsets"
+description: "Indexing PDFs is easy. Indexing PDFs in a way that makes them findable is a different sport. Cognitive Search skillsets are the part I usually sell to…"
 author: Michael John Peña
 draft: false
 date: 2020-11-14
@@ -176,4 +177,4 @@ public static async Task<IActionResult> Run(
 }
 ```
 
-Skillsets transform raw documents into searchable knowledge.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Skillsets transform raw documents into searchable knowledge.

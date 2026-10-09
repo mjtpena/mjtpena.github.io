@@ -1,5 +1,6 @@
 ---
 title: "Bing Chat: GPT-4 Powered Search"
+description: "Bing Chat represents the future of search: not just finding links, but synthesizing answers from the web with AI understanding."
 author: Michael John Pena
 draft: false
 date: 2023-04-11
@@ -9,10 +10,7 @@ tags:
   - Bing
   - GPT-4
   - Search
-
 ---
-
-I wrote "Bing Chat: GPT-4 Powered Search" to share practical, production-minded guidance on this topic.
 
 ## Architecture: Search + LLM
 
@@ -247,4 +245,4 @@ Answer citing sources as [1], [2], etc."""
 | Conversation | Unlimited | Limited turns |
 | Modes | One | Creative/Balanced/Precise |
 
-Bing Chat represents the future of search: not just finding links, but synthesizing answers from the web with AI understanding.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Bing Chat represents the future of search: not just finding links, but synthesizing answers from the web with AI understanding.

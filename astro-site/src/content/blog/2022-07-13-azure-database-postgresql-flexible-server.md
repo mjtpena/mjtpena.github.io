@@ -1,13 +1,11 @@
 ---
 title: "Azure Database for PostgreSQL Flexible Server Deep Dive"
+description: "Flexible Server gives you the power of managed PostgreSQL with the flexibility to tune it for your specific needs."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-13
 tags: ["Azure", "PostgreSQL", "Flexible Server", "Database", "Cloud"]
-
 ---
-
-I wrote "Azure Database for PostgreSQL Flexible Server Deep Dive" to share practical, production-minded guidance on this topic.
 
 ## Creating a Flexible Server
 
@@ -181,4 +179,4 @@ az postgres flexible-server update \
     --maintenance-window "Sun:02:00"
 ```
 
-Flexible Server gives you the power of managed PostgreSQL with the flexibility to tune it for your specific needs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Flexible Server gives you the power of managed PostgreSQL with the flexibility to tune it for your specific needs.

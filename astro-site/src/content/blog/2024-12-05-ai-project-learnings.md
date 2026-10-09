@@ -1,5 +1,6 @@
 ---
 title: "AI Project Learnings: What Actually Works in Practice"
+description: "These lessons were learned the hard way. Hopefully, they save you some pain."
 author: Michael John Peña
 draft: false
 date: 2024-12-05
@@ -9,10 +10,7 @@ tags:
   - Lessons Learned
   - Best Practices
   - Enterprise
-
 ---
-
-I wrote "AI Project Learnings: What Actually Works in Practice" to share practical, production-minded guidance on this topic.
 
 ## Lesson 1: Data Quality Trumps Model Sophistication
 
@@ -385,4 +383,3 @@ These lessons were learned the hard way. Hopefully, they save you some pain.
 - [Google AI Best Practices](https://ai.google/responsibility/best-practices/)
 - [OpenAI Production Best Practices](https://platform.openai.com/docs/guides/production-best-practices)
 - [Microsoft Responsible AI](https://www.microsoft.com/en-us/ai/responsible-ai)
-

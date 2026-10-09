@@ -4,10 +4,7 @@ author: "Michael John Peña"
 draft: false
 date: 2022-10-02
 tags: ["Azure", "Azure Arc", "Hybrid Cloud", "Multi-Cloud"]
-
 ---
-
-I wrote "Azure Arc Updates - Hybrid Cloud Management" to share practical, production-minded guidance on this topic.
 
 ## Azure Arc Overview
 
@@ -240,4 +237,5 @@ public class ArcK8sMetrics
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: flux-system\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+  name: flux-system
+```

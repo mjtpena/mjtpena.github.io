@@ -6,12 +6,9 @@ date: 2022-06-15
 tags:
   - linkerd
   - service-mesh
-  - kubernetes
-  - microservices
-
+  - Kubernetes
+  - Microservices
 ---
-
-I wrote "Linkerd: Lightweight Service Mesh for Kubernetes" to share practical, production-minded guidance on this topic.
 
 ## Installation
 
@@ -72,5 +69,3 @@ linkerd viz top deploy/api
 ## Summary
 
 Linkerd offers simplicity and low overhead, ideal for teams wanting service mesh benefits without complexity.
-
-

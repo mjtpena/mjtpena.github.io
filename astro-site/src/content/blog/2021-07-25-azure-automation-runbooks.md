@@ -10,12 +10,9 @@ tags:
   - DevOps
   - PowerShell
   - Infrastructure
-
 ---
 
-I wrote "2021-07-25-azure-automation-runbooks" to share practical, production-minded guidance on this topic.
-
-# Creating an Automation Account
+## Creating an Automation Account
 
 Set up Azure Automation:
 
@@ -45,7 +42,7 @@ az role assignment create \
     --scope /subscriptions/$SUBSCRIPTION_ID
 ```
 
-# PowerShell Runbook Example
+## PowerShell Runbook Example
 
 Create a runbook for VM management:
 
@@ -148,7 +145,7 @@ $results | Format-Table -AutoSize
 return $results
 ```
 
-# Python Runbook Example
+## Python Runbook Example
 
 Create a Python runbook for resource cleanup:
 
@@ -250,7 +247,7 @@ if __name__ == "__main__":
     main()
 ```
 
-# Scheduling Runbooks
+## Scheduling Runbooks
 
 Create schedules for automated execution:
 
@@ -343,7 +340,7 @@ link_schedule_to_runbook(
 )
 ```
 
-# Webhook Triggers
+## Webhook Triggers
 
 Create webhooks for external triggering:
 
@@ -382,7 +379,7 @@ webhook = create_webhook(
 )
 ```
 
-# Monitoring Runbook Jobs
+## Monitoring Runbook Jobs
 
 Track runbook execution:
 
@@ -453,7 +450,7 @@ for job in recent:
     print(f"  {job['runbook']}: {job['status']} ({job['creation_time']})")
 ```
 
-# Error Handling and Notifications
+## Error Handling and Notifications
 
 Add robust error handling to runbooks:
 
@@ -580,9 +577,8 @@ catch {
 }
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Automation runbooks provide a powerful way to automate repetitive tasks and operational procedures. Whether using PowerShell for Azure-native operations or Python for cross-platform scripts, runbooks enable consistent, auditable automation.
 
 Key practices include using Managed Identities for authentication, implementing proper error handling with notifications, and scheduling runbooks for routine tasks. Combined with webhooks for external triggering, Azure Automation becomes a central hub for infrastructure management.
-

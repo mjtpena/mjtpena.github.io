@@ -1,5 +1,6 @@
 ---
 title: "SynapseML: Distributed AI at Scale"
+description: "SynapseML democratizes distributed machine learning. Train on massive datasets, tune hyperparameters in parallel, and deploy models at scale - all with…"
 author: Michael John Pena
 draft: false
 date: 2023-04-20
@@ -9,10 +10,7 @@ tags:
   - Spark
   - Machine Learning
   - Distributed Computing
-
 ---
-
-I wrote "SynapseML: Distributed AI at Scale" to share practical, production-minded guidance on this topic.
 
 ## SynapseML Fundamentals
 
@@ -501,4 +499,4 @@ result = pipeline.run_classification_pipeline(
 print(f"Model AUC: {result['metrics']['auc']:.4f}")
 ```
 
-SynapseML democratizes distributed machine learning. Train on massive datasets, tune hyperparameters in parallel, and deploy models at scale - all with familiar APIs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+SynapseML democratizes distributed machine learning. Train on massive datasets, tune hyperparameters in parallel, and deploy models at scale - all with familiar APIs.

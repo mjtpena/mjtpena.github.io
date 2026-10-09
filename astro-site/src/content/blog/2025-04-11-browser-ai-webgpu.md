@@ -1,5 +1,6 @@
 ---
 title: "Browser AI with WebGPU: Running Models in the Browser"
+description: "WebGPU brings near-native AI performance to web applications with zero installation."
 author: Michael John Peña
 draft: false
 date: 2025-04-11
@@ -9,10 +10,7 @@ tags:
   - AI
   - JavaScript
   - Web
-
 ---
-
-I wrote "Browser AI with WebGPU: Running Models in the Browser" to share practical, production-minded guidance on this topic.
 
 ## Browser AI with WebGPU
 
@@ -120,4 +118,4 @@ function cosineSimilarity(a, b) {
 }
 ```
 
-WebGPU brings near-native AI performance to web applications with zero installation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+WebGPU brings near-native AI performance to web applications with zero installation.

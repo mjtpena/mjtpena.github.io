@@ -9,10 +9,7 @@ tags:
   - Cost Optimization
   - Performance
   - FinOps
-
 ---
-
-I wrote "Microsoft Fabric Capacity Optimization" to share practical, production-minded guidance on this topic.
 
 ## Understanding Fabric Capacity
 
@@ -496,4 +493,3 @@ for rec in analysis["recommendations"]:
 Effective capacity optimization balances performance requirements with cost efficiency. Regular monitoring, smart scheduling, and workload optimization help organizations maximize their Fabric investment.
 
 Start with right-sized capacity, monitor usage patterns, and adjust based on actual needs rather than assumptions.
-

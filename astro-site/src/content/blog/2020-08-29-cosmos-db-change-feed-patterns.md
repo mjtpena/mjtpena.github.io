@@ -1,5 +1,6 @@
 ---
 title: "Azure Cosmos DB Change Feed Patterns"
+description: "Change Feed transforms Cosmos DB from a database into a real-time event platform."
 author: Michael John Peña
 draft: false
 date: 2020-08-29
@@ -8,10 +9,7 @@ tags:
   - Cosmos DB
   - Change Feed
   - Event-Driven
-
 ---
-
-I wrote "Azure Cosmos DB Change Feed Patterns" to share practical, production-minded guidance on this topic.
 
 ## Common Patterns
 
@@ -83,4 +81,4 @@ public static async Task PublishToEventHub(
 - Ordering is guaranteed within a partition, not globally
 - Use lease collection to track progress and enable scaling
 
-Change Feed transforms Cosmos DB from a database into a real-time event platform.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Change Feed transforms Cosmos DB from a database into a real-time event platform.

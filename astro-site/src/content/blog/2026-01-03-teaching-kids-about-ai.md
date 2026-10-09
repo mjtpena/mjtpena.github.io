@@ -1,5 +1,6 @@
 ---
 title: "Teaching My Son About AI (The Non-Technical Version)"
+description: "Archael asked me yesterday what I do for work. I told him I help computers think. He looked at me like I was pulling his leg. \"Dad, computers can't think.\""
 author: Michael John Peña
 draft: false
 date: 2026-01-03
@@ -108,4 +109,4 @@ The rest they can learn later if they're interested.
 
 For now, Archael wants to use it to help write his Pokemon fanfiction. Andriel wants to know if AI can help him identify different types of trains.
 
-I'll take that as a win.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+I'll take that as a win.

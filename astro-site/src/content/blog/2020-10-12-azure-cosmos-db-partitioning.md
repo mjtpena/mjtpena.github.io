@@ -1,5 +1,6 @@
 ---
 title: "Azure Cosmos DB Partitioning Strategies"
+description: "Of every Cosmos DB design conversation I've had, partition key choice is the one that has the biggest cost-and-performance consequence and the smallest…"
 author: Michael John Peña
 draft: false
 date: 2020-10-12
@@ -8,9 +9,7 @@ tags:
   - Cosmos DB
   - NoSQL
   - Database
-
 ---
-
 
 Of every Cosmos DB design conversation I've had, partition key choice is the one that has the biggest cost-and-performance consequence and the smallest amount of "I can fix it later" — once the container is populated, you're stuck with it short of a full migration. Pick a high-cardinality key that distributes writes evenly *and* keeps the access patterns you actually use single-partition. Time-based keys, status-flag keys, and "we'll figure out access patterns later" are the three traps I keep watching teams fall into.
 
@@ -130,5 +129,4 @@ az cosmosdb sql container show \
 | Random GUID partition key | Cross-partition queries always |
 | Same partition key as id | No logical grouping |
 
-Choose your partition key carefully—it's the foundation of Cosmos DB performance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+Choose your partition key carefully—it's the foundation of Cosmos DB performance.

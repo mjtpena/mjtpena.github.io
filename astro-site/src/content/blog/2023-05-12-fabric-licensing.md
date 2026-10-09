@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Licensing: Understanding Your Options"
+description: "Understanding Fabric licensing helps you plan costs and ensure users have appropriate access. Tomorrow, I will cover Fabric Workspace configuration and…"
 author: Michael John Peña
 draft: false
 date: 2023-05-12
@@ -9,10 +10,7 @@ tags:
   - Power BI
   - Azure
   - Enterprise
-
 ---
-
-I wrote "Microsoft Fabric Licensing: Understanding Your Options" to share practical, production-minded guidance on this topic.
 
 ## Fabric Licensing Model
 
@@ -278,4 +276,4 @@ Understanding Fabric licensing helps you plan costs and ensure users have approp
 
 - [Fabric Licenses](https://learn.microsoft.com/en-us/fabric/enterprise/licenses)
 - [Power BI Licensing](https://learn.microsoft.com/en-us/power-bi/fundamentals/service-features-license-type)
-- [Fabric Pricing](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric Pricing](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/)

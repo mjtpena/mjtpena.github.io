@@ -1,13 +1,11 @@
 ---
 title: "AI Compliance Considerations: Navigating the Regulatory Landscape"
+description: "Compliance moved from a legal exercise to a product requirement in 2023. My pragmatic approach: map data flows to jurisdictions, embed consent and retention…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-08
 tags: ["AI", "Compliance", "Regulation", "GDPR", "Enterprise"]
-
 ---
-
-I wrote "AI Compliance Considerations: Navigating the Regulatory Landscape" to share practical, production-minded guidance on this topic.
 
 Compliance moved from a legal exercise to a product requirement in 2023. My pragmatic approach: map data flows to jurisdictions, embed consent and retention policies in pipelines, and bake compliance checks into deployment pipelines so regulations don't become blockers at release time.
 
@@ -330,4 +328,5 @@ class AIPrivacyImpactAssessment:
 
 ## 6. Conclusion
 
-[To be completed after assessment]\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+[To be completed after assessment]
+```

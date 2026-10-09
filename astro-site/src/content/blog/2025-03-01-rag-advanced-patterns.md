@@ -1,5 +1,6 @@
 ---
 title: "RAG Advanced Patterns: Beyond Basic Retrieval"
+description: "Advanced RAG combines query expansion, hybrid retrieval, reranking, and context compression for better results."
 author: Michael John Peña
 draft: false
 date: 2025-03-01
@@ -9,10 +10,7 @@ tags:
   - Retrieval
   - Patterns
   - Architecture
-
 ---
-
-I wrote "RAG Advanced Patterns: Beyond Basic Retrieval" to share practical, production-minded guidance on this topic.
 
 ## Advanced RAG Architecture
 
@@ -70,4 +68,4 @@ class AdvancedRAGPipeline:
         )
 ```
 
-Advanced RAG combines query expansion, hybrid retrieval, reranking, and context compression for better results.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Advanced RAG combines query expansion, hybrid retrieval, reranking, and context compression for better results.

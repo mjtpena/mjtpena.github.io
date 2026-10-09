@@ -1,5 +1,6 @@
 ---
 title: Productive this Pandemic - Planning your week ahead
+description: "People have asked me lately, how do I do it? Having a full-time consulting company, spending quality time with family, doing groceries, cooking, house…"
 author: Michael John Peña
 draft: false
 date: 2021-09-04

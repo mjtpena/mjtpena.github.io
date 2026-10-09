@@ -1,13 +1,11 @@
 ---
 title: "Hyperparameter Tuning with Azure ML Sweep Jobs"
+description: "Sweep jobs automate the tedious process of hyperparameter tuning, helping you find optimal configurations faster."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-19
 tags: ["Azure", "Machine Learning", "Hyperparameter Tuning", "Sweep", "Optimization"]
-
 ---
-
-I wrote "Hyperparameter Tuning with Azure ML Sweep Jobs" to share practical, production-minded guidance on this topic.
 
 ## Basic Sweep Job
 
@@ -307,4 +305,4 @@ model = Model(
 ml_client.models.create_or_update(model)
 ```
 
-Sweep jobs automate the tedious process of hyperparameter tuning, helping you find optimal configurations faster.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Sweep jobs automate the tedious process of hyperparameter tuning, helping you find optimal configurations faster.

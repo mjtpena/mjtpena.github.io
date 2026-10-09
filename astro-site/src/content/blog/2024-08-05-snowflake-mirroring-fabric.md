@@ -1,5 +1,6 @@
 ---
 title: "Snowflake Mirroring to Fabric: Cross-Cloud Data Integration"
+description: "Mirroring eliminates the need for complex ETL between these systems."
 author: Michael John Peña
 draft: false
 date: 2024-08-05
@@ -9,10 +10,7 @@ tags:
   - Mirroring
   - Cross-Cloud
   - Data Integration
-
 ---
-
-I wrote "Snowflake Mirroring to Fabric: Cross-Cloud Data Integration" to share practical, production-minded guidance on this topic.
 
 ## Why Snowflake to Fabric?
 
@@ -433,4 +431,3 @@ def estimate_snowflake_mirror_costs(
 Snowflake mirroring bridges the gap between Snowflake and Microsoft's data ecosystem. While still in preview, it offers a promising path for organizations with multi-cloud data strategies.
 
 Evaluate the cost and performance characteristics for your specific workload before committing to production use.
-

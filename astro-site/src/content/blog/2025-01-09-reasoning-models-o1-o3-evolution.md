@@ -1,5 +1,6 @@
 ---
 title: "Reasoning Models Evolution: From o1 to o3 and Beyond"
+description: "Reasoning models represent a significant advancement in AI capability. Use them for problems that truly require deep thinking, and you'll see dramatically…"
 author: Michael John Peña
 draft: false
 date: 2025-01-09
@@ -10,10 +11,7 @@ tags:
   - o1
   - o3
   - LLM
-
 ---
-
-I wrote "Reasoning Models Evolution: From o1 to o3 and Beyond" to share practical, production-minded guidance on this topic.
 
 ## What Makes Reasoning Models Different?
 
@@ -314,4 +312,4 @@ Expect to see:
 - **Verifiable reasoning** with formal proofs
 - **Cost optimization** as the technology matures
 
-Reasoning models represent a significant advancement in AI capability. Use them for problems that truly require deep thinking, and you'll see dramatically better results.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Reasoning models represent a significant advancement in AI capability. Use them for problems that truly require deep thinking, and you'll see dramatically better results.

@@ -1,5 +1,6 @@
 ---
 title: "End-to-End MLOps with Azure Machine Learning and GitHub Actions"
+description: "Implement approval gates before production deployment. Track model lineage, performance metrics, and data dependencies for full auditability."
 author: Michael John Peña
 draft: false
 date: 2025-07-31
@@ -9,10 +10,7 @@ tags:
   - GitHub Actions
   - CI/CD
   - Model Registry
-
 ---
-
-I wrote "End-to-End MLOps with Azure Machine Learning and GitHub Actions" to share practical, production-minded guidance on this topic.
 
 ## Pipeline Architecture
 
@@ -126,4 +124,4 @@ jobs:
 
 ## Model Governance
 
-Implement approval gates before production deployment. Track model lineage, performance metrics, and data dependencies for full auditability.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Implement approval gates before production deployment. Track model lineage, performance metrics, and data dependencies for full auditability.

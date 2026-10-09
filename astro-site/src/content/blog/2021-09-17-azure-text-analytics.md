@@ -1,5 +1,6 @@
 ---
 title: Text Analytics with Azure Cognitive Services
+description: "Text Analytics enables rich understanding of unstructured text, powering applications from customer feedback analysis to content recommendation systems."
 author: Michael John Pena
 draft: false
 date: 2021-09-17
@@ -9,10 +10,7 @@ tags:
   - NLP
   - Text Analytics
   - AI
-
 ---
-
-I wrote "2021-09-17-azure-text-analytics" to share practical, production-minded guidance on this topic.
 
 ## Available Features
 
@@ -399,4 +397,4 @@ if __name__ == '__main__':
 5. **Rate Limiting**: Implement retry logic for throttling
 6. **Caching**: Cache results for frequently analyzed content
 
-Text Analytics enables rich understanding of unstructured text, powering applications from customer feedback analysis to content recommendation systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Text Analytics enables rich understanding of unstructured text, powering applications from customer feedback analysis to content recommendation systems.

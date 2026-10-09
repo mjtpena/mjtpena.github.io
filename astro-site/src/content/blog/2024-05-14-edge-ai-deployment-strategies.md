@@ -1,5 +1,6 @@
 ---
 title: "Edge AI Deployment: Taking Models to the Data"
+description: "Sometimes the data can't come to the cloud. Today I'm exploring strategies for deploying AI models at the edge."
 author: Michael John Peña
 draft: false
 date: 2024-05-14
@@ -420,4 +421,4 @@ Tomorrow I'll dive into ONNX Runtime for cross-platform AI deployment.
 
 - [Azure IoT Edge](https://learn.microsoft.com/azure/iot-edge/)
 - [ONNX Runtime](https://onnxruntime.ai/)
-- [Edge AI Best Practices](https://learn.microsoft.com/azure/architecture/ai-ml/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Edge AI Best Practices](https://learn.microsoft.com/azure/architecture/ai-ml/)

@@ -1,5 +1,6 @@
 ---
 title: "Phi-3 Local Deployment: Running Microsoft's SLM On-Device"
+description: "Phi-3 enables powerful AI capabilities entirely on-device with no cloud dependency."
 author: Michael John Peña
 draft: false
 date: 2025-04-05
@@ -9,10 +10,7 @@ tags:
   - On-Device
   - Microsoft
   - Deployment
-
 ---
-
-I wrote "Phi-3 Local Deployment: Running Microsoft's SLM On-Device" to share practical, production-minded guidance on this topic.
 
 ## Phi-3 Deployment Options
 
@@ -109,4 +107,4 @@ class Phi3UseCases:
         return self.generate(prompt)
 ```
 
-Phi-3 enables powerful AI capabilities entirely on-device with no cloud dependency.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Phi-3 enables powerful AI capabilities entirely on-device with no cloud dependency.

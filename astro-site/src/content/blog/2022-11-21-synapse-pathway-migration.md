@@ -9,10 +9,7 @@ tags:
   - Migration
   - Data Warehouse
   - SQL Server
-
 ---
-
-I wrote "Synapse Pathway: Accelerating Data Warehouse Migration" to share practical, production-minded guidance on this topic.
 
 ## What is Synapse Pathway?
 
@@ -403,4 +400,3 @@ Synapse Pathway significantly reduces the effort required for data warehouse mig
 - [Synapse Pathway Documentation](https://docs.microsoft.com/en-us/sql/tools/synapse-pathway/overview-synapse-pathway)
 - [Download Synapse Pathway](https://aka.ms/synapse-pathway-download)
 - [Migration Best Practices](https://docs.microsoft.com/en-us/azure/synapse-analytics/migration-guides/)
-

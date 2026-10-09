@@ -1,5 +1,6 @@
 ---
 title: "Azure Arc Data Services: Azure SQL and PostgreSQL Anywhere"
+description: "Arc data services let you run Azure-managed databases on your own infrastructure while using Azure tools for management."
 author: Michael John Peña
 draft: false
 date: 2021-05-08
@@ -9,10 +10,7 @@ tags:
   - SQL
   - PostgreSQL
   - Hybrid Cloud
-
 ---
-
-I wrote "Azure Arc Data Services: Azure SQL and PostgreSQL Anywhere" to share practical, production-minded guidance on this topic.
 
 ## Why Arc Data Services?
 
@@ -346,4 +344,4 @@ az sql mi-arc update \
 
 - [Azure Arc Data Services Documentation](https://docs.microsoft.com/en-us/azure/azure-arc/data/)
 - [SQL Managed Instance on Arc](https://docs.microsoft.com/en-us/azure/azure-arc/data/managed-instance-overview)
-- [PostgreSQL Hyperscale on Arc](https://docs.microsoft.com/en-us/azure/azure-arc/data/what-is-azure-arc-enabled-postgres-hyperscale)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [PostgreSQL Hyperscale on Arc](https://docs.microsoft.com/en-us/azure/azure-arc/data/what-is-azure-arc-enabled-postgres-hyperscale)

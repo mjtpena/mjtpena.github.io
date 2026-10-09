@@ -1,5 +1,6 @@
 ---
 title: "Real-Time Speech Translation with Azure Cognitive Services"
+description: "All three happen with minimal latency for real-time conversations."
 author: Michael John Peña
 draft: false
 date: 2022-03-07
@@ -8,11 +9,8 @@ tags:
   - Speech Services
   - AI
   - Translation
-  - Real-time
-
+  - Real-Time
 ---
-
-I wrote "Real-Time Speech Translation with Azure Cognitive Services" to share practical, production-minded guidance on this topic.
 
 ## How Speech Translation Works
 
@@ -543,4 +541,3 @@ Key considerations:
 - [Speech Translation Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-translation)
 - [Language Support](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support)
 - [Speech SDK Reference](https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-speech/)
-

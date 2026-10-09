@@ -7,12 +7,9 @@ tags:
   - Power BI
   - Embedded Analytics
   - SaaS
-  - Multi-tenant
+  - Multi-Tenant
   - Development
-
 ---
-
-I wrote "Power BI Embed for Customers: Building Analytics Portals" to share practical, production-minded guidance on this topic.
 
 ## Architecture
 
@@ -316,4 +313,3 @@ Embed for customers enables powerful analytics in customer-facing applications:
 - [Embed for Customers Tutorial](https://docs.microsoft.com/en-us/power-bi/developer/embedded/embed-sample-for-customers)
 - [Service Principal Configuration](https://docs.microsoft.com/en-us/power-bi/developer/embedded/embed-service-principal)
 - [Capacity Planning](https://docs.microsoft.com/en-us/power-bi/developer/embedded/embedded-capacity-planning)
-

@@ -1,5 +1,6 @@
 ---
 title: "MLflow in Fabric: Experiment Tracking and Model Management"
+description: "MLflow in Fabric is the managed tracking layer that turns a Spark notebook into a reproducible experiment record. The integration is transparent — you…"
 author: Michael John Peña
 draft: false
 date: 2023-07-25
@@ -327,4 +328,4 @@ Tomorrow we'll explore experiment tracking patterns in detail.
 
 - [MLflow in Fabric](https://learn.microsoft.com/en-us/fabric/data-science/mlflow-autologging)
 - [MLflow Documentation](https://mlflow.org/docs/latest/index.html)
-- [Experiment Tracking](https://learn.microsoft.com/en-us/fabric/data-science/experiment-tracking)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Experiment Tracking](https://learn.microsoft.com/en-us/fabric/data-science/experiment-tracking)

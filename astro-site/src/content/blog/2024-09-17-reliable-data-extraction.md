@@ -1,13 +1,11 @@
 ---
 title: "Reliable Data Extraction with LLMs: Patterns and Practices"
+description: "Reliable extraction requires careful schema design, multi-pass validation, and explicit handling of uncertainty. These patterns help you build extraction…"
 author: "Michael John Peña"
 draft: false
 date: 2024-09-17
 tags: ["Data Extraction", "LLM", "AI", "NLP", "Python"]
-
 ---
-
-I wrote "Reliable Data Extraction with LLMs: Patterns and Practices" to share practical, production-minded guidance on this topic.
 
 ## The Extraction Challenge
 
@@ -405,4 +403,4 @@ class ExtractionValidator:
         return response.choices[0].message.parsed
 ```
 
-Reliable extraction requires careful schema design, multi-pass validation, and explicit handling of uncertainty. These patterns help you build extraction systems you can trust in production.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Reliable extraction requires careful schema design, multi-pass validation, and explicit handling of uncertainty. These patterns help you build extraction systems you can trust in production.

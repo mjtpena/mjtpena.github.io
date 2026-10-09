@@ -1,5 +1,6 @@
 ---
 title: "AI-Assisted Development: How AI is Changing How We Build"
+description: "AI-assisted development is here to stay. Learn to use these tools effectively while maintaining code quality and understanding."
 author: Michael John Peña
 draft: false
 date: 2024-12-27
@@ -9,10 +10,7 @@ tags:
   - GitHub Copilot
   - Productivity
   - Coding
-
 ---
-
-I wrote "AI-Assisted Development: How AI is Changing How We Build" to share practical, production-minded guidance on this topic.
 
 ## The AI Development Stack
 
@@ -386,4 +384,4 @@ AI-assisted development is here to stay. Learn to use these tools effectively wh
 
 - [GitHub Copilot](https://github.com/features/copilot)
 - [Claude for Coding](https://www.anthropic.com/claude)
-- [AI Coding Best Practices](https://docs.github.com/en/copilot)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AI Coding Best Practices](https://docs.github.com/en/copilot)

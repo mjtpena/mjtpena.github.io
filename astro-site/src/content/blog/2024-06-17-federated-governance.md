@@ -1,5 +1,6 @@
 ---
 title: "Federated Governance in Data Mesh"
+description: "Federated governance balances domain autonomy with organizational standards. Today I'm exploring how to implement effective federated governance in…"
 author: Michael John Peña
 draft: false
 date: 2024-06-17
@@ -391,4 +392,4 @@ Tomorrow I'll cover data products in detail.
 
 - [Data Mesh Governance](https://www.datamesh-architecture.com/data-mesh-principles/federated-computational-governance)
 - [Fabric Governance](https://learn.microsoft.com/fabric/governance/)
-- [Purview Integration](https://learn.microsoft.com/purview/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Purview Integration](https://learn.microsoft.com/purview/)

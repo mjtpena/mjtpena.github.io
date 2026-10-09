@@ -10,10 +10,7 @@ tags:
   - AI
   - Data Analytics
   - Generative AI
-
 ---
-
-I wrote "Fabric Copilot Preview: AI-Assisted Analytics" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -231,10 +228,10 @@ df.filter("date >= '2023-01-01'").select(...)
             confidence=0.80
         )
 
-# Usage simulation
+## Usage simulation
 copilot = FabricCopilotSimulator()
 
-# Generate code from natural language
+## Generate code from natural language
 response = copilot.generate_pyspark_code(
     "Calculate total sales by region and product category for 2023",
     table_context={
@@ -564,4 +561,3 @@ print(f"\nGenerated DAX:\n{dax}")
 ## Conclusion
 
 Fabric Copilot represents a significant advancement in making analytics more accessible through AI assistance. By providing natural language interfaces for code generation, data analysis, and report creation, it enables both technical and business users to work more efficiently with data. As the preview matures, expect enhanced capabilities for more complex scenarios and better context awareness.
-

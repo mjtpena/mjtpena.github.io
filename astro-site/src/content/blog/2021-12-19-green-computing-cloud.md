@@ -1,5 +1,6 @@
 ---
 title: "Green Computing in the Cloud: Sustainability at Scale"
+description: "Green computing in 2021 became a real consideration, not just marketing. Azure's commitment to carbon negative by 2030 provides the tools; it's up to us to…"
 author: Michael John Pena
 draft: false
 date: 2021-12-19
@@ -9,10 +10,7 @@ tags:
   - Azure
   - Cloud
   - Carbon Footprint
-
 ---
-
-I wrote "Green Computing in the Cloud: Sustainability at Scale" to share practical, production-minded guidance on this topic.
 
 ## Understanding Cloud Carbon Footprint
 
@@ -448,4 +446,4 @@ Green computing in 2021 became a real consideration, not just marketing. Azure's
 
 - [Microsoft Sustainability Calculator](https://www.microsoft.com/en-us/sustainability/emissions-impact-dashboard)
 - [Azure Sustainability](https://azure.microsoft.com/en-us/global-infrastructure/sustainability/)
-- [Green Software Foundation](https://greensoftware.foundation/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Green Software Foundation](https://greensoftware.foundation/)

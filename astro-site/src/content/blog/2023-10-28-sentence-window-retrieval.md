@@ -10,10 +10,7 @@ tags:
   - Retrieval
   - Context Window
   - AI
-
 ---
-
-I wrote "Sentence Window Retrieval for RAG Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -613,4 +610,3 @@ for source in result['sources']:
 ## Conclusion
 
 Sentence window retrieval provides an excellent balance between retrieval precision and context richness. By indexing individual sentences but returning surrounding context, this approach captures precise semantic matches while giving the generator enough information for accurate responses. Dynamic window sizing and sentence fusion further enhance retrieval quality for complex queries.
-

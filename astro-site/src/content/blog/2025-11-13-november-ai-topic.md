@@ -1,5 +1,6 @@
 ---
 title: "Semantic Kernel: Orchestrating AI Agents with Plugins and Planners"
+description: "Semantic Kernel abstracts the complexity of working with multiple AI services while providing extensibility through plugins. This allows developers to…"
 author: Michael John Peña
 draft: false
 date: 2025-11-13
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - C#
   - Orchestration
-
 ---
-
-I wrote "Semantic Kernel: Orchestrating AI Agents with Plugins and Planners" to share practical, production-minded guidance on this topic.
 
 ## Understanding Semantic Kernel
 
@@ -144,4 +142,4 @@ Console.WriteLine($"Plan executed with {result.Iterations} steps");
 Console.WriteLine($"Final answer: {result.FinalAnswer}");
 ```
 
-Semantic Kernel's architecture enables building sophisticated AI agents that can reason about complex tasks while maintaining full control over the actions they can take.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Semantic Kernel's architecture enables building sophisticated AI agents that can reason about complex tasks while maintaining full control over the actions they can take.

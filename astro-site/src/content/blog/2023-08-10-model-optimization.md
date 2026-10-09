@@ -8,10 +8,7 @@ tags:
   - Machine Learning
   - Performance
   - Deployment
-
 ---
-
-I wrote "Model Optimization Techniques for Production Deployment" to share practical, production-minded guidance on this topic.
 
 ## Optimization Overview
 
@@ -256,4 +253,4 @@ Tomorrow we'll explore quantization basics in more detail.
 
 - [PyTorch Quantization](https://pytorch.org/docs/stable/quantization.html)
 - [Flash Attention](https://github.com/Dao-AILab/flash-attention)
-- [torch.compile](https://pytorch.org/tutorials/intermediate/torch_compile_tutorial.html)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [torch.compile](https://pytorch.org/tutorials/intermediate/torch_compile_tutorial.html)

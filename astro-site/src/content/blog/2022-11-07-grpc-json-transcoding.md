@@ -1,5 +1,6 @@
 ---
 title: "gRPC JSON Transcoding in .NET 7: REST and gRPC from One Service"
+description: "JSON transcoding bridges this gap."
 author: Michael John Peña
 draft: false
 date: 2022-11-07
@@ -9,10 +10,7 @@ tags:
   - ASP.NET Core
   - API
   - Azure
-
 ---
-
-I wrote "gRPC JSON Transcoding in .NET 7: REST and gRPC from One Service" to share practical, production-minded guidance on this topic.
 
 ## Why JSON Transcoding?
 
@@ -424,4 +422,5 @@ spec:
         image: myregistry.azurecr.io/product-service:latest
         ports:
         - containerPort: 80   # REST/HTTP
-        - containerPort: 443  # gRPC/HTTP2\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+        - containerPort: 443  # gRPC/HTTP2
+```

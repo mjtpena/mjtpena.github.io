@@ -9,10 +9,7 @@ tags:
   - Azure OpenAI
   - Anthropic
   - Resilience
-
 ---
-
-I wrote "Multi-LLM Strategies: Building Resilient AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Why Multi-LLM?
 
@@ -250,4 +247,3 @@ class MultiLLMMonitor:
 ## Conclusion
 
 Multi-LLM strategies transform AI applications from fragile to resilient. Start with basic fallback, evolve to smart routing, and continuously optimize based on monitoring data.
-

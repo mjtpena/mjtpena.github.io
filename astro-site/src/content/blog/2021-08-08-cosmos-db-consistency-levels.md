@@ -1,13 +1,11 @@
 ---
 title: "Understanding Cosmos DB Consistency Levels: Tradeoffs and Best Practices"
+description: "Consistency levels in Cosmos DB give you fine-grained control over the CAP theorem tradeoffs, enabling you to optimize for your specific application…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-08
 tags: ["Azure", "Cosmos DB", "Consistency", "Distributed Systems", "NoSQL"]
-
 ---
-
-I wrote "Understanding Cosmos DB Consistency Levels: Tradeoffs and Best Practices" to share practical, production-minded guidance on this topic.
 
 ## The Five Consistency Levels
 
@@ -265,4 +263,4 @@ by consistencyLevel_s, operationType_s
 4. **Monitor RU impact**: Strong consistency doubles read costs
 5. **Test multi-region behavior**: Understand latency implications
 
-Consistency levels in Cosmos DB give you fine-grained control over the CAP theorem tradeoffs, enabling you to optimize for your specific application requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Consistency levels in Cosmos DB give you fine-grained control over the CAP theorem tradeoffs, enabling you to optimize for your specific application requirements.

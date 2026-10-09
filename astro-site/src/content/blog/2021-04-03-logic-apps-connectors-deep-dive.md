@@ -1,5 +1,6 @@
 ---
 title: Logic Apps Connectors - A Deep Dive into Enterprise Integration
+description: "Logic Apps connectors are the product feature that makes integration architects either love or dread the platform. Over 400 connectors covering everything…"
 author: Michael John Peña
 draft: false
 date: 2021-04-03

@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-27
 tags:
-  - azure
+  - Azure
   - stream-analytics
-  - real-time
-  - data
-
+  - Real-Time
+  - Data
 ---
-
-I wrote "Azure Stream Analytics Updates: No-Code Editor and More" to share practical, production-minded guidance on this topic.
 
 ## No-Code Editor
 
@@ -66,5 +63,3 @@ WHERE temperature - LAG(temperature, 1) OVER (PARTITION BY deviceId LIMIT DURATI
 ## Summary
 
 Stream Analytics updates make real-time processing more accessible while adding powerful features for complex streaming scenarios.
-
-

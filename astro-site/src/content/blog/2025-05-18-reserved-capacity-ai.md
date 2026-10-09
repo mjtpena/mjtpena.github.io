@@ -1,5 +1,6 @@
 ---
 title: "Reserved Capacity for AI: Optimizing Long-Term Costs"
+description: "Strategic use of reserved capacity can reduce AI costs by 30-50% for predictable workloads."
 author: Michael John Peña
 draft: false
 date: 2025-05-18
@@ -9,10 +10,7 @@ tags:
   - Cost Optimization
   - Azure
   - Planning
-
 ---
-
-I wrote "Reserved Capacity for AI: Optimizing Long-Term Costs" to share practical, production-minded guidance on this topic.
 
 ## Reserved Capacity Strategy
 
@@ -114,4 +112,4 @@ class AIReservationPlanner:
         }
 ```
 
-Strategic use of reserved capacity can reduce AI costs by 30-50% for predictable workloads.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Strategic use of reserved capacity can reduce AI costs by 30-50% for predictable workloads.

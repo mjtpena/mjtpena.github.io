@@ -9,10 +9,7 @@ tags:
   - Lighthouse
   - Multi-Tenant
   - MSP
-
 ---
-
-I wrote "2021-06-15-azure-lighthouse" to share practical, production-minded guidance on this topic.
 
 ## Understanding Azure Lighthouse
 
@@ -411,4 +408,3 @@ Azure Lighthouse transforms multi-tenant management from a fragmented experience
 
 - [Azure Lighthouse Documentation](https://docs.microsoft.com/en-us/azure/lighthouse/)
 - [Onboard Customers to Azure Lighthouse](https://docs.microsoft.com/en-us/azure/lighthouse/how-to/onboard-customer)
-

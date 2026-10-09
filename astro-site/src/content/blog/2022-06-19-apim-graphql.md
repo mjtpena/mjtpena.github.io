@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-19
 tags:
-  - azure
+  - Azure
   - apim
   - graphql
-  - api
-
+  - API
 ---
-
-I wrote "Azure API Management GraphQL: Modern API Gateway" to share practical, production-minded guidance on this topic.
 
 ## Adding GraphQL API
 
@@ -73,5 +70,3 @@ input CreateProductInput {
 ## Summary
 
 APIM GraphQL support enables modern API patterns with enterprise governance, rate limiting, and authentication.
-
-

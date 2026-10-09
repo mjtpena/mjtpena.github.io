@@ -1,13 +1,11 @@
 ---
 title: "Azure IoT Hub Updates and New Features in 2022"
+description: "These IoT Hub updates enable more sophisticated device management and data processing scenarios."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-22
 tags: ["Azure", "IoT Hub", "IoT", "Cloud", "Updates"]
-
 ---
-
-I wrote "Azure IoT Hub Updates and New Features in 2022" to share practical, production-minded guidance on this topic.
 
 ## Enhanced Device Provisioning
 
@@ -252,4 +250,4 @@ async def receive_events():
         )
 ```
 
-These IoT Hub updates enable more sophisticated device management and data processing scenarios.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These IoT Hub updates enable more sophisticated device management and data processing scenarios.

@@ -1,13 +1,11 @@
 ---
 title: "LangSmith Alternatives: Choosing the Right LLM Observability Platform"
+description: "The best tool depends on your specific needs. Start with the simplest option that meets your requirements, and upgrade as your needs grow."
 author: "Michael John Peña"
 draft: false
 date: 2024-10-15
 tags: ["LangSmith", "Observability", "AI Tools", "Comparison", "LangChain"]
-
 ---
-
-I wrote "LangSmith Alternatives: Choosing the Right LLM Observability Platform" to share practical, production-minded guidance on this topic.
 
 ## Why Consider Alternatives?
 
@@ -289,4 +287,4 @@ llm = ChatOpenAI(
 # Migration is often this simple!
 ```
 
-The best tool depends on your specific needs. Start with the simplest option that meets your requirements, and upgrade as your needs grow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The best tool depends on your specific needs. Start with the simplest option that meets your requirements, and upgrade as your needs grow.

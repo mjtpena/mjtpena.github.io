@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Document Intelligence: Extracting Structured Data from Invoices"
+description: "First, provision an Azure AI Document Intelligence resource and configure your client. The prebuilt invoice model recognizes vendor details, line items…"
 author: Michael John Peña
 draft: false
 date: 2025-09-02
@@ -9,10 +10,7 @@ tags:
   - OCR
   - Invoice Processing
   - Python
-
 ---
-
-I wrote "Azure AI Document Intelligence: Extracting Structured Data from Invoices" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Document Intelligence
 
@@ -97,4 +95,4 @@ def extract_line_items(invoice) -> list:
 
 Always implement confidence thresholds for automated processing. Fields below 0.85 confidence should trigger human review.
 
-Document Intelligence handles multiple invoice formats without custom training, making it ideal for processing invoices from diverse vendors.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Document Intelligence handles multiple invoice formats without custom training, making it ideal for processing invoices from diverse vendors.

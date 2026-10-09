@@ -9,10 +9,7 @@ tags:
   - Data Visualization
   - Azure
   - Development
-
 ---
-
-I wrote "Power BI Embedded: Analytics in Your Applications" to share practical, production-minded guidance on this topic.
 
 ## Embedding Options
 
@@ -347,4 +344,3 @@ It's the foundation for analytics-powered applications.
 - [Power BI Embedded Documentation](https://docs.microsoft.com/en-us/power-bi/developer/embedded/)
 - [JavaScript SDK](https://github.com/microsoft/PowerBI-JavaScript)
 - [Embedding Setup Tool](https://app.powerbi.com/embedsetup)
-

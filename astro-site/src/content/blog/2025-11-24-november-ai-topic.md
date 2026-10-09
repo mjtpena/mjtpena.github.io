@@ -1,5 +1,6 @@
 ---
 title: "Document Intelligence: Extracting Structured Data from Complex Documents"
+description: "Document Intelligence understands document structure, extracting tables, key-value pairs, and semantic entities rather than just raw text. This structured…"
 author: Michael John Peña
 draft: false
 date: 2025-11-24
@@ -9,10 +10,7 @@ tags:
   - OCR
   - Data Extraction
   - Automation
-
 ---
-
-I wrote "Document Intelligence: Extracting Structured Data from Complex Documents" to share practical, production-minded guidance on this topic.
 
 ## Beyond Basic OCR
 
@@ -189,4 +187,4 @@ async def process_contract_with_llm(
     }
 ```
 
-Document Intelligence transforms document-heavy processes, reducing manual data entry and enabling intelligent automation of workflows that previously required human review.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Document Intelligence transforms document-heavy processes, reducing manual data entry and enabling intelligent automation of workflows that previously required human review.

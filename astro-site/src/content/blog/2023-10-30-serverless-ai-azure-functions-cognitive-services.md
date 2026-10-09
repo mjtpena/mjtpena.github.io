@@ -9,10 +9,7 @@ tags:
   - Serverless
   - AI
   - Azure Functions
-
 ---
-
-I wrote "Step-by-Step Guide for Implementing a Serverless AI Solution Using Azure Functions and Azure Cognitive Services" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -114,4 +111,3 @@ module.exports = async function (context, req) {
 ## Conclusion
 
 By following these steps, you can implement a serverless AI solution using Azure Functions and Azure Cognitive Services. This approach allows you to build scalable and cost-effective AI applications without managing infrastructure.
-

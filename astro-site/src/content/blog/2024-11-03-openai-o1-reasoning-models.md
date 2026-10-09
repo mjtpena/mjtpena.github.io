@@ -1,5 +1,6 @@
 ---
 title: "OpenAI o1 Reasoning Models: A New Paradigm for Complex Problem Solving"
+description: "The reasoning tokens are where the model works through the problem step-by-step, similar to how humans solve complex problems."
 author: Michael John Peña
 draft: false
 date: 2024-11-03
@@ -9,10 +10,7 @@ tags:
   - OpenAI o1
   - Reasoning
   - LLM
-
 ---
-
-I wrote "OpenAI o1 Reasoning Models: A New Paradigm for Complex Problem Solving" to share practical, production-minded guidance on this topic.
 
 ## Understanding o1's Architecture
 
@@ -244,4 +242,4 @@ The key is knowing when the extra cost and latency are worth the improved reason
 
 - [o1 Model Documentation](https://platform.openai.com/docs/guides/reasoning)
 - [Azure OpenAI Models](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models)
-- [Prompt Engineering for o1](https://platform.openai.com/docs/guides/reasoning/advice-on-prompting)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Prompt Engineering for o1](https://platform.openai.com/docs/guides/reasoning/advice-on-prompting)

@@ -1,18 +1,16 @@
 ---
 title: "OIDC for GitHub Actions: Secure Azure Deployments"
+description: "OIDC for GitHub Actions is the modern, secure approach to Azure authentication in CI/CD pipelines."
 author: Michael John Peña
 draft: false
 date: 2022-02-13
 url: /blog/oidc-github-actions/
 tags:
-  - github
-  - azure
-  - oidc
-  - security
-
+  - GitHub
+  - Azure
+  - OIDC
+  - Security
 ---
-
-I wrote "OIDC for GitHub Actions: Secure Azure Deployments" to share practical, production-minded guidance on this topic.
 
 ## Why OIDC?
 
@@ -259,4 +257,4 @@ Common issues:
 - Audience mismatch (must be `api://AzureADTokenExchange`)
 - Missing `id-token: write` permission
 
-OIDC for GitHub Actions is the modern, secure approach to Azure authentication in CI/CD pipelines.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+OIDC for GitHub Actions is the modern, secure approach to Azure authentication in CI/CD pipelines.

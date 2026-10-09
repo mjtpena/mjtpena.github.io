@@ -8,10 +8,7 @@ tags:
   - Eventstreams
   - Streaming
   - Real-Time
-
 ---
-
-I wrote "Eventstreams in Fabric: Streaming Data Ingestion" to share practical, production-minded guidance on this topic.
 
 ## What are Eventstreams?
 
@@ -332,4 +329,4 @@ Tomorrow we'll explore Real-Time Dashboards for visualizing streaming data.
 
 - [Eventstream Documentation](https://learn.microsoft.com/en-us/fabric/real-time-analytics/event-streams/overview)
 - [Event Hub Integration](https://learn.microsoft.com/en-us/fabric/real-time-analytics/event-streams/add-source-azure-event-hubs)
-- [Streaming Best Practices](https://learn.microsoft.com/en-us/fabric/real-time-analytics/event-streams/best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Streaming Best Practices](https://learn.microsoft.com/en-us/fabric/real-time-analytics/event-streams/best-practices)

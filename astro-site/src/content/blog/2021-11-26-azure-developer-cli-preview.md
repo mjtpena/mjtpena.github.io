@@ -1,5 +1,6 @@
 ---
 title: "Azure Developer CLI Preview: Streamlined Cloud Development"
+description: "Azure Developer CLI represents a significant shift toward developer productivity. By providing high-level commands and proven templates, it reduces the…"
 author: Michael John Pena
 draft: false
 date: 2021-11-26
@@ -9,10 +10,7 @@ tags:
   - CLI
   - DevOps
   - Cloud Native
-
 ---
-
-I wrote "Azure Developer CLI Preview: Streamlined Cloud Development" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Developer CLI?
 
@@ -462,4 +460,4 @@ Azure Developer CLI represents a significant shift toward developer productivity
 
 - [Azure Developer CLI Documentation](https://docs.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Template Gallery](https://azure.github.io/awesome-azd/)
-- [GitHub Repository](https://github.com/Azure/azure-dev)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [GitHub Repository](https://github.com/Azure/azure-dev)

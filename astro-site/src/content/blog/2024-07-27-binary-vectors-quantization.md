@@ -1,5 +1,6 @@
 ---
 title: "Binary Vectors and Quantization in Azure AI Search"
+description: "With quantization, this can be reduced to 1-2 GB."
 author: Michael John Peña
 draft: false
 date: 2024-07-27
@@ -9,10 +10,7 @@ tags:
   - Quantization
   - Binary Vectors
   - Performance
-
 ---
-
-I wrote "Binary Vectors and Quantization in Azure AI Search" to share practical, production-minded guidance on this topic.
 
 ## The Storage Challenge
 
@@ -346,4 +344,3 @@ def evaluate_quantization(
 Quantization is essential for scaling vector search. Binary and scalar quantization in Azure AI Search enable significantly larger indices without proportional cost increases.
 
 Start with scalar quantization with rescoring enabled. This provides 4x compression with minimal recall impact for most applications.
-

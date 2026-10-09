@@ -1,5 +1,6 @@
 ---
 title: Azure Functions Premium Plan - When and Why
+description: "The Azure Functions Premium plan is the hosting option I reach for as soon as two of these three conditions are true: the function needs to connect to a…"
 author: Michael John Peña
 draft: false
 date: 2021-07-28
@@ -14,7 +15,7 @@ tags:
 
 The Azure Functions Premium plan is the hosting option I reach for as soon as two of these three conditions are true: the function needs to connect to a resource in a private VNet (Storage Account or SQL Server with no public endpoint, Key Vault on a private endpoint), the function is user-facing and cold starts would degrade the experience, or the execution model requires more than 10 minutes per invocation. Premium keeps at least one always-warm instance that eliminates the cold start, provides VNet integration for private resource access, and removes the execution time cap. The cost model is different: you pay for instance-hours rather than per-execution, so the economics make sense when your function runs frequently enough that pre-warmed instances are utilised most of the time. For sporadic workloads with generous latency budgets, Consumption is still the better choice.
 
-# Premium Plan Features
+## Premium Plan Features
 
 The Premium plan offers several advantages:
 
@@ -24,7 +25,7 @@ The Premium plan offers several advantages:
 - **More powerful instances**: Up to 14GB memory
 - **Premium storage**: Faster storage performance
 
-# Creating a Premium Function App
+## Creating a Premium Function App
 
 Deploy a Premium function app:
 
@@ -56,7 +57,7 @@ az functionapp vnet-integration add \
     --subnet subnet-functions
 ```
 
-# Terraform Configuration
+## Terraform Configuration
 
 Complete Premium function app setup:
 
@@ -161,7 +162,7 @@ resource "azurerm_private_endpoint" "storage_blob" {
 }
 ```
 
-# Comparing Premium vs Consumption
+## Comparing Premium vs Consumption
 
 Code to analyze when Premium makes sense:
 
@@ -242,7 +243,7 @@ for scenario in scenarios:
     print(f"  Recommendation: {result['recommendation']}")
 ```
 
-# VNet-Connected Function
+## VNet-Connected Function
 
 Access private resources from Premium functions:
 
@@ -292,7 +293,7 @@ public class PrivateResourceFunction
 }
 ```
 
-# Scaling Configuration
+## Scaling Configuration
 
 Configure Premium plan scaling:
 
@@ -389,7 +390,7 @@ def configure_premium_scaling(resource_group, function_app_name, min_instances, 
 configure_premium_scaling("rg-functions", "myfunc-premium", min_instances=2, max_burst=10)
 ```
 
-# When to Choose Premium
+## When to Choose Premium
 
 Decision criteria for Premium plan:
 
@@ -456,7 +457,7 @@ print(f"Premium reasons: {result['premium_reasons']}")
 print(f"Consumption reasons: {result['consumption_reasons']}")
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Functions Premium plan is the right choice when you need VNet connectivity, cannot tolerate cold starts, have long-running functions, or require more powerful instances. While it has a higher baseline cost than Consumption, the predictable pricing and enhanced capabilities often justify the investment for production workloads.
 

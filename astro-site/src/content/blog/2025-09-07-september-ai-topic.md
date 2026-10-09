@@ -1,5 +1,6 @@
 ---
 title: "Responsible AI: Implementing Fairness Metrics in ML Pipelines"
+description: "Different fairness definitions apply to different contexts. Demographic parity, equalized odds, and calibration each capture distinct aspects of fairness."
 author: Michael John Peña
 draft: false
 date: 2025-09-07
@@ -9,10 +10,7 @@ tags:
   - ML Ethics
   - Bias Detection
   - Azure ML
-
 ---
-
-I wrote "Responsible AI: Implementing Fairness Metrics in ML Pipelines" to share practical, production-minded guidance on this topic.
 
 ## Understanding Fairness Metrics
 
@@ -107,4 +105,4 @@ def check_fairness_thresholds(report: FairnessReport) -> List[str]:
     return warnings
 ```
 
-Integrate fairness evaluation into your CI/CD pipeline to catch bias issues before deployment. Responsible AI is not a one-time check but an ongoing commitment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Integrate fairness evaluation into your CI/CD pipeline to catch bias issues before deployment. Responsible AI is not a one-time check but an ongoing commitment.

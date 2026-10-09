@@ -1,5 +1,6 @@
 ---
 title: "Data Pipelines: What Production Actually Teaches You"
+description: "I've built data pipelines for 8 years. Every production deployment humbled me. Here's what the tutorials don't teach."
 author: Michael John Peña
 draft: false
 date: 2026-02-05
@@ -120,4 +121,4 @@ Production data pipelines are 20% building and 80% maintaining.
 
 The exciting part is building them. The valuable part is keeping them running.
 
-Design for maintenance from day one. Your future self will thank you.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Design for maintenance from day one. Your future self will thank you.

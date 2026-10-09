@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions with AI: Building Serverless AI Applications"
+description: "Configure appropriate timeout settings for AI operations and implement retry logic for transient failures. Consider using premium plans for…"
 author: Michael John Peña
 draft: false
 date: 2025-10-19
@@ -9,10 +10,7 @@ tags:
   - AI Applications
   - Azure OpenAI
   - Python
-
 ---
-
-I wrote "Azure Functions with AI: Building Serverless AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Creating an AI-Powered Function
 
@@ -117,4 +115,4 @@ def process_document(msg: func.QueueMessage, outputBlob: func.Out[str]):
 
 ## Performance Considerations
 
-Configure appropriate timeout settings for AI operations and implement retry logic for transient failures. Consider using premium plans for latency-sensitive AI workloads.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Configure appropriate timeout settings for AI operations and implement retry logic for transient failures. Consider using premium plans for latency-sensitive AI workloads.

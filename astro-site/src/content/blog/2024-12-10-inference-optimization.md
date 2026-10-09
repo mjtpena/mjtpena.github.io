@@ -1,5 +1,6 @@
 ---
 title: "Inference Optimization: Making AI Fast and Cost-Effective"
+description: "Inference optimization is a continuous process. Start with caching and routing for quick wins, then progressively implement more sophisticated techniques."
 author: Michael John Peña
 draft: false
 date: 2024-12-10
@@ -9,10 +10,7 @@ tags:
   - Optimization
   - Performance
   - Cost
-
 ---
-
-I wrote "Inference Optimization: Making AI Fast and Cost-Effective" to share practical, production-minded guidance on this topic.
 
 ## The Inference Optimization Stack
 
@@ -412,4 +410,4 @@ Inference optimization is a continuous process. Start with caching and routing f
 
 - [vLLM Documentation](https://docs.vllm.ai/)
 - [Azure OpenAI Performance](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/performance)
-- [LLM Inference Optimization](https://lilianweng.github.io/posts/2023-01-10-inference-optimization/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [LLM Inference Optimization](https://lilianweng.github.io/posts/2023-01-10-inference-optimization/)

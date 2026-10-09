@@ -8,10 +8,7 @@ tags:
   - LLM
   - Architecture
   - Chatbots
-
 ---
-
-I wrote "Memory Management for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Memory Types
 
@@ -265,4 +262,4 @@ Tomorrow we'll explore LangChain updates and new features.
 
 - [LangChain Memory](https://python.langchain.com/docs/modules/memory/)
 - [Vector Stores](https://python.langchain.com/docs/modules/data_connection/vectorstores/)
-- [Conversational Memory Patterns](https://arxiv.org/abs/2304.03442)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Conversational Memory Patterns](https://arxiv.org/abs/2304.03442)

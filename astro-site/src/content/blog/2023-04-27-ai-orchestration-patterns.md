@@ -1,5 +1,6 @@
 ---
 title: "AI Orchestration Patterns: Coordinating Multi-Model Systems"
+description: "AI orchestration patterns enable building sophisticated AI systems from modular components. The key is designing for reliability, observability, and…"
 author: Michael John Pena
 draft: false
 date: 2023-04-27
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Architecture
   - Python
-
 ---
-
-I wrote "AI Orchestration Patterns: Coordinating Multi-Model Systems" to share practical, production-minded guidance on this topic.
 
 ## AI Orchestration Framework
 
@@ -618,4 +616,4 @@ orchestrator.on("entities.extracted", summary_handler)
 await orchestrator.emit("document.uploaded", document_data)
 ```
 
-AI orchestration patterns enable building sophisticated AI systems from modular components. The key is designing for reliability, observability, and graceful failure handling.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI orchestration patterns enable building sophisticated AI systems from modular components. The key is designing for reliability, observability, and graceful failure handling.

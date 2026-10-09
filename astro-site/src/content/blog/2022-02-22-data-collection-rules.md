@@ -1,18 +1,16 @@
 ---
 title: "Azure Data Collection Rules: Modern Log Ingestion"
+description: "Data Collection Rules provide the flexibility and control needed for modern monitoring architectures."
 author: Michael John Peña
 draft: false
 date: 2022-02-22
 url: /blog/data-collection-rules/
 tags:
-  - azure
-  - monitoring
+  - Azure
+  - Monitoring
   - log-analytics
   - data-collection
-
 ---
-
-I wrote "Azure Data Collection Rules: Modern Log Ingestion" to share practical, production-minded guidance on this topic.
 
 ## Understanding Data Collection Rules
 
@@ -324,4 +322,4 @@ resource multiDestinationDCR 'Microsoft.Insights/dataCollectionRules@2021-09-01-
 }
 ```
 
-Data Collection Rules provide the flexibility and control needed for modern monitoring architectures.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Data Collection Rules provide the flexibility and control needed for modern monitoring architectures.

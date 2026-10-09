@@ -1,5 +1,6 @@
 ---
 title: "Azure Document Intelligence Custom Models: Training for Specialized Documents"
+description: "Azure offers three custom model approaches: template models for fixed layouts, neural models for varied layouts, and composed models that combine multiple…"
 author: Michael John Peña
 draft: false
 date: 2025-09-11
@@ -9,10 +10,7 @@ tags:
   - Custom Models
   - Machine Learning
   - Document Processing
-
 ---
-
-I wrote "Azure Document Intelligence Custom Models: Training for Specialized Documents" to share practical, production-minded guidance on this topic.
 
 ## Choosing the Right Custom Model Type
 
@@ -140,4 +138,4 @@ def evaluate_model(model_id: str, test_document_url: str) -> dict:
 
 Provide at least 5 labeled samples per document variation. Include edge cases like partially filled forms and poor scan quality. Neural models require more samples (15-20) but handle layout variations better than template models.
 
-Custom models unlock document automation for your unique business documents that no prebuilt model can handle.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Custom models unlock document automation for your unique business documents that no prebuilt model can handle.

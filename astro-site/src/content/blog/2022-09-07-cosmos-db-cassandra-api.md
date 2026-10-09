@@ -1,13 +1,11 @@
 ---
 title: "Azure Cosmos DB for Apache Cassandra"
+description: "Azure Cosmos DB for Apache Cassandra bridges the gap between familiar Cassandra development and cloud-native scalability."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-07
 tags: ["Azure", "Cosmos DB", "Cassandra", "NoSQL", "Wide Column"]
-
 ---
-
-I wrote "Azure Cosmos DB for Apache Cassandra" to share practical, production-minded guidance on this topic.
 
 ## Getting Started with Cassandra API
 
@@ -399,4 +397,4 @@ if __name__ == '__main__':
 4. **Tunable consistency** - Five consistency levels available
 5. **Serverless option** - Pay only for what you use
 
-Azure Cosmos DB for Apache Cassandra bridges the gap between familiar Cassandra development and cloud-native scalability.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Cosmos DB for Apache Cassandra bridges the gap between familiar Cassandra development and cloud-native scalability.

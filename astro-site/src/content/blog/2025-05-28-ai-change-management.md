@@ -1,5 +1,6 @@
 ---
 title: "AI Change Management: Leading AI Transformation"
+description: "Effective change management ensures AI initiatives achieve their intended business value."
 author: Michael John Peña
 draft: false
 date: 2025-05-28
@@ -9,10 +10,7 @@ tags:
   - Leadership
   - Transformation
   - Culture
-
 ---
-
-I wrote "AI Change Management: Leading AI Transformation" to share practical, production-minded guidance on this topic.
 
 ## AI Change Management Framework
 
@@ -127,4 +125,4 @@ class AIChangeManager:
         }
 ```
 
-Effective change management ensures AI initiatives achieve their intended business value.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Effective change management ensures AI initiatives achieve their intended business value.

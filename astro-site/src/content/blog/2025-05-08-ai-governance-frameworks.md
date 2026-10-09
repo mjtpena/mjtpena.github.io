@@ -1,5 +1,6 @@
 ---
 title: "AI Governance Frameworks: Building Responsible AI Systems"
+description: "Comprehensive AI governance ensures responsible and compliant AI deployment."
 author: Michael John Peña
 draft: false
 date: 2025-05-08
@@ -9,10 +10,7 @@ tags:
   - Responsible AI
   - Compliance
   - Enterprise
-
 ---
-
-I wrote "AI Governance Frameworks: Building Responsible AI Systems" to share practical, production-minded guidance on this topic.
 
 ## AI Governance Implementation
 
@@ -113,4 +111,4 @@ class AIGovernanceFramework:
         return report
 ```
 
-Comprehensive AI governance ensures responsible and compliant AI deployment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Comprehensive AI governance ensures responsible and compliant AI deployment.

@@ -1,5 +1,6 @@
 ---
 title: Azure Container Instances for Serverless Container Workloads
+description: "ACI is the container service I reach for when I need a container running in under two minutes and I don't want to explain what a node pool is. Per-second…"
 author: Michael John Pena
 draft: false
 date: 2021-03-03

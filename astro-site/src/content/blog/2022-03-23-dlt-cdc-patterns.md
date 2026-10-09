@@ -1,5 +1,6 @@
 ---
 title: "Change Data Capture with Delta Live Tables"
+description: "DLT's applychanges function processes these into clean, current-state tables."
 author: Michael John Peña
 draft: false
 date: 2022-03-23
@@ -9,10 +10,7 @@ tags:
   - Delta Live Tables
   - CDC
   - Data Engineering
-
 ---
-
-I wrote "Change Data Capture with Delta Live Tables" to share practical, production-minded guidance on this topic.
 
 ## Understanding CDC in DLT
 
@@ -408,4 +406,3 @@ This enables reliable, scalable CDC pipelines with minimal code.
 - [APPLY CHANGES API](https://docs.databricks.com/delta-live-tables/cdc.html)
 - [CDC with Debezium](https://docs.databricks.com/structured-streaming/delta-lake.html)
 - [SCD Type 2 in DLT](https://docs.databricks.com/delta-live-tables/scd-type-2.html)
-

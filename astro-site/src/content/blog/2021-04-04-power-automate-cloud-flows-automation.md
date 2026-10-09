@@ -1,5 +1,6 @@
 ---
 title: Power Automate Cloud Flows - Building Intelligent Automation
+description: "Power Automate cloud flows are the thing I recommend to the \"I don't want to write code\" person on every client engagement, and they almost always produce…"
 author: Michael John Peña
 draft: false
 date: 2021-04-04

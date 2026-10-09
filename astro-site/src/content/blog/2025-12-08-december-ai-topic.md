@@ -1,5 +1,6 @@
 ---
 title: "2026 Predictions: The Rise of Multimodal AI Applications"
+description: "As 2025 closes, multimodal AI has moved from impressive demos to practical applications. Here are my predictions for how multimodal capabilities will…"
 author: Michael John Peña
 draft: false
 date: 2025-12-08
@@ -116,4 +117,4 @@ Start building multimodal capabilities now:
 3. Plan for increased compute requirements
 4. Consider accessibility from the start
 
-The organizations that master multimodal AI in 2026 will have significant competitive advantages in customer experience, operational efficiency, and innovation speed.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The organizations that master multimodal AI in 2026 will have significant competitive advantages in customer experience, operational efficiency, and innovation speed.

@@ -8,10 +8,7 @@ tags:
   - Code Interpreter
   - AI
   - Data Analysis
-
 ---
-
-I wrote "Azure OpenAI Code Interpreter: AI-Powered Data Analysis" to share practical, production-minded guidance on this topic.
 
 ## What is Code Interpreter?
 
@@ -330,4 +327,4 @@ Tomorrow we'll explore ChatGPT Code Interpreter capabilities.
 
 - [Azure OpenAI Assistants](https://learn.microsoft.com/en-us/azure/ai-services/openai/assistants-quickstart)
 - [Code Interpreter Guide](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/code-interpreter)
-- [Azure OpenAI Pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure OpenAI Pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)

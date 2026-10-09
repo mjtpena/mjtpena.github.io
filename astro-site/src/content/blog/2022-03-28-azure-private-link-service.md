@@ -9,10 +9,7 @@ tags:
   - Networking
   - Security
   - Architecture
-
 ---
-
-I wrote "Azure Private Link Service: Expose Your Services Privately" to share practical, production-minded guidance on this topic.
 
 ## Private Link Service vs Private Endpoint
 
@@ -428,4 +425,3 @@ For organizations building shared services or SaaS platforms, Private Link Servi
 - [Private Link Service Documentation](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview)
 - [Create Private Link Service](https://docs.microsoft.com/en-us/azure/private-link/create-private-link-service-portal)
 - [Private Link Pricing](https://azure.microsoft.com/en-us/pricing/details/private-link/)
-

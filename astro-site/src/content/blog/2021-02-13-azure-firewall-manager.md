@@ -10,10 +10,7 @@ tags:
   - Networking
   - Firewall
   - Enterprise
-
 ---
-
-I wrote "2021-02-13-azure-firewall-manager" to share practical, production-minded guidance on this topic.
 
 ## Key Features
 
@@ -414,4 +411,3 @@ AzureDiagnostics
 Azure Firewall Manager provides the centralized control needed for enterprise-scale firewall deployments. By using hierarchical policies and integrated threat protection features, you can maintain consistent security posture across all your Azure environments.
 
 Start with a base policy defining organization-wide rules, then create regional child policies for location-specific requirements.
-

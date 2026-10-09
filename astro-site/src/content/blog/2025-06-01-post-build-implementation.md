@@ -1,5 +1,6 @@
 ---
 title: "Post-Build 2025: Implementing New Features"
+description: "Start with non-critical systems to validate changes before production deployment."
 author: Michael John Peña
 draft: false
 date: 2025-06-01
@@ -9,10 +10,7 @@ tags:
   - Implementation
   - AI
   - Development
-
 ---
-
-I wrote "Post-Build 2025: Implementing New Features" to share practical, production-minded guidance on this topic.
 
 ## Implementation Priorities
 
@@ -76,4 +74,4 @@ const extension = new CopilotExtension({
 - [ ] Document changes for team
 - [ ] Plan gradual rollout
 
-Start with non-critical systems to validate changes before production deployment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Start with non-critical systems to validate changes before production deployment.

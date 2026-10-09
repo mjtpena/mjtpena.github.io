@@ -10,10 +10,7 @@ tags:
   - Neural Voice
   - AI
   - Custom TTS
-
 ---
-
-I wrote "Custom Neural Voice in Azure AI: Creating Unique Voice Experiences" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -567,4 +564,3 @@ print(f"Tests: {results['passed']}/{results['total_tests']} passed")
 ## Conclusion
 
 Custom Neural Voice enables organizations to create distinctive, branded voice experiences that strengthen their identity across applications. By following proper recording guidelines, validating audio quality, and implementing comprehensive testing, you can build high-quality custom voices that deliver consistent, engaging user experiences.
-

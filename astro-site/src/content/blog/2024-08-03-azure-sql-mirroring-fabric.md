@@ -9,10 +9,7 @@ tags:
   - Mirroring
   - Database
   - Tutorial
-
 ---
-
-I wrote "Azure SQL Mirroring to Fabric: Complete Setup Guide" to share practical, production-minded guidance on this topic.
 
 ## Prerequisites Checklist
 
@@ -453,4 +450,3 @@ troubleshooting_guide = {
 Azure SQL mirroring to Fabric transforms how operational data becomes available for analytics. With proper setup and monitoring, you get near real-time data access without complex ETL pipelines.
 
 Follow this guide to set up your first mirror, then expand to more tables as you validate the approach.
-

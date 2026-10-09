@@ -1,5 +1,6 @@
 ---
 title: "LLMOps: Operationalizing Large Language Models in Production"
+description: "LLMs present distinct operational challenges: non-deterministic outputs, prompt sensitivity, context window management, and the difficulty of defining…"
 author: Michael John Peña
 draft: false
 date: 2025-08-13
@@ -9,10 +10,7 @@ tags:
   - Production AI
   - DevOps
   - AI Engineering
-
 ---
-
-I wrote "LLMOps: Operationalizing Large Language Models in Production" to share practical, production-minded guidance on this topic.
 
 ## Key LLMOps Challenges
 
@@ -92,4 +90,4 @@ class LLMEvaluator:
         return self._parse_evaluation(evaluation.choices[0].message.content)
 ```
 
-LLMOps is about building confidence that your AI system behaves correctly through systematic testing, monitoring, and iteration. Start with basic telemetry and expand based on observed failure modes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+LLMOps is about building confidence that your AI system behaves correctly through systematic testing, monitoring, and iteration. Start with basic telemetry and expand based on observed failure modes.

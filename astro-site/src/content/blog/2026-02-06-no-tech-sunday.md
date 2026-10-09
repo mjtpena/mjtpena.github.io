@@ -1,5 +1,6 @@
 ---
 title: "Our First No-Tech Sunday"
+description: "I promised in my January retrospective: one no-tech day per month with the family. Today was the first one."
 author: Michael John Peña
 draft: false
 date: 2026-02-06
@@ -68,4 +69,4 @@ And the best day I've had in months involved zero technology.
 
 That's not irony. That's balance.
 
-We're doing this again.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+We're doing this again.

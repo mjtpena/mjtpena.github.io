@@ -1,5 +1,6 @@
 ---
 title: "Azure Logic Apps: Connectors for Everything"
+description: "Accept webhooks from any source. Create connectors for your APIs. Logic Apps is the integration glue for enterprise systems."
 author: Michael John Peña
 draft: false
 date: 2020-10-19
@@ -8,10 +9,7 @@ tags:
   - Logic Apps
   - Integration
   - Low-Code
-
 ---
-
-I wrote "Azure Logic Apps: Connectors for Everything" to share practical, production-minded guidance on this topic.
 
 ## Popular Connectors
 
@@ -212,4 +210,4 @@ definitions:
                     └─────────────┘
 ```
 
-Logic Apps is the integration glue for enterprise systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Logic Apps is the integration glue for enterprise systems.

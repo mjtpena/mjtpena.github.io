@@ -6,12 +6,9 @@ date: 2022-05-08
 tags:
   - dotnet
   - csharp
-  - azure
-  - performance
-
+  - Azure
+  - Performance
 ---
-
-I wrote ".NET 7 Preview: Performance and Cloud-Native Features" to share practical, production-minded guidance on this topic.
 
 ## Key Features Overview
 
@@ -414,5 +411,3 @@ app.Run();
 - Performance improvements across the board
 
 These features make .NET 7 excellent for cloud-native and high-performance applications.
-
-

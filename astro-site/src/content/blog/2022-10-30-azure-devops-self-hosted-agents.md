@@ -1,13 +1,11 @@
 ---
 title: "Self-Hosted Agents in Azure DevOps"
+description: "Self-hosted agents provide flexibility for specialized build requirements and secure access to internal resources."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-30
 tags: ["Azure", "Azure DevOps", "Agents", "Infrastructure"]
-
 ---
-
-I wrote "Self-Hosted Agents in Azure DevOps" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Self-Hosted Agents
 
@@ -80,4 +78,4 @@ spec:
               value: kubernetes-pool
 ```
 
-Self-hosted agents provide flexibility for specialized build requirements and secure access to internal resources.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Self-hosted agents provide flexibility for specialized build requirements and secure access to internal resources.

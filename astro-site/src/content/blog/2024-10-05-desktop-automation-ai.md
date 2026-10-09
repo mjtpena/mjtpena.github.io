@@ -1,13 +1,11 @@
 ---
 title: "Desktop Automation with AI: Controlling Any Application"
+description: "Desktop automation with AI brings human-like understanding to any application, enabling automation of complex workflows that were previously impossible to…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-05
 tags: ["Desktop Automation", "AI", "RPA", "Computer Use", "Productivity"]
-
 ---
-
-I wrote "Desktop Automation with AI: Controlling Any Application" to share practical, production-minded guidance on this topic.
 
 ## Cross-Platform Desktop Agent
 
@@ -451,4 +449,4 @@ example_workflow = {
 # results = automator.execute_workflow(example_workflow)
 ```
 
-Desktop automation with AI brings human-like understanding to any application, enabling automation of complex workflows that were previously impossible to script reliably.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Desktop automation with AI brings human-like understanding to any application, enabling automation of complex workflows that were previously impossible to script reliably.

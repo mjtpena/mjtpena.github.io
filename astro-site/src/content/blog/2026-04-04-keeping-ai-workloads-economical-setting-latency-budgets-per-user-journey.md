@@ -1,5 +1,6 @@
 ---
 title: "Keeping AI Workloads Economical: setting latency budgets per user journey"
+description: "I spent the day reducing cognitive overhead for engineers and analysts—introducing clearer table contracts, simpler failure modes, and concise runbooks that…"
 author: Michael John Peña
 draft: false
 date: 2026-04-04
@@ -36,4 +37,4 @@ Tomorrow I want to verify this pattern under a busier workload before I call it 
 
 - [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
 - [RAG design and evaluation guide](https://learn.microsoft.com/azure/architecture/ai-ml/guide/rag/rag-solution-design-and-evaluation-guide)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

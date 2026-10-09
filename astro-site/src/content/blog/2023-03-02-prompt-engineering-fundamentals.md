@@ -1,5 +1,6 @@
 ---
 title: "Prompt Engineering Fundamentals for Azure OpenAI"
+description: "Provide specific line-by-line feedback.\"\"\", requiredvars=[\"databasetype\", \"query\"] ) prompt = SQLREVIEWTEMPLATE.format( databasetype=\"Azure SQL Database\"…"
 author: Michael John Pena
 draft: false
 date: 2023-03-02
@@ -9,10 +10,7 @@ tags:
   - AI
   - Prompt Engineering
   - GPT
-
 ---
-
-I wrote "Prompt Engineering Fundamentals for Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## The Anatomy of a Good Prompt
 
@@ -267,7 +265,7 @@ Provide specific line-by-line feedback.""",
     required_vars=["database_type", "query"]
 )
 
-# Use template
+## Use template
 prompt = SQL_REVIEW_TEMPLATE.format(
     database_type="Azure SQL Database",
     query="SELECT * FROM users WHERE name = '" + user_input + "'"
@@ -321,4 +319,4 @@ def test_prompt_consistency(prompt: str, test_cases: list[dict], expected_format
 5. **Iterate**: Test and refine prompts based on results
 6. **Version control**: Track prompt changes like code
 
-Prompt engineering is a skill that improves with practice. Start with these fundamentals and iterate based on your specific use cases.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Prompt engineering is a skill that improves with practice. Start with these fundamentals and iterate based on your specific use cases.

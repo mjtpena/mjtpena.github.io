@@ -9,10 +9,7 @@ tags:
   - AI
   - OCR
   - Data Extraction
-
 ---
-
-I wrote "Azure AI Document Intelligence: Extracting Data from Documents" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -342,4 +339,4 @@ for chunk in chunks:
 
 - [Document Intelligence Documentation](https://learn.microsoft.com/azure/ai-services/document-intelligence/)
 - [Prebuilt Models](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-model-overview)
-- [SDK Reference](https://learn.microsoft.com/python/api/azure-ai-formrecognizer/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [SDK Reference](https://learn.microsoft.com/python/api/azure-ai-formrecognizer/)

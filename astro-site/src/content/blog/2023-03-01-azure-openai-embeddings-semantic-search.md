@@ -1,5 +1,6 @@
 ---
 title: "Building Semantic Search with Azure OpenAI Embeddings"
+description: "Embeddings are numerical representations of text that capture semantic meaning. Similar concepts have similar vectors. Azure OpenAI provides the…"
 author: Michael John Pena
 draft: false
 date: 2023-03-01
@@ -9,10 +10,7 @@ tags:
   - AI
   - Embeddings
   - Semantic Search
-
 ---
-
-I wrote "Building Semantic Search with Azure OpenAI Embeddings" to share practical, production-minded guidance on this topic.
 
 ## What Are Embeddings?
 
@@ -256,4 +254,4 @@ Next steps to explore:
 - Re-ranking with cross-encoders
 - Integrating with RAG patterns
 
-The combination of Azure OpenAI embeddings and Azure Cognitive Search provides a production-ready semantic search foundation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The combination of Azure OpenAI embeddings and Azure Cognitive Search provides a production-ready semantic search foundation.

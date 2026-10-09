@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Box: Physical Data Transfer at Scale"
+description: "Data Box: when the network isn't fast enough, ship it."
 author: Michael John Peña
 draft: false
 date: 2020-11-05
@@ -8,10 +9,7 @@ tags:
   - Data Box
   - Migration
   - Data Transfer
-
 ---
-
-I wrote "Azure Data Box: Physical Data Transfer at Scale" to share practical, production-minded guidance on this topic.
 
 ## When to Use Data Box
 
@@ -144,4 +142,4 @@ On-Premises                         Azure
 | Data Box | $500 | $50/day after 10 days |
 | Data Box Heavy | $2,000 | $100/day after 10 days |
 
-Data Box: when the network isn't fast enough, ship it.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Data Box: when the network isn't fast enough, ship it.

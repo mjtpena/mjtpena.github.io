@@ -10,10 +10,7 @@ tags:
   - Security
   - Embedded Systems
   - Azure Sphere
-
 ---
-
-I wrote "2021-03-21-azure-sphere" to share practical, production-minded guidance on this topic.
 
 ## The Three Components of Azure Sphere
 
@@ -393,4 +390,3 @@ Azure Sphere provides comprehensive IoT security:
 - **Real-time capable**: Support for time-critical workloads
 
 It's ideal for mission-critical IoT applications requiring the highest security standards.
-

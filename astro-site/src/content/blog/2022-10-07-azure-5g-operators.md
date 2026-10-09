@@ -4,10 +4,7 @@ author: "Michael John Peña"
 draft: false
 date: 2022-10-07
 tags: ["Azure", "5G", "Telecommunications", "Edge"]
-
 ---
-
-I wrote "5G and Azure for Operators" to share practical, production-minded guidance on this topic.
 
 ## Azure for Operators Overview
 
@@ -28,4 +25,5 @@ spec:
       sliceConfiguration:
         name: default-slice
         sst: 1
-        sd: "0x010203"\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+        sd: "0x010203"
+```

@@ -1,5 +1,6 @@
 ---
 title: "Cosmos DB Vector Search: Implementing Semantic Search at Global Scale"
+description: "Configure your Cosmos account with write regions near your users and read replicas globally. Vector searches automatically route to the nearest replica…"
 author: Michael John Peña
 draft: false
 date: 2025-07-08
@@ -9,10 +10,7 @@ tags:
   - NoSQL
   - Global Distribution
   - Python
-
 ---
-
-I wrote "Cosmos DB Vector Search: Implementing Semantic Search at Global Scale" to share practical, production-minded guidance on this topic.
 
 ## Configuring Vector Indexing
 
@@ -88,4 +86,4 @@ async def semantic_search(query_embedding: list, category: str, limit: int = 10)
 
 ## Global Distribution Strategy
 
-Configure your Cosmos account with write regions near your users and read replicas globally. Vector searches automatically route to the nearest replica, delivering consistent sub-10ms latency worldwide.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Configure your Cosmos account with write regions near your users and read replicas globally. Vector searches automatically route to the nearest replica, delivering consistent sub-10ms latency worldwide.

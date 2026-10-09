@@ -1,13 +1,11 @@
 ---
 title: "Gradual Rollout Strategies for AI Features"
+description: "Deploying AI features to production requires careful risk management. Gradual rollouts help identify issues early while minimizing blast radius."
 author: "Michael John Peña"
 draft: false
 date: 2024-03-29
 tags: ["AI", "Deployment", "MLOps", "DevOps", "Risk Management"]
-
 ---
-
-I wrote "Gradual Rollout Strategies for AI Features" to share practical, production-minded guidance on this topic.
 
 Deploying AI features to production requires careful risk management. Gradual rollouts help identify issues early while minimizing blast radius.
 
@@ -380,4 +378,3 @@ class AutomatedRolloutController:
 ## Conclusion
 
 Gradual rollouts are essential for safe AI deployments. Combine percentage-based rollouts with automated health monitoring and quick rollback capabilities. Use shadow deployments to validate new models before any user exposure.
-

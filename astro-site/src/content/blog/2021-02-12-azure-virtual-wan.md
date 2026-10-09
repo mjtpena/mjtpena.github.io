@@ -10,10 +10,7 @@ tags:
   - Virtual WAN
   - Hub and Spoke
   - Enterprise
-
 ---
-
-I wrote "2021-02-12-azure-virtual-wan" to share practical, production-minded guidance on this topic.
 
 ## Understanding Virtual WAN Architecture
 
@@ -351,4 +348,3 @@ AzureDiagnostics
 Azure Virtual WAN simplifies complex enterprise networking by providing a unified platform for connectivity and security. The automated routing and integrated security features reduce operational complexity while providing global-scale connectivity.
 
 Start with a pilot deployment connecting a few spoke VNets, then expand to include branch offices and additional regions as you validate the architecture.
-

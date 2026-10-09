@@ -1,13 +1,11 @@
 ---
 title: "Weights and Biases for LLM Applications: Complete Guide"
+description: "Weights & Biases provides a comprehensive platform for LLM observability, evaluation, and collaboration. Its strength lies in combining experiment tracking…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-16
 tags: ["Weights and Biases", "LLM", "MLOps", "Observability", "Evaluation"]
-
 ---
-
-I wrote "Weights and Biases for LLM Applications: Complete Guide" to share practical, production-minded guidance on this topic.
 
 ## Getting Started with W&B Weave
 
@@ -326,4 +324,4 @@ wandb.alert(
 )
 ```
 
-Weights & Biases provides a comprehensive platform for LLM observability, evaluation, and collaboration. Its strength lies in combining experiment tracking with production monitoring.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Weights & Biases provides a comprehensive platform for LLM observability, evaluation, and collaboration. Its strength lies in combining experiment tracking with production monitoring.

@@ -9,10 +9,7 @@ tags:
   - Intellectual Property
   - AI Content
   - Enterprise
-
 ---
-
-I wrote "Copyright Considerations for AI-Generated Content" to share practical, production-minded guidance on this topic.
 
 ## Current Legal Landscape
 
@@ -112,4 +109,3 @@ The final output reflects human creative direction, curation, and editing.
 ## Conclusion
 
 Copyright for AI content remains evolving. Document everything, add human creativity, and seek legal guidance for high-stakes content.
-

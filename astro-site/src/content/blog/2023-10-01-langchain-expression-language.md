@@ -10,10 +10,7 @@ tags:
   - LLM
   - AI
   - Python
-
 ---
-
-I wrote "LangChain Expression Language (LCEL): A Practical Guide" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -381,4 +378,3 @@ print(result)
 ## Conclusion
 
 LangChain Expression Language provides a powerful, declarative way to build LLM applications. Its support for streaming, async operations, and composability makes it ideal for production applications. By mastering LCEL patterns like branching, fallbacks, and configurable chains, you can build robust and maintainable AI systems.
-

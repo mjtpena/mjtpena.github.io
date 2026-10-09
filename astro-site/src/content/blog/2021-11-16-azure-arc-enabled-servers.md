@@ -1,5 +1,6 @@
 ---
 title: "Azure Arc-Enabled Servers: Manage Any Server from Azure"
+description: "Azure Arc-enabled servers bring Azure's management capabilities to your entire server estate, regardless of where those servers run. This unified management…"
 author: Michael John Pena
 draft: false
 date: 2021-11-16
@@ -9,10 +10,7 @@ tags:
   - Hybrid Cloud
   - Infrastructure
   - Management
-
 ---
-
-I wrote "Azure Arc-Enabled Servers: Manage Any Server from Azure" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Arc-Enabled Servers?
 
@@ -451,4 +449,4 @@ Azure Arc-enabled servers bring Azure's management capabilities to your entire s
 
 - [Azure Arc Documentation](https://docs.microsoft.com/en-us/azure/azure-arc/servers/overview)
 - [Azure Arc Jumpstart](https://azurearcjumpstart.io/)
-- [Arc-Enabled Servers Best Practices](https://docs.microsoft.com/en-us/azure/azure-arc/servers/manage-agent)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Arc-Enabled Servers Best Practices](https://docs.microsoft.com/en-us/azure/azure-arc/servers/manage-agent)

@@ -1,13 +1,11 @@
 ---
 title: "Data Drift Detection for ML Models"
+description: "Early drift detection enables proactive model maintenance and prevents silent failures in production."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-13
 tags: ["Azure", "Machine Learning", "Data Drift", "MLOps", "Monitoring"]
-
 ---
-
-I wrote "Data Drift Detection for ML Models" to share practical, production-minded guidance on this topic.
 
 ## Types of Data Drift
 
@@ -356,4 +354,4 @@ results = pipeline.run_detection()
 print(f"Drift detected in {len(results[results['drift_detected']])} features")
 ```
 
-Early drift detection enables proactive model maintenance and prevents silent failures in production.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Early drift detection enables proactive model maintenance and prevents silent failures in production.

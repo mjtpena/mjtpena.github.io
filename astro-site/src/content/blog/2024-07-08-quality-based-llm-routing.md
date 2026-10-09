@@ -9,10 +9,7 @@ tags:
   - Quality
   - Azure
   - Evaluation
-
 ---
-
-I wrote "Quality-Based LLM Routing: Maximizing Output Quality" to share practical, production-minded guidance on this topic.
 
 ## Defining Quality Dimensions
 
@@ -589,4 +586,3 @@ class SLAEnforcer:
 Quality-based routing ensures you deliver appropriate quality for each use case. Not everything needs the best model, but critical tasks shouldn't get cheap treatment.
 
 Build evaluation into your workflow. Measure, adjust, and continuously improve your routing decisions based on actual outcomes.
-

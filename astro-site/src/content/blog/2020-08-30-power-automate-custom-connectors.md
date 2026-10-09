@@ -1,5 +1,6 @@
 ---
 title: "Building Power Automate Custom Connectors"
+description: "The power of custom connectors: developers build once, business users consume forever."
 author: Michael John Peña
 draft: false
 date: 2020-08-30
@@ -8,10 +9,7 @@ tags:
   - Power Automate
   - Integration
   - Low-Code
-
 ---
-
-I wrote "Building Power Automate Custom Connectors" to share practical, production-minded guidance on this topic.
 
 ## OpenAPI Definition
 
@@ -77,4 +75,4 @@ Condition: If quantity < 10
 Send email notification
 ```
 
-The power of custom connectors: developers build once, business users consume forever.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The power of custom connectors: developers build once, business users consume forever.

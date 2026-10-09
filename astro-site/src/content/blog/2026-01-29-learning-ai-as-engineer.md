@@ -1,5 +1,6 @@
 ---
 title: "Learning AI as a Traditional Engineer"
+description: "Three years ago, I was a cloud/data engineer. AI was \"something other people do.\" Now it's a core part of my work."
 author: Michael John Peña
 draft: false
 date: 2026-01-29
@@ -86,4 +87,4 @@ The AI part is learnable. The engineering discipline is harder to teach.
 
 If you're a solid engineer, you can learn AI. Start building. Start now.
 
-The best time to start was three years ago. The second-best time is today.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The best time to start was three years ago. The second-best time is today.

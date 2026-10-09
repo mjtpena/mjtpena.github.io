@@ -1,5 +1,6 @@
 ---
 title: "Copilot Extensibility: Building Custom Plugins for Microsoft 365 Copilot"
+description: "Use the Copilot Developer Portal to test plugins in a sandboxed environment before enterprise deployment. The new debugging tools show exactly how Copilot…"
 author: Michael John Peña
 draft: false
 date: 2025-07-05
@@ -9,10 +10,7 @@ tags:
   - TypeScript
   - Enterprise AI
   - Microsoft Graph
-
 ---
-
-I wrote "Copilot Extensibility: Building Custom Plugins for Microsoft 365 Copilot" to share practical, production-minded guidance on this topic.
 
 ## Plugin Architecture Overview
 
@@ -84,4 +82,4 @@ export async function getCustomerDetails(
 
 ## Testing and Deployment
 
-Use the Copilot Developer Portal to test plugins in a sandboxed environment before enterprise deployment. The new debugging tools show exactly how Copilot interprets your API responses and generates user-facing output.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use the Copilot Developer Portal to test plugins in a sandboxed environment before enterprise deployment. The new debugging tools show exactly how Copilot interprets your API responses and generates user-facing output.

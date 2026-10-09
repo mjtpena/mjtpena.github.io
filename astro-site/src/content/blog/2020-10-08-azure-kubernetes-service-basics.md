@@ -8,10 +8,7 @@ tags:
   - Kubernetes
   - AKS
   - Containers
-
 ---
-
-I wrote "Azure Kubernetes Service: Managed Kubernetes" to share practical, production-minded guidance on this topic.
 
 ## Creating a Cluster
 
@@ -55,4 +52,5 @@ spec:
         resources:
           limits:
             cpu: "500m"
-            memory: "128Mi"\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+            memory: "128Mi"
+```

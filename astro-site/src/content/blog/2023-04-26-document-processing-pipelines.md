@@ -1,5 +1,6 @@
 ---
 title: "Intelligent Document Processing Pipelines with AI"
+description: "Intelligent document processing transforms unstructured documents into structured, actionable data. Combining OCR, layout analysis, and LLM understanding…"
 author: Michael John Pena
 draft: false
 date: 2023-04-26
@@ -9,10 +10,7 @@ tags:
   - Azure
   - Data Engineering
   - OCR
-
 ---
-
-I wrote "Intelligent Document Processing Pipelines with AI" to share practical, production-minded guidance on this topic.
 
 ## Document Processing Architecture
 
@@ -592,4 +590,4 @@ stats = await processor.process_batch(
 print(f"Processed {stats['successful']}/{stats['total']} documents")
 ```
 
-Intelligent document processing transforms unstructured documents into structured, actionable data. Combining OCR, layout analysis, and LLM understanding enables automation of document-heavy business processes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Intelligent document processing transforms unstructured documents into structured, actionable data. Combining OCR, layout analysis, and LLM understanding enables automation of document-heavy business processes.

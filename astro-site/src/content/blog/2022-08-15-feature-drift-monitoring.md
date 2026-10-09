@@ -1,13 +1,11 @@
 ---
 title: "Feature Drift Monitoring for ML Systems"
+description: "Feature-level drift monitoring enables targeted investigation and remediation of model issues."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-15
 tags: ["Azure", "Machine Learning", "Feature Drift", "MLOps", "Feature Engineering"]
-
 ---
-
-I wrote "Feature Drift Monitoring for ML Systems" to share practical, production-minded guidance on this topic.
 
 ## Feature Drift vs Data Drift
 
@@ -362,4 +360,4 @@ class FeatureDriftAlertManager:
                 f"Method: {result.method}")
 ```
 
-Feature-level drift monitoring enables targeted investigation and remediation of model issues.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Feature-level drift monitoring enables targeted investigation and remediation of model issues.

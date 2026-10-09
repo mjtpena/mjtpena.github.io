@@ -1,5 +1,6 @@
 ---
 title: "Azure Private DNS Zones: Name Resolution in VNets"
+description: "The first time a Private Endpoint refused to resolve correctly because the VNet was using Azure-provided DNS, I learned this lesson the hard way: private…"
 author: Michael John Peña
 draft: false
 date: 2020-11-18
@@ -163,4 +164,4 @@ az dns-resolver inbound-endpoint create \
     --ip-configurations '[{"private-ip-address":"10.0.1.4","private-ip-allocation-method":"Static","subnet":{"id":"/subscriptions/.../subnets/dns-inbound"}}]'
 ```
 
-Private DNS: seamless name resolution for private networks.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Private DNS: seamless name resolution for private networks.

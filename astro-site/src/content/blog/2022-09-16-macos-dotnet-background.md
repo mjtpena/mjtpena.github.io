@@ -1,5 +1,6 @@
 ---
 title: "Creating native MacOS background apps with .NET"
+description: "For those who are already familiar with Windows Services, with .NET, you traditionally create a Windows Service project using the .NET Framework. But with…"
 author: Michael John Peña
 draft: false
 date: 2022-09-15T21:52:19+00:00
@@ -8,10 +9,7 @@ tags:
   - csharp
   - dotnet
   - macos
-
 ---
-
-I wrote "Creating native MacOS background apps with .NET" to share practical, production-minded guidance on this topic.
 
 ## IntroductionBut what if you actually want to create and run a head-less (no UI) application in your Mac using your favourite .NET framework and libraries? Then I have some good news for you, it’s possible, but then again - with some caveats.
 
@@ -116,5 +114,3 @@ Click the “Start” streaming toggle. Also, type in the search bar, your appli
 - .NET Apps (Core onwards) allow you to use Worker Service to create continuously running processes.
 - Platypus is a tool to use in order to create MacOS application bundles. This applies to your self-hosted .NET application too.
 - You can check your application logs in Console.
-
-

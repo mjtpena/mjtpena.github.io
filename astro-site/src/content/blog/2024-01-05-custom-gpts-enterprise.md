@@ -1,5 +1,6 @@
 ---
 title: "Custom GPTs for Enterprise: Building Internal AI Tools"
+description: "As organizations hand Custom GPTs to teams, my focus has been on governance, access control, and sensible defaults. These notes outline how enterprises can…"
 author: Michael John Peña
 draft: false
 date: 2024-01-05

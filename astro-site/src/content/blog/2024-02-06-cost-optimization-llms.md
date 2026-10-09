@@ -9,10 +9,7 @@ tags:
   - Azure OpenAI
   - Token Management
   - Enterprise AI
-
 ---
-
-I wrote "Cost Optimization for LLMs: Strategies That Work" to share practical, production-minded guidance on this topic.
 
 ## Cost Reduction Strategies
 
@@ -151,4 +148,3 @@ def calculate_daily_cost(usage_log: list[dict]) -> dict:
 ## Conclusion
 
 Cost optimization is essential for sustainable AI at scale. Combine these strategies to reduce costs by 50-80% while maintaining quality.
-

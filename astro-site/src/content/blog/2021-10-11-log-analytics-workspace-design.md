@@ -1,13 +1,11 @@
 ---
 title: "Log Analytics Workspace Design for Enterprise Kubernetes"
+description: "Log Analytics workspace design is one of those infrastructure decisions that feels low-stakes until your bill arrives or you hit a query that crosses a…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-11
 tags: ["Azure", "Log Analytics", "Monitoring", "Architecture", "Enterprise"]
-
 ---
-
-I wrote "Log Analytics Workspace Design for Enterprise Kubernetes" to share practical, production-minded guidance on this topic.
 
 Log Analytics workspace design is one of those infrastructure decisions that feels low-stakes until your bill arrives or you hit a query that crosses a workspace boundary and requires a `workspace()` function call. The core design tension: centralised workspace (all logs in one place, simpler queries, easier cross-resource correlation) versus distributed workspaces (separate billing, access control by workspace, data residency compliance). For most organisations, the answer is a hybrid: a central workspace for platform and security logs (Azure Activity, Azure AD, Defender for Cloud) with separate workspaces for team-owned applications where the team manages their own Log Analytics costs and access. The data retention setting and data capping (daily ingestion limit) are the cost control mechanisms—set them before you connect high-volume data sources like verbose application logging or network flow logs.
 
@@ -327,4 +325,3 @@ az aks enable-addons \
 Thoughtful Log Analytics workspace design balances operational needs with cost and security requirements. Choose a pattern that fits your organization's structure and scale appropriately as your Kubernetes estate grows.
 
 Tomorrow, we'll explore cross-workspace queries for enterprise-wide visibility.
-

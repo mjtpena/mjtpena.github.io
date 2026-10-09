@@ -9,10 +9,7 @@ tags:
   - Agents
   - Python
   - Control Flow
-
 ---
-
-I wrote "Conditional Edges in LangGraph: Dynamic Agent Flows" to share practical, production-minded guidance on this topic.
 
 ## Basic Conditional Edges
 
@@ -524,4 +521,3 @@ def test_full_graph_routing():
 Conditional edges are the decision-making backbone of intelligent agents. Master them, and you can build agents that adapt to any situation.
 
 Start with simple binary decisions, build up to multi-factor routing, and always test your routing logic thoroughly.
-

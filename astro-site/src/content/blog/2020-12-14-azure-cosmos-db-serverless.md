@@ -1,5 +1,6 @@
 ---
 title: "Azure Cosmos DB Serverless: Pay-Per-Request NoSQL"
+description: "Cosmos DB Serverless: NoSQL without the commitment."
 author: Michael John Peña
 draft: false
 date: 2020-12-14
@@ -8,10 +9,7 @@ tags:
   - Cosmos DB
   - Serverless
   - NoSQL
-
 ---
-
-I wrote "Azure Cosmos DB Serverless: Pay-Per-Request NoSQL" to share practical, production-minded guidance on this topic.
 
 ## Serverless vs Provisioned
 
@@ -144,4 +142,4 @@ dt.exe /s:CosmosDB /s.ConnectionString:"..." \
     /t:CosmosDB /t.ConnectionString:"..." /t.Throughput:1000
 ```
 
-Cosmos DB Serverless: NoSQL without the commitment.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Cosmos DB Serverless: NoSQL without the commitment.

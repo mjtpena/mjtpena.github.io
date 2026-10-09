@@ -9,10 +9,7 @@ tags:
   - Identity
   - Active Directory
   - Defender
-
 ---
-
-I wrote "Microsoft Defender for Identity: Protecting Your Active Directory" to share practical, production-minded guidance on this topic.
 
 ## What Defender for Identity Detects
 
@@ -321,4 +318,4 @@ def check_sensor_health():
 
 - [Defender for Identity Documentation](https://docs.microsoft.com/en-us/defender-for-identity/)
 - [Deployment Guide](https://docs.microsoft.com/en-us/defender-for-identity/install-step1)
-- [Alert Reference](https://docs.microsoft.com/en-us/defender-for-identity/alerts-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Alert Reference](https://docs.microsoft.com/en-us/defender-for-identity/alerts-overview)

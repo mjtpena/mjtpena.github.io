@@ -1,16 +1,14 @@
 ---
 title: "Test-Driven Development in TypeScript: A Practical Guide"
+description: "To get started with TDD in TypeScript, you will need to set up a TypeScript project and install the necessary dependencies."
 author: Michael John Peña
 draft: false
 date: 2022-12-23
 url: /blog/typescript-tdd/
 tags:
-  - typescript
-  - testing
-
+  - TypeScript
+  - Testing
 ---
-
-I wrote "Test-Driven Development in TypeScript: A Practical Guide" to share practical, production-minded guidance on this topic.
 
 In this post, we will explore how to do TDD in TypeScript, a typed superset of JavaScript that can be used to build large scale applications. We will cover the following topics:
 
@@ -22,7 +20,7 @@ In this post, we will explore how to do TDD in TypeScript, a typed superset of J
 
 Let's get started!
 
-# Setting up a TypeScript project for TDD
+## Setting up a TypeScript project for TDD
 
 To get started with TDD in TypeScript, you will need to set up a TypeScript project and install the necessary dependencies.
 
@@ -58,7 +56,7 @@ Finally, create a src directory in your project and add an empty index.ts file. 
 
 Your project is now set up and ready for TDD!
 
-# Writing tests in TypeScript
+## Writing tests in TypeScript
 
 To write tests in TypeScript, you will need to understand the syntax of the testing library you are using. In this tutorial, we will be using Jest.
 
@@ -66,7 +64,7 @@ Jest tests are written using the describe and it functions. The describe functio
 
 Here is an example of a simple test in TypeScript:
 
-```TypeScript
+```typescript
 import { add } from './math';
 
 describe('math', () => {
@@ -81,7 +79,7 @@ In this example, we are testing the add function from the math module. The test 
 
 You can write as many tests as you like for a given piece of code. It is a good practice to test for both expected and unexpected input, to ensure that the code is robust and handles all cases properly.
 
-# Running tests in TypeScript
+## Running tests in TypeScript
 
 To run your tests in TypeScript, you will need to use the testing library's command-line interface (CLI). In the case of Jest, you can run the tests by using the jest command in your terminal.
 
@@ -111,7 +109,7 @@ By default, Jest will run tests in watch mode, which means that it will continuo
 jest --no-watch
 ```
 
-# Debugging tests in TypeScript
+## Debugging tests in TypeScript
 
 Debugging tests in TypeScript can be done using a debugger in your code editor or by using the debugger statement in your code.
 
@@ -119,7 +117,7 @@ To use a debugger in your code editor, you will need to set a breakpoint in your
 
 To use the debugger statement, simply add the debugger keyword to your code wherever you want to pause execution:
 
-```TypeScript
+```typescript
 import { add } from './math';
 
 describe('math', () => {
@@ -133,7 +131,7 @@ describe('math', () => {
 
 When you run your tests in debug mode, the debugger will pause execution at the debugger statement, allowing you to inspect the state of your code and step through the execution.
 
-# Best practices for TDD in TypeScript
+## Best practices for TDD in TypeScript
 
 Here are some best practices to follow when doing TDD in TypeScript:
 
@@ -145,4 +143,4 @@ Here are some best practices to follow when doing TDD in TypeScript:
 
 - Use mocks and stubs: When testing code that depends on external services or APIs, it can be helpful to use mocks or stubs to isolate the code being tested. This will make it easier to test and debug your code.
 
-By following these best practices, you can ensure that your TypeScript code is correct, well-tested, and easy to maintain.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+By following these best practices, you can ensure that your TypeScript code is correct, well-tested, and easy to maintain.

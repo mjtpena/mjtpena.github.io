@@ -1,5 +1,6 @@
 ---
 title: Image Analysis with Azure Computer Vision
+description: "Computer Vision is the Cognitive Service that covers the \"I have an image and I need to know what's in it\" scenario without training a custom model. Read…"
 author: Michael John Pena
 draft: false
 date: 2021-03-28

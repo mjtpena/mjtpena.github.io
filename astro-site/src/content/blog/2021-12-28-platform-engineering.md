@@ -1,5 +1,6 @@
 ---
 title: "Platform Engineering: Building the Foundation for Developer Productivity"
+description: "Platform engineering is about creating golden paths - paved roads that make it easy for developers to do the right thing. It's infrastructure as a product…"
 author: Michael John Pena
 draft: false
 date: 2021-12-28
@@ -9,10 +10,7 @@ tags:
   - Developer Experience
   - Infrastructure
   - Cloud
-
 ---
-
-I wrote "Platform Engineering: Building the Foundation for Developer Productivity" to share practical, production-minded guidance on this topic.
 
 ## What is Platform Engineering?
 
@@ -537,4 +535,4 @@ Platform engineering in 2021 emerged as the answer to scaling DevOps practices. 
 - [Team Topologies](https://teamtopologies.com/)
 - [Backstage](https://backstage.io/)
 - [Platform Engineering Community](https://platformengineering.org/)
-- [Internal Developer Platform](https://internaldeveloperplatform.org/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Internal Developer Platform](https://internaldeveloperplatform.org/)

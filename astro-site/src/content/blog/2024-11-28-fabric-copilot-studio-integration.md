@@ -1,5 +1,6 @@
 ---
 title: "Fabric and Copilot Studio Integration: Building Data-Driven AI Assistants"
+description: "The Fabric + Copilot Studio integration makes enterprise data conversationally accessible while maintaining security and governance."
 author: Michael John Peña
 draft: false
 date: 2024-11-28
@@ -9,10 +10,7 @@ tags:
   - Copilot Studio
   - Integration
   - AI
-
 ---
-
-I wrote "Fabric and Copilot Studio Integration: Building Data-Driven AI Assistants" to share practical, production-minded guidance on this topic.
 
 ## Integration Architecture
 
@@ -474,4 +472,4 @@ The Fabric + Copilot Studio integration makes enterprise data conversationally a
 
 - [Copilot Studio + Fabric](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fabric-integration)
 - [Fabric AI Skills](https://learn.microsoft.com/en-us/fabric/ai-skills)
-- [Custom Connectors](https://learn.microsoft.com/en-us/connectors/custom-connectors/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Custom Connectors](https://learn.microsoft.com/en-us/connectors/custom-connectors/)

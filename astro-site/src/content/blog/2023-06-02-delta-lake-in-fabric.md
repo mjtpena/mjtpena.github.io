@@ -1,5 +1,6 @@
 ---
 title: "Delta Lake in Microsoft Fabric: ACID Transactions for Data Lakes"
+description: "Delta Lake isn't a bolt-on feature in Microsoft Fabric — it's the foundational table format for everything. Every table you write through a Spark notebook…"
 author: Michael John Peña
 draft: false
 date: 2023-06-02
@@ -357,4 +358,4 @@ Delta Lake provides the reliability foundation for Fabric Lakehouses. Tomorrow, 
 
 - [Delta Lake in Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables)
 - [Delta Lake Documentation](https://docs.delta.io/)
-- [Delta Lake Operations](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Delta Lake Operations](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order)

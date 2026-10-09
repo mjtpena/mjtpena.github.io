@@ -1,5 +1,6 @@
 ---
 title: "AI Governance Frameworks: Building Responsible AI at Scale"
+description: "AI governance is not bureaucracy - it's enablement with guardrails. Build governance that enables innovation while managing risk appropriately."
 author: Michael John Peña
 draft: false
 date: 2024-12-17
@@ -9,10 +10,7 @@ tags:
   - Responsible AI
   - Enterprise
   - Framework
-
 ---
-
-I wrote "AI Governance Frameworks: Building Responsible AI at Scale" to share practical, production-minded guidance on this topic.
 
 ## Governance Framework Overview
 
@@ -472,4 +470,4 @@ AI governance is not bureaucracy - it's enablement with guardrails. Build govern
 
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - [Microsoft Responsible AI Standard](https://www.microsoft.com/en-us/ai/responsible-ai)
-- [ISO/IEC 42001 AI Management](https://www.iso.org/standard/81230.html)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [ISO/IEC 42001 AI Management](https://www.iso.org/standard/81230.html)

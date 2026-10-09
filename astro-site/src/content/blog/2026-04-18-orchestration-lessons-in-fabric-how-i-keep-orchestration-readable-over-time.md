@@ -1,5 +1,6 @@
 ---
 title: "Orchestration Lessons in Fabric: how I keep orchestration readable over time"
+description: "I turned implicit processes into explicit operating rules—defining owners, acceptance tests, and lightweight runbooks so teams can move confidently and…"
 author: Michael John Peña
 draft: false
 date: 2026-04-18
@@ -36,4 +37,4 @@ Tomorrow I want to tighten the metrics so improvements are obvious without inter
 
 - [Fabric Data Factory](https://learn.microsoft.com/fabric/data-factory/)
 - [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

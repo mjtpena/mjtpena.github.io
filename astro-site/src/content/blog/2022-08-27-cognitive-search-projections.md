@@ -1,13 +1,11 @@
 ---
 title: "Working with Projections in Azure Cognitive Search"
+description: "Projections enable flexible storage and querying of AI-enriched content for various downstream use cases."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-27
 tags: ["Azure", "Cognitive Search", "Projections", "Knowledge Store", "Data Shaping"]
-
 ---
-
-I wrote "Working with Projections in Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## Projection Types
 
@@ -298,4 +296,4 @@ docs = client.get_documents_by_entity("Microsoft", "Organization")
 print(f"Documents mentioning Microsoft: {len(docs)}")
 ```
 
-Projections enable flexible storage and querying of AI-enriched content for various downstream use cases.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Projections enable flexible storage and querying of AI-enriched content for various downstream use cases.

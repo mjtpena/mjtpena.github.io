@@ -9,10 +9,7 @@ tags:
   - Connectors
   - Integration
   - Automation
-
 ---
-
-I wrote "Power Automate Cloud Connectors: Connecting Your Enterprise" to share practical, production-minded guidance on this topic.
 
 ## Connector Categories
 
@@ -478,4 +475,3 @@ Power Automate connectors enable powerful integrations with minimal code. Unders
 - [Connector Reference](https://docs.microsoft.com/en-us/connectors/connector-reference/)
 - [Connection Management](https://docs.microsoft.com/en-us/power-automate/connection-management)
 - [Throttling Limits](https://docs.microsoft.com/en-us/power-automate/limits-and-config)
-

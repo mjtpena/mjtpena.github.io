@@ -9,10 +9,7 @@ tags:
   - GPT-4 Vision
   - Document Intelligence
   - OCR
-
 ---
-
-I wrote "Document Understanding with AI: From Images to Insights" to share practical, production-minded guidance on this topic.
 
 ## Azure Document Intelligence + GPT-4
 
@@ -128,4 +125,3 @@ def extract_tables(document_path: str) -> list[dict]:
 ## Conclusion
 
 Document understanding pipelines combine specialized extraction with LLM reasoning for powerful document automation.
-

@@ -1,13 +1,11 @@
 ---
 title: "Retry Strategies for AI Applications: Beyond Simple Backoff"
+description: "Smart retry strategies balance reliability with resource efficiency. The key is adapting behavior based on error type, system state, and business requirements."
 author: "Michael John Peña"
 draft: false
 date: 2024-09-23
 tags: ["Retry", "Resilience", "AI", "Best Practices", "Production"]
-
 ---
-
-I wrote "Retry Strategies for AI Applications: Beyond Simple Backoff" to share practical, production-minded guidance on this topic.
 
 ## Intelligent Retry Framework
 
@@ -356,4 +354,4 @@ def retry_with_budget(func: Callable, *args, **kwargs) -> Any:
         raise
 ```
 
-Smart retry strategies balance reliability with resource efficiency. The key is adapting behavior based on error type, system state, and business requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Smart retry strategies balance reliability with resource efficiency. The key is adapting behavior based on error type, system state, and business requirements.

@@ -1,5 +1,6 @@
 ---
 title: ".NET 7 Release Candidate: Final Preview Before GA"
+description: ".NET 7 continues the tradition of making .NET faster and more cloud-native with each release. Here's a preview of the key improvements we'll see at GA."
 author: Michael John Peña
 draft: false
 date: 2022-11-01
@@ -9,10 +10,7 @@ tags:
   - Microsoft
   - C#
   - Performance
-
 ---
-
-I wrote ".NET 7 Release Candidate: Final Preview Before GA" to share practical, production-minded guidance on this topic.
 
 ## What's Coming in .NET 7
 
@@ -225,4 +223,3 @@ Mark your calendar for November 8-10 for .NET Conf 2022. The event will feature:
 - [What's New in .NET 7](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-7)
 - [.NET Conf 2022](https://www.dotnetconf.net/)
 - [Migration Guide](https://learn.microsoft.com/en-us/dotnet/core/compatibility/7.0)
-

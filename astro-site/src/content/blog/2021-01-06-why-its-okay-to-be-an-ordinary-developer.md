@@ -1,5 +1,6 @@
 ---
 title: Why it’s okay to be “an ordinary” developer
+description: "Someone once asked me, what does it take to become a prominent developer? A 10X Engineer? You know some who are \"extraordinary\". What do you mean by…"
 author: Michael John Peña
 draft: false
 date: 2021-01-06
@@ -7,10 +8,10 @@ url: /blog/why-its-okay-to-be-an-ordinary-developer/
 images: 
      - /2021/01/Screen-Shot-2021-01-07-at-06.01.46-940x510.png
 tags:
-  - 10xengineer
-  - career
+  - "10xengineer"
+  - Career
   - developer
-  - self-help
+  - Self-Help
   - software engineer
 ---
 
@@ -55,4 +56,4 @@ Couple of years ago, I was "that guy", you know, the guy who would look down at 
 
 There is more to life than code. At least for 99.99% of us. If you're part of that 0.001%, for as long as you're happy and healthy - that's OK too. Don't feel guilty if you don't have the perfect green in GitHub activities. Don't feel sad if you don't wake up at 5:30 AM. Things change, your interests and priorities change - and that's ok. Maybe you're really into programming today, 5 years later you decide that you want to be a bee farmer, that's fine. Live your own life.
 
-If you're currently struggling with your career or life right now, message me. I'm willing to listen.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+If you're currently struggling with your career or life right now, message me. I'm willing to listen.

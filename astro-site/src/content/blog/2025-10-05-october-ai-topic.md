@@ -1,5 +1,6 @@
 ---
 title: "Building Multi-Modal AI Applications with GPT-4 Vision and Audio"
+description: "Multi-modal requests consume more tokens and have higher latency. Use the detail parameter wisely: \"low\" for quick analysis, \"high\" for detailed extraction…"
 author: Michael John Peña
 draft: false
 date: 2025-10-05
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - Computer Vision
   - Audio Processing
-
 ---
-
-I wrote "Building Multi-Modal AI Applications with GPT-4 Vision and Audio" to share practical, production-minded guidance on this topic.
 
 ## Processing Images with GPT-4 Vision
 
@@ -99,4 +97,4 @@ invoice_data = process_invoice(processor, "/documents/invoice_001.png")
 
 ## Performance Considerations
 
-Multi-modal requests consume more tokens and have higher latency. Use the `detail` parameter wisely: "low" for quick analysis, "high" for detailed extraction, and "auto" to let the model decide based on image complexity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multi-modal requests consume more tokens and have higher latency. Use the `detail` parameter wisely: "low" for quick analysis, "high" for detailed extraction, and "auto" to let the model decide based on image complexity.

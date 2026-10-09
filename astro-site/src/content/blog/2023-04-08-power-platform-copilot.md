@@ -1,5 +1,6 @@
 ---
 title: "Power Platform Copilot: Low-Code Meets AI"
+description: "Power Platform Copilot makes citizen development more accessible than ever. Combined with proper governance, it enables rapid digital transformation."
 author: Michael John Pena
 draft: false
 date: 2023-04-08
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - Power Platform
   - Low-Code
-
 ---
-
-I wrote "Power Platform Copilot: Low-Code Meets AI" to share practical, production-minded guidance on this topic.
 
 ## Power Apps Copilot
 
@@ -394,4 +392,4 @@ Generate:
 4. **Document** - Record what Copilot helped create
 5. **Iterate** - Refine prompts for better results
 
-Power Platform Copilot makes citizen development more accessible than ever. Combined with proper governance, it enables rapid digital transformation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Power Platform Copilot makes citizen development more accessible than ever. Combined with proper governance, it enables rapid digital transformation.

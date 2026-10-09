@@ -1,5 +1,6 @@
 ---
 title: "Prompt Management: Version Control for AI Instructions"
+description: "Effective prompt management enables reliable AI applications with traceable changes."
 author: Michael John Peña
 draft: false
 date: 2025-05-12
@@ -9,10 +10,7 @@ tags:
   - Management
   - Version Control
   - Best Practices
-
 ---
-
-I wrote "Prompt Management: Version Control for AI Instructions" to share practical, production-minded guidance on this topic.
 
 ## Prompt Management System
 
@@ -132,4 +130,4 @@ class PromptTesting:
         }
 ```
 
-Effective prompt management enables reliable AI applications with traceable changes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Effective prompt management enables reliable AI applications with traceable changes.

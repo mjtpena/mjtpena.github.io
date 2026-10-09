@@ -1,5 +1,6 @@
 ---
 title: "GPT-4 Enterprise Use Cases"
+description: "GPT-4's cost (~$0.10 per analysis) is negligible compared to time savings. GPT-4 enables automation of knowledge work that was previously too complex for…"
 author: Michael John Pena
 draft: false
 date: 2023-03-18
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Enterprise
   - Use Cases
-
 ---
-
-I wrote "GPT-4 Enterprise Use Cases" to share practical, production-minded guidance on this topic.
 
 ## 1. Contract Analysis and Legal Review
 
@@ -443,4 +441,4 @@ GPT-4's cost (~$0.10 per analysis) is negligible compared to time savings.
 3. **Measure quality**: Track accuracy, corrections needed
 4. **Expand gradually**: Build confidence before automation
 
-GPT-4 enables automation of knowledge work that was previously too complex for AI. The enterprise applications are substantial.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GPT-4 enables automation of knowledge work that was previously too complex for AI. The enterprise applications are substantial.

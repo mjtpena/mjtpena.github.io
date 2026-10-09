@@ -1,5 +1,6 @@
 ---
 title: "Knowledge Graphs and AI: Building Intelligent Data Structures"
+description: "Knowledge graphs add structured reasoning capabilities to AI applications."
 author: Michael John Peña
 draft: false
 date: 2025-03-02
@@ -9,10 +10,7 @@ tags:
   - Neo4j
   - GraphRAG
   - Architecture
-
 ---
-
-I wrote "Knowledge Graphs and AI: Building Intelligent Data Structures" to share practical, production-minded guidance on this topic.
 
 ## Knowledge Graph Construction
 
@@ -75,4 +73,4 @@ class KnowledgeGraphBuilder:
             return [record["path"] for record in result]
 ```
 
-Knowledge graphs add structured reasoning capabilities to AI applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Knowledge graphs add structured reasoning capabilities to AI applications.

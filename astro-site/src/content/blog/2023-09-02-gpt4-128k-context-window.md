@@ -10,10 +10,7 @@ tags:
   - GPT-4
   - Context Window
   - AI
-
 ---
-
-I wrote "Maximizing GPT-4's Context Window: Patterns for Large Document Processing" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -416,4 +413,3 @@ While current context window limits require careful document handling, these pat
 - [Azure OpenAI Service Limits](https://learn.microsoft.com/azure/cognitive-services/openai/quotas-limits)
 - [tiktoken Library](https://github.com/openai/tiktoken)
 - [RAG Pattern Guide](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview)
-

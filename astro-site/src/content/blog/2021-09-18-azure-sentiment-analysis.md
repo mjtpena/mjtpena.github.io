@@ -1,5 +1,6 @@
 ---
 title: Building Sentiment Analysis Solutions with Azure
+description: "Sentiment analysis transforms unstructured feedback into actionable insights, enabling data-driven decisions about products, services, and customer experience."
 author: Michael John Pena
 draft: false
 date: 2021-09-18
@@ -9,10 +10,7 @@ tags:
   - NLP
   - Customer Analytics
   - AI
-
 ---
-
-I wrote "2021-09-18-azure-sentiment-analysis" to share practical, production-minded guidance on this topic.
 
 ## Understanding Sentiment Analysis
 
@@ -367,4 +365,4 @@ for r in results:
 5. **Trend Analysis**: Track sentiment over time
 6. **Action Integration**: Connect insights to business processes
 
-Sentiment analysis transforms unstructured feedback into actionable insights, enabling data-driven decisions about products, services, and customer experience.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Sentiment analysis transforms unstructured feedback into actionable insights, enabling data-driven decisions about products, services, and customer experience.

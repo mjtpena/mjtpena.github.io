@@ -1,13 +1,11 @@
 ---
 title: "Building Effective Grafana Dashboards for AKS"
+description: "Grafana is the visualisation layer that makes Prometheus metrics interpretable at a glance—and for AKS, the starting point is the community dashboards that…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-09
 tags: ["Azure", "Kubernetes", "AKS", "Grafana", "Monitoring", "Visualization"]
-
 ---
-
-I wrote "Building Effective Grafana Dashboards for AKS" to share practical, production-minded guidance on this topic.
 
 Grafana is the visualisation layer that makes Prometheus metrics interpretable at a glance—and for AKS, the starting point is the community dashboards that someone has already built. The Grafana community dashboard library includes excellent AKS dashboards: the Kubernetes cluster overview (node CPU/memory, pod counts by namespace), the Kubernetes deployment dashboard (replica availability, rollout history), and the Node Exporter Full dashboard (detailed node-level metrics). The real value comes from building application-specific dashboards: importing application-level Prometheus metrics (request rate, error rate, latency percentiles from your services) and correlating them with infrastructure metrics. For production AKS operations, the RED method dashboards (Request rate, Error rate, Duration for each service) give the fastest path to identifying which service is responsible for a degradation in a distributed system.
 
@@ -316,4 +314,3 @@ az grafana data-source create \
 Effective Grafana dashboards provide immediate visibility into cluster and application health. By combining Prometheus metrics with thoughtful visualization, you can quickly identify and troubleshoot issues.
 
 Tomorrow, we'll explore Azure Monitor for containers and how it integrates with your existing monitoring setup.
-

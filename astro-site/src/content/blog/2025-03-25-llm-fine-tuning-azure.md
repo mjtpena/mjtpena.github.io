@@ -1,5 +1,6 @@
 ---
 title: "LLM Fine-Tuning on Azure: When and How to Customize Models"
+description: "Fine-tuning is a powerful tool when used appropriately, but prompt engineering often achieves similar results faster."
 author: Michael John Peña
 draft: false
 date: 2025-03-25
@@ -9,10 +10,7 @@ tags:
   - Azure
   - LLM
   - Customization
-
 ---
-
-I wrote "LLM Fine-Tuning on Azure: When and How to Customize Models" to share practical, production-minded guidance on this topic.
 
 ## Fine-Tuning on Azure OpenAI
 
@@ -110,4 +108,4 @@ class FineTuningPipeline:
 # - Quick iteration needed
 ```
 
-Fine-tuning is a powerful tool when used appropriately, but prompt engineering often achieves similar results faster.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Fine-tuning is a powerful tool when used appropriately, but prompt engineering often achieves similar results faster.

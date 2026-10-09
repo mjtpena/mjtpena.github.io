@@ -9,10 +9,7 @@ tags:
   - Monitoring
   - DevOps
   - Application Insights
-
 ---
-
-I wrote "Observability and Monitoring: Practices That Worked in 2022" to share practical, production-minded guidance on this topic.
 
 ## The Three Pillars in Practice
 
@@ -576,4 +573,3 @@ Observability in 2022 moved beyond simple monitoring to true understanding of sy
 - [Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/)
 - [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview)
 - [SRE Workbook](https://sre.google/workbook/table-of-contents/)
-

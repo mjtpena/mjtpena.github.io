@@ -1,5 +1,6 @@
 ---
 title: "Map-Reduce Patterns for LLM Applications"
+description: "Map-reduce transforms complex LLM tasks into manageable, parallelizable operations. Master these patterns for processing data at any scale."
 author: Michael John Pena
 draft: false
 date: 2023-03-27
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Map-Reduce
   - Architecture
-
 ---
-
-I wrote "Map-Reduce Patterns for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Core Map-Reduce Framework
 
@@ -459,4 +457,4 @@ class OptimizedMapReduce:
         return results
 ```
 
-Map-reduce transforms complex LLM tasks into manageable, parallelizable operations. Master these patterns for processing data at any scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Map-reduce transforms complex LLM tasks into manageable, parallelizable operations. Master these patterns for processing data at any scale.

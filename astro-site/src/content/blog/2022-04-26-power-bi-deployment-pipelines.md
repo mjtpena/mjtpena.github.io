@@ -9,10 +9,7 @@ tags:
   - CI/CD
   - Deployment
   - Enterprise
-
 ---
-
-I wrote "Power BI Deployment Pipelines: CI/CD for Analytics" to share practical, production-minded guidance on this topic.
 
 ## Pipeline Stages
 
@@ -236,4 +233,3 @@ Deployment Pipelines bring enterprise ALM to Power BI:
 
 - [Deployment Pipelines Documentation](https://docs.microsoft.com/en-us/power-bi/create-reports/deployment-pipelines-overview)
 - [REST API Reference](https://docs.microsoft.com/en-us/rest/api/power-bi/pipelines)
-

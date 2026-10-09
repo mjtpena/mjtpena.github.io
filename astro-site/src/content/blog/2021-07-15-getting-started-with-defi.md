@@ -1,5 +1,6 @@
 ---
 title: Getting Started with DeFi
+description: "Blockchain is not dead. Actually, quite the contrary is happening in the past year. There are more and more interest and it's gaining a lot more traction…"
 author: Michael John Peña
 draft: false
 date: 2021-07-15
@@ -10,16 +11,13 @@ tags:
   - Technology
   - Blockchain
   - Web
-
 ---
-
-I wrote "2021-07-15-getting-started-with-defi" to share practical, production-minded guidance on this topic.
 
 Blockchain is not dead. Actually, quite the contrary is happening in the past year. There are more and more interest and it's gaining a lot more traction than before. A big portion of this growth is due to "DeFi" AKA Decentralised Finance applications. From the hyped cryptocurrencies, we are now seeing the new next wave of this transformation as we see more financial products being developed: lending, exchanges, yield farming, and pools just to name a few. It is a hot topic right now and there are a lot of demand in this space. There are also a lot of opportunities to start creating your own innovative products as part of this wave.
 
 **Warning: Cryptocurrencies involve risks, so do your own research before investing.**
 
-# Why DeFi and blockchain?
+## Why DeFi and blockchain?
 
 There are a lot of locked money right now in DeFi. As of now, we have at least 54 Billion dollar worth of locked assets that are circulating just in this vertical.
 
@@ -43,7 +41,7 @@ There are a lot of locked money right now in DeFi. As of now, we have at least 5
 - Opportunity to adapt and innovate.
 - Leverage DeFi side-by-side with your existing products.
 
-# What is DeFi or Decentralized Finance?
+## What is DeFi or Decentralized Finance?
 
 ![](https://miro.medium.com/max/1400/1*UAq2AOQGRwErIPDlPmBS1w.png)
 **Image taken from:** [Stably blog on Medium](https://medium.com/stably-blog/decentralized-finance-vs-traditional-finance-what-you-need-to-know-3b57aed7a0c2)
@@ -52,7 +50,7 @@ DeFi is similar to how we call Financial Technologies as "FinTech". It's an indu
 
 One of the key advantages of DeFi is the decentralised nature of it. Compared to traditional banking and financial institutes, you need a "middle man" in order to do transactions. With the use of decentralised technologies, no central entity have "control" on the network of exchanges and transactions. This allows more efficient and straightforward transactions across individuals.
 
-# What makes a product DeFi?
+## What makes a product DeFi?
 
 Throughout the years, there has been so many use cases of blockchain and decentralised technologies. There are also a lot of applications that seems to be just partially decentralised. These are some of the properties to look at in order for a product to utilise these revolutionary movement.
 
@@ -84,7 +82,7 @@ Althoguht it is totally optional, as the founder of Bitcoin, Satoshi Nakamoto st
 
 This is a hard technical problem to have. Interoperability means your asset or product can work to various blockchain networks, or supports multiple types of coin, and even support non-blockchain data. I've dealt with these and I'm telling you it's not one of the easiest thing to work on. There are a lot of performance considerations as well as overall user experiences.
 
-# Use Cases and Popular DeFi Apps
+## Use Cases and Popular DeFi Apps
 
 There are a lot of popular use cases and DeFi Apps lately. Although some are more dominant than others in terms of locked asset, there are still a lot of opportunities to capture more market.
 Here are some of the popular DApps (Decentralised Apps) out there that are categorised as DeFi.
@@ -135,7 +133,7 @@ is a decentralized ecosystem of aggregators that utilize lending services such a
 ![Yearn.Finance Doesn't Need More YFI Tokens to Reward Its Developers •  CryptoMode](https://cryptomode.com/wp-content/uploads/2020/08/CryptoMode-YFI-42-Coin-Bitcoin.png)
 https://yearn.finance
 
-# How to Get Started?
+## How to Get Started?
 
 If you want to get started creating a DeFi product (before jumping to code or hard technical bits), these are some of the guiding pillars that you can look at in order to structure your thought processing.
 
@@ -191,7 +189,7 @@ However, there are some opinions around it wherein if you are still married with
 
 Sometimes you don't really have to do everything from scratch. You can mix and match different products and platforms as they are not your core business or focus. Most of the DeFi products embraces the use of APIs and SDKs as a means of interoperability.
 
-# Challenges of DeFi
+## Challenges of DeFi
 
 Although DeFi and the whole world of blockchain and cryptocurrencies have a lot of potential to improve, this is still a relative young market. There are still a lot of lessons learnt to have, as well as more innovative products to come.
 
@@ -199,7 +197,7 @@ There are still a lot of unregulated products and platforms around. This is actu
 
 Another current problem that most DeFi faces is problem with scalability as the Ethereum network is having a hard time to cater a lot of transactions. Not only that, but as well as some current limitations of smart contracts in terms of size and gas costs. I am confident though that this is a problem that the market will eventually evolve to overcome.
 
-# Summary and Resources
+## Summary and Resources
 
 - DeFi gives a new wave of more materialised crypto.
 - The market is still maturing and has a lot of room to grow.
@@ -211,4 +209,3 @@ To learn more:
 - https://defiprime.com
 - https://docs.microsoft.com/en-us/learn/paths/ethereum-blockchain-development/
 - https://ethereum.org/en/developers/tutorials/create-and-deploy-a-defi-app
-

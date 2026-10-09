@@ -10,12 +10,9 @@ tags:
   - DevOps
   - Operations
   - High Availability
-
 ---
 
-I wrote "2021-07-23-resource-health" to share practical, production-minded guidance on this topic.
-
-# Understanding Resource Health States
+## Understanding Resource Health States
 
 Resource Health reports four possible states:
 
@@ -24,7 +21,7 @@ Resource Health reports four possible states:
 - **Degraded**: Resource has reduced performance but is still operational
 - **Unknown**: Health signal not received (typically transient)
 
-# Querying Resource Health
+## Querying Resource Health
 
 Access Resource Health using the Azure CLI:
 
@@ -43,7 +40,7 @@ az graph query -q "
 "
 ```
 
-# Python SDK for Resource Health
+## Python SDK for Resource Health
 
 Monitor resource health programmatically:
 
@@ -111,7 +108,7 @@ print(f"VM Status: {status['availability_state']}")
 unhealthy = get_unhealthy_resources()
 ```
 
-# Historical Health Events
+## Historical Health Events
 
 Query historical health events for root cause analysis:
 
@@ -186,7 +183,7 @@ sql_id = f"/subscriptions/{subscription_id}/resourceGroups/rg-sql/providers/Micr
 analyze_outage_pattern(sql_id, days=90)
 ```
 
-# Setting Up Resource Health Alerts
+## Setting Up Resource Health Alerts
 
 Create alerts for resource health changes:
 
@@ -253,7 +250,7 @@ for name, resource_type in resource_types:
     print(f"Created alert: {name}")
 ```
 
-# Resource Health Dashboard
+## Resource Health Dashboard
 
 Query Resource Health using Resource Graph:
 
@@ -347,7 +344,7 @@ get_health_summary()
 get_unhealthy_by_type()
 ```
 
-# Integrating with Incident Management
+## Integrating with Incident Management
 
 Automate incident creation from Resource Health:
 
@@ -402,9 +399,8 @@ def send_recovery_notification(resource_id, summary):
     print(f"Resource recovered: {resource_id}")
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Resource Health provides critical visibility into the health of your individual resources. By monitoring health status changes, analyzing historical patterns, and setting up proactive alerts, you can quickly identify and respond to availability issues.
 
 Combining Resource Health with Service Health gives you a complete picture of both platform-level issues and resource-specific problems. Use Resource Graph for efficient querying across large environments, and integrate with your incident management processes for streamlined operations.
-

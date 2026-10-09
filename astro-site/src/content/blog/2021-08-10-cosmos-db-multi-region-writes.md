@@ -1,13 +1,11 @@
 ---
 title: "Cosmos DB Multi-Region Writes: Active-Active Global Architecture"
+description: "Multi-region writes enable true active-active architectures, but require careful design to handle the inevitable conflicts that arise from concurrent…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-10
 tags: ["Azure", "Cosmos DB", "Multi-Region", "Active-Active", "High Availability"]
-
 ---
-
-I wrote "Cosmos DB Multi-Region Writes: Active-Active Global Architecture" to share practical, production-minded guidance on this topic.
 
 ## Enabling Multi-Region Writes
 
@@ -295,4 +293,4 @@ public class IdempotentWrite<T> where T : IVersioned
 }
 ```
 
-Multi-region writes enable true active-active architectures, but require careful design to handle the inevitable conflicts that arise from concurrent modifications across regions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Multi-region writes enable true active-active architectures, but require careful design to handle the inevitable conflicts that arise from concurrent modifications across regions.

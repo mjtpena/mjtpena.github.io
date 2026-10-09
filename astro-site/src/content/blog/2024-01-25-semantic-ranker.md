@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Search Semantic Ranker: Deep Dive and Optimization"
+description: "Semantic ranking improved my search relevance considerably; the main cost was configuration complexity. This deep dive explains how I tuned the ranker for…"
 author: Michael John Peña
 draft: false
 date: 2024-01-25
@@ -9,9 +10,7 @@ tags:
   - Relevance
   - RAG
   - Search Optimization
-
 ---
-
 
 Semantic ranking improved my search relevance considerably; the main cost was configuration complexity. This deep dive explains how I tuned the ranker for better results while keeping latency and costs predictable.
 
@@ -246,4 +245,3 @@ def evaluate_semantic_ranking(test_queries: list[dict]):
 ## Conclusion
 
 The semantic ranker transforms search quality by understanding query intent and document meaning. Proper configuration and the right combination with hybrid search create highly relevant results for RAG applications.
-

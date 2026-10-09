@@ -10,10 +10,7 @@ tags:
   - Machine Learning
   - Computer Vision
   - AI
-
 ---
-
-I wrote "Azure Custom Vision Updates: Enhanced Model Training and Deployment" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -493,4 +490,3 @@ for pred in predictions[:3]:
 ## Conclusion
 
 Azure Custom Vision's latest updates provide powerful capabilities for building custom image classification and object detection models. With AutoML-powered training, enhanced performance metrics, and flexible edge deployment options, it's easier than ever to create production-ready computer vision solutions. Whether deploying to the cloud or edge devices, Custom Vision offers a complete workflow from training to deployment.
-

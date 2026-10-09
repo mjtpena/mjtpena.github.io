@@ -1,5 +1,6 @@
 ---
 title: Building Media Workflows with Azure Media Services
+description: "Azure Media Services provides enterprise-grade media processing and delivery capabilities for building streaming platforms and video applications."
 author: Michael John Pena
 draft: false
 date: 2021-09-24
@@ -9,10 +10,7 @@ tags:
   - Video Streaming
   - Content Delivery
   - Encoding
-
 ---
-
-I wrote "2021-09-24-azure-media-services" to share practical, production-minded guidance on this topic.
 
 ## Media Services Capabilities
 
@@ -400,4 +398,4 @@ for protocol, url in result["streaming_urls"].items():
 5. **Monitor Jobs**: Track encoding progress and errors
 6. **Clean Up**: Delete assets when no longer needed
 
-Azure Media Services provides enterprise-grade media processing and delivery capabilities for building streaming platforms and video applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Media Services provides enterprise-grade media processing and delivery capabilities for building streaming platforms and video applications.

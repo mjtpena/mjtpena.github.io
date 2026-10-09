@@ -9,10 +9,7 @@ tags:
   - Document Intelligence
   - Custom Models
   - AI
-
 ---
-
-I wrote "Custom Models in Azure Form Recognizer for Domain-Specific Documents" to share practical, production-minded guidance on this topic.
 
 ## Custom Model Types
 
@@ -361,4 +358,4 @@ print(f"Overall confidence: {metrics['overall_confidence']:.2%}")
 
 - [Custom Models Documentation](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-custom)
 - [Training Data Setup](https://learn.microsoft.com/azure/ai-services/document-intelligence/how-to-guides/build-a-custom-model)
-- [Form Recognizer Studio](https://formrecognizer.appliedai.azure.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Form Recognizer Studio](https://formrecognizer.appliedai.azure.com/)

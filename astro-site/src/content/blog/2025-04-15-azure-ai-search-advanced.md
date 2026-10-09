@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Search Advanced Features: Beyond Basic Indexing"
+description: "Azure AI Search combines the best of vector, keyword, and semantic search in one service."
 author: Michael John Peña
 draft: false
 date: 2025-04-15
@@ -9,10 +10,7 @@ tags:
   - Vector
   - Hybrid Search
   - Enterprise
-
 ---
-
-I wrote "Azure AI Search Advanced Features: Beyond Basic Indexing" to share practical, production-minded guidance on this topic.
 
 ## Advanced Azure AI Search
 
@@ -141,4 +139,4 @@ class AdvancedAzureSearch:
         }
 ```
 
-Azure AI Search combines the best of vector, keyword, and semantic search in one service.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure AI Search combines the best of vector, keyword, and semantic search in one service.

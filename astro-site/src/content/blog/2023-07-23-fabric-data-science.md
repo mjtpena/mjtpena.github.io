@@ -1,5 +1,6 @@
 ---
 title: "Fabric Data Science: ML Workflows in the Modern Data Platform"
+description: "Data Science in Fabric brings ML experiment tracking, model registration, and batch prediction into the same platform where the training data lives — which…"
 author: Michael John Peña
 draft: false
 date: 2023-07-23
@@ -355,4 +356,4 @@ Tomorrow we'll dive deeper into ML models in Fabric.
 
 - [Fabric Data Science Documentation](https://learn.microsoft.com/en-us/fabric/data-science/data-science-overview)
 - [MLflow in Fabric](https://learn.microsoft.com/en-us/fabric/data-science/mlflow-autologging)
-- [Model Training Tutorial](https://learn.microsoft.com/en-us/fabric/data-science/tutorial-train-models)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Model Training Tutorial](https://learn.microsoft.com/en-us/fabric/data-science/tutorial-train-models)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Managed Grafana: Visualization for Cloud Observability"
+description: "Grafana on Azure became substantially easier when Azure Managed Grafana reached general availability. Before that, teams ran Grafana on AKS or a VM, managed…"
 author: Michael John Peña
 draft: false
 date: 2021-05-14
@@ -437,4 +438,4 @@ resource "azurerm_role_assignment" "grafana_monitoring" {
 
 - [Azure Managed Grafana Documentation](https://docs.microsoft.com/en-us/azure/managed-grafana/)
 - [Grafana Dashboard JSON Model](https://grafana.com/docs/grafana/latest/dashboards/json-model/)
-- [Azure Monitor Data Source](https://grafana.com/docs/grafana/latest/datasources/azure-monitor/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Monitor Data Source](https://grafana.com/docs/grafana/latest/datasources/azure-monitor/)

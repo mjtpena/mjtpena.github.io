@@ -10,12 +10,9 @@ tags:
   - DevOps
   - Operations
   - Alerts
-
 ---
 
-I wrote "2021-07-24-service-health-alerts" to share practical, production-minded guidance on this topic.
-
-# Service Health Event Types
+## Service Health Event Types
 
 Service Health tracks three types of events:
 
@@ -23,7 +20,7 @@ Service Health tracks three types of events:
 - **Planned Maintenance**: Upcoming maintenance that might affect availability
 - **Health Advisories**: Changes requiring action (feature deprecations, etc.)
 
-# Creating Service Health Alerts
+## Creating Service Health Alerts
 
 Set up alerts using Azure CLI:
 
@@ -56,7 +53,7 @@ az monitor activity-log alert create \
     --action-group /subscriptions/$SUBSCRIPTION_ID/resourceGroups/rg-monitoring/providers/Microsoft.Insights/actionGroups/service-health-ag
 ```
 
-# Terraform Configuration
+## Terraform Configuration
 
 Comprehensive Service Health alerting with Terraform:
 
@@ -217,7 +214,7 @@ resource "azurerm_monitor_activity_log_alert" "security_advisories" {
 }
 ```
 
-# Querying Service Health Events
+## Querying Service Health Events
 
 Access Service Health data programmatically:
 
@@ -307,7 +304,7 @@ def analyze_service_health_impact(days=30):
 analyze_service_health_impact(days=30)
 ```
 
-# Logic App for Automated Response
+## Logic App for Automated Response
 
 Create automated workflows for Service Health events:
 
@@ -448,7 +445,7 @@ Create automated workflows for Service Health events:
 }
 ```
 
-# Service Health Dashboard
+## Service Health Dashboard
 
 Create a status dashboard:
 
@@ -483,9 +480,8 @@ AzureActivity
 | render timechart
 ```
 
-# Conclusion
+## Conclusion
 
 Service Health alerts are essential for proactive operations in Azure. By configuring comprehensive alerts for service issues, planned maintenance, and health advisories, you ensure your team is informed about platform-level issues that could impact your applications.
 
 Combine Service Health alerts with automated workflows in Logic Apps or Azure Functions to streamline incident response. This integration enables automatic ticket creation, on-call paging, and stakeholder communication when Azure platform issues occur.
-

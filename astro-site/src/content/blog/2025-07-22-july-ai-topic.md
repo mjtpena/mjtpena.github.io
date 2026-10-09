@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions with AI: Serverless Inference Patterns"
+description: "Use consumption-based billing to pay only for actual inference time. Implement caching for repeated queries and batch similar requests to amortize cold…"
 author: Michael John Peña
 draft: false
 date: 2025-07-22
@@ -9,10 +10,7 @@ tags:
   - AI Inference
   - Python
   - Cost Optimization
-
 ---
-
-I wrote "Azure Functions with AI: Serverless Inference Patterns" to share practical, production-minded guidance on this topic.
 
 ## Configuring Functions for AI Workloads
 
@@ -106,4 +104,4 @@ async def analyze_single_document(document: dict) -> dict:
 
 ## Cost Optimization
 
-Use consumption-based billing to pay only for actual inference time. Implement caching for repeated queries and batch similar requests to amortize cold start costs.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use consumption-based billing to pay only for actual inference time. Implement caching for repeated queries and batch similar requests to amortize cold start costs.

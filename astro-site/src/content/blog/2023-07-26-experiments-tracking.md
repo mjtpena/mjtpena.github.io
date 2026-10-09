@@ -8,10 +8,7 @@ tags:
   - MLflow
   - Experiment Tracking
   - MLOps
-
 ---
-
-I wrote "Experiment Tracking in Fabric: Best Practices and Patterns" to share practical, production-minded guidance on this topic.
 
 ## Experiment Tracking Framework
 
@@ -354,4 +351,4 @@ Tomorrow we'll explore Azure OpenAI Code Interpreter.
 
 - [MLflow Tracking](https://mlflow.org/docs/latest/tracking.html)
 - [Experiment Best Practices](https://learn.microsoft.com/en-us/fabric/data-science/experiment-tracking)
-- [MLOps Patterns](https://ml-ops.org/content/mlops-principles)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [MLOps Patterns](https://ml-ops.org/content/mlops-principles)

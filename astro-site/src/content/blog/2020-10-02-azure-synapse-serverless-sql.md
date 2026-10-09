@@ -1,5 +1,6 @@
 ---
 title: "Azure Synapse Serverless SQL (Preview): Query Your Data Lake"
+description: "A second Synapse-preview note, on what I think is the genuinely new idea in the platform: serverless SQL. Point T-SQL at parquet, CSV, or JSON in your data…"
 author: Michael John Peña
 draft: false
 date: 2020-10-02
@@ -102,4 +103,4 @@ WHERE sale_date >= '2020-01-01'
 SELECT * FROM curated.sales
 ```
 
-Serverless SQL democratizes data lake access for SQL users.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Serverless SQL democratizes data lake access for SQL users.

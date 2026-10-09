@@ -1,5 +1,6 @@
 ---
 title: "Responsible AI Practices with Azure OpenAI"
+description: "Responsible AI isn't just about compliance - it's about building trust with users and ensuring AI benefits everyone. Azure OpenAI provides a foundation, but…"
 author: Michael John Pena
 draft: false
 date: 2023-03-05
@@ -9,10 +10,7 @@ tags:
   - AI
   - Responsible AI
   - Ethics
-
 ---
-
-I wrote "Responsible AI Practices with Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Azure OpenAI Content Filtering
 
@@ -373,4 +371,4 @@ class BiasMonitor:
 5. **Safety**: Implement multiple layers of safeguards
 6. **Accountability**: Log and audit AI decisions
 
-Responsible AI isn't just about compliance - it's about building trust with users and ensuring AI benefits everyone. Azure OpenAI provides a foundation, but the responsibility ultimately lies with us as developers.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Responsible AI isn't just about compliance - it's about building trust with users and ensuring AI benefits everyone. Azure OpenAI provides a foundation, but the responsibility ultimately lies with us as developers.

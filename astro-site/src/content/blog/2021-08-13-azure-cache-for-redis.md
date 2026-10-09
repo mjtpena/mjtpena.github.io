@@ -1,5 +1,6 @@
 ---
 title: "Azure Cache for Redis: High-Performance Caching Strategies"
+description: "Azure Cache for Redis is the caching layer I add to almost every production Azure application that has read-heavy patterns with data that doesn't change on…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-13
@@ -371,4 +372,4 @@ class RateLimiter {
 4. **Monitor memory usage**: Configure eviction policies
 5. **Enable TLS**: Always use encrypted connections
 
-Azure Cache for Redis is a versatile tool for caching, session management, real-time messaging, and much more, providing the performance boost your applications need.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Cache for Redis is a versatile tool for caching, session management, real-time messaging, and much more, providing the performance boost your applications need.

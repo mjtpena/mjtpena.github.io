@@ -1,5 +1,6 @@
 ---
 title: "Azure SQL Security Features: Protect Your Data"
+description: "Encrypt sensitive columns—keys never exposed to SQL Server. Azure SQL security is comprehensive—use all layers for maximum protection."
 author: Michael John Peña
 draft: false
 date: 2020-10-16
@@ -8,10 +9,7 @@ tags:
   - SQL
   - Security
   - Database
-
 ---
-
-I wrote "Azure SQL Security Features: Protect Your Data" to share practical, production-minded guidance on this topic.
 
 ## Security Layers
 
@@ -162,4 +160,4 @@ az sql db threat-policy update \
     --email-account-admins Enabled
 ```
 
-Azure SQL security is comprehensive—use all layers for maximum protection.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure SQL security is comprehensive—use all layers for maximum protection.

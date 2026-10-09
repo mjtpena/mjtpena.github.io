@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Search: Implementing Hybrid Search for Better RAG Results"
+description: "Pure vector search excels at semantic similarity but can miss exact keyword matches. Pure keyword search finds exact terms but misses conceptually similar…"
 author: Michael John Peña
 draft: false
 date: 2025-11-09
@@ -9,10 +10,7 @@ tags:
   - Vector Search
   - Hybrid Search
   - Information Retrieval
-
 ---
-
-I wrote "Azure AI Search: Implementing Hybrid Search for Better RAG Results" to share practical, production-minded guidance on this topic.
 
 ## Why Hybrid Search Wins
 
@@ -152,4 +150,4 @@ embedding = client.embeddings.create(
 results = hybrid_search(search_client, "configure network security", embedding)
 ```
 
-Hybrid search typically improves RAG accuracy by 15-25% compared to pure vector search. The combination of keyword precision and semantic understanding delivers more relevant context to the LLM.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hybrid search typically improves RAG accuracy by 15-25% compared to pure vector search. The combination of keyword precision and semantic understanding delivers more relevant context to the LLM.

@@ -9,10 +9,7 @@ tags:
   - Responsible AI
   - Microsoft
   - Governance
-
 ---
-
-I wrote "AI Ethics and Responsible AI: Building Trustworthy Systems" to share practical, production-minded guidance on this topic.
 
 ## Microsoft's Responsible AI Principles
 
@@ -412,4 +409,3 @@ Responsible AI isn't optional - it's essential. As we build more powerful AI sys
 - [Fairlearn](https://fairlearn.org/)
 - [Azure Content Safety](https://azure.microsoft.com/en-us/products/cognitive-services/content-safety/)
 - [Model Cards for Model Reporting](https://arxiv.org/abs/1810.03993)
-

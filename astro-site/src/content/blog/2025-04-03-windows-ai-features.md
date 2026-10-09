@@ -1,5 +1,6 @@
 ---
 title: "Windows AI Features: Building for the AI PC"
+description: "Windows AI brings powerful on-device intelligence to every application."
 author: Michael John Peña
 draft: false
 date: 2025-04-03
@@ -9,10 +10,7 @@ tags:
   - NPU
   - On-Device
   - Microsoft
-
 ---
-
-I wrote "Windows AI Features: Building for the AI PC" to share practical, production-minded guidance on this topic.
 
 ## Windows AI Development
 
@@ -97,4 +95,4 @@ public class AITextBox : TextBox
 | Recall | AI-powered memory | Semantic search |
 | Live Captions | Real-time transcription | Accessibility |
 
-Windows AI brings powerful on-device intelligence to every application.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Windows AI brings powerful on-device intelligence to every application.

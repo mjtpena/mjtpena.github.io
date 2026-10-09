@@ -1,5 +1,6 @@
 ---
 title: "Keeping OneLake Clean Under Delivery Pressure: why governance has to be designed before scale"
+description: "I spent the day reducing cognitive overhead for engineers and analysts—introducing clearer table contracts, simpler failure modes, and concise runbooks that…"
 author: Michael John Peña
 draft: false
 date: 2026-03-04
@@ -36,4 +37,4 @@ Tomorrow I will review this with the team so the decision is shared, not persona
 
 - [OneLake overview](https://learn.microsoft.com/fabric/onelake/)
 - [OneLake shortcuts](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts)
-- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)

@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Copilot Now Available for All Paid SKUs"
+description: "This works on F2 and above now. For small businesses, this transforms how reports are built."
 author: Michael John Peña
 draft: false
 date: 2025-03-10
@@ -9,10 +10,7 @@ tags:
   - AI
   - Data Engineering
   - Power BI
-
 ---
-
-I wrote "Microsoft Fabric Copilot Now Available for All Paid SKUs" to share practical, production-minded guidance on this topic.
 
 ## What Changed
 
@@ -210,4 +208,4 @@ The democratization of AI in analytics is accelerating. Microsoft Fabric Copilot
 - [Fabric Copilot SKU Announcement](https://blog.fabric.microsoft.com/en/blog/copilot-and-ai-capabilities-now-accessible-to-all-paid-skus-in-microsoft-fabric/)
 - [Copilot in Fabric Documentation](https://learn.microsoft.com/en-us/fabric/fundamentals/copilot-fabric-overview)
 - [AI Functions Reference](https://learn.microsoft.com/en-us/fabric/data-engineering/ai-functions)
-- [Fabric Capacity Planning](https://learn.microsoft.com/en-us/fabric/enterprise/capacity-planning)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric Capacity Planning](https://learn.microsoft.com/en-us/fabric/enterprise/capacity-planning)

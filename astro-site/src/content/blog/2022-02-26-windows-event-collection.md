@@ -1,18 +1,16 @@
 ---
 title: "Windows Event Collection: Comprehensive Monitoring with AMA"
+description: "Comprehensive Windows Event collection is essential for security monitoring and compliance."
 author: Michael John Peña
 draft: false
 date: 2022-02-26
 url: /blog/windows-event-collection/
 tags:
-  - azure
-  - monitoring
-  - windows
-  - security
-
+  - Azure
+  - Monitoring
+  - Windows
+  - Security
 ---
-
-I wrote "Windows Event Collection: Comprehensive Monitoring with AMA" to share practical, production-minded guidance on this topic.
 
 ## XPath Query Basics
 
@@ -276,4 +274,4 @@ resource bruteForceAlert 'Microsoft.Insights/scheduledQueryRules@2021-08-01' = {
 }
 ```
 
-Comprehensive Windows Event collection is essential for security monitoring and compliance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Comprehensive Windows Event collection is essential for security monitoring and compliance.

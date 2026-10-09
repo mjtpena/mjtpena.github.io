@@ -1,13 +1,11 @@
 ---
 title: "Azure Cognitive Search Updates and New Features"
+description: "Azure Cognitive Search provides enterprise-grade search capabilities with AI enrichment options."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-22
 tags: ["Azure", "Cognitive Search", "AI", "Search", "Updates"]
-
 ---
-
-I wrote "Azure Cognitive Search Updates and New Features" to share practical, production-minded guidance on this topic.
 
 ## What's New in Cognitive Search
 
@@ -260,4 +258,4 @@ results = search_client.search(
 )
 ```
 
-Azure Cognitive Search provides enterprise-grade search capabilities with AI enrichment options.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Cognitive Search provides enterprise-grade search capabilities with AI enrichment options.

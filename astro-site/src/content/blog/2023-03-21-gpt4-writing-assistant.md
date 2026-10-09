@@ -1,5 +1,6 @@
 ---
 title: "Building a GPT-4 Writing Assistant"
+description: "GPT-4's writing capabilities go far beyond autocomplete. With proper prompting and structure, it becomes a powerful writing partner for technical content…"
 author: Michael John Pena
 draft: false
 date: 2023-03-21
@@ -9,10 +10,7 @@ tags:
   - GPT-4
   - Writing
   - Content
-
 ---
-
-I wrote "Building a GPT-4 Writing Assistant" to share practical, production-minded guidance on this topic.
 
 ## Writing Assistant Architecture
 
@@ -563,4 +561,4 @@ List all inconsistencies found with recommendations."""
         return {"inconsistencies": response.content}
 ```
 
-GPT-4's writing capabilities go far beyond autocomplete. With proper prompting and structure, it becomes a powerful writing partner for technical content creation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+GPT-4's writing capabilities go far beyond autocomplete. With proper prompting and structure, it becomes a powerful writing partner for technical content creation.

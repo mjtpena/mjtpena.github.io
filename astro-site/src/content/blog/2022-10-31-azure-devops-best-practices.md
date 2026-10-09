@@ -1,13 +1,11 @@
 ---
 title: "Azure DevOps Best Practices - October 2022 Summary"
+description: "Azure DevOps provides a comprehensive platform for enterprise DevOps with robust security and governance features."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-31
 tags: ["Azure", "Azure DevOps", "Best Practices", "DevOps"]
-
 ---
-
-I wrote "Azure DevOps Best Practices - October 2022 Summary" to share practical, production-minded guidance on this topic.
 
 ## Pipeline Best Practices
 
@@ -66,4 +64,4 @@ stages:
 4. **Variable groups** - Centralize configuration
 5. **Agent pools** - Organize and manage compute resources
 
-Azure DevOps provides a comprehensive platform for enterprise DevOps with robust security and governance features.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure DevOps provides a comprehensive platform for enterprise DevOps with robust security and governance features.

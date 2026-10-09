@@ -1,5 +1,6 @@
 ---
 title: "January 2026: Month in Review"
+description: "Made several commitments at the start of the month. Time to be honest about how I did. Only worked one Saturday. Actual production emergency. Otherwise…"
 author: Michael John Peña
 draft: false
 date: 2026-01-31
@@ -8,10 +9,7 @@ tags:
   - Retrospective
   - Career
   - Reflection
-
 ---
-
-I wrote "January 2026: Month in Review" to share practical, production-minded guidance on this topic.
 
 ## The Commitments
 
@@ -87,4 +85,4 @@ But I'm heading in the right direction.
 
 That's enough for now.
 
-Here's to February.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Here's to February.

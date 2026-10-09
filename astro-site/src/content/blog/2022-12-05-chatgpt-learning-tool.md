@@ -1,5 +1,6 @@
 ---
 title: "ChatGPT as a Learning Tool: Accelerating Your Technical Growth"
+description: "What ChatGPT did better than any other tool I'd used for technical learning was adapt its explanation level to the question's framing—ask \"what is a…"
 author: Michael John Peña
 draft: false
 date: 2022-12-05

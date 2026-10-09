@@ -1,5 +1,6 @@
 ---
 title: "Power BI Row-Level Security: Data Access Control"
+description: "In Desktop: Modeling → View as Roles → Select role → Enter email to test RLS enables true multi-tenancy in Power BI, where one dataset serves many users…"
 author: Michael John Peña
 draft: false
 date: 2020-09-25
@@ -8,10 +9,7 @@ tags:
   - Security
   - DAX
   - Multi-Tenancy
-
 ---
-
-I wrote "Power BI Row-Level Security: Data Access Control" to share practical, production-minded guidance on this topic.
 
 ## Defining Roles
 
@@ -94,4 +92,4 @@ Invoke-PowerBIRestMethod -Url "datasets/$datasetId/users" -Method POST -Body ($b
 2. **Service accounts** - RLS applies to interactive users, not service principals by default
 3. **Performance** - Complex RLS filters can slow queries
 
-RLS enables true multi-tenancy in Power BI, where one dataset serves many users with appropriate data isolation.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+RLS enables true multi-tenancy in Power BI, where one dataset serves many users with appropriate data isolation.

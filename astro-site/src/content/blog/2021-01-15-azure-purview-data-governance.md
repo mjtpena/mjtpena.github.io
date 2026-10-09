@@ -1,5 +1,6 @@
 ---
 title: "Azure Purview: Unified Data Governance"
+description: "Azure Purview: know your data, govern your data."
 author: Michael John Peña
 draft: false
 date: 2021-01-15
@@ -8,10 +9,7 @@ tags:
   - Purview
   - Data Governance
   - Data Catalog
-
 ---
-
-I wrote "Azure Purview: Unified Data Governance" to share practical, production-minded guidance on this topic.
 
 ## Create Purview Account
 
@@ -227,4 +225,4 @@ for facet in insights["@search.facets"]["classification"]:
     print(f"  {facet['value']}: {facet['count']}")
 ```
 
-Azure Purview: know your data, govern your data.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Purview: know your data, govern your data.

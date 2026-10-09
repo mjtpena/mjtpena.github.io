@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Public Preview: What You Need to Know"
+description: "Six weeks into the Fabric public preview and I'm past the demo phase — I'm running actual data engineering workloads and discovering what holds up and what…"
 author: Michael John Peña
 draft: false
 date: 2023-07-01
@@ -172,4 +173,4 @@ Over the coming weeks, I'll dive deep into each Fabric workload. Tomorrow, we'll
 
 - [Microsoft Fabric Preview Documentation](https://learn.microsoft.com/en-us/fabric/)
 - [Fabric Preview FAQ](https://learn.microsoft.com/en-us/fabric/get-started/fabric-faq)
-- [Known Issues in Preview](https://learn.microsoft.com/en-us/fabric/get-started/fabric-known-issues)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Known Issues in Preview](https://learn.microsoft.com/en-us/fabric/get-started/fabric-known-issues)

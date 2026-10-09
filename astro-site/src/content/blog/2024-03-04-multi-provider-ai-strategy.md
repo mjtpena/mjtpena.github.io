@@ -1,5 +1,6 @@
 ---
 title: "Claude 3 Released: Anthropic's Most Capable AI Model Family"
+description: "Today, Anthropic released Claude 3 - their most capable AI model family yet. With three models (Opus, Sonnet, and Haiku), Anthropic is directly challenging…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-04

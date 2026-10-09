@@ -1,5 +1,6 @@
 ---
 title: "Comparing Vector Databases: Azure AI Search vs Pinecone vs Weaviate"
+description: "Choosing the right vector database is crucial for RAG applications. After implementing production systems with all three major options in 2025, here's my…"
 author: Michael John Peña
 draft: false
 date: 2025-12-09
@@ -138,4 +139,4 @@ results = products.query.hybrid(
 - **Startups:** Pinecone for simplicity and serverless
 - **ML teams:** Weaviate for advanced features and flexibility
 
-The best choice depends on your existing infrastructure, team expertise, and specific requirements. All three are production-ready in 2025.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The best choice depends on your existing infrastructure, team expertise, and specific requirements. All three are production-ready in 2025.

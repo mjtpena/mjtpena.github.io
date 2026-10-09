@@ -1,18 +1,16 @@
 ---
 title: "Azure Spot Instances Strategies: Maximizing Savings with Smart Architecture"
+description: "Smart Spot instance architecture lets you achieve massive cost savings while maintaining the reliability your applications need."
 author: Michael John Peña
 draft: false
 date: 2022-01-07
 url: /blog/azure-spot-instances-strategies/
 tags:
-  - azure
+  - Azure
   - spot-instances
-  - architecture
+  - Architecture
   - cost-optimization
-
 ---
-
-I wrote "Azure Spot Instances Strategies: Maximizing Savings with Smart Architecture" to share practical, production-minded guidance on this topic.
 
 ## Multi-Region Spot Strategy
 
@@ -222,4 +220,4 @@ AzureDiagnostics
     Savings = (RegularHours * 0.20) - (SpotHours * 0.05)
 ```
 
-Smart Spot instance architecture lets you achieve massive cost savings while maintaining the reliability your applications need.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Smart Spot instance architecture lets you achieve massive cost savings while maintaining the reliability your applications need.

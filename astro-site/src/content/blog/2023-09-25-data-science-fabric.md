@@ -10,10 +10,7 @@ tags:
   - Machine Learning
   - Python
   - Spark
-
 ---
-
-I wrote "Data Science Workflows in Microsoft Fabric" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -520,4 +517,3 @@ print(training_code)
 ## Conclusion
 
 Microsoft Fabric provides a comprehensive environment for data science workflows. By leveraging its integrated notebooks, Spark capabilities, and MLflow integration, data scientists can build end-to-end solutions from exploration to deployment within a unified platform.
-

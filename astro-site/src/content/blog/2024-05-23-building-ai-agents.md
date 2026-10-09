@@ -1,5 +1,6 @@
 ---
 title: "Building AI Agents: From Simple to Sophisticated"
+description: "AI agents are systems that can take actions autonomously to achieve goals. Today I'm exploring how to build agents from simple tool-using assistants to…"
 author: Michael John Peña
 draft: false
 date: 2024-05-23
@@ -479,4 +480,4 @@ Tomorrow I'll cover agent orchestration patterns in more depth.
 
 - [ReAct Paper](https://arxiv.org/abs/2210.03629)
 - [LangChain Agents](https://python.langchain.com/docs/modules/agents/)
-- [AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)

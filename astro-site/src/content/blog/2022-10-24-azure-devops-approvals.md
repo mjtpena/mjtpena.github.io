@@ -1,13 +1,11 @@
 ---
 title: "Approvals and Checks in Azure DevOps"
+description: "Approvals and checks ensure deployments meet organizational requirements."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-24
 tags: ["Azure", "Azure DevOps", "Approvals", "Governance"]
-
 ---
-
-I wrote "Approvals and Checks in Azure DevOps" to share practical, production-minded guidance on this topic.
 
 ## Approval Workflows
 
@@ -61,4 +59,4 @@ checks:
       templates: ['security-scan.yml', 'compliance-check.yml']
 ```
 
-Approvals and checks ensure deployments meet organizational requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Approvals and checks ensure deployments meet organizational requirements.

@@ -1,18 +1,16 @@
 ---
 title: "Azure Synapse Analytics Updates: What's New in 2022"
+description: "Azure Synapse Analytics in 2022 provides a more unified, performant, and feature-rich analytics platform."
 author: Michael John Peña
 draft: false
 date: 2022-02-01
 url: /blog/azure-synapse-analytics-updates/
 tags:
-  - azure
-  - synapse
-  - analytics
+  - Azure
+  - Synapse
+  - Analytics
   - data-engineering
-
 ---
-
-I wrote "Azure Synapse Analytics Updates: What's New in 2022" to share practical, production-minded guidance on this topic.
 
 ## Synapse Link Enhancements
 
@@ -213,4 +211,4 @@ SynapseSqlPoolDms
 | take 20
 ```
 
-Azure Synapse Analytics in 2022 provides a more unified, performant, and feature-rich analytics platform.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Synapse Analytics in 2022 provides a more unified, performant, and feature-rich analytics platform.

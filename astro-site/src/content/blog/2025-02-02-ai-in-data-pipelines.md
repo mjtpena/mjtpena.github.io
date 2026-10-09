@@ -1,5 +1,6 @@
 ---
 title: "AI in Data Pipelines: Intelligent ETL and Data Processing"
+description: "AI transforms data pipelines from rigid rule-based systems to adaptive, intelligent processes. Start with high-value, error-prone steps and expand from there."
 author: Michael John Peña
 draft: false
 date: 2025-02-02
@@ -9,10 +10,7 @@ tags:
   - ETL
   - Data Pipelines
   - Azure
-
 ---
-
-I wrote "AI in Data Pipelines: Intelligent ETL and Data Processing" to share practical, production-minded guidance on this topic.
 
 ## AI-Powered Pipeline Stages
 
@@ -389,4 +387,4 @@ result = await pipeline.run(data, context="Customer data from CRM")
 4. **Track lineage**: Record which records were AI-processed
 5. **Cost monitoring**: Track AI costs per pipeline run
 
-AI transforms data pipelines from rigid rule-based systems to adaptive, intelligent processes. Start with high-value, error-prone steps and expand from there.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI transforms data pipelines from rigid rule-based systems to adaptive, intelligent processes. Start with high-value, error-prone steps and expand from there.

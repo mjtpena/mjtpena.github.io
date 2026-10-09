@@ -9,10 +9,7 @@ tags:
   - OpenAI
   - AI
   - Microsoft
-
 ---
-
-I wrote "Semantic Kernel Introduction: Microsoft's AI Orchestration SDK" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -361,4 +358,4 @@ result = await rag.query("What is Azure Functions?")
 
 - [Semantic Kernel Documentation](https://learn.microsoft.com/semantic-kernel/)
 - [GitHub Repository](https://github.com/microsoft/semantic-kernel)
-- [Sample Applications](https://github.com/microsoft/semantic-kernel/tree/main/samples)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Sample Applications](https://github.com/microsoft/semantic-kernel/tree/main/samples)

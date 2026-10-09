@@ -1,5 +1,6 @@
 ---
 title: "February: A Fresh Start"
+description: "Writing daily for 31 days straight taught me something: consistency beats intensity. I didn't write masterpieces every day. Some posts were short. Some were…"
 author: Michael John Peña
 draft: false
 date: 2026-02-01
@@ -8,10 +9,7 @@ tags:
   - Goals
   - Reflection
   - Career
-
 ---
-
-I wrote "February: A Fresh Start" to share practical, production-minded guidance on this topic.
 
 ## What January Taught Me
 
@@ -72,4 +70,4 @@ February is short. 28 days. That's a feature, not a bug.
 
 Less time means more focus. Every day counts a little more.
 
-Let's make them count.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Let's make them count.

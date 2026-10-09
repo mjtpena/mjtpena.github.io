@@ -10,10 +10,7 @@ tags:
   - AI Alignment
   - Anthropic
   - AI
-
 ---
-
-I wrote "Constitutional AI: Self-Supervised Alignment" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -428,4 +425,3 @@ class CAIEvaluator:
 ## Conclusion
 
 Constitutional AI provides a scalable approach to AI alignment by using self-critique and revision guided by explicit principles. By defining clear constitutions and implementing automated revision chains, organizations can improve AI safety and helpfulness without extensive human feedback collection.
-

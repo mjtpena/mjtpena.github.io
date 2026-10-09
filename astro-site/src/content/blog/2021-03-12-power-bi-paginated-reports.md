@@ -10,10 +10,7 @@ tags:
   - Reporting
   - SSRS
   - Business Intelligence
-
 ---
-
-I wrote "2021-03-12-power-bi-paginated-reports" to share practical, production-minded guidance on this topic.
 
 ## When to Use Paginated Reports
 
@@ -383,4 +380,3 @@ Paginated reports fill a critical gap in modern BI platforms. They're essential 
 - Bulk document generation
 
 Combined with Power BI's interactive reports, you have a complete enterprise reporting solution.
-

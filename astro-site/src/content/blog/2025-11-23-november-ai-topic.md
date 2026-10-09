@@ -1,5 +1,6 @@
 ---
 title: "Azure Container Apps: Serverless Deployment for AI Workloads"
+description: "AI applications often have variable load patterns with periods of high demand followed by quiet periods. Container Apps scales to zero during idle times…"
 author: Michael John Peña
 draft: false
 date: 2025-11-23
@@ -9,10 +10,7 @@ tags:
   - AI Deployment
   - Kubernetes
   - Infrastructure
-
 ---
-
-I wrote "Azure Container Apps: Serverless Deployment for AI Workloads" to share practical, production-minded guidance on this topic.
 
 ## Why Container Apps for AI
 
@@ -203,4 +201,4 @@ async def inference(request: InferenceRequest):
     )
 ```
 
-Azure Container Apps simplifies AI deployment by handling infrastructure concerns, letting teams focus on building great AI applications while benefiting from automatic scaling and cost optimization.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Container Apps simplifies AI deployment by handling infrastructure concerns, letting teams focus on building great AI applications while benefiting from automatic scaling and cost optimization.

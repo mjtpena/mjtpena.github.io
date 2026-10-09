@@ -10,12 +10,9 @@ tags:
   - Synapse
   - Spark
   - Big Data
-
 ---
 
-I wrote "2021-07-01-azure-synapse-spark-3" to share practical, production-minded guidance on this topic.
-
-# Setting Up a Spark 3.0 Pool
+## Setting Up a Spark 3.0 Pool
 
 First, let us create a new Spark pool with version 3.0 in Azure Synapse:
 
@@ -32,7 +29,7 @@ az synapse spark pool create \
     --delay 15
 ```
 
-# Adaptive Query Execution (AQE)
+## Adaptive Query Execution (AQE)
 
 One of the most significant improvements in Spark 3.0 is Adaptive Query Execution. AQE optimizes query plans at runtime based on actual data statistics:
 
@@ -54,7 +51,7 @@ result = df.join(large_dimension_df, "key_column")
 result.write.parquet("abfss://container@storage.dfs.core.windows.net/output/")
 ```
 
-# Dynamic Partition Pruning
+## Dynamic Partition Pruning
 
 Dynamic partition pruning significantly improves query performance when joining a partitioned table with another table:
 
@@ -82,7 +79,7 @@ filtered_sales = spark.sql("""
 """)
 ```
 
-# Improved Pandas API with PyArrow
+## Improved Pandas API with PyArrow
 
 Spark 3.0 brings better pandas integration through PyArrow:
 
@@ -106,7 +103,7 @@ df_with_ma = df.withColumn("moving_avg", calculate_moving_average("value"))
 pandas_df = df_with_ma.toPandas()
 ```
 
-# New SQL Functions
+## New SQL Functions
 
 Spark 3.0 adds many new SQL functions:
 
@@ -127,7 +124,7 @@ df.groupBy("category").agg(
 )
 ```
 
-# Integration with Azure Services
+## Integration with Azure Services
 
 Leverage the full power of Azure ecosystem:
 
@@ -150,9 +147,8 @@ df.write \
     .save()
 ```
 
-# Conclusion
+## Conclusion
 
 Apache Spark 3.0 in Azure Synapse Analytics brings substantial performance improvements through Adaptive Query Execution, dynamic partition pruning, and enhanced pandas support. These features allow you to build more efficient and scalable data pipelines with less manual tuning.
 
 Start migrating your existing Spark 2.4 workloads to Spark 3.0 to take advantage of these improvements. The migration is generally straightforward, with most existing code working without modifications.
-

@@ -1,5 +1,6 @@
 ---
 title: "Chunking Strategies for RAG: Finding the Right Granularity"
+description: "Choose chunking strategy based on document structure and retrieval requirements."
 author: Michael John Peña
 draft: false
 date: 2025-03-12
@@ -9,10 +10,7 @@ tags:
   - AI
   - NLP
   - Best Practices
-
 ---
-
-I wrote "Chunking Strategies for RAG: Finding the Right Granularity" to share practical, production-minded guidance on this topic.
 
 ## Advanced Chunking Techniques
 
@@ -90,4 +88,4 @@ class SmartChunker:
         return self.split_at_boundaries(text, boundaries)
 ```
 
-Choose chunking strategy based on document structure and retrieval requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose chunking strategy based on document structure and retrieval requirements.

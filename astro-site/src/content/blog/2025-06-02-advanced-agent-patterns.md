@@ -1,5 +1,6 @@
 ---
 title: "Advanced Agent Patterns: Complex Multi-Agent Systems"
+description: "Choose the right execution pattern based on task complexity and agent capabilities."
 author: Michael John Peña
 draft: false
 date: 2025-06-02
@@ -9,10 +10,7 @@ tags:
   - Patterns
   - Multi-Agent
   - Architecture
-
 ---
-
-I wrote "Advanced Agent Patterns: Complex Multi-Agent Systems" to share practical, production-minded guidance on this topic.
 
 ## Advanced Agent Architectures
 
@@ -101,4 +99,4 @@ class AgentOrchestrator:
         return await self.merge_results(results)
 ```
 
-Choose the right execution pattern based on task complexity and agent capabilities.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose the right execution pattern based on task complexity and agent capabilities.

@@ -1,5 +1,6 @@
 ---
 title: "Pre-Ignite Checklist: Preparing Your Organization for AI Announcements"
+description: "Use this checklist to ensure your organization is ready to quickly evaluate and act on the AI innovations announced at Microsoft Ignite 2025."
 author: Michael John Peña
 draft: false
 date: 2025-10-31
@@ -9,10 +10,7 @@ tags:
   - Enterprise Planning
   - Azure
   - Technology Roadmap
-
 ---
-
-I wrote "Pre-Ignite Checklist: Preparing Your Organization for AI Announcements" to share practical, production-minded guidance on this topic.
 
 ## Technical Readiness Assessment
 
@@ -179,4 +177,4 @@ def create_evaluation_template() -> dict:
     }
 ```
 
-Use this checklist to ensure your organization is ready to quickly evaluate and act on the AI innovations announced at Microsoft Ignite 2025.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use this checklist to ensure your organization is ready to quickly evaluate and act on the AI innovations announced at Microsoft Ignite 2025.

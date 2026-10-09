@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts, buildTagIndex } from '../../utils/posts';
+
+const tags = buildTagIndex(await getPublishedPosts());
+const main = tags.filter((t) => t.posts.length >= 3);
+const minor = tags.filter((t) => t.posts.length < 3).sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<BaseLayout title="Topics" description={`Browse ${tags.length} topics across the blog: Microsoft Fabric, Azure, AI, data engineering, and more.`}>
+  <section class="pt-20 pb-12 md:pt-28 md:pb-20 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <header class="mb-10">
+        <span class="section-label">
+          <span class="glow-dot"></span>
+          Browse
+        </span>
+        <h1 class="section-title">Topics</h1>
+        <p class="text-zinc-500 max-w-2xl">Every tag used on the blog, most-written-about first.</p>
+      </header>
+
+      <div class="card p-4 sm:p-6 mb-8">
+        <ul class="flex flex-wrap gap-2">
+          {main.map((tag) => (
+            <li>
+              <a href={`/blog/tag/${tag.slug}/`} class="tag text-sm">
+                {tag.name}<span class="ml-1.5 text-zinc-600 font-mono text-xs">{tag.posts.length}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {minor.length > 0 && (
+        <details class="card p-4 sm:p-6">
+          <summary class="cursor-pointer text-sm text-zinc-400 hover:text-white">
+            {minor.length} more niche topics
+          </summary>
+          <ul class="flex flex-wrap gap-2 mt-4">
+            {minor.map((tag) => (
+              <li>
+                <a href={`/blog/tag/${tag.slug}/`} class="tag text-xs">{tag.name}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
+    </div>
+  </section>
+</BaseLayout>

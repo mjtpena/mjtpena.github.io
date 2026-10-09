@@ -9,10 +9,7 @@ tags:
   - Accessibility
   - Education
   - AI
-
 ---
-
-I wrote "Azure Immersive Reader: Building Accessible Reading Experiences" to share practical, production-minded guidance on this topic.
 
 ## What Immersive Reader Offers
 
@@ -521,4 +518,3 @@ Key benefits:
 - [Immersive Reader Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/immersive-reader/)
 - [SDK Reference](https://docs.microsoft.com/en-us/azure/cognitive-services/immersive-reader/reference)
 - [Accessibility Best Practices](https://docs.microsoft.com/en-us/azure/cognitive-services/immersive-reader/accessibility)
-

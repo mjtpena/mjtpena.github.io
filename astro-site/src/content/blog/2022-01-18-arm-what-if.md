@@ -1,18 +1,16 @@
 ---
 title: "ARM What-If: Preview Changes Before Deploying"
+description: "What-if is an essential safety net for infrastructure deployments, preventing costly mistakes before they happen."
 author: Michael John Peña
 draft: false
 date: 2022-01-18
 url: /blog/arm-what-if/
 tags:
-  - azure
-  - arm
-  - bicep
-  - deployment
-
+  - Azure
+  - ARM
+  - Bicep
+  - Deployment
 ---
-
-I wrote "ARM What-If: Preview Changes Before Deploying" to share practical, production-minded guidance on this topic.
 
 ## Understanding What-If
 
@@ -234,4 +232,4 @@ jobs:
             --parameters environment=prod
 ```
 
-What-if is an essential safety net for infrastructure deployments, preventing costly mistakes before they happen.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+What-if is an essential safety net for infrastructure deployments, preventing costly mistakes before they happen.

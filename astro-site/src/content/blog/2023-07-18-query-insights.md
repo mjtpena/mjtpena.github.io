@@ -8,10 +8,7 @@ tags:
   - Query Insights
   - Performance
   - Monitoring
-
 ---
-
-I wrote "Query Insights in Fabric: Monitoring and Optimization" to share practical, production-minded guidance on this topic.
 
 ## Understanding Query Insights
 
@@ -293,4 +290,4 @@ Tomorrow we'll explore Fabric Real-Time Analytics.
 
 - [Query Insights Documentation](https://learn.microsoft.com/en-us/fabric/data-warehouse/query-insights)
 - [Performance Tuning](https://learn.microsoft.com/en-us/fabric/data-warehouse/guidelines-warehouse-performance)
-- [Monitoring DMVs](https://learn.microsoft.com/en-us/fabric/data-warehouse/monitoring-dmvs)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Monitoring DMVs](https://learn.microsoft.com/en-us/fabric/data-warehouse/monitoring-dmvs)

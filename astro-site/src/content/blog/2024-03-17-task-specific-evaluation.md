@@ -1,13 +1,11 @@
 ---
 title: "Task-Specific Evaluation for LLMs: Beyond Generic Benchmarks"
+description: "Generic benchmarks like MMLU and HumanEval don't predict performance on your specific use cases. This guide covers how to design and implement task-specific…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-17
 tags: ["AI", "LLM", "Evaluation", "Machine Learning", "Testing"]
-
 ---
-
-I wrote "Task-Specific Evaluation for LLMs: Beyond Generic Benchmarks" to share practical, production-minded guidance on this topic.
 
 Generic benchmarks like MMLU and HumanEval don't predict performance on your specific use cases. This guide covers how to design and implement task-specific evaluation pipelines.
 
@@ -317,7 +315,7 @@ Respond with only the number."""
 
         return scores
 
-# Usage
+## Usage
 doc_evaluator = GenerationEvaluator(
     task=my_tasks[2],
     criteria=["accuracy", "completeness", "clarity", "code_quality"]
@@ -383,4 +381,3 @@ suite = EvaluationSuite([
 ## Conclusion
 
 Task-specific evaluation provides actionable insights that generic benchmarks cannot. Invest in building evaluation datasets that reflect your actual use cases and iterate on both your prompts and evaluation criteria.
-

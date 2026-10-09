@@ -9,10 +9,7 @@ tags:
   - Machine Learning
   - Foundation Models
   - GPT-3
-
 ---
-
-I wrote "Foundation Models on Azure: Understanding Large Language Models" to share practical, production-minded guidance on this topic.
 
 ## What Are Foundation Models?
 
@@ -363,4 +360,3 @@ Foundation models are transforming AI development. Azure provides access to stat
 - [Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/)
 - [Azure Cognitive Services](https://azure.microsoft.com/en-us/products/cognitive-services/)
 - [OpenAI API Documentation](https://platform.openai.com/docs/)
-

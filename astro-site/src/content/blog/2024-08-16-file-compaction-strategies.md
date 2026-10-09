@@ -9,10 +9,7 @@ tags:
   - File Compaction
   - Performance
   - Data Engineering
-
 ---
-
-I wrote "File Compaction Strategies in Delta Lake" to share practical, production-minded guidance on this topic.
 
 ## The Small File Problem
 
@@ -538,4 +535,3 @@ print(report)
 File compaction is essential for maintaining Delta Lake performance. Combine scheduled compaction with auto-compact features to keep your tables optimized. Monitor file statistics regularly and adjust thresholds based on your query patterns.
 
 The goal is files between 128-256MB for optimal query performance in Microsoft Fabric and other analytics engines.
-

@@ -1,5 +1,6 @@
 ---
 title: "Cosmos DB Vector Search: Building AI-Ready Databases"
+description: "Cosmos DB vector search brings global scale and multi-model capabilities to AI applications."
 author: Michael John Peña
 draft: false
 date: 2025-04-16
@@ -9,10 +10,7 @@ tags:
   - Vector
   - Database
   - AI
-
 ---
-
-I wrote "Cosmos DB Vector Search: Building AI-Ready Databases" to share practical, production-minded guidance on this topic.
 
 ## Cosmos DB Vector Search
 
@@ -121,4 +119,4 @@ class CosmosVectorStore:
         ))
 ```
 
-Cosmos DB vector search brings global scale and multi-model capabilities to AI applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Cosmos DB vector search brings global scale and multi-model capabilities to AI applications.

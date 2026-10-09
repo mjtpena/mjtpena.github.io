@@ -1,13 +1,11 @@
 ---
 title: "Azure Blob NFS: Native NFS 3.0 Access to Blob Storage"
+description: "Azure Blob NFS bridges the gap between traditional NFS workloads and cloud-native blob storage, enabling seamless migration of Linux applications without…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-22
 tags: ["Azure", "Blob Storage", "NFS", "Linux", "File Storage"]
-
 ---
-
-I wrote "Azure Blob NFS: Native NFS 3.0 Access to Blob Storage" to share practical, production-minded guidance on this topic.
 
 ## Enabling NFS 3.0 on Storage Account
 
@@ -322,4 +320,4 @@ class NFSPerformanceTester:
 4. **Tune mount options**: Match rsize/wsize to workload pattern
 5. **Monitor performance**: Track latency and throughput metrics
 
-Azure Blob NFS bridges the gap between traditional NFS workloads and cloud-native blob storage, enabling seamless migration of Linux applications without code changes.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Blob NFS bridges the gap between traditional NFS workloads and cloud-native blob storage, enabling seamless migration of Linux applications without code changes.

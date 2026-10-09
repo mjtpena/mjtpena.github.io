@@ -1,5 +1,6 @@
 ---
 title: "DataOps Practices: Agile for Data Teams"
+description: "DataOps in 2021 matured from concept to standard practice. Teams that adopted these practices delivered faster and more reliably than those stuck in manual…"
 author: Michael John Pena
 draft: false
 date: 2021-12-27
@@ -9,10 +10,7 @@ tags:
   - DevOps
   - Agile
   - Best Practices
-
 ---
-
-I wrote "DataOps Practices: Agile for Data Teams" to share practical, production-minded guidance on this topic.
 
 ## DataOps Principles
 
@@ -540,4 +538,4 @@ DataOps in 2021 matured from concept to standard practice. Teams that adopted th
 - [DataOps Manifesto](https://dataopsmanifesto.org/)
 - [dbt](https://www.getdbt.com/)
 - [Apache Airflow](https://airflow.apache.org/)
-- [Great Expectations](https://greatexpectations.io/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Great Expectations](https://greatexpectations.io/)

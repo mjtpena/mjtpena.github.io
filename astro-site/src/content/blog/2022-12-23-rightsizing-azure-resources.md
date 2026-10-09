@@ -9,10 +9,7 @@ tags:
   - Performance
   - Right-Sizing
   - Best Practices
-
 ---
-
-I wrote "Right-Sizing Azure Resources: A Data-Driven Approach" to share practical, production-minded guidance on this topic.
 
 ## The Right-Sizing Process
 
@@ -404,4 +401,3 @@ Right-sizing is an ongoing process, not a one-time activity. Use data-driven ana
 - [Azure Advisor Recommendations](https://docs.microsoft.com/azure/advisor/)
 - [VM Sizes](https://docs.microsoft.com/azure/virtual-machines/sizes)
 - [Azure Monitor Metrics](https://docs.microsoft.com/azure/azure-monitor/essentials/data-platform-metrics)
-

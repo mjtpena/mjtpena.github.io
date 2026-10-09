@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Lake Storage Gen2: Foundation of Modern Data Platforms"
+description: "Gen2 is the standard for new data lakes on Azure. ADLS Gen2 is the foundation. Build your data platform on solid ground."
 author: Michael John Peña
 draft: false
 date: 2020-09-30
@@ -8,10 +9,7 @@ tags:
   - Data Lake
   - Storage
   - Data Engineering
-
 ---
-
-I wrote "Azure Data Lake Storage Gen2: Foundation of Modern Data Platforms" to share practical, production-minded guidance on this topic.
 
 ## Why Gen2?
 
@@ -84,4 +82,4 @@ spark.conf.set("fs.azure.account.oauth2.client.id.mydatalake.dfs.core.windows.ne
 3. **Implement folder structure** that matches your data domains
 4. **Apply ACLs** at directory level, not individual files
 
-ADLS Gen2 is the foundation. Build your data platform on solid ground.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+ADLS Gen2 is the foundation. Build your data platform on solid ground.

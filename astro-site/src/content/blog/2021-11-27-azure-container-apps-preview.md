@@ -1,5 +1,6 @@
 ---
 title: "Azure Container Apps Preview: Serverless Containers Made Simple"
+description: "Azure Container Apps provides a sweet spot between serverless functions and full Kubernetes - the power of containers without the operational complexity of…"
 author: Michael John Pena
 draft: false
 date: 2021-11-27
@@ -10,10 +11,7 @@ tags:
   - Serverless
   - KEDA
   - Dapr
-
 ---
-
-I wrote "Azure Container Apps Preview: Serverless Containers Made Simple" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Container Apps?
 
@@ -528,4 +526,4 @@ Azure Container Apps provides a sweet spot between serverless functions and full
 
 - [Container Apps Documentation](https://docs.microsoft.com/en-us/azure/container-apps/)
 - [KEDA Scalers](https://keda.sh/docs/scalers/)
-- [Dapr Documentation](https://docs.dapr.io/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Dapr Documentation](https://docs.dapr.io/)

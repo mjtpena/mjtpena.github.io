@@ -1,5 +1,6 @@
 ---
 title: Building Conversational AI with Azure Language Understanding (LUIS)
+description: "LUIS enables natural language understanding that powers conversational interfaces, making applications more intuitive and user-friendly."
 author: Michael John Pena
 draft: false
 date: 2021-09-16
@@ -9,10 +10,7 @@ tags:
   - LUIS
   - NLU
   - Conversational AI
-
 ---
-
-I wrote "2021-09-16-azure-language-understanding" to share practical, production-minded guidance on this topic.
 
 ## Key Concepts
 
@@ -392,4 +390,4 @@ def add_prebuilt_domain(client, app_id: str, version_id: str, domain: str):
 5. **Active Learning**: Review endpoint logs and add corrections
 6. **Testing**: Test with real user queries before deployment
 
-LUIS enables natural language understanding that powers conversational interfaces, making applications more intuitive and user-friendly.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+LUIS enables natural language understanding that powers conversational interfaces, making applications more intuitive and user-friendly.

@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Factory Triggers: Scheduling and Event-Driven Pipelines"
+description: "A Data Factory pipeline without a trigger is a stored procedure that nobody calls. Triggers are the boring half of orchestration that decides whether your…"
 author: Michael John Peña
 draft: false
 date: 2020-09-17
@@ -109,4 +110,4 @@ Trigger from Event Grid custom events:
 }
 ```
 
-Choose the right trigger: Schedule for time-based, Tumbling Window for sequential windows, Event for reactive processing.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose the right trigger: Schedule for time-based, Tumbling Window for sequential windows, Event for reactive processing.

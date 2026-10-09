@@ -10,10 +10,7 @@ tags:
   - Computer Vision
   - Speech
   - Language
-
 ---
-
-I wrote "Azure AI Services Updates: Vision, Speech, and Language Capabilities" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -457,4 +454,3 @@ Azure AI Services provides a comprehensive suite of capabilities for building in
 - [Azure AI Vision](https://learn.microsoft.com/azure/cognitive-services/computer-vision/)
 - [Azure AI Speech](https://learn.microsoft.com/azure/cognitive-services/speech-service/)
 - [Azure AI Language](https://learn.microsoft.com/azure/cognitive-services/language-service/)
-

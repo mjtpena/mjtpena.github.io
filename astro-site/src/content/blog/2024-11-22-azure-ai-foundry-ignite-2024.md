@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Foundry: Microsoft's Unified Platform for Enterprise AI"
+description: "Think of it as the \"Visual Studio for AI\" - one place to build everything from simple chatbots to complex multi-agent systems."
 author: Michael John Peña
 draft: false
 date: 2024-11-22
@@ -9,10 +10,7 @@ tags:
   - Azure AI Foundry
   - Ignite
   - Enterprise AI
-
 ---
-
-I wrote "Azure AI Foundry: Microsoft's Unified Platform for Enterprise AI" to share practical, production-minded guidance on this topic.
 
 ## What is Azure AI Foundry?
 
@@ -279,4 +277,4 @@ The tools are here. Time to build.
 - [Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/)
 - [AI Foundry SDK Reference](https://learn.microsoft.com/en-us/python/api/overview/azure/ai-foundry)
 - [Agent Service Guide](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/)
-- [Ignite 2024 AI Sessions](https://ignite.microsoft.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Ignite 2024 AI Sessions](https://ignite.microsoft.com/)

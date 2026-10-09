@@ -1,5 +1,6 @@
 ---
 title: "API Design Patterns That Stood the Test of Time in 2025"
+description: "Good API design is timeless. These patterns work because they prioritize developer experience and operational reliability."
 author: Michael John Peña
 draft: false
 date: 2025-12-29
@@ -9,10 +10,7 @@ tags:
   - Best-Practices
   - Architecture
   - "2025"
-
 ---
-
-I wrote "API Design Patterns That Stood the Test of Time in 2025" to share practical, production-minded guidance on this topic.
 
 ## 1. Resource-Based URLs with Proper Nesting
 
@@ -165,4 +163,4 @@ X-RateLimit-Reset: 1703894400
 - **Backward compatibility** - Version and deprecate carefully
 - **Performance transparency** - Pagination, rate limits visible
 
-Good API design is timeless. These patterns work because they prioritize developer experience and operational reliability.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Good API design is timeless. These patterns work because they prioritize developer experience and operational reliability.

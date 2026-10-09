@@ -1,5 +1,6 @@
 ---
 title: "LangChain Updates: New Features and Improvements"
+description: "LangChain's velocity in 2023 has been remarkable and occasionally destabilising — the 0.0.x series has introduced breaking API changes in point releases…"
 author: Michael John Peña
 draft: false
 date: 2023-08-30
@@ -354,4 +355,4 @@ Tomorrow we'll explore vector store integrations and best practices.
 
 - [LangChain Documentation](https://python.langchain.com/docs/)
 - [LCEL Guide](https://python.langchain.com/docs/expression_language/)
-- [LangSmith](https://smith.langchain.com/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [LangSmith](https://smith.langchain.com/)

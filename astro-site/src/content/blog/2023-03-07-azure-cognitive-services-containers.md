@@ -9,10 +9,7 @@ tags:
   - Cognitive Services
   - Containers
   - Docker
-
 ---
-
-I wrote "Running Azure Cognitive Services in Containers" to share practical, production-minded guidance on this topic.
 
 ## Why Containerized Cognitive Services?
 
@@ -235,4 +232,5 @@ spec:
             path: /status
             port: 5000
           initialDelaySeconds: 60
-          periodSeconds: 30\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+          periodSeconds: 30
+```

@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Search: Implementing Hybrid Search with Vectors and Keywords"
+description: "Hybrid search significantly improves retrieval quality for RAG applications by leveraging both semantic understanding and exact keyword matching."
 author: Michael John Peña
 draft: false
 date: 2025-10-10
@@ -9,10 +10,7 @@ tags:
   - Hybrid Search
   - RAG
   - Semantic Search
-
 ---
-
-I wrote "Azure AI Search: Implementing Hybrid Search with Vectors and Keywords" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Hybrid Search Index
 
@@ -93,4 +91,4 @@ class HybridSearchService:
         return [{"id": r["id"], "title": r["title"], "content": r["content"], "score": r["@search.score"]} for r in results]
 ```
 
-Hybrid search significantly improves retrieval quality for RAG applications by leveraging both semantic understanding and exact keyword matching.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Hybrid search significantly improves retrieval quality for RAG applications by leveraging both semantic understanding and exact keyword matching.

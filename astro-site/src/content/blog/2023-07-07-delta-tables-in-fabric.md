@@ -1,5 +1,6 @@
 ---
 title: "Delta Tables in Microsoft Fabric: Deep Dive"
+description: "The theoretical benefits of Delta Lake — ACID transactions, time travel, schema enforcement — are easy to describe, but the practical payoff becomes clear…"
 author: Michael John Peña
 draft: false
 date: 2023-07-07
@@ -320,4 +321,4 @@ Tomorrow we'll explore Spark in Fabric and how to use notebooks effectively.
 
 - [Delta Lake Documentation](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake)
 - [Delta Lake Best Practices](https://docs.delta.io/latest/best-practices.html)
-- [Time Travel](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake#delta-lake-time-travel)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Time Travel](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-lake#delta-lake-time-travel)

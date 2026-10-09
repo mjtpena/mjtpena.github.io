@@ -1,5 +1,6 @@
 ---
 title: "Event-Driven AI Integration: Connecting AI to Business Events"
+description: "Event-driven AI enables intelligent, automated responses to business events. Start with high-value events where AI can add immediate value."
 author: Michael John Peña
 draft: false
 date: 2025-02-21
@@ -9,10 +10,7 @@ tags:
   - Integration
   - Architecture
   - Azure
-
 ---
-
-I wrote "Event-Driven AI Integration: Connecting AI to Business Events" to share practical, production-minded guidance on this topic.
 
 ## Event-Driven AI Patterns
 
@@ -65,4 +63,4 @@ async def handle_feedback(event: dict, ai: AIFoundryClient) -> dict:
 await ai_events.process_events()
 ```
 
-Event-driven AI enables intelligent, automated responses to business events. Start with high-value events where AI can add immediate value.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Event-driven AI enables intelligent, automated responses to business events. Start with high-value events where AI can add immediate value.

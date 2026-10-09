@@ -1,5 +1,6 @@
 ---
 title: "Dataflow Gen2: Power Query Transformations in Fabric"
+description: "A month into production-style Fabric testing and Dataflow Gen2 has become my go-to recommendation for teams without Spark expertise who need repeatable data…"
 author: Michael John Peña
 draft: false
 date: 2023-07-13
@@ -367,4 +368,4 @@ Tomorrow we'll explore Data Pipelines and orchestration patterns.
 
 - [Dataflow Gen2 Documentation](https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview)
 - [Power Query M Reference](https://learn.microsoft.com/en-us/powerquery-m/)
-- [Dataflow Best Practices](https://learn.microsoft.com/en-us/power-query/best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Dataflow Best Practices](https://learn.microsoft.com/en-us/power-query/best-practices)

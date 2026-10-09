@@ -1,5 +1,6 @@
 ---
 title: "Fine-Tuning Azure OpenAI Models: When and How to Customize"
+description: "Fine-tuning is appropriate when you need consistent formatting, domain-specific language understanding, or reduced prompt lengths. However, it requires…"
 author: Michael John Peña
 draft: false
 date: 2025-10-13
@@ -9,10 +10,7 @@ tags:
   - LLM
   - Machine Learning
   - Customization
-
 ---
-
-I wrote "Fine-Tuning Azure OpenAI Models: When and How to Customize" to share practical, production-minded guidance on this topic.
 
 ## When to Consider Fine-Tuning
 
@@ -117,4 +115,4 @@ class FineTuningManager:
 
 ## Evaluating Fine-Tuned Models
 
-Always compare fine-tuned models against base models with optimized prompts to ensure the fine-tuning investment delivers measurable improvements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Always compare fine-tuned models against base models with optimized prompts to ensure the fine-tuning investment delivers measurable improvements.

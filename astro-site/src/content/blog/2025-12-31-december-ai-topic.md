@@ -9,10 +9,7 @@ tags:
   - Learning
   - Planning
   - "2026"
-
 ---
-
-I wrote "New Year's Eve 2025: Setting Technical Goals That Actually Work" to share practical, production-minded guidance on this topic.
 
 ## The SMART-ER Framework for Tech Goals
 
@@ -185,4 +182,4 @@ def new_year_wish():
     }
 
 print(new_year_wish())
-```\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+```

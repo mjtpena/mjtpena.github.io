@@ -1,5 +1,6 @@
 ---
 title: "Azure Synapse Analytics is Now Generally Available"
+description: "All of this is unified through Synapse Studio - a single workspace where data engineers, data scientists, and analysts can collaborate."
 author: Michael John Peña
 draft: false
 date: 2020-12-05
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Analytics
   - Big Data
-
 ---
-
-I wrote "Azure Synapse Analytics is Now Generally Available" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Synapse Analytics?
 
@@ -162,4 +160,4 @@ The Azure Synapse Analytics documentation has improved significantly - start wit
 - [Azure Synapse Analytics Documentation](https://docs.microsoft.com/en-us/azure/synapse-analytics/)
 - [Azure Synapse Analytics Pricing](https://azure.microsoft.com/en-us/pricing/details/synapse-analytics/)
 - [Azure Purview Preview](https://docs.microsoft.com/en-us/azure/purview/)
-- [James Serra's Blog on Synapse GA](https://www.jamesserra.com/archive/2020/12/azure-synapse-analytics-is-ga/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [James Serra's Blog on Synapse GA](https://www.jamesserra.com/archive/2020/12/azure-synapse-analytics-is-ga/)

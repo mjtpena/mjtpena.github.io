@@ -1,5 +1,6 @@
 ---
 title: "The Principal Engineer Question"
+description: "Someone asked me last week if I miss being a principal engineer. I had to think about it longer than I expected."
 author: Michael John Peña
 draft: false
 date: 2026-02-27
@@ -84,4 +85,4 @@ There's no wrong answer to the principal engineer question. There's only an hone
 
 Know what you actually want. Know why.
 
-Everything else is just the path to getting there.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Everything else is just the path to getting there.

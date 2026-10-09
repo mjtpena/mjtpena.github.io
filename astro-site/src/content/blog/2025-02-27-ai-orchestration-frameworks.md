@@ -1,5 +1,6 @@
 ---
 title: "AI Orchestration Frameworks: Building Complex AI Workflows"
+description: "Choose orchestration frameworks based on workflow complexity and team expertise."
 author: Michael John Peña
 draft: false
 date: 2025-02-27
@@ -9,10 +10,7 @@ tags:
   - Frameworks
   - Agents
   - Architecture
-
 ---
-
-I wrote "AI Orchestration Frameworks: Building Complex AI Workflows" to share practical, production-minded guidance on this topic.
 
 ## Orchestration Options
 
@@ -54,4 +52,4 @@ app = workflow.compile()
 result = app.invoke({"query": "Analyze sales"})
 ```
 
-Choose orchestration frameworks based on workflow complexity and team expertise.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose orchestration frameworks based on workflow complexity and team expertise.

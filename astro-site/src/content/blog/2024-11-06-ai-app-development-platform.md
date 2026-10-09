@@ -1,5 +1,6 @@
 ---
 title: "Building AI Applications: Choosing the Right Platform and Architecture"
+description: "The key to successful AI applications is choosing the right architecture for your requirements and building with production considerations from the start."
 author: Michael John Peña
 draft: false
 date: 2024-11-06
@@ -9,10 +10,7 @@ tags:
   - Architecture
   - Application Development
   - Best Practices
-
 ---
-
-I wrote "Building AI Applications: Choosing the Right Platform and Architecture" to share practical, production-minded guidance on this topic.
 
 ## The AI Application Stack
 
@@ -336,4 +334,4 @@ The key to successful AI applications is choosing the right architecture for you
 
 - [AI Architecture Patterns](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/)
 - [Azure AI Foundry Best Practices](https://learn.microsoft.com/en-us/azure/ai-foundry/best-practices)
-- [Enterprise AI Guidelines](https://learn.microsoft.com/en-us/azure/architecture/example-scenario/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Enterprise AI Guidelines](https://learn.microsoft.com/en-us/azure/architecture/example-scenario/ai/)

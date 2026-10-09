@@ -1,17 +1,15 @@
 ---
 title: "Seccomp by Default: Kubernetes Container Security"
+description: "Seccomp (Secure Computing Mode) limits which system calls a process can make, reducing the attack surface."
 author: Michael John Peña
 draft: false
 date: 2022-06-06
 tags:
-  - kubernetes
-  - security
+  - Kubernetes
+  - Security
   - seccomp
-  - containers
-
+  - Containers
 ---
-
-I wrote "Seccomp by Default: Kubernetes Container Security" to share practical, production-minded guidance on this topic.
 
 ## Understanding Seccomp
 
@@ -102,5 +100,3 @@ dmesg | grep "seccomp"
 ## Summary
 
 Seccomp profiles restrict system calls, limiting container capabilities and reducing security risks. The default profile in Kubernetes 1.24 provides baseline protection.
-
-

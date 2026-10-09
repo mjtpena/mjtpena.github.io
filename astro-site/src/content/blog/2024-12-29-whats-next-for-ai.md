@@ -1,5 +1,6 @@
 ---
 title: "What's Next for AI: The Road from Here"
+description: "The future of AI is being written now. Stay curious, stay learning, and help shape it responsibly."
 author: Michael John Peña
 draft: false
 date: 2024-12-29
@@ -9,10 +10,7 @@ tags:
   - Technology
   - Trends
   - Innovation
-
 ---
-
-I wrote "What's Next for AI: The Road from Here" to share practical, production-minded guidance on this topic.
 
 ## The AI Capability Curve
 
@@ -326,4 +324,4 @@ The future of AI is being written now. Stay curious, stay learning, and help sha
 
 - [AI Safety Research](https://www.safe.ai/)
 - [Future of Life Institute](https://futureoflife.org/ai/)
-- [AI Alignment Forum](https://www.alignmentforum.org/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [AI Alignment Forum](https://www.alignmentforum.org/)

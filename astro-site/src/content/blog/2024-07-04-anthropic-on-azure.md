@@ -1,5 +1,6 @@
 ---
 title: "Anthropic Models Coming to Azure: What It Means"
+description: "For organizations already invested in Azure, this eliminates the complexity of managing another vendor relationship."
 author: Michael John Peña
 draft: false
 date: 2024-07-04
@@ -9,10 +10,7 @@ tags:
   - Claude
   - Anthropic
   - Enterprise
-
 ---
-
-I wrote "Anthropic Models Coming to Azure: What It Means" to share practical, production-minded guidance on this topic.
 
 ## The Azure Advantage
 
@@ -326,4 +324,3 @@ Based on similar Azure AI services:
 Claude on Azure will give enterprise customers more choice without leaving their trusted cloud environment. The multi-model future is here - design your systems to take advantage of it.
 
 Start preparing now by building flexible architectures. When Azure Claude launches, you'll be ready to integrate smoothly.
-

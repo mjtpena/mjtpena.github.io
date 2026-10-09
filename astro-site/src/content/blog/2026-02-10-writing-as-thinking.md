@@ -1,5 +1,6 @@
 ---
 title: "Writing as Thinking"
+description: "Forty-one days of daily blogging. Here's what I've discovered: I don't write to share ideas. I write to find them."
 author: Michael John Peña
 draft: false
 date: 2026-02-10
@@ -78,4 +79,4 @@ No subscription. No framework. No setup. Just you and your thoughts.
 
 If you're an engineer who doesn't write, you're missing your most powerful debugging tool—for your own mind.
 
-Start writing. Start today.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Start writing. Start today.

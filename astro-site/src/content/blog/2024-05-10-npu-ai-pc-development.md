@@ -1,5 +1,6 @@
 ---
 title: "NPU Development for AI PCs: A Deep Dive"
+description: "Yesterday I introduced Copilot+ PCs. Today let's dive deep into developing applications that leverage the NPU effectively."
 author: Michael John Peña
 draft: false
 date: 2024-05-10
@@ -371,4 +372,4 @@ Tomorrow I'll cover local AI models and the Phi-3 family from Microsoft.
 - [DirectML Documentation](https://learn.microsoft.com/windows/ai/directml/)
 - [Windows ML](https://learn.microsoft.com/windows/ai/windows-ml/)
 - [ONNX Runtime DirectML](https://onnxruntime.ai/docs/execution-providers/DirectML-ExecutionProvider.html)
-- [Model Optimization Guide](https://onnxruntime.ai/docs/performance/model-optimizations/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Model Optimization Guide](https://onnxruntime.ai/docs/performance/model-optimizations/)

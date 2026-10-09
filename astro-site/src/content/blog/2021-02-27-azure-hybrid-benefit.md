@@ -1,5 +1,6 @@
 ---
 title: Maximizing Value with Azure Hybrid Benefit
+description: "Azure Hybrid Benefit is the discount that nobody in finance remembers to claim and every consultant I know flags in the first cost review. If you have…"
 author: Michael John Peña
 draft: false
 date: 2021-02-27

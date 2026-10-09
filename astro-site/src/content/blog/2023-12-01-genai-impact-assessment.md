@@ -1,13 +1,11 @@
 ---
 title: "GenAI Impact Assessment: Measuring Real Business Value"
+description: "When teams move from pilots to production, the question I hear most is: 'Did this deliver measurable business value?' From dozens of GenAI assessments this…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-01
 tags: ["AI", "GenAI", "ROI", "Business Value", "Assessment"]
-
 ---
-
-I wrote "GenAI Impact Assessment: Measuring Real Business Value" to share practical, production-minded guidance on this topic.
 
 When teams move from pilots to production, the question I hear most is: 'Did this deliver measurable business value?' From dozens of GenAI assessments this year, the frameworks that work focus on clear baselines, conservative attribution, and KPIs that map directly to revenue or cost reduction rather than vague productivity claims.
 
@@ -309,4 +307,4 @@ impact_assessment_best_practices = {
 }
 ```
 
-Tomorrow, we'll explore AI adoption patterns and what drives successful implementations!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore AI adoption patterns and what drives successful implementations!

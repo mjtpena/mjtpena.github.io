@@ -1,13 +1,11 @@
 ---
 title: "Faithfulness Scoring in RAG: Detecting Hallucinations"
+description: "Faithfulness is perhaps the most critical metric for RAG systems. An unfaithful answer that hallucinates information not in the source documents can be…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-22
 tags: ["AI", "RAG", "Faithfulness", "Hallucination", "Evaluation"]
-
 ---
-
-I wrote "Faithfulness Scoring in RAG: Detecting Hallucinations" to share practical, production-minded guidance on this topic.
 
 Faithfulness is perhaps the most critical metric for RAG systems. An unfaithful answer that hallucinates information not in the source documents can be worse than no answer at all.
 
@@ -403,4 +401,3 @@ Answer:"""
 ## Conclusion
 
 Faithfulness scoring is essential for trustworthy RAG systems. Implement multiple verification strategies and set appropriate thresholds to minimize hallucinations in production.
-

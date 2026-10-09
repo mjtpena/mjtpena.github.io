@@ -8,10 +8,7 @@ tags:
   - Hugging Face
   - Fine-Tuning
   - Python
-
 ---
-
-I wrote "PEFT Libraries: Practical Tools for Efficient Fine-Tuning" to share practical, production-minded guidance on this topic.
 
 ## Hugging Face PEFT Library
 
@@ -319,4 +316,4 @@ Tomorrow we'll explore Hugging Face integration with Azure.
 
 - [PEFT Documentation](https://huggingface.co/docs/peft)
 - [PEFT GitHub](https://github.com/huggingface/peft)
-- [TRL Library](https://huggingface.co/docs/trl)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [TRL Library](https://huggingface.co/docs/trl)

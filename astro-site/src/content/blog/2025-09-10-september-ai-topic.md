@@ -1,5 +1,6 @@
 ---
 title: "Enterprise AI Governance: Building Model Registries and Approval Workflows"
+description: "A model registry serves as the single source of truth for all ML models, tracking versions, lineage, and deployment status."
 author: Michael John Peña
 draft: false
 date: 2025-09-10
@@ -9,10 +10,7 @@ tags:
   - Model Registry
   - Enterprise
   - Compliance
-
 ---
-
-I wrote "Enterprise AI Governance: Building Model Registries and Approval Workflows" to share practical, production-minded guidance on this topic.
 
 ## The Model Registry Pattern
 
@@ -127,4 +125,4 @@ class ApprovalWorkflow:
         return tiers.get(risk_tier, tiers["high"])
 ```
 
-Implementing governance early prevents technical debt and compliance issues as your AI portfolio grows. The registry becomes the foundation for auditing, reproducibility, and trust in AI systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Implementing governance early prevents technical debt and compliance issues as your AI portfolio grows. The registry becomes the foundation for auditing, reproducibility, and trust in AI systems.

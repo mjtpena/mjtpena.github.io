@@ -1,5 +1,6 @@
 ---
 title: "RAG Architecture Maturity Model: From Basic to Production-Grade"
+description: "I've seen hundreds of RAG prototypes. The gap between a demo and a production-grade system usually comes down to retrieval quality, freshness, and…"
 author: Michael John Peña
 draft: false
 date: 2024-01-06

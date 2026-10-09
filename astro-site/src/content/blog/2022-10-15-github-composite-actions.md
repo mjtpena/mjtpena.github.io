@@ -1,13 +1,11 @@
 ---
 title: "Building GitHub Composite Actions"
+description: "Composite actions bridge the gap between simple step sequences and full custom actions."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-15
 tags: ["GitHub", "GitHub Actions", "Automation", "DevOps"]
-
 ---
-
-I wrote "Building GitHub Composite Actions" to share practical, production-minded guidance on this topic.
 
 ## Creating Composite Actions
 
@@ -74,4 +72,4 @@ jobs:
         run: dotnet build --configuration Release
 ```
 
-Composite actions bridge the gap between simple step sequences and full custom actions.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Composite actions bridge the gap between simple step sequences and full custom actions.

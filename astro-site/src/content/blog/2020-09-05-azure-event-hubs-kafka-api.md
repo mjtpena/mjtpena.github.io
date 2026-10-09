@@ -1,5 +1,6 @@
 ---
 title: "Azure Event Hubs with Kafka API"
+description: "The Kafka API compatibility makes Event Hubs a drop-in replacement for many streaming scenarios."
 author: Michael John Peña
 draft: false
 date: 2020-09-05
@@ -8,10 +9,7 @@ tags:
   - Event Hubs
   - Kafka
   - Streaming
-
 ---
-
-I wrote "Azure Event Hubs with Kafka API" to share practical, production-minded guidance on this topic.
 
 ## Configuration
 
@@ -61,4 +59,4 @@ for message in consumer:
 - Use existing Kafka tooling and libraries
 - Get Event Hubs benefits: scaling, retention, capture to blob
 
-The Kafka API compatibility makes Event Hubs a drop-in replacement for many streaming scenarios.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Kafka API compatibility makes Event Hubs a drop-in replacement for many streaming scenarios.

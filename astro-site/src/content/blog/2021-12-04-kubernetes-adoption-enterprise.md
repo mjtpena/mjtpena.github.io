@@ -9,10 +9,7 @@ tags:
   - Containers
   - Cloud Native
   - DevOps
-
 ---
-
-I wrote "Kubernetes Adoption in the Enterprise: Lessons from 2021" to share practical, production-minded guidance on this topic.
 
 ## The Managed Kubernetes Reality
 
@@ -67,4 +64,5 @@ spec:
   postBuild:
     substitute:
       ENVIRONMENT: production
-      CLUSTER_NAME: prod-aks-cluster\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+      CLUSTER_NAME: prod-aks-cluster
+```

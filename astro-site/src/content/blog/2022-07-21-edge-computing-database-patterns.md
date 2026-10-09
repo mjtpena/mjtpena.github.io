@@ -1,13 +1,11 @@
 ---
 title: "Edge Computing Database Patterns and Best Practices"
+description: "Handle intermittent connectivity by storing data locally and forwarding when connected. Reduce data volume by aggregating at the edge before cloud sync."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-21
 tags: ["Edge Computing", "Database", "IoT", "Azure", "Architecture"]
-
 ---
-
-I wrote "Edge Computing Database Patterns and Best Practices" to share practical, production-minded guidance on this topic.
 
 ## Pattern 1: Store and Forward
 
@@ -297,4 +295,4 @@ manager = SchemaVersionManager(db_connection)
 manager.apply_migrations(migrations)
 ```
 
-These patterns enable robust edge database deployments that handle real-world challenges like connectivity issues, limited resources, and cloud integration.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These patterns enable robust edge database deployments that handle real-world challenges like connectivity issues, limited resources, and cloud integration.

@@ -1,5 +1,6 @@
 ---
 title: Synology NAS Series – Cloud Sync with Azure Storage
+description: "Synology reached out to me to give their new DiskStation&nbsp;DS920+ a review. If you're not yet aware of Synology, they are the leading NAS…"
 author: Michael John Peña
 draft: false
 date: 2020-09-28
@@ -7,14 +8,11 @@ url: /blog/synology-nas-series-cloud-sync-with-azure-storage/
 images: 
      - /2020/09/20200821_025202969_iOS-940x510.jpg
 tags:
-  - azure
-  - cloud
+  - Azure
+  - Cloud
   - nas
-  - storage
-
+  - Storage
 ---
-
-I wrote "2020-09-28-synology-nas-series-cloud-sync-with-azure-storage" to share practical, production-minded guidance on this topic.
 
 Synology reached out to me to give their new <a href="https://www.synology.com/en-us/products/DS920+" target="_blank" rel="noreferrer noopener">DiskStation&nbsp;DS920+</a> a review. If you're not yet aware of Synology, they are the leading NAS (Network-attached storage) provider for home and work use-cases. You can use a NAS for pretty much anything such as backing up files, sharing files in a local network, streaming media files, or have your own "private cloud".
 
@@ -22,7 +20,7 @@ Throughout the years, the concept of NAS has developed and there is now a very t
 
 I am creating a Synology NAS series on highlighting the different capabilities of their NAS. In particular, the features that work within the Microsoft ecosystem such as Microsoft Azure, Azure Active Directory, and Microsoft 365, which is something I use on a day-to-day basis.
 
-# Introduction
+## Introduction
 
 Lately I've been working on a lot of live video analytics to analyse CCTV (surveillance) feeds and extract useful information around it. There are 3 major points around my customer's business requirements and policy.
 
@@ -30,7 +28,7 @@ Lately I've been working on a lot of live video analytics to analyse CCTV (surve
 2. We archive CCTV feeds in the public cloud through a reliable and cost-effective public storage mechanism. There is no requirement for these videos to be accessible in real-time.
 3. The customer wants that network traffic should not clog or would require dedicated network connections for video processing and archiving. They leverage the same network infrastructure in their remote office locations.
 
-# Why Cloud Sync + Azure Storage?
+## Why Cloud Sync + Azure Storage?
 
 In this specific business case, the customer already uses Synology for NAS and an active Azure subscription.
 
@@ -42,7 +40,7 @@ Azure Blob storage is the perfect fit for this as it has: hot, cool, and archive
 
 Cloud Sync can also schedule upload times to avoid disrupting the network during office hours.
 
-# Getting Started
+## Getting Started
 
 Setting up Cloud Sync is fairly easy and a straightforward process. To get started, go to your Synology NAS landing page. Then go to "Package Center" to search, install, and open Cloud Sync.<figure class="wp-block-image size-large">
 
@@ -116,11 +114,10 @@ Click on Next and finish the wizard. A pop-up should appear, confirming a succes
 
 Once the connection to the Azure storage is established, you will see the notifications saying files are being synced.
 
-# Conclusion
+## Conclusion
 
 To my interest, I've also adapted this pattern with my personal/home surveillance system.
 
 One thing I would say is that - it just works - which is good. I think it's seldom to see managed services or platform these days where the burden of over configuration is in the hands of the customer.
 
 I've been running this setup for a few weeks now and I am very delighted with the results. The setup is very easy that doesn't require deep technical skills in file storage. I remember the days when doing this would require complex scripts to sync between network files and centralized servers. Those days are now a thing of a past.
-

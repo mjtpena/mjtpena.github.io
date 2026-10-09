@@ -1,13 +1,11 @@
 ---
 title: "Unity Catalog for ML: Governed Machine Learning"
+description: "Unity Catalog extends governance to machine learning assets. Manage models, features, and experiments with the same rigor as your data."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-25
 tags: ["Databricks", "Unity Catalog", "MLOps", "Machine Learning", "Governance"]
-
 ---
-
-I wrote "Unity Catalog for ML: Governed Machine Learning" to share practical, production-minded guidance on this topic.
 
 Unity Catalog extends governance to machine learning assets. Manage models, features, and experiments with the same rigor as your data.
 
@@ -318,4 +316,3 @@ def log_inference(
 ## Conclusion
 
 Unity Catalog brings enterprise governance to ML assets. Register models, manage features, and control access with a unified approach that spans data and ML lifecycle management.
-

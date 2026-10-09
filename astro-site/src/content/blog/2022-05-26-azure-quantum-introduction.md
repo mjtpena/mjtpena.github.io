@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-05-26
 tags:
-  - azure
+  - Azure
   - quantum
   - computing
   - qsharp
-
 ---
-
-I wrote "Azure Quantum: Introduction to Quantum Computing" to share practical, production-minded guidance on this topic.
 
 ## Understanding Quantum Computing
 
@@ -343,5 +340,3 @@ Azure Quantum provides:
 - Cost estimation tools
 
 Start exploring quantum algorithms for optimization, cryptography, and simulation.
-
-

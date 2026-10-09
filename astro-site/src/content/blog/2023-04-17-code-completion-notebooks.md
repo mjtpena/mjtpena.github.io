@@ -1,5 +1,6 @@
 ---
 title: "Code Completion for Data Science Notebooks"
+description: "Return only the docstring (including quotes).\"\"\" response = await self.client.chatcompletion( model=\"gpt-35-turbo\", messages=[{\"role\": \"user\", \"content\"…"
 author: Michael John Pena
 draft: false
 date: 2023-04-17
@@ -9,10 +10,7 @@ tags:
   - Notebooks
   - Data Science
   - Copilot
-
 ---
-
-I wrote "Code Completion for Data Science Notebooks" to share practical, production-minded guidance on this topic.
 
 ## Context-Aware Completion
 
@@ -297,4 +295,4 @@ transform_code = await df_completer.suggest_transformation(
 )
 ```
 
-Intelligent code completion transforms notebooks from blank-page intimidation to guided data exploration. The AI understands both the language and your data context.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Intelligent code completion transforms notebooks from blank-page intimidation to guided data exploration. The AI understands both the language and your data context.

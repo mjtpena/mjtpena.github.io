@@ -1,11 +1,12 @@
 ---
 title: "Data Engineering Career Retrospective: What Changed in 2025"
+description: "The data engineering profession evolved dramatically in 2025. As the year ends, here's my retrospective on the skills, tools, and mindsets that defined…"
 author: Michael John Peña
 draft: false
 date: 2025-12-17
 tags:
   - Career
-  - Data-Engineering
+  - data-engineering
   - Retrospective
   - Skills
   - "2025"
@@ -106,4 +107,4 @@ class DataQualityGate:
 4. **Understand costs** - Cloud cost optimization is a differentiating skill
 5. **Build soft skills** - Explaining data to non-technical stakeholders matters
 
-The data engineer role expanded in 2025. Those who embraced AI, real-time processing, and quality engineering thrived. The same will be true in 2026.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The data engineer role expanded in 2025. Those who embraced AI, real-time processing, and quality engineering thrived. The same will be true in 2026.

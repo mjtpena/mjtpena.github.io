@@ -5,14 +5,11 @@ draft: false
 date: 2022-02-17
 url: /blog/secrets-management-patterns/
 tags:
-  - azure
-  - security
+  - Azure
+  - Security
   - secrets
-  - patterns
-
+  - Patterns
 ---
-
-I wrote "Secrets Management Patterns: Best Practices for Azure" to share practical, production-minded guidance on this topic.
 
 ## Secret Categories
 
@@ -140,4 +137,5 @@ spec:
         - objectName: database-connection-string
           key: DB_CONNECTION
         - objectName: api-key
-          key: API_KEY\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+          key: API_KEY
+```

@@ -9,10 +9,7 @@ tags:
   - Resilience
   - Architecture
   - Production
-
 ---
-
-I wrote "Circuit Breakers for AI Applications: Preventing Cascade Failures" to share practical, production-minded guidance on this topic.
 
 ## Circuit Breaker Pattern
 
@@ -349,4 +346,3 @@ Building resilient AI applications requires thoughtful architecture and proper e
 - [Circuit Breaker Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker)
 - [Resilience4j](https://resilience4j.readme.io/)
 - [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architecture/)
-

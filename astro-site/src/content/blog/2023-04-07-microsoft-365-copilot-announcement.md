@@ -1,5 +1,6 @@
 ---
 title: "Microsoft 365 Copilot: AI for Every Knowledge Worker"
+description: "Microsoft 365 Copilot will fundamentally change how knowledge workers interact with productivity tools. Organizations should start preparing now."
 author: Michael John Pena
 draft: false
 date: 2023-04-07
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - Microsoft 365
   - Productivity
-
 ---
-
-I wrote "Microsoft 365 Copilot: AI for Every Knowledge Worker" to share practical, production-minded guidance on this topic.
 
 ## What Microsoft 365 Copilot Does
 
@@ -358,4 +356,4 @@ Provide:
 4. **Policy updates** - Update acceptable use policies
 5. **Pilot planning** - Start with specific teams/scenarios
 
-Microsoft 365 Copilot will fundamentally change how knowledge workers interact with productivity tools. Organizations should start preparing now.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Microsoft 365 Copilot will fundamentally change how knowledge workers interact with productivity tools. Organizations should start preparing now.

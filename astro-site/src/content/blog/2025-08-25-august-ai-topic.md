@@ -1,5 +1,6 @@
 ---
 title: "Medallion Architecture in Microsoft Fabric: Bronze, Silver, Gold Explained"
+description: "Bronze tables store data exactly as received from source systems, preserving the original format for replayability and debugging."
 author: Michael John Peña
 draft: false
 date: 2025-08-25
@@ -9,10 +10,7 @@ tags:
   - Data Engineering
   - Delta Lake
   - Lakehouse
-
 ---
-
-I wrote "Medallion Architecture in Microsoft Fabric: Bronze, Silver, Gold Explained" to share practical, production-minded guidance on this topic.
 
 ## Bronze Layer: Raw Data Landing
 
@@ -85,4 +83,4 @@ def build_gold_metrics():
     df_gold.write.format("delta").mode("overwrite").saveAsTable("gold.customer_monthly_metrics")
 ```
 
-The Medallion architecture scales from small projects to enterprise data platforms, providing consistent patterns your team can follow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Medallion architecture scales from small projects to enterprise data platforms, providing consistent patterns your team can follow.

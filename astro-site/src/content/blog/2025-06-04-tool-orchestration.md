@@ -1,5 +1,6 @@
 ---
 title: "Tool Orchestration: Managing Complex Tool Interactions"
+description: "Robust tool orchestration enables complex, reliable AI workflows."
 author: Michael John Peña
 draft: false
 date: 2025-06-04
@@ -9,10 +10,7 @@ tags:
   - Orchestration
   - Agents
   - Integration
-
 ---
-
-I wrote "Tool Orchestration: Managing Complex Tool Interactions" to share practical, production-minded guidance on this topic.
 
 ## Tool Orchestration Framework
 
@@ -131,4 +129,4 @@ class ToolOrchestrator:
         return recommendations
 ```
 
-Robust tool orchestration enables complex, reliable AI workflows.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Robust tool orchestration enables complex, reliable AI workflows.

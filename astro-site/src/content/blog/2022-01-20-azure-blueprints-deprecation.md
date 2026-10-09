@@ -1,18 +1,16 @@
 ---
 title: "Azure Blueprints Deprecation: Migration Strategies"
+description: "The move away from Blueprints leads to more flexible, testable, and maintainable infrastructure governance."
 author: Michael John Peña
 draft: false
 date: 2022-01-20
 url: /blog/azure-blueprints-deprecation/
 tags:
-  - azure
-  - governance
-  - blueprints
+  - Azure
+  - Governance
+  - Blueprints
   - landing-zones
-
 ---
-
-I wrote "Azure Blueprints Deprecation: Migration Strategies" to share practical, production-minded guidance on this topic.
 
 ## Why Blueprints Are Being Deprecated
 
@@ -230,4 +228,4 @@ jobs:
 8. Delete old Blueprint assignments
 9. Delete Blueprint definitions
 
-The move away from Blueprints leads to more flexible, testable, and maintainable infrastructure governance.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The move away from Blueprints leads to more flexible, testable, and maintainable infrastructure governance.

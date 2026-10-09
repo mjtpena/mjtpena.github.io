@@ -1,13 +1,11 @@
 ---
 title: "Canary Deployments for ML Models"
+description: "Canary deployment provides a controlled, observable approach to rolling out new model versions with minimal risk."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-10
 tags: ["Azure", "Machine Learning", "MLOps", "Canary Deployment", "Risk Management"]
-
 ---
-
-I wrote "Canary Deployments for ML Models" to share practical, production-minded guidance on this topic.
 
 ## Understanding Canary Deployment
 
@@ -304,4 +302,4 @@ class ShadowTester:
         }
 ```
 
-Canary deployment provides a controlled, observable approach to rolling out new model versions with minimal risk.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Canary deployment provides a controlled, observable approach to rolling out new model versions with minimal risk.

@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI o1 Models: Reasoning at Scale for Complex Problems"
+description: "The o1 models are designed for tasks requiring deep reasoning: mathematical proofs, code debugging, scientific analysis, and strategic planning. They take…"
 author: Michael John Peña
 draft: false
 date: 2025-08-04
@@ -9,10 +10,7 @@ tags:
   - AI Reasoning
   - LLM
   - Enterprise AI
-
 ---
-
-I wrote "Azure OpenAI o1 Models: Reasoning at Scale for Complex Problems" to share practical, production-minded guidance on this topic.
 
 ## When to Use o1 Models
 
@@ -69,4 +67,4 @@ What are the time complexity, space complexity, and potential bugs?
 
 The o1 models use more compute for reasoning, making them more expensive per token. Use them strategically for high-value problems where accuracy matters most. For simpler tasks, GPT-4o remains the more cost-effective choice.
 
-Understanding when to deploy o1 versus GPT-4o is crucial for building cost-efficient AI applications that leverage the right model for each task.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Understanding when to deploy o1 versus GPT-4o is crucial for building cost-efficient AI applications that leverage the right model for each task.

@@ -1,5 +1,6 @@
 ---
 title: "Fabric Capacity Metrics: Understanding and Optimizing Consumption"
+description: "Fabric's capacity unit (CU) model is genuinely different from the per-resource billing in Synapse Analytics, and understanding it properly is the difference…"
 author: Michael John Peña
 draft: false
 date: 2023-06-13
@@ -338,4 +339,4 @@ Understanding and optimizing capacity consumption ensures cost-effective operati
 
 - [Capacity Metrics App](https://learn.microsoft.com/en-us/fabric/enterprise/capacity-metrics-app)
 - [Capacity Planning](https://learn.microsoft.com/en-us/fabric/enterprise/capacity-planning)
-- [Optimization Best Practices](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Optimization Best Practices](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order)

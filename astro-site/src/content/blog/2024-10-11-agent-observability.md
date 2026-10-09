@@ -1,13 +1,11 @@
 ---
 title: "Agent Observability: Monitoring AI Systems in Production"
+description: "Observability transforms AI agents from black boxes into understandable systems. Combine metrics, logs, and traces to gain complete visibility into agent…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-11
 tags: ["Observability", "AI Agents", "Monitoring", "Production", "DevOps"]
-
 ---
-
-I wrote "Agent Observability: Monitoring AI Systems in Production" to share practical, production-minded guidance on this topic.
 
 ## The Three Pillars for AI
 
@@ -394,4 +392,4 @@ class AgentDashboard:
         return sorted(slow_traces, key=lambda t: t["duration_ms"], reverse=True)[:10]
 ```
 
-Observability transforms AI agents from black boxes into understandable systems. Combine metrics, logs, and traces to gain complete visibility into agent behavior.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Observability transforms AI agents from black boxes into understandable systems. Combine metrics, logs, and traces to gain complete visibility into agent behavior.

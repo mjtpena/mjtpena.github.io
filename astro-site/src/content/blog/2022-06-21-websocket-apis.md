@@ -1,5 +1,6 @@
 ---
 title: "GitHub Copilot is Now Generally Available: The AI Pair Programmer for Everyone"
+description: "GitHub Copilot is an AI-powered code completion tool developed by GitHub in collaboration with OpenAI. It uses the Codex model (a descendant of GPT-3…"
 author: Michael John Peña
 draft: false
 date: 2022-06-21
@@ -9,10 +10,7 @@ tags:
   - Developer Tools
   - Code Completion
   - OpenAI
-
 ---
-
-I wrote "GitHub Copilot is Now Generally Available: The AI Pair Programmer for Everyone" to share practical, production-minded guidance on this topic.
 
 ## What is GitHub Copilot?
 
@@ -267,4 +265,4 @@ To:
 # Start your free trial and experience the future of coding
 ```
 
-This is just the beginning. With GitHub's backing and OpenAI's technology, Copilot will only get better. Today, I'm celebrating a milestone in developer tooling - the AI pair programmer is here for everyone.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+This is just the beginning. With GitHub's backing and OpenAI's technology, Copilot will only get better. Today, I'm celebrating a milestone in developer tooling - the AI pair programmer is here for everyone.

@@ -1,13 +1,11 @@
 ---
 title: "Essential Azure Data Studio Extensions"
+description: "Extensions transform Azure Data Studio into a comprehensive database development platform."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-24
 tags: ["Azure", "Azure Data Studio", "Extensions", "Productivity"]
-
 ---
-
-I wrote "Essential Azure Data Studio Extensions" to share practical, production-minded guidance on this topic.
 
 ## Top Extensions
 
@@ -325,4 +323,4 @@ azuredatastudio --uninstall-extension publisher.extension-name
 # Preferences > Extensions > Find extension > Disable
 ```
 
-Extensions transform Azure Data Studio into a comprehensive database development platform.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Extensions transform Azure Data Studio into a comprehensive database development platform.

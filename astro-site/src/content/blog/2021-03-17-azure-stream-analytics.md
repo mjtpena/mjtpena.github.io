@@ -1,5 +1,6 @@
 ---
 title: Azure Stream Analytics for Real-Time Data Processing
+description: "Azure Stream Analytics sits in a specific niche that I've come to appreciate: SQL-native stream processing for teams who shouldn't have to learn Spark or…"
 author: Michael John Pena
 draft: false
 date: 2021-03-17

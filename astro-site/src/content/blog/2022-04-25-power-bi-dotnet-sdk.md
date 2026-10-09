@@ -9,10 +9,7 @@ tags:
   - C#
   - SDK
   - Development
-
 ---
-
-I wrote "Power BI .NET SDK: Building C# Applications with Power BI" to share practical, production-minded guidance on this topic.
 
 ## Getting Started
 
@@ -284,4 +281,3 @@ The Power BI .NET SDK provides:
 
 - [SDK NuGet Package](https://www.nuget.org/packages/Microsoft.PowerBI.Api)
 - [SDK Documentation](https://docs.microsoft.com/en-us/power-bi/developer/embedded/)
-

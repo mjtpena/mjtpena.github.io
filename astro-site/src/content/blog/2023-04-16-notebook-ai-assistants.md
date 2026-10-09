@@ -1,5 +1,6 @@
 ---
 title: "AI Assistants in Jupyter and Databricks Notebooks"
+description: "Error: {type(error).name}: {str(error)} response = openai.ChatCompletion.create( engine=\"gpt-4\", messages=[{\"role\": \"user\", \"content\": prompt}] ) return…"
 author: Michael John Pena
 draft: false
 date: 2023-04-16
@@ -9,10 +10,7 @@ tags:
   - Databricks
   - Notebooks
   - Python
-
 ---
-
-I wrote "AI Assistants in Jupyter and Databricks Notebooks" to share practical, production-minded guidance on this topic.
 
 ## Notebook AI Integration
 
@@ -161,7 +159,7 @@ Provide:
     )
     return response.choices[0].message.content
 
-# Wrapper for automatic error explanation
+## Wrapper for automatic error explanation
 def run_with_help(code: str):
     """Run code with AI error assistance."""
     try:
@@ -274,4 +272,5 @@ Include:
         return response.choices[0].message.content
 ```
 
-AI-powered notebooks transform data exploration from writing code to having conversations about data. The interactive environment makes the feedback loop immediate and productive.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+AI-powered notebooks transform data exploration from writing code to having conversations about data. The interactive environment makes the feedback loop immediate and productive.
+```

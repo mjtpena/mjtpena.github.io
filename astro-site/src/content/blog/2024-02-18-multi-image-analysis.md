@@ -9,10 +9,7 @@ tags:
   - Computer Vision
   - AI
   - Analysis
-
 ---
-
-I wrote "Multi-Image Analysis with GPT-4 Vision" to share practical, production-minded guidance on this topic.
 
 ## Comparing Multiple Images
 
@@ -123,4 +120,3 @@ def analyze_product_images(images: list[str]) -> dict:
 ## Conclusion
 
 Multi-image analysis unlocks powerful comparison and temporal understanding capabilities. Structure your prompts to guide the model through the images effectively.
-

@@ -9,10 +9,7 @@ tags:
   - Kubernetes
   - Helm
   - AKS
-
 ---
-
-I wrote "2021-06-30-helm-charts-azure" to share practical, production-minded guidance on this topic.
 
 ## Chart Structure
 
@@ -568,4 +565,3 @@ Helm charts provide a powerful way to package and deploy applications to AKS wit
 
 - [Helm Documentation](https://helm.sh/docs/)
 - [AKS Helm Best Practices](https://docs.microsoft.com/en-us/azure/aks/kubernetes-helm)
-

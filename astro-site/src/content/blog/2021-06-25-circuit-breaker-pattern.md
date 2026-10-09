@@ -9,10 +9,7 @@ tags:
   - Circuit Breaker
   - Resilience
   - Polly
-
 ---
-
-I wrote "2021-06-25-circuit-breaker-pattern" to share practical, production-minded guidance on this topic.
 
 ## Circuit Breaker States
 
@@ -464,4 +461,3 @@ The Circuit Breaker pattern is essential for building resilient microservices. P
 
 - [Circuit Breaker Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker)
 - [Polly Documentation](https://github.com/App-vNext/Polly)
-

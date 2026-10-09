@@ -10,10 +10,7 @@ tags:
   - SQL Server
   - DMS
   - Modernization
-
 ---
-
-I wrote "2021-04-29-azure-database-migration-service-strategies" to share practical, production-minded guidance on this topic.
 
 ## Understanding Azure DMS
 
@@ -497,4 +494,3 @@ Solution:
 ## Conclusion
 
 Azure Database Migration Service simplifies the complex process of migrating databases to Azure. Whether you're performing an offline migration during a maintenance window or an online migration with minimal downtime, DMS provides the tools and automation needed for successful database modernization. The key is thorough assessment, proper planning, and comprehensive validation.
-

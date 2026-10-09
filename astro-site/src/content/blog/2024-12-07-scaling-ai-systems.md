@@ -9,10 +9,7 @@ tags:
   - Architecture
   - Performance
   - Enterprise
-
 ---
-
-I wrote "Scaling AI Systems: From Prototype to Enterprise" to share practical, production-minded guidance on this topic.
 
 ## The Scaling Journey
 
@@ -406,4 +403,5 @@ spec:
           valueFrom:
             secretKeyRef:
               name: ai-secrets
-              key: endpoint\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+              key: endpoint
+```

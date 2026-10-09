@@ -1,5 +1,6 @@
 ---
 title: "Power Apps Model-Driven Apps: Data-First Design"
+description: "A finance team I'm working with this month wanted \"a Power App\" for vendor onboarding. They drew screens. I asked about the data first—who owns vendors…"
 author: Michael John Peña
 draft: false
 date: 2020-10-30
@@ -7,7 +8,7 @@ tags:
   - Power Apps
   - Power Platform
   - Low-Code
-  - Dataverse
+  - dataverse
 ---
 
 A finance team I'm working with this month wanted "a Power App" for vendor onboarding. They drew screens. I asked about the data first—who owns vendors, what relationships exist, what permissions matter—and the conversation turned into a Dataverse model. That's the moment a canvas app stops making sense and a model-driven app starts. You define tables and relationships, and the UI mostly generates itself.
@@ -146,4 +147,4 @@ Sales Role
 └── Settings: None
 ```
 
-Model-driven apps: enterprise apps from data models.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Model-driven apps: enterprise apps from data models.

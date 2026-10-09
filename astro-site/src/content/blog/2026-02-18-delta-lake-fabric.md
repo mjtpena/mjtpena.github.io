@@ -1,5 +1,6 @@
 ---
 title: "Delta Lake in Microsoft Fabric: Why the Format Matters"
+description: "When I tell clients \"everything in Fabric uses Delta Lake format,\" the room divides. Data engineers nod. Everyone else says \"what?\""
 author: Michael John Peña
 draft: false
 date: 2026-02-18
@@ -113,4 +114,4 @@ Delta Lake isn't a detail. It's the reason Fabric's architecture works.
 
 ACID transactions, time travel, schema enforcement, efficient upserts—these aren't features to check off. They're the operational foundation that makes enterprise-grade data platforms possible.
 
-When you're building on Fabric, you're standing on Delta Lake. Understanding it makes everything else make sense.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+When you're building on Fabric, you're standing on Delta Lake. Understanding it makes everything else make sense.

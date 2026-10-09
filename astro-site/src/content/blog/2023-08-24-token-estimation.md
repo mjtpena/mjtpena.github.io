@@ -8,10 +8,7 @@ tags:
   - API
   - Cost Estimation
   - OpenAI
-
 ---
-
-I wrote "Token Estimation: Predicting API Costs" to share practical, production-minded guidance on this topic.
 
 ## Understanding Tokens
 
@@ -220,4 +217,4 @@ Tomorrow we'll explore prompt compression techniques.
 
 - [tiktoken Library](https://github.com/openai/tiktoken)
 - [OpenAI Tokenizer](https://platform.openai.com/tokenizer)
-- [Azure OpenAI Pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure OpenAI Pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)

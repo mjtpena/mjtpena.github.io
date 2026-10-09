@@ -1,5 +1,6 @@
 ---
 title: "Observability for LLM Applications: Tracing, Metrics, and Debugging"
+description: "Log prompts and responses for failed interactions to a secure store for debugging. Implement sampling for successful calls to control storage costs while…"
 author: Michael John Peña
 draft: false
 date: 2025-07-30
@@ -9,10 +10,7 @@ tags:
   - Monitoring
   - Azure Monitor
   - OpenTelemetry
-
 ---
-
-I wrote "Observability for LLM Applications: Tracing, Metrics, and Debugging" to share practical, production-minded guidance on this topic.
 
 ## Implementing LLM Tracing
 
@@ -106,4 +104,4 @@ def record_llm_metrics(model: str, usage: dict, latency: float):
 
 ## Debugging Failed Interactions
 
-Log prompts and responses for failed interactions to a secure store for debugging. Implement sampling for successful calls to control storage costs while maintaining debugging capability.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Log prompts and responses for failed interactions to a secure store for debugging. Implement sampling for successful calls to control storage costs while maintaining debugging capability.

@@ -1,13 +1,11 @@
 ---
 title: "Databricks Model Serving Updates: April 2024"
+description: "Databricks Model Serving continues to evolve with new features for deploying and scaling ML models. This guide covers the latest updates and best practices."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-28
 tags: ["Databricks", "Model Serving", "MLOps", "AI", "Deployment"]
-
 ---
-
-I wrote "Databricks Model Serving Updates: April 2024" to share practical, production-minded guidance on this topic.
 
 Databricks Model Serving continues to evolve with new features for deploying and scaling ML models. This guide covers the latest updates and best practices.
 
@@ -383,4 +381,3 @@ for ep in endpoints:
 ## Conclusion
 
 Databricks Model Serving provides flexible options from serverless to GPU-accelerated endpoints. Use traffic splitting for safe deployments and auto-capture for monitoring. Match your workload size to your latency and cost requirements.
-

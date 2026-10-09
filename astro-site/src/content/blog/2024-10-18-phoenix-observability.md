@@ -1,13 +1,11 @@
 ---
 title: "Phoenix Observability: Local-First LLM Tracing"
+description: "Phoenix provides powerful local-first observability that keeps your data private while offering the visualization and analysis capabilities needed for…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-18
 tags: ["Phoenix", "Arize", "LLM", "Observability", "Open Source"]
-
 ---
-
-I wrote "Phoenix Observability: Local-First LLM Tracing" to share practical, production-minded guidance on this topic.
 
 ## Getting Started with Phoenix
 
@@ -292,4 +290,4 @@ tracer_provider.add_span_processor(BatchSpanProcessor(exporter))
 # Now traces are sent to Phoenix server
 ```
 
-Phoenix provides powerful local-first observability that keeps your data private while offering the visualization and analysis capabilities needed for effective LLM development.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Phoenix provides powerful local-first observability that keeps your data private while offering the visualization and analysis capabilities needed for effective LLM development.

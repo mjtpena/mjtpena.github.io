@@ -1,5 +1,6 @@
 ---
 title: "Copilot Everywhere: Microsoft's AI Strategy"
+description: "Microsoft's strategy is clear: every product gets an AI assistant. These aren't separate products but integrated capabilities powered by Azure OpenAI."
 author: Michael John Pena
 draft: false
 date: 2023-04-01
@@ -9,10 +10,7 @@ tags:
   - Copilot
   - Strategy
   - Azure
-
 ---
-
-I wrote "Copilot Everywhere: Microsoft's AI Strategy" to share practical, production-minded guidance on this topic.
 
 ## The Copilot Vision
 
@@ -259,4 +257,4 @@ Always be helpful, accurate, and efficient."""
 4. **Train users** - AI literacy programs
 5. **Build internal expertise** - Azure OpenAI skills
 
-The Copilot era is beginning. Organizations that embrace these tools while maintaining governance will have significant productivity advantages.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Copilot era is beginning. Organizations that embrace these tools while maintaining governance will have significant productivity advantages.

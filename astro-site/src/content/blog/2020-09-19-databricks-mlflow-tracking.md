@@ -1,5 +1,6 @@
 ---
 title: "MLflow on Azure Databricks: Experiment Tracking"
+description: "MLflow makes ML experiments reproducible and models traceable."
 author: Michael John Peña
 draft: false
 date: 2020-09-19
@@ -8,10 +9,7 @@ tags:
   - Databricks
   - MLflow
   - Machine Learning
-
 ---
-
-I wrote "MLflow on Azure Databricks: Experiment Tracking" to share practical, production-minded guidance on this topic.
 
 ## Tracking Experiments
 
@@ -83,4 +81,4 @@ model = mlflow.pyfunc.load_model("models:/churn-prediction-model/Production")
 predictions = model.predict(new_data)
 ```
 
-MLflow makes ML experiments reproducible and models traceable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+MLflow makes ML experiments reproducible and models traceable.

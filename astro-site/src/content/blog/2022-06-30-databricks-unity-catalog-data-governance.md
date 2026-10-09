@@ -1,5 +1,6 @@
 ---
 title: "Azure Databricks Unity Catalog: Unified Data Governance for the Lakehouse"
+description: "Unity Catalog provides a unified governance layer across all your Databricks workspaces. Metastore: The top-level container for all metadata. You create one…"
 author: Michael John Peña
 draft: false
 date: 2022-06-30
@@ -9,10 +10,7 @@ tags:
   - Data Governance
   - Unity Catalog
   - Data Engineering
-
 ---
-
-I wrote "Azure Databricks Unity Catalog: Unified Data Governance for the Lakehouse" to share practical, production-minded guidance on this topic.
 
 ## The Problem Unity Catalog Solves
 
@@ -170,4 +168,4 @@ The lakehouse is growing up. Proper governance was the missing piece, and Unity 
 - [Unity Catalog Documentation](https://docs.databricks.com/data-governance/unity-catalog/index.html)
 - [Azure Databricks Unity Catalog](https://docs.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/)
 - [Databricks Unity Catalog Best Practices](https://docs.databricks.com/data-governance/unity-catalog/best-practices.html)
-- [Data + AI Summit 2022 Announcements](https://databricks.com/dataaisummit/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data + AI Summit 2022 Announcements](https://databricks.com/dataaisummit/)

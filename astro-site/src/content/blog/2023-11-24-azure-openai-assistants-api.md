@@ -1,13 +1,11 @@
 ---
 title: "Azure OpenAI Assistants API: Enterprise AI Agents"
+description: "The Azure OpenAI Assistants API — launched in preview on Azure shortly after the OpenAI DevDay announcement in November 2023 — is the stateful AI agent…"
 author: "Michael John Peña"
 draft: false
 date: 2023-11-24
 tags: ["Azure", "OpenAI", "Assistants API", "AI Agents", "Enterprise"]
-
 ---
-
-I wrote "Azure OpenAI Assistants API: Enterprise AI Agents" to share practical, production-minded guidance on this topic.
 
 The Azure OpenAI Assistants API — launched in preview on Azure shortly after the OpenAI DevDay announcement in November 2023 — is the stateful AI agent platform that changes the architecture of conversational AI applications in a meaningful way. Before Assistants API, every conversational application had to implement its own state management: storing the conversation history, managing the context window, deciding what to summarise or prune as the conversation grew, and handling tool execution loops. Assistants API provides all of this as a managed service: Threads persist conversation history server-side with automatic context management, the Run abstraction handles the reasoning and tool execution loop, and built-in tools (Code Interpreter, Retrieval, custom Functions) are available without the application implementing the tool execution plumbing. The enterprise case for using the Azure variant over the direct OpenAI endpoint: Azure's existing data handling agreements, private endpoints, and Azure RBAC integration apply to Assistants API operations.
 
@@ -346,4 +344,4 @@ enterprise_best_practices = {
 }
 ```
 
-Tomorrow, we'll explore Threads and Messages in depth for building conversational AI applications!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Threads and Messages in depth for building conversational AI applications!

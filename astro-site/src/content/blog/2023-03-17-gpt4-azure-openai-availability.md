@@ -1,5 +1,6 @@
 ---
 title: "GPT-4 on Azure OpenAI: What to Expect"
+description: "Stay updated through Azure OpenAI documentation and Microsoft announcements."
 author: Michael John Pena
 draft: false
 date: 2023-03-17
@@ -9,10 +10,7 @@ tags:
   - AI
   - GPT-4
   - Enterprise
-
 ---
-
-I wrote "GPT-4 on Azure OpenAI: What to Expect" to share practical, production-minded guidance on this topic.
 
 ## Azure OpenAI Advantages for GPT-4
 
@@ -382,4 +380,4 @@ Based on Microsoft's patterns:
 - **Broader rollout**: 4-8 weeks after initial
 - **GA**: 2-3 months after announcement
 
-Stay updated through Azure OpenAI documentation and Microsoft announcements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Stay updated through Azure OpenAI documentation and Microsoft announcements.

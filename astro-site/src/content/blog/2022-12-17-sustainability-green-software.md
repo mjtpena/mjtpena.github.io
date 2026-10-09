@@ -9,10 +9,7 @@ tags:
   - Cloud Computing
   - Azure
   - Carbon
-
 ---
-
-I wrote "Green Software and Sustainability in Cloud Computing" to share practical, production-minded guidance on this topic.
 
 ## The Green Software Foundation Principles
 
@@ -359,4 +356,3 @@ Building sustainable software requires intentional design choices. Azure provide
 - [Azure Sustainability](https://azure.microsoft.com/en-us/global-infrastructure/sustainability/)
 - [Carbon Aware SDK](https://github.com/Green-Software-Foundation/carbon-aware-sdk)
 - [Principles of Green Software](https://principles.green/)
-

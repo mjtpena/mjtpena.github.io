@@ -10,10 +10,7 @@ tags:
   - Big Data
   - Data Engineering
   - Python
-
 ---
-
-I wrote "2021-04-19-pyspark-best-practices-production" to share practical, production-minded guidance on this topic.
 
 ## Project Structure
 
@@ -592,4 +589,3 @@ def timed_transformation(func):
 ## Conclusion
 
 Writing production-quality PySpark code requires balancing Python best practices with Spark's distributed nature. By structuring your project properly, using explicit schemas, writing testable transformations, and avoiding common pitfalls, you can build reliable data pipelines that scale effectively.
-

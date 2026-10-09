@@ -1,5 +1,6 @@
 ---
 title: "Incident Response for AI Systems: Handling AI Failures"
+description: "Effective incident response minimizes AI system impact and enables quick recovery."
 author: Michael John Peña
 draft: false
 date: 2025-05-15
@@ -9,10 +10,7 @@ tags:
   - Operations
   - Reliability
   - Best Practices
-
 ---
-
-I wrote "Incident Response for AI Systems: Handling AI Failures" to share practical, production-minded guidance on this topic.
 
 ## AI Incident Response Framework
 
@@ -122,4 +120,4 @@ class AIIncidentResponse:
             await self.deploy_version(system, previous)
 ```
 
-Effective incident response minimizes AI system impact and enables quick recovery.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Effective incident response minimizes AI system impact and enables quick recovery.

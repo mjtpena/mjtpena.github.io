@@ -1,5 +1,6 @@
 ---
 title: "LangChain Updates: What's New in July 2024"
+description: "LangChain 0.2.x Stability LCEL (LangChain Expression Language) Maturity Azure AI Search Vector Store"
 author: Michael John Peña
 draft: false
 date: 2024-07-11
@@ -9,10 +10,7 @@ tags:
   - Python
   - LLM
   - Framework
-
 ---
-
-I wrote "LangChain Updates: What's New in July 2024" to share practical, production-minded guidance on this topic.
 
 ## Key Changes
 
@@ -440,4 +438,3 @@ result = chain.invoke({"input": "..."})
 LangChain 0.2.x brings maturity and stability. The cleaner abstractions and LCEL make building production applications more straightforward. The improved Azure integrations mean less custom code for common patterns.
 
 Update your dependencies and adopt the new patterns. The migration effort pays off in maintainability and reliability.
-

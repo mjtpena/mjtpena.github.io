@@ -1,5 +1,6 @@
 ---
 title: "Integrating Azure Machine Learning with Azure OpenAI"
+description: "The combination of Azure ML's operational capabilities with Azure OpenAI's language understanding creates powerful, production-ready AI systems."
 author: Michael John Pena
 draft: false
 date: 2023-03-31
@@ -9,10 +10,7 @@ tags:
   - AI
   - Machine Learning
   - MLOps
-
 ---
-
-I wrote "Integrating Azure Machine Learning with Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Architecture Overview
 
@@ -452,4 +450,4 @@ class PromptTemplateManager:
 5. **Monitor token usage** - Track costs in pipeline runs
 6. **Cache embeddings** - Don't regenerate unnecessarily
 
-The combination of Azure ML's operational capabilities with Azure OpenAI's language understanding creates powerful, production-ready AI systems.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The combination of Azure ML's operational capabilities with Azure OpenAI's language understanding creates powerful, production-ready AI systems.

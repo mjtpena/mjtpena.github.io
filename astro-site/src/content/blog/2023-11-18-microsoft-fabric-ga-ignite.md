@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric is GA: What We Learned from Six Months of Preview"
+description: "Microsoft Fabric reached General Availability at Ignite 2023 — November 15-17 in Seattle — and it's the outcome I genuinely thought might take another six…"
 author: Michael John Peña
 draft: false
 date: 2023-11-18

@@ -9,10 +9,7 @@ tags:
   - Cost Management
   - FinOps
   - Governance
-
 ---
-
-I wrote "2021-06-17-azure-cost-management-budgets" to share practical, production-minded guidance on this topic.
 
 ## Creating Budgets via Azure CLI
 
@@ -508,4 +505,3 @@ Effective cost management requires proactive monitoring and automated responses.
 
 - [Azure Cost Management Documentation](https://docs.microsoft.com/en-us/azure/cost-management-billing/)
 - [Create and Manage Budgets](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets)
-

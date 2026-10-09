@@ -1,5 +1,6 @@
 ---
 title: "Fabric Admin Updates: Governance and Management"
+description: "Fabric administration has matured significantly. Today I'm covering the latest admin capabilities for managing your Fabric environment effectively."
 author: Michael John Peña
 draft: false
 date: 2024-06-11
@@ -417,4 +418,4 @@ Tomorrow I'll cover capacity management in more detail.
 
 - [Fabric Admin Portal](https://learn.microsoft.com/fabric/admin/)
 - [Tenant Settings](https://learn.microsoft.com/fabric/admin/tenant-settings)
-- [Capacity Management](https://learn.microsoft.com/fabric/admin/capacity-settings)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Capacity Management](https://learn.microsoft.com/fabric/admin/capacity-settings)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Cosmos DB Serverless: Pay-Per-Request Pricing"
+description: "Cosmos DB Serverless: scale-to-zero for your NoSQL workloads."
 author: Michael John Peña
 draft: false
 date: 2021-01-09
@@ -8,10 +9,7 @@ tags:
   - Cosmos DB
   - Serverless
   - NoSQL
-
 ---
-
-I wrote "Azure Cosmos DB Serverless: Pay-Per-Request Pricing" to share practical, production-minded guidance on this topic.
 
 ## Serverless vs Provisioned
 
@@ -161,4 +159,4 @@ Provisioned (400 RU/s):
 - Total: ~$25.86/month
 ```
 
-Cosmos DB Serverless: scale-to-zero for your NoSQL workloads.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Cosmos DB Serverless: scale-to-zero for your NoSQL workloads.

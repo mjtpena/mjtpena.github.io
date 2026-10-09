@@ -1,18 +1,16 @@
 ---
 title: "Azure Well-Architected Reviews: Building Better Workloads"
+description: "Regular Well-Architected Reviews ensure your workloads remain optimized across all five pillars as they evolve."
 author: Michael John Peña
 draft: false
 date: 2022-01-23
 url: /blog/well-architected-reviews/
 tags:
-  - azure
-  - architecture
-  - well-architected
-  - best-practices
-
+  - Azure
+  - Architecture
+  - Well-Architected
+  - Best-Practices
 ---
-
-I wrote "Azure Well-Architected Reviews: Building Better Workloads" to share practical, production-minded guidance on this topic.
 
 ## The Five Pillars
 
@@ -298,4 +296,4 @@ jobs:
             }
 ```
 
-Regular Well-Architected Reviews ensure your workloads remain optimized across all five pillars as they evolve.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Regular Well-Architected Reviews ensure your workloads remain optimized across all five pillars as they evolve.

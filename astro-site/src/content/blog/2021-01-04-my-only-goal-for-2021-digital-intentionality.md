@@ -1,5 +1,6 @@
 ---
 title: "My only goal for 2021: Digital Intentionality"
+description: "During the holidays, I was contemplating on what skills should I invest time on for 2021. As someone who is working in the technology field, there are a lot…"
 author: Michael John Peña
 draft: false
 date: 2021-01-04
@@ -8,8 +9,8 @@ images:
      - /2021/01/jumpstory-download20210104-231305-940x510.jpg
 tags:
   - digital
-  - goals
-  - productivity
+  - Goals
+  - Productivity
 ---
 
 During the holidays, I was contemplating on what skills should I invest time on for 2021. As someone who is working in the technology field, there are a lot of exciting things to double-down on: from Artificial Intelligence (AI), Internet of Things (IoT), Blockchain, and a plethora of technology trends. As I reflected on how my 2020 went in terms of career and lifestyle, I noticed that there is an area I really need to work on - my digital life.
@@ -41,4 +42,4 @@ What I want to accomplish by the end of the year are:
 
 > The modern struggle: Lone individuals summoning inhuman willpower, fasting, meditating, and exercising… Up against armies of scientists and statisticians weaponizing abundant food, screens, and medicine into junk food, clickbait news, infinite porn, endless games, and addictive drugs. -Naval Ravikant
 
-These technologies are here to stay, you can't just go rogue and live on the mountains. This is part of who we are now as a society, whether or not you like it. It's time that we make sure we are still in control of our lives, not some machine learning algorithms.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+These technologies are here to stay, you can't just go rogue and live on the mountains. This is part of who we are now as a society, whether or not you like it. It's time that we make sure we are still in control of our lives, not some machine learning algorithms.

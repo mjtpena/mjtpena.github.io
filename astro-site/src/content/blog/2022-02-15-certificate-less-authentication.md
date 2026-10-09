@@ -1,18 +1,16 @@
 ---
 title: "Certificate-Less Authentication: Simplifying Service Identity"
+description: "Certificate-less authentication dramatically simplifies operations while improving security posture."
 author: Michael John Peña
 draft: false
 date: 2022-02-15
 url: /blog/certificate-less-authentication/
 tags:
-  - azure
-  - security
-  - certificates
-  - authentication
-
+  - Azure
+  - Security
+  - Certificates
+  - Authentication
 ---
-
-I wrote "Certificate-Less Authentication: Simplifying Service Identity" to share practical, production-minded guidance on this topic.
 
 ## The Certificate Management Problem
 
@@ -218,4 +216,4 @@ AADServicePrincipalSignInLogs
    - Remove old certificates after validation
    - Update documentation
 
-Certificate-less authentication dramatically simplifies operations while improving security posture.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Certificate-less authentication dramatically simplifies operations while improving security posture.

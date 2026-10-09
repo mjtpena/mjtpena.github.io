@@ -1,5 +1,6 @@
 ---
 title: "Azure OpenAI Service Updates at Microsoft Ignite 2022"
+description: "Azure OpenAI Service is moving toward broader preview access, with more customers being able to apply and get approved. The application process is becoming…"
 author: Michael John Peña
 draft: false
 date: 2022-11-08
@@ -9,10 +10,7 @@ tags:
   - AI
   - GPT-3
   - Microsoft Ignite
-
 ---
-
-I wrote "Azure OpenAI Service Updates at Microsoft Ignite 2022" to share practical, production-minded guidance on this topic.
 
 ## What is Azure OpenAI Service?
 
@@ -368,4 +366,3 @@ Azure OpenAI Service is maturing rapidly. The combination of OpenAI's powerful m
 - [Azure OpenAI Studio](https://oai.azure.com/)
 - [Pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/)
 - [Responsible AI Guidelines](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/responsible-ai)
-

@@ -1,13 +1,11 @@
 ---
 title: "Semantic Search in Azure Cognitive Search"
+description: "Semantic search dramatically improves search relevance by understanding user intent rather than just matching keywords."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-23
 tags: ["Azure", "Cognitive Search", "Semantic Search", "AI", "NLP"]
-
 ---
-
-I wrote "Semantic Search in Azure Cognitive Search" to share practical, production-minded guidance on this topic.
 
 ## Enabling Semantic Search
 
@@ -249,4 +247,4 @@ results = search_client.search(
 )
 ```
 
-Semantic search dramatically improves search relevance by understanding user intent rather than just matching keywords.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Semantic search dramatically improves search relevance by understanding user intent rather than just matching keywords.

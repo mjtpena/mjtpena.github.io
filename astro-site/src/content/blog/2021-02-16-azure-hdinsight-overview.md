@@ -10,10 +10,7 @@ tags:
   - Big Data
   - Hadoop
   - Spark
-
 ---
-
-I wrote "2021-02-16-azure-hdinsight-overview" to share practical, production-minded guidance on this topic.
 
 ## HDInsight Cluster Types
 
@@ -392,4 +389,3 @@ KafkaMetrics_CL
 Azure HDInsight provides a flexible, fully managed platform for running open-source big data frameworks. Whether you need batch processing with Hadoop, stream processing with Kafka, or interactive queries with Hive LLAP, HDInsight can handle your enterprise big data needs.
 
 Evaluate your workload requirements to choose the appropriate cluster type and configuration.
-

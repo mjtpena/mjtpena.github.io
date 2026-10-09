@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Microsoft Fabric: A Practical Guide"
+description: "I've been onboarding several clients onto Fabric over the past few weeks and the first hour is always the same: getting oriented to an interface that's…"
 author: Michael John Peña
 draft: false
 date: 2023-07-02

@@ -1,5 +1,6 @@
 ---
 title: "Introduction to LLMOps: MLOps for Large Language Models"
+description: "LLMOps brings discipline to LLM application development. Start with these foundations and iterate as your applications mature."
 author: Michael John Pena
 draft: false
 date: 2023-03-29
@@ -9,10 +10,7 @@ tags:
   - AI
   - LLMOps
   - MLOps
-
 ---
-
-I wrote "Introduction to LLMOps: MLOps for Large Language Models" to share practical, production-minded guidance on this topic.
 
 ## LLMOps vs Traditional MLOps
 
@@ -456,4 +454,4 @@ class LLMMonitor:
 5. **Cost Control**: Budgets, alerts, optimization
 6. **Security**: Content filtering, PII detection, audit logs
 
-LLMOps brings discipline to LLM application development. Start with these foundations and iterate as your applications mature.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+LLMOps brings discipline to LLM application development. Start with these foundations and iterate as your applications mature.

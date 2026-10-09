@@ -1,5 +1,6 @@
 ---
 title: "Semantic Search for Enterprise: Beyond Keyword Matching"
+description: "Enterprise semantic search transforms how organizations find and use knowledge. By understanding meaning rather than just matching keywords, these systems…"
 author: Michael John Pena
 draft: false
 date: 2023-04-28
@@ -9,10 +10,7 @@ tags:
   - Embeddings
   - Enterprise
   - Azure
-
 ---
-
-I wrote "Semantic Search for Enterprise: Beyond Keyword Matching" to share practical, production-minded guidance on this topic.
 
 ## Enterprise Semantic Search Architecture
 
@@ -673,4 +671,4 @@ Provide a helpful, conversational response that:
         return response.content
 ```
 
-Enterprise semantic search transforms how organizations find and use knowledge. By understanding meaning rather than just matching keywords, these systems unlock insights hidden in document repositories.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Enterprise semantic search transforms how organizations find and use knowledge. By understanding meaning rather than just matching keywords, these systems unlock insights hidden in document repositories.

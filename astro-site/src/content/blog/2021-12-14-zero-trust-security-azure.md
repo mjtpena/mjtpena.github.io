@@ -9,10 +9,7 @@ tags:
   - Azure
   - Identity
   - Cloud Security
-
 ---
-
-I wrote "Zero Trust Security in Azure: Trust Nothing, Verify Everything" to share practical, production-minded guidance on this topic.
 
 ## Zero Trust Principles
 
@@ -233,4 +230,5 @@ metadata:
   name: app-identity
   namespace: production
   annotations:
-    azure.workload.identity/client-id: "<managed-identity-client-id>"\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    azure.workload.identity/client-id: "<managed-identity-client-id>"
+```

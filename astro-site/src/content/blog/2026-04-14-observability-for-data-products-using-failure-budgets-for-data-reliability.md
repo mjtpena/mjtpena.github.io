@@ -1,5 +1,6 @@
 ---
 title: "Observability for Data Products: using failure budgets for data reliability"
+description: "I tightened system boundaries so quality checks trigger earlier, catching regressions before downstream systems consume bad data."
 author: Michael John Peña
 draft: false
 date: 2026-04-14
@@ -36,4 +37,4 @@ Tomorrow I want to verify this pattern under a busier workload before I call it 
 
 - [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)
 - [Fabric Data Factory](https://learn.microsoft.com/fabric/data-factory/)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

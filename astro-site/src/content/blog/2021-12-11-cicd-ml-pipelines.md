@@ -1,5 +1,6 @@
 ---
 title: "CI/CD for Machine Learning: Building Reliable ML Pipelines"
+description: "ML CI/CD in 2021 became essential for production systems. The tooling caught up with the need, and now there's no excuse for manual deployments."
 author: Michael John Pena
 draft: false
 date: 2021-12-11
@@ -9,10 +10,7 @@ tags:
   - Machine Learning
   - Azure DevOps
   - GitHub Actions
-
 ---
-
-I wrote "CI/CD for Machine Learning: Building Reliable ML Pipelines" to share practical, production-minded guidance on this topic.
 
 ## The ML CI/CD Pipeline
 
@@ -465,4 +463,4 @@ ML CI/CD in 2021 became essential for production systems. The tooling caught up 
 
 - [Azure ML Pipelines](https://docs.microsoft.com/en-us/azure/machine-learning/concept-ml-pipelines)
 - [MLOps Guide](https://ml-ops.org/)
-- [GitHub Actions for ML](https://github.blog/2020-06-17-using-github-actions-for-mlops-data-science/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [GitHub Actions for ML](https://github.blog/2020-06-17-using-github-actions-for-mlops-data-science/)

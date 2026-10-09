@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Teams Integration with Azure: Building Collaborative Apps"
+description: "Microsoft Teams integration with Azure enables powerful collaborative applications. Whether building bots, tabs, or webhooks, the combination provides a…"
 author: Michael John Pena
 draft: false
 date: 2021-11-29
@@ -9,10 +10,7 @@ tags:
   - Bots
   - Integration
   - Collaboration
-
 ---
-
-I wrote "Microsoft Teams Integration with Azure: Building Collaborative Apps" to share practical, production-minded guidance on this topic.
 
 ## Teams Integration Options
 
@@ -518,4 +516,4 @@ Microsoft Teams integration with Azure enables powerful collaborative applicatio
 - [Teams Developer Documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 - [Bot Framework Documentation](https://docs.microsoft.com/en-us/azure/bot-service/)
 - [Adaptive Cards Designer](https://adaptivecards.io/designer/)
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)

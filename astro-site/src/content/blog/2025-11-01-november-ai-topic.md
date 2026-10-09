@@ -1,5 +1,6 @@
 ---
 title: "Building Production-Ready AI Pipelines with Azure Machine Learning"
+description: "Many organizations struggle with the gap between experimentation and production. Models that work in notebooks often fail in real-world scenarios due to…"
 author: Michael John Peña
 draft: false
 date: 2025-11-01
@@ -9,10 +10,7 @@ tags:
   - MLOps
   - Production
   - Data Engineering
-
 ---
-
-I wrote "Building Production-Ready AI Pipelines with Azure Machine Learning" to share practical, production-minded guidance on this topic.
 
 ## The Production ML Challenge
 
@@ -85,4 +83,4 @@ The pipeline includes data validation to catch schema changes early. Feature eng
 
 Implementing proper error handling and retry logic at each stage prevents pipeline failures from cascading. Azure ML's built-in monitoring tracks metrics across all pipeline runs, making it easier to identify performance degradation over time.
 
-Production ML is an iterative process. Starting with a solid pipeline foundation allows teams to incrementally improve model performance while maintaining system reliability.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Production ML is an iterative process. Starting with a solid pipeline foundation allows teams to incrementally improve model performance while maintaining system reliability.

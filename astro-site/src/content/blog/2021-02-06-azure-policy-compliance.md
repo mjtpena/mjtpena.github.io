@@ -1,5 +1,6 @@
 ---
 title: Enforcing Cloud Governance with Azure Policy
+description: "The tagging policy conversation is the one I have in every landing zone engagement. Someone inevitably says \"we'll just ask people to tag resources…"
 author: Michael John Peña
 draft: false
 date: 2021-02-06

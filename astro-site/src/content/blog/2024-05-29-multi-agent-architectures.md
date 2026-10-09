@@ -1,5 +1,6 @@
 ---
 title: "Multi-Agent Architectures: Collaboration at Scale"
+description: "Single agents have limits. Multi-agent systems multiply capabilities. Today I'm exploring architectures for agent collaboration."
 author: Michael John Peña
 draft: false
 date: 2024-05-29
@@ -533,4 +534,4 @@ Tomorrow I'll wrap up May with a summary of the best practices for AI agent deve
 
 - [AutoGen](https://microsoft.github.io/autogen/)
 - [CrewAI](https://github.com/joaomdmoura/crewAI)
-- [LangGraph](https://python.langchain.com/docs/langgraph)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [LangGraph](https://python.langchain.com/docs/langgraph)

@@ -1,5 +1,6 @@
 ---
 title: "Azure Stack HCI: Hyperconverged Infrastructure with Azure Integration"
+description: "Azure Stack HCI provides a modern hyperconverged infrastructure platform with deep Azure integration. It's ideal for organizations that need on-premises…"
 author: Michael John Pena
 draft: false
 date: 2021-11-19
@@ -9,10 +10,7 @@ tags:
   - HCI
   - Hybrid Cloud
   - Infrastructure
-
 ---
-
-I wrote "Azure Stack HCI: Hyperconverged Infrastructure with Azure Integration" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Stack HCI?
 
@@ -396,4 +394,4 @@ Azure Stack HCI provides a modern hyperconverged infrastructure platform with de
 
 - [Azure Stack HCI Documentation](https://docs.microsoft.com/en-us/azure-stack/hci/overview)
 - [AKS on Azure Stack HCI](https://docs.microsoft.com/en-us/azure-stack/aks-hci/overview)
-- [Windows Admin Center](https://docs.microsoft.com/en-us/windows-server/manage/windows-admin-center/overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Windows Admin Center](https://docs.microsoft.com/en-us/windows-server/manage/windows-admin-center/overview)

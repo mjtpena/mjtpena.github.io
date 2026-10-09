@@ -1,5 +1,6 @@
 ---
 title: "Tool Use Patterns for AI Agents"
+description: "Tools extend what AI agents can do beyond text generation. Today I'm exploring patterns for effective tool use in production agents."
 author: Michael John Peña
 draft: false
 date: 2024-05-25
@@ -444,4 +445,4 @@ Tomorrow I'll cover code execution in AI agents.
 
 - [OpenAI Function Calling](https://platform.openai.com/docs/guides/function-calling)
 - [Azure OpenAI Tools](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)
-- [LangChain Tools](https://python.langchain.com/docs/modules/tools/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [LangChain Tools](https://python.langchain.com/docs/modules/tools/)

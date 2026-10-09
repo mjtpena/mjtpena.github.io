@@ -1,5 +1,6 @@
 ---
 title: "SQL Server 2022 Preview: Key Features for Developers"
+description: "SQL Server 2022 entered public preview in late 2021 and continued preview through 2022 with a feature set deliberately designed to bridge the gap between…"
 author: "Michael John Peña"
 draft: false
 date: 2022-07-16
@@ -182,4 +183,4 @@ FROM OPENROWSET(
 ) AS data;
 ```
 
-SQL Server 2022 represents a significant evolution, bringing cloud-native capabilities to on-premises deployments while maintaining the reliability SQL Server is known for.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+SQL Server 2022 represents a significant evolution, bringing cloud-native capabilities to on-premises deployments while maintaining the reliability SQL Server is known for.

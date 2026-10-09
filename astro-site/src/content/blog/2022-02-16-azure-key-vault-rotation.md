@@ -1,18 +1,16 @@
 ---
 title: "Azure Key Vault Secret Rotation: Automating Credential Management"
+description: "Automated secret rotation ensures credentials remain secure while reducing operational burden."
 author: Michael John Peña
 draft: false
 date: 2022-02-16
 url: /blog/azure-key-vault-rotation/
 tags:
-  - azure
+  - Azure
   - key-vault
   - secrets
-  - automation
-
+  - Automation
 ---
-
-I wrote "Azure Key Vault Secret Rotation: Automating Credential Management" to share practical, production-minded guidance on this topic.
 
 ## Automatic Rotation for Storage Accounts
 
@@ -255,4 +253,4 @@ AzureDiagnostics
 4. **Monitor closely** - Alert on rotation failures
 5. **Stagger rotations** - Avoid rotating everything at once
 
-Automated secret rotation ensures credentials remain secure while reducing operational burden.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Automated secret rotation ensures credentials remain secure while reducing operational burden.

@@ -1,13 +1,11 @@
 ---
 title: "Retrieval Metrics for RAG: A Deep Dive"
+description: "The retrieval component of RAG systems directly impacts generation quality. This guide provides a comprehensive overview of retrieval metrics and how to…"
 author: "Michael John Peña"
 draft: false
 date: 2024-03-20
 tags: ["AI", "RAG", "Search", "Evaluation", "Information Retrieval"]
-
 ---
-
-I wrote "Retrieval Metrics for RAG: A Deep Dive" to share practical, production-minded guidance on this topic.
 
 The retrieval component of RAG systems directly impacts generation quality. This guide provides a comprehensive overview of retrieval metrics and how to implement them.
 
@@ -292,4 +290,3 @@ print(evaluator.generate_report(evaluation))
 ## Conclusion
 
 Understanding retrieval metrics is essential for optimizing RAG systems. Different metrics capture different aspects of retrieval quality - use multiple metrics for a complete picture.
-

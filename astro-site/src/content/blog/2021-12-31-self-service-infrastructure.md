@@ -1,5 +1,6 @@
 ---
 title: "Self-Service Infrastructure: Empowering Teams to Move Fast"
+description: "The future is developers who can move fast within safe guardrails. Self-service infrastructure makes that possible."
 author: Michael John Pena
 draft: false
 date: 2021-12-31
@@ -9,10 +10,7 @@ tags:
   - Platform Engineering
   - DevOps
   - Cloud
-
 ---
-
-I wrote "Self-Service Infrastructure: Empowering Teams to Move Fast" to share practical, production-minded guidance on this topic.
 
 ## The Self-Service Imperative
 
@@ -558,4 +556,4 @@ Thank you for reading this series on Azure, Data, and AI trends throughout Decem
 - [Platform Engineering](https://platformengineering.org/)
 - [Backstage](https://backstage.io/)
 - [Crossplane](https://crossplane.io/)
-- [Terraform Cloud](https://www.terraform.io/cloud)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Terraform Cloud](https://www.terraform.io/cloud)

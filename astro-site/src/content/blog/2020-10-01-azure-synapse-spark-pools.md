@@ -1,5 +1,6 @@
 ---
 title: "Azure Synapse Spark Pools (Preview): Big Data Processing"
+description: "Spark on Synapse is the same managed Spark story most cloud providers offer now, but it's done with the parts of Azure I already use — same workspace as the…"
 author: Michael John Peña
 draft: false
 date: 2020-10-01
@@ -101,4 +102,4 @@ df.cache()
 - **Auto-scale**: Scale down during low usage
 - **Spot instances**: Coming soon for cost savings
 
-Synapse Spark brings enterprise Spark without the ops burden.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Synapse Spark brings enterprise Spark without the ops burden.

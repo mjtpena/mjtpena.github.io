@@ -1,13 +1,11 @@
 ---
 title: "Mastering IoT Hub Queries for Device Management"
+description: "Effective use of IoT Hub queries enables proactive device fleet management at scale."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-28
 tags: ["Azure", "IoT Hub", "Queries", "Device Management", "Device Twin"]
-
 ---
-
-I wrote "Mastering IoT Hub Queries for Device Management" to share practical, production-minded guidance on this topic.
 
 ## Query Basics
 
@@ -292,4 +290,4 @@ class FleetManager:
         return {name: self.query(q) for name, q in queries.items()}
 ```
 
-Effective use of IoT Hub queries enables proactive device fleet management at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Effective use of IoT Hub queries enables proactive device fleet management at scale.

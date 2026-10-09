@@ -1,5 +1,6 @@
 ---
 title: "V-Order: Microsoft Fabric's Performance Optimization"
+description: "V-Order is a write-time optimization that physically reorders data within Parquet files to maximize compression and query performance, especially for Direct…"
 author: Michael John Peña
 draft: false
 date: 2024-08-18
@@ -9,10 +10,7 @@ tags:
   - Performance
   - Direct Lake
   - Parquet
-
 ---
-
-I wrote "V-Order: Microsoft Fabric's Performance Optimization" to share practical, production-minded guidance on this topic.
 
 ## What is V-Order?
 
@@ -523,4 +521,3 @@ print(f"Improvement: {results['improvement_percent']:.1f}%")
 V-Order is a key optimization feature in Microsoft Fabric that improves both storage efficiency and query performance. Enable it by default for all analytical tables, especially those backing Power BI Direct Lake semantic models.
 
 The minimal write overhead is far outweighed by the compression and query performance benefits, making V-Order essential for any Fabric lakehouse.
-

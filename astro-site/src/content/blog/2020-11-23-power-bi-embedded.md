@@ -1,5 +1,6 @@
 ---
 title: "Power BI Embedded: Analytics in Your Applications"
+description: "\"Can my customers get the dashboard inside my product?\" is one of the most common questions I get from product teams once Power BI lands internally. Power…"
 author: Michael John Peña
 draft: false
 date: 2020-11-23
@@ -8,9 +9,7 @@ tags:
   - Embedded Analytics
   - Data Visualization
   - SaaS
-
 ---
-
 
 "Can my customers get the dashboard inside my product?" is one of the most common questions I get from product teams once Power BI lands internally. Power BI Embedded is the answer for ISV-style scenarios: you license capacity, the end users don't need a Power BI licence, and reports render inside your application with row-level security and your own theme. The pricing model is the part most teams underestimate—plan capacity carefully.
 
@@ -186,5 +185,4 @@ var generateTokenRequest = new GenerateTokenRequest(
 | A3 | 4 | 10 GB | ~$4.00 |
 | A4 | 8 | 25 GB | ~$8.00 |
 
-Power BI Embedded: branded analytics at scale.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
-
+Power BI Embedded: branded analytics at scale.

@@ -1,5 +1,6 @@
 ---
 title: "Where Agent Systems Break: state handling patterns that reduce agent confusion"
+description: "I turned implicit processes into explicit operating rules—defining owners, acceptance tests, and lightweight runbooks so teams can move confidently and…"
 author: Michael John Peña
 draft: false
 date: 2026-04-24
@@ -36,4 +37,4 @@ Tomorrow I will apply the same rule to a second workflow to check repeatability.
 
 - [Microsoft Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
 - [Copilot in Fabric overview](https://learn.microsoft.com/fabric/fundamentals/copilot-fabric-overview)
-- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure Well-Architected for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)

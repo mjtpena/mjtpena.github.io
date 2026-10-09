@@ -1,13 +1,15 @@
 ---
 title: "Azure Orbital Updates - Space Computing"
+description: "Azure Orbital brings space data directly into the Azure ecosystem for processing and analysis."
 author: "Michael John Peña"
 draft: false
 date: 2022-10-09
-tags: ["Azure", "Azure Orbital", "Satellite", "Space"]
-
+tags:
+  - Azure
+  - Azure Orbital
+  - satellite
+  - space
 ---
-
-I wrote "Azure Orbital Updates - Space Computing" to share practical, production-minded guidance on this topic.
 
 ## Azure Orbital Overview
 
@@ -284,4 +286,4 @@ public class ContactScheduler
 4. **Maritime tracking** - AIS data collection
 5. **Scientific research** - Space science missions
 
-Azure Orbital brings space data directly into the Azure ecosystem for processing and analysis.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Orbital brings space data directly into the Azure ecosystem for processing and analysis.

@@ -1,5 +1,6 @@
 ---
 title: "Holiday Tech Gift Guide 2025: Tools That Made Me More Productive"
+description: "Looking for last-minute gifts for the developers in your life? Here are the tools and subscriptions that genuinely improved my productivity in 2025."
 author: Michael John Peña
 draft: false
 date: 2025-12-23
@@ -98,4 +99,4 @@ Consider gifting:
 
 If I had to choose one gift for a developer: **a quality AI coding assistant subscription**. The productivity improvement is immediate and measurable. It's the gift that keeps giving every day.
 
-Happy holidays to all the developers making the tech world better!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Happy holidays to all the developers making the tech world better!

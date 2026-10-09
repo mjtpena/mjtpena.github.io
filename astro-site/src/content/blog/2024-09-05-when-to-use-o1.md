@@ -1,13 +1,11 @@
 ---
 title: "When to Use o1: A Decision Guide for AI Applications"
+description: "o1 shines in specific scenarios. Understanding these helps you deploy it effectively."
 author: "Michael John Peña"
 draft: false
 date: 2024-09-05
 tags: ["OpenAI", "o1", "Best Practices", "AI Architecture", "Decision Making"]
-
 ---
-
-I wrote "When to Use o1: A Decision Guide for AI Applications" to share practical, production-minded guidance on this topic.
 
 ## The o1 Sweet Spot
 
@@ -226,4 +224,3 @@ def should_use_o1(task_value: float,
 ## Conclusion
 
 Use o1 when the cost of errors is high and the task genuinely requires reasoning. For everything else, GPT-4o or GPT-4o-mini will serve you better at a fraction of the cost.
-

@@ -1,13 +1,14 @@
 ---
 title: "Create a File Converter Service in 5 minutes or less using Gotenberg and Azure Container Instances"
+description: "I'm very surprised that there isn't a straight forward library out there that is free to use and convenient in terms of file conversion. I think it's…"
 author: Michael John Peña
 draft: false
 date: 2022-12-23
 url: /blog/gotenberg-aci/
 tags:
-  - api
+  - API
   - file
-  - azure
+  - Azure
 ---
 
 I'm very surprised that there isn't a straight forward library out there that is free to use and convenient in terms of file conversion. I think it's because a lot of these file formats come with proprietary software, specially during the early day: Office by Microsoft, PDF by Adobe, etc. Good thing there is Gotenberg!

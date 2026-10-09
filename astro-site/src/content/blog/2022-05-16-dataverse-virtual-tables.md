@@ -6,12 +6,9 @@ date: 2022-05-16
 tags:
   - dataverse
   - power-platform
-  - integration
-  - data
-
+  - Integration
+  - Data
 ---
-
-I wrote "Dataverse Virtual Tables: Integrating External Data" to share practical, production-minded guidance on this topic.
 
 ## Virtual Table Concepts
 
@@ -429,5 +426,3 @@ Dataverse virtual tables enable:
 - Custom provider development
 
 Extend Dataverse reach without moving data.
-
-

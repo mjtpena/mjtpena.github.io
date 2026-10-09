@@ -1,5 +1,6 @@
 ---
 title: "Model Monitoring in Production: Detecting Drift Before It's Too Late"
+description: "Model monitoring in 2021 became non-negotiable for production ML. The tools improved, but the discipline of continuous monitoring is what separates…"
 author: Michael John Pena
 draft: false
 date: 2021-12-10
@@ -9,10 +10,7 @@ tags:
   - Monitoring
   - Data Drift
   - Model Performance
-
 ---
-
-I wrote "Model Monitoring in Production: Detecting Drift Before It's Too Late" to share practical, production-minded guidance on this topic.
 
 ## Types of Drift
 
@@ -370,4 +368,4 @@ Model monitoring in 2021 became non-negotiable for production ML. The tools impr
 
 - [Azure ML Model Monitoring](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-monitor-datasets)
 - [Evidently AI](https://evidentlyai.com/)
-- [WhyLabs](https://whylabs.ai/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [WhyLabs](https://whylabs.ai/)

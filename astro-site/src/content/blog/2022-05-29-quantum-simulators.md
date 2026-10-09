@@ -6,12 +6,9 @@ date: 2022-05-29
 tags:
   - quantum
   - simulators
-  - azure
-  - development
-
+  - Azure
+  - Development
 ---
-
-I wrote "Quantum Simulators: Testing Without Quantum Hardware" to share practical, production-minded guidance on this topic.
 
 ## Types of Quantum Simulators
 
@@ -340,5 +337,3 @@ Quantum simulators enable:
 - Performance benchmarking
 
 Essential tools for quantum software development.
-
-

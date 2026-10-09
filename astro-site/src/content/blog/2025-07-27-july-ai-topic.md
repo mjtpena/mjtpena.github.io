@@ -1,5 +1,6 @@
 ---
 title: "Azure API Management for AI APIs: Rate Limiting and Cost Control"
+description: "Configure Azure Monitor alerts when subscriptions approach quota limits. Provide self-service usage dashboards so customers can track their consumption and…"
 author: Michael John Peña
 draft: false
 date: 2025-07-27
@@ -9,10 +10,7 @@ tags:
   - Rate Limiting
   - Cost Management
   - Infrastructure
-
 ---
-
-I wrote "Azure API Management for AI APIs: Rate Limiting and Cost Control" to share practical, production-minded guidance on this topic.
 
 ## Configuring AI-Specific Policies
 
@@ -100,4 +98,4 @@ Different subscription tiers get different limits:
 
 ## Monitoring and Alerts
 
-Configure Azure Monitor alerts when subscriptions approach quota limits. Provide self-service usage dashboards so customers can track their consumption and plan accordingly.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Configure Azure Monitor alerts when subscriptions approach quota limits. Provide self-service usage dashboards so customers can track their consumption and plan accordingly.

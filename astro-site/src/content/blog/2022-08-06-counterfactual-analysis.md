@@ -1,13 +1,11 @@
 ---
 title: "Counterfactual Analysis for ML Model Understanding"
+description: "Counterfactual analysis makes ML models more interpretable and provides actionable guidance for users."
 author: "Michael John Peña"
 draft: false
 date: 2022-08-06
 tags: ["Azure", "Machine Learning", "Counterfactuals", "Explainability", "AI"]
-
 ---
-
-I wrote "Counterfactual Analysis for ML Model Understanding" to share practical, production-minded guidance on this topic.
 
 ## Understanding Counterfactuals
 
@@ -240,4 +238,4 @@ explanation = generate_customer_explanation(sample, best_cf, feature_description
 print(explanation)
 ```
 
-Counterfactual analysis makes ML models more interpretable and provides actionable guidance for users.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Counterfactual analysis makes ML models more interpretable and provides actionable guidance for users.

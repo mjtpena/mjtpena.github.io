@@ -1,5 +1,6 @@
 ---
 title: "Fabric Mirroring: Real-Time Database Replication"
+description: "Mirroring simplifies real-time data replication to Fabric. Tomorrow, I will cover Git integration in Fabric."
 author: Michael John Peña
 draft: false
 date: 2023-06-09
@@ -9,10 +10,7 @@ tags:
   - CDC
   - Database Replication
   - Real-Time
-
 ---
-
-I wrote "Fabric Mirroring: Real-Time Database Replication" to share practical, production-minded guidance on this topic.
 
 ## What is Mirroring?
 
@@ -321,4 +319,4 @@ Mirroring simplifies real-time data replication to Fabric. Tomorrow, I will cove
 
 - [Fabric Mirroring Overview](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/overview)
 - [Azure SQL Mirroring](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/azure-sql-database)
-- [Mirroring FAQ](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/faq)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Mirroring FAQ](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/faq)

@@ -1,18 +1,16 @@
 ---
 title: "The Ultimate Azure Cost Optimization Checklist for 2026"
+description: "Start the new year with optimized cloud spend. These changes compound over time into significant savings."
 author: Michael John Peña
 draft: false
 date: 2025-12-19
 tags:
   - Azure
-  - Cost-Optimization
+  - cost-optimization
   - FinOps
   - Best-Practices
   - Cloud
-
 ---
-
-I wrote "The Ultimate Azure Cost Optimization Checklist for 2026" to share practical, production-minded guidance on this topic.
 
 ## Compute Optimization
 
@@ -141,4 +139,4 @@ class AIBudgetController:
 - [ ] Set up budget alerts
 - [ ] Review costs weekly
 
-Start the new year with optimized cloud spend. These changes compound over time into significant savings.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Start the new year with optimized cloud spend. These changes compound over time into significant savings.

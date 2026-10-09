@@ -9,10 +9,7 @@ tags:
   - LLM
   - AI
   - Patterns
-
 ---
-
-I wrote "Building LLM Applications with Azure OpenAI: Patterns and Practices" to share practical, production-minded guidance on this topic.
 
 ## Building Blocks for LLM Applications
 
@@ -427,4 +424,3 @@ Building production LLM applications requires more than just calling the API. Yo
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 - [Prompt Engineering Best Practices](https://platform.openai.com/docs/guides/completion/prompt-design)
 - [Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/)
-

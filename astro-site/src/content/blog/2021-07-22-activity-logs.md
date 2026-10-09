@@ -10,12 +10,9 @@ tags:
   - Security
   - Compliance
   - Governance
-
 ---
 
-I wrote "2021-07-22-activity-logs" to share practical, production-minded guidance on this topic.
-
-# Understanding Activity Log Categories
+## Understanding Activity Log Categories
 
 Activity Logs include several categories:
 
@@ -28,7 +25,7 @@ Activity Logs include several categories:
 - **Autoscale**: Autoscale operations
 - **Resource Health**: Resource availability changes
 
-# Querying Activity Logs
+## Querying Activity Logs
 
 Query Activity Logs using Azure CLI:
 
@@ -56,7 +53,7 @@ az monitor activity-log list \
     --output table
 ```
 
-# Python SDK for Activity Logs
+## Python SDK for Activity Logs
 
 Query and analyze activity logs programmatically:
 
@@ -116,7 +113,7 @@ print("\nTop operations:")
 print(operation_counts.head(10))
 ```
 
-# Security Audit Queries
+## Security Audit Queries
 
 Audit security-relevant operations:
 
@@ -182,7 +179,7 @@ deletions = audit_resource_deletions(days=7)
 failures = audit_failed_operations(days=1)
 ```
 
-# Exporting Activity Logs
+## Exporting Activity Logs
 
 Configure long-term export to storage:
 
@@ -258,7 +255,7 @@ resource "azurerm_storage_account" "audit" {
 }
 ```
 
-# Log Analytics Queries
+## Log Analytics Queries
 
 Query Activity Logs in Log Analytics:
 
@@ -312,7 +309,7 @@ AzureActivity
 | order by TimeGenerated desc
 ```
 
-# Creating Alerts on Activity Logs
+## Creating Alerts on Activity Logs
 
 Set up alerts for critical operations:
 
@@ -368,7 +365,7 @@ for name, operation in alerts_to_create:
     print(f"Created alert: {name}")
 ```
 
-# Compliance Reporting
+## Compliance Reporting
 
 Generate compliance reports from Activity Logs:
 
@@ -435,9 +432,8 @@ with open("compliance_report.json", "w") as f:
 print(f"Report generated: {report['summary']}")
 ```
 
-# Conclusion
+## Conclusion
 
 Azure Activity Logs are fundamental for governance, compliance, and security in Azure. They provide a complete audit trail of control plane operations, enabling you to track who did what, when, and to which resources.
 
 Best practices include exporting logs to long-term storage for compliance, setting up alerts on security-sensitive operations, and regularly reviewing logs for suspicious activity. Combined with Log Analytics queries, Activity Logs give you the visibility needed to maintain secure and compliant Azure environments.
-

@@ -1,5 +1,6 @@
 ---
 title: "AI Team Collaboration: Building Effective AI Development Teams"
+description: "Effective AI teams combine diverse skills with clear collaboration patterns."
 author: Michael John Peña
 draft: false
 date: 2025-05-25
@@ -9,10 +10,7 @@ tags:
   - Collaboration
   - Organization
   - Best Practices
-
 ---
-
-I wrote "AI Team Collaboration: Building Effective AI Development Teams" to share practical, production-minded guidance on this topic.
 
 ## AI Team Structure
 
@@ -133,4 +131,4 @@ team_ceremonies = {
 }
 ```
 
-Effective AI teams combine diverse skills with clear collaboration patterns.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Effective AI teams combine diverse skills with clear collaboration patterns.

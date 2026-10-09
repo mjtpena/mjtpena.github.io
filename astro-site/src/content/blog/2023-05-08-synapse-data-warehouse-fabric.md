@@ -1,5 +1,6 @@
 ---
 title: "Synapse Data Warehouse in Microsoft Fabric: Cloud-Native SQL Analytics"
+description: "The Fabric Data Warehouse provides enterprise SQL analytics without infrastructure management. Tomorrow, I will cover Synapse Real-Time Analytics for…"
 author: Michael John Peña
 draft: false
 date: 2023-05-08
@@ -9,10 +10,7 @@ tags:
   - T-SQL
   - Analytics
   - Azure
-
 ---
-
-I wrote "Synapse Data Warehouse in Microsoft Fabric: Cloud-Native SQL Analytics" to share practical, production-minded guidance on this topic.
 
 ## Fabric Data Warehouse Overview
 
@@ -387,4 +385,4 @@ The Fabric Data Warehouse provides enterprise SQL analytics without infrastructu
 
 - [Warehouse in Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/)
 - [T-SQL Reference](https://learn.microsoft.com/en-us/fabric/data-warehouse/tsql-surface-area)
-- [Data Warehouse Tutorial](https://learn.microsoft.com/en-us/fabric/data-warehouse/tutorial-introduction)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Data Warehouse Tutorial](https://learn.microsoft.com/en-us/fabric/data-warehouse/tutorial-introduction)

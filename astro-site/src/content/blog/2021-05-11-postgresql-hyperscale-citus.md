@@ -9,10 +9,7 @@ tags:
   - Database
   - Distributed Systems
   - Citus
-
 ---
-
-I wrote "PostgreSQL Hyperscale (Citus) on Azure: Distributed Database Patterns" to share practical, production-minded guidance on this topic.
 
 ## Understanding Hyperscale Architecture
 
@@ -363,4 +360,4 @@ SELECT pg_reload_conf();
 
 - [Hyperscale (Citus) Documentation](https://docs.microsoft.com/en-us/azure/postgresql/hyperscale/)
 - [Citus Data Modeling](https://docs.citusdata.com/en/stable/develop/migration.html)
-- [Performance Tuning](https://docs.microsoft.com/en-us/azure/postgresql/hyperscale/howto-performance-tuning)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Performance Tuning](https://docs.microsoft.com/en-us/azure/postgresql/hyperscale/howto-performance-tuning)

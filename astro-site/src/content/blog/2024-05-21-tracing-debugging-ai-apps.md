@@ -1,5 +1,6 @@
 ---
 title: "Tracing and Debugging AI Applications"
+description: "Debugging AI applications is different from traditional software. Today I'm exploring tracing and debugging techniques for production AI systems."
 author: Michael John Peña
 draft: false
 date: 2024-05-21
@@ -401,4 +402,4 @@ Tomorrow I'll cover Azure AI Agent Service preview.
 
 - [OpenTelemetry Python](https://opentelemetry.io/docs/instrumentation/python/)
 - [Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable)
-- [Prompt Flow Tracing](https://microsoft.github.io/promptflow/how-to-guides/tracing/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Prompt Flow Tracing](https://microsoft.github.io/promptflow/how-to-guides/tracing/)

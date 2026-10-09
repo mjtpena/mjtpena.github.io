@@ -1,5 +1,6 @@
 ---
 title: "Vector Databases on Azure: Comparing Options for AI Applications"
+description: "Best for: Enterprise search, RAG applications with complex filtering Best for: Global applications, multi-model data, transactional + vector workloads"
 author: Michael John Peña
 draft: false
 date: 2025-01-26
@@ -9,10 +10,7 @@ tags:
   - AI
   - RAG
   - Architecture
-
 ---
-
-I wrote "Vector Databases on Azure: Comparing Options for AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Vector Database Options on Azure
 
@@ -385,4 +383,4 @@ class HybridVectorStore:
         return enriched
 ```
 
-Choose based on your specific requirements, team expertise, and existing infrastructure. There's no one-size-fits-all solution for vector databases.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose based on your specific requirements, team expertise, and existing infrastructure. There's no one-size-fits-all solution for vector databases.

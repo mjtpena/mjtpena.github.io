@@ -1,5 +1,6 @@
 ---
 title: "Cosmos DB Integrated Cache: Reducing RU Costs at Scale"
+description: "The Cosmos DB integrated cache is the feature I've been waiting for since the first time I watched a read-heavy application burn through its RU budget…"
 author: Michael John Peña
 draft: false
 date: 2021-05-07
@@ -323,4 +324,4 @@ If issues arise, simply revert to direct mode - no data changes required.
 
 - [Integrated Cache Documentation](https://docs.microsoft.com/en-us/azure/cosmos-db/integrated-cache)
 - [Dedicated Gateway Overview](https://docs.microsoft.com/en-us/azure/cosmos-db/dedicated-gateway)
-- [Cost Optimization Guide](https://docs.microsoft.com/en-us/azure/cosmos-db/plan-manage-costs)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Cost Optimization Guide](https://docs.microsoft.com/en-us/azure/cosmos-db/plan-manage-costs)

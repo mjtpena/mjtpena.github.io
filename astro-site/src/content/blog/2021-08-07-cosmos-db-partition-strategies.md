@@ -1,13 +1,11 @@
 ---
 title: "Azure Cosmos DB Partition Strategies for Optimal Performance"
+description: "Proper partition key design is fundamental to Cosmos DB success. Take time to analyze your access patterns and data distribution before finalizing your…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-07
 tags: ["Azure", "Cosmos DB", "Partitioning", "NoSQL", "Performance"]
-
 ---
-
-I wrote "Azure Cosmos DB Partition Strategies for Optimal Performance" to share practical, production-minded guidance on this topic.
 
 ## Understanding Partitions
 
@@ -242,4 +240,4 @@ az monitor metrics list \
     --interval PT1H
 ```
 
-Proper partition key design is fundamental to Cosmos DB success. Take time to analyze your access patterns and data distribution before finalizing your partition strategy.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Proper partition key design is fundamental to Cosmos DB success. Take time to analyze your access patterns and data distribution before finalizing your partition strategy.

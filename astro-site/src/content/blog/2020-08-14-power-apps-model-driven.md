@@ -1,5 +1,6 @@
 ---
 title: "Building Model-Driven Apps with Power Apps"
+description: "When I help clients pick between canvas and model-driven, my rule of thumb is simple: if the app is a form over data with relationships, security roles, and…"
 author: Michael John Peña
 draft: false
 date: 2020-08-14
@@ -8,10 +9,7 @@ tags:
   - Power Apps
   - Low Code
   - Business Applications
-
 ---
-
-I wrote "Building Model-Driven Apps with Power Apps" to share practical, production-minded guidance on this topic.
 
 ## Understanding Model-Driven vs Canvas Apps
 
@@ -244,4 +242,4 @@ Model-driven apps automatically work on mobile:
 - Power Apps mobile app
 - Responsive forms adapt to screen size
 
-When I help clients pick between canvas and model-driven, my rule of thumb is simple: if the app is a *form over data* with relationships, security roles, and audit requirements, go model-driven. If it's a customer-facing kiosk or a polished mobile experience for a single workflow, go canvas. Mixing the two in one solution is fine and often correct — model-driven for the back-office, canvas embedded for the polished bits users see most.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+When I help clients pick between canvas and model-driven, my rule of thumb is simple: if the app is a *form over data* with relationships, security roles, and audit requirements, go model-driven. If it's a customer-facing kiosk or a polished mobile experience for a single workflow, go canvas. Mixing the two in one solution is fine and often correct — model-driven for the back-office, canvas embedded for the polished bits users see most.

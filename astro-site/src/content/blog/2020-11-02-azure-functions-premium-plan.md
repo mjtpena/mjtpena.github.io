@@ -1,5 +1,6 @@
 ---
 title: "Azure Functions Premium Plan: Enterprise Serverless"
+description: "Cold starts on Consumption plan kill credibility. I've watched a perfectly good HTTP-triggered function get blamed for \"the API being slow\" because the…"
 author: Michael John Peña
 draft: false
 date: 2020-11-02
@@ -164,4 +165,4 @@ az functionapp deployment slot create \
     --slot staging
 ```
 
-Premium plan: production-grade serverless without compromises.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Premium plan: production-grade serverless without compromises.

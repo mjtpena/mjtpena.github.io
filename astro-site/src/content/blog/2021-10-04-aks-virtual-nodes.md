@@ -1,13 +1,11 @@
 ---
 title: "Serverless Kubernetes with AKS Virtual Nodes"
+description: "Virtual nodes in AKS enable pods to run on Azure Container Instances rather than on VM-based node pool nodes—useful for burst workloads that spike…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-04
 tags: ["Azure", "Kubernetes", "AKS", "Serverless", "ACI"]
-
 ---
-
-I wrote "Serverless Kubernetes with AKS Virtual Nodes" to share practical, production-minded guidance on this topic.
 
 Virtual nodes in AKS enable pods to run on Azure Container Instances rather than on VM-based node pool nodes—useful for burst workloads that spike unpredictably and where provisioning a new VM node (which takes minutes) is too slow. The mechanism is Virtual Kubelet: a Kubernetes node object backed by ACI rather than a VM. When a pod is scheduled to the virtual node, it launches as an ACI container group, consuming ACI pricing (per-second billing) rather than VM hours. The practical limitations in 2021: not all workloads can run on virtual nodes (DaemonSets don't work, host networking isn't supported, some admission webhooks behave differently), and ACI cold start is slower than scheduling to a pre-warmed node. Virtual nodes work best for batch and burst scenarios that arrive unpredictably and where a few seconds of startup latency is acceptable.
 
@@ -312,4 +310,3 @@ ContainerInstanceLog_CL
 Virtual nodes provide a powerful serverless option for Kubernetes workloads. They're ideal for burst scenarios, batch processing, and workloads that need rapid, unlimited scaling without infrastructure management.
 
 Tomorrow, we'll dive into AKS pod identity for secure access to Azure resources.
-

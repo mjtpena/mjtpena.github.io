@@ -1,5 +1,6 @@
 ---
 title: "Copy Activity in Fabric: Data Movement Patterns"
+description: "The Copy Activity in Fabric Data Factory is the same copy engine as Azure Data Factory — the underlying data movement service optimised for throughput with…"
 author: Michael John Peña
 draft: false
 date: 2023-07-12
@@ -351,4 +352,4 @@ Tomorrow we'll explore Dataflow Gen2 and Power Query-based transformations.
 
 - [Copy Activity Documentation](https://learn.microsoft.com/en-us/fabric/data-factory/copy-data-activity)
 - [Copy Activity Performance](https://learn.microsoft.com/en-us/azure/data-factory/copy-activity-performance)
-- [Incremental Load Patterns](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-incremental-copy-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Incremental Load Patterns](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-incremental-copy-overview)

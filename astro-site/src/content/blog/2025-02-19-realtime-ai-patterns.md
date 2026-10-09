@@ -1,5 +1,6 @@
 ---
 title: "Real-Time AI Patterns: Building Low-Latency Intelligent Systems"
+description: "Real-time AI requires discipline around latency. Design for the worst case and optimize for the common case."
 author: Michael John Peña
 draft: false
 date: 2025-02-19
@@ -9,10 +10,7 @@ tags:
   - Streaming
   - Architecture
   - Azure
-
 ---
-
-I wrote "Real-Time AI Patterns: Building Low-Latency Intelligent Systems" to share practical, production-minded guidance on this topic.
 
 ## Real-Time AI Architecture Patterns
 
@@ -336,4 +334,4 @@ class MonitoredAIService:
 5. **Pre-compute features**: Don't compute features during inference
 6. **Monitor percentiles**: P99 latency matters more than average
 
-Real-time AI requires discipline around latency. Design for the worst case and optimize for the common case.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Real-time AI requires discipline around latency. Design for the worst case and optimize for the common case.

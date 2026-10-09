@@ -1,18 +1,16 @@
 ---
 title: "Prometheus Remote Write to Azure Monitor: Unified Metrics"
+description: "Prometheus remote write to Azure Monitor provides a powerful, unified metrics platform for cloud-native applications."
 author: Michael John Peña
 draft: false
 date: 2022-02-28
 url: /blog/prometheus-remote-write-azure/
 tags:
-  - azure
-  - prometheus
-  - monitoring
-  - kubernetes
-
+  - Azure
+  - Prometheus
+  - Monitoring
+  - Kubernetes
 ---
-
-I wrote "Prometheus Remote Write to Azure Monitor: Unified Metrics" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Azure Monitor Workspace
 
@@ -287,4 +285,4 @@ resource alertRuleGroup 'Microsoft.AlertsManagement/prometheusRuleGroups@2021-07
 }
 ```
 
-Prometheus remote write to Azure Monitor provides a powerful, unified metrics platform for cloud-native applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Prometheus remote write to Azure Monitor provides a powerful, unified metrics platform for cloud-native applications.

@@ -8,10 +8,7 @@ tags:
   - API Management
   - Azure OpenAI
   - Architecture
-
 ---
-
-I wrote "Rate Limit Management for AI APIs" to share practical, production-minded guidance on this topic.
 
 ## Rate Limiting Patterns
 
@@ -254,4 +251,4 @@ Tomorrow we'll explore token estimation techniques.
 
 - [Rate Limiting Patterns](https://learn.microsoft.com/en-us/azure/architecture/patterns/rate-limiting-pattern)
 - [Circuit Breaker Pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker)
-- [Azure OpenAI Best Practices](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Azure OpenAI Best Practices](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota)

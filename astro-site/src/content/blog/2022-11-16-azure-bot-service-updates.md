@@ -9,10 +9,7 @@ tags:
   - Conversational AI
   - AI
   - Microsoft
-
 ---
-
-I wrote "Azure Bot Service Updates: Building Intelligent Conversational AI" to share practical, production-minded guidance on this topic.
 
 ## Bot Framework Composer Updates
 
@@ -489,4 +486,3 @@ Azure Bot Service provides a comprehensive platform for building conversational 
 - [Bot Framework Composer](https://docs.microsoft.com/en-us/composer/)
 - [Adaptive Cards](https://adaptivecards.io/)
 - [Bot Framework SDK](https://github.com/Microsoft/botframework-sdk)
-

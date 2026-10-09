@@ -1,5 +1,6 @@
 ---
 title: "AI Safety Guardrails: Implementing Content Filtering in Azure OpenAI"
+description: "Maintain comprehensive logs of all content filtering decisions for compliance and incident investigation. Every blocked request should be logged with…"
 author: Michael John Peña
 draft: false
 date: 2025-10-04
@@ -9,10 +10,7 @@ tags:
   - Content Filtering
   - Responsible AI
   - Security
-
 ---
-
-I wrote "AI Safety Guardrails: Implementing Content Filtering in Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Understanding Azure OpenAI Content Filtering
 
@@ -109,4 +107,4 @@ class BusinessRuleGuard:
 
 ## Logging and Audit Trail
 
-Maintain comprehensive logs of all content filtering decisions for compliance and incident investigation. Every blocked request should be logged with context while respecting privacy requirements.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Maintain comprehensive logs of all content filtering decisions for compliance and incident investigation. Every blocked request should be logged with context while respecting privacy requirements.

@@ -1,5 +1,6 @@
 ---
 title: "SLM vs LLM Strategies: Choosing the Right Model Size"
+description: "The right model size depends on your specific requirements, not just capabilities."
 author: Michael John Peña
 draft: false
 date: 2025-04-06
@@ -9,10 +10,7 @@ tags:
   - Strategy
   - Architecture
   - AI
-
 ---
-
-I wrote "SLM vs LLM Strategies: Choosing the Right Model Size" to share practical, production-minded guidance on this topic.
 
 ## Decision Framework
 
@@ -115,4 +113,4 @@ class ModelSelector:
 # | Summarization | Hybrid | Depends on length and complexity |
 ```
 
-The right model size depends on your specific requirements, not just capabilities.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The right model size depends on your specific requirements, not just capabilities.

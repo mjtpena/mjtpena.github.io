@@ -1,13 +1,11 @@
 ---
 title: "AI Governance Frameworks: Building Trust at Scale"
+description: "Governance isn't a checkbox — it's what lets organisations scale AI safely. The frameworks I use combine risk tiers, model lifecycle controls, and pragmatic…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-04
 tags: ["AI", "Governance", "Enterprise", "Compliance", "Risk Management"]
-
 ---
-
-I wrote "AI Governance Frameworks: Building Trust at Scale" to share practical, production-minded guidance on this topic.
 
 Governance isn't a checkbox — it's what lets organisations scale AI safely. The frameworks I use combine risk tiers, model lifecycle controls, and pragmatic review gates so teams can move fast without leaving compliance to chance.
 
@@ -365,4 +363,4 @@ class GovernanceMonitoring:
         return report
 ```
 
-Tomorrow, we'll explore AI risk management in depth!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore AI risk management in depth!

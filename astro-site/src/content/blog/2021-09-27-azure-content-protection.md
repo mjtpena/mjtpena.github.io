@@ -1,5 +1,6 @@
 ---
 title: Content Protection and DRM with Azure Media Services
+description: "Content protection with DRM ensures your premium content remains secure while providing a seamless viewing experience across all platforms."
 author: Michael John Pena
 draft: false
 date: 2021-09-27
@@ -9,10 +10,7 @@ tags:
   - DRM
   - Content Protection
   - Security
-
 ---
-
-I wrote "2021-09-27-azure-content-protection" to share practical, production-minded guidance on this topic.
 
 ## DRM Options
 
@@ -466,4 +464,4 @@ playProtectedContent(
 5. **Monitor Usage**: Track license requests for abuse detection
 6. **Offline Support**: Consider persistent licenses for offline viewing
 
-Content protection with DRM ensures your premium content remains secure while providing a seamless viewing experience across all platforms.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Content protection with DRM ensures your premium content remains secure while providing a seamless viewing experience across all platforms.

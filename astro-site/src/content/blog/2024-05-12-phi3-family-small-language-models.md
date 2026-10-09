@@ -1,5 +1,6 @@
 ---
 title: "Phi-3 Family: Microsoft's Small Language Models"
+description: "Phi-3 uses high-quality training data (textbooks, filtered web content) rather than raw internet scale."
 author: Michael John Peña
 draft: false
 date: 2024-05-12
@@ -9,10 +10,7 @@ tags:
   - SLM
   - Microsoft
   - Azure
-
 ---
-
-I wrote "Phi-3 Family: Microsoft's Small Language Models" to share practical, production-minded guidance on this topic.
 
 ## The Phi-3 Family
 
@@ -281,7 +279,7 @@ Completed code:"""
     response = pipe([{"role": "user", "content": prompt}])
     return response[0]['generated_text'][-1]['content']
 
-# Usage
+## Usage
 code = """def binary_search(arr, target):
     left, right = 0, len(arr) - 1
     while left <= right:"""
@@ -364,4 +362,4 @@ Tomorrow I'll cover Small Language Models more broadly and their role in enterpr
 - [Phi-3 Model Card](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct)
 - [Azure AI Model Catalog](https://ai.azure.com/explore/models)
 - [Phi-3 Cookbook](https://github.com/microsoft/Phi-3CookBook)
-- [ONNX Runtime GenAI](https://github.com/microsoft/onnxruntime-genai)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [ONNX Runtime GenAI](https://github.com/microsoft/onnxruntime-genai)

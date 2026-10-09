@@ -1,5 +1,6 @@
 ---
 title: "Azure Monitor Application Insights: Deep Observability for Applications"
+description: "Application Insights provides the deep observability needed for modern applications. Combined with Azure Monitor's broader capabilities, it enables…"
 author: Michael John Pena
 draft: false
 date: 2021-11-23
@@ -9,10 +10,7 @@ tags:
   - Application Insights
   - Observability
   - DevOps
-
 ---
-
-I wrote "Azure Monitor Application Insights: Deep Observability for Applications" to share practical, production-minded guidance on this topic.
 
 ## What is Application Insights?
 
@@ -521,4 +519,4 @@ Application Insights provides the deep observability needed for modern applicati
 
 - [Application Insights Documentation](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
 - [KQL Reference](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/)
-- [Distributed Tracing](https://docs.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Distributed Tracing](https://docs.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing)

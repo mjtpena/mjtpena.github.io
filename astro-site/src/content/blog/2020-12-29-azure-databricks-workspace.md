@@ -1,5 +1,6 @@
 ---
 title: "Azure Databricks Workspace Management"
+description: "Spinning up a Databricks workspace is the easy part. Making it production-ready is where I see the most avoidable rework. Cluster policies, AAD passthrough…"
 author: Michael John Peña
 draft: false
 date: 2020-12-29
@@ -196,4 +197,4 @@ events = spark.sql("""
 """)
 ```
 
-Databricks workspace management: secure, scalable, collaborative.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Databricks workspace management: secure, scalable, collaborative.

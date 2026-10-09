@@ -9,10 +9,7 @@ tags:
   - RAG
   - NLP
   - Data Processing
-
 ---
-
-I wrote "Document Chunking Strategies for RAG Systems" to share practical, production-minded guidance on this topic.
 
 ## Why Chunking Matters
 
@@ -482,4 +479,4 @@ CHUNKING_GUIDE = {
 ## Resources
 
 - [LangChain Text Splitters](https://python.langchain.com/docs/modules/data_connection/document_transformers/)
-- [Chunking Strategies Comparison](https://www.pinecone.io/learn/chunking-strategies/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Chunking Strategies Comparison](https://www.pinecone.io/learn/chunking-strategies/)

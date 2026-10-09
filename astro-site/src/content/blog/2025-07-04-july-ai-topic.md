@@ -1,5 +1,6 @@
 ---
 title: "GPT-4o Vision for Document Intelligence: Building Smart OCR Pipelines"
+description: "For multi-page documents, process pages in parallel and use a synthesis step to merge extracted data. GPT-4o handles cross-page references like \"continued…"
 author: Michael John Peña
 draft: false
 date: 2025-07-04
@@ -9,10 +10,7 @@ tags:
   - Document Processing
   - Azure OpenAI
   - Python
-
 ---
-
-I wrote "GPT-4o Vision for Document Intelligence: Building Smart OCR Pipelines" to share practical, production-minded guidance on this topic.
 
 ## The Vision-First Approach
 
@@ -73,4 +71,4 @@ For multi-page documents, process pages in parallel and use a synthesis step to 
 
 ## Accuracy Validation
 
-Implement confidence scoring by asking the model to rate its extraction certainty. Route low-confidence extractions to human review, creating a feedback loop that continuously improves your extraction prompts.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Implement confidence scoring by asking the model to rate its extraction certainty. Route low-confidence extractions to human review, creating a feedback loop that continuously improves your extraction prompts.

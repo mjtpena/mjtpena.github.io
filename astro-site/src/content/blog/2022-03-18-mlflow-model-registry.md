@@ -9,10 +9,7 @@ tags:
   - MLflow
   - Model Registry
   - MLOps
-
 ---
-
-I wrote "MLflow Model Registry: Versioning and Deploying ML Models" to share practical, production-minded guidance on this topic.
 
 ## Model Registry Concepts
 
@@ -454,4 +451,3 @@ Combined with Databricks' Model Serving and Feature Store, it provides a complet
 - [MLflow Model Registry Docs](https://mlflow.org/docs/latest/model-registry.html)
 - [Databricks Model Registry](https://docs.databricks.com/mlflow/model-registry.html)
 - [Model Registry Webhooks](https://docs.databricks.com/mlflow/model-registry-webhooks.html)
-

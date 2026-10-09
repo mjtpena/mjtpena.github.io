@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric Lakehouse: Unified Analytics for the Modern Data Stack"
+description: "A Lakehouse stores data in open formats like Delta Lake while providing SQL query capabilities, ACID transactions, and schema enforcement. In Microsoft…"
 author: Michael John Peña
 draft: false
 date: 2025-08-03
@@ -9,10 +10,7 @@ tags:
   - Delta Lake
   - Data Engineering
   - Analytics
-
 ---
-
-I wrote "Microsoft Fabric Lakehouse: Unified Analytics for the Modern Data Stack" to share practical, production-minded guidance on this topic.
 
 ## Understanding the Lakehouse Concept
 
@@ -57,4 +55,4 @@ spark.sql("""
 
 The Fabric Lakehouse provides automatic table discovery, making Delta tables instantly queryable from the SQL endpoint. Data engineers work with Spark notebooks while analysts query the same data through familiar SQL tools like Power BI.
 
-OneLake's unified storage layer means data is stored once and accessed everywhere, eliminating costly data movement and duplication. The integration with Copilot in Fabric further accelerates development by generating code and insights.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+OneLake's unified storage layer means data is stored once and accessed everywhere, eliminating costly data movement and duplication. The integration with Copilot in Fabric further accelerates development by generating code and insights.

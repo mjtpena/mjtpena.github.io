@@ -1,18 +1,16 @@
 ---
 title: "Power Platform Environment Strategy: Planning for Scale"
+description: "A well-planned environment strategy enables teams to move fast while maintaining governance and security."
 author: Michael John Peña
 draft: false
 date: 2022-02-10
 url: /blog/power-platform-environment-strategy/
 tags:
   - power-platform
-  - governance
+  - Governance
   - environments
-  - architecture
-
+  - Architecture
 ---
-
-I wrote "Power Platform Environment Strategy: Planning for Scale" to share practical, production-minded guidance on this topic.
 
 ## Environment Types
 
@@ -240,4 +238,4 @@ $healthReport | Export-Csv "environment-health.csv"
 6. **Monitor capacity** - Track usage and limits
 7. **Document ownership** - Clear responsibility
 
-A well-planned environment strategy enables teams to move fast while maintaining governance and security.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A well-planned environment strategy enables teams to move fast while maintaining governance and security.

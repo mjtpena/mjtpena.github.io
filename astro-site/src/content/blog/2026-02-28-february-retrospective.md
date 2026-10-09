@@ -1,5 +1,6 @@
 ---
 title: "February 2026: Month in Review"
+description: "Made four commitments at the start of February. Here's the honest accounting. Twenty-eight posts in twenty-eight days. The streak continues—fifty-six days…"
 author: Michael John Peña
 draft: false
 date: 2026-02-28
@@ -8,10 +9,7 @@ tags:
   - Retrospective
   - Reflection
   - Career
-
 ---
-
-I wrote "February 2026: Month in Review" to share practical, production-minded guidance on this topic.
 
 ## The Commitments
 
@@ -85,4 +83,4 @@ The same goals as last month, slightly better execution.
 
 That's the game. Compound the improvements.
 
-March starts tomorrow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+March starts tomorrow.

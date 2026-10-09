@@ -1,17 +1,15 @@
 ---
 title: "Azure CNI Overlay: Scalable Pod Networking"
+description: "Traditional Azure CNI assigns VNet IPs to pods, limiting scale. Overlay mode uses a separate address space for pods."
 author: Michael John Peña
 draft: false
 date: 2022-06-10
 tags:
-  - azure
-  - aks
-  - networking
+  - Azure
+  - AKS
+  - Networking
   - cni
-
 ---
-
-I wrote "Azure CNI Overlay: Scalable Pod Networking" to share practical, production-minded guidance on this topic.
 
 ## Traditional vs Overlay Networking
 
@@ -56,5 +54,3 @@ az aks show --resource-group myRG --name myAKS --query networkProfile
 ## Summary
 
 Azure CNI Overlay solves IP exhaustion challenges while maintaining Azure network integration, enabling larger AKS deployments.
-
-

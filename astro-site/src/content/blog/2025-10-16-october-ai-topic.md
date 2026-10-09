@@ -1,5 +1,6 @@
 ---
 title: "Implementing RAG with LangChain and Azure OpenAI"
+description: "Experiment with chunk sizes, overlap, and retrieval strategies. Hybrid search combining semantic and keyword matching often provides the best results for…"
 author: Michael John Peña
 draft: false
 date: 2025-10-16
@@ -9,10 +10,7 @@ tags:
   - Azure OpenAI
   - Vector Search
   - AI Applications
-
 ---
-
-I wrote "Implementing RAG with LangChain and Azure OpenAI" to share practical, production-minded guidance on this topic.
 
 ## Setting Up the RAG Pipeline
 
@@ -130,4 +128,4 @@ def answer_question(self, question: str) -> dict:
 
 ## Optimizing Retrieval Quality
 
-Experiment with chunk sizes, overlap, and retrieval strategies. Hybrid search combining semantic and keyword matching often provides the best results for enterprise applications.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Experiment with chunk sizes, overlap, and retrieval strategies. Hybrid search combining semantic and keyword matching often provides the best results for enterprise applications.

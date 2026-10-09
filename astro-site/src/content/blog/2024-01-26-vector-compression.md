@@ -1,5 +1,6 @@
 ---
 title: "Vector Compression in Azure AI Search: Reducing Costs Without Sacrificing Quality"
+description: "Vector compression reduced storage costs dramatically in a production index I worked on. Here are the practical trade-offs and configuration tips I used to…"
 author: Michael John Peña
 draft: false
 date: 2024-01-26

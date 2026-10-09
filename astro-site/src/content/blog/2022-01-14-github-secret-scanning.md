@@ -1,18 +1,16 @@
 ---
 title: "GitHub Secret Scanning: Protecting Your Credentials"
+description: "GitHub partners with service providers to detect over 100 types of secrets. When a secret is detected, both you and the provider are notified, allowing for…"
 author: Michael John Peña
 draft: false
 date: 2022-01-14
 url: /blog/github-secret-scanning/
 tags:
-  - github
-  - security
+  - GitHub
+  - Security
   - secrets
   - devsecops
-
 ---
-
-I wrote "GitHub Secret Scanning: Protecting Your Credentials" to share practical, production-minded guidance on this topic.
 
 ## How Secret Scanning Works
 
@@ -207,4 +205,4 @@ def rotate_exposed_secret(secret_name, vault_url):
     return new_value
 ```
 
-Secret scanning is a critical layer in your defense-in-depth security strategy.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Secret scanning is a critical layer in your defense-in-depth security strategy.

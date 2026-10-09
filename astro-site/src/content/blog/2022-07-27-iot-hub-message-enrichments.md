@@ -1,13 +1,11 @@
 ---
 title: "Enhancing IoT Data with Message Enrichments"
+description: "Message enrichments simplify downstream processing by providing device context at the point of ingestion."
 author: "Michael John Peña"
 draft: false
 date: 2022-07-27
 tags: ["Azure", "IoT Hub", "Message Enrichments", "Device Twin", "Data Processing"]
-
 ---
-
-I wrote "Enhancing IoT Data with Message Enrichments" to share practical, production-minded guidance on this topic.
 
 ## Understanding Message Enrichments
 
@@ -235,4 +233,4 @@ az iot hub message-enrichment delete \
     --key "region"
 ```
 
-Message enrichments simplify downstream processing by providing device context at the point of ingestion.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Message enrichments simplify downstream processing by providing device context at the point of ingestion.

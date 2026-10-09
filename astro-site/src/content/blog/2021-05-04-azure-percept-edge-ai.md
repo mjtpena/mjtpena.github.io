@@ -1,5 +1,6 @@
 ---
 title: "Azure Percept: Edge AI Development Made Accessible"
+description: "The goal is reducing the time from idea to edge-deployed AI from months to days. The platform uses Azure Custom Vision under the hood but abstracts away the…"
 author: Michael John Peña
 draft: false
 date: 2021-05-04
@@ -9,10 +10,7 @@ tags:
   - Edge Computing
   - IoT
   - Azure Percept
-
 ---
-
-I wrote "Azure Percept: Edge AI Development Made Accessible" to share practical, production-minded guidance on this topic.
 
 ## What is Azure Percept?
 
@@ -257,4 +255,4 @@ They're making it possible for non-specialists to deploy AI at the edge. As the 
 
 - [Azure Percept Documentation](https://docs.microsoft.com/en-us/azure/azure-percept/)
 - [Percept Studio](https://ms.portal.azure.com/#blade/AzureEdgeDevices/Main/overview)
-- [Custom Vision Edge Deployment](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/export-your-model)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Custom Vision Edge Deployment](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/export-your-model)

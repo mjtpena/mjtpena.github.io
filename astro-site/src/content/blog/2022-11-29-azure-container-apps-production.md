@@ -9,10 +9,7 @@ tags:
   - Kubernetes
   - Serverless
   - Cloud Native
-
 ---
-
-I wrote "Azure Container Apps for Production Workloads" to share practical, production-minded guidance on this topic.
 
 ## Why Container Apps?
 
@@ -481,4 +478,3 @@ Azure Container Apps provides a compelling platform for containerized workloads 
 - [Dapr Integration](https://docs.microsoft.com/en-us/azure/container-apps/dapr-overview)
 - [Scaling Rules](https://docs.microsoft.com/en-us/azure/container-apps/scale-app)
 - [Networking](https://docs.microsoft.com/en-us/azure/container-apps/networking)
-

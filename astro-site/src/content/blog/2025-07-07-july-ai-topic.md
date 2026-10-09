@@ -1,5 +1,6 @@
 ---
 title: "Real-Time AI Inference with Azure Container Apps: Dynamic Scaling Patterns"
+description: "Use spot instances for non-critical workloads, implement request batching for throughput optimization, and configure appropriate scale-to-zero policies.…"
 author: Michael John Peña
 draft: false
 date: 2025-07-07
@@ -9,10 +10,7 @@ tags:
   - KEDA
   - Serverless
   - Python
-
 ---
-
-I wrote "Real-Time AI Inference with Azure Container Apps: Dynamic Scaling Patterns" to share practical, production-minded guidance on this topic.
 
 ## Container Configuration for ML Workloads
 
@@ -87,4 +85,4 @@ spec:
 
 ## Cost Optimization
 
-Use spot instances for non-critical workloads, implement request batching for throughput optimization, and configure appropriate scale-to-zero policies. Monitor cold start latency and adjust minimum replicas during peak hours.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Use spot instances for non-critical workloads, implement request batching for throughput optimization, and configure appropriate scale-to-zero policies. Monitor cold start latency and adjust minimum replicas during peak hours.

@@ -1,5 +1,6 @@
 ---
 title: "Fabric Lakehouse Patterns: turning messy raw zones into reliable products"
+description: "I spent the day reducing cognitive overhead for engineers and analysts—introducing clearer table contracts, simpler failure modes, and concise runbooks that…"
 author: Michael John Peña
 draft: false
 date: 2026-03-25
@@ -36,4 +37,4 @@ Tomorrow's focus is to stress-test this with less ideal inputs and see where it 
 
 - [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/)
 - [Fabric data lifecycle](https://learn.microsoft.com/fabric/fundamentals/data-lifecycle)
-- [Lakehouse in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Lakehouse in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)

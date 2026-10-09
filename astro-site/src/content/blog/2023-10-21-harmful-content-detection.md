@@ -10,10 +10,7 @@ tags:
   - AI Safety
   - Machine Learning
   - AI
-
 ---
-
-I wrote "Harmful Content Detection in AI Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -546,4 +543,3 @@ print(f"Stats: {detector.get_stats()}")
 ## Conclusion
 
 Harmful content detection requires a multi-layered approach combining keyword detection, pattern matching, contextual analysis, and severity scoring. Real-time detection services enable immediate response to harmful content while maintaining performance. Regular updates to detection patterns and continuous monitoring ensure effectiveness against evolving harmful content.
-

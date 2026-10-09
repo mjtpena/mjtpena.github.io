@@ -1,13 +1,11 @@
 ---
 title: "Fabric Migration Stories: Real-World Experiences"
+description: "There is no substitute for learning from real migrations: the patterns we reuse (lift-and-shift for bulk data, iterative modernization for dependent…"
 author: "Michael John Peña"
 draft: false
 date: 2023-12-15
 tags: ["Microsoft Fabric", "Migration", "Case Study", "Data Platform", "Lessons Learned"]
-
 ---
-
-I wrote "Fabric Migration Stories: Real-World Experiences" to share practical, production-minded guidance on this topic.
 
 There is no substitute for learning from real migrations: the patterns we reuse (lift-and-shift for bulk data, iterative modernization for dependent pipelines) matter less than the safeguards — end-to-end testing, parity validation, and stakeholder sign-off — that prevent surprises.
 
@@ -372,4 +370,4 @@ AS SELECT * FROM [external_source].{details.get('schema')}.{details.get('table_n
         }
 ```
 
-Tomorrow, we'll explore Fabric best practices for production deployments!\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Tomorrow, we'll explore Fabric best practices for production deployments!

@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric June 2024 Updates: Real-Time Intelligence GA"
+description: "Real-Time Intelligence is Fabric's answer to streaming analytics, combining the power of Azure Data Explorer with the unified Fabric experience."
 author: Michael John Peña
 draft: false
 date: 2024-06-01
@@ -9,10 +10,7 @@ tags:
   - Data Platform
   - Azure
   - Analytics
-
 ---
-
-I wrote "Microsoft Fabric June 2024 Updates: Real-Time Intelligence GA" to share practical, production-minded guidance on this topic.
 
 ## Real-Time Intelligence GA
 
@@ -333,4 +331,4 @@ Tomorrow I'll dive deep into Eventhouses and their capabilities.
 
 - [Real-Time Intelligence Documentation](https://learn.microsoft.com/fabric/real-time-intelligence/)
 - [KQL Reference](https://learn.microsoft.com/kusto/query/)
-- [Fabric Pricing](https://azure.microsoft.com/pricing/details/microsoft-fabric/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Fabric Pricing](https://azure.microsoft.com/pricing/details/microsoft-fabric/)

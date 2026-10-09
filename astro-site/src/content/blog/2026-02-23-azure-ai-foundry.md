@@ -1,5 +1,6 @@
 ---
 title: "Azure AI Foundry: What It Is and Why It Matters"
+description: "A unified platform for building, deploying, and managing AI applications and agents at enterprise scale."
 author: Michael John Peña
 draft: false
 date: 2026-02-23
@@ -8,10 +9,7 @@ tags:
   - Azure
   - Architecture
   - Engineering
-
 ---
-
-I wrote "Azure AI Foundry: What It Is and Why It Matters" to share practical, production-minded guidance on this topic.
 
 ## What Azure AI Foundry Is
 
@@ -115,4 +113,4 @@ Azure AI Foundry is the production platform Azure AI work has needed.
 
 Not a silver bullet. Not magic. But a real operational improvement over managing individual model endpoints, credentials, and safety configurations independently.
 
-If you're serious about AI in production on Azure, this is where you should be working.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+If you're serious about AI in production on Azure, this is where you should be working.

@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-06-02
 tags:
-  - kubernetes
-  - containers
-  - devops
-  - cloud
-
+  - Kubernetes
+  - Containers
+  - DevOps
+  - Cloud
 ---
-
-I wrote "Kubernetes 1.24 Features: Deep Dive into New Capabilities" to share practical, production-minded guidance on this topic.
 
 ## Non-Graceful Node Shutdown
 
@@ -240,4 +237,5 @@ metadata:
 spec:
   volumeSnapshotClassName: azure-disk-snapshot
   source:
-    persistentVolumeClaimName: my-pvc\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+    persistentVolumeClaimName: my-pvc
+```

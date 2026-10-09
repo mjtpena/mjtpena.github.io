@@ -9,10 +9,7 @@ tags:
   - Parameters
   - AI
   - Configuration
-
 ---
-
-I wrote "Temperature and Top-P: Fine-Tuning Azure OpenAI Response Creativity" to share practical, production-minded guidance on this topic.
 
 ## Understanding Temperature
 
@@ -505,4 +502,4 @@ creative_result = adaptive.generate("Imagine a world where clouds are made of da
 
 - [Azure OpenAI Parameters](https://learn.microsoft.com/azure/cognitive-services/openai/reference)
 - [OpenAI API Reference](https://platform.openai.com/docs/api-reference/completions)
-- [Sampling Methods Explained](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Sampling Methods Explained](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277)

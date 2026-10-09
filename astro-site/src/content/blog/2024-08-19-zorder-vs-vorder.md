@@ -9,10 +9,7 @@ tags:
   - Z-Order
   - V-Order
   - Performance
-
 ---
-
-I wrote "Z-Order vs V-Order: Choosing the Right Data Ordering" to share practical, production-minded guidance on this topic.
 
 ## How They Work
 
@@ -535,4 +532,3 @@ maintenance.maintain_table(
 V-Order and Z-Order serve different purposes and work well together. Use V-Order as your baseline optimization for all tables, then layer Z-Order on top for tables with specific, known filter patterns.
 
 The combination provides both general compression benefits (V-Order) and targeted data skipping (Z-Order) for optimal query performance across all workloads.
-

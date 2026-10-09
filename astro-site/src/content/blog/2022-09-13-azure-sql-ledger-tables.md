@@ -1,13 +1,11 @@
 ---
 title: "Ledger Tables in Azure SQL Database"
+description: "Ledger tables maintain a complete history of all changes with cryptographic hashes, making it possible to verify that data hasn't been tampered with."
 author: "Michael John Peña"
 draft: false
 date: 2022-09-13
 tags: ["Azure", "SQL Database", "Ledger", "Security", "Blockchain"]
-
 ---
-
-I wrote "Ledger Tables in Azure SQL Database" to share practical, production-minded guidance on this topic.
 
 ## Understanding Ledger Tables
 
@@ -309,4 +307,4 @@ public class LedgerBlock
 4. **Supply chain** - Provenance tracking
 5. **Legal documents** - Chain of custody
 
-Ledger tables provide enterprise-grade data integrity without the overhead of maintaining a separate blockchain infrastructure.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Ledger tables provide enterprise-grade data integrity without the overhead of maintaining a separate blockchain infrastructure.

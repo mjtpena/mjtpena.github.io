@@ -1,13 +1,11 @@
 ---
 title: "Row-Level Security in Azure SQL Database"
+description: "RLS uses security policies with predicate functions to filter rows transparently. Users see only the rows they're authorized to access without any…"
 author: "Michael John Peña"
 draft: false
 date: 2022-09-16
 tags: ["Azure", "SQL Database", "Security", "RLS"]
-
 ---
-
-I wrote "Row-Level Security in Azure SQL Database" to share practical, production-minded guidance on this topic.
 
 ## Understanding Row-Level Security
 
@@ -357,4 +355,4 @@ SELECT * FROM dbo.Orders;  -- Only tenant 2 orders
 4. **Combine with DDM** - Layer RLS with Dynamic Data Masking
 5. **Monitor performance** - Predicates add overhead; optimize functions
 
-Row-Level Security provides robust data isolation for multi-tenant applications without application-level complexity.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Row-Level Security provides robust data isolation for multi-tenant applications without application-level complexity.

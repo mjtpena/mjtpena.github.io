@@ -4,14 +4,11 @@ author: Michael John Peña
 draft: false
 date: 2022-05-07
 tags:
-  - azure
-  - functions
+  - Azure
+  - Functions
   - nodejs
-  - serverless
-
+  - Serverless
 ---
-
-I wrote "Azure Functions Node.js 18: New Runtime Features" to share practical, production-minded guidance on this topic.
 
 ## Setting Up Node.js 18
 
@@ -425,5 +422,3 @@ Node.js 18 in Azure Functions brings:
 - Enhanced performance and memory management
 
 This update makes Azure Functions more aligned with modern Node.js development practices.
-
-

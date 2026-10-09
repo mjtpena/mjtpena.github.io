@@ -9,10 +9,7 @@ tags:
   - Cloud Native
   - Architecture
   - Cost
-
 ---
-
-I wrote "The Serverless Benefits Realized in 2022" to share practical, production-minded guidance on this topic.
 
 ## The Serverless Value Proposition
 
@@ -321,4 +318,3 @@ Serverless delivered on its promises in 2022. For the right workloads, it provid
 - [Azure Functions Documentation](https://docs.microsoft.com/azure/azure-functions/)
 - [Serverless Architectures](https://docs.microsoft.com/azure/architecture/reference-architectures/serverless/)
 - [Azure Functions Pricing](https://azure.microsoft.com/pricing/details/functions/)
-

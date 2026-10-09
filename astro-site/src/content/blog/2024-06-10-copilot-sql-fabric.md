@@ -1,5 +1,6 @@
 ---
 title: "Copilot for SQL in Microsoft Fabric Data Warehouse"
+description: "Copilot for SQL transforms natural language into T-SQL queries. Today I'm exploring how to leverage AI for data warehouse development in Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-10
@@ -422,4 +423,4 @@ Tomorrow I'll cover Fabric Admin updates.
 
 - [Copilot for SQL](https://learn.microsoft.com/fabric/data-warehouse/copilot)
 - [T-SQL Reference](https://learn.microsoft.com/sql/t-sql/)
-- [Query Performance Tips](https://learn.microsoft.com/sql/relational-databases/performance/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Query Performance Tips](https://learn.microsoft.com/sql/relational-databases/performance/)

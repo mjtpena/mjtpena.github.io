@@ -1,5 +1,6 @@
 ---
 title: "On-Device Models: Deploying AI Without the Cloud"
+description: "On-device AI enables new categories of privacy-preserving, low-latency applications. Choose the right format and optimization strategy for your target platform."
 author: Michael John Peña
 draft: false
 date: 2025-02-08
@@ -9,10 +10,7 @@ tags:
   - Mobile
   - ONNX
   - Privacy
-
 ---
-
-I wrote "On-Device Models: Deploying AI Without the Cloud" to share practical, production-minded guidance on this topic.
 
 ## Why On-Device AI?
 
@@ -323,4 +321,4 @@ class OnDeviceModelManager:
 5. **Fallback gracefully**: Handle cases where model can't run
 6. **Monitor performance**: Track inference time and memory usage
 
-On-device AI enables new categories of privacy-preserving, low-latency applications. Choose the right format and optimization strategy for your target platform.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+On-device AI enables new categories of privacy-preserving, low-latency applications. Choose the right format and optimization strategy for your target platform.

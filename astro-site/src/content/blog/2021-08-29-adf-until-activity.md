@@ -1,5 +1,6 @@
 ---
 title: "Azure Data Factory Until Activity: Implementing Loops and Polling Patterns"
+description: "The Until activity in ADF is the polling loop that keeps running until a condition is true—useful for pipelines that trigger an external process and need to…"
 author: "Michael John Peña"
 draft: false
 date: 2021-08-29
@@ -512,4 +513,4 @@ def monitor_until_activity(client, resource_group, factory_name, run_id,
 4. **Handle failure states**: Don't just wait for success
 5. **Use variables wisely**: Track state between iterations
 
-The Until Activity enables sophisticated control flow patterns that go beyond simple linear pipelines, allowing you to build resilient integrations that wait for and respond to external events.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+The Until Activity enables sophisticated control flow patterns that go beyond simple linear pipelines, allowing you to build resilient integrations that wait for and respond to external events.

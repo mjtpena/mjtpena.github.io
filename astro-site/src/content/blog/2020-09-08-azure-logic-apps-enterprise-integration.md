@@ -1,5 +1,6 @@
 ---
 title: "Azure Logic Apps for Enterprise Integration"
+description: "Logic Apps excels at the unglamorous middleware work — turning the SOAP service the warehouse system exposes into the REST endpoint the new mobile app…"
 author: Michael John Peña
 draft: false
 date: 2020-09-08
@@ -85,4 +86,4 @@ With Integration Accounts:
 4. Parameterize connection strings
 5. Implement idempotent actions
 
-Logic Apps handles the complex plumbing of enterprise integration so you can focus on business logic.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Logic Apps handles the complex plumbing of enterprise integration so you can focus on business logic.

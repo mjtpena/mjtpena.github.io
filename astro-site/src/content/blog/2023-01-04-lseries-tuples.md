@@ -1,5 +1,6 @@
 ---
 title: "Language Compare Series: TUPLES in CSharp, TypeScript, and Rust"
+description: "Comparing how different languages handle the same concept is one of the fastest ways I know to develop genuine language intuition—not the \"read the docs\"…"
 author: Michael John Peña
 draft: false
 date: 2023-01-04
@@ -8,12 +9,12 @@ tags:
   - tuples
   - csharp
   - rust
-  - typescript
+  - TypeScript
 ---
 
 Comparing how different languages handle the same concept is one of the fastest ways I know to develop genuine language intuition—not the "read the docs" kind of understanding but the kind where you feel why a language made the choices it did. Tuples are a simple enough data structure to serve as a useful comparator: every language has them (or something similar), but the design decisions around mutability, destructuring, pattern matching, and type inference reveal the language's philosophy clearly. This is the first post in a Language Compare Series where I look at C#, TypeScript, and Rust through a common concept—not to crown a winner but to understand what each language is trying to be.
 
-# Introduction about the series
+## Introduction about the series
 
 I've been in the technology for more than a decade now, and one thing that really facinates me is when I get back to the roots of programming languages. When you just look at "coding" and not really have to deal with business requirements, what methodologies to use, and how to communicate effectively with your teams and stakeholders. This is what I particularly love about technology and programming languages, there's always something new to learn.
 
@@ -27,7 +28,7 @@ Rust is new for me. I've been playing with it for almost 2 years now, but I have
 
 So let's start with one simple concept that exists with all these 3 languages: TUPLES.
 
-# What are Tuples?
+## What are Tuples?
 
 Tuples are a data structure that allows you to store a fixed number of elements of different types. They are often used to store small collections of data where you don't want to create a custom data type. Tuples are typically immutable, meaning that you can't add or remove elements from them once they have been created.
 
@@ -70,7 +71,7 @@ Tuples in TypeScript are similar to those in C#. They are fixed-size arrays of e
 
 Here is an example of creating and using a tuple in TypeScript:
 
-```TypeScript
+```typescript
 // Creating a tuple
 let tuple: [number, string, boolean] = [10, "hello", true];
 
@@ -110,4 +111,4 @@ As you can see, tuples in C#, TypeScript, and Rust are very similar in terms of 
 
 One difference between the three languages is that C# and TypeScript provide named elements in tuples, whereas Rust does not. This can make it easier to work with tuples in C# and TypeScript because you can give names to the elements and use those names to access the elements, rather than having to remember their positions.
 
-Overall, tuples can be a useful tool for storing and working with small collections of data where you don't want to create a custom data type. They are easy to use and can help make your code more readable and maintainable.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Overall, tuples can be a useful tool for storing and working with small collections of data where you don't want to create a custom data type. They are easy to use and can help make your code more readable and maintainable.

@@ -1,13 +1,11 @@
 ---
 title: "Databricks REST API for Advanced Automation"
+description: "The Databricks REST API exposes every workspace capability that the UI and CLI provide—and then some—making it the integration point for external…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-28
 tags: ["Azure", "Databricks", "REST API", "Automation", "Python"]
-
 ---
-
-I wrote "Databricks REST API for Advanced Automation" to share practical, production-minded guidance on this topic.
 
 The Databricks REST API exposes every workspace capability that the UI and CLI provide—and then some—making it the integration point for external orchestrators, monitoring systems, and custom tooling that need to interact with Databricks programmatically. The API families: Jobs API (run management, triggering, status polling), Clusters API (create, resize, start, stop), Workspace API (notebook import/export), DBFS API (file operations), Secrets API (secret scope management), and Permissions API (access control). For CI/CD pipelines, the Jobs Runs API's `run-now` and `get` endpoints provide the trigger-and-poll pattern: trigger a job run, poll for completion, check the result state. Authentication is via Personal Access Token in the `Authorization: Bearer` header or Databricks-native OAuth (in preview in October 2021). The API is well-documented and stable, making it reliable for production automation.
 
@@ -453,4 +451,3 @@ if __name__ == "__main__":
 The Databricks REST API provides complete programmatic control over your Databricks environment. Combined with the CLI, you can build sophisticated automation and CI/CD pipelines.
 
 Tomorrow, we'll explore notebook workflows for orchestrating data pipelines.
-

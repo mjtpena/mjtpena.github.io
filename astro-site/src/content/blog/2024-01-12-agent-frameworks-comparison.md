@@ -1,5 +1,6 @@
 ---
 title: "AI Agent Frameworks Comparison: LangChain, AutoGen, CrewAI, and More"
+description: "I've built prototypes on LangChain, AutoGen, and several newcomers; each choice has trade-offs. This comparison focuses on practical differences that…"
 author: Michael John Peña
 draft: false
 date: 2024-01-12

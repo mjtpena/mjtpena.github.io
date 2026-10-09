@@ -8,10 +8,7 @@ tags:
   - Quotas
   - Rate Limits
   - API Management
-
 ---
-
-I wrote "Azure OpenAI Quotas: Understanding and Managing Limits" to share practical, production-minded guidance on this topic.
 
 ## Quota Types
 
@@ -231,4 +228,4 @@ Tomorrow we'll explore rate limit management strategies.
 
 - [Azure OpenAI Quotas](https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits)
 - [Quota Management](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota)
-- [Rate Limit Best Practices](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota#best-practices)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Rate Limit Best Practices](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota#best-practices)

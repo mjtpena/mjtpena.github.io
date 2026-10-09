@@ -1,5 +1,6 @@
 ---
 title: "Fabric Real-Time Intelligence: Building Streaming Analytics Solutions"
+description: "I've built several streaming pipelines on Fabric; the combination of Eventstreams, KQL, and Data Activator covers most real-time needs. This post shows…"
 author: Michael John Peña
 draft: false
 date: 2024-01-18

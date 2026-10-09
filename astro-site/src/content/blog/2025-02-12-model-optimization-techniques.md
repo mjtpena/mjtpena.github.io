@@ -1,5 +1,6 @@
 ---
 title: "Model Optimization Techniques: From Training to Deployment"
+description: "Model optimization is both science and art. Start with the techniques that offer the best impact for your specific constraints."
 author: Michael John Peña
 draft: false
 date: 2025-02-12
@@ -9,10 +10,7 @@ tags:
   - Deep Learning
   - MLOps
   - Performance
-
 ---
-
-I wrote "Model Optimization Techniques: From Training to Deployment" to share practical, production-minded guidance on this topic.
 
 ## The Optimization Journey
 
@@ -389,4 +387,4 @@ results = pipeline.optimize(config)
 5. **Profile memory**: Size matters for deployment
 6. **Automate**: Build optimization into your pipeline
 
-Model optimization is both science and art. Start with the techniques that offer the best impact for your specific constraints.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Model optimization is both science and art. Start with the techniques that offer the best impact for your specific constraints.

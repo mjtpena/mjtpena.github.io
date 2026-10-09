@@ -8,10 +8,7 @@ tags:
   - Hugging Face
   - NLP
   - Deep Learning
-
 ---
-
-I wrote "Transformers Library: The Swiss Army Knife of NLP" to share practical, production-minded guidance on this topic.
 
 ## Core Concepts
 
@@ -275,4 +272,4 @@ Tomorrow we'll explore the Accelerate library for distributed training.
 
 - [Transformers Documentation](https://huggingface.co/docs/transformers)
 - [Pipeline API](https://huggingface.co/docs/transformers/main_classes/pipelines)
-- [Model Hub](https://huggingface.co/models)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Model Hub](https://huggingface.co/models)

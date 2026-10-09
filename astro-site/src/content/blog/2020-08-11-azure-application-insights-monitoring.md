@@ -1,5 +1,6 @@
 ---
 title: "Application Performance Monitoring with Azure Application Insights"
+description: "First thing I do on any new Azure-hosted application I'm asked to look at: open Application Insights and see what's actually happening. Half the time, \"the…"
 author: Michael John Peña
 draft: false
 date: 2020-08-11
@@ -272,4 +273,4 @@ services.Configure<TelemetryConfiguration>(config =>
 
 Application Insights provides the visibility needed to maintain application health and quickly diagnose issues, essential for teams operating remotely.
 
-A pricing word of warning: at scale, ingestion is the cost. A chatty service that logs every cache hit can quietly run up a bill that exceeds the compute it monitors. Keep adaptive sampling on by default, and audit any custom telemetry with the same care you'd audit a database write — it's all going to a billed log store.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+A pricing word of warning: at scale, ingestion is the cost. A chatty service that logs every cache hit can quietly run up a bill that exceeds the compute it monitors. Keep adaptive sampling on by default, and audit any custom telemetry with the same care you'd audit a database write — it's all going to a billed log store.

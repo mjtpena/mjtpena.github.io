@@ -10,10 +10,7 @@ tags:
   - Content Moderation
   - Safety
   - AI
-
 ---
-
-I wrote "Output Filtering for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Introduction
 
@@ -569,4 +566,3 @@ print(f"Final output: {result['final_output']}")
 ## Conclusion
 
 Output filtering provides critical protection against harmful content, PII leakage, dangerous code, and hallucinations. A comprehensive approach combines content classification, quality checks, hallucination detection, and context-aware filtering. Regular updates to filtering rules and continuous monitoring ensure effective protection as new risks emerge.
-

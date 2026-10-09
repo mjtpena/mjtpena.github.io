@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Fabric vs Azure Synapse Analytics: A Detailed Comparison"
+description: "Both Synapse and Fabric are excellent platforms. The choice depends on your specific requirements, existing investments, and organizational priorities."
 author: Michael John Peña
 draft: false
 date: 2023-05-14
@@ -9,10 +10,7 @@ tags:
   - Data Platform
   - Azure
   - Comparison
-
 ---
-
-I wrote "Microsoft Fabric vs Azure Synapse Analytics: A Detailed Comparison" to share practical, production-minded guidance on this topic.
 
 ## Architecture Comparison
 
@@ -355,4 +353,4 @@ Both Synapse and Fabric are excellent platforms. The choice depends on your spec
 
 - [Fabric vs Synapse Comparison](https://learn.microsoft.com/en-us/fabric/get-started/fabric-azure-synapse-analytics)
 - [Migration Guide](https://learn.microsoft.com/en-us/fabric/data-engineering/migrate-synapse-overview)
-- [Synapse Documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Synapse Documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/)

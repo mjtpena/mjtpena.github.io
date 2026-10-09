@@ -1,5 +1,6 @@
 ---
 title: "External Data Access Patterns in Microsoft Fabric"
+description: "Accessing external data is essential for hybrid and multi-cloud scenarios. Today I'm exploring external data access patterns in Microsoft Fabric."
 author: Michael John Peña
 draft: false
 date: 2024-06-23
@@ -515,4 +516,4 @@ Tomorrow I'll cover security fundamentals in Microsoft Fabric.
 
 - [OneLake Shortcuts](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts)
 - [S3 Compatible Storage](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts-s3-compatible)
-- [Multi-Cloud Data Access](https://learn.microsoft.com/fabric/onelake/access-onelake-shortcuts)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Multi-Cloud Data Access](https://learn.microsoft.com/fabric/onelake/access-onelake-shortcuts)

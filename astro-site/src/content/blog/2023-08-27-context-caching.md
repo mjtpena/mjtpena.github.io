@@ -8,10 +8,7 @@ tags:
   - LLM
   - Performance
   - Optimization
-
 ---
-
-I wrote "Context Caching for LLM Applications" to share practical, production-minded guidance on this topic.
 
 ## Caching Strategies
 
@@ -257,4 +254,4 @@ Tomorrow we'll explore conversation summarization techniques.
 
 - [Redis Caching](https://redis.io/docs/manual/client-side-caching/)
 - [Semantic Search](https://www.sbert.net/docs/usage/semantic_textual_similarity.html)
-- [LLM Caching Patterns](https://python.langchain.com/docs/modules/memory/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [LLM Caching Patterns](https://python.langchain.com/docs/modules/memory/)

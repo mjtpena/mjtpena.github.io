@@ -1,13 +1,11 @@
 ---
 title: "Smart Narratives in Power BI: Automated Data Storytelling"
+description: "Smart Narratives automatically generate text summaries of your data, transforming numbers into stories. This guide covers implementation and customization."
 author: "Michael John Peña"
 draft: false
 date: 2024-04-13
 tags: ["Power BI", "Smart Narratives", "AI", "Data Storytelling", "Analytics"]
-
 ---
-
-I wrote "Smart Narratives in Power BI: Automated Data Storytelling" to share practical, production-minded guidance on this topic.
 
 Smart Narratives automatically generate text summaries of your data, transforming numbers into stories. This guide covers implementation and customization.
 
@@ -363,4 +361,3 @@ class DynamicNarrativeManager:
 ## Conclusion
 
 Smart Narratives transform data into accessible stories. Combine Power BI's built-in capabilities with custom AI-generated narratives for comprehensive automated reporting.
-

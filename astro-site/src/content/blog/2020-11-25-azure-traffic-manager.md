@@ -1,5 +1,6 @@
 ---
 title: "Azure Traffic Manager: Global DNS Load Balancing"
+description: "Traffic Manager is a deeply unglamorous service that has saved a couple of my projects. It works at the DNS layer—no traffic flows through it, just the…"
 author: Michael John Peña
 draft: false
 date: 2020-11-25
@@ -187,4 +188,4 @@ az network traffic-manager endpoint show \
     --query "endpointMonitorStatus"
 ```
 
-Traffic Manager: global traffic distribution made simple.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Traffic Manager: global traffic distribution made simple.

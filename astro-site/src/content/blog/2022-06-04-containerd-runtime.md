@@ -1,17 +1,15 @@
 ---
 title: "containerd Runtime: Understanding the Container Engine"
+description: "containerd provides core container functionality: image management, container execution, and storage through a modular design with plugins."
 author: Michael John Peña
 draft: false
 date: 2022-06-04
 tags:
   - containerd
-  - kubernetes
-  - containers
+  - Kubernetes
+  - Containers
   - runtime
-
 ---
-
-I wrote "containerd Runtime: Understanding the Container Engine" to share practical, production-minded guidance on this topic.
 
 ## containerd Architecture
 
@@ -86,5 +84,3 @@ containerd offers better performance than Docker for Kubernetes workloads due to
 ## Summary
 
 containerd provides a lightweight, efficient container runtime ideal for Kubernetes clusters. Understanding its tools and architecture helps with debugging and optimization.
-
-

@@ -1,5 +1,6 @@
 ---
 title: "RAG Patterns That Actually Work in Production"
+description: "Vector search alone misses exact matches. Keyword search alone misses semantic similarity. Combine them."
 author: Michael John Peña
 draft: false
 date: 2026-01-07
@@ -8,10 +9,7 @@ tags:
   - RAG
   - Azure
   - Architecture
-
 ---
-
-I wrote "RAG Patterns That Actually Work in Production" to share practical, production-minded guidance on this topic.
 
 ## The Naive RAG (Don't Do This)
 
@@ -291,4 +289,4 @@ After building a dozen RAG systems, here's what moves the needle:
 - [ ] Cost optimization (caching)
 - [ ] User feedback collection
 
-Don't build RAG systems with tutorial-level patterns. These are the patterns that actually work when users depend on your system.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Don't build RAG systems with tutorial-level patterns. These are the patterns that actually work when users depend on your system.

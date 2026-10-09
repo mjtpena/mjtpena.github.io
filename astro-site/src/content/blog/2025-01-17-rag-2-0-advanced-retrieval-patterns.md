@@ -1,5 +1,6 @@
 ---
 title: "RAG 2.0: Advanced Retrieval Patterns for Production AI"
+description: "RAG 2.0 is about precision and reliability. Invest in retrieval quality, and your generation quality will follow."
 author: Michael John Peña
 draft: false
 date: 2025-01-17
@@ -9,10 +10,7 @@ tags:
   - Vector Search
   - Azure
   - LLM
-
 ---
-
-I wrote "RAG 2.0: Advanced Retrieval Patterns for Production AI" to share practical, production-minded guidance on this topic.
 
 ## The Evolution of RAG
 
@@ -390,4 +388,4 @@ class RerankerPipeline:
 7. **Evaluation** - Measure retrieval and generation quality
 8. **Caching** - Cache embeddings and frequent queries
 
-RAG 2.0 is about precision and reliability. Invest in retrieval quality, and your generation quality will follow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+RAG 2.0 is about precision and reliability. Invest in retrieval quality, and your generation quality will follow.

@@ -1,5 +1,6 @@
 ---
 title: "Azure Machine Learning Designer for No-Code ML"
+description: "Designer democratizes ML for teams that don't live in code."
 author: Michael John Peña
 draft: false
 date: 2020-09-07
@@ -8,10 +9,7 @@ tags:
   - Machine Learning
   - No-Code
   - AI
-
 ---
-
-I wrote "Azure Machine Learning Designer for No-Code ML" to share practical, production-minded guidance on this topic.
 
 ## When to Use Designer
 
@@ -65,4 +63,4 @@ response = requests.post(scoring_uri, json=data, headers=headers)
 print(response.json())
 ```
 
-Designer democratizes ML for teams that don't live in code.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Designer democratizes ML for teams that don't live in code.

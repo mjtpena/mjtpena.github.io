@@ -1,13 +1,11 @@
 ---
 title: "LLM Observability Tools: Comparing the Landscape"
+description: "Choose your observability tools based on your team size, budget, privacy requirements, and existing tooling. Start simple and add more sophisticated tools…"
 author: "Michael John Peña"
 draft: false
 date: 2024-10-14
 tags: ["LLM Observability", "Monitoring", "AI Tools", "Comparison", "Production"]
-
 ---
-
-I wrote "LLM Observability Tools: Comparing the Landscape" to share practical, production-minded guidance on this topic.
 
 ## Tool Categories
 
@@ -331,4 +329,4 @@ class LightweightLLMObserver:
         return by_model
 ```
 
-Choose your observability tools based on your team size, budget, privacy requirements, and existing tooling. Start simple and add more sophisticated tools as your needs grow.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Choose your observability tools based on your team size, budget, privacy requirements, and existing tooling. Start simple and add more sophisticated tools as your needs grow.

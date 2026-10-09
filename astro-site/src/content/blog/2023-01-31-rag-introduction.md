@@ -1,5 +1,6 @@
 ---
 title: "Introduction to Retrieval Augmented Generation (RAG)"
+description: "RAG solves both by retrieving relevant context before generating responses."
 author: Michael John Peña
 draft: false
 date: 2023-01-31
@@ -9,10 +10,7 @@ tags:
   - RAG
   - AI
   - Architecture
-
 ---
-
-I wrote "Introduction to Retrieval Augmented Generation (RAG)" to share practical, production-minded guidance on this topic.
 
 ## Why RAG?
 
@@ -438,4 +436,4 @@ RAG_BEST_PRACTICES = {
 
 - [Azure OpenAI + Cognitive Search](https://learn.microsoft.com/azure/search/search-get-started-openai)
 - [RAG Best Practices](https://learn.microsoft.com/azure/cognitive-services/openai/how-to/use-your-data)
-- [LangChain RAG](https://python.langchain.com/docs/use_cases/question_answering/)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [LangChain RAG](https://python.langchain.com/docs/use_cases/question_answering/)

@@ -1,5 +1,6 @@
 ---
 title: "TDD (Test-Driven Development) Overview with Python Example"
+description: "This cycle is repeated for each new piece of functionality. The result is a suite of tests that provide confidence in the code and make it easier to…"
 author: Michael John Peña
 draft: false
 date: 2023-02-07
@@ -9,12 +10,9 @@ tags:
   - Testing
   - Python
   - Software
-
 ---
 
-I wrote "TDD (Test-Driven Development) Overview with Python Example" to share practical, production-minded guidance on this topic.
-
-# How TDD Works
+## How TDD Works
 
 TDD is based on the Red-Green-Refactor cycle:
 
@@ -57,4 +55,5 @@ def add(a, b):
 ```bash
 .
 
--------------------------------------------------------------------\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+-------------------------------------------------------------------
+```

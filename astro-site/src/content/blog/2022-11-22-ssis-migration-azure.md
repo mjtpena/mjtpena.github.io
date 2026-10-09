@@ -9,10 +9,7 @@ tags:
   - Data Factory
   - Migration
   - ETL
-
 ---
-
-I wrote "SSIS to Azure Migration: Strategies and Tools" to share practical, production-minded guidance on this topic.
 
 ## Migration Options
 
@@ -385,4 +382,3 @@ SSIS migration to Azure offers flexibility. Azure-SSIS IR provides the fastest p
 - [Azure-SSIS Integration Runtime](https://docs.microsoft.com/en-us/azure/data-factory/create-azure-ssis-integration-runtime)
 - [Mapping Data Flows](https://docs.microsoft.com/en-us/azure/data-factory/concepts-data-flow-overview)
 - [SSIS Migration Guide](https://docs.microsoft.com/en-us/azure/data-factory/how-to-migrate-ssis-job-ssms)
-

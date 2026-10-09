@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Security Copilot: AI-Powered Threat Defense"
+description: "Security Copilot addresses the security skills gap by augmenting analysts with AI-powered investigation and response capabilities."
 author: Michael John Pena
 draft: false
 date: 2023-04-10
@@ -9,10 +10,7 @@ tags:
   - Security
   - Copilot
   - Cybersecurity
-
 ---
-
-I wrote "Microsoft Security Copilot: AI-Powered Threat Defense" to share practical, production-minded guidance on this topic.
 
 ## Security Copilot Capabilities
 
@@ -292,4 +290,4 @@ Provide:
 4. **Knowledge augmentation** - Explain complex security concepts
 5. **Response guidance** - Step-by-step remediation instructions
 
-Security Copilot addresses the security skills gap by augmenting analysts with AI-powered investigation and response capabilities.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Security Copilot addresses the security skills gap by augmenting analysts with AI-powered investigation and response capabilities.

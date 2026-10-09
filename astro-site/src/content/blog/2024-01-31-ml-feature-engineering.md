@@ -1,5 +1,6 @@
 ---
 title: "Feature Engineering for ML: Patterns and Best Practices"
+description: "Feature engineering is often the difference between mediocre and exceptional model performance. These are the production-ready patterns I apply when…"
 author: Michael John Peña
 draft: false
 date: 2024-01-31

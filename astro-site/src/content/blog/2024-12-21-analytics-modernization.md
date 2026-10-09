@@ -1,5 +1,6 @@
 ---
 title: "Analytics Modernization: From Legacy BI to AI-Powered Insights"
+description: "Analytics modernization is a journey, not a destination. Start with clear goals, measure progress, and continuously evolve your analytics capabilities."
 author: Michael John Peña
 draft: false
 date: 2024-12-21
@@ -9,10 +10,7 @@ tags:
   - Business Intelligence
   - AI
   - Data
-
 ---
-
-I wrote "Analytics Modernization: From Legacy BI to AI-Powered Insights" to share practical, production-minded guidance on this topic.
 
 ## The Modernization Journey
 
@@ -359,4 +357,4 @@ Analytics modernization is a journey, not a destination. Start with clear goals,
 
 - [Power BI Migration Guide](https://learn.microsoft.com/en-us/power-bi/guidance/migration-overview)
 - [Fabric Analytics Best Practices](https://learn.microsoft.com/en-us/fabric/get-started/best-practices)
-- [Modern Analytics Architecture](https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/analytics-end-to-end)\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+- [Modern Analytics Architecture](https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/analytics-end-to-end)

@@ -1,5 +1,6 @@
 ---
 title: Advanced Azure Cognitive Search Techniques
+description: "Default Cognitive Search will get you to \"decent enough.\" Excellent search is a tuning exercise, and the levers that matter are mostly hidden. Custom…"
 author: Michael John Pena
 draft: false
 date: 2021-01-27
@@ -684,4 +685,4 @@ export class SearchSuggestionService {
 5. **Monitoring**: Track search metrics and zero-result queries
 6. **Testing**: A/B test scoring profiles and relevance tuning
 
-Azure Cognitive Search provides powerful capabilities for building intelligent search experiences. Combining full-text search with AI enrichment and vector similarity enables sophisticated discovery scenarios that were previously difficult to implement.\n\n## Takeaways\n\n*Add a concise, personal takeaway and recommended next steps here.*\n
+Azure Cognitive Search provides powerful capabilities for building intelligent search experiences. Combining full-text search with AI enrichment and vector similarity enables sophisticated discovery scenarios that were previously difficult to implement.

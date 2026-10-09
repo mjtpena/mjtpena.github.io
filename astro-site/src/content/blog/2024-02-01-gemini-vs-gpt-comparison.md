@@ -1,5 +1,6 @@
 ---
 title: "Gemini vs GPT: Practical Comparison for Enterprise Applications"
+description: "I spent time comparing Gemini and GPT in enterprise settings; below are the practical differences that should influence model choice."
 author: Michael John Peña
 draft: false
 date: 2024-02-01

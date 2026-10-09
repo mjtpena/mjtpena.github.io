@@ -1,13 +1,11 @@
 ---
 title: "Databricks Cluster Policies for Governance and Cost Control"
+description: "Databricks cluster policies are the governance layer that prevents the classic enterprise data platform problem: data scientists spinning up 64-node GPU…"
 author: "Michael John Peña"
 draft: false
 date: 2021-10-25
 tags: ["Azure", "Databricks", "Governance", "Cost Management", "Policies"]
-
 ---
-
-I wrote "Databricks Cluster Policies for Governance and Cost Control" to share practical, production-minded guidance on this topic.
 
 Databricks cluster policies are the governance layer that prevents the classic enterprise data platform problem: data scientists spinning up 64-node GPU clusters for a five-minute notebook experiment, discovering the issue when the invoice arrives. A cluster policy is an admin-defined template that specifies which cluster configuration fields are fixed, which are bounded (min/max values), and which are unrestricted—users creating clusters through that policy can only configure within the allowed ranges. The cost control pattern: a `default-interactive` policy with max 4 workers and autoscale disabled (forces use of the minimum reasonable cluster for interactive work); a `large-batch` policy with max 16 workers, single user access mode, and autotermination after 30 minutes of inactivity. Library installation policies prevent users from installing untested packages that could destabilise shared clusters.
 
@@ -487,4 +485,3 @@ def get_clusters_by_policy(workspace_url, token, policy_id):
 Cluster policies are essential for governing Databricks usage at scale. By implementing appropriate policies, you can control costs, enforce standards, and simplify the user experience while maintaining flexibility for different workload types.
 
 Tomorrow, we'll compare job clusters vs all-purpose clusters for different use cases.
-

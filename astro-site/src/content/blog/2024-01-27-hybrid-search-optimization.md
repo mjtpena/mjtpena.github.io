@@ -1,5 +1,6 @@
 ---
 title: "Hybrid Search Optimization: Combining Vector, Keyword, and Semantic Search"
+description: "Combining vector, keyword, and semantic search solved many relevance problems for us. This post distils the hybrid strategies I used to get the best of each…"
 author: Michael John Peña
 draft: false
 date: 2024-01-27
