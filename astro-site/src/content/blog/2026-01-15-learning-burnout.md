@@ -19,13 +19,13 @@ I think that message is wrong, and I think it's making a lot of good engineers w
 
 The pressure itself isn't imaginary. In data and AI especially, the surface area keeps growing. Model families, agent frameworks, vector stores, orchestration tools, platform features, certification refreshes. If you treat every announcement as homework, the backlog never shrinks.
 
-The broken premise is that the backlog is yours to clear. "Continuous learning" has drifted from a sensible idea (keep getting better at your craft) into an impossible one (keep up with everything). The people who look like they keep up with everything are usually skimming, and skimming looks a lot like learning from the outside.
+The broken premise is that the backlog is yours to clear. "Continuous learning" has drifted from a sensible idea (keep getting better at your craft) into an impossible one (keep up with everything). In my experience, most people who appear to keep up with everything are skimming, and skimming looks a lot like learning from the outside.
 
 ## When input stops becoming understanding
 
 You can't absorb new information endlessly. At some point the input stops turning into understanding and starts turning into noise. You read the release notes, watch the demo, bookmark the repo, and a week later you can't explain what problem it solved.
 
-When keeping up becomes an unspoken part of the job, it can feed what the World Health Organization describes as [burn-out](https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases): a syndrome resulting from chronic workplace stress that hasn't been successfully managed, marked by exhaustion, growing mental distance or cynicism about the job, and reduced professional efficacy. WHO is careful to frame it as an occupational phenomenon rather than a medical condition and limits it to the workplace, which is exactly where the expectation to keep up comes from. I'm not qualified to diagnose anyone. But the three dimensions map uncomfortably well onto what endless "keeping up" does to people:
+When keeping up becomes an unspoken part of the job, it can feed what the World Health Organization describes as [burn-out](https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases). WHO defines it as a syndrome resulting from chronic workplace stress that hasn't been successfully managed. It has three dimensions: exhaustion, growing mental distance or cynicism about the job, and reduced professional efficacy. WHO frames it as an occupational phenomenon rather than a medical condition and limits it to the workplace, which is exactly where the expectation to keep up comes from. I'm not qualified to diagnose anyone. But the three dimensions map uncomfortably well onto what endless "keeping up" does to people:
 
 - **Exhaustion**, because evenings and weekends become study time with no finish line.
 - **Cynicism**, because every new tool starts to feel like hype you're obliged to care about.
@@ -39,7 +39,11 @@ The habit sold as protection against falling behind can make you worse at the wo
 
 Master what you use. If your day job is building on a particular cloud, data platform or language, the highest-return learning is usually getting genuinely good at that: how it fails, how it's priced, where its limits are, what the documentation glosses over.
 
-Depth carries over: understanding why a query is slow, why a deployment is fragile or why a model's output drifts transfers to the next tool far better than a dozen "getting started" tutorials ever will. Breadth has a place, but it should be a thin layer of awareness ("this exists, this is roughly what it's for"), not an attempt at competence in everything.
+Depth carries over: understanding why a query is slow, why a deployment is fragile or why a model's output drifts transfers to the next tool far better than a dozen "getting started" tutorials ever will.
+
+Here's what that looks like on the Microsoft data stack. Knowing how Microsoft Fabric [capacity smoothing and throttling](https://learn.microsoft.com/fabric/enterprise/throttling) work (background jobs smoothed over 24 hours, interactive work over five to 64 minutes, and a capacity that first delays and then rejects requests once it has borrowed too much future capacity) tells you why a heavy afternoon of scheduled jobs can still be slowing everyone's reports the next morning. Knowing why a Power BI semantic model refresh is slow (a Power Query step that breaks query folding, a high-cardinality column that bloats the model, a full refresh where incremental refresh would do) is the same kind of knowledge. Neither is about a feature announcement. Both are about how a platform spends compute and where it pushes back, and that way of thinking carries straight over to whatever platform you're on next.
+
+Breadth has a place, but it should be a thin layer of awareness ("this exists, this is roughly what it's for"), not an attempt at competence in everything.
 
 My rule of thumb: batch awareness into one fixed slot a month, such as skimming the Microsoft Learn "What's new" pages for the platforms you own, and only promote something to a learning sprint if it passes the three questions below. Everything else can wait for next month's skim.
 
@@ -47,7 +51,7 @@ My rule of thumb: batch awareness into one fixed slot a month, such as skimming 
 
 Sprint, then rest. Learn, then consolidate.
 
-Spacing also has evidence behind it, not just wellbeing. There's solid evidence that spacing beats cramming for retention. A large [review and meta-analysis by Cepeda and colleagues (2006)](https://pubmed.ncbi.nlm.nih.gov/16719566/) pooled hundreds of experiments on distributed practice and found that spreading study over time produced better long-term recall than massing it together, and that the best gap between study sessions of the same material grows the longer you need to remember it. That research is about verbal recall rather than learning a new SDK, so I wouldn't stretch it too far. But the direction matches what most practitioners already know: the stuff you learn, apply, leave alone, then come back to is the stuff that sticks.
+Spacing isn't just a wellbeing argument; there's solid evidence it beats cramming for retention. A large [review and meta-analysis by Cepeda and colleagues (2006)](https://pubmed.ncbi.nlm.nih.gov/16719566/) pooled 839 assessments from 317 experiments across 184 articles on distributed practice and found that spreading study over time produced better long-term recall than massing it together, and that the best gap between study sessions of the same material grows the longer you need to remember it. That research is about verbal recall rather than learning a new SDK, so I wouldn't stretch it too far. But the direction matches what most practitioners already know: the stuff you learn, apply, leave alone, then come back to is the stuff that sticks.
 
 In practice that means treating learning like a project with a start and an end. Pick a topic, give it two to four focused weeks, and finish with something you've actually built or written up. Then leave it for a few weeks and come back to it before it's needed again. That revisit is where the spacing evidence applies: the longer you need to keep something, the longer that gap can be.
 
@@ -69,9 +73,9 @@ Learn what helps your work, not what's hyped. Before picking something up, I fin
 | Does it change a decision I'm responsible for? | Awareness is enough |
 | Will it still matter if the hype moves on? | Wait and see |
 
-Fundamentals usually pass all three: data modelling, security, networking, testing, clear writing, how systems fail. Most announcements fail at least one. Here's how I'd apply that to a monthly skim of the [Microsoft Fabric "What's new" page](https://learn.microsoft.com/fabric/fundamentals/whats-new). A change to capacity, security or governance passes the second question straight away if I own the platform, because it can change how I size, secure or administer the tenant, so it gets read properly that week. A preview feature for a workload I won't touch in the next three to six months fails the first question and goes on a parked list, to be revisited when it reaches general availability or when a project actually needs it. Expect only one or two items a month to earn more than a headline read.
+Fundamentals usually pass all three: data modelling, security, networking, testing, clear writing, how systems fail. Most announcements fail at least one. Here's how I'd apply that to a monthly skim of the [Microsoft Fabric "What's new" page](https://learn.microsoft.com/fabric/fundamentals/whats-new), or the equivalent page for your platform. A change to capacity, security or governance passes the second question straight away if I own the platform, because it can change how I size, secure or administer the tenant, so it gets read properly that week. A preview feature for a workload I won't touch in the next three to six months fails the first question and goes on a parked list, to be revisited when it reaches general availability or when a project actually needs it. Expect only one or two items a month to earn more than a headline read.
 
-Waiting is underrated. A lot of tools that look essential in their launch week are renamed, merged or abandoned a year later, and the ones that survive are better documented by the time you get to them.
+Waiting is underrated. A lot of tools that look essential in their launch week are renamed, merged or abandoned a year later. Azure AI Studio became Azure AI Foundry in November 2024 and has since been renamed again as Microsoft Foundry, and Semantic Kernel and AutoGen are converging into [Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/overview/agent-framework-overview), which entered public preview in October 2025. Anyone who went deep on either predecessor's API now has some migration work ahead. The tools that survive are better documented by the time you get to them.
 
 ## When this advice doesn't apply
 
@@ -83,10 +87,12 @@ Depth-first isn't always right.
 
 None of this means never learning new things. It means choosing deliberately, rather than letting the release cycle choose for you.
 
-## Permission to stop
+## A monthly learning budget
 
-You don't need to learn the new JavaScript framework. Or the latest AI model. Or that new database.
+My decision is to put a budget on learning rather than keep a guilt list. Depth in the stack you're paid for comes first. Everything else gets headline-level awareness at most, and the time when you're not learning anything at all is protected, because that's when the last round of learning actually lands. It's the same reason I've started being stricter about [weekends without work](/blog/2026-01-12-weekend-work-boundaries/): rest isn't the opposite of getting better, it's part of it.
 
-Focus on depth in your stack. Ignore the rest, or at most keep a headline-level awareness of it. Protect the time when you're not learning anything at all, because that's when the last round of learning actually lands. It's the same reason I've started being stricter about [weekends without work](/blog/2026-01-12-weekend-work-boundaries/): rest isn't the opposite of getting better, it's part of it.
+The rule I'd suggest fits in three lines:
 
-It's okay to not keep up with everything. Nobody actually does.
+- **One fixed monthly skim** of the "What's new" pages for the platforms you own, and nothing in between.
+- **At most one learning sprint at a time**, two to four weeks, ending in something built or written up, and only for items that pass the three questions.
+- **A parked list for everything else**, reviewed when an item reaches general availability or a project actually needs it.

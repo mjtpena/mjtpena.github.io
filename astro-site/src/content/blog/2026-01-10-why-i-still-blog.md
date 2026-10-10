@@ -10,7 +10,7 @@ tags:
   - Career
 ---
 
-Someone asked me why I still maintain a blog. "Doesn't everyone just use LinkedIn or Twitter now?" It's a fair question, and the honest answer is that social platforms are where my writing gets noticed, but this blog is where it lives.
+Someone asked me why I still maintain a blog. "Doesn't everyone just use LinkedIn or Twitter now?" It's a fair question. Social platforms are where my writing gets noticed, but this blog is where it lives.
 
 ## The short answer
 
@@ -18,7 +18,7 @@ This is my space. I own it and I control it. I own the domain and the source, so
 
 That was the reason I gave myself in August 2020, when I wrote [I'm going to start writing again!](/blog/2020-08-26-writing-again/) and said I wanted "a space on the internet that I can say is mine". More than five years on, the reason hasn't changed.
 
-The last few years made the point for me. When Twitter became X in July 2023 ([Al Jazeera's news coverage](https://www.aljazeera.com/news/2023/7/23/elon-musk-says-he-will-change-twitters-blue-bird-logo-to-an-x) of the announcement), many people wondered what would happen to their accounts, their handles and years of threads. When LinkedIn changes a feature, people adapt, because the platform sets the rules. My blog stays up for as long as I keep the domain and a build running.
+The last few years made the point for me. When Twitter rebranded as X in July 2023 ([Al Jazeera](https://www.aljazeera.com/news/2023/7/23/elon-musk-says-he-will-change-twitters-blue-bird-logo-to-an-x)), many people wondered what would happen to their accounts, their handles and years of threads. When LinkedIn changes a feature, people adapt, because the platform sets the rules. My blog stays up for as long as I keep the domain and a build running.
 
 ## Six reasons it's still worth it
 
@@ -40,11 +40,11 @@ The habit also carries over to emails, proposals and architecture documents, whi
 
 ### 3. Search works
 
-When I need to remember how I solved an Azure Functions problem, I search my own blog first; posts like the [dependency injection one](/blog/2020-11-06-azure-functions-dependency-injection/) are the ones I end up rereading.
+When I need to remember how I solved an Azure Functions problem, I search my own blog first; posts like the [dependency injection one](/blog/2020-11-06-azure-functions-dependency-injection/) are written for exactly that.
 
 It works better than a notes app or old Slack threads because I wrote the post for someone without my context, and years later that someone is me. A note says "fixed it with the startup class". A post says which startup class, why the obvious approach failed, and what the error message was, and that last part is what I actually type into the search box.
 
-The same property helps strangers. A post that names the exact error and the fix gets found by the next person who hits it. A thread on a social feed is effectively unsearchable a month later, even by its author.
+The same property helps strangers. A post that names the exact error and the fix gets found by the next person who hits it. A thread on a social feed is hard to find a month later, even for its author, and harder still from a search engine.
 
 ### 4. A portfolio that does the talking
 
@@ -62,7 +62,7 @@ Posts get shared years after I publish them, long after anything I posted on a f
 
 The most interesting conversations I have come from blog comments and emails, from people who read the whole thing. Someone who reaches the end of a long post has already followed the reasoning, so their questions are about the details, not the headline.
 
-The trade-off is volume. Far fewer people finish a 1,500-word post than react to a LinkedIn update, but the ones who finish are the ones who email. A hundred likes rarely turns into a conversation; one reader who disagrees with a specific paragraph often does. I'd take the smaller audience for that.
+The trade-off is volume. Far fewer people finish a 1,500-word post than react to a LinkedIn update, but the ones who finish are the ones who email. A hundred likes rarely turns into a conversation; the reader most likely to write back is the one who disagrees with a specific paragraph. I'd take the smaller audience for that.
 
 ### 6. Room for long-form thinking, with no algorithm to feed
 
@@ -88,19 +88,23 @@ The reason is simple: I write to think, to learn, and to share my actual experie
 
 **Technical posts bring traffic. Personal posts start conversations.** The balance matters. A blog that's only tutorials reads like documentation; one that's only reflection doesn't help anyone fix anything.
 
-**Nobody cares about your setup, except the few who care intensely.** By "setup" I mean posts about the blog itself: the static site generator, the hosting, the build pipeline. Most readers skip them, but the small group trying to solve the same problem reads every line, and they're the ones who reply with a better approach or a fix I'd missed. Write for those people.
+**Nobody cares about your setup, except the few who care intensely.** By "setup" I mean posts about the blog itself: the static site generator, the hosting, the build pipeline. Most readers skip them, but the small group trying to solve the same problem reads every line. Write for those people.
 
 ## When a blog isn't the right call
 
-I'm not going to pretend everyone needs one. If your goal is reach this month, a LinkedIn post will beat a blog post every time. If you'd only ever publish to promote yourself, skip it; that shows. And if you can't commit to owning the thing (the domain, the hosting, the occasional broken build), a hosted platform is a perfectly sensible trade.
+I'm not going to pretend everyone needs one. If your goal is reach this month, a LinkedIn post will almost always beat a blog post. If you'd only ever publish to promote yourself, skip it; that shows. And if you can't commit to owning the thing (the domain, the hosting, the occasional broken build), a hosted platform is a perfectly sensible trade.
 
 What I'd push back on is treating social media as the *only* place your writing lives. Post there for distribution. Keep the original somewhere you control.
 
 ## If you start one
 
-Buy your own domain on day one, before you pick a platform. Hosts come and go, and you'll probably change static site generators at least once. If your posts live at your own domain, you can move them and keep every URL and every inbound link; if they live on a platform's subdomain, moving means starting your links from zero. Most static hosts support this directly; GitHub Pages, for example, lets you [point a custom domain at your site](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) with a DNS record and a setting in the repository.
+First, buy your own domain on day one, before you pick a platform. Hosts come and go, and you'll probably change static site generators at least once. If your posts live at your own domain, you can move them and keep your inbound links, as long as you keep the same path structure or add redirects when you switch; if they live on a platform's subdomain, moving means starting your links from zero. Most static hosts support this directly; GitHub Pages, for example, lets you [point a custom domain at your site](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) with a DNS record and a setting in the repository.
 
-Then pick the simplest host you can, and spend the energy on the second and third posts instead of the theme.
+Second, keep the posts as plain Markdown files in a git repository, not locked inside a CMS database or a generator-specific format. Every post on this blog is a Markdown file with a few lines of frontmatter (title, date, tags) at the top. Generators, themes and hosts are replaceable; a folder of Markdown with full history is the part that outlives them. If a generator needs special shortcodes or components inside the post body, use them sparingly, because each one is something you'll have to rewrite when you move.
+
+Third, when you do migrate, treat URLs as a contract. Before switching, export the list of every published URL from the old site, build the new one, and check each old URL either still resolves or redirects to its new home. A broken link from someone else's post or a search result is traffic you won't get back, and a scripted check against the old URL list is cheap by comparison.
+
+Finally, pick the simplest host you can, and spend the energy on your next few posts instead of the theme.
 
 ## To other developers
 
@@ -110,4 +114,4 @@ But a place where you document what you're learning is valuable: for future you,
 
 If you're waiting for the right moment, don't. I restarted in August 2020 after years of excuses. The industry moves fast, and it's useful to have a record of the journey. I learn by writing, and sometimes people tell me a post helped them.
 
-But mostly, I keep blogging because it's mine. In 2026, with every platform's rules one product decision away from changing, that still matters.
+In 2026, with every platform's rules one product decision away from changing, owning the place I write still matters.

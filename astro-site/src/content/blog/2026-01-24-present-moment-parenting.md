@@ -37,21 +37,23 @@ It's tempting to think a distracted "that's great" is harmless. At least I respo
 
 I don't think it is. When a child brings you something (a drawing, a story, a question), they're making what the Gottman Institute calls a [bid for connection](https://www.gottman.com/blog/turning-toward-our-children-answering-bids-for-connection/). The Center on the Developing Child at Harvard describes this kind of back-and-forth as ["serve and return"](https://developingchild.harvard.edu/key-concepts/serve-and-return/): the child serves, the adult returns the serve with eye contact, words or attention, and those exchanges matter for development. Their work focuses on babies and preschoolers, but the principle doesn't expire at five: a return without looking isn't really a return. At best, it's a polite way of saying "not now".
 
-He's also learning from it. If "Dad, look!" reliably gets a reply to the phone instead of to him, sooner or later he'll stop saying it. The American Academy of Pediatrics' 2016 statement Media and Young Minds, written about children under five, noted that heavy parent use of mobile devices was associated with fewer verbal and nonverbal interactions with children. Its January 2026 replacement, [Digital Ecosystems, Children, and Adolescents](https://doi.org/10.1542/peds.2025-075320), widens the lens to the whole digital environment kids grow up in. I'd rather fix my habit than teach him that lesson.
+He's also learning from it. If "Dad, look!" reliably gets a reply to the phone instead of to him, sooner or later he'll stop saying it. The American Academy of Pediatrics' 2016 policy statement [*Media and Young Minds*](https://doi.org/10.1542/peds.2016-2591), written about children under five, noted that heavy parent use of mobile devices was associated with fewer verbal and nonverbal interactions with children. Its January 2026 successor policy statement, *Digital Ecosystems, Children, and Adolescents*, widens the lens to the whole digital environment kids grow up in. I'd rather fix my habit than teach him that lesson.
 
 ## The change
 
 New rule: when my kids talk to me, the phone goes down. The computer stays closed. I look at them.
 
-That's it. No app, no timer, no system. I like solving things with tooling, but this one doesn't need tooling. It needs me to turn my head.
+That's it. I like solving things with tooling, but this one just needs me to turn my head.
 
-The reasoning is simple: fully present for five minutes beats half-present for an hour. I'm not aiming to be a father who's available every minute; I'm aiming to be one who's there for the five minutes that count. Most of what my kids bring me doesn't need an hour. A drawing needs a minute with my eyes on the page, a question or two about which Pokémon it is, and some real enthusiasm. A story about their day needs me to stop scrolling until it's finished. Five minutes, given properly, is usually enough, and then everyone gets on with what they were doing.
+I haven't set up anything to make the rule easier to keep yet, such as a fixed spot for the phone after school or notifications off in the evening. For now it's the rule on its own, and I'm relying on noticing. If it keeps slipping, adding that kind of friction is the next thing to try.
 
-When I genuinely can't stop, on a live client call or while driving, my plan is to say so out loud and name a time ("show me in ten minutes"), then go back and ask to see it. A deferral he can trust is better than a fake "that's great".
+The reasoning is simple: fully present for five minutes beats half-present for an hour. Most of what my kids bring me doesn't need an hour. A drawing needs a minute with my eyes on the page, a question or two about which Pokémon it is, and some real enthusiasm. A story about their day needs me to stop scrolling until it's finished. Five minutes, given properly, is usually enough, and then everyone gets on with what they were doing.
+
+When I genuinely can't stop, on a live client call or while driving, my plan is to say so out loud and name a time ("show me in ten minutes"), then go back and ask to see it. If I say ten minutes, I need to turn up in ten minutes, or the deferral is just a slower "mm-hmm".
 
 ## What I'm learning
 
-**The rule fits Andriel better than a vague intention would.** In [The Tech Parent's Dilemma](/blog/2026-01-06-parenting-in-tech/) I wrote that he needs routine and predictability. "Dad, look!" getting the same response every time, phone down and eyes on him, is a kind of predictability too. So is "show me in ten minutes", as long as I keep it. A rule he can rely on is worth more to him than a father who is attentive only when the mood strikes.
+**The rule fits Andriel better than a vague intention would.** In [The Tech Parent's Dilemma](/blog/2026-01-06-parenting-in-tech/) I wrote that he needs routine and predictability. "Dad, look!" getting the same response every time, phone down and eyes on him, is a kind of predictability too. So is "show me in ten minutes", as long as I keep it. Attention that depends on my mood isn't something he can plan around.
 
 **Tomorrow isn't guaranteed.** I might not get another chance to see this drawing, hear this story, share this moment. Kids don't repeat their bids on a schedule that suits me.
 
@@ -59,7 +61,9 @@ When I genuinely can't stop, on a live client call or while driving, my plan is 
 
 I'm not perfect at this. I still get distracted. I still think about work.
 
-But I'm trying. The rule is deliberately small so I can't argue my way out of it. "Be more present" is a resolution I'd quietly abandon. "Phone down when they talk" is a rule I can keep, and catch myself breaking. When I catch myself mid-"mm-hmm", the plan is not to pretend it didn't happen: put the phone face down, say "sorry, show me again", and look properly. A repaired miss is better than a hidden one. And when both kids talk at once, the rule doesn't change: one at a time, and each one gets me looking at them. It's the same approach I described in [New Year, Same Foundation](/blog/2026-01-01-new-year-same-foundation/): small things I can really do, rather than grand promises I won't.
+But I'm trying. The rule is deliberately small so I can't argue my way out of it. "Be more present" is a resolution I'd quietly abandon. "Phone down when they talk" is a rule I can keep, and catch myself breaking. It's the same approach I described in [New Year, Same Foundation](/blog/2026-01-01-new-year-same-foundation/): small things I can really do, rather than grand promises I won't.
+
+When I catch myself mid-"mm-hmm", the plan is not to pretend it didn't happen: put the phone face down, say "sorry, show me again", and look properly. And when both kids talk at once, the rule doesn't change: one at a time, and each one gets me looking at them.
 
 If you're a parent who spends your day on a screen, try the same rule for a week. Don't measure anything. Just notice how often you'd have answered your kid without looking up.
 

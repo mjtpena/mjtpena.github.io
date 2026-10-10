@@ -61,7 +61,7 @@ That question is still argued about by people who build these systems for a livi
 
 Andriel thought about it. "Like when I memorise things but don't always know what they mean?"
 
-That's the gap between fluency and understanding, in one sentence.
+He'd described the gap between sounding fluent and actually understanding better than most explainers I've read.
 
 Later he came back with another one: "If it learns from what people write, does it learn bad things too?"
 
@@ -85,25 +85,23 @@ Not transformers or embeddings. They can learn that later if they want to. What 
 
 There's a practical side too, and it doesn't come up much when tech people get excited about their kids "getting into AI".
 
-ChatGPT isn't designed for young children. OpenAI's [Terms of Use](https://openai.com/policies/row-terms-of-use/) require users to be at least 13 (or older where local law sets a higher age), and anyone under 18 needs a parent's or guardian's permission. My kids are seven and 10, so I do the typing on my own account and they sit beside me. When they turn 13, ChatGPT's [parental controls](https://openai.com/index/introducing-parental-controls/) (launched 29 September 2025) let you link a teen account to yours and set limits such as quiet hours and turning off voice, memory and image generation.
+ChatGPT isn't designed for young children. OpenAI's [Terms of Use](https://openai.com/policies/row-terms-of-use/) require users to be at least 13 (or older where local law sets a higher age), and anyone under 18 needs a parent's or guardian's permission. My kids are seven and 10, so when they use it, it should be on my account with me doing the typing and them beside me. When they turn 13, ChatGPT's [parental controls](https://openai.com/index/introducing-parental-controls/) (launched 29 September 2025) let you link a teen account to yours and set limits such as quiet hours and turning off voice, memory and image generation.
 
-Supervision looks different at each age, in my view. At seven, I'd keep it to short sessions of 10 to 15 minutes on a single task, short enough that checking the answer together is still part of the session, like a story or a question about trains, with the adult typing everything. At 10, the child can suggest the wording of the prompt and decide what to ask next, but personal details, health worries and anything that turns into a chat about feelings stay off the table and go to a parent instead.
+Supervision looks different at each age, in my view. At seven, I'd keep it to 10 to 15 minutes on one task, such as a story or a question about trains, with the adult typing and time left to check the answer together. At 10, the child can suggest the wording of the prompt and decide what to ask next, but personal details, health worries and anything that turns into a chat about feelings stay off the table and go to a parent instead.
 
-What worries me more is the companion-style chatbots built to feel like a friend, rather than a general assistant writing a robot story. In an online safety advisory published on 18 February 2025, Australia's eSafety Commissioner [warned about AI chatbots and companions](https://www.esafety.gov.au/newsroom/blogs/ai-chatbots-and-companions-risks-to-children-and-young-people): some children spend hours a day with them, and conversations can drift into sexual content and self-harm.
+What worries me more is the companion-style chatbots built to feel like a friend, rather than a general assistant writing a robot story. In an online safety advisory, Australia's eSafety Commissioner [warned about AI chatbots and companions](https://www.esafety.gov.au/newsroom/blogs/ai-chatbots-and-companions-risks-to-children-and-young-people): some children spend hours a day with them, and conversations can drift into sexual content and self-harm.
 
-On 9 September 2025 eSafety [registered six more industry codes](https://www.esafety.gov.au/newsroom/media-releases/new-industry-codes-seek-to-take-on-ai-chatbots-that-encourage-suicide-and-engage-in-sexually-explicit-conversations-with-aussie-kids), including rules for AI companion chatbots, that require services to protect children from that kind of content. They take effect on 9 March 2026.
+Most parents here have heard about the [social media minimum age](https://www.esafety.gov.au/about-us/industry-regulation/social-media-age-restrictions), in force since 10 December 2025, which stops under-16s having accounts on platforms like TikTok, Instagram and Snapchat. It doesn't cover chatbots like ChatGPT. What does apply are eSafety's [new industry codes](https://www.esafety.gov.au/newsroom/media-releases/new-industry-codes-seek-to-take-on-ai-chatbots-that-encourage-suicide-and-engage-in-sexually-explicit-conversations-with-aussie-kids), which include rules for AI companion chatbots and require services to protect children from that kind of content from 9 March 2026, plus the provider's own age terms.
 
-The change most parents here have heard about is the [social media minimum age](https://www.esafety.gov.au/about-us/industry-regulation/social-media-age-restrictions), in force since 10 December 2025, which requires platforms like TikTok, Instagram and Snapchat to take reasonable steps to stop under-16s from having accounts. It doesn't cover AI chatbots like ChatGPT. For those, the eSafety codes and the provider's own age terms are what apply.
-
-Regulation helps, but it moves slower than kids do. My position is simple. Supervised, purposeful use is fine, even good. An always-on AI "friend" for a child is something I'd keep out of the house.
+Regulation helps, but it moves slower than kids do. Supervised, purposeful use is fine, even good. An always-on AI "friend" for a child is something I'd keep out of the house.
 
 ## Judgement, not gatekeeping
 
-My kids will grow up treating chatbots as normal, the way I grew up with television. I'm still deciding how I feel about that.
+My kids will grow up treating chatbots as normal, as ubiquitous as smartphones are now. I'm still deciding how I feel about that.
 
 Part of me wants to protect them from becoming dependent on these tools. The other part knows that's futile. My job isn't to gatekeep the technology. It's to help them develop the judgement to use it well: understand it enough to get value from it, and stay sceptical enough not to trust it blindly.
 
-That's harder than any technical problem I deal with at work, and I'm still working it out myself.
+That's harder than any technical problem I deal with at work.
 
 ## If you're explaining AI to your own kids
 
@@ -111,7 +109,7 @@ That's harder than any technical problem I deal with at work, and I'm still work
 - **Test it on something they already know.** Ask the chatbot a question your child knows the answer to, such as their favourite Pokémon's type or how many carriages a local train has, then check its answer together. Catching a wrong answer teaches "it guesses" better than any explanation.
 - **Take their questions seriously.** Andriel's questions about understanding and bias are ones experts still debate. Say so.
 - **Make it hands-on, and sit with them.** Check the age requirements of whatever tool you use. Until your child meets them, you do the typing and they watch and suggest.
-- **Focus on judgement over mechanics.** They don't need backpropagation. They need to know that people built these tools, people control them, and people are responsible for them.
+- **Have an answer ready for "Is it alive?"** It will come up. Mine is: no, it doesn't feel anything or want anything, even when it writes as if it does. It's a program that's very good at sounding like a person.
 
 For now, Archael wants to use it to help write his Pokémon fanfiction. Andriel wants to know if AI can help him identify different types of trains.
 

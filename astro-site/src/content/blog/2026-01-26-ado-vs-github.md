@@ -33,11 +33,11 @@ Neither column wins outright. For most teams the decision comes down to two rows
 
 Azure Boards is a work management system with governance built in. Process templates (Agile, Scrum, CMMI, or your own inherited process), area paths that map to teams and carry their own permissions, iteration paths, Delivery Plans across teams, and an Analytics service you can query from Power BI. When a portfolio office wants rollups from epic to task across twelve teams, Boards does it without add-ons.
 
-GitHub has closed a lot of this gap. Sub-issues, issue types and advanced search went generally available in April 2025, alongside higher item limits in Projects. For a product team, GitHub Projects is now perfectly adequate. What it still lacks is the opinionated process layer: there's no equivalent of area-path security or a governed process template that every team inherits.
+GitHub has closed a lot of this gap. Sub-issues, issue types and advanced search went generally available in April 2025. For a product team, GitHub Projects is now perfectly adequate. What it still lacks is the opinionated process layer: there's no equivalent of area-path security or a governed process template that every team inherits.
 
 ### Test management
 
-Azure Test Plans gives you manual and exploratory test cases, test suites tied to requirements, and traceability from requirement to test run to build. If you work in a regulated environment where an auditor wants evidence that requirement X was tested in release Y, this matters. GitHub has nothing first-party here; you'd add a third-party test management tool and wire it in. I covered how Test Plans fits together in an earlier post on [Azure DevOps Test Plans](/blog/2020-11-30-azure-devops-test-plans/); the traceability argument hasn't changed, and Microsoft is still investing in it (Sprint 268 made the new Test Run Hub generally available).
+Azure Test Plans gives you manual and exploratory test cases, test suites tied to requirements, and traceability from requirement to test run to build. If you work in a regulated environment where an auditor wants evidence that requirement X was tested in release Y, this matters. GitHub has nothing first-party here; you'd add a third-party test management tool and wire it in. I covered how Test Plans fits together in an earlier post on [Azure DevOps Test Plans](/blog/2020-11-30-azure-devops-test-plans/); the traceability argument hasn't changed, and Microsoft is still investing in it (Sprint 268, released 26 January 2026, began rolling out the new Test Run Hub as generally available).
 
 ### Enterprise process control
 
@@ -63,11 +63,11 @@ Azure Pipelines is still very capable, especially multi-stage YAML with environm
 
 Secret scanning with push protection, CodeQL, dependency review and Dependabot all sit in the same place developers work. Since April 2025 secret scanning and push protection are sold as GitHub Secret Protection, and CodeQL, Copilot Autofix and dependency review as GitHub Code Security. Both can be bought on the Team plan, and Dependabot alerts and updates stay free.
 
-Azure DevOps customers get the same engines. Microsoft made [GitHub Secret Protection and GitHub Code Security for Azure DevOps](https://devblogs.microsoft.com/devops/github-secret-protection-and-github-code-security-for-azure-devops/) available as standalone products in June 2025 for new customers (existing bundled customers can switch through a support request), at US$19 and US$30 per active committer per month. So "security" is no longer a reason to move platforms. The experience is just more integrated on GitHub, with Dependabot pull requests and security campaigns built in.
+Azure DevOps customers get the same engines. Microsoft made GitHub Secret Protection and GitHub Code Security for Azure DevOps available as standalone products in June 2025 for new customers (existing bundled customers can switch through a support request), at [US$19 and US$30 per active committer per month](https://learn.microsoft.com/azure/devops/repos/security/github-advanced-security-billing). So "security" is no longer a reason to move platforms. The experience is just more integrated on GitHub, with Dependabot pull requests and security campaigns built in.
 
 ### Copilot and the coding agent
 
-This is the biggest change since my 2022 post. GitHub Copilot's coding agent takes an issue, works in its own environment and opens a pull request for review. It isn't a preview: the coding agent has been generally available on Copilot Pro, Pro+, Business and Enterprise since September 2025. On GitHub that's native. On Azure DevOps you need your code on GitHub to use it, even if your backlog stays in Boards. My 2022 comparison of [Azure DevOps vs GitHub Actions](/blog/2022-11-27-azure-devops-github-actions-comparison/) only covered the CI/CD side, and nothing in it anticipated this.
+This is the biggest change since my 2022 post. GitHub Copilot's coding agent takes an issue, works in its own environment and opens a pull request for review. The coding agent has been generally available on Copilot Pro, Pro+, Business and Enterprise since September 2025. On GitHub that's native. On Azure DevOps you need your code on GitHub to use it, even if your backlog stays in Boards. My 2022 comparison of [Azure DevOps vs GitHub Actions](/blog/2022-11-27-azure-devops-github-actions-comparison/) only covered the CI/CD side, and nothing in it anticipated this.
 
 ## Cost
 
@@ -84,9 +84,7 @@ GitHub has three organisation plans. Free gives you unlimited private repositori
 
 So a five-person team pays nothing on either platform. What usually pushes a GitHub team off Free is that it lacks protected branches and required reviewers on private repositories, and few teams I'd trust with production code skip those.
 
-Compare Team against Azure DevOps Basic and the break-even is easy to work out: US$6 for each user after the first five against US$4 for every user means Azure DevOps is cheaper up to about 15 users, and GitHub Team is cheaper beyond that.
-
-GitHub Team also includes 3,000 Actions minutes a month, against Azure DevOps' single free hosted job capped at 60 minutes per run, so CI-heavy teams hit the GitHub side of the line sooner. Build minutes and parallel jobs still move the line, so price your actual CI load rather than trusting the seat maths alone. Once you add Secret Protection, Code Security, Copilot and a few hundred engineers, licence costs converge and the per-seat price stops being the deciding factor.
+Start with seats. Compare Team against Azure DevOps Basic: US$6 for each user after the first five against US$4 for every user means Azure DevOps is cheaper up to about 15 users, and GitHub Team is cheaper beyond that. CI volume then moves that line in both directions. GitHub Team's 3,000 included minutes cover light CI that would outgrow Azure DevOps' single free hosted job (60 minutes per run, 1,800 minutes a month). At sustained heavy use the maths flips: a US$40 unlimited-minute Azure Pipelines job can undercut GitHub's per-minute billing (US$0.006 per Linux minute). Price your actual CI load rather than trusting the seat maths alone. Once you add Secret Protection, Code Security, Copilot and a few hundred engineers, licence costs converge and the per-seat price stops being the deciding factor.
 
 ## The hybrid option is now first class
 
@@ -115,5 +113,3 @@ The mistake I see most often is a migration justified on developer experience th
 **Run both when** developers want GitHub but the PMO, test and compliance functions depend on Boards and Test Plans. Put the code on GitHub, keep planning in Boards, and connect them.
 
 **Don't migrate when** the only reason is that GitHub feels more modern. If Azure DevOps works for you, the security engines are available either way, and Copilot in the IDE works with any repo; only the coding agent and Copilot code review on pull requests need your code on GitHub. Meanwhile the cost of moving pipelines and work history is real.
-
-For my own projects, it's GitHub. For clients, my rule is simple: if Test Plans or area-path security isn't on your list, default to GitHub; if it is, put the code on GitHub and keep Boards.

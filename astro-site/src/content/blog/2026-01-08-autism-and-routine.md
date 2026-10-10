@@ -1,6 +1,6 @@
 ---
 title: "What My Son's Autism Taught Me About Predictable Systems"
-description: "Andriel needs routine, not just likes it. Living with that has changed how I design functions, error messages, API deprecations and team change."
+description: "Andriel needs routine, not just likes it. Living with that has changed how I design functions, error messages, API deprecations and change for my teams."
 author: Michael John Peña
 draft: false
 date: 2026-01-08
@@ -14,7 +14,7 @@ tags:
 
 Andriel needs structure. Not wants it; needs it. His autism means unpredictability causes him genuine distress, and over the years I've realised that living with that has changed how I design software more than most of what I've read about it.
 
-I'm not suggesting your users are autistic. This is about what designing a household for someone who can't fill in gaps has taught me, and why the same discipline helps everyone else.
+I'm not suggesting your users are autistic. This is about what designing a household around a child who needs the gaps filled in for him has taught me, and why the same discipline helps everyone else.
 
 ## The morning routine
 
@@ -68,7 +68,7 @@ print(get_user(99))  # None
 print(get_user(0))   # None
 ```
 
-The second version isn't clever. It just makes one promise and keeps it, and the `User | None` union type (Python 3.10+) tells the caller what that promise is before they read a line of the body.
+The second version makes one promise and keeps it. The `User | None` union type (Python 3.10+) tells the caller what that promise is before they read a line of the body.
 
 There is a trade-off. Collapsing every "not found" case into `None` can hide a genuine bug: a negative ID is probably a caller error, not a missing user. If that distinction matters in your system, raise a specific exception for invalid input and return `None` only for "valid but absent". What matters is that the rule is written down and never varies.
 
@@ -80,7 +80,7 @@ When something goes wrong in Andriel's routine, vague explanations don't work.
 
 "We can't go to the train station today because it's closed for repairs. We'll go on Saturday instead when it reopens" gives him enough structure to understand and adjust. It says what changed, why, and what the new plan is.
 
-Error messages should do the same. The `int` annotation below documents the contract, but type hints aren't enforced at runtime, so the function still validates the type at the boundary (and rejects `bool`, which Python treats as a subclass of `int`).
+Error messages should do the same: say what was wrong, what was received and what is valid.
 
 ```python
 MAX_USER_ID = 1_000_000
@@ -92,6 +92,7 @@ MAX_USER_ID = 1_000_000
 
 # Clear: what was wrong, what was received, what is valid
 def validate_user_id(user_id: int) -> None:
+    # type hints aren't enforced at runtime; bool is a subclass of int, so reject it explicitly
     if not isinstance(user_id, int) or isinstance(user_id, bool):
         raise TypeError(f"User ID must be an int, got {type(user_id).__name__}.")
     if not 1 <= user_id <= MAX_USER_ID:
@@ -167,6 +168,8 @@ Here's how that maps onto retiring an API version, using the dates from the head
 | 3 months before sunset | Final reminder to remaining callers, with the date repeated. | 5 |
 | 30 Jun 2027 | Sunset. The old version returns `410 Gone` with a Problem Details body pointing to the migration guide. | 6 |
 
+I size the window to the slowest consumer's release cycle: if a partner ships quarterly, 18 months gives them at least five chances to migrate; an internal service with one caller can move in a sprint.
+
 The changelog entry itself can be three lines: "v1 `/users` is deprecated as of 1 January 2026 and will stop responding after 30 June 2027. Reason: v2 adds paging and consistent dates. Migrate with the guide at `/docs/migrate-v2`." What changed, why, and what to do next, the same shape as the train-station sentence.
 
 Sometimes the full process is too much, such as a security fix that has to ship today. Then shorten it: skip the advance notice and the walkthrough if you must, but never skip explaining why (step 2) or supporting people through the change (step 5).
@@ -206,6 +209,6 @@ The lesson I take is narrower: be predictable about the **contract**, even when 
 
 A test I use on my own work is simple: would this make sense to Andriel? If the behaviour is clear enough for him, it's clear enough for any developer reading it at 2 am.
 
-If you're a parent of an autistic child working in tech, you're probably already practising this: the advance warnings, the explicit plans, the patient walkthroughs of change. Those habits transfer directly. Andriel has made me a better engineer. Not in spite of his autism, but because of it. What looks like a limitation from the outside has turned out to be a feature: he needs the clarity that every user quietly benefits from. I wrote about the other side of the work-family balance in [The Tech Parent's Dilemma](/blog/2026-01-06-parenting-in-tech/).
+If you're a parent of an autistic child working in tech, you're probably already practising this: the advance warnings, the explicit plans, the patient walkthroughs of change. Those habits transfer directly. Andriel has made me a better engineer, not in spite of his autism but because of it: designing for the people who most need clarity produces systems that work better for everyone. He teaches me something new every day, and I'm grateful for it.
 
-Andriel taught me the principle underneath all of this: designing for the people with the greatest need for clarity produces systems that work better for everyone. He teaches me something new every day, and I'm grateful for it.
+I wrote about the other side of the work-family balance in [The Tech Parent's Dilemma](/blog/2026-01-06-parenting-in-tech/).

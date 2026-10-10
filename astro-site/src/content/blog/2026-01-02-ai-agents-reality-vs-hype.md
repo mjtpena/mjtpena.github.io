@@ -12,7 +12,7 @@ tags:
   - Opinion
 ---
 
-2025 was sold as the year of agents (my [year in review](/blog/2025-12-01-december-ai-topic/) covers it). The useful question for 2026 is why so many agent pilots haven't paid off. My answer is that most of them asked an agent to do a job that a workflow, a search index, or a single well-written prompt would have done better and cheaper.
+2025 was sold as the year of agents (my [year in review](/blog/2025-12-01-december-ai-topic/) covers it). The useful question for 2026 is why many agent pilots haven't paid off. My answer is that most of them asked an agent to do a job that a workflow, a search index, or a single well-written prompt would have done better and cheaper.
 
 So agent work this year should start by asking whether it needs an agent at all.
 
@@ -31,9 +31,9 @@ My working definition is blunt: if the sequence of steps is known in advance, yo
 
 ## Where agents work well
 
-I've deployed agents for four kinds of work. They share a constrained problem space, a human close by, and one design choice that makes each work.
+I've deployed agents for four kinds of work. They share a constrained problem space and a human close by, and for each there's one design choice I'd insist on.
 
-**Code review automation.** Agents catch the obvious issues and draft fixes. The design detail is permissions: the agent posts review comments and suggested changes, and it can't push or merge. The value is a shorter first pass for the reviewer. Don't make it a merge gate: it usually reviews the diff with limited repository context, so it misses cross-service and architectural problems.
+**Code review automation.** Agents catch the obvious issues and draft fixes. The design choice I'd insist on is permissions: let the agent post review comments and suggested changes, but never push or merge. The value is a shorter first pass for the reviewer. Don't make it a merge gate: it usually reviews the diff with limited repository context, so it misses cross-service and architectural problems.
 
 **Data pipeline monitoring.** An agent watching for anomalies, pulling the relevant logs, and proposing a likely root cause works because there are only so many ways a pipeline fails. Give it read-only tools (run history, logs, row counts) and put any remediation, such as a rerun or a backfill, behind an explicit approval step. A wrong diagnosis is cheap; a rerun against the wrong partition isn't.
 
@@ -96,6 +96,7 @@ client = OpenAI(
 )
 DEPLOYMENT = "<your-deployment-name>"
 MAX_STEPS = 8
+# Soft cap: checked after each call, so a run can exceed it by one call's tokens.
 MAX_TOKENS = 40_000
 
 
@@ -147,7 +148,7 @@ def run_agent(question: str) -> dict:
                 if step == MAX_STEPS or tokens_used >= MAX_TOKENS:
                     break
 
-                messages.append(message)
+                messages.append(message.model_dump(exclude_none=True))
                 for call in message.tool_calls:
                     with tracer.start_as_current_span("agent.tool_call") as tool_span:
                         tool_span.set_attribute("agent.tool", call.function.name)
@@ -183,16 +184,16 @@ Here's how I see the main options after a busy late 2025.
 | Foundry Agent Service (Microsoft Foundry) | Core service GA (Build, May 2025); new Ignite 2025 capabilities such as hosted and workflow agents in preview | Managed agents with Azure identity, tools, and tracing | Platform names and portal experiences are still settling |
 | Microsoft Agent Framework | Public preview (October 2025) | New .NET or Python agent and workflow code on Microsoft's stack | Preview APIs can change before 1.0 |
 | Semantic Kernel | Stable, supported | Existing SK applications | New feature work is heading to Agent Framework |
-| AutoGen | Bug fixes and critical security patches only | Existing AutoGen research code | No new features; plan migration to Agent Framework |
-| LangGraph | 1.0 since October 2025 | Explicit, stateful graphs with fine control | Steeper learning curve; you own more of the hosting |
+| AutoGen | Critical bug fixes and security patches; no significant new features | Existing AutoGen research code | No new features; plan migration to Agent Framework |
+| LangGraph | 1.0 since October 2025 | Explicit, stateful graphs with fine control | Steeper learning curve; hosting is either self-managed or LangChain's paid platform, not Azure-native |
 
 **Foundry Agent Service.** The service went GA at Build in May 2025, when the platform was still Azure AI Foundry; Ignite renamed it Microsoft Foundry. The GA label covers the original service, not every preview shown in the keynote. The [Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) is the place to start.
 
 **When not to use the managed service.** If the agent has to run across clouds, on-premises, or in a region the service doesn't support, or if even the standard agent setup, which keeps threads in your own Cosmos DB account, doesn't satisfy your data-residency rules (for example, the data can't leave on-premises), a code-first framework such as LangGraph or Agent Framework in your own containers fits better. You take on more operations work in exchange for control over where every thread lives.
 
-**Agent Framework, Semantic Kernel, and AutoGen.** Microsoft announced [Agent Framework in public preview](https://devblogs.microsoft.com/dotnet/introducing-microsoft-agent-framework-preview/) on 1 October 2025 as the successor that brings Semantic Kernel and AutoGen together. At the same time, Microsoft said AutoGen will now get only bug fixes and critical security patches ([announcement](https://github.com/microsoft/autogen/discussions/7066), [AutoGen README](https://github.com/microsoft/autogen)), so new projects that would have started on AutoGen should start on Agent Framework instead. If you have a working Semantic Kernel application, there's no reason to rewrite it this month. For new work on Microsoft's stack that can tolerate preview APIs, I'd start on Agent Framework and expect some churn before it stabilises. I covered the older approach in [Semantic Kernel: Orchestrating AI Agents with Plugins and Planners](/blog/2025-11-13-november-ai-topic/).
+**Agent Framework, Semantic Kernel, and AutoGen.** Microsoft announced [Agent Framework in public preview](https://devblogs.microsoft.com/dotnet/introducing-microsoft-agent-framework-preview/) on 1 October 2025 as the successor that brings Semantic Kernel and AutoGen together. A day later, Microsoft [said](https://github.com/microsoft/autogen/discussions/7066) that AutoGen would continue to receive critical bug fixes and security patches but no significant new features, so new projects that would have started on AutoGen should start on Agent Framework instead. If you have a working Semantic Kernel application, there's no reason to rewrite it this month. For new work on Microsoft's stack that can tolerate preview APIs, I'd start on Agent Framework and expect some churn before it stabilises. I covered the older approach in [Semantic Kernel: Orchestrating AI Agents with Plugins and Planners](/blog/2025-11-13-november-ai-topic/).
 
-**LangGraph.** It's powerful for complex, stateful workflows and shipped 1.0 on 17 October 2025, which settles the breaking-change worry. The trade-off is more code and more decisions you own.
+**LangGraph.** It's powerful for complex, stateful workflows and shipped 1.0 on 17 October 2025, which settles the breaking-change worry. The trade-off is a steeper learning curve, and hosting is either self-managed or LangChain's paid platform, not Azure-native.
 
 **MCP.** The Model Context Protocol has become the default way to expose tools to agents across vendors, and in December 2025 it moved to the [Agentic AI Foundation under the Linux Foundation](https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/). Neutral governance says nothing about any individual server. My rule is to allow only first-party MCP servers from the vendor whose system they front, or ones we build internally; pin each to a specific version, review its tool list and permissions before every upgrade, and run it under an identity scoped to the data it actually needs.
 
@@ -202,7 +203,7 @@ My advice hasn't changed: build your first agent with plain function calling, li
 
 Integration, not model capability, is where organisations struggle. Identity, data access, and legacy APIs eat the schedule, because an agent is only as useful as the systems it can reach, each with its own permission model.
 
-Security is the sharpest version of that problem: what is an agent allowed to do, and on whose behalf? Microsoft Entra Agent ID (in preview) is the first serious attempt at agent identity, but most organisations haven't designed agent permissions yet. Until they do, the safe default is the one from the use cases above: read-only tools, a person approving every write, and a separate identity per agent so the audit log tells you which one acted.
+Security is the sharpest version of that problem: what is an agent allowed to do, and on whose behalf? Microsoft Entra Agent ID (in preview) is Microsoft's answer to agent identity, but most organisations haven't designed agent permissions yet. Until they do, the safe default is the one from the use cases above: read-only tools, a person approving every write, and a separate identity per agent so the audit log tells you which one acted.
 
 ## Deciding whether your problem needs an agent
 

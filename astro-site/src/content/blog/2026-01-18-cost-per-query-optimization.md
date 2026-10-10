@@ -170,9 +170,10 @@ def answer(
             headers = getattr(getattr(exc, "response", None), "headers", None) or {}
             retry_after = headers.get("retry-after")
             try:
-                delay = float(retry_after) if retry_after else 2**attempt
+                # Cap the wait: a user is waiting on this request.
+                delay = min(float(retry_after), 30.0) if retry_after else 2**attempt
             except ValueError:  # an HTTP date rather than seconds
-                delay = 2**attempt
+                delay = min(2**attempt, 30.0)
             time.sleep(delay)
             continue
 
@@ -199,7 +200,7 @@ Retries are the other cost people forget, which is why they live in `answer()` a
 
 ### Reconcile at the gateway
 
-Azure Monitor reports processed prompt and generated completion tokens per deployment, so check that the ledger's daily totals land within a few percent of what was metered. When several apps share a deployment behind API Management, the [`llm-emit-token-metric` policy](https://learn.microsoft.com/en-us/azure/api-management/llm-emit-token-metric-policy) (or the older `azure-openai-emit-token-metric`) emits token counts to Application Insights with up to five custom dimensions, such as an app name. It can't go per query, because each dimension keeps at most 100 unique values and silently drops the rest. I use the gateway to attribute cost to apps and the ledger to explain it. For where the metered bill drifts from estimates, see [Azure OpenAI hidden costs](/blog/2026-01-04-azure-openai-hidden-costs/).
+Azure Monitor reports processed prompt and generated completion tokens per deployment, so check that the ledger's daily totals land within a few percent of what was metered. When several apps share a deployment behind API Management, the [`llm-emit-token-metric` policy](https://learn.microsoft.com/en-us/azure/api-management/llm-emit-token-metric-policy) (or the older `azure-openai-emit-token-metric`) emits token counts to Application Insights with up to five custom dimensions, such as an app name. It can't go per query: custom-metric dimensions are meant for low-cardinality values like an app or team name, and Application Insights caps how many distinct values a dimension can hold. I use the gateway to attribute cost to apps and the ledger to explain it. For where the metered bill drifts from estimates, see [Azure OpenAI hidden costs](/blog/2026-01-04-azure-openai-hidden-costs/).
 
 ## Decompose before you optimise
 
@@ -219,15 +220,17 @@ I break each query down along three axes. Input tokens usually dominate in retri
 | Input vs output | Are we paying for what we send or what we generate? | Context trimming, caching, output limits |
 | Which step | Is it the answer, the planner, the retries or retrieval? | Fewer calls, batching, fixing failure loops |
 
-The input-vs-output row is the same formula the ledger uses. Take a retrieval query with placeholder counts: 6,000 prompt tokens, 2,000 of them cached, and 400 completion tokens. Its cost is (4,000 × input rate + 2,000 × cached-input rate + 400 × output rate) / 1,000,000, summed over every call in the query. Output rates are several times input rates, but here prompt tokens outnumber completion tokens 15 to 1, so the first term usually wins. The table tells you where to spend effort first.
+The input-vs-output row is the same formula the ledger uses. Take a retrieval query with placeholder counts: 6,000 prompt tokens, 2,000 of them cached, and 400 completion tokens. Its cost is (4,000 × input rate + 2,000 × cached-input rate + 400 × output rate) / 1,000,000, summed over every call in the query. Output rates are several times input rates, but here prompt tokens outnumber completion tokens 15 to 1, so the uncached-input term is the largest. Run the same arithmetic on your own p95 query before choosing a lever.
 
-## The levers, in the order I'd pull them
+## The levers, in the order they paid off
+
+This is the order that worked for a mixed workload; if your decomposition says input dominates, start at lever 2.
 
 ### 1. Match the model to the query
 
-The biggest single change in the system I mentioned was moving simple queries from GPT-4o to GPT-4o-mini. Lookups, classification, short factual answers and reformatting rarely need the large model, and this one change moved the number more than anything else.
+The biggest single change in the system I mentioned was moving simple queries from GPT-4o to GPT-4o mini. Lookups, classification, short factual answers and reformatting rarely need the large model, and this one change moved the number more than anything else.
 
-By January 2026 the menu is wider: the GPT-4.1 family and the GPT-5 family both have mini and nano sizes, and Microsoft Foundry's [model router](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/model-router) will pick a model per request for you. Model router reached GA in November 2025; Claude models in its pool must be deployed to your Foundry resource first. I still prefer explicit routing rules for anything with a quality bar I have to defend, because a rule I wrote is a rule I can test. Use the router when the query mix is broad and you can evaluate it against your own test set, not on faith. The router also bills its own input-token charge on top of the model it selects. That is what `ROUTER_INPUT_PRICE` in the ledger is for.
+By January 2026 the menu is wider: the GPT-4.1 family and the GPT-5 family both have mini and nano sizes, and Microsoft Foundry's [model router](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/model-router) will pick a model per request for you. Model router reached GA in November 2025. I still prefer explicit routing rules for anything with a quality bar I have to defend, because a rule I wrote is a rule I can test. Use the router when the query mix is broad and you can evaluate it against your own test set, not on faith. The router also bills its own input-token charge on top of the model it selects. That is what `ROUTER_INPUT_PRICE` in the ledger is for.
 
 When not to do this: if a wrong answer is expensive (compliance, financial advice, anything a person acts on without checking), the saving from a smaller model can disappear in one bad outcome. Route on evaluated quality, never on price alone.
 
@@ -235,7 +238,7 @@ When not to do this: if a wrong answer is expensive (compliance, financial advic
 
 There are two different kinds of caching and they solve different problems.
 
-Application caching means you don't call the model at all. An exact-match cache on the normalised question, keyed together with the model and a prompt version, is simple and safe. Include the prompt version in the key, or a prompt change will keep serving stale answers. Caching query embeddings is also worthwhile, because the same questions get embedded again and again. Semantic caching (matching similar but not identical questions) saves more but can return a confidently wrong answer to a subtly different question, so I only use it for content that isn't personalised or time-sensitive.
+Application caching means you don't call the model at all. An exact-match cache on the normalised question, keyed with the model and a prompt version (so a prompt change doesn't keep serving stale answers), is simple and safe. Caching query embeddings is also worthwhile, because the same questions get embedded again and again. Semantic caching (matching similar but not identical questions) saves more but can return a confidently wrong answer to a subtly different question, so I only use it for content that isn't personalised or time-sensitive.
 
 [Prompt caching](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/prompt-caching) is the service-side kind, and it's on by default for supported models. Prompts of 1,024 tokens or more get a cache hit when their first 1,024 tokens exactly match a recent request (and further in 128-token increments); the matched tokens are billed at a discounted cached-input rate and show up in `cached_tokens`. The design implication is simple: put the stable parts first (system prompt, tool definitions, fixed instructions) and the variable parts last (retrieved chunks, the user's question). A timestamp at the top of the system prompt quietly defeats it. Caches are typically cleared within 5 to 10 minutes of inactivity and always within an hour of last use, so the benefit is greatest on steady traffic.
 

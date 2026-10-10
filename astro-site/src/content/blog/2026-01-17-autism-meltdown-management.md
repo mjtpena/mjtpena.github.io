@@ -1,5 +1,5 @@
 ---
-title: "Autism Meltdowns: What Helps, What Doesn't, What Prevents Them"
+title: "Autism Meltdowns: What Doesn't Help, What Does, and Prevention"
 description: "What our family has learned about our son's autism meltdowns: what makes them worse, what helps, how we prevent some, and why it isn't bad parenting."
 author: Michael John Peña
 draft: false
@@ -11,9 +11,9 @@ tags:
   - Family
 ---
 
-A meltdown isn't a tantrum, and treating it like one makes everything worse. A tantrum is usually goal-directed and often eases once the goal is met or the audience goes; a meltdown is what happens when our son is overwhelmed and has run out of ways to cope. The [National Autistic Society](https://www.autism.org.uk/advice-and-guidance/topics/behaviour/meltdowns/all-audiences) describes a meltdown as an intense response to an overwhelming situation, when someone temporarily loses behavioural control, and that matches what we see.
+A meltdown isn't a tantrum, and treating it like one makes everything worse. Unlike a tantrum, which is usually aimed at getting something, a meltdown is what happens when our son is overwhelmed and has run out of ways to cope. The [National Autistic Society](https://www.autism.org.uk/advice-and-guidance/topics/behaviour/meltdowns/all-audiences) describes a meltdown as an intense response to an overwhelming situation, when someone temporarily loses behavioural control, and that matches what we see.
 
-The same page covers shutdowns, the quieter version of overload: going quiet, withdrawing or switching off. They're easier to miss, but they come from the same place.
+The National Autistic Society also describes shutdowns, the quieter version of overload: going quiet, withdrawing or switching off. They're easier to miss, but they come from the same place.
 
 This is the short list of what we've learned. It isn't clinical advice, and every autistic child is different. It's what works, and what doesn't, in our house.
 
@@ -32,25 +32,23 @@ Most of the instincts you'd bring to a tantrum backfire here.
 
 **Reduce stimulation.** Quiet, dim, calm. Less noise, less light, fewer people, fewer words.
 
-**Physical comfort.** If he allows it, gentle pressure or holding. The "if he allows it" matters. Touch can help or hurt depending on the moment, so we follow his lead.
+**Physical comfort.** If he allows it, gentle pressure or holding. The "if he allows it" matters. Touch can help or hurt depending on the moment, so we follow his lead. Holding is comfort he accepts, never restraint; the [National Autistic Society's meltdown guidance](https://www.autism.org.uk/advice-and-guidance/topics/behaviour/meltdowns/all-audiences) is clear that the priority is safety and space, not control.
 
-**Wait it out.** Meltdowns end when they end. They can't be rushed. In the moment, what matters is keeping everyone safe and the space calm. In practice I'd move anything he could hurt himself on, give him physical room, keep it to one adult talking (or none), and get siblings out of the room.
+**Wait it out.** Meltdowns end when they end. They can't be rushed. In the moment, what matters is keeping everyone safe and the space calm. Focus on safety: clear the space of anything that could hurt, give room, and keep talking to a minimum.
 
-**Respond to shutdowns differently.** A shutdown looks calmer, but it's the same overload. I wouldn't push for eye contact or answers. Lower the demands, keep the space quiet and let him come back in his own time.
+**Respond to shutdowns differently.** A shutdown looks calmer, but it's the same overload. The usual guidance is to lower demands rather than push for eye contact or answers, keep the space quiet, and allow time to come back.
 
-**Talk about it later.** A meltdown is exhausting. I'd hold any conversation until after rest, food and water, once he has properly settled, not the minute the visible part stops, and keep it to what happened just before and what might make it easier next time.
-
-**Look after the adult too.** Supporting a child through a meltdown drains you as well. Give yourself a few minutes to recover before picking up where the day left off.
+**Talk about it later.** We talk about it later, once he's calm. A meltdown is exhausting, so any conversation can wait until there has been time to rest and properly settle, not just until the visible part stops.
 
 ## Prevention strategies
 
 Some meltdowns can be headed off before they start.
 
-**Warn about changes.** "In 5 minutes we're leaving." A heads-up gives him time to shift gears instead of having a transition sprung on him. I wrote more about why routine and advance notice matter so much to him in [What My Son's Autism Taught Me About Predictable Systems](/blog/2026-01-08-autism-and-routine/).
+**Warn about changes.** "In 5 minutes we're leaving." A heads-up gives him time to shift gears instead of having a transition sprung on him. I'd also try a visual timer or a [visual schedule](https://raisingchildren.net.au/autism/communicating-relationships/communicating/visual-supports), because a child can see the time running down and what comes next instead of having to hold it in their head. I wrote more about why routine and advance notice matter so much to him in [What My Son's Autism Taught Me About Predictable Systems](/blog/2026-01-08-autism-and-routine/).
 
-**Avoid known triggers.** Loud places during busy times. Avoidance has a cost, though: steer around every trigger and his world can shrink. My view is that avoidance is right when he's already running low, and that building tolerance belongs on good days, in small doses, with an easy way out.
+**Avoid known triggers.** Loud places during busy times. Avoidance has a cost, though: steer around every trigger and a child's world can shrink.
 
-**Watch for early signs.** Hands over ears, increased stimming, verbal withdrawal. These are the signals that he's heading towards overload. Learn your own child's early signs. Spotting them early gives us a chance to step in before the meltdown starts, rather than managing it once it has.
+**Watch for early signs.** Hands over ears, increased stimming, verbal withdrawal. These are the signals that he's heading towards overload. Every child's early signs are different, so learn your own child's. Spotting them early gives you a chance to step in before the meltdown starts, rather than managing it once it has.
 
 **Have exit strategies.** Always know how to leave quickly. Having a way out planned makes it easier for the adult to stay calm, and a calm adult helps.
 
@@ -60,8 +58,8 @@ Not every meltdown is something to manage alone at home. If your child's meltdow
 
 ## To other autism parents
 
-Meltdowns happen. They're not the result of bad parenting; they're part of autism. Our job isn't to prevent all of them. It's to support our kids through them.
+Meltdowns happen. They're not the result of bad parenting; they're part of autism. Our job isn't to prevent all of them. It's to support him through them.
 
-You're not failing. This is hard. You're doing your best.
+You're not failing. This is hard, and it drains you too, so take a few minutes to recover afterwards.
 
-Your child needs understanding, not judgement. Give that to them. Give that to yourself.
+Your child needs understanding, not judgement. Give that to yourself as well.

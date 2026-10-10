@@ -21,7 +21,7 @@ The commitments came out of three posts: the principles in [New Year, Same Found
 |---|---|---|
 | Weekend boundaries | B+ | One emergency Saturday; still checking Slack |
 | Being present | C+ | Phone away more often; head still drifts to work |
-| Writing consistently | A | A post every day so far |
+| Writing consistently | A | Daily habit held; quality uneven |
 | AI project discipline | B- | Pulled into new model releases; turned down two gigs |
 
 ### Weekend boundaries: B+
@@ -46,7 +46,7 @@ The A is for consistency, not for every post being great. That's the trade-off I
 
 ### AI project discipline: B-
 
-I said I'd stop chasing every new model. I mostly succeeded. But I still got pulled into the latest Gemini releases, and spent time on them that I'd meant to put into the tools I already use. That breaks the [depth over breadth](/blog/2026-01-01-new-year-same-foundation/#what-im-carrying-forward) principle I set at the start of the month.
+I said I'd stop chasing every new model. I mostly succeeded. But I still got pulled into the latest Gemini releases. That breaks the [depth over breadth](/blog/2026-01-01-new-year-same-foundation/#what-im-carrying-forward) principle I set at the start of the month.
 
 Curiosity isn't the problem; it's part of the job. The problem is when exploring a new model quietly replaces finishing the work in front of me.
 
@@ -54,13 +54,13 @@ The better news on this front is saying no. I turned down two consulting gigs. A
 
 ## Three goals for February
 
-Each goal targets the weakest grade above: being present. Each one is small enough that I can't talk myself out of it.
+All three target the weakest grade above, being present, and they're small enough that I can't talk myself out of them.
 
-1. **A daily meditation practice.** I tried it for a week in January and struggled. Five minutes a day, properly this time, to see whether it helps with presence.
+1. **A daily meditation practice.** I tried it for a week in January and struggled. Five minutes a day, smaller and less ambitious this time, to see whether it helps with presence.
 2. **A weekly family activity.** One thing each week, phones away, fully present.
 3. **A monthly no-tech day.** One Saturday with no computer and no phone. Just family.
 
-I'll grade these the same way on 24 February: did each one happen, and did my wife and kids notice?
+I'll grade these the same way at the end of February. The test that matters is whether my family notices.
 
 ## Somewhere in between
 

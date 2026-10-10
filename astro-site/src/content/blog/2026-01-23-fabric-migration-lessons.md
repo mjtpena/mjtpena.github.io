@@ -37,11 +37,11 @@ When not to do this: if your Synapse footprint is genuinely small (a handful of 
 
 Notebooks are where I'd budget the most contingency. Fabric Spark looks familiar, but the surrounding contracts are different.
 
-**Runtimes differ.** Fabric's current GA runtime is Runtime 1.3 (Apache Spark 3.5, Python 3.11, Delta Lake 3.2). Runtime 2.0 (Spark 4.0) is an experimental preview; don't target it for a production migration, and Runtime 1.2 is at end of support announced, so don't land there either. If your Synapse pools were on an older Spark version, library versions move under you, and anything pinned to an old version of a package needs testing again.
+**Runtimes differ.** Fabric's current GA runtime is Runtime 1.3 (Apache Spark 3.5, Python 3.11, Delta Lake 3.2). Runtime 2.0 (Spark 4.0) is an experimental preview; don't target it for a production migration, and Runtime 1.2 is in end-of-support-announced (EOSA) status, so don't land there either. If your Synapse pools were on an older Spark version, library versions move under you, and anything pinned to an old version of a package needs testing again.
 
 **Linked services don't exist.** Synapse notebooks often read credentials or connection details through linked services. Fabric has no equivalent object. External sources move to Fabric connections, and storage you used to mount is usually better exposed as OneLake shortcuts (mounting via `notebookutils.fs.mount` still works). Every notebook that called a linked service needs a code change.
 
-**The utilities namespace changed.** `mssparkutils` is renamed to `notebookutils` in Fabric. Existing calls still run, but Microsoft's NotebookUtils documentation recommends `notebookutils` for continued support and new features, and says the `mssparkutils` namespace will be retired. If you are touching the code anyway, rename it now.
+**The utilities namespace changed.** `mssparkutils` is renamed to `notebookutils` in Fabric. Existing calls still run, but Microsoft's [NotebookUtils documentation](https://learn.microsoft.com/fabric/data-engineering/notebook-utilities) recommends `notebookutils` for continued support and new features, and says the `mssparkutils` namespace will be retired. If you are touching the code anyway, rename it now.
 
 **Paths change.** Hard-coded `abfss://` paths to your Synapse storage account either become OneLake paths or relative paths against the lakehouse attached to the notebook.
 
@@ -67,11 +67,11 @@ The identity change is the real gotcha. In Synapse, `getSecret` through a linked
 
 ### Pipelines, data flows and T-SQL need rework too
 
-**Pipelines.** Synapse pipelines don't import into Fabric as they are. The Fabric pipeline upgrade PowerShell module targets Azure Data Factory, not Synapse, so Synapse pipelines are rebuilt by hand as Fabric Data Factory pipelines, including any pipeline that orchestrates notebooks or Spark job definitions. During the transition, the Invoke Pipeline activity can call your existing Synapse pipelines from Fabric, so you can migrate orchestration last.
+**Pipelines.** Synapse pipelines don't import into Fabric as they are. The Fabric pipeline upgrade PowerShell module targets Azure Data Factory, not Synapse, so Synapse pipelines are rebuilt by hand as Fabric Data Factory pipelines, including any pipeline that orchestrates notebooks or Spark job definitions. During the transition, the Invoke Pipeline activity (remote invocation GA since September 2025) can call your existing Synapse pipelines from Fabric, so you can migrate orchestration last.
 
 **Mapping data flows.** These have no direct equivalent. Plan to rewrite them as Dataflow Gen2 (Power Query) or as notebook code.
 
-**Dedicated SQL pools.** Expect T-SQL surface differences in Fabric Warehouse: distribution and index options don't carry over, and some DDL and data types need changing. The Fabric Data Warehouse migration assistant (generally available since September 2025) helps here: it converts the schema from an uploaded DACPAC, uses Copy job to move data, and uses Copilot to help fix incompatibilities. It reduces the effort; it doesn't remove the testing.
+**Dedicated SQL pools.** Expect T-SQL surface differences in Fabric Warehouse: distribution and index options don't carry over, and some DDL and data types need changing. The [Fabric Data Warehouse migration assistant](https://learn.microsoft.com/fabric/data-warehouse/migration-assistant) (generally available since September 2025) helps here: it converts the schema from an uploaded DACPAC, uses Copy job to move data, and uses Copilot to help fix incompatibilities. It reduces the effort; it doesn't remove the testing.
 
 Scope each of these as its own line item, not as part of "the notebooks".
 
@@ -88,28 +88,28 @@ What actually matters, per the [Direct Lake overview](https://learn.microsoft.co
 | Requirement | What it means in practice |
 |---|---|
 | Delta tables in OneLake | Data must be a Delta table in a lakehouse or warehouse. Raw Parquet or CSV folders don't qualify. Shortcut tables work with Direct Lake on SQL endpoints; Direct Lake on OneLake doesn't support them while it's in preview. |
-| Guardrails per capacity SKU | Each table has limits on Parquet files, row groups and rows. Exceeding a per-table limit makes queries touching that table fall back to DirectQuery (Direct Lake on SQL) or fail (Direct Lake on OneLake), and for Direct Lake on OneLake the refresh (framing) itself fails until the tables are back under the limits; exceeding the model-size limit sends every query to DirectQuery. |
+| Guardrails per capacity SKU | Each table has limits on Parquet files, row groups and rows. Exceeding a per-table limit makes queries on that table fall back to DirectQuery (Direct Lake on SQL endpoints) or fail (Direct Lake on OneLake, which has no fallback), and framing can fail when a table exceeds the guardrails. On SQL endpoints, exceeding the max model size sends every query to DirectQuery. |
 | Supported data types | Complex column types (struct, array, map) and binary columns aren't supported. Convert them to strings or other supported types in the gold layer, and check the known issues and limitations before modelling. |
 | Healthy file layout | Lots of small files and row groups hurt both guardrails and query speed. |
 
 Teams coming from Synapse often assume partitioning is the main lever. It isn't. Over-partitioning a modest table creates exactly the small-file problem that pushes you towards the guardrails. Compaction (`OPTIMIZE`) and file layout matter more.
 
+Direct Lake isn't always the right answer, either. I'd stay on Import mode for small, heavily modelled models or ones that lean on calculated columns, and for gold data that can't meet the guardrails on your current SKU.
+
 Two details worth knowing before you design gold tables:
 
-- **V-Order is not on by default in new workspaces.** New Fabric workspaces default to the `writeHeavy` [Spark resource profile](https://learn.microsoft.com/fabric/data-engineering/configure-resource-profile-configurations), which disables V-Order to speed up writes. For tables that Direct Lake reads heavily, turn V-Order back on for those writes or use a read-optimised profile.
+- **V-Order is not on by default in new workspaces.** New Fabric workspaces default to the `writeHeavy` Spark resource profile, which disables V-Order to speed up writes. For tables that Direct Lake reads heavily, turn V-Order back on for those writes or use a read-optimised profile.
 - **Fallback behaves differently by mode.** Direct Lake on SQL endpoints can fall back to DirectQuery when a guardrail is exceeded, which hides the problem behind slower queries. The newer Direct Lake on OneLake mode (public preview, enabled through the tenant setting "User can create Direct Lake on OneLake semantic models (preview)") doesn't fall back at all. Either way, you want to find out during the pilot, not from a user.
 
-A quick, read-only check I run on candidate tables in a notebook:
+A quick, read-only check to run on candidate tables. Run these in a Spark SQL cell (`%%sql`) in a Fabric notebook:
 
 ```sql
-%%sql
--- Spark SQL cell in a Fabric notebook. Replace <table-name> with your table,
+-- Replace <table-name> with your table,
 -- schema-qualified (<schema>.<table-name>) if the lakehouse has schemas enabled.
 DESCRIBE DETAIL <table-name>;
 ```
 
 ```sql
-%%sql
 -- Row count, to compare against the rows-per-table guardrail for your SKU
 SELECT COUNT(*) AS row_count FROM <table-name>;
 ```
@@ -119,7 +119,6 @@ SELECT COUNT(*) AS row_count FROM <table-name>;
 Compaction is a separate maintenance step. `OPTIMIZE` rewrites the table's files and consumes CUs, so schedule it rather than running it ad hoc on a busy capacity:
 
 ```sql
-%%sql
 -- Maintenance: compact small files and apply V-Order for read-heavy tables
 OPTIMIZE <table-name> VORDER;
 ```
@@ -149,7 +148,7 @@ Set up from day one:
 Three design choices prevent most contention:
 
 - **Separate capacities for dev/test and production.** Experiments and backfills then burn their own CUs, not the ones your production reports depend on.
-- **[Surge protection](https://learn.microsoft.com/fabric/enterprise/surge-protection)** (GA since June 2025) on the production capacity, which rejects new background jobs once 24-hour background utilisation crosses a threshold you set, so a backfill can't push interactive users into throttling.
+- **Surge protection** (GA since June 2025) on the production capacity, which rejects new background jobs once 24-hour background utilisation crosses a threshold you set, so a backfill can't push interactive users into throttling.
 - **Autoscale Billing for Spark**, generally available since mid-2025. It runs Spark jobs pay-as-you-go, outside the shared capacity, up to a CU limit you set. Heavy notebooks stop competing with Power BI, at the cost of a less predictable bill.
 
 I wrote more about sizing and what the metrics told us in [From F64 to F32: Three Fabric Sizing Mistakes and the Fixes](/blog/2026-01-20-fabric-capacity-planning/).
@@ -162,7 +161,7 @@ We underestimated this, and it cost us two weeks of confusion. The usual failure
 
 My rule of thumb: run the pilot workload as the training exercise, built by the people who will own the migrated workloads. Before the pilot ends, each engineer should have done four things themselves:
 
-- Built one lakehouse table, fed through a OneLake shortcut,.
+- Built one lakehouse table fed through a OneLake shortcut.
 - Attached a Fabric environment with the libraries and Spark settings their notebooks need.
 - Committed the workspace to Git and deployed a change through it.
 - Found their own jobs' CU usage in the Capacity Metrics app.

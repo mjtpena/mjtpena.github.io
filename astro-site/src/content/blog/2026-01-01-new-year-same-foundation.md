@@ -14,7 +14,7 @@ Another year begins, and I find myself less excited about "new year, new me" pro
 
 ## The resolution trap
 
-I stopped making New Year's resolutions a few years back. Not because I don't believe in self-improvement, but because I realised I was setting myself up for failure by treating the new year as a magical reset button. Technical goals with milestones are fine, and I set them. If you do want concrete technical targets for the year, I set mine out in [setting technical goals that actually work](/blog/2025-12-31-december-ai-topic/). Goals with a plan behind them are a different thing from a midnight promise.
+I stopped making New Year's resolutions a few years back. Not because I don't believe in self-improvement, but because I realised I was setting myself up for failure by treating the new year as a magical reset button. Technical goals with milestones are fine; I set mine out in [setting technical goals that actually work](/blog/2025-12-31-december-ai-topic/). A goal with a plan behind it is a different thing from a midnight promise.
 
 The problem with a resolution is its shape. It's usually a big, binary promise ("get fit", "write a book", "learn a new language") made at the moment of maximum optimism and minimum information. The first missed day feels like the whole thing has failed, so it gets quietly abandoned by February. The fix is in the design of the commitment, not in more willpower. What I've dropped is the all-or-nothing personal promise.
 
@@ -29,9 +29,9 @@ This year, I'm not starting from zero. I'm building on:
 - The relationships I've nurtured in the tech community
 - The habits, good and bad, that define my daily routine
 
-That last one matters most. The bad habits are part of the foundation too, and pretending they don't exist is how resolutions fail. I'd rather name them and work around them than declare them gone. My rule of thumb: if a habit keeps winning, change the environment rather than relying on willpower. Charge the phone outside the bedroom, pack the gym bag the night before. Late-night scrolling is the obvious example: if the phone isn't within reach after 10 pm, the habit has nothing to grab onto. Making the good option the easy one does more than any promise made at midnight.
+That last one matters most. The bad habits are part of the foundation too, and pretending they don't exist is how resolutions fail. I'd rather name them and work around them than declare them gone. My rule of thumb: if a habit keeps winning, change the environment rather than relying on willpower. If the phone charges outside the bedroom, late-night scrolling has nothing to grab onto; if the gym bag is packed the night before, the morning session doesn't need a decision. Making the good option the easy one does more than any promise made at midnight.
 
-So instead of revolutionary change, I'm looking at incremental improvement. Can I be 1% better as a father? As a developer? As a husband? A 1% change is small enough that I'll still be doing it in March.
+So instead of revolutionary change, I'm looking at incremental improvement. Can I be 1% better as a father? As a developer? As a husband? For me, 1% means the size of change I'd still be doing in March, like the 300 words a day below.
 
 ## What I'm carrying forward
 
@@ -45,7 +45,7 @@ These are principles I've already been living by, imperfectly, and want to keep.
 
 ## The AI reality check
 
-We're entering 2026 with models that write, reason over documents and call tools well enough to put into production, which three years ago was still a demo. But I'm not caught up in the hype anymore. The tools are impressive, but they're still just tools. The thinking, the strategy, the human judgement: that's still on us.
+Three years ago, getting a model to call your code meant parsing free text and hoping; OpenAI only added [function calling to its API in June 2023](https://openai.com/index/function-calling-and-other-api-updates/). Structured tool calls are now a baseline feature, and agents are built on them. But I'm not caught up in the hype anymore. A model can draft the answer; it can't decide whether the question was worth asking. The thinking, the strategy, the human judgement: that's still on us.
 
 The trap I want to avoid is confusing access to a capable model with having solved a problem. Anyone can call an API. Knowing which problem is worth solving, what "good" looks like, and when the answer is "don't use AI for this" is where the actual work sits.
 
