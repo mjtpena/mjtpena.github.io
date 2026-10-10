@@ -1,519 +1,243 @@
 ---
-title: "Advanced Chunking Strategies for RAG: Beyond Fixed-Size Splits"
-description: "In projects I've worked on, chunking decisions alone changed retrieval quality more than model choice ever did. This deep dive pulls together advanced…"
+title: "Structure-Aware Chunking for RAG: Headings, Tables and Breadcrumbs"
+description: "Chunk documents along their headings, keep tables whole and prefix every chunk with its section path, using Document Intelligence markdown output and Python."
 author: Michael John Peña
 draft: false
 date: 2024-01-07
 tags:
   - RAG
   - Chunking
-  - NLP
+  - Document Intelligence
   - Azure AI Search
-  - Document Processing
+  - Python
 ---
 
-In projects I've worked on, chunking decisions alone changed retrieval quality more than model choice ever did. This deep dive pulls together advanced chunking strategies I used to preserve coherence while optimising token budgets.
+My rule of thumb: fix chunking before you swap models; it usually moves retrieval quality more. Yet most pipelines still cut documents every N characters, slicing tables in half and stranding paragraphs from the headings that explain what they're about. A chunk that says "the limit is 30 days" is useless if the retriever can't tell whether it came from the refund policy or the leave policy. This post is about fixing that by chunking along the structure the author already gave the document.
 
-## Why Chunking Matters
+I covered the menu of options (fixed-size, recursive, semantic) in [Document Chunking Strategies for RAG Systems](/blog/2023-10-26-chunking-strategies/). Here I want to go deeper on the one I now default to for business documents: structure-aware chunking with breadcrumbs.
 
-The chunk is the unit of retrieval. When a user asks a question:
-1. Their query gets embedded
-2. Similar chunks are retrieved
-3. Those chunks become context for the LLM
+## Why fixed-size splits fail on real documents
 
-If your chunks split important information across boundaries, you lose context. If they're too large, you waste token budget. If they're too small, you lose coherence.
+Policies, manuals, contracts and runbooks aren't streams of prose. They're trees: a title, sections, subsections, lists, tables. Fixed-size chunking ignores the tree, and three things go wrong.
 
-## Chunking Strategies
+- **Context is lost at the boundary.** The heading "Refunds > Digital products" sits in one chunk and the rule sits in the next. The rule's embedding no longer carries the word "refund" at all.
+- **Tables get cut mid-row.** Half a pricing table with no header row is noise to an embedding model and dangerous context for an LLM, which will happily read the wrong column.
+- **Overlap papers over the problem.** Adding 10–20% overlap is the usual fix. It costs index size and tokens, produces near-duplicate search results, and still doesn't guarantee the heading lands in the same chunk as the rule.
 
-### 1. Fixed-Size Chunking (Baseline)
+Semantic chunking (splitting where the embedding similarity between neighbouring sentences drops) is the other popular answer. It's clever, but it needs an embedding for every sentence at ingestion time (batched, but still far more vectors than you'll store), its threshold is a magic number you'll tune per corpus, and it ignores the explicit signal the author left behind. When a document has headings, I'd rather trust the headings.
 
-Simple but often suboptimal:
+## Step one: get the structure out of the file
+
+Structure-aware chunking only works if you can see the structure. Plain-text extraction from a PDF flattens it: headings become ordinary lines and tables become columns of words. That was the main obstacle until recently.
+
+In November 2023, Azure AI Document Intelligence (renamed from Form Recognizer) shipped the `2023-10-31-preview` API, and its `prebuilt-layout` model can now return the document as **Markdown**, with headings, paragraphs and tables marked up ([What's new in Document Intelligence](https://learn.microsoft.com/azure/ai-services/document-intelligence/whats-new)). The new `azure-ai-documentintelligence` Python package, first released as 1.0.0b1 on 17 November 2023, targets that API version ([changelog](https://github.com/Azure/azure-sdk-for-python/blob/main/sdk/documentintelligence/azure-ai-documentintelligence/CHANGELOG.md)). Both are preview, so pin the package version and expect breaking changes before GA.
 
 ```python
-def fixed_size_chunk(text: str, chunk_size: int = 1000, overlap: int = 200) -> list[str]:
-    """Basic fixed-size chunking with overlap."""
-    chunks = []
-    start = 0
+# pip install azure-ai-documentintelligence==1.0.0b1
+import os
 
-    while start < len(text):
-        end = start + chunk_size
-        chunk = text[start:end]
-        chunks.append(chunk)
-        start = end - overlap
+from azure.ai.documentintelligence import DocumentIntelligenceClient
+from azure.ai.documentintelligence.models import ContentFormat
+from azure.core.credentials import AzureKeyCredential
 
-    return chunks
+client = DocumentIntelligenceClient(
+    endpoint=os.environ["DOCUMENTINTELLIGENCE_ENDPOINT"],  # https://<your-resource-name>.cognitiveservices.azure.com/
+    credential=AzureKeyCredential(os.environ["DOCUMENTINTELLIGENCE_API_KEY"]),
+)
 
-# Problems:
-# - Splits mid-sentence
-# - Ignores document structure
-# - Fixed size regardless of content type
+with open("leave-policy.pdf", "rb") as f:
+    poller = client.begin_analyze_document(
+        "prebuilt-layout",
+        analyze_request=f,
+        content_type="application/octet-stream",
+        output_content_format=ContentFormat.MARKDOWN,
+    )
+
+markdown = poller.result().content
+
+with open("leave-policy.md", "w", encoding="utf-8") as out:
+    out.write(markdown)
 ```
 
-### 2. Sentence-Aware Chunking
+If your sources are already Markdown, HTML or Word with proper heading styles, you can skip this and convert directly. The point is to reach a text format where headings and tables are explicit.
 
-Respect sentence boundaries:
+## Step two: chunk along the tree
 
-```python
-import nltk
-from nltk.tokenize import sent_tokenize
+The chunker below makes three decisions, and they're the substance of this approach:
 
-def sentence_aware_chunk(
-    text: str,
-    max_chunk_size: int = 1000,
-    overlap_sentences: int = 2
-) -> list[str]:
-    """Chunk by sentences, respecting boundaries."""
+1. **A chunk never crosses a heading.** Each section is packed on its own, so a chunk is always about one thing.
+2. **A table is never split.** Blocks are separated by blank lines, so a pipe table stays in one block, and an HTML `<table>` is collected whole even if it contains blank lines.
+3. **Every chunk carries its breadcrumb.** The heading path ("Leave Policy > Parental leave > Eligibility") is prefixed to the chunk text, so it's embedded and sent to the LLM with the content.
 
-    sentences = sent_tokenize(text)
-    chunks = []
-    current_chunk = []
-    current_size = 0
-
-    for sentence in sentences:
-        sentence_size = len(sentence)
-
-        if current_size + sentence_size > max_chunk_size and current_chunk:
-            # Save current chunk
-            chunks.append(" ".join(current_chunk))
-
-            # Start new chunk with overlap
-            current_chunk = current_chunk[-overlap_sentences:] if overlap_sentences else []
-            current_size = sum(len(s) for s in current_chunk)
-
-        current_chunk.append(sentence)
-        current_size += sentence_size
-
-    # Don't forget the last chunk
-    if current_chunk:
-        chunks.append(" ".join(current_chunk))
-
-    return chunks
-```
-
-### 3. Semantic Chunking
-
-Group sentences by semantic similarity:
+Size is measured in tokens with `tiktoken` and the `cl100k_base` encoding used by `text-embedding-ada-002`, not in characters. Character counts drift badly on tables, numbers and non-English text.
 
 ```python
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
-
-class SemanticChunker:
-    def __init__(self, embedding_client, similarity_threshold: float = 0.75):
-        self.embeddings = embedding_client
-        self.threshold = similarity_threshold
-
-    def chunk(self, text: str, max_chunk_size: int = 1500) -> list[str]:
-        """Chunk based on semantic similarity between sentences."""
-
-        sentences = sent_tokenize(text)
-        if len(sentences) <= 1:
-            return [text]
-
-        # Embed all sentences
-        embeddings = self._embed_batch(sentences)
-
-        # Group semantically similar consecutive sentences
-        chunks = []
-        current_chunk = [sentences[0]]
-        current_embedding = embeddings[0]
-
-        for i in range(1, len(sentences)):
-            similarity = cosine_similarity(
-                [current_embedding],
-                [embeddings[i]]
-            )[0][0]
-
-            current_text = " ".join(current_chunk)
-
-            # Check if we should start a new chunk
-            if similarity < self.threshold or len(current_text) + len(sentences[i]) > max_chunk_size:
-                chunks.append(current_text)
-                current_chunk = [sentences[i]]
-                current_embedding = embeddings[i]
-            else:
-                current_chunk.append(sentences[i])
-                # Update embedding as average
-                current_embedding = np.mean(
-                    [current_embedding, embeddings[i]],
-                    axis=0
-                )
-
-        # Last chunk
-        if current_chunk:
-            chunks.append(" ".join(current_chunk))
-
-        return chunks
-
-    def _embed_batch(self, texts: list[str]) -> list[list[float]]:
-        """Embed multiple texts efficiently."""
-        response = self.embeddings.create(
-            model="text-embedding-ada-002",
-            input=texts
-        )
-        return [e.embedding for e in response.data]
-```
-
-### 4. Recursive Structure-Aware Chunking
-
-Use document structure (headers, paragraphs):
-
-```python
-from dataclasses import dataclass
-from typing import Optional
+# pip install tiktoken
 import re
+import sys
+from dataclasses import dataclass, field
+from pathlib import Path
+
+import tiktoken
+
+ENCODING = tiktoken.get_encoding("cl100k_base")
+HEADING = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
+
+
+def n_tokens(text: str) -> int:
+    return len(ENCODING.encode(text))
+
 
 @dataclass
-class DocumentSection:
-    title: str
-    content: str
-    level: int
-    children: list["DocumentSection"]
+class Chunk:
+    breadcrumb: str
+    body: str
+    metadata: dict = field(default_factory=dict)
 
-class StructureAwareChunker:
-    def __init__(self, max_chunk_size: int = 1500):
-        self.max_chunk_size = max_chunk_size
+    @property
+    def text(self) -> str:
+        return f"{self.breadcrumb}\n\n{self.body}"
 
-    def chunk_markdown(self, markdown: str) -> list[dict]:
-        """Chunk markdown respecting header structure."""
 
-        # Parse into sections
-        sections = self._parse_markdown_structure(markdown)
+def split_blocks(lines: list[str]) -> list[str]:
+    """Group lines into blocks separated by blank lines; keep HTML tables whole."""
+    blocks: list[str] = []
+    current: list[str] = []
+    in_table = False
+    for line in lines:
+        if not in_table and "<table" in line:
+            if current:
+                blocks.append("\n".join(current))
+                current = []
+            in_table = True
+        if in_table:
+            current.append(line)
+            if "</table>" in line:
+                blocks.append("\n".join(current))
+                current = []
+                in_table = False
+            continue
+        if line.strip():
+            current.append(line)
+        elif current:
+            blocks.append("\n".join(current))
+            current = []
+    if current:
+        blocks.append("\n".join(current))
+    return blocks
 
-        # Convert sections to chunks
-        chunks = []
-        for section in sections:
-            chunks.extend(self._section_to_chunks(section, []))
 
-        return chunks
-
-    def _parse_markdown_structure(self, markdown: str) -> list[DocumentSection]:
-        """Parse markdown into hierarchical sections."""
-
-        lines = markdown.split("\n")
-        root_sections = []
-        section_stack = []
-
-        current_content = []
-
-        for line in lines:
-            header_match = re.match(r'^(#{1,6})\s+(.+)$', line)
-
-            if header_match:
-                # Save accumulated content to current section
-                if section_stack and current_content:
-                    section_stack[-1].content = "\n".join(current_content)
-                    current_content = []
-
-                level = len(header_match.group(1))
-                title = header_match.group(2)
-
-                new_section = DocumentSection(
-                    title=title,
-                    content="",
-                    level=level,
-                    children=[]
-                )
-
-                # Find parent
-                while section_stack and section_stack[-1].level >= level:
-                    section_stack.pop()
-
-                if section_stack:
-                    section_stack[-1].children.append(new_section)
-                else:
-                    root_sections.append(new_section)
-
-                section_stack.append(new_section)
-            else:
-                current_content.append(line)
-
-        # Handle remaining content
-        if section_stack and current_content:
-            section_stack[-1].content = "\n".join(current_content)
-
-        return root_sections
-
-    def _section_to_chunks(
-        self,
-        section: DocumentSection,
-        parent_titles: list[str]
-    ) -> list[dict]:
-        """Convert section to chunks, preserving hierarchy context."""
-
-        chunks = []
-        context_path = parent_titles + [section.title]
-
-        # Check if section content fits in one chunk
-        full_content = f"{'#' * section.level} {section.title}\n\n{section.content}"
-
-        if len(full_content) <= self.max_chunk_size and not section.children:
-            chunks.append({
-                "content": full_content,
-                "metadata": {
-                    "section_path": " > ".join(context_path),
-                    "level": section.level
-                }
-            })
-        else:
-            # Split content if too large
-            if section.content:
-                content_chunks = self._split_content(section.content)
-                for i, chunk_content in enumerate(content_chunks):
-                    header = f"{'#' * section.level} {section.title}"
-                    if len(content_chunks) > 1:
-                        header += f" (Part {i+1}/{len(content_chunks)})"
-
-                    chunks.append({
-                        "content": f"{header}\n\n{chunk_content}",
-                        "metadata": {
-                            "section_path": " > ".join(context_path),
-                            "level": section.level,
-                            "part": i + 1
-                        }
-                    })
-
-            # Process children
-            for child in section.children:
-                chunks.extend(self._section_to_chunks(child, context_path))
-
-        return chunks
-
-    def _split_content(self, content: str) -> list[str]:
-        """Split content by paragraphs then sentences if needed."""
-
-        paragraphs = content.split("\n\n")
-        chunks = []
-        current_chunk = []
-        current_size = 0
-
-        for para in paragraphs:
-            if current_size + len(para) > self.max_chunk_size:
-                if current_chunk:
-                    chunks.append("\n\n".join(current_chunk))
-                current_chunk = [para]
-                current_size = len(para)
-            else:
-                current_chunk.append(para)
-                current_size += len(para)
-
-        if current_chunk:
-            chunks.append("\n\n".join(current_chunk))
-
-        return chunks
-```
-
-### 5. Document-Type Specific Chunking
-
-Different document types need different strategies:
-
-```python
-from abc import ABC, abstractmethod
-from enum import Enum
-
-class DocumentType(Enum):
-    PROSE = "prose"
-    CODE = "code"
-    TABLE = "table"
-    FAQ = "faq"
-    LEGAL = "legal"
-
-class DocumentChunker(ABC):
-    @abstractmethod
-    def chunk(self, content: str) -> list[dict]:
-        pass
-
-class CodeChunker(DocumentChunker):
-    """Chunk code files by logical units."""
-
-    def chunk(self, content: str) -> list[dict]:
-        # For Python: split by function/class definitions
-        import ast
-
-        try:
-            tree = ast.parse(content)
-        except SyntaxError:
-            # Fall back to line-based chunking
-            return self._line_based_chunk(content)
-
-        chunks = []
-
-        for node in ast.walk(tree):
-            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-                # Get source lines for this node
-                start_line = node.lineno - 1
-                end_line = node.end_lineno
-
-                lines = content.split("\n")
-                chunk_content = "\n".join(lines[start_line:end_line])
-
-                chunks.append({
-                    "content": chunk_content,
-                    "metadata": {
-                        "type": "function" if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) else "class",
-                        "name": node.name,
-                        "line_start": start_line + 1,
-                        "line_end": end_line
-                    }
-                })
-
-        return chunks
-
-    def _line_based_chunk(self, content: str, chunk_lines: int = 50) -> list[dict]:
-        lines = content.split("\n")
-        chunks = []
-
-        for i in range(0, len(lines), chunk_lines):
-            chunk_content = "\n".join(lines[i:i+chunk_lines])
-            chunks.append({
-                "content": chunk_content,
-                "metadata": {
-                    "line_start": i + 1,
-                    "line_end": min(i + chunk_lines, len(lines))
-                }
-            })
-
-        return chunks
-
-class FAQChunker(DocumentChunker):
-    """Chunk FAQ documents by Q&A pairs."""
-
-    def chunk(self, content: str) -> list[dict]:
-        # Assume Q: ... A: ... format
-        qa_pattern = r'Q:\s*(.+?)\s*A:\s*(.+?)(?=Q:|$)'
-        matches = re.findall(qa_pattern, content, re.DOTALL)
-
-        chunks = []
-        for question, answer in matches:
-            chunks.append({
-                "content": f"Question: {question.strip()}\n\nAnswer: {answer.strip()}",
-                "metadata": {
-                    "type": "qa_pair",
-                    "question": question.strip()[:100]
-                }
-            })
-
-        return chunks
-
-class TableChunker(DocumentChunker):
-    """Chunk tables row by row with headers."""
-
-    def chunk(self, content: str, rows_per_chunk: int = 10) -> list[dict]:
-        lines = content.strip().split("\n")
-
-        # Assume first line is headers
-        headers = lines[0]
-        data_lines = lines[1:]
-
-        chunks = []
-        for i in range(0, len(data_lines), rows_per_chunk):
-            chunk_rows = data_lines[i:i+rows_per_chunk]
-            chunk_content = headers + "\n" + "\n".join(chunk_rows)
-
-            chunks.append({
-                "content": chunk_content,
-                "metadata": {
-                    "type": "table",
-                    "row_start": i + 1,
-                    "row_end": min(i + rows_per_chunk, len(data_lines))
-                }
-            })
-
-        return chunks
-
-# Factory
-def get_chunker(doc_type: DocumentType) -> DocumentChunker:
-    chunkers = {
-        DocumentType.CODE: CodeChunker(),
-        DocumentType.FAQ: FAQChunker(),
-        DocumentType.TABLE: TableChunker(),
-        # Add more...
-    }
-    return chunkers.get(doc_type, SentenceAwareChunker())
-```
-
-## Chunking Pipeline
-
-Putting it all together:
-
-```python
-class ChunkingPipeline:
-    def __init__(self, embedding_client):
-        self.semantic_chunker = SemanticChunker(embedding_client)
-        self.structure_chunker = StructureAwareChunker()
-        self.type_chunkers = {
-            "py": CodeChunker(),
-            "faq": FAQChunker(),
+def pack(path: list[str], blocks: list[str], max_tokens: int, doc_title: str) -> list[Chunk]:
+    """Pack whole blocks into chunks that fit the token budget, breadcrumb included."""
+    breadcrumb = " > ".join(path) if path else doc_title  # text before the first heading
+    budget = max_tokens - n_tokens(breadcrumb) - 2
+    chunks: list[Chunk] = []
+    current: list[str] = []
+    for block in blocks:
+        if current and n_tokens("\n\n".join(current + [block])) > budget:
+            chunks.append(Chunk(breadcrumb, "\n\n".join(current)))
+            current = []
+        current.append(block)
+    if current:
+        chunks.append(Chunk(breadcrumb, "\n\n".join(current)))
+    for chunk in chunks:
+        chunk.metadata = {
+            "section_path": breadcrumb,
+            "tokens": n_tokens(chunk.text),
+            "oversized": n_tokens(chunk.text) > max_tokens,
         }
+    return chunks
 
-    def process_document(
-        self,
-        content: str,
-        filename: str,
-        doc_type: Optional[str] = None
-    ) -> list[dict]:
-        """Process document with appropriate chunking strategy."""
 
-        # Detect document type
-        if doc_type is None:
-            doc_type = self._detect_type(filename, content)
+def chunk_markdown(markdown: str, doc_title: str, max_tokens: int = 512) -> list[Chunk]:
+    path: list[str] = []
+    section_lines: list[str] = []
+    chunks: list[Chunk] = []
 
-        # Select chunker
-        if doc_type in self.type_chunkers:
-            chunks = self.type_chunkers[doc_type].chunk(content)
-        elif filename.endswith(".md"):
-            chunks = self.structure_chunker.chunk_markdown(content)
+    def flush() -> None:
+        blocks = split_blocks(section_lines)
+        if blocks:
+            chunks.extend(pack(path, blocks, max_tokens, doc_title))
+        section_lines.clear()
+
+    for line in markdown.splitlines():
+        if line.strip().startswith("<!--"):
+            continue  # skip single-line HTML comments such as page markers
+        match = HEADING.match(line)
+        if match:
+            flush()
+            level = len(match.group(1))
+            path = path[: level - 1] + [match.group(2)]
         else:
-            chunks = self.semantic_chunker.chunk(content)
+            section_lines.append(line)
+    flush()
+    return chunks
 
-        # Enrich metadata
-        for i, chunk in enumerate(chunks):
-            chunk["metadata"]["source_file"] = filename
-            chunk["metadata"]["chunk_index"] = i
-            chunk["metadata"]["total_chunks"] = len(chunks)
 
-        return chunks
-
-    def _detect_type(self, filename: str, content: str) -> str:
-        """Auto-detect document type."""
-        ext = filename.split(".")[-1].lower()
-
-        if ext in ["py", "js", "ts", "java", "cs"]:
-            return "code"
-        if "Q:" in content and "A:" in content:
-            return "faq"
-        return "prose"
+if __name__ == "__main__":
+    source = Path(sys.argv[1])
+    with source.open(encoding="utf-8") as f:
+        for i, chunk in enumerate(chunk_markdown(f.read(), doc_title=source.stem)):
+            print(f"--- chunk {i} {chunk.metadata}")
+            print(chunk.text)
 ```
 
-## Evaluation
+Run it with `python chunker.py leave-policy.md` and read the output before you embed anything. Text that appears before the first heading gets the document title (here the file name) as its breadcrumb, so it still embeds with useful context. The comment filter strips only single-line comments, such as Document Intelligence's `<!-- PageBreak -->` markers; a comment that spans lines would end up in a chunk. Reading twenty chunks by eye catches more problems than any metric.
 
-Always measure chunking quality:
+### What the code deliberately doesn't do
+
+**No overlap.** Overlap exists to compensate for arbitrary boundaries. Once boundaries follow headings and every chunk carries its section path, overlap mostly adds duplicates. If a section is long enough to need several chunks and the paragraphs genuinely depend on each other, add overlap per section, not globally.
+
+**No silent splitting of oversized blocks.** A table bigger than the budget comes out as one chunk flagged `oversized`. I'd rather see those and decide: split by rows and repeat the header rows in each piece, summarise the table into prose for retrieval while keeping the original for the answer, or raise the budget for that document type. Splitting a table blindly is exactly the failure this approach exists to avoid.
+
+**No merging of tiny sections.** A section with a single sentence becomes a small chunk. That's usually fine, because the breadcrumb gives it enough context to embed well. If your documents have dozens of one-line sections, merge siblings under their parent heading.
+
+## Embedding the breadcrumb, not just the body
+
+The breadcrumb is embedded with the chunk on purpose. A user asking "who is eligible for parental leave?" should match a chunk whose body only says "Eligible after 12 months of continuous service", because its breadcrumb says "Parental leave > Eligibility". Keep `section_path` as a separate filterable, retrievable field in your index too, so you can show citations and filter by section.
 
 ```python
-def evaluate_chunking(chunks: list[dict], test_queries: list[dict]) -> dict:
-    """Evaluate chunking quality with test queries."""
+# pip install openai==1.6.1
+import os
 
-    results = {
-        "avg_chunk_size": np.mean([len(c["content"]) for c in chunks]),
-        "chunk_size_std": np.std([len(c["content"]) for c in chunks]),
-        "total_chunks": len(chunks),
-        "retrieval_accuracy": 0.0
-    }
+from openai import AzureOpenAI
 
-    # For each test query, check if correct chunk is retrievable
-    # Implementation depends on your retrieval system
+client = AzureOpenAI(
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],  # https://<your-resource-name>.openai.azure.com/
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2023-05-15",
+)
 
-    return results
+
+def embed(texts: list[str], deployment: str = "<your-ada-002-deployment>") -> list[list[float]]:
+    vectors: list[list[float]] = []
+    for start in range(0, len(texts), 16):  # Azure OpenAI caps ada-002 (version 2) at 16 inputs per request
+        response = client.embeddings.create(model=deployment, input=texts[start : start + 16])
+        vectors.extend(item.embedding for item in response.data)
+    return vectors
 ```
 
-## Conclusion
+Azure OpenAI's `text-embedding-ada-002` (version 2) accepts up to 16 inputs per request and 8,191 input tokens per input ([quotas and limits](https://learn.microsoft.com/azure/ai-services/openai/quotas-limits)); version 1 takes only one input per request. The token limit is a ceiling, not a target. A 512-token chunk embeds one idea; a 4,000-token chunk embeds the average of twenty, and retrieval precision falls with it. I start at 512 and only go higher for documents with long, tightly coupled sections such as legal clauses.
 
-Chunking is foundational to RAG quality. Key takeaways:
+## Where Azure AI Search fits
 
-1. **Never use naive fixed-size** - At minimum, respect sentences
-2. **Use document structure** - Headers and sections matter
-3. **Consider semantic similarity** - Keep related content together
-4. **Adapt to document type** - Code, tables, and prose need different strategies
-5. **Measure and iterate** - Chunking quality affects retrieval quality
+Azure AI Search (renamed from Azure Cognitive Search in November 2023) now has integrated vectorization in public preview, which chunks with the [Text Split skill](https://learn.microsoft.com/azure/search/cognitive-search-skill-textsplit) and embeds with an Azure OpenAI skill inside the indexer ([integrated vectorization](https://learn.microsoft.com/azure/search/vector-search-integrated-vectorization)). It's the fastest way to get a vector index running over blob storage, and for homogeneous prose it's good enough.
 
-The right chunking strategy can improve retrieval accuracy by 20-40%. It's worth the investment.
+The Text Split skill splits by pages or sentences with a maximum length and, in the `2023-10-01-preview` API, optional page overlap. It doesn't know about headings or tables. So my rule of thumb is:
+
+| Situation | What I'd use |
+|---|---|
+| Mostly prose, few headings, need a prototype this week | Integrated vectorization with Text Split |
+| Structured business documents with headings and tables | Custom chunking (as above), push chunks to the index |
+| Same, but you want the indexer to own the pipeline | Wrap the chunker in a custom Web API skill |
+| Transcripts, chat logs, scraped pages with no reliable structure | Sentence-aware or semantic chunking |
+
+## When not to bother
+
+Structure-aware chunking depends on the structure being real. If your PDFs are scans of letters, if headings are just bold text that the layout model doesn't classify as headings, or if every document is a single wall of text, the breadcrumb will be empty and you'll gain nothing over a sentence-aware splitter. Check a sample of Document Intelligence output first: if the Markdown has few `#` lines, choose a different strategy.
+
+It's also more code to own. A heading regex, a table detector and a token budget are simple, but they're yours to maintain when a new source format turns up.
+
+## The decision
+
+If your corpus is manuals, policies, contracts or runbooks, chunk along the headings, keep tables whole and embed the section path with every chunk. Get the structure out with Document Intelligence's Markdown output (preview, so pin your versions), size chunks in tokens, and drop global overlap. Then build a small set of real questions with known answers and compare retrieval against your fixed-size baseline before you commit. Chunking is cheap to change before you've indexed a million documents and expensive after.

@@ -1,6 +1,6 @@
 ---
-title: "Multi-Agent Systems: Orchestrating Specialized AI Agents"
-description: "Complex enterprise tasks benefit from specialization. In my work, coordinating small specialist agents led to clearer reasoning, easier testing, and more…"
+title: "When to Split One AI Agent into Several: A Supervisor Pattern"
+description: "When a single GPT-4 agent stops being reliable, split it into specialists. A framework-free supervisor pattern on Azure OpenAI, with trade-offs and limits."
 author: Michael John Peña
 draft: false
 date: 2024-01-09
@@ -9,572 +9,201 @@ tags:
   - Multi-Agent
   - Azure OpenAI
   - Architecture
-  - Enterprise AI
 ---
 
-Complex enterprise tasks benefit from specialization. In my work, coordinating small specialist agents led to clearer reasoning, easier testing, and more predictable cost profiles than monolithic agents. These are the architecture patterns I rely on.
+A single agent with a long system prompt and a dozen tools works well right up until it doesn't. Once one prompt has to cover SQL, statistics, business writing and calendar access, it starts picking the wrong tool, forgetting constraints, and failing in ways you can't reproduce. Splitting into small specialist agents usually gives clearer reasoning, easier testing and more predictable cost, but "multi-agent" is also the most over-applied idea in generative AI right now. Knowing when not to split matters as much as knowing how.
 
-## Why Multi-Agent?
+## The real reason to split: separate concerns, not more intelligence
 
-Consider a complex enterprise task: "Analyze our Q4 sales data, identify underperforming regions, draft an email to regional managers with improvement suggestions, and schedule follow-up meetings."
+Take a typical enterprise request: "Analyse our Q4 sales, find the underperforming regions, and draft an email to each regional manager with suggestions."
 
-A single agent would need to:
-- Query databases (data analyst skills)
-- Perform statistical analysis
-- Write professional emails (communication skills)
-- Access calendar systems (tool integration)
+One agent can attempt this, but it has to hold several unrelated jobs in a single context window: writing correct queries against your schema, interpreting the numbers, and writing in your organisation's tone. Every instruction you add for one job dilutes the others. When the email comes out wrong, you can't tell whether the prompt, the data or the tool call was at fault.
 
-Multi-agent systems let us create specialized agents for each capability.
+Splitting the work gives you three things that matter in production:
 
-## Architecture Patterns
+- **Smaller prompts you can test in isolation.** A data agent with one job and three tools can have its own evaluation set. A writer agent can be checked against a style guide without touching a database.
+- **Least privilege.** Only the data agent gets database credentials. The writer never sees a connection string, which limits the damage from prompt injection in retrieved content.
+- **Model choice per role.** Planning and synthesis benefit from GPT-4 Turbo (`1106-preview`, still in preview on Azure OpenAI). Preview model versions can be auto-upgraded to a newer version, so pin the planner deployment's model version and re-run your evaluations before moving it. Formatting, classification and simple extraction often run fine on GPT-35-Turbo at a fraction of the price.
 
-### Pattern 1: Hierarchical Orchestration
+What splitting does *not* give you is a smarter system. Agents talking to each other still run on the same models. You are trading one hard prompt for several easy ones plus a coordination problem.
 
-A supervisor agent coordinates specialized workers:
+## Three coordination patterns, and which one I'd start with
+
+| Pattern | How it works | Good for | Main risk |
+|---|---|---|---|
+| Supervisor (hierarchical) | One planner breaks the task into steps and delegates to named workers | Business workflows with clear stages | Planner becomes a bottleneck and single point of failure |
+| Peer-to-peer / group chat | Agents message each other; a selection rule decides who speaks next | Open-ended exploration, code-and-review loops | Conversations that loop, drift or never terminate |
+| Critic / debate | Agents produce answers, then critique each other over a few rounds | Reasoning and factual accuracy on high-stakes outputs | Token cost multiplies with every round |
+
+I start almost every enterprise build with the supervisor pattern. It is the easiest to log, the easiest to explain to a risk or audit team, and its failure modes are obvious: the plan was wrong, or a step failed. Peer-to-peer conversation is powerful, and it is what Microsoft Research's AutoGen is built around: its `GroupChat` manager, which since 0.2.2 picks the next speaker from each agent's description ([All About Agent Descriptions](https://microsoft.github.io/autogen/0.2/blog/2023/12/29/AgentDescriptions)). The `description` field on each worker in the sample below plays the same role for the planner. It is also much harder to put a ceiling on. The critic pattern has research behind it (Du et al., [Improving Factuality and Reasoning in Language Models through Multiagent Debate](https://arxiv.org/abs/2305.14325)), but I treat it as a verification step bolted onto a supervisor flow, not an architecture on its own.
+
+## A minimal supervisor on Azure OpenAI
+
+You don't need a framework to understand the pattern. The sketch below uses the `openai` Python library 1.x ([v1.0.0 shipped on 6 November 2023](https://github.com/openai/openai-python/releases/tag/v1.0.0)) with `AsyncAzureOpenAI`. The steps run one after another here; the async client is there so that independent steps can later run concurrently with `asyncio.gather`. The planner uses JSON mode, which Azure OpenAI supports on the GPT-4 Turbo `1106-preview` model from API version `2023-12-01-preview` ([JSON mode docs](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/json-mode)). Deployment names are placeholders for whatever you called your deployments.
 
 ```python
-from dataclasses import dataclass
-from enum import Enum
-from typing import Optional, Callable
 import asyncio
+import json
+import logging
+import os
+import uuid
+from dataclasses import dataclass
 
-class AgentRole(Enum):
-    SUPERVISOR = "supervisor"
-    DATA_ANALYST = "data_analyst"
-    WRITER = "writer"
-    RESEARCHER = "researcher"
-    CODER = "coder"
+from openai import AsyncAzureOpenAI
+
+client = AsyncAzureOpenAI(
+    azure_endpoint="https://<your-resource-name>.openai.azure.com",
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2023-12-01-preview",
+)
+
+PLANNER_DEPLOYMENT = "<your-gpt-4-1106-preview-deployment>"
+WORKER_DEPLOYMENT = "<your-gpt-35-turbo-deployment>"
+MAX_STEPS = 6
+
+logging.basicConfig(level=logging.INFO, format="%(message)s")
+log = logging.getLogger("supervisor")
+
 
 @dataclass
-class AgentMessage:
-    from_agent: str
-    to_agent: str
-    content: str
-    task_id: str
-    requires_response: bool = True
+class Worker:
+    name: str
+    description: str
+    system_prompt: str
+    deployment: str
 
-@dataclass
-class TaskResult:
-    agent: str
-    task_id: str
-    success: bool
-    result: str
-    error: Optional[str] = None
-
-class BaseAgent:
-    def __init__(self, name: str, role: AgentRole, llm_client, tools: list = None):
-        self.name = name
-        self.role = role
-        self.llm = llm_client
-        self.tools = tools or []
-        self.system_prompt = self._build_system_prompt()
-
-    def _build_system_prompt(self) -> str:
-        """Build role-specific system prompt."""
-        raise NotImplementedError
-
-    async def process(self, message: AgentMessage) -> TaskResult:
-        """Process an incoming message/task."""
-        raise NotImplementedError
-
-class SupervisorAgent(BaseAgent):
-    def __init__(self, llm_client, worker_agents: dict[str, BaseAgent]):
-        super().__init__("Supervisor", AgentRole.SUPERVISOR, llm_client)
-        self.workers = worker_agents
-        self.task_history = []
-
-    def _build_system_prompt(self) -> str:
-        worker_descriptions = "\n".join([
-            f"- {name}: {agent.role.value}"
-            for name, agent in self.workers.items()
-        ])
-
-        return f"""You are a supervisor agent coordinating a team of specialized agents.
-
-Your team:
-{worker_descriptions}
-
-Your job:
-1. Analyze incoming tasks
-2. Break them into subtasks
-3. Delegate to appropriate agents
-4. Synthesize results
-5. Ensure quality
-
-Always think step by step about which agent should handle each part."""
-
-    async def process(self, task: str) -> str:
-        """Process a complex task by orchestrating workers."""
-
-        # Step 1: Plan the task decomposition
-        plan = await self._create_plan(task)
-
-        # Step 2: Execute plan steps
-        results = []
-        for step in plan["steps"]:
-            agent_name = step["agent"]
-            subtask = step["task"]
-
-            if agent_name not in self.workers:
-                results.append(TaskResult(
-                    agent=agent_name,
-                    task_id=step["id"],
-                    success=False,
-                    result="",
-                    error=f"Unknown agent: {agent_name}"
-                ))
-                continue
-
-            message = AgentMessage(
-                from_agent=self.name,
-                to_agent=agent_name,
-                content=subtask,
-                task_id=step["id"]
-            )
-
-            result = await self.workers[agent_name].process(message)
-            results.append(result)
-
-            # Check for failure
-            if not result.success and step.get("critical", False):
-                break
-
-        # Step 3: Synthesize final response
-        return await self._synthesize_results(task, results)
-
-    async def _create_plan(self, task: str) -> dict:
-        """Create execution plan for the task."""
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            response_format={"type": "json_object"},
+    async def run(self, task: str, run_id: str) -> str:
+        response = await client.chat.completions.create(
+            model=self.deployment,
+            temperature=0,
             messages=[
                 {"role": "system", "content": self.system_prompt},
-                {
-                    "role": "user",
-                    "content": f"""Create an execution plan for this task:
-                    {task}
-
-                    Return JSON:
-                    {{
-                        "steps": [
-                            {{"id": "1", "agent": "agent_name", "task": "specific subtask", "critical": true/false}},
-                            ...
-                        ]
-                    }}"""
-                }
-            ]
+                {"role": "user", "content": task},
+            ],
         )
-
-        return json.loads(response.choices[0].message.content)
-
-    async def _synthesize_results(self, original_task: str, results: list[TaskResult]) -> str:
-        """Synthesize worker results into final response."""
-
-        results_text = "\n\n".join([
-            f"Agent: {r.agent}\nTask ID: {r.task_id}\nSuccess: {r.success}\nResult: {r.result}"
-            for r in results
-        ])
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "Synthesize the agent results into a coherent final response."
-                },
-                {
-                    "role": "user",
-                    "content": f"""Original task: {original_task}
-
-Agent results:
-{results_text}
-
-Provide a comprehensive response addressing the original task."""
-                }
-            ]
+        choice = response.choices[0]
+        log.info(
+            "run=%s agent=%s deployment=%s prompt_tokens=%d completion_tokens=%d finish=%s",
+            run_id,
+            self.name,
+            self.deployment,
+            response.usage.prompt_tokens,
+            response.usage.completion_tokens,
+            choice.finish_reason,
         )
-
-        return response.choices[0].message.content
-
-class DataAnalystAgent(BaseAgent):
-    def __init__(self, llm_client, database_client):
-        super().__init__("DataAnalyst", AgentRole.DATA_ANALYST, llm_client)
-        self.db = database_client
-
-    def _build_system_prompt(self) -> str:
-        return """You are a data analyst agent. You can:
-        - Write and execute SQL queries
-        - Perform statistical analysis
-        - Identify trends and anomalies
-        - Create data summaries
-
-        Always validate your queries before execution.
-        Present findings with supporting numbers."""
-
-    async def process(self, message: AgentMessage) -> TaskResult:
-        """Process a data analysis task."""
-
-        try:
-            # Generate analysis plan
-            analysis = await self._plan_analysis(message.content)
-
-            # Execute queries
-            query_results = []
-            for query in analysis.get("queries", []):
-                result = await self.db.execute(query)
-                query_results.append(result)
-
-            # Generate insights
-            insights = await self._generate_insights(message.content, query_results)
-
-            return TaskResult(
-                agent=self.name,
-                task_id=message.task_id,
-                success=True,
-                result=insights
+        if not choice.message.content:
+            raise RuntimeError(
+                f"{self.name} returned no content (finish_reason={choice.finish_reason})"
             )
+        return choice.message.content
 
-        except Exception as e:
-            return TaskResult(
-                agent=self.name,
-                task_id=message.task_id,
-                success=False,
-                result="",
-                error=str(e)
-            )
 
-    async def _plan_analysis(self, task: str) -> dict:
-        """Plan the analysis approach."""
-        # Implementation details...
-        pass
+WORKERS = {
+    "analyst": Worker(
+        name="analyst",
+        description="Interprets sales figures supplied in the task and identifies trends.",
+        system_prompt="You are a sales analyst. Only use numbers given to you. "
+        "If data is missing, say so instead of guessing.",
+        deployment=PLANNER_DEPLOYMENT,
+    ),
+    "writer": Worker(
+        name="writer",
+        description="Drafts short, professional business emails.",
+        system_prompt="You write concise business emails in Australian English. "
+        "Never invent figures that are not in the brief.",
+        deployment=WORKER_DEPLOYMENT,
+    ),
+}
 
-    async def _generate_insights(self, task: str, data: list) -> str:
-        """Generate insights from query results."""
-        # Implementation details...
-        pass
 
-class WriterAgent(BaseAgent):
-    def __init__(self, llm_client, style_guide: str = None):
-        super().__init__("Writer", AgentRole.WRITER, llm_client)
-        self.style_guide = style_guide
+async def plan(task: str) -> list[dict]:
+    roster = "\n".join(f"- {w.name}: {w.description}" for w in WORKERS.values())
+    response = await client.chat.completions.create(
+        model=PLANNER_DEPLOYMENT,
+        temperature=0,
+        response_format={"type": "json_object"},
+        messages=[
+            {
+                "role": "system",
+                "content": "You plan work for a team of agents. Available agents:\n"
+                f"{roster}\n"
+                'Reply in JSON as {"steps": [{"agent": "<name>", "task": "<instruction>"}]}. '
+                f"Use at most {MAX_STEPS} steps and only the agents listed.",
+            },
+            {"role": "user", "content": task},
+        ],
+    )
+    steps = json.loads(response.choices[0].message.content or "{}").get("steps")
+    if not isinstance(steps, list) or not steps:
+        raise ValueError(f"Planner returned no usable steps: {steps!r}")
+    for step in steps:
+        if not isinstance(step, dict) or "agent" not in step or "task" not in step:
+            raise ValueError(f"Malformed plan step: {step!r}")
+    return steps[:MAX_STEPS]
 
-    def _build_system_prompt(self) -> str:
-        base = """You are a professional writer agent. You can:
-        - Draft emails and communications
-        - Create reports and summaries
-        - Adapt tone for different audiences
-        - Edit and improve text"""
 
-        if self.style_guide:
-            base += f"\n\nStyle Guide:\n{self.style_guide}"
+async def run(task: str) -> str:
+    run_id = str(uuid.uuid4())
+    context = ""
+    for step in await plan(task):
+        worker = WORKERS.get(step["agent"])
+        if worker is None:
+            raise ValueError(f"Planner chose an unknown agent: {step['agent']}")
+        log.info("run=%s step agent=%s task=%s", run_id, worker.name, step["task"])
+        prompt = f"{step['task']}\n\nResults so far:\n{context or '(none)'}"
+        output = await worker.run(prompt, run_id)
+        context += f"\n## {worker.name}\n{output}\n"
+    return context
 
-        return base
 
-    async def process(self, message: AgentMessage) -> TaskResult:
-        """Process a writing task."""
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {"role": "system", "content": self.system_prompt},
-                {"role": "user", "content": message.content}
-            ]
-        )
-
-        return TaskResult(
-            agent=self.name,
-            task_id=message.task_id,
-            success=True,
-            result=response.choices[0].message.content
-        )
+if __name__ == "__main__":
+    task = (
+        "Q4 revenue by region (AUD): NSW 4.2m (target 4.0m), VIC 3.1m (target 3.6m), "
+        "QLD 2.0m (target 2.4m). Identify regions below target and draft one email "
+        "per underperforming regional manager with two practical suggestions."
+    )
+    print(asyncio.run(run(task)))
 ```
 
-### Pattern 2: Peer-to-Peer Collaboration
+A few design decisions in there are deliberate:
 
-Agents communicate directly without a central supervisor:
+- **The planner can only choose from a fixed roster.** An unknown agent name is an error, not something to improvise around. If the model can invent agents, it will.
+- **There's a hard step limit and a shape check**, enforced in code as well as in the prompt. Prompts are suggestions; validating every step and slicing to `MAX_STEPS` is a guarantee. The same goes for empty worker output: a content-filter finish returns no text, and it should stop the run rather than pass the word "None" to the next agent.
+- **Every model call logs tokens and the deployment against one run ID.** That's the minimum you need to see which role is expensive and to replay a bad run.
+- **Workers get the accumulated results as plain text.** That keeps the hand-off visible in your logs. For anything long-running, you'd write each step to a store such as Cosmos DB or Table Storage so a failed run can resume and be audited.
+- **The analyst runs on the GPT-4 Turbo preview deployment and the writer on GPT-35-Turbo.** That split is where most of the cost saving comes from, and it only works because each role is narrow enough for the cheaper model to handle.
 
-```python
-class CollaborativeAgent(BaseAgent):
-    def __init__(self, name: str, role: AgentRole, llm_client, message_bus):
-        super().__init__(name, role, llm_client)
-        self.message_bus = message_bus
-        self.pending_requests = {}
+The analyst here receives figures in the prompt. In a real system it would call a query tool through [function calling](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/function-calling), and that tool, not the model, would hold the database permissions.
 
-    async def start(self):
-        """Start listening for messages."""
-        await self.message_bus.subscribe(self.name, self._handle_message)
+### Evaluate the planner separately from the workers
 
-    async def _handle_message(self, message: AgentMessage):
-        """Handle incoming message from another agent."""
+Each worker gets its own evaluation set: fixed inputs with checks on the output, such as "the email mentions only figures from the brief". The planner needs one too. Keep a fixed set of tasks with the agent sequence you expect for each (this task should be `analyst` then `writer`, that one `analyst` only) and score `plan()` against it on its own, without running any workers. When a run goes wrong, that tells you quickly whether the plan or a step was at fault, and it's the test to re-run whenever the planner's model version or prompt changes.
 
-        if message.requires_response:
-            # This is a request - process and respond
-            result = await self.process(message)
-            await self._send_response(message, result)
-        else:
-            # This is a response to our earlier request
-            if message.task_id in self.pending_requests:
-                self.pending_requests[message.task_id].set_result(message.content)
+## Where multi-agent designs go wrong
 
-    async def request_help(self, target_agent: str, task: str) -> str:
-        """Request help from another agent."""
+The failure modes are predictable enough that I'd design for them from day one.
 
-        task_id = str(uuid.uuid4())
-        future = asyncio.Future()
-        self.pending_requests[task_id] = future
+**Error compounding.** If each step is right 90% of the time, a five-step plan is right about 59% of the time. More agents means more hand-offs, and every hand-off is a chance to lose information. This is the strongest argument for keeping the agent count small.
 
-        message = AgentMessage(
-            from_agent=self.name,
-            to_agent=target_agent,
-            content=task,
-            task_id=task_id,
-            requires_response=True
-        )
+**Runaway cost and latency.** Every agent turn is a full model call with its own context. A three-agent debate over three rounds is at least nine GPT-4 calls before you synthesise anything. Put step limits, token budgets and timeouts in code, and log tokens per agent so you can see which role is expensive.
 
-        await self.message_bus.send(target_agent, message)
+**Loops and politeness spirals.** Peer agents happily thank each other, ask clarifying questions back and forth, or re-do each other's work. Free-form chat needs an explicit termination condition and a maximum number of turns. AutoGen's `GroupChat` has a `max_round` setting for exactly this reason.
 
-        # Wait for response with timeout
-        try:
-            result = await asyncio.wait_for(future, timeout=60.0)
-            return result
-        except asyncio.TimeoutError:
-            return "Request timed out"
-        finally:
-            del self.pending_requests[task_id]
+**Untraceable failures.** If you can't replay which agent said what, with which inputs, you can't debug it. Log the plan, every step's input and output, the model deployment used, and token counts, with a single correlation ID per request.
 
-    async def _send_response(self, original: AgentMessage, result: TaskResult):
-        """Send response back to requesting agent."""
+**Trusting the critic too much.** A critic agent using the same model as the author shares its blind spots. Critique improves outputs on average, but it isn't validation. For figures, check them in code against the source data.
 
-        response = AgentMessage(
-            from_agent=self.name,
-            to_agent=original.from_agent,
-            content=result.result,
-            task_id=original.task_id,
-            requires_response=False
-        )
+## When one agent (or no agent) is the better answer
 
-        await self.message_bus.send(original.from_agent, response)
+I'd stay with a single agent, or a plain deterministic pipeline, when:
 
-class MessageBus:
-    """Simple in-memory message bus for agent communication."""
+- **The steps are fixed.** If the workflow is always extract, validate, summarise, write it as ordinary code that calls the model three times. You don't need an LLM to plan a sequence you already know.
+- **The tool count is small.** A single agent with three or four well-described functions is usually reliable. Split when the toolset spans genuinely different domains or permission boundaries, not because the prompt feels long.
+- **Latency matters.** Sequential agent hand-offs add seconds each. A user-facing chat response rarely survives a five-agent plan.
+- **You can't evaluate it yet.** If you don't have test cases for the single-agent version, adding agents only multiplies what you can't measure.
 
-    def __init__(self):
-        self.subscribers: dict[str, Callable] = {}
+On frameworks: AutoGen is the most capable option for conversational multi-agent patterns today, and the 0.2 releases are moving quickly. Semantic Kernel, whose .NET SDK [reached 1.0 in December 2023](https://devblogs.microsoft.com/semantic-kernel/semantic-kernel-v1-0-1-has-arrived-to-help-you-build-agents/), is the better fit when you want planners and plugins inside an existing .NET application. My advice is to build the supervisor loop by hand once, as above, so you understand what any framework is doing for you, then adopt one when you need its conversation management rather than its abstractions. If retrieval is the main job, the self-correcting patterns in [agentic RAG](/blog/2024-01-08-agentic-rag-patterns/) often solve the problem without multiple agents at all.
 
-    async def subscribe(self, agent_name: str, handler: Callable):
-        self.subscribers[agent_name] = handler
+## The decision in one line
 
-    async def send(self, target: str, message: AgentMessage):
-        if target in self.subscribers:
-            await self.subscribers[target](message)
-        else:
-            raise ValueError(f"Unknown agent: {target}")
-```
-
-### Pattern 3: Debate/Critic Pattern
-
-Agents review and challenge each other's work:
-
-```python
-class DebateSystem:
-    def __init__(self, llm_client, num_rounds: int = 3):
-        self.llm = llm_client
-        self.num_rounds = num_rounds
-
-    async def debate(self, topic: str, perspectives: list[str]) -> str:
-        """Run a multi-agent debate on a topic."""
-
-        # Initialize perspectives
-        agents = [
-            self._create_perspective_agent(p)
-            for p in perspectives
-        ]
-
-        debate_history = []
-
-        # Initial positions
-        for agent in agents:
-            position = await agent.state_position(topic)
-            debate_history.append({
-                "agent": agent.perspective,
-                "round": 0,
-                "content": position
-            })
-
-        # Debate rounds
-        for round_num in range(1, self.num_rounds + 1):
-            for agent in agents:
-                # Get other agents' latest positions
-                others_positions = [
-                    h for h in debate_history
-                    if h["agent"] != agent.perspective and h["round"] == round_num - 1
-                ]
-
-                # Generate response/critique
-                response = await agent.respond(topic, others_positions)
-
-                debate_history.append({
-                    "agent": agent.perspective,
-                    "round": round_num,
-                    "content": response
-                })
-
-        # Synthesize conclusion
-        return await self._synthesize_debate(topic, debate_history)
-
-    def _create_perspective_agent(self, perspective: str):
-        return PerspectiveAgent(perspective, self.llm)
-
-    async def _synthesize_debate(self, topic: str, history: list[dict]) -> str:
-        """Synthesize debate into balanced conclusion."""
-
-        debate_text = "\n\n".join([
-            f"[{h['agent']} - Round {h['round']}]: {h['content']}"
-            for h in history
-        ])
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """You are synthesizing a multi-perspective debate.
-                    Present a balanced conclusion that:
-                    1. Acknowledges valid points from each perspective
-                    2. Identifies areas of consensus
-                    3. Notes unresolved disagreements
-                    4. Provides actionable recommendations"""
-                },
-                {
-                    "role": "user",
-                    "content": f"Topic: {topic}\n\nDebate:\n{debate_text}"
-                }
-            ]
-        )
-
-        return response.choices[0].message.content
-
-class PerspectiveAgent:
-    def __init__(self, perspective: str, llm_client):
-        self.perspective = perspective
-        self.llm = llm_client
-
-    async def state_position(self, topic: str) -> str:
-        """State initial position on the topic."""
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": f"""You represent the {self.perspective} perspective.
-                    Present a clear, well-reasoned position on the topic.
-                    Be specific and provide supporting arguments."""
-                },
-                {
-                    "role": "user",
-                    "content": f"State your position on: {topic}"
-                }
-            ]
-        )
-
-        return response.choices[0].message.content
-
-    async def respond(self, topic: str, others: list[dict]) -> str:
-        """Respond to other perspectives."""
-
-        others_text = "\n\n".join([
-            f"[{o['agent']}]: {o['content']}"
-            for o in others
-        ])
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": f"""You represent the {self.perspective} perspective.
-                    Respond to other viewpoints by:
-                    1. Acknowledging valid points
-                    2. Challenging weak arguments
-                    3. Refining your own position
-                    4. Finding common ground where possible"""
-                },
-                {
-                    "role": "user",
-                    "content": f"""Topic: {topic}
-
-Other perspectives:
-{others_text}
-
-Provide your response."""
-                }
-            ]
-        )
-
-        return response.choices[0].message.content
-```
-
-## Practical Example: Document Processing Pipeline
-
-```python
-class DocumentProcessingPipeline:
-    """Multi-agent pipeline for document processing."""
-
-    def __init__(self, llm_client, storage):
-        self.llm = llm_client
-        self.storage = storage
-
-        # Initialize agents
-        self.extractor = ExtractionAgent(llm_client)
-        self.validator = ValidationAgent(llm_client)
-        self.enricher = EnrichmentAgent(llm_client)
-        self.summarizer = SummaryAgent(llm_client)
-
-    async def process_document(self, document: str, doc_type: str) -> dict:
-        """Process document through agent pipeline."""
-
-        # Stage 1: Extract structured data
-        extraction_result = await self.extractor.extract(document, doc_type)
-
-        if not extraction_result["success"]:
-            return {"error": "Extraction failed", "details": extraction_result}
-
-        # Stage 2: Validate extracted data
-        validation_result = await self.validator.validate(
-            extraction_result["data"],
-            doc_type
-        )
-
-        if validation_result["issues"]:
-            # Try to fix issues
-            extraction_result = await self.extractor.extract(
-                document,
-                doc_type,
-                feedback=validation_result["issues"]
-            )
-
-        # Stage 3: Enrich with additional context
-        enriched = await self.enricher.enrich(extraction_result["data"])
-
-        # Stage 4: Generate summary
-        summary = await self.summarizer.summarize(document, enriched)
-
-        return {
-            "extracted_data": extraction_result["data"],
-            "validation": validation_result,
-            "enriched_data": enriched,
-            "summary": summary
-        }
-```
-
-## Conclusion
-
-Multi-agent systems enable:
-- **Specialization**: Each agent excels at specific tasks
-- **Scalability**: Add agents for new capabilities
-- **Robustness**: Redundancy and cross-checking
-- **Complexity handling**: Break down hard problems
-
-Start with hierarchical patterns (easier to debug), then evolve to peer-to-peer as your system matures. Always include monitoring to track inter-agent communication and task completion.
+Split an agent when its jobs need different tools, permissions or models, and keep the coordination as boring as possible: a fixed roster, a supervisor that plans, hard limits in code, and a log of every hand-off. If the workflow is predictable, skip the agents and write the pipeline.

@@ -1,246 +1,154 @@
 ---
-title: "AI Predictions for 2024: What to Expect in Enterprise AI"
-description: "As we enter 2024, the AI landscape is evolving at an unprecedented pace. After a transformative 2023 that brought us GPT-4, the Assistants API, and…"
+title: "Enterprise AI in 2024: Five Bets Against What Is GA on Azure"
+description: "Five enterprise AI bets for 2024, each checked against what is generally available or still in preview on Azure as of 1 January 2024."
 author: Michael John Peña
 draft: false
 date: 2024-01-01
 tags:
-  - AI
   - Predictions
-  - Enterprise
+  - Enterprise AI
   - Azure OpenAI
-  - Machine Learning
+  - Azure AI Search
+  - Microsoft Fabric
 ---
 
-As we enter 2024, the AI landscape is evolving at an unprecedented pace. After a transformative 2023 that brought us GPT-4, the Assistants API, and Microsoft Fabric GA, here are my predictions for what enterprise AI will look like this year.
+Most 2024 prediction lists, mine included, describe where the industry is heading. What they rarely say is which parts of that future you can put into production on 1 January, and which parts are still a preview feature with no SLA. That gap matters more than the predictions do, because it decides what goes into this year's budget and what stays in the lab.
 
-## Prediction 1: Agentic AI Goes Mainstream
+I've already written broader takes in [2024 Predictions: The Year Ahead in AI and Data](/blog/2023-12-26-2024-predictions-ai/) and [AI Trends to Watch in 2024](/blog/2023-12-27-ai-trends-to-watch/). This post is narrower: five bets for enterprise teams building on Microsoft, each one checked against what is actually shipped today.
 
-2024 will be the year AI agents move from research to production. We'll see frameworks like AutoGen and LangChain mature to handle complex, multi-step workflows.
+## Where things stand on 1 January 2024
 
-```python
-# Example: Simple agent pattern we'll see more of
-from openai import AzureOpenAI
-import json
+A quick status check, because the November and December announcements blurred the line between "announced" and "available":
 
-class AIAgent:
-    def __init__(self, client, tools):
-        self.client = client
-        self.tools = tools
-        self.conversation_history = []
+| Capability | Status on 1 Jan 2024 |
+|---|---|
+| Microsoft Fabric | GA (announced at Ignite, 15 Nov 2023) |
+| Copilot in Fabric | Public preview (staged rollout; F64/P1 capacity and above) |
+| Data Activator (Fabric) | Public preview |
+| Azure AI Search vector search and semantic ranker | GA (REST API `2023-11-01`) |
+| Azure AI Search integrated vectorisation | Public preview |
+| GPT-4 Turbo (`1106-preview`) on Azure OpenAI | Preview model version |
+| GPT-4 Turbo with Vision on Azure OpenAI | Public preview (December 2023) |
+| Assistants API | OpenAI platform only, in beta; not on Azure OpenAI yet |
+| Azure AI Studio | Public preview |
+| Semantic Kernel for .NET | v1.0.1, first stable release (18 Dec 2023) |
+| Copilot for Microsoft 365 | GA for enterprise customers since 1 Nov 2023 |
 
-    def execute_task(self, task: str, max_iterations: int = 10):
-        """Execute a task with tool use and reasoning."""
-        self.conversation_history.append({
-            "role": "user",
-            "content": task
-        })
+The pattern is clear. The data and retrieval layers are GA. The model layer you'd most want to use (GPT-4 Turbo, vision) is still preview on Azure. The orchestration layer is either brand new (Semantic Kernel 1.0.1) or not on Azure at all (Assistants). Plan accordingly. The sources for these are the [Azure OpenAI what's new page](https://learn.microsoft.com/azure/ai-services/openai/whats-new) and the [Azure AI Search what's new page](https://learn.microsoft.com/azure/search/whats-new).
 
-        for _ in range(max_iterations):
-            response = self.client.chat.completions.create(
-                model="gpt-4-turbo",
-                messages=self.conversation_history,
-                tools=self.tools,
-                tool_choice="auto"
-            )
+## Bet 1: Agents arrive, but as narrow tool-calling loops
 
-            message = response.choices[0].message
-            self.conversation_history.append(message)
+Everyone expects 2024 to be the year of agents. I agree, with a caveat: the agents that reach production this year will be small, bounded loops where a model chooses between three to ten well-defined tools, not open-ended autonomous systems.
 
-            if message.tool_calls:
-                # Execute tools and continue
-                for tool_call in message.tool_calls:
-                    result = self._execute_tool(tool_call)
-                    self.conversation_history.append({
-                        "role": "tool",
-                        "tool_call_id": tool_call.id,
-                        "content": json.dumps(result)
-                    })
-            else:
-                # Task complete
-                return message.content
+The building blocks are real. Parallel tool calling arrived with the `1106` model versions, and Azure OpenAI exposes it through the `2023-12-01-preview` API version. Microsoft shipped [Semantic Kernel 1.0.1 for .NET](https://devblogs.microsoft.com/semantic-kernel/semantic-kernel-v1-0-1-has-arrived-to-help-you-build-agents/) on 18 December with automatic function calling. AutoGen from Microsoft Research is the most interesting multi-agent framework I've looked at, and LangChain is still pre-1.0 and changing fast.
 
-        return "Max iterations reached"
+What isn't there yet is the operational layer. There's no Azure equivalent of the Assistants API, so you own conversation state, retries, and tool execution. That's fine. Owning the loop is how you learn where it breaks, and it means the guardrails are yours to set. Three I'd put in from day one: a hard cap on iterations per request (five is plenty for most tasks), an allow-list of tools scoped to the request rather than the whole catalogue, and human approval before any tool that writes, sends, or deletes. A loop that can only read and has to stop after five turns is cheap to get wrong.
 
-    def _execute_tool(self, tool_call):
-        """Execute a single tool call."""
-        func_name = tool_call.function.name
-        args = json.loads(tool_call.function.arguments)
+When *not* to build an agent: if the steps are known in advance, write a workflow. A Logic App or a Durable Function that calls a model at fixed points is cheaper, testable, and auditable. Reach for a model-driven loop only when the order of steps genuinely depends on the input.
 
-        if func_name in self.tools:
-            return self.tools[func_name](**args)
-        return {"error": f"Unknown tool: {func_name}"}
-```
+## Bet 2: RAG stops being a demo and becomes a retrieval problem
 
-## Prediction 2: RAG Becomes Table Stakes
+Retrieval-augmented generation is now the default pattern for "chat with our documents". The 2024 shift is that teams will stop treating it as a prompt problem and start treating it as a search-relevance problem, because that's where the bad answers come from.
 
-Retrieval Augmented Generation will no longer be a differentiator - it will be expected. The focus will shift to:
+This is the area where the GA story is strongest. Vector search and semantic ranker both went GA in Azure AI Search in November, so a hybrid query (keyword plus vector, re-ranked semantically) is a supported production pattern today. Microsoft's [published relevance testing](https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/azure-cognitive-search-outperforming-vector-search-with-hybrid/ba-p/3929167) showed hybrid retrieval with semantic ranking beating pure vector search across their test sets, which matches what I'd expect from mixed enterprise content full of product codes and acronyms that embeddings handle badly.
 
-- **Hybrid search** combining vector and keyword approaches
-- **Advanced chunking** strategies for better context
-- **Index optimization** for cost and latency
+Here's the query pattern using `azure-search-documents` 11.4.0 (GA) and `openai` 1.x. It assumes an existing index with a `content_vector` field and a semantic configuration.
 
 ```python
-# Azure AI Search with integrated vectorization (expected pattern for 2024)
+import os
+
+from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
 from azure.search.documents.models import VectorizedQuery
+from openai import AzureOpenAI
 
-def hybrid_search(query: str, vector: list[float], k: int = 10):
-    """Hybrid search combining semantic and vector approaches."""
+openai_client = AzureOpenAI(
+    azure_endpoint="https://<your-openai-resource>.openai.azure.com",
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2023-05-15",
+)
 
-    vector_query = VectorizedQuery(
-        vector=vector,
-        k_nearest_neighbors=k,
-        fields="content_vector"
-    )
+search_client = SearchClient(
+    endpoint="https://<your-search-service>.search.windows.net",
+    index_name="<your-index-name>",
+    credential=AzureKeyCredential(os.environ["AZURE_SEARCH_API_KEY"]),
+)
+
+
+def hybrid_search(query: str, k: int = 5) -> list[dict]:
+    embedding = openai_client.embeddings.create(
+        model="<your-ada-002-deployment>",
+        input=query,
+    ).data[0].embedding
 
     results = search_client.search(
         search_text=query,
-        vector_queries=[vector_query],
+        vector_queries=[
+            VectorizedQuery(vector=embedding, k_nearest_neighbors=50, fields="content_vector")
+        ],
         query_type="semantic",
-        semantic_configuration_name="my-semantic-config",
-        select=["title", "content", "source"],
-        top=k
+        semantic_configuration_name="<your-semantic-config>",
+        select=["title", "content"],
+        top=k,
     )
 
     return [
         {
+            "title": r["title"],
             "content": r["content"],
-            "score": r["@search.reranker_score"],
-            "source": r["source"]
+            # None if the semantic ranker didn't run (e.g. a throttling fallback)
+            "reranker_score": r.get("@search.reranker_score"),
         }
         for r in results
     ]
+
+
+if __name__ == "__main__":
+    for hit in hybrid_search("What is our parental leave policy?"):
+        print(round(hit["reranker_score"] or 0, 2), hit["title"])
 ```
 
-## Prediction 3: Multi-Modal AI in Production
+Two decisions in that snippet are deliberate. I ask the vector query for 50 neighbours even though I only want five results, because the semantic ranker can only re-rank what it's given. And I generate the embedding client-side, because integrated vectorisation, which would do this inside the service, is still preview.
 
-GPT-4 Vision and similar models will move from demos to production use cases:
+When *not* to use RAG: if the answer lives in a structured system (an ERP, a data warehouse), retrieving text chunks about it is the wrong tool. Query the system and let the model summarise the result.
 
-- Document understanding pipelines
-- Visual quality inspection
-- Multi-modal customer support
+## Bet 3: Multimodal moves into document pipelines first
 
-```python
-# Document analysis with GPT-4V
-def analyze_document_image(image_base64: str, analysis_type: str):
-    """Analyze a document image using GPT-4 Vision."""
+GPT-4 Turbo with Vision reached public preview on Azure OpenAI in December. The first serious enterprise use won't be chatbots that look at photos. It will be document processing: forms, invoices, and scanned PDFs where layout carries meaning.
 
-    response = client.chat.completions.create(
-        model="gpt-4-vision-preview",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": f"Analyze this document. Extract: {analysis_type}"
-                    },
-                    {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:image/png;base64,{image_base64}"
-                        }
-                    }
-                ]
-            }
-        ],
-        max_tokens=4096
-    )
+My position is that vision models will complement Azure AI Document Intelligence rather than replace it this year. Document Intelligence gives you deterministic field extraction, confidence scores, and a GA SLA. A vision model gives you flexible reasoning over messy layouts, with no confidence score and preview status. A sensible 2024 pipeline uses Document Intelligence for extraction and a language model for the judgement calls that follow, such as "does this invoice match the purchase order?".
 
-    return response.choices[0].message.content
-```
+When *not* to use a vision model: anything where you need repeatable, auditable field values. Preview models can change behaviour between versions, and finance teams don't accept "the model read it differently this week".
 
-## Prediction 4: Cost Optimization Becomes Critical
+## Bet 4: Cost moves from the pilot budget to the P&L
 
-As AI usage scales, cost management will become a primary concern:
+In 2023, most generative AI spend sat in innovation budgets that nobody scrutinised. In 2024 the successful pilots become products, and someone in finance will ask what each conversation costs.
 
-- **Prompt caching** to reduce redundant API calls
-- **Model routing** to use smaller models when possible
-- **Token optimization** in prompt engineering
+The price gap between models is the lever. At [OpenAI's DevDay](https://openai.com/blog/new-models-and-developer-products-announced-at-devday) in November, GPT-4 Turbo was priced at a third of GPT-4's input price and half its output price, and GPT-3.5 Turbo is cheaper again by an order of magnitude. Routing simple requests to a smaller model is the single biggest saving available, and it's an architecture decision you make early, not a tuning exercise you bolt on later.
 
-```python
-# Simple cost-aware model routing
-def route_to_model(query: str, complexity_score: float) -> str:
-    """Route queries to appropriate model based on complexity."""
+Practical moves for this year:
 
-    if complexity_score < 0.3:
-        return "gpt-35-turbo"  # Simple queries
-    elif complexity_score < 0.7:
-        return "gpt-4-turbo"   # Medium complexity
-    else:
-        return "gpt-4"         # Complex reasoning
+- **Log tokens per request with a business identifier** (tenant, product, use case). Azure Monitor gives you totals per deployment; it doesn't tell you which feature burned them.
+- **Separate deployments per workload** so one noisy feature can't exhaust another's tokens-per-minute quota.
+- **Trim retrieval context.** In RAG, the retrieved chunks usually dominate input tokens. Five good chunks beat twenty mediocre ones on both cost and answer quality.
 
-def estimate_complexity(query: str) -> float:
-    """Estimate query complexity using heuristics."""
+When *not* to optimise: before you have a product people use. Optimising a pilot's token spend is premature; measure first.
 
-    complexity_indicators = [
-        ("analyze", 0.3),
-        ("compare", 0.4),
-        ("synthesize", 0.5),
-        ("code", 0.4),
-        ("multi-step", 0.6),
-        ("reasoning", 0.5)
-    ]
+## Bet 5: Governance becomes a delivery requirement, not a slide
 
-    score = 0.2  # Base complexity
-    query_lower = query.lower()
+Two things changed in December. The EU reached a provisional political agreement on the AI Act on 8 December, and Copilot for Microsoft 365 has been GA long enough that security teams are discovering how much oversharing exists in SharePoint permissions. Both push governance from a policy document to an engineering task.
 
-    for indicator, weight in complexity_indicators:
-        if indicator in query_lower:
-            score += weight
+For Azure teams, that means content filtering configuration, prompt and response logging with clear retention rules, and Microsoft Purview sensitivity labels that actually reflect the data. The Copilot point is worth stressing: Copilot respects existing permissions, so it will surface anything a user can already technically open. Fixing permissions is a prerequisite, not a Copilot problem.
 
-    return min(score, 1.0)
-```
+On Fabric, the same discipline applies. Fabric is GA and OneLake makes data far easier to share across workspaces. Easier sharing without domains, endorsement, and workspace roles set up properly is how you end up feeding the wrong data to a model.
 
-## Prediction 5: Microsoft Fabric Dominates Data + AI
+## What I'd commit to in Q1
 
-Fabric will become the default choice for organizations wanting unified data and AI:
+If I had to pick where to spend the first quarter, it would be in this order:
 
-- **OneLake** as the single source of truth
-- **Direct Lake** for Power BI performance
-- **Data Activator** for real-time alerts
+1. **Build retrieval on GA pieces.** Hybrid search with semantic ranker is production-ready. Get relevance right before touching agents.
+2. **Prototype agents, don't ship them broadly.** Keep tool sets small and wait for the orchestration layer on Azure to mature.
+3. **Instrument cost per use case now**, while volumes are low and changes are cheap.
+4. **Treat preview as preview.** GPT-4 Turbo, vision, Copilot in Fabric and integrated vectorisation are worth evaluating. Don't put them on a critical path with a contractual SLA until they go GA.
 
-```python
-# Fabric notebook pattern for AI-enhanced analytics
-from pyspark.sql.functions import udf, col
-from pyspark.sql.types import StringType
-import openai
-
-@udf(returnType=StringType())
-def classify_feedback(text):
-    """UDF to classify customer feedback using Azure OpenAI."""
-    response = openai.chat.completions.create(
-        model="gpt-35-turbo",
-        messages=[
-            {"role": "system", "content": "Classify as: positive, negative, neutral"},
-            {"role": "user", "content": text}
-        ],
-        max_tokens=10
-    )
-    return response.choices[0].message.content
-
-# Apply to Fabric lakehouse data
-feedback_df = spark.read.table("customer_feedback")
-classified_df = feedback_df.withColumn(
-    "sentiment",
-    classify_feedback(col("feedback_text"))
-)
-classified_df.write.mode("overwrite").saveAsTable("classified_feedback")
-```
-
-## What This Means for Enterprises
-
-Organizations should prepare by:
-
-1. **Building AI platforms** - Not just point solutions
-2. **Investing in data quality** - AI is only as good as your data
-3. **Developing AI governance** - Responsible AI frameworks
-4. **Upskilling teams** - Prompt engineering and AI literacy
-5. **Monitoring costs** - Token usage and model efficiency
-
-## Conclusion
-
-2024 will be the year enterprise AI moves from experimentation to industrialization. The winners will be organizations that can operationalize AI at scale while managing costs and risks effectively.
-
-The technology is ready. The question is: are you?
+Put a GA/preview column in your 2024 roadmap and make every line item fill it in.
