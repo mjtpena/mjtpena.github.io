@@ -1,6 +1,6 @@
 ---
 title: "The Myth of Continuous Learning: Depth Beats Keeping Up"
-description: "Learning every new framework and model isn't growth, it's a fast route to fatigue. Why depth, deliberate rest and relevance beat trying to keep up."
+description: "Trying to learn every new framework and model leads to fatigue, not growth. Why depth, deliberate rest and relevance beat keeping up."
 author: Michael John Peña
 draft: false
 date: 2026-01-15
@@ -15,11 +15,11 @@ A new framework every month. A new AI model every week. Feeds full of "10x devel
 
 I think that message is wrong, and I think it's making a lot of good engineers worse at their jobs.
 
-## The pressure is real, the premise isn't
+## Real pressure, broken premise
 
 The pressure itself isn't imaginary. In data and AI especially, the surface area keeps growing. Model families, agent frameworks, vector stores, orchestration tools, platform features, certification refreshes. If you treat every announcement as homework, the backlog never shrinks.
 
-The broken premise is that the backlog is yours to clear. "Continuous learning" has drifted from a sensible idea (keep getting better at your craft) into an impossible one (keep up with everything). Nobody actually keeps up with everything. The people who look like they do are usually skimming, and skimming looks a lot like learning from the outside.
+The broken premise is that the backlog is yours to clear. "Continuous learning" has drifted from a sensible idea (keep getting better at your craft) into an impossible one (keep up with everything). The people who look like they keep up with everything are usually skimming, and skimming looks a lot like learning from the outside.
 
 ## When input stops becoming understanding
 
@@ -31,7 +31,7 @@ When keeping up becomes an unspoken part of the job, it can feed what the World 
 - **Cynicism**, because every new tool starts to feel like hype you're obliged to care about.
 - **Reduced efficacy**, because attention spread across twenty things means you're shallow in all of them, including the one you're paid for.
 
-That's the part that stings: the habit sold as protection against falling behind can make you worse at the work in front of you.
+The habit sold as protection against falling behind can make you worse at the work in front of you.
 
 ## What actually works
 
@@ -39,17 +39,25 @@ That's the part that stings: the habit sold as protection against falling behind
 
 Master what you use. If your day job is building on a particular cloud, data platform or language, the highest-return learning is usually getting genuinely good at that: how it fails, how it's priced, where its limits are, what the documentation glosses over.
 
-Depth compounds. Understanding why a query is slow, why a deployment is fragile or why a model's output drifts transfers to the next tool far better than a dozen "getting started" tutorials ever will. Breadth has a place, but it should be a thin layer of awareness ("this exists, this is roughly what it's for"), not an attempt at competence in everything.
+Depth carries over: understanding why a query is slow, why a deployment is fragile or why a model's output drifts transfers to the next tool far better than a dozen "getting started" tutorials ever will. Breadth has a place, but it should be a thin layer of awareness ("this exists, this is roughly what it's for"), not an attempt at competence in everything.
 
 My rule of thumb: batch awareness into one fixed slot a month, such as skimming the Microsoft Learn "What's new" pages for the platforms you own, and only promote something to a learning sprint if it passes the three questions below. Everything else can wait for next month's skim.
 
-### Gaps, not continuous
+### Spaced, not continuous
 
 Sprint, then rest. Learn, then consolidate.
 
-This isn't just a wellbeing argument. There's solid evidence that spacing beats cramming for retention. A large [review and meta-analysis by Cepeda and colleagues (2006)](https://pubmed.ncbi.nlm.nih.gov/16719566/) pooled hundreds of experiments on distributed practice and found that spreading study over time produced better long-term recall than massing it together, and that the best gap grows the longer you need to remember something. That research is about verbal recall rather than learning a new SDK, so I wouldn't stretch it too far. But the direction matches what most practitioners already know: the stuff you learn, apply, leave alone, then come back to is the stuff that sticks.
+Spacing also has evidence behind it, not just wellbeing. There's solid evidence that spacing beats cramming for retention. A large [review and meta-analysis by Cepeda and colleagues (2006)](https://pubmed.ncbi.nlm.nih.gov/16719566/) pooled hundreds of experiments on distributed practice and found that spreading study over time produced better long-term recall than massing it together, and that the best gap between study sessions of the same material grows the longer you need to remember it. That research is about verbal recall rather than learning a new SDK, so I wouldn't stretch it too far. But the direction matches what most practitioners already know: the stuff you learn, apply, leave alone, then come back to is the stuff that sticks.
 
-In practice that means treating learning like a project with a start and an end. Pick a topic, give it a few focused weeks, build something real with it, then stop and let it settle. A useful default is two to four focused weeks ending in something you've actually built or written up, then at least as long before the next topic. Constant low-grade consumption has no consolidation phase, which is exactly why so little of it stays.
+In practice that means treating learning like a project with a start and an end. Pick a topic, give it two to four focused weeks, and finish with something you've actually built or written up. Then leave it for a few weeks and come back to it before it's needed again. That revisit is where the spacing evidence applies: the longer you need to keep something, the longer that gap can be.
+
+"Let it settle" shouldn't mean doing nothing with it. Consolidation is active, and three habits do most of the work:
+
+- **Write it up or explain it to a colleague.** If you can't explain what problem the tool solves and where it breaks, you haven't learned it yet, and writing exposes the gaps fast.
+- **Rebuild a small piece from memory instead of re-reading.** When you come back after the gap, try to recreate the key configuration, query or pattern without the docs open, then check what you missed. Pulling it out of memory does more for retention than another pass through the notes.
+- **Apply it on a real work item.** A proof of concept against your own data, or one ticket done the new way, teaches you the failure modes no tutorial covers.
+
+Constant low-grade consumption has no consolidation phase, which is exactly why so little of it stays.
 
 ### Relevant, not trendy
 
@@ -61,17 +69,19 @@ Learn what helps your work, not what's hyped. Before picking something up, I fin
 | Does it change a decision I'm responsible for? | Awareness is enough |
 | Will it still matter if the hype moves on? | Wait and see |
 
-Fundamentals usually pass all three: data modelling, security, networking, testing, clear writing, how systems fail. Most announcements fail at least one. Waiting is underrated. A lot of tools that look essential in their launch week are renamed, merged or abandoned a year later, and the ones that survive are better documented by the time you get to them.
+Fundamentals usually pass all three: data modelling, security, networking, testing, clear writing, how systems fail. Most announcements fail at least one. Here's how I'd apply that to a monthly skim of the [Microsoft Fabric "What's new" page](https://learn.microsoft.com/fabric/fundamentals/whats-new). A change to capacity, security or governance passes the second question straight away if I own the platform, because it can change how I size, secure or administer the tenant, so it gets read properly that week. A preview feature for a workload I won't touch in the next three to six months fails the first question and goes on a parked list, to be revisited when it reaches general availability or when a project actually needs it. Expect only one or two items a month to earn more than a headline read.
+
+Waiting is underrated. A lot of tools that look essential in their launch week are renamed, merged or abandoned a year later, and the ones that survive are better documented by the time you get to them.
 
 ## When this advice doesn't apply
 
 Depth-first isn't always right.
 
 - **Early in a career**, breadth matters more. You don't yet know what you'll want to go deep on, and sampling is how you find out.
-- **When your stack is genuinely being replaced**, keeping your head down is a risk. If your platform is being retired, learning the successor isn't trend-chasing, it's maintenance.
+- **When your stack is genuinely being replaced**, keeping your head down is a risk. If your platform is being retired, learning its successor is maintenance work.
 - **In advisory or architecture roles**, part of the job is knowing the landscape well enough to recommend between options. Even then, the goal is informed judgement, not hands-on mastery of everything.
 
-The point isn't "never learn new things". It's to choose deliberately, rather than letting the release cycle choose for you.
+None of this means never learning new things. It means choosing deliberately, rather than letting the release cycle choose for you.
 
 ## Permission to stop
 

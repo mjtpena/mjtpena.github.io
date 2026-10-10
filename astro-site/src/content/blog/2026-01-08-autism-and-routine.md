@@ -12,9 +12,9 @@ tags:
   - API Design
 ---
 
-Andriel needs structure. Not wants it: needs it. His autism means unpredictability causes him genuine distress, and over the years I've realised that living with that has changed how I design software more than most of what I've read about it.
+Andriel needs structure. Not wants it; needs it. His autism means unpredictability causes him genuine distress, and over the years I've realised that living with that has changed how I design software more than most of what I've read about it.
 
-This isn't a claim that software users are autistic. It's about what designing a household for someone who can't fill in gaps has taught me, and why the same discipline helps people who can.
+I'm not suggesting your users are autistic. This is about what designing a household for someone who can't fill in gaps has taught me, and why the same discipline helps everyone else.
 
 ## The morning routine
 
@@ -30,7 +30,7 @@ Most of the systems I've worked on behave the same way from the user's side. Peo
 
 Good code is boring. It does what you expect, every time.
 
-Bad code surprises you. A function that sometimes returns `None`, sometimes raises, and sometimes returns an empty dict is the software version of reshuffling Andriel's morning without warning. Every caller now has to defend against three outcomes, and most of them will only defend against one.
+Bad code surprises you. A function that sometimes returns `None`, sometimes raises, and sometimes returns an empty dict is the software version of reshuffling Andriel's morning without warning. Every caller now has to handle three different kinds of nothing on top of the real result, and most will only handle one.
 
 ```python
 from dataclasses import dataclass
@@ -68,7 +68,7 @@ print(get_user(99))  # None
 print(get_user(0))   # None
 ```
 
-The second version isn't clever. It just makes one promise and keeps it, and the [`User | None` union type](https://docs.python.org/3/library/stdtypes.html#types-union) (Python 3.10+) tells the caller what that promise is before they read a line of the body.
+The second version isn't clever. It just makes one promise and keeps it, and the `User | None` union type (Python 3.10+) tells the caller what that promise is before they read a line of the body.
 
 There is a trade-off. Collapsing every "not found" case into `None` can hide a genuine bug: a negative ID is probably a caller error, not a missing user. If that distinction matters in your system, raise a specific exception for invalid input and return `None` only for "valid but absent". What matters is that the rule is written down and never varies.
 
@@ -112,7 +112,7 @@ for value in (42, 3.5, -5):
 # -5: ValueError: User ID must be an integer from 1 to 1000000, got -5.
 ```
 
-For HTTP APIs, the same principle already has a standard: [RFC 9457, Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html), gives you a consistent JSON shape for errors with a type, title, status and detail. I'd use it rather than inventing yet another error envelope, because consistency across endpoints matters as much as the wording of any one message.
+For HTTP APIs, the same principle already has a standard. [RFC 9457, Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html) gives you a consistent JSON shape for errors with a type, title, status and detail. I'd use it rather than inventing yet another error envelope, because consistency across endpoints matters as much as the wording of any one message.
 
 ## Transitions need warnings
 
@@ -120,7 +120,7 @@ You can't just switch contexts on Andriel. "Five more minutes until we leave" gi
 
 APIs are no different. Removing an endpoint without notice is the "we're leaving now" of software. The tools for giving notice exist and are cheap:
 
-- In Python libraries, emit a [`DeprecationWarning`](https://docs.python.org/3/library/warnings.html) with `warnings.warn(..., DeprecationWarning, stacklevel=2)` before you remove anything, and remember it's hidden by default unless it's triggered from code in `__main__` or a test runner or `-W` flag turns it on. Library users often never see it, so call it out in release notes too. For warnings aimed at end users of an application, use `FutureWarning`, which is shown by default.
+- In Python libraries, emit a [`DeprecationWarning`](https://docs.python.org/3/library/warnings.html) with `warnings.warn(..., DeprecationWarning, stacklevel=2)` before you remove anything. Python hides `DeprecationWarning` by default unless the warning is triggered directly by code in `__main__`. Test runners such as pytest, or the `-W` flag, will show it. Library users often never see it, so call it out in release notes too. For warnings aimed at end users of an application, use `FutureWarning`, which is shown by default.
 - In HTTP APIs, send the [`Deprecation` response header (RFC 9745, published March 2025)](https://www.rfc-editor.org/rfc/rfc9745.html) to say when a resource was or will be deprecated, and the [`Sunset` header (RFC 8594)](https://www.rfc-editor.org/rfc/rfc8594.html) to say when it will stop responding.
 - Publish the migration path at the same time as the warning, not after.
 
@@ -142,7 +142,7 @@ I can't assume Andriel knows the plan, so I tell him. Every morning: "Today we'r
 
 It's the same every day, and the confirmation still matters. It reduces anxiety because it turns an assumption into a fact.
 
-Teams need the same thing. The runbook step everyone "just knows", the reason a service is configured the way it is, the order in which things deploy: write them down. A "How this deploys" section in the README, or a short architecture decision record (ADR) explaining why a setting was chosen, is enough. Documentation of the obvious is what the next person, including future you, actually needs when something is on fire.
+Teams need the same thing. The runbook step everyone "just knows", the reason a service is configured the way it is, the order in which things deploy: write them down. A "How this deploys" section in the README, or a short architecture decision record (ADR) explaining why a setting was chosen, is enough. The test is whether someone who joined last week could deploy on their own by following the page, without asking anyone what the "obvious" step is.
 
 ## Change needs more communication than you think
 
@@ -157,22 +157,44 @@ When we need to change Andriel's routine, the process looks like this:
 
 That's a change management process. Most technology rollouts I see skip steps 1 to 4: they announce a go-live date and then wonder why adoption stalls. Steps 1 to 4 feel slow, but they're where trust is built. Skip them and you pay for it in support tickets and workarounds.
 
+Here's how that maps onto retiring an API version, using the dates from the headers above. The intervals are my defaults for an internal or partner API; public APIs with slow-moving consumers deserve longer.
+
+| When | What happens | Andriel's step |
+|---|---|---|
+| Day 0 (1 Jan 2026) | Changelog entry and email: what is being retired, why, and the sunset date. Migration guide published the same day. `Deprecation` and `Sunset` headers go live. | 1, 2, 3 |
+| First month | Office hours or a short walkthrough of the migration guide; answer questions in one public thread. | 3, 4 |
+| Every quarter | Check request logs for callers still on the old version and contact those owners directly. | 4, 5 |
+| 3 months before sunset | Final reminder to remaining callers, with the date repeated. | 5 |
+| 30 Jun 2027 | Sunset. The old version returns `410 Gone` with a Problem Details body pointing to the migration guide. | 6 |
+
+The changelog entry itself can be three lines: "v1 `/users` is deprecated as of 1 January 2026 and will stop responding after 30 June 2027. Reason: v2 adds paging and consistent dates. Migrate with the guide at `/docs/migrate-v2`." What changed, why, and what to do next, the same shape as the train-station sentence.
+
 Sometimes the full process is too much, such as a security fix that has to ship today. Then shorten it: skip the advance notice and the walkthrough if you must, but never skip explaining why (step 2) or supporting people through the change (step 5).
 
 ## Consistency is what builds trust
 
 Andriel trusts his routines because they're consistent. Break that consistency often enough and the trust goes, and getting it back takes far longer than losing it.
 
-Systems work the same way. If one endpoint paginates with `page` and another with `offset`, if one returns dates as ISO 8601 strings and another as epoch seconds, every consumer has to learn each endpoint separately. Pick a convention and hold to it. Write it in a shared API style guide, then enforce it with a linter such as [Spectral](https://github.com/stoplightio/spectral) that checks every OpenAPI definition, so the rule doesn't depend on reviewers remembering it. A ruleset can start as small as this fragment, which extends Spectral's built-in OpenAPI rules and makes one of them fail the build:
+Systems work the same way. If one endpoint paginates with `page` and another with `offset`, if one returns dates as ISO 8601 strings and another as epoch seconds, every consumer has to learn each endpoint separately. Pick a convention and hold to it. Write it in a shared API style guide, then enforce it with a linter such as [Spectral](https://github.com/stoplightio/spectral) that checks every OpenAPI definition, so the rule doesn't depend on reviewers remembering it. Spectral's built-in `spectral:oas` rules check general OpenAPI hygiene, not your house conventions, so the conventions need custom rules. Here's one that fails the build if any operation declares `offset` or `page_number` as a query parameter, whether on the operation itself or shared at the path level, assuming the house convention is `page` and `page_size`:
 
 ```yaml
-# .spectral.yaml (fragment)
+# .spectral.yaml
 extends: ["spectral:oas"]
 rules:
-  operation-tag-defined: error
+  pagination-param-names:
+    description: Paginate with page and page_size, never offset or page_number.
+    message: "Query parameter '{{value}}' breaks the pagination convention; use page and page_size."
+    severity: error
+    given:
+      - "$.paths[*].parameters[?(@.in == 'query')].name"
+      - "$.paths[*][get,put,post,delete,options,head,patch,trace].parameters[?(@.in == 'query')].name"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "^(offset|page_number)$"
 ```
 
-Add your own rules for pagination parameters and date formats on top of that. Inconsistency is a tax every user pays on every call.
+Run against a definition with `?offset=` on `GET /users`, `spectral lint` reports `pagination-param-names` as an error on that parameter. A date-format rule works the same way: target the schema properties that hold timestamps and require `format: date-time`. Every inconsistency you don't catch becomes a special case in someone else's client code.
 
 ## When not to design for rigid predictability
 
@@ -182,8 +204,8 @@ The lesson I take is narrower: be predictable about the **contract**, even when 
 
 ## What Andriel has taught me
 
-He teaches me something new every day, and I'm grateful for it. A test I use on my own work is simple: would this make sense to Andriel? If the behaviour is clear enough for him, it's clear enough for any developer reading it at 2 am.
+A test I use on my own work is simple: would this make sense to Andriel? If the behaviour is clear enough for him, it's clear enough for any developer reading it at 2 am.
 
-If you're a parent of an autistic child working in tech, you're probably already practising this: the advance warnings, the explicit plans, the patient walkthroughs of change. Those habits transfer directly. I wrote about the other side of the work-family balance in [The Tech Parent's Dilemma](/blog/2026-01-06-parenting-in-tech/).
+If you're a parent of an autistic child working in tech, you're probably already practising this: the advance warnings, the explicit plans, the patient walkthroughs of change. Those habits transfer directly. Andriel has made me a better engineer. Not in spite of his autism, but because of it. What looks like a limitation from the outside has turned out to be a feature: he needs the clarity that every user quietly benefits from. I wrote about the other side of the work-family balance in [The Tech Parent's Dilemma](/blog/2026-01-06-parenting-in-tech/).
 
-Andriel taught me the principle underneath all of this: designing for the people with the greatest need for clarity produces systems that work better for everyone.
+Andriel taught me the principle underneath all of this: designing for the people with the greatest need for clarity produces systems that work better for everyone. He teaches me something new every day, and I'm grateful for it.

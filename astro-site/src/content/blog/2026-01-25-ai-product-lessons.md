@@ -1,6 +1,6 @@
 ---
 title: "AI Product Lessons: Users Want Augmentation, Not Automation"
-description: "What building AI features for six products taught me: users want faster existing tasks, visible uncertainty and easy overrides, not chat for everything."
+description: "What building AI features for six products taught me: users want their existing tasks done faster, visible uncertainty and easy overrides, not chat."
 author: Michael John Peña
 draft: false
 date: 2026-01-25
@@ -11,7 +11,7 @@ tags:
   - Lessons Learned
 ---
 
-I've built AI features into six different products, and most of those features failed. Not because the models were weak, but because we built what we assumed users wanted instead of what they actually needed. If you're about to put a large language model in front of real users, that gap is where most of the budget gets wasted.
+I've built AI features into six different products, and most of those features failed. Not because the models were weak, but because we built what we assumed users wanted instead of what they actually needed. If you're about to put a large language model in front of real users, that gap is where I've seen the most effort wasted.
 
 ## What we assumed versus what users wanted
 
@@ -29,7 +29,7 @@ What users actually asked for was more modest and more useful:
 - An easy way to override the AI when it's wrong
 - An obvious answer to "what does this do for me?"
 
-Read those lists side by side and the pattern is plain. We were designing for the model's capabilities. Users were judging us on their own workflow.
+We were designing for the model's capabilities. Users were judging us on their own workflow.
 
 ## The pattern that works: assistant, not replacement
 
@@ -47,19 +47,23 @@ None of this is new. Microsoft Research published the [Guidelines for Human-AI I
 
 ## The features that flopped
 
-**Fully automated workflows.** Users didn't trust them, and they were right not to. Without a human checkpoint, nobody can see what the automation did until something downstream breaks. Once you add checkpoints back in, the "automation" tends to become a slower version of a suggestion feature.
+**Fully automated workflows.** Users didn't trust them, and they were right not to. Without a human checkpoint, nobody can see what the automation did until something downstream breaks. Once you add checkpoints back in, the "automation" tends to become a slower version of a suggestion feature. What I'd build instead is automation that shows its work: a run that stages its changes and presents them as a diff, record by record, so the user can approve the batch, reject individual items, or roll the lot back.
 
 **Chat for everything.** Most tasks are faster with a traditional UI. If a user knows they want last quarter's figures filtered by region, two dropdowns beat typing a sentence and waiting for a model to interpret it. Chat adds friction whenever the user already knows exactly what they want. It earns its place when the request is genuinely open-ended or hard to express as form fields.
 
-**AI-generated content with no editing step.** Users wanted control over the final output. People are reluctant to put their name to content they can't adjust.
+**AI-generated content with no editing step.** Users wanted control over the final output. People are reluctant to put their name to content they can't adjust, and output that goes straight out the door takes every hallucination with it. The fix is a draft-then-approve flow: the AI produces a draft in an editable state, the user changes what they need, and nothing is sent or published until a person explicitly approves it. It also gives you a useful signal, because how much people edit a draft tells you how good the drafts really are.
 
 ## The features that worked
 
-**Smart suggestions.** The AI proposes, the user accepts or rejects. It's fast, the cost of a wrong answer is small, and the user stays in charge. Code completion in tools like GitHub Copilot is the best-known example of the shape, and it works for the same reason: ignoring a bad suggestion costs nothing.
+**Smart suggestions.** The AI proposes, the user accepts or rejects. It's fast, the cost of a wrong answer is small, and the user stays in charge. Code completion in tools like GitHub Copilot is the best-known example of the shape, and it works for the same reason: ignoring a bad suggestion costs almost nothing.
 
-**Context-aware assistance.** Help that understands what you're doing right now and offers something relevant, rather than waiting for you to open a chat pane and explain your situation from scratch. Pre-filling a form from the document the user already has open, or suggesting the next step on a support ticket based on its current status and history, are the kind of thing I mean. The cost is real, though. Gathering context means the feature reads more data, so it needs a permissions and privacy review, and every call carries more tokens, which adds latency and spend. It isn't worth it when the context is cheap for the user to supply: if one dropdown tells you what you need, ask for it rather than building a pipeline to infer it. Proactive help can also become noise. A suggestion that fires on every keystroke or every ticket update, and is usually wrong or irrelevant, trains people to dismiss it without reading, which is alert fatigue by another name. If a proactive suggestion's acceptance rate stays low, I'd make it on-demand rather than keep interrupting people.
+**Context-aware assistance.** Help that understands what you're doing right now and offers something relevant, rather than waiting for you to open a chat pane and explain your situation from scratch. Pre-filling a form from the document the user already has open, or suggesting the next step on a support ticket from its status and history: that's the kind of help I mean.
 
-**Automating the busy work.** Repetitive tasks people dislike, where the time saving is obvious and the stakes of an occasional miss are low. Classification, extraction, first-pass tagging, summarising long threads for triage. Nobody needs convincing that these are worth doing.
+The cost is real, though. Gathering context means the feature reads more data, so it needs a permissions and privacy review, and every call carries more tokens, which adds latency and spend. It isn't worth it when the context is cheap for the user to supply: if one dropdown tells you what you need, ask for it rather than building a pipeline to infer it.
+
+Proactive help can also become noise. A suggestion that fires on every keystroke or every ticket update, and is usually wrong or irrelevant, trains people to dismiss it without reading, which is alert fatigue by another name. If a proactive suggestion's acceptance rate stays low, I'd make it on-demand rather than keep interrupting people.
+
+**Automating the busy work.** Repetitive tasks people dislike, where the time saving is obvious and the stakes of an occasional miss are low: classification, extraction, first-pass tagging, summarising long threads for triage. Low stakes still needs checking: sample outputs regularly against a small labelled set, and route low-confidence items to a person instead of guessing. It stops being busy work when the output feeds something that matters: extraction that drives payments or populates compliance records needs the same review step as any other decision.
 
 ## Lessons I'd apply to the next one
 
@@ -75,7 +79,7 @@ Some users won't trust it, at least at first. That's fine. Keep the traditional 
 
 When the system is unsure, say so. Users appreciate it, and it helps them calibrate how much to rely on it, which Microsoft's [literature review on overreliance on AI](https://www.microsoft.com/en-us/research/publication/overreliance-on-ai-literature-review/) identifies as the real design goal: appropriate reliance, neither blind trust nor blanket dismissal.
 
-The trap is showing a number that looks precise but isn't. A raw token probability from a language model is not a reliable confidence score for whether a claim is correct, and a "92% confident" badge invites exactly the overreliance you're trying to avoid. I'd rather use signals that mean something: "no matching source document found", "this field was inferred, not extracted", or an evaluated classifier whose scores you've actually checked against labelled data. If you can't back a confidence indicator with evidence, show the source instead and let the user judge. The [HAX Design Library](https://www.microsoft.com/en-us/haxtoolkit/library/) files this under Guideline 11, "make clear why the system did what it did", with pattern 11A, local explanations, covering the case of explaining one specific output. For a generated answer, the practical version is an inline citation next to each claim that opens the passage it came from, so checking a claim takes one click instead of a search.
+The trap is showing a number that looks precise but isn't. A raw token probability from a language model is not a reliable confidence score for whether a claim is correct, and a "92% confident" badge invites exactly the overreliance you're trying to avoid. I'd rather use signals that mean something: "no matching source document found", "this field was inferred, not extracted", or an evaluated classifier whose scores you've actually checked against labelled data. If you can't back a confidence indicator with evidence, show the source instead and let the user judge. The [HAX Design Library](https://www.microsoft.com/en-us/haxtoolkit/library/) files this under Guideline 11, "Make clear why the system did what it did", with pattern G11-A, "Local explanations", covering the case of explaining one specific output. For a generated answer, the practical version is an inline citation next to each claim that opens the passage it came from, so checking a claim takes one click instead of a search.
 
 ### Make overrides trivial
 
@@ -83,7 +87,21 @@ The AI will be wrong sometimes. Correcting it should take one click or one keyst
 
 ### Measure time saved, not sophistication
 
-Users don't care about your model's benchmark scores. They care whether their task got faster. The metrics I'd track from day one are task completion time with and without the feature, suggestion acceptance rate, and how often users edit or undo what the AI produced. A high acceptance rate with heavy editing tells a different story from a high acceptance rate with none. Read them against a baseline, either a control group without the feature or the task time you measured before launch, and treat a falling acceptance rate or a rising undo rate over successive weeks as the signal to retune the feature or pull it. Wire these into your [LLM observability](/blog/2026-01-16-llm-observability/) from the start rather than bolting them on after launch. If you already trace model calls with OpenTelemetry, the cheapest way I know is one extra counter, say `app.suggestion.outcome`, incremented from the UI's backend when a user accepts, edits, undoes or dismisses a suggestion, with the outcome and feature name as attributes. Keep the trace ID off the metric, because it would create a time series per request, but log each outcome with the trace ID of the model call that produced the suggestion, so you can go from a spike in undos straight to the prompts and responses behind it. In Application Insights the counter lands in `customMetrics` next to your token metrics, and the acceptance and undo rates become a query rather than a separate analytics project.
+Users don't care about your model's benchmark scores. They care whether their task got faster. The metrics I'd track from day one are:
+
+- **Task completion time**, with and without the feature. Emit start and finish events for the task (form opened to form submitted) from the same backend that records suggestion outcomes, so task time and outcomes share the feature-name attribute
+- **Suggestion acceptance rate**
+- **Edit and undo rate**: how often users change or reverse what the AI produced
+
+A high acceptance rate with heavy editing tells a different story from a high acceptance rate with none. Read all three against a baseline, either a control group without the feature or the task time you measured before launch, and treat a falling acceptance rate or a rising undo rate over successive weeks as the signal to retune the feature or pull it.
+
+### Instrument outcomes, not just model calls
+
+Wire these metrics into your [LLM observability](/blog/2026-01-16-llm-observability/) from the start. If you already trace model calls with OpenTelemetry, the cheapest way I know is one extra counter, say `app.suggestion.outcome`, incremented from the UI's backend when a user accepts, edits, undoes or dismisses a suggestion, with the outcome and feature name as attributes.
+
+Keep the trace ID off the metric, because it would create a time series per request. Instead, log each outcome with the trace ID of the model call that produced the suggestion, so you can go from a spike in undos straight to the prompts and responses behind it.
+
+Azure Monitor exports OpenTelemetry counters as custom metrics, which you query from the `customMetrics` table (`AppMetrics` in the Log Analytics workspace), and the docs [recommend the Sum aggregation for counters](https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-add-modify). The acceptance and undo rates then become a query rather than a separate analytics project.
 
 ## When full automation is the right call
 
