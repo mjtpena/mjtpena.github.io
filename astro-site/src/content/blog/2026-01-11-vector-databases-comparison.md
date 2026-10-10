@@ -12,11 +12,11 @@ tags:
   - PostgreSQL
 ---
 
-I've used five different vector stores across RAG projects: Azure AI Search, the MongoDB-compatible vCore flavour of Cosmos DB, PostgreSQL with pgvector, Pinecone and Redis. Each project picked a different one, and they all work on the happy path. The differences show up at the filtered query that returns too few results, the keyword query vectors can't answer, and the invoice nobody modelled. Feature checklists don't separate them any more, so this post is about where each one hurts. I've also covered Azure Cosmos DB for NoSQL as the greenfield alternative to DocumentDB.
+I've used five different vector stores across RAG projects: Azure AI Search, the MongoDB-compatible vCore flavour of Cosmos DB, PostgreSQL with pgvector, Pinecone and Redis. Each project picked a different one, and they all work on the happy path. Feature checklists don't separate them any more; the differences show up at the filtered query that returns too few results, the keyword query vectors can't answer, and the invoice nobody modelled.
 
 For a side-by-side of the Azure-native options, see [comparing Azure AI Search, Cosmos DB and PostgreSQL](/blog/2025-11-20-november-ai-topic/). For Pinecone against Weaviate, see [this comparison](/blog/2025-12-09-december-ai-topic/). This one is about failure modes.
 
-## First, the January 2026 landscape
+## What changed in 2025
 
 Some names and statuses moved in 2025, so older posts (including some of mine) are out of date:
 
@@ -47,18 +47,18 @@ Avoid it when the corpus is small and the team already runs PostgreSQL. A dedica
 
 The only good reason I've found to pick this service is that the application data already lives in the MongoDB API. Keeping vectors next to the documents removes a sync pipeline, and that's worth a lot. Since Ignite 2025 the service is Azure DocumentDB. It runs on the open-source DocumentDB engine. Existing clusters were renamed without any changes.
 
-It supports HNSW, IVF and DiskANN vector indexes through `cosmosSearch`. Hybrid search is possible, but you build it in the aggregation pipeline: a `$search` stage using `cosmosSearch` for vectors, a `$match` with `$text` for keywords, and RRF scoring computed in later stages, as the Learn sample shows. That works, but it's more query plumbing than AI Search asks of you.
+It supports HNSW, IVF and DiskANN vector indexes through `cosmosSearch`. Hybrid search is possible, but you build it in the aggregation pipeline: a `$search` stage using `cosmosSearch` for vectors, a `$match` with `$text` for keywords, and RRF scoring computed in later stages, as the [Learn sample](https://learn.microsoft.com/en-us/azure/documentdb/hybrid-search) shows. That works, but it's more query plumbing than AI Search asks of you.
 
 Where it hurts:
 
-- **vCore sizing is a cluster decision.** You pick compute and storage tiers up front. IVF runs on any tier, but HNSW and DiskANN need a larger cluster tier, and the [DocumentDB vector search docs](https://learn.microsoft.com/en-us/azure/documentdb/vector-search) list the minimum for each index type. So a vector workload has a real floor cost and doesn't scale smoothly from zero.
+- **vCore sizing is a cluster decision.** You pick compute and storage tiers up front. IVF runs on any tier, but DiskANN needs M30 or above and HNSW needs M40 or above (see the [DocumentDB vector search docs](https://learn.microsoft.com/en-us/azure/documentdb/vector-search)). So a vector workload has a real floor cost and doesn't scale smoothly from zero.
 - **Hybrid relevance is your code.** Tuning the fusion and the weighting is on you.
 
 My rule: choose it because your documents are already there, not for vector search on its own.
 
 ### If you're greenfield: Cosmos DB for NoSQL
 
-If you're starting fresh on Cosmos DB, look at Azure Cosmos DB for NoSQL instead. It has DiskANN-based vector indexing and BM25 full-text search, [hybrid search](https://learn.microsoft.com/en-us/azure/cosmos-db/gen-ai/hybrid-search) went GA at Build in May 2025, and you also get its global distribution story. It's a separate recommendation from DocumentDB, with its own pain points:
+If you're starting fresh on Cosmos DB, look at Azure Cosmos DB for NoSQL instead. It has DiskANN-based vector indexing and BM25 full-text search, hybrid search went GA at Build in May 2025, and you also get its global distribution story. It's a separate recommendation from DocumentDB, with its own pain points:
 
 - **Retrieval costs request units.** Vector and full-text queries consume RUs, so heavy retrieval shows up directly in your RU bill.
 - **The vector embedding policy is fixed at creation.** You set dimensions and distance function when you create the container. Changing embedding models later means a new container and a data migration.
@@ -67,9 +67,15 @@ Avoid it when you expect to swap embedding models often, or when retrieval volum
 
 ## PostgreSQL with pgvector: it hurts on filtered queries and on tuning
 
-pgvector is the option I'd recommend most often to teams with a relational schema. You get SQL joins, row-level security, transactions, and one backup strategy covering both the data and its embeddings. On Azure Database for PostgreSQL flexible server you also get [`pg_diskann`](https://learn.microsoft.com/en-us/azure/postgresql/extensions/how-to-use-pgdiskann), which went GA in May 2025, alongside pgvector's HNSW and IVFFlat.
+pgvector is the option I'd recommend most often to teams with a relational schema. You get SQL joins, row-level security, transactions, and one backup strategy covering both the data and its embeddings. On Azure Database for PostgreSQL flexible server you also get `pg_diskann`, which went GA in May 2025, alongside pgvector's HNSW and IVFFlat.
 
-The classic pain point is filtered search. An approximate index returns the nearest `ef_search` candidates first and applies your `WHERE` clause afterwards. A selective tenant filter can then leave you with three results when you asked for ten. Before pgvector 0.8.0 the usual workarounds were partial indexes or partitioning. Version 0.8.0 added iterative index scans, which keep scanning until enough rows pass the filter:
+The classic pain point is filtered search. An approximate index returns the nearest `ef_search` candidates first and applies your `WHERE` clause afterwards. A selective tenant filter can then leave you with three results when you asked for ten. Before pgvector 0.8.0 the usual workarounds were partial indexes or partitioning. Version 0.8.0 added iterative index scans, which keep scanning until enough rows pass the filter. They only apply when the planner uses an HNSW (or IVFFlat) index, so the index has to exist first:
+
+```sql
+CREATE INDEX ON document_chunks USING hnsw (embedding vector_cosine_ops);
+```
+
+The distance operator in the query must match the index's operator class: `<=>` for `vector_cosine_ops`. If they don't match, the planner ignores the index, the query runs as a sequential scan, and the settings below do nothing.
 
 ```sql
 -- Requires pgvector 0.8.0 or later.
@@ -78,7 +84,7 @@ The classic pain point is filtered search. An approximate index returns the near
 BEGIN;
 SET LOCAL hnsw.iterative_scan = relaxed_order;
 SET LOCAL hnsw.ef_search = 100;
-SET LOCAL hnsw.max_scan_tuples = 20000; -- default; raise if filtered queries still return too few rows
+SET LOCAL hnsw.max_scan_tuples = 40000; -- default is 20000; raise it if filtered queries still return too few rows
 
 SELECT id, title, embedding <=> $1::vector AS distance
 FROM document_chunks
@@ -88,7 +94,7 @@ LIMIT 10;
 COMMIT;
 ```
 
-`SET LOCAL` keeps the settings inside the transaction, which matters with a connection pool: a plain `SET` follows the connection to whichever request borrows it next. `relaxed_order` lets results come back slightly out of distance order in exchange for better recall. If ordering matters, use `strict_order`, or wrap the query in a `WITH ... AS MATERIALIZED` CTE and re-sort outside it, as the pgvector README shows:
+`SET LOCAL` keeps the settings inside the transaction, which matters with a connection pool: a plain `SET` follows the connection to whichever request borrows it next. `relaxed_order` lets results come back slightly out of distance order in exchange for better recall. If ordering matters, use `strict_order`, or wrap the query in a `WITH ... AS MATERIALIZED` CTE and re-sort outside it, as the [pgvector README](https://github.com/pgvector/pgvector#iterative-index-scans) shows:
 
 ```sql
 -- Run inside the same transaction, after the SET LOCAL statements above.
@@ -118,7 +124,7 @@ Pinecone is the simplest of the five to reason about. It does one job, the API i
 
 Where it hurts:
 
-- **Data leaves your cloud boundary.** For a lot of regulated workloads in Australia, residency and private networking requirements end the conversation before performance comes up. Pinecone runs serverless indexes in Azure regions and offers private networking on Enterprise plans. BYOC puts the data plane in your own cloud account but keeps the control plane with Pinecone, so check which clouds it supports and whether that split satisfies your residency rules.
+- **Data leaves your cloud boundary.** Pinecone's serverless Azure region is East US 2 and there is no Australian region on any cloud, so for a lot of regulated workloads in Australia residency ends the conversation before performance comes up. Pinecone offers private networking on Enterprise plans. BYOC puts the data plane in your own cloud account but keeps the control plane with Pinecone, so check which clouds it supports and whether that split satisfies your residency rules.
 - **Usage-based billing is harder to forecast.** Serverless bills read units, write units and storage. An agent that retrieves five times per turn costs five times as much. Paid plans also carry a monthly minimum.
 - **Metadata is a filter, not a database.** You'll still need a system of record for the documents themselves.
 
@@ -126,12 +132,12 @@ Avoid it when governance requires every part of the service, control plane inclu
 
 ## Redis: it hurts on memory and on platform churn
 
-Redis earns its place when latency matters and the working set is small: semantic caching of LLM responses, session-scoped retrieval, recommendation lookups. The Redis query engine supports HNSW and flat vector indexes, plus tag, numeric and full-text fields in the same index. Filtering is better than its reputation suggests.
+Redis earns its place when latency matters and the working set is small: semantic caching of LLM responses, session-scoped retrieval, recommendation lookups. On Azure Managed Redis the query engine supports HNSW and FLAT vector indexes (Redis 8.2 adds SVS-VAMANA, but Azure Managed Redis isn't on 8.x yet), plus tag, numeric and full-text fields in the same index. Filtering is better than its reputation suggests.
 
 Where it hurts:
 
 - **Everything is in memory.** Cost scales with vectors × dimensions × replicas, and a 3,072-dimension embedding at float32 is about 12 KB per vector before overhead.
-- **Platform choices on Azure are in flux.** Vector search needs the RediSearch module. On Azure Managed Redis, which went GA in May 2025, you have to enable it when you create the cache, and the Flash Optimized tier doesn't support it. Microsoft has also announced [retirement of the Azure Cache for Redis tiers](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/retirement-faq): Enterprise in March 2027, and Basic, Standard and Premium in September 2028. Don't start a new vector workload on Azure Cache for Redis.
+- **Platform choices on Azure are in flux.** Vector search needs the RediSearch module. On Azure Managed Redis, which went GA in May 2025, you have to enable it when you create the cache, and the Flash Optimized tier doesn't support it. Microsoft has also announced [retirement of the Azure Cache for Redis tiers](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/retirement-faq): Enterprise in March 2027 and Basic, Standard and Premium in September 2028, and new Enterprise caches can't be created after 1 April 2026. Don't start a new vector workload on Azure Cache for Redis.
 
 Avoid it as the primary store for a large document corpus. Use it as a cache in front of one of the others.
 

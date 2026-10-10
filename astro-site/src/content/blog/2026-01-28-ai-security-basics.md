@@ -11,7 +11,7 @@ tags:
   - Governance
 ---
 
-Most AI security conversations start with prompt injection, because it's novel and it demos well. In my experience, the incidents that reach the invoice or the breach register don't start there. They start with an API key in a Git history, a chatbot endpoint with no per-user limit that someone scripts against overnight, or a log table full of customer data that nobody meant to keep. These are ordinary application security failures, and they're the ones that turn up on the invoice and in the breach notification.
+Most AI security conversations start with prompt injection, because it's novel and it demos well. In my experience, the incidents that reach the invoice or the breach register don't start there. They start with an API key in a Git history, a chatbot endpoint with no per-user limit that someone scripts against overnight, or a log table full of customer data that nobody meant to keep. These are ordinary application security failures, and they're far more common.
 
 This post is about that boring layer: identity, consumption limits, data handling and logging. If you want a full pre-production list, I wrote [Securing AI Applications: A Comprehensive 2025 Checklist](/blog/2025-12-10-december-ai-topic/). For the injection side specifically, see [Prompt Injection Defense: Securing LLM Applications](/blog/2025-09-28-september-ai-topic/). Here I want to argue for an order of operations.
 
@@ -42,7 +42,7 @@ az role assignment create \
   --scope /subscriptions/<subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.CognitiveServices/accounts/<your-resource-name>
 ```
 
-Passing the object ID with an explicit principal type skips a Microsoft Graph lookup, which can fail or lag for a managed identity created moments earlier. Role assignments can also take up to five minutes to apply, so a 401 straight after this command isn't necessarily a mistake.
+Passing the object ID with an explicit principal type skips a Microsoft Graph lookup, which can fail or lag for a managed identity created moments earlier. Role assignments can also take up to five minutes to apply, so an access-denied error straight after this command isn't necessarily a mistake.
 
 With the v1 API endpoint, the standard `OpenAI` client accepts a token provider as its `api_key`, and refreshes the token for you. Callable `api_key` support landed in `openai` 1.106.0 in September 2025, so any 2.x release works.
 
@@ -76,11 +76,11 @@ az resource update \
   --set properties.disableLocalAuth=true
 ```
 
-There's a built-in Azure Policy, "Azure AI Services resources should have key access disabled (disable local authentication)", that you can assign at subscription or management group scope so new resources can't quietly come back with keys enabled. Propagation usually takes minutes but can take hours, so confirm by calling the endpoint with the old key and checking for a 401 before you treat keys as dead.
+There's a built-in Azure Policy, "Azure AI Services resources should have key access disabled (disable local authentication)", that you can assign with the Deny effect at subscription or management group scope so new resources can't be created with keys enabled; assigned with Audit, it only reports. Pair it with the DeployIfNotExists policy "Configure Azure AI Services resources to disable local key access (disable local authentication)" to remediate existing resources. The change can take a few minutes to apply, so confirm by calling the endpoint with the old key and checking for a 403 `AuthenticationTypeDisabled` error before you treat keys as dead.
 
 Identity is half of access; the network is the other half. Once callers use Entra ID, also set `publicNetworkAccess` to `Disabled` and reach the resource through a private endpoint, or at least restrict its network ACLs to known networks, so a stolen token isn't usable from anywhere.
 
-When not to do this on day one: if a third-party tool you depend on only accepts a key, you'll need to keep keys on that one resource. In that case, put the key in Key Vault, rotate it on a schedule, and keep that resource separate from the one your production app uses. GitHub push protection, which GitHub turned on by default for pushes to public repositories from late February 2024, catches many committed secrets, but it isn't a reason to have them.
+When not to do this on day one: if a third-party tool you depend on only accepts a key, you'll need to keep keys on that one resource. Check dependencies before you flip `disableLocalAuth` on a shared resource, too: some portal playgrounds and older tools rely on key access and stop working once keys are disabled. Where a key really is required, put the key in Key Vault, rotate it on a schedule, and keep that resource separate from the one your production app uses. GitHub push protection, which GitHub turned on by default for pushes to public repositories from late February 2024, catches many committed secrets, but it isn't a reason to have them.
 
 ## Put a ceiling on consumption at the gateway
 

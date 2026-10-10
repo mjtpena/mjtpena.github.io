@@ -1,17 +1,17 @@
 ---
 title: "From F64 to F32: Three Fabric Sizing Mistakes and the Fixes"
-description: "We started Microsoft Fabric on an F64 because it sounded enterprise. F32 was enough. The mistakes, the monitoring we added, and when going smaller is wrong."
+description: "Why we moved Microsoft Fabric from F64 to F32: the three sizing mistakes, the monitoring and alerts we added, and when going smaller is the wrong call."
 author: Michael John Peña
 draft: false
 date: 2026-01-20
 tags:
-  - Fabric
+  - Microsoft Fabric
   - Capacity Planning
   - Cost Optimization
   - FinOps
 ---
 
-We started our Microsoft Fabric platform on an F64 because it sounded like the "enterprise" choice. That was a guess, not a sizing decision, and we paid for it every month until the usage data told us F32 was enough. Capacity is the single biggest line on most Fabric bills, so guessing wrong in either direction costs you: too big and you burn money, too small and your users meet throttling errors.
+We started our Microsoft Fabric platform on an F64 because it sounded like the "enterprise" choice. That was a guess, not a sizing decision, and we paid for it every month until we looked hard enough at the usage to step down to F32. Capacity is the single biggest line on most Fabric bills, so guessing wrong in either direction costs you: too big and you burn money, too small and your users meet throttling errors.
 
 ## Mistake 1: Starting too big
 
@@ -33,9 +33,9 @@ It helps to understand what "hitting the limit" means in Fabric, because it isn'
 
 What we do now:
 
-- **Monitor from day one.** The [Fabric Capacity Metrics app](https://learn.microsoft.com/en-us/fabric/enterprise/metrics-app) is the source of truth for CU consumption by item and operation. What it lacks for daily operations is a per-workspace trend you can glance at, any alerting of its own, and history: the compute views cover the last 14 days. So we built custom dashboards on top for day-to-day visibility. If you want trends longer than two weeks, plan to keep the data yourself: the app is backed by an ordinary semantic model, so a scheduled Fabric notebook can query it with semantic link (`sempy.fabric.evaluate_dax`) once a day and append the results to a lakehouse table you can chart however you like.
+- **Monitor from day one.** The [Fabric Capacity Metrics app](https://learn.microsoft.com/en-us/fabric/enterprise/metrics-app) is the source of truth for CU consumption by item and operation. What it lacks for daily operations is a simple at-a-glance view per team, any alerting of its own, and history beyond 14 days. So we built custom dashboards on top for day-to-day visibility. If you want trends longer than two weeks, plan to keep the data yourself: the app is backed by a semantic model you can query with semantic link (`sempy.fabric.evaluate_dax`), but Microsoft doesn't support using it outside the app's own reports, so its schema can change without notice. Treat a daily snapshot from a scheduled notebook into a lakehouse table as best-effort, or use Real-Time hub capacity events or workspace monitoring for a supported feed.
 - **Alert at 70%.** Capacity settings include throttling notifications that email capacity admins (or a custom list) when utilisation passes a threshold you set. Treat it as an early warning, not a pager. We alert at 70% because that leaves time to act before throttling stages kick in; 90% is too late to do anything except apologise.
-- **Turn on surge protection.** [Surge protection](https://learn.microsoft.com/en-us/fabric/enterprise/surge-protection) for background operations has been GA since 2025. You set a threshold on 24-hour background utilisation, and the capacity rejects new background jobs before they starve interactive users. It doesn't cancel running jobs, so it isn't a hard cap, but on a smaller capacity it's the setting I'd configure first. One catch: surge protection protects interactive users by rejecting background jobs, so on a capacity where most usage is background, it will mostly reject your own pipelines and refreshes. In that case, set the thresholds from the Background rejection chart in the Metrics app, or reschedule the heavy jobs first.
+- **Turn on surge protection.** [Surge protection](https://learn.microsoft.com/en-us/fabric/enterprise/surge-protection) for background operations has been GA since 2025. You set a rejection threshold and a lower recovery threshold on 24-hour background utilisation: above the first, the capacity rejects new background jobs before they starve interactive users, and it only accepts them again once usage falls below the second. The gap between the two is the main tuning decision; my starting values are in the [reality check](/blog/2026-01-05-microsoft-fabric-reality-check/). It doesn't cancel running jobs, so it isn't a hard cap, but on a smaller capacity it's the setting I'd configure first. One catch: surge protection protects interactive users by rejecting background jobs, so on a capacity where most usage is background, it will mostly reject your own pipelines and refreshes. In that case, set the thresholds from the Background rejection chart in the Metrics app, or reschedule the heavy jobs first.
 
 ## Mistake 3: Ignoring the usage pattern
 
@@ -67,7 +67,7 @@ If you want to script resizing rather than click through the portal, an F SKU is
 
 ```bash
 # Resize a Fabric capacity (for example, F64 to F32)
-# Requires Contributor (or Fabric capacity administrator) on the capacity resource,
+# Requires Contributor (or a custom Azure role with Microsoft.Fabric/capacities/write) on the capacity resource,
 # and the capacity must be running (state Active), not paused
 az resource update \
   --resource-group <your-resource-group> \
@@ -85,7 +85,7 @@ Resize outside business hours and check the Capacity Metrics app afterwards; a s
 | Before | F64 | ~US$8,000 |
 | Now | F32 | ~US$4,000 |
 
-That's roughly **US$4,000 a month saved**. I don't have clean before-and-after utilisation figures to put beside it, so I won't pretend to. Those figures are rounded; US list pay-as-you-go pricing works out to about US$8,410 a month for F64 and about US$4,205 for F32 at 730 hours, and prices vary by region and currency, so check Microsoft's Fabric pricing page for yours.
+That's roughly **US$4,000 a month saved**. I don't have clean before-and-after utilisation figures to put beside it, so I won't pretend to. Those figures are rounded; US list pay-as-you-go pricing works out to about US$8,410 a month for F64 and about US$4,205 for F32 at 730 hours, and prices vary by region and currency, so check Microsoft's [Fabric pricing page](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/) for yours.
 
 Before you copy this, check two things the capacity line doesn't show.
 

@@ -65,7 +65,7 @@ df = spark.read.parquet("Files/raw/sales/")
 
 ### Pipelines, data flows and T-SQL need rework too
 
-Notebooks aren't the only thing that has to move. Synapse pipelines don't import into Fabric as they are; you rebuild them as Fabric Data Factory pipelines. That includes any pipeline that orchestrates notebooks or Spark job definitions, as the [Synapse data and pipelines migration guidance](https://learn.microsoft.com/fabric/data-engineering/migrate-synapse-data-pipelines) notes. Mapping data flows have no direct equivalent, so plan to rewrite them as Dataflow Gen2 (Power Query) or as notebook code; Microsoft's [guide for mapping data flow users](https://learn.microsoft.com/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users) maps the transformations across. If you have a dedicated SQL pool, expect T-SQL surface differences in Fabric Warehouse too: distribution and index options don't carry over, and some DDL and data types need changing. Scope each of these as its own line item, not as part of "the notebooks".
+Notebooks aren't the only thing that has to move. Synapse pipelines don't import into Fabric as they are; you rebuild them as Fabric Data Factory pipelines, including any pipeline that orchestrates notebooks or Spark job definitions. Mapping data flows have no direct equivalent, so plan to rewrite them as Dataflow Gen2 (Power Query) or as notebook code; Microsoft publishes a guide for mapping data flow users that maps the transformations across. If you have a dedicated SQL pool, expect T-SQL surface differences in Fabric Warehouse too: distribution and index options don't carry over, and some DDL and data types need changing. Scope each of these as its own line item, not as part of "the notebooks".
 
 ### Test against real data
 
@@ -79,9 +79,9 @@ What actually matters, per the [Direct Lake overview](https://learn.microsoft.co
 
 | Requirement | What it means in practice |
 |---|---|
-| Delta tables in OneLake | Data must be a Delta table in a lakehouse or warehouse Raw Parquet or CSV folders don't. Shortcuts are supported with Direct Lake on SQL endpoints, not yet with Direct Lake on OneLake. |
+| Delta tables in OneLake | Data must be a Delta table in a lakehouse or warehouse. Raw Parquet or CSV folders don't qualify. Shortcut tables work with Direct Lake on SQL endpoints; for Direct Lake on OneLake, check the overview's current limitations before you rely on them. |
 | Guardrails per capacity SKU | Each table has limits on Parquet files, row groups and rows. Exceeding a per-table limit makes queries touching that table fall back to DirectQuery (Direct Lake on SQL) or fail (Direct Lake on OneLake), and can break framing; exceeding the model-size limit sends every query to DirectQuery. |
-| Supported data types | Columns have to map to types the semantic model supports. Check your schema before you build the model. |
+| Supported data types | Complex column types (struct, array, map) and binary columns aren't supported. Convert them to strings or other supported types in the gold layer, and check the known issues and limitations before modelling. |
 | Healthy file layout | Lots of small files and row groups hurt both guardrails and query speed. |
 
 Teams coming from Synapse often assume partitioning is the main lever. It isn't. Over-partitioning a modest table creates exactly the small-file problem that pushes you towards the guardrails. Compaction (`OPTIMIZE`) and file layout matter more.
@@ -94,7 +94,8 @@ Two details worth knowing before you design gold tables:
 A quick check I run on candidate tables in a notebook:
 
 ```sql
--- Spark SQL in a Fabric notebook; replace with your table name.
+%%sql
+-- Spark SQL cell in a Fabric notebook; replace with your table name.
 -- Assumes a schema-enabled lakehouse; otherwise use the table name alone (fact_sales).
 DESCRIBE DETAIL gold.fact_sales;
 
@@ -132,7 +133,7 @@ Set up from day one:
 Monitoring tells you about contention; two design choices prevent most of it:
 
 - **Separate capacities for dev/test and production.** Experiments and backfills then burn their own CUs, not the ones your production reports depend on.
-- **[Autoscale Billing for Spark](https://learn.microsoft.com/fabric/data-engineering/autoscale-billing-for-spark-overview)**, generally available since mid-2025. It runs Spark jobs pay-as-you-go, outside the shared capacity, up to a CU limit you set. Heavy notebooks stop competing with Power BI, at the cost of a less predictable bill.
+- **Autoscale Billing for Spark**, generally available since mid-2025. It runs Spark jobs pay-as-you-go, outside the shared capacity, up to a CU limit you set. Heavy notebooks stop competing with Power BI, at the cost of a less predictable bill.
 
 I wrote more about sizing and what the metrics told us in [From F64 to F32: Three Fabric Sizing Mistakes and the Fixes](/blog/2026-01-20-fabric-capacity-planning/).
 
@@ -140,14 +141,14 @@ I wrote more about sizing and what the metrics told us in [From F64 to F32: Thre
 
 Fabric is different enough from Synapse that your team needs real training: not a link to the docs, but hands-on practice in a workspace with their own data. Workspaces and roles, lakehouse versus warehouse, shortcuts, environments, Git integration, and how capacity consumption works are all new concepts, even for experienced Synapse engineers.
 
-We underestimated this, and it cost us two weeks of confusion: people building things the Synapse way, then rebuilding them once the Fabric pattern became clear. Training before the pilot would have been cheaper than training after it.
+We underestimated this, and it cost us two weeks of confusion: people building things the Synapse way, then rebuilding them once the Fabric pattern became clear. Training at the start of the pilot, with the pilot as the exercise, would have been cheaper than training after it.
 
 My rule of thumb: run the pilot workload as the training exercise. The people who will own the migrated workloads should build the first one themselves, with someone who has already read the migration guidance sitting next to them.
 
 ## What I'd tell you before you start
 
-Fabric is a good platform, and I'd make the move again. But migration is real engineering work, not a configuration change. Start with one workload, treat notebook refactoring as its own workstream, design gold tables around Direct Lake's rules, watch capacity from the first day, and train people before they build.
+Fabric is a good platform, and I'd make the move again. But migration is real engineering work, not a configuration change. Start with one workload, treat notebook refactoring as its own workstream, design gold tables around Direct Lake's rules, watch capacity from the first day, and train people on the pilot before they build the rest.
 
-If your warehouse is a Synapse dedicated SQL pool, look at the [Fabric Data Warehouse migration assistant](https://learn.microsoft.com/fabric/data-warehouse/migration-assistant) (generally available since September 2025), which converts the schema from a DACPAC or a direct connection, uses Copy job to move data, and helps fix incompatibilities. It reduces the effort; it doesn't remove the testing.
+If your warehouse is a Synapse dedicated SQL pool, look at the [Fabric Data Warehouse migration assistant](https://learn.microsoft.com/fabric/data-warehouse/migration-assistant) (generally available since September 2025), which converts the schema from an uploaded DACPAC (live connectivity to a dedicated SQL pool is on the roadmap), uses Copy job to move data, and uses Copilot to help fix incompatibilities. It reduces the effort; it doesn't remove the testing.
 
 And whatever your first estimate is, double it. Ours ran twice as long as planned. For a wider set of migration patterns, see [Fabric Migration Stories: Real-World Experiences](/blog/2023-12-15-fabric-migration-stories/).

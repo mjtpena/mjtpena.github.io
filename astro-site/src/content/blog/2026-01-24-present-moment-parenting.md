@@ -35,9 +35,9 @@ Boundaries protect time. They don't automatically produce presence. You can clea
 
 It's tempting to think a distracted "that's great" is harmless. At least I responded, right?
 
-I don't think it is. When a child brings you something, a drawing, a story, a question, they're making what relationship researcher John Gottman calls a bid for connection. The Center on the Developing Child at Harvard describes this kind of back-and-forth as ["serve and return"](https://developingchild.harvard.edu/key-concepts/serve-and-return/): the child serves, the adult returns the serve with eye contact, words or attention, and those exchanges matter for development. Their research focuses on early childhood, and Andriel is seven, but I don't need a study to tell me he knew. A return without looking isn't really a return. It's a polite way of saying "not now", and kids know it when they hear it.
+I don't think it is. When a child brings you something (a drawing, a story, a question), they're making what relationship researcher John Gottman calls a bid for connection. The Center on the Developing Child at Harvard describes this kind of back-and-forth as ["serve and return"](https://developingchild.harvard.edu/key-concepts/serve-and-return/): the child serves, the adult returns the serve with eye contact, words or attention, and those exchanges matter for development. Their research focuses on early childhood, and Andriel is past that stage, but I don't need a study to tell me he knew. A return without looking isn't really a return. It's a polite way of saying "not now", and kids know it when they hear it.
 
-He's also learning from it. If "Dad, look!" reliably gets a reply to the phone instead of to him, sooner or later he'll stop saying it. The American Academy of Pediatrics makes a similar point in its policy statement [Media and Young Minds](https://doi.org/10.1542/peds.2016-2591): heavy parent use of mobile devices is associated with fewer verbal and nonverbal interactions with their children. I'd rather fix my habit than teach him that lesson.
+He's also learning from it. If "Dad, look!" reliably gets a reply to the phone instead of to him, sooner or later he'll stop saying it. The American Academy of Pediatrics makes a similar point in its policy statement [Media and Young Minds](https://doi.org/10.1542/peds.2016-2591), a statement aimed at children under six: heavy parent use of mobile devices is associated with fewer verbal and nonverbal interactions with their children. I'd rather fix my habit than teach him that lesson.
 
 ## The change
 
@@ -57,7 +57,7 @@ That's where the title comes from. I'm not aiming to be a father who's available
 
 **Kids know the difference** between being in the room and being *there*. Andriel didn't need me to explain that I was distracted. He could see it.
 
-**Quality beats quantity.** Five focused minutes matter more than an hour of distracted time. That's not an excuse to give my kids less time; it's a reminder that time I'm not paying attention in barely counts.
+**Five focused minutes beat an hour of half-listening.** That's not an excuse to give my kids less time; it's a reminder that time I spend not paying attention barely counts.
 
 **Tomorrow isn't guaranteed.** I might not get another chance to see this drawing, hear this story, share this moment. Kids don't repeat their bids on a schedule that suits me.
 

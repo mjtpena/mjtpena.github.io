@@ -122,7 +122,7 @@ By then the new norm was the default, so the new starter never learned the old o
 
 If a sceptical manager reads one line, it should be that one. The cost I'd been afraid of never showed up.
 
-The biggest lesson was that availability feeds itself. The more available I was, the more people expected it, and the more I expected it of myself. My kids had learned that work came first, and I'm teaching them something different now. The boundary also needs maintaining: every weekend reply I send makes the old norm a little more normal again.
+The biggest lesson was how quickly expectations compound. The more available I was, the more people expected it, and the more I expected it of myself. My kids had learned that work came first, and I'm teaching them something different now. The boundary also needs maintaining: every weekend reply I send makes the old norm a little more normal again.
 
 ## Give the team somewhere else to go first
 
@@ -137,13 +137,13 @@ The trade-off is effort up front: writing a runbook entry takes longer than answ
 
 Most "urgent" things can wait until Monday. True emergencies still exist: production down, a data breach, an actual crisis.
 
-I've had two in six months. Both times I got a phone call, not a Slack message. Both times I responded, and both times it was genuinely urgent.
+I've had two in six months. Both times I got a phone call, not a Slack message. Both times I responded, and both times it was genuinely urgent. If the on-call person ends up phoning you for every real incident, that's a sign the runbook or the rota needs work, not that the boundary failed.
 
 The other 47 Slack messages? None were emergencies. All of them could wait.
 
 My rule of thumb now: if it's worth interrupting my weekend, it's worth a phone call. That rule only works if there's a real on-call arrangement behind it.
 
-Time zones complicate this. Saturday morning in Sydney is still Friday afternoon in the US, so a US-based colleague or client sending a message then is just finishing their week. I put my handover time in my status ("back Monday 9 AM Sydney time") and let the notification schedule follow Sydney hours, not the sender's. Anything that genuinely can't wait for my Monday goes to the on-call person, the same as a local message would.
+Time zones complicate this. Saturday morning in Sydney is still Friday afternoon in the US, so a US-based colleague or client sending a message then is just finishing their week. Put your handover time in your status, in your own time zone, and set Slack's notification schedule to your local hours rather than the sender's. Anything that genuinely can't wait for your Monday should go to the on-call person, the same as a local message would.
 
 ### When zero contact is the wrong goal
 
@@ -153,12 +153,8 @@ It's also worth knowing where you stand if you work in Australia. The [right to 
 
 ## If you want to try it
 
-You don't get extra points for weekend availability. You don't advance faster. You don't build better products. You burn out faster.
-
 I spent years optimising my code, my tools and my workflows. I never optimised my boundaries, and that turned out to be the real bottleneck.
 
+This weekend, Archael asked if we could go to the park. I said yes straight away. We went, and I was fully there. My phone stayed home. Nobody will remember my Saturday Slack replies. My kids will remember whether I showed up.
+
 Start with one weekend that is truly off, with a named on-call person your team knows to call instead of you. It'll feel uncomfortable and you'll want to check. Don't. Monday will come, the work will be there, and you'll be in better shape to handle it.
-
-Nobody remembers the Saturday Slack replies. My kids will remember whether I showed up.
-
-This weekend, Archael asked if we could go to the park. I said yes straight away. We went, and I was fully there. My phone stayed home. That's the success metric I care about now.

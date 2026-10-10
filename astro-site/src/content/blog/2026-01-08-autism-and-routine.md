@@ -120,11 +120,11 @@ You can't just switch contexts on Andriel. "Five more minutes until we leave" gi
 
 APIs are no different. Removing an endpoint without notice is the "we're leaving now" of software. The tools for giving notice exist and are cheap:
 
-- In Python libraries, emit a [`DeprecationWarning`](https://docs.python.org/3/library/warnings.html) before you remove anything.
+- In Python libraries, emit a [`DeprecationWarning`](https://docs.python.org/3/library/warnings.html) with `warnings.warn(..., DeprecationWarning, stacklevel=2)` before you remove anything, and remember it's hidden by default unless it's triggered from code in `__main__` or a test runner or `-W` flag turns it on. Library users often never see it, so call it out in release notes too. For warnings aimed at end users of an application, use `FutureWarning`, which is shown by default.
 - In HTTP APIs, send the [`Deprecation` response header (RFC 9745, published March 2025)](https://www.rfc-editor.org/rfc/rfc9745.html) to say when a resource was or will be deprecated, and the [`Sunset` header (RFC 8594)](https://www.rfc-editor.org/rfc/rfc8594.html) to say when it will stop responding.
 - Publish the migration path at the same time as the warning, not after.
 
-One gotcha with the two headers: they don't use the same date format. `Deprecation` takes a Structured Fields date (an `@` followed by Unix seconds), while `Sunset` takes a classic HTTP-date. RFC 9745 also defines a `deprecation` link relation, which is where the migration path goes:
+One gotcha with the two headers: they don't use the same date format. `Deprecation` takes a Structured Fields date (an `@` followed by Unix seconds), while `Sunset` takes a classic HTTP-date. RFC 9745 also defines a `deprecation` link relation, which is where the migration path goes. Here are the relevant response headers:
 
 ```http
 Deprecation: @1767225600
@@ -163,7 +163,16 @@ Sometimes the full process is too much, such as a security fix that has to ship 
 
 Andriel trusts his routines because they're consistent. Break that consistency often enough and the trust goes, and getting it back takes far longer than losing it.
 
-Systems work the same way. If one endpoint paginates with `page` and another with `offset`, if one returns dates as ISO 8601 strings and another as epoch seconds, every consumer has to learn each endpoint separately. Pick a convention and hold to it, and enforce it with a shared API style guide plus a linter that checks every OpenAPI definition against a ruleset, such as Spectral, so the rule doesn't depend on reviewers remembering it. Inconsistency is a tax every user pays on every call.
+Systems work the same way. If one endpoint paginates with `page` and another with `offset`, if one returns dates as ISO 8601 strings and another as epoch seconds, every consumer has to learn each endpoint separately. Pick a convention and hold to it. Write it in a shared API style guide, then enforce it with a linter such as [Spectral](https://github.com/stoplightio/spectral) that checks every OpenAPI definition, so the rule doesn't depend on reviewers remembering it. A ruleset can start as small as this fragment, which extends Spectral's built-in OpenAPI rules and makes one of them fail the build:
+
+```yaml
+# .spectral.yaml (fragment)
+extends: ["spectral:oas"]
+rules:
+  operation-tag-defined: error
+```
+
+Add your own rules for pagination parameters and date formats on top of that. Inconsistency is a tax every user pays on every call.
 
 ## When not to design for rigid predictability
 
@@ -173,8 +182,8 @@ The lesson I take is narrower: be predictable about the **contract**, even when 
 
 ## What Andriel has taught me
 
-A test I use on my own work is simple: would this make sense to Andriel? If the behaviour is clear enough for him, it's clear enough for any developer reading it at 2 am.
+He teaches me something new every day, and I'm grateful for it. A test I use on my own work is simple: would this make sense to Andriel? If the behaviour is clear enough for him, it's clear enough for any developer reading it at 2 am.
 
 If you're a parent of an autistic child working in tech, you're probably already practising this: the advance warnings, the explicit plans, the patient walkthroughs of change. Those habits transfer directly. I wrote about the other side of the work-family balance in [The Tech Parent's Dilemma](/blog/2026-01-06-parenting-in-tech/).
 
-Designing for the people with the greatest need for clarity produces systems that work better for everyone. Andriel taught me that. He teaches me something new every day, and I'm grateful.
+Andriel taught me the principle underneath all of this: designing for the people with the greatest need for clarity produces systems that work better for everyone.

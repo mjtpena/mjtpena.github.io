@@ -34,7 +34,7 @@ None of these are new ideas. [PEP 20](https://peps.python.org/pep-0020/) says "e
 
 ## A one-liner that isn't what it looks like
 
-Here's the kind of line I used to be pleased with:
+Here's the kind of line I used to be pleased with. Assume `data` is a list of dicts and `validate`/`transform` are defined as in the full example below; the next three snippets are fragments.
 
 ```python
 result = [x for x in data if validate(x) and transform(x)["valid"]]
@@ -61,7 +61,7 @@ That's the real problem with dense code: it's slower to read, and it makes bugs 
 
 ### The fix depends on what you meant
 
-If you wanted the transformed values, there are two honest ways to write it. Python 3.8 added [assignment expressions](https://docs.python.org/3/whatsnew/3.8.html#assignment-expressions), so a comprehension can capture the intermediate value:
+If you wanted the transformed values, there are two honest ways to write it. Python 3.8 added assignment expressions, so a comprehension can capture the intermediate value:
 
 ```python
 result = [
@@ -71,7 +71,7 @@ result = [
 ]
 ```
 
-This is correct and still compact, but it's at the edge of what I'd accept in review. The walrus inside a condition inside a comprehension is three ideas in one expression. It also has a scoping quirk: under [PEP 572](https://peps.python.org/pep-0572/#scope-of-the-target), the walrus target binds in the enclosing scope, so `transformed` stays bound after the comprehension finishes, holding the last item it saw. That's one more surprise for the 2 AM reader. I'd usually pull it into a named function instead:
+This is correct and still compact, but it's at the edge of what I'd accept in review. The walrus inside a condition inside a comprehension is three ideas in one expression. It also has a scoping quirk: under [PEP 572](https://peps.python.org/pep-0572/#scope-of-the-target), the walrus target binds in the enclosing scope, so `transformed` leaks into the enclosing scope after the comprehension finishes. It holds whatever `transform` last returned, which may be an item the filter rejected, or it isn't bound at all if nothing passed `validate`. That's one more surprise for the on-call reader. I'd usually pull it into a named function instead:
 
 ```python
 from collections.abc import Iterable
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     # [{'id': 1, 'name': 'Ada Lovelace', 'valid': True}]
 ```
 
-The function name now carries the intent, the docstring states the contract, and the body is boring. Boring is the goal.
+The function name now carries the intent, the docstring states the contract, and the body is boring.
 
 ### Pin the behaviour before you refactor
 
@@ -132,7 +132,7 @@ def test_skips_items_that_fail_validation_or_transform():
     assert valid_transformed_items(data) == []
 ```
 
-This assumes the previous snippet is saved as `pipeline.py` and run with `pytest`. Run against the original comprehension, the first test fails immediately, because it returns the untransformed item. Whatever framework you use, treat "refactor for readability" as a behaviour change until a test says otherwise. I've written more about choosing what to test, and where, in [Testing AI Systems](/blog/2026-01-21-ai-testing-strategies/); the same layering applies to ordinary code.
+This assumes the previous snippet is saved as `pipeline.py` and run with `pytest`. If you put the original comprehension inside `valid_transformed_items` and run the tests, the first one fails immediately, because it returns the untransformed item. Whatever framework you use, treat "refactor for readability" as a behaviour change until a test says otherwise. I've written more about choosing what to test, and where, in [Testing AI Systems](/blog/2026-01-21-ai-testing-strategies/); the same layering applies to ordinary code.
 
 ## The questions I ask before merging
 
@@ -147,7 +147,17 @@ These are the four I keep coming back to, in my own pull requests and in reviews
 
 The second question is the one people underrate. A useful test: imagine the function returned the wrong answer in production. Where would you set the breakpoint, and what would you inspect? If the honest answer is "I'd rewrite it into a loop first so I could see what's happening", rewrite it now while nobody's waiting on you.
 
-Questions alone rely on reviewers remembering to ask them, so I back the last one with tooling. Ruff's [`C901` complex-structure rule](https://docs.astral.sh/ruff/rules/complex-structure/) is opt-in and flags any function whose McCabe complexity exceeds [`lint.mccabe.max-complexity`](https://docs.astral.sh/ruff/settings/#lint_mccabe_max-complexity) (10 by default). Turn it on in CI and "more complex than it needs to be" becomes a failing check that someone has to justify, not a matter of taste in a review thread.
+Questions alone rely on reviewers remembering to ask them, so I back the last one with tooling. Ruff's [`C901` complex-structure rule](https://docs.astral.sh/ruff/rules/complex-structure/) is opt-in and flags any function whose McCabe complexity exceeds `lint.mccabe.max-complexity` (10 by default). Turning it on takes two short tables in `pyproject.toml`:
+
+```toml
+[tool.ruff.lint]
+extend-select = ["C901"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+```
+
+Run that in CI and "more complex than it needs to be" becomes a failing check that someone has to justify, not a matter of taste in a review thread. Be clear about what it measures, though: McCabe complexity counts branches, not readability. It wouldn't flag the one-liner bug this post is built around, so it backs up review rather than replacing it.
 
 ## When clever is fine
 

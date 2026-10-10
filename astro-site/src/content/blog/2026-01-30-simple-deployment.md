@@ -63,9 +63,14 @@ jobs:
       - name: Azure login (OIDC)
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Look up the registry login server
+        run: |
+          loginServer=$(az acr show --name "$REGISTRY" --query loginServer --output tsv)
+          echo "LOGIN_SERVER=$loginServer" >> "$GITHUB_ENV"
 
       - name: Build and push image with ACR Tasks
         run: |
@@ -78,26 +83,28 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.APP_NAME }}
-          images: ${{ env.REGISTRY }}.azurecr.io/${{ env.IMAGE }}:${{ github.sha }}
+          images: ${{ env.LOGIN_SERVER }}/${{ env.IMAGE }}:${{ github.sha }}
 ```
 
 A few choices in there are deliberate.
+
+**The login server is looked up, not assembled.** Registries created with a domain name label scope other than Unsecure get a hashed login server such as `<name>-<hash>.azurecr.io`, so building `<name>.azurecr.io` by hand breaks for them. One `az acr show` call returns the right value either way.
 
 **The image tag is the commit SHA, not `latest`.** With `latest`, you can't tell what is running, and "roll back" means rebuilding old code and hoping the build is reproducible. With the SHA, every image in the registry is an immutable record of a commit, and the app's container configuration tells you exactly which one is live. This covers the traceable and reversible bars in one move.
 
 **`az acr build` instead of `docker build` and `docker push`.** The build runs in Azure Container Registry as an [ACR Tasks quick task](https://learn.microsoft.com/azure/container-registry/container-registry-quickstart-task-cli), and the push happens there too, so the runner never needs registry credentials or a `docker login` step. If you'd rather build on the runner (for layer caching, or because the build needs other tools), `az acr login --name <your-registry-name>` after the Azure login gives Docker a token without storing a registry password.
 
-**OIDC instead of a stored service principal secret.** `azure/login@v2` exchanges a short-lived GitHub token for an Azure token through a [federated identity credential](https://learn.microsoft.com/entra/workload-id/workload-identity-federation-create-trust). The three values in GitHub secrets are identifiers, not credentials. I covered the setup in more depth in [OIDC for GitHub Actions](/blog/2022-02-13-oidc-github-actions/). Scope the identity tightly: Contributor on the one resource group that holds the app and registry is the simplest working assignment, and you can narrow it later.
+**OIDC instead of a stored service principal secret.** `azure/login@v2` exchanges a short-lived GitHub token for an Azure token through a [federated identity credential](https://learn.microsoft.com/entra/workload-id/workload-identity-federation-create-trust). Because the job declares `environment: production`, create the federated credential with entity type Environment and subject `repo:<org>/<repo>:environment:production`, not a branch subject. A credential scoped to `refs/heads/main` won't match the token this job presents, and the login fails with AADSTS70021. The three values the login needs are identifiers, not credentials, so I keep them as GitHub variables (`vars.`) rather than secrets. Secrets still work if you'd prefer the values masked in logs, but they protect nothing that matters here. I covered the setup in more depth in [OIDC for GitHub Actions](/blog/2022-02-13-oidc-github-actions/). Scope the pipeline identity tightly: Contributor on the one resource group that holds the app and registry is the simplest working assignment, and you can narrow it later.
 
 **`concurrency` with `cancel-in-progress: false`.** Two quick merges shouldn't produce two deployments racing each other. This queues them instead of cancelling a deployment halfway through.
 
 **The gate lives on the pull request, not in this file.** A push-to-`main` deploy is only as safe as what's allowed onto `main`. Branch protection on `main` with a required status check (your existing test workflow on pull requests) is part of the day-one bar, not an upgrade. Without it, "repeatable" just means you ship untested code the same way every time. If you have no tests yet, a required check that builds the image is still better than nothing, because it catches a broken Dockerfile before it reaches production.
 
-**`environment: production`.** It costs nothing today, and it gives you somewhere to hang required reviewers or environment-scoped secrets later without restructuring the workflow.
+**`environment: production`.** It costs almost nothing today (it does mean the federated credential must target the environment), and it gives you somewhere to hang required reviewers or environment-scoped secrets later without restructuring the workflow.
 
 ## One-time setup the YAML doesn't show
 
-The web app needs permission to pull from the registry. I'd use the app's managed identity rather than the registry admin account:
+The web app needs permission to pull from the registry. Run this once as someone who can create role assignments (Owner or User Access Administrator on the registry), not as the pipeline identity, which only has Contributor. I'd use the app's managed identity rather than the registry admin account:
 
 ```bash
 # Give the web app a system-assigned identity
@@ -121,7 +128,7 @@ az webapp config set \
   --generic-configurations '{"acrUseManagedIdentityCreds": true}'
 ```
 
-This is the approach in Microsoft's [custom container configuration guide](https://learn.microsoft.com/azure/app-service/configure-custom-container), and it means there's no registry password anywhere, in GitHub or in app settings.
+This is the approach in Microsoft's [custom container configuration guide](https://learn.microsoft.com/azure/app-service/configure-custom-container), and it means there's no registry password anywhere, in GitHub or in app settings. If pulls fail with UNAUTHORIZED, check that the registry hasn't disabled ARM-audience tokens (`az acr config authentication-as-arm show --registry <your-registry-name>`), which some organisations turn off by policy and which managed-identity pulls depend on.
 
 Turn on [health check](https://learn.microsoft.com/azure/app-service/monitor-instances-health-check) with a lightweight endpoint while you're there. It's a few minutes of work and it lets App Service take unhealthy instances out of rotation once you run more than one.
 
@@ -133,7 +140,7 @@ Because every image is tagged by commit, rollback is a configuration change, not
 az webapp config container set \
   --resource-group <your-resource-group> \
   --name <your-app-name> \
-  --container-image-name <your-registry-name>.azurecr.io/myapp:<previous-commit-sha>
+  --container-image-name <your-registry-login-server>/myapp:<previous-commit-sha>
 ```
 
 Then revert the bad commit on `main` so the next push doesn't redeploy it. Write this command down somewhere the on-call person can find it before you need it.
@@ -161,7 +168,9 @@ My rule: add complexity in response to a pain you can name, not one you can imag
 
 The first row is usually the first one you hit, and [deployment slots](https://learn.microsoft.com/azure/app-service/deploy-staging-slots) are the cheapest answer on App Service. They need the Standard, Premium or Isolated tier (Standard allows five slots), slots cost nothing extra on top of the plan, and a swap warms up the new version on the staging slot before switching traffic, so production stays online. In the workflow, that's one extra `slot-name: staging` input and an `az webapp deployment slot swap` step. One caveat: auto swap isn't supported for Linux apps or Web App for Containers, so the swap has to be an explicit step in the pipeline.
 
-Notice what's last in that table. Canary releases with automated rollback are worth having, but they need meaningful traffic to produce a signal, metrics you trust, and someone who understands the tooling when it misbehaves. With 100 users, a 5% canary is five people, and the statistics won't tell you anything you couldn't learn from an error log. If you get to that point, the trade-offs between rolling, blue-green and canary are covered in [deployment strategies on AKS](/blog/2020-08-06-aks-deployment-strategies/).
+Before you go that far, App Service can route a percentage of traffic to a slot (the "testing in production" setting) for a manual canary. Automated, metric-based promotion is what usually needs a different hosting model.
+
+Notice what's near the bottom of that table. Canary releases with automated rollback are worth having, but they need meaningful traffic to produce a signal, metrics you trust, and someone who understands the tooling when it misbehaves. With 100 users, a 5% canary is five people, and the statistics won't tell you anything you couldn't learn from an error log. If you get to that point, the trade-offs between rolling, blue-green and canary are covered in [deployment strategies on AKS](/blog/2020-08-06-aks-deployment-strategies/).
 
 ## When this isn't the right starting point
 

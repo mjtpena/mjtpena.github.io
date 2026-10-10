@@ -14,11 +14,11 @@ Someone asked me why I still maintain a blog. "Doesn't everyone just use LinkedI
 
 ## The short answer
 
-This is my space. I own it and I control it. Nobody can shut it down, change the algorithm under me, or monetise my writing without my consent.
+This is my space. I own it and I control it. I own the domain and the source, so no platform can take the posts away, change the algorithm under me, or monetise my writing without my consent.
 
 That was the reason I gave myself in August 2020, when I wrote [I'm going to start writing again!](/blog/2020-08-26-writing-again/) and said I wanted "a space on the internet that I can say is mine". More than five years on, the reason hasn't changed.
 
-If anything, it's been proven. When Twitter became X in July 2023, people scrambled to work out what would happen to their accounts, their handles and years of threads. When LinkedIn changes a feature, people adapt, because they have no other option. My blog will be here for as long as I want it to be, at the same address, with the same posts.
+If anything, it's been proven. When [Twitter became X in July 2023](https://www.aljazeera.com/news/2023/7/23/elon-musk-says-he-will-change-twitters-blue-bird-logo-to-an-x), people scrambled to work out what would happen to their accounts, their handles and years of threads. When LinkedIn changes a feature, people adapt, because the platform sets the rules. My blog will be here for as long as I keep paying for the domain, and if the host changes, the address and the posts move with me.
 
 ## Six reasons it's still worth it
 
@@ -40,7 +40,7 @@ The habit also carries over to emails, proposals and architecture documents, whi
 
 ### 3. Search works
 
-When I need to remember how I solved an Azure Functions problem, I search my own blog first, and posts like [the one on dependency injection in Azure Functions](/blog/2020-11-06-azure-functions-dependency-injection/) are usually what I land on.
+When I need to remember how I solved an Azure Functions problem, I search my own blog first (the [dependency injection post](/blog/2020-11-06-azure-functions-dependency-injection/) is one I've gone back to).
 
 It works better than my notes app or old Slack threads because I wrote the post for someone without my context, and years later that someone is me.
 
@@ -52,13 +52,13 @@ When someone asks, "Can you help with Azure OpenAI?", I send them three blog pos
 - how I communicate
 - how I approach a problem
 
-That's worth more than a résumé. Multiple clients have found me through blog posts, which is the same idea working without me having to send the link. Conference organisers read my blog to vet topics, so it's also how speaking opportunities start.
+That's worth more than a résumé. Job offers and work have followed: multiple clients have found me through blog posts, which is the same idea working without me having to send the link. Conference organisers read my blog to vet topics, so it's also how speaking opportunities start.
 
 And it compounds. Posts get shared years after I publish them, long after anything I posted on a feed has scrolled away. A résumé only works when I hand it over; the archive keeps working when I'm not paying attention.
 
 ### 5. Better conversations
 
-The most interesting conversations I have come from blog comments and emails, from people who read the whole thing. Someone who reaches the end of a long post has already followed the reasoning, so their question starts where the argument ends rather than at the headline.
+The most interesting conversations I have come from blog comments and emails, from people who read the whole thing. Someone who reaches the end of a long post has already followed the reasoning, so their questions are about the details, not the headline.
 
 ### 6. Room for long-form thinking, with no algorithm to feed
 
@@ -66,7 +66,7 @@ Twitter trained us to think in 140-character (later 280) sound bites. LinkedIn t
 
 It also means I don't have to game engagement. No clickbait titles (okay, sometimes). No posting at the "optimal time". No worrying about shadowbans.
 
-That has a real cost. A post on my blog doesn't get pushed into anyone's feed, so on day one it reaches far fewer people than the same idea posted on LinkedIn at 8am on a Tuesday. I accept that trade. The feed rewards what's engaging this hour; search rewards what's still useful next year, and the second is the kind of writing I want to do. If people find it, great. If not, it's still here for future me.
+That has a real cost. A post on my blog doesn't get pushed into anyone's feed, so on day one it reaches far fewer people than the same idea posted on LinkedIn at 8am on a Tuesday. I accept that trade. I'd rather write things people still find useful through search a year later. If people find it, great. If not, it's still here for future me.
 
 ## How I write, and where AI fits
 
@@ -74,11 +74,11 @@ I don't have a content calendar. I don't batch-write posts. I write when I have 
 
 Could I use AI to write my blog posts? Sure. Plenty of people do. I don't use it to generate outlines or drafts, though I do use it to edit.
 
-The reason is simple: I write to think, to learn, and to share my actual experiences and opinions. If a model writes the post, I've skipped the part that was doing me any good. AI helps with editing, structure and clarity. It can't have my experiences or form my opinions for me, and it can't tell you which of your opinions you'd actually defend in a design review.
+The reason is simple: I write to think, to learn, and to share my actual experiences and opinions. If a model writes the post, I've skipped the part that was doing me any good. AI helps with editing, structure and clarity. It can't have my experiences or form my opinions for me.
 
 ## What five years have taught me
 
-**Published beats perfect.** I've published posts with typos. Posts that aged badly. Posts I'd write differently now. They're all still up, and that's fine. A record of how your thinking changed is more useful than a curated highlight reel.
+**Consistency beats perfection.** I've published posts with typos. Posts that aged badly. Posts I'd write differently now. They're all still up, and that's fine. A record of how your thinking changed is more useful than a curated highlight reel.
 
 **Shorter posts get read more, longer posts get referenced more.** Write both. The quick fix gets the search traffic; the long explanation is what people link to in a design review.
 
@@ -98,12 +98,10 @@ You don't need to be a "content creator". You don't need viral posts or thousand
 
 But a place where you document what you're learning is valuable: for future you, for people facing the same problem, and as evidence of how you think. It doesn't have to be daily. It doesn't have to be long. It just has to be yours.
 
-If you take one practical step, buy your own domain on day one, before you pick a platform. Hosts come and go, and you'll probably change static site generators at least once. If your posts live at your own domain, you can move them and keep every URL and every inbound link; if they live on a platform's subdomain, moving means starting your links from zero. Pick the simplest host you can, and spend the energy on the second and third posts instead of the theme.
+If you're waiting for the right moment, don't. I restarted in August 2020 after years of excuses. And if you take one practical step, buy your own domain on day one, before you pick a platform. Hosts come and go, and you'll probably change static site generators at least once. If your posts live at your own domain, you can move them and keep every URL and every inbound link; if they live on a platform's subdomain, moving means starting your links from zero. Pick the simplest host you can, and spend the energy on the second and third posts instead of the theme.
 
 ## Why I'll keep going
 
 The industry moves fast, and it's useful to have a record of the journey. I learn by writing. And sometimes people tell me a post helped them.
 
 But mostly, I keep blogging because it's mine. In 2026, with every platform's rules one product decision away from changing, that still matters.
-
-Start a blog. Write when you have something to say. If you're waiting for the right moment, don't. I restarted in August 2020 after years of excuses.

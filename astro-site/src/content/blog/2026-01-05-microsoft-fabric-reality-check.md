@@ -28,7 +28,7 @@ Our footprint is modest, which is exactly why it's useful as a reference point:
 | Daily active users | ~50 |
 | Capacity | F64 |
 
-Nothing here is exotic. If Fabric couldn't handle this comfortably, it wouldn't be worth discussing.
+Nothing here is exotic, which is the point.
 
 ## What holds up
 
@@ -77,9 +77,7 @@ The Capacity Metrics app is where you go to understand CU consumption, and it's 
 
 ### Two smaller things that bite
 
-**Refreshes still cost CUs.** Import-mode refreshes are background operations, smoothed over 24 hours, so a heavy refresh schedule stays hidden until the background load triggers the throttling stages above.
-
-**Region placement matters.** A capacity in a different region from its sources adds latency to pipelines and shortcuts, and possibly cross-region transfer costs. Put the capacity where the data is.
+Import-mode refreshes are background operations smoothed over 24 hours, so a heavy refresh schedule stays hidden until it tips you into throttling. And a capacity in a different region from its sources adds latency and possible transfer costs, so put the capacity where the data is.
 
 ### Migration is a re-platform
 
@@ -103,7 +101,7 @@ Our F64 runs at roughly US$8,000 a month; we stayed on pay-as-you-go while we me
 Fabric is cheaper for us, but it's also doing more, so this isn't a clean apples-to-apples comparison. Two pricing details matter more than the headline number:
 
 - **F64 is the free-viewer threshold.** On F64 and above, users with a free licence can view Power BI content shared through the capacity, as they could on P1. Below F64, every viewer needs a Pro or Premium Per User licence. Microsoft announced in March 2024 that it would retire the Power BI Premium P SKUs; new purchases stopped on 1 July 2024, non-EA renewals ended on 1 February 2025, and EA customers can renew annually until their EA term ends. The [migration overview](https://learn.microsoft.com/en-us/power-bi/support/premium-migration-overview) covers the grace-period rules. P1 maps to F64, so this is the comparison most Power BI shops will face.
-- **Reserved pricing is the real lever.** Pay-as-you-go is the wrong baseline for a production capacity that runs around the clock. A [one-year Fabric capacity reservation](https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/fabric-capacity) is roughly 41% off pay-as-you-go, which takes an F64 from about US$8,410 to about US$5,000 a month at US list prices. Against the ~$12,000 legacy total, that's the comparison that matters: well under half the old bill, not two-thirds of it. Now that our baseline is stable, a reservation is the obvious next step for us. The catch is that you pay the reservation whether the capacity is running or paused. Pay-as-you-go capacities can be paused, which suits dev and test, and rarely production. A common pattern is a reservation sized for the steady baseline plus pay-as-you-go for occasional scale-ups.
+- **Reserved pricing is the real lever.** Pay-as-you-go is the wrong baseline for a production capacity that runs around the clock. A [one-year Fabric capacity reservation](https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/fabric-capacity) is roughly 41% off pay-as-you-go, which takes an F64 from about US$8,410 to about US$5,000 a month at US list prices. Against the ~$12,000 legacy total, that's the comparison that matters: well under half the old bill, not two-thirds of it. Now that our baseline is stable, a reservation is the obvious next step for us. The catch is that you pay the reservation whether the capacity is running or paused. Pausing pay-as-you-go suits dev and test, rarely production, so a common pattern is a reservation for the steady baseline plus pay-as-you-go for occasional scale-ups.
 
 ## What I'd do differently
 
@@ -120,12 +118,12 @@ Fabric is working for us, and we're staying on it. The integration is real, Dire
 
 - Heavy Power BI users, especially those facing a P SKU renewal
 - Teams consolidating several Azure data services with copies of the same data
-- Microsoft-centric organisations that value one security and billing model over best-of-breed components
+- Microsoft-centric organisations that value one security and billing model
 
 **Think harder first:**
 
-- Teams that need strict, predictable performance for real-time or customer-facing workloads on a shared capacity; plan for dedicated capacity or keep those workloads elsewhere
+- Real-time or customer-facing workloads that need predictable performance on a shared capacity
 - Multi-cloud strategies where vendor flexibility is a hard requirement
-- Teams that want fine-grained compute control, or lack the people to run capacity monitoring and governance
+- Teams without the people to run capacity monitoring and governance
 
 If you're evaluating it, run a proof of concept on a non-critical workload, collect a few weeks of Capacity Metrics data, and only then size the capacity, buy the reservation and plan the migration.

@@ -17,26 +17,26 @@ The commitments came out of three posts: the principles in [New Year, Same Found
 
 ## The report card
 
-| Commitment | Grade | One-line verdict |
-|---|---|---|
-| Weekend boundaries | B+ | Held, with one genuine emergency |
-| Being present | C+ | Physically there, mentally drifting |
-| Writing consistently | A | 27 posts in 27 days |
-| AI project discipline | B- | Mostly focused, still distracted by launches |
+| Commitment | Grade |
+|---|---|
+| Weekend boundaries | B+ |
+| Being present | C+ |
+| Writing consistently | A |
+| AI project discipline | B- |
 
 ### Weekend boundaries: B+
 
 I mostly held the line. I worked one Saturday this month, and it was an actual emergency, not a "quick question" dressed up as one. Most weekends felt good, and taking weekends off is the change I'm proudest of: it was the biggest shift, and it's holding.
 
-The slip-up is Slack. I still check it occasionally. I don't respond, but I check, and checking is its own kind of work: it pulls my head back into the week even when my hands stay off the keyboard. That's the next thing to stop.
+The slip-up is Slack. I still check it occasionally. I don't respond, but I check, and checking is its own kind of work: it pulls my head back into the week even when my hands stay off the keyboard. That's the next thing to stop, and the monthly no-tech day below is where I start.
 
 ### Being present: C+
 
 Better than before. My phone stays away during family time more often than it used to.
 
-But I still drift mentally. I'm physically there and thinking about work. This is harder to fix than I expected, because there's nothing to put in a drawer. A phone is an object; a wandering mind isn't. I wrote about one small tactic for this in [The Five-Minute Father](/blog/2026-01-24-present-moment-parenting/), and it helps in the moment, but it hasn't changed the default yet. What I can say is that I now notice when I'm not present. Noticing isn't fixing, but it's where fixing starts.
+But I still drift mentally. I'm physically there and thinking about work. This is harder to fix than I expected, because there's nothing to put in a drawer. A phone goes in a drawer. My head doesn't. I wrote about one small tactic for this in [The Five-Minute Father](/blog/2026-01-24-present-moment-parenting/), and it helps in the moment, but it hasn't changed the default yet. What I can say is that I now notice when I'm not present. That's progress, but it hasn't fixed anything yet.
 
-The part of this grade I like least is patience with my kids. I snap more than I should, especially when I'm stressed. I haven't set a separate goal for it, because I think it's the same problem wearing different clothes: when my head is still in work, I have less patience for whatever is in front of me. The presence goals below are meant to cover it too, and if they don't, it needs a goal of its own.
+The part of this grade I like least is patience with my kids. I snap more than I should, especially when I'm stressed. I haven't set a separate goal for it, because I think it's the same problem: when my head is still in work, I have less patience for whatever is in front of me. The presence goals below are meant to cover it too, and if they don't, it needs a goal of its own.
 
 ### Writing consistently: A
 
@@ -48,15 +48,9 @@ The A is for consistency, not for every post being great. That's the trade-off I
 
 I said I'd stop chasing every new model. I mostly succeeded. But I still got pulled into experimenting with Google's Gemini 3 models, and spent time poking at them that I'd promised to spend going deeper on the tools I already use.
 
-The pull of a launch day is still stronger than my rule. Curiosity isn't the problem; it's part of the job. The problem is when exploring a new model quietly replaces finishing the work in front of me.
+Gemini 3 Flash had only been out a few weeks, and the pull of a shiny new model was still stronger than my rule. Curiosity isn't the problem; it's part of the job. The problem is when exploring a new model quietly replaces finishing the work in front of me.
 
 The better news on this front is saying no. I turned down two consulting gigs. A year ago I would have said yes to both. Fewer commitments is what makes focus possible in the first place.
-
-## What the grades don't capture
-
-Imposter syndrome. I'm still questioning whether I know enough, am enough, do enough. No letter grade fits that, and I don't expect one month to settle it. Some weeks are better than others, and that's okay.
-
-I won't get any of this right every day. Aiming for "better" is enough.
 
 ## Three goals for February
 
@@ -70,4 +64,6 @@ Each goal targets the weakest grade above, being present, and each is small enou
 
 I'm not crushing it, and I'm not failing either. I'm making progress in some areas and struggling in others, and this report card is the unedited version of that.
 
-If you made commitments of your own this January, try grading them before the month ends rather than after. A grade with a few days left is something you can still act on. A grade on 1 February is just a story about what happened.
+One thing sits outside the grades: imposter syndrome. I'm still questioning whether I know enough, am enough, do enough. No letter grade fits that, and I don't expect one month to settle it. Some weeks are better than others. I won't get any of this right every day, and aiming for "better" is enough.
+
+If you made commitments of your own this January, try grading them before the month ends rather than after. A grade with a few days left is something you can still act on. A grade on 1 February is only a record.

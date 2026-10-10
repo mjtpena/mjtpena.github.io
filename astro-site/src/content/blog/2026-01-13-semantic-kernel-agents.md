@@ -28,7 +28,8 @@ Before writing any code, check the release status of every package you'll depend
 | Sequential, Concurrent, Handoff, Group Chat orchestrations | `Microsoft.SemanticKernel.Agents.Orchestration` | Preview |
 | Magentic orchestration | `Microsoft.SemanticKernel.Agents.Magentic` | Preview |
 | In-process agent runtime | `Microsoft.SemanticKernel.Agents.Runtime.InProcess` | Preview |
-| `ISemanticTextMemory` and the old memory stores | `Microsoft.SemanticKernel.Abstractions` | Experimental, superseded by vector store connectors |
+| Vector store connectors (Azure AI Search etc.) | `Microsoft.SemanticKernel.Connectors.*` | Preview |
+| `ISemanticTextMemory` and the old memory stores | `Microsoft.SemanticKernel.Abstractions` / `.Core` | Experimental (`SKEXP0001`); most store implementations removed, superseded by vector store connectors |
 
 The practical rule I follow: the agent itself, its plugins, and its filters can carry a production workload. Multi-agent orchestration is experimental and ships as preview packages, so it goes behind a feature flag or into internal tools until it stabilises.
 
@@ -100,7 +101,7 @@ public sealed class OrdersPlugin
 }
 ```
 
-An earlier version of this post showed a `QuerySalesData(string query)` tool that runs model-written SQL after a `StartsWith("SELECT")` check. Don't. A string blocklist doesn't stop a `SELECT` that reads a table the user shouldn't see, and it doesn't stop a query that scans a billion rows. If an agent needs data, give it typed functions with parameters you validate, run them under an identity with read access to exactly what it needs, and keep free-form SQL for analysts.
+A pattern I see in a lot of agent samples is a `QuerySalesData(string query)` tool that runs model-written SQL after a `StartsWith("SELECT")` check. Don't. A string blocklist doesn't stop a `SELECT` that reads a table the user shouldn't see, and it doesn't stop a query that scans a billion rows. If an agent needs data, give it typed functions with parameters you validate, run them under an identity with read access to exactly what it needs, and keep free-form SQL for analysts.
 
 ## Guard the tool loop with a filter
 
@@ -126,6 +127,13 @@ public sealed class ToolGuardFilter(ILogger<ToolGuardFilter> logger) : IAutoFunc
             "Tool call {Plugin}.{Function} (round trip {Round})",
             context.Function.PluginName, name, context.RequestSequenceIndex);
 
+        if (context.RequestSequenceIndex >= MaxModelRoundTrips + 2)
+        {
+            // Hard stop for a model that ignores the soft message below.
+            context.Terminate = true;
+            return;
+        }
+
         if (context.RequestSequenceIndex >= MaxModelRoundTrips)
         {
             // No Terminate here: the model reads this result and writes the final answer.
@@ -146,15 +154,23 @@ public sealed class ToolGuardFilter(ILogger<ToolGuardFilter> logger) : IAutoFunc
 }
 ```
 
-Register it on the kernel the agent uses, before invoking the agent. This is a fragment for the program above: add `using Microsoft.Extensions.Logging;` to its usings and the `Microsoft.Extensions.Logging.Console` package for `AddConsole`. The `using` declaration disposes the factory at the end of the program, which flushes the console logger before the process exits.
+Register it on the kernel the agent uses, before invoking the agent. This is a fragment for the program above, and `AddConsole` needs one more package:
+
+```bash
+dotnet add package Microsoft.Extensions.Logging.Console
+```
 
 ```csharp
+// Add `using Microsoft.Extensions.Logging;` to the program's usings.
+// The using declaration disposes the factory at exit, which flushes the console logger.
 using ILoggerFactory loggerFactory = LoggerFactory.Create(b => b.AddConsole());
 kernel.AutoFunctionInvocationFilters.Add(
     new ToolGuardFilter(loggerFactory.CreateLogger<ToolGuardFilter>()));
 ```
 
-Two design choices are worth explaining. The first is that the filter returns a result to the model instead of throwing. An exception ends the run with a stack trace; a returned message lets the agent explain to the user what happened. That's also why the budget branch doesn't set `context.Terminate = true`. Terminating stops the loop before the model sees the message, and `ChatCompletionAgent` hands back the raw tool-result message, whose `Content` is empty. If you do want a hard stop, keep `Terminate` and have the caller detect the terminated run and write the user-facing message itself. With the soft version, the model gets one more round trip to answer, and the next filter call sees an index over the budget, so a model that ignores the instruction gets the same message back instead of running another real tool.
+Two design choices are worth explaining. The first is that the filter returns a result to the model instead of throwing. An exception ends the run with a stack trace; a returned message lets the agent explain to the user what happened.
+
+That's also why the budget branch doesn't set `context.Terminate = true`. Terminating stops the loop before the model sees the message, and `ChatCompletionAgent` hands back the raw tool-result message, whose `Content` is empty, so the caller has to detect the terminated run and write the user-facing message itself. The soft message gets a well-behaved model to answer with what it has. On its own, though, it doesn't bound cost: a model that keeps asking for tools gets the same message back on every round trip until Semantic Kernel's internal auto-invoke cap of 128 attempts, and each one is a paid model call. The hard stop two round trips later caps that, and the caller handles it as described.
 
 The second choice is that the approval gate doesn't execute anything. In a real system that branch writes a request to a queue or a ticketing system and a person approves it outside the agent loop. I don't let an agent hold a conversation open while waiting for a human, because threads, tokens, and user patience all expire.
 
@@ -205,7 +221,7 @@ A tempting shortcut is to subclass `ChatCompletionAgent` to track costs; that do
 
 ## Memory: skip the old APIs
 
-If you find a tutorial using `MemoryBuilder`, `SaveInformationAsync`, and `AzureAISearchMemoryStore`, it's out of date. Those memory APIs were experimental, and Semantic Kernel moved to vector store connectors built on `Microsoft.Extensions.VectorData`. The abstraction to code against now is `VectorStoreCollection<TKey, TRecord>`; the Azure AI Search connector implements it as `AzureAISearchCollection<TKey, TRecord>`, with typed record classes instead of the old string-and-metadata records.
+If you find a tutorial using `MemoryBuilder`, `SaveInformationAsync`, and `AzureAISearchMemoryStore`, it's out of date. Those memory APIs were experimental, and Semantic Kernel moved to vector store connectors built on `Microsoft.Extensions.VectorData`. The abstraction to code against now is `VectorStoreCollection<TKey, TRecord>`; the Azure AI Search connector implements it as `AzureAISearchCollection<TKey, TRecord>`, with typed record classes instead of the old string-and-metadata records. The connector package itself is still preview (`Microsoft.SemanticKernel.Connectors.AzureAISearch` 1.68.0-preview), while the `Microsoft.Extensions.VectorData` abstractions are GA. Code against the abstraction so a connector change stays local.
 
 For an agent, the simplest durable pattern is still retrieval through a tool: a plugin that searches that collection with the caller's permissions applied, rather than a hidden memory layer the agent writes to freely. A tool call shows up in your traces and goes through your filter; a hidden layer doesn't. I'd only accept agent-written memory when the agent genuinely needs to remember things across sessions that no system of record holds, such as a user's stated preferences, and even then I'd scope it per user, give it a retention period, and let the user see and delete it.
 

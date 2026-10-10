@@ -25,7 +25,7 @@ Every LLM feature in production eventually gets asked four things:
 3. **Is it failing or being throttled?** Errors, 429s, content filter blocks and timeouts behave very differently and need separating.
 4. **Is it still any good?** Whether the answers are grounded and useful, which no latency chart will tell you.
 
-Everything below maps to one of these. If a metric doesn't help answer one of them, I don't collect it until someone asks a question it would answer.
+Everything below maps to one of these. If a metric doesn't help answer one, I don't collect it.
 
 ## Tokens, attributed properly
 
@@ -33,7 +33,7 @@ Token counts are the closest thing an LLM system has to a unit cost, and the raw
 
 That split matters more than it used to. Input tokens dominate in retrieval-heavy features because of the stuffed context; output tokens dominate in drafting features; and reasoning models bill their hidden reasoning tokens as output, which the OpenAI SDK exposes as `usage.completion_tokens_details.reasoning_tokens`. Prompt caching muddies it further, since `usage.prompt_tokens_details.cached_tokens` are billed at a discount. A single "total tokens" number hides all of that.
 
-I'd record tokens rather than dollars at the point of the call. Prices change and differ by deployment type, and converting at query time from a price table you control is easier than rewriting historical telemetry. Keep the dollar conversion in your dashboard or a nightly job.
+I'd record tokens rather than dollars at the point of the call. Prices change and differ by deployment type, so convert at query time from a price table you control, in your dashboard or a nightly job.
 
 ## Latency, split by phase
 
@@ -50,7 +50,7 @@ Where the model call is a small fraction of end-to-end time, the fix is usually 
 
 ## Failures, separated by kind
 
-Lumping every non-200 into one "error rate" is the fastest way to build an alert nobody trusts. The categories I keep distinct:
+Lumping every non-200 into one "error rate" builds an alert nobody trusts. The categories I keep distinct:
 
 | Failure | What it usually means | What to do |
 |---|---|---|
@@ -60,19 +60,19 @@ Lumping every non-200 into one "error rate" is the fastest way to build an alert
 | 5xx from the service | Genuine service-side errors | Retry, fail over, raise a support case if sustained |
 | Malformed output | Model returned JSON or a tool call your code couldn't parse | Prompt or schema fix; this is a quality signal disguised as an error |
 
-Azure OpenAI returns rate limit headers such as `x-ratelimit-remaining-tokens` and, on a 429, a `retry-after-ms` value. The OpenAI Python SDK honours those headers in its built-in retries, which hides throttling from your own code; the instrumentation section below covers where to count it instead.
+Azure OpenAI returns rate limit headers such as `x-ratelimit-remaining-tokens` and, on a 429, a `retry-after-ms` value. The OpenAI Python SDK honours `retry-after-ms` (and `retry-after`) in its built-in retries, which hides throttling from your own code; it ignores the `x-ratelimit-remaining-*` headers, so log those yourself if you want headroom data. The instrumentation section below covers where to count throttling instead.
 
 ## Quality, sampled not exhaustive
 
-Quality is the signal teams most want and least often measure. You can't run an LLM-as-judge evaluation on every production request without roughly doubling your inference bill, and you shouldn't try. What works is sampling: score a small, consistent slice of traffic (and every request that got negative user feedback) for groundedness and relevance, offline, and track the trend.
+Quality is the signal teams most want and least often measure. LLM-as-judge on every production request would roughly double your inference bill, so don't try. What works is sampling: score a small, consistent slice of traffic (and every request that got negative user feedback) for groundedness and relevance, offline, and track the trend.
 
-The [Azure AI Evaluation SDK](https://learn.microsoft.com/azure/foundry-classic/how-to/develop/evaluate-sdk) has built-in evaluators for this (its how-to page sits under the Foundry classic docs, unlike the other Foundry links in this post), and Microsoft Foundry (the new name for Azure AI Foundry since Ignite in November 2025) can show evaluation results next to traces when the project is connected to Application Insights. The tooling is less important than the discipline: a fixed sample, the same evaluators, and a chart you look at after every prompt or model change.
+The [Azure AI Evaluation SDK](https://learn.microsoft.com/azure/foundry-classic/how-to/develop/evaluate-sdk) has built-in evaluators for this, and Microsoft Foundry (the new name for Azure AI Foundry since Ignite in November 2025) can show evaluation results next to traces when the project is connected to Application Insights. The tooling is less important than the discipline: a fixed sample, the same evaluators, and a chart you look at after every prompt or model change.
 
-Explicit user feedback (thumbs up or down) is cheap and worth capturing as an attribute on the trace. It's noisy and biased towards annoyed users, so treat it as a pointer to samples worth reading, not as a score.
+Thumbs up or down is cheap to capture as a trace attribute. It's noisy and biased towards annoyed users, so treat it as a pointer to samples worth reading, not a score.
 
 ## Instrumenting it with OpenTelemetry
 
-The OpenTelemetry [semantic conventions for generative AI](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-metrics/) define a client metric `gen_ai.client.token.usage` (with a `gen_ai.token.type` attribute of `input` or `output`) and `gen_ai.client.operation.duration`, plus span attributes like `gen_ai.request.model` and `gen_ai.provider.name`. They are still marked Development rather than stable, and attribute names have already changed once (`gen_ai.system` became `gen_ai.provider.name` in v1.37), so expect some churn. I still use them: they're the names the instrumentation libraries and backends are converging on. Adoption is uneven, though: the OpenAI auto-instrumentation still emits `gen_ai.system` (see below).
+The OpenTelemetry [semantic conventions for generative AI](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-metrics/) define a client metric `gen_ai.client.token.usage` (with a `gen_ai.token.type` attribute of `input` or `output`) and `gen_ai.client.operation.duration`, plus span attributes like `gen_ai.request.model` and `gen_ai.provider.name`. They are still marked Development rather than stable, and attribute names have already changed once (`gen_ai.system` became `gen_ai.provider.name` in v1.37), so expect some churn. I still use them: they're the names the instrumentation libraries and backends are converging on.
 
 The fragment below shows the shape of a wrapper that emits those signals plus the attribution attributes that make them useful. It uses the `openai` 2.x Python SDK against the Azure OpenAI v1 endpoint with Entra ID auth, and the [Azure Monitor OpenTelemetry Distro](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable) to export to Application Insights. One Azure-specific wrinkle: the conventions define `gen_ai.request.model` as the model name, but on Azure the "model" you send is your deployment name, so that's what lands in the attribute, while `gen_ai.response.model` carries the actual model version the service ran.
 
@@ -175,9 +175,33 @@ Two deliberate choices in there. First, the prompt and response text are not rec
 
 That's also why `app.tenant` sits on the span and not the metrics. Every distinct combination of metric attribute values is its own time series. The OpenTelemetry metrics specification recommends a default cap of 2,000 attribute sets per metric, beyond which SDKs fold new series into a single overflow series, but as of version 1.39 the Python SDK doesn't enforce a cap, so you simply pay for every series in Application Insights. Add tenant to the metric attributes only when the tenant list is bounded and small; otherwise aggregate per-tenant cost from the `gen_ai.usage.*` attributes in `dependencies`.
 
-The wrapper also can't see throttling. With `max_retries` at its default of 2, the SDK retries a 429 internally (honouring `retry-after-ms`), so the span records only the final outcome and its duration silently includes the back-off. That's fine, because the throttle count belongs on the platform side: the Azure OpenAI Requests metric, split by `StatusCode`, counts every 429 the service returned, retried or not, and that's where my 429 alert comes from. If you need per-feature throttling, set `max_retries=0` and retry in your own loop, adding a span event or counter for each 429 before you back off.
+The wrapper also can't see throttling. With `max_retries` at its default of 2, the SDK retries a 429 internally (honouring `retry-after-ms`), so the span records only the final outcome and its duration silently includes the back-off. That's fine: the Azure OpenAI Requests metric, split by `StatusCode`, counts every 429 the service returned, retried or not, and that's where my 429 alert comes from. If you need per-feature throttling, set `max_retries=0` and retry in your own loop, adding a span event or counter for each 429 before you back off.
 
-If you'd rather not hand-write the spans, the `opentelemetry-instrumentation-openai-v2` package (2.3b0, still beta) instruments the OpenAI client automatically, though you'll still want to add the attribution attributes yourself. It also still emits the older `gen_ai.system` attribute, so pick one approach per client rather than running both; combining it with a wrapper like the one above gives you two attribute names for the provider and duplicate `gen_ai.client.*` metrics.
+The wrapper is non-streaming, so it can't measure time to first token. For streaming, call with `stream=True, stream_options={"include_usage": True}`, record TTFT when the first chunk with content arrives, and take usage from the final chunk, which has an empty `choices` list. Leave out `include_usage` and a streamed response carries no token usage at all, so your token metrics silently drop out for every streaming feature. This fragment reuses names from above, plus a `ttft` histogram created like `op_duration`:
+
+```python
+start = time.perf_counter()
+first_token_at = None
+usage = None
+parts = []
+stream = client.chat.completions.create(
+    model=deployment,
+    messages=messages,
+    stream=True,
+    stream_options={"include_usage": True},
+)
+for chunk in stream:
+    if chunk.usage:  # final chunk: usage only, no choices
+        usage = chunk.usage
+    for choice in chunk.choices:
+        if choice.delta and choice.delta.content:
+            if first_token_at is None:
+                first_token_at = time.perf_counter()
+                ttft.record(first_token_at - start, base_attrs)
+            parts.append(choice.delta.content)
+```
+
+If you'd rather not hand-write the spans, the `opentelemetry-instrumentation-openai-v2` package (2.3b0, still beta) instruments the OpenAI client automatically, though you'll still want to add the attribution attributes yourself. It also still emits the older `gen_ai.system` attribute, and sets it to `openai` even when the client is calling Azure, so pick one approach per client rather than running both; combining it with a wrapper like the one above gives you two attribute names for the provider and duplicate `gen_ai.client.*` metrics.
 
 In Application Insights, the custom metrics land in `customMetrics` and the client spans in `dependencies`, so the daily cost question becomes a short query:
 
@@ -193,11 +217,11 @@ customMetrics
 
 ## Don't forget the platform metrics
 
-You don't have to instrument everything client-side. Azure OpenAI publishes platform metrics to Azure Monitor, including Azure OpenAI Requests (split by `StatusCode` for 429s), Processed Prompt Tokens, Generated Completion Tokens, Time to Response and Provisioned-managed Utilization V2, listed in the [monitoring data reference](https://learn.microsoft.com/azure/foundry/openai/monitor-openai-reference). They can't tell you which feature or tenant spent the tokens, which is why the client-side attributes matter, but they're the authoritative view of deployment health and the right source for capacity alerts on provisioned throughput.
+You don't have to instrument everything client-side. Azure OpenAI publishes platform metrics to Azure Monitor, including Azure OpenAI Requests (split by `StatusCode` for 429s), Processed Prompt Tokens, Generated Completion Tokens, Time to Response and Provisioned-managed Utilization V2, listed in the [monitoring data reference](https://learn.microsoft.com/azure/foundry/openai/monitor-openai-reference). They can't tell you which feature or tenant spent the tokens, which is why the client-side attributes matter, but they're the authoritative view of deployment health and the right source for capacity alerts on provisioned throughput. One caveat: the reference notes that Time to Response (first-token latency), Tokens per Second and Time Between Tokens aren't currently available for Standard deployments, so on Standard you need client-side time to first token.
 
 ## What I'd alert on
 
-Fixed thresholds like "P95 over five seconds" are easy to write and usually wrong, because acceptable latency depends entirely on the feature. My starting set:
+Fixed thresholds like "P95 over five seconds" are usually wrong, because acceptable latency depends on the feature. My starting set:
 
 - **Sustained 429 rate** per deployment, from the platform's Azure OpenAI Requests metric.
 - **Daily token spend per feature** against a budget, as an alert to the owning team rather than a page.

@@ -14,7 +14,7 @@ tags:
 
 Four days ago I graded my January commitments while there was still time to act on the grades. That was the [mid-course report card](/blog/2026-01-27-honest-retro/). This is the other half: the month is closed, the numbers are final, and I want to look at the experiments I ran alongside those commitments, because that's where most of the failures were.
 
-I'm not repeating the letter grades here. The short version is that the commitments mostly held, and the extra habits I bolted on mostly didn't. That gap is the useful part.
+I'm not repeating the letter grades here. The short version is that the commitments mostly held, and the extra habits I bolted on mostly didn't. That gap is what this post is about.
 
 ## The final numbers
 
@@ -27,7 +27,7 @@ I'm not repeating the letter grades here. The short version is that the commitme
 
 ### Weekend boundaries held
 
-Apart from that one emergency, every weekend was for family. The kids noticed. My wife noticed. I noticed. That's a better measure than any tracker. I described how this started in [The Weekend I Stopped Answering Slack](/blog/2026-01-12-weekend-work-boundaries/). It's staying in February, no debate.
+Apart from that one emergency, every weekend was for family (I still glanced at Slack more than I should). The kids noticed. My wife noticed. I noticed. That's a better measure than any tracker. I described how this started in [The Weekend I Stopped Answering Slack](/blog/2026-01-12-weekend-work-boundaries/). It stays in February.
 
 ### Being present: mixed
 
@@ -45,23 +45,19 @@ I turned down projects that didn't fit and kept my work centred on Azure OpenAI 
 
 Alongside the commitments, I tried three habits that productivity advice tends to treat as universal. All three failed for me this month.
 
-**Meditation.** I tried it for a week and struggled with it. I'm not writing it off. The thing it's meant to help with, being present, is exactly my weakest result above, which is why it's still on February's list in a different form: five minutes a day rather than whatever I attempted this month.
+**Meditation.** I tried it for a week and struggled with it. I'm not writing it off. The thing it's meant to help with, being present, is exactly my weakest result above, which is why it's still on February's list in a different form: five minutes a day, small enough that I can't skip it.
 
-**Time-blocking.** I tried batching work into fixed blocks. It didn't stick. My read is that a rigid calendar is fragile when the work itself is unpredictable, but I'll be honest that one month isn't enough evidence to say why it failed, only that it did.
+**Time-blocking.** I tried batching work into fixed blocks. It didn't stick. My read is that a rigid calendar is fragile when the work itself is unpredictable, but one month isn't enough evidence to say why it failed, only that it did.
 
 **5 AM starts.** I tried waking at 5 AM. My body said no. I'm not going to fight that one. A habit that depends on overriding sleep is a habit I'll abandon the first busy week, so it isn't worth building.
 
 ## Why the subtractions won
 
-The pattern across all three experiments: they were additions. Each one asked for new time or new willpower on top of everything else. What held were subtractions: stop working weekends, stop taking projects that don't fit. Saying no to something is a single decision. Adding a habit is a decision you have to remake every day. That's why the fixed boundaries made life easier rather than harder. "Do I work this Saturday?" stopped being a question I had to answer each week, and turning down work that didn't fit is the least glamorous thing I did in January and probably the one doing the most.
+The pattern across all three experiments: they were additions. Each one asked for new time or new willpower on top of everything else. What held were subtractions: stop working weekends, stop taking projects that don't fit. The one addition that held, daily writing, is the exception that proves the point: it had a hard daily deadline and a public record, so missing a day was visible. Meditation, time-blocking and 5 AM starts had neither. Saying no to something is a single decision. Adding a habit is a decision you have to remake every day. That's why the fixed boundaries made life easier rather than harder. "Do I work this Saturday?" stopped being a question I had to answer each week, and turning down work that didn't fit is the least visible thing I did in January, even if the weekend boundary is the one my family noticed.
 
 ## What January taught me
 
-**Small changes compound.** Not working weekends improved everything else. One boundary changed more than any new habit I tried.
-
-**Presence takes constant effort.** It isn't a switch you flip once. It's something I have to choose again every time I sit down with the family.
-
-**Better counts.** Even when it isn't perfect.
+Presence takes constant effort. It isn't a switch you flip once. It's something I have to choose again every time I sit down with the family.
 
 ## February, kept short
 
@@ -72,12 +68,12 @@ The [report card](/blog/2026-01-27-honest-retro/) already set three specific goa
 - **Stop:** feeling guilty about what I'm not doing.
 - **Focus:** being present, not just productive.
 
-The "stop" line matters more than it looks. A month of commitments makes it easy to keep a running list of everything I'm falling short on, and that guilt eats the same attention I'm trying to give my family.
+The "stop" line is the one I most need. A month of commitments makes it easy to keep a running list of everything I'm falling short on, and that guilt eats the same attention I'm trying to give my family.
 
 ## Good, not perfect
 
-January was good, not perfect. I made progress on what matters and there's still work to do.
+January was good, not perfect. I made progress on what matters and there's still work to do, and better counts even when it isn't perfect.
 
-If you're doing your own January review this weekend, I'd suggest one thing: split your results into what you stopped doing and what you tried to add. My guess is the subtractions held up better. If they did, February's plan should probably have more of them and fewer new habits.
+If you're doing your own January review this weekend, I'd suggest one thing: split your results into what you stopped doing and what you tried to add. My guess is the subtractions held up better, and any addition that survived had something forcing it, such as a deadline or an audience. If that's true for you too, February's plan should probably have more subtractions and fewer new habits without one.
 
-I'm heading in the right direction. That's enough for now. Here's to February.
+Here's to February.

@@ -13,7 +13,7 @@ tags:
 
 A new framework every month. A new AI model every week. Feeds full of "10x developers" who seem to learn something new every evening and ship a side project every weekend. The message underneath all of it is simple: if you're not learning something new constantly, you're falling behind.
 
-I think that message is wrong, and I think it's quietly making a lot of good engineers worse at their jobs.
+I think that message is wrong, and I think it's making a lot of good engineers worse at their jobs.
 
 ## The pressure is real, the premise isn't
 
@@ -21,17 +21,17 @@ The pressure itself isn't imaginary. In data and AI especially, the surface area
 
 The broken premise is that the backlog is yours to clear. "Continuous learning" has drifted from a sensible idea (keep getting better at your craft) into an impossible one (keep up with everything). Nobody actually keeps up with everything. The people who look like they do are usually skimming, and skimming looks a lot like learning from the outside.
 
-## Learning fatigue is real
+## When input stops becoming understanding
 
 You can't absorb new information endlessly. At some point the input stops turning into understanding and starts turning into noise. You read the release notes, watch the demo, bookmark the repo, and a week later you can't explain what problem it solved.
 
-When that pattern runs alongside a full-time job, it tends to feed the thing the World Health Organization describes as [burn-out](https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases): a syndrome resulting from chronic workplace stress that hasn't been successfully managed, marked by exhaustion, growing mental distance or cynicism about the job, and reduced professional efficacy. WHO is careful to frame it as an occupational phenomenon rather than a medical condition, and I'm not qualified to diagnose anyone. But the three dimensions map uncomfortably well onto what endless "keeping up" does to people:
+When keeping up becomes an unspoken part of the job, it can feed what the World Health Organization describes as [burn-out](https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases): a syndrome resulting from chronic workplace stress that hasn't been successfully managed, marked by exhaustion, growing mental distance or cynicism about the job, and reduced professional efficacy. WHO is careful to frame it as an occupational phenomenon rather than a medical condition and limits it to the workplace, which is exactly where the expectation to keep up comes from. I'm not qualified to diagnose anyone. But the three dimensions map uncomfortably well onto what endless "keeping up" does to people:
 
 - **Exhaustion**, because evenings and weekends become study time with no finish line.
 - **Cynicism**, because every new tool starts to feel like hype you're obliged to care about.
 - **Reduced efficacy**, because attention spread across twenty things means you're shallow in all of them, including the one you're paid for.
 
-That last point is the irony. The habit sold as protection against falling behind can make you worse at the work in front of you.
+That's the part that stings: the habit sold as protection against falling behind can make you worse at the work in front of you.
 
 ## What actually works
 
@@ -41,13 +41,15 @@ Master what you use. If your day job is building on a particular cloud, data pla
 
 Depth compounds. Understanding why a query is slow, why a deployment is fragile or why a model's output drifts transfers to the next tool far better than a dozen "getting started" tutorials ever will. Breadth has a place, but it should be a thin layer of awareness ("this exists, this is roughly what it's for"), not an attempt at competence in everything.
 
+My rule of thumb: batch awareness into one fixed slot a month, such as skimming the Microsoft Learn "What's new" pages for the platforms you own, and only promote something to a learning sprint if it passes the three questions below. Everything else can wait for next month's skim.
+
 ### Gaps, not continuous
 
 Sprint, then rest. Learn, then consolidate.
 
 This isn't just a wellbeing argument. There's solid evidence that spacing beats cramming for retention. A large [review and meta-analysis by Cepeda and colleagues (2006)](https://pubmed.ncbi.nlm.nih.gov/16719566/) pooled hundreds of experiments on distributed practice and found that spreading study over time produced better long-term recall than massing it together, and that the best gap grows the longer you need to remember something. That research is about verbal recall rather than learning a new SDK, so I wouldn't stretch it too far. But the direction matches what most practitioners already know: the stuff you learn, apply, leave alone, then come back to is the stuff that sticks.
 
-In practice that means treating learning like a project with a start and an end. Pick a topic, give it a few focused weeks, build something real with it, then stop and let it settle. Constant low-grade consumption has no consolidation phase, which is exactly why so little of it stays.
+In practice that means treating learning like a project with a start and an end. Pick a topic, give it a few focused weeks, build something real with it, then stop and let it settle. A useful default is two to four focused weeks ending in something you've actually built or written up, then at least as long before the next topic. Constant low-grade consumption has no consolidation phase, which is exactly why so little of it stays.
 
 ### Relevant, not trendy
 
@@ -63,7 +65,7 @@ Fundamentals usually pass all three: data modelling, security, networking, testi
 
 ## When this advice doesn't apply
 
-I'd be dishonest if I pretended depth-first is always right.
+Depth-first isn't always right.
 
 - **Early in a career**, breadth matters more. You don't yet know what you'll want to go deep on, and sampling is how you find out.
 - **When your stack is genuinely being replaced**, keeping your head down is a risk. If your platform is being retired, learning the successor isn't trend-chasing, it's maintenance.
@@ -75,6 +77,6 @@ The point isn't "never learn new things". It's to choose deliberately, rather th
 
 You don't need to learn the new JavaScript framework. Or the latest AI model. Or that new database.
 
-Focus on depth in your stack. Keep a light awareness of the rest. Protect the time when you're not learning anything at all, because that's when the last round of learning actually lands. It's the same reason I've started being stricter about [weekends without work](/blog/2026-01-12-weekend-work-boundaries/): rest isn't the opposite of getting better, it's part of it.
+Focus on depth in your stack. Ignore the rest, or at most keep a headline-level awareness of it. Protect the time when you're not learning anything at all, because that's when the last round of learning actually lands. It's the same reason I've started being stricter about [weekends without work](/blog/2026-01-12-weekend-work-boundaries/): rest isn't the opposite of getting better, it's part of it.
 
 It's okay to not keep up with everything. Nobody actually does.
