@@ -11,13 +11,13 @@ tags:
   - Cost Optimization
 ---
 
-Storage bills creep. They never spike and they never alert; they just slowly become a line item somebody in finance asks about, and by then you've got several terabytes of three-year-old log files sitting at Hot tier rates. Lifecycle management policies fix this, and they cost nothing to configure, yet plenty of storage accounts don't have one. Here's how I design them, and the traps worth knowing about before you let a policy loose on production data.
+Storage bills creep. They never spike and they never alert; they just slowly become a line item somebody in finance asks about, and by then you've got several terabytes of three-year-old log files sitting at Hot tier rates. Lifecycle management policies fix this, and they cost nothing to configure, yet plenty of storage accounts don't have one. The design is easy; the early-deletion and rehydration rules are where people lose money.
 
 ## What lifecycle management actually does
 
-[Lifecycle management](https://learn.microsoft.com/azure/storage/blobs/lifecycle-management-overview) has been [generally available since March 2019](https://azure.microsoft.com/blog/azure-blob-storage-lifecycle-management-now-generally-available/) on general-purpose v2 and Blob Storage accounts. It's a single JSON policy per storage account containing up to 100 rules. Each rule has a filter (which blobs) and actions (what to do with them once they're old enough). The platform evaluates the policy roughly once a day and does the work for you: no Azure Functions, no Data Factory pipelines, no scheduled scripts that quietly stop working when somebody rotates a key.
+[Lifecycle management](https://learn.microsoft.com/azure/storage/blobs/lifecycle-management-overview) has been generally available since March 2019 on general-purpose v2 and Blob Storage accounts. It's a single JSON policy per storage account containing up to 100 rules. Each rule has a filter (which blobs) and actions (what to do with them once they're old enough). The platform evaluates the policy roughly once a day and does the work for you: no Azure Functions, no Data Factory pipelines, no scheduled scripts that quietly stop working when somebody rotates a key.
 
-It now works on accounts with a hierarchical namespace too. [Lifecycle management for Data Lake Storage Gen2 went GA at the end of July](https://azure.microsoft.com/updates/lifecycle-management-for-azure-data-lake-storage-is-now-generally-available/), a month after the Archive tier did, so it's new enough that I'd test it on a non-critical zone first. The examples below are written for a standard flat-namespace GPv2 account, but the same rules apply to a `raw/` zone in a Gen2 data lake.
+It now works on accounts with a hierarchical namespace too. Lifecycle management for Data Lake Storage Gen2 has only just reached GA, so it's new enough that I'd test it on a non-critical zone first. The examples below are written for a standard flat-namespace GPv2 account, and the base-blob tiering and delete rules apply unchanged to a `raw/` zone in a Gen2 data lake. Snapshot rules and blob index filters don't, because hierarchical-namespace accounts don't support those features yet.
 
 As of today, the actions are:
 
@@ -26,7 +26,7 @@ As of today, the actions are:
 
 Filters are `blobTypes` (block blobs are the ones that matter here) and `prefixMatch`, which takes up to 10 prefixes per rule. A prefix always starts with the container name, so `logs/app/` means "blobs in the `logs` container whose names start with `app/`".
 
-There are two newer pieces worth knowing about, but both are in preview right now. [Blob index tags](https://azure.microsoft.com/blog/manage-and-find-data-with-blob-index-for-azure-storage-now-in-preview/) add a `blobIndexMatch` filter, which lets you target blobs by tag (say `Status = Processed`) instead of by path. [Blob versioning](https://azure.microsoft.com/updates/azure-blob-versioning-public-preview-now-available/) has also been in public preview since May. I wouldn't build production retention on either one until they reach GA, but tag-based filtering is the one I'm most interested in. Prefixes force you to encode lifecycle into your folder structure, and that's a design constraint I'd rather not have.
+There are two newer pieces worth knowing about, but both are in preview right now. [Blob index tags](https://learn.microsoft.com/azure/storage/blobs/storage-manage-find-blobs), in preview since May, add a `blobIndexMatch` filter, which lets you target blobs by tag (say `Status = Processed`) instead of by path. Blob versioning is currently in public preview too, and it matters here because previous versions keep billing after the base blob is tiered or deleted, so once versioning reaches GA you'll need to account for versions in your retention rules. I wouldn't build production retention on either one until they reach GA, but tag-based filtering is the one I'm most interested in. Prefixes force you to encode lifecycle into your folder structure, and that's a design constraint I'd rather not have.
 
 ## Tiers and minimum durations
 
@@ -36,11 +36,11 @@ There are two newer pieces worth knowing about, but both are in preview right no
 | Cool | Data you rarely touch but need straight away | 30 days | Online, higher per-operation and per-GB retrieval cost |
 | Archive | Data you're keeping for compliance or "just in case" | 180 days | Offline; must be rehydrated first |
 
-Storage gets cheaper as you go down the table, while access gets more expensive and, in Archive's case, slower. I'm deliberately not quoting per-GB prices here because they vary by region and redundancy. Pull the numbers for your own region from the [Azure Blob Storage pricing page](https://azure.microsoft.com/pricing/details/storage/blobs/) before you model savings.
+Storage gets cheaper as you go down the table, while access gets more expensive and, in Archive's case, slower. I'm deliberately not quoting per-GB prices here because they vary by region and redundancy. Pull the numbers for your own region from the Azure Blob Storage pricing page before you model savings.
 
-The minimum durations are the part people skip. Move a blob to Cool and delete it or move it again within 30 days, and you pay an early deletion charge for the rest of those 30 days. Archive works the same way with a 180-day window. A policy that sends data to Cool at day 30 and Archive at day 45 isn't saving what you think it is.
+The minimum durations are the part people skip. On a general-purpose v2 account, move a blob to Cool and delete it or move it again within 30 days, and you pay an early deletion charge for the rest of those 30 days. Archive works the same way with a 180-day window. The [access tiers overview](https://learn.microsoft.com/azure/storage/blobs/access-tiers-overview) spells out how the charge is prorated. A policy that sends data to Cool at day 30 and Archive at day 45 isn't saving what you think it is.
 
-Archive also isn't available on every redundancy option: it works with LRS, GRS and RA-GRS accounts, not ZRS or GZRS. Check the account's SKU before you write a rule that depends on it.
+Archive also isn't available on every redundancy option: it works with LRS, GRS and RA-GRS accounts, not ZRS, GZRS or RA-GZRS. Check the account's SKU before you write a rule that depends on it.
 
 ## Designing the rules
 
@@ -134,11 +134,11 @@ az storage account management-policy show \
 
 The same policy can go into an ARM template as a `Microsoft.Storage/storageAccounts/managementPolicies` resource, which is how I'd ship it for anything beyond a one-off account.
 
-Don't expect results immediately. Microsoft's guidance is that a new or changed policy can take up to 24 hours to go into effect, and the first run may take longer than that on large accounts. Wait at least a couple of days before you decide a rule "isn't working".
+Don't expect results immediately. Microsoft's guidance is that a new or changed policy can take up to 24 hours to go into effect, and in my experience the first pass over a very large account can take longer. Wait at least a couple of days before you decide a rule "isn't working".
 
 ## Checking it worked
 
-There's no lifecycle "run history" to look at, so I check the outcome instead: capacity by tier. The `BlobCapacity` metric in Azure Monitor can be split by the `BlobType` and `Tier` dimensions, which shows data moving out of Hot over the following days.
+There's no lifecycle "run history" to look at, so I check the outcome instead: capacity by tier. The `BlobCapacity` metric in Azure Monitor can be split by the `Tier` dimension, which shows data moving out of Hot over the following days.
 
 ```bash
 az monitor metrics list \
@@ -154,21 +154,21 @@ Capacity metrics are reported to Azure Monitor hourly, but the values only refre
 
 ## The traps
 
-**Reading an archived blob doesn't bring it back.** People sometimes assume Archive behaves like a slower Cool. It doesn't. A read against an archived blob fails until you rehydrate it, either by setting the tier back to Hot or Cool or by copying it to a new blob in an online tier. Standard-priority rehydration can take up to 15 hours. [High-priority rehydration](https://azure.microsoft.com/blog/enhanced-features-in-azure-archive-storage-now-generally-available/), generally available since April, usually finishes in under an hour for blobs under 10 GB but costs more. If "rarely accessed" turns out to mean "a Power BI report nobody told you about reads it every Monday", that report breaks, and Archive is the wrong tier.
+**Reading an archived blob doesn't bring it back.** People sometimes assume Archive behaves like a slower Cool. It doesn't. A read against an archived blob fails until you rehydrate it, either by setting the tier back to Hot or Cool or by copying it to a new blob in an online tier. [Standard-priority rehydration](https://learn.microsoft.com/azure/storage/blobs/archive-rehydrate-overview) can take up to 15 hours. High-priority rehydration, now generally available, usually finishes in under an hour for blobs under 10 GB but costs more. If "rarely accessed" turns out to mean "a Power BI report nobody told you about reads it every Monday", that report breaks, and Archive is the wrong tier.
 
-**Modification date isn't access date.** Rules trigger on last *modified* time, not last *read* time. A file that's written once and read daily looks exactly as "old" as a file nobody has opened in two years. You need to know the access pattern before you write the rule, which usually means a few weeks of storage analytics logs or a conversation with whoever owns the downstream jobs.
+**Modification date isn't access date.** Rules trigger on last *modified* time, not last *read* time. There's no access-time condition in the policy schema today. A file that's written once and read daily looks exactly as "old" as a file nobody has opened in two years. You need to know the access pattern before you write the rule, which usually means a few weeks of storage analytics logs or a conversation with whoever owns the downstream jobs.
 
 **Early deletion stacks with your rules.** A rule that deletes at 60 days anything it archived at 30 days pays 150 days of Archive storage it never used. Line up your tiering and deletion thresholds with the 30- and 180-day minimums.
 
 **Soft delete keeps billing after a lifecycle delete.** If blob soft delete is enabled, a lifecycle delete only moves the blob into the soft-deleted state, and you keep paying for that data until the soft-delete retention period expires. Factor the retention window into your savings estimate. (Soft delete isn't yet supported on hierarchical namespace accounts, so this one only bites flat-namespace accounts for now.)
 
-**Tiering millions of tiny blobs can cost more than it saves.** Each tier change is a billed write operation per blob, and write operations in Cool and Archive are priced higher than in Hot. Logs and IoT ingestion often produce millions of objects a few KB each, and for those the one-off transaction bill for moving them can outweigh months of storage savings. Check the average blob size before you write the rule: if most objects are tiny, batch them into larger files first or leave them in Hot.
+**Tiering millions of tiny blobs can cost more than it saves.** Each tier change is a billed write operation per blob, and write operations in Cool and Archive are priced higher than in Hot. Logs and IoT ingestion often produce millions of objects a few KB each, and for those the one-off transaction bill for moving them can outweigh months of storage savings. Archive adds a second penalty: every archived blob also carries a fixed slice of metadata billed at Hot and Archive rates (the [pricing page](https://azure.microsoft.com/pricing/details/storage/blobs/) lists the sizes), so for tiny blobs that overhead can be bigger than the data itself. Check the average blob size before you write the rule: if most objects are tiny, batch them into larger files first or leave them in Hot.
 
 **Test on something you can afford to get wrong.** Point a new rule at a non-critical prefix first and check the result. Once data is in Archive, undoing a mistake means paying for rehydration and waiting for it.
 
 ## When not to bother
 
-If an account holds a few gigabytes, the savings won't cover the time you spend designing rules. If your data is genuinely hot, for example the working set of an analytics workload that scans everything daily, tiering it just adds per-read charges. And if retention is driven by a legal requirement that data must *not* be deleted or altered, use [immutable storage policies](https://learn.microsoft.com/azure/storage/blobs/immutable-storage-overview) for that guarantee. A lifecycle rule can be edited by anyone with the right role, so it's a cost tool, not a compliance control.
+If an account holds a few gigabytes, the savings won't cover the time you spend designing rules. If your data is genuinely hot, for example the working set of an analytics workload that scans everything daily, tiering it just adds per-read charges. And if retention is driven by a legal requirement that data must *not* be deleted or altered, use immutable storage policies for that guarantee. A lifecycle rule can be edited by anyone with the right role, so it's a cost tool, not a compliance control.
 
 ## Where I'd start
 

@@ -1,297 +1,176 @@
 ---
-title: "Introduction to Azure Synapse Analytics"
-description: "\"We have a data warehouse and a Hadoop cluster and they don't talk to each other\" was a sentence I heard for years. Synapse is Microsoft's answer: a single…"
+title: "Azure Synapse Analytics in Preview: What's GA and Where to Start"
+description: "A first-day tour of Azure Synapse Analytics in August 2020: which parts are GA, which are preview, and why I start with SQL on-demand before a SQL pool."
 author: Michael John Peña
 draft: false
 date: 2020-08-23
 tags:
   - Azure
   - Synapse
-  - Data Analytics
+  - Data Warehouse
+  - Data Lake
   - Big Data
 ---
 
-"We have a data warehouse and a Hadoop cluster and they don't talk to each other" was a sentence I heard for years. Synapse is Microsoft's answer: a single workspace where dedicated SQL pools (the old SQL DW), serverless SQL, Spark, and pipelines coexist. The unified-experience claim is genuine — you can query a parquet file in ADLS from a notebook, then immediately write a SQL query against the same data without moving it. A first-day tour with the bits I find useful and the bits I treat carefully.
+A common pattern is a data warehouse alongside a separate Hadoop or Spark estate that barely share data. Azure Synapse Analytics is Microsoft's answer: one workspace where a provisioned SQL warehouse, serverless SQL over the lake, Apache Spark, and Data Factory-style pipelines sit side by side. The unified experience is real: you can read a Parquet folder from a notebook, then query the same files with T-SQL without moving them. What the marketing glosses over is that most of that experience is still in preview, and that matters a lot when you're deciding what to build on.
 
-## What is Azure Synapse?
+## What Synapse actually is right now
 
-Azure Synapse combines:
-- **Dedicated SQL pools** - MPP data warehouse (formerly SQL DW)
-- **Serverless SQL pools** - Query data lake without loading
-- **Spark pools** - Big data processing
-- **Pipelines** - Data integration (Data Factory)
-- **Studio** - Unified workspace
+The name covers two things, and you need to keep them apart.
 
-## Creating a Synapse Workspace
+At Ignite in November 2019, Azure SQL Data Warehouse was renamed Azure Synapse Analytics. The provisioned MPP warehouse, now called a **SQL pool**, is the same engine SQL DW customers have been running for years, and it is generally available. Then, during 2020, the wider **Synapse workspace** entered public preview: Synapse Studio, SQL on-demand, Apache Spark pools, and pipelines, all inside one workspace resource.
 
-```bash
-# Create a storage account for the data lake
-az storage account create \
-    --name synapsedatalake2020 \
-    --resource-group rg-analytics \
-    --location australiaeast \
-    --sku Standard_LRS \
-    --kind StorageV2 \
-    --enable-hierarchical-namespace true
+Here is how the pieces stand as of this month:
 
-# Create the Synapse workspace
-az synapse workspace create \
-    --name synapse-analytics-2020 \
-    --resource-group rg-analytics \
-    --storage-account synapsedatalake2020 \
-    --file-system synapse-fs \
-    --sql-admin-login-user sqladmin \
-    --sql-admin-login-password 'YourSecurePassword123!' \
-    --location australiaeast
-```
+| Component | What it is | Status (August 2020) | How you pay |
+|---|---|---|---|
+| SQL pool | Provisioned MPP warehouse (formerly SQL DW) | GA | Per DWU-hour while running; can pause |
+| SQL on-demand | Serverless T-SQL over files in the lake | Preview | Per TB of data processed |
+| Apache Spark pools | Managed Spark 2.4 clusters with notebooks | Preview | Per vCore-hour (node size x node count) while the pool is running |
+| Pipelines | Data Factory integration engine inside the workspace | Preview | Per activity run and integration runtime hour, as in ADF |
+| Synapse Studio | Web UI at `web.azuresynapse.net` tying it together | Preview | No separate charge |
 
-## Dedicated SQL Pool
+The [What is Azure Synapse Analytics](https://learn.microsoft.com/azure/synapse-analytics/overview-what-is) page is the best single overview, but read it with that status column in mind. A GA warehouse with preview tooling around it is a different proposition from a GA platform.
 
-Create a dedicated pool for data warehousing:
+## The workspace and its data lake
 
-```bash
-# Create a dedicated SQL pool
-az synapse sql pool create \
-    --name dwpool \
-    --workspace-name synapse-analytics-2020 \
-    --resource-group rg-analytics \
-    --performance-level DW100c
-```
+Every workspace is created with a primary Azure Data Lake Storage Gen2 account (a storage account with hierarchical namespace enabled) and a default file system. That account is where Spark writes by default, where SQL on-demand reads from, and where Studio's data hub browses.
 
-### Creating Tables
+Two things trip people up on day one:
+
+- **The workspace managed identity needs data access on the lake.** Pipelines and SQL pool loads authenticate as the workspace identity, so grant it *Storage Blob Data Contributor* on the account or container. Owner on the subscription is not the same as data-plane access.
+- **Your own account needs data access too.** Being able to open Studio doesn't mean you can read the files. If a query or notebook fails with a 403 against storage, check your own role assignment on the container before anything else.
+
+I create the workspace in the portal for now. Treat the first one as a sandbox: one resource group, one storage account, no production data, and delete it when the preview tour is done.
+
+## SQL on-demand: the part I'd start with
+
+SQL on-demand is the piece that surprises people. There is nothing to provision. Each workspace gets an on-demand endpoint, you point `OPENROWSET` at files in the lake, and you pay for the data your queries process, metered per TB. The list price is USD 5 per TB processed, rounded up to the nearest MB with a 10 MB minimum per query ([data processed and cost control](https://learn.microsoft.com/azure/synapse-analytics/sql/data-processed)). There is no idle cost because nothing sits running, but a careless `SELECT *` over a large CSV folder is billed in full.
 
 ```sql
--- Create a dimension table
+-- SQL on-demand: aggregate Parquet files directly in the lake.
+-- Replace the storage account and path with your own.
+SELECT
+    s.CustomerKey,
+    SUM(s.TotalAmount) AS TotalRevenue,
+    COUNT(*)           AS OrderCount
+FROM OPENROWSET(
+    BULK 'https://<your-storage-account>.dfs.core.windows.net/<your-container>/sales/2020/*.parquet',
+    FORMAT = 'PARQUET'
+) AS s
+GROUP BY s.CustomerKey
+ORDER BY TotalRevenue DESC;
+```
+
+That query is the whole pitch. An analyst who knows T-SQL can explore lake data from SSMS, Azure Data Studio or Studio without waiting for anyone to build a load process.
+
+The trade-offs are real, though:
+
+- **You pay for bytes scanned, so file layout is your cost model.** Parquet beats CSV because the engine reads only the columns you select. Folder-per-date partitioning lets you narrow the `BULK` path instead of scanning everything.
+- **It's preview.** No SLA, and behaviour can change. That's fine for exploration and prototyping; it's not where I'd hang a board-level dashboard yet.
+- **It's not a warehouse.** There's no data stored in it, no distribution choices, and no workload isolation. Heavy, repeated, high-concurrency reporting belongs on something provisioned.
+
+My rule of thumb: start on SQL on-demand, look at the query patterns that keep coming back, and only then decide whether they justify a SQL pool. The [SQL on-demand overview](https://learn.microsoft.com/azure/synapse-analytics/sql/on-demand-workspace-overview) lists the supported T-SQL surface, which is narrower than a full SQL Server, and I go further into views, external tables and cost control in [Azure Synapse serverless SQL](/blog/2020-10-02-azure-synapse-serverless-sql/).
+
+## SQL pools: the GA warehouse
+
+If you already run SQL DW, nothing about your warehouse changed with the rename. Same MPP engine, same distributions, same DWU scaling from DW100c upwards, same pause and resume. It is the one part of Synapse with a GA SLA, and it's where I'd put production star schemas today.
+
+The design decisions haven't changed either. Hash-distribute large fact tables on a column with many distinct values that you join on, replicate small dimensions (heap or clustered index), and default large facts to clustered columnstore:
+
+```sql
+-- SQL pool: a replicated dimension and a hash-distributed fact table.
 CREATE TABLE dbo.DimCustomer
 (
-    CustomerKey INT NOT NULL,
+    CustomerKey  INT           NOT NULL,
     CustomerName NVARCHAR(100) NOT NULL,
-    Email NVARCHAR(255),
-    Country NVARCHAR(50),
-    CreatedDate DATE
+    Country      NVARCHAR(50)  NULL
 )
-WITH
-(
-    DISTRIBUTION = REPLICATE,
-    CLUSTERED COLUMNSTORE INDEX
-);
+WITH (DISTRIBUTION = REPLICATE, CLUSTERED INDEX (CustomerKey));
 
--- Create a fact table
 CREATE TABLE dbo.FactSales
 (
-    SalesKey BIGINT NOT NULL,
-    CustomerKey INT NOT NULL,
-    ProductKey INT NOT NULL,
-    OrderDate DATE NOT NULL,
-    Quantity INT NOT NULL,
-    UnitPrice DECIMAL(10, 2) NOT NULL,
-    TotalAmount DECIMAL(10, 2) NOT NULL
+    SalesKey    BIGINT         NOT NULL,
+    CustomerKey INT            NOT NULL,
+    OrderDate   DATE           NOT NULL,
+    Quantity    INT            NOT NULL,
+    TotalAmount DECIMAL(18, 2) NOT NULL
 )
-WITH
-(
-    DISTRIBUTION = HASH(CustomerKey),
-    CLUSTERED COLUMNSTORE INDEX,
-    PARTITION (OrderDate RANGE RIGHT FOR VALUES
-        ('2020-01-01', '2020-04-01', '2020-07-01', '2020-10-01'))
-);
+WITH (DISTRIBUTION = HASH(CustomerKey), CLUSTERED COLUMNSTORE INDEX);
 ```
 
-### Loading Data with COPY
+One thing I'd skip on day one is partitioning. Columnstore wants roughly a million rows per row group in each of the 60 distributions, so partitioning a modest fact table by quarter splits it into segments too small to compress well. Add partitions when the table is big enough and you have a switching or retention reason.
+
+For loading, the new [COPY statement](https://learn.microsoft.com/sql/t-sql/statements/copy-into-transact-sql) is much simpler than setting up PolyBase external tables, and it can authenticate as the workspace managed identity. It's currently in preview, so I use it for new work and keep existing PolyBase loads where they are until it reaches GA.
 
 ```sql
--- Load data from data lake
+-- SQL pool: load Parquet from the lake with COPY (preview).
+-- Assumes the Parquet columns match dbo.FactSales in order and type.
 COPY INTO dbo.FactSales
-FROM 'https://synapsedatalake2020.dfs.core.windows.net/raw/sales/*.parquet'
+FROM 'https://<your-storage-account>.dfs.core.windows.net/<your-container>/sales/2020/*.parquet'
 WITH (
-    FILE_TYPE = 'PARQUET',
-    CREDENTIAL = (IDENTITY = 'Managed Identity')
-);
-
--- Load from CSV
-COPY INTO dbo.DimCustomer
-FROM 'https://synapsedatalake2020.dfs.core.windows.net/raw/customers/*.csv'
-WITH (
-    FILE_TYPE = 'CSV',
-    FIRSTROW = 2,
-    FIELDTERMINATOR = ',',
+    FILE_TYPE  = 'PARQUET',
     CREDENTIAL = (IDENTITY = 'Managed Identity')
 );
 ```
 
-## Serverless SQL Pool
+The cost model is the opposite of on-demand. A SQL pool bills for every hour it's running, whether or not anyone queries it. Pausing outside business hours is the easiest saving available, as long as nothing upstream expects it to be awake.
 
-Query data lake directly:
+## Spark pools
 
-```sql
--- Query Parquet files
-SELECT
-    CustomerName,
-    SUM(TotalAmount) as TotalRevenue,
-    COUNT(*) as OrderCount
-FROM OPENROWSET(
-    BULK 'https://synapsedatalake2020.dfs.core.windows.net/raw/sales/2020/*.parquet',
-    FORMAT = 'PARQUET'
-) AS sales
-JOIN OPENROWSET(
-    BULK 'https://synapsedatalake2020.dfs.core.windows.net/raw/customers/*.parquet',
-    FORMAT = 'PARQUET'
-) AS customers ON sales.CustomerKey = customers.CustomerKey
-GROUP BY CustomerName
-ORDER BY TotalRevenue DESC;
-
--- Create external table for repeated queries
-CREATE EXTERNAL DATA SOURCE DataLake
-WITH (
-    LOCATION = 'https://synapsedatalake2020.dfs.core.windows.net/raw'
-);
-
-CREATE EXTERNAL FILE FORMAT ParquetFormat
-WITH (
-    FORMAT_TYPE = PARQUET,
-    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'
-);
-
-CREATE EXTERNAL TABLE dbo.ExternalSales
-WITH (
-    LOCATION = 'sales/',
-    DATA_SOURCE = DataLake,
-    FILE_FORMAT = ParquetFormat
-)
-AS SELECT * FROM OPENROWSET(
-    BULK 'https://synapsedatalake2020.dfs.core.windows.net/raw/sales/*.parquet',
-    FORMAT = 'PARQUET'
-) AS sales;
-```
-
-## Spark Pools
-
-Create and use Spark for big data:
-
-```bash
-# Create a Spark pool
-az synapse spark pool create \
-    --name sparkpool \
-    --workspace-name synapse-analytics-2020 \
-    --resource-group rg-analytics \
-    --spark-version 2.4 \
-    --node-count 3 \
-    --node-size Medium
-```
-
-### PySpark Notebook
+Spark pools give you managed Apache Spark 2.4 with notebooks in Studio. You can write PySpark, Scala, Spark SQL or .NET for Spark (C#), and pools can auto-pause after an idle period, so a forgotten cluster doesn't run all weekend. I cover pool creation, shared metadata and cost control in [Azure Synapse Spark pools](/blog/2020-10-01-azure-synapse-spark-pools/).
 
 ```python
-# Read data from data lake
-df = spark.read.parquet("abfss://synapse-fs@synapsedatalake2020.dfs.core.windows.net/raw/sales/")
+# Synapse notebook (PySpark): `spark` is predefined in the session.
+from pyspark.sql import functions as F
 
-# Transform data
-from pyspark.sql.functions import col, sum, count, avg
+lake = "abfss://<your-container>@<your-storage-account>.dfs.core.windows.net"
 
-sales_summary = df \
-    .groupBy("CustomerKey", "ProductKey") \
-    .agg(
-        sum("TotalAmount").alias("TotalRevenue"),
-        count("*").alias("TransactionCount"),
-        avg("Quantity").alias("AvgQuantity")
-    )
+sales = spark.read.parquet(f"{lake}/sales/2020/")
 
-# Write to data lake
-sales_summary.write \
-    .mode("overwrite") \
-    .parquet("abfss://synapse-fs@synapsedatalake2020.dfs.core.windows.net/processed/sales_summary/")
+summary = (
+    sales.groupBy("CustomerKey")
+         .agg(F.sum("TotalAmount").alias("TotalRevenue"),
+              F.count("*").alias("OrderCount"))
+)
 
-# Write to dedicated SQL pool
-sales_summary.write \
-    .format("com.databricks.spark.sqldw") \
-    .option("url", jdbc_url) \
-    .option("tempDir", "abfss://synapse-fs@synapsedatalake2020.dfs.core.windows.net/temp/") \
-    .option("forwardSparkAzureStorageCredentials", "true") \
-    .option("dbTable", "dbo.SalesSummary") \
-    .mode("overwrite") \
-    .save()
+summary.write.mode("overwrite").parquet(f"{lake}/curated/customer_revenue/")
 ```
 
-## Data Pipelines
+Writing the result back as Parquet in the lake is deliberate. SQL on-demand can query that output immediately, which is the lake-first pattern Synapse is built around.
 
-Create pipelines for data movement:
+If you need to push a DataFrame into a SQL pool, the built-in connector is currently Scala-only. In a PySpark notebook you hand off through a temporary view and a `%%spark` cell:
 
-```json
-{
-    "name": "DailyDataIngestion",
-    "properties": {
-        "activities": [
-            {
-                "name": "CopyFromSource",
-                "type": "Copy",
-                "inputs": [
-                    {
-                        "referenceName": "SourceDataset",
-                        "type": "DatasetReference"
-                    }
-                ],
-                "outputs": [
-                    {
-                        "referenceName": "DataLakeDataset",
-                        "type": "DatasetReference"
-                    }
-                ],
-                "typeProperties": {
-                    "source": {
-                        "type": "SqlSource",
-                        "sqlReaderQuery": "SELECT * FROM Sales WHERE ModifiedDate >= '@{pipeline().parameters.startDate}'"
-                    },
-                    "sink": {
-                        "type": "ParquetSink"
-                    }
-                }
-            },
-            {
-                "name": "TransformWithSpark",
-                "type": "SynapseNotebook",
-                "dependsOn": [
-                    {
-                        "activity": "CopyFromSource",
-                        "dependencyConditions": ["Succeeded"]
-                    }
-                ],
-                "typeProperties": {
-                    "notebook": {
-                        "referenceName": "TransformSalesData",
-                        "type": "NotebookReference"
-                    },
-                    "parameters": {
-                        "inputPath": {
-                            "value": "@pipeline().parameters.dataPath",
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        ]
-    }
-}
+```scala
+// %%spark cell, fragment: assumes a temp view "customer_revenue" was
+// registered from PySpark and the SQL pool database already exists.
+// PySpark: summary.createOrReplaceTempView("customer_revenue")
+import com.microsoft.spark.sqlanalytics.utils.Constants
+import org.apache.spark.sql.SqlAnalyticsConnector._
+
+val df = spark.sqlContext.sql("SELECT * FROM customer_revenue")
+// Creates the table; fails if dbo.CustomerRevenue already exists, so drop it
+// or write to a staging name first.
+df.write.sqlanalytics("<your-sql-pool>.dbo.CustomerRevenue", Constants.INTERNAL)
 ```
 
-## Security
+Don't copy Azure Databricks code for this. The `com.databricks.spark.sqldw` connector belongs to the Databricks runtime and isn't the integration Synapse Spark uses.
 
-```sql
--- Column-level security
-CREATE USER DataAnalyst FROM EXTERNAL PROVIDER;
-GRANT SELECT ON dbo.FactSales(OrderDate, Quantity, ProductKey) TO DataAnalyst;
-DENY SELECT ON dbo.FactSales(UnitPrice, TotalAmount) TO DataAnalyst;
+Should you move Spark work here from Databricks? Not yet, in my view. Synapse Spark is preview, on Spark 2.4, and Databricks is a mature GA service with its own optimised Delta Lake implementation, a faster release cadence and a far richer runtime; Synapse Spark ships open-source Delta Lake 0.6.1 on Spark 2.4. Synapse Spark is worth trying when your data and users already live in the workspace and you want one fewer service to secure.
 
--- Row-level security
-CREATE FUNCTION dbo.fn_SecurityPredicate(@Country AS NVARCHAR(50))
-RETURNS TABLE
-WITH SCHEMABINDING
-AS
-RETURN SELECT 1 AS result
-WHERE @Country = USER_NAME() OR USER_NAME() = 'admin';
+## Pipelines
 
-CREATE SECURITY POLICY SalesFilter
-ADD FILTER PREDICATE dbo.fn_SecurityPredicate(Country) ON dbo.DimCustomer;
-```
+Synapse pipelines are the Data Factory engine inside the workspace: same activities, same linked services, same expression language, plus a notebook activity for Spark. Everything in my [first rerunnable Data Factory pipeline](/blog/2020-08-15-azure-data-factory-pipelines/) applies unchanged: parameterise by date, make loads idempotent, keep secrets in Key Vault.
 
-Azure Synapse Analytics provides a unified platform for all your analytics needs, from data warehousing to big data processing.
+The catch is that pipelines here are preview and don't yet do everything ADF does. The SSIS integration runtime is the obvious gap. If you have production ADF factories, leave them alone. Use Synapse pipelines for new work that lives entirely inside a workspace.
 
-A practical note for anyone evaluating it: serverless SQL is the part of Synapse that surprises people most. You can point it at parquet files in ADLS, write SQL, and pay per TB scanned — no provisioning, no idle cost. For exploratory analytics over a data lake, it's frequently the right answer before you commit to a dedicated SQL pool's hourly cost. Start serverless, scale to dedicated only when query patterns and SLAs justify it.
+## How I'd approach it this month
+
+Synapse is two products at different maturity levels, sold under one name. Here's what I'd do with that:
+
+- **Production warehouse:** use a SQL pool. It's GA, it's the SQL DW engine, and the rename changed nothing about running it.
+- **Exploring lake data:** start with SQL on-demand. No idle cost, and it shows you which queries deserve a provisioned warehouse.
+- **Spark and pipelines:** prototype in a sandbox workspace, keep production on Databricks and ADF, and revisit when they reach GA.
+- **Security:** sort out managed identity and storage role assignments before anyone builds anything. Most day-one failures are 403s, not bugs.
+
+The unified workspace is the right direction. Analysts, engineers and data scientists working over the same lake files is better than three copies in three services. Just keep track of which parts carry an SLA, and build production on those.

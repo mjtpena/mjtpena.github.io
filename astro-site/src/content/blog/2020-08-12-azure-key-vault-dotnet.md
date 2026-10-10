@@ -1,6 +1,6 @@
 ---
-title: "Secure Secret Management with Azure Key Vault in .NET"
-description: "A confession to start: I've shipped connection strings in appsettings.json more times than I'm proud of. The reasons are always the same — \"it's only dev\"…"
+title: "Key Vault in ASP.NET Core 3.1 with Azure.Identity and Managed Identity"
+description: "Wiring Azure Key Vault into ASP.NET Core 3.1 config with Azure.Identity 1.2, managed identity and access policies, plus the trade-offs to know before you ship."
 author: Michael John Peña
 draft: false
 date: 2020-08-12
@@ -9,261 +9,232 @@ tags:
   - Security
   - Key Vault
   - .NET Core
+  - C#
 ---
 
-A confession to start: I've shipped connection strings in `appsettings.json` more times than I'm proud of. The reasons are always the same — "it's only dev", "we'll fix it before prod", "the repo is private." None of those reasons survive the first time a secret leaks. Key Vault is the cure, and once it's wired into your app correctly with managed identity, you stop touching secrets in code entirely. Here's the integration that I now reach for as the default.
+A confession to start: I've shipped connection strings in `appsettings.json` more times than I'm proud of. The reasons are always the same: "it's only dev", "we'll fix it before prod", "the repo is private". None of those reasons survive the first time a secret leaks. Azure Key Vault fixes the storage problem, but only if the app reaches the vault without a credential of its own. With managed identity and this month's `Azure.Identity` release, ASP.NET Core 3.1 finally gets one code path that works on a laptop and in App Service with no secrets anywhere.
 
-## Creating a Key Vault
+## Which package, and why it changed
+
+There are two Key Vault configuration providers on NuGet right now, and most tutorials still show the old one. The new one, `Azure.Extensions.AspNetCore.Configuration.Secrets`, went GA in June. Its credential library, `Azure.Identity` 1.2.0, [went GA on 10 August 2020](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/CHANGELOG.md), and `DefaultAzureCredential` now officially walks through Azure CLI, Visual Studio and VS Code sign-ins as well as managed identity.
+
+| | Old provider | New provider |
+|---|---|---|
+| Package | `Microsoft.Extensions.Configuration.AzureKeyVault` | `Azure.Extensions.AspNetCore.Configuration.Secrets` 1.0.0 |
+| Underlying SDK | `Microsoft.Azure.KeyVault` (track 1) | `Azure.Security.KeyVault.Secrets` 4.x (track 2) |
+| Authentication | `KeyVaultClient` callbacks, `AzureServiceTokenProvider`, or client ID + secret | Any `TokenCredential`, typically `DefaultAzureCredential` |
+| Status | Maintained, but not where new work happens | GA, the current recommendation |
+
+My recommendation is the new one for anything you start today. The track-2 libraries share one credential model (`Azure.Identity`), one retry and diagnostics pipeline, and one set of conventions across Storage, Service Bus and Key Vault. The old stack made you learn a different auth story per service. The [new package's README](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/extensions.aspnetcore.configuration.secrets-readme) covers its API.
+
+## Create the vault with recovery turned on
 
 ```bash
-# Create a Key Vault
 az keyvault create \
-    --name kv-myapp-2020 \
-    --resource-group rg-security \
+    --name <your-vault-name> \
+    --resource-group <your-resource-group> \
     --location australiaeast \
     --enable-soft-delete true \
     --enable-purge-protection true
 
-# Add a secret
 az keyvault secret set \
-    --vault-name kv-myapp-2020 \
-    --name "DatabaseConnectionString" \
-    --value "Server=tcp:myserver.database.windows.net..."
-
-# Add another secret
-az keyvault secret set \
-    --vault-name kv-myapp-2020 \
-    --name "ApiKey" \
-    --value "your-api-key-here"
+    --vault-name <your-vault-name> \
+    --name "ConnectionStrings--Default" \
+    --value "<your-connection-string>"
 ```
 
-## Managed Identity Setup
+Two decisions are hiding in that command.
 
-Use managed identity for secure, credential-free access:
+**Soft-delete** keeps a deleted vault or secret recoverable for the retention period, 90 days by default (configurable from 7 to 90 days at creation with `--retention-days`). Microsoft announced at the end of July that soft-delete will be [turned on for all key vaults by the end of 2020](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-change) with no opt-out. Turn it on now so you find out early if any of your automation deletes and recreates vaults with the same name. That pattern breaks once soft-delete is on, because the name stays reserved until the deleted vault is purged.
+
+**Purge protection** stops anyone, including a subscription owner, from permanently deleting the vault or its objects before the retention period ends. It can't be turned off again once enabled. I want it on every production vault. For throwaway dev vaults that a pipeline tears down every night, I leave it off, because otherwise you're waiting out the full retention period before you can reuse the name. If you must have purge protection there, create dev vaults with `--retention-days 7`.
+
+Note the secret name. Key Vault secret names allow only letters, numbers and dashes, so the provider maps `--` to the `:` that .NET configuration uses for hierarchy. `ConnectionStrings--Default` becomes `ConnectionStrings:Default`, which `GetConnectionString("Default")` reads.
+
+## Give the app an identity, not a password
 
 ```bash
-# Enable managed identity on App Service
 az webapp identity assign \
-    --name mywebapp \
-    --resource-group rg-app
+    --name <your-app-name> \
+    --resource-group <your-resource-group>
 
-# Get the principal ID
 principalId=$(az webapp identity show \
-    --name mywebapp \
-    --resource-group rg-app \
+    --name <your-app-name> \
+    --resource-group <your-resource-group> \
     --query principalId -o tsv)
 
-# Grant access to Key Vault
 az keyvault set-policy \
-    --name kv-myapp-2020 \
-    --object-id $principalId \
+    --name <your-vault-name> \
+    --object-id "$principalId" \
     --secret-permissions get list
 ```
 
-## .NET Core Configuration Integration
+A system-assigned managed identity is a service principal in Azure Active Directory whose lifecycle is tied to the web app. Azure rotates its credentials, and nobody ever sees them. The access policy grants only `get` and `list` on secrets. The configuration provider needs `list` to enumerate secrets at startup. If you only ever call `GetSecretAsync` by name, drop `list`.
 
-Add the NuGet packages:
+Access policies are vault-wide for each object type. A principal with `get` on secrets can read *every* secret in that vault. Access policies are the only GA data-plane permission model today, so the vault itself is the boundary: one vault per application per environment. Sharing a vault across apps means sharing secrets across apps, whatever the naming convention says.
+
+## Wire it into Program.cs
 
 ```bash
-dotnet add package Azure.Extensions.AspNetCore.Configuration.Secrets
-dotnet add package Azure.Identity
+dotnet add package Azure.Extensions.AspNetCore.Configuration.Secrets --version 1.0.0
+dotnet add package Azure.Identity --version 1.2.0
 ```
-
-Configure in `Program.cs`:
 
 ```csharp
-public class Program
+using System;
+using Azure.Identity;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+
+namespace MyApp
 {
-    public static void Main(string[] args)
+    public class Program
     {
-        CreateHostBuilder(args).Build().Run();
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    var builtConfig = config.Build();
+                    var vaultName = builtConfig["KeyVaultName"];
+
+                    if (!string.IsNullOrEmpty(vaultName))
+                    {
+                        var vaultUri = new Uri($"https://{vaultName}.vault.azure.net/");
+                        config.AddAzureKeyVault(vaultUri, new DefaultAzureCredential());
+                    }
+                })
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((context, config) =>
-            {
-                var builtConfig = config.Build();
-
-                var keyVaultEndpoint = new Uri($"https://{builtConfig["KeyVaultName"]}.vault.azure.net/");
-
-                config.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
-            })
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
 }
 ```
-
-In `appsettings.json`:
 
 ```json
 {
-  "KeyVaultName": "kv-myapp-2020"
+  "KeyVaultName": "<your-vault-name>"
 }
 ```
 
-## Accessing Secrets
-
-Secrets are available through standard configuration:
+Because the provider is added last, Key Vault values override anything with the same key in `appsettings.json` or environment variables. Code that reads configuration doesn't change at all:
 
 ```csharp
-public class MyService
+using Microsoft.Extensions.Configuration;
+
+public class OrdersRepository
 {
     private readonly string _connectionString;
-    private readonly string _apiKey;
 
-    public MyService(IConfiguration configuration)
+    public OrdersRepository(IConfiguration configuration)
     {
-        // Key Vault secret names use -- instead of : for hierarchy
-        _connectionString = configuration["DatabaseConnectionString"];
-        _apiKey = configuration["ApiKey"];
+        _connectionString = configuration.GetConnectionString("Default");
     }
 }
 ```
 
-## Direct Key Vault Client Usage
+That is the main reason I prefer the configuration provider over calling `SecretClient` everywhere. The rest of the codebase doesn't know Key Vault exists, and unit tests just pass in an in-memory configuration.
 
-For more control, use the SDK directly:
+## Local development without a shared secret
+
+On a developer machine there's no managed identity, so `DefaultAzureCredential` moves down its chain: environment variables, managed identity, the shared token cache, Visual Studio, VS Code, then the Azure CLI. As of 1.2.0, a developer who has run `az login`, or signed in to Visual Studio, just works. Grant each developer (or better, an Azure AD group) its own access policy on the dev vault:
+
+```bash
+az login
+az keyvault set-policy \
+    --name <your-dev-vault-name> \
+    --upn <your-upn@your-domain.com> \
+    --secret-permissions get list
+
+# Or, for a group of developers
+az keyvault set-policy \
+    --name <your-dev-vault-name> \
+    --object-id <your-group-object-id> \
+    --secret-permissions get list
+```
+
+The chain has a cost. When something fails, the exception lists every credential it tried, and on a machine with several tenants the CLI or Visual Studio can pick the wrong account. When that happens I stop guessing and construct the specific credential (`new AzureCliCredential()` or `new ManagedIdentityCredential()`) so the failure points at one thing.
+
+Two links in the chain cause most of the local pain. `ManagedIdentityCredential` probes the instance metadata endpoint first, which can add a noticeable delay to every startup on a laptop. `SharedTokenCacheCredential` often finds a stale or wrong account before Visual Studio or the CLI get a turn. For local runs, I switch both off with `new DefaultAzureCredential(new DefaultAzureCredentialOptions { ExcludeManagedIdentityCredential = true, ExcludeSharedTokenCacheCredential = true })`, gated on `context.HostingEnvironment.IsDevelopment()`. Developers who work across tenants can set `VisualStudioTenantId` or `SharedTokenCacheTenantId` on the same options object instead.
+
+## Trade-offs to know before you ship
+
+**Secrets are read once, at startup.** The 1.0.0 provider lists and loads every secret when the host builds and doesn't refresh them. If you rotate a database password, running instances keep the old value until they restart. For most connection strings that's acceptable, and a slot swap or restart becomes part of your rotation runbook. If a secret rotates often, read it on demand through `SecretClient` and cache it for a short, deliberate period:
 
 ```csharp
-using Azure.Identity;
+using System;
+using System.Threading.Tasks;
 using Azure.Security.KeyVault.Secrets;
+using Microsoft.Extensions.Caching.Memory;
 
-public class KeyVaultService
-{
-    private readonly SecretClient _client;
-
-    public KeyVaultService(string keyVaultName)
-    {
-        var keyVaultUri = new Uri($"https://{keyVaultName}.vault.azure.net/");
-        _client = new SecretClient(keyVaultUri, new DefaultAzureCredential());
-    }
-
-    public async Task<string> GetSecretAsync(string secretName)
-    {
-        var secret = await _client.GetSecretAsync(secretName);
-        return secret.Value.Value;
-    }
-
-    public async Task SetSecretAsync(string secretName, string value)
-    {
-        await _client.SetSecretAsync(secretName, value);
-    }
-
-    public async Task<List<string>> ListSecretsAsync()
-    {
-        var secrets = new List<string>();
-
-        await foreach (var secret in _client.GetPropertiesOfSecretsAsync())
-        {
-            secrets.Add(secret.Name);
-        }
-
-        return secrets;
-    }
-}
-```
-
-## Working with Certificates
-
-```csharp
-using Azure.Security.KeyVault.Certificates;
-
-public class CertificateService
-{
-    private readonly CertificateClient _client;
-
-    public CertificateService(string keyVaultName)
-    {
-        var keyVaultUri = new Uri($"https://{keyVaultName}.vault.azure.net/");
-        _client = new CertificateClient(keyVaultUri, new DefaultAzureCredential());
-    }
-
-    public async Task<X509Certificate2> GetCertificateAsync(string certificateName)
-    {
-        var certificate = await _client.GetCertificateAsync(certificateName);
-        return new X509Certificate2(certificate.Value.Cer);
-    }
-}
-```
-
-## Caching Secrets
-
-For performance, implement caching:
-
-```csharp
-public class CachedKeyVaultService
+public class SecretReader
 {
     private readonly SecretClient _client;
     private readonly IMemoryCache _cache;
-    private readonly TimeSpan _cacheExpiration = TimeSpan.FromMinutes(5);
+    private static readonly TimeSpan CacheDuration = TimeSpan.FromMinutes(5);
 
-    public CachedKeyVaultService(SecretClient client, IMemoryCache cache)
+    public SecretReader(SecretClient client, IMemoryCache cache)
     {
         _client = client;
         _cache = cache;
     }
 
-    public async Task<string> GetSecretAsync(string secretName)
-    {
-        return await _cache.GetOrCreateAsync($"kv-{secretName}", async entry =>
+    public Task<string> GetAsync(string name) =>
+        _cache.GetOrCreateAsync($"kv:{name}", async entry =>
         {
-            entry.AbsoluteExpirationRelativeToNow = _cacheExpiration;
-            var secret = await _client.GetSecretAsync(secretName);
-            return secret.Value.Value;
+            entry.AbsoluteExpirationRelativeToNow = CacheDuration;
+            KeyVaultSecret secret = await _client.GetSecretAsync(name);
+            return secret.Value;
         });
-    }
 }
 ```
 
-## Local Development
-
-For local development, use Azure CLI authentication:
-
-```bash
-# Login to Azure
-az login
-
-# Set your subscription
-az account set --subscription "your-subscription"
-```
-
-The `DefaultAzureCredential` will automatically use your Azure CLI credentials locally.
-
-## Secret Rotation
-
-Implement secret rotation handling:
+Register one credential and one `SecretClient` as singletons, so the chain is walked once and the token cache is shared. This is a fragment of `Startup.ConfigureServices`, which needs `using Azure.Core;`, `using Azure.Identity;` and `using Azure.Security.KeyVault.Secrets;` alongside the `using System;` the default 3.1 template already includes:
 
 ```csharp
-public class RotatingSecretService
+// Fragment: inside Startup.ConfigureServices(IServiceCollection services)
+var vaultName = Configuration["KeyVaultName"];
+if (string.IsNullOrEmpty(vaultName))
 {
-    private readonly SecretClient _client;
-    private string _currentSecret;
-    private DateTimeOffset _lastRefresh;
-    private readonly TimeSpan _refreshInterval = TimeSpan.FromHours(1);
-
-    public async Task<string> GetSecretAsync(string secretName)
-    {
-        if (_currentSecret == null ||
-            DateTimeOffset.UtcNow - _lastRefresh > _refreshInterval)
-        {
-            var secret = await _client.GetSecretAsync(secretName);
-            _currentSecret = secret.Value.Value;
-            _lastRefresh = DateTimeOffset.UtcNow;
-        }
-
-        return _currentSecret;
-    }
+    throw new InvalidOperationException(
+        "KeyVaultName is not configured. Set it in appsettings.json or an environment variable.");
 }
+
+var credential = new DefaultAzureCredential();
+services.AddSingleton<TokenCredential>(credential);
+services.AddSingleton(new SecretClient(
+    new Uri($"https://{vaultName}.vault.azure.net/"),
+    credential));
+services.AddMemoryCache();
+services.AddSingleton<SecretReader>();
 ```
 
-## Lessons learned the painful way
+Don't fetch secrets on every request without a cache. Key Vault throttles each vault per region, and a busy API with no cache will hit that limit, then fail in ways that look like random 429s.
 
-- **Soft-delete and purge protection should be on for any vault you care about.** Without them, a misconfigured Terraform run can wipe a vault, and "restore from backup" is not a thing for Key Vault data.
-- **Use Managed Identity wherever possible.** The whole point of Key Vault is to not have credentials in your app — and then plenty of tutorials hand you a client secret to authenticate to Key Vault, which puts you back where you started.
-- **RBAC roles are now preferred over access policies.** New vaults default to RBAC; existing vaults can be migrated. RBAC integrates with Privileged Identity Management, which you'll want once auditors get involved.
-- **Don't read every secret on every request.** Cache (and refresh on a schedule), or use the Configuration Builder so secrets are loaded at startup.
+**Startup now depends on Key Vault.** If the vault is unreachable or the identity lacks permission, the app fails to start. I think that's correct, because failing fast beats running with missing configuration. Still, make sure your health checks and deployment slots surface the error instead of letting a bad deployment swap into production.
 
-Key Vault is not interesting technology. It's invisible-when-it-works infrastructure, like good plumbing. Set it up once, with managed identity, RBAC, soft-delete, and purge protection, and never think about it again.
+**Every secret in the vault gets loaded.** With one vault per app this doesn't matter. If you are stuck with a shared vault, subclass `KeyVaultSecretManager`, override `Load(SecretProperties)` to filter by a prefix, override `GetKey(KeyVaultSecret)` to strip it, and pass the manager to the `AddAzureKeyVault` overload that accepts one.
+
+## When not to use the configuration provider at all
+
+If the app runs on App Service or Azure Functions and you only need a handful of values, [Key Vault references](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references) (GA since October 2019) may be simpler. You set an app setting to `@Microsoft.KeyVault(SecretUri=https://<your-vault-name>.vault.azure.net/secrets/<secret-name>/<version>)`, and the platform resolves it with the app's managed identity. The app sees an ordinary environment variable and needs no SDK at all. The catch is that the reference pins a specific secret version, so rotation means updating the setting. You also lose the local-development story, since your laptop doesn't resolve references.
+
+I'd also skip Key Vault for values that aren't secret. Feature flags, URLs and timeouts belong in `appsettings.json` or Azure App Configuration. Putting them in the vault widens who needs vault access and adds operations you pay for.
+
+## What I'd set up on day one
+
+For a new ASP.NET Core 3.1 service on Azure, I'd do this:
+
+- Create one vault per app per environment, with soft-delete on, and purge protection on in production.
+- Assign a system-assigned managed identity with an access policy limited to `get` and `list` on secrets.
+- Use `Azure.Extensions.AspNetCore.Configuration.Secrets` with `DefaultAzureCredential`, so the same code runs locally and in Azure.
+- Accept startup-time loading for stable secrets, and use `SecretClient` plus a short cache for the few that rotate.
+- Never add a client secret to "authenticate to Key Vault". If a tutorial tells you to, you've moved the problem rather than solved it.
+
+Rotation still needs a restart or a short cache, but nobody on the team ever handles a vault credential again.

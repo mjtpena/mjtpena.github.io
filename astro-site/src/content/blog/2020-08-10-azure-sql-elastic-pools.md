@@ -53,7 +53,7 @@ A worked example using price ratios, so it holds in any region:
 
 This compares compute only. Ten S1s include 250 GB each, while the 100 eDTU pool includes 100 GB and caps at 750 GB, so check total data size before trusting the ratio.
 
-The 100 eDTU pool saves about 25%, but only if ten tenants that each peak at 20 DTU never need more than 100 DTU *at the same time*. If the combined peak needs 200 eDTU, the pool costs 50% more than the single databases. Same tenants, same workload, opposite answer. That's why I don't recommend a pool from a database count alone.
+The 100 eDTU pool saves about 25%, but only if ten tenants that each peak at 20 DTU never need more than 100 DTU *at the same time*. If the combined peak needs 200 eDTU, the pool costs 50% more than the single databases. The tenants and workload are the same in both cases; only the overlap of their peaks changes the answer. That's why I don't recommend a pool from a database count alone.
 
 The profile that pools well looks like this:
 
@@ -81,6 +81,8 @@ WHERE start_time > DATEADD(day, -14, GETUTCDATE())
 GROUP BY database_name
 ORDER BY peak_cpu DESC;
 ```
+
+The rows are sparse: `sys.resource_stats` only writes a row for a database in windows where its resource use changed, so a tenant that sits idle has gaps rather than zeros. `AVG(avg_cpu_percent)` and `AVG(avg_data_io_percent)` skip those quiet windows, so for mostly idle tenants treat the averages as an upper bound and use the peaks to judge how spiky each tenant is.
 
 Per-database averages and peaks tell you whether each tenant is spiky. They don't tell you whether the spikes overlap, and overlap is the question that decides the pool size. For that, convert each 5-minute row into approximate DTUs consumed and add them up per interval:
 
@@ -110,13 +112,13 @@ GROUP BY start_time
 ORDER BY combined_dtu DESC;
 ```
 
-The top rows are your combined peaks. If the highest `combined_dtu` sits comfortably under a pool size, and that pool size times 1.5 is less than what you pay for the single databases today, you have a case. If the top 20 windows all fall at 9am on weekdays, you've learned something about your customers that matters more than the pool.
+The top rows are your combined peaks. If the highest `combined_dtu` sits comfortably under a pool size, and that pool size times 1.5 is less than what you pay for the single databases today, you have a case. If the top 20 windows all fall at 9am on weekdays, your tenants' peaks are correlated, and that is a strong signal against pooling (more on that below).
 
-`databases_reporting` tells you how many databases had a row in that window; if it's well below your database count, treat `combined_dtu` as a lower bound.
+Caveats on this estimate:
 
-These queries assume DTU-model databases; for vCore databases `dtu_limit` is NULL, so use `cpu_limit * avg_cpu_percent / 100` to estimate vCores used instead.
-
-The second query is an estimate. Five-minute averages smooth out short bursts, so leave headroom (I'd add at least 20 to 30 percent) rather than sizing to the exact peak.
+- **Missing rows.** `databases_reporting` tells you how many databases had a row in that window. If it's well below your database count, treat `combined_dtu` as a lower bound.
+- **vCore databases.** These queries assume DTU-model databases. For vCore databases, use `cpu_limit * avg_cpu_percent / 100` instead of `dtu_limit` to estimate vCores used.
+- **Smoothing.** Five-minute averages hide short bursts, so leave headroom (I'd add at least 20 to 30 percent) rather than sizing to the exact peak.
 
 ## Creating the pool
 
@@ -156,7 +158,7 @@ az sql db update \
     --elastic-pool pool-tenants-std
 ```
 
-Two settings deserve more thought than they usually get.
+Two settings matter most:
 
 **Per-database maximum (`--db-max-capacity`).** This is your noisy-neighbour control. If one tenant can take all 100 eDTU, one runaway report can stall every other customer in the pool. Capping each database at half the pool, or lower, keeps a single bad query from becoming a platform-wide incident. The cost is that a legitimately busy tenant gets throttled sooner.
 
@@ -245,7 +247,7 @@ public class TenantConnectionFactory
         return connection;
     }
 
-    // Azure.Identity 1.2 (current as of August 2020) doesn't cache managed identity
+    // Azure.Identity 1.x (as of August 2020) doesn't cache managed identity
     // tokens, so without this every connection open would call the token endpoint.
     private static async Task<string> GetTokenAsync()
     {
@@ -267,6 +269,25 @@ public class TenantConnectionFactory
     }
 }
 ```
+
+The token login only works once the server has an Azure AD admin and every tenant database has a contained user for the managed identity. Set the admin once per server, then run the T-SQL in each tenant database while connected as that admin:
+
+```bash
+az sql server ad-admin create \
+    --resource-group <resource-group> \
+    --server-name <server-name> \
+    --display-name <admin-group> \
+    --object-id <object-id>
+```
+
+```sql
+-- Fragment: run in each tenant database, connected as the Azure AD admin.
+CREATE USER [<managed-identity-name>] FROM EXTERNAL PROVIDER;
+ALTER ROLE db_datareader ADD MEMBER [<managed-identity-name>];
+ALTER ROLE db_datawriter ADD MEMBER [<managed-identity-name>];
+```
+
+That's one more step your tenant-provisioning script has to run for every new database, alongside creating it in the pool.
 
 Validate `tenantId` against your tenant catalogue before building the name, because it ends up in a connection string. Connection pooling in SqlClient is per connection string and, when you set `AccessToken`, per token as well, so pools turn over each time the token refreshes. Caching the token for most of its lifetime keeps that churn low. Either way, a few hundred tenants means a few hundred small client-side pools. That's fine at this scale, but it's worth knowing when you see connection counts in `max_session_percent`.
 

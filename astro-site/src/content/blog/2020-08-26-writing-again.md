@@ -1,6 +1,6 @@
 ---
-title: I’m going to start writing again!
-description: "I have been meaning to write a blog post for an awfully long time, but it has blocked me for so many reasons. There are many reasons I stopped writing. I…"
+title: "I'm Going to Start Writing Again"
+description: "Why I stopped blogging, why I'm starting again, and why I want a corner of the internet I own: no ads, no walled garden, just my own words and time."
 author: Michael John Peña
 draft: false
 date: 2020-08-26
@@ -9,19 +9,40 @@ images:
   - /2020/08/mike-tinnion-3ym6i13Y9LU-unsplash-scaled.jpg
 tags:
   - Writing
+  - Personal
+  - Blogging
 ---
 
-I have been meaning to write a blog post for an awfully long time, but it has blocked me for so many reasons. There are many reasons I stopped writing. I find different excuses for not doing it. Lazy. Busy. Afraid that contents I write may not be good enough. I feel my English is not good enough. So much more. No one will read it, why write?
+I have been meaning to write a blog post for an awfully long time, but something has always blocked me. This is the post where I stop making excuses and start.
 
+## Excuses, and the real problem
 
-But then the more I think about it, the more I realised that I spend a lot of time in my day writing. Whether that's writing an email, chats, creating documentations, or even programming. The fundamental problem I have is that I'm not as confident in writing as I am in public speaking. You can ask me to present to hundreds or thousands of audience, but writing for people I don't know or may not exist - there's just too much pressure on it. I need to work on this fear.
+There are many reasons I stopped writing, and I kept finding new excuses not to start again. Lazy. Busy. Afraid that what I write won't be good enough. Worried that my English isn't good enough. And the big one: no one will read it, so why write?
 
-I have always wanted to share my thoughts about things. There are many things I want to say. There are many things to write about: Reaction to this current pandemic; How fatherhood is treating me; The things I like; The things I hate; Things that I learn outside of work (and technology); Write a poem or letter.
+The more I thought about it, the more I realised I spend a lot of my day writing anyway: emails, chats, documentation, even programming. Writing isn't the problem.
 
-For the past years, I or for the most of us, we have been living in a digital consumerism era. We just keep consuming content, and we don’t really do anything about it. We don’t discuss it; we don’t talk about it. We just watch or read it - full stop.
+The real problem is confidence. I'm not as confident in writing as I am in public speaking. You can ask me to present to hundreds or thousands of people, but writing for people I don't know, who may not even exist, carries far more pressure. That's a fear I need to work on.
 
-I need a space on the internet that I can say is mine. No ads. No promotions. No walled garden platform. I own this place: the domain, the content, the infrastructure that runs it. I have the absolute freedom to put whatever I want or think. I want to be in control of my digital life, the content I consume, the content I share, and the consequences of doing so.
+## What I want to write about
 
-All the tools needed in writing and sharing content are there. You'll just have to start somewhere. There is an art and beauty in creating authentic content - just like any other industry or discipline. All we just need is to spend time and effort on it.
+I have always wanted to share my thoughts, and there are plenty of things I want to say:
 
-One thing I’ve learned through the books I’ve read in the past years, time is always the most valuable asset. Not money or career success, but time. Having the notion you have control of your time and have the freedom on where to spend it. I want to spend a lot of time writing and I am doing it now.
+- My reaction to the current pandemic
+- How fatherhood is treating me
+- The things I like, and the things I hate
+- What I learn outside of work and technology
+- Maybe even a poem or a letter
+
+## A space I own
+
+Over the past few years, most of us (me included) have been living in an era of digital consumerism. We keep consuming content and don't do anything with it. We don't discuss it or talk about it. We watch it or read it, full stop. Writing about the pandemic or fatherhood, instead of just scrolling past other people's takes, is what being on the creating side means for me.
+
+For that, I need a space on the internet that I can say is mine. No ads. No promotions. No walled-garden platform. I own this place: the domain, the content, and the infrastructure that runs it. I have the freedom to publish whatever I think, and I want to be in control of my digital life: the content I consume, the content I share, and the consequences of both.
+
+Owning the infrastructure also means looking after it. My next post is about exactly that: [setting up Azure Static Web Apps (Preview) for this site](/blog/2020-08-27-setting-up-azure-static-web-apps/).
+
+## Just start
+
+All the tools you need to write and share are already there. You just have to start somewhere. There is a craft to writing honestly, like any other discipline, and all it asks for is time and effort.
+
+That's the one lesson that keeps coming up in the books I've read over the past few years: time is the most valuable asset. Not money, not career success, but time, and the sense that you control it and get to choose where it goes. I want to spend a lot of mine writing, and I'm starting now.

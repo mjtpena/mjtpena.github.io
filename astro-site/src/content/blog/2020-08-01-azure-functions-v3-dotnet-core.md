@@ -12,13 +12,13 @@ tags:
   - C#
 ---
 
-A lot of the work landing on my desk this year has been "we suddenly need this in the cloud, and we needed it last week." For the small, event-driven pieces (billing reconciliations, webhook receivers, the unglamorous glue between systems) Azure Functions on .NET Core 3.1 has become my default answer. The quick-start template gets you a running function in five minutes, but it leaves out the decisions that decide whether that function is still healthy a year later.
+This year a lot of teams have needed small pieces in the cloud, fast. For the small, event-driven pieces (scheduled jobs, webhook receivers, the unglamorous glue between systems) Azure Functions on .NET Core 3.1 is my default answer. The quick-start template gets you a running function in five minutes, but it leaves out the choices that determine whether that function is still healthy a year later.
 
 ## Where Functions v3 stands right now
 
-The Functions 3.0 runtime had its go-live release in December 2019, and Microsoft [announced general availability on 23 January 2020](https://azure.microsoft.com/updates/azure-functions-runtime-30-is-now-available/), and 3.0 became the default for new function apps that month. The headline change for C# developers is that v3 runs on .NET Core 3.1. The Functions 2.x host runs on .NET Core 2.2, which went out of support on 23 December 2019, while 2.x C# projects usually target `netcoreapp2.1`. Microsoft still patches 2.x, but v3 on .NET Core 3.1 is where new work should go.
+The Functions 3.0 runtime had its go-live release in December 2019. Microsoft [announced general availability on 23 January 2020](https://azure.microsoft.com/updates/azure-functions-runtime-30-is-now-available/), and new apps can target 3.0 in production. The headline change for C# developers is that v3 runs on .NET Core 3.1. The Functions 2.x host runs on .NET Core 2.2, which went out of support on 23 December 2019, while 2.x C# projects usually target `netcoreapp2.1`. Microsoft still patches 2.x, but v3 on .NET Core 3.1 is where new work should go.
 
-.NET Core 3.1 is a Long Term Support release, supported until December 2022. For code I expect to forget about and leave running for a couple of years, I want LTS. The [runtime versions overview](https://learn.microsoft.com/azure/azure-functions/functions-versions) covers what changed between 2.x and 3.x; for most C# apps, migrating is a target framework change and a package bump.
+.NET Core 3.1 is a Long Term Support release, supported until December 2022. For code I expect to forget about and leave running for a couple of years, I want LTS. The [runtime versions overview](https://learn.microsoft.com/azure/azure-functions/functions-versions) explains how to target a version. For most C# apps, migrating is a target framework change and a package bump.
 
 One thing to understand early: C# functions in v3 run **in-process** with the Functions host. Your code loads into the same process as the runtime, which is why binding to `HttpRequest` and `IActionResult` feels so natural. It also means your app runs on the .NET version and `Microsoft.Extensions.*` package versions the host runs, not whichever ones you would prefer. That trade-off comes back later.
 
@@ -65,6 +65,8 @@ Notice that `Microsoft.Extensions.Http.Polly` is a 3.1.x package. This is the in
 
 [Dependency injection support](https://learn.microsoft.com/azure/azure-functions/functions-dotnet-dependency-injection) arrived with `Microsoft.Azure.Functions.Extensions` and works on v3. This is the piece I always wish I'd added on day one, because retrofitting it means rewriting every function's signature. Once two functions share an outbound API, you want one registration point.
 
+`Startup.cs` (the `assembly` attribute sits outside the namespace):
+
 ```csharp
 using System;
 using System.Net.Http;
@@ -107,7 +109,7 @@ namespace MyFunctionApp
 
 The order of the handlers matters. Policies added first sit on the outside, so the retry wraps the 5-second per-attempt timeout: a hung attempt is cancelled with a `TimeoutRejectedException`, and because the retry policy handles that exception alongside the usual transient errors (`HandleTransientHttpError` covers network failures, 5xx, and 408), the next attempt runs. `AddTransientHttpErrorPolicy` on its own wouldn't retry a timeout, which is why I build the policy explicitly. `HttpClient.Timeout` wraps the whole pipeline, so it has to be the overall budget. Set it to 5 seconds and one hung attempt uses it up before any retry gets a chance.
 
-The client and the function itself:
+The client and the function itself, in `GetRate.cs` (client and function together, for brevity):
 
 ```csharp
 using System;
@@ -167,12 +169,27 @@ One DI gotcha: if you inject `ILogger<T>` instead of taking the `ILogger` parame
 
 ## Running it locally
 
+Add `RatesApiBaseUrl` to the `Values` section of `local.settings.json` first. `UseDevelopmentStorage=true` points the host at the local Azure Storage Emulator (Windows), or Azurite on macOS/Linux for blob and queue only, which needs to be running:
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "RatesApiBaseUrl": "https://<rates-api-host>/"
+  }
+}
+```
+
+Then start the host and call the function:
+
 ```bash
 func start
 curl http://localhost:7071/api/rates/AUD
 ```
 
-Add `RatesApiBaseUrl` to the `Values` section of `local.settings.json` first. Function-level keys aren't enforced when running locally, which is convenient but also means you won't notice a wrong `AuthorizationLevel` until you deploy. Keep `local.settings.json` out of source control; the template's `.gitignore` already excludes it.
+Function-level keys aren't enforced when running locally, which is convenient but also means you won't notice a wrong `AuthorizationLevel` until you deploy. Keep `local.settings.json` out of source control; the template's `.gitignore` already excludes it.
 
 ## Deploying to Azure
 
@@ -214,25 +231,25 @@ Pass `--functions-version 3` explicitly. Being explicit in scripts protects you 
 
 ## Choosing the plan
 
-The Consumption plan is the right default for glue work, but know its limits before you commit. These figures come from the Functions hosting plan documentation:
+The Consumption plan is the right default for glue work, but know its limits before you commit. These figures come from the [Functions hosting plan documentation](https://learn.microsoft.com/azure/azure-functions/functions-scale):
 
-| Concern | Consumption | Premium |
-|---|---|---|
-| Default / max timeout | 5 min / 10 min | 30 min / unlimited (guaranteed up to 60 min) |
-| Cold start | Yes, after idle | Always-ready instances, plus a pre-warmed buffer when scaling out |
-| VNet integration | No | Yes |
-| Billing | Per execution and GB-s | Per instance, always at least one running |
+| Concern | Consumption | Premium | Dedicated (App Service) |
+|---|---|---|---|
+| Default / max timeout | 5 min / 10 min | 30 min / unlimited (guaranteed up to 60 min) | 30 min / unlimited (with Always On) |
+| Cold start | Yes, after idle | Minimum (always-warm) instances, plus pre-warmed instances as a buffer when scaling out | None with Always On enabled |
+| VNet integration | No | Yes | Yes |
+| Billing | Per execution and GB-s | Per instance, always at least one running | Per App Service plan instance |
 
 Whatever the plan, an HTTP-triggered function has to respond within 230 seconds because of the front-end load balancer. If your work takes longer than that, an HTTP function is the wrong shape: accept the request, drop a message on a queue, and process it in a queue-triggered function.
 
-If the long-running work is really several steps with state between them (fan-out and fan-in, waiting on an approval, retrying one step without redoing the others), use [Durable Functions](https://azure.microsoft.com/updates/new-version-of-durable-functions-available-now/) instead of chaining queues by hand. Version 2.0 went GA in November 2019 and works on v3. My rule: one hand-off from HTTP to background work is a queue; anything with a sequence, checkpoints, or a human in the loop is an orchestration.
+If the long-running work is really several steps with state between them (fan-out and fan-in, waiting on an approval, retrying one step without redoing the others), use Durable Functions 2.0, GA since November 2019, instead of chaining queues by hand. It works on v3. My rule: one hand-off from HTTP to background work is a queue; anything with a sequence, checkpoints, or a human in the loop is an orchestration.
 
-Start on Consumption, and move to Premium (GA since late 2019) when you need VNet access to private resources or a cold start would breach an SLA. Keep dependencies modest regardless; package size and startup work are most of what you feel on a cold start.
+Start on Consumption, and move to Premium (GA since late 2019) when you need VNet access to private resources or a cold start would breach an SLA. That fix has a price: Premium bills for at least one EP1 instance running around the clock, whether or not anything executes, so you are paying a fixed monthly floor to avoid the cold start that Consumption charges you nothing for. If you already pay for an App Service plan with spare capacity, running the function app there with Always On beats Premium: you get no cold start and VNet integration for no extra cost, as long as you can live with manual or rule-based scaling instead of event-driven scale-out. Keep dependencies modest regardless; package size and startup work are most of what you feel on a cold start.
 
 ## Defaults I set on every Function app
 
-- **Turn on Application Insights when you create the app.** Passing `--app-insights` to `az functionapp create`, as the deploy script does, wires the instrumentation key into the app settings so telemetry flows from the first deployment. Retrofitting telemetry onto a function that's already misbehaving in production is a bad time. The default adaptive sampling is fine for most apps.
-- **One function, one job.** I keep trying to be clever by combining responsibilities. It always ends with a deployment I'm afraid to touch.
+- **Turn on Application Insights when you create the app.** Passing `--app-insights` to `az functionapp create`, as the deploy script does, wires the instrumentation key into the app settings so telemetry flows from the first deployment. You can't diagnose a production failure with telemetry you didn't collect. The default adaptive sampling is fine for most apps.
+- **One function, one job.** Combining responsibilities in one function couples their scaling, timeouts and deployments, so a change to one job risks the other. Keep one trigger, one job.
 - **Get secrets out of app settings.** Turn on the app's system-assigned managed identity and use [Key Vault references](https://learn.microsoft.com/azure/app-service/app-service-key-vault-references) for API keys and connection strings. For now a reference has to include the secret version, so rotation means updating the setting. The `AzureWebJobsStorage` connection the host itself uses still has to be a storage connection string, so treat that storage account as sensitive: anyone with that connection string can read your function keys and trigger state in the `azure-webjobs-secrets` and `azure-webjobs-hosts` containers. Keep your application data in a separate account with its own access.
 - **Don't fight the in-process model.** Match `Microsoft.Extensions.*` to the host's 3.1 versions and stay on LTS. Upgrade when the Functions host supports the next .NET version, not before.
 
