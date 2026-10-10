@@ -1,505 +1,172 @@
 ---
-title: "Temperature and Top-P: Fine-Tuning Azure OpenAI Response Creativity"
+title: "Temperature and Top-P in Azure OpenAI: What They Actually Change"
 author: Michael John Peña
 draft: false
 date: 2023-01-16
+description: "How temperature and top_p reshape token sampling in Azure OpenAI completions, why to tune one not both, and how to measure the effect before you ship."
 tags:
-  - Azure
+  - Azure OpenAI
   - OpenAI
-  - Parameters
-  - AI
-  - Configuration
+  - GPT-3
+  - Prompt Engineering
+  - Python
 ---
 
-## Understanding Temperature
+Most teams I talk to treat `temperature` as a "creativity dial" and leave it wherever the playground had it. That's a problem, because the completions API defaults to `temperature=1`, which is full sampling from the model's distribution, and that's rarely what you want behind an extraction or classification endpoint. With Azure OpenAI Service now [generally available](https://azure.microsoft.com/en-us/blog/general-availability-of-azure-openai-service-expands-access-to-large-advanced-ai-models-with-added-enterprise-benefits/), a lot of prototypes are about to become production workloads, and sampling settings are one of the cheapest things to get right before that happens.
 
-Temperature controls randomness in token selection:
+This post explains what `temperature` and `top_p` do mechanically, shows how to see their effect on your own prompts, and gives my defaults for the common workloads. Everything here uses the completions endpoint with models such as `text-davinci-003` or `text-davinci-002` and the GA `2022-12-01` API version.
 
-- **Temperature = 0**: Nearly deterministic, always picks the most likely token
-- **Temperature = 1**: Standard randomness, samples according to probability
-- **Temperature > 1**: More random, flattens probability distribution
-- **Temperature < 1**: More focused, sharpens probability distribution
+## What the model is actually choosing between
+
+A GPT-3 model doesn't produce a sentence. At every step it produces a probability for every token in its vocabulary, and the service picks one. Then it does it again with that token appended. Both parameters act on that single step, repeated for every token in the output.
+
+- **`temperature`** (0 to 2, default 1) rescales the distribution before sampling. Each token's log-probability is divided by the temperature and the result is renormalised. Below 1, likely tokens get more likely and unlikely ones fade. Above 1, the distribution flattens and long-tail tokens start getting picked. At 0 the service effectively takes the most likely token every time (argmax).
+- **`top_p`** (0 to 1, default 1) is *nucleus sampling*, from Holtzman et al.'s [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751). Sort tokens by probability, keep the smallest set whose cumulative probability reaches `top_p`, discard the rest, renormalise, then sample. At 0.1 you're sampling only from the tokens that make up the top 10% of probability mass.
+
+The difference matters. Temperature changes the *shape* of the whole distribution. Top-p changes the *cut-off* and leaves the relative shape of what survives intact. When the model is confident (one token at 90%), `top_p=0.9` collapses to a single choice while `temperature=0.7` still leaves a small chance of the runner-up. When the model is uncertain (ten tokens at roughly 8% each), `top_p=0.9` keeps nearly all of them, while a low temperature still pushes hard toward the leader.
+
+That's why the [Azure OpenAI REST reference](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference) carries the same advice as OpenAI's: alter `temperature` or `top_p`, but not both. Stacking them makes the effective behaviour hard to reason about, and you lose the ability to say which knob caused a regression.
+
+## Seeing it on your own prompts
+
+You don't have to take the theory on faith. The completions API can return the top candidate tokens and their log-probabilities through the `logprobs` parameter (up to 5). Pulling those for the first token of a response, then applying temperature and top-p locally, shows exactly what each setting would do to that one decision.
+
+This uses the `openai` Python package (0.26.x at the time of writing) configured for Azure:
 
 ```python
+import math
+import os
+
 import openai
-from typing import List
 
-def demonstrate_temperature(
-    prompt: str,
-    temperatures: List[float],
-    deployment: str = "gpt35"
-) -> dict:
-    """Show how temperature affects outputs."""
-    results = {}
+openai.api_type = "azure"
+openai.api_base = os.environ["AZURE_OPENAI_ENDPOINT"]  # https://<your-resource-name>.openai.azure.com/
+openai.api_version = "2022-12-01"
+openai.api_key = os.environ["AZURE_OPENAI_KEY"]
 
-    for temp in temperatures:
-        responses = []
+DEPLOYMENT = "<your-davinci-deployment>"
 
-        # Generate multiple responses at each temperature
-        for _ in range(3):
-            response = openai.Completion.create(
-                engine=deployment,
-                prompt=prompt,
-                max_tokens=50,
-                temperature=temp
-            )
-            responses.append(response.choices[0].text.strip())
-
-        results[temp] = {
-            "responses": responses,
-            "unique_count": len(set(responses)),
-            "variance": "low" if len(set(responses)) == 1 else "high"
-        }
-
-    return results
-
-# Example
-results = demonstrate_temperature(
-    prompt="Write a creative tagline for a cloud computing company:",
-    temperatures=[0.0, 0.5, 1.0, 1.5]
+PROMPT = (
+    "Classify the sentiment of this review as Positive, Negative or Neutral.\n"
+    "Review: The install was painless but support never replied.\n"
+    "Sentiment:"
 )
 
-for temp, data in results.items():
-    print(f"\nTemperature {temp}:")
-    print(f"  Unique responses: {data['unique_count']}/3")
-    for r in data['responses']:
-        print(f"  - {r[:60]}...")
-```
-
-## Understanding Top-P (Nucleus Sampling)
-
-Top-P limits token selection to a cumulative probability threshold:
-
-- **Top-P = 1.0**: Consider all tokens
-- **Top-P = 0.9**: Consider tokens comprising top 90% of probability mass
-- **Top-P = 0.1**: Only consider the very top tokens
-
-```python
-def demonstrate_top_p(
-    prompt: str,
-    top_p_values: List[float],
-    deployment: str = "gpt35"
-) -> dict:
-    """Show how top_p affects outputs."""
-    results = {}
-
-    for top_p in top_p_values:
-        responses = []
-
-        for _ in range(3):
-            response = openai.Completion.create(
-                engine=deployment,
-                prompt=prompt,
-                max_tokens=50,
-                temperature=1.0,  # Keep temperature constant
-                top_p=top_p
-            )
-            responses.append(response.choices[0].text.strip())
-
-        results[top_p] = {
-            "responses": responses,
-            "unique_count": len(set(responses))
-        }
-
-    return results
-
-# Example
-results = demonstrate_top_p(
-    prompt="Complete this sentence creatively: The cloud is like",
-    top_p_values=[0.1, 0.5, 0.9, 1.0]
+response = openai.Completion.create(
+    engine=DEPLOYMENT,
+    prompt=PROMPT,
+    max_tokens=1,
+    temperature=0,
+    logprobs=5,
 )
+
+# Top 5 candidate tokens for the first position, as {token: logprob}
+top = response["choices"][0]["logprobs"]["top_logprobs"][0]
+
+
+def apply_temperature(logprobs: dict, temperature: float) -> dict:
+    """Rescale and renormalise over the returned candidates only."""
+    scaled = {tok: lp / temperature for tok, lp in logprobs.items()}
+    total = sum(math.exp(v) for v in scaled.values())
+    return {tok: math.exp(v) / total for tok, v in scaled.items()}
+
+
+def apply_top_p(probs: dict, top_p: float) -> dict:
+    """Keep the smallest set of tokens whose cumulative probability reaches top_p."""
+    kept, cumulative = {}, 0.0
+    for tok, p in sorted(probs.items(), key=lambda kv: kv[1], reverse=True):
+        kept[tok] = p
+        cumulative += p
+        if cumulative >= top_p:
+            break
+    total = sum(kept.values())
+    return {tok: p / total for tok, p in kept.items()}
+
+
+for t in (0.3, 0.7, 1.0, 1.5):
+    probs = apply_temperature(top, t)
+    print(f"temperature={t}: " + ", ".join(f"{tok!r}={p:.2f}" for tok, p in probs.items()))
+
+base = apply_temperature(top, 1.0)
+for p in (0.5, 0.9, 1.0):
+    probs = apply_top_p(base, p)
+    print(f"top_p={p}: " + ", ".join(f"{tok!r}={v:.2f}" for tok, v in probs.items()))
 ```
 
-## Temperature vs Top-P: When to Use Each
+It's an approximation: the service only returns the top five candidates, so renormalising over five tokens overstates their share compared with the full vocabulary. For a classification prompt like this one, the top five usually carry nearly all the mass, so the picture is close enough to be useful. Two things usually jump out. First, on a well-constrained prompt the leading token often sits above 0.9, so moderate temperature changes make little difference there. Second, on an open-ended prompt the leading token can sit at 0.2 or lower, and that's where temperature starts rewriting your output.
+
+That's the real lesson: **the right setting depends on how confident the model is for your prompt**, not on a category label like "creative" or "factual".
+
+## Measuring variability before you pick a number
+
+The second check I'd run is empirical. Ask for several completions in one call with `n`, and count how many distinct answers come back at each setting:
 
 ```python
-from dataclasses import dataclass
-from typing import Optional
+import os
 
-@dataclass
-class SamplingConfig:
-    """Configuration for sampling parameters."""
-    temperature: float
-    top_p: float
-    use_case: str
-    description: str
+import openai
 
-# Recommended configurations for different use cases
-SAMPLING_CONFIGS = {
-    "factual_qa": SamplingConfig(
-        temperature=0.0,
-        top_p=1.0,
-        use_case="Factual Q&A, data extraction",
-        description="Deterministic output for consistent, factual responses"
-    ),
+openai.api_type = "azure"
+openai.api_base = os.environ["AZURE_OPENAI_ENDPOINT"]
+openai.api_version = "2022-12-01"
+openai.api_key = os.environ["AZURE_OPENAI_KEY"]
 
-    "code_generation": SamplingConfig(
-        temperature=0.2,
-        top_p=0.95,
-        use_case="Code generation, SQL queries",
-        description="Low randomness for syntactically correct code"
-    ),
+DEPLOYMENT = "<your-davinci-deployment>"
+PROMPT = "Suggest a name for an internal tool that tracks Azure spend by team:"
 
-    "summarization": SamplingConfig(
-        temperature=0.3,
-        top_p=0.9,
-        use_case="Document summarization",
-        description="Slight variation while maintaining accuracy"
-    ),
 
-    "conversational": SamplingConfig(
-        temperature=0.7,
-        top_p=0.9,
-        use_case="Chatbots, conversational AI",
-        description="Natural, varied responses"
-    ),
-
-    "creative_writing": SamplingConfig(
-        temperature=0.9,
-        top_p=0.95,
-        use_case="Creative writing, brainstorming",
-        description="High creativity and variation"
-    ),
-
-    "experimental": SamplingConfig(
-        temperature=1.2,
-        top_p=1.0,
-        use_case="Highly creative, experimental",
-        description="Maximum randomness (may be incoherent)"
-    )
-}
-
-def get_sampling_config(use_case: str) -> SamplingConfig:
-    """Get recommended sampling config for a use case."""
-    if use_case not in SAMPLING_CONFIGS:
-        raise ValueError(f"Unknown use case. Available: {list(SAMPLING_CONFIGS.keys())}")
-    return SAMPLING_CONFIGS[use_case]
-
-def create_completion_with_config(
-    prompt: str,
-    use_case: str,
-    deployment: str = "gpt35",
-    max_tokens: int = 500
-) -> str:
-    """Create completion using recommended config."""
-    config = get_sampling_config(use_case)
-
+def distinct_outputs(temperature: float, samples: int = 10) -> int:
     response = openai.Completion.create(
-        engine=deployment,
-        prompt=prompt,
-        max_tokens=max_tokens,
-        temperature=config.temperature,
-        top_p=config.top_p
+        engine=DEPLOYMENT,
+        prompt=PROMPT,
+        max_tokens=20,
+        temperature=temperature,
+        n=samples,
     )
+    texts = {choice["text"].strip().lower() for choice in response["choices"]}
+    return len(texts)
 
-    return response.choices[0].text.strip()
 
-# Usage
-code = create_completion_with_config(
-    prompt="Write a Python function to calculate Fibonacci numbers:",
-    use_case="code_generation"
-)
-
-creative = create_completion_with_config(
-    prompt="Write the opening paragraph of a sci-fi story:",
-    use_case="creative_writing"
-)
+for t in (0.0, 0.4, 0.8, 1.2):
+    print(f"temperature={t}: {distinct_outputs(t)} distinct out of 10")
 ```
 
-## Frequency and Presence Penalties
+Remember that `n=10` bills ten completions' worth of tokens. Keep `max_tokens` small for this kind of probe, and run it against a handful of representative prompts rather than one.
 
-Additional parameters to control repetition:
+Also expect a non-zero count at `temperature=0` occasionally. Zero gets you close to deterministic, not guaranteed deterministic: when two tokens are nearly tied, small numerical differences can flip the choice, and one flipped token changes everything after it. If you need repeatable output for audit or caching, store the response rather than assuming you can regenerate it.
 
-```python
-@dataclass
-class GenerationConfig:
-    """Complete generation configuration."""
-    temperature: float = 0.7
-    top_p: float = 1.0
-    frequency_penalty: float = 0.0  # -2.0 to 2.0, penalizes frequent tokens
-    presence_penalty: float = 0.0   # -2.0 to 2.0, penalizes any repeat
+## My defaults
 
-class SmartGenerator:
-    """Generate text with smart parameter selection."""
+These are starting points, tuned by moving temperature only and leaving `top_p` at 1:
 
-    def __init__(self, deployment: str):
-        self.deployment = deployment
+| Workload | `temperature` | Why |
+|---|---|---|
+| Extraction, classification, structured output | 0 | You want the most likely answer and a parseable format every time |
+| Code generation (`code-davinci-002`) | 0 to 0.2 | Syntax is unforgiving; small variation helps only when retrying a failed attempt |
+| Summarisation, Q&A over supplied text | 0.2 to 0.4 | Some phrasing variety, little drift from the source |
+| Conversational replies | 0.5 to 0.7 | Avoids repeating the same canned sentence, still stays on topic |
+| Brainstorming, naming, marketing drafts | 0.8 to 1.0 | Variety is the point, and a human picks from the output |
 
-    def generate(
-        self,
-        prompt: str,
-        config: GenerationConfig,
-        max_tokens: int = 500
-    ) -> str:
-        """Generate with specified configuration."""
-        response = openai.Completion.create(
-            engine=self.deployment,
-            prompt=prompt,
-            max_tokens=max_tokens,
-            temperature=config.temperature,
-            top_p=config.top_p,
-            frequency_penalty=config.frequency_penalty,
-            presence_penalty=config.presence_penalty
-        )
-        return response.choices[0].text.strip()
+I rarely go above 1. Past that point you're deliberately sampling tokens the model thinks are unlikely, and davinci starts producing fluent nonsense. If a temperature of 1 isn't varied enough, the prompt usually needs work (ask for "ten different names in different styles") rather than the sampler.
 
-    def generate_diverse_list(
-        self,
-        prompt: str,
-        num_items: int = 5
-    ) -> str:
-        """Generate diverse list with anti-repetition."""
-        config = GenerationConfig(
-            temperature=0.8,
-            top_p=0.95,
-            frequency_penalty=0.5,  # Reduce word repetition
-            presence_penalty=0.3   # Encourage new topics
-        )
+When would I reach for `top_p` instead? When the long tail is the problem rather than the overall sharpness. For example, a moderately creative task where the occasional bizarre token derails an output: `top_p=0.9` at `temperature=1` trims the tail while keeping the genuine alternatives. That's a narrower use case than most guides suggest.
 
-        full_prompt = f"{prompt}\n\nProvide {num_items} diverse and unique items:"
-        return self.generate(full_prompt, config)
+## The penalties are a different tool
 
-    def generate_focused(self, prompt: str) -> str:
-        """Generate focused, on-topic response."""
-        config = GenerationConfig(
-            temperature=0.3,
-            top_p=0.8,
-            frequency_penalty=0.0,
-            presence_penalty=0.0
-        )
-        return self.generate(prompt, config)
+`frequency_penalty` and `presence_penalty` (both -2.0 to 2.0, default 0) get lumped in with sampling, but they solve a different problem: repetition across a longer output. Frequency penalty reduces a token's likelihood in proportion to how often it has already appeared; presence penalty applies a flat reduction once it has appeared at all.
 
-    def generate_creative(self, prompt: str) -> str:
-        """Generate creative, varied response."""
-        config = GenerationConfig(
-            temperature=1.0,
-            top_p=0.95,
-            frequency_penalty=0.3,
-            presence_penalty=0.3
-        )
-        return self.generate(prompt, config)
+Use them for long-form generation that loops ("…and also scalable, and also scalable…") or for lists that keep returning near-duplicates. Values between 0.1 and 0.8 are usually plenty. Don't use them on structured output: a penalty on repeated tokens will happily discourage the quotes, commas and field names your JSON needs.
 
-# Usage
-generator = SmartGenerator("gpt35")
+## When not to tune sampling at all
 
-# Diverse list generation
-ideas = generator.generate_diverse_list(
-    "Azure services for building a modern data platform"
-)
+Sampling parameters get blamed for problems they can't fix:
 
-# Focused technical response
-technical = generator.generate_focused(
-    "Explain how Azure Cosmos DB partitioning works:"
-)
-```
+- **Wrong answers at temperature 0** are a prompt or knowledge problem. Temperature 0 gives you the model's best guess; if that guess is wrong, add context or examples. I covered the prompt side in [Prompts Are Production Code](/blog/2023-01-12-prompt-engineering-fundamentals/).
+- **Inconsistent format** is usually fixed with few-shot examples and a stop sequence, not a lower temperature.
+- **Output that's too long or truncated** is `max_tokens` and `stop`, which I touched on in the [token management post](/blog/2023-01-11-token-management-azure-openai/).
 
-## A/B Testing Parameters
+## What I'd do this week
 
-Test different configurations to find optimal settings:
+If you have Azure OpenAI completions in flight, check every call site for an explicit `temperature`. Anything that feeds code (parsers, classifiers, SQL, JSON) should be at 0 unless someone can say why it isn't. For the rest, pick a temperature per workload, leave `top_p` alone, and run the `n`-sample check on real prompts before you commit to a number. Keep the setting in configuration next to the prompt, not hard-coded, so you can change one without redeploying the other.
 
-```python
-from dataclasses import dataclass, field
-from typing import Dict, List, Callable
-import random
-import statistics
-
-@dataclass
-class ABTestResult:
-    """Result of an A/B test."""
-    config_a: GenerationConfig
-    config_b: GenerationConfig
-    scores_a: List[float]
-    scores_b: List[float]
-    winner: str
-    confidence: float
-
-class ParameterTester:
-    """A/B test different parameter configurations."""
-
-    def __init__(
-        self,
-        deployment: str,
-        evaluator: Callable[[str, str], float] = None
-    ):
-        self.deployment = deployment
-        self.generator = SmartGenerator(deployment)
-        # Default evaluator: response length (replace with actual metrics)
-        self.evaluator = evaluator or (lambda prompt, response: len(response))
-
-    def test_configurations(
-        self,
-        prompts: List[str],
-        config_a: GenerationConfig,
-        config_b: GenerationConfig,
-        num_iterations: int = 10
-    ) -> ABTestResult:
-        """Test two configurations against each other."""
-        scores_a = []
-        scores_b = []
-
-        for prompt in prompts:
-            for _ in range(num_iterations):
-                # Generate with config A
-                response_a = self.generator.generate(prompt, config_a)
-                score_a = self.evaluator(prompt, response_a)
-                scores_a.append(score_a)
-
-                # Generate with config B
-                response_b = self.generator.generate(prompt, config_b)
-                score_b = self.evaluator(prompt, response_b)
-                scores_b.append(score_b)
-
-        mean_a = statistics.mean(scores_a)
-        mean_b = statistics.mean(scores_b)
-
-        # Simple winner determination (use proper statistical tests in production)
-        winner = "A" if mean_a > mean_b else "B"
-        difference = abs(mean_a - mean_b) / max(mean_a, mean_b)
-
-        return ABTestResult(
-            config_a=config_a,
-            config_b=config_b,
-            scores_a=scores_a,
-            scores_b=scores_b,
-            winner=winner,
-            confidence=difference
-        )
-
-    def find_optimal_temperature(
-        self,
-        prompts: List[str],
-        temperature_range: List[float] = None
-    ) -> Dict[float, float]:
-        """Find optimal temperature for given prompts."""
-        temperatures = temperature_range or [0.0, 0.3, 0.5, 0.7, 0.9, 1.0]
-        results = {}
-
-        for temp in temperatures:
-            config = GenerationConfig(temperature=temp)
-            scores = []
-
-            for prompt in prompts:
-                response = self.generator.generate(prompt, config)
-                score = self.evaluator(prompt, response)
-                scores.append(score)
-
-            results[temp] = statistics.mean(scores)
-
-        return results
-
-# Custom evaluator for code quality
-def code_quality_evaluator(prompt: str, response: str) -> float:
-    """Simple code quality heuristic."""
-    score = 0.0
-
-    # Has code block
-    if "```" in response or "def " in response or "function" in response:
-        score += 1.0
-
-    # Has comments
-    if "#" in response or "//" in response:
-        score += 0.5
-
-    # Reasonable length
-    if 100 < len(response) < 2000:
-        score += 0.5
-
-    return score
-
-# Usage
-# tester = ParameterTester("gpt35", evaluator=code_quality_evaluator)
-# results = tester.find_optimal_temperature(
-#     prompts=["Write a Python function to sort a list"],
-#     temperature_range=[0.0, 0.2, 0.4, 0.6]
-# )
-```
-
-## Dynamic Parameter Adjustment
-
-Adjust parameters based on context:
-
-```python
-class AdaptiveGenerator:
-    """Dynamically adjust parameters based on context."""
-
-    def __init__(self, deployment: str):
-        self.deployment = deployment
-
-    def analyze_prompt(self, prompt: str) -> GenerationConfig:
-        """Analyze prompt and select appropriate config."""
-        prompt_lower = prompt.lower()
-
-        # Code-related prompts
-        if any(kw in prompt_lower for kw in ["code", "function", "implement", "write a program"]):
-            return GenerationConfig(temperature=0.2, top_p=0.95)
-
-        # Factual questions
-        if any(kw in prompt_lower for kw in ["what is", "explain", "how does", "describe"]):
-            return GenerationConfig(temperature=0.3, top_p=0.9)
-
-        # Creative prompts
-        if any(kw in prompt_lower for kw in ["creative", "imagine", "story", "brainstorm"]):
-            return GenerationConfig(temperature=0.9, top_p=0.95, presence_penalty=0.3)
-
-        # List generation
-        if any(kw in prompt_lower for kw in ["list", "enumerate", "give me examples"]):
-            return GenerationConfig(temperature=0.7, frequency_penalty=0.5)
-
-        # Default
-        return GenerationConfig(temperature=0.7, top_p=0.9)
-
-    def generate(self, prompt: str, max_tokens: int = 500) -> dict:
-        """Generate with auto-selected parameters."""
-        config = self.analyze_prompt(prompt)
-
-        response = openai.Completion.create(
-            engine=self.deployment,
-            prompt=prompt,
-            max_tokens=max_tokens,
-            temperature=config.temperature,
-            top_p=config.top_p,
-            frequency_penalty=config.frequency_penalty,
-            presence_penalty=config.presence_penalty
-        )
-
-        return {
-            "response": response.choices[0].text.strip(),
-            "config_used": config,
-            "analysis": f"Detected prompt type and used temp={config.temperature}"
-        }
-
-# Usage
-adaptive = AdaptiveGenerator("gpt35")
-
-# Will use low temperature
-code_result = adaptive.generate("Write a Python function to parse JSON")
-
-# Will use high temperature
-creative_result = adaptive.generate("Imagine a world where clouds are made of data")
-```
-
-## Best Practices
-
-1. **Don't use both temperature and top_p together**: OpenAI recommends adjusting one, not both
-2. **Start conservative**: Begin with lower temperature for production
-3. **Test systematically**: Use A/B testing to find optimal values
-4. **Match task requirements**: Factual = low temp, creative = high temp
-5. **Consider penalties**: Use frequency/presence penalties for diverse outputs
-6. **Monitor outputs**: Track quality metrics with different configurations
-
-## Quick Reference
-
-| Use Case | Temperature | Top-P | Notes |
-|----------|-------------|-------|-------|
-| Code generation | 0.0-0.2 | 0.95 | Deterministic, correct syntax |
-| Factual Q&A | 0.0-0.3 | 0.9 | Consistent, accurate |
-| Summarization | 0.3-0.5 | 0.9 | Slight variation |
-| Conversational | 0.7 | 0.9 | Natural responses |
-| Creative writing | 0.8-1.0 | 0.95 | High variety |
-| Brainstorming | 0.9+ | 1.0 | Maximum creativity |
-
-## Resources
-
-- [Azure OpenAI Parameters](https://learn.microsoft.com/azure/cognitive-services/openai/reference)
-- [OpenAI API Reference](https://platform.openai.com/docs/api-reference/completions)
-- [Sampling Methods Explained](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277)
+The settings are cheap to change and cheap to test. What's expensive is discovering in production that a classifier has been answering "Positive" one call and "Mostly positive" the next because nobody set the default.

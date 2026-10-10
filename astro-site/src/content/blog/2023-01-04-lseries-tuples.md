@@ -1,114 +1,197 @@
 ---
-title: "Language Compare Series: TUPLES in CSharp, TypeScript, and Rust"
-description: "Comparing how different languages handle the same concept is one of the fastest ways I know to develop genuine language intuition—not the \"read the docs\"…"
+title: "Tuples in C#, TypeScript and Rust: Same Syntax, Different Rules"
+description: "How C# 11, TypeScript 4.9 and Rust 1.66 treat tuples: naming, mutability, equality and pattern matching, and when a named type is the better choice."
 author: Michael John Peña
 draft: false
 date: 2023-01-04
 url: /blog/lseries-tuples/
 tags:
-  - tuples
-  - csharp
-  - rust
+  - Programming
+  - C#
   - TypeScript
+  - rust
+  - Development
 ---
 
-Comparing how different languages handle the same concept is one of the fastest ways I know to develop genuine language intuition—not the "read the docs" kind of understanding but the kind where you feel why a language made the choices it did. Tuples are a simple enough data structure to serve as a useful comparator: every language has them (or something similar), but the design decisions around mutability, destructuring, pattern matching, and type inference reveal the language's philosophy clearly. This is the first post in a Language Compare Series where I look at C#, TypeScript, and Rust through a common concept—not to crown a winner but to understand what each language is trying to be.
+In JavaScript, `[1, "a"] === [1, "a"]` is `false` (and TypeScript 4.8 and later won't even compile it), while in C# and Rust `(1, "a") == (1, "a")` is true. The three languages write tuples as a bracketed list of values, so the code looks nearly identical, but underneath they disagree on naming, mutability, equality and what exists at runtime. If you switch between them in the same week, as I do, that's exactly the kind of difference that slips past a code review. This is the first post in a Language Compare series I'm starting, looking at C#, TypeScript and Rust through one shared concept at a time.
 
-## Introduction about the series
+C# has been home since I started with it in 2010, TypeScript is the default on every frontend project I'm involved with, and I've spent almost two years with Rust on small things: file I/O, C++ parsers, Solana smart contracts and simple HTTP APIs. (I've also written about test-driven development in [Rust](/blog/2022-12-19-tdd-rust/) and [TypeScript](/blog/2022-12-25-tdd-typescript/).) The versions in scope are the current stable releases as of early January 2023: C# 11 on .NET 7 (see my [C# 11 features post](/blog/2022-11-02-csharp-11-features/)), [TypeScript 4.9](https://devblogs.microsoft.com/typescript/announcing-typescript-4-9/) (released 15 November 2022) and [Rust 1.66](https://blog.rust-lang.org/2022/12/15/Rust-1.66.0.html) (released 15 December 2022).
 
-I've been in the technology for more than a decade now, and one thing that really facinates me is when I get back to the roots of programming languages. When you just look at "coding" and not really have to deal with business requirements, what methodologies to use, and how to communicate effectively with your teams and stakeholders. This is what I particularly love about technology and programming languages, there's always something new to learn.
+## What a tuple is, and what it isn't
 
-## Why CSharp, TypeScript, and Rust?
+A tuple is a fixed-length, ordered group of values where each position can have a different type. It's an anonymous product type: you get structure without declaring a named type. The classic use is returning more than one value from a function, such as a parse result and an error flag, or a minimum and maximum.
 
-CSharp and .NET is just a natural "home" for me as I've started my journey with it since 2010 and I've been involved to a lot of applications since then. Majority of the projects I've been involved with are within the Microsoft stack, and even up until today I still find the sophistication of this language. CSharp can be written in simple ways, more complex (with a lot of patterns / anti-patterns); and the language keeps improving year-by-year.
+One common claim I want to correct up front: tuples are *not* universally immutable. Of the three languages here, C# value tuples have mutable fields, TypeScript tuples are mutable arrays unless you mark them `readonly`, and Rust tuples are mutable when the binding is `mut`. Immutability is a property of each language's rules, not of tuples in general.
 
-TypeScript is just a norm in all frontend development projects I'm involved with. To be honest, this is the only thing that keeps me `a bit sane` when dealing with JavaScript projects. I like how strucuted and "typed" a project can be, and doesn't look "very dirty". It's also easier to create patterns and practices with larger frontend projects when using TypeScript. Although I would admit that my skills and understanding of TypeScript is still not that advanced - that's why I want to learn more about this language.
+## C#: value types with compile-time names
 
-Rust is new for me. I've been playing with it for almost 2 years now, but I haven't really had any large projects that involved this language than some simple File I/Os, C++ parsers, Solana smart contracts, and simple HTTP APIs. I'm seeing a lot of really interesting open source projects with this language and a very welcoming community. I also seeing the experience with this language as how it is like the TypeScript of JavaScript - and Rust is on to C++. All the really low level things you want to accomplish in C++ can be written in Rust but in a more `opinionated` elegant way. So I really want to spend more time learning about Rust in the next couple of years.
+C# has had two tuple types. `System.Tuple<...>` is the older reference type with read-only `Item1`, `Item2` properties. The tuple syntax introduced in C# 7.0 maps to [`System.ValueTuple<...>`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/value-tuples), a struct with public, *mutable* fields.
 
-So let's start with one simple concept that exists with all these 3 languages: TUPLES.
-
-## What are Tuples?
-
-Tuples are a data structure that allows you to store a fixed number of elements of different types. They are often used to store small collections of data where you don't want to create a custom data type. Tuples are typically immutable, meaning that you can't add or remove elements from them once they have been created.
-
-In many programming languages, tuples are similar to arrays, but with the added benefit of being able to store elements of different types. This can be useful when you want to store a small collection of related data, but don't need the full functionality of a more complex data structure such as an object or class.
-
-Tuples are often used for returning multiple values from a function or method. For example, you might have a function that calculates the area and perimeter of a rectangle. Instead of returning two separate values, you could use a tuple to return both values in a single data structure.
-
-## Tuples in CSharp
-
-In C#, tuples are data structures that allow you to store a fixed number of elements of different types. They were introduced in C# 7.0 and can be used as an alternative to creating a custom data type.
-
-Here is an example of creating and using a tuple in C#:
+The move to a struct was about allocation. Every `System.Tuple` is a heap object the garbage collector has to track, which adds up when a hot loop returns pairs millions of times; a `ValueTuple` of two `int`s is stored inline (on the stack for a local, or inside its containing object) and needs no separate allocation. The trade-off is that structs are copied by value on every assignment, parameter pass and return, so a seven-element tuple of `decimal`s or large structs gets copied in full each time. Past a few small elements, a class or a `record` (passed by reference) is usually cheaper as well as clearer. Element names like `Min` and `Max` are a compiler feature only. They're stored as metadata on method signatures, but at runtime the fields are still `Item1` and `Item2`, so reflection and serialisers that walk fields won't see your names.
 
 ```csharp
-// Creating a tuple
-var tuple = (10, "hello", true);
+// Program.cs - .NET 7 console app (top-level statements)
+var stats = MinMax(new[] { 4, 9, 1, 7 });
+Console.WriteLine($"{stats.Min} to {stats.Max}");   // 1 to 9
+Console.WriteLine(stats.Item1 == stats.Min);         // True: names are aliases
 
-// Accessing elements of a tuple
-int x = tuple.Item1;
-string y = tuple.Item2;
-bool z = tuple.Item3;
+// Fields are mutable because ValueTuple is a struct with public fields
+stats.Max = 100;
 
-// You can also access the elements using deconstruction
-(int x, string y, bool z) = tuple;
+// Deconstruction
+var (low, high) = stats;
+Console.WriteLine($"{low}, {high}");                 // 1, 100
 
+// Tuple equality (C# 7.3+) compares element by element
+Console.WriteLine((1, "a") == (1, "a"));             // True
+
+// Tuple patterns in a switch expression (C# 8+)
+string Describe((int Min, int Max) range) => range switch
+{
+    (0, 0) => "empty",
+    var (min, max) when min == max => "single value",
+    _ => "range"
+};
+Console.WriteLine(Describe(stats));                  // range
+
+static (int Min, int Max) MinMax(int[] values)
+{
+    var min = int.MaxValue;
+    var max = int.MinValue;
+    foreach (var v in values)
+    {
+        if (v < min) min = v;
+        if (v > max) max = v;
+    }
+    return (min, max);
+}
 ```
 
-You can also create tuple types by using the `ValueTuple` struct. Here is an example:
+A trap worth knowing: if you write `ValueTuple<int, string> t = (id: 10, name: "hello");`, the names are discarded because the target type has none, and the compiler raises warning CS8123. Declare the names on the type instead, as in `(int Id, string Name) t = (10, "hello");`. Because names are only matched by position, assigning `(int A, int B)` to `(int B, int A)` doesn't swap anything either. It copies position to position, and the names just mislead you.
 
-```csharp
-ValueTuple<int, string, bool> tuple = (10, "hello", true);
+## TypeScript: typed arrays and nothing more
 
-// You can also give names to the elements of the tuple
-ValueTuple<int, string, bool> tuple = (x: 10, y: "hello", z: true);
-```
-
-## Tuples in TypeScript
-
-Tuples in TypeScript are similar to those in C#. They are fixed-size arrays of elements where each element can have a different type.
-
-Here is an example of creating and using a tuple in TypeScript:
+A TypeScript tuple is a type-level description of a JavaScript array. At runtime there is no tuple, just an `Array`. That shapes everything else.
 
 ```typescript
-// Creating a tuple
-let tuple: [number, string, boolean] = [10, "hello", true];
+// tuples.ts - compiles with TypeScript 4.9 (tsc --strict)
+function minMax(values: number[]): [min: number, max: number] {
+  return [Math.min(...values), Math.max(...values)];
+}
 
-// Accessing elements of a tuple
-let x: number = tuple[0];
-let y: string = tuple[1];
-let z: boolean = tuple[2];
+const stats = minMax([4, 9, 1, 7]);
+const [low, high] = stats;
+console.log(low, high); // 1 9
 
-// You can also use destructuring to access the elements
-let [x, y, z] = tuple;
+// Without an annotation, an array literal is inferred as an array, not a tuple
+const loose = [10, "hello"]; // (string | number)[]
+console.log(loose); // [10, "hello"]
+const exact = [10, "hello"] as const; // readonly [10, "hello"]
+console.log(exact); // [10, "hello"]
 
+// Ordinary tuple types still allow array mutation methods
+const pair: [number, string] = [10, "hello"];
+pair.push(42); // compiles, and pair now has three elements at runtime
+console.log(pair.length); // 3, even though the type says 2
+
+// readonly tuples close that gap
+const safePair: readonly [number, string] = [10, "hello"];
+// safePair.push(42); // error: Property 'push' does not exist
+console.log(safePair[1]); // hello
+
+// Optional and rest elements
+type Point = [x: number, y: number, z?: number];
+type Command = [name: string, ...args: string[]];
+const p: Point = [1, 2];
+console.log(p.length); // 2
+const cmd: Command = ["deploy", "--env", "prod"];
+console.log(cmd.slice(1)); // ["--env", "prod"]
+
+// Equality is reference equality, as for any array
+const a: [number, string] = [1, "a"];
+const b: [number, string] = [1, "a"];
+console.log(a === b); // false
 ```
 
-## Tuples in Rust
+The labels in `[min: number, max: number]` (added in TypeScript 4.0) are documentation for editors and error messages. You still access elements by index, and destructuring ignores them. `readonly` tuples and `as const` arrived in 3.4, and optional and rest elements in 3.0, so all of this is well established.
 
-Tuples in Rust are similar to those in C# and TypeScript. They are fixed-size arrays of elements where each element can have a different type.
+The `push` hole is the one I'd flag in code review. If a tuple is meant to be a fixed shape, type it `readonly`, especially in function return types.
 
-Here is an example of creating and using a tuple in Rust:
+## Rust: real values, structural comparison
+
+Rust tuples are genuine values laid out in memory, with fields accessed as `.0`, `.1` and so on. They follow the normal ownership rules: a tuple is `Copy` if every element is `Copy`, and it's mutable only if the binding is declared `mut`. The [standard library](https://doc.rust-lang.org/1.66.0/std/primitive.tuple.html) implements `Debug`, `PartialEq`, `Eq`, `PartialOrd`, `Ord`, `Hash` and `Default` for tuples of up to 12 elements (`Clone` and `Copy` are generated by the compiler and work at any length), so equality and sorting work out of the box. The empty tuple `()`, the unit type, is what functions return when they return nothing.
 
 ```rust
-// Creating a tuple
-let tuple = (10, "hello", true);
+// main.rs - Rust 1.66 (cargo run)
+fn min_max(values: &[i32]) -> Option<(i32, i32)> {
+    let first = *values.first()?;
+    Some(values.iter().fold((first, first), |(lo, hi), &v| (lo.min(v), hi.max(v))))
+}
 
-// Accessing elements of a tuple
-let x = tuple.0;
-let y = tuple.1;
-let z = tuple.2;
+fn describe(range: (i32, i32)) -> &'static str {
+    match range {
+        (0, 0) => "empty",
+        (lo, hi) if lo == hi => "single value",
+        _ => "range",
+    }
+}
 
-// You can also use destructuring to access the elements
-let (x, y, z) = tuple;
+// When positions need names, a tuple struct or a struct is the idiomatic step up
+struct Meters(f64);
 
+fn main() {
+    let mut stats = min_max(&[4, 9, 1, 7]).expect("non-empty input");
+    println!("{} to {}", stats.0, stats.1); // 1 to 9
+
+    stats.1 = 100; // allowed only because the binding is `mut`
+    let (low, high) = stats;
+    println!("{low}, {high}"); // 1, 100
+
+    // Structural equality and lexicographic ordering
+    assert_eq!((1, "a"), (1, "a"));
+    assert!((1, 9) < (2, 0));
+
+    println!("{}", describe(stats)); // range
+
+    let distance = Meters(42.0);
+    println!("{} m", distance.0);
+}
 ```
 
-## Comparison
+Rust has no named tuple elements. Its answer is that if positions need names, you want a struct. Tuple structs like `Meters(f64)` sit in between: they give a distinct type with positional fields, which is how the newtype pattern works.
 
-As you can see, tuples in C#, TypeScript, and Rust are very similar in terms of syntax and usage. They all allow you to create a fixed-size collection of elements where each element can have a different type, and they all provide ways to access the elements of the tuple.
+## Side by side
 
-One difference between the three languages is that C# and TypeScript provide named elements in tuples, whereas Rust does not. This can make it easier to work with tuples in C# and TypeScript because you can give names to the elements and use those names to access the elements, rather than having to remember their positions.
+| | C# 11 | TypeScript 4.9 | Rust 1.66 |
+|---|---|---|---|
+| Runtime representation | `ValueTuple` struct | Plain JavaScript array | Value type, laid out in memory |
+| Element names | Compile-time aliases for `Item1`... | Labels for tooling only (4.0+) | None; use a struct |
+| Mutable by default | Yes, public fields | Yes, unless `readonly` | No, needs `let mut` |
+| `==` compares | Element values (C# 7.3+) | Array reference | Element values (`PartialEq`) |
+| Pattern matching | Tuple patterns in `switch` | Destructuring only | Full `match` with guards |
+| Length fixed by the type | Yes | No (compile-time only, `push` still works) | Yes |
 
-Overall, tuples can be a useful tool for storing and working with small collections of data where you don't want to create a custom data type. They are easy to use and can help make your code more readable and maintainable.
+The pattern I take from this: C# and Rust treat a tuple as a real value with structural equality, and TypeScript treats it as a type annotation over an array. If you move between the three, equality is the difference most likely to bite you. `(1, "a") == (1, "a")` is true in C# and Rust, and comparing two equal TypeScript tuples with `===` is false ([TypeScript 4.8](https://devblogs.microsoft.com/typescript/announcing-typescript-4-8/) and later even reject `===` against an array literal outright, because it can never be true).
+
+## The middle ground before a full named type
+
+Each language has a step between "anonymous tuple" and "full class", and it's worth knowing before you decide a tuple is too weak.
+
+In C#, that step is the `record struct`, added in [C# 10](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/record). `public record struct Range(int Min, int Max);` is one line, stays a value type like `ValueTuple` (no heap allocation), and gives you real property names that survive at runtime, so reflection and serialisers see `Min` and `Max` instead of `Item1` and `Item2`. You also get value equality, deconstruction and a readable `ToString()`. Positional properties on a `record struct` are settable, which matches `ValueTuple`; if you want immutability, declare it `readonly record struct` and the properties become `init`-only. The cost is that it's a declared type, so it lives somewhere in the codebase and has to be named well. I'd use a `ValueTuple` inside a method or private helper, a `readonly record struct` for small values that travel between classes, and a `record` class once the data gets bigger than a few fields or needs reference semantics.
+
+In TypeScript, the choice for a function return is between a labelled tuple and an object type or interface. A tuple return such as `[min: number, max: number]` makes destructuring short and lets callers pick their own names, which is why React's `useState` returns one. An object type `{ min: number; max: number }` forces callers to use the real names, survives reordering, and lets you add a third field later without breaking anyone who destructures. My rule: tuples for returns with two elements of different types where callers will always rename them; object types for everything else, and interfaces when the shape is shared across modules.
+
+Rust's equivalent is the tuple struct covered above, with a named struct as the next step.
+
+## When to reach for a tuple, and when not to
+
+My rule of thumb is the same in all three languages: tuples are for **short-lived, local, positional data**. Returning two values from a private helper, iterating over key/value pairs, or matching on a pair of states in a `switch` or `match` are all good fits.
+
+I'd avoid them when:
+
+- **The data crosses a public API boundary.** A `(int, int)` return type tells the caller nothing about which value is which. In C#, a `record` is one line and gives you named properties, value equality and a useful `ToString()`. In Rust, a struct with `#[derive(Debug, PartialEq)]` costs about the same. In TypeScript, an object type `{ min: number; max: number }` is clearer than any tuple.
+- **There are more than three elements.** By the fourth position, nobody remembers what `.3` or `Item4` means.
+- **The data is serialised.** C# tuple names vanish at runtime: Newtonsoft.Json writes `Item1` and `Item2`, and System.Text.Json writes `{}` unless you set `JsonSerializerOptions.IncludeFields = true`. TypeScript tuples serialise as arrays, which is compact but fragile when the shape changes.
+- **Two positions share a type.** `(int, int)` or `[string, string]` lets callers swap arguments silently. Named fields or a newtype prevent that.
+
+If you're unsure, start with a named type. Moving from a tuple to a named type later means touching every call site, while the reverse rarely comes up.

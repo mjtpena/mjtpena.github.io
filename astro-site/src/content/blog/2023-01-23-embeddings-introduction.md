@@ -1,408 +1,171 @@
 ---
-title: "Introduction to Text Embeddings with Azure OpenAI"
+title: "Text Embeddings on Azure OpenAI: What They Are and When to Use Them"
+description: "What text embeddings are, which Azure OpenAI embeddings models you can use in January 2023, how to compare vectors, and when embeddings are the wrong tool."
 author: Michael John Peña
 draft: false
 date: 2023-01-23
 tags:
-  - Azure
+  - Azure OpenAI
   - OpenAI
   - Embeddings
-  - AI
+  - Python
   - NLP
 ---
 
-## What Are Embeddings?
+Most of the attention on Azure OpenAI is going to completions, but I expect the embeddings endpoint to do more quiet, useful work inside real systems. Search, deduplication, clustering and "find me the similar ticket" all reduce to the same operation: turn text into a vector, then measure distance. If you get the basics wrong, such as mixing models, comparing the wrong way, or embedding text that is too long, nothing errors. Your results just get worse, and nobody can tell you why.
 
-Embeddings are dense vector representations of text where:
-- Similar meanings are close together in vector space
-- Different meanings are far apart
-- Relationships are captured (king - man + woman = queen)
+## What an embedding actually is
+
+An embedding is a fixed-length list of floating-point numbers that a model produces for a piece of text. The model is trained so that texts with similar meaning land close together in that vector space and unrelated texts land far apart. "Reset my password" and "I can't log in" share almost no words, but their vectors sit near each other. That is the whole point: you get similarity on meaning, not on spelling.
+
+Three properties matter in practice:
+
+- **The length is fixed per model.** Every input, from three words to three pages, comes back as the same number of dimensions. A long document gets squeezed into the same space as a short phrase, which is why chunking matters.
+- **Vectors are only comparable within one model.** A vector from one model means nothing next to a vector from another. Change models and you re-embed everything.
+- **The individual numbers mean nothing on their own.** Dimension 412 isn't "about cloud computing". Only distances between vectors carry information.
+
+## The models you'll meet in January 2023
+
+Azure OpenAI went [generally available on 16 January](/blog/2023-01-20-azure-openai-service-ga/), and the embeddings story is in transition right now.
+
+The first-generation models come in families split by task and size. There are `text-similarity-*-001` models for comparing two texts, and pairs of `text-search-*-doc-001` and `text-search-*-query-001` models for search, where documents and queries go through different models. There are also `code-search-*` models for code. Sizes run from Ada to Davinci, and the vector length grows with the size: 1,024 dimensions for Ada, 4,096 for Curie and 12,288 for Davinci. Microsoft's [Azure OpenAI models page](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) lists those dimensions and the regions each model is offered in. The input limit is in the [REST reference](https://learn.microsoft.com/azure/cognitive-services/openai/reference): 2,048 tokens per input.
+
+On 15 December 2022 OpenAI released [`text-embedding-ada-002`](https://openai.com/index/new-and-improved-embedding-model/), which replaces five of those first-generation models (similarity, text search query and doc, and code search) with a single model. It returns 1,536 dimensions, one-eighth the size of Davinci's vectors. On OpenAI's API it accepts inputs up to 8,191 tokens, and OpenAI prices it far below the Davinci-class embedding models. On OpenAI's own API it is the obvious default.
+
+Here is the catch for Azure users: **`text-embedding-ada-002` isn't in the Azure OpenAI model list yet.** The models page lists only the `-001` embeddings models, and the January entry on the [What's new page](https://learn.microsoft.com/azure/cognitive-services/openai/whats-new) covers GA and `text-davinci-003`, not ada-002. Neither page gives a date for it. When it does arrive, don't assume it will carry the same 8,191-token limit as OpenAI's API; check the models page for whatever you actually deploy. My position is simple:
+
+| Situation | What I'd do |
+|---|---|
+| Building now on Azure OpenAI | Use the `-001` families: `text-search-ada-doc-001` and `text-search-ada-query-001` (or the Curie pair) for search, `text-similarity-*-001` for comparing texts. Keep the source text and plan a re-embed when ada-002 lands. |
+| Prototyping on OpenAI's API | Use `text-embedding-ada-002` for everything: similarity, search and code. One model, one vector store. |
+| You're tempted by Davinci-001 embeddings for quality | Don't. 12,288 dimensions is eight times the storage and compute per comparison of ada-002 for results that OpenAI's own benchmarks put behind ada-002 on most tasks. |
+
+For a search prototype on Azure today, I'd start with the Ada search pair: 1,024 dimensions and the cheapest per token. Curie's 4,096 dimensions cost more and take four times the storage, which is hard to justify for vectors you expect to replace when ada-002 arrives. The search pair has one rule that trips people up: embed every document with the `-doc` model and every query with the `-query` model. They are two deployments, and using the doc model for queries (or the reverse) quietly degrades ranking. The `text-similarity` models use one model for both sides and suit deduplication and clustering, where there is no query/document split.
+
+## Getting a vector from Azure OpenAI
+
+With the `openai` 0.26 Python library, an embeddings call to Azure looks like a completions call: you point the library at your resource, pin the API version, and pass your deployment name as `engine`. I covered the configuration options in [setting up the openai 0.26 library](/blog/2023-01-18-azure-openai-python-sdk/).
 
 ```python
-import openai
-import numpy as np
+import os
 from typing import List
 
-# Get an embedding
-def get_embedding(text: str, deployment: str = "text-embedding-ada-002") -> List[float]:
-    """Get embedding vector for text."""
-    response = openai.Embedding.create(
-        engine=deployment,
-        input=text
-    )
-    return response['data'][0]['embedding']
+import openai
 
-# Example
-embedding = get_embedding("Azure is a cloud computing platform")
-print(f"Dimensions: {len(embedding)}")  # 1536 for ada-002
-print(f"First 5 values: {embedding[:5]}")
+openai.api_type = "azure"
+openai.api_base = "https://<your-resource-name>.openai.azure.com/"
+openai.api_version = "2022-12-01"
+openai.api_key = os.environ["AZURE_OPENAI_KEY"]
+
+EMBEDDING_DEPLOYMENT = "<your-embedding-deployment>"
+
+
+def get_embedding(text: str, deployment: str = EMBEDDING_DEPLOYMENT) -> List[float]:
+    # Newlines can degrade results on the first-generation models; flatten them.
+    text = text.replace("\n", " ")
+    response = openai.Embedding.create(engine=deployment, input=text)
+    return response["data"][0]["embedding"]
+
+
+if __name__ == "__main__":
+    vector = get_embedding("Azure Key Vault stores secrets and certificates")
+    print(len(vector))
 ```
 
-## Understanding Embedding Dimensions
+Two Azure-specific details. First, `engine` is the name you gave the deployment, not the model name. If you use a search pair, you need two deployments and two engine names, one for `-doc` and one for `-query`. Second, send one input per request. OpenAI's API accepts an array of inputs, but the [Azure OpenAI REST reference](https://learn.microsoft.com/azure/cognitive-services/openai/reference) currently accepts a maximum array of one, so plan on one string per call. A bulk indexing job then becomes thousands of small requests against your deployment's rate limit, which is why [handling throttling](/blog/2023-01-10-rate-limiting-azure-openai/) matters more for embeddings than for completions.
 
-Azure OpenAI's text-embedding-ada-002 produces 1536-dimensional vectors:
+## Comparing vectors
 
-```python
-import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
+Cosine similarity is the standard measure. It looks at the angle between two vectors and ignores their length. OpenAI's embeddings are normalised to length 1, so cosine similarity and a plain dot product give the same ranking, and the dot product is cheaper. I still write the cosine version in exploratory code because it stays correct if a vector from somewhere else turns up.
 
-def visualize_embeddings(texts: List[str], labels: List[str] = None):
-    """Visualize embeddings in 2D using PCA."""
-    embeddings = [get_embedding(text) for text in texts]
-
-    # Reduce to 2D
-    pca = PCA(n_components=2)
-    reduced = pca.fit_transform(embeddings)
-
-    # Plot
-    plt.figure(figsize=(10, 8))
-    for i, (x, y) in enumerate(reduced):
-        plt.scatter(x, y)
-        label = labels[i] if labels else texts[i][:20]
-        plt.annotate(label, (x, y), fontsize=8)
-
-    plt.title("Text Embeddings (2D PCA)")
-    plt.xlabel("PC1")
-    plt.ylabel("PC2")
-    plt.show()
-
-# Example
-texts = [
-    "Azure is a cloud platform",
-    "AWS is Amazon's cloud service",
-    "Google Cloud Platform offers cloud computing",
-    "Python is a programming language",
-    "JavaScript runs in browsers",
-    "Machine learning uses data to learn patterns"
-]
-
-visualize_embeddings(texts)
-# Cloud platforms cluster together, programming languages cluster together
-```
-
-## Similarity Calculations
+This block is self-contained and uses the search pair: documents go through the `-doc` deployment, the query through the `-query` one.
 
 ```python
-from typing import Tuple
+import os
+from typing import List, Tuple
+
 import numpy as np
+import openai
+
+openai.api_type = "azure"
+openai.api_base = "https://<your-resource-name>.openai.azure.com/"
+openai.api_version = "2022-12-01"
+openai.api_key = os.environ["AZURE_OPENAI_KEY"]
+
+DOC_DEPLOYMENT = "<your-text-search-ada-doc-001-deployment>"
+QUERY_DEPLOYMENT = "<your-text-search-ada-query-001-deployment>"
+
+
+def get_embedding(text: str, deployment: str) -> List[float]:
+    # Retry on HTTP 429 is omitted on purpose to keep the demo short.
+    text = text.replace("\n", " ")
+    response = openai.Embedding.create(engine=deployment, input=text)
+    return response["data"][0]["embedding"]
+
 
 def cosine_similarity(a: List[float], b: List[float]) -> float:
-    """Calculate cosine similarity between two vectors."""
-    a = np.array(a)
-    b = np.array(b)
-    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+    va, vb = np.array(a), np.array(b)
+    return float(np.dot(va, vb) / (np.linalg.norm(va) * np.linalg.norm(vb)))
 
-def euclidean_distance(a: List[float], b: List[float]) -> float:
-    """Calculate Euclidean distance between two vectors."""
-    return np.linalg.norm(np.array(a) - np.array(b))
 
-def dot_product(a: List[float], b: List[float]) -> float:
-    """Calculate dot product (works well with normalized vectors)."""
-    return np.dot(a, b)
+def rank(
+    query: str,
+    documents: List[str],
+    doc_vectors: List[List[float]],
+    query_deployment: str,
+) -> List[Tuple[float, str]]:
+    query_vector = get_embedding(query, query_deployment)
+    scored = [
+        (cosine_similarity(query_vector, vector), doc)
+        for vector, doc in zip(doc_vectors, documents)
+    ]
+    return sorted(scored, reverse=True)
 
-class SimilarityCalculator:
-    """Calculate and compare text similarities."""
 
-    def __init__(self, deployment: str = "text-embedding-ada-002"):
-        self.deployment = deployment
-        self.cache = {}
-
-    def get_embedding(self, text: str) -> List[float]:
-        """Get embedding with caching."""
-        if text not in self.cache:
-            self.cache[text] = get_embedding(text, self.deployment)
-        return self.cache[text]
-
-    def similarity(self, text1: str, text2: str) -> float:
-        """Calculate similarity between two texts."""
-        emb1 = self.get_embedding(text1)
-        emb2 = self.get_embedding(text2)
-        return cosine_similarity(emb1, emb2)
-
-    def rank_by_similarity(
-        self,
-        query: str,
-        documents: List[str],
-        top_k: int = 5
-    ) -> List[Tuple[str, float]]:
-        """Rank documents by similarity to query."""
-        query_emb = self.get_embedding(query)
-
-        scored = []
-        for doc in documents:
-            doc_emb = self.get_embedding(doc)
-            score = cosine_similarity(query_emb, doc_emb)
-            scored.append((doc, score))
-
-        scored.sort(key=lambda x: x[1], reverse=True)
-        return scored[:top_k]
-
-# Usage
-calc = SimilarityCalculator()
-
-# Compare two sentences
-sim = calc.similarity(
-    "The quick brown fox jumps over the lazy dog",
-    "A fast auburn fox leaps above a sleepy canine"
-)
-print(f"Similarity: {sim:.4f}")  # High similarity (same meaning)
-
-sim2 = calc.similarity(
-    "The quick brown fox jumps over the lazy dog",
-    "Azure provides cloud computing services"
-)
-print(f"Similarity: {sim2:.4f}")  # Low similarity (different topics)
+if __name__ == "__main__":
+    docs = [
+        "Azure Functions runs event-driven code without managing servers",
+        "Azure SQL Database is a managed relational database",
+        "My dog sleeps most of the afternoon",
+    ]
+    # Embed the documents once with the -doc deployment. A real index stores
+    # these vectors rather than recomputing them for every query.
+    doc_vectors = [get_embedding(d, DOC_DEPLOYMENT) for d in docs]
+    for score, doc in rank("serverless compute", docs, doc_vectors, QUERY_DEPLOYMENT):
+        print(f"{score:.3f}  {doc}")
 ```
 
-## Batch Processing
+With a `text-similarity` model, pass the same deployment for both sides. Production code should also retry on HTTP 429 with backoff, as in the [throttling post](/blog/2023-01-10-rate-limiting-azure-openai/). Expect the Functions sentence to rank first. Expect the scores to be compressed, too. In my experience scores cluster high (unrelated text often lands around 0.7 with ada-002), and the `-001` models have their own range, so the gap between "relevant" and "irrelevant" is narrower than intuition suggests.
 
-Efficiently embed many documents:
+That leads to the most common mistake I see: **treating the similarity score as a probability.** A score of 0.82 doesn't mean "82% relevant". Scores are only meaningful relative to other scores from the same model on the same kind of content. If you need a cut-off, for example "treat anything above X as a duplicate", pick X by labelling a few dozen real pairs from your own data and looking at where the scores separate.
 
-```python
-from typing import List, Dict
-import time
+## What embeddings are good for
 
-class BatchEmbedder:
-    """Efficient batch embedding with rate limiting."""
+- **Semantic search.** Embed your documents once, embed each query, return the nearest vectors. This is the backbone of the retrieve-then-generate pattern, where you find relevant passages and put them in a completion prompt. I build one end to end in [semantic search with Azure OpenAI embeddings](/blog/2023-01-24-semantic-search-embeddings/).
+- **Near-duplicate detection.** Support tickets, product listings and survey responses that say the same thing in different words.
+- **Clustering and topic discovery.** Run k-means over the vectors and read a sample from each cluster.
+- **Classification with few labels.** Embed a handful of labelled examples per class and assign new text to the nearest class centroid. It's crude, but it often beats nothing when you have twenty examples and no budget to train a model.
 
-    def __init__(
-        self,
-        deployment: str = "text-embedding-ada-002",
-        batch_size: int = 100,
-        requests_per_minute: int = 60
-    ):
-        self.deployment = deployment
-        self.batch_size = batch_size
-        self.min_interval = 60.0 / requests_per_minute
+## When not to use them
 
-    def embed_batch(self, texts: List[str]) -> List[List[float]]:
-        """Embed a batch of texts."""
-        response = openai.Embedding.create(
-            engine=self.deployment,
-            input=texts
-        )
-        return [item['embedding'] for item in response['data']]
+Embeddings are cheap to try, which makes them easy to overuse.
 
-    def embed_all(
-        self,
-        texts: List[str],
-        show_progress: bool = True
-    ) -> List[List[float]]:
-        """Embed all texts with batching and rate limiting."""
-        all_embeddings = []
-        total_batches = (len(texts) + self.batch_size - 1) // self.batch_size
+- **Exact matches.** Product codes, error numbers, invoice IDs and people's names are what keyword search was built for. Embeddings blur `ERR-4012` and `ERR-4021` together because they look alike. If users search for identifiers, you need keyword search alongside the vectors, not instead of them.
+- **Long documents as a single vector.** A 6,000-token policy document embedded whole becomes an average of everything in it and matches nothing well. Chunk by section or paragraph, and keep a pointer back to the source.
+- **Small corpora with good structure.** If your content is 200 well-tagged FAQ entries, a filter and a keyword index may be all you need. Adding a vector store adds a pipeline to keep in sync.
+- **Anything needing an explanation.** You can't tell a user or an auditor why two texts scored 0.84. If a decision has to be justified, embeddings can shortlist candidates, but something explainable should make the call.
+- **Sensitive text you haven't classified.** Every embedding call sends the text to the service. Treat it like any other Azure OpenAI request for data-handling purposes.
 
-        for i in range(0, len(texts), self.batch_size):
-            batch = texts[i:i + self.batch_size]
-            batch_num = i // self.batch_size + 1
+## Operational details that bite later
 
-            if show_progress:
-                print(f"Processing batch {batch_num}/{total_batches}")
+**Store the model name with every vector.** When you re-embed, and you will, you need to know which vectors came from which model. A `model` column costs nothing and saves you from silently mixing spaces.
 
-            start_time = time.time()
-            embeddings = self.embed_batch(batch)
-            all_embeddings.extend(embeddings)
+**Keep the source text.** Vectors can't be turned back into text. If you only keep vectors, a model change means going back to source systems that may have moved on.
 
-            # Rate limiting
-            elapsed = time.time() - start_time
-            if elapsed < self.min_interval:
-                time.sleep(self.min_interval - elapsed)
+**Mind the storage.** 1,536 32-bit floats is about 6 KB per vector before any index overhead. A million chunks is roughly 6 GB of raw vectors. I compare the storage options in [an introduction to vector databases](/blog/2023-01-25-vector-databases-intro/).
 
-        return all_embeddings
+**Count tokens before you send.** Over-length inputs are rejected, not truncated. Check length with `tiktoken` first and chunk anything over the limit of the model you deployed, as covered in [token management](/blog/2023-01-11-token-management-azure-openai/). Use the right tokenizer: ada-002 uses the `cl100k_base` encoding, but the `-001` models use the older GPT-3 tokenizer (`r50k_base` in `tiktoken`), so don't count tokens for them with `cl100k_base`. On Azure today, size chunks to stay under the 2,048-token limit in the REST reference, and re-check the models page when you deploy something new.
 
-    def embed_with_metadata(
-        self,
-        documents: List[Dict]
-    ) -> List[Dict]:
-        """Embed documents and add embeddings to metadata."""
-        texts = [doc.get('text', doc.get('content', '')) for doc in documents]
-        embeddings = self.embed_all(texts)
+## The short version
 
-        results = []
-        for doc, emb in zip(documents, embeddings):
-            result = doc.copy()
-            result['embedding'] = emb
-            results.append(result)
-
-        return results
-
-# Usage
-embedder = BatchEmbedder()
-
-documents = [
-    {"id": 1, "text": "Azure Virtual Machines provide scalable computing"},
-    {"id": 2, "text": "Azure Functions is a serverless compute service"},
-    {"id": 3, "text": "Azure Cosmos DB is a globally distributed database"},
-    # ... many more documents
-]
-
-embedded_docs = embedder.embed_with_metadata(documents)
-print(f"Embedded {len(embedded_docs)} documents")
-```
-
-## Building a Simple Semantic Search
-
-```python
-from dataclasses import dataclass
-from typing import List, Optional
-import json
-
-@dataclass
-class SearchResult:
-    """A search result."""
-    document: dict
-    score: float
-    rank: int
-
-class SimpleSemanticSearch:
-    """Simple in-memory semantic search."""
-
-    def __init__(self, deployment: str = "text-embedding-ada-002"):
-        self.deployment = deployment
-        self.documents: List[dict] = []
-        self.embeddings: List[List[float]] = []
-
-    def add_documents(self, documents: List[dict], text_field: str = "text"):
-        """Add documents to the index."""
-        embedder = BatchEmbedder(self.deployment)
-
-        for doc in documents:
-            text = doc.get(text_field, "")
-            embedding = get_embedding(text, self.deployment)
-
-            self.documents.append(doc)
-            self.embeddings.append(embedding)
-
-    def search(
-        self,
-        query: str,
-        top_k: int = 5,
-        threshold: Optional[float] = None
-    ) -> List[SearchResult]:
-        """Search for similar documents."""
-        query_embedding = get_embedding(query, self.deployment)
-
-        # Calculate similarities
-        scores = []
-        for i, doc_emb in enumerate(self.embeddings):
-            score = cosine_similarity(query_embedding, doc_emb)
-            scores.append((i, score))
-
-        # Sort by score
-        scores.sort(key=lambda x: x[1], reverse=True)
-
-        # Filter and limit
-        results = []
-        for rank, (idx, score) in enumerate(scores[:top_k], 1):
-            if threshold and score < threshold:
-                continue
-
-            results.append(SearchResult(
-                document=self.documents[idx],
-                score=score,
-                rank=rank
-            ))
-
-        return results
-
-    def save_index(self, filepath: str):
-        """Save index to file."""
-        data = {
-            "documents": self.documents,
-            "embeddings": self.embeddings
-        }
-        with open(filepath, 'w') as f:
-            json.dump(data, f)
-
-    def load_index(self, filepath: str):
-        """Load index from file."""
-        with open(filepath, 'r') as f:
-            data = json.load(f)
-        self.documents = data["documents"]
-        self.embeddings = data["embeddings"]
-
-# Usage
-search = SimpleSemanticSearch()
-
-# Add documents
-docs = [
-    {"id": 1, "title": "VM Guide", "text": "Azure Virtual Machines are IaaS compute resources"},
-    {"id": 2, "title": "Functions Guide", "text": "Azure Functions lets you run code without servers"},
-    {"id": 3, "title": "Cosmos DB Guide", "text": "Cosmos DB is a NoSQL database with global distribution"},
-    {"id": 4, "title": "SQL Guide", "text": "Azure SQL Database is a managed relational database"},
-    {"id": 5, "title": "Blob Storage", "text": "Azure Blob Storage stores unstructured data objects"}
-]
-
-search.add_documents(docs)
-
-# Search
-results = search.search("serverless computing", top_k=3)
-for r in results:
-    print(f"{r.rank}. {r.document['title']} (score: {r.score:.4f})")
-```
-
-## Embedding Use Cases
-
-```python
-# 1. Document deduplication
-def find_duplicates(documents: List[str], threshold: float = 0.95) -> List[Tuple[int, int]]:
-    """Find near-duplicate documents."""
-    embeddings = [get_embedding(doc) for doc in documents]
-    duplicates = []
-
-    for i in range(len(embeddings)):
-        for j in range(i + 1, len(embeddings)):
-            sim = cosine_similarity(embeddings[i], embeddings[j])
-            if sim >= threshold:
-                duplicates.append((i, j))
-
-    return duplicates
-
-# 2. Text clustering
-from sklearn.cluster import KMeans
-
-def cluster_documents(documents: List[str], n_clusters: int = 5) -> List[int]:
-    """Cluster documents by semantic similarity."""
-    embeddings = [get_embedding(doc) for doc in documents]
-
-    kmeans = KMeans(n_clusters=n_clusters, random_state=42)
-    labels = kmeans.fit_predict(embeddings)
-
-    return labels.tolist()
-
-# 3. Anomaly detection
-def find_outliers(documents: List[str], threshold: float = 0.5) -> List[int]:
-    """Find documents that are outliers (dissimilar to others)."""
-    embeddings = [get_embedding(doc) for doc in documents]
-
-    # Calculate average similarity to all other documents
-    outlier_indices = []
-
-    for i, emb in enumerate(embeddings):
-        similarities = [
-            cosine_similarity(emb, other)
-            for j, other in enumerate(embeddings)
-            if i != j
-        ]
-        avg_sim = np.mean(similarities)
-
-        if avg_sim < threshold:
-            outlier_indices.append(i)
-
-    return outlier_indices
-```
-
-## Best Practices
-
-1. **Cache embeddings**: Embedding generation is slow and costs tokens
-2. **Batch requests**: Process multiple texts in one API call
-3. **Normalize vectors**: For faster dot product similarity
-4. **Choose the right model**: ada-002 balances quality and cost
-5. **Handle long text**: Chunk or summarize texts over 8191 tokens
-6. **Monitor costs**: Track token usage for embedding calls
-
-## Resources
-
-- [Azure OpenAI Embeddings](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings)
-- [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings)
-- [Embedding Use Cases](https://platform.openai.com/docs/guides/embeddings/use-cases)
+Use one embedding model per corpus. On Azure OpenAI this month that means a `-001` model, most likely the Ada search pair, with the source text kept so you can re-embed when ada-002 arrives; on OpenAI's API, use ada-002 now. Embed documents and queries with the matching halves of a search pair, send one input per call to Azure OpenAI, and budget for the rate limit. Compare with cosine similarity, and calibrate any threshold on your own data. Chunk long text, keep the original, and record the model that produced each vector. Then be honest about the gaps: embeddings are good at finding meaning and bad at exact identifiers and explanations, so plan for keyword search and human judgement where they matter. Microsoft's [embeddings concept page](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings) is a good short read on the Azure side.
