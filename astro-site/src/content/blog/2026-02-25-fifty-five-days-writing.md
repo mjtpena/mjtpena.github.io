@@ -1,6 +1,6 @@
 ---
-title: "Fifty-Five Days of Daily Writing"
-description: "I started this in January as an experiment. I keep doing it because it's become something I didn't expect."
+title: "Fifty-Five Days In: Being Wrong in Public and Writing on Empty"
+description: "Fifty-five days of daily posts: calibrating my opinions by being wrong in public, letting go of saved-up ideas, and why the empty-tank days are worth it."
 author: Michael John Peña
 draft: false
 date: 2026-02-25
@@ -11,78 +11,83 @@ tags:
   - Career
 ---
 
-I started this in January as an experiment. I keep doing it because it's become something I didn't expect.
+I started writing every day in January as an experiment. I've kept going because it turned into something I didn't plan for: it changed how sure I am of what I think, and how I say it out loud.
 
-## What I Expected
+Two weeks ago, in [Writing as Thinking](/blog/2026-02-10-writing-as-thinking/), I wrote about the page as a thinking tool and why the delete step matters. This post is about the parts that only showed up later: what happens after you publish, which ideas survive, and the days when there's nothing in the tank.
 
-A writing habit. Clearer thinking. Maybe some useful posts for my blog.
+## What I expected
 
-That's all happened. But there's something else underneath it.
+A writing habit. Clearer thinking. Maybe a few useful posts for the blog.
 
-## What Actually Happened
+All of that has happened. But there's something underneath it that I didn't see coming.
 
-**My opinions got more calibrated.** Writing forces you to commit to a position. Then people react. Then you learn whether you were right.
+## What actually happened
 
-I've been wrong in public a few times. Not dramatically wrong, but noticeably wrong. That used to embarrass me. Now I treat it as information.
+### My opinions got more calibrated
 
-**I stopped hoarding ideas.** Before this, I'd have an interesting thought and file it away for a "proper" post someday. Most ideas died in that folder.
+Writing forces you to commit to a position. Then people react. Then you find out whether you were right.
 
-Now I write the idea the day I have it. Most of them are smaller than I thought. Some of them are bigger. I wouldn't know which without writing them.
+I've been wrong in public a few times. Not dramatically wrong, but noticeably wrong. That used to embarrass me. Now I treat it as information. An opinion I've never had to defend is really just a mood, and publishing it is the cheapest way I know to test it against people who see a different slice of the problem.
 
-**The topics I return to have surprised me.** I thought I'd write mostly technical posts. I've written as much about parenting, presence, and consulting as I have about Azure.
+The side effect is that I now hold my positions with a confidence level attached. Some things I'll argue for in any room. Some I'll write as "my current bet". Knowing the difference is most of what people mean by judgement.
 
-That's the writing showing me what I'm actually thinking about.
+### I stopped hoarding ideas
 
-## The Rhythm
+Before this, I'd have an interesting thought and file it away for a "proper" post someday. Most ideas died in that folder.
 
-Morning coffee. Thirty to forty minutes. Most posts start as a question I want to answer.
+Now I write the idea the day I have it. Most of them turn out smaller than I thought. Some are bigger. I wouldn't know which without writing them. The folder was protecting ideas from the one test that mattered.
 
-"Why does prompt caching matter and why do I keep forgetting to bring it up with clients?"
+### The topics I return to surprised me
 
-"What does my son's LEGO session have to do with debugging?"
+I assumed I'd write mostly technical posts. I've written as much about parenting, presence and consulting as I have about Azure.
 
-"When does an agent make more sense than a workflow?"
+That's the writing showing me what I'm actually thinking about. A post about [my son's LEGO set](/blog/2026-02-19-debugging-lessons-from-son/) ended up being about debugging discipline. A post about [being hired as the expert](/blog/2026-02-17-the-expert-trap/) ended up being about listening. The personal and the technical keep leaking into each other, and I've stopped trying to keep them apart.
 
-The writing is the thinking. The published post is the evidence that thinking happened.
+## The rhythm
 
-## What I've Let Go
+Morning coffee. Thirty to forty minutes. Most posts start as a question I want to answer:
 
-Early on I worried about quality. "Is this good enough to publish?"
+- "Why does prompt caching matter, and why do I keep forgetting to bring it up with clients?" That became [Why Your Azure OpenAI Prompt Cache Keeps Missing](/blog/2026-02-16-prompt-caching-performance/).
+- "What does my son's LEGO session have to do with debugging?"
+- "When does an agent make more sense than a workflow?" That became [Workflow First, Agent Inside](/blog/2026-02-11-agents-vs-workflows/).
 
-The question shifted to: "Did I think clearly about something today?" If yes, it gets published. Length, structure, polish—these serve clarity, not the other way around.
+Starting from a question matters more than I expected. A topic ("prompt caching") gives me nothing to push against. A question gives me a finish line: the post is done when I've answered it, or when I've admitted I can't yet.
 
-Some posts are 300 words. Some are 1500. The word count isn't the point.
+The writing is the thinking. The published post is the evidence that the thinking happened.
 
-## The Unexpected Benefit
+## What I've let go
 
-I talk to people differently now. When someone asks what I think about something, I have a more precise answer. Not because I'm smarter—because I've been practicing precision in writing, and it transfers to speech.
+Early on I worried about quality: "Is this good enough to publish?"
 
-Clients have noticed. A few have asked if I consult on communication, not just technical architecture.
+The question has shifted to: "Did I think clearly about something today?" If yes, it gets published. Length, structure and polish serve clarity, not the other way around.
 
-That's writing paying forward into work.
+Some posts are 300 words. Some are 1,500. The word count isn't the point. A 300-word post that makes one decision clear is worth more than a long one that surveys a topic and commits to nothing.
 
-## The Hard Days
+## The benefit I didn't plan for
 
-There are days when nothing interesting happened and nothing interesting came to mind.
+I talk to people differently now. When someone asks what I think about something, I have a more precise answer. Not because I'm smarter, but because I've been practising precision in writing every morning, and it carries over into speech.
 
-Those are the best posts, actually. Writing from an empty state forces honesty. No interesting framing to hide behind. Just: this is what I'm thinking, even when what I'm thinking is mostly uncertainty.
+Clients have noticed. A few have asked whether I consult on communication, not just technical architecture. I didn't expect that, and I take it as a signal of where the real value in consulting often sits: the architecture matters, but so does being able to explain the trade-off to the person signing off on it.
 
-## Fifty-Five More?
+## The hard days
 
-Yes. Not because I've committed to a number, but because stopping would feel like choosing less clarity over more.
+There are days when nothing interesting happened and nothing interesting comes to mind.
+
+Those turn out to be some of the best posts. Writing from an empty state forces honesty. There's no clever framing to hide behind, just: this is what I'm thinking, even when what I'm thinking is mostly uncertainty.
+
+They're also the days the habit earns its keep. Anyone can write when an idea is burning. The practice is showing up when it isn't, and finding that there was something there after all, just quieter.
+
+## Fifty-five more?
+
+Yes. Not because I've committed to a number, but because stopping would mean choosing less clarity over more.
 
 That's not a good trade.
 
-## If You're Considering It
+## If you're considering it
 
-Start with ten days. Don't aim for quality—aim for consistency.
+- **Start with ten days.** Don't aim for quality; aim for consistency. Ten is short enough to finish and long enough to hit at least one empty day.
+- **Write what you actually think,** not what sounds impressive. The impressive version is the one you'll be embarrassed by later.
+- **Publish it even when it's imperfect.** Being wrong in public is how the calibration happens.
+- **Don't do it as a performance.** If daily publishing becomes about streaks or reach, it stops being a thinking tool. Skip the day rather than publish filler.
 
-Write what you actually think. Not what sounds impressive.
-
-Publish it even when it's imperfect.
-
-The compounding happens quietly, then all at once.
-
-Day fifty-five doesn't look much different from day fifty-four. But it looks very different from day one.
-
-Start on day one.
+Day fifty-five doesn't look much different from day fifty-four. It looks very different from day one. The only way to get there is to start on day one.
