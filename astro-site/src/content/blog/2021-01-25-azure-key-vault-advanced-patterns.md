@@ -1,6 +1,6 @@
 ---
-title: Advanced Azure Key Vault Patterns
-description: "\"Put it in Key Vault\" is the easy advice. The advanced game is rotation, lifecycle, and access patterns that don't break under pressure. Managed identity…"
+title: "Key Vault Beyond the Basics: RBAC, Soft-Delete and Expiry Events"
+description: "Vault topology, the Azure RBAC preview versus access policies, default soft-delete, and rotating secrets from Event Grid expiry events, as of January 2021."
 author: Michael John Pena
 draft: false
 date: 2021-01-25
@@ -9,502 +9,272 @@ tags:
   - Azure
   - Key Vault
   - Security
-  - Secrets Management
-  - Encryption
+  - Terraform
+  - Event Grid
 ---
 
-"Put it in Key Vault" is the easy advice. The advanced game is rotation, lifecycle, and access patterns that don't break under pressure. Managed identity references over connection strings, soft-delete and purge protection so a misclick isn't catastrophic, RBAC permissions instead of access policies (yes, RBAC for Key Vault is the right default now), and an automated rotation pipeline for the secrets that matter—database passwords, signing keys, third-party API tokens. Today's post is the patterns I wish someone had handed me three years ago.
+"Put it in Key Vault" is the easy advice, and most teams have taken it. What goes wrong comes later: one vault shared by twelve apps, a Contributor who quietly grants themselves read access to production secrets, a vault deleted by a pipeline with no way back, or a database password that expired at 2am because nobody owned the rotation. Key Vault changed a lot in late 2020, so it's worth revisiting those decisions.
 
-## Key Vault Architecture Decisions
+I've covered the app-side integration (managed identity, the configuration provider, caching) in [an earlier post on Key Vault in .NET](/blog/2020-08-12-azure-key-vault-dotnet/). This one is about the platform decisions around the vault: how many to have, who can read what, what happens on delete, and how secrets get rotated.
 
-### Vault per Environment vs Shared Vault
+## One vault per app, per environment
+
+Microsoft's [Key Vault best practices](https://learn.microsoft.com/azure/key-vault/general/best-practices) recommend a vault per application per environment, and I agree. The reasoning:
+
+- **Blast radius.** Any identity with read access to secrets on a vault can read *every* secret in it under the access-policy model. A shared vault means the reporting job can read the payments API's signing key.
+- **Throttling.** Key Vault limits transactions per vault. A chatty app that doesn't cache can throttle every other tenant of a shared vault.
+- **Lifecycle.** When an app is retired you delete its vault. With a shared vault you're grepping secret names and hoping.
+
+Vaults cost nothing to have; you pay per operation, so sprawl is a naming problem, not a cost problem.
+
+When *wouldn't* I do this? Certificates shared across many apps, such as a wildcard TLS certificate, are better kept in one well-guarded vault that the consuming services (App Service, Application Gateway, Front Door) import from. Copying the same certificate into twenty vaults means renewing it twenty times.
+
+## Access policies vs the Azure RBAC preview
+
+Key Vault has two permission models for the data plane, and you choose one per vault.
+
+**Vault access policies** are the classic model. Each policy grants an identity a set of permissions (for example `get` and `list` on secrets) across the *whole* vault. There's no per-secret scoping, a vault supports a limited number of policies, and the policies live in the vault's management-plane properties. That last point is the real problem: anyone with `Microsoft.KeyVault/vaults/write`, which includes the built-in Contributor role, can edit the access policies and grant themselves data access. Your management-plane Contributors are effectively secret readers.
+
+**Azure RBAC for the Key Vault data plane** went into [public preview in September 2020](https://learn.microsoft.com/azure/key-vault/general/rbac-guide). With `enableRbacAuthorization` set on the vault, access is controlled by role assignments, the same as everything else in Azure. You get built-in roles such as Key Vault Administrator, Secrets Officer, Secrets User, Crypto User and Certificates Officer; each currently carries a (preview) suffix, such as "Key Vault Secrets User (preview)". Assignments can be scoped down to an individual secret, key or certificate, and they're governed by the same Privileged Identity Management and access reviews you already run. Contributor no longer implies data access; only principals who can write role assignments (Owner, User Access Administrator) can grant it. One caveat: the permission model is itself a property of the vault resource, so someone who can write the vault can still switch it back to access policies. Alert on that change in the Activity Log.
+
+| | Access policies | Azure RBAC (preview, Jan 2021) |
+|---|---|---|
+| Granularity | Whole vault, per object type | Down to a single secret, key or certificate |
+| Who can grant data access | Anyone who can write the vault resource | Only principals who can write role assignments |
+| Management | Per-vault list | Same as every other Azure resource, including PIM |
+| Status | GA | Public preview |
+| Propagation | Near-immediate | Role assignments can take a few minutes to apply |
+
+My position: for **new** vaults I'm defaulting to RBAC, with the preview caveat stated plainly to whoever owns the risk register. It's where Microsoft is taking the product, and the escalation path through access policies is a real gap. For **existing** production vaults I'm not switching yet. Changing the permission model disables every existing access policy at once. If your role assignments aren't already in place, that's an outage. Plan the migration, mirror the policies as role assignments first, and wait for GA if your organisation doesn't run production on previews.
+
+Here's the shape I use in Terraform. `enable_rbac_authorization` has been in the `azurerm` provider since late 2020; the 2.4x releases this month all support it.
 
 ```hcl
-# Terraform: Separate vaults per environment
-locals {
-  environments = ["dev", "staging", "prod"]
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.44"
+    }
+  }
 }
 
-resource "azurerm_key_vault" "env_vault" {
-  for_each = toset(local.environments)
+provider "azurerm" {
+  features {}
+}
 
-  name                = "kv-${var.project}-${each.key}"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+variable "app" { type = string }
+variable "environment" { type = string }
+variable "location" {
+  type    = string
+  default = "australiaeast"
+}
+variable "app_principal_id" {
+  description = "Object ID of the app's managed identity"
+  type        = string
+}
+variable "allowed_ip_ranges" {
+  type    = list(string)
+  default = []
+}
+
+data "azurerm_client_config" "current" {}
+
+resource "azurerm_resource_group" "app" {
+  name     = "rg-${var.app}-${var.environment}"
+  location = var.location
+}
+
+resource "azurerm_key_vault" "app" {
+  name                = "kv-${var.app}-${var.environment}"
+  location            = azurerm_resource_group.app.location
+  resource_group_name = azurerm_resource_group.app.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "standard"
 
-  purge_protection_enabled   = each.key == "prod" ? true : false
-  soft_delete_retention_days = each.key == "prod" ? 90 : 7
+  enable_rbac_authorization  = true
+  soft_delete_retention_days = 90
+  purge_protection_enabled   = var.environment == "prod"
 
   network_acls {
-    default_action             = "Deny"
-    bypass                     = "AzureServices"
-    ip_rules                   = var.allowed_ip_ranges[each.key]
-    virtual_network_subnet_ids = var.allowed_subnet_ids[each.key]
+    default_action = "Deny"
+    bypass         = "AzureServices"
+    ip_rules       = var.allowed_ip_ranges
   }
+}
 
-  tags = {
-    Environment = each.key
-  }
+# Key Vault Secrets User: read secret values, nothing else
+resource "azurerm_role_assignment" "app_secrets_user" {
+  scope              = azurerm_key_vault.app.id
+  role_definition_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/providers/Microsoft.Authorization/roleDefinitions/4633458b-17de-408a-b874-0445c86b69e6"
+  principal_id       = var.app_principal_id
 }
 ```
 
-## Access Policies vs RBAC
+I reference the role by its GUID rather than its display name, because the name still has the (preview) suffix and will change at GA; the GUID won't. Two things catch people out. The identity running Terraform needs a data-plane role (Secrets Officer, say) if the same configuration also writes secrets; owning the subscription isn't enough under RBAC. And with `default_action = "Deny"`, your build agents need to reach the vault through an allowed IP range or a private endpoint.
 
-Azure Key Vault supports both access policies and Azure RBAC. Here is when to use each:
+## Soft-delete is becoming mandatory
 
-### Access Policies (Classic)
+Soft-delete keeps a deleted vault, or a deleted secret, key or certificate, recoverable for a retention period of 7 to 90 days, and once it's on it can't be turned off. Microsoft [announced that the ability to opt out will be removed](https://learn.microsoft.com/azure/key-vault/general/soft-delete-change), originally planned for the end of December 2020. As I write, new vaults get soft-delete by default and you can still technically opt out at creation, but I'd treat that door as already closed. The Terraform provider has: [azurerm 2.41 (17 December 2020)](https://github.com/hashicorp/terraform-provider-azurerm/blob/main/CHANGELOG-v2.md) started purging secrets, keys and certificates on destroy (switch it off with `purge_soft_delete_on_destroy` in the provider's `features` block), and 2.42 (8 January 2021) deprecated `soft_delete_enabled` and defaulted it to `true`, so it now treats soft-delete as always on. The [soft-delete overview](https://learn.microsoft.com/azure/key-vault/general/soft-delete-overview) has the details.
 
-```csharp
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-using Azure.ResourceManager;
-using Azure.ResourceManager.KeyVault;
+What this changes in practice:
 
-public class KeyVaultPolicyManager
-{
-    private readonly ArmClient _armClient;
+- **Names stay reserved.** A soft-deleted vault keeps its globally unique name until it's purged or the retention period ends. A pipeline that deletes and recreates `kv-orders-dev` will fail on the second run unless it purges first or recovers the old vault.
+- **Secret names too.** Deleting a secret and immediately setting one with the same name fails with a conflict while the deleted secret is still in the recycle bin.
+- **Purge is the new delete.** Tidy-up scripts need the `purge` permission (or the Key Vault Contributor role on the management side for vault purges), and that permission deserves the same scrutiny as delete used to.
 
-    public KeyVaultPolicyManager()
-    {
-        _armClient = new ArmClient(new DefaultAzureCredential());
-    }
+**Purge protection** is the second switch. With it on, nobody (including a subscription Owner) can purge a deleted vault or object before the retention period ends. It can't be turned off once enabled, and it's required for customer-managed key scenarios such as Azure Storage and Azure SQL encryption with your own keys, because losing that key means losing the data.
 
-    public async Task GrantSecretAccessAsync(
-        string vaultName,
-        string resourceGroup,
-        string objectId,
-        string[] permissions)
-    {
-        var subscription = await _armClient.GetDefaultSubscriptionAsync();
-        var vault = await subscription
-            .GetResourceGroups()
-            .Get(resourceGroup)
-            .Value
-            .GetKeyVaults()
-            .GetAsync(vaultName);
+I turn purge protection on for production and leave it off in dev and test, as in the Terraform above. In dev, recreating environments on the same names matters more than protecting throwaway secrets.
 
-        var vaultData = vault.Value.Data;
+## Make expiry do the work
 
-        // Add new access policy
-        vaultData.Properties.AccessPolicies.Add(new KeyVaultAccessPolicy(
-            tenantId: vaultData.Properties.TenantId,
-            objectId: objectId,
-            permissions: new IdentityAccessPermissions
-            {
-                Secrets = permissions.Select(p =>
-                    Enum.Parse<IdentityAccessSecretPermission>(p, true)).ToList()
-            }
-        ));
+Most teams store secrets with no expiry date, which wastes the most useful signal the service gives you. Key Vault's [Event Grid integration](https://learn.microsoft.com/azure/key-vault/general/event-grid-overview) went GA in the second half of 2020, after being in preview since 2019. It emits `SecretNearExpiry` 30 days before a secret's expiry date, `SecretExpired` when it passes, and `SecretNewVersionCreated` when a new version is written. Equivalent events exist for keys and certificates.
 
-        await vault.Value.UpdateAsync(WaitUntil.Completed, vaultData);
-    }
-}
-```
+That gives you a pattern that doesn't depend on someone's calendar reminder:
 
-### Azure RBAC (Recommended)
+1. Every rotatable secret is written with an `expires_on` date and a `rotation-target` tag that says what consumes it.
+2. An Event Grid subscription on the vault sends `SecretNearExpiry` to a Function.
+3. The Function generates a new value, applies it to the target system, and writes a new secret version with a fresh expiry, which restarts the cycle.
 
-```bicep
-// Bicep: Key Vault with RBAC
-resource keyVault 'Microsoft.KeyVault/vaults@2021-06-01-preview' = {
-  name: 'kv-${projectName}'
-  location: location
-  properties: {
-    tenantId: subscription().tenantId
-    sku: {
-      family: 'A'
-      name: 'standard'
-    }
-    enableRbacAuthorization: true  // Enable RBAC
-    enableSoftDelete: true
-    softDeleteRetentionInDays: 90
-    enablePurgeProtection: true
-  }
-}
-
-// Role assignment for secrets reader
-resource secretsReaderRole 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
-  name: guid(keyVault.id, appIdentity.id, 'SecretsReader')
-  scope: keyVault
-  properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6') // Key Vault Secrets User
-    principalId: appIdentity.properties.principalId
-    principalType: 'ServicePrincipal'
-  }
-}
-```
-
-## Automatic Secret Rotation
-
-Implement automatic rotation for database credentials:
+Microsoft's [rotation tutorial](https://learn.microsoft.com/azure/key-vault/secrets/tutorial-rotation) covers Azure SQL. Here's a handler skeleton using the Python Functions programming model and the track-2 SDKs (`azure-keyvault-secrets` 4.x, `azure-identity` 1.x). The target-specific step is deliberately left as a stub, because it's different for every system.
 
 ```python
+# __init__.py: Event Grid-triggered rotation handler (skeleton)
+import logging
+import os
+import secrets
+import string
+from datetime import datetime, timedelta, timezone
+
 import azure.functions as func
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
-from azure.mgmt.sql import SqlManagementClient
-import secrets
-import string
 
-def main(mytimer: func.TimerRequest) -> None:
+ROTATION_DAYS = int(os.environ.get("ROTATION_DAYS", "90"))
+ALPHABET = string.ascii_letters + string.digits + "-_.~"
+
+
+def generate_password(length: int = 32) -> str:
+    return "".join(secrets.choice(ALPHABET) for _ in range(length))
+
+
+def apply_to_target(target: str, new_value: str) -> None:
+    """Push the new credential to the system that uses it.
+
+    Implement per target: ALTER LOGIN on a database, a vendor API call, etc.
+    Raise on failure so Key Vault keeps the current version.
     """
-    Azure Function triggered on schedule to rotate SQL credentials.
+    raise NotImplementedError(f"No rotation handler for target '{target}'")
+
+
+def event_field(data: dict, key: str):
+    """Read a payload field whatever its casing.
+
+    The schema docs show camelCase (vaultName, version); real payloads use
+    PascalCase (VaultName, Version).
     """
-    vault_url = os.environ["KEY_VAULT_URL"]
-    subscription_id = os.environ["SUBSCRIPTION_ID"]
+    lowered = {k.lower(): v for k, v in data.items()}
+    return lowered.get(key.lower())
 
-    credential = DefaultAzureCredential()
-    secret_client = SecretClient(vault_url=vault_url, credential=credential)
-    sql_client = SqlManagementClient(credential, subscription_id)
 
-    # Get current configuration
-    config = get_rotation_config(secret_client)
+def main(event: func.EventGridEvent) -> None:
+    # topic: /subscriptions/.../providers/Microsoft.KeyVault/vaults/<vault-name>
+    # subject: the secret name
+    vault_name = event.topic.rsplit("/vaults/", 1)[-1]
+    vault_url = f"https://{vault_name}.vault.azure.net"
+    name = event.subject
+    event_version = event_field(event.get_json(), "version")
 
-    for db_config in config["databases"]:
-        rotate_database_password(
-            secret_client,
-            sql_client,
-            db_config
-        )
+    client = SecretClient(vault_url=vault_url, credential=DefaultAzureCredential())
+    current = client.get_secret(name)
+    tags = current.properties.tags or {}
 
-def generate_secure_password(length=32):
-    """Generate a cryptographically secure password."""
-    alphabet = string.ascii_letters + string.digits + "!@#$%^&*"
-    return ''.join(secrets.choice(alphabet) for _ in range(length))
+    # Event Grid delivers at least once and retries; a duplicate or late event
+    # for a version that has already been replaced must not rotate again.
+    if event_version and event_version != current.properties.version:
+        logging.info("Event for %s/%s is stale; current version is %s",
+                     name, event_version, current.properties.version)
+        return
 
-def rotate_database_password(secret_client, sql_client, db_config):
-    """
-    Rotate password for an Azure SQL database.
-    """
-    server_name = db_config["server"]
-    resource_group = db_config["resource_group"]
-    secret_name = db_config["secret_name"]
+    target = tags.get("rotation-target")
+    if not target:
+        logging.warning("Secret %s has no rotation-target tag; skipping", name)
+        return
 
-    # Generate new password
-    new_password = generate_secure_password()
+    new_value = generate_password()
+    apply_to_target(target, new_value)
 
-    try:
-        # Update password in Azure SQL
-        sql_client.servers.update(
-            resource_group_name=resource_group,
-            server_name=server_name,
-            parameters={
-                "administratorLoginPassword": new_password
-            }
-        )
-
-        # Store new password in Key Vault
-        secret_client.set_secret(
-            secret_name,
-            new_password,
-            tags={
-                "rotated_at": datetime.utcnow().isoformat(),
-                "server": server_name
-            }
-        )
-
-        # Keep previous version for rollback
-        # (Key Vault automatically versions secrets)
-
-        logging.info(f"Successfully rotated password for {server_name}")
-
-    except Exception as e:
-        logging.error(f"Failed to rotate password for {server_name}: {e}")
-        raise
-
-def get_rotation_config(secret_client):
-    """Get rotation configuration from Key Vault."""
-    config_secret = secret_client.get_secret("rotation-config")
-    return json.loads(config_secret.value)
+    client.set_secret(
+        name,
+        new_value,
+        expires_on=datetime.now(timezone.utc) + timedelta(days=ROTATION_DAYS),
+        tags={**tags, "rotated-from": current.properties.version},
+    )
+    logging.info("Rotated %s, previous version %s", name, current.properties.version)
 ```
 
-## Certificate Management
-
-### Auto-Renewing Certificates
-
-```csharp
-using Azure.Security.KeyVault.Certificates;
-
-public class CertificateManager
+```json
 {
-    private readonly CertificateClient _client;
-
-    public CertificateManager(string vaultUrl)
+  "scriptFile": "__init__.py",
+  "bindings": [
     {
-        _client = new CertificateClient(
-            new Uri(vaultUrl),
-            new DefaultAzureCredential()
-        );
+      "type": "eventGridTrigger",
+      "name": "event",
+      "direction": "in"
     }
-
-    public async Task<KeyVaultCertificateWithPolicy> CreateAutoRenewingCertificateAsync(
-        string certificateName,
-        string subject,
-        int validityInMonths = 12)
-    {
-        var policy = new CertificatePolicy("Self", subject)
-        {
-            KeyType = CertificateKeyType.Rsa,
-            KeySize = 4096,
-            ReuseKey = false,
-            ValidityInMonths = validityInMonths,
-            ContentType = CertificateContentType.Pkcs12,
-
-            // Auto-renewal settings
-            LifetimeActions =
-            {
-                new LifetimeAction(CertificatePolicyAction.AutoRenew)
-                {
-                    DaysBeforeExpiry = 30
-                },
-                new LifetimeAction(CertificatePolicyAction.EmailContacts)
-                {
-                    DaysBeforeExpiry = 60
-                }
-            },
-
-            // Key usage
-            KeyUsage =
-            {
-                CertificateKeyUsage.DigitalSignature,
-                CertificateKeyUsage.KeyEncipherment
-            },
-
-            // Enhanced key usage
-            EnhancedKeyUsage =
-            {
-                "1.3.6.1.5.5.7.3.1", // Server Authentication
-                "1.3.6.1.5.5.7.3.2"  // Client Authentication
-            }
-        };
-
-        var operation = await _client.StartCreateCertificateAsync(
-            certificateName,
-            policy
-        );
-
-        return await operation.WaitForCompletionAsync();
-    }
-
-    public async Task<byte[]> ExportCertificateAsync(string certificateName)
-    {
-        var certificate = await _client.GetCertificateAsync(certificateName);
-        var secret = await new SecretClient(
-            _client.VaultUri,
-            new DefaultAzureCredential()
-        ).GetSecretAsync(certificate.Value.SecretId.AbsoluteUri.Split('/').Last());
-
-        return Convert.FromBase64String(secret.Value.Value);
-    }
+  ]
 }
 ```
 
-## Encryption with Customer-Managed Keys
+Wire it up with an event subscription filtered to the one event type you handle:
 
-### Cosmos DB with CMK
-
-```bicep
-// Customer-managed key for Cosmos DB
-resource cosmosKey 'Microsoft.KeyVault/vaults/keys@2021-06-01-preview' = {
-  parent: keyVault
-  name: 'cosmos-cmk'
-  properties: {
-    kty: 'RSA'
-    keySize: 2048
-    keyOps: [
-      'wrapKey'
-      'unwrapKey'
-    ]
-  }
-}
-
-resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-06-15' = {
-  name: 'cosmos-${projectName}'
-  location: location
-  kind: 'GlobalDocumentDB'
-  identity: {
-    type: 'SystemAssigned'
-  }
-  properties: {
-    databaseAccountOfferType: 'Standard'
-    keyVaultKeyUri: cosmosKey.properties.keyUriWithVersion
-    locations: [
-      {
-        locationName: location
-        failoverPriority: 0
-      }
-    ]
-  }
-}
-
-// Grant Cosmos DB access to the key
-resource cosmosKeyAccess 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
-  name: guid(keyVault.id, cosmosAccount.id, 'KeyVaultCryptoUser')
-  scope: cosmosKey
-  properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '12338af0-0e69-4776-bea7-57ae8d297424') // Key Vault Crypto User
-    principalId: cosmosAccount.identity.principalId
-    principalType: 'ServicePrincipal'
-  }
-}
+```bash
+az eventgrid event-subscription create \
+  --name rotate-near-expiry \
+  --source-resource-id "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.KeyVault/vaults/<vault-name>" \
+  --endpoint-type azurefunction \
+  --endpoint "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Web/sites/<function-app-name>/functions/<function-name>" \
+  --included-event-types Microsoft.KeyVault.SecretNearExpiry
 ```
 
-## Application Integration Patterns
+The Function's managed identity needs Key Vault Secrets Officer on the vault, not Secrets User, because it writes new versions.
 
-### Configuration Provider for .NET
+Design the handler for Event Grid's delivery model. [Delivery is at least once](https://learn.microsoft.com/azure/event-grid/delivery-and-retry), and a failed or slow delivery is retried with backoff for up to 24 hours by default. Without a guard, a duplicate `SecretNearExpiry` rotates the credential twice, and an exception in `apply_to_target` triggers a retry storm against the target. That's why the handler compares the event's version with the secret's current version and skips stale events. I'd also add a dead-letter destination (a storage container) to the subscription, so an event that exhausts its retries becomes something you can see rather than a silent miss.
 
-```csharp
-// Program.cs
-using Azure.Identity;
-using Azure.Extensions.AspNetCore.Configuration.Secrets;
+### The single-credential trap
 
-var builder = WebApplication.CreateBuilder(args);
+Look at the order in the handler: change the target, then write to Key Vault. If the second step fails, the database has a password nobody knows. Reverse the order and you get a window where Key Vault holds a password the database doesn't accept yet. With one credential, there's no ordering that avoids a gap.
 
-// Add Key Vault configuration provider
-var keyVaultEndpoint = builder.Configuration["KeyVaultEndpoint"];
-if (!string.IsNullOrEmpty(keyVaultEndpoint))
-{
-    var credential = new DefaultAzureCredential();
-    builder.Configuration.AddAzureKeyVault(
-        new Uri(keyVaultEndpoint),
-        credential,
-        new AzureKeyVaultConfigurationOptions
-        {
-            // Custom secret name to configuration key mapping
-            Manager = new CustomSecretManager("MyApp"),
-            // Reload secrets every 5 minutes
-            ReloadInterval = TimeSpan.FromMinutes(5)
-        }
-    );
-}
+That's why I prefer **dual credentials** wherever the target supports them. Storage accounts have two keys, many SaaS APIs allow two active tokens, and you can create two SQL logins. You rotate the *inactive* one, write it to Key Vault, then let consumers move over. Microsoft has a [dual-credential version of the tutorial](https://learn.microsoft.com/azure/key-vault/secrets/tutorial-rotation-dual) for storage account keys. Single-credential rotation is acceptable when consumers re-read the secret on failure and you can tolerate a brief error spike. Make that a deliberate choice, not an accident.
 
-// Custom secret manager to filter and transform secrets
-public class CustomSecretManager : KeyVaultSecretManager
-{
-    private readonly string _prefix;
+When *not* to rotate automatically: secrets whose consumers cache them for the process lifetime, with no reload path. Rotating those just schedules an outage. Fix the consumer first. With App Service, [Key Vault references](https://learn.microsoft.com/azure/app-service/app-service-key-vault-references) don't help here yet: they must name a specific secret version, so every rotation also means updating the app setting (or having the rotation Function do it). With your own code, use a reload interval on the configuration provider.
 
-    public CustomSecretManager(string prefix)
-    {
-        _prefix = $"{prefix}--";
-    }
+## Watch the denials, not just the reads
 
-    public override bool Load(SecretProperties secret)
-    {
-        // Only load secrets with our prefix
-        return secret.Name.StartsWith(_prefix);
-    }
-
-    public override string GetKey(KeyVaultSecret secret)
-    {
-        // Transform "MyApp--ConnectionStrings--Database"
-        // to "ConnectionStrings:Database"
-        return secret.Name
-            .Substring(_prefix.Length)
-            .Replace("--", ":");
-    }
-}
-```
-
-### Kubernetes Secret Store CSI Driver
-
-```yaml
-# SecretProviderClass for Azure Key Vault
-apiVersion: secrets-store.csi.x-k8s.io/v1
-kind: SecretProviderClass
-metadata:
-  name: azure-keyvault-secrets
-spec:
-  provider: azure
-  parameters:
-    usePodIdentity: "false"
-    useVMManagedIdentity: "true"
-    userAssignedIdentityID: "<managed-identity-client-id>"
-    keyvaultName: "kv-myproject"
-    objects: |
-      array:
-        - |
-          objectName: database-connection-string
-          objectType: secret
-        - |
-          objectName: api-key
-          objectType: secret
-        - |
-          objectName: tls-certificate
-          objectType: secret
-    tenantId: "<tenant-id>"
-
-  # Sync as Kubernetes secrets
-  secretObjects:
-    - data:
-        - key: connection-string
-          objectName: database-connection-string
-        - key: api-key
-          objectName: api-key
-      secretName: app-secrets
-      type: Opaque
-
----
-# Pod using the secrets
-apiVersion: v1
-kind: Pod
-metadata:
-  name: myapp
-spec:
-  containers:
-    - name: app
-      image: myapp:latest
-      env:
-        - name: DATABASE_CONNECTION
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: connection-string
-      volumeMounts:
-        - name: secrets-store
-          mountPath: "/mnt/secrets"
-          readOnly: true
-  volumes:
-    - name: secrets-store
-      csi:
-        driver: secrets-store.csi.k8s.io
-        readOnly: true
-        volumeAttributes:
-          secretProviderClass: azure-keyvault-secrets
-```
-
-## Monitoring and Auditing
+Turn on diagnostic settings for every vault and send `AuditEvent` logs to Log Analytics. The query I actually use looks for 403s, because a spike in denied requests is either a broken deployment or someone probing:
 
 ```kusto
-// Key Vault diagnostic logs query
 AzureDiagnostics
 | where ResourceProvider == "MICROSOFT.KEYVAULT"
 | where TimeGenerated > ago(24h)
-| summarize
-    Operations = count(),
-    SuccessfulOps = countif(ResultType == "Success"),
-    FailedOps = countif(ResultType != "Success")
-    by OperationName, CallerIPAddress, identity_claim_upn_s
-| order by Operations desc
-
-// Detect unusual access patterns
-let threshold = 100;
-AzureDiagnostics
-| where ResourceProvider == "MICROSOFT.KEYVAULT"
-| where TimeGenerated > ago(1h)
-| summarize AccessCount = count() by CallerIPAddress, bin(TimeGenerated, 5m)
-| where AccessCount > threshold
-| project TimeGenerated, CallerIPAddress, AccessCount
+| where httpStatusCode_d == 403
+| summarize Denied = count(), Operations = make_set(OperationName)
+    by Resource, identity_claim_appid_g, CallerIPAddress
+| order by Denied desc
 ```
 
-## Best Practices
+After an RBAC switch-over, this query tells you within minutes which identity you forgot to assign a role to.
 
-1. **Use Managed Identities**: Avoid storing credentials to access Key Vault
-2. **Enable Soft Delete**: Protect against accidental deletion
-3. **Enable Purge Protection**: Required for CMK scenarios
-4. **Network Isolation**: Use private endpoints in production
-5. **Separate by Environment**: Use different vaults for dev/staging/prod
-6. **Monitor Access**: Enable diagnostic logging and alerts
-7. **Version Secrets**: Leverage automatic versioning for audit trails
+## What I'd do this quarter
 
-Azure Key Vault is essential for secure secrets management in modern cloud architectures. Implementing these advanced patterns ensures your sensitive data remains protected while maintaining operational flexibility.
+If you own a Key Vault estate, this is the order I'd work in:
+
+1. **Inventory shared vaults** and split the ones holding secrets for unrelated apps.
+2. **Audit who holds Contributor** on vaults that still use access policies, because those people can read your secrets.
+3. **Check your pipelines for soft-delete assumptions**: create-after-delete, reused names, scripts that expect delete to be final.
+4. **Turn on purge protection in production**, especially anywhere a customer-managed key lives.
+5. **Put expiry dates on rotatable secrets** and subscribe to `SecretNearExpiry`, even if the first handler only raises an alert.
+6. **Pilot RBAC on a new vault** now, and plan the migration of existing ones for when it reaches GA.
+
+None of this is exotic. It's unglamorous decisions, made once and written into the templates every team starts from.

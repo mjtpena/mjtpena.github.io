@@ -1,6 +1,6 @@
 ---
-title: Global Load Balancing with Azure Traffic Manager
-description: "Traffic Manager keeps showing up in my designs because it's cheap, simple, and works at the layer most failover stories actually need: DNS. The catch is…"
+title: "Traffic Manager Failover Engineering: TTLs, Probes and Nesting"
+description: "How to make Azure Traffic Manager failover behave in practice: TTL and probe maths, nested profiles, weighted cutovers and health endpoints that tell the truth."
 author: Michael John Pena
 draft: false
 date: 2021-01-31
@@ -8,641 +8,246 @@ url: /blog/azure-traffic-manager-patterns/
 tags:
   - Azure
   - Traffic Manager
-  - Load Balancing
   - High Availability
   - DNS
+  - Load Balancing
 ---
 
-Traffic Manager keeps showing up in my designs because it's cheap, simple, and works at the layer most failover stories actually need: DNS. The catch is that DNS-based failover is bounded by TTLs and client cache behaviour—if you don't account for that, your "10-minute failover" is a 60-minute failover with a long tail of customers stuck on the old endpoint. Today's post is the patterns I've used in anger: priority routing for active-passive, performance routing for global apps, nested profiles for multi-tier failover, and the TTL discipline that makes it all behave.
+DNS-based failover is cheap and protocol-agnostic, but it is bounded by probe timings, TTLs and client cache behaviour. That's what makes Azure Traffic Manager attractive and what makes it easy to oversell. If you don't account for those, the "one-minute failover" on your architecture diagram becomes ten minutes with a long tail of users still resolving the dead region.
 
-## Understanding Traffic Manager Routing Methods
+I covered the routing methods and basic profile setup in [Azure Traffic Manager: Global DNS Load Balancing](/blog/2020-11-25-azure-traffic-manager/). This post is the next layer down: the settings and patterns that decide how quickly and how safely Traffic Manager actually moves traffic.
 
-Traffic Manager supports six routing methods:
-- **Priority**: Active/passive failover
-- **Weighted**: Distribute traffic by weight
-- **Performance**: Route to closest region
-- **Geographic**: Route based on user location
-- **MultiValue**: Return multiple healthy endpoints
-- **Subnet**: Route based on client IP ranges
+## The failover budget is three numbers, not one
 
-## Setting Up Traffic Manager
+Traffic Manager never sees your traffic. It answers DNS queries with the endpoint it thinks is healthy, and the client connects directly. So the time from "region dies" to "users land somewhere healthy" is the sum of three things:
 
-### Bicep Template
+1. **Detection.** How long the probes take to mark the endpoint Degraded. That's driven by the probing interval, the probe timeout and the tolerated number of failures.
+2. **DNS cache expiry.** How long resolvers keep handing out the old answer. That's your profile TTL, plus whatever your users' recursive resolvers and client stacks do with it.
+3. **Client behaviour.** Long-lived connections, connection pools and apps that resolve once at startup don't care about your TTL at all.
 
-```bicep
-resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2018-08-01' = {
-  name: 'tm-${applicationName}'
-  location: 'global'
-  properties: {
-    profileStatus: 'Enabled'
-    trafficRoutingMethod: 'Performance'
-    dnsConfig: {
-      relativeName: applicationName
-      ttl: 60
-    }
-    monitorConfig: {
-      protocol: 'HTTPS'
-      port: 443
-      path: '/health'
-      intervalInSeconds: 30
-      timeoutInSeconds: 10
-      toleratedNumberOfFailures: 3
-      customHeaders: [
-        {
-          name: 'Host'
-          value: '${applicationName}.com'
-        }
-      ]
-      expectedStatusCodeRanges: [
-        {
-          min: 200
-          max: 299
-        }
-      ]
-    }
-  }
-}
+The [endpoint monitoring settings](https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-monitoring) give you two probing intervals: 30 seconds (normal) or 10 seconds (fast probing, which costs extra per endpoint per month). The probe timeout must be shorter than the interval; with fast probing it sits between 5 and 9 seconds. Tolerated failures range from 0 to 9, with 3 as the default. With a 30-second interval and three tolerated failures, detection alone is around a minute and a half to two minutes before TTL even enters the picture. Fast probing cuts that to roughly half a minute.
 
-// Primary endpoint (East US)
-resource primaryEndpoint 'Microsoft.Network/trafficmanagerprofiles/azureEndpoints@2018-08-01' = {
-  parent: trafficManager
-  name: 'primary-eastus'
-  properties: {
-    targetResourceId: appServiceEastUs.id
-    endpointStatus: 'Enabled'
-    weight: 100
-    priority: 1
-    endpointLocation: 'East US'
-  }
-}
+My rule of thumb: decide the failover time you're willing to promise, then work backwards. If the business wants "about a minute", you need fast probing, a TTL of 30 to 60 seconds, and an honest conversation about the clients you don't control.
 
-// Secondary endpoint (West US)
-resource secondaryEndpoint 'Microsoft.Network/trafficmanagerprofiles/azureEndpoints@2018-08-01' = {
-  parent: trafficManager
-  name: 'secondary-westus'
-  properties: {
-    targetResourceId: appServiceWestUs.id
-    endpointStatus: 'Enabled'
-    weight: 100
-    priority: 2
-    endpointLocation: 'West US'
-  }
-}
+### TTL is a trade-off, not a free knob
 
-// Europe endpoint
-resource europeEndpoint 'Microsoft.Network/trafficmanagerprofiles/azureEndpoints@2018-08-01' = {
-  parent: trafficManager
-  name: 'europe-westeurope'
-  properties: {
-    targetResourceId: appServiceWestEurope.id
-    endpointStatus: 'Enabled'
-    weight: 100
-    priority: 3
-    endpointLocation: 'West Europe'
-  }
-}
+A low TTL means more DNS queries hit Traffic Manager, and you pay per million queries. For most workloads that's small money, but a TTL of 0 on a high-traffic consumer domain is a cost and latency decision, not just a reliability one. Every uncached lookup adds a resolution round trip. I rarely go below 30 seconds, and I'd rather spend money on fast probing than push TTL to zero, because some resolvers and client stacks (the JVM's DNS cache, for example) apply their own caching regardless of TTL.
+
+## A priority profile with probes that mean something
+
+Here's an active-passive profile created with the Azure CLI. I'm using the CLI rather than ARM templates here because the flags map one-to-one to the monitoring settings, which makes the trade-offs easier to read.
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+RG="<your-resource-group>"
+PROFILE="tm-<your-app>"
+DNS_NAME="<your-unique-dns-prefix>"   # becomes <prefix>.trafficmanager.net
+
+az network traffic-manager profile create \
+  --resource-group "$RG" \
+  --name "$PROFILE" \
+  --routing-method Priority \
+  --unique-dns-name "$DNS_NAME" \
+  --ttl 30 \
+  --protocol HTTPS \
+  --port 443 \
+  --path "/health/ready" \
+  --interval 10 \
+  --timeout 5 \
+  --max-failures 2 \
+  --custom-headers host=<your-app-hostname> \
+  --status-code-ranges 200-299
+
+az network traffic-manager endpoint create \
+  --resource-group "$RG" \
+  --profile-name "$PROFILE" \
+  --name primary-australiaeast \
+  --type azureEndpoints \
+  --target-resource-id "<resource-id-of-primary-app-service>" \
+  --priority 1 \
+  --endpoint-status Enabled
+
+az network traffic-manager endpoint create \
+  --resource-group "$RG" \
+  --profile-name "$PROFILE" \
+  --name secondary-australiasoutheast \
+  --type azureEndpoints \
+  --target-resource-id "<resource-id-of-secondary-app-service>" \
+  --priority 2 \
+  --endpoint-status Enabled
 ```
 
-## Nested Traffic Manager Profiles
+Three choices in there are deliberate.
 
-Combine routing methods for complex scenarios:
+**The custom Host header.** By default the probe sends the endpoint's own host name. If your app routes or filters on the public host name (host filtering, multi-tenant middleware, an Application Gateway listener), the probe will fail for reasons that have nothing to do with health. Set the header to the name your users actually use.
 
-```bicep
-// Parent profile - Geographic routing
-resource parentProfile 'Microsoft.Network/trafficmanagerprofiles@2018-08-01' = {
-  name: 'tm-global'
-  location: 'global'
-  properties: {
-    profileStatus: 'Enabled'
-    trafficRoutingMethod: 'Geographic'
-    dnsConfig: {
-      relativeName: 'myapp-global'
-      ttl: 60
-    }
-    monitorConfig: {
-      protocol: 'HTTPS'
-      port: 443
-      path: '/health'
-    }
-  }
-}
+**The status code range.** Out of the box only a 200 counts as healthy. If your health endpoint returns 204, the probe will fail. I'd rather widen the range explicitly than discover this during an incident.
 
-// Child profile - Americas with Performance routing
-resource americasProfile 'Microsoft.Network/trafficmanagerprofiles@2018-08-01' = {
-  name: 'tm-americas'
-  location: 'global'
-  properties: {
-    profileStatus: 'Enabled'
-    trafficRoutingMethod: 'Performance'
-    dnsConfig: {
-      relativeName: 'myapp-americas'
-      ttl: 60
-    }
-    monitorConfig: {
-      protocol: 'HTTPS'
-      port: 443
-      path: '/health'
-    }
-  }
-}
+**Two tolerated failures, not zero.** Zero sounds aggressive and decisive, but it means a single slow probe flips the endpoint. Flapping between regions is worse than a slightly slower failover, especially when the secondary has cold caches.
 
-// Americas endpoints in child profile
-resource usEastEndpoint 'Microsoft.Network/trafficmanagerprofiles/azureEndpoints@2018-08-01' = {
-  parent: americasProfile
-  name: 'us-east'
-  properties: {
-    targetResourceId: appServiceEastUs.id
-    endpointStatus: 'Enabled'
-    endpointLocation: 'East US'
-  }
-}
+## The fail-open rule you need to know about
 
-resource usWestEndpoint 'Microsoft.Network/trafficmanagerprofiles/azureEndpoints@2018-08-01' = {
-  parent: americasProfile
-  name: 'us-west'
-  properties: {
-    targetResourceId: appServiceWestUs.id
-    endpointStatus: 'Enabled'
-    endpointLocation: 'West US'
-  }
-}
+When *every* endpoint in a profile is Degraded, Traffic Manager stops trusting its probes and returns all of them as if they were healthy. The [degraded-state troubleshooting guide](https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-troubleshooting-degraded) explains why: a broken probe configuration shouldn't cause a total outage.
 
-// Nested endpoint in parent pointing to child
-resource americasNestedEndpoint 'Microsoft.Network/trafficmanagerprofiles/nestedEndpoints@2018-08-01' = {
-  parent: parentProfile
-  name: 'americas'
-  properties: {
-    targetResourceId: americasProfile.id
-    endpointStatus: 'Enabled'
-    minChildEndpoints: 1
-    geoMapping: ['GEO-NA', 'GEO-SA']  // North and South America
-  }
-}
+That's a sensible default, but it has two consequences people miss:
 
-// Europe child profile
-resource europeProfile 'Microsoft.Network/trafficmanagerprofiles@2018-08-01' = {
-  name: 'tm-europe'
-  location: 'global'
-  properties: {
-    profileStatus: 'Enabled'
-    trafficRoutingMethod: 'Weighted'  // A/B testing in Europe
-    dnsConfig: {
-      relativeName: 'myapp-europe'
-      ttl: 60
-    }
-    monitorConfig: {
-      protocol: 'HTTPS'
-      port: 443
-      path: '/health'
-    }
-  }
-}
+- A misconfigured probe (HTTP probe against an HTTPS-only app, wrong path, wrong Host header) can leave the profile Degraded for weeks while traffic flows normally. Nobody notices until a real failure, when failover doesn't happen because Traffic Manager was already ignoring health.
+- If every endpoint genuinely fails, Traffic Manager routes as though they were all healthy (for a Priority profile that means the primary). That's fine; there's nowhere better to send them.
 
-resource europeNestedEndpoint 'Microsoft.Network/trafficmanagerprofiles/nestedEndpoints@2018-08-01' = {
-  parent: parentProfile
-  name: 'europe'
-  properties: {
-    targetResourceId: europeProfile.id
-    endpointStatus: 'Enabled'
-    minChildEndpoints: 1
-    geoMapping: ['GEO-EU']
-  }
-}
+The fix for the first is boring: alert on endpoint state from day one, not on profile status alone. More on that below.
+
+Disabling an endpoint is different. A disabled endpoint is removed from DNS responses entirely, which is why it's the right tool for maintenance and cutovers.
+
+## Nested profiles: regional failover inside global routing
+
+A single routing method rarely matches the real requirement. A common shape is "send users to their nearest geography, and within that geography fail over between two regions". That's two routing methods, so you need [nested profiles](https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-nested-profiles).
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+RG="<your-resource-group>"
+
+# Child profile: Australia, priority failover between two regions
+az network traffic-manager profile create \
+  --resource-group "$RG" --name tm-<your-app>-au \
+  --routing-method Priority --unique-dns-name <your-app>-au \
+  --ttl 30 --protocol HTTPS --port 443 --path "/health/ready" \
+  --interval 10 --timeout 5 --max-failures 2
+
+az network traffic-manager endpoint create \
+  --resource-group "$RG" --profile-name tm-<your-app>-au \
+  --name au-east --type azureEndpoints \
+  --target-resource-id "<resource-id-of-australiaeast-app>" --priority 1
+
+az network traffic-manager endpoint create \
+  --resource-group "$RG" --profile-name tm-<your-app>-au \
+  --name au-southeast --type azureEndpoints \
+  --target-resource-id "<resource-id-of-australiasoutheast-app>" --priority 2
+
+# Parent profile: geographic routing
+az network traffic-manager profile create \
+  --resource-group "$RG" --name tm-<your-app>-global \
+  --routing-method Geographic --unique-dns-name <your-app>-global \
+  --ttl 30 --protocol HTTPS --port 443 --path "/health/ready"
+
+# Australia/Pacific and Asia users go to the Australian child profile
+az network traffic-manager endpoint create \
+  --resource-group "$RG" --profile-name tm-<your-app>-global \
+  --name apac --type nestedEndpoints \
+  --target-resource-id "$(az network traffic-manager profile show \
+      --resource-group "$RG" --name tm-<your-app>-au --query id --output tsv)" \
+  --min-child-endpoints 1 \
+  --geo-mapping GEO-AP GEO-AS
 ```
 
-## Blue-Green Deployments
+Add a second child for other geographies and map it to `WORLD` as a catch-all, otherwise users from unmapped locations get no answer at all. [Geographic routing](https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-routing-methods) doesn't fall back to "nearest" on its own; it only returns endpoints whose mapping covers the user's location.
 
-Use weighted routing for zero-downtime deployments:
+The setting that deserves thought is `--min-child-endpoints`. It defaults to 1: the parent considers the child healthy as long as one endpoint inside it is healthy. For a pair of regions sized to carry each other's load, that's right. If each region can only take half the load, a child with one healthy endpoint is not really healthy, and you may prefer to raise the threshold so the parent treats the whole geography as down. Under a Geographic parent this does nothing for routing: a geography maps to one endpoint, and Traffic Manager keeps answering with it even when Degraded. The threshold only matters under Priority, Weighted or Performance parents, where there is another endpoint to choose. That Geographic behaviour is also why the child profile needs two regions in the first place.
 
-```python
-from azure.identity import DefaultAzureCredential
-from azure.mgmt.trafficmanager import TrafficManagerManagementClient
+## Weighted cutovers without pretending weight can be zero
 
-credential = DefaultAzureCredential()
-subscription_id = os.environ["SUBSCRIPTION_ID"]
+Weighted routing is a reasonable way to shift traffic between a blue and green deployment, as long as you remember it's DNS-level and sticky per resolver. Two details trip people up: [endpoint weights](https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-routing-methods) must be between 1 and 1000, so you can't set a weight of 0 to drain an endpoint; and the shift isn't instant, because cached answers keep sending users to the old endpoint for at least a TTL.
 
-tm_client = TrafficManagerManagementClient(credential, subscription_id)
+The script below is a controlled rollout, not a timed sleep loop. Between steps, check per-endpoint error rates, and if they rise, abort: set the weights back to 100/1 or disable green.
 
-class BlueGreenDeployment:
-    def __init__(self, profile_name, resource_group):
-        self.profile_name = profile_name
-        self.resource_group = resource_group
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-    def get_profile(self):
-        return tm_client.profiles.get(
-            self.resource_group,
-            self.profile_name
-        )
+RG="<your-resource-group>"
+PROFILE="tm-<your-app>-weighted"
+SOAK_SECONDS=300
 
-    def shift_traffic(self, blue_weight: int, green_weight: int, step_delay: int = 60):
-        """
-        Gradually shift traffic from blue to green deployment.
-        """
-        profile = self.get_profile()
+set_weights() {
+  az network traffic-manager endpoint update --resource-group "$RG" \
+    --profile-name "$PROFILE" --type azureEndpoints --name blue --weight "$1" --output none
+  az network traffic-manager endpoint update --resource-group "$RG" \
+    --profile-name "$PROFILE" --type azureEndpoints --name green --weight "$2" --output none
+  echo "blue=$1 green=$2"
+}
 
-        blue_endpoint = next(
-            e for e in profile.endpoints if 'blue' in e.name.lower()
-        )
-        green_endpoint = next(
-            e for e in profile.endpoints if 'green' in e.name.lower()
-        )
+# Gradual shift: 90/10, 50/50, 10/90, soaking between steps.
+# Check per-endpoint error rates during each soak; on a regression, stop and run set_weights 100 1.
+for green in 10 50 90; do
+  set_weights $((100 - green)) "$green"
+  sleep "$SOAK_SECONDS"
+done
 
-        current_blue = blue_endpoint.weight
-        current_green = green_endpoint.weight
-
-        # Calculate steps
-        blue_diff = blue_weight - current_blue
-        green_diff = green_weight - current_green
-        steps = max(abs(blue_diff), abs(green_diff)) // 10
-
-        if steps == 0:
-            steps = 1
-
-        blue_step = blue_diff / steps
-        green_step = green_diff / steps
-
-        print(f"Shifting traffic in {steps} steps...")
-
-        for i in range(steps):
-            new_blue = int(current_blue + (blue_step * (i + 1)))
-            new_green = int(current_green + (green_step * (i + 1)))
-
-            # Update weights
-            blue_endpoint.weight = new_blue
-            green_endpoint.weight = new_green
-
-            tm_client.endpoints.update(
-                self.resource_group,
-                self.profile_name,
-                'AzureEndpoints',
-                blue_endpoint.name,
-                {'weight': new_blue}
-            )
-
-            tm_client.endpoints.update(
-                self.resource_group,
-                self.profile_name,
-                'AzureEndpoints',
-                green_endpoint.name,
-                {'weight': new_green}
-            )
-
-            print(f"Step {i + 1}/{steps}: Blue={new_blue}%, Green={new_green}%")
-
-            # Wait before next step
-            if i < steps - 1:
-                time.sleep(step_delay)
-
-        print("Traffic shift completed")
-
-    def instant_switch(self, target: str):
-        """
-        Instantly switch all traffic to blue or green.
-        """
-        if target not in ['blue', 'green']:
-            raise ValueError("Target must be 'blue' or 'green'")
-
-        profile = self.get_profile()
-
-        for endpoint in profile.endpoints:
-            if target in endpoint.name.lower():
-                endpoint.weight = 100
-                endpoint.endpoint_status = 'Enabled'
-            else:
-                endpoint.weight = 0
-                endpoint.endpoint_status = 'Disabled'
-
-            tm_client.endpoints.update(
-                self.resource_group,
-                self.profile_name,
-                'AzureEndpoints',
-                endpoint.name,
-                {
-                    'weight': endpoint.weight,
-                    'endpointStatus': endpoint.endpoint_status
-                }
-            )
-
-        print(f"All traffic switched to {target}")
-
-    def rollback(self):
-        """
-        Emergency rollback to blue deployment.
-        """
-        print("EMERGENCY ROLLBACK: Switching to blue deployment")
-        self.instant_switch('blue')
-
-
-# Usage
-deployment = BlueGreenDeployment('tm-myapp', 'rg-production')
-
-# Gradual deployment
-deployment.shift_traffic(blue_weight=0, green_weight=100, step_delay=120)
-
-# Or instant switch
-deployment.instant_switch('green')
-
-# Emergency rollback
-deployment.rollback()
+# Final step: take blue out of DNS entirely by disabling it
+az network traffic-manager endpoint update --resource-group "$RG" \
+  --profile-name "$PROFILE" --type azureEndpoints --name blue \
+  --endpoint-status Disabled --output none
+echo "blue disabled; rollback = re-enable blue and disable green"
 ```
 
-## Custom Health Probes
+Make the soak time several times your TTL, and watch error rates per endpoint, not overall. If you need per-request canarying, sticky user assignment or instant rollback, DNS is the wrong layer. Use the deployment slot traffic routing in App Service or a layer 7 entry point instead.
 
-Implement sophisticated health checks:
+## Health endpoints that tell the truth
+
+The probe is only as good as the URL it hits. The two failure modes I see most are a health endpoint that returns 200 because the web server is up while the database is unreachable, and the opposite: a deep check that fails because a non-critical dependency is slow, so Traffic Manager fails over a perfectly working region.
+
+Split it. A readiness endpoint checks only what the region cannot serve without, and Traffic Manager probes that. Everything else goes to monitoring, not to routing. In ASP.NET Core 5 the built-in health checks make this a few lines in `Startup.cs`. `RegionalDatabaseHealthCheck` and `RecommendationsApiHealthCheck` stand in for your own `IHealthCheck` implementations:
 
 ```csharp
-using Microsoft.AspNetCore.Mvc;
+// Startup.cs fragment: register checks and expose a readiness endpoint for Traffic Manager
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-[ApiController]
-[Route("health")]
-public class HealthController : ControllerBase
+// In ConfigureServices
+services.AddHealthChecks()
+    .AddCheck<RegionalDatabaseHealthCheck>("regional-db", tags: new[] { "ready" })
+    .AddCheck<RecommendationsApiHealthCheck>("recommendations", tags: new[] { "info" });
+
+// In Configure, inside app.UseEndpoints(endpoints => { ... })
+endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions
 {
-    private readonly HealthCheckService _healthCheckService;
-    private readonly ILogger<HealthController> _logger;
-
-    public HealthController(
-        HealthCheckService healthCheckService,
-        ILogger<HealthController> logger)
+    Predicate = check => check.Tags.Contains("ready"),
+    ResultStatusCodes =
     {
-        _healthCheckService = healthCheckService;
-        _logger = logger;
+        [HealthStatus.Healthy] = StatusCodes.Status200OK,
+        [HealthStatus.Degraded] = StatusCodes.Status200OK,
+        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
     }
-
-    [HttpGet]
-    public async Task<IActionResult> Get()
-    {
-        // Run all health checks
-        var report = await _healthCheckService.CheckHealthAsync();
-
-        var response = new HealthCheckResponse
-        {
-            Status = report.Status.ToString(),
-            Duration = report.TotalDuration,
-            Checks = report.Entries.Select(e => new HealthCheckItem
-            {
-                Name = e.Key,
-                Status = e.Value.Status.ToString(),
-                Duration = e.Value.Duration,
-                Description = e.Value.Description,
-                Exception = e.Value.Exception?.Message
-            }).ToList()
-        };
-
-        // Return appropriate status code for Traffic Manager
-        return report.Status switch
-        {
-            HealthStatus.Healthy => Ok(response),
-            HealthStatus.Degraded => Ok(response), // Still accept traffic
-            HealthStatus.Unhealthy => StatusCode(503, response)
-        };
-    }
-
-    [HttpGet("ready")]
-    public async Task<IActionResult> Ready()
-    {
-        // Readiness check - is the app ready to receive traffic?
-        var report = await _healthCheckService.CheckHealthAsync(
-            predicate: check => check.Tags.Contains("ready")
-        );
-
-        if (report.Status == HealthStatus.Healthy)
-        {
-            return Ok(new { status = "ready" });
-        }
-
-        return StatusCode(503, new { status = "not ready" });
-    }
-
-    [HttpGet("live")]
-    public IActionResult Live()
-    {
-        // Liveness check - is the app still running?
-        return Ok(new { status = "alive", timestamp = DateTime.UtcNow });
-    }
-}
-
-// Health check implementations
-public class DatabaseHealthCheck : IHealthCheck
-{
-    private readonly IDbConnection _connection;
-
-    public async Task<HealthCheckResult> CheckHealthAsync(
-        HealthCheckContext context,
-        CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            using var cmd = _connection.CreateCommand();
-            cmd.CommandText = "SELECT 1";
-            cmd.CommandTimeout = 5;
-
-            await _connection.OpenAsync(cancellationToken);
-            await cmd.ExecuteScalarAsync(cancellationToken);
-
-            return HealthCheckResult.Healthy("Database connection successful");
-        }
-        catch (Exception ex)
-        {
-            return HealthCheckResult.Unhealthy(
-                "Database connection failed",
-                exception: ex);
-        }
-    }
-}
-
-public class DependencyHealthCheck : IHealthCheck
-{
-    private readonly HttpClient _httpClient;
-    private readonly string _dependencyUrl;
-
-    public async Task<HealthCheckResult> CheckHealthAsync(
-        HealthCheckContext context,
-        CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            var response = await _httpClient.GetAsync(
-                _dependencyUrl,
-                cancellationToken);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return HealthCheckResult.Healthy(
-                    $"Dependency {_dependencyUrl} is healthy");
-            }
-
-            return HealthCheckResult.Degraded(
-                $"Dependency returned {response.StatusCode}");
-        }
-        catch (Exception ex)
-        {
-            return HealthCheckResult.Unhealthy(
-                "Dependency check failed",
-                exception: ex);
-        }
-    }
-}
-
-// Configure in Program.cs
-builder.Services.AddHealthChecks()
-    .AddCheck<DatabaseHealthCheck>("database", tags: new[] { "ready" })
-    .AddCheck<DependencyHealthCheck>("api-dependency", tags: new[] { "ready" })
-    .AddCheck("self", () => HealthCheckResult.Healthy(), tags: new[] { "live" });
+});
 ```
 
-## Monitoring and Alerting
+Degraded returns 200 on purpose: a region running slow is still better than failing everyone over to a region that is about to absorb double load. Keep the check cheap, too. Traffic Manager probes from many locations, so a 10-second interval generates far more requests than the interval suggests.
 
-```kusto
-// KQL query for Traffic Manager endpoint health
-AzureDiagnostics
-| where ResourceProvider == "MICROSOFT.NETWORK"
-| where ResourceType == "TRAFFICMANAGERPROFILES"
-| where Category == "ProbeHealthStatusEvents"
-| extend EndpointName = tostring(split(endpoint_s, "/")[1])
-| summarize
-    HealthyProbes = countif(status_s == "Online"),
-    UnhealthyProbes = countif(status_s == "Degraded" or status_s == "Disabled"),
-    TotalProbes = count()
-    by EndpointName, bin(TimeGenerated, 5m)
-| extend HealthPercentage = round(100.0 * HealthyProbes / TotalProbes, 2)
-| project TimeGenerated, EndpointName, HealthPercentage, HealthyProbes, UnhealthyProbes
+## Alert per endpoint, not per profile
 
-// Alert rule for endpoint degradation
-AzureDiagnostics
-| where ResourceProvider == "MICROSOFT.NETWORK"
-| where ResourceType == "TRAFFICMANAGERPROFILES"
-| where Category == "ProbeHealthStatusEvents"
-| where status_s != "Online"
-| project TimeGenerated, endpoint_s, status_s, message_s
+Because of the fail-open rule, the profile can look "fine" while health checking is broken. Alert on the `ProbeAgentCurrentEndpointStateByProfileResourceId` metric, split by endpoint, so you hear about any single endpoint going down:
+
+```bash
+az monitor metrics alert create \
+  --resource-group "<your-resource-group>" \
+  --name tm-endpoint-down \
+  --scopes "$(az network traffic-manager profile show \
+      --resource-group "<your-resource-group>" --name "tm-<your-app>" --query id --output tsv)" \
+  --condition "min ProbeAgentCurrentEndpointStateByProfileResourceId < 1 where EndpointName includes *" \
+  --window-size 5m \
+  --evaluation-frequency 1m \
+  --severity 1 \
+  --action "<resource-id-of-your-action-group>"
 ```
 
-### Azure Monitor Alert
+Then test it. Disable the primary's health path or stop the app in a non-production profile and time the whole chain: probe detection, DNS change, and how long your real clients take to follow. That number is your failover time, not the one on the diagram.
 
-```json
-{
-  "type": "Microsoft.Insights/metricAlerts",
-  "apiVersion": "2018-03-01",
-  "name": "tm-endpoint-unhealthy",
-  "location": "global",
-  "properties": {
-    "description": "Alert when Traffic Manager endpoint becomes unhealthy",
-    "severity": 1,
-    "enabled": true,
-    "scopes": [
-      "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/trafficManagerProfiles/{profile}"
-    ],
-    "evaluationFrequency": "PT1M",
-    "windowSize": "PT5M",
-    "criteria": {
-      "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-      "allOf": [
-        {
-          "name": "EndpointHealth",
-          "metricName": "ProbeAgentCurrentEndpointStateByProfileResourceId",
-          "dimensions": [
-            {
-              "name": "EndpointName",
-              "operator": "Include",
-              "values": ["*"]
-            }
-          ],
-          "operator": "LessThan",
-          "threshold": 1,
-          "timeAggregation": "Minimum"
-        }
-      ]
-    },
-    "actions": [
-      {
-        "actionGroupId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Insights/actionGroups/ops-team"
-      }
-    ]
-  }
-}
-```
+## Where Traffic Manager stops being the answer
 
-## Integration with Azure Front Door
+Traffic Manager is the right choice when you need protocol-agnostic failover (TCP services, non-HTTP endpoints, things outside Azure), when cost matters, or when you want a thin global layer over regional entry points like Application Gateway. It's the wrong choice when you need sub-minute failover regardless of client caching, per-request routing, TLS offload at the edge or a WAF in front of everything. That's what [Azure Front Door](/blog/2020-09-18-azure-front-door-global-loadbalancing/) is for: it terminates connections at the edge, so failover doesn't wait on anyone's DNS cache.
 
-For additional features like WAF and caching, combine Traffic Manager with Front Door:
+| | Traffic Manager | Front Door |
+|---|---|---|
+| Protocols | Any, because it only answers DNS | HTTP and HTTPS only |
+| Failover speed | Probe detection plus TTL plus client caching | Edge reroutes per request, no DNS wait |
+| TLS offload | None; clients connect straight to the endpoint | At the edge |
+| WAF | None; put it on the regional entry point | WAF policy at the edge |
+| Cost | Per DNS query and per monitored endpoint | Higher, billed on routing rules and data transfer |
 
-```bicep
-// Traffic Manager for backend failover
-resource backendTrafficManager 'Microsoft.Network/trafficmanagerprofiles@2018-08-01' = {
-  name: 'tm-backend'
-  location: 'global'
-  properties: {
-    profileStatus: 'Enabled'
-    trafficRoutingMethod: 'Priority'
-    dnsConfig: {
-      relativeName: 'myapp-backend'
-      ttl: 60
-    }
-    monitorConfig: {
-      protocol: 'HTTPS'
-      port: 443
-      path: '/health'
-    }
-  }
-}
-
-// Front Door with Traffic Manager as backend
-resource frontDoor 'Microsoft.Cdn/profiles@2021-06-01' = {
-  name: 'fd-myapp'
-  location: 'global'
-  sku: {
-    name: 'Premium_AzureFrontDoor'
-  }
-}
-
-resource frontDoorEndpoint 'Microsoft.Cdn/profiles/afdEndpoints@2021-06-01' = {
-  parent: frontDoor
-  name: 'myapp'
-  location: 'global'
-  properties: {
-    enabledState: 'Enabled'
-  }
-}
-
-resource backendGroup 'Microsoft.Cdn/profiles/originGroups@2021-06-01' = {
-  parent: frontDoor
-  name: 'backend-group'
-  properties: {
-    loadBalancingSettings: {
-      sampleSize: 4
-      successfulSamplesRequired: 3
-    }
-    healthProbeSettings: {
-      probePath: '/health'
-      probeRequestType: 'GET'
-      probeProtocol: 'Https'
-      probeIntervalInSeconds: 30
-    }
-  }
-}
-
-resource trafficManagerOrigin 'Microsoft.Cdn/profiles/originGroups/origins@2021-06-01' = {
-  parent: backendGroup
-  name: 'tm-origin'
-  properties: {
-    hostName: '${backendTrafficManager.properties.dnsConfig.relativeName}.trafficmanager.net'
-    httpPort: 80
-    httpsPort: 443
-    originHostHeader: 'myapp.com'
-    priority: 1
-    weight: 1000
-  }
-}
-```
-
-## Best Practices
-
-1. **TTL Configuration**: Use low TTL (60s) for faster failover
-2. **Health Probes**: Implement comprehensive health endpoints
-3. **Nested Profiles**: Combine routing methods for complex scenarios
-4. **Monitoring**: Set up alerts for endpoint health changes
-5. **Testing**: Regularly test failover scenarios
-6. **DNS Propagation**: Account for DNS caching in clients
-7. **Geographic Routing**: Use for compliance or data sovereignty requirements
-
-Azure Traffic Manager enables sophisticated global load balancing strategies. Combined with proper health checks and monitoring, it ensures your applications remain available and performant for users worldwide.
+My default for a public HTTP application is Front Door. My default for everything else that needs to survive a region outage is Traffic Manager with fast probing, a 30-second TTL, an honest readiness endpoint and an alert per endpoint. And if the database underneath isn't replicated and recoverable, none of this matters; routing is the easy half of [disaster recovery](/blog/2021-01-30-azure-site-recovery-dr/).

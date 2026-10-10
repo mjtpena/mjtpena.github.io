@@ -1,6 +1,6 @@
 ---
-title: Why you should experience being self-employed
-description: "I believe that every person who dreamed of being self-employed should at least try it, given their circumstances. Obviously, I wouldn't advise people to…"
+title: "Why You Should Try Being Self-Employed at Least Once"
+description: "Five reasons running your own business is worth trying at least once, from the MBA you earn by doing to finding out what clients will actually pay you."
 author: Michael John Peña
 draft: false
 date: 2021-01-27
@@ -8,71 +8,71 @@ url: /blog/why-you-should-experience-being-self-employed/
 images: 
      - /2021/01/jumpstory-download20210127-211611-940x510.jpg
 tags:
-  - business
-  - company
-  - startup
-  - work
+  - Career
+  - Personal
+  - Consulting
 ---
 
-I believe that every person who dreamed of being self-employed should at least try it, given their circumstances. Obviously, I wouldn't advise people to quit their job and start a poor-planned business if there is a financial or family obligation at stake. But given if you have the capability and capacity to do so; plan it properly and just go for it.
+If you've ever dreamed of working for yourself, I think you should try it at least once, as long as your circumstances allow it. That caveat matters. I wouldn't tell anyone to quit their job for a poorly planned business when there's a mortgage, a family, or other financial obligations at stake. But if you have the capability and the capacity, plan it properly and go for it. Even for a season of your life, it teaches you things a salary never will.
 
-Here are 5 of my personal reasons why it's beneficial to be self-employed or at least experience being one in your life.
+## It's an MBA you earn by doing
 
-## A real-world training of an MBA
+Running a business is trial by fire. Some people would argue that the money you'd spend on an MBA is better invested in a business, and I have some sympathy for that view. Most of what you need to know about running a business is available for free. If the business becomes profitable, the investment paid off. If it fails, you still come away knowing what didn't work and how to make better decisions next time.
 
-This experience will be a trial by fire. Some would even argue that the money you put in to study an MBA might actually be better worth investing in a business instead. There are a lot of resources on how to run and manage a business (most of them are for free). If your business succeeds or becomes profitable, then you've done the right investment; and in case you fail with your venture, you would at least capture what didn't work and how you can take better decisions next time.
+When I started my business, I applied a version of the 80/20 rule: I only needed to know about 20% of how it worked, and I'd learn the other 80% along the way. The trick is finding the balance between "I know nothing, should I even try?" and "I don't know 100% of it yet, so I'm not ready."
 
-When I ventured having my business, I applied the 20-80 principle: I just need to know 20% of how it works, and I'll learn the rest of 80% along the way. It's important to find the balance between "I know nothing, should I do it?" and "I feel like I don't know 100% about it". So, for example, starting a business around beauty and car products is a bad idea on my end because I know less than 20% of it.
+That's also why the domain matters. Starting a business selling beauty or car products would be a bad idea for me, because I know less than 20% about either. A business in a field you already know, built on your past work, has a much better chance. I've spent the last decade in technology consulting and have enough experience to deliver successful project outcomes, so building a business around that made sense. The 80% I'm still learning is everything around the delivery: sales, marketing, white-label products, managing remote workers, working with partners, and accounting.
 
-However, if you are venturing on a familiar domain, such as past work and jobs, then that might actually work. I've been in the technology consulting for the last decade, and I have enough experience on my belt to deliver successful project outcomes. So starting a business around this made sense, because I have over 20% knowledge and experience on how it works, I am just learning the rest of 80% like doing sales, marketing, white label products, managing remote workers, collaboration with partners, accounting, etc.
+My rule of thumb: pick a business where the hardest part, the thing clients actually pay for, is the part you already know. Everything else can be learned.
 
-## You experience to do the "necessary evils"
+## You learn to do the "necessary evils"
 
-Year after year, you deal with expenses, taxes, and cash flows. I think this can also apply to your personal finances, but you become more invested in managing it. The simple coffee expense can become much more visible. This allows you to experience firsthand some of those paper-works and signatures required to file for your quarterly or yearly declarations.
+Every year you deal with expenses, taxes, and cash flow. The same applies to your personal finances, but you pay much closer attention when it's your company. Even a simple coffee expense becomes visible. You also experience first-hand the paperwork and signatures behind every quarterly and yearly lodgement. In Australia, that means things like your [business activity statement](https://www.ato.gov.au/businesses-and-organisations/preparing-lodging-and-paying/business-activity-statements-bas) on top of the annual tax return.
 
-If organising these is too much for you, or taking too much of your time, then hire an accountant. I have an accountant, she's exceptional. She handles 80% to 90% of the work involved in our accounting books. Even if you have an accountant, the actual money that goes in and out of the company is still for you to handle - carefully. So having that sense of responsibility brings up financial literacy on your end.
+If organising all of this is too much for you, or takes too much of your time, hire an accountant who is a [registered tax agent](https://www.ato.gov.au/individuals-and-families/your-tax-return/how-to-lodge-your-tax-return/lodge-with-a-registered-tax-agent). I have one, and she's exceptional. She handles 80% to 90% of the work involved in our books. But even with a great accountant, the money that actually goes in and out of the company is still yours to manage, carefully. That sense of responsibility builds financial literacy in a way a payslip never will.
 
-This knowledge and experience will become handy if you plan to go back to being employed. You would have a better understanding on how to balance expenses and sales, like "Why can't I have the best super fast laptop for work?"
+This experience is useful even if you go back to being an employee later. You'll understand how a business balances expenses against sales, and questions like these suddenly have answers:
 
-"Why is my salary delayed again?"
+- "Why can't I have the fastest laptop for work?"
+- "Why is my salary delayed again?"
 
-## It's one step closer to financial freedom
+## It's a step closer to financial freedom
 
-As an employee working in a technology firm (or actually any company), have you ever thought that maybe you can cash in all the money that clients pay for your service? Well, the answer is yes. That's the whole point of being self-employed. You're willing to do the rest of the functions of your former employer and get the maximum benefit out of it. You'll remove a lot of the overhead costs of the people in the company that translate little value for you. Being an employee brings you a "subjective stability" but doesn't give you much control, being self-employed means having a lot of control but with a higher risk (and potential reward).
+If you work for a technology firm (or any company, really), have you ever wondered whether you could keep all the money clients pay for your service? You can. That's the whole point of being self-employed. You agree to take on the rest of your former employer's functions in exchange for keeping more of the value you create, and you cut out a lot of overhead that does little for you.
 
-In the beginning of your business, you will have no need for a complicated HR structure, cultivating company culture, hierarchy of managers (and middle-managers). You focus on making the company profitable with the least amount of expenses. You build a company, so that in a few years' time you can exit. Exiting means you already gathered enough resources to venture for something new, or the company became big (or get acquired) that you just want to benefit from it without working hands-on day-to-day.
+Being an employee gives you a subjective sense of stability but not much control. Being self-employed gives you a lot of control, with higher risk and higher potential reward. Neither is objectively better; it depends on what you're optimising for.
 
-If you're motivated to make money, then it's a straightforward decision that you really have to start-up a business. It's very few who actually get rich from being employed. Not all people who start up a business becomes rich. There are different "survivorship bias" on both ends, so be careful. The advantage of being self-employed is at least you have a very flexible control on where you want your career or "making money" take you.
+In the early days you don't need a complicated HR structure, a carefully cultivated company culture, or layers of managers and middle managers. You focus on making the company profitable with as few expenses as possible. And you build it with an exit in mind: in a few years, either you've gathered enough resources to start something new, or the company has grown (or been acquired) to the point where you benefit from it without working hands-on every day.
 
-## You'll realise your "real worth"
+If making money is your main motivation, starting a business is the more direct path. Very few people get rich from a salary. But plenty of people who start businesses don't get rich either. There's survivorship bias on both sides, so be careful whose stories you listen to. What self-employment does give you is far more control over where your career, and your earning potential, goes.
 
-Once you venture out in the market, you will understand how much is your actual worth by 2 fundamental principles:
+## You find out what you're really worth
 
-- How much do you think you should earn from your service or product?
-- How much do you think clients and customers would pay for it?
+Once you're in the market, your worth comes down to two questions:
 
-The latter being more important than the former. The former is more around building hypothesis and assumptions based from your own experience or research, the latter is more around actual negotiation skills and market margins.
+- How much do you think you should earn for your service or product?
+- How much will clients and customers actually pay for it?
 
-If you're trying to build a product, you'll do the basic maths on how much time you're putting in it. Does it make sense to hire more people? Do you need funding from investors? Or maybe outsource some non-core services? How much should I sell the product for?
+The second matters more. The first is a hypothesis built from your own experience and research. The second is settled by negotiation and market margins, and the market doesn't care about your hypothesis.
 
-If you're doing a service business, you'll ask yourself how much should you charge a client. Are they willing to pay $20,000 per day? Or maybe $2000? $200? Should I do fixed-price contracts? How do you scale it so that you get paid in full, but still deliver the expected outcome? All those questions become more relevant to you as you learn to value your actual effort and time.
+If you're building a product, you start doing the basic maths on the time you're putting in. Does it make sense to hire more people? Do you need funding from investors? Should you outsource some of the non-core work? What should you charge for the product?
 
-## More opportunity to inspire and touch lives
+If you're running a services business, the questions are about pricing. Will a client pay $20,000 a day? $2,000? $200? Should you do fixed-price contracts? How do you scale so that you're paid in full and still deliver the outcome the client expects? These questions become very real once you start valuing your own time and effort, and the answers will change how you see your salary if you ever go back to one.
 
-I think this is one of the best reasons to start a company. You have the option to help others, whether that's through giving people jobs (or gigs), doing not-for-profit work, company donations, etc. Or simply because you have more money, you'll have more options to buy from your local butcher or fresh market and not buy from the big companies.
+## You get more opportunities to make a difference
 
-You will meet many people on the journey, and you will share a lot of stories with them. You will write more about your struggles and lessons (like this). Having a company gives you a responsibility to not just think about yourself, you think of a bigger goal. What will your company look like in 5 years' time? How will it affect the surrounding people: your family, your friends, and your peers? **How will it affect you?**
+I think this is one of the best reasons to start a company. You can help others by giving people jobs or gigs, doing not-for-profit work, or making donations through the company. Even something as simple as having more control over your money gives you the option to buy from the local butcher or fresh market instead of the big chains.
 
-There is a common misconception that once you become self-employed, always plan for it to be a 1,000+ people's company or a multi-million business. Although that's something worth aiming in the long run, if your only reason for starting a business is money and influence, you might also consider challenging "the growth." Is that what you really want? Well, you would know - it's your business!
+You'll meet a lot of people along the way and share a lot of stories with them. You'll probably end up writing about your struggles and lessons, like I'm doing here. Running a company also makes you responsible for more than yourself. What will the company look like in five years? How will it affect the people around you: your family, your friends, and your peers? **And how will it affect you?**
 
-## Conclusion
+There's a common misconception that if you go out on your own, you have to plan for a 1,000-person company or a multimillion-dollar business. That can be worth aiming for in the long run. But if money and influence are your only reasons, challenge the assumption that growth is the goal. Is that what you really want? Only you can answer that. It's your business.
 
-- Starting a business is your actual "on the job" training of an MBA.
-- You'll experience to do the necessities: accounting, sales, marketing, and managing people.
-- It's an opportunity to make more money.
-- You'll value how much your time converts into a dollar figure.
-- There's opportunity to help others.
+## When to wait, and when to go
 
-If you have the right resources and plans to start a business, just go for it. You'll learn the rest of it along the way. You will go pass by the "What if I...?". If it doesn't work, then at least you tried, maybe it's not yet the right time.
+Self-employment isn't for every moment of your life. If you have no savings buffer, heavy financial obligations, or no real knowledge of the domain you want to enter, wait and prepare. Waiting a year to build a buffer is a better plan than starting under pressure.
 
-Let me know your story. Have you started your own business? Do you want to start a business? What's holding you back?
+When I say "plan it properly", I mean two things. My rule of thumb is to have enough savings to cover several months of personal expenses before you resign, because early invoices can take weeks to be paid and the first quiet month always arrives sooner than you expect. And line up your first client, or at least a signed piece of work, before you leave rather than after. Resigning and then looking for work puts you in the weakest negotiating position you'll ever have, which is exactly the wrong moment to be setting your rates.
+
+Go for it, and learn the rest along the way. You'll get past the "What if I...?" either way. If it doesn't work out, at least you tried, and maybe it just wasn't the right time yet. Most of that learning is free or cheap, and books are a good place to start. I wrote about [how I built a reading habit](/blog/2021-01-08-you-should-read-books-you-know-you-should/) earlier this month.
+
+I'd love to hear your story. Have you started your own business? Do you want to? What's holding you back?

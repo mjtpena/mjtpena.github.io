@@ -1,6 +1,6 @@
 ---
-title: Disaster Recovery with Azure Site Recovery
-description: "Disaster recovery is the topic everyone agrees is important and nobody wants to be assigned. ASR is the service that turns \"we should test my DR\" from a…"
+title: Automating Azure Site Recovery DR Drills with Recovery Plans
+description: "Turn Azure Site Recovery recovery plans and Azure Automation runbooks into a scheduled, unattended DR drill that proves failover works and records evidence."
 author: Michael John Pena
 draft: false
 date: 2021-01-30
@@ -10,590 +10,212 @@ tags:
   - Site Recovery
   - Disaster Recovery
   - Business Continuity
-  - High Availability
+  - Automation
+  - PowerShell
 ---
 
-Disaster recovery is the topic everyone agrees is important and nobody wants to be assigned. ASR is the service that turns "we should test my DR" from a six-month project into a recovery plan you can actually run on a Tuesday afternoon. Replicate VMs cross-region, define a recovery plan that orders the dependencies, and—the part most teams skip—run a non-disruptive test failover quarterly. Today's post is the end-to-end implementation, plus the automation I bolt on so the DR drill happens whether or not anyone remembers.
+Enabling replication in Azure Site Recovery takes an afternoon. Keeping the disaster recovery plan honest for the next three years is the hard part, because the plan rots: someone adds a VM that never makes it into the recovery plan, a subnet changes, a runbook still points at a DNS zone that was renamed. The only thing that catches that drift is a test failover, and a test failover that depends on someone remembering to run it doesn't happen, so the drill has to run itself.
 
-## Understanding Azure Site Recovery
+I covered the ASR basics (replication scenarios, failover types, commit and reprotect) in [Azure Site Recovery: Disaster Recovery as a Service](/blog/2020-12-01-azure-site-recovery/). Here I'm assuming Azure-to-Azure replication is already running and focusing on three things: designing a recovery plan that can run unattended, writing runbooks that behave differently in a drill than in a real event, and scheduling the drill so it produces evidence rather than a calendar reminder.
 
-ASR provides:
-- **Replication**: Continuous replication of VMs and physical servers
-- **Failover**: Automated or manual failover to secondary region
-- **Failback**: Return to primary region when recovered
-- **DR Drills**: Test failovers without impacting production
+## What a recovery plan gives you, and its rules
 
-## Architecture for Multi-Region DR
+A recovery plan groups replicated machines so they fail over as one application. According to the [recovery plan overview](https://learn.microsoft.com/en-us/azure/site-recovery/recovery-plan-overview), a plan can hold up to 100 protected instances (the documented limit at the time of writing), machines in the same group start in parallel, and Group 2 doesn't start until every machine in Group 1 has failed over and started. You can have up to seven groups, and each group gets pre-actions and post-actions: either an Azure Automation runbook or a manual action.
 
-```bicep
-// Primary Region Resources
-module primaryInfra 'modules/infrastructure.bicep' = {
-  name: 'primaryInfra'
-  params: {
-    location: primaryLocation
-    environmentName: 'primary'
-    vnetAddressSpace: '10.0.0.0/16'
-  }
-}
+A few rules from the [runbook integration docs](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-runbook-automation) shape everything that follows:
 
-// Secondary Region Resources (DR Site)
-module secondaryInfra 'modules/infrastructure.bicep' = {
-  name: 'secondaryInfra'
-  params: {
-    location: secondaryLocation
-    environmentName: 'dr'
-    vnetAddressSpace: '10.1.0.0/16'
-  }
-}
+- The Automation account can be in any region but must be in the **same subscription** as the Recovery Services vault.
+- Runbooks in a plan run serially, in the order you set.
+- The plan **keeps running even if a script fails**. A broken runbook doesn't stop the failover, which is the right call in a real disaster and a trap in a drill, because the drill "succeeds" while your DNS update quietly failed.
+- A manual action pauses the plan until someone acknowledges it in the portal.
+- The only input a runbook gets is the `RecoveryPlanContext` object. Anything else has to come from Automation variables or the script itself.
 
-// Recovery Services Vault in DR region
-resource recoveryVault 'Microsoft.RecoveryServices/vaults@2021-08-01' = {
-  name: 'rsv-dr-${secondaryLocation}'
-  location: secondaryLocation
-  sku: {
-    name: 'RS0'
-    tier: 'Standard'
-  }
-  properties: {}
-}
+That last point and the "keeps running" rule are why most automated drills I see report green while proving very little. The fix is to design for them.
 
-// Replication Policy
-resource replicationPolicy 'Microsoft.RecoveryServices/vaults/replicationPolicies@2021-08-01' = {
-  parent: recoveryVault
-  name: 'vm-replication-policy'
-  properties: {
-    providerSpecificInput: {
-      instanceType: 'A2A'
-      multiVmSyncStatus: 'Enable'
-      appConsistentFrequencyInMinutes: 60
-      crashConsistentFrequencyInMinutes: 5
-      recoveryPointHistory: 1440  // 24 hours
-    }
-  }
-}
+## Design the plan for unattended runs
 
-// VNet Peering for replication traffic
-resource primaryToSecondaryPeering 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2021-05-01' = {
-  name: '${primaryInfra.outputs.vnetName}/primary-to-dr'
-  properties: {
-    remoteVirtualNetwork: {
-      id: secondaryInfra.outputs.vnetId
-    }
-    allowVirtualNetworkAccess: true
-    allowForwardedTraffic: true
-    allowGatewayTransit: false
-    useRemoteGateways: false
-  }
-}
-```
+| Decision | What I recommend | Why |
+| --- | --- | --- |
+| Group order | Data tier, then app tier, then web tier | The web tier shouldn't accept traffic before its dependencies are up |
+| Manual actions | Scope them to Failover only, not Test failover (Planned failover doesn't apply to Azure-to-Azure plans) | A manual action in a test run suspends the job and the scheduled drill stalls |
+| Runbook branching | Check `FailoverType` before touching shared infrastructure | A drill must never repoint production DNS |
+| Pass/fail signal | Runbooks write failures to an Automation variable | The plan won't fail on a script error, so you need another channel |
+| Test network | An isolated VNet in the DR region, not the replication target VNet | Avoids IP conflicts and accidental traffic from real clients |
 
-## Enabling Replication
+When you add a manual action in the portal, you choose which failover types it applies to; the [recovery plan how-to](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-create-recovery-plans) covers this. For an Azure-to-Azure plan the choices that matter are Test failover and Failover, so tick Failover and leave Test failover clear. "Confirm with the DBA that SQL is healthy" is a sensible gate in a real event and a blocker in a 2 a.m. scheduled drill. If the check matters in the drill too, automate it as a runbook instead.
 
-### PowerShell Automation
+## A runbook that knows it's in a drill
+
+The context injected into each runbook carries `RecoveryPlanName`, `FailoverType` (`Test` for a drill), `FailoverDirection` (`PrimaryToSecondary` or `SecondaryToPrimary`), `GroupId`, and `VmMap`, keyed by a GUID per VM with `SubscriptionId`, `ResourceGroupName` and `RoleName` (the failed-over VM's name). `VmMap` only contains the VMs in the group the action is attached to, so attach this runbook as a post-action on each group whose VMs need DNS records.
+
+This runbook checks that each failed-over VM is running and has a private IP. During a real failover it repoints an A record in an Azure Private DNS zone. During a test it doesn't touch DNS at all, and records any failure in an Automation variable the drill driver reads later. It authenticates with the Automation account's Run As connection. The Run As certificate is valid for one year, so renew it (or alert on its expiry) before it lapses; an expired certificate makes every scheduled drill fail at `Connect-AzAccount`, and nobody notices until the next audit.
 
 ```powershell
-# Enable replication for Azure VMs
-
-param(
-    [string]$SourceResourceGroup,
-    [string]$SourceVMName,
-    [string]$TargetResourceGroup,
-    [string]$RecoveryVaultName,
-    [string]$RecoveryVaultRG,
-    [string]$TargetVNetName,
-    [string]$TargetSubnetName,
-    [string]$ReplicationPolicyName,
-    [string]$TargetStorageAccountId
+param (
+    [parameter(Mandatory = $false)]
+    [Object]$RecoveryPlanContext
 )
 
-# Get the vault
-$vault = Get-AzRecoveryServicesVault `
-    -Name $RecoveryVaultName `
-    -ResourceGroupName $RecoveryVaultRG
+$ErrorActionPreference = 'Stop'
 
-Set-AzRecoveryServicesAsrVaultContext -Vault $vault
+# Authenticate with the Automation account's Run As connection
+$conn = Get-AutomationConnection -Name 'AzureRunAsConnection'
+Connect-AzAccount -ServicePrincipal `
+    -Tenant $conn.TenantID `
+    -ApplicationId $conn.ApplicationID `
+    -CertificateThumbprint $conn.CertificateThumbprint | Out-Null
 
-# Get the source VM
-$sourceVM = Get-AzVM -ResourceGroupName $SourceResourceGroup -Name $SourceVMName
+$planName = $RecoveryPlanContext.RecoveryPlanName
+$isTest   = $RecoveryPlanContext.FailoverType -eq 'Test'
 
-# Get replication fabric (source region)
-$primaryFabric = Get-AzRecoveryServicesAsrFabric |
-    Where-Object { $_.FabricSpecificDetails.Location -eq $sourceVM.Location }
+# Per-plan settings live in Automation variables prefixed with the plan name
+$zoneName  = Get-AutomationVariable -Name "$planName-DnsZone"
+$zoneRg    = Get-AutomationVariable -Name "$planName-DnsZoneRG"
+$statusVar = "$planName-DrillStatus"
 
-if (-not $primaryFabric) {
-    # Create fabric for source region
-    $primaryFabric = New-AzRecoveryServicesAsrFabric `
-        -Azure `
-        -Name "fabric-$($sourceVM.Location)" `
-        -Location $sourceVM.Location
-}
+$vmMap = $RecoveryPlanContext.VmMap
+$vmIds = $vmMap | Get-Member -MemberType NoteProperty | Select-Object -ExpandProperty Name
+$failures = @()
 
-# Get or create protection container
-$primaryContainer = Get-AzRecoveryServicesAsrProtectionContainer `
-    -Fabric $primaryFabric |
-    Where-Object { $_.FriendlyName -like "*$($sourceVM.Location)*" }
-
-if (-not $primaryContainer) {
-    $primaryContainer = New-AzRecoveryServicesAsrProtectionContainer `
-        -Name "container-$($sourceVM.Location)" `
-        -Fabric $primaryFabric
-}
-
-# Get target fabric and container (DR region)
-$targetLocation = "westus2"  # DR region
-$targetFabric = Get-AzRecoveryServicesAsrFabric |
-    Where-Object { $_.FabricSpecificDetails.Location -eq $targetLocation }
-
-$targetContainer = Get-AzRecoveryServicesAsrProtectionContainer `
-    -Fabric $targetFabric
-
-# Get replication policy
-$policy = Get-AzRecoveryServicesAsrPolicy -Name $ReplicationPolicyName
-
-# Create container mapping
-$containerMapping = Get-AzRecoveryServicesAsrProtectionContainerMapping `
-    -ProtectionContainer $primaryContainer |
-    Where-Object { $_.PolicyFriendlyName -eq $ReplicationPolicyName }
-
-if (-not $containerMapping) {
-    $containerMapping = New-AzRecoveryServicesAsrProtectionContainerMapping `
-        -Name "mapping-$($sourceVM.Location)-to-$targetLocation" `
-        -Policy $policy `
-        -PrimaryProtectionContainer $primaryContainer `
-        -RecoveryProtectionContainer $targetContainer
-}
-
-# Get target network
-$targetVNet = Get-AzVirtualNetwork `
-    -Name $TargetVNetName `
-    -ResourceGroupName $TargetResourceGroup
-
-$targetSubnet = $targetVNet.Subnets |
-    Where-Object { $_.Name -eq $TargetSubnetName }
-
-# Enable replication
-$diskConfigs = @()
-foreach ($disk in $sourceVM.StorageProfile.OsDisk, $sourceVM.StorageProfile.DataDisks) {
-    if ($disk) {
-        $diskConfigs += New-AzRecoveryServicesAsrAzureToAzureDiskReplicationConfig `
-            -ManagedDisk `
-            -LogStorageAccountId $TargetStorageAccountId `
-            -DiskId $disk.ManagedDisk.Id `
-            -RecoveryResourceGroupId "/subscriptions/$((Get-AzContext).Subscription.Id)/resourceGroups/$TargetResourceGroup" `
-            -RecoveryReplicaDiskAccountType "Premium_LRS" `
-            -RecoveryTargetDiskAccountType "Premium_LRS"
+foreach ($vmId in $vmIds) {
+    $vmInfo = $vmMap.$vmId
+    if (-not $vmInfo -or -not $vmInfo.ResourceGroupName -or -not $vmInfo.RoleName) {
+        continue
     }
-}
 
-$job = New-AzRecoveryServicesAsrReplicationProtectedItem `
-    -AzureToAzure `
-    -AzureVmId $sourceVM.Id `
-    -Name "$SourceVMName-asr" `
-    -ProtectionContainerMapping $containerMapping `
-    -AzureToAzureDiskReplicationConfiguration $diskConfigs `
-    -RecoveryResourceGroupId "/subscriptions/$((Get-AzContext).Subscription.Id)/resourceGroups/$TargetResourceGroup" `
-    -RecoveryAzureNetworkId $targetVNet.Id `
-    -RecoveryAzureSubnetName $TargetSubnetName
+    Set-AzContext -SubscriptionId $vmInfo.SubscriptionId | Out-Null
 
-Write-Host "Replication enabled. Job ID: $($job.Name)"
-```
+    $status = Get-AzVM -ResourceGroupName $vmInfo.ResourceGroupName -Name $vmInfo.RoleName -Status
+    $power  = ($status.Statuses | Where-Object { $_.Code -like 'PowerState/*' }).Code
+    if ($power -ne 'PowerState/running') {
+        $failures += "$($vmInfo.RoleName) is $power"
+        continue
+    }
 
-## Recovery Plans
-
-Create recovery plans for orchestrated failover:
-
-```json
-{
-  "name": "ecommerce-recovery-plan",
-  "properties": {
-    "primaryFabricId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.RecoveryServices/vaults/{vault}/replicationFabrics/fabric-eastus",
-    "recoveryFabricId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.RecoveryServices/vaults/{vault}/replicationFabrics/fabric-westus2",
-    "failoverDeploymentModel": "ResourceManager",
-    "groups": [
-      {
-        "groupType": "Boot",
-        "replicationProtectedItems": [],
-        "startGroupActions": [
-          {
-            "actionName": "Pre-Failover-Script",
-            "failoverTypes": ["PlannedFailover", "UnplannedFailover"],
-            "failoverDirections": ["PrimaryToRecovery"],
-            "customDetails": {
-              "instanceType": "AutomationRunbookActionDetails",
-              "runbookId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Automation/automationAccounts/{account}/runbooks/PreFailoverChecks",
-              "fabricLocation": "Primary"
-            }
-          }
-        ]
-      },
-      {
-        "groupType": "Boot",
-        "replicationProtectedItems": [
-          {
-            "id": "/subscriptions/{sub}/.../replicationProtectedItems/sql-server-asr"
-          }
-        ],
-        "startGroupActions": [],
-        "endGroupActions": [
-          {
-            "actionName": "Wait-For-SQL",
-            "failoverTypes": ["PlannedFailover", "UnplannedFailover"],
-            "customDetails": {
-              "instanceType": "ManualActionDetails",
-              "description": "Verify SQL Server is healthy and databases are online"
-            }
-          }
-        ]
-      },
-      {
-        "groupType": "Boot",
-        "replicationProtectedItems": [
-          {
-            "id": "/subscriptions/{sub}/.../replicationProtectedItems/app-server-1-asr"
-          },
-          {
-            "id": "/subscriptions/{sub}/.../replicationProtectedItems/app-server-2-asr"
-          }
-        ],
-        "startGroupActions": [],
-        "endGroupActions": []
-      },
-      {
-        "groupType": "Boot",
-        "replicationProtectedItems": [
-          {
-            "id": "/subscriptions/{sub}/.../replicationProtectedItems/web-server-asr"
-          }
-        ],
-        "startGroupActions": [],
-        "endGroupActions": [
-          {
-            "actionName": "Update-DNS",
-            "failoverTypes": ["PlannedFailover", "UnplannedFailover"],
-            "customDetails": {
-              "instanceType": "AutomationRunbookActionDetails",
-              "runbookId": "/subscriptions/{sub}/.../runbooks/UpdateDNSRecords"
-            }
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-## Automation Runbooks
-
-### Pre-Failover Validation
-
-```powershell
-# PreFailoverChecks.ps1
-
-param(
-    [object]$RecoveryPlanContext
-)
-
-Write-Output "Starting pre-failover checks..."
-
-$failoverType = $RecoveryPlanContext.FailoverType
-$failoverDirection = $RecoveryPlanContext.FailoverDirection
-
-# Check 1: Verify DR region capacity
-$drRegion = "westus2"
-$requiredVMSize = "Standard_D4s_v3"
-
-$skuAvailability = Get-AzComputeResourceSku -Location $drRegion |
-    Where-Object { $_.Name -eq $requiredVMSize } |
-    Select-Object -ExpandProperty Restrictions
-
-if ($skuAvailability) {
-    Write-Error "Required VM SKU $requiredVMSize has restrictions in $drRegion"
-    throw "Capacity check failed"
-}
-
-Write-Output "Capacity check passed"
-
-# Check 2: Verify network connectivity
-$targetVNet = Get-AzVirtualNetwork -Name "vnet-dr" -ResourceGroupName "rg-dr"
-if (-not $targetVNet) {
-    Write-Error "Target VNet not found"
-    throw "Network check failed"
-}
-
-Write-Output "Network check passed"
-
-# Check 3: Verify storage accounts
-$storageAccount = Get-AzStorageAccount -ResourceGroupName "rg-dr" -Name "drbootdiag"
-if ($storageAccount.ProvisioningState -ne "Succeeded") {
-    Write-Error "Storage account not ready"
-    throw "Storage check failed"
-}
-
-Write-Output "Storage check passed"
-
-# Check 4: Verify DNS zone
-$dnsZone = Get-AzDnsZone -Name "myapp.com" -ResourceGroupName "rg-dns"
-if (-not $dnsZone) {
-    Write-Error "DNS zone not found"
-    throw "DNS check failed"
-}
-
-Write-Output "DNS check passed"
-
-Write-Output "All pre-failover checks passed successfully"
-```
-
-### Post-Failover DNS Update
-
-```powershell
-# UpdateDNSRecords.ps1
-
-param(
-    [object]$RecoveryPlanContext
-)
-
-Write-Output "Updating DNS records post-failover..."
-
-$dnsZoneName = "myapp.com"
-$dnsResourceGroup = "rg-dns"
-
-# Get the new IP addresses of failed-over VMs
-$vmGroup = $RecoveryPlanContext.VmMap
-
-foreach ($vmId in $vmGroup.Keys) {
-    $vmInfo = $vmGroup[$vmId]
-    $vmName = $vmInfo.RoleName
-
-    # Get the new VM
-    $vm = Get-AzVM | Where-Object { $_.Name -like "*$vmName*" }
+    $vm  = Get-AzVM -ResourceGroupName $vmInfo.ResourceGroupName -Name $vmInfo.RoleName
     $nic = Get-AzNetworkInterface -ResourceId $vm.NetworkProfile.NetworkInterfaces[0].Id
-    $privateIP = $nic.IpConfigurations[0].PrivateIpAddress
-
-    # Update A record
-    $recordSetName = $vmName.ToLower()
-
-    $existingRecord = Get-AzDnsRecordSet `
-        -ZoneName $dnsZoneName `
-        -ResourceGroupName $dnsResourceGroup `
-        -Name $recordSetName `
-        -RecordType A `
-        -ErrorAction SilentlyContinue
-
-    if ($existingRecord) {
-        $existingRecord.Records.Clear()
-        $existingRecord.Records.Add([Microsoft.Azure.Management.Dns.Models.ARecord]::new($privateIP))
-        Set-AzDnsRecordSet -RecordSet $existingRecord
-        Write-Output "Updated DNS record for $vmName to $privateIP"
-    } else {
-        New-AzDnsRecordSet `
-            -ZoneName $dnsZoneName `
-            -ResourceGroupName $dnsResourceGroup `
-            -Name $recordSetName `
-            -RecordType A `
-            -Ttl 300 `
-            -DnsRecords (New-AzDnsRecordConfig -IPv4Address $privateIP)
-        Write-Output "Created DNS record for $vmName with IP $privateIP"
+    $ip  = $nic.IpConfigurations[0].PrivateIpAddress
+    if (-not $ip) {
+        $failures += "$($vmInfo.RoleName) has no private IP"
+        continue
     }
+
+    if ($isTest) {
+        Write-Output "Test failover: $($vmInfo.RoleName) running at $ip, DNS left unchanged"
+        continue
+    }
+
+    # Real failover: repoint the A record at the recovered VM
+    $recordName = $vmInfo.RoleName.ToLower()
+    $recordSet  = Get-AzPrivateDnsRecordSet -ZoneName $zoneName -ResourceGroupName $zoneRg `
+        -Name $recordName -RecordType A
+    foreach ($old in @($recordSet.Records)) {
+        Remove-AzPrivateDnsRecordConfig -RecordSet $recordSet -Ipv4Address $old.Ipv4Address | Out-Null
+    }
+    Add-AzPrivateDnsRecordConfig -RecordSet $recordSet -Ipv4Address $ip | Out-Null
+    Set-AzPrivateDnsRecordSet -RecordSet $recordSet | Out-Null
+    Write-Output "Updated $recordName.$zoneName to $ip"
 }
 
-# Update Traffic Manager if used
-$tmProfile = Get-AzTrafficManagerProfile -Name "tm-myapp" -ResourceGroupName "rg-traffic"
-if ($tmProfile) {
-    $drEndpoint = $tmProfile.Endpoints | Where-Object { $_.Name -eq "dr-endpoint" }
-    $drEndpoint.EndpointStatus = "Enabled"
-
-    $primaryEndpoint = $tmProfile.Endpoints | Where-Object { $_.Name -eq "primary-endpoint" }
-    $primaryEndpoint.EndpointStatus = "Disabled"
-
-    Set-AzTrafficManagerProfile -TrafficManagerProfile $tmProfile
-    Write-Output "Updated Traffic Manager endpoints"
-}
-
-Write-Output "DNS update completed"
-```
-
-## Monitoring Replication Health
-
-```csharp
-using Azure.ResourceManager.RecoveryServices;
-
-public class ASRMonitoringService
-{
-    public async Task<ReplicationHealthReport> GetReplicationHealthAsync(
-        string vaultName,
-        string resourceGroup)
-    {
-        var report = new ReplicationHealthReport
-        {
-            GeneratedAt = DateTime.UtcNow
-        };
-
-        var subscription = await _armClient.GetDefaultSubscriptionAsync();
-        var vault = await subscription
-            .GetResourceGroups()
-            .Get(resourceGroup)
-            .Value
-            .GetRecoveryServicesVaults()
-            .GetAsync(vaultName);
-
-        // Get all protected items
-        var protectedItems = vault.Value.GetReplicationProtectedItems();
-
-        await foreach (var item in protectedItems)
-        {
-            var itemHealth = new ProtectedItemHealth
-            {
-                Name = item.Data.Properties.FriendlyName,
-                ReplicationHealth = item.Data.Properties.ReplicationHealth,
-                FailoverHealth = item.Data.Properties.FailoverHealth,
-                ProtectionState = item.Data.Properties.ProtectionState,
-                LastRpoCalculatedTime = item.Data.Properties.LastRpoCalculatedTime,
-                RpoInSeconds = item.Data.Properties.RpoInSeconds
-            };
-
-            // Check for health issues
-            if (item.Data.Properties.ReplicationHealth != "Normal")
-            {
-                itemHealth.Issues.AddRange(
-                    item.Data.Properties.ReplicationHealthErrors?.Select(e =>
-                        new HealthIssue
-                        {
-                            ErrorCode = e.ErrorCode,
-                            ErrorMessage = e.ErrorMessage,
-                            PossibleCauses = e.PossibleCauses,
-                            RecommendedAction = e.RecommendedAction
-                        }) ?? Enumerable.Empty<HealthIssue>()
-                );
-            }
-
-            // RPO breach check (threshold: 30 minutes)
-            if (item.Data.Properties.RpoInSeconds > 1800)
-            {
-                itemHealth.Warnings.Add(
-                    $"RPO exceeded threshold: {item.Data.Properties.RpoInSeconds / 60} minutes");
-            }
-
-            report.ProtectedItems.Add(itemHealth);
-        }
-
-        // Get recovery plan health
-        var recoveryPlans = vault.Value.GetRecoveryPlans();
-        await foreach (var plan in recoveryPlans)
-        {
-            report.RecoveryPlans.Add(new RecoveryPlanHealth
-            {
-                Name = plan.Data.Properties.FriendlyName,
-                ProviderSpecificDetails = plan.Data.Properties.ProviderSpecificDetails,
-                LastTestFailoverTime = plan.Data.Properties.LastTestFailoverTime
-            });
-
-            // Warn if test failover hasn't been done recently
-            if (plan.Data.Properties.LastTestFailoverTime == null ||
-                plan.Data.Properties.LastTestFailoverTime < DateTime.UtcNow.AddDays(-30))
-            {
-                report.Warnings.Add(
-                    $"Recovery plan '{plan.Data.Properties.FriendlyName}' hasn't been tested in 30+ days");
-            }
-        }
-
-        return report;
-    }
+if ($failures.Count -gt 0) {
+    $message = "FAILED (group $($RecoveryPlanContext.GroupId)): " + ($failures -join '; ')
+    Set-AutomationVariable -Name $statusVar -Value $message
+    throw $message
 }
 ```
 
-## Test Failover Automation
+Create the three variables (`<plan>-DnsZone`, `<plan>-DnsZoneRG`, `<plan>-DrillStatus`) in the Automation account first; `Set-AutomationVariable` updates an existing variable but won't create one. The Automation account needs the Az.Accounts, Az.Compute, Az.Network and Az.PrivateDns modules imported. Many accounts still default to AzureRM modules, and Microsoft's own samples still use AzureRM; don't mix AzureRM and Az cmdlets in the same runbook.
+
+Two judgement calls in there. First, the runbook only writes the status variable on failure, so a later group can't overwrite an earlier group's failure with "OK". Second, it throws after writing the variable. The plan won't stop, but the failure shows up in the job details and in the Automation job history, which is where on-call engineers will look.
+
+## The drill driver
+
+The second runbook runs on an Automation schedule. It resets the status variable, starts a test failover of the whole recovery plan into an isolated VNet, waits, reads the status, and cleans up unless the job is stuck on a manual action. The cmdlets are the same ones the [Azure-to-Azure PowerShell guide](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell) uses for a single VM, pointed at a recovery plan instead. It needs Az.RecoveryServices and Az.Automation as well.
 
 ```powershell
-# Automated DR drill script
-
-param(
-    [string]$VaultName,
-    [string]$VaultResourceGroup,
-    [string]$RecoveryPlanName,
-    [string]$TestNetworkId,
-    [switch]$CleanupAfterTest
+param (
+    [Parameter(Mandatory = $true)][string]$VaultName,
+    [Parameter(Mandatory = $true)][string]$VaultResourceGroup,
+    [Parameter(Mandatory = $true)][string]$RecoveryPlanName,
+    [Parameter(Mandatory = $true)][string]$TestVNetId,
+    [Parameter(Mandatory = $true)][string]$AutomationAccountName,
+    [Parameter(Mandatory = $true)][string]$AutomationResourceGroup
 )
+
+$ErrorActionPreference = 'Stop'
+
+$conn = Get-AutomationConnection -Name 'AzureRunAsConnection'
+Connect-AzAccount -ServicePrincipal `
+    -Tenant $conn.TenantID `
+    -ApplicationId $conn.ApplicationID `
+    -CertificateThumbprint $conn.CertificateThumbprint | Out-Null
+
+function Wait-AsrJob {
+    param ($Job)
+    while ($Job.State -eq 'NotStarted' -or $Job.State -eq 'InProgress') {
+        Start-Sleep -Seconds 30
+        $Job = Get-AzRecoveryServicesAsrJob -Job $Job
+    }
+    return $Job
+}
+
+$statusVar = "$RecoveryPlanName-DrillStatus"
+Set-AzAutomationVariable -ResourceGroupName $AutomationResourceGroup `
+    -AutomationAccountName $AutomationAccountName `
+    -Name $statusVar -Value 'OK' -Encrypted $false | Out-Null
 
 $vault = Get-AzRecoveryServicesVault -Name $VaultName -ResourceGroupName $VaultResourceGroup
-Set-AzRecoveryServicesAsrVaultContext -Vault $vault
+Set-AzRecoveryServicesAsrVaultContext -Vault $vault | Out-Null
+$plan = Get-AzRecoveryServicesAsrRecoveryPlan -Name $RecoveryPlanName
 
-$recoveryPlan = Get-AzRecoveryServicesAsrRecoveryPlan -Name $RecoveryPlanName
+$tfoJob = Start-AzRecoveryServicesAsrTestFailoverJob -RecoveryPlan $plan `
+    -Direction PrimaryToRecovery -AzureVMNetworkId $TestVNetId
+$tfoJob = Wait-AsrJob -Job $tfoJob
 
-Write-Host "Starting test failover for recovery plan: $RecoveryPlanName"
-
-# Start test failover
-$testFailoverJob = Start-AzRecoveryServicesAsrTestFailoverJob `
-    -RecoveryPlan $recoveryPlan `
-    -Direction PrimaryToRecovery `
-    -AzureVMNetworkId $TestNetworkId
-
-# Wait for completion
-do {
-    $testFailoverJob = Get-AzRecoveryServicesAsrJob -Job $testFailoverJob
-    Write-Host "Test failover status: $($testFailoverJob.State)"
-    Start-Sleep -Seconds 30
-} while ($testFailoverJob.State -eq "InProgress")
-
-if ($testFailoverJob.State -eq "Succeeded") {
-    Write-Host "Test failover completed successfully"
-
-    # Run validation tests
-    Write-Host "Running validation tests..."
-
-    # Get test VMs
-    $testVMs = Get-AzVM -ResourceGroupName "*-asr" |
-        Where-Object { $_.Name -like "*test*" }
-
-    foreach ($vm in $testVMs) {
-        # Test VM connectivity
-        $vmStatus = Get-AzVM -ResourceGroupName $vm.ResourceGroupName -Name $vm.Name -Status
-        $powerState = $vmStatus.Statuses |
-            Where-Object { $_.Code -like "PowerState/*" }
-
-        if ($powerState.Code -eq "PowerState/running") {
-            Write-Host "VM $($vm.Name) is running - PASS"
-        } else {
-            Write-Host "VM $($vm.Name) is not running - FAIL"
-        }
-    }
-
-    if ($CleanupAfterTest) {
-        Write-Host "Cleaning up test failover..."
-
-        $cleanupJob = Start-AzRecoveryServicesAsrTestFailoverCleanupJob `
-            -RecoveryPlan $recoveryPlan `
-            -Comment "Automated DR drill completed"
-
-        do {
-            $cleanupJob = Get-AzRecoveryServicesAsrJob -Job $cleanupJob
-            Start-Sleep -Seconds 10
-        } while ($cleanupJob.State -eq "InProgress")
-
-        Write-Host "Cleanup completed"
-    }
-} else {
-    Write-Error "Test failover failed: $($testFailoverJob.StateDescription)"
+if ($tfoJob.State -eq 'Suspended') {
+    throw "Drill is waiting on a manual action. Scope manual actions away from Test failover, then complete or cancel job $($tfoJob.Name) in the portal. Test VMs are still running: run Cleanup test failover on the plan once the job is resolved."
 }
 
-# Generate report
-$report = @{
-    DrillDate = Get-Date
-    RecoveryPlan = $RecoveryPlanName
-    Result = $testFailoverJob.State
-    Duration = (New-TimeSpan -Start $testFailoverJob.StartTime -End $testFailoverJob.EndTime).TotalMinutes
-}
+$drillStatus = (Get-AzAutomationVariable -ResourceGroupName $AutomationResourceGroup `
+    -AutomationAccountName $AutomationAccountName -Name $statusVar).Value
 
-$report | ConvertTo-Json | Out-File "dr-drill-report-$(Get-Date -Format 'yyyyMMdd').json"
+# Clean up even when the checks failed, so test VMs don't linger and bill
+$cleanupJob = Start-AzRecoveryServicesAsrTestFailoverCleanupJob -RecoveryPlan $plan `
+    -Comment "Scheduled DR drill: job $($tfoJob.State), checks $drillStatus"
+$cleanupJob = Wait-AsrJob -Job $cleanupJob
+
+$report = [ordered]@{
+    RecoveryPlan    = $RecoveryPlanName
+    DrillStartedUtc = $tfoJob.StartTime.ToUniversalTime().ToString('o')
+    FailoverMinutes = [math]::Round(($tfoJob.EndTime - $tfoJob.StartTime).TotalMinutes, 1)
+    FailoverState   = $tfoJob.State
+    ValidationState = $drillStatus
+    CleanupState    = $cleanupJob.State
+}
+Write-Output ($report | ConvertTo-Json)
+
+if ($tfoJob.State -ne 'Succeeded' -or $drillStatus -ne 'OK' -or $cleanupJob.State -ne 'Succeeded') {
+    throw "DR drill for $RecoveryPlanName did not pass."
+}
 ```
 
-## Best Practices
+The final `throw` matters: it marks the Automation job as Failed, so forwarding Automation job status to a Log Analytics workspace and alerting on failed jobs is enough to make a broken drill page someone. The JSON report in the job output is your audit evidence, with a timestamp and a measured failover time you can put next to the RTO the business signed off on.
 
-1. **Regular Testing**: Perform test failovers at least quarterly
-2. **Recovery Plans**: Create plans for application-consistent failover
-3. **Automation**: Use runbooks for pre/post-failover tasks
-4. **Monitoring**: Set up alerts for replication health issues
-5. **RPO/RTO Targets**: Define and monitor against business requirements
-6. **Documentation**: Maintain runbooks for manual failover steps
-7. **Network Planning**: Ensure IP address and DNS strategies are documented
+Keep the whole run well inside the Automation sandbox's [three-hour fair share limit](https://learn.microsoft.com/en-us/azure/automation/automation-runbook-execution#fair-share). For a typical three-tier plan the failover takes minutes, but a plan with a large number of VMs and slow runbooks can get closer than you'd expect. If the sandbox stops the driver mid-drill, cleanup never runs, and simply re-running it isn't safe either: a re-run starts the script from the top, resets the status variable to `OK` and calls `Start-AzRecoveryServicesAsrTestFailoverJob` against a plan that's already in test failover. For large plans, run the driver on a Hybrid Runbook Worker, which isn't subject to fair share, or split it into a start runbook and a separate check-and-clean-up runbook scheduled a couple of hours later.
 
-Azure Site Recovery provides enterprise-grade disaster recovery capabilities. Combined with proper planning, automation, and regular testing, it ensures business continuity when disaster strikes.
+## What the drill does and doesn't prove
+
+A green drill proves the VMs boot in the DR region from current replicated data, in the right order, with network interfaces attached, and that your runbooks run with working permissions. That's more than most organisations can say.
+
+It doesn't prove:
+
+- **The application works end to end.** The test VNet is isolated, so nothing outside it can reach the VMs. If the app needs Active Directory, include a domain controller in the plan or the test network, or the services won't start cleanly.
+- **The real-failover branch of your runbooks.** The DNS update path never runs in a test. Review it whenever the zone or naming changes, and run a real failover and failback in a maintenance window when you can.
+- **PaaS dependencies.** ASR replicates VMs. Azure SQL Database, storage accounts and Key Vault need their own geo-replication or redeployment story, and your plan should state which.
+- **Capacity on the day.** ASR doesn't reserve compute in the target region. Check that your VM sizes are offered in the DR region before you choose it.
+
+## When I wouldn't build this
+
+If the workload is stateless and fully defined in ARM templates or Terraform, redeploying into the DR region from your pipeline is often cheaper and cleaner than paying for replication on every instance (protected instances are free for the first 31 days, then billed per instance per month). If the workload is already active-active across regions, ASR adds little. And if the app is mostly PaaS, ASR covers the minority of it; spend the effort on the data tier first.
+
+For a VM-based line-of-business app with a stated RPO and RTO, though, this is worth the half day it takes. Start with a monthly drill on one recovery plan. Once it has run unattended and failed loudly at least once for a real reason, add the next application. If the only proof your DR plan works is a meeting invite, you don't have proof. The [DR drill tutorial](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill) is the manual version, and the point of all this is to stop needing it.

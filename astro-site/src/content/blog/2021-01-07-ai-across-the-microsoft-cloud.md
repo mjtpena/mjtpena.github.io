@@ -1,6 +1,6 @@
 ---
-title: AI across the Microsoft Cloud
-description: "Artificial Intelligence (AI) and Machine Learning (ML) are trending topics right now. In 2021, there are countless of ways to have a form of \"AI\" in your…"
+title: "AI Across the Microsoft Cloud: Choosing the Right Layer in 2021"
+description: "A practitioner's map of AI and ML options across Azure, Power Platform and Microsoft 365 in early 2021, and how to pick the right layer for a problem."
 author: Michael John Peña
 draft: false
 date: 2021-01-07
@@ -8,216 +8,127 @@ url: /blog/ai-across-the-microsoft-cloud/
 images: 
      - /2021/01/Azure-AI-1-940x510.png
 tags:
-  - artificial intelligence
+  - AI
   - Azure
-  - Data Science
-  - Databricks
   - Machine Learning
-  - Microsoft Cloud
-  - MLOps
+  - Cognitive Services
   - Power Platform
   - Synapse
 ---
 
-Artificial Intelligence (AI) and Machine Learning (ML) are trending topics right now. In 2021, there are countless of ways to have a form of "AI" in your apps and platforms. A lot of companies from startups to software giants offer services that relate to this space. I spent the last 2 years exploring this space, and I still swimming my way as the movements in this area are quick and it's hard to keep up.
+Ask "how do we do AI on Microsoft?" and you'll get a different answer from every team you ask. A data scientist says Azure Machine Learning, a data engineer says Databricks or Synapse, a Power Platform maker says AI Builder, and someone from Microsoft 365 points at Designer in PowerPoint. They're all right, and that is the problem: there is no single tool, and choosing the wrong layer is how a three-week project turns into a six-month platform build.
 
-Microsoft is a leader in this space, specially in AI for Enterprise, as they offer a variety of options depending on your needs and choice of approach. In the Microsoft Cloud space (Azure, Microsoft 365, and other related products), it's very easy to get confused as there is no "one tool to rule them all" as a market fit. In my experience, there isn't really one silver bullet "yet" in this game, since unique problems require different approaches. The actual value of AI is when it solves a problem, and technologies and platforms successfully enable this outcome.
+I've spent the last two years working through this space and I'm still finding my way, because it moves fast. This is my map of it as of January 2021, organised by the question that matters most: how much of the model do you actually need to own?
 
-This is my attempt to create an ultimate rundown of navigating AI in the Microsoft Cloud. Let's start with platforms that allow Data Scientists develop ML models. There are times I need to wear this "Data Scientist" or "Data Engineer" hat when some ML models that we are developing are relatively common, but some `really` difficult ML problems require a lot of research, experimentation, deep-expertise, and resources. Having a unified and seamless workspace is what you need in order to be productive in creating and training models.
+## Four layers, one question
 
+The way I sort the options is by ownership. The further down you go, the more control you get and the more you pay for it in skills, time and operations.
 
-## Machine Learning Workspace
+| Layer | You own | Typical products (January 2021) | Who builds it |
+|---|---|---|---|
+| Prebuilt AI | The integration | Azure Cognitive Services, Azure Cognitive Search, Azure Bot Service | App developers |
+| Low-code AI | The data and the business logic | AI Builder, Power BI AutoML, Power Virtual Agents, Dynamics 365 Customer Insights | Analysts and makers |
+| Custom ML platform | The model and its lifecycle | Azure Machine Learning, Azure Databricks, Azure Synapse Analytics | Data scientists and ML engineers |
+| Infrastructure | Everything | GPU VMs, AKS, Azure Stack Edge, SQL Server Machine Learning Services | Platform teams |
 
+My rule of thumb: start at the top and only move down when you can name the specific thing the layer above can't do. "We want more control" isn't a reason. "The prebuilt OCR model can't read our handwritten delivery dockets and Custom Vision isn't the right shape either" is.
 
-#### Azure Machine Learning
+## Prebuilt AI: Cognitive Services and friends
 
-This is an end-to-end platform and workspace for all bespoke AI and ML development. This platform has the balance of flexibility but, not too general, as this still taps on with specific "fit-for-purpose" ML tools.
+Azure Cognitive Services is where most organisations should start. You call a REST API or a native SDK (.NET, Python, Java, JavaScript and others) and get a result back, with no training infrastructure to run. The catalogue is grouped into four families:
 
-- **Notebooks**. Arguably, the modern way to deal with ML, is by using a Jupyter notebook. Azure ML allows you to use the same experience as you have with any other Jupyter server instance, but with roles and underlying infrastructure abstracted.
-- **ML Designer**. The previous iteration of this is called "ML Studio". This drag-and-drop flow-chart-like capability is also available in Azure ML in case you prefer this rather than using notebooks.
-- **Automated ML**. Some ML problems like simple classification can easily be captured using AutoML. This feature focuses on the common problems that may have already been solved before, so you can focus your team's energy on the harder problems.
-- **MLOps**. This is one step further in making your ML life-cycle more mature. Having this maturity of proper version control using Git and workflows allow you to automate training and experimentation in CI/CD fashion - just like how you stage web applications.
+- **Vision**: [Computer Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) (including OCR), Custom Vision, Face, Video Indexer and Form Recognizer, which went GA in mid-2020 for extracting text, key-value pairs and tables from forms.
+- **Speech**: speech-to-text, text-to-speech, speech translation and custom speech models. This is an area I'm personally involved in, and neural text-to-speech is the part I'd watch: synthetic voices are getting much harder to tell apart from real ones.
+- **Language**: Text Analytics, Language Understanding (LUIS), QnA Maker and Translator.
+- **Decision**: Anomaly Detector (GA since September 2020), Content Moderator, Personalizer, and Metrics Advisor, which was announced in public preview at Ignite in September 2020.
 
-There are a lot of other things that Azure ML can do especially in the integrations space. Mature and companies with dedicated AI team(s) should seriously explore this. If you want to learn more about Azure ML, [click here][1].
+Deployment is where I see teams rule this layer out too early. Most services are pay-per-call, and a growing subset can run in [Docker containers](/blog/2020-12-04-azure-cognitive-services-containers/) when data can't leave your network.
 
+I treat Cognitive Search and Bot Service as part of this layer because the intelligence in both comes from Cognitive Services. You configure and integrate them; you don't train anything.
 
-#### Data Science VM
+### Azure Cognitive Search
 
-Well, in all honesty, you can use any Virtual Machine for your ML workflow. Actually, any machine at all from any cloud or hardware provider. However, unless you have DSC (desired state configuration) setup per instance, then you have to install Python, Jupyter, Anaconda, etc. DSVM is a ready-made image that comes with a lot of pre-installed tools that an AI scientist or engineer would use. The beauty of this approach is you have full control of that machine and can turn it off anytime. [Learn more][2].
+**Azure Cognitive Search** with AI enrichment is Microsoft's answer to "knowledge mining": an indexer pulls documents from storage, a [skillset](/blog/2020-11-14-azure-cognitive-search-skills/) runs OCR, entity recognition and key-phrase extraction over them, and the enriched output lands in a searchable index. For contracts, audit evidence and support archives, it beats a custom model on effort.
 
-![img](https://miro.medium.com/max/1200/1*tkxMr0bjfYUHS0nGqQtX8A.png)
+### Azure Bot Service
 
-#### Notebooks in VS Code
+**Azure Bot Service** hosts conversational bots and publishes them to channels such as Teams, Slack, Telegram and web chat. Bot Framework Composer, which reached GA at Build in May 2020, lets you design much of the dialog visually and wire in LUIS and QnA Maker. It's low-code, not no-code. You'll still write code once the bot has to call your own systems.
 
-Sometimes you prefer to do some simple experiments locally on your machine instead of a hosted Jupyter kernel instance. Maybe you're using a beefy desktop and want to experiment on simple models and small datasets, then having that offline experience of Jupyter notebook is available in VS Code. [Learn more][3].
+**When not to use this layer:** when your domain is unusual enough that a general model is consistently wrong, or when the per-call price at your volume is more than hosting a model yourself would cost. Do that arithmetic early.
 
-Bonus: Notebooks extension is also available on [Github Codespaces][4]. Go explore. 😉
+## Low-code AI: Power Platform, Power BI, Dynamics 365 and Microsoft 365
 
-## Complements with MLOps
+### Power Platform and Dynamics 365
 
-The next part I want to cover are products and services that are "related" to ML, but it's not the primary focus. One way or the other, you can create an ML model based from a dataset and use it for any purpose that it may serve.
+**AI Builder** brings prebuilt models (business card reader, text recognition, sentiment) and trainable models (prediction, form processing, object detection, category classification) into Power Apps and Power Automate. Its value isn't the models themselves. It's that authentication, data access and deployment are inherited from the Power Platform environment, so an app that reads invoices can be in front of users in days.
 
-#### Apache Spark™
+**Power BI** has two AI features that are easy to mix up. AI Insights in Power Query calls Cognitive Services (sentiment, key phrases, image tagging) and published Azure ML models from within a transformation. Automated ML in dataflows trains [binary prediction, classification and regression models](https://learn.microsoft.com/en-us/power-bi/transform-model/dataflows/dataflows-machine-learning-integration) on your dataflow data, using Azure ML's AutoML under the hood. It needs Premium or Embedded capacity, and it doesn't do time-series forecasting. If someone tells you it does, check what they're actually using.
 
-The reason I would argue that any service related to Spark™ would fall into the "big data" category and as a byproduct, can host an ML server that comes with Python based frameworks (MLlib, TensorFlow, PyTorch, and scikit-learn to name a few.)
+**Power Virtual Agents** (GA since December 2019) is the maker-friendly route to a bot, built on the same Bot Framework foundation. **Dynamics 365 Customer Insights** unifies customer data from several sources into a single profile and adds AI-driven predictions on top. If your goal is "a single view of the customer" and you're already on Dynamics 365, look at it before building one in a data warehouse.
 
+### Microsoft 365
 
-##### Azure Databricks
+Some of the most-used AI in the Microsoft cloud doesn't look like AI at all. **PowerPoint Designer** suggests slide layouts from your content, and **Presenter Coach** gives feedback on pace, filler words and reading off the slides. There's nothing to configure or govern, so if the need is personal productivity inside Office, use these and don't build anything.
 
-Databricks creates a unified environment for your big data analytics. Similar to Azure ML, this is more than just a Spark™ cluster. It also comes with notebooks, managed infrastructure, and native integrations with other Azure services. I would argue that Databricks can really be your prime-time production workspace, but then again, it's more positioned as "more big data, ML as a byproduct." [Learn more][5].
+**SharePoint Syntex**, the first product out of Project Cortex, went GA on 1 October 2020. It brings two model types into SharePoint document libraries: document understanding models, which classify documents and extract fields from unstructured files such as contracts, and form processing models, which extract data from structured forms and are built on AI Builder. Subject-matter experts train them from a handful of examples in a SharePoint content centre, and the extracted values land as library metadata.
 
+My split between Syntex and AI Builder is about where the documents live and where the output goes. If the documents already sit in SharePoint and the goal is classification, metadata and retention, Syntex fits. If the extracted data has to drive an app or a flow into another system, AI Builder in Power Automate is the better home.
 
-##### **Azure HDInsight**
+Cost often decides between these layers more than capability does. Cognitive Services bill per transaction, so cost grows in a straight line with volume. AI Builder consumes capacity credits, sold as an add-on to Power Platform licences, so a high-volume form flow can quietly use up its allocation. Power BI AutoML needs Premium or Embedded capacity, which is easy to justify if you already have it and hard if you don't. With Azure ML you mainly pay for the compute you run, which is cheaper per prediction at scale but comes with people and operations costs that don't show up on the Azure bill.
 
-It also has a managed Spark™ cluster capability hence comes with MLlib (machine learning library), but beyond that it also has support for Hadoop, Kafka, HBase. HDInsight is really useful in "crunching enormous set of unstructured/semi-structured data" and is more for the big data scenarios. The ML capabilities are currently limited. [Learn more][6].
+**When not to use this layer:** when the model is the product. If accuracy, explainability or retraining cadence are things you'll have to defend to a regulator or a customer, you need the lifecycle control of the next layer.
 
+## Custom ML platforms: Azure ML, Databricks and Synapse
 
-##### **.NET for Apache Spark™**
+This is where most of the confusion is, because all three run notebooks, all three run Spark or Python, and all three can train a model. The difference is the centre of gravity.
 
-The popular ways to interface with a Spark™ instance is by using Python and Scala. The .NET team created an open-source high performance bindings that is compliant with .NET Standard that will allow you to perform Spark™ operations in any .NET apps using C# or F#. [Learn more][7].
+### Azure Machine Learning
 
+[Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning) is the one built around the model lifecycle. Notebooks run on managed compute instances, training runs on compute clusters, and every run, dataset and model is tracked in the workspace. The studio web experience, the drag-and-drop designer (the successor to the classic ML Studio) and the AutoML UI were all made generally available at Ignite 2020 (the [release notes](https://learn.microsoft.com/en-us/azure/machine-learning/azure-machine-learning-release-notes) track the SDK side of each change). For MLOps, pipelines plus Azure DevOps or GitHub Actions let you retrain, register and deploy in the same CI/CD flow you use for applications. I've covered [automated ML](/blog/2020-11-11-azure-ml-automated-ml/) separately.
 
-#### Azure Synapse Analytics
+If you have a dedicated data science team, this is the default. Its weakness is large-scale data engineering, which is not what it was designed for.
 
-This is the new kid in the block that developed from Azure SQL Data Warehouse. Similar to Databricks, Synapse also offers an end-to-end pipeline and workflows for your modern data warehouse needs. Data warehousing has developed from traditional "housing of data" to creating unified and real-time data analytics. Synapse really shines when you're dealing with a lot (even petabyte) of diverse and unstructured data and wants to gain meaningful insights out of it. As part of this approach, Synapse also overlaps (and co-exists) with ML services. You have the option to use the ML capabilities of the dedicated pools of Spark™ and SQL instances or integrate with Azure ML and Power BI. I would argue that Synapse is "more data analytics, ML as a byproduct." [Learn more][8].
+### Azure Databricks
 
+Databricks is the strongest choice when the data work dominates the ML work. You get managed Spark, the ML runtime with the common frameworks preinstalled, and managed MLflow for experiment tracking and a model registry. I'd describe it as "big data first, ML as a natural extension".
 
-#### **Power BI**
+I wouldn't use it when data volumes are small and nobody in the team knows Spark. Then you're paying for clusters and learning a distributed engine to do work that Azure ML compute clusters handle more simply.
 
-This is your go-to tool when creating meaningful dashboards and reports from your data. As part of this, Power BI also comes with features that allow you to go beyond visualisation like creating semantic (structured table-like) data models. In the ML side of things, Power BI comes with "Dataflows" that allows you to select a data source to generate and train an ML model with "AI Insights" using AutoML under the hood. This works in some scenarios such as time-series forecasting. I would say that Power BI is "more data visualisation, ML and Big Data as byproducts." [Learn more][9].
+### Azure Synapse Analytics
 
-## AI Apps and Agents
+Synapse became [generally available in December 2020](/blog/2020-12-05-azure-synapse-analytics-ga/), bringing dedicated SQL pools (the former Azure SQL Data Warehouse), serverless SQL and Apache Spark pools into one workspace. It's "analytics first, ML as a by-product". Spark pools can train models, and integration with Azure ML (including launching AutoML runs from a Synapse workspace) was in preview at GA. I'd pick it for ML when the warehouse is already in Synapse and the models are modest. I wouldn't pick it as an ML platform in its own right yet.
 
-In this section, I will cover "AI infused" functionalities that are more application-driven. These products and services are very powerful as these have the least barrier of entry and abstracts some complexities of AI/ML operations such as setting up infrastructure, access to deep knowledge of AI scientists, and sometimes cost efficiency to name a few.
+Two Spark-adjacent notes. **.NET for Apache Spark** reached v1.0 in October 2020, so C# and F# teams can write Spark jobs without switching to Python or Scala, and Synapse notebooks support .NET (C#) as a language. And **HDInsight** is still a good managed home for Spark, Hadoop, Kafka and HBase, but its ML Services (R Server) cluster type [reached end of support on 31 December 2020](https://github.com/hdinsight/release-notes/releases/tag/2020-11-09). Don't start anything new on it.
 
+### Working outside a hosted workspace
 
-#### Azure Cognitive Services
+The **Data Science Virtual Machine** is a prebuilt Windows or Ubuntu image with Python, R, Jupyter and the common frameworks already installed. You get full control and can deallocate it when you're done. It's good for individuals and short experiments. For a team, I'd rather have Azure ML compute instances, which bring access control and run tracking.
 
-These set of services allow you to add intelligence to your apps. Throughout the years, it has developed in to a lot of general purpose service offerings and specialised AI & ML use-cases that fit your business needs or problems you're trying to solve. The beauty of Cognitive Services is that it's very easy to get started and a lot of it can be accessed in either a form of API, Native SDKs (.NET, JavaScript, Java, Python, etc), or intuitive graphical portals. The deployment model is also very flexible, from hosted consumption (pay-per-hit) to containerised instances.
+Locally, **VS Code** with the Python and Jupyter extensions gives you a native notebook experience against your own kernel. That's enough for small datasets and quick checks, and since the hosted Azure Notebooks preview was retired in October 2020, it's also the obvious replacement. **GitHub Codespaces** can run the same setup in the cloud, but it's still in limited public beta, so treat it as something to try rather than something to standardise on.
 
-- **Vision**. If you want to create a simple facial recognition system, this is something to explore. You can even do advanced OCR (Optical Character recognitions) like Form Recognizer. Analyse videos using Video Indexer. And analysing image contents using Computer and Custom vision.
-- **Speech**. There are a lot of things that you can do with Speech. From simple speech-to-text & text-to-speech, to real-time translations of a voice. Imagine speaking a language or having your own narration that doesn't sound "too robot like." There are a lot of exciting things happening in this space that I am involved too, so watch this space.
-- **Language**. In parallel with speech, _Language_ also provides a lot of texts related insights, mostly coming from unstructured texts. From text-to-text translations (even a document file) to complex NLP (Natural Language Processing) problems with Language Understanding.
-- **Decision**. This set of services allows you to create ML models to enable smarter decisions. From simple anomaly detectors, content moderator, content personaliser, and metrics advisor.
+For **ML.NET** (1.5.4 as of December 2020), C# and F# developers can train and consume models with Model Builder and the CLI's AutoML without leaving .NET. It's a sensible choice when the model ships inside a .NET application and the team has no Python skills to lean on.
 
-They add more services from time to time, as some emerging AI disciplines are becoming democratised. To learn more about Azure Cognitive Services, [click here][10].
+## Infrastructure: where the model runs
 
+Eventually a model has to run somewhere. The options, from most managed to least:
 
-#### Knowledge Mining
+- **Azure Container Instances** for dev/test and low-volume scoring. Azure ML can deploy here directly.
+- **App Service (Web App for Containers)** when you already have an App Service plan and the model is light.
+- **Azure Kubernetes Service** for production inference at scale, and the target Azure ML is designed around for real-time endpoints. It also gives you the most operational work.
+- **Azure Container Registry** underneath all three, versioned in line with your MLOps pipeline.
 
-Sometimes these services are the things we take for granted on how easy it is now to perform, but it would take a lot of research and resources to do decades ago. A more evolved form of cognitive service is a new offering called **Knowledge Mining** with **Azure Cognitive Search.** Knowledge mining is an emerging discipline in AI where you use a combination of intelligent services to quickly create insights from your company data sources. Imagine ingesting all of your historical documents, database records, other unstructured data and explore meaningful insights about it - create an audit & risk compliance, managing contracts, customer support, and a lot more! [Learn more][11].
+For training, the NC, ND and NDv2 GPU VM families cover most deep learning work, and the A100-based ND A100 v4 is in preview. Azure ML can also deploy a small set of image models to FPGAs, which is a niche option for very low-latency vision inference.
 
+**SQL Server Machine Learning Services** deserves a mention for the opposite reason: it brings the model to the data. R has been supported since SQL Server 2016 and Python since 2017, run in-database through `sp_execute_external_script`. If your training data and scoring both live in SQL Server, moving that data out to a separate platform is often the bigger risk.
 
-#### **Azure Bot Service**
+At the edge, **Azure Stack Edge Pro with GPU** puts compute and an NVIDIA T4 GPU on site for local inference, which matters for video and other data you can't or shouldn't stream to the cloud. I've worked with Azure Stack Edge and the performance impressed me. I think hybrid is where much of enterprise AI ends up, because not every workload belongs in a public cloud region.
 
-This is a managed service that allows you to create bots (like chatbots). This also allows you to integrate and deploy to popular channels such as Teams, Slack, Skype, Telegram. Together with the service itself, it also comes with a composer and framework to integrate with various Azure services such as Cognitive Services - Language. You can completely do all of this without code! [Learn more][12].
+## How I'd decide
 
+- **Start with Cognitive Services** and prove the problem is worth solving before you train anything.
+- **Use the low-code layer** when the people who understand the problem are analysts and makers, not data scientists. Use the Microsoft 365 features first when the documents already live in SharePoint or the need is personal productivity.
+- **Pick Azure ML** when the model is the asset and needs a governed lifecycle. Pick Databricks when the data engineering is the hard part. Use Synapse for ML when your warehouse is already there and the models are modest.
+- **Check what's being retired** before you design around it. HDInsight ML Services and Azure Notebooks both ended in 2020.
+- **Plan inference before training.** Where the model runs (ACI, AKS, SQL Server or the edge) often constrains the design more than how it was trained.
 
-#### **ML.NET**
-
-If you want to create custom ML models using C# or F# without leaving the ecosystem (say interop with Python or R), ML.NET is a viable option for you. It also allows you to leverage popular libraries such as Infer.NET and TensorFlow. You can also use AutoML for you to build, train, and deploy ML models. [Learn more][13].
-
-Bonus: Outside of ML.NET, F# has been long used for Data Science. There have been a lot of development in this space, like using SciSharrp Stack. [Learn more][14].
-
-
-#### **AI Builder**
-
-It's a Microsoft Power Platform feature that allows you to build ML models by intuitively connecting to a data source. The approach is very similar of Power BI's dataflows. It uses an intuitive drag-and-drop graphical tool to connect data sources and build an ML model. This is very useful if you want to create simple ML models beyond consuming Cognitive Services APIs. [Learn more][15].
-
-## Integrations
-
-There are hundreds or probably even thousands of way to integrate a form of AI and ML to anything. From the use of RESTful APIs, to adapters, to wrapped libraries, etc. The following are worth mentioning, as these integrations are well established and have a lot of synergy when implementing it.
-
-
-#### **SQL Server**
-
-I think even before the hype of "AI/ML" or even "Big Data," a lot of companies have already implemented intelligence or analytics to their data sets in their SQL Server clusters. Particular to ML, SQL server started offering Machine Learning Services since SQL Server 2017. Using the same SQL Server cluster, you can execute Python and R scripts directly to SQL Server. So there are scenarios where use TensorFlow using the database as the direct source for your training model. This approach is very useful if most of your data sources are already aggregated in SQL Server. [Learn more][16].
-
-
-#### **Power Platform**
-
-More than what you can do with dataflows in Power BI and AI builder for Power Automate and Power Apps, the Power Platform itself can be in a form serving ML for users. Power BI can integrate with Azure ML & Azure Synapse Analytics, where Power BI focuses on data visualisation. Power Apps can input and output data straight from Azure Cognitive Services. You can automate some internal workflow in Power Automate that integrates with Azure Cognitive Search. The beauty of these approaches is the ease to infuse AI or ML to these services, while the underlying Security and Infrastructure complexities are abstracted or inherited - an example would be Authentication and how easily it is to deploy and consume these apps internally.
-
-Bonus: [Power Virtual Agents][17] is something also worth looking at.
-
-![img](https://user-images.githubusercontent.com/6510026/49263444-6e726180-f3ff-11e8-850e-1024b7af023e.jpeg)
-
-#### **Microsoft 365**
-
-Similar to Power Platform, the suite of Microsoft 365 includes (but not limited to) Excel, PowerPoint, Word, Outlook, Yammer, and Teams. These products and services comes with some really cool "AI-infused" features. In PowerPoint alone, it comes with features like "Design Ideas" and "Presenter Coach". Beyond what's already baked-in and actively being developed by the product teams, creating extensions and infusing a form of AI or ML is also possible. If you think about it, one way or the other, you might also deal with Excel and CSVs in your ML workflow.
-
-
-#### **Logic App, Azure Function, and Azure Data Factory**
-
-If you're already in the Microsoft ecosystem, one way or the other you can use LA, AF, or ADF to transfer or ETL (Extract, Transform, Load) from one end to the other. Logic App shines when there are built-in connectors available. Azure Function shine best if you would require a custom coding but want to abstract the underlying infrastructure. Azure Data Factory is best when you want to create custom data pipelines, mostly involving a Data Lake or Synapse.
-
-Links: [Logic Apps][18], [Azure Functions][19], and [Azure Data Factory][20]
-
-![img](https://cdn.cytrack.com/wpv1/dynamics-365-logo-512.png)
-
-#### Dynamics CRM with Customer 360
-
-The last one I want to mention in integration is Dynamics CRM with Customer 360. With the power of Microsoft Graph, you can activate AI-powered insights about your customers. It gives you AI-driven recommendations that will help your business create more data-informed decisions. Let's say someone bought something, you may want to also recommend this item as an added bundle. The innovations of AI in retail are endless!
-
-## Hardware and Infrastructure
-
-Lastly, Azure also offers various infrastructure options in different parts of ML lifecycle. Obviously, you can pretty much spin up an Azure VM to use it for anything, however there are also specific offerings that are specific for ML & AI use-cases.
-
-![img](https://www.meldium.com/2018/11/FpgaServices.png)
-
-#### **FPGA & GPU on Azure VMs**
-
-When training an ML model, it takes a lot of compute power to deal with a large (and complex) data-sets. You have the option to use virtual machines that has FPGA & GPUs, provided you write your script to target those configurations, to train models faster instead of using CPUs. [Learn more][21].
-
-
-#### **Azure Containers**
-
-Sometimes, when you want to use your ML model and embed it to your applications, you package it in a Docker container. It's probably the easiest way to make sure you have all the dependencies needed in order to run your model in "inference" mode. Azure provides a lot of options in this space, from:
-
-- **Azure Container Registry** - a general purpose storage of your container images. Very useful if it's versioned well according to your MLOps (Git).
-- **Azure Container Instance** (ACI) - this is very lean if you want a standalone or short-lived workloads on your service.
-- **Azure App Service for Containers** - similar to ACI, but just uses a different hosting plan underneath. It's useful if you prefer to use an App Service Plan and the model is lean.
-- **Azure Kubernetes Services** (AKS) - if you have more complex orchestrations such as various consumer services. This is also the most flexible option (and arguably more complex configuration.)
-
-Bonus: You can also create an advanced ML Training pipeline with AKS such as highly scalable training and inference clusters.
-
-To learn more on how to train a model using a custom Docker image, [click here][22].
-
-
-#### **Azure Stack**
-
-There are use-cases where you need to perform AI workloads outside of the cloud. The common example are videos. It's not very ideal to send videos over cloud while you're disconnected or using your on-premises data centre. I believe that Hybrid Cloud is the future and we should not store everything on cloud. I worked on **Azure Stack Edge**, and I'm amazed on the performance that it offers. [Learn more][23].
-
-## **Conclusion**
-
-- Azure ML is a good end-to-end ML workspace.
-- You have a lot of options where to use a Jupyter Notebook
-- Azure Cognitive Services is the easiest way to start your AI journey.
-- There are a lot of options for infrastructure from specialised hardware to containers and edge devices.
-- There are myriads of overlaps and synergies with various Azure products or services. You just have to choose which suits you best.
-
-I hope you enjoyed my rundown of all things AI and ML in the Microsoft Cloud. Did I miss anything? Let me know in the comments section.
-
-[1]: https://azure.microsoft.com/en-au/services/machine-learning/
-[2]: https://azure.microsoft.com/en-au/services/virtual-machines/data-science-virtual-machines/
-[3]: https://docs.microsoft.com/en-gb/azure/notebooks/quickstart-export-jupyter-notebook-project#use-notebooks-in-visual-studio-code
-[4]: https://github.com/features/codespaces
-[5]: https://docs.microsoft.com/en-us/azure/databricks/applications/machine-learning/
-[6]: https://docs.microsoft.com/en-us/azure/hdinsight/r-server/r-server-overview
-[7]: https://dotnet.microsoft.com/apps/data/spark
-[8]: https://docs.microsoft.com/en-us/azure/synapse-analytics/machine-learning/what-is-machine-learning
-[9]: https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-ai-insights
-[10]: https://azure.microsoft.com/en-au/services/cognitive-services/#api
-[11]: https://azure.microsoft.com/en-au/solutions/knowledge-mining/#overview
-[12]: https://azure.microsoft.com/en-gb/services/bot-services/
-[13]: https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet
-[14]: https://fsharp.org/guides/data-science/
-[15]: https://docs.microsoft.com/en-us/ai-builder/overview#:~:text=AI%20Builder%20is%20a%20Microsoft,Power%20Apps%20and%20Power%20Automate.
-[16]: https://docs.microsoft.com/en-us/sql/machine-learning/sql-server-machine-learning-services?view=sql-server-ver15
-[17]: https://powervirtualagents.microsoft.com/en-us/
-[18]: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-trigger-published-pipeline
-[19]: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-functions
-[20]: https://docs.microsoft.com/en-us/azure/data-factory/transform-data-machine-learning-service
-[21]: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-fpga-web-service
-[22]: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-custom-docker-image
-[23]: https://azure.microsoft.com/en-au/solutions/architecture/ai-at-the-edge/
+There's no single tool for AI on Microsoft's cloud, and I don't think there should be. The skill is knowing which layer a problem belongs in.

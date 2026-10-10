@@ -1,375 +1,242 @@
 ---
-title: Intelligent Document Processing with Azure Form Recognizer
-description: "An accounts payable team I worked with last quarter was processing 4,000 invoices a month by hand—open the PDF, retype line items into the ERP, repeat. The…"
+title: "Form Recognizer Invoices in Production: Confidence Gates and Review"
+description: "How to put Form Recognizer's preview invoice model behind confidence thresholds, business-rule checks and a human review queue before data reaches the ERP."
 author: Michael John Pena
 draft: false
 date: 2021-01-18
 url: /blog/azure-form-recognizer-document-processing/
 tags:
-  - Azure
   - Form Recognizer
-  - AI
   - Cognitive Services
   - Document Processing
+  - Azure Functions
+  - Python
 ---
 
-An accounts payable team I worked with last quarter was processing 4,000 invoices a month by hand—open the PDF, retype line items into the ERP, repeat. The cost wasn't the data entry; it was the errors. Form Recognizer is the service I built their pilot on. Pre-built models for invoices, receipts, business cards, and IDs; custom models when your form is bespoke; layout API when you just need structure. Today I'm walking through the practical bits—training a custom model, integrating with Logic Apps, and the accuracy tuning that doesn't show up in the marketing.
+An accounts payable team I worked with last quarter was processing about 4,000 invoices a month by hand: open the PDF, retype the fields into the ERP, repeat. The cost wasn't the data entry; it was the errors. Form Recognizer is a good fit for that kind of workload, but the extraction model is the easy part. The hard part is deciding which results you trust enough to post automatically and which ones a person has to look at.
 
-## Understanding Form Recognizer Models
+I've covered the basics of the service before, in [Extracting Data from Documents with Azure Form Recognizer](/blog/2020-08-17-azure-form-recognizer/) and the [follow-up on what changed in late 2020](/blog/2020-10-28-azure-form-recognizer/). This post is narrower: how to wrap the invoice model in a pipeline that routes low-confidence results to a reviewer instead of straight into your finance system.
 
-Form Recognizer offers several pre-built models and the ability to train custom models:
+## What you're actually building on (January 2021)
 
-- **Layout API**: Extracts text, tables, and structure
-- **Pre-built Models**: Invoice, Receipt, Business Card, ID Document
-- **Custom Models**: Train on your specific document types
+Be clear-eyed about release status before you design anything, because it changes what you can promise the business.
 
-## Setting Up the Service
+| Capability | API version | Status today |
+|---|---|---|
+| Layout (text, tables) | v2.0 | Generally available |
+| Prebuilt receipts | v2.0 | Generally available |
+| Custom models (with and without labels) | v2.0 | Generally available |
+| Prebuilt invoices | v2.1-preview.2 | Public preview |
+| Prebuilt business cards | v2.1-preview.2 | Public preview |
+| Selection marks, composed custom models | v2.1-preview.2 | Public preview |
+
+The SDKs track this split. The stable Python package, `azure-ai-formrecognizer` 3.0.0, only talks to the v2.0 API and has no invoice method. The invoice and business card methods arrived in the [3.1.0b1 beta in November 2020](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-formrecognizer_3.1.0b2/sdk/formrecognizer/azure-ai-formrecognizer/CHANGELOG.md), and [3.1.0b2](https://pypi.org/project/azure-ai-formrecognizer/3.1.0b2/) shipped on 12 January with a dependency fix. The .NET equivalent is `Azure.AI.FormRecognizer` 3.1.0-beta.1.
+
+Two practical consequences. First, the [preview invoice model](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept-invoice?view=doc-intel-2.1.0) returns header-level fields: vendor and customer names and addresses, invoice ID, invoice date, due date and invoice total. It does not return line items, so if your ERP posting needs line-level detail you still need either table output from another model or a person. Second, preview means no SLA and the response shape can change between preview versions. I'm comfortable running a pilot on it; I would not hard-wire a month-end close process to it without a fallback path.
+
+## Create the resource
+
+A single-service Form Recognizer resource is what you want here, not a multi-service Cognitive Services key, so that billing and key rotation stay scoped to this workload.
 
 ```bash
-# Create Form Recognizer resource
 az cognitiveservices account create \
-    --name my-form-recognizer \
-    --resource-group my-resource-group \
+    --name <your-form-recognizer-name> \
+    --resource-group <your-resource-group> \
     --kind FormRecognizer \
     --sku S0 \
-    --location eastus
+    --location <your-region>
 ```
 
-## Processing Invoices with Python
+The free F0 tier only analyses the first two pages of a PDF or TIFF (see the [input requirements](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-2.1.0)), which is fine for poking at the API and misleading for anything else. Test on S0 with real multi-page invoices. On S0 you pay per page analysed, so a ten-page invoice with nine pages of terms and conditions costs ten times a single-page one; check the [pricing page](https://azure.microsoft.com/en-us/pricing/details/form-recognizer/) for your region before you estimate a monthly run rate.
 
-Here is a complete example for extracting invoice data:
+## The design: three outcomes, not two
+
+Most first attempts treat extraction as pass/fail. I'd push for three outcomes per document:
+
+1. **Auto-post.** Every required field is present, every field clears its confidence threshold, and the business rules pass.
+2. **Review.** The document was read, but something is uncertain. A person confirms or corrects specific fields. The result records the page number and bounding box of each flagged field, so the review screen can highlight it and they don't have to hunt.
+3. **Reject.** The file isn't an invoice, is unreadable, or the service call failed. It goes to an exception queue, not to a reviewer who will waste time on it.
+
+The middle bucket is where the value is. A reviewer confirming two flagged fields on a pre-filled screen is much faster than keying a whole invoice, and that's the realistic win in the first few months, not "zero touch".
+
+The review screen doesn't need to be elaborate. A simple Power Apps canvas app or a small web form that lists JSON files in the `review` container, shows the source PDF next to the extracted values, and writes the corrected result to `approved` is enough for a pilot. Capture what the reviewer changed, because those corrections are the data you'll tune thresholds with later.
+
+### Thresholds per field, not one global number
+
+A single global threshold of 0.8 is the default everyone reaches for, and it's wrong in both directions. A low-confidence vendor address costs you almost nothing; a wrong invoice total costs real money. Set the bar by the cost of an error:
+
+- **Invoice total, invoice ID, due date:** strict. These drive payment amount, duplicate detection and payment timing.
+- **Vendor name:** moderate, because you will match it against the vendor master anyway.
+- **Addresses and customer details:** loose or informational only.
+
+Start conservative, log every field's confidence alongside what the reviewer eventually accepted, and lower thresholds only when the data says a field is reliably right above a given score. Treat the confidence score as a relative signal to tune against your own documents rather than a calibrated probability: a 0.9 on one field doesn't mean nine out of ten of those values are right.
+
+### Business rules catch what confidence can't
+
+A field can be extracted with high confidence and still be wrong for your process. A correctly read invoice ID that already exists in the ERP is a duplicate. A due date earlier than the invoice date is a misread or a vendor error. These checks are cheap, deterministic and catch a category of problem the model will never flag.
+
+## The pipeline in code
+
+A minimal shape for this is a blob-triggered Azure Function: invoices land in an `invoices` container, the function calls Form Recognizer, and writes a JSON result into an `approved`, `review` or `rejected` container that downstream systems pick up. This uses the Python Functions programming model with a `function.json` binding file and the 3.1.0b2 SDK.
+
+The invoices and results live in their own storage account, referenced by an `INVOICE_STORAGE` app setting, not in the account behind `AzureWebJobsStorage`. The host account holds the Functions runtime's leases, logs and trigger receipts; keeping business documents out of it means you can lock down, retain and audit the invoice data on its own terms, and rotating one doesn't break the other. Create the four containers up front:
+
+```bash
+for c in invoices approved review rejected; do
+    az storage container create \
+        --name "$c" \
+        --connection-string "<your-invoice-storage-connection-string>"
+done
+```
+
+The function also creates the output containers at startup if they're missing, so a fresh environment doesn't fail its first write with `ResourceNotFoundError`.
+
+`requirements.txt`:
+
+```text
+azure-functions
+azure-ai-formrecognizer==3.1.0b2
+azure-storage-blob==12.7.0
+```
+
+`ProcessInvoice/function.json`:
+
+```json
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "name": "invoice",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "invoices/{name}",
+      "connection": "INVOICE_STORAGE"
+    }
+  ]
+}
+```
+
+`ProcessInvoice/__init__.py`:
 
 ```python
-from azure.ai.formrecognizer import DocumentAnalysisClient
-from azure.core.credentials import AzureKeyCredential
+import json
+import logging
 import os
 
-endpoint = os.environ["FORM_RECOGNIZER_ENDPOINT"]
-key = os.environ["FORM_RECOGNIZER_KEY"]
-
-client = DocumentAnalysisClient(
-    endpoint=endpoint,
-    credential=AzureKeyCredential(key)
-)
-
-def analyze_invoice(invoice_url):
-    poller = client.begin_analyze_document_from_url(
-        "prebuilt-invoice",
-        invoice_url
-    )
-    result = poller.result()
-
-    invoices = []
-    for idx, invoice in enumerate(result.documents):
-        invoice_data = {
-            "vendor_name": get_field_value(invoice.fields.get("VendorName")),
-            "vendor_address": get_field_value(invoice.fields.get("VendorAddress")),
-            "customer_name": get_field_value(invoice.fields.get("CustomerName")),
-            "invoice_id": get_field_value(invoice.fields.get("InvoiceId")),
-            "invoice_date": get_field_value(invoice.fields.get("InvoiceDate")),
-            "due_date": get_field_value(invoice.fields.get("DueDate")),
-            "subtotal": get_field_value(invoice.fields.get("SubTotal")),
-            "total_tax": get_field_value(invoice.fields.get("TotalTax")),
-            "invoice_total": get_field_value(invoice.fields.get("InvoiceTotal")),
-            "line_items": []
-        }
-
-        # Extract line items
-        items = invoice.fields.get("Items")
-        if items:
-            for item in items.value:
-                line_item = {
-                    "description": get_field_value(item.value.get("Description")),
-                    "quantity": get_field_value(item.value.get("Quantity")),
-                    "unit_price": get_field_value(item.value.get("UnitPrice")),
-                    "amount": get_field_value(item.value.get("Amount"))
-                }
-                invoice_data["line_items"].append(line_item)
-
-        invoices.append(invoice_data)
-
-    return invoices
-
-def get_field_value(field):
-    if field is None:
-        return None
-    return field.value
-
-# Usage
-invoice_url = "https://example.com/invoices/sample.pdf"
-extracted_data = analyze_invoice(invoice_url)
-print(json.dumps(extracted_data, indent=2, default=str))
-```
-
-## Training Custom Models
-
-When pre-built models do not fit your needs, train custom models on your document types:
-
-```python
-from azure.ai.formrecognizer import DocumentModelAdministrationClient
+import azure.functions as func
+from azure.ai.formrecognizer import FormRecognizerClient
 from azure.core.credentials import AzureKeyCredential
+from azure.core.exceptions import HttpResponseError, ResourceExistsError
+from azure.storage.blob import BlobServiceClient
 
-admin_client = DocumentModelAdministrationClient(
-    endpoint=endpoint,
-    credential=AzureKeyCredential(key)
+# Minimum confidence per field; tune these against your own documents.
+THRESHOLDS = {
+    "InvoiceId": 0.90,
+    "InvoiceTotal": 0.90,
+    "DueDate": 0.85,
+    "InvoiceDate": 0.80,
+    "VendorName": 0.75,
+}
+
+fr_client = FormRecognizerClient(
+    endpoint=os.environ["FORM_RECOGNIZER_ENDPOINT"],
+    credential=AzureKeyCredential(os.environ["FORM_RECOGNIZER_KEY"]),
 )
+blob_service = BlobServiceClient.from_connection_string(os.environ["INVOICE_STORAGE"])
 
-def train_custom_model(training_data_url, model_id):
-    """
-    Train a custom model using labeled training data.
-    Training data should be in Azure Blob Storage with a properly
-    formatted .ocr.json file for each document.
-    """
-    poller = admin_client.begin_build_document_model(
-        build_mode="template",
-        blob_container_url=training_data_url,
-        model_id=model_id,
-        description="Custom purchase order model"
-    )
+for name in ("approved", "review", "rejected"):
+    try:
+        blob_service.get_container_client(name).create_container()
+    except ResourceExistsError:
+        pass
 
-    model = poller.result()
 
-    print(f"Model ID: {model.model_id}")
-    print(f"Description: {model.description}")
-    print(f"Created on: {model.created_on}")
+def evaluate(invoice):
+    """Return (values, review reasons, locations of flagged fields)."""
+    values, reasons, locations = {}, [], {}
+    for name, minimum in THRESHOLDS.items():
+        field = invoice.fields.get(name)
+        if field is None or field.value is None:
+            reasons.append(f"{name}: missing")
+            continue
+        values[name] = field.value
+        if field.confidence < minimum:
+            page, box = None, None
+            if field.value_data:
+                page = field.value_data.page_number
+                box = [(p.x, p.y) for p in field.value_data.bounding_box or []]
+            locations[name] = {"page": page, "bounding_box": box}
+            reasons.append(f"{name}: confidence {field.confidence:.2f} on page {page}")
 
-    print("Document types:")
-    for doc_type, doc_type_info in model.doc_types.items():
-        print(f"  Document type: {doc_type}")
-        for field_name, field in doc_type_info.field_schema.items():
-            print(f"    Field: {field_name} ({field['type']})")
+    # Business rules the model cannot know about.
+    invoice_date, due_date = values.get("InvoiceDate"), values.get("DueDate")
+    if invoice_date and due_date and due_date < invoice_date:
+        reasons.append("DueDate is earlier than InvoiceDate")
+    total = values.get("InvoiceTotal")
+    if isinstance(total, (int, float)) and total <= 0:
+        reasons.append("InvoiceTotal is not positive")
 
-    return model
+    return values, reasons, locations
 
-# Train the model
-training_url = "https://mystorageaccount.blob.core.windows.net/training-data?sas_token"
-model = train_custom_model(training_url, "purchase-order-model-v1")
+
+def write_result(container, blob_name, payload):
+    blob = blob_service.get_blob_client(container=container, blob=blob_name)
+    blob.upload_blob(json.dumps(payload, indent=2, default=str), overwrite=True)
+
+
+def main(invoice: func.InputStream):
+    source = invoice.name.split("/", 1)[-1]
+    result_name = os.path.splitext(source)[0] + ".json"
+
+    try:
+        poller = fr_client.begin_recognize_invoices(invoice.read(), locale="en-US")
+        forms = poller.result()
+    except HttpResponseError as err:
+        logging.error("Form Recognizer failed for %s: %s", source, err.message)
+        write_result("rejected", result_name, {"source": source, "error": err.message})
+        return
+
+    if not forms:
+        write_result("rejected", result_name, {"source": source, "error": "no invoice found"})
+        return
+
+    for index, form in enumerate(forms):
+        values, reasons, locations = evaluate(form)
+        container = "review" if reasons else "approved"
+        payload = {
+            "source": source,
+            "pages": [
+                form.page_range.first_page_number,
+                form.page_range.last_page_number,
+            ],
+            "fields": values,
+            "review_reasons": reasons,
+            "flagged_locations": locations,
+        }
+        write_result(container, f"{index}-{result_name}", payload)
+        logging.info("%s -> %s (%d reasons)", source, container, len(reasons))
 ```
 
-## Building an Invoice Processing Pipeline
+A few decisions in there are worth calling out.
 
-Here is a complete C# implementation for an Azure Function-based invoice processing pipeline:
+- **The duplicate-invoice check isn't in the function.** It belongs wherever you can query the ERP or a ledger of processed invoice IDs, usually the downstream integration. Don't let a stateless function pretend to own it.
+- **Review reasons are specific.** "InvoiceTotal: confidence 0.62 on page 2", plus the bounding box in `flagged_locations`, tells a reviewer exactly where to look. A boolean `needs_review` flag throws that away.
+- **Failures go to `rejected`, not `review`.** A reviewer can't fix a 400 from the service or a file that isn't an invoice.
+- **The key comes from app settings.** In a real deployment I'd reference it from Key Vault in the Function App configuration rather than pasting it into settings.
 
-```csharp
-using Azure;
-using Azure.AI.FormRecognizer.DocumentAnalysis;
-using Azure.Storage.Blobs;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
-using System.Text.Json;
+The service has hard input limits worth validating before you pay for a call: files must be PDF, JPEG, PNG or TIFF (BMP is accepted for layout and prebuilt models in the v2.1 preview), under 50 MB, and between 50 × 50 and 10,000 × 10,000 pixels. Scanned invoices from multifunction printers at low DPI are the usual source of poor confidence, so if a vendor's results are consistently weak, check the scan settings before blaming the model. Validating page count up front also controls cost, since every page of a multi-page invoice is billed whether or not the fields you need are on it. The [v2.1 overview and input requirements](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-2.1.0) list the details.
 
-public class InvoiceProcessor
-{
-    private readonly DocumentAnalysisClient _formRecognizerClient;
-    private readonly BlobServiceClient _blobServiceClient;
+## When the prebuilt invoice model is the wrong choice
 
-    public InvoiceProcessor()
-    {
-        var endpoint = Environment.GetEnvironmentVariable("FORM_RECOGNIZER_ENDPOINT");
-        var key = Environment.GetEnvironmentVariable("FORM_RECOGNIZER_KEY");
+The preview invoice model is a generalist, and that's both its strength and its limit. I'd reach for something else when:
 
-        _formRecognizerClient = new DocumentAnalysisClient(
-            new Uri(endpoint),
-            new AzureKeyCredential(key)
-        );
+- **You need line items today.** Use the Layout API (or an unlabelled custom model on v2.0), which returns tables per page, and map the line-item table to your ERP schema yourself; labelled v2.0 models extract key-value fields, not repeating rows. Expect to write per-vendor mapping logic, because column headers and table shapes vary.
+- **A handful of vendors make up most of your volume.** A custom model per high-volume vendor, combined with the preview composed-model feature so one model ID routes to the right sub-model, often beats the generalist on accuracy for those vendors.
+- **Your documents aren't English-language invoices.** The preview model targets English invoices. Don't assume it degrades gracefully on other languages; test it.
+- **Data can't leave your environment.** Look at the [Form Recognizer container](/blog/2020-12-04-azure-cognitive-services-containers/) instead of the cloud endpoint, and check which models the container supports first.
 
-        _blobServiceClient = new BlobServiceClient(
-            Environment.GetEnvironmentVariable("STORAGE_CONNECTION_STRING")
-        );
-    }
+And sometimes you don't need machine learning at all. If 90% of your invoices arrive as structured e-invoices or EDI from a supplier portal, integrate that feed first and use Form Recognizer for the long tail of PDFs.
 
-    [FunctionName("ProcessInvoice")]
-    public async Task Run(
-        [BlobTrigger("invoices/{name}", Connection = "STORAGE_CONNECTION_STRING")]
-        Stream invoiceStream,
-        string name,
-        ILogger log)
-    {
-        log.LogInformation($"Processing invoice: {name}");
+## Where I'd start
 
-        try
-        {
-            // Analyze the document
-            var operation = await _formRecognizerClient.AnalyzeDocumentAsync(
-                WaitUntil.Completed,
-                "prebuilt-invoice",
-                invoiceStream
-            );
-
-            var result = operation.Value;
-
-            foreach (var document in result.Documents)
-            {
-                var invoice = ExtractInvoiceData(document);
-
-                // Save processed data
-                await SaveProcessedInvoice(invoice, name, log);
-
-                // Trigger downstream processing
-                await TriggerApprovalWorkflow(invoice, log);
-            }
-        }
-        catch (Exception ex)
-        {
-            log.LogError(ex, $"Error processing invoice {name}");
-            await MoveToErrorQueue(name, ex.Message);
-        }
-    }
-
-    private InvoiceData ExtractInvoiceData(AnalyzedDocument document)
-    {
-        return new InvoiceData
-        {
-            VendorName = GetFieldString(document, "VendorName"),
-            VendorAddress = GetFieldString(document, "VendorAddress"),
-            CustomerName = GetFieldString(document, "CustomerName"),
-            InvoiceId = GetFieldString(document, "InvoiceId"),
-            InvoiceDate = GetFieldDate(document, "InvoiceDate"),
-            DueDate = GetFieldDate(document, "DueDate"),
-            SubTotal = GetFieldCurrency(document, "SubTotal"),
-            TotalTax = GetFieldCurrency(document, "TotalTax"),
-            InvoiceTotal = GetFieldCurrency(document, "InvoiceTotal"),
-            LineItems = ExtractLineItems(document)
-        };
-    }
-
-    private string GetFieldString(AnalyzedDocument doc, string fieldName)
-    {
-        if (doc.Fields.TryGetValue(fieldName, out var field))
-        {
-            return field.Value.AsString();
-        }
-        return null;
-    }
-
-    private DateTime? GetFieldDate(AnalyzedDocument doc, string fieldName)
-    {
-        if (doc.Fields.TryGetValue(fieldName, out var field))
-        {
-            return field.Value.AsDate();
-        }
-        return null;
-    }
-
-    private decimal? GetFieldCurrency(AnalyzedDocument doc, string fieldName)
-    {
-        if (doc.Fields.TryGetValue(fieldName, out var field))
-        {
-            return (decimal?)field.Value.AsCurrency().Amount;
-        }
-        return null;
-    }
-
-    private List<LineItem> ExtractLineItems(AnalyzedDocument doc)
-    {
-        var items = new List<LineItem>();
-
-        if (doc.Fields.TryGetValue("Items", out var itemsField))
-        {
-            foreach (var item in itemsField.Value.AsList())
-            {
-                var itemDict = item.Value.AsDictionary();
-                items.Add(new LineItem
-                {
-                    Description = itemDict.TryGetValue("Description", out var desc)
-                        ? desc.Value.AsString() : null,
-                    Quantity = itemDict.TryGetValue("Quantity", out var qty)
-                        ? (decimal?)qty.Value.AsDouble() : null,
-                    UnitPrice = itemDict.TryGetValue("UnitPrice", out var price)
-                        ? (decimal?)price.Value.AsCurrency().Amount : null,
-                    Amount = itemDict.TryGetValue("Amount", out var amount)
-                        ? (decimal?)amount.Value.AsCurrency().Amount : null
-                });
-            }
-        }
-
-        return items;
-    }
-
-    private async Task SaveProcessedInvoice(InvoiceData invoice, string originalName, ILogger log)
-    {
-        var container = _blobServiceClient.GetBlobContainerClient("processed-invoices");
-        var blobName = $"{Path.GetFileNameWithoutExtension(originalName)}.json";
-        var blob = container.GetBlobClient(blobName);
-
-        var json = JsonSerializer.Serialize(invoice, new JsonSerializerOptions
-        {
-            WriteIndented = true
-        });
-
-        await blob.UploadAsync(new BinaryData(json), overwrite: true);
-        log.LogInformation($"Saved processed invoice to {blobName}");
-    }
-
-    private async Task TriggerApprovalWorkflow(InvoiceData invoice, ILogger log)
-    {
-        // Integration with Power Automate or Logic Apps
-        // Send to approval queue based on amount thresholds
-        if (invoice.InvoiceTotal > 10000)
-        {
-            log.LogInformation($"Invoice {invoice.InvoiceId} requires executive approval");
-            // Trigger high-value approval workflow
-        }
-    }
-}
-
-public class InvoiceData
-{
-    public string VendorName { get; set; }
-    public string VendorAddress { get; set; }
-    public string CustomerName { get; set; }
-    public string InvoiceId { get; set; }
-    public DateTime? InvoiceDate { get; set; }
-    public DateTime? DueDate { get; set; }
-    public decimal? SubTotal { get; set; }
-    public decimal? TotalTax { get; set; }
-    public decimal? InvoiceTotal { get; set; }
-    public List<LineItem> LineItems { get; set; }
-}
-
-public class LineItem
-{
-    public string Description { get; set; }
-    public decimal? Quantity { get; set; }
-    public decimal? UnitPrice { get; set; }
-    public decimal? Amount { get; set; }
-}
-```
-
-## Confidence Scores and Human Review
-
-Form Recognizer provides confidence scores for each extracted field. Implement human review for low-confidence extractions:
-
-```python
-def process_with_confidence_check(result, confidence_threshold=0.8):
-    """
-    Process results and flag low-confidence fields for human review.
-    """
-    for document in result.documents:
-        review_required = []
-
-        for field_name, field in document.fields.items():
-            if field.confidence < confidence_threshold:
-                review_required.append({
-                    "field": field_name,
-                    "extracted_value": field.value,
-                    "confidence": field.confidence,
-                    "bounding_regions": field.bounding_regions
-                })
-
-        if review_required:
-            # Queue for human review
-            send_to_review_queue(document, review_required)
-        else:
-            # Auto-process high-confidence documents
-            auto_process_document(document)
-```
-
-## Performance Tips
-
-1. **Batch Processing**: Use async operations for processing multiple documents
-2. **Model Selection**: Use pre-built models when possible; they are optimized and require no training
-3. **Image Quality**: Ensure documents are at least 50x50 pixels and less than 10,000x10,000
-4. **File Formats**: PDF, JPEG, PNG, BMP, and TIFF are supported
-
-Azure Form Recognizer significantly reduces the manual effort in document processing while maintaining high accuracy. Combined with Azure Functions and Logic Apps, you can build end-to-end intelligent document processing pipelines.
+Run the prebuilt invoice model over a few hundred of your real invoices before writing any pipeline code, and look at the confidence distribution per field. That single exercise tells you which fields can auto-post, which will always need review, and whether you need a custom model at all. Then build the three-way routing, ship it with conservative thresholds, and let reviewer corrections tell you where to relax them. The goal for the first release isn't to remove people from accounts payable; it's to turn their day from data entry into exception handling, on a preview API you've deliberately kept a fallback for.

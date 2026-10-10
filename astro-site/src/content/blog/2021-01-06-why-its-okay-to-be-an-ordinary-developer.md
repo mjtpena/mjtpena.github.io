@@ -1,6 +1,6 @@
 ---
-title: Why it’s okay to be “an ordinary” developer
-description: "Someone once asked me, what does it take to become a prominent developer? A 10X Engineer? You know some who are \"extraordinary\". What do you mean by…"
+title: "Why It's Okay to Be an Ordinary Developer"
+description: "The 10x engineer myth, vanity metrics and social media make good developers feel small; aim to beat your past self, not the top 1%."
 author: Michael John Peña
 draft: false
 date: 2021-01-06
@@ -8,52 +8,66 @@ url: /blog/why-its-okay-to-be-an-ordinary-developer/
 images: 
      - /2021/01/Screen-Shot-2021-01-07-at-06.01.46-940x510.png
 tags:
-  - "10xengineer"
   - Career
-  - developer
+  - Personal
   - Self-Help
-  - software engineer
+  - Engineering Culture
 ---
 
-Someone once asked me, what does it take to become a prominent developer? A 10X Engineer? You know some who are "extraordinary". What do you mean by extraordinary? I've always had some thoughts (all of us do) around it, but my understanding and opinion of it is now much more concrete. Actually, this applies not only to being a developer, but to any other career or profession that you're in.
+Someone once asked me what it takes to become a prominent developer. A "10x engineer". One of the "extraordinary" ones. My first question back was: what do you mean by extraordinary? I've had opinions on this for years, like most of us, but they're much firmer now. And they apply to almost any career, not just software.
 
+## We only look at the far right of the bell curve
 
-I believe there is a big problem with polarisation in the industry. We only look at the further right of the bell curve. We disregard that there are average and less than average people.
+The industry has a polarisation problem. We stare at the far right tail of the bell curve and forget that most people, by definition, sit in the middle, and plenty sit below it.
 
-Because of technology, it's very easy to get swayed by social media about "the extraordinary people", the top 1% of the 1% of the population who are romanticise about being great.
+Social media makes this worse. It's easy to get swept up in stories about the top 1% of the top 1%, romanticised as the standard everyone should meet. Someone started programming on their dad's Commodore 64 at age four, and you feel behind because you started at four plus N. Someone shipped a pile of apps and exited with millions while you were busy playing video games with friends. Someone is running a multinational company in their twenties. The list never ends, and the message underneath is always the same: if you're not like them, you're "just" average.
 
-You see someone who is extremely bright and started programming with his dad's Commodore 64 at age 4, and you feel bad that you didn't start learning to program at an age of 4 + N days. Someone developed a lot of programs and exited with millions at a young age, while you were pre-occupied with something else (like playing video games with friends). A young chief executive of a multi-national company in his 20s. The list goes on. If you're not "like them" or "better", then you're "just" average. There is nothing wrong with being an average.
+There is nothing wrong with being average. A big disclaimer, though: average is not the same as complacent. The "not even trying", "come what may", "I still can't finish this module after five years" attitude is a different thing entirely. You know the type. Don't be that person.
 
-Unfortunately, a lot of companies set these unrealistic standards in order to hire only the "top 5% of the world" but maybe you can intern with them (with a minimum wage or no pay at all) and if you "wear multiple hats" and work hard enough (90+ hours per week), maybe you'll be extraordinary too, just like them. Maybe if you attend these conferences, read 100+ technology books, use only command lines and no mouse; you'll be extraordinary too.
+The "10x" label itself deserves more scepticism than it gets. It's usually traced back to a [1968 Communications of the ACM paper by Sackman, Erikson and Grant](https://dl.acm.org/doi/10.1145/362851.362858), which reported very large differences between individual programmers. That study was mainly about online versus offline programming, and the often-quoted 28:1 gap came from comparing the best and worst performers in a group of only 12 experienced programmers, working under mixed tools and conditions. Critics have pointed out ever since that a best-versus-worst ratio from a sample that small says little about the typical gap between two developers on the same team. A half-century-old observation about variance turned into a hiring slogan.
 
-You buy into the false belief that there is a hero waiting inside you to unleash. A lot of the self-help industry and HR culture are really selling these "feel good" trainings like pancakes. I believe that you don't have to be extraordinary at work to be a good person. You shouldn't let some random book or article tell you if you're not good just because you don't know set SMART goals every week in your job or career. Are you actually fun to work with? Do people around you get inspired and learn from you?
+## The hiring and self-help machine
 
-Some metrics are BS anyway. How do you actually measure an extraordinary developer or software engineer in the first place? Sometimes this also gets very weird when you join a company with a weird performance review process.
+A lot of companies set unrealistic standards so they can claim to hire only "the top 5% of the world". The pitch often continues: maybe you can intern with us for minimum wage or nothing, and if you wear multiple hats and work 90+ hours a week, maybe you'll become extraordinary too. Maybe if you attend the right conferences, read 100+ technology books, and use only the command line and never a mouse.
 
-We fall into the "vanity metrics" trap where we want to find some numbers to compare to measure performance. Some common and unjustified vanity metrics I experienced:
+You end up buying the idea that there's a hero waiting inside you to be unleashed. Much of the self-help industry and some HR culture sell "feel good" training on exactly that premise. I don't accept it. You don't have to be extraordinary at work to be a good person, and you shouldn't let a random book or article tell you you're not good enough because you don't set SMART goals every week.
 
-- The number of line of codes you've written.
-- The number of unit tests that passed. I can write hundreds of "not so meaningful" tests.
-- The ratio of pass/fail builds.
-- The number of commits.
-- Time spent "online" or in the office.
+I say this as someone who used to be part of the problem. A couple of years ago I was "that guy". I'd look down on people who weren't technical enough, who didn't spend extreme hours learning technology X, who weren't "as good as me", and a whole list of other imaginary ceilings. I thought I was great. I wasn't helping anyone.
 
-We sometimes base it from someone who is "above" the rest.
+Better questions: are you good to work with? Do the people around you learn from you and get better because you're there?
 
-- Someone has a higher salary than you.
-- Someone gets awarded with a diamond plaque and you're not.
-- Someone has a "Chief,", "Head of," "Senior Lead Manager Global Distinguished Architect Black Belt," title in their profiles and you're still stuck with "Associate Junior Assistant Team Lead Secondment,".
+## Most performance metrics for developers are vanity metrics
 
-You shouldn't be jealous of that person. That person is unique. He or she is not you. Unless you want to be that person as a "wholesale" and not just some selective things about him or her, then you need to get rid of that jealousy. Here's a good quote from Naval.
+How do you actually measure an "extraordinary" developer? Most attempts I've seen fall into the vanity metrics trap: we want a number to compare, so we grab whatever is easy to count. Some I've been measured on, or seen used, that I think are unjustified:
 
-> You can’t cherry-pick the things you envy so much about the other person. You would have to take a 180-degree swap with that person. You would have to take her age, her family history, her struggles, her failures, her medical conditions, her pains, her parents, her friends, everything. And lose everything you have built and leave everyone you love behind. And unless you are totally comfortable with that swap, you shouldn’t be envious. -Naval Ravikant
+- **Lines of code written.** More code is often worse code.
+- **Number of passing unit tests.** I can write hundreds of tests that prove nothing.
+- **Ratio of passing to failing builds.** This rewards people who avoid risky but necessary changes.
+- **Number of commits.** Easy to inflate, and it says nothing about value.
+- **Time spent "online" or in the office.** Presence is not output.
 
-At any company, you don't always work with "extraordinary people" and not all the people in the world are "extraordinary". We design and create applications so that "ordinary" people can use them and potentially make their lives meaningful, and they become more productive at work. The actual value of your work is about the outcome it creates and not how complex the technology you use.
+It gets stranger when you join a company with an odd performance review process and these numbers decide your rating.
 
-However, a huge disclaimer, that there is a big difference in being average and those side of the fences of "not even trying", "complacent", "come-what-may", "the Mr excuse I can't finish this module in 5 years". You know what I mean - don't you? Don't be that person. The key message here is aspire to be a better developer, better than who you were in the past; but don't feel bad if you are not extraordinary.
+There are better signals, and none of them are new. Look at the outcomes someone helped deliver: the problem solved, the customer who stopped complaining, the system that stopped paging people at 2 AM. Look at how much their teammates grow. For delivery itself, the research in *Accelerate* (Forsgren, Humble and Kim, 2018) gave us four key metrics: deployment frequency, lead time for changes, change failure rate and time to restore service, which Google's DORA team [explains and shows how to measure](https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance). Be clear about what they are, though. They measure a team and its delivery system, and the moment you use them to rank individuals you've built another vanity metric.
 
-Couple of years ago, I was "that guy", you know, the guy who would look down at people because they're not technical enough, they don't spend extreme hours learning technology X, those who are not "as good as me", and a myriad of other imaginary ceilings. I thought I was great, but I was actually part of the problem.
+The other comparison trap is status. Someone earns more than you. Someone gets a diamond plaque and you don't. Someone has "Chief", "Head of" or "Senior Lead Global Distinguished Architect Black Belt" on their profile while you're still "Associate Junior Assistant Team Lead (Secondment)".
 
-There is more to life than code. At least for 99.99% of us. If you're part of that 0.001%, for as long as you're happy and healthy - that's OK too. Don't feel guilty if you don't have the perfect green in GitHub activities. Don't feel sad if you don't wake up at 5:30 AM. Things change, your interests and priorities change - and that's ok. Maybe you're really into programming today, 5 years later you decide that you want to be a bee farmer, that's fine. Live your own life.
+## Envy only makes sense as a full swap
 
-If you're currently struggling with your career or life right now, message me. I'm willing to listen.
+You shouldn't be jealous of that person. They're unique, and they aren't you. The test I use comes from Naval Ravikant, collected in the happiness part of [The Almanack of Naval Ravikant](https://www.navalmanack.com/) (Eric Jorgenson, 2020): unless you'd take a "wholesale, 24/7, 100 percent swap" with that person, there's no point being jealous.
+
+You can't cherry-pick their title or salary. You'd have to take their age, family history, struggles, failures, health, relationships and everything else, and give up everything you've built and everyone you love. If you're not comfortable with that trade, let the envy go.
+
+## Ordinary is who we build for
+
+At any company, you won't always work with "extraordinary" people, and most people in the world aren't. We design and build applications so that ordinary people can use them, get more done at work, and maybe make their lives a little more meaningful. The value of your work is the outcome it creates, not how complex the technology behind it is.
+
+So the goal isn't to become extraordinary. It's to be a better developer than you were last year, and to stop feeling bad because you're not in someone else's highlight reel.
+
+## There is more to life than code
+
+There is more to life than code, for 99.99% of us anyway. If you're in the 0.01% who wants nothing else, and you're happy and healthy, that's okay too.
+
+Don't feel guilty if your GitHub contribution graph isn't solid green. Don't feel bad if you don't wake up at 5:30 AM. Interests and priorities change, and that's fine. Maybe you're deep into programming today and in five years you decide to become a bee farmer. Live your own life.
+
+If you're struggling with your career or your life right now, [message me on LinkedIn](https://www.linkedin.com/in/michaeljohnpena/). I'm willing to listen.

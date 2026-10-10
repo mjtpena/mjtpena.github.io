@@ -1,396 +1,225 @@
 ---
-title: "Azure Functions with .NET 5: Modernizing Serverless Development"
-description: ".NET 5 is out, and Functions has a new hosting model in flight: isolated process. Instead of running inside the Functions host, your function runs in its…"
+title: "Azure Functions on .NET 5: A First Look at the Isolated Worker Preview"
+description: "What the .NET 5 isolated worker preview for Azure Functions looks like in January 2021, what it costs you today, and when to stay on .NET Core 3.1."
 author: Michael John Peña
 draft: false
 date: 2021-01-03
 tags:
   - Azure
-  - Functions
+  - Azure Functions
   - .NET
   - Serverless
+  - C#
 ---
 
-.NET 5 is out, and Functions has a new hosting model in flight: isolated process. Instead of running inside the Functions host, your function runs in its own .NET process and talks to the host over gRPC. The benefit is decoupling—you pick the .NET version, you control DI and middleware, and the host doesn't dictate your dependency graph. The cost is a little extra plumbing. For long-lived services I now default to isolated; for quick utility Functions the in-process model still wins on simplicity.
+.NET 5 shipped in November, and the obvious question for any team on Azure Functions is "can we move to it?" The honest answer is "not the way you're used to". The Functions v3 host runs on .NET Core 3.1, and a class library loaded into that host can't target a newer runtime than the host itself. Microsoft's answer is a new out-of-process model, the .NET isolated worker. It's in early preview right now, and you should understand its trade-offs before you put it on a roadmap.
 
-## Current .NET Support in Azure Functions
+## Why .NET 5 needs a different model
 
-As of January 2021, Azure Functions supports:
-- **.NET Core 3.1** - In-process model (GA, recommended for production)
-- **.NET 5** - Out-of-process model (preview)
+Today's C# functions are class libraries. The Functions host loads your assembly into its own process, which is why you get rich bindings like `IAsyncCollector<T>` and `CloudBlockBlob`. It's also why your dependency graph has to fit around the host's. If you've ever fought a `Newtonsoft.Json` or `Microsoft.Extensions.*` version conflict in a function app, you've met the downside of sharing a process.
 
-The out-of-process model runs your function code in a separate worker process, giving you more control over dependencies and the .NET version.
+The isolated model turns .NET into an ordinary language worker, the way Node.js, Python and Java already work. Your app is a console executable with its own `Main`. The host starts it as a separate process and talks to it over gRPC. The host stays on .NET Core 3.1, and your code runs on .NET 5 because it's a different process.
 
-## In-Process Model (.NET Core 3.1)
+Here is where things stand on 3 January 2021:
 
-The traditional model where functions run in the same process as the host:
+| | In-process class library | .NET isolated worker |
+|---|---|---|
+| Target framework | `netcoreapp3.1` | `net5.0` |
+| Status | GA, the production default on Functions v3 | Early preview |
+| SDK package | `Microsoft.NET.Sdk.Functions` 3.0.11 | `Microsoft.Azure.Functions.Worker` and `.Sdk` 1.0.0-preview1 |
+| `FUNCTIONS_WORKER_RUNTIME` | `dotnet` | `dotnet-isolated` |
+| Bindings | Full binding model, rich SDK types | Strings, JSON POCOs, `HttpRequestData`/`HttpResponseData` and `OutputBinding<T>` |
+| Durable Functions | Supported | Not supported |
+| Tooling | Visual Studio, VS Code, Core Tools | Core Tools 3.0.3160 or later |
 
-```csharp
-// .csproj
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
-  </ItemGroup>
-</Project>
-```
+The worker packages first appeared on NuGet on 10 December 2020 as [1.0.0-preview1](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker/1.0.0-preview1). Azure Functions [Core Tools 3.0.3160](https://github.com/Azure/azure-functions-core-tools/releases/tag/3.0.3160), released in early December, added the worker runtime; its release note reads "Add support for dotnet-isolated Functions runtime". The code lives in the open in the [azure-functions-dotnet-worker](https://github.com/Azure/azure-functions-dotnet-worker) repo, which is the best place to track what's changing. Expect breaking changes between previews. The API below is the preview1 surface, and I'd be surprised if it survives to GA unchanged.
 
-```csharp
-// HttpExample.cs
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+## What an isolated function app looks like
 
-public static class HttpExample
-{
-    [FunctionName("GetItems")]
-    public static async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req,
-        ILogger log)
-    {
-        log.LogInformation("Processing request");
+The project is a console app. Note `OutputType` set to `Exe`. Bindings still come from the WebJobs extension packages, because the host is what actually talks to Storage, HTTP and the rest. This is an excerpt, reduced from the sample in Microsoft's worker repo: I've left out the usual `host.json` and `local.settings.json` copy-to-output items. `ExtensionsMetadataGenerator` isn't optional. It writes the `extensions.json` the host reads to find the Storage extension and the startup class the SDK generates in your assembly. `System.Net.NameResolution` is a workaround the official sample carries, and I'd keep it until a later preview drops it.
 
-        var items = await GetItemsAsync();
-
-        return new OkObjectResult(items);
-    }
-}
-```
-
-## Dependency Injection in In-Process Model
-
-```csharp
-// Startup.cs
-using Microsoft.Azure.Functions.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
-
-[assembly: FunctionsStartup(typeof(MyFunctionApp.Startup))]
-
-namespace MyFunctionApp
-{
-    public class Startup : FunctionsStartup
-    {
-        public override void Configure(IFunctionsHostBuilder builder)
-        {
-            builder.Services.AddHttpClient();
-            builder.Services.AddSingleton<IMyService, MyService>();
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Environment.GetEnvironmentVariable("SqlConnection")));
-        }
-    }
-}
-```
-
-```csharp
-// Function with DI
-public class HttpFunctions
-{
-    private readonly IMyService _service;
-    private readonly ILogger<HttpFunctions> _logger;
-
-    public HttpFunctions(IMyService service, ILogger<HttpFunctions> logger)
-    {
-        _service = service;
-        _logger = logger;
-    }
-
-    [FunctionName("GetItems")]
-    public async Task<IActionResult> GetItems(
-        [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
-    {
-        _logger.LogInformation("Processing request");
-
-        var items = await _service.GetItemsAsync();
-
-        return new OkObjectResult(items);
-    }
-}
-```
-
-## .NET 5 Out-of-Process Model (Preview)
-
-The new isolated worker model for .NET 5:
-
-```csharp
-// .csproj
+```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <OutputType>Exe</OutputType>
+    <_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.0.1" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.12" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.0.0-preview1" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.0.0-preview1" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Http" Version="3.0.2" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="4.0.3" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Script.ExtensionsMetadataGenerator" Version="1.2.0" />
+    <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
   </ItemGroup>
 </Project>
 ```
 
+`local.settings.json` tells the host which worker to start:
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
+  }
+}
+```
+
+### You own the host now
+
+This is the part I like most. `Program.cs` is a standard .NET Generic Host. Configuration, logging and DI are the same `HostBuilder` you'd use in a worker service. You don't need the separate `FunctionsStartup` abstraction from the in-process model, which I covered in [Azure Functions Dependency Injection](/blog/2020-11-06-azure-functions-dependency-injection/).
+
 ```csharp
-// Program.cs
-using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
+using Microsoft.Azure.Functions.Worker.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-var host = new HostBuilder()
-    .ConfigureFunctionsWorkerDefaults()
-    .ConfigureServices(services =>
-    {
-        services.AddHttpClient();
-        services.AddSingleton<IMyService, MyService>();
-    })
-    .Build();
-
-host.Run();
-```
-
-## HTTP Functions in Isolated Model
-
-```csharp
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
-using System.Net;
-
-public class HttpFunctions
+namespace OrdersApp
 {
-    private readonly IMyService _service;
-    private readonly ILogger<HttpFunctions> _logger;
-
-    public HttpFunctions(IMyService service, ILogger<HttpFunctions> logger)
+    public class Program
     {
-        _service = service;
-        _logger = logger;
-    }
-
-    [Function("GetItems")]
-    public async Task<HttpResponseData> GetItems(
-        [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequestData req)
-    {
-        _logger.LogInformation("Processing request");
-
-        var items = await _service.GetItemsAsync();
-
-        var response = req.CreateResponse(HttpStatusCode.OK);
-        await response.WriteAsJsonAsync(items);
-        return response;
-    }
-
-    [Function("CreateItem")]
-    public async Task<HttpResponseData> CreateItem(
-        [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
-    {
-        var item = await req.ReadFromJsonAsync<Item>();
-        var created = await _service.CreateAsync(item);
-
-        var response = req.CreateResponse(HttpStatusCode.Created);
-        await response.WriteAsJsonAsync(created);
-        return response;
-    }
-}
-```
-
-## Queue Triggered Functions
-
-```csharp
-// In-process (.NET Core 3.1)
-public class QueueFunctions
-{
-    [FunctionName("ProcessMessage")]
-    public async Task ProcessMessage(
-        [QueueTrigger("input-queue")] string message,
-        [Queue("output-queue")] IAsyncCollector<string> outputQueue,
-        ILogger log)
-    {
-        log.LogInformation($"Processing: {message}");
-
-        var result = await ProcessAsync(message);
-
-        await outputQueue.AddAsync(result);
-    }
-}
-
-// Isolated (.NET 5 preview)
-public class QueueFunctions
-{
-    [Function("ProcessMessage")]
-    [QueueOutput("output-queue")]
-    public string ProcessMessage(
-        [QueueTrigger("input-queue")] string message,
-        FunctionContext context)
-    {
-        var logger = context.GetLogger<QueueFunctions>();
-        logger.LogInformation($"Processing: {message}");
-
-        return $"Processed: {message}";
-    }
-}
-```
-
-## Timer Functions
-
-```csharp
-public class TimerFunctions
-{
-    private readonly IMyService _service;
-
-    public TimerFunctions(IMyService service)
-    {
-        _service = service;
-    }
-
-    [FunctionName("DailyCleanup")]
-    public async Task DailyCleanup(
-        [TimerTrigger("0 0 2 * * *")] TimerInfo timer,
-        ILogger log)
-    {
-        log.LogInformation($"Cleanup started at: {DateTime.UtcNow}");
-
-        await _service.CleanupOldRecordsAsync();
-
-        log.LogInformation("Cleanup completed");
-    }
-}
-```
-
-## Durable Functions
-
-Durable Functions work with both models:
-
-```csharp
-public class DurableFunctions
-{
-    [FunctionName("OrderOrchestrator")]
-    public async Task<OrderResult> RunOrchestrator(
-        [OrchestrationTrigger] IDurableOrchestrationContext context)
-    {
-        var order = context.GetInput<Order>();
-
-        // Sequential activities
-        var validated = await context.CallActivityAsync<bool>("ValidateOrder", order);
-        if (!validated)
-            return new OrderResult { Success = false, Message = "Validation failed" };
-
-        var reserved = await context.CallActivityAsync<bool>("ReserveInventory", order);
-        var charged = await context.CallActivityAsync<bool>("ChargeCustomer", order);
-
-        if (charged)
+        public static async Task Main(string[] args)
         {
-            await context.CallActivityAsync("SendConfirmation", order);
+            var host = new HostBuilder()
+                .ConfigureAppConfiguration(config =>
+                {
+                    config.AddCommandLine(args);
+                    config.AddEnvironmentVariables();
+                })
+                .ConfigureFunctionsWorker((context, worker) =>
+                {
+                    worker.UseFunctionExecutionMiddleware();
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton<IOrderValidator, OrderValidator>();
+                })
+                .Build();
+
+            await host.RunAsync();
+        }
+    }
+}
+```
+
+`UseFunctionExecutionMiddleware()` registers the step that actually invokes your function. The worker builder runs a middleware pipeline, so cross-cutting work like correlation or exception handling has a home that isn't copy-pasted into every function. In preview1 this pipeline is still bare, so I wouldn't build anything elaborate on it yet.
+
+### An HTTP function with a queue output
+
+Two things look different from the in-process model. HTTP uses the worker's own `HttpRequestData` and `HttpResponseData` types instead of ASP.NET Core's `HttpRequest` and `IActionResult`. Output bindings are `OutputBinding<T>` parameters you call `SetValue` on, instead of `IAsyncCollector<T>`.
+
+```csharp
+using System.Net;
+using System.Text.Json;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Pipeline;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Extensions.Logging;
+
+namespace OrdersApp
+{
+    public class SubmitOrder
+    {
+        private static readonly JsonSerializerOptions JsonOptions =
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+        private readonly IOrderValidator _validator;
+
+        public SubmitOrder(IOrderValidator validator)
+        {
+            _validator = validator;
         }
 
-        return new OrderResult { Success = true, OrderId = order.Id };
+        [FunctionName("SubmitOrder")]
+        public HttpResponseData Run(
+            [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req,
+            [Queue("orders", Connection = "AzureWebJobsStorage")] OutputBinding<Order> orderQueue,
+            FunctionExecutionContext executionContext)
+        {
+            var logger = executionContext.Logger;
+
+            if (string.IsNullOrWhiteSpace(req.Body))
+            {
+                return new HttpResponseData(HttpStatusCode.BadRequest, "Body required.");
+            }
+
+            Order order;
+            try
+            {
+                order = JsonSerializer.Deserialize<Order>(req.Body, JsonOptions);
+            }
+            catch (JsonException)
+            {
+                return new HttpResponseData(HttpStatusCode.BadRequest, "Malformed JSON.");
+            }
+
+            if (order == null || !_validator.IsValid(order))
+            {
+                return new HttpResponseData(HttpStatusCode.BadRequest, "Invalid order.");
+            }
+
+            orderQueue.SetValue(order);
+            logger.LogInformation($"Queued order {order.Id}");
+
+            return new HttpResponseData(HttpStatusCode.Accepted, $"Order {order.Id} accepted.");
+        }
     }
 
-    [FunctionName("ValidateOrder")]
-    public bool ValidateOrder([ActivityTrigger] Order order, ILogger log)
+    public class Order
     {
-        log.LogInformation($"Validating order {order.Id}");
-        return order.Items.Any() && order.Total > 0;
+        public string Id { get; set; }
+        public decimal Total { get; set; }
     }
 
-    [FunctionName("ReserveInventory")]
-    public async Task<bool> ReserveInventory(
-        [ActivityTrigger] Order order,
-        ILogger log)
+    public interface IOrderValidator
     {
-        log.LogInformation($"Reserving inventory for order {order.Id}");
-        // Reserve logic
-        return true;
+        bool IsValid(Order order);
+    }
+
+    public class OrderValidator : IOrderValidator
+    {
+        public bool IsValid(Order order) => !string.IsNullOrEmpty(order.Id) && order.Total > 0;
     }
 }
 ```
 
-## Configuration and Settings
+`[FunctionName]`, `[HttpTrigger]` and `[Queue]` still come from the WebJobs namespaces in this preview. In preview1 the SDK includes a Roslyn source generator that reads these attributes at compile time and emits a function-metadata provider into your assembly; the host loads it to wire up triggers and bindings. You won't find `function.json` files in the output. Your code never touches the Storage SDK. The host does the I/O and hands you a deserialised string or POCO across gRPC. `req.Body` is a string in preview1, so streaming large request bodies isn't on the table yet.
 
-```csharp
-// Access configuration
-public class ConfiguredFunction
-{
-    private readonly IConfiguration _configuration;
+Note the case-insensitive serialiser options: `System.Text.Json` is case-sensitive by default, so a camelCase body like `{"id":"1","total":10}` would otherwise bind to an empty `Order` and fail validation. The empty-body guard and the `JsonException` catch turn bad input into a 400 instead of an unhandled 500.
 
-    public ConfiguredFunction(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
+Run it locally with `func start` from the build output, using Core Tools 3.0.3160 or later. Publish with `func azure functionapp publish <your-function-app-name>`, which in that release sets the isolated worker settings for you.
 
-    [FunctionName("ConfigExample")]
-    public IActionResult Run(
-        [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
-    {
-        var setting = _configuration["MySetting"];
-        var connectionString = _configuration.GetConnectionString("DefaultConnection");
+## What you give up today
 
-        return new OkObjectResult(new { Setting = setting });
-    }
-}
-```
+The preview is real and it works. Here's what's missing as of this week:
 
-## Testing Functions
+- **No Durable Functions.** The Durable extension depends on running inside the host. If your app orchestrates with Durable, it stays in-process.
+- **Thin bindings.** No `IAsyncCollector<T>`, no binding to `CloudBlockBlob` or `CloudQueueMessage`, no `ICollector<T>` for multiple outputs. You get strings and POCOs. For many HTTP and queue functions that's fine. For anything that needs blob leases or message metadata, it's a step back.
+- **Rough tooling.** Visual Studio doesn't have a template or F5 experience for isolated apps yet. Microsoft's own sample in the [worker repo](https://github.com/Azure/azure-functions-dotnet-worker) calls `Debugger.Launch()` in `Main` to attach a debugger. That tells you where the tooling is.
+- **Extra hop per invocation.** Every trigger payload and every output crosses a process boundary over gRPC. For chatty, high-throughput functions, measure before you assume the overhead doesn't matter.
+- **A short-lived runtime.** .NET 5 is a "Current" release, not LTS. Under the [.NET support policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) it's supported for three months after .NET 6 ships, and .NET 6 is planned for November 2021 as the next LTS. Moving a production app to .NET 5 means signing up for another upgrade within roughly a year.
 
-```csharp
-[TestClass]
-public class HttpFunctionsTests
-{
-    [TestMethod]
-    public async Task GetItems_ReturnsItems()
-    {
-        // Arrange
-        var mockService = new Mock<IMyService>();
-        mockService.Setup(s => s.GetItemsAsync())
-            .ReturnsAsync(new List<Item> { new Item { Id = 1 } });
+## When I'd use it, and when I wouldn't
 
-        var mockLogger = Mock.Of<ILogger<HttpFunctions>>();
-        var functions = new HttpFunctions(mockService.Object, mockLogger);
+My position: **keep production Functions on .NET Core 3.1 in-process for now.** It's GA, it's LTS until December 2022, the tooling is mature, and every binding and Durable Functions work. If you need a refresher on that setup, my [v3 on .NET Core 3.1 post](/blog/2020-08-01-azure-functions-v3-dotnet-core/) has the configuration I use.
 
-        var mockRequest = CreateMockRequest();
+Use the isolated preview when:
 
-        // Act
-        var response = await functions.GetItems(mockRequest);
+- You're building a new, non-critical function app and want to learn the model before it reaches GA.
+- You have a library that genuinely needs .NET 5 or C# 9 runtime features and can't be isolated behind a 3.1-compatible facade.
+- You've been burned by host dependency conflicts and want to prove the isolated model removes them for your codebase.
 
-        // Assert
-        Assert.IsInstanceOfType(response, typeof(OkObjectResult));
-    }
+Don't use it when:
 
-    private HttpRequest CreateMockRequest()
-    {
-        var context = new DefaultHttpContext();
-        return context.Request;
-    }
-}
-```
+- The app uses Durable Functions, or bindings richer than strings, POCOs and HTTP request/response data.
+- The team relies on Visual Studio debugging and templates.
+- You can't absorb breaking changes between preview releases.
 
-## Deployment
-
-```bash
-# Deploy using Azure CLI
-az functionapp deployment source config-zip \
-    --resource-group myResourceGroup \
-    --name myFunctionApp \
-    --src functionapp.zip
-
-# Or using func CLI
-func azure functionapp publish myFunctionApp
-```
-
-## Best Practices
-
-1. **Use dependency injection** - Manage services properly
-2. **Handle cold starts** - Use premium plan for low latency
-3. **Configure retries** - For queue-triggered functions
-4. **Monitor with Application Insights** - Enable for all functions
-5. **Use managed identities** - Avoid storing secrets
-
-## When to Use Each Model
-
-| Scenario | Recommendation |
-|----------|---------------|
-| Production workloads | In-process (.NET Core 3.1) |
-| Need .NET 5 features | Isolated (preview) |
-| Durable Functions | In-process |
-| Maximum performance | In-process |
-
-The isolated process model is still in preview but shows promise for future .NET versions.
+The direction matters more than the preview, though. Decoupling the worker from the host is how Functions stops holding .NET versions hostage, and it's the same shape every other language worker already uses. My advice for this quarter: write new function code against small, testable services and keep the function classes thin. Whichever model you end up on, the migration is then mostly `Program.cs` and attribute plumbing, not your business logic.

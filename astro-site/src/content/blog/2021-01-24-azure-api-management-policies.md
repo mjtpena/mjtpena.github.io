@@ -1,6 +1,6 @@
 ---
-title: Advanced Azure API Management Policies
-description: "I revisit APIM policies on this blog roughly every six months because the patterns are how the service earns its keep. Rate limiting per subscription, JWT…"
+title: "APIM Policies in Production: Limits, Fan-out and Fallbacks"
+description: "Four Azure API Management policy patterns that hold up in production: identity-aware limits, Key Vault named values, parallel fan-out and stale fallbacks."
 author: Michael John Pena
 draft: false
 date: 2021-01-24
@@ -8,401 +8,236 @@ url: /blog/azure-api-management-policies/
 tags:
   - Azure
   - API Management
-  - Policies
-  - Security
+  - APIs
   - Integration
+  - Security
 ---
 
-I revisit APIM policies on this blog roughly every six months because the patterns are how the service earns its keep. Rate limiting per subscription, JWT validation that doesn't trust the client, response caching for idempotent reads, and the request/response transforms that let you hide a creaky backend behind a clean public API. Today I'm getting into the advanced patterns I keep reusing—policy fragments, named values backed by Key Vault, and the diagnostic traces that turn "the policy isn't firing" into a five-minute debug.
+Most Azure API Management policy samples work in the test console and fall over in production. They throttle the wrong thing, hard-code secrets, call backends one after another when they could call them in parallel, or label a retry loop a "circuit breaker". Four patterns fix most of that, and each one has a limit or gotcha that decides whether it works.
 
-## Understanding Policy Scopes
+If you want the basics first (policy sections, scopes, `<base />`, simple JWT and caching examples), start with my [policy deep dive](/blog/2020-11-15-azure-api-management-policies/) and the [gateway patterns overview](/blog/2020-09-11-azure-api-management/). This post assumes you already know them.
 
-Policies can be applied at four scopes:
-- **Global**: Applies to all APIs
-- **Product**: Applies to APIs in a product
-- **API**: Applies to all operations in an API
-- **Operation**: Applies to a specific operation
+## Pattern 1: Validate the token once, then trust the variable
 
-```xml
-<policies>
-    <inbound>
-        <!-- Policies applied before the request reaches the backend -->
-    </inbound>
-    <backend>
-        <!-- Policies applied when forwarding to backend -->
-    </backend>
-    <outbound>
-        <!-- Policies applied to the response -->
-    </outbound>
-    <on-error>
-        <!-- Policies applied when an error occurs -->
-    </on-error>
-</policies>
-```
+The common sample validates a JWT and then parses the `Authorization` header again with `AsJwt()` every time it needs a claim. That works, but it's wasteful, and it puts token parsing in several places. `validate-jwt` can write the validated token to a context variable with `output-token-variable-name`. Everything downstream then reads claims from a token the gateway has already checked.
 
-## Authentication and Authorization
-
-### JWT Validation with Claims
+The second improvement is to keep tenant IDs and audiences out of the XML. Named values are referenced as `{{name}}` and resolved when the policy runs. API Management can now reference an Azure Key Vault secret from a named value, read through the instance's managed identity ([named values docs](https://learn.microsoft.com/azure/api-management/api-management-howto-properties)). The feature is still in preview, so I use it for non-production environments and keep encrypted secret named values in production until it reaches GA. Tenant IDs and audiences aren't secret anyway. Backend API keys are, and those are the ones I want in Key Vault eventually.
 
 ```xml
 <policies>
     <inbound>
+        <base />
         <validate-jwt header-name="Authorization"
                       failed-validation-httpcode="401"
-                      failed-validation-error-message="Unauthorized">
-            <openid-config url="https://login.microsoftonline.com/{tenant}/.well-known/openid-configuration" />
+                      failed-validation-error-message="Unauthorized"
+                      output-token-variable-name="jwt">
+            <openid-config url="https://login.microsoftonline.com/{{aad-tenant-id}}/.well-known/openid-configuration" />
             <audiences>
-                <audience>api://my-api</audience>
+                <audience>{{orders-api-audience}}</audience>
             </audiences>
             <issuers>
-                <issuer>https://sts.windows.net/{tenant}/</issuer>
+                <issuer>https://sts.windows.net/{{aad-tenant-id}}/</issuer>
             </issuers>
             <required-claims>
                 <claim name="roles" match="any">
-                    <value>API.ReadWrite</value>
-                    <value>API.Admin</value>
+                    <value>Orders.Read</value>
+                    <value>Orders.Admin</value>
                 </claim>
             </required-claims>
         </validate-jwt>
-
-        <!-- Extract claims for downstream use -->
-        <set-variable name="userId" value="@(context.Request.Headers.GetValueOrDefault("Authorization","").AsJwt()?.Claims.GetValueOrDefault("oid", ""))" />
-        <set-variable name="userRoles" value="@(context.Request.Headers.GetValueOrDefault("Authorization","").AsJwt()?.Claims.GetValueOrDefault("roles", ""))" />
-
-        <!-- Pass user context to backend -->
-        <set-header name="X-User-Id" exists-action="override">
-            <value>@((string)context.Variables["userId"])</value>
+        <set-variable name="callerId" value="@(((Jwt)context.Variables["jwt"]).Claims.GetValueOrDefault("oid", "unknown"))" />
+        <set-header name="X-Caller-Id" exists-action="override">
+            <value>@((string)context.Variables["callerId"])</value>
+        </set-header>
+        <set-header name="x-functions-key" exists-action="override">
+            <value>{{orders-backend-key}}</value>
         </set-header>
     </inbound>
-</policies>
-```
-
-### API Key with Subscription Tiers
-
-```xml
-<policies>
-    <inbound>
-        <!-- Validate subscription key -->
-        <check-header name="Ocp-Apim-Subscription-Key"
-                      failed-check-httpcode="401"
-                      failed-check-error-message="API key required" />
-
-        <!-- Get subscription tier from product -->
-        <set-variable name="subscriptionTier"
-                      value="@(context.Subscription.ProductName)" />
-
-        <!-- Apply rate limits based on tier -->
-        <choose>
-            <when condition="@(context.Variables.GetValueOrDefault<string>("subscriptionTier") == "Free")">
-                <rate-limit calls="100" renewal-period="3600" />
-                <quota calls="1000" renewal-period="86400" />
-            </when>
-            <when condition="@(context.Variables.GetValueOrDefault<string>("subscriptionTier") == "Standard")">
-                <rate-limit calls="1000" renewal-period="3600" />
-                <quota calls="50000" renewal-period="86400" />
-            </when>
-            <when condition="@(context.Variables.GetValueOrDefault<string>("subscriptionTier") == "Premium")">
-                <rate-limit calls="10000" renewal-period="3600" />
-                <!-- No daily quota for premium -->
-            </when>
-        </choose>
-    </inbound>
-</policies>
-```
-
-## Request/Response Transformation
-
-### GraphQL to REST Translation
-
-```xml
-<policies>
-    <inbound>
-        <!-- Transform GraphQL query to REST call -->
-        <set-variable name="graphqlQuery" value="@(context.Request.Body.As<JObject>()["query"].ToString())" />
-
-        <choose>
-            <when condition="@(((string)context.Variables["graphqlQuery"]).Contains("getUser"))">
-                <!-- Extract user ID from GraphQL variables -->
-                <set-variable name="userId"
-                              value="@(context.Request.Body.As<JObject>()["variables"]["id"].ToString())" />
-
-                <!-- Rewrite to REST endpoint -->
-                <rewrite-uri template="@("/api/users/" + context.Variables["userId"])" />
-                <set-method>GET</set-method>
-                <set-body>@("")</set-body>
-            </when>
-            <when condition="@(((string)context.Variables["graphqlQuery"]).Contains("listOrders"))">
-                <rewrite-uri template="/api/orders" />
-                <set-method>GET</set-method>
-            </when>
-        </choose>
-    </inbound>
-
-    <outbound>
-        <!-- Wrap REST response in GraphQL format -->
-        <set-body>@{
-            var response = context.Response.Body.As<JObject>();
-            return new JObject(
-                new JProperty("data", response),
-                new JProperty("errors", null)
-            ).ToString();
-        }</set-body>
-    </outbound>
-</policies>
-```
-
-### Response Filtering Based on User Role
-
-```xml
-<policies>
-    <outbound>
-        <choose>
-            <when condition="@(!context.Variables.GetValueOrDefault<string>("userRoles", "").Contains("Admin"))">
-                <!-- Filter sensitive fields for non-admin users -->
-                <set-body>@{
-                    var response = context.Response.Body.As<JObject>();
-
-                    // Remove sensitive fields
-                    var sensitiveFields = new[] { "ssn", "salary", "internalNotes", "costPrice" };
-
-                    void RemoveSensitiveFields(JToken token)
-                    {
-                        if (token is JObject obj)
-                        {
-                            foreach (var field in sensitiveFields)
-                            {
-                                obj.Remove(field);
-                            }
-                            foreach (var child in obj.Children())
-                            {
-                                RemoveSensitiveFields(child);
-                            }
-                        }
-                        else if (token is JArray arr)
-                        {
-                            foreach (var item in arr)
-                            {
-                                RemoveSensitiveFields(item);
-                            }
-                        }
-                    }
-
-                    RemoveSensitiveFields(response);
-                    return response.ToString();
-                }</set-body>
-            </when>
-        </choose>
-    </outbound>
-</policies>
-```
-
-## Caching Strategies
-
-### Conditional Caching
-
-```xml
-<policies>
-    <inbound>
-        <!-- Only cache GET requests for authenticated users -->
-        <choose>
-            <when condition="@(context.Request.Method == "GET" && context.Variables.ContainsKey("userId"))">
-                <cache-lookup vary-by-developer="false"
-                              vary-by-developer-groups="false"
-                              downstream-caching-type="none">
-                    <vary-by-header>Accept</vary-by-header>
-                    <vary-by-query-parameter>page</vary-by-query-parameter>
-                    <vary-by-query-parameter>pageSize</vary-by-query-parameter>
-                </cache-lookup>
-            </when>
-        </choose>
-    </inbound>
-
-    <outbound>
-        <choose>
-            <when condition="@(context.Request.Method == "GET" && context.Response.StatusCode == 200)">
-                <!-- Cache successful GET responses for 5 minutes -->
-                <cache-store duration="300" />
-            </when>
-        </choose>
-    </outbound>
-</policies>
-```
-
-### External Redis Cache
-
-```xml
-<policies>
-    <inbound>
-        <cache-lookup-value key="@("order-" + context.Request.MatchedParameters["orderId"])"
-                            variable-name="cachedOrder"
-                            caching-type="external" />
-
-        <choose>
-            <when condition="@(context.Variables.ContainsKey("cachedOrder"))">
-                <!-- Return cached response immediately -->
-                <return-response>
-                    <set-status code="200" reason="OK" />
-                    <set-header name="X-Cache" exists-action="override">
-                        <value>HIT</value>
-                    </set-header>
-                    <set-body>@((string)context.Variables["cachedOrder"])</set-body>
-                </return-response>
-            </when>
-        </choose>
-    </inbound>
-
-    <outbound>
-        <choose>
-            <when condition="@(context.Response.StatusCode == 200)">
-                <cache-store-value key="@("order-" + context.Request.MatchedParameters["orderId"])"
-                                   value="@(context.Response.Body.As<string>(preserveContent: true))"
-                                   duration="600"
-                                   caching-type="external" />
-                <set-header name="X-Cache" exists-action="override">
-                    <value>MISS</value>
-                </set-header>
-            </when>
-        </choose>
-    </outbound>
-</policies>
-```
-
-## Backend Integration Patterns
-
-### Circuit Breaker with Retry
-
-```xml
-<policies>
     <backend>
-        <retry condition="@(context.Response.StatusCode >= 500)"
-               count="3"
-               interval="1"
-               max-interval="10"
-               delta="2"
-               first-fast-retry="true">
-            <forward-request buffer-request-body="true" timeout="30" />
-        </retry>
+        <base />
     </backend>
-
+    <outbound>
+        <base />
+    </outbound>
     <on-error>
-        <choose>
-            <!-- Circuit breaker: if backend fails repeatedly, return cached response -->
-            <when condition="@(context.LastError.Reason == "Timeout" || context.Response.StatusCode >= 500)">
-                <cache-lookup-value key="@("fallback-" + context.Request.Url.Path)"
-                                    variable-name="fallbackResponse" />
-
-                <choose>
-                    <when condition="@(context.Variables.ContainsKey("fallbackResponse"))">
-                        <return-response>
-                            <set-status code="200" reason="OK (Cached)" />
-                            <set-header name="X-Fallback" exists-action="override">
-                                <value>true</value>
-                            </set-header>
-                            <set-body>@((string)context.Variables["fallbackResponse"])</set-body>
-                        </return-response>
-                    </when>
-                    <otherwise>
-                        <return-response>
-                            <set-status code="503" reason="Service Temporarily Unavailable" />
-                            <set-body>@{
-                                return new JObject(
-                                    new JProperty("error", "Service temporarily unavailable"),
-                                    new JProperty("retryAfter", 30)
-                                ).ToString();
-                            }</set-body>
-                        </return-response>
-                    </otherwise>
-                </choose>
-            </when>
-        </choose>
+        <base />
     </on-error>
 </policies>
 ```
 
-### Request Aggregation
+Two details matter here. The issuer must match the token version your Azure Active Directory app registration issues: `sts.windows.net` for v1.0 access tokens, `login.microsoftonline.com/<tenant-id>/v2.0` for v2.0. A mismatch here is the most common reason a "correct" `validate-jwt` returns 401. Also, `X-Caller-Id` is only trustworthy because the gateway sets it with `exists-action="override"`. If your backend can be reached without going through APIM, a client can send that header itself. Lock the backend down (IP restrictions, VNet, or a gateway-only key) before you rely on it.
+
+## Pattern 2: Throttle the identity, not just the subscription
+
+A tempting design is a `choose` block on `context.Subscription.ProductName` with a different `rate-limit`, say 100 calls per 3,600 seconds, in each branch. It doesn't work, for two reasons. `rate-limit` caps `renewal-period` at 300 seconds, and it can be used only once per policy definition ([rate-limit reference](https://learn.microsoft.com/azure/api-management/rate-limit-policy)). Branching on product names is fragile too: rename a product in the portal and your limits disappear without an error.
+
+My rule of thumb:
+
+| Need | Where to put it |
+|---|---|
+| Different limits per tier (Free, Standard, Premium) | A plain `rate-limit` and `quota` in each **product's** policy. The product is the tier. |
+| Limit per end user, IP, or tenant, across subscriptions | `rate-limit-by-key` / `quota-by-key` at API or operation scope |
+| Protect a fragile backend regardless of caller | `rate-limit-by-key` with a constant key at API scope |
+
+The by-key policies are the advanced tool. One subscription key often sits behind a whole web app, so a per-subscription limit lets one noisy user use up everyone's allowance. Keying on the validated `oid` claim fixes that:
+
+```xml
+<policies>
+    <inbound>
+        <base />
+        <rate-limit-by-key calls="60"
+                           renewal-period="60"
+                           counter-key="@((context.Subscription?.Id ?? "anon") + ":" + (string)context.Variables["callerId"])" />
+        <quota-by-key calls="20000"
+                      renewal-period="86400"
+                      counter-key="@((context.Subscription?.Id ?? "anon") + ":" + (string)context.Variables["callerId"])"
+                      increment-condition="@(context.Response.StatusCode >= 200 && context.Response.StatusCode < 400)" />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
+```
+
+This fragment depends on `callerId` from Pattern 1, so put it at a scope that runs after the JWT validation. The `?.` guard matters: on an API that doesn't require a subscription key, `context.Subscription` is null and a plain `.Id` throws. The trade-offs:
+
+- **Tier support.** The by-key policies aren't available on the Consumption tier. If you're on Consumption, you only get subscription-based throttling.
+- **Counters are per key, not per scope.** The same `counter-key` used at two scopes shares one counter. Prefix the key with the API name if you want separate budgets.
+- **Accuracy.** Treat these limits as protection, not as billing. A caller can slip a few calls past the limit under load. If you charge for calls, meter them from logs.
+- **Don't key on anything the client controls** unless it was validated first. Keying on a raw header lets a caller reset its own limit by changing the value.
+
+## Pattern 3: Fan out in parallel with `wait`
+
+Aggregation endpoints ("give me the customer, their orders, and their preferences in one call") are a legitimate gateway job when the backends already exist and a dedicated BFF service would be overkill. A common mistake is to write three `send-request` calls one after another and assume they run in parallel. They don't. Calls only run concurrently inside a [`wait` policy](https://learn.microsoft.com/azure/api-management/wait-policy), which runs its immediate children at the same time and, with `for="all"`, finishes when all of them complete.
+
+```xml
+<policies>
+    <inbound>
+        <base />
+        <set-variable name="customerId" value="@(context.Request.MatchedParameters["customerId"])" />
+        <wait for="all">
+            <send-request mode="new" response-variable-name="profile" timeout="5" ignore-error="true">
+                <set-url>@("https://<customers-backend>/api/customers/" + (string)context.Variables["customerId"])</set-url>
+                <set-method>GET</set-method>
+            </send-request>
+            <send-request mode="new" response-variable-name="orders" timeout="5" ignore-error="true">
+                <set-url>@("https://<orders-backend>/api/customers/" + (string)context.Variables["customerId"] + "/orders")</set-url>
+                <set-method>GET</set-method>
+                <set-header name="x-functions-key" exists-action="override">
+                    <value>{{orders-backend-key}}</value>
+                </set-header>
+            </send-request>
+        </wait>
+        <return-response>
+            <set-status code="200" reason="OK" />
+            <set-header name="Content-Type" exists-action="override">
+                <value>application/json</value>
+            </set-header>
+            <set-body>@{
+                var profile = (IResponse)context.Variables["profile"];
+                var orders = (IResponse)context.Variables["orders"];
+                var profileOk = profile != null && profile.StatusCode == 200;
+                var ordersOk = orders != null && orders.StatusCode == 200;
+                return new JObject(
+                    new JProperty("profile", profileOk ? profile.Body.As<JObject>() : null),
+                    new JProperty("orders", ordersOk ? orders.Body.As<JArray>() : null),
+                    new JProperty("partial", !(profileOk && ordersOk))
+                ).ToString();
+            }</set-body>
+        </return-response>
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
+```
+
+`ignore-error="true"` means a failed or timed-out call leaves the variable `null` instead of failing the whole request, so the body can return a partial result with an explicit `partial` flag. Decide up front whether partial is acceptable. For a dashboard it usually is. For a checkout page it isn't, and you should return a 502 instead.
+
+When **not** to do this: if the aggregation needs business logic (joins, pagination across sources, writes), move it into a real service. Policy expressions are C# snippets you can't unit test, and the policy editor won't help you when one breaks.
+
+## Pattern 4: Retry carefully, then serve stale data
+
+APIM had no circuit breaker in January 2021. What you can build is retry plus a fallback. Two rules matter more than the XML:
+
+1. **Retry only idempotent requests.** Retrying a `POST` that timed out after the backend committed it creates duplicate orders.
+2. **Know what reaches `on-error`.** A backend that returns 500 is a *response*. It flows into `outbound`, not `on-error`. `on-error` fires when the gateway itself fails, such as a timeout or a refused connection in `forward-request`.
 
 ```xml
 <policies>
     <inbound>
         <base />
     </inbound>
-
     <backend>
-        <!-- Make parallel calls to multiple backends -->
-        <send-request mode="new" response-variable-name="userResponse" timeout="10" ignore-error="true">
-            <set-url>@("https://users-api.internal/api/users/" + context.Request.MatchedParameters["userId"])</set-url>
-            <set-method>GET</set-method>
-        </send-request>
-
-        <send-request mode="new" response-variable-name="ordersResponse" timeout="10" ignore-error="true">
-            <set-url>@("https://orders-api.internal/api/users/" + context.Request.MatchedParameters["userId"] + "/orders")</set-url>
-            <set-method>GET</set-method>
-        </send-request>
-
-        <send-request mode="new" response-variable-name="preferencesResponse" timeout="10" ignore-error="true">
-            <set-url>@("https://preferences-api.internal/api/users/" + context.Request.MatchedParameters["userId"] + "/preferences")</set-url>
-            <set-method>GET</set-method>
-        </send-request>
+        <retry condition="@(context.Request.Method == "GET" && context.Response != null && context.Response.StatusCode >= 500)"
+               count="2"
+               interval="1"
+               delta="1"
+               max-interval="4"
+               first-fast-retry="true">
+            <forward-request timeout="10" />
+        </retry>
     </backend>
-
     <outbound>
-        <!-- Aggregate responses -->
-        <set-body>@{
-            var user = ((IResponse)context.Variables["userResponse"]).Body.As<JObject>();
-            var orders = ((IResponse)context.Variables["ordersResponse"]).Body.As<JArray>();
-            var prefs = ((IResponse)context.Variables["preferencesResponse"]).Body.As<JObject>();
-
-            return new JObject(
-                new JProperty("user", user),
-                new JProperty("recentOrders", orders),
-                new JProperty("preferences", prefs)
-            ).ToString();
-        }</set-body>
+        <base />
+        <set-variable name="staleKey" value="@("stale-" + context.Request.Url.Path + context.Request.Url.QueryString + ":" + context.Variables.GetValueOrDefault<string>("callerId", "shared"))" />
+        <choose>
+            <when condition="@(context.Request.Method == "GET" && context.Response.StatusCode == 200)">
+                <cache-store-value key="@((string)context.Variables["staleKey"])"
+                                   value="@(context.Response.Body.As<string>(preserveContent: true))"
+                                   duration="3600" />
+            </when>
+            <when condition="@(context.Request.Method == "GET" && context.Response.StatusCode >= 500)">
+                <cache-lookup-value key="@((string)context.Variables["staleKey"])" variable-name="stale" />
+                <choose>
+                    <when condition="@(context.Variables.ContainsKey("stale"))">
+                        <return-response>
+                            <set-status code="200" reason="OK" />
+                            <set-header name="Content-Type" exists-action="override">
+                                <value>application/json</value>
+                            </set-header>
+                            <set-header name="X-Served-Stale" exists-action="override">
+                                <value>true</value>
+                            </set-header>
+                            <set-body>@((string)context.Variables["stale"])</set-body>
+                        </return-response>
+                    </when>
+                </choose>
+            </when>
+        </choose>
     </outbound>
+    <on-error>
+        <base />
+    </on-error>
 </policies>
 ```
 
-## Logging and Monitoring
+The [retry policy](https://learn.microsoft.com/azure/api-management/retry-policy) runs its children once before it evaluates `condition`, so `count="2"` means up to three attempts in total. With `interval`, `delta` and `max-interval` all set, the waits grow exponentially up to the cap. Keep the total small. Two quick retries absorb a blip; ten retries just keep a dying backend busy and hold the caller's connection open.
 
-### Structured Logging to Event Hub
+Both branches check for `GET`, so only safe reads are cached or replayed; a failed `POST` or `PUT` passes through with its real status instead of a cached body that pretends the write succeeded. The cache key includes the query string and, when Pattern 1 has run, the caller's `callerId`, so one user's response is never served to another. Even so, stale fallback suits shared, non-personalised data such as catalogues or reference lists. For per-user data the cache fills slowly and the fallback rarely helps.
 
-```xml
-<policies>
-    <inbound>
-        <set-variable name="requestId" value="@(Guid.NewGuid().ToString())" />
-        <set-variable name="requestTime" value="@(DateTime.UtcNow)" />
-    </inbound>
+A few more caveats. The built-in cache isn't available on the Consumption tier, so there you need an external Azure Cache for Redis configured on the instance. `cache-lookup-value` can appear only once per policy section, which is why the lookup sits inside the single `>= 500` branch. And a stale `200` hides an outage from clients, so the `X-Served-Stale` header and your monitoring need to tell the truth even if the response body doesn't. Copy the fallback lookup into `on-error` as well if you want timeouts to fall back too.
 
-    <outbound>
-        <log-to-eventhub logger-id="api-logger">@{
-            var requestTime = (DateTime)context.Variables["requestTime"];
-            var duration = (DateTime.UtcNow - requestTime).TotalMilliseconds;
+## Debugging when "the policy isn't firing"
 
-            return new JObject(
-                new JProperty("timestamp", DateTime.UtcNow.ToString("o")),
-                new JProperty("requestId", context.Variables["requestId"]),
-                new JProperty("api", context.Api.Name),
-                new JProperty("operation", context.Operation.Name),
-                new JProperty("method", context.Request.Method),
-                new JProperty("url", context.Request.Url.ToString()),
-                new JProperty("statusCode", context.Response.StatusCode),
-                new JProperty("durationMs", duration),
-                new JProperty("subscriptionId", context.Subscription?.Id ?? "anonymous"),
-                new JProperty("clientIp", context.Request.IpAddress),
-                new JProperty("userAgent", context.Request.Headers.GetValueOrDefault("User-Agent", ""))
-            ).ToString();
-        }</log-to-eventhub>
-    </outbound>
-</policies>
-```
+Nearly every "it's not working" turns out to be scope, order, or a missing `<base />`. The fastest way to find out is a request trace. Send `Ocp-Apim-Trace: true` with a subscription key that has tracing allowed, then fetch the trace from the URL in the `Ocp-Apim-Trace-Location` response header. The test console in the Azure portal does this for you on the **Trace** tab. The trace shows each policy step that ran, which scope it came from, the expression results, and how long each step took. Use **Calculate effective policy** in the portal to see the merged XML. Turn tracing off for subscriptions you hand to external consumers, because traces expose your policy internals and backend URLs.
 
-## Best Practices
+For things that aren't errors, such as "why did this caller get throttled", log the counter key and the caller to Application Insights or Event Hubs rather than adding temporary headers to responses.
 
-1. **Use Policy Fragments**: Extract reusable policies into fragments
-2. **Test Incrementally**: Use the APIM test console during development
-3. **Monitor Performance**: Policy execution adds latency; measure impact
-4. **Handle Errors**: Always implement on-error policies
-5. **Version Policies**: Store policies in source control
-6. **Use Named Values**: Externalize configuration for different environments
+## Where I'd draw the line
 
-Azure API Management policies provide a powerful declarative way to implement cross-cutting concerns. Mastering policies enables you to build robust, secure, and performant API gateways without modifying backend services.
+Policies are the right place for cross-cutting concerns that are the same for every caller: token validation, limits keyed on validated identity, secrets injection, and simple resilience. They're the wrong place for business rules, multi-step workflows, or anything you'd want a unit test for. If a policy expression is long enough to need comments, it belongs in code behind the gateway.
+
+Keep policies in source control and deploy them with the rest of the API definition; the [APIM DevOps Resource Kit](https://github.com/Azure/azure-api-management-devops-resource-kit)'s extractor is a reasonable starting point for that. Validate claims once and pass them along, throttle on who the caller actually is, run independent backend calls inside `wait`, and only retry requests that are safe to repeat. Those four habits fix most of the production problems I see with APIM.
