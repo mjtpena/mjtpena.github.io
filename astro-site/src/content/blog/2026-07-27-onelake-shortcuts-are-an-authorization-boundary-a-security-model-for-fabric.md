@@ -1,37 +1,24 @@
 ---
-title: "OneLake Shortcuts Are an Authorization Boundary, Not a Storage Convenience — A Security Model for Microsoft Fabric"
+title: "Whose Identity Reaches the Target? OneLake Shortcut Security"
 author: Michael John Peña
 draft: false
 date: 2026-07-27
-description: "A shortcut splices two independently governed permission domains together. Treating it as an access-control and identity problem: two-layer permissions, pass-through vs delegated auth, the Direct Lake / SQL identity-passthrough exception, and where enforcement silently changes hands."
+description: "How identity flows through OneLake shortcuts: passthrough vs delegated, SQL endpoint access modes, the Direct Lake over SQL exception, and lost policy."
 tags:
   - Microsoft Fabric
   - OneLake
-  - Data Security
-  - Data Architecture
+  - Security
   - Direct Lake
-  - Entra ID
+  - Governance
 ---
 
-OneLake shortcuts look like a storage convenience — a pointer that makes data in one location appear in another without copying. That framing is wrong for anyone responsible for access control. A shortcut is a federated identity and authorization construct: it splices two independently governed permission domains together and forces you to reason about *which identity reaches the target*, *which security model enforces the target*, and *where the two disagree*.
+Most conversations about OneLake shortcuts are about storage: no copies, less pipeline code. For anyone accountable for access control, that framing misses the point. A shortcut joins two separately governed permission domains, and every read through it answers a question nobody wrote down: *whose identity reaches the target, and which security model judges it?* Get that wrong and row-level security you carefully defined at the source is either bypassed or blocks the report everyone depends on.
 
-This article treats shortcuts as an identity-and-authorization boundary, traces how identity flows across it, and maps where enforcement silently changes hands between OneLake security, SQL security, KQL RBAC, and semantic-model security. It assumes you already know OneLake, lakehouses, the SQL analytics endpoint, Direct Lake, and Entra identities.
+I've covered the operational side before: [treating shortcuts as dependencies you inventory](/blog/2026-04-06-onelake-shortcuts-in-practice-why-governance-has-to-be-designed-before-scale/) and [handing features to AI teams without over-sharing](/blog/2026-04-17-onelake-shortcuts-in-practice-balancing-speed-and-access-boundaries/). This post is the security model underneath both, updated for where Fabric stands at the end of July 2026. [Microsoft said at FabCon 2026](https://blog.fabric.microsoft.com/en-us/blog/fabcon-and-sqlcon-2026-whats-new-in-microsoft-onelake/) in March that OneLake security would reach general availability within weeks. It went GA in April, with the automatic rollout to supported items finishing by the end of May, and delegated OneLake-to-OneLake shortcuts are now in preview.
 
-### What you'll learn
+## Two paths, most restrictive wins
 
-- Why every shortcut is evaluated at *two* permission layers, and how most-restrictive-wins actually resolves
-- How identity flows to the target under pass-through vs delegated authentication
-- The Direct Lake over SQL / T-SQL exception where the caller's identity is *not* passed through — verified against current docs
-- Which engine enforces which security model, as a data-location → model table
-- The concrete failure modes, and the blast radius of each
-
-## 1. The two-layer permission model
-
-Every shortcut has two paths. The **shortcut path** is where the shortcut appears (the consumer-side lakehouse); the **target path** is what it points to. Authorization is evaluated at both, and OneLake applies the most restrictive of the two:
-
-> A combination of the permissions in the shortcut path and the target path governs the permissions for shortcuts. When a user accesses a shortcut, the most restrictive permission of the two locations is applied.
-
-That intersection cuts both ways. A user with read+write in the consumer lakehouse but only read at the target cannot write to the target; a user with only read at the shortcut path but read+write at the target also cannot write ([Secure and manage OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security#accessing-shortcuts)). Neither path can grant more than it holds, and neither can rescue a deficiency in the other.
+Every shortcut has a **shortcut path** (where it appears, usually the consumer's lakehouse) and a **target path** (what it points to). OneLake evaluates both and applies the more restrictive result. A user with read and write in the consumer lakehouse but only read at the target can't write through the shortcut; a user with read-only on the consumer side can't write either, even with full rights at the target ([Secure and manage OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security)).
 
 <div class="code-title">most-restrictive-wins · conceptual</div>
 
@@ -43,8 +30,6 @@ effective(user, shortcut) = min(
 # write requires ReadWrite on BOTH sides;
 # a Read-only target caps the result at Read, whatever the shortcut path grants.
 ```
-
-The permission required is not uniform across operations. Note the asymmetry: create and delete accept item Write on the shortcut side, delete needs nothing at the target, but writing *through* a shortcut demands a ReadWrite-equivalent on **both** sides.
 
 <div style="overflow-x:auto;margin:1.75rem 0;border:1px solid #27272a;border-radius:12px">
 <table style="width:100%;border-collapse:collapse;min-width:680px;font-size:0.9rem">
@@ -61,7 +46,7 @@ The permission required is not uniform across operations. Note the asymmetry: cr
 <tr>
 <td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600;white-space:nowrap">Create shortcut</td>
 <td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22;font-family:'JetBrains Mono',monospace;font-size:0.78rem">Item Write <span style="color:#71717a">or</span> OneLake security ReadWrite</td>
-<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22;font-family:'JetBrains Mono',monospace;font-size:0.78rem">OneLake security Read</td>
+<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22;font-family:'JetBrains Mono',monospace;font-size:0.78rem">OneLake security Read <span style="color:#71717a">(ReadAll for items without OneLake security)</span></td>
 <td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Internal: caller needs Read at the target. External (S3/ADLS): target read is delegated via a cloud connection — only a user with permission on the connection can bind it.</td>
 </tr>
 <tr>
@@ -86,32 +71,26 @@ The permission required is not uniform across operations. Note the asymmetry: cr
 </table>
 </div>
 
-Matrix source: [Secure and manage OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security#accessing-shortcuts); cloud-connection binding: [OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts#how-shortcuts-use-cloud-connections). A second, more granular table on the same page frames the shortcut-path requirement for OneLake-security-managed operations as `Fabric Read and OneLake security ReadWrite` (Create/Update/Delete) or `Fabric Read and OneLake security Read` for listing shortcuts. When you cite exact permission strings, distinguish the two tables — they describe the same operations at different granularity.
+Two details matter more than they look. Deleting the shortcut never touches the target, but deleting a *folder inside* the shortcut deletes it at the target if you have write permission there, including in an external ADLS or S3 account.
 
-One escape hatch: workspace Admin, Member, and Contributor roles read all shortcut data regardless of OneLake data-access roles — but they still need access on both the shortcut path and the target path. OneLake data-access roles only bind Viewers and item Read-permission users ([OneLake security](https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security)).
+The second detail is about who the roles bind. If your restricted consumers are Contributors in the producer workspace, OneLake roles won't contain them. The roles bind Viewers and people the item was shared with; Admins, Members and Contributors read through Spark and direct OneLake access unfiltered. The main exception is a SQL analytics endpoint in user identity mode, which applies OneLake RLS to every caller, and even unfiltered, those roles still need access on both the shortcut and target paths. Restricted readers belong in the Viewer role or on item sharing.
 
-## 2. Authentication models: pass-through vs delegated
+## Passthrough and delegated: the identity decision
 
-Shortcuts use two authentication models, and which one applies depends on shortcut type. Internal OneLake-to-OneLake shortcuts default to pass-through and may opt into delegated; external (multicloud) shortcuts are delegated only ([Secure and manage OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security#shortcut-authentication-models)).
+Shortcuts authenticate one of two ways, and the type of shortcut decides which options you have. Same-tenant OneLake-to-OneLake shortcuts default to passthrough and can now opt into delegated (preview). Cross-tenant OneLake shortcuts (also preview) are always delegated, through a connection identity in the producer's tenant. External shortcuts to ADLS, S3, GCS and the rest are always delegated too, through the cloud connection's credential.
 
-### Pass-through
+**Passthrough** carries the caller's Entra identity to the target. Each consumer is evaluated against the source's rules, and there's no credential to store or rotate. The cost is that the producer must grant every consumer, or every consumer group, read at the target.
 
-The shortcut carries the *calling user's* Entra identity to the target:
+**Delegated** reaches the target with an intermediate credential: an organisational account or service principal on a connection, or a key for some external sources. The [Delegated OneLake Shortcuts preview](https://community.fabric.microsoft.com/t5/Fabric-Updates-Blog/Simplifying-secure-data-access-with-Delegated-OneLake-Shortcuts/ba-p/5254632) brings this to internal shortcuts. The caller sees the intersection of their own OneLake security on the consumer side and whatever the delegated identity can see at the producer. The security rules split by side:
 
-> When a user accesses data from another OneLake location through a shortcut, OneLake uses the identity of the calling user to authorize access to the data. This user must have permissions in the target location to read the data.
+- Column-level security works on both the producer and consumer side.
+- Row-level security can only be set on the producer side.
+- If the producer has RLS, each consumer can sit in only one CLS role on the consumer side.
 
-Each consumer is evaluated individually against the target. The producer keeps full control and never replicates its access model ([OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts#internal-onelake-shortcuts)). This is the correct model when you want the source system to remain the single source of authorization truth.
-
-### Delegated
-
-The shortcut reaches the target using an intermediate credential "such as another user's identity, a service principal, or an account key" instead of the caller's ([Secure and manage OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security#delegated-authentication)). External shortcuts to S3 or GCS always work this way. For internal shortcuts, delegated must be chosen explicitly at creation time, and switching an existing shortcut between the two modes requires deleting and recreating it — there is no in-place toggle ([Create a OneLake shortcut](https://learn.microsoft.com/en-us/fabric/onelake/shortcuts/create-onelake-shortcut)).
-
-Which identities can back a delegated internal shortcut? The security page names *another user's identity, a service principal, or an account key*. The Delegated OneLake Shortcuts announcement (a Preview feature) states the configurable connection identity "can be an organizational account, a service principal, or a workspace identity" ([Fabric Community](https://community.fabric.microsoft.com/t5/Fabric-Updates-Blog/Simplifying-secure-data-access-with-Delegated-OneLake-Shortcuts/ba-p/5254632)). The current Create-shortcut UI walkthrough exposes only Organizational account and Service principal as authentication kinds — treat workspace identity as a rolling/preview addition to verify against the live product. External S3/ADLS connections additionally support credentials such as account keys, with SAS and other secret types documented on the per-source connection pages.
-
-The permission consequence is the crux. Under pass-through, **each caller needs their own permission at the target path**. Under delegation, the *configured connection identity* needs target access, not each user; the caller instead sees "the intersection of their security and the security that applies to the delegated identity" ([Delegated OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security#delegated-onelake-shortcuts)). Row-level security is enforceable on the producer side of a delegated shortcut but cannot be set on the consumer side; column-level security is supported on both sides.
+Two constraints shape how I'd use it. You choose the model when you create the shortcut, and switching later means deleting and recreating it. And the connection identity becomes a standing grant whose blast radius is every consumer of every shortcut that uses it.
 
 <figure class="ff">
-<svg class="ff-svg" viewBox="0 0 800 542" role="img" aria-label="Decision flow: a caller passes the shortcut-path gate, then branches into pass-through (caller identity reaches target) or delegated (connection identity reaches target); a Direct Lake over SQL delegated-mode exception overrides the default.">
+<svg class="ff-svg" viewBox="0 0 800 542" role="img" aria-label="Decision flow: a caller passes the shortcut-path gate, then branches into pass-through (caller identity reaches target) or delegated (connection identity reaches target); a Direct Lake over SQL or delegated-mode T-SQL exception overrides the default.">
 <defs><marker id="olN" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah"/></marker></defs>
 <rect x="320" y="16" width="160" height="44" rx="10" class="ff-node"/>
 <text x="400" y="43" text-anchor="middle" class="ff-title">Calling user</text>
@@ -152,38 +131,54 @@ The permission consequence is the crux. Under pass-through, **each caller needs 
 <text x="575" y="414" text-anchor="middle" class="ff-sub">Caller sees</text>
 <text x="575" y="433" text-anchor="middle" class="ff-tok">own ∩ delegated security</text>
 <rect x="60" y="478" width="680" height="52" rx="11" class="ff-node ff-node-dn"/>
-<text x="400" y="500" text-anchor="middle" class="ff-title" style="fill:#f0a49d">Exception — Direct Lake over SQL / T-SQL in Delegated identity mode</text>
+<text x="400" y="500" text-anchor="middle" class="ff-title" style="fill:#f0a49d">Exception — Direct Lake over SQL, or T-SQL in delegated identity mode</text>
 <text x="400" y="518" text-anchor="middle" class="ff-sub">the item owner's identity replaces the caller's; OneLake roles still filter the result</text>
 </svg>
-<figcaption><strong>Figure 1.</strong> Two-layer evaluation and the identity branch. The shortcut-path gate always applies; the authentication model decides whether the caller's identity or a fixed connection identity reaches the target. The delegated-mode query-engine exception (§3) overrides the pass-through default.</figcaption>
+<figcaption><strong>Figure 1.</strong> Two-layer evaluation and the identity branch. The shortcut-path gate always applies; the authentication model decides whether the caller's identity or a fixed connection identity reaches the target. The owner-identity exception for Direct Lake over SQL and delegated-mode T-SQL (next section) overrides the pass-through default.</figcaption>
 </figure>
 
-## 3. Identity-passthrough exceptions
+## The exception that breaks the mental model
 
-Pass-through is the default rule, not a universal one. Certain query engines substitute a different identity before reaching the target, and this is where a naive mental model breaks.
-
-The documented exception:
-
-> When users access shortcuts through Power BI semantic models using Direct Lake over SQL or T-SQL engines in Delegated identity mode, the calling user's identity isn't passed through to the shortcut target. Instead, the calling item's owner's identity is passed.
-
-The concrete consequences: the target is accessed with the item owner's permissions (not the end user's), OneLake security roles still filter what the end user reads, and "any permissions configured directly at the shortcut target path for the end user are bypassed" ([Secure and manage OneLake shortcuts](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security#accessing-shortcuts)).
+Passthrough is the default rule, not a universal one. The shortcut security page buries this in a footnote: when shortcut data is read through **Power BI semantic models using Direct Lake over SQL**, or through **T-SQL engines in delegated identity mode**, the caller's identity is not passed to the target. The engine reads with the **item owner's** identity, then applies OneLake security roles to filter what the caller sees. Any permission set for the end user directly at the target path is bypassed.
 
 <div class="cl cl-warn">
 <div class="cl-tag">Watch</div>
 <div class="cl-body">
 
-In **Delegated identity mode** the querying user's *own* permissions on the shortcut target are never consulted — the item owner's identity reaches the data and only OneLake security roles filter the result. Use **User identity mode**, or **Direct Lake over OneLake**, when callers must be evaluated at the target.
+Through **Direct Lake over SQL**, and through T-SQL in **delegated identity mode**, the querying user's *own* permissions on the shortcut target are never consulted: the item owner's identity reaches the data and only OneLake security roles filter the result. Use **user identity mode** for T-SQL, and **Direct Lake on OneLake** for semantic models, when callers must be evaluated at the target.
 
 </div>
 </div>
 
-Be precise about the trigger. This is **not** a blanket property of "Direct Lake over SQL." It is conditional on the SQL analytics endpoint's *access mode*. In **User identity mode**, the endpoint passes the signed-in user's Entra identity to OneLake and read access is governed by OneLake rules. In **Delegated identity mode**, the endpoint "connects to OneLake using the identity of the workspace or item owner" — the item account, not the signed-in user ([OneLake security for the SQL analytics endpoint](https://learn.microsoft.com/en-us/fabric/onelake/security/sql-analytics-endpoint-onelake-security)). Newly created items with a SQL endpoint start in User identity mode by default, and Admins or Members can change the mode at any time in the endpoint settings. Because the mode is a per-endpoint setting an administrator can flip — and older endpoints may predate that default — treat the current mode as something to verify, not assume.
+Those are two separate triggers, and it's worth being exact about each.
 
-The security implication is a delegation of the item owner's reach to every downstream caller. If the owner has broad access at the target and the endpoint is in Delegated mode, the querying user's *own* permissions on the target are never consulted — only OneLake security roles filter the result. There is a matching failure in the other direction: in Delegated mode, shortcuts whose source carries OneLake RLS/CLS are blocked entirely through the SQL endpoint rather than silently over-exposed. Microsoft's remedies are explicit: use Direct Lake over OneLake mode, or set the endpoint to User identity mode. Direct Lake over OneLake reads OneLake directly and preserves the caller's identity at the target; Direct Lake over SQL inherits whatever mode the endpoint is set to.
+### The SQL analytics endpoint access mode
 
-## 4. Security-model boundaries
+Every SQL analytics endpoint runs in one of two modes ([OneLake security for SQL analytics endpoints](https://learn.microsoft.com/en-us/fabric/onelake/security/sql-analytics-endpoint-onelake-security)):
 
-OneLake security "is the data plane security model for data in OneLake" and enforces consistently across compute engines ([OneLake security](https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security)) — but it is not the enforcing model for every location in Fabric. As James Serra puts it, "OneLake security is not the native security model for every data location in Fabric. Some data stores use SQL security, some use KQL/Kusto RBAC, some use Power BI semantic model security" ([jamesserra.com](https://www.jamesserra.com/archive/2026/07/understanding-microsoft-fabric-onelake-security/)). Which engine enforces which model is the single most consequential thing to get right, because a shortcut can move data across an enforcement boundary without moving the policy.
+| Aspect | User identity mode | Delegated identity mode |
+|---|---|---|
+| Identity used against OneLake | The signed-in user | The workspace or item owner |
+| Table access governed by | OneLake security roles | SQL `GRANT`/`REVOKE` only |
+| RLS and CLS defined in | OneLake security roles | SQL security policies and column grants |
+| Dynamic data masking | Not supported | Supported |
+| Shortcuts to tables with OneLake RLS or CLS | Work, evaluated as the caller on both sides | Blocked |
+
+New SQL analytics endpoints start in delegated identity mode, and an Admin or Member has to switch each one to user identity mode once before OneLake security roles apply. The switch briefly takes every SQL analytics endpoint in the workspace offline and cancels running queries. In user identity mode, table-level `GRANT`/`REVOKE` is ignored and SQL RLS and CLS on tables no longer govern access. User identity mode is an action you take on every endpoint, not a default you inherit.
+
+Delegated mode fails closed for shortcuts: if the source table has OneLake RLS or CLS, the endpoint blocks the shortcut rather than serving unfiltered rows through the owner's identity. For source tables *without* OneLake rules, though, the owner's reach is what every SQL user inherits, governed only by whatever SQL grants exist in the consumer endpoint.
+
+### Direct Lake over SQL
+
+The owner-identity behaviour here isn't a side effect of the endpoint's mode. The [Direct Lake security integration](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-security-integration) docs describe it directly: Direct Lake first checks that the effective identity (the user under SSO, or a fixed identity on the connection) can access the table through the SQL endpoint, then, for internal shortcuts, reads the Delta table through the shortcut with the **data source owner's** identity. For external shortcuts the owner also needs Use permission on the cloud connection. So the owner's access at the target is the ceiling for every report reader.
+
+There's a second cost. Once the endpoint is in user identity mode, OneLake security roles become SQL access rules and Direct Lake on SQL falls back to DirectQuery for every query, so each read goes through the SQL endpoint and you lose Direct Lake performance. Any query touching a table with SQL endpoint RLS, or a view, falls back too. That is a second reason to move semantic models to Direct Lake on OneLake.
+
+Direct Lake on OneLake behaves differently. It skips the SQL endpoint, resolves OneLake security roles for the effective identity, and for an internal shortcut requires that identity to have read at the target. If you need caller identity honoured at the shortcut target in a semantic model, Direct Lake on OneLake (GA since FabCon 2026 in March) is the option that does it.
+
+## Which engine enforces what
+
+OneLake security is the data-plane model for lakehouses and mirrored items, enforced across Spark, the SQL endpoint in user identity mode, and Direct Lake on OneLake. It isn't the native model everywhere, and shortcuts move data across those borders without moving the policy.
 
 <div style="overflow-x:auto;margin:1.75rem 0;border:1px solid #27272a;border-radius:12px">
 <table style="width:100%;border-collapse:collapse;min-width:680px;font-size:0.9rem">
@@ -197,46 +192,61 @@ OneLake security "is the data plane security model for data in OneLake" and enfo
 </thead>
 <tbody>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/lakehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Lakehouse Delta tables via Spark / OneLake API</td>
-<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#00B7C3">OneLake security</strong> (table/folder, RLS, CLS)</td>
-<td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Enforced consistently across engines; roles bind Viewers / Read-permission users, not Admin/Member/Contributor.</td>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/lakehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Lakehouse via Spark</td>
+<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#00B7C3">OneLake security</strong> roles, RLS/CLS filtered</td>
+<td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Roles bind Viewers / Read-permission users, not Admin/Member/Contributor.</td>
 </tr>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/lakehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Lakehouse via SQL analytics endpoint</td>
-<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#00B7C3">OneLake security</strong> (User identity mode) <strong style="color:#fff">or</strong> <strong style="color:#0aa5d6">SQL permissions</strong> (Delegated identity mode)</td>
-<td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">User mode enforces OneLake roles natively and ignores table GRANT/REVOKE; Delegated mode governs by SQL alone and does <em>not</em> carry OneLake roles for table data.</td>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/lakehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Direct OneLake API or file access</td>
+<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#00B7C3">OneLake security</strong> roles</td>
+<td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Tables with RLS/CLS are <em>blocked</em> rather than served unfiltered.</td>
 </tr>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/data_warehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Warehouse (native tables)</td>
-<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#0aa5d6">SQL security</strong> (GRANT/DENY, OLS, RLS, CLS, DDM)</td>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/lakehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Lakehouse via SQL endpoint, user identity mode</td>
+<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#00B7C3">OneLake security</strong> roles</td>
+<td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Enforces OneLake roles natively and ignores table GRANT/REVOKE.</td>
+</tr>
+<tr>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/lakehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Lakehouse via SQL endpoint, delegated identity mode</td>
+<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#0aa5d6">SQL permissions</strong> only</td>
+<td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Governs by SQL alone and does <em>not</em> carry OneLake roles for table data; shortcuts to tables with OneLake RLS or CLS are blocked.</td>
+</tr>
+<tr>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/data_warehouse_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Warehouse</td>
+<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#0aa5d6">SQL security</strong>, within the SQL engine only</td>
 <td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Enforced only within the SQL/TDS execution context; <strong style="color:#f0a49d">not</strong> translated into OneLake policies. Warehouse is not among the items that support OneLake security roles.</td>
 </tr>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/event_house_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>KQL / Eventhouse database</td>
-<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#744EC2">KQL / Kusto RBAC</strong> (hybrid Fabric + Kusto roles)</td>
-<td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Union of Fabric-granted and Kusto-command-granted roles, inherited top-down; roles include Admin, User, Viewer, Unrestrictedviewer, Ingestor, Monitor.</td>
+<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/semantic_model_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Direct Lake on SQL</td>
+<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#0aa5d6">SQL endpoint permissions</strong>, then owner identity at shortcut targets</td>
+<td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Internal shortcut targets are read with the data source owner's identity whatever the endpoint mode; falls back to DirectQuery under SQL endpoint RLS, views, or user identity mode.</td>
 </tr>
 <tr>
-<td style="padding:12px 16px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/semantic_model_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Power BI semantic model (Import)</td>
-<td style="padding:12px 16px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><strong style="color:#744EC2">Semantic-model security</strong> (DAX RLS/OLS)</td>
-<td style="padding:12px 16px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Data is imported into the model; DAX RLS applies to Viewers only, not Admin/Member/Contributor.</td>
-</tr>
-<tr>
-<td style="padding:12px 16px;color:#e4e4e7;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/semantic_model_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Direct Lake</td>
-<td style="padding:12px 16px;color:#d4d4d8"><strong style="color:#00B7C3">OneLake security</strong> (over OneLake) <strong style="color:#fff">or</strong> <strong style="color:#0aa5d6">SQL-endpoint model</strong> (over SQL) + model-level DAX</td>
-<td style="padding:12px 16px;color:#a1a1aa">Direct Lake on OneLake checks permissions via OneLake APIs; Direct Lake on SQL checks via the SQL endpoint and can fall back to DirectQuery under RLS, whereas Direct Lake on OneLake errors instead of falling back.</td>
+<td style="padding:12px 16px;color:#e4e4e7;font-family:'Space Grotesk',sans-serif;font-weight:600"><img src="/icons/fabric/semantic_model_48_item.svg" alt="" width="18" height="18" style="vertical-align:-4px;margin-right:8px"/>Direct Lake on OneLake</td>
+<td style="padding:12px 16px;color:#d4d4d8"><strong style="color:#00B7C3">OneLake security</strong> roles, then the model's own roles</td>
+<td style="padding:12px 16px;color:#a1a1aa">Resolves OneLake roles for the effective identity, which needs Read at internal shortcut targets; errors instead of falling back to DirectQuery.</td>
 </tr>
 </tbody>
 </table>
 </div>
 
-Sources: OneLake security model ([Learn](https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security)); SQL endpoint modes and Warehouse non-translation ([Learn](https://learn.microsoft.com/en-us/fabric/onelake/security/sql-analytics-endpoint-onelake-security)); Kusto RBAC ([Learn](https://learn.microsoft.com/en-us/kusto/access-control/role-based-access-control?view=microsoft-fabric)); Power BI RLS ([Learn](https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security)); Direct Lake ([Learn](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-security-integration)); location → model mapping ([jamesserra.com](https://www.jamesserra.com/archive/2026/07/understanding-microsoft-fabric-onelake-security/)).
+Two rules fall out of that table.
 
-Two cross-cutting rules matter. First, rules defined only inside a Direct Lake semantic model apply only within that model's scope — other engines reading the same data do not honor them, so a user with OneLake access can still retrieve data the model would restrict. Second, engines that cannot enforce OneLake RLS/CLS are *blocked* from that data rather than served unfiltered rows ([OneLake security integrations](https://learn.microsoft.com/en-us/fabric/onelake/security/onelake-security-integrations-overview)). Microsoft's guidance is to enforce data-access rules in OneLake security, since it is the only layer that applies uniformly across engines ([Direct Lake security integration](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-security-integration)).
+First, warehouse security doesn't travel. Warehouse RLS, CLS and object permissions live in the SQL engine's execution context, and nothing translates them into OneLake roles. A shortcut reads the Delta files underneath, so I assume a reader through a shortcut sees the full table unless OneLake itself restricts it. Secure that data in a lakehouse with OneLake security, or keep consumers on the warehouse's SQL surface. Lakehouses, mirrored databases and Azure Databricks mirrored catalogs support OneLake security roles; Eventhouse support (RLS only) arrived in preview at FabCon 2026; Warehouse does not yet.
 
-## 5. Architecture patterns
+Second, rules defined only inside a semantic model stay inside that model. Anyone with OneLake access can read the same data through Spark and skip them. Engines that can't enforce OneLake RLS or CLS are blocked rather than handed unfiltered rows. That's the right default, but it shows up as a failing third-party query.
 
-The durable pattern is a **domain-owned curated lakehouse** as producer, with **shortcut-only consumer workspaces** that hold no copy of the data and no direct grant on the source.
+## Where it goes wrong
+
+- **Same user, different rows.** A table enforces OneLake roles in Spark, but a consumer endpoint left in delegated mode applies only SQL grants. The user blocked in a notebook sees everything in SSMS. Standardise on user identity mode unless you need SQL-only features like dynamic data masking, and accept that any Direct Lake on SQL models over that endpoint will then run as DirectQuery.
+- **An over-privileged owner behind Direct Lake over SQL.** The lakehouse owner is a platform admin with broad reach, so every Direct Lake over SQL report inherits that reach at shortcut targets, filtered only by OneLake roles that may not exist. Own items with scoped identities, or use Direct Lake on OneLake.
+- **External targets with coarse IAM.** A delegated connection to an ADLS account is only as narrow as that account's own permissions, and a delete through the shortcut deletes in the external account. Scope the connection credential to the exact container or prefix.
+- **Standing connection credentials.** Delegated shortcuts decouple credential lifetime from access reviews. Track connections as first-class assets with owners and rotation dates.
+- **Group mismatch across the boundary.** Until late July 2026 the docs required the exact group named in the producer role to hold Fabric Read on the consumer, because nested membership wasn't resolved, and queries failed closed with an access error. The SQL endpoint page now says effective group membership is evaluated, but the troubleshooting guide still describes the literal-match rule, so I'd still grant the same groups on both sides and test with a nested member before relying on it.
+
+## How I'd decide
+
+My default for same-tenant consumers is passthrough, with OneLake security roles on the producer lakehouse assigned to Entra groups, SQL endpoints pinned to user identity mode, and semantic models on Direct Lake on OneLake, because user identity mode pushes Direct Lake on SQL models into DirectQuery anyway. The safest discipline is granting Fabric Read on each consumer item to the exact groups named in the producer's roles, not to their members or parent groups. That keeps one authorisation system of record and evaluates every reader as themselves.
 
 <figure class="ff">
 <svg class="ff-svg" viewBox="0 0 900 388" role="img" aria-label="A domain-owned producer workspace containing a curated lakehouse governed by OneLake security fans out shortcuts across an authorization boundary to shortcut-only consumer workspaces A, B, and N, each holding no copy and no direct grant.">
@@ -284,51 +294,6 @@ The durable pattern is a **domain-owned curated lakehouse** as producer, with **
 <figcaption><strong>Figure 2.</strong> Producer / consumer fan-out. Policy lives once, at the producer, in OneLake security; consumers hold only shortcuts — no replicated data and no independent grant to keep in sync. Every read crosses the authorization boundary, and whether it carries the caller's identity or a connection identity is exactly the pass-through vs delegated choice below.</figcaption>
 </figure>
 
-### When pass-through is correct
+I'd reach for delegated shortcuts when the grant count is the real problem: a curated dataset served to many teams who should manage their own readers, or a cross-tenant source where passthrough isn't an option. In those cases, scope the connection identity to exactly what the shortcut exposes, put RLS on the producer side because the consumer side can't hold it, and remember delegated OneLake shortcuts, same-tenant and cross-tenant, are still in preview, so I'd pilot it before it fronts anything sensitive.
 
-The producer wants each consumer evaluated individually against source authorization, the consumer population is bounded, and every consumer is a resolvable Entra principal in the producer's tenant. Pass-through keeps the source as the authorization system of record and requires no credential to store or rotate.
-
-### When delegated is correct
-
-Fan-out to many consumers, where "when a curated dataset must be served to thousands of downstream users across multiple teams, the data owner becomes responsible for granting and maintaining every individual user's permission on the source" ([Fabric Community](https://community.fabric.microsoft.com/t5/Fabric-Updates-Blog/Simplifying-secure-data-access-with-Delegated-OneLake-Shortcuts/ba-p/5254632)). Delegation collapses that N-grant problem to a single connection identity, with the producer defining RLS/CLS at the source and consumers seeing the intersection of their own security and the delegated identity's. Cross-tenant and multicloud targets force delegation regardless — external shortcuts are delegated-only, and the binding user must hold permission on the cloud connection.
-
-The cross-tenant caution: with delegation you must treat the connection identity as a shared, standing credential whose blast radius is every consumer of the shortcut. Scope it to exactly the source data the shortcut exposes, and enforce differentiation through producer-side OneLake RLS/CLS rather than assuming the delegated identity is narrow.
-
-## 6. Where this breaks
-
-**Source authorization not aligned with OneLake permissions.** A shortcut to a Warehouse table inherits none of the Warehouse's SQL security. "Warehouse SQL RLS/CLS/OLS is enforced in the Warehouse SQL execution context and is not automatically translated into OneLake security policies" ([jamesserra.com](https://www.jamesserra.com/archive/2026/07/understanding-microsoft-fabric-onelake-security/)) — reconfirmed in the Learn docs: when warehouse data is reached through OneLake shortcuts, "these SQL security semantics are not translated into OneLake security policies." *Blast radius:* RLS that hid rows in the warehouse silently disappears for anyone reading the shortcut through OneLake or Spark.
-
-**Inconsistent enforcement across access paths.** The same lakehouse table can enforce OneLake roles through Spark and Direct Lake over OneLake, yet enforce a completely different SQL model through a SQL endpoint in Delegated mode — where "any security rules defined in OneLake … will not apply when the same data is queried through the SQL analytics endpoint" ([Learn](https://learn.microsoft.com/en-us/fabric/onelake/security/sql-analytics-endpoint-onelake-security)). A user blocked in one tool sees everything in another. Model-only DAX rules have the same gap: they do not extend beyond the model. *Blast radius:* the same identity gets different row/column visibility depending on which engine it happens to use.
-
-**Shortcuts to unmanaged external targets.** An external shortcut may require "source-system authorization plus OneLake security on the shortcut path" ([jamesserra.com](https://www.jamesserra.com/archive/2026/07/understanding-microsoft-fabric-onelake-security/)). If the S3 or ADLS bucket's own IAM is coarse, the delegated connection inherits that coarseness — and a write through the shortcut can delete target directories in the external account. *Blast radius:* Fabric-side permissions become a facade over whatever the external ACL actually allows.
-
-**Delegated identity over-privilege.** The Direct-Lake-over-SQL-in-Delegated-mode exception means the item owner's identity, not the caller's, reaches the target, bypassing any target-path grant set for the end user. *Blast radius:* a broadly privileged owner delegates that breadth to every report consumer, filtered only by whatever OneLake roles happen to exist.
-
-**Stale connection credentials.** A delegated shortcut is only as trustworthy as its stored connection identity. Because you cannot toggle a shortcut's auth model in place — it must be deleted and recreated — an over-scoped or unrotated service principal or account key persists as a standing grant behind every consumer until someone rebuilds the shortcut. *Blast radius:* credential lifetime is decoupled from access reviews; nobody notices the standing grant.
-
-## Design checklist
-
-- **Enforce at the OneLake layer** for lakehouse data — it is the only model that applies across every engine; treat model-only DAX rules as scoping, not security.
-- **Pin the SQL analytics endpoint's access mode deliberately.** Use User identity mode wherever callers must be evaluated at the shortcut target; know that Delegated mode substitutes the item owner's identity.
-- **Prefer Direct Lake over OneLake** when caller-identity passthrough at shortcut targets is required; Direct Lake over SQL inherits the endpoint's mode.
-- **Choose pass-through for bounded, same-tenant consumers**; choose delegated for fan-out, and expect it as mandatory for external / cross-tenant targets.
-- **Scope every delegated connection identity to least privilege** and enforce differentiation with producer-side RLS/CLS; audit that no consumer inherits more than intended.
-- **Never assume Warehouse or KQL security carries into OneLake** — a shortcut crosses the enforcement boundary and drops the source policy.
-- **Verify both paths** on every shortcut — shortcut path and target path — remembering most-restrictive-wins and that Admin/Member/Contributor bypass OneLake data-access roles.
-- **Track connection-credential lifecycle** — rotate secrets, and remember that changing a shortcut's auth model means delete-and-recreate.
-- **Treat delegated-shortcut and third-party-engine features as evolving** (both are Preview) and re-verify behavior against the live product before relying on it.
-
-## References
-
-Verified against Microsoft Learn documentation current as of July 2026 (Secure and manage OneLake shortcuts, last updated 2026-07-23), the Fabric Community announcement of Delegated OneLake Shortcuts (Preview), and James Serra's overview. Preview features and rolling capabilities should be re-checked against the live product before you rely on them.
-
-1. [Secure and manage OneLake shortcuts — Microsoft Fabric (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcut-security)
-2. [OneLake shortcuts overview — internal shortcuts & cloud connections (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/onelake/onelake-shortcuts)
-3. [OneLake security](https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-security) and [Get started with OneLake security (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/onelake/security/get-started-onelake-security)
-4. [OneLake security for the SQL analytics endpoint — user vs delegated identity mode (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/onelake/security/sql-analytics-endpoint-onelake-security)
-5. [Direct Lake and OneLake security integration (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-security-integration)
-6. [Create a OneLake shortcut — authentication kinds (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/onelake/shortcuts/create-onelake-shortcut)
-7. [Kusto role-based access control (Microsoft Learn)](https://learn.microsoft.com/en-us/kusto/access-control/role-based-access-control?view=microsoft-fabric)
-8. [Row-level security with Power BI semantic models (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security)
-9. [Simplifying secure data access with Delegated OneLake Shortcuts, Preview (Fabric Community)](https://community.fabric.microsoft.com/t5/Fabric-Updates-Blog/Simplifying-secure-data-access-with-Delegated-OneLake-Shortcuts/ba-p/5254632)
-10. [Understanding Microsoft Fabric OneLake Security — James Serra](https://www.jamesserra.com/archive/2026/07/understanding-microsoft-fabric-onelake-security/)
+When not to bother with any of this: one team producing and consuming in the same workspace, with Contributors on both sides. Workspace roles already decide everything there, and OneLake roles would only add sync lag and configuration to maintain. The model above earns its keep the moment the producer and the reader are different people.
