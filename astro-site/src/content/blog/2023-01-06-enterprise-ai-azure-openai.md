@@ -1,426 +1,221 @@
 ---
-title: "Enterprise AI with Azure OpenAI: Security, Compliance, and Governance"
-description: "The question I kept hearing from enterprise clients in January 2023 was some variation of: \"We've seen what ChatGPT can do—how do we get that capability…"
+title: "Locking Down an Azure OpenAI Resource: Network, Identity, Keys, Logs"
+description: "A security baseline for an Azure OpenAI preview resource in January 2023: private endpoints, Azure AD auth, customer-managed keys, logging and policy."
 author: Michael John Peña
 draft: false
 date: 2023-01-06
 tags:
-  - Azure
-  - OpenAI
-  - Enterprise
+  - Azure OpenAI
   - Security
-  - Compliance
+  - Networking
+  - Identity
+  - Governance
 ---
 
-The question I kept hearing from enterprise clients in January 2023 was some variation of: "We've seen what ChatGPT can do—how do we get that capability without putting my confidential data through OpenAI's servers?" Azure OpenAI Service is the answer to that specific question, and it's worth being precise about what the enterprise features actually provide. The data privacy commitment: prompts and completions sent to Azure OpenAI endpoints associated with your Azure subscription are not used by Microsoft or OpenAI to train the underlying models—this is the contractual commitment that distinguishes Azure OpenAI from the consumer ChatGPT API or OpenAI's direct API. The network isolation: Azure OpenAI supports Private Endpoints (deploying the Azure OpenAI resource's endpoint into a customer VNet so that all API traffic stays on private network paths, never traversing the public internet). The compliance posture: Azure OpenAI is covered under Azure's SOC 1/2/3, ISO 27001, HIPAA BAA, and EU Model Clauses compliance certifications—the same compliance framework that makes Azure acceptable for regulated data processing applies to Azure OpenAI.
+The first question I expect in a security review of an Azure OpenAI pilot is some version of "is this just ChatGPT with an Azure logo?" It isn't, but "it's on Azure" doesn't make it secure either. An Azure OpenAI resource is a Cognitive Services account with a public endpoint and two API keys, and that's how it arrives. Whether it meets your organisation's bar depends on what you configure after the resource is created.
 
-## The Enterprise Security Model
+This post is the baseline I'd apply to an Azure OpenAI resource today, in the first week of January 2023, while the service is still a limited-access preview. For the wider picture of where the preview stands and what to sort out before GA, see [my New Year's Day post](/blog/2023-01-01-azure-openai-service-ga-announcement/).
 
-Azure OpenAI Service inherits all of Azure's enterprise security capabilities:
+## What you are actually securing
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Your Azure Subscription                   │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                Virtual Network                        │   │
-│  │  ┌─────────────┐     ┌─────────────────────────┐    │   │
-│  │  │ Your App    │────▶│ Private Endpoint        │    │   │
-│  │  │ Service     │     │ (Azure OpenAI)          │    │   │
-│  │  └─────────────┘     └─────────────────────────┘    │   │
-│  │                              │                        │   │
-│  │                              ▼                        │   │
-│  │                      ┌───────────────┐               │   │
-│  │                      │ Azure OpenAI  │               │   │
-│  │                      │ Service       │               │   │
-│  │                      └───────────────┘               │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-```
+It helps to be precise about the moving parts, because "secure the AI" isn't something you can configure.
 
-## Setting Up Private Endpoints
+- **The resource.** A `Microsoft.CognitiveServices/accounts` resource of kind `OpenAI`, available in East US, South Central US and West Europe. It has an endpoint at `https://<your-resource-name>.openai.azure.com/` and two keys.
+- **Deployments.** Models (GPT-3 and GPT-3.5 series completion models, such as `text-davinci-002` with `text-davinci-003` rolling out, plus Codex and embeddings) deployed under names you choose.
+- **Data the service keeps.** Fine-tuning files and fine-tuned models are stored by the service. Prompts and completions aren't used to train models, but under Microsoft's [data, privacy and security terms for Azure OpenAI](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy) they can be retained for a limited period for abuse monitoring, with authorised Microsoft staff able to review flagged content.
 
-Keep your API calls within Azure's backbone network:
+That last point is the one that matters most to privacy teams and isn't something any network or identity control changes. Read the page with your privacy officer before you argue about private endpoints. If retention for abuse monitoring is a blocker for your data, no amount of VNet design fixes it. What can change it is a separate application: customers with approved low-risk use cases who meet additional Limited Access criteria can apply to modify abuse monitoring and human review, as described on the same [data, privacy and security page](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy). Check whether your use case qualifies before you rule the service out.
 
-```python
-# Terraform configuration for private endpoint
-resource "azurerm_private_endpoint" "openai" {
-  name                = "pe-openai-${var.environment}"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
-  subnet_id           = azurerm_subnet.private.id
+The rest of this post covers what you *can* control: who can reach the endpoint, who can call it, who holds the encryption keys, and what gets logged.
 
-  private_service_connection {
-    name                           = "openai-connection"
-    private_connection_resource_id = azurerm_cognitive_account.openai.id
-    subresource_names              = ["account"]
-    is_manual_connection           = false
-  }
+## Network: private endpoint and public access off
 
-  private_dns_zone_group {
-    name                 = "openai-dns-zone-group"
-    private_dns_zone_ids = [azurerm_private_dns_zone.openai.id]
-  }
-}
-
-resource "azurerm_private_dns_zone" "openai" {
-  name                = "privatelink.openai.azure.com"
-  resource_group_name = azurerm_resource_group.main.name
-}
-
-resource "azurerm_private_dns_zone_virtual_network_link" "openai" {
-  name                  = "openai-vnet-link"
-  resource_group_name   = azurerm_resource_group.main.name
-  private_dns_zone_name = azurerm_private_dns_zone.openai.name
-  virtual_network_id    = azurerm_virtual_network.main.id
-}
-```
-
-## Managed Identity Authentication
-
-Eliminate API keys with managed identity:
-
-```python
-from azure.identity import DefaultAzureCredential, ManagedIdentityCredential
-import openai
-import requests
-
-class SecureOpenAIClient:
-    """Azure OpenAI client using managed identity."""
-
-    def __init__(self, endpoint: str):
-        self.endpoint = endpoint
-        self.api_version = "2022-12-01"
-
-        # Use managed identity in production, DefaultAzureCredential for development
-        if os.getenv("ENVIRONMENT") == "production":
-            self.credential = ManagedIdentityCredential()
-        else:
-            self.credential = DefaultAzureCredential()
-
-    def _get_token(self) -> str:
-        """Get access token for Azure OpenAI."""
-        token = self.credential.get_token("https://cognitiveservices.azure.com/.default")
-        return token.token
-
-    def complete(self, deployment: str, prompt: str, **kwargs) -> str:
-        """Make a completion request using managed identity."""
-        url = f"{self.endpoint}/openai/deployments/{deployment}/completions"
-
-        headers = {
-            "Authorization": f"Bearer {self._get_token()}",
-            "Content-Type": "application/json"
-        }
-
-        params = {"api-version": self.api_version}
-
-        body = {
-            "prompt": prompt,
-            "max_tokens": kwargs.get("max_tokens", 500),
-            "temperature": kwargs.get("temperature", 0.7)
-        }
-
-        response = requests.post(url, headers=headers, params=params, json=body)
-        response.raise_for_status()
-
-        return response.json()["choices"][0]["text"]
-
-# Usage
-client = SecureOpenAIClient("https://my-openai.openai.azure.com")
-result = client.complete("gpt35", "Explain cloud security in one sentence:")
-```
-
-## RBAC for Azure OpenAI
-
-Configure role-based access control:
+Azure OpenAI uses the same networking model as the rest of Cognitive Services: firewall rules, virtual network rules and private endpoints, documented in [Configure Azure Cognitive Services virtual networks](https://learn.microsoft.com/en-us/azure/ai-services/cognitive-services-virtual-networks). My default for anything beyond a sandbox is a private endpoint in a spoke VNet and public network access disabled.
 
 ```bash
-# Assign roles for different team members
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Developers - can use models but not manage them
-az role assignment create \
-    --assignee "developer@contoso.com" \
-    --role "Cognitive Services OpenAI User" \
-    --scope "/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.CognitiveServices/accounts/{account}"
+RG="rg-openai-pilot"
+ACCOUNT="<your-resource-name>"
+VNET="<your-vnet-name>"
+SUBNET="<your-private-endpoint-subnet>"
 
-# Data Scientists - can deploy and manage models
-az role assignment create \
-    --assignee "datascience-team@contoso.com" \
-    --role "Cognitive Services OpenAI Contributor" \
-    --scope "/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.CognitiveServices/accounts/{account}"
+ACCOUNT_ID=$(az cognitiveservices account show \
+  --name "$ACCOUNT" --resource-group "$RG" --query id -o tsv)
 
-# Security team - read-only access for auditing
-az role assignment create \
-    --assignee "security-team@contoso.com" \
-    --role "Reader" \
-    --scope "/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.CognitiveServices/accounts/{account}"
+# Private endpoint for the account ("account" is the only sub-resource)
+az network private-endpoint create \
+  --name "pe-${ACCOUNT}" \
+  --resource-group "$RG" \
+  --vnet-name "$VNET" \
+  --subnet "$SUBNET" \
+  --private-connection-resource-id "$ACCOUNT_ID" \
+  --group-id account \
+  --connection-name "pec-${ACCOUNT}"
+
+# Private DNS zone for the Azure OpenAI hostname, linked to the VNet
+az network private-dns zone create \
+  --resource-group "$RG" \
+  --name privatelink.openai.azure.com
+
+az network private-dns link vnet create \
+  --resource-group "$RG" \
+  --zone-name privatelink.openai.azure.com \
+  --name "link-${VNET}" \
+  --virtual-network "$VNET" \
+  --registration-enabled false
+
+# Zone group: the private endpoint writes its A record into the zone
+az network private-endpoint dns-zone-group create \
+  --resource-group "$RG" \
+  --endpoint-name "pe-${ACCOUNT}" \
+  --name default \
+  --private-dns-zone privatelink.openai.azure.com \
+  --zone-name openai
 ```
 
-## Compliance and Data Residency
+Two things catch people out here.
 
-Azure OpenAI supports regional deployment for data residency:
+**DNS.** The private endpoint is useless if your clients still resolve the public IP. The Azure OpenAI hostname sits under `openai.azure.com`, not `cognitiveservices.azure.com`, so don't assume the Cognitive Services zone in the private DNS table covers it. The script creates `privatelink.openai.azure.com`, links it to one VNet and attaches it to the endpoint with a zone group, so the A record is managed for you. Link the zone to every other VNet your apps resolve from (or forward to it from your custom DNS), and then check from inside the network:
+
+```bash
+nslookup <your-resource-name>.openai.azure.com
+```
+
+You want a private IP from your subnet and a `privatelink` alias in the CNAME chain. If you see a public IP, fix DNS before you disable public access, not after. Once the lookup returns a private IP from every network your apps resolve from, turn off the public endpoint:
+
+```bash
+# Continues the script above: ACCOUNT_ID is set there
+az resource update \
+  --ids "$ACCOUNT_ID" \
+  --set properties.publicNetworkAccess=Disabled
+```
+
+**Azure OpenAI Studio.** The Studio and its playground run in your browser and call the resource from there. With public access disabled, they only work from a machine that can reach the private endpoint. That's correct behaviour, but tell your prompt engineers before you flip the switch, or they'll assume the service is broken. My compromise for pilots: a separate, non-production resource with an IP allowlist for prompt experimentation using synthetic data, and the locked-down resource for anything touching real data.
+
+When would I *not* bother with a private endpoint? For a sandbox resource with no real data and a short life, IP firewall rules are enough, and they're far cheaper to get right. The private endpoint earns its complexity once production data or production apps are involved.
+
+## Identity: Azure AD, not keys
+
+The two account keys grant full data-plane access, aren't tied to a person, and end up in config files, notebooks and screenshots. Azure OpenAI supports Azure Active Directory authentication, including [managed identities](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/managed-identity), and that should be the default for every application.
+
+Microsoft's Azure OpenAI docs currently show the general **Cognitive Services User** role for data-plane access. That role is broad: it covers inference on any Cognitive Services account in the scope you assign it at, and it includes the `listkeys` action, so anyone holding it can read the account keys too. Microsoft has said it is adding Azure AD role support specific to Azure OpenAI, but those roles aren't in the [built-in roles reference](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles) yet, so check what your tenant actually has with `az role definition list --name "Cognitive Services OpenAI User"`. If that returns a role, use it. If it returns nothing, assign Cognitive Services User, scoped to the single Azure OpenAI resource rather than the resource group the docs suggest, and turn off local auth (below) so its `listkeys` permission stops mattering. Either way, never assign at resource group or subscription scope.
+
+```bash
+# Continues the script above: RG and ACCOUNT_ID are set there
+APP_PRINCIPAL_ID=$(az webapp identity show \
+  --name <your-app-name> --resource-group "$RG" --query principalId -o tsv)
+
+# Prefer the Azure OpenAI-specific role; fall back to the general one
+ROLE="Cognitive Services OpenAI User"
+if [ -z "$(az role definition list --name "$ROLE" --query "[].roleName" -o tsv)" ]; then
+  ROLE="Cognitive Services User"
+fi
+
+az role assignment create \
+  --assignee-object-id "$APP_PRINCIPAL_ID" \
+  --assignee-principal-type ServicePrincipal \
+  --role "$ROLE" \
+  --scope "$ACCOUNT_ID"
+```
+
+In Python, the `openai` library (0.25.0) accepts an Azure AD token when you set `api_type = "azure_ad"`. Tokens last about an hour, so a long-running service has to refresh them. This is a complete example:
 
 ```python
-# Configuration for different compliance requirements
+import os
+import time
 
-REGIONAL_CONFIG = {
-    "europe": {
-        "endpoint": "https://my-openai-eu.openai.azure.com",
-        "region": "westeurope",
-        "compliance": ["GDPR", "ISO 27001"]
-    },
-    "us_healthcare": {
-        "endpoint": "https://my-openai-us.openai.azure.com",
-        "region": "eastus",
-        "compliance": ["HIPAA", "SOC 2", "FedRAMP"]
-    },
-    "australia": {
-        "endpoint": "https://my-openai-au.openai.azure.com",
-        "region": "australiaeast",
-        "compliance": ["IRAP", "ISO 27001"]
-    }
-}
+import openai
+from azure.identity import ManagedIdentityCredential
 
-def get_regional_client(region: str) -> SecureOpenAIClient:
-    """Get a client configured for the specified region."""
-    config = REGIONAL_CONFIG.get(region)
-    if not config:
-        raise ValueError(f"Unknown region: {region}")
+# pip install "openai==0.25.0" "azure-identity==1.12.0"
+SCOPE = "https://cognitiveservices.azure.com/.default"
 
-    return SecureOpenAIClient(config["endpoint"])
+credential = ManagedIdentityCredential()
+_token = None
+
+
+def ensure_token() -> None:
+    """Refresh the Azure AD token when it's within five minutes of expiry."""
+    global _token
+    if _token is None or _token.expires_on - time.time() < 300:
+        _token = credential.get_token(SCOPE)
+        openai.api_key = _token.token
+
+
+openai.api_type = "azure_ad"
+openai.api_base = os.environ["AZURE_OPENAI_ENDPOINT"]  # https://<your-resource-name>.openai.azure.com/
+openai.api_version = "2022-12-01"
+
+
+def complete(prompt: str) -> str:
+    ensure_token()
+    response = openai.Completion.create(
+        engine=os.environ["AZURE_OPENAI_DEPLOYMENT"],  # your deployment name
+        prompt=prompt,
+        max_tokens=200,
+        temperature=0.2,
+    )
+    return response["choices"][0]["text"].strip()
+
+
+if __name__ == "__main__":
+    print(complete("Summarise the purpose of a private endpoint in one sentence:"))
 ```
 
-## Audit Logging
+Once every caller uses Azure AD, disable key-based (local) authentication on the account so the keys stop working entirely. If you had to fall back to Cognitive Services User, this is the step that makes its key access harmless. Even with a narrower role, Owners and Contributors can still list keys, so do it regardless:
 
-Enable comprehensive logging for compliance:
-
-```python
-# Azure Monitor diagnostic settings
-resource "azurerm_monitor_diagnostic_setting" "openai" {
-  name                       = "openai-diagnostics"
-  target_resource_id         = azurerm_cognitive_account.openai.id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
-
-  log {
-    category = "Audit"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 365
-    }
-  }
-
-  log {
-    category = "RequestResponse"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 90
-    }
-  }
-
-  metric {
-    category = "AllMetrics"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 90
-    }
-  }
-}
+```bash
+# Continues the script above: ACCOUNT_ID is set there
+az resource update \
+  --ids "$ACCOUNT_ID" \
+  --set properties.disableLocalAuth=true
 ```
 
-Query logs with KQL:
+Test your tooling first. Anything that still reads a key from Key Vault or an app setting will fail with a 401 the moment this lands, which is exactly the point, but better found in test.
+
+## Encryption: customer-managed keys, if you need them
+
+Data the service stores (fine-tuning files and fine-tuned models) is encrypted at rest with Microsoft-managed keys by default. If policy requires you to hold the key, Azure OpenAI supports [customer-managed keys in Azure Key Vault](https://learn.microsoft.com/en-us/azure/ai-services/openai/encrypt-data-at-rest). Today you request access to CMK through a form, and the vault needs soft delete and purge protection enabled, an RSA 2048 key, and the same region and tenant as the resource.
+
+The December 2022 [What's new](https://learn.microsoft.com/en-us/azure/ai-services/openai/whats-new) also added Customer Lockbox support, which means a Microsoft engineer who needs to access your customer data during a support case has to get your explicit approval first. That's worth switching on, but be clear about its limit: it governs support engineer access, not the human review of flagged content under abuse monitoring, which follows the data-handling terms described above.
+
+My view: if you aren't fine-tuning, CMK protects very little, because prompts sent to a base model deployment aren't what it encrypts. Don't let it become the headline control in a risk register while abuse-monitoring retention goes undiscussed. If you are fine-tuning on sensitive data, CMK is worth the paperwork, and the ability to revoke the key is a real kill switch for stored training data.
+
+## Logging: what you can see, and what you can't
+
+Turn on diagnostic settings for the **Audit** and **RequestResponse** categories (plus AllMetrics) and send them to Log Analytics. The [Cognitive Services diagnostic logging guidance](https://learn.microsoft.com/en-us/azure/ai-services/diagnostic-logging) applies to Azure OpenAI as-is. Then you can answer who called what, when, and how it went:
 
 ```kusto
-// Query Azure OpenAI usage logs
 AzureDiagnostics
 | where ResourceProvider == "MICROSOFT.COGNITIVESERVICES"
 | where Category == "RequestResponse"
-| project
-    TimeGenerated,
-    OperationName,
-    CallerIPAddress,
-    DurationMs,
-    ResultSignature,
-    properties_s
+| summarize Calls = count(), Failures = countif(toint(ResultSignature) >= 400),
+            AvgMs = avg(DurationMs)
+    by bin(TimeGenerated, 1h), OperationName, CallerIPAddress
 | order by TimeGenerated desc
-| take 100
 ```
 
-## Data Loss Prevention
+Be clear with auditors about what this doesn't give you: these are request logs, not a transcript of the prompts and completions. If your compliance requirement is "we must be able to show what the model was asked and what it said", that's application logging. Log it in your app, with the user identity, to a store you control and with retention you choose, and treat that store as sensitive as the source data.
 
-Implement DLP to prevent sensitive data leakage:
+## Guardrails that outlast the pilot
 
-```python
-import re
-from typing import List, Tuple
+Configuration drifts. Someone recreates the resource in a hurry, or a second team spins up their own. Assign the [built-in Azure Policy definitions for Cognitive Services](https://learn.microsoft.com/en-us/azure/ai-services/policy-reference) at the management group that holds your AI subscriptions, covering disabled public network access, private link, disabled local authentication and, where you need it, customer-managed keys. Start in Audit mode to see what exists, then move the ones you're sure of to Deny. The public network access, local authentication and customer-managed key definitions support Deny; the private link definition is audit-only (AuditIfNotExists), so it reports gaps but won't block a deployment.
 
-class DLPFilter:
-    """Data Loss Prevention filter for Azure OpenAI requests."""
+One honest gap: compliance certifications. Azure's broad compliance portfolio doesn't automatically cover a preview service. Microsoft listed [SOC 2 compliance for Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/whats-new) in its December 2022 update; check the Azure compliance documentation and Service Trust Portal for anything else your risk assessment cites (ISO, IRAP and so on), by service name, before anyone writes "covered by our Azure certifications" into it.
 
-    PATTERNS = {
-        "credit_card": r"\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}\b",
-        "ssn": r"\b\d{3}[-\s]?\d{2}[-\s]?\d{4}\b",
-        "email": r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b",
-        "phone": r"\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b",
-        "api_key": r"\b(sk-[a-zA-Z0-9]{32,}|[A-Za-z0-9]{32,})\b"
-    }
+## The baseline, in order
 
-    def __init__(self, enabled_patterns: List[str] = None):
-        self.enabled_patterns = enabled_patterns or list(self.PATTERNS.keys())
+| Control | Default for production | When to skip |
+|---|---|---|
+| Data handling review | Always, first | Never |
+| Azure AD auth, keys disabled | Always | Short-lived sandbox |
+| Narrowest available role, scoped to the resource | Always | Never |
+| Private endpoint, public access off | Real data or production apps | Sandbox with synthetic data |
+| Customer-managed keys | Fine-tuning on sensitive data | No fine-tuning |
+| Diagnostic logs to Log Analytics | Always | Never |
+| App-level prompt logging | Where audit needs content | When storing prompts is itself the risk |
+| Azure Policy at management group | Once a second resource exists | Single throwaway resource |
 
-    def scan(self, text: str) -> List[Tuple[str, str]]:
-        """Scan text for sensitive data patterns."""
-        findings = []
-
-        for pattern_name in self.enabled_patterns:
-            pattern = self.PATTERNS.get(pattern_name)
-            if pattern:
-                matches = re.findall(pattern, text)
-                for match in matches:
-                    findings.append((pattern_name, match))
-
-        return findings
-
-    def redact(self, text: str) -> str:
-        """Redact sensitive data from text."""
-        redacted = text
-
-        for pattern_name in self.enabled_patterns:
-            pattern = self.PATTERNS.get(pattern_name)
-            if pattern:
-                redacted = re.sub(pattern, f"[REDACTED-{pattern_name.upper()}]", redacted)
-
-        return redacted
-
-    def validate(self, text: str) -> bool:
-        """Return True if text contains no sensitive data."""
-        return len(self.scan(text)) == 0
-
-class SecureOpenAIWrapper:
-    """OpenAI client with DLP protection."""
-
-    def __init__(self, client: SecureOpenAIClient, dlp_filter: DLPFilter):
-        self.client = client
-        self.dlp_filter = dlp_filter
-
-    def complete(self, deployment: str, prompt: str, **kwargs) -> str:
-        """Make a completion with DLP filtering."""
-        # Scan input for sensitive data
-        findings = self.dlp_filter.scan(prompt)
-
-        if findings:
-            # Option 1: Reject the request
-            raise ValueError(f"Sensitive data detected: {[f[0] for f in findings]}")
-
-            # Option 2: Redact and continue (uncomment to use)
-            # prompt = self.dlp_filter.redact(prompt)
-
-        return self.client.complete(deployment, prompt, **kwargs)
-
-# Usage
-dlp = DLPFilter(enabled_patterns=["credit_card", "ssn", "api_key"])
-secure_client = SecureOpenAIWrapper(
-    SecureOpenAIClient("https://my-openai.openai.azure.com"),
-    dlp
-)
-
-# This will raise an error due to credit card number
-try:
-    result = secure_client.complete(
-        "gpt35",
-        "Process this payment: 4111-1111-1111-1111"
-    )
-except ValueError as e:
-    print(f"Blocked: {e}")
-```
-
-## Cost Governance
-
-Implement cost controls and monitoring:
-
-```python
-from dataclasses import dataclass
-from datetime import datetime, timedelta
-import redis
-
-@dataclass
-class CostLimits:
-    daily_limit_usd: float = 100.0
-    monthly_limit_usd: float = 2000.0
-    per_request_limit_tokens: int = 4000
-
-class CostGovernor:
-    """Track and limit Azure OpenAI costs."""
-
-    # Pricing per 1K tokens
-    PRICING = {
-        "text-davinci-003": 0.02,
-        "text-curie-001": 0.002,
-        "gpt-35-turbo": 0.002
-    }
-
-    def __init__(self, redis_client: redis.Redis, limits: CostLimits):
-        self.redis = redis_client
-        self.limits = limits
-
-    def _get_daily_key(self) -> str:
-        return f"openai:cost:daily:{datetime.now().strftime('%Y-%m-%d')}"
-
-    def _get_monthly_key(self) -> str:
-        return f"openai:cost:monthly:{datetime.now().strftime('%Y-%m')}"
-
-    def check_limits(self) -> bool:
-        """Check if within cost limits."""
-        daily_cost = float(self.redis.get(self._get_daily_key()) or 0)
-        monthly_cost = float(self.redis.get(self._get_monthly_key()) or 0)
-
-        if daily_cost >= self.limits.daily_limit_usd:
-            raise Exception(f"Daily cost limit exceeded: ${daily_cost:.2f}")
-
-        if monthly_cost >= self.limits.monthly_limit_usd:
-            raise Exception(f"Monthly cost limit exceeded: ${monthly_cost:.2f}")
-
-        return True
-
-    def record_usage(self, model: str, tokens: int):
-        """Record token usage and estimated cost."""
-        rate = self.PRICING.get(model, 0.02)
-        cost = (tokens / 1000) * rate
-
-        # Increment daily and monthly costs
-        pipe = self.redis.pipeline()
-        pipe.incrbyfloat(self._get_daily_key(), cost)
-        pipe.expire(self._get_daily_key(), 86400 * 2)  # 2 days TTL
-        pipe.incrbyfloat(self._get_monthly_key(), cost)
-        pipe.expire(self._get_monthly_key(), 86400 * 35)  # 35 days TTL
-        pipe.execute()
-
-    def get_usage_report(self) -> dict:
-        """Get current usage statistics."""
-        return {
-            "daily_cost": float(self.redis.get(self._get_daily_key()) or 0),
-            "daily_limit": self.limits.daily_limit_usd,
-            "monthly_cost": float(self.redis.get(self._get_monthly_key()) or 0),
-            "monthly_limit": self.limits.monthly_limit_usd
-        }
-```
-
-## Best Practices Summary
-
-1. **Network Security**: Use private endpoints, disable public access
-2. **Authentication**: Prefer managed identity over API keys
-3. **Authorization**: Implement RBAC with least privilege
-4. **Data Protection**: Implement DLP scanning on inputs
-5. **Compliance**: Choose regions based on regulatory requirements
-6. **Monitoring**: Enable diagnostic logging for audit trails
-7. **Cost Control**: Implement usage tracking and limits
-
-## Resources
-
-- [Azure OpenAI Security Baseline](https://learn.microsoft.com/security/benchmark/azure/baselines/cognitive-services-security-baseline)
-- [Private Endpoints for Cognitive Services](https://learn.microsoft.com/azure/cognitive-services/cognitive-services-virtual-networks)
-- [RBAC Roles](https://learn.microsoft.com/azure/cognitive-services/openai/how-to/role-based-access-control)
+None of this is specific to large language models. It's the same baseline you'd put on any Cognitive Services account holding sensitive data, and that's the point I make to security teams: Azure OpenAI fits into controls you already understand. The genuinely new questions are about the data the service retains and the content it generates. I'll pick those up next, in posts on [Azure OpenAI versus OpenAI's own API](/blog/2023-01-07-azure-openai-vs-openai-api/) and [content filtering](/blog/2023-01-09-content-filtering-azure-openai/). Get the plumbing right this month so those conversations aren't stuck behind a debate about API keys.
