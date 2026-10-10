@@ -1,268 +1,133 @@
 ---
-title: "Power BI Smart Narratives: AI-Generated Insights"
-description: "Smart narratives transform raw data into understandable stories, making Power BI reports more accessible to all users regardless of their analytical expertise."
+title: "Power BI Smart Narratives vs DAX Text: Choosing How Reports Talk"
+description: "When the Power BI smart narrative visual is enough, when a hand-written DAX text measure is safer, and the limitations that decide it before you publish."
 author: Michael John Peña
 draft: false
 date: 2022-01-31
 url: /blog/power-bi-smart-narratives/
 tags:
-  - power-bi
+  - Power BI
   - AI
   - Analytics
-  - natural-language
+  - DAX
+  - Natural Language
 ---
 
-## What Are Smart Narratives?
+Most report pages have someone who only reads the words. An executive skims the headline, a regional manager wants one sentence about their region, and the charts are there for the analysts. Power BI gives you two ways to write that sentence: let the smart narrative visual generate it, or write it yourself as a DAX measure. They suit different jobs, and choosing the wrong one usually shows up after publishing, as a summary nobody trusts or a measure nobody can maintain.
 
-Smart narratives analyze your visuals and data to produce:
-- Key metric summaries
-- Trend descriptions
-- Outlier highlights
-- Comparative insights
+## Where smart narratives stand in early 2022
 
-## Adding a Smart Narrative
+The smart narrative visual arrived as a preview in the [September 2020 Power BI Desktop release](https://powerbi.microsoft.com/en-us/blog/power-bi-september-2020-feature-summary/) and became generally available in the [May 2021 release](https://powerbi.microsoft.com/en-us/blog/power-bi-may-2021-feature-summary/), the GA milestone Microsoft had scheduled in its 2021 release wave 1 plan. It's a core visual, so you don't need a custom visual from AppSource or Premium capacity to use it.
 
-In Power BI Desktop, add the Smart Narrative visual:
+There are two ways in:
 
-```json
-{
-  "visualType": "smartNarrative",
-  "config": {
-    "dataRoles": [
-      {
-        "name": "Values",
-        "values": ["Sales[Total Revenue]", "Sales[Quantity]"]
-      },
-      {
-        "name": "Category",
-        "values": ["Product[Category]"]
-      },
-      {
-        "name": "Time",
-        "values": ["Date[Date]"]
-      }
-    ],
-    "settings": {
-      "summaryLevel": "detailed",
-      "includeComparisons": true,
-      "highlightOutliers": true
-    }
-  }
-}
-```
+- **Add the visual** from the Visualizations pane. With nothing selected, it summarises the visuals already on the page.
+- **Right-click a visual and choose Summarize.** That creates a narrative scoped to that one chart.
 
-## Customizing Narrative Content
+The generated text describes what the model can see: totals, trends over time, the largest and smallest contributors, and notable changes between periods. The numbers in it are dynamic values, not static text. When a reader cross-filters with a slicer or clicks a bar, the values recompute for the new filter context. The [smart narrative documentation](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-smart-narrative) covers the mechanics.
 
-Use the visual's configuration options:
+## What you can actually customise
 
-```json
-{
-  "smartNarrativeSettings": {
-    "summary": {
-      "enabled": true,
-      "type": "autoSummarize"
-    },
-    "trends": {
-      "enabled": true,
-      "period": "monthly"
-    },
-    "outliers": {
-      "enabled": true,
-      "threshold": 2.0
-    },
-    "comparisons": {
-      "enabled": true,
-      "compareWith": "previousPeriod"
-    },
-    "formatting": {
-      "numberFormat": "#,##0",
-      "percentFormat": "0.0%",
-      "dateFormat": "MMM yyyy"
-    }
-  }
-}
-```
+The narrative isn't a black box. It behaves like a text box, so you can delete generated sentences, rewrite them, and add your own. The useful part is that you can add your own dynamic values:
 
-## Dynamic Text with DAX
+- Map a phrase to an existing field or measure.
+- Type a natural language expression, such as "total sales for Australia", and let the Q&A engine resolve it to a calculation. You get the same suggestions as you type that you get in the Q&A visual.
+- Format each value: currency, decimal places, thousands separator.
+- Use the **Review** tab to list every value in the narrative, find unused ones, and remove or reuse them.
 
-Create custom dynamic text that complements smart narratives:
+That's the full customisation surface, and it's done in the editor, not in a configuration file. There is no JSON schema for "summary level" or "outlier threshold", and you can't feed it your own linguistic rules except through the Q&A synonyms you've already set on the model. Anything you can't do in that editor, you can't do at all.
+
+Because custom values go through Q&A, their quality depends on how well your model is set up for Q&A. If your measures are called `M_Rev_Net_v2` and nobody has added synonyms, "net revenue" won't resolve. The same model hygiene that makes Q&A usable (friendly names, synonyms, hiding technical columns) makes smart narratives usable. The [Q&A best practices](https://learn.microsoft.com/en-us/power-bi/natural-language/q-and-a-best-practices) apply directly.
+
+## The limitations that decide it
+
+This is where most of the decisions actually get made. As of this writing, the smart narrative visual isn't supported for:
+
+- Pinning to a dashboard
+- Publish to web
+- Power BI Report Server
+- On-premises Analysis Services, or live connections to Azure Analysis Services or SQL Server Analysis Services
+- Multidimensional Analysis Services data sources
+
+Language is the other constraint that doesn't appear on that list. Custom dynamic values written in natural language are resolved by Q&A, so they follow Q&A's [language support](https://learn.microsoft.com/en-us/power-bi/natural-language/q-and-a-limitations): English, with Spanish in preview. The generated sentences are English too, and there's no way to localise them.
+
+Two of the platform limits catch teams out. If your organisation runs Power BI Report Server for data that can't go to the cloud, smart narratives are off the table. And if your "single source of truth" is an Analysis Services model reached through a live connection, which is common in enterprises that built their semantic layer before Power BI datasets matured, the visual won't work there either.
+
+Dashboards are the other trap. Executives often consume dashboards, not reports, and a narrative can't be pinned to one. If the sentence must appear on the dashboard, you need a measure on a card.
+
+## Writing the sentence yourself in DAX
+
+The alternative is a measure that returns text. You control every word, it works anywhere a card visual works, and it can be scripted, diffed and reviewed with Tabular Editor or ALM Toolkit like any other measure, which matters while a .pbix file is still a binary that source control can't diff. Here's one that assumes a `Sales` fact table, a `Product` dimension, a [Total Sales] measure, and a `Date` table marked as a date table, with the page filtered to a single month:
 
 ```dax
-// Custom narrative measure
-Sales Narrative =
-VAR TotalSales = [Total Sales]
-VAR PreviousMonthSales = CALCULATE([Total Sales], PREVIOUSMONTH('Date'[Date]))
-VAR Growth = DIVIDE(TotalSales - PreviousMonthSales, PreviousMonthSales)
-VAR TopProduct = TOPN(1, ALL(Product[Name]), [Total Sales])
-VAR TopProductName = MAXX(TopProduct, Product[Name])
-VAR TopProductSales = MAXX(TopProduct, [Total Sales])
-
-RETURN
-"Total sales reached " & FORMAT(TotalSales, "$#,##0") &
-", which is " & FORMAT(ABS(Growth), "0.0%") &
-IF(Growth >= 0, " higher ", " lower ") &
-"than last month. " &
-"The top performing product was " & TopProductName &
-" with " & FORMAT(TopProductSales, "$#,##0") & " in sales."
-
-// Conditional narrative
-Performance Summary =
+Sales Headline =
 VAR CurrentSales = [Total Sales]
-VAR Target = [Sales Target]
-VAR Achievement = DIVIDE(CurrentSales, Target)
-
+VAR PriorSales =
+    CALCULATE ( [Total Sales], DATEADD ( 'Date'[Date], -1, MONTH ) )
+VAR Growth =
+    DIVIDE ( CurrentSales - PriorSales, PriorSales )
+VAR TopProduct =
+    TOPN ( 1, VALUES ( 'Product'[Product Name] ), [Total Sales], DESC )
+VAR TopProductName =
+    CONCATENATEX ( TopProduct, 'Product'[Product Name], ", " )
 RETURN
-SWITCH(TRUE(),
-    Achievement >= 1.1, "Excellent! Sales exceeded target by " & FORMAT(Achievement - 1, "0%") & ".",
-    Achievement >= 1.0, "Target achieved! Sales met expectations.",
-    Achievement >= 0.9, "Close to target. Sales are at " & FORMAT(Achievement, "0%") & " of goal.",
-    "Below target. Immediate action needed to reach " & FORMAT(Target, "$#,##0") & " goal."
-)
+    IF (
+        ISBLANK ( CurrentSales ),
+        "No sales for the current selection.",
+        "Sales were " & FORMAT ( CurrentSales, "$#,0" )
+            & IF (
+                ISBLANK ( Growth ),
+                ".",
+                ", " & FORMAT ( ABS ( Growth ), "0.0%" )
+                    & IF ( Growth >= 0, " up on", " down on" )
+                    & " the previous month."
+            )
+            & " Top product: " & TopProductName & "."
+    )
 ```
 
-## Formatting Smart Narratives
+A few details are deliberate. `VALUES` rather than `ALL` keeps the top product inside the reader's current filters, so selecting a category names the top product in that category. `CONCATENATEX` handles ties, which a `MAXX` over the `TOPN` result would hide. And the blank checks stop the measure from printing an empty percentage when there's no prior month to compare against: testing `Growth` rather than `PriorSales` also covers a prior month of exactly zero, where `DIVIDE` returns BLANK.
 
-```json
-{
-  "formatting": {
-    "general": {
-      "font": {
-        "family": "Segoe UI",
-        "size": 12
-      },
-      "color": "#333333"
-    },
-    "emphasis": {
-      "positive": {
-        "color": "#107C10",
-        "bold": true
-      },
-      "negative": {
-        "color": "#D83B01",
-        "bold": true
-      },
-      "neutral": {
-        "color": "#0078D4",
-        "bold": false
-      }
-    },
-    "numbers": {
-      "style": "currency",
-      "decimals": 0,
-      "thousandsSeparator": true
-    }
-  }
-}
+A target-based status line works the same way:
+
+```dax
+Target Status =
+VAR Achievement = DIVIDE ( [Total Sales], [Sales Target] )
+RETURN
+    SWITCH (
+        TRUE (),
+        ISBLANK ( Achievement ), "No target set for this selection.",
+        Achievement >= 1, "On or above target at " & FORMAT ( Achievement, "0%" ) & ".",
+        Achievement >= 0.9, "Close to target at " & FORMAT ( Achievement, "0%" ) & ".",
+        "Below target at " & FORMAT ( Achievement, "0%" ) & "."
+    )
 ```
 
-## Combining with Q&A
+Keep the thresholds in the measure or, better, in a parameter table if the business will want to change them. Avoid editorial words like "Excellent!" or "Immediate action needed". The report should state the fact and let the reader judge it.
 
-Enable natural language queries alongside narratives:
+The cost is effort. Every sentence is hand-built, every new insight is a new measure, and the text never notices anything you didn't anticipate. A smart narrative might point out that one region drove most of a month's growth; a DAX measure only reports what you told it to look for.
 
-```json
-{
-  "linguisticSchema": {
-    "entities": [
-      {
-        "name": "Sales",
-        "terms": ["revenue", "income", "sales amount"],
-        "measures": ["Total Sales", "Average Sale"]
-      },
-      {
-        "name": "Products",
-        "terms": ["items", "goods", "merchandise"],
-        "attributes": ["Category", "Name", "Price"]
-      }
-    ],
-    "relationships": [
-      {
-        "from": "Sales",
-        "to": "Products",
-        "terms": ["of", "for", "by"]
-      }
-    ]
-  }
-}
-```
+## How they compare
 
-## Embedding Narratives in Paginated Reports
+| Concern | Smart narrative | DAX text measure |
+|---|---|---|
+| Effort to create | Minutes | Hours per sentence pattern |
+| Finds things you didn't anticipate | Yes | No |
+| Wording control | Editable, but generated sentences can shift as data changes | Total |
+| Pin to dashboard | No | Yes, via a card |
+| Report Server, live Analysis Services | No | Yes |
+| Source control and review | Lives in the report layout, no practical diff | Scriptable and diffable with Tabular Editor or ALM Toolkit |
+| Depends on Q&A setup | For custom values | No |
+| Languages | English (Q&A Spanish in preview) | Any, you write the words |
 
-```xml
-<!-- Paginated report with dynamic narrative -->
-<Textbox Name="NarrativeSummary">
-  <CanGrow>true</CanGrow>
-  <Paragraphs>
-    <Paragraph>
-      <TextRuns>
-        <TextRun>
-          <Value>=
-            "This report covers sales data from " &amp;
-            Format(Parameters!StartDate.Value, "MMMM d, yyyy") &amp;
-            " to " &amp;
-            Format(Parameters!EndDate.Value, "MMMM d, yyyy") &amp;
-            ". Total revenue was " &amp;
-            Format(Sum(Fields!Revenue.Value, "SalesDataset"), "C0") &amp;
-            " across " &amp;
-            CountDistinct(Fields!CustomerID.Value, "SalesDataset") &amp;
-            " customers."
-          </Value>
-          <Style>
-            <FontSize>12pt</FontSize>
-          </Style>
-        </TextRun>
-      </TextRuns>
-    </Paragraph>
-  </Paragraphs>
-</Textbox>
-```
+## When not to use a smart narrative
 
-## API Integration
+I wouldn't put a smart narrative on a report where the wording carries weight: board packs, regulatory reporting, or anything a reader might quote back to you. Generated sentences are accurate about the numbers, but which facts get mentioned can change as the data changes, and that's the wrong property for a page that has to read the same way every month. The same goes for reports published to readers in other languages: you can't translate generated wording, but you can translate a measure.
 
-Generate narratives programmatically:
+I also wouldn't use it as a substitute for a well-designed page. If a chart needs a paragraph of generated text to be understood, fix the chart first.
 
-```python
-import requests
+Where it earns its place is exploratory and operational reporting: a sales page reviewed weekly, a self-service report used by managers who won't read a line chart, or a prototype where you want to see what the data says before deciding which sentences deserve a hand-written measure. Using it that way, as a discovery tool, works well. Let the smart narrative show you which observations people actually care about, then promote the stable ones to DAX measures in the model.
 
-class SmartNarrativeGenerator:
-    def __init__(self, access_token: str):
-        self.base_url = "https://api.powerbi.com/v1.0/myorg"
-        self.headers = {
-            "Authorization": f"Bearer {access_token}",
-            "Content-Type": "application/json"
-        }
+## My recommendation
 
-    def generate_summary(self, dataset_id: str, visual_config: dict):
-        """Generate a summary for the given visual configuration."""
-        # Execute DAX query to get data
-        dax_query = self._build_summary_query(visual_config)
-        result = self._execute_query(dataset_id, dax_query)
-
-        # Generate narrative from results
-        narrative = self._create_narrative(result, visual_config)
-        return narrative
-
-    def _create_narrative(self, data: dict, config: dict) -> str:
-        """Create natural language narrative from data."""
-        total = data.get("total", 0)
-        previous = data.get("previous", 0)
-        change = (total - previous) / previous if previous else 0
-
-        parts = []
-
-        # Summary
-        parts.append(f"Total {config['metric_name']} reached {total:,.0f}")
-
-        # Trend
-        if change > 0:
-            parts.append(f"an increase of {change:.1%} from the previous period")
-        elif change < 0:
-            parts.append(f"a decrease of {abs(change):.1%} from the previous period")
-
-        # Top performer
-        if data.get("top_category"):
-            parts.append(f"{data['top_category']} was the top performer")
-
-        return ", ".join(parts) + "."
-```
-
-Smart narratives transform raw data into understandable stories, making Power BI reports more accessible to all users regardless of their analytical expertise.
+Start with the platform constraints, because they decide most cases. If the text has to be on a dashboard, on Report Server, or over a live Analysis Services connection, write it in DAX. Otherwise, use the smart narrative for pages where discovery matters more than fixed wording, invest in Q&A synonyms so your custom values resolve, and move any sentence that becomes part of a standing conversation into a reviewed measure. For where this sits among the other Power BI features worth adopting right now, see my [early 2022 Power BI status check](/blog/power-bi-2022-features/).
