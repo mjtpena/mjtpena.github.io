@@ -8,7 +8,7 @@ url: /blog/you-should-read-books-you-know-you-should/
 images: 
      - /2021/01/jumpstory-download20210108-203724-940x510.jpg
 tags:
-  - Books
+  - Learning
   - Reading
   - Personal
   - Productivity
