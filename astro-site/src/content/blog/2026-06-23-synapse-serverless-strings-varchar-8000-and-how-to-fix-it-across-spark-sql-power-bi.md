@@ -1,202 +1,220 @@
 ---
-title: "Why Your Synapse Serverless Strings Are varchar(8000) — And How to Fix It Properly Across Spark, SQL, and Power BI"
+title: "Synapse Serverless varchar(8000): Fixing Strings for Spark and Power BI"
 author: Michael John Peña
 draft: false
 date: 2026-06-23
-description: "Synapse serverless SQL infers long text columns as varchar(8000), and you can't fix it from PySpark. Here's why it happens — and how to fix it properly across Spark, SQL, and Power BI."
+description: "Why Synapse serverless SQL infers strings as varchar(8000), why Spark-created lake tables behave differently, and where Power BI string contracts belong."
 tags:
   - Synapse
-  - Serverless SQL
+  - Serverless
   - Power BI
   - PySpark
   - Data Engineering
 ---
 
-If you've worked with Azure Synapse Analytics serverless SQL pool over a Delta or Parquet lake, you've probably hit this surprise at least once: your source column is clearly a free-text field — sometimes 200,000+ characters — and yet Synapse insists on returning it as `varchar(8000)`. Worse, you start seeing the error `String or binary data would be truncated while reading column of type 'VARCHAR(8000)'.`
+The failure usually looks like this: a Gold table in the lake has a free-text column with values well past 8,000 characters, Spark reads it without complaint, and the first Power BI refresh through Azure Synapse serverless SQL pool fails with "String or binary data would be truncated". The column is `varchar(8000)` on the SQL side, even though no one chose that length.
 
-This isn't a bug. It's documented, deliberate behaviour — and once you understand where the boundary sits between Spark, Synapse, and Power BI, the fix becomes obvious and architecturally clean.
+No one had to. The number comes from schema inference, and where you fix it depends on how the table reaches serverless SQL in the first place. Get that wrong and you end up with `varchar(max)` on every column, which trades a refresh failure for slower queries.
 
-### What you'll learn
+## Where varchar(8000) comes from
 
-- Why `varchar(8000)` appears in the first place
-- Why you cannot fix this from PySpark `StructType` / `StructField`
-- How to fix it properly at the Synapse layer
-- How this impacts Power BI semantic models
-- A reference design pattern for Gold tables consumed by BI
+When you query Parquet or Delta files with `OPENROWSET` and no `WITH` clause, serverless SQL pool infers each column's type from the file. Parquet stores a string as a UTF-8 byte array with no declared maximum length. The [serverless SQL pool best practices](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/best-practices-serverless-sql-pool#check-inferred-data-types) put it plainly: "Parquet files don't contain metadata about maximum character column length. So serverless SQL pool infers it as varchar(8000)." Delta follows the same rule because its data files are Parquet.
 
-## 1. Why Synapse Serverless Returns varchar(8000)
+That one default causes two separate problems:
 
-When you query files directly with `OPENROWSET` without an explicit schema, serverless SQL pool infers types from the file. Microsoft's [Best practices for serverless SQL pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/best-practices-serverless-sql-pool) article explicitly states:
+- **Values longer than 8,000 bytes fail.** The [serverless SQL troubleshooting guide](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/resources-self-help-sql-on-demand#string-or-binary-data-would-be-truncated) says that with schema inference "all string columns are automatically defined as the `VARCHAR(8000)` type" and that the fix is an explicit `WITH` schema using `VARCHAR(MAX)`.
+- **Short values get an oversized type.** A three-character state code inferred as `varchar(8000)` costs performance and concurrency; the same page tells you to use the smallest type that fits.
 
-> Parquet files don't contain metadata about maximum character column length. So serverless SQL pool infers it as varchar(8000).
-
-This is reinforced in [How to use OPENROWSET in serverless SQL pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-openrowset), which shows that you can declare an explicit schema using a `WITH` clause containing types like `varchar(max)`:
+You can see what serverless SQL pool inferred before anything downstream depends on it:
 
 ```sql
-SELECT *
-FROM OPENROWSET(
-    BULK N'https://account.dfs.core.windows.net/container/folder/data.parquet',
-    FORMAT = 'PARQUET'
-) WITH (C1 int, C2 varchar(20), C3 varchar(max)) AS rows;
+EXEC sp_describe_first_result_set N'
+    SELECT *
+    FROM OPENROWSET(
+        BULK ''https://<storage-account>.dfs.core.windows.net/<container>/gold/dim_provider/'',
+        FORMAT = ''DELTA''
+    ) AS r';
 ```
 
-When inference picks `varchar(8000)` and your data is longer, you hit the classic truncation error. The [Troubleshoot serverless SQL pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/resources-self-help-sql-on-demand) article confirms the remedy: if you use schema inference (without the `WITH` clause), all string columns are automatically defined as `VARCHAR(8000)`. To resolve the error, explicitly define the schema in a `WITH` clause with the larger `VARCHAR(MAX)` column type.
+Every string column shows up as `varchar(8000)` in `system_type_name`. That is your to-do list.
 
-So the root cause is schema inference, and the fix is to be explicit.
+## Lake database tables behave differently
 
-## 2. Can You Fix It in PySpark StructType / StructField?
+Tables you create in a Synapse Spark pool as Parquet, CSV or Delta (Delta access is still documented as public preview) are synchronised into a lake database that serverless SQL can query. They skip `OPENROWSET` inference and use the [Spark-to-SQL type mapping for shared tables](https://learn.microsoft.com/en-us/azure/synapse-analytics/metadata/table#share-spark-tables):
 
-Short answer: **No.** This is one of the most common misconceptions, so it's worth being precise.
+| Spark column type | Serverless SQL type |
+|---|---|
+| `StringType` (no length) | `varchar(max)` |
+| `VARCHAR(n)` declared in the table DDL | `varchar(n)` |
+| Partition column with a declared length | `varchar(n)`, `n` at most 2048 |
+| `array`, `map`, `struct` | `varchar(max)` serialised as JSON |
 
-### What Spark actually supports
+So if a Spark-created table shows `varchar(8000)` in serverless SQL, something is almost certainly reading the files with `OPENROWSET` and inference, not the synchronised table. Check which object Power BI connects to first: the Power Query source names it, and running `SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH FROM INFORMATION_SCHEMA.COLUMNS` in the lake database and again in your user database shows which one reports 8000 (`-1` means `max`).
 
-The Apache Spark documentation for [pyspark.sql.types.VarcharType](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.types.VarcharType.html) confirms the constructor takes a single integer `length` parameter — there is no `max` overload. And [StringType](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.types.StringType.html) itself is unbounded — it has no length parameter at all. The full list of available PySpark data types is documented in the [PySpark data types reference](https://learn.microsoft.com/en-us/azure/databricks/pyspark/reference/datatypes).
+It also means that "you can't control string length from Spark" isn't quite right. `StringType` has no length, and `VarcharType` takes only an integer, so there is no `max` to declare. But a table created with `VARCHAR(64)` in Spark SQL DDL does arrive in serverless SQL as `varchar(64)`. The catch is that Spark enforces that length on write: a single over-length value fails the whole write.
 
-So these are the only options you have in PySpark:
+Microsoft's troubleshooting guide does suggest this route for lake database tables: increase the string column size in the Spark pool. I still wouldn't push SQL sizing decisions into Spark DDL just to shape a BI contract. A report width can now break an ingestion job, and you can't change a BI column width without altering the Spark table.
 
-```python
-StructField("description", StringType(), True)         # ✅ unbounded
-StructField("description", VarcharType(8000), True)    # ⚠️ bounded
-StructField("description", CharType(10), True)         # ⚠️ fixed length
-StructField("description", StringType(max=True))       # ❌ does not exist
-StructField("description", VarcharType("max"))         # ❌ does not exist
-```
+## Put the contract in a typed view
 
-### Why this matters
-
-Spark's type system doesn't model SQL engine–specific concepts like `varchar(max)`, `nvarchar`, or `text`. Length semantics belong to the sink, not to the DataFrame. So no matter what you do at the `StructField` level, you cannot persuade Synapse serverless to project a column as `varchar(max)` purely from PySpark.
-
-This is confirmed in community threads such as this [Stack Overflow Q&A](https://stackoverflow.com/questions/76506104/azure-synapse-pyspark-translates-string-datatype-into-varchar8000-for-external) where a developer running `spark.sql()` with `STRING` columns found their data landing as `varchar(8000)` in Synapse serverless. The community confirmation matches the Microsoft docs: serverless infers `STRING` → `varchar(8000)` by length inference.
-
-## 3. The Right Fix: Be Explicit at the Synapse Layer
-
-Once you accept that Spark cannot express `varchar(max)`, the architecture becomes clean. There are three patterns Microsoft documents.
-
-### Pattern A — OPENROWSET with WITH
-
-The simplest, directly from the [Access files on storage in serverless SQL pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-storage-files-overview) article:
+My default for anything Power BI consumes is a view in a serverless SQL database you own, with every column typed explicitly. This follows Microsoft's explicit schema guidance for querying Delta Lake, including the UTF-8 collation that Delta string data needs:
 
 ```sql
-SELECT *
-FROM OPENROWSET(
-    BULK 'https://account.dfs.core.windows.net/gold/dim_provider/',
-    FORMAT = 'DELTA'
-)
-WITH (
-    provider_business_key varchar(64),
-    provider_name         varchar(max),
-    abn                   varchar(11),
-    description           varchar(max)
-) AS r;
-```
+USE <your-serverless-db>;
+GO
 
-### Pattern B — Typed view
+IF SCHEMA_ID('gold') IS NULL EXEC('CREATE SCHEMA gold');
+GO
 
-Wrap Pattern A in a view, so consumers (including Power BI) see a stable contract:
-
-```sql
 CREATE OR ALTER VIEW gold.dim_provider AS
 SELECT *
 FROM OPENROWSET(
-    BULK 'https://account.dfs.core.windows.net/gold/dim_provider/',
+    BULK 'https://<storage-account>.dfs.core.windows.net/<container>/gold/dim_provider/',
     FORMAT = 'DELTA'
 )
 WITH (
-    provider_business_key varchar(64),
-    provider_name         varchar(max),
-    abn                   varchar(11)
+    provider_business_key varchar(64)  COLLATE Latin1_General_100_BIN2_UTF8,
+    provider_name         varchar(400) COLLATE Latin1_General_100_BIN2_UTF8,
+    abn                   char(11)     COLLATE Latin1_General_100_BIN2_UTF8,
+    state_code            varchar(3)   COLLATE Latin1_General_100_BIN2_UTF8,
+    description           varchar(max) COLLATE Latin1_General_100_BIN2_UTF8,
+    updated_at            datetime2(6)
 ) AS r;
 ```
 
-### Pattern C — CREATE EXTERNAL TABLE
+Run this in a user database you created, not `master`. The column names in the `WITH` clause must match the column names in the Delta table. Only `description` gets `varchar(max)`. Keys and codes get tight types for the reasons in the next section. Every string gets the `BIN2_UTF8` collation because, per the same best practices page, predicate pushdown on Parquet character columns only works with `Latin1_General_100_BIN2_UTF8`. If you'd rather not repeat the collation on every column, set it once with `ALTER DATABASE CURRENT COLLATE Latin1_General_100_BIN2_UTF8;`.
 
-If you prefer external tables for governance, the same explicit typing applies. Both views and external tables are valid surfaces, as described in the [serverless SQL pool storage access overview](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-storage-files-overview).
+Why a view rather than an external table? Serverless SQL external tables don't support partitioning on Delta folders (no partition elimination), so the documentation points you at partitioned views instead. A view also lets you rename, cast and add columns without touching the Spark job. External tables still make sense for Parquet or CSV when you want a table-shaped object, but the typing rule is the same: never let a consumed column fall back to inference.
 
-### The escape-hatch (do not rely on this)
+### When not to reach for varchar(max)
 
-For ad-hoc exploration only, you can suppress truncation errors:
+The lazy fix is to declare every string as `varchar(max)`. It ends the errors, but the troubleshooting guide warns that `VARCHAR(MAX)` can impair performance, and it hides the fact that your data has no agreed shape. My rule of thumb: `varchar(max)` only for columns where you've confirmed values can exceed 8,000 bytes. Remember that the limit is bytes, not characters, and UTF-8 text with accents or non-Latin scripts uses more than one byte per character. Everything else gets a measured length with some headroom.
 
-```sql
-SET ANSI_WARNINGS OFF;
-SELECT TOP 100 * FROM OPENROWSET(BULK '...', FORMAT='DELTA') AS r;
-SET ANSI_WARNINGS ON;
+### The ANSI_WARNINGS escape hatch
+
+The troubleshooting guide also documents `SET ANSI_WARNINGS OFF`, which makes serverless SQL truncate oversized values silently instead of failing. Fine for exploring a file; in a view feeding a report, users see clipped text and no one gets an error. I treat it as a diagnostic, never a fix.
+
+## Generate the view DDL from your Spark schemas
+
+If your Gold layer already defines schemas in Python as `StructType` objects, you don't need a second hand-maintained contract. Generate the view from the same definitions, with an override map for columns that need specific sizes:
+
+```python
+from pyspark.sql.types import (
+    StructType, StructField, StringType, IntegerType, LongType,
+    BooleanType, DateType, TimestampType, DecimalType, DoubleType,
+)
+
+COLLATION = "Latin1_General_100_BIN2_UTF8"
+
+def sql_type(field: StructField, overrides: dict) -> str:
+    if field.name in overrides:
+        return overrides[field.name]
+    t = field.dataType
+    if isinstance(t, StringType):
+        return f"varchar(8000) COLLATE {COLLATION}"
+    if isinstance(t, IntegerType):
+        return "int"
+    if isinstance(t, LongType):
+        return "bigint"
+    if isinstance(t, BooleanType):
+        return "bit"
+    if isinstance(t, DateType):
+        return "date"
+    if isinstance(t, TimestampType):
+        return "datetime2(6)"
+    if isinstance(t, DoubleType):
+        return "float"
+    if isinstance(t, DecimalType):
+        return f"decimal({t.precision},{t.scale})"
+    raise ValueError(f"No SQL mapping for {field.name}: {t}")
+
+def view_ddl(view: str, path: str, schema: StructType, overrides: dict) -> str:
+    cols = ",\n    ".join(
+        f"[{f.name.replace(']', ']]')}] {sql_type(f, overrides)}" for f in schema.fields
+    )
+    return (
+        f"CREATE OR ALTER VIEW {view} AS\nSELECT *\nFROM OPENROWSET(\n"
+        f"    BULK '{path}',\n    FORMAT = 'DELTA'\n)\nWITH (\n    {cols}\n) AS r;"
+    )
+
+dim_provider = StructType([
+    StructField("provider_business_key", StringType(), False),
+    StructField("provider_name", StringType(), True),
+    StructField("abn", StringType(), True),
+    StructField("state_code", StringType(), True),
+    StructField("description", StringType(), True),
+    StructField("updated_at", TimestampType(), True),
+])
+
+print(view_ddl(
+    "gold.dim_provider",
+    "https://<storage-account>.dfs.core.windows.net/<container>/gold/dim_provider/",
+    dim_provider,
+    {
+        "provider_business_key": f"varchar(64) COLLATE {COLLATION}",
+        "provider_name": f"varchar(400) COLLATE {COLLATION}",
+        "abn": f"char(11) COLLATE {COLLATION}",
+        "state_code": f"varchar(3) COLLATE {COLLATION}",
+        "description": f"varchar(max) COLLATE {COLLATION}",
+    },
+))
 ```
 
-This is a temporary investigation tool, not a production fix.
+The default for unlisted strings is deliberately `varchar(8000)`, not `varchar(max)`, so wide columns become an explicit decision in code review. The generator raises an error on unmapped types rather than guessing, so a new nested column breaks the build instead of the report. Any type not in the mapping, including `FloatType`, `ShortType`, `ByteType` and `BinaryType`, raises an error until you add it. `TimestampNTZType` falls through to the error on purpose, because serverless SQL can't read Delta's timestamp-without-timezone type. With those overrides the output gives equivalent column definitions (names are bracket-quoted, so a column with a space or a reserved word still produces valid DDL). It doesn't emit the `USE` or schema statements, so apply it from your deployment pipeline against the user database that holds the `gold` schema.
 
-## 4. What About Lake Databases?
+The trade-off: you now own a mapping table. For a small, stable Gold layer, hand-written views are simpler to review. The generator pays off at a few dozen tables or more, or when schemas change often.
 
-If you're using Synapse Lake databases (Spark-created tables exposed automatically to the SQL engine), the [Access lake databases using serverless SQL pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/metadata/database) article is clear about the boundary:
+## What Power BI sees
 
-> Tables in the lake databases can't be modified from a serverless SQL pool. Use the database designer or Apache Spark pools to modify a lake database.
+Power BI takes column types from whatever serverless SQL returns. Fix the view and Power BI picks it up on the next refresh.
 
-In other words: when the table is owned by Spark, you must adjust it on the Spark side, or expose it via a serverless view that re-projects the columns explicitly.
+### Text length in the model
 
-For Gold tables consumed by Power BI, I recommend not relying on Lake database auto-exposure for wide-string columns. Instead, define your own SQL database with views (Pattern B). This:
+The length contract stops at SQL: Power BI maps every `varchar` and `char` length to its single Text type, so `varchar(3)` and `varchar(max)` look the same in the model. Microsoft's Power BI Desktop data types page gives Text a maximum of 268,435,456 characters, but Power Query has long silently truncated text values above 32,766 characters when loading into an Import model (Chris Webb documented it in 2019, and it is still widely reported). Test with a known long value before you rely on it. If a value really is longer, split it across rows or columns in the view, or keep only a preview column in the model.
 
-- Decouples your Spark physical layout from your BI contract
-- Lets you declare `varchar(max)` for every wide column
-- Avoids drift if Spark schemas change
+After the first refresh, check the longest value with a `LEN` measure against the source. If they don't match and the source value is over 32,766 characters, suspect that reported Power Query truncation; otherwise something between the view and the model is still clipping text.
 
-## 5. Power BI Consumption
+### Refresh identity and storage credentials
 
-Power BI is a passive consumer of whatever Synapse projects. So if Synapse says `varchar(8000)`, Power BI sees `varchar(8000)` — and your long-text columns will silently truncate or throw errors.
+A view that works in Synapse Studio under your own Entra ID pass-through can fail on a scheduled refresh, because the service connects with the credential stored on the semantic model. If that's a SQL login, serverless SQL can't pass an Entra identity to storage. Because the view calls `OPENROWSET` with an absolute URL and no `DATA_SOURCE`, a SQL login uses a server-level credential whose name matches the storage URL, per the [storage access control guide](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-storage-files-storage-access-control). Either create one in `master` and grant the login access to it, or rewrite the view to use `DATA_SOURCE =` an external data source backed by a database-scoped credential. A database-scoped credential on its own isn't picked up by an absolute-URL `OPENROWSET`.
 
-### Import mode (recommended for Synapse serverless)
+```sql
+USE master;
+GO
 
-Microsoft's [Best practices for serverless SQL pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/best-practices-serverless-sql-pool) article is unambiguous:
+CREATE CREDENTIAL [https://<storage-account>.dfs.core.windows.net/<container>]
+WITH IDENTITY = 'Managed Identity';
+GO
 
-> Consider caching the results on the client side by using Power BI import mode or Azure Analysis Services, and periodically refresh them. Serverless SQL pools can't provide an interactive experience in Power BI Direct Query mode if you're using complex queries or processing a large amount of data.
+GRANT REFERENCES ON CREDENTIAL::[https://<storage-account>.dfs.core.windows.net/<container>] TO [<sql-login>];
+```
 
-In Import mode, as described in [Semantic model modes in the Power BI service](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand), Power BI reads the SQL projection's metadata, ingests the values, and compresses them via VertiPaq. Once imported, there's no SQL length concept inside the semantic model — long strings (over 8k) work fine, as long as Synapse projected them as `varchar(max)`.
+With `IDENTITY = 'Managed Identity'`, the workspace managed identity also needs the Storage Blob Data Reader role on the storage account, or the refresh fails on access instead of on string length.
 
-### DirectQuery mode
+### Import vs DirectQuery
 
-Microsoft's [DirectQuery in Power BI](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about) article documents that DirectQuery passes queries through to the source, so SQL types and folding behaviour matter more. For Synapse serverless plus wide text, Import mode is the safer choice, exactly as the best practices article advises.
+The serverless best practices recommend caching results in Power BI Import mode or Azure Analysis Services, and say serverless SQL can't provide an interactive experience in DirectQuery for complex queries or large data volumes. I covered the wider serverless performance picture in [an earlier post on Synapse serverless SQL performance](/blog/2022-02-02-synapse-serverless-sql-performance/). Long free text compresses poorly in the model, so ask whether a report really needs a 50,000-character description; a preview column plus a drill-through to the source is often better.
 
-## 6. A Reference Pattern for Gold Tables
+## If you're weighing Fabric instead
 
-If your Gold layer is Python-driven (e.g. you maintain a `GOLD_TABLE_SCHEMAS` dict of `StructType` definitions), you don't need to abandon Python. The pragmatic pattern is:
+The same 8 KB problem exists in a Microsoft Fabric Lakehouse, with less room to fix it. The difference is who controls the type:
 
-1. **Spark side:** keep `StringType()` everywhere. It is unbounded by definition.
-2. **Generator step:** write a small Python helper that walks each `StructType` and emits Synapse view DDL where `StringType` becomes `varchar(max)` by default, and known-narrow columns (codes, ABN, postcode, surrogate keys) get tight types via an override dictionary.
-3. **Synapse side:** deploy generated views per Gold table. Power BI connects to these views.
+| | Synapse serverless SQL | Fabric Lakehouse SQL analytics endpoint |
+|---|---|---|
+| Delta string column type | Inferred `varchar(8000)`, or whatever your `WITH` clause says | `STRING`: `varchar(8000)`; Spark `VARCHAR(n)` (n < 2000): `varchar(4n)` |
+| Values over 8 KB | Error (or silent truncation with `ANSI_WARNINGS OFF`) | Truncated at 8 KB |
+| Override | Typed view with `OPENROWSET ... WITH` | Spark `VARCHAR(n)` for narrower types only; no `varchar(max)` on Lakehouse tables |
 
-### Why this works
+As of June 2026, the [Fabric data types reference](https://learn.microsoft.com/en-us/fabric/data-warehouse/data-types) and the SQL analytics endpoint limitations restrict `varchar(max)` to the SQL analytics endpoints of mirrored items and Fabric databases (for tables created after 10 November 2025, or older tables after their next schema change), not Lakehouse tables. If you need full long text in Fabric, land it in a Fabric Warehouse table, where `varchar(max)` holds up to 16 MB.
 
-- The single source of truth stays in Python, beside your transformation code.
-- Synapse gets an explicit contract — no inference, no `varchar(8000)`, no truncation.
-- Power BI sees stable, predictable column types.
-- Schema changes flow through one generator step, eliminating drift between layers.
+## When a view is the wrong tool
 
-### Avoid these patterns
+If Power BI genuinely needs the full long text, or the queries behind the report are complex, a CETAS or Spark-materialised table, or Import directly from the lake, may beat a view over `OPENROWSET`.
 
-- Relying on Lake database auto-exposure for wide-string columns (you lose typing control).
-- `OPENROWSET` without a `WITH` clause for anything consumed downstream.
-- Trying to model `varchar(max)` in PySpark — it doesn't exist.
-- DirectQuery against complex serverless queries for interactive reports.
+## The short version
 
-## 7. TL;DR
-
-- Synapse serverless defaults to `varchar(8000)` when inferring schema, because Parquet doesn't store string length metadata.
-- This is documented behaviour, not a bug.
-- PySpark has no `varchar(max)` concept. `StringType` is unbounded; `VarcharType(n)` is bounded with no `max` overload.
-- The only correct fix is to declare the schema explicitly at the Synapse layer — via `OPENROWSET … WITH (…)`, a typed view, or an external table.
-- Power BI inherits whatever Synapse projects. Use Import mode for Synapse serverless, and make sure your wide-string columns are projected as `varchar(max)`.
-- Keep Spark schemas simple (`StringType`) and put the type contract in Synapse. Optionally generate the Synapse DDL from your Python schemas to keep one source of truth.
-
-## References
-
-1. [Best practices for serverless SQL pool — Azure Synapse Analytics (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/best-practices-serverless-sql-pool)
-2. [How to use OPENROWSET in serverless SQL pool — Azure Synapse Analytics (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-openrowset)
-3. [Troubleshoot serverless SQL pool in Azure Synapse Analytics (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/resources-self-help-sql-on-demand)
-4. [Query Parquet files using serverless SQL pool — Azure Synapse Analytics (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-parquet-files)
-5. [Serverless SQL pool in Azure Synapse Analytics — overview (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/on-demand-workspace-overview)
-6. [Access files on storage in serverless SQL pool — Azure Synapse Analytics (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/develop-storage-files-overview)
-7. [Access lake databases using serverless SQL pool — Azure Synapse Analytics (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/synapse-analytics/metadata/database)
-8. [PySpark API — pyspark.sql.types.VarcharType (Apache Spark)](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.types.VarcharType.html)
-9. [PySpark API — pyspark.sql.types.StringType (Apache Spark)](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.types.StringType.html)
-10. [PySpark data types reference (Microsoft Learn — Azure Databricks)](https://learn.microsoft.com/en-us/azure/databricks/pyspark/reference/datatypes)
-11. [DirectQuery in Power BI — when to use, limitations, alternatives (Microsoft Learn)](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about)
-12. [Semantic model modes in the Power BI service (Microsoft Learn)](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand)
-13. [Azure Synapse pyspark translates STRING datatype into varchar(8000) for external table (Stack Overflow)](https://stackoverflow.com/questions/76506104/azure-synapse-pyspark-translates-string-datatype-into-varchar8000-for-external)
+- `varchar(8000)` is what serverless SQL infers for Parquet and Delta strings when there's no `WITH` clause. It isn't a Spark setting.
+- Spark-created lake database tables map `StringType` to `varchar(max)`, so if you're seeing 8000, find the `OPENROWSET` that's inferring.
+- Exploring files: inference and `ANSI_WARNINGS OFF` are fine. Anything Power BI refreshes from: typed view with UTF-8 collation, no exceptions.
+- Spark-owned table already `varchar(max)` and small: leave it. Only size it in Spark DDL if you're happy for writes to fail on over-length values.
+- `varchar(max)` only where you've confirmed values exceed 8,000 bytes. Power Query has long been reported to truncate text above 32,766 characters on Import, so test with a known long value.

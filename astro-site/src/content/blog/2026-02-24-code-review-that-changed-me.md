@@ -1,88 +1,93 @@
 ---
-title: "The Code Review That Rewired How I Think"
-description: "Seven years ago, a senior engineer reviewed my code and said nothing about the code. I've thought about that review almost every week since."
+title: "The Code Review Comment That Wasn't About the Code"
+description: "Seven years ago a tech lead answered my pull request with one question about who it was for, and it still shapes how I review code."
 author: Michael John Peña
 draft: false
 date: 2026-02-24
 tags:
   - Career
   - Engineering
+  - Code Review
   - Lessons
   - Personal
 ---
 
-Seven years ago, a senior engineer reviewed my code and said nothing about the code.
+Seven years ago, a senior engineer reviewed my code and said nothing about the code. He asked one question about the person it was for, and I've thought about it almost every week since. Most review feedback I've received has been about naming, structure, or a missed edge case. That one comment was about whether I understood the job at all.
 
-I've thought about that review almost every week since.
+## The pull request
 
-## The Setup
+This was early in my career. I'd spent three days building a feature. It worked, the tests passed, and I was proud of it.
 
-Early in my career. I'd spent three days building a feature. It worked. Tests passed. I was proud of it.
+I opened the pull request. My tech lead, a quiet engineer who wrote maybe one comment a day, picked it up.
 
-I submitted the pull request. My tech lead—a quiet engineer who wrote maybe one comment a day—reviewed it.
+He left a single comment. Not on a line of code. On the PR description:
 
-He left one comment. On the PR description, not the code.
+> "Who is this for and what problem does it solve for them?"
 
-"Who is this for and what problem does it solve for them?"
+## How I took it
 
-## My Reaction
+Badly, at first. I was confused and slightly defensive. The problem was obvious. It was in the ticket.
 
-Confused. Slightly defensive. The problem was obvious—it was in the ticket.
+So I replied with the ticket number, a summary of the feature and the acceptance criteria.
 
-I wrote back explaining the feature. The ticket number. The acceptance criteria.
+He came back with:
 
-He replied: "I know what the ticket says. I'm asking if you know why it matters to the person who will use this."
+> "I know what the ticket says. I'm asking if you know why it matters to the person who will use this."
 
-## What He Was Really Asking
+## What he was actually asking
 
-He wasn't asking about users. He was asking if I understood the difference between implementing requirements and solving problems.
+He wasn't really asking about users. He was asking whether I understood the difference between implementing requirements and solving problems.
 
-I'd built exactly what was specified. I'd never asked whether what was specified was actually the right thing.
+I had built exactly what was specified. I had never asked whether what was specified was the right thing. That is a perfectly reliable way to deliver mediocre software forever: every ticket closed, every acceptance criterion ticked, and nobody's day noticeably better.
 
-That's a fine way to deliver mediocre software indefinitely.
+The uncomfortable part was that nothing in my process would have caught it. The tests passed because they tested the spec. The ticket was closed because the spec was met. The only check in the whole pipeline that looked past the spec was one person asking one question.
 
-## What Changed
+## The first time it paid off
 
-I started asking "why" before writing a single line. Not to question the ticket, but to understand it well enough to make better decisions in the implementation.
+I started asking "why" before writing a line. Not to second-guess the ticket, but to understand it well enough to make better decisions inside the implementation.
 
-Two weeks later, I was building a data export feature. Instead of immediately writing the code, I talked to the person who'd requested it.
+Two weeks later I was building a data export feature. Instead of going straight to the code, I talked to the person who had asked for it.
 
-Turned out they needed the export to fit a specific format for a downstream tool. The format in the spec was wrong—it would have required manual reformatting every time.
+It turned out they needed the export to fit a specific format for a downstream tool. The format in the spec was wrong. As written, it would have meant manual reformatting every single time they used it.
 
-Twenty minutes of conversation saved three hours of wrong implementation and an unhappy user.
+Twenty minutes of conversation saved three hours of building the wrong thing, and an unhappy user.
 
-That conversation happened because someone asked me "who is this for and why does it matter to them?"
+That conversation only happened because someone had asked me who my work was for and why it mattered to them.
 
-## The Deeper Lesson
+## What I took from it
 
-**Code is communication.** Not just to the machine. To the next engineer who reads it. To the user it serves. To the team that maintains it.
+**The spec is the minimum.** Meeting it is expected; understanding why it was written is what lets you make good calls on the hundred small decisions the spec never mentions: defaults, error messages, what happens when the input is ugly.
 
-**The spec is the minimum.** Implementing what's written is table stakes. Understanding why it's written unlocks better solutions.
+**Code is communication.** Not just to the compiler. To the next engineer who reads it, to the user it serves, and to the team that has to maintain it. A PR description that only restates the ticket is a missed chance to communicate the part that matters most.
 
-**The best engineers I know are curious.** Not about the technology. About the people. Why does this person need this? What does success look like for them? What will happen if this breaks?
+**The best engineers I know are curious about people, not just technology.** Why does this person need this? What does success look like for them? What happens to them if it breaks?
 
-## What I Try to Do in Reviews Now
+None of this is unique to one tech lead. Google's published review guidance says much the same thing in more formal language. Its [guide to what reviewers look for](https://google.github.io/eng-practices/review/reviewer/looking-for.html) asks whether a change does what the developer intended *and* whether that is good for its users, and it counts both end users and future developers as users. Its [advice on change descriptions](https://google.github.io/eng-practices/review/developer/cl-descriptions.html) says a description should record why the change was made, not just what changed, because it becomes a permanent part of the history. My tech lead just compressed all of that into one sentence.
 
-When I review code, I still look at the implementation. But I also ask the question I was asked.
+## How I review now
 
-Not always explicitly. Sometimes it's "walk me through how a user would encounter this code path." Sometimes it's "what happens if the upstream data is malformed?"
+I still read the implementation. Correctness, security and maintainability matter, and I wrote about the [questions I ask before merging](/blog/2026-01-22-building-for-maintenance/) last month. But I also ask the question I was asked, in one form or another:
 
-I'm looking for the same thing my tech lead was looking for: does this person understand what they're actually building and why?
+- "Walk me through how a user would hit this code path."
+- "What happens if the upstream data is malformed?"
+- "Who notices first if this breaks, and what do they see?"
 
-## The Quiet Engineers
+I'm looking for the same thing he was: does the author understand what they're building and why?
 
-I've noticed a pattern. The engineers who give the most valuable feedback rarely say the most. They ask one question. They point at one thing. And it's always the right one.
+A good answer usually fits in the PR description, in two or three lines. It names who the user is ("the finance analyst who runs the month-end report", not "users"), the outcome they need ("a file their reconciliation tool can import without editing"), and any choice the author made beyond the spec ("I defaulted empty dates to blank instead of 1900-01-01 because the import rejects that value"). If a description covers those three things, I rarely need to ask the question at all.
 
-My tech lead reviewed probably thousands of PRs. He knew which comments mattered and which were noise.
+### When not to ask it
 
-One question. Changed how I approach everything.
+There's a way to get this wrong. The "who is this for" question is powerful because it's rare. If every PR gets a philosophical interrogation, it turns into a ritual people answer with boilerplate, and a dependency bump or a typo fix doesn't need a user story.
 
-## The Bottom Line
+My rule of thumb: ask it when the change is user-facing, when the description only restates the ticket, or when the implementation makes a choice the spec didn't. Skip it for mechanical changes. And ask it as a genuine question, not a gotcha. The point is to get the author thinking, not to prove the reviewer is smarter. Tone decides whether a question like this lands or just stings.
 
-Good code solves a problem for a real person. The best reviews help you see that person clearly.
+It also matters more now than it did seven years ago. With coding assistants writing more of the first draft, producing code that meets a spec has become cheap. Knowing whether the spec is right hasn't.
 
-If you're reviewing code—ask the human question, not just the technical one.
+## The quiet ones
 
-If your code is being reviewed—be able to answer who it's for and why it matters.
+I've noticed a pattern since. The engineers who give the most valuable feedback rarely say the most. They ask one question or point at one thing, and it's usually the right one.
 
-Everything else follows from that.
+My tech lead probably reviewed thousands of PRs. He knew which comments mattered and which were noise, so he left out the noise.
+
+If you're reviewing code, ask the human question, not just the technical one. If your code is being reviewed, be ready to answer who it's for and why it matters to them. Everything else follows from that.
