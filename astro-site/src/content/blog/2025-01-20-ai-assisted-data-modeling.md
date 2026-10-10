@@ -1,400 +1,284 @@
 ---
-title: "AI-Assisted Data Modeling: From Requirements to Schema"
-description: "AI-assisted data modeling accelerates the initial design phase but doesn't replace expertise. Use it to generate options quickly, then apply your domain…"
+title: "Drafting a Star Schema with GPT-4o and Structured Outputs"
+description: "Use GPT-4o structured outputs to draft a star schema from requirements, check it with plain code, and generate Fabric Warehouse DDL that respects its limits."
 author: Michael John Peña
 draft: false
 date: 2025-01-20
 tags:
-  - AI
   - Data Modeling
-  - Database Design
-  - Azure
-  - Architecture
+  - Azure OpenAI
+  - Structured Output
+  - Microsoft Fabric
+  - Data Warehouse
+  - AI
 ---
 
-## The AI-Assisted Modeling Workflow
+The slow part of a new warehouse project is rarely writing the DDL. It's the weeks spent turning a pile of requirements into a list of facts, a grain for each one, and the dimensions everyone agrees on. A large language model can produce a plausible first draft of that in seconds. The catch is that a plausible draft with the wrong grain is worse than no draft, because it looks finished.
 
-```
-Traditional:
-Requirements → Manual Analysis → ERD → Review → Schema → DDL
+My position is simple: use the model to draft the dimensional design and surface the questions, use deterministic code to check it, and keep a human responsible for the grain. Here is how I'd wire that up with Azure OpenAI and a Microsoft Fabric Warehouse as of January 2025.
 
-AI-Assisted:
-Requirements → AI Analysis → Initial Model → Human Review → Refinement → Schema → DDL
-```
+## Where the model helps and where it doesn't
 
-## From Natural Language to Data Model
+Kimball's [four-step dimensional design process](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/four-4-step-design-process/) is still the right frame: pick the business process, declare the grain, identify the dimensions, identify the facts. An LLM is useful at each step, but not equally.
+
+| Step | What GPT-4o is good at | What still needs a person |
+|---|---|---|
+| Business process | Grouping requirements into candidate processes | Deciding which processes are in scope this release |
+| Grain | Proposing a grain sentence per fact | Confirming the grain matches how the source system actually records events |
+| Dimensions | Spotting the usual suspects (date, customer, product, store) | Conformed dimensions shared with existing marts |
+| Facts | Listing measures and guessing additivity | Semi-additive and non-additive measures, which models routinely get wrong |
+
+The model has read a lot of textbook star schemas, so its drafts look like textbook star schemas. That's both the value and the risk. It will happily put `account_balance` on a transaction fact and mark it additive, or invent a `dim_promotion` because retail examples usually have one. Role-playing dimensions are another common slip: an accumulating snapshot needs an order date and a ship date that both point at `dim_date`, and drafts often collapse them into one reference or name them so they collide. It also has no idea that your order lines arrive in a different system from your shipments, which is exactly the kind of fact that decides the grain.
+
+So the workflow I recommend is: requirements in, typed draft out, automated checks, then a design review where people argue about the grain with the draft and its open questions on the screen.
+
+## Constrain the output shape first
+
+Asking for "a JSON structure" in the prompt, or using JSON mode, gets you valid JSON most of the time, but not necessarily your schema. For something you'll feed into a code generator, most of the time isn't good enough. Azure OpenAI's [structured outputs](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/structured-outputs) feature makes the model follow a JSON Schema you supply. It arrived in API version `2024-08-01-preview` and is in the GA API version `2024-10-21`, with `gpt-4o` version `2024-08-06` (or `gpt-4o-mini` version `2024-07-18`) as the model to deploy for it.
+
+There are rules you have to design around. Every property must be required, `additionalProperties` must be false, and only a subset of JSON Schema is supported. In practice that pushes you towards flat, explicit shapes with enums wherever the answer is drawn from a fixed list. I also add an `open_questions` field, because the most useful thing a model can do in a design session is tell you what it had to assume. Fact tables reference dimensions through a role, so a fact can use `dim_date` twice as `order_date` and `ship_date`.
+
+The three snippets below form one script, `draft_schema.py`; install its dependencies with `pip install openai azure-identity pydantic`.
 
 ```python
-from azure.ai.foundry import AIFoundryClient
+import os
+from pathlib import Path
+from typing import Literal
 
-class AIDataModeler:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from openai import AzureOpenAI
+from pydantic import BaseModel
 
-    async def generate_model(self, requirements: str, model_type: str = "dimensional") -> dict:
-        """Generate data model from business requirements."""
 
-        if model_type == "dimensional":
-            prompt = self._dimensional_prompt(requirements)
-        elif model_type == "normalized":
-            prompt = self._normalized_prompt(requirements)
-        else:
-            prompt = self._generic_prompt(requirements)
+class Column(BaseModel):
+    name: str
+    logical_type: Literal["string", "integer", "bigint", "decimal", "date", "datetime", "boolean"]
+    nullable: bool
+    description: str
 
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.2
-        )
 
-        model = json.loads(response.choices[0].message.content)
+class Measure(BaseModel):
+    name: str
+    logical_type: Literal["integer", "decimal"]
+    additivity: Literal["additive", "semi_additive", "non_additive"]
+    description: str
 
-        # Validate and enhance
-        model = self._validate_model(model)
-        model = self._add_best_practices(model)
 
-        return model
+class Dimension(BaseModel):
+    name: str
+    description: str
+    natural_key: str
+    scd_type: Literal["type_1", "type_2"]
+    attributes: list[Column]
 
-    def _dimensional_prompt(self, requirements: str) -> str:
-        return f"""Design a dimensional data model (star schema) based on these requirements:
 
-        Requirements:
-        {requirements}
+class DimensionRef(BaseModel):
+    role: str
+    dimension: str
 
-        Return a JSON structure:
-        {{
-            "model_name": "name",
-            "description": "what this model represents",
-            "facts": [
-                {{
-                    "name": "fact_table_name",
-                    "description": "what this fact represents",
-                    "grain": "what one row represents",
-                    "measures": [
-                        {{"name": "column_name", "type": "decimal|integer", "description": "what it measures", "aggregation": "sum|avg|count"}}
-                    ],
-                    "degenerate_dimensions": [
-                        {{"name": "column_name", "type": "string|integer", "description": "description"}}
-                    ],
-                    "foreign_keys": ["dimension_name", ...]
-                }}
-            ],
-            "dimensions": [
-                {{
-                    "name": "dim_table_name",
-                    "description": "what this dimension represents",
-                    "type": "Type1|Type2|Type3",
-                    "attributes": [
-                        {{"name": "column_name", "type": "string|integer|date", "description": "description"}}
-                    ],
-                    "hierarchies": [
-                        {{"name": "hierarchy_name", "levels": ["level1", "level2", ...]}}
-                    ]
-                }}
-            ],
-            "relationships": [
-                {{"fact": "fact_name", "dimension": "dim_name", "type": "many_to_one"}}
+
+class Fact(BaseModel):
+    name: str
+    business_process: str
+    fact_type: Literal["transaction", "periodic_snapshot", "accumulating_snapshot"]
+    grain: str
+    dimensions: list[DimensionRef]
+    degenerate_dimensions: list[Column]
+    measures: list[Measure]
+
+
+class StarSchema(BaseModel):
+    facts: list[Fact]
+    dimensions: list[Dimension]
+    open_questions: list[str]
+
+
+SYSTEM_PROMPT = """You are a dimensional modeller following Kimball's four-step process.
+For each business process, declare the grain as one sentence describing what a single row represents.
+Use snake_case names. Prefix fact tables with fact_ and dimension tables with dim_.
+Every dimension a fact references must match a dimension you define.
+Give each reference a role, such as order_date or customer; use the dimension name without dim_ when it plays one role.
+Do not put foreign key or surrogate key columns in attributes; they are generated later.
+Mark balances, inventory levels and other point-in-time values as semi_additive.
+List every assumption you made about the source systems in open_questions."""
+
+token_provider = get_bearer_token_provider(
+    DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
+)
+
+client = AzureOpenAI(
+    azure_endpoint="https://<your-resource-name>.openai.azure.com/",
+    azure_ad_token_provider=token_provider,
+    api_version="2024-10-21",
+)
+
+
+def draft_star_schema(requirements: str) -> StarSchema:
+    completion = client.beta.chat.completions.parse(
+        model=os.environ.get("AZURE_OPENAI_DEPLOYMENT", "<your-gpt-4o-deployment>"),
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": requirements},
+        ],
+        response_format=StarSchema,
+        temperature=0.2,
+    )
+    message = completion.choices[0].message
+    if message.refusal:
+        raise RuntimeError(f"Model refused: {message.refusal}")
+    return message.parsed
+```
+
+A few choices worth calling out. I authenticate with Microsoft Entra ID through `azure-identity` rather than an API key, because a design tool tends to end up on a shared VM or in a notebook and keys leak from both. The `parse` helper in the `openai` 1.x Python library turns the Pydantic model into the JSON Schema and hands you a typed object back, so there's no `json.loads` and no hand-written schema to keep in sync. Low temperature keeps reruns on the same requirements broadly similar, which matters when you want to diff two drafts.
+
+If you haven't used schema enforcement before, I covered the general pattern in [JSON Schema enforcement in LLM applications](/blog/2024-09-14-json-schema-enforcement/).
+
+## Check the draft with boring code
+
+Structured outputs guarantees the shape, not the sense. A fact can still reference a dimension that doesn't exist, and a "transaction" fact can still carry a semi-additive balance. These checks are cheap, deterministic, and catch the mistakes I'd otherwise be pointing out in a review meeting.
+
+```python
+import re
+
+SNAKE_CASE = re.compile(r"^[a-z][a-z0-9_]*$")
+
+
+def validate(schema: StarSchema) -> list[str]:
+    problems: list[str] = []
+    dimension_names = {d.name for d in schema.dimensions}
+    referenced: set[str] = set()
+
+    for fact in schema.facts:
+        if not fact.name.startswith("fact_"):
+            problems.append(f"{fact.name}: fact tables should start with fact_")
+        if len(fact.grain.split()) < 4:
+            problems.append(f"{fact.name}: grain '{fact.grain}' is too vague to review")
+        if not any("date" in ref.dimension for ref in fact.dimensions):
+            problems.append(f"{fact.name}: no date dimension; check how this process is timed")
+        roles = [ref.role for ref in fact.dimensions]
+        if len(roles) != len(set(roles)):
+            problems.append(f"{fact.name}: duplicate dimension roles; each reference needs its own role")
+        for ref in fact.dimensions:
+            referenced.add(ref.dimension)
+            if ref.dimension not in dimension_names:
+                problems.append(f"{fact.name}: references undefined dimension {ref.dimension}")
+            if not SNAKE_CASE.match(ref.role):
+                problems.append(f"{fact.name}.{ref.role}: role is not snake_case")
+        for measure in fact.measures:
+            if fact.fact_type == "transaction" and measure.additivity == "semi_additive":
+                problems.append(
+                    f"{fact.name}.{measure.name}: semi-additive measure on a transaction fact; "
+                    "consider a periodic snapshot"
+                )
+
+    for dim in schema.dimensions:
+        if not dim.name.startswith("dim_"):
+            problems.append(f"{dim.name}: dimension tables should start with dim_")
+        if dim.name not in referenced:
+            problems.append(f"{dim.name}: not used by any fact")
+        names = [a.name for a in dim.attributes]
+        if len(names) != len(set(names)):
+            problems.append(f"{dim.name}: duplicate attribute names")
+        for name in names + [dim.natural_key]:
+            if not SNAKE_CASE.match(name):
+                problems.append(f"{dim.name}.{name}: not snake_case")
+
+    return problems
+```
+
+You could ask the model to critique its own draft instead. I wouldn't, at least not as the only gate. A second LLM pass is non-deterministic and tends to agree with itself. Rules like "every fact needs a date dimension" are your team's standards, so encode them once in code and run them on every draft. Feed the failures back to the model as a follow-up message if you want it to repair them, but keep the check itself in Python.
+
+## Generate DDL that Fabric Warehouse will accept
+
+Most generic generators emit SQL Server DDL, and a Fabric Warehouse rejects a fair bit of it. As of January 2025, these are the differences that matter for a star schema:
+
+- [Table constraints](https://learn.microsoft.com/en-us/fabric/data-warehouse/table-constraints) are informational only. `PRIMARY KEY` and `UNIQUE` must be `NONCLUSTERED` and `NOT ENFORCED`, `FOREIGN KEY` must be `NOT ENFORCED`, and you add them with `ALTER TABLE` after creating the table.
+- [Data types](https://learn.microsoft.com/en-us/fabric/data-warehouse/data-types) are a subset of SQL Server's. There's no `nvarchar`, `datetime` or `money`, and `datetime2` precision tops out at 6.
+- There are no `IDENTITY` columns, so surrogate keys come from your load process, not the table.
+
+Because the keys aren't enforced, the warehouse won't stop duplicate surrogate keys or orphaned fact rows. Declaring them is still worthwhile because tools can read the relationships, but your pipeline owns integrity.
+
+```python
+TYPE_MAP = {
+    "string": "VARCHAR(255)",
+    "integer": "INT",
+    "bigint": "BIGINT",
+    "decimal": "DECIMAL(19, 4)",
+    "date": "DATE",
+    "datetime": "DATETIME2(6)",
+    "boolean": "BIT",
+}
+
+
+def column_sql(col: Column) -> str:
+    null = "NULL" if col.nullable else "NOT NULL"
+    return f"{col.name} {TYPE_MAP[col.logical_type]} {null}"
+
+
+def create_table(name: str, columns: list[str]) -> str:
+    body = ",\n    ".join(columns)
+    return f"CREATE TABLE dbo.{name} (\n    {body}\n);"
+
+
+def generate_ddl(schema: StarSchema) -> str:
+    statements: list[str] = []
+
+    for dim in schema.dimensions:
+        # The natural key is assumed to be a string; adjust if your source uses numeric IDs.
+        columns = [f"{dim.name}_key BIGINT NOT NULL", f"{dim.natural_key} VARCHAR(100) NOT NULL"]
+        columns += [column_sql(a) for a in dim.attributes if a.name != dim.natural_key]
+        if dim.scd_type == "type_2":
+            columns += [
+                "valid_from DATETIME2(6) NOT NULL",
+                "valid_to DATETIME2(6) NULL",
+                "is_current BIT NOT NULL",
             ]
-        }}
-
-        Follow dimensional modeling best practices:
-        - Identify business processes for facts
-        - Identify descriptive context for dimensions
-        - Define clear grain for each fact
-        - Use surrogate keys for dimensions
-        - Consider slowly changing dimensions"""
-
-    def _normalized_prompt(self, requirements: str) -> str:
-        return f"""Design a normalized data model (3NF) based on these requirements:
-
-        Requirements:
-        {requirements}
-
-        Return a JSON structure:
-        {{
-            "model_name": "name",
-            "description": "what this model represents",
-            "entities": [
-                {{
-                    "name": "entity_name",
-                    "description": "what this entity represents",
-                    "attributes": [
-                        {{
-                            "name": "column_name",
-                            "type": "string|integer|decimal|date|boolean",
-                            "nullable": true|false,
-                            "description": "description",
-                            "constraints": ["primary_key", "unique", "foreign_key:table.column"]
-                        }}
-                    ]
-                }}
-            ],
-            "relationships": [
-                {{
-                    "name": "relationship_name",
-                    "from_entity": "entity1",
-                    "to_entity": "entity2",
-                    "cardinality": "one_to_one|one_to_many|many_to_many",
-                    "on_delete": "cascade|set_null|restrict"
-                }}
-            ]
-        }}
-
-        Follow normalization best practices:
-        - Eliminate redundancy
-        - Ensure referential integrity
-        - Use appropriate data types
-        - Define clear primary keys"""
-```
-
-## Iterative Refinement
-
-```python
-class InteractiveModeler:
-    def __init__(self, base_modeler: AIDataModeler):
-        self.modeler = base_modeler
-        self.current_model = None
-        self.history = []
-
-    async def start(self, requirements: str) -> dict:
-        """Start a new modeling session."""
-        self.current_model = await self.modeler.generate_model(requirements)
-        self.history.append({"action": "initial", "model": self.current_model.copy()})
-        return self.current_model
-
-    async def refine(self, feedback: str) -> dict:
-        """Refine model based on feedback."""
-        response = await self.modeler.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Current data model:
-                {json.dumps(self.current_model, indent=2)}
-
-                User feedback:
-                {feedback}
-
-                Update the model based on the feedback. Return the complete updated model in the same JSON format.
-                Explain your changes briefly."""
-            }]
+        statements.append(create_table(dim.name, columns))
+        statements.append(
+            f"ALTER TABLE dbo.{dim.name} ADD CONSTRAINT pk_{dim.name} "
+            f"PRIMARY KEY NONCLUSTERED ({dim.name}_key) NOT ENFORCED;"
         )
 
-        # Parse response (model + explanation)
-        result = self._parse_refinement(response.choices[0].message.content)
+    for fact in schema.facts:
+        columns = [f"{ref.role}_key BIGINT NOT NULL" for ref in fact.dimensions]
+        columns += [column_sql(c) for c in fact.degenerate_dimensions]
+        columns += [f"{m.name} {TYPE_MAP[m.logical_type]} NULL" for m in fact.measures]
+        grain = " ".join(fact.grain.split())  # keep the SQL comment on one line
+        statements.append(f"-- Grain: {grain}\n" + create_table(fact.name, columns))
+        for ref in fact.dimensions:
+            statements.append(
+                f"ALTER TABLE dbo.{fact.name} ADD CONSTRAINT fk_{fact.name}_{ref.role} "
+                f"FOREIGN KEY ({ref.role}_key) REFERENCES dbo.{ref.dimension} "
+                f"({ref.dimension}_key) NOT ENFORCED;"
+            )
 
-        self.current_model = result["model"]
-        self.history.append({
-            "action": "refine",
-            "feedback": feedback,
-            "changes": result["explanation"],
-            "model": self.current_model.copy()
-        })
+    return "\n\n".join(statements)
 
-        return result
 
-    async def add_entity(self, description: str) -> dict:
-        """Add a new entity based on description."""
-        return await self.refine(f"Add a new entity: {description}")
-
-    async def modify_entity(self, entity_name: str, changes: str) -> dict:
-        """Modify an existing entity."""
-        return await self.refine(f"Modify entity '{entity_name}': {changes}")
-
-    async def add_relationship(self, description: str) -> dict:
-        """Add a relationship between entities."""
-        return await self.refine(f"Add relationship: {description}")
-
-    async def optimize_for(self, use_case: str) -> dict:
-        """Optimize model for specific use case."""
-        return await self.refine(f"Optimize this model for: {use_case}")
+if __name__ == "__main__":
+    requirements = Path("requirements.md").read_text(encoding="utf-8")
+    draft = draft_star_schema(requirements)
+    issues = validate(draft)
+    for question in draft.open_questions:
+        print(f"OPEN QUESTION: {question}")
+    if issues:
+        for issue in issues:
+            print(f"FIX: {issue}")
+    else:
+        print(generate_ddl(draft))
 ```
 
-## Schema Generation
+Note that the generator is ordinary code, not a prompt. I don't let the model write DDL directly. The model's job ends at the logical design. Type mapping, naming, SCD columns and constraint syntax are platform rules, and they should come out the same every time. If you later target Azure SQL Database or Synapse dedicated SQL pools, you swap the generator, not the prompt. The grain comment above each fact table is deliberate: it puts the most important design decision where the next engineer will actually read it.
 
-```python
-class SchemaGenerator:
-    def __init__(self, model: dict):
-        self.model = model
+## When not to bother
 
-    def generate_ddl(self, dialect: str = "fabric") -> str:
-        """Generate DDL for the data model."""
-        if dialect == "fabric":
-            return self._generate_fabric_ddl()
-        elif dialect == "postgres":
-            return self._generate_postgres_ddl()
-        elif dialect == "snowflake":
-            return self._generate_snowflake_ddl()
-        else:
-            raise ValueError(f"Unknown dialect: {dialect}")
+This approach earns its keep at the start of a new subject area, when the requirements are long and nobody has a diagram yet. It's less useful, or actively unhelpful, in a few cases:
 
-    def _generate_fabric_ddl(self) -> str:
-        """Generate Fabric Warehouse DDL."""
-        ddl_statements = []
+- **Extending a mature warehouse.** The hard part there is conforming to dimensions you already have. Unless you put the existing model into the prompt, the draft will reinvent `dim_customer` with different attributes.
+- **Thin requirements.** If the input is three bullet points, the output is a textbook schema with your nouns in it. Do the workshop first.
+- **Sensitive requirements documents.** Requirements often name systems, customers and data classifications. That's fine with an Azure OpenAI deployment inside your tenant and governance, and not fine in a consumer chat window.
+- **Teams that will skip the review.** If the draft goes straight to DDL, you've automated the most expensive mistake in dimensional modelling: a wrong grain built into every downstream report.
 
-        # Generate dimension tables first
-        for dim in self.model.get("dimensions", []):
-            ddl = self._dimension_to_ddl(dim)
-            ddl_statements.append(ddl)
+## The takeaway
 
-        # Generate fact tables
-        for fact in self.model.get("facts", []):
-            ddl = self._fact_to_ddl(fact)
-            ddl_statements.append(ddl)
-
-        return "\n\n".join(ddl_statements)
-
-    def _dimension_to_ddl(self, dim: dict) -> str:
-        """Generate DDL for dimension table."""
-        columns = []
-
-        # Surrogate key
-        columns.append(f"    {dim['name']}_key BIGINT NOT NULL")
-
-        # Natural key
-        columns.append(f"    {dim['name']}_id VARCHAR(50) NOT NULL")
-
-        # Attributes
-        for attr in dim["attributes"]:
-            col_type = self._map_type(attr["type"])
-            nullable = "NULL" if attr.get("nullable", True) else "NOT NULL"
-            columns.append(f"    {attr['name']} {col_type} {nullable}")
-
-        # SCD columns if Type 2
-        if dim.get("type") == "Type2":
-            columns.extend([
-                "    effective_date DATE NOT NULL",
-                "    expiration_date DATE",
-                "    is_current BIT NOT NULL DEFAULT 1"
-            ])
-
-        # Audit columns
-        columns.extend([
-            "    created_at DATETIME2 NOT NULL DEFAULT GETDATE()",
-            "    updated_at DATETIME2 NOT NULL DEFAULT GETDATE()"
-        ])
-
-        ddl = f"""-- {dim['description']}
-CREATE TABLE {dim['name']} (
-{chr(10).join(columns)},
-    CONSTRAINT PK_{dim['name']} PRIMARY KEY ({dim['name']}_key)
-);"""
-
-        return ddl
-
-    def _fact_to_ddl(self, fact: dict) -> str:
-        """Generate DDL for fact table."""
-        columns = []
-
-        # Foreign keys to dimensions
-        for fk in fact["foreign_keys"]:
-            columns.append(f"    {fk}_key BIGINT NOT NULL")
-
-        # Degenerate dimensions
-        for dd in fact.get("degenerate_dimensions", []):
-            col_type = self._map_type(dd["type"])
-            columns.append(f"    {dd['name']} {col_type}")
-
-        # Measures
-        for measure in fact["measures"]:
-            col_type = self._map_type(measure["type"])
-            columns.append(f"    {measure['name']} {col_type}")
-
-        # Date key (typically required)
-        columns.append("    date_key INT NOT NULL")
-
-        # Audit
-        columns.append("    loaded_at DATETIME2 NOT NULL DEFAULT GETDATE()")
-
-        ddl = f"""-- {fact['description']}
--- Grain: {fact['grain']}
-CREATE TABLE {fact['name']} (
-{chr(10).join(columns)}
-);
-
--- Foreign key constraints
-"""
-        # Add FK constraints
-        for fk in fact["foreign_keys"]:
-            ddl += f"""ALTER TABLE {fact['name']}
-ADD CONSTRAINT FK_{fact['name']}_{fk}
-FOREIGN KEY ({fk}_key) REFERENCES {fk}({fk}_key);
-
-"""
-
-        return ddl
-
-    def _map_type(self, logical_type: str) -> str:
-        """Map logical types to Fabric types."""
-        type_map = {
-            "string": "VARCHAR(255)",
-            "text": "VARCHAR(MAX)",
-            "integer": "INT",
-            "bigint": "BIGINT",
-            "decimal": "DECIMAL(18,2)",
-            "date": "DATE",
-            "datetime": "DATETIME2",
-            "boolean": "BIT"
-        }
-        return type_map.get(logical_type, "VARCHAR(255)")
-```
-
-## Model Documentation
-
-```python
-class ModelDocumenter:
-    def __init__(self, llm_client):
-        self.llm = llm_client
-
-    async def generate_documentation(self, model: dict) -> str:
-        """Generate comprehensive documentation for data model."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Generate comprehensive documentation for this data model:
-
-                {json.dumps(model, indent=2)}
-
-                Include:
-                1. Executive Summary
-                2. Model Overview diagram description
-                3. Entity Descriptions (purpose, key attributes, relationships)
-                4. Data Dictionary (all columns with descriptions)
-                5. Business Rules and Constraints
-                6. Usage Examples (sample queries)
-                7. Maintenance Guidelines
-
-                Format as Markdown."""
-            }]
-        )
-
-        return response.choices[0].message.content
-
-    async def generate_erd_description(self, model: dict) -> str:
-        """Generate Mermaid diagram for ERD."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Generate a Mermaid ER diagram for this data model:
-
-                {json.dumps(model, indent=2)}
-
-                Use Mermaid erDiagram syntax. Include key attributes and relationships."""
-            }]
-        )
-
-        return response.choices[0].message.content
-```
-
-## Best Practices
-
-1. **Start with requirements**: AI needs clear business context
-2. **Review critically**: AI-generated models are starting points
-3. **Iterate**: Use feedback loops to refine
-4. **Validate**: Check against known patterns and constraints
-5. **Document**: Generate documentation alongside the model
-
-AI-assisted data modeling accelerates the initial design phase but doesn't replace expertise. Use it to generate options quickly, then apply your domain knowledge to refine.
+Treat the model as a fast junior modeller who has read every Kimball book and never seen your source systems. Constrain its output with structured outputs, hold it to your standards with plain code, keep platform-specific DDL in a generator you control, and spend the time you saved arguing about the grain. That conversation is still the job. Once the tables exist, the next layer up is the semantic model, which I covered in [semantic layers with AI](/blog/2025-01-19-semantic-layer-with-ai/).
