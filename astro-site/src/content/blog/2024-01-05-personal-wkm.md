@@ -1,52 +1,98 @@
 ---
-title: "Personal Workflow System for Knowledge Workers"
-description: "Every project or task begins as an idea. To effectively capture these initial thoughts, a creative and unstructured outlet is essential. This is where the…"
+title: "Capture, Plan, Execute, Refine: My Knowledge Work System"
+description: "The four-stage personal workflow I use as a knowledge worker, and the tools behind each stage: reMarkable, Drafts, Readwise, Obsidian, To Do and Outlook."
 author: Michael John Peña
 draft: false
 date: 2024-01-05
 image: /2024/01/personal-wkm.png
 url: /blog/personal-wkm/
 tags:
-  - obsidian
   - Productivity
-  - flow
-  - work
+  - Knowledge Management
+  - Obsidian
+  - Personal
 ---
 
-![img](/2024/01/personal-wkm.png)
+![Diagram of a personal workflow with four stages: capture, plan, execute and refine](/2024/01/personal-wkm.png)
 
-## Capture: The Birthplace of Innovation
+Knowledge work leaks. Ideas show up in the shower, decisions get made in meetings nobody wrote down, and the article you highlighted last month is gone when you need it. Most productivity advice answers this with a single app, which I think is the wrong unit of change. What helps is a workflow: a small number of stages, each with one clear home, so you always know where a thought goes next.
 
-Every project or task begins as an idea. To effectively capture these initial thoughts, a creative and unstructured outlet is essential. This is where the **reMarkable** tablet comes into play. Acting as a digital scratchpad, it serves as a platform for sketching out the preliminary versions of any concept. In this stage, the focus isn't on perfection or structure, but on the free flow of ideas. The tablet's user-friendly interface enables an undistracted brainstorming process, fostering the creation of unique and innovative ideas.
+Mine has four stages: capture, plan, execute and refine. The tools matter less than the boundaries between them, so for each stage I'll explain what I use and why it earns its place.
 
-For tasks that already have a certain level of structure or direction, I employ the **Drafts** app. This tool is designed for quick and easy note-taking, making it perfect for recording fleeting thoughts or ideas. Whether you're on a commute, in a meeting, or simply away from your workstation, Drafts provides a low-friction environment for capturing thoughts effectively.
+## Capture: get it out of your head
 
-Beyond ideation, knowledge workers also consume a vast amount of content from diverse sources. This is where tools like Readwise prove invaluable. With its central highlighting feature, **Readwise** enables users to consolidate key points from various reading materials into a single, manageable location. This not only aids in content organization but also enhances recall and comprehension.
+Capture is about speed and low friction, not structure. If capturing a thought takes more effort than the thought is worth, you'll skip it, and that's how ideas die. I split capture by how formed the idea already is.
 
-Participation in **meetings** also forms a significant part of the capture process. Over the years, my approach to meetings has evolved, shifting from aggressive participation to active listening. Recognizing the importance of capturing key points from these discussions, I systematically record new ideas, problems, solutions, anecdotes, and action items. These notes are captured in **Obsidian** straight away, a powerful note-taking app, using a customized template that aligns with the project at hand.
+### Unstructured ideas go on paper (or close to it)
 
-## Plan: The Roadmap to Success
+Every project or task I take on starts as a rough idea, and rough ideas need somewhere messy to live. I use a **reMarkable** tablet as a digital scratchpad for sketching early versions of a concept. At this stage I'm not after polish or structure; I want the ideas to flow. What I value is that it's an undistracting device. There's no inbox and nothing pinging me, so I stay in the problem instead of drifting into email.
 
-Having captured the initial ideas and information, the next step is to create a structured plan. This stage is critical in transforming abstract concepts into tangible tasks and goals. The key components of an effective plan include task tracking, scheduling, and workspace organization.
+### Semi-structured thoughts go into Drafts
 
-For task tracking, I use **Microsoft ToDo**. This app offers a simple and intuitive interface for recording and tracking tasks. It's free to use and has been a part of my workflow for several years. The beauty of task tracking apps like Microsoft ToDo lies in their versatility. They can accommodate both personal and professional tasks, keeping all your responsibilities in one organized location.
+When a thought already has some shape, such as a task, a sentence for a blog post or a follow-up for a colleague, I use the **[Drafts](https://getdrafts.com/)** app. It opens straight to a blank note, which makes it ideal on a commute, between meetings, or anywhere away from my desk. The point is to capture first and decide where it belongs later.
 
-When it comes to scheduling, I rely on **Microsoft Outlook**. This tool excels in its ability to consolidate multiple calendars, ensuring a comprehensive view of all commitments. In my workflow, every task that I commit to is scheduled in Outlook. This practice is guided by a simple rule: if it's not on the calendar, it's likely not going to happen.
+### Reading goes through Readwise
 
-## Execute: The Journey from Concept to Reality
+A large part of knowledge work is consuming other people's thinking: books, articles, papers, documentation. **Readwise** pulls highlights from those sources into one place, so key points stop being scattered across a Kindle, a browser and a stack of PDFs. Having them in one place also helps me remember and understand what I've read, because I'm revisiting highlights instead of rereading whole pieces. Readwise also has an [official Obsidian export](https://docs.readwise.io/readwise/docs/exporting-highlights/obsidian), which matters because it means highlights end up next to the rest of my notes rather than in another silo.
 
-The execution phase is where ideas turn into deliverables. Over the past two years, **Obsidian** has been my primary tool for this stage. I first started with RoamResearch, then Obsidian, then LogSeq, and now back to Obsidian. This digital workspace offers a range of features that aid in processing and organizing data from various sources. It's where I draft my blogs, create content outlines, and collate research findings.
+### Meetings get captured live, in Obsidian
 
-Once the initial drafts are ready, they are transferred to the necessary platforms for further refinement and publishing. These platforms may include long-form documents for work-related projects, internal wikis for team collaboration, blogs for personal or professional content, and other relevant outlets.
+Meetings are a big part of my capture process, and my approach to them has changed over the years. I've shifted from aggressive participation to active listening. Listening well and writing well turn out to be the same skill: if you're busy composing your next point, you aren't capturing anything.
 
-For more complex items such as code snippets and images, the transition process requires a bit more finesse. For instance, while code snippets may be drafted and organized in Obsidian, the actual solution files would reside in a dedicated code editor like Visual Studio. The key here is to maintain a balance between convenience and context. While it's useful to have relevant snippets at your fingertips in Obsidian, you wouldn't want to duplicate all your code there.
+During a meeting I record five things:
 
-The same principle applies to images and other media. While these can be referenced and organized in Obsidian, the actual files would need to be stored and edited in appropriate software. This careful handling ensures a smooth transition between different aspects of the workflow, from ideation to execution.
+| What I capture | Why it matters later |
+|---|---|
+| New ideas | Raw material for future work or writing |
+| Problems | The things people actually care about, in their own words |
+| Solutions | Options already on the table, so nobody re-proposes them |
+| Anecdotes | Stories and examples that make a point land |
+| Action items | Commitments, which feed straight into planning |
 
-## Refine: The Pursuit of Continuous Improvement
+These go straight into **Obsidian**, using a template I've customised for the project in question. Obsidian's built-in [Templates core plugin](https://help.obsidian.md/Plugins/Templates) is enough for this. The template means I don't waste the first five minutes of a meeting deciding how to structure notes, and every meeting note for a project has the same shape when I search it later.
 
-While a well-structured workflow system can significantly enhance productivity, it's important to remember that no system is perfect. There will be times when the system fails to deliver optimal results, or when a new tool that better meets your needs comes along. Changes in priorities or personal preferences can also necessitate modifications to your workflow.
+## Plan: turn captured items into commitments
 
-This is where the process of refinement comes into play. The goal is not to achieve a perfect system, but rather to constantly improve the one you have. This requires regular reflection on your workflows and processes, identification of areas that need improvement, and the willingness to make necessary changes.
+Capture gives you a pile; planning turns the pile into tasks, dates and goals. This stage is where abstract ideas become concrete. For me it comes down to two things: tracking tasks and scheduling them.
 
-In my experience, one of the most effective ways to refine your workflow is to seek feedback from others. This could be colleagues, mentors, or other professionals in your field. Their perspectives can provide valuable insights into potential areas for improvement that you might have overlooked.
+### Task tracking: Microsoft To Do
+
+For tasks I use **Microsoft To Do**. It's simple, it's free, and it has been part of my workflow for several years. I don't need dependency graphs or custom fields for personal task management. I need one list that holds both personal and work responsibilities, so nothing falls through the gap between two systems. To Do does that well.
+
+My rule is that the task list is a holding area, not a promise. A task that sits in To Do without a time attached is something I *might* do.
+
+### Scheduling: Microsoft Outlook
+
+The promise lives in **Microsoft Outlook**. Outlook pulls multiple calendars into one view, which gives me a complete picture of my commitments across work and home. Every task I commit to gets a block in Outlook. The rule is simple: if it's not on the calendar, it probably isn't going to happen.
+
+This is the step most people skip, and in my view it's the one that matters most. A to-do list has no sense of capacity. A calendar does. When the week is full, it's obvious, and you're forced to make a trade-off now instead of discovering it on Friday afternoon. I wrote more about the weekly side of this in [planning your week ahead](/blog/planning-your-week-ahead/).
+
+## Execute: where the work happens
+
+Execution is where ideas turn into deliverables, and for the past two years **Obsidian** has been my main tool for it. It's where I draft blog posts, outline content and pull research together from different sources.
+
+I didn't land on it straight away. I started with Roam Research, moved to Obsidian, tried Logseq, and came back to Obsidian. If you're comparing note tools, my advice is not to treat this as a feature checklist. They all handle linked notes. Pick the one you'll actually open every day, and be wary of switching more often than your notes can survive. Every migration costs you time and some broken structure.
+
+### Obsidian is the workshop, not the final destination
+
+Once a draft is ready, it moves to wherever it needs to be refined and published: long-form documents for work projects, internal wikis for team collaboration, blogs for personal or professional writing, and other relevant outlets. Obsidian is where thinking happens, not where finished work lives.
+
+Code and images need more care. I'll draft and organise code snippets in Obsidian, but the actual solution files belong in a proper editor such as Visual Studio, under source control. The balance I aim for is convenience versus context. It's useful to have relevant snippets at hand in your notes, but you don't want to duplicate your codebase there. Once you have two copies, one of them is wrong.
+
+The same goes for images and other media. I reference and organise them in Obsidian, but the files themselves are stored and edited in the right tools. Keeping these boundaries clear is what makes the handover from idea to delivered work smooth.
+
+### When this setup isn't the right fit
+
+This many tools is overkill for some people. If most of your work happens inside one team's systems, such as a Jira board, a shared OneNote or a Teams channel, a parallel personal system can become a second job of syncing. In that case I'd keep only capture and calendar personal, and let the team's tools handle planning and execution. The stages are what matter. You can collapse several of them into one app if that's what your work needs.
+
+## Refine: improve the system, don't perfect it
+
+No workflow is perfect. Sometimes the system won't deliver what you need, a better tool will come along, or your priorities and preferences will change. All of these are good reasons to adjust it.
+
+The goal isn't a perfect system. It's to keep improving the one you have. That means regularly reflecting on how your workflows and processes are going, noticing where they need improvement, and being willing to make the change, even when that means admitting the tool you championed six months ago isn't working.
+
+One of the most effective ways I've found to do this is to ask other people for feedback. Colleagues, mentors and other professionals in your field will spot gaps you've stopped seeing, because they don't share your habits.
+
+## The takeaway
+
+If you take one thing from this, make it the boundaries, not the apps. Have one place for messy ideas, one for quick notes, one for what you read, one for tasks, and one calendar that holds every real commitment. Once each stage has a single home, you'll spend less effort remembering where things are and more effort doing the work.

@@ -1,450 +1,200 @@
 ---
-title: "Fabric Eventstreams Patterns: From Ingestion to Analytics"
-description: "Eventstreams lets teams deliver streaming analytics without managing complex infra. From deployments I've supported, these patterns make ingestion and…"
+title: "Fabric Eventstream Patterns: Deciding Where Stream Logic Lives"
+description: "Practical Fabric Eventstream patterns: what belongs in the no-code event processor, what belongs in KQL, and what to fix before events arrive."
 author: Michael John Peña
 draft: false
 date: 2024-01-19
 tags:
-  - Eventstreams
   - Microsoft Fabric
+  - Eventstreams
   - Streaming
-  - Event Processing
+  - KQL
   - Architecture
 ---
 
-Eventstreams lets teams deliver streaming analytics without managing complex infra. From deployments I've supported, these patterns make ingestion and routing predictable and observable.
+Eventstream became generally available with Microsoft Fabric at Ignite in November 2023, and the design question that matters now is not "how do I connect Event Hubs?" but "where should this logic go?" A Fabric streaming pipeline has three places to put logic: the producer, the Eventstream event processor, and the KQL database behind it. Put a rule in the wrong place and you get pipelines that are hard to change, results you can't correct, and capacity spent on work you didn't need to do.
 
-## Core Concepts
+For the basics of creating an eventstream, see my [introduction to Eventstreams](/blog/2023-07-21-eventstreams/); for the end-to-end picture, see [yesterday's post on Fabric streaming analytics](/blog/2024-01-18-fabric-realtime-intelligence/).
 
-### Event Processing Topology
+## What Eventstream actually gives you today
 
-```
-Sources (Input)           Processing              Destinations (Output)
-───────────────           ──────────              ────────────────────
-Azure Event Hubs    ─┐                        ┌─→  KQL Database
-Azure IoT Hub       ─┤                        ├─→  Lakehouse
-Kafka              ─┼─→  Eventstream  ────────┼─→  Custom Endpoint
-Custom App          ─┤    (Transform)         ├─→  Reflex (Alerts)
-Sample Data         ─┘                        └─→  Derived Stream
-```
+It's worth being precise, because a lot of content describes Eventstream as if it were Azure Stream Analytics with a Fabric badge. It isn't. As of January 2024, the [Eventstream docs](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview) listed an item with:
 
-## Pattern 1: Simple Passthrough
+| Area | What's available |
+|---|---|
+| Sources | Azure Event Hubs, Azure IoT Hub, Sample data, Custom App (an endpoint you push to over the Event Hubs, AMQP or Kafka protocols) |
+| Destinations | KQL Database, Lakehouse, Custom App (for consumers), Reflex (Data Activator, still in preview) |
+| Processing | The no-code event processor: Filter, Manage fields, Aggregate, Group by, Expand, Union |
+| Windows (Group by) | Tumbling, hopping, sliding, session and snapshot |
 
-For basic ingestion without transformation:
+There is no SQL query surface in Eventstream. There is no reference-data join against a Lakehouse table, no user-defined functions, and no public REST API for defining an eventstream. You build the topology on a canvas. If a design depends on any of those things, that's a signal the logic belongs somewhere else, not a gap to work around.
 
-```json
-{
-  "name": "simple-passthrough",
-  "source": {
-    "type": "AzureEventHubs",
-    "eventHubNamespace": "my-namespace",
-    "eventHubName": "raw-events",
-    "consumerGroup": "$Default"
-  },
-  "destinations": [
-    {
-      "type": "KqlDatabase",
-      "database": "TelemetryDB",
-      "table": "RawEvents",
-      "mappingName": "RawEventsMapping"
-    },
-    {
-      "type": "Lakehouse",
-      "lakehouse": "RawDataLake",
-      "table": "raw_events",
-      "format": "Delta"
-    }
-  ]
-}
-```
+## Pattern 1: Land raw first, shape in KQL
 
-## Pattern 2: Filter and Route
+My default for almost every new stream is a KQL Database destination using **direct ingestion**: events go straight into a table through an ingestion mapping, with no event processor in the path. The [KQL Database destination docs](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/add-destination-kql-database) describe the two modes, direct ingestion and event processing before ingestion. Choose the mode deliberately; changing it later means deleting and re-adding the destination.
 
-Route events to different destinations based on content:
+Why raw first:
 
-```sql
--- Eventstream transformation SQL
+- **You can replay your own mistakes.** If a parsing rule is wrong, the raw table still has the original events. If you filtered or reshaped in the event processor, the discarded data is gone.
+- **KQL is better at transformation than a canvas.** Update policies, materialized views and functions are versionable as scripts. A canvas isn't.
+- **Late data gets handled for you.** A materialized view keeps re-aggregating as late rows arrive. A windowed Group by in the event processor emits a result when the window closes, and a straggler that turns up afterwards won't fix the number you already wrote.
 
--- Route high-priority events to alerts
-SELECT *
-INTO AlertsDestination
-FROM InputStream
-WHERE priority = 'HIGH' OR severity > 8
+The shaping then lives in the database. In a KQL queryset, run each control command on its own. First the raw table:
 
--- Route normal events to analytics
-SELECT *
-INTO AnalyticsDestination
-FROM InputStream
-WHERE priority != 'HIGH' AND severity <= 8
-
--- Route error events to error handling
-SELECT *
-INTO ErrorsDestination
-FROM InputStream
-WHERE eventType = 'ERROR'
-```
-
-```python
-# Python representation of routing logic
-def route_event(event: dict) -> list[str]:
-    """Determine destinations for an event."""
-
-    destinations = []
-
-    if event.get("priority") == "HIGH" or event.get("severity", 0) > 8:
-        destinations.append("alerts")
-
-    if event.get("eventType") == "ERROR":
-        destinations.append("error_handling")
-    else:
-        destinations.append("analytics")
-
-    return destinations
-```
-
-## Pattern 3: Windowed Aggregation
-
-Aggregate events over time windows:
-
-```sql
--- Tumbling window: Non-overlapping fixed windows
-SELECT
-    deviceId,
-    System.Timestamp() as windowEnd,
-    COUNT(*) as eventCount,
-    AVG(temperature) as avgTemperature,
-    MAX(temperature) as maxTemperature,
-    MIN(temperature) as minTemperature
-INTO TumblingAggregates
-FROM InputStream
-TIMESTAMP BY eventTime
-GROUP BY
-    deviceId,
-    TumblingWindow(minute, 5)
-
--- Hopping window: Overlapping windows
-SELECT
-    deviceId,
-    System.Timestamp() as windowEnd,
-    AVG(temperature) as rollingAvgTemperature
-INTO HoppingAggregates
-FROM InputStream
-TIMESTAMP BY eventTime
-GROUP BY
-    deviceId,
-    HoppingWindow(minute, 10, 1)  -- 10-minute window, 1-minute hop
-
--- Sliding window: Window that moves with each event
-SELECT
-    deviceId,
-    System.Timestamp() as windowEnd,
-    COUNT(*) as eventsInWindow
-INTO SlidingAggregates
-FROM InputStream
-TIMESTAMP BY eventTime
-GROUP BY
-    deviceId,
-    SlidingWindow(minute, 5)
-HAVING COUNT(*) > 100  -- Only output if more than 100 events
-```
-
-## Pattern 4: Stream Enrichment
-
-Join streaming data with reference data:
-
-```sql
--- Join with reference data
-SELECT
-    i.deviceId,
-    i.temperature,
-    i.humidity,
-    i.eventTime,
-    r.deviceName,
-    r.location,
-    r.deviceType,
-    r.owner
-INTO EnrichedStream
-FROM InputStream i
-TIMESTAMP BY eventTime
-JOIN ReferenceData r
-ON i.deviceId = r.deviceId
-
--- Reference data from Lakehouse table
--- Updated periodically (e.g., daily)
-```
-
-```python
-# Reference data management
-def update_reference_data(eventstream_id: str, lakehouse_table: str):
-    """Update reference data for stream enrichment."""
-
-    # Read latest reference data
-    reference_df = spark.read.table(lakehouse_table)
-
-    # Publish to Eventstream reference data
-    # This is conceptual - actual implementation uses Fabric APIs
-    eventstream_api.update_reference_data(
-        eventstream_id=eventstream_id,
-        data=reference_df.toPandas().to_dict('records'),
-        key_column="deviceId"
-    )
-
-# Schedule daily refresh
-# 0 0 * * * python update_reference_data.py
-```
-
-## Pattern 5: Sessionization
-
-Group events into logical sessions:
-
-```sql
--- Session window: Groups events with gaps
-SELECT
-    userId,
-    System.Timestamp() as sessionEnd,
-    MIN(eventTime) as sessionStart,
-    COUNT(*) as eventsInSession,
-    COLLECT(eventType) as eventSequence,
-    DATEDIFF(second, MIN(eventTime), MAX(eventTime)) as sessionDurationSeconds
-INTO UserSessions
-FROM InputStream
-TIMESTAMP BY eventTime
-GROUP BY
-    userId,
-    SessionWindow(minute, 30)  -- 30-minute session timeout
-```
-
-## Pattern 6: Anomaly Detection
-
-Detect anomalies in real-time:
-
-```sql
--- Statistical anomaly detection
-WITH StatsByDevice AS (
-    SELECT
-        deviceId,
-        AVG(temperature) as avgTemp,
-        STDEV(temperature) as stdTemp
-    FROM InputStream
-    TIMESTAMP BY eventTime
-    GROUP BY
-        deviceId,
-        HoppingWindow(minute, 60, 5)  -- 1-hour lookback, 5-min update
+```kusto
+.create table RawTelemetry (
+    deviceId: string,
+    eventTime: datetime,
+    temperature: real,
+    humidity: real,
+    eventType: string,
+    severity: int
 )
-
-SELECT
-    i.deviceId,
-    i.temperature,
-    i.eventTime,
-    s.avgTemp,
-    s.stdTemp,
-    (i.temperature - s.avgTemp) / s.stdTemp as zScore,
-    CASE
-        WHEN (i.temperature - s.avgTemp) / s.stdTemp > 3 THEN 'HIGH_ANOMALY'
-        WHEN (i.temperature - s.avgTemp) / s.stdTemp < -3 THEN 'LOW_ANOMALY'
-        ELSE 'NORMAL'
-    END as anomalyStatus
-INTO AnomalyDetection
-FROM InputStream i
-TIMESTAMP BY eventTime
-JOIN StatsByDevice s
-ON i.deviceId = s.deviceId
-WHERE ABS((i.temperature - s.avgTemp) / s.stdTemp) > 2
 ```
 
-## Pattern 7: Late Arrival Handling
+Then a summary view over it. If the raw table already holds data, add `with (backfill=true)` after `materialized-view` so existing rows are included; on a new, empty table it makes no difference.
 
-Handle events that arrive out of order:
-
-```sql
--- Configure watermark for late arrivals
--- Events up to 5 minutes late will still be processed
-
-SELECT
-    deviceId,
-    System.Timestamp() as windowEnd,
-    COUNT(*) as eventCount,
-    SUM(CASE WHEN eventTime < DATEADD(minute, -5, System.Timestamp()) THEN 1 ELSE 0 END) as lateArrivals
-INTO LateArrivalAnalysis
-FROM InputStream
-TIMESTAMP BY eventTime OVER eventId
--- WATERMARK allows 5 minutes of lateness
-GROUP BY
-    deviceId,
-    TumblingWindow(minute, 5)
-```
-
-```python
-# Monitor late arrivals
-def analyze_late_arrivals(kql_client, database: str):
-    """Analyze late arrival patterns."""
-
-    query = """
-    LateArrivalAnalysis
-    | where windowEnd > ago(24h)
+```kusto
+.create materialized-view DeviceTelemetry5m on table RawTelemetry
+{
+    RawTelemetry
     | summarize
-        TotalEvents = sum(eventCount),
-        TotalLateArrivals = sum(lateArrivals),
-        LateArrivalPercent = sum(lateArrivals) * 100.0 / sum(eventCount)
-        by bin(windowEnd, 1h)
-    | order by windowEnd asc
-    """
-
-    results = kql_client.execute(database, query)
-
-    for row in results.primary_results[0]:
-        if row['LateArrivalPercent'] > 5:
-            print(f"Warning: {row['LateArrivalPercent']:.2f}% late arrivals at {row['windowEnd']}")
-
-    return results
-```
-
-## Pattern 8: Multi-Destination Fan-Out
-
-Send processed events to multiple destinations:
-
-```python
-# Eventstream configuration with multiple destinations
-eventstream_config = {
-    "name": "multi-destination-stream",
-    "source": {
-        "type": "AzureEventHubs",
-        "eventHubName": "incoming-events"
-    },
-    "transformations": [
-        {
-            "name": "enrich",
-            "query": """
-                SELECT
-                    *,
-                    CASE WHEN temperature > 40 THEN 'CRITICAL' ELSE 'NORMAL' END as status
-                FROM InputStream
-            """
-        }
-    ],
-    "destinations": [
-        {
-            "name": "kql-realtime",
-            "type": "KqlDatabase",
-            "database": "RealtimeDB",
-            "table": "Events"
-        },
-        {
-            "name": "lakehouse-archive",
-            "type": "Lakehouse",
-            "lakehouse": "ArchiveLake",
-            "table": "events_archive"
-        },
-        {
-            "name": "critical-alerts",
-            "type": "Reflex",
-            "filter": "status = 'CRITICAL'",
-            "trigger": "CriticalEventsTrigger"
-        },
-        {
-            "name": "external-system",
-            "type": "CustomEndpoint",
-            "url": "https://external-api.company.com/events",
-            "headers": {
-                "Authorization": "Bearer {{secret:api-key}}"
-            }
-        }
-    ]
+        events = count(),
+        avgTemperature = avg(temperature),
+        maxTemperature = max(temperature)
+        by deviceId, bin(eventTime, 5m)
 }
 ```
 
-## Pattern 9: Schema Evolution
+And when producers retry and send duplicates (they will), a last-value view gives you a clean "current state per device" without touching the stream:
 
-Handle changing event schemas:
-
-```sql
--- Flexible schema handling
-SELECT
-    eventId,
-    eventTime,
-    eventType,
-    -- Handle optional fields with defaults
-    COALESCE(temperature, 0) as temperature,
-    COALESCE(humidity, -1) as humidity,
-    -- Handle new fields that may not exist in old events
-    TRY_CAST(pressure as float) as pressure,
-    -- Preserve unknown fields in a catch-all column
-    UDF.ExtractUnknownFields(rawEvent) as additionalFields
-INTO SchemaFlexibleOutput
-FROM InputStream
+```kusto
+.create materialized-view DeviceLatest on table RawTelemetry
+{
+    RawTelemetry
+    | summarize arg_max(eventTime, *) by deviceId
+}
 ```
 
-## Monitoring and Troubleshooting
+**When not to use it:** if the raw volume is large and most of it is noise you will never query, landing everything costs ingestion and storage you don't need. That's the case for Pattern 2.
+
+## Pattern 2: Filter and trim in the event processor
+
+The event processor earns its place when it *reduces* data in ways you're sure about. Good candidates:
+
+- **Filter** out heartbeat or debug events that no consumer reads.
+- **Manage fields** to drop large payload fields, rename awkward source names, and cast types before they reach a table.
+- **Expand** an array of readings into one row per reading, so the destination table has a sensible grain.
+
+Each of these is a stateless, row-by-row decision that's easy to reason about. Use **event processing before ingestion** on the KQL destination, or the Lakehouse destination, which runs through the event processor to define the table schema.
+
+The trade-off is reversibility. Anything you drop here is gone. My rule of thumb: filter in Eventstream only when you'd be comfortable explaining to an auditor why that data was never stored. If you hesitate, land it raw, put a short retention policy on the raw table, and filter in KQL.
+
+## Pattern 3: Fan out the same stream by consumer, not by rule
+
+One eventstream can feed several destinations, and each destination can have its own processing. This is where Eventstream is genuinely useful, because the alternative is consumer groups and separate jobs on the Event Hub.
+
+A pattern that holds up well:
+
+| Destination | Processing | Purpose |
+|---|---|---|
+| KQL Database | Direct ingestion | Raw, queryable history for operations and investigation |
+| Lakehouse | Manage fields, light filtering | Delta tables for Spark, data science and Power BI models |
+| Reflex | None, or Filter on the events that matter | Alerts and actions via Data Activator |
+
+Route by *who consumes it*, not by business rule. One eventstream supports at most 11 sources and destinations combined, so fan-out by consumer, not by category, also keeps you under that ceiling. The temptation is to build three filtered branches for "high", "normal" and "error" events and send each to a different table. That pushes classification logic into a canvas where it's hard to test, and every new category means editing the topology. Classify in KQL with a column or a function, and let downstream queries filter.
+
+Reflex is still preview, so treat that branch as something you can lose without breaking the other two. I'll cover the alerting side in [the Data Activator post](/blog/2024-01-21-reflex-alerts/).
+
+**When not to use it:** if two destinations need materially different shapes of the same data, you can end up maintaining two event processors that drift apart. At that point, land once in KQL and derive the second shape from there.
+
+## Pattern 4: Windowed aggregates only when the consumer needs the aggregate
+
+Group by in the event processor supports tumbling, hopping, sliding, session and snapshot windows, with the same semantics as the [Stream Analytics window functions](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-window-functions). They're useful, but they're the pattern I recommend least often.
+
+Use an Eventstream window when the destination should *only ever* see the aggregate: a Lakehouse table of per-minute counts for a report, where storing every raw event in the Lakehouse would be wasteful. Even then, I'd usually keep the raw events in KQL alongside it.
+
+Watch file sizes on any Lakehouse branch. The destination writes files either by **Rows per file** (1 to 2 million) or by **Duration** (1 minute to 2 hours); for a low-volume stream, pick Duration so you aren't writing a tiny file every few seconds. Streaming Delta tables still accumulate small files, so schedule table optimisation (`OPTIMIZE`, which the destination's table optimisation shortcut runs for you in a notebook) rather than waiting for reads to slow down.
+
+Don't use one for dashboards or anomaly checks that people will query interactively. A materialized view or a query over `bin()` gives you the same answer, lets you change the window size without redeploying anything, and copes with late events. Window size is a business decision that changes more often than people expect ("can we see it per minute instead?"), and changing a KQL query is cheaper than reworking a stream.
+
+## Pattern 5: Fix event quality at the producer
+
+Some problems can't be solved downstream, and the cheapest fix is in the code that sends the events:
+
+- **Include an event timestamp.** Eventstream records when it received an event, not when it happened. Without your own `eventTime`, every time-based query is really measuring network and buffering delay.
+- **Partition by entity.** Using the device or customer ID as the partition key keeps ordering per entity.
+- **Send JSON with a stable shape.** Add fields freely, but don't change the type of an existing field. Mappings and Lakehouse schemas don't forgive that.
+- **Batch.** Sending one event per call is a common and avoidable cause of poor throughput.
+
+The Custom App source gives you an Event Hubs-compatible connection string, so the standard [`azure-eventhub` Python library](https://learn.microsoft.com/en-us/python/api/overview/azure/eventhub-readme) works unchanged. This producer sends a batch per device with a partition key and an explicit event time:
 
 ```python
-# Eventstream health monitoring
-class EventstreamMonitor:
-    def __init__(self, workspace_id: str, eventstream_id: str, token: str):
-        self.workspace_id = workspace_id
-        self.eventstream_id = eventstream_id
-        self.token = token
+import json
+import os
+from datetime import datetime, timezone
 
-    def get_metrics(self) -> dict:
-        """Get Eventstream metrics."""
+from azure.eventhub import EventData, EventHubProducerClient
 
-        url = f"https://api.fabric.microsoft.com/v1/workspaces/{self.workspace_id}/eventstreams/{self.eventstream_id}/metrics"
+# Copy the connection string from the Custom App source in your eventstream.
+# It already includes the EntityPath, so no event hub name is needed.
+CONNECTION_STRING = os.environ["EVENTSTREAM_CONNECTION_STRING"]
 
-        response = requests.get(
-            url,
-            headers={"Authorization": f"Bearer {self.token}"}
-        )
 
-        return response.json()
+def build_reading(device_id: str, temperature: float, humidity: float) -> dict:
+    return {
+        "deviceId": device_id,
+        "eventTime": datetime.now(timezone.utc).isoformat(),
+        "temperature": temperature,
+        "humidity": humidity,
+        "eventType": "TELEMETRY",
+        "severity": 1,
+    }
 
-    def check_health(self) -> dict:
-        """Check Eventstream health status."""
 
-        metrics = self.get_metrics()
+def send_readings(device_id: str, readings: list[dict]) -> None:
+    producer = EventHubProducerClient.from_connection_string(CONNECTION_STRING)
+    with producer:
+        batch = producer.create_batch(partition_key=device_id)
+        for reading in readings:
+            event = EventData(json.dumps(reading))
+            try:
+                batch.add(event)
+            except ValueError:
+                # Batch is full: send it and start a new one.
+                producer.send_batch(batch)
+                batch = producer.create_batch(partition_key=device_id)
+                batch.add(event)
+        if len(batch) > 0:
+            producer.send_batch(batch)
 
-        health = {
-            "status": "healthy",
-            "issues": []
-        }
 
-        # Check input rate
-        if metrics.get("inputEventsPerSecond", 0) == 0:
-            health["issues"].append("No incoming events")
-            health["status"] = "warning"
-
-        # Check backlog
-        if metrics.get("backloggedEvents", 0) > 10000:
-            health["issues"].append(f"High backlog: {metrics['backloggedEvents']} events")
-            health["status"] = "degraded"
-
-        # Check errors
-        if metrics.get("errors", 0) > 0:
-            health["issues"].append(f"Processing errors: {metrics['errors']}")
-            health["status"] = "error"
-
-        # Check watermark delay
-        if metrics.get("watermarkDelaySeconds", 0) > 300:
-            health["issues"].append(f"High watermark delay: {metrics['watermarkDelaySeconds']}s")
-            health["status"] = "degraded"
-
-        return health
-
-# Usage
-monitor = EventstreamMonitor(workspace_id, eventstream_id, token)
-health = monitor.check_health()
-print(f"Eventstream health: {health['status']}")
-for issue in health["issues"]:
-    print(f"  - {issue}")
+if __name__ == "__main__":
+    sample = [build_reading("device-001", 21.5 + i * 0.1, 48.0) for i in range(100)]
+    send_readings("device-001", sample)
 ```
 
-## Best Practices
+Keep the connection string in Key Vault or your app's secret store, not in source control. It's a shared access key with send rights to the stream.
 
-1. **Start simple** - Begin with passthrough, add transformations incrementally
-2. **Choose appropriate windows** - Match window size to business requirements
-3. **Handle late data** - Set watermarks based on expected delays
-4. **Monitor throughput** - Track input/output rates and backlog
-5. **Use reference data** - Enrich streams without impacting performance
-6. **Plan destinations** - Consider query patterns when choosing outputs
+## Watching the pipeline
 
-## Conclusion
+Eventstream shows data insights for each source and destination (incoming and outgoing event counts) and runtime logs for errors such as mapping failures. Those are the first places to look when a table stops growing. Because there's no metrics API for Eventstream yet, I monitor the outcome instead of the pipe. A freshness query like the one below tells you more than any canvas; run it on a schedule from a Data Factory pipeline [KQL activity](https://learn.microsoft.com/en-us/fabric/data-factory/kql-activity), or pin it to a Power BI report and put a Data Activator alert on the visual.
 
-Eventstreams patterns provide building blocks for real-time data processing. Combine these patterns to build sophisticated streaming pipelines without writing infrastructure code. Start with simple patterns and compose them as requirements evolve.
+```kusto
+RawTelemetry
+| where ingestion_time() > ago(1h)
+| summarize
+    events = count(),
+    lastIngested = max(ingestion_time()),
+    medianDelay = percentile(ingestion_time() - eventTime, 50)
+    by window = bin(ingestion_time(), 5m)
+| order by window desc
+```
+
+A rising median delay between `eventTime` and ingestion time is your early warning for producer batching problems, throttling, or a capacity under pressure. That only works because Pattern 5 put the timestamp in the event.
+
+## The placement rule
+
+If I had to compress this into one decision rule: **the producer owns correctness, Eventstream owns routing and safe reduction, KQL owns meaning.** Timestamps, keys and schema stability belong at the source. Fan-out, filtering noise and trimming payloads belong in Eventstream. Classification, aggregation, deduplication and anything you might want to change next month belong in KQL, where they can be re-run against raw data.
+
+Eventstream is a good router with a capable but deliberately simple processor. Designs go wrong when they treat it as the place for business logic. Keep the canvas boring and the interesting work in a database that can replay history.

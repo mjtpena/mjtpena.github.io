@@ -1,6 +1,6 @@
 ---
-title: "CrewAI Introduction: Role-Based Multi-Agent Framework"
-description: "I started experimenting with CrewAI because I wanted clearer role definitions in multi-agent workflows. CrewAI's focus on roles, goals, and agent…"
+title: "CrewAI 0.1 on Azure OpenAI: Roles, Tasks and Current Limits"
+description: "A practical look at CrewAI 0.1.x with Azure OpenAI: how agents, tasks and sequential crews work, what's missing today, and when to choose it."
 author: Michael John Peña
 draft: false
 date: 2024-01-11
@@ -8,419 +8,183 @@ tags:
   - CrewAI
   - AI Agents
   - Multi-Agent
+  - Azure OpenAI
   - Python
-  - LangChain
 ---
 
-I started experimenting with CrewAI because I wanted clearer role definitions in multi-agent workflows. CrewAI's focus on roles, goals, and agent backstories makes collaboration between agents more predictable and testable.
+I started experimenting with CrewAI because I wanted clearer role definitions in multi-agent workflows. Most multi-agent demos I see are one long conversation, and it's hard to tell which agent is responsible for what or why a run went sideways. CrewAI's focus on roles, goals and agent backstories makes the collaboration more predictable and easier to test, but it is also a very young project. Here's what it actually does today, how to point it at Azure OpenAI, and where I'd hold back.
 
-## CrewAI Philosophy
+## What CrewAI is, as of January 2024
 
-CrewAI models agent collaboration like a real team:
-- **Agents** have roles, goals, and backstories
-- **Tasks** are specific assignments with expected outputs
-- **Crews** coordinate agents to complete workflows
-- **Tools** extend agent capabilities
+CrewAI is an open-source Python framework by João Moura. The [first release (0.1.0) landed on PyPI on 14 November 2023](https://pypi.org/project/crewai/#history), and the current version as I write this is 0.1.24, with new releases arriving every few days. It sits on top of LangChain: every agent is a LangChain ReAct-style agent executor, and the package pins `langchain` to exactly 0.0.354. That pin matters, because LangChain 0.1.0 shipped on 6 January and you can't install both in the same environment.
 
-## Installation
+The model is deliberately simple. There are four concepts:
+
+- **Agent**: a `role`, a `goal`, a `backstory`, an optional `llm`, and a list of tools. These three strings are written straight into the agent's prompt.
+- **Task**: a `description` and the `agent` that owns it. Optionally, a narrower list of tools for that task.
+- **Crew**: a list of agents and tasks plus a `process` that decides how tasks run.
+- **Process**: the execution strategy. In 0.1.24 the enum has exactly one value, `Process.sequential`. `hierarchical` and `consensual` appear in the [0.1.24 source](https://pypi.org/project/crewai/0.1.24/) (`crewai/process.py` in the sdist) only as commented-out TODOs.
+
+That last point is worth stating plainly, because blog posts and videos already talk about manager agents and hierarchical crews. In the version you can install today, a crew runs its tasks in the order you list them. Nothing more.
+
+## Wiring it to Azure OpenAI
+
+By default every `Agent` creates its own `ChatOpenAI(model_name="gpt-4")`, which means it goes to OpenAI directly and needs `OPENAI_API_KEY`. If your organisation's data must stay in your Azure tenant, you need to pass an Azure model to every agent explicitly. Forgetting one agent is an easy way to send prompts somewhere you didn't intend.
 
 ```bash
-pip install crewai crewai-tools
+pip install crewai==0.1.24
+export AZURE_OPENAI_API_KEY="<your-api-key>"
 ```
 
-## Basic Concepts
+Pin the version. With this release cadence, an unpinned install next week will behave differently.
 
-### Defining Agents
+```python
+from langchain_community.chat_models import AzureChatOpenAI
+
+llm = AzureChatOpenAI(
+    azure_endpoint="https://<your-resource-name>.openai.azure.com/",
+    azure_deployment="<your-gpt-4-deployment>",
+    openai_api_version="2023-05-15",
+    temperature=0.2,
+)
+```
+
+`langchain-community` comes in as a dependency of LangChain 0.0.354, so this import needs nothing extra installed. The class is deprecated in favour of `AzureChatOpenAI` in the new `langchain-openai` package, so the first run prints a `LangChainDeprecationWarning`; it still works with the 0.0.354 pin, and I'd rather live with the warning than add another fast-moving package to an already pinned stack. Any GPT-4 deployment works; GPT-4 Turbo (`1106-preview`) is [still a preview model on Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/whats-new), so check that it's available in your region before you standardise on it. I keep the temperature low: the agents parse their own ReAct-format output, and creative formatting from the model shows up as parsing retries.
+
+## A three-agent crew
+
+Here's a complete crew that researches a topic, drafts a post, and edits it. It reuses the `llm` defined above.
 
 ```python
 from crewai import Agent, Task, Crew, Process
-from langchain_openai import AzureChatOpenAI
 
-# Configure LLM
-llm = AzureChatOpenAI(
-    azure_deployment="gpt-4-turbo",
-    azure_endpoint="https://your-resource.openai.azure.com/",
-    api_version="2024-02-15-preview"
-)
-
-# Define agents with roles
 researcher = Agent(
     role="Senior Research Analyst",
-    goal="Uncover cutting-edge developments in AI and data science",
-    backstory="""You work at a leading tech think tank.
-    Your expertise lies in identifying emerging trends and technologies.
-    You have a knack for dissecting complex data and presenting
-    actionable insights.""",
-    verbose=True,
+    goal="Find the key facts, frameworks and open problems in a technical topic",
+    backstory="You work at a technology think tank and are known for "
+              "separating established facts from speculation.",
+    llm=llm,
     allow_delegation=False,
-    llm=llm
+    memory=False,
+    verbose=True,
 )
 
 writer = Agent(
-    role="Tech Content Strategist",
-    goal="Craft compelling content on tech advancements",
-    backstory="""You are a renowned Content Strategist, known for
-    your insightful and engaging articles. You transform complex
-    concepts into compelling narratives.""",
+    role="Technical Writer",
+    goal="Turn research notes into a clear article for engineers",
+    backstory="You write for practitioners and avoid marketing language.",
+    llm=llm,
+    allow_delegation=False,
+    memory=False,
     verbose=True,
-    allow_delegation=True,
-    llm=llm
 )
 
 editor = Agent(
     role="Senior Editor",
-    goal="Ensure content quality and accuracy",
-    backstory="""You are an experienced editor with an eye for detail.
-    You ensure all content is accurate, well-structured, and
-    engaging for the target audience.""",
-    verbose=True,
+    goal="Make the article accurate, well structured and concise",
+    backstory="You have edited technical publications for years and cut "
+              "anything that isn't supported by the research.",
+    llm=llm,
     allow_delegation=False,
-    llm=llm
-)
-```
-
-### Defining Tasks
-
-```python
-# Define tasks for the agents
-research_task = Task(
-    description="""Conduct comprehensive research on the latest
-    advancements in AI agents and multi-agent systems.
-    Focus on:
-    - Key frameworks and tools
-    - Real-world applications
-    - Challenges and limitations
-    - Future trends
-
-    Your final report should be detailed and include references.""",
-    expected_output="A comprehensive research report on AI agents",
-    agent=researcher
+    memory=False,
+    verbose=True,
 )
 
-writing_task = Task(
-    description="""Using the research report, write an engaging
-    blog post about AI agents for a technical audience.
+research = Task(
+    description="Research multi-agent LLM frameworks. List the main frameworks, "
+                "how they coordinate agents, and their known limitations. "
+                "Return bullet-point notes.",
+    agent=researcher,
+)
 
-    The post should:
-    - Be approximately 1500 words
-    - Include practical examples
-    - Have clear sections with headers
-    - Be accessible yet technically accurate""",
-    expected_output="A polished blog post draft",
+draft = Task(
+    description="Write a 600-word article for engineers based on the research "
+                "notes provided as context. Use short sections with headings.",
     agent=writer,
-    context=[research_task]  # Depends on research task
 )
 
-editing_task = Task(
-    description="""Review and edit the blog post for:
-    - Technical accuracy
-    - Grammar and style
-    - Flow and readability
-    - SEO optimization
-
-    Provide the final polished version.""",
-    expected_output="Final edited blog post ready for publication",
+edit = Task(
+    description="Edit the draft provided as context. Fix unclear sentences, "
+                "remove unsupported claims and return the final article.",
     agent=editor,
-    context=[writing_task]
 )
-```
 
-### Creating and Running a Crew
-
-```python
-# Assemble the crew
-content_crew = Crew(
+crew = Crew(
     agents=[researcher, writer, editor],
-    tasks=[research_task, writing_task, editing_task],
-    process=Process.sequential,  # Tasks run in order
-    verbose=True
+    tasks=[research, draft, edit],
+    process=Process.sequential,
+    verbose=2,
 )
 
-# Execute the crew
-result = content_crew.kickoff()
+result = crew.kickoff()
 print(result)
 ```
 
-## Advanced Patterns
+`kickoff()` returns a plain string: the output of the last task.
 
-### Hierarchical Process
+### How context actually flows
 
-A manager agent coordinates the crew:
+There is no `context` parameter on `Task` in this version. The sequential process passes the output of the previous task into the next one, appended to the description under "This is the context you are working with". Only the immediately preceding output is passed. If the editor needed the original research notes as well as the draft, it wouldn't get them. You'd have to have the writer include them in its output, or run separate crews and stitch the results together yourself.
 
-```python
-from crewai import Crew, Process
+That's why the task descriptions above say "provided as context". Writing descriptions that expect the hand-off makes the chain more reliable than hoping the model notices the appended text.
 
-# Create a crew with hierarchical process
-hierarchical_crew = Crew(
-    agents=[researcher, writer, editor],
-    tasks=[research_task, writing_task, editing_task],
-    process=Process.hierarchical,
-    manager_llm=llm,  # LLM for the manager
-    verbose=True
-)
+## Tools and delegation
 
-# The manager will:
-# - Analyze the tasks
-# - Assign work to appropriate agents
-# - Review outputs
-# - Coordinate handoffs
-```
-
-### Custom Tools
-
-Extend agent capabilities with tools:
+Tools are ordinary LangChain tools. Anything from `langchain_community.tools`, or your own function decorated with `@tool`, can go in an agent's `tools` list. This fragment adds a file-reading tool to an analyst:
 
 ```python
-from crewai_tools import (
-    SerperDevTool,
-    WebsiteSearchTool,
-    FileReadTool,
-    DirectoryReadTool
-)
+from pathlib import Path
+
 from crewai import Agent
 from langchain.tools import tool
 
-# Built-in tools
-search_tool = SerperDevTool()
-web_tool = WebsiteSearchTool()
-file_tool = FileReadTool()
 
-# Custom tool
-@tool("Database Query Tool")
-def query_database(query: str) -> str:
-    """Execute a database query and return results.
+@tool("Read support tickets")
+def read_tickets(path: str) -> str:
+    """Read a UTF-8 text file of support tickets and return its contents."""
+    return Path(path.strip()).read_text(encoding="utf-8")[:8000]
 
-    Args:
-        query: SQL query to execute
 
-    Returns:
-        Query results as formatted string
-    """
-    # Implementation
-    return "Query results..."
-
-@tool("API Caller")
-def call_api(endpoint: str, method: str = "GET") -> str:
-    """Call an external API.
-
-    Args:
-        endpoint: API endpoint URL
-        method: HTTP method (GET, POST, etc.)
-
-    Returns:
-        API response
-    """
-    import requests
-    response = requests.request(method, endpoint)
-    return response.text
-
-# Assign tools to agents
-data_analyst = Agent(
-    role="Data Analyst",
-    goal="Analyze data and provide insights",
-    backstory="Expert in data analysis and SQL",
-    tools=[query_database, search_tool],
-    llm=llm
-)
-
-api_integrator = Agent(
-    role="API Integration Specialist",
-    goal="Integrate with external services",
-    backstory="Expert in API integrations",
-    tools=[call_api, web_tool],
-    llm=llm
+analyst = Agent(
+    role="Support Analyst",
+    goal="Identify the most common customer issues in support tickets",
+    backstory="You triage support queues and spot recurring problems early.",
+    tools=[read_tickets],
+    llm=llm,
+    allow_delegation=False,
+    memory=False,
 )
 ```
 
-### Task Dependencies and Context
+Two behaviours are easy to miss:
 
-```python
-# Tasks can depend on other tasks
-task1 = Task(
-    description="Gather initial data",
-    expected_output="Raw data collection",
-    agent=researcher
-)
+- **Tool results are cached per crew.** The crew's cache handler stores each tool call by tool name and input, so the same call made twice returns the stored result. That saves money on repeated searches, but it's wrong for tools whose answer changes between calls.
+- **Delegation is on by default.** `allow_delegation` defaults to `True`. When it's on, the agent gets two extra tools, "Delegate work to co-worker" and "Ask question to co-worker", and has to call them with a pipe-separated string: `coworker|task|context`. Models get that format wrong often enough that I switch delegation off unless I specifically want it.
 
-task2 = Task(
-    description="Analyze the gathered data",
-    expected_output="Analysis report",
-    agent=data_analyst,
-    context=[task1]  # Uses output from task1
-)
+Memory is also on by default. `memory=True` attaches a LangChain `ConversationSummaryMemory`, which uses the same LLM to summarise the conversation. That means extra model calls you'll pay for. For single-pass pipelines like the one above, I'd turn it off with `memory=False`, which is why every agent in this post sets it.
 
-task3 = Task(
-    description="Visualize the analysis results",
-    expected_output="Visualization and dashboard",
-    agent=writer,
-    context=[task2]  # Uses output from task2
-)
+## CrewAI next to AutoGen
 
-# Parallel tasks that both depend on task1
-task4 = Task(
-    description="Create executive summary",
-    expected_output="One-page summary",
-    agent=editor,
-    context=[task1, task2]  # Uses both outputs
-)
-```
+I covered [AutoGen yesterday](/blog/2024-01-10-autogen-introduction/), and the difference is mostly about how you think about the problem:
 
-### Callbacks and Monitoring
+| Aspect | CrewAI 0.1.x | AutoGen |
+|---|---|---|
+| Mental model | A team with roles working through assigned tasks | Agents that talk to each other |
+| Coordination | Sequential task list | Two-agent chats and `GroupChat` with a manager |
+| Hand-off | Previous task output appended to the next task | Shared conversation history |
+| Code execution | Not built in; only through tools | Built-in code execution, Docker optional |
+| Maturity | Weeks old, frequent breaking changes | Larger community, research-backed |
+| Underlying stack | LangChain (pinned) | Its own `openai`-based client |
 
-```python
-from crewai import Task
+My rule of thumb: if you can write the workflow down as a numbered list of steps with an owner for each, CrewAI's model fits and is easier to read. If the agents need to negotiate, iterate or write and run code until something works, AutoGen is the better fit today. There's a broader comparison in [AI agent frameworks compared](/blog/2024-01-12-agent-frameworks-comparison/), and the coordination patterns themselves are in [multi-agent systems](/blog/2024-01-09-multi-agent-systems/).
 
-def task_callback(output):
-    """Called when a task completes."""
-    print(f"Task completed!")
-    print(f"Output: {output.raw_output[:200]}...")
+## When I wouldn't use it
 
-    # Log to monitoring system
-    log_task_completion(output)
+- **Anything going to production soon.** With an exact LangChain pin and releases every few days, you take on real upgrade risk. Pin everything and expect to rewrite parts.
+- **Workflows that aren't really sequential.** If tasks need to fan out, run in parallel or loop, the current process model can't express that. You'll end up orchestrating crews from your own code, and by then the framework isn't adding much.
+- **Deterministic pipelines.** If each step is a fixed prompt with a fixed input, you don't need agents at all. A plain chain of model calls is cheaper, faster and much easier to debug.
+- **Cost-sensitive runs.** Default memory, delegation and ReAct reasoning all add model calls. A three-agent crew on GPT-4 can easily use several times the tokens of the same work done as three direct prompts. Per task, the extra calls come from each iteration of the ReAct loop (one model call per thought and tool step), one `ConversationSummaryMemory` summarisation call per agent run when memory is on, and the round-trips whenever an agent delegates to a co-worker. Run once with `verbose=2`, or attach a LangChain callback handler to count calls, before you scale anything up.
 
-def step_callback(step_output):
-    """Called after each agent step."""
-    print(f"Step: {step_output}")
+## Where it's worth your time
 
-research_task = Task(
-    description="Research AI trends",
-    expected_output="Research report",
-    agent=researcher,
-    callback=task_callback
-)
-
-# Crew-level callbacks
-crew = Crew(
-    agents=[researcher, writer],
-    tasks=[research_task, writing_task],
-    step_callback=step_callback,
-    verbose=True
-)
-```
-
-## Practical Example: Customer Support Analysis
-
-```python
-from crewai import Agent, Task, Crew, Process
-from crewai_tools import FileReadTool
-
-# Tools
-file_reader = FileReadTool()
-
-# Agents
-data_collector = Agent(
-    role="Data Collection Specialist",
-    goal="Gather and organize customer support data",
-    backstory="""You specialize in collecting and organizing
-    customer feedback data from various sources.""",
-    tools=[file_reader],
-    llm=llm
-)
-
-sentiment_analyst = Agent(
-    role="Sentiment Analysis Expert",
-    goal="Analyze customer sentiment and emotions",
-    backstory="""You are an expert in understanding customer
-    emotions and sentiment from their communications.""",
-    llm=llm
-)
-
-trend_analyst = Agent(
-    role="Trend Analysis Specialist",
-    goal="Identify patterns and trends in support tickets",
-    backstory="""You excel at finding patterns in data
-    and identifying emerging issues before they escalate.""",
-    llm=llm
-)
-
-report_writer = Agent(
-    role="Business Intelligence Reporter",
-    goal="Create actionable reports for stakeholders",
-    backstory="""You transform complex analysis into clear,
-    actionable business recommendations.""",
-    llm=llm
-)
-
-# Tasks
-collect_task = Task(
-    description="""Read and organize the customer support tickets
-    from the provided files. Categorize by:
-    - Issue type
-    - Product area
-    - Customer segment
-    - Urgency level""",
-    expected_output="Organized dataset of support tickets",
-    agent=data_collector
-)
-
-sentiment_task = Task(
-    description="""Analyze the sentiment of each ticket:
-    - Overall sentiment (positive/neutral/negative)
-    - Emotion detection (frustrated, confused, satisfied)
-    - Urgency indicators
-    - Escalation risk""",
-    expected_output="Sentiment analysis report",
-    agent=sentiment_analyst,
-    context=[collect_task]
-)
-
-trend_task = Task(
-    description="""Identify trends in the support data:
-    - Common issues
-    - Emerging problems
-    - Seasonal patterns
-    - Product-specific trends
-    - Customer segment patterns""",
-    expected_output="Trend analysis report",
-    agent=trend_analyst,
-    context=[collect_task, sentiment_task]
-)
-
-report_task = Task(
-    description="""Create an executive report including:
-    - Key findings summary
-    - Critical issues requiring immediate attention
-    - Trend visualizations (describe)
-    - Recommendations for improvement
-    - Metrics and KPIs""",
-    expected_output="Executive report with recommendations",
-    agent=report_writer,
-    context=[sentiment_task, trend_task]
-)
-
-# Crew
-support_analysis_crew = Crew(
-    agents=[data_collector, sentiment_analyst, trend_analyst, report_writer],
-    tasks=[collect_task, sentiment_task, trend_task, report_task],
-    process=Process.sequential,
-    verbose=True
-)
-
-# Run
-result = support_analysis_crew.kickoff()
-```
-
-## CrewAI vs AutoGen
-
-| Aspect | CrewAI | AutoGen |
-|--------|--------|---------|
-| Metaphor | Role-playing crew | Conversable agents |
-| Structure | Tasks and processes | Conversations |
-| Coordination | Sequential/Hierarchical | GroupChat/Custom |
-| Tools | Built-in tool system | Function registration |
-| Learning Curve | Lower | Higher |
-| Flexibility | Moderate | High |
-| Best For | Structured workflows | Open-ended problems |
-
-## Best Practices
-
-1. **Define clear roles**: Each agent should have a distinct specialty
-2. **Specific goals**: Goals should be measurable and achievable
-3. **Rich backstories**: Help agents stay in character
-4. **Task dependencies**: Use context to share information between tasks
-5. **Appropriate tools**: Only give agents the tools they need
-6. **Monitor execution**: Use callbacks to track progress
-
-## Conclusion
-
-CrewAI makes multi-agent systems accessible through its role-based metaphor. The framework excels at structured workflows where you can clearly define roles, tasks, and dependencies. Start with sequential processes, then explore hierarchical patterns as your use cases become more complex.
+CrewAI's real contribution is the shape it puts on the problem: role, goal and backstory per agent, one owner per task, and a visible order of execution. That makes a multi-agent prototype much easier to explain to a stakeholder and to reason about when it fails. I'd use it today to prototype role-based workflows on Azure OpenAI, with every agent given an explicit `llm`, delegation and memory switched off until you need them, and the version pinned. I wouldn't build anything long-lived on it until the process model and APIs settle.
