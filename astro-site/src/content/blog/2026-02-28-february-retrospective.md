@@ -99,4 +99,4 @@ Better execution than January, and this time the misses share a cause I can desi
 
 If you're reviewing your own month, sort your misses by type before you set next month's goals. A miss that needs more effort and a miss that needs a different structure look the same on a scorecard, but only one of them gets fixed by trying harder.
 
-The full plan is in [March: Fixed Sleep, Fewer Tabs, More Focus](/blog/2026-03-01-march-fixed-sleep-more-focus/).
+The full plan is in [March 2026: A Fixed Bedtime, Two Inbox Checks, One Tool to Ship](/blog/2026-03-01-march-fixed-sleep-more-focus/).
