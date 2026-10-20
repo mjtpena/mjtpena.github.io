@@ -1,364 +1,193 @@
 ---
-title: "Prompt Engineering 2025: Advanced Techniques for Better AI Outputs"
-description: "Query: \"What's the average order value by customer segment?\" SQL: \"\"\" Effective prompt engineering is about clear communication. The better you describe…"
+title: "Prompting in 2025: What Changes with o1 and Structured Outputs"
+description: "Which prompt techniques still earn their place on Azure OpenAI in January 2025, which moved into the API, and which now work against reasoning models like o1."
 author: Michael John Peña
 draft: false
 date: 2025-01-16
 tags:
   - AI
   - Prompt Engineering
+  - Azure OpenAI
+  - Structured Output
+  - Reasoning
   - LLM
-  - Best Practices
-  - Azure
 ---
 
-## Foundation: The Anatomy of a Good Prompt
+Most prompt engineering advice still reads as if it were written for GPT-3.5: add a persona, say "think step by step", paste three examples, and beg for valid JSON. Two things shipped in the second half of 2024 that change that advice for anyone building on Azure OpenAI. Structured outputs moved JSON compliance out of the prompt and into the API, and o1 brought a model that does its own reasoning and works best when you stop telling it how to think. If your prompt library hasn't changed since 2023, some of it is now dead weight and some of it is actively hurting you.
+
+This isn't a list of ten techniques. It's my sorting of the familiar ones into three buckets: still worth doing, now handled by the platform, and counterproductive on reasoning models.
+
+## What actually changed
+
+Two releases matter here.
+
+**Structured outputs.** With `gpt-4o` (2024-08-06) and `gpt-4o-mini` (2024-07-18), you can pass a JSON Schema and the model is constrained to produce output that matches it. Azure OpenAI first exposed it in the `2024-08-01-preview` API, and it is in the current GA API version, `2024-10-21`. The [Microsoft Learn structured outputs guide](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/structured-outputs) covers the supported models and the schema restrictions: every field must be required and objects must set `additionalProperties: false`, among others. This is different from the older JSON mode, which only promised syntactically valid JSON, not JSON matching your shape.
+
+**o1.** OpenAI's o1 (2024-12-17) arrived in Azure OpenAI in December 2024, following the o1-preview and o1-mini previews from September. It spends hidden reasoning tokens before it answers. The December model added the things o1-preview lacked for production work: developer messages (the reasoning-model replacement for system messages), structured outputs, function calling, image input, and a `reasoning_effort` parameter of `low`, `medium` or `high`, which needs API version `2024-12-01-preview` or later. It also drops parameters you may have hard-coded: `temperature` and `top_p` aren't supported, and you set `max_completion_tokens` rather than `max_tokens` because the budget covers hidden reasoning tokens as well as the visible answer. The [Azure OpenAI reasoning models guide](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/reasoning) lists the details, and access to o1 was gated behind a registration form at launch.
+
+I covered where these models came from in [the evolution of reasoning models](/blog/2025-01-09-reasoning-models-o1-o3-evolution/). This post is about what they mean for the prompts you write.
+
+## Still worth doing
+
+### Context and constraints beat personas
+
+The structure I'd keep for any model is: the task, the context the model can't know, the constraints, and what "done" looks like. "We ingest 10 TB a day from 50 source systems, latency must stay under 15 minutes, and the team has intermediate Spark skills" changes the answer. "You are a senior data engineer with 10+ years of experience" mostly changes the tone.
+
+My view on role prompting is unpopular but simple: personas are cheap and occasionally useful for setting register and audience, but they're a weak substitute for facts. If you spend more words on who the model is than on what the problem is, rebalance.
+
+### Delimiters and clear sections
+
+Separating instructions from data with headings, XML-style tags or triple quotes still pays on every model. It reduces the chance that the model treats pasted content as an instruction, which matters for [prompt injection](/blog/2023-10-15-prompt-injection-defense/), and it makes long prompts easier for humans to review. OpenAI's own [advice for prompting reasoning models](https://platform.openai.com/docs/guides/reasoning) recommends delimiters explicitly, so this is one habit that carries straight over to o1.
+
+### Few-shot examples for style and edge cases
+
+Examples are still the most reliable way to show a format or tone that's hard to describe, such as a house style for commit messages or how to label an ambiguous support ticket. Where I've changed my approach is in what the examples are for. If you're only including them to get the model to emit a particular JSON shape, structured outputs does that job better and with fewer tokens. Keep examples for judgement calls, not for syntax.
+
+### Asking the model to state assumptions and uncertainty
+
+"List the assumptions you made and what information would change your recommendation" is still one of the highest-value lines you can add to an analytical prompt. It doesn't make the model smarter, but it surfaces the guesses you'd otherwise discover in production. It also works on o1, because you're asking for a property of the output, not dictating the reasoning process.
+
+## Now handled by the platform
+
+### "Return valid JSON with exactly this structure"
+
+This was the most fragile pattern in the old playbook: a schema pasted into the prompt, a plea for valid JSON, and a retry loop for when the model added a trailing comment. With structured outputs you define the shape in code and the API enforces it. Here's the pattern with the `openai` Python package (1.58 or later) against a `gpt-4o` 2024-08-06 deployment:
 
 ```python
-# Structure of an effective prompt
-prompt_template = """
-# Role/Persona (Who is the AI?)
-You are a senior data engineer with expertise in Azure and Spark.
+import os
+from typing import Literal
 
-# Context (What background is needed?)
-We are building a data lakehouse on Microsoft Fabric for a retail company.
-The data volume is 10TB daily from 50 source systems.
+from openai import AzureOpenAI
+from pydantic import BaseModel
 
-# Task (What needs to be done?)
-Design the bronze layer ingestion strategy.
 
-# Format (How should the output look?)
-Provide your response in this structure:
-1. Architecture Overview
-2. Key Design Decisions
-3. Implementation Steps
-4. Code Examples
-5. Potential Challenges
+class QualityIssue(BaseModel):
+    column: str
+    issue_type: Literal["null", "duplicate", "format", "range", "referential"]
+    severity: Literal["critical", "high", "medium", "low"]
+    recommendation: str
+    sql_check: str
 
-# Constraints (What limitations exist?)
-- Must support near-real-time ingestion (< 15 min latency)
-- Budget: $10K/month for compute
-- Team has intermediate Spark skills
 
-# Examples (Optional demonstrations)
-Here's an example of our current pipeline for reference:
-[example code]
-"""
-```
+class QualityReport(BaseModel):
+    summary: str
+    issues: list[QualityIssue]
+    assumptions: list[str]
 
-## Technique 1: Chain of Thought (CoT)
 
-Guide the model through logical steps:
+client = AzureOpenAI(
+    azure_endpoint="https://<your-resource-name>.openai.azure.com",
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2024-10-21",
+)
 
-```python
-# Without CoT
-prompt_bad = "What's the best way to partition our sales data?"
+profile = """<column profile output for the customer table>"""
 
-# With CoT
-prompt_good = """
-Analyze the best partitioning strategy for our sales data.
-
-Think through this step by step:
-
-1. First, consider the data characteristics:
-   - 500M rows per day
-   - Queries typically filter by date and region
-   - Data retention: 3 years
-
-2. Then, evaluate partitioning options:
-   - Date-based partitioning
-   - Region-based partitioning
-   - Composite partitioning
-
-3. For each option, analyze:
-   - Query performance impact
-   - File size implications
-   - Maintenance overhead
-
-4. Finally, recommend the best approach with justification.
-
-Show your reasoning at each step.
-"""
-```
-
-## Technique 2: Few-Shot Learning
-
-Provide examples to establish patterns:
-
-```python
-few_shot_prompt = """
-Convert natural language queries to SQL.
-
-Examples:
-
-Query: "Show total sales by region for last month"
-SQL:
-```sql
-SELECT region, SUM(amount) as total_sales
-FROM sales
-WHERE date >= DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')
-  AND date < DATE_TRUNC('month', CURRENT_DATE)
-GROUP BY region
-ORDER BY total_sales DESC;
-```
-
-Query: "Find customers who haven't ordered in 90 days"
-SQL:
-```sql
-SELECT c.customer_id, c.name, MAX(o.order_date) as last_order
-FROM customers c
-LEFT JOIN orders o ON c.customer_id = o.customer_id
-GROUP BY c.customer_id, c.name
-HAVING MAX(o.order_date) < CURRENT_DATE - INTERVAL '90 days'
-   OR MAX(o.order_date) IS NULL;
-```
-
-Query: "What's the average order value by customer segment?"
-SQL:
-"""
-```
-
-## Technique 3: Role-Based Prompting
-
-Assign specific expertise:
-
-```python
-# Generic (weaker)
-prompt_generic = "Review this data pipeline code."
-
-# Role-based (stronger)
-prompt_role = """
-You are a senior data platform architect conducting a code review.
-Your expertise includes:
-- 10+ years of data engineering
-- Deep knowledge of Spark optimization
-- Experience with production data systems at scale
-
-Review this pipeline code with focus on:
-1. Performance optimization opportunities
-2. Error handling completeness
-3. Scalability concerns
-4. Best practice violations
-
-Be specific and provide code examples for improvements.
-
-Code to review:
-[code here]
-"""
-```
-
-## Technique 4: Structured Output Prompting
-
-Request specific formats:
-
-```python
-structured_prompt = """
-Analyze the data quality issues in our customer table.
-
-Return your analysis as JSON with this exact structure:
-{
-    "summary": "Brief overview of findings",
-    "issues": [
+completion = client.beta.chat.completions.parse(
+    model="<your-gpt-4o-deployment>",
+    messages=[
         {
-            "column": "column name",
-            "issue_type": "null|duplicate|format|range|referential",
-            "severity": "critical|high|medium|low",
-            "affected_rows": "estimated count or percentage",
-            "recommendation": "how to fix",
-            "sql_check": "SQL query to identify affected rows"
-        }
+            "role": "system",
+            "content": "You review data quality profiles for a retail data platform. "
+            "Only report issues supported by the profile. List any assumptions.",
+        },
+        {"role": "user", "content": f"<profile>\n{profile}\n</profile>"},
     ],
-    "overall_quality_score": 0-100,
-    "priority_fixes": ["ordered list of what to fix first"]
-}
+    response_format=QualityReport,
+)
 
-Ensure the JSON is valid and parseable.
-"""
+report = completion.choices[0].message.parsed
+if report is None:
+    print("Model refused:", completion.choices[0].message.refusal)
+else:
+    for issue in report.issues:
+        print(issue.severity, issue.column, issue.issue_type)
 ```
 
-## Technique 5: Constraint-Based Prompting
+Notice what disappeared from the prompt: the schema, the enum values, and the "ensure the JSON is parseable" plea. The prompt is now about the job, and the Pydantic model is the contract. Handle the `refusal` field, though: a constrained model can still decline, and it tells you so there rather than in malformed JSON. I went deeper on this style of contract in [building type-safe AI applications](/blog/2024-09-16-type-safe-ai-applications/).
 
-Set explicit boundaries:
+One caution: structured outputs guarantees shape, not truth. A perfectly valid `sql_check` string can still be wrong SQL. Validate the content the same way you would any other untrusted input.
+
+### Strict function calling
+
+The same mechanism applies to tools. Setting `strict: true` on a function definition means arguments match the schema, so the "please only use these parameter names" paragraphs in tool-heavy prompts can go.
+
+## Counterproductive on reasoning models
+
+### "Think step by step"
+
+Chain-of-thought prompting was the most useful trick of 2022 and 2023 because it made the model write its intermediate reasoning into the output, where later tokens could use it. o1 does that internally. OpenAI's guidance for reasoning models says to keep prompts simple and direct and to avoid chain-of-thought instructions, because the model already reasons and prescribing the steps can get in the way. If you want more thinking, raise `reasoning_effort` rather than adding instructions.
+
+This is the biggest change for teams with a shared prompt library. A template that wraps every request in "First consider X, then evaluate Y, then recommend Z" is helping `gpt-4o` and constraining o1. I made the case for explicit chain-of-thought on non-reasoning models in [chain-of-thought prompting](/blog/2024-09-03-chain-of-thought-in-models/), and that advice still holds for them. It just doesn't transfer.
+
+### Scripted decomposition and self-verification loops
+
+The same logic applies to prompts that force a fixed sequence ("complete step 1 before moving to step 2") or ask the model to work backwards to check itself. On o1 these mostly add tokens. If a task genuinely needs separate stages, for example because a human approves the architecture before implementation starts, make them separate calls in your orchestration code, not paragraphs in one prompt.
+
+### Stuffing the context
+
+OpenAI's advice also recommends limiting extra context in retrieval-augmented prompts to what's relevant, since the model can overthink irrelevant material. With o1 that overthinking costs you directly, because reasoning tokens are billed as output tokens. Retrieve fewer, better chunks.
+
+Here's the same kind of request, reshaped for o1:
 
 ```python
-constrained_prompt = """
-Generate a Python function for data validation.
+import os
 
-MUST include:
-- Type hints for all parameters and return value
-- Docstring with examples
-- Input validation
-- Proper error handling with custom exceptions
-- Logging statements
+from openai import AzureOpenAI
 
-MUST NOT include:
-- External dependencies beyond standard library and pandas
-- Hardcoded values (use parameters)
-- Print statements (use logging)
+client = AzureOpenAI(
+    azure_endpoint="https://<your-resource-name>.openai.azure.com",
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2024-12-01-preview",
+)
 
-CONSTRAINTS:
-- Function must be under 50 lines
-- Must handle DataFrames up to 1M rows efficiently
-- Must be thread-safe
+response = client.chat.completions.create(
+    model="<your-o1-deployment>",
+    reasoning_effort="medium",
+    max_completion_tokens=8000,
+    messages=[
+        {
+            "role": "developer",
+            "content": "Recommend partitioning strategies for Delta tables. "
+            "Be concise. State assumptions explicitly.",
+        },
+        {
+            "role": "user",
+            "content": (
+                "<data>\n"
+                "Rows per day: 500 million\n"
+                "Common filters: order_date, region\n"
+                "Retention: 3 years\n"
+                "</data>\n"
+                "Recommend a partitioning strategy for the sales table and "
+                "explain the trade-off against the main alternative."
+            ),
+        },
+    ],
+)
 
-Generate the function:
-"""
+print(response.choices[0].message.content)
+print("Reasoning tokens:", response.usage.completion_tokens_details.reasoning_tokens)
 ```
 
-## Technique 6: Decomposition Prompting
+There's no persona essay, no step list, and no temperature. The facts are delimited, the deliverable is clear, and the effort level is a parameter you can tune. Log the reasoning token count from day one, because it's where the cost surprises come from.
 
-Break complex tasks into steps:
+## When not to reach for o1 at all
 
-```python
-decomposition_prompt = """
-Task: Design a real-time fraud detection system for payment transactions.
+Most prompts in a production system aren't hard reasoning problems. Classification, extraction, summarisation and chat over retrieved documents are well served by `gpt-4o` or `gpt-4o-mini`, which are faster, cheaper, support `temperature`, and respond well to the classic techniques above. My rule of thumb: if a careful human could do the task without a whiteboard, it doesn't need a reasoning model. Save o1 for multi-step planning, gnarly SQL or code, and analysis where a wrong answer is expensive, and measure it against `gpt-4o` on your own evaluation set before switching.
 
-Let's approach this systematically:
+The practical consequence is that you now maintain two prompt styles. Treat that as a feature of your prompt management, not a nuisance: tag each prompt with the model family it was written for, so nobody silently points a chain-of-thought template at o1 and wonders why it got slower and pricier.
 
-## Step 1: Requirements Analysis
-What data do we need? What latency is acceptable? What's the expected volume?
+## The short version
 
-## Step 2: Architecture Design
-[After completing Step 1]
-Design the high-level architecture. What components are needed?
+| Technique | `gpt-4o` / `gpt-4o-mini` | o1 |
+|---|---|---|
+| Task, context, constraints | Keep | Keep, and keep it short |
+| Personas | Optional, for tone | Optional, in the developer message |
+| Delimiters | Keep | Keep |
+| Few-shot examples | For style and judgement calls | Use sparingly, test with and without |
+| "Think step by step" | Still helps | Drop it, use `reasoning_effort` |
+| JSON schema in the prompt | Replace with structured outputs | Replace with structured outputs |
+| Large retrieved context | Fine within reason | Trim to what's relevant |
 
-## Step 3: Feature Engineering
-[After completing Step 2]
-What features should we extract from transactions for fraud detection?
-
-## Step 4: Model Selection
-[After completing Step 3]
-What ML approach is appropriate? Why?
-
-## Step 5: Implementation Plan
-[After completing Step 4]
-How do we implement this? What's the timeline?
-
-Complete each step before moving to the next.
-Start with Step 1:
-"""
-```
-
-## Technique 7: Self-Consistency Prompting
-
-Ask for verification:
-
-```python
-self_consistent_prompt = """
-Calculate the optimal cluster size for our Spark workload.
-
-Parameters:
-- Daily data volume: 500GB
-- Peak concurrent users: 50
-- Average query complexity: Medium (joins across 5 tables)
-- SLA: 95th percentile query < 30 seconds
-
-Provide your recommendation, then:
-1. Verify your calculation by working backwards
-2. Check if the recommendation meets all constraints
-3. Identify any assumptions you made
-4. Rate your confidence (1-10) and explain why
-
-If verification fails, revise your recommendation.
-"""
-```
-
-## Technique 8: Persona Ensemble
-
-Get multiple perspectives:
-
-```python
-ensemble_prompt = """
-Evaluate this data architecture decision: Using a single lakehouse vs. separate bronze/silver/gold lakehouses.
-
-Provide analysis from three perspectives:
-
-## Data Engineer Perspective
-Focus on: Development workflow, debugging, code organization
-[Analysis here]
-
-## Platform Administrator Perspective
-Focus on: Management, security, cost, governance
-[Analysis here]
-
-## Data Consumer Perspective
-Focus on: Query performance, data discovery, self-service
-[Analysis here]
-
-## Synthesis
-Combine all perspectives into a balanced recommendation.
-"""
-```
-
-## Technique 9: Iterative Refinement
-
-Build up the solution:
-
-```python
-refinement_prompt = """
-We're building a customer churn prediction model.
-
-Round 1 - Basic Approach:
-Describe a simple baseline approach using logistic regression.
-
-Round 2 - Improvements:
-Based on the baseline, what improvements would you make?
-Consider: feature engineering, model selection, evaluation metrics.
-
-Round 3 - Production Considerations:
-How would you productionize this model?
-Consider: monitoring, retraining, serving, A/B testing.
-
-Round 4 - Edge Cases:
-What edge cases might cause problems? How would you handle them?
-
-Build each round on the previous one.
-"""
-```
-
-## Technique 10: Metacognitive Prompting
-
-Ask the model to think about its thinking:
-
-```python
-metacognitive_prompt = """
-Design an ETL pipeline for merging data from 10 source systems.
-
-Before providing your solution:
-1. What information would you ideally want that wasn't provided?
-2. What assumptions are you making?
-3. What are you most uncertain about?
-4. What alternative approaches did you consider and reject?
-
-Then provide your solution.
-
-After your solution:
-1. What could go wrong with this approach?
-2. How confident are you in each component (1-10)?
-3. What would you do differently with more time/resources?
-"""
-```
-
-## Practical Tips
-
-```python
-# 1. Be specific about length
-"Provide a brief summary (2-3 sentences)"
-"Write a comprehensive guide (500-1000 words)"
-
-# 2. Specify the audience
-"Explain for a junior developer new to the codebase"
-"Write for a technical executive making budget decisions"
-
-# 3. Set the tone
-"Be direct and concise"
-"Be thorough and educational"
-
-# 4. Handle uncertainty
-"If you're unsure, say so and explain what additional information would help"
-
-# 5. Request citations
-"Support your recommendations with references to documentation or best practices"
-```
-
-Effective prompt engineering is about clear communication. The better you describe what you want, the better results you'll get. Experiment with these techniques and combine them for your specific use cases.
+If you change one thing this quarter, move your output contracts out of prompt text and into schemas. If you change two, split your prompt library by model family before o1 makes its way into your stack.

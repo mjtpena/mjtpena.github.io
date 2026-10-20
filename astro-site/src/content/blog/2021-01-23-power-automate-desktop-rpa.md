@@ -1,6 +1,6 @@
 ---
-title: Robotic Process Automation with Power Automate Desktop
-description: "Microsoft made Power Automate Desktop free for Windows 10 users in March, which quietly turned every back-office worker into a potential RPA developer. It's…"
+title: "Power Automate Desktop at GA: Designing RPA Flows That Survive"
+description: "How to design Power Automate Desktop flows that survive UI changes, when to choose attended or unattended RPA, and when an API beats a bot."
 author: Michael John Pena
 draft: false
 date: 2021-01-23
@@ -9,455 +9,108 @@ tags:
   - Power Automate
   - RPA
   - Automation
-  - Desktop Flows
-  - Microsoft 365
+  - Power Platform
 ---
 
-Microsoft made Power Automate Desktop free for Windows 10 users in March, which quietly turned every back-office worker into a potential RPA developer. It's the "click here, then here, then save" automation that finance and operations teams have been begging for, and the price tag finally matches the audience. Today I'm walking through scenarios I've actually shipped—legacy app data entry, scheduled report extraction from a portal that has no API, and the patterns that survive the inevitable UI change.
-
-## Understanding Power Automate Desktop
+Most back-office work that still runs on copy and paste lives in applications with no API: a thick-client line-of-business system, a supplier portal, a terminal session nobody wants to touch. Power Automate Desktop, which reached general availability in December 2020, is Microsoft's answer for that work, and it changes who can build the automation. The hard part was never recording the clicks. It's building something that still works after the next UI update, and knowing when a bot is the wrong tool.
 
-Power Automate Desktop (PAD) allows you to:
-- Record and playback desktop interactions
-- Automate legacy applications without APIs
-- Process files, emails, and web data
-- Integrate with cloud flows and AI Builder
+The scenarios I've built with it are the classic ones: entering data into a legacy app, and pulling a scheduled report out of a portal that has no API.
 
-## Getting Started
+## What Power Automate Desktop actually is
 
-After installing Power Automate Desktop, here is a simple flow that extracts data from a legacy application:
+Power Automate Desktop is a Windows application for building desktop flows. Its roots are in WinAutomation, which came with Microsoft's [acquisition of Softomotive](https://www.microsoft.com/en-us/power-platform/blog/power-automate/microsoft-acquires-softomotive-to-expand-low-code-robotic-process-automation-capabilities-in-microsoft-power-automate/) in May 2020. Microsoft [announced Power Automate Desktop](https://www.microsoft.com/en-us/power-platform/blog/power-automate/jumpstart-your-business-with-power-automates-new-desktop-rpa-solution/) in public preview around Ignite in September 2020, and the [December 2020 update](https://www.microsoft.com/en-us/power-platform/blog/power-automate/take-a-tour-of-process-advisor-and-new-rpa-enhancements/) made it generally available. The same update renamed the original "UI flows" to desktop flows, which is the term you'll now see across the Power Automate portal.
 
-```
-# Power Automate Desktop Flow: Extract Sales Data
+In practice you get:
 
-# Variables
-SET SalesData TO []
-SET TodayDate TO %CurrentDateTime.ToString("yyyy-MM-dd")%
+- A designer with hundreds of drag-and-drop actions covering files, folders, Excel, email, web browsers, Windows UI, terminal emulators and scripting.
+- A desktop recorder and a web recorder that capture what you do as actions.
+- UI elements: captured references to controls in a window or web page, identified by selectors instead of screen coordinates.
+- Variables, loops, conditions, subflows, and error handling at both the action level and the block level.
+- Input and output variables, so a cloud flow can pass values in and read results back.
 
-# Launch the legacy application
-Run application
-    Application path: C:\Program Files\LegacyApp\SalesSystem.exe
-    Wait for application: true
+The December 2020 release also added a sensitive text type for input variables and encrypted direct input for actions such as "Populate text field on web page", "Populate text field in window" and "Send keys". That matters, and I'll come back to it.
 
-# Wait for login screen
-Wait for window
-    Window title: Sales System - Login
-    Timeout: 30
+## Licensing, as it stands today
 
-# Enter credentials (from secure credential store)
-Get credential
-    Credential name: LegacySalesApp
-    Store in: Username, Password
+The installer is a free download, but signing in and running desktop flows requires the Power Automate per user plan with attended RPA (or a trial). The current model, unchanged since RPA arrived in Power Automate in April 2020:
 
-Send keys
-    Keys to send: %Username%
+| Need | Licence | List price |
+|---|---|---|
+| A person runs bots on their own machine while signed in (attended) | Power Automate per user plan with attended RPA | US$40 per user per month |
+| A bot runs on a machine with no one signed in (unattended) | Unattended RPA add-on, on top of an attended or per flow plan | US$150 per bot per month |
 
-Press key
-    Key: Tab
-
-Send keys
-    Keys to send: %Password%
+This is the first thing to sort out with whoever owns the budget. A pilot built on a trial looks free until someone asks for 20 people to run it. For many teams, US$40 per user per month is the real gate on rolling this out widely.
 
-Press key
-    Key: Enter
-
-# Navigate to reports
-Wait for window
-    Window title: Sales System - Main Menu
-
-Click UI element
-    Element: Reports menu item
-
-Click UI element
-    Element: Daily Sales Report
-
-# Set date filter
-Set text
-    Element: Start Date field
-    Text: %TodayDate%
-
-Click UI element
-    Element: Generate Report button
-
-# Wait for report to load
-Wait for UI element
-    Element: Report table
-    Timeout: 60
-
-# Extract table data
-Extract data from window
-    Window: Sales Report
-    Element: Report table
-    Store data in: SalesData
-
-# Export to Excel
-Launch Excel
-    Make instance visible: false
-    Store instance in: ExcelInstance
-
-Write to Excel worksheet
-    Excel instance: %ExcelInstance%
-    Value to write: %SalesData%
-    Write mode: On specified cell
-    Start column: A
-    Start row: 1
-
-Save Excel
-    Excel instance: %ExcelInstance%
-    File path: C:\Reports\DailySales_%TodayDate%.xlsx
-
-Close Excel
-    Excel instance: %ExcelInstance%
-    Save before closing: true
-
-# Close legacy app
-Close window
-    Window: Sales System
-```
-
-## Web Automation
-
-Automate web-based tasks without Selenium coding:
-
-```
-# Power Automate Desktop Flow: Process Web Orders
-
-# Launch browser
-Launch new Chrome
-    Initial URL: https://orders.company.com
-    Store browser instance in: Browser
-
-# Login
-Populate text field in web page
-    Browser instance: %Browser%
-    Element: Username field
-    Text: %Username%
-
-Populate text field in web page
-    Browser instance: %Browser%
-    Element: Password field
-    Text: %Password%
-
-Click link on web page
-    Browser instance: %Browser%
-    Element: Login button
-
-# Navigate to pending orders
-Click link on web page
-    Browser instance: %Browser%
-    Element: Orders link
-
-Click link on web page
-    Browser instance: %Browser%
-    Element: Pending filter
-
-# Extract order data
-Extract data from web page
-    Browser instance: %Browser%
-    Element: Orders table
-    Store data in: PendingOrders
-
-# Process each order
-LOOP FOREACH CurrentOrder IN PendingOrders
-    # Click on order
-    Click link on web page
-        Browser instance: %Browser%
-        Element: Order link with text %CurrentOrder['OrderID']%
-
-    # Check inventory (call cloud flow)
-    Run Power Automate flow
-        Flow name: Check Inventory
-        Input parameters: ProductID=%CurrentOrder['ProductID']%, Quantity=%CurrentOrder['Quantity']%
-        Store result in: InventoryResult
-
-    IF %InventoryResult['InStock']% = true THEN
-        # Approve order
-        Click link on web page
-            Browser instance: %Browser%
-            Element: Approve button
-
-        Display notification
-            Title: Order Approved
-            Message: Order %CurrentOrder['OrderID']% has been approved
-    ELSE
-        # Flag for review
-        Click link on web page
-            Browser instance: %Browser%
-            Element: Flag for Review button
-
-        Populate text field in web page
-            Browser instance: %Browser%
-            Element: Notes field
-            Text: Insufficient inventory. Available: %InventoryResult['Available']%
-    END
-
-    # Return to list
-    Click link on web page
-        Browser instance: %Browser%
-        Element: Back to Orders
-END
-
-# Close browser
-Close web browser
-    Browser instance: %Browser%
-```
-
-## Excel Automation
-
-Process Excel files with complex logic:
-
-```
-# Power Automate Desktop Flow: Monthly Report Consolidation
-
-# Get all Excel files from folder
-Get files in folder
-    Folder: C:\MonthlyReports\Raw
-    File filter: *.xlsx
-    Store files in: ReportFiles
-
-# Create master workbook
-Launch Excel
-    Make instance visible: false
-    Store instance in: MasterWorkbook
-
-Add new worksheet
-    Excel instance: %MasterWorkbook%
-    New worksheet name: Consolidated
-
-SET CurrentRow TO 2
-SET IsFirstFile TO true
-
-LOOP FOREACH ReportFile IN ReportFiles
-    # Open source file
-    Launch Excel
-        File path: %ReportFile%
-        Make instance visible: false
-        Store instance in: SourceWorkbook
-
-    # Read data
-    Read from Excel worksheet
-        Excel instance: %SourceWorkbook%
-        Retrieve: All available values
-        Store data in: SourceData
-
-    IF %IsFirstFile% = true THEN
-        # Copy headers from first file
-        Write to Excel worksheet
-            Excel instance: %MasterWorkbook%
-            Value to write: %SourceData[0]%
-            Start column: A
-            Start row: 1
-        SET IsFirstFile TO false
-    END
-
-    # Copy data rows (skip header)
-    LOOP FOREACH DataRow IN SourceData STARTING FROM 1
-        Write to Excel worksheet
-            Excel instance: %MasterWorkbook%
-            Value to write: %DataRow%
-            Start column: A
-            Start row: %CurrentRow%
-
-        SET CurrentRow TO %CurrentRow + 1%
-    END
-
-    # Close source file
-    Close Excel
-        Excel instance: %SourceWorkbook%
-        Save before closing: false
-END
-
-# Add summary formulas
-Write to Excel worksheet
-    Excel instance: %MasterWorkbook%
-    Value to write: Total
-    Start column: A
-    Start row: %CurrentRow + 1%
-
-Write to Excel worksheet
-    Excel instance: %MasterWorkbook%
-    Value to write: =SUM(C2:C%CurrentRow%)
-    Start column: C
-    Start row: %CurrentRow + 1%
-
-# Save master workbook
-SET MonthYear TO %CurrentDateTime.ToString("yyyy-MM")%
-Save Excel
-    Excel instance: %MasterWorkbook%
-    File path: C:\MonthlyReports\Consolidated\Report_%MonthYear%.xlsx
-
-Close Excel
-    Excel instance: %MasterWorkbook%
-```
-
-## Error Handling and Logging
-
-Implement robust error handling in your flows:
-
-```
-# Power Automate Desktop Flow: Robust Data Processing
-
-SET LogFile TO "C:\Logs\ProcessLog_%CurrentDateTime.ToString("yyyyMMdd_HHmmss")%.txt"
-SET ProcessedCount TO 0
-SET ErrorCount TO 0
-
-# Initialize log
-Write text to file
-    File path: %LogFile%
-    Text to write: Process started at %CurrentDateTime%
-    Append new line: true
-
-BLOCK Process Data
-ON BLOCK ERROR
-    # Handle any error in this block
-    Write text to file
-        File path: %LogFile%
-        Text to write: ERROR: %LastError% at %CurrentDateTime%
-        Append new line: true
-
-    SET ErrorCount TO %ErrorCount + 1%
-
-    # Take screenshot for debugging
-    Take screenshot
-        Save to file: C:\Logs\Error_%CurrentDateTime.ToString("yyyyMMdd_HHmmss")%.png
-
-    # Send notification
-    Send email
-        To: admin@company.com
-        Subject: RPA Flow Error
-        Body: Error occurred in data processing flow. Check logs at %LogFile%
-END
-
-    # Main processing logic
-    Get files in folder
-        Folder: C:\Data\Input
-        Store files in: DataFiles
-
-    LOOP FOREACH DataFile IN DataFiles
-        BLOCK Process File
-        ON BLOCK ERROR
-            Write text to file
-                File path: %LogFile%
-                Text to write: Failed to process %DataFile%: %LastError%
-                Append new line: true
-            SET ErrorCount TO %ErrorCount + 1%
-            CONTINUE LOOP
-        END
-
-            # Process the file
-            Read text from file
-                File path: %DataFile%
-                Store content in: FileContent
-
-            # Validate content
-            IF %FileContent.Length% = 0 THEN
-                THROW EXCEPTION "Empty file detected"
-            END
-
-            # Process content...
-
-            # Move processed file
-            Move file
-                File to move: %DataFile%
-                Destination: C:\Data\Processed\
-
-            SET ProcessedCount TO %ProcessedCount + 1%
-
-            Write text to file
-                File path: %LogFile%
-                Text to write: Successfully processed %DataFile%
-                Append new line: true
-        END
-    END
-END
-
-# Write summary
-Write text to file
-    File path: %LogFile%
-    Text to write: Process completed. Processed: %ProcessedCount%, Errors: %ErrorCount%
-    Append new line: true
-```
-
-## Integration with Cloud Flows
-
-Connect desktop flows with Power Automate cloud flows:
-
-```json
-{
-  "definition": {
-    "$schema": "https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json",
-    "actions": {
-      "Run_Desktop_Flow": {
-        "type": "OpenApiConnection",
-        "inputs": {
-          "host": {
-            "connectionName": "shared_uiflow",
-            "operationId": "RunDesktopFlow"
-          },
-          "parameters": {
-            "runMode": "Attended",
-            "desktopFlowId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            "body": {
-              "inputParameters": {
-                "OrderID": "@triggerBody()?['OrderID']",
-                "CustomerEmail": "@triggerBody()?['Email']"
-              }
-            }
-          }
-        }
-      },
-      "Process_Output": {
-        "type": "Compose",
-        "inputs": "@body('Run_Desktop_Flow')?['outputParameters']",
-        "runAfter": {
-          "Run_Desktop_Flow": ["Succeeded"]
-        }
-      },
-      "Send_Confirmation": {
-        "type": "OpenApiConnection",
-        "inputs": {
-          "host": {
-            "connectionName": "shared_office365",
-            "operationId": "SendEmailV2"
-          },
-          "parameters": {
-            "emailMessage/To": "@triggerBody()?['Email']",
-            "emailMessage/Subject": "Order Processed",
-            "emailMessage/Body": "Your order has been processed. Tracking: @{outputs('Process_Output')?['TrackingNumber']}"
-          }
-        },
-        "runAfter": {
-          "Process_Output": ["Succeeded"]
-        }
-      }
-    },
-    "triggers": {
-      "When_a_new_order_arrives": {
-        "type": "ApiConnectionWebhook",
-        "inputs": {
-          "host": {
-            "connectionName": "shared_commondataservice"
-          },
-          "parameters": {
-            "dataset": "default.cds",
-            "table": "orders",
-            "eventType": "create"
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-## Best Practices
-
-1. **Use UI Element Selectors**: Prefer CSS selectors and names over coordinates
-2. **Add Wait Actions**: Allow time for applications to respond
-3. **Implement Logging**: Track execution for troubleshooting
-4. **Handle Errors Gracefully**: Use block error handling for recovery
-5. **Secure Credentials**: Use the built-in credential manager
-6. **Test Incrementally**: Build and test flows step by step
-7. **Document Flows**: Add comments explaining complex logic
-
-Power Automate Desktop democratizes RPA by making it accessible to business users while providing the power needed for complex automation scenarios. Combined with cloud flows and AI Builder, it forms a comprehensive automation platform.
+## Attended or unattended: decide before you build
+
+The run mode changes how you build the flow, so pick it up front.
+
+**Attended** flows run on a user's machine while that user is signed in, usually started by them or by a cloud flow on their behalf. Use attended when a person needs to make a judgement mid-process, when the app needs the user's own session or smart card, or when the volume is a handful of runs a day.
+
+**Unattended** flows run on a machine where no user is signed in; the bot signs in, runs and signs out. Use unattended for scheduled, high-volume, no-judgement work such as overnight report extraction.
+
+How cloud flows reach the machine catches people out. Today, [triggering a desktop flow from a cloud flow](https://learn.microsoft.com/en-us/power-automate/desktop-flows/trigger-desktop-flows) goes through the desktop flows connector, and that connection needs an **on-premises data gateway** installed on the machine running the bot. Plan for gateway installation, its service account, and its updates as part of the build. Don't leave them for the week of go-live.
+
+### What an unattended machine needs
+
+Unattended runs have stricter requirements than a developer laptop. The machine should run Windows 10 Pro or Enterprise, or Windows Server 2016 or 2019, with Power Automate Desktop and the gateway installed and registered against the same environment as your cloud flows. The desktop flows connection stores the Windows account and password the bot signs in with, so that account must be allowed to sign in to that machine, and nobody else can be signed in when the run starts: a disconnected or locked session blocks it. Each machine runs one unattended desktop flow at a time. When volume grows, add machines to a gateway cluster and let the [desktop flow queue](https://www.microsoft.com/en-us/power-platform/blog/power-automate/take-a-tour-of-process-advisor-and-new-rpa-enhancements/) (in preview since the December update) and its priorities decide what runs next.
+
+My rule of thumb: start attended, prove the process is stable for a few weeks, then move it to unattended. An unattended bot that fails at 2 am with nobody watching is much more expensive than an attended one that fails in front of the person who knows the process.
+
+## Designing flows that survive the next UI change
+
+Every RPA project eventually meets the same problem: the target application changes. A button moves, a window title gains a version number, a web page gets a redesign. Here's how I design for that.
+
+### Use UI elements, not coordinates
+
+When the recorder can't identify a control, or when you add "Send mouse click" by hand, you end up with screen-coordinate clicks. Replace them with actions that target UI elements ("Click UI element in window", "Populate text field in window"), because a selector based on control type, name or automation ID survives screen resolution, window position and DPI changes. Coordinates survive none of those.
+
+Selectors can be edited after capture. The most common fix I make is removing brittle attributes, such as a window title that includes today's date or a record ID, so the selector matches the window you mean rather than the exact window you happened to record.
+
+### Wait for state, not for time
+
+A fixed "Wait 5 seconds" works on your machine and fails on a busy VM. Wait for something real instead: "Wait for window", "Wait for image", or "Wait for web page content", each with a timeout. When the timeout hits, that's a real error you can handle, instead of a click that lands on nothing.
+
+### Split the flow into subflows by screen
+
+Put each logical screen or step in its own subflow: sign in, navigate to the report, set filters, extract, export. When the vendor changes the reports screen, you fix one subflow and leave the rest alone. It also makes run failures readable, because the failing subflow name tells you where it broke.
+
+### Keep credentials out of the flow
+
+Never type a password into a "Send keys" action as plain text. Use a sensitive text input variable or the encrypted direct input added in the December release, and pass the value in from the cloud flow when you can. Better still, run the bot as a dedicated account with the minimum access the process needs, and treat that account like any other service account: owned, documented, password rotated.
+
+## Error handling that tells you what happened
+
+Desktop flows stop on the first error by default. That's the right default for development and the wrong one for production. There are two levels of error handling:
+
+- **Action level:** each action's "On error" settings can retry a number of times with a delay, continue the run, or go to a label. Use retries for known transient failures, such as a slow page load.
+- **Block level:** "On block error" wraps a group of actions in one handler. It went into public preview in November 2020 and the [release plan](https://learn.microsoft.com/en-us/power-platform-release-plan/2020wave2/power-automate/second-level-error-handling-power-automate-desktop) still lists it as preview at the time of writing, so test it properly before you lean on it. It's the closest thing to a try/catch you get.
+
+The pattern I use: wrap each item's processing in an "On block error" block, so one bad record doesn't kill the batch. In the handler, use "Get last error", take a screenshot, write the record ID and error to a log file, and continue with the next item. At the end, return counts of processed and failed items as output variables so the calling cloud flow can send a summary or raise an alert.
+
+A screenshot at the moment of failure is worth more than any log line. Most RPA failures are "the screen wasn't what the bot expected", and a picture settles that in seconds.
+
+## Governance before the second bot
+
+Desktop flows are called through the desktop flows connector, and that connector sits in your environment data loss prevention (DLP) policies like any other. Decide which group it belongs in alongside the connectors your cloud flows use, and put production bots in their own environment rather than the default one. DLP governs connectors, not the individual actions inside a desktop flow, so review what each bot does before it reaches production.
+
+For monitoring, the calling cloud flow's run history is your first stop: the desktop flow step shows its status, duration and outputs, which is why returning counts as output variables pays off. The December update also added real-time views of desktop flow runs and queues in a Monitor section of the portal. Someone has to own those views; a failed run nobody looks at is the same as no automation.
+
+## When not to use a desktop flow
+
+RPA is the integration of last resort. It's slower than an API, more fragile, and needs a Windows machine to stay healthy. Before building a bot, ask:
+
+| If… | Use instead |
+|---|---|
+| The system has a REST API, even an undocumented one the vendor will support | A cloud flow with the [HTTP connector](/blog/2020-08-07-power-automate-http-connector/) or a [custom connector](/blog/2020-08-30-power-automate-custom-connectors/) |
+| The data is in a database you're allowed to read | A direct query, a dataflow or a pipeline |
+| The source can drop a file somewhere on a schedule | File-based integration |
+| The process changes every month | Fix the process first; automating churn means rebuilding the bot every month |
+
+Desktop flows earn their place when the only interface is the UI and the system isn't going away soon: legacy line-of-business apps, mainframe terminals, and supplier portals with no export. They're also a reasonable bridge while a proper integration is on the roadmap. In that case, say so out loud and give the bot an end date.
+
+## Where I'd start
+
+Pick one high-volume, rules-based process with a stable UI and a patient process owner. Build it attended, using UI elements instead of coordinates, subflows per screen, sensitive inputs for credentials and block-level error handling with screenshots. Run it for a month before you talk about unattended bots, gateways and the US$150 add-on.
+
+If you can't name the person who will fix the bot when the vendor ships a new UI, don't build it yet.

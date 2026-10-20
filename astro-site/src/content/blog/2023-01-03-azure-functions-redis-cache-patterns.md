@@ -1,46 +1,31 @@
 ---
-title: "Implementing Redis Caching Patterns with Azure Functions"
-description: "Redis is a popular in-memory data store that can be used as a cache. Azure Functions is a serverless compute service that can be used to run code on-demand…"
+title: "Redis Caching Patterns in .NET 7 Isolated Azure Functions"
+description: "Cache-aside, write-through, write-behind and refresh-ahead with Azure Cache for Redis in .NET 7 isolated Azure Functions, and when each one is the wrong choice."
 author: Michael John Peña
 draft: false
 date: 2023-01-03
 url: /blog/azure-functions-redis-cache-patterns/
 tags:
+  - Azure Functions
   - Redis
-  - Cache
-  - Functions
-  - Patterns
-  - Azure
+  - Caching
+  - Serverless
+  - .NET
 ---
 
-## What are the different caching patterns?
+Serverless functions are stateless by design, so every invocation that needs data goes back to the database. That works until a popular endpoint starts hammering Cosmos DB or SQL with the same reads, or a burst of writes saturates a backend that can't scale as fast as Functions can. A shared cache like Azure Cache for Redis fixes that, but the pattern you pick decides whether you get speed, consistency, or a data-loss bug you won't find until production.
 
-There are several different caching patterns that can be used to improve the performance of an application. Some of the most common caching patterns include:
+I covered the general patterns with Azure Cache for Redis [in an earlier post](/blog/2020-10-24-azure-redis-cache-patterns/). This one is narrower: how cache-aside, write-through, write-behind and refresh-ahead map onto Azure Functions running in the .NET 7 isolated worker, what each costs you, and when I wouldn't use them.
 
-1.  **Cache-Aside**: In this pattern, the cache is not pre-populated with data. Instead, the application is responsible for loading data into the cache when it is needed. This allows the application to have complete control over what data is stored in the cache and when it is refreshed.
-2.  **Write-Through**: In this pattern, data is written to the cache and the backing store at the same time. This ensures that the cache is always up-to-date, but can result in slower write performance.
-3.  **Write-Behind**: In this pattern, data is written to the cache and then asynchronously written to the backing store at a later time. This can improve write performance, but there is a risk of data loss if the cache goes down before the data is written to the backing store.
-4.  **Refresh-ahead**: In this pattern, cache is pre-populated with data for clients to use. A scheduled job is triggered to request the cache data for clients in advanced.
+## Why the isolated worker, and why there's no Redis binding
 
-## How can these patterns be implemented on Redis with Azure Functions?
+Functions has supported [.NET 7 in the isolated worker process](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide) since .NET 7 shipped in November 2022 ([my notes on that release](/blog/2022-11-03-azure-functions-dotnet-7-isolated/)). The in-process model is still tied to the LTS release (.NET 6), so if you want .NET 7 on Functions, isolated is the only option. I prefer it anyway: `Program.cs`, dependency injection and middleware look like ASP.NET Core, and your code no longer shares a process with the Functions host.
 
-Redis is a popular in-memory data store that can be used as a cache. Azure Functions is a serverless compute service that can be used to run code on-demand in response to a variety of triggers.
+There's no first-party Redis trigger or binding for Azure Functions, so every pattern here talks to Redis directly through a client library. I use `IDistributedCache` from the `Microsoft.Extensions.Caching.StackExchangeRedis` package rather than raw `StackExchange.Redis`. The abstraction only gives you get, set, refresh and remove with expiry, and that is all these four patterns need. The moment you need atomic counters, Lua scripts, pub/sub or locks, inject `IConnectionMultiplexer` instead. `AddStackExchangeRedisCache` doesn't make it injectable, so register it yourself with `services.AddSingleton<IConnectionMultiplexer>(_ => ConnectionMultiplexer.Connect(...))`, and point the cache at the same instance through `options.ConnectionMultiplexerFactory` so you keep one connection rather than opening a second.
 
-## Prerequisites
+## Common setup
 
-- An Azure account
-- Azure Functions Tools
-- The Azure Functions extension for Visual Studio Code (Visual Studio / Rider)
-- The **Microsoft.Extensions.Caching.StackExchangeRedis** NuGet package
-- Azure Functions and Azure Redis Cache
-
-_Note: This example can also be replicated locally by using the Redis docker image instead of Azure Redis Cache._
-
-## Common Setup
-
-To implement any of the cache patterns below with Azure Functions and Redis, we can use the **Microsoft.Extensions.Caching.StackExchangeRedis** NuGet package, which provides a .NET client for Redis. I prefer to use **ISOLATED process** mode as it's more close to the ASP.NET Core implementations but still leverages the serverless nature of Functions. So the rest of the code samples won't work on IN-PROCESS mode, but the concept and idea will be the same - just different implementation.
-
-After importing the nuget package, in your Program.cs, inject Redis by adding the following:
+Packages: `Microsoft.Azure.Functions.Worker`, `Microsoft.Azure.Functions.Worker.Sdk`, `Microsoft.Azure.Functions.Worker.Extensions.Http`, `Microsoft.Azure.Functions.Worker.Extensions.Timer`, `Microsoft.Azure.Functions.Worker.Extensions.ServiceBus` and `Microsoft.Extensions.Caching.StackExchangeRedis`. Register the cache once in `Program.cs`:
 
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
@@ -50,19 +35,23 @@ var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
     .ConfigureServices(services =>
     {
-        // Azure Redis Cache (or Redis via Docker)
         services.AddStackExchangeRedisCache(options =>
         {
             options.Configuration = Environment.GetEnvironmentVariable("RedisCache");
-            options.InstanceName = "MyRedisCacheInstance";
+            options.InstanceName = "products-api:";
         });
+
+        // Your data access implementation (Cosmos DB, SQL, etc.)
+        services.AddSingleton<IProductStore, CosmosProductStore>();
     })
     .Build();
 
 host.Run();
 ```
 
-Then in your local.settings.json file, add the following:
+`AddStackExchangeRedisCache` registers a singleton that opens one multiplexed connection and reuses it across invocations. That matters on the Consumption plan: creating a connection per invocation is the fastest way to exhaust connections and pay a TLS handshake on every request. `InstanceName` is prefixed to every key, which keeps two apps sharing one cache from colliding.
+
+The connection string goes in app settings (or `local.settings.json` locally). Azure Cache for Redis uses TLS on port 6380, and the [non-TLS port 6379 is disabled by default](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-configure#access-ports), so keep `ssl=True`:
 
 ```json
 {
@@ -70,278 +59,304 @@ Then in your local.settings.json file, add the following:
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "RedisCache": "***.redis.cache.windows.net:6380,password=***=,ssl=True,abortConnect=False"
+    "RedisCache": "<your-cache-name>.redis.cache.windows.net:6380,password=<your-access-key>,ssl=True,abortConnect=False",
+    "ServiceBusConnection": "<your-service-bus-connection-string>"
   }
 }
 ```
 
-## Cache-Aside
+For local development, `docker run -p 6379:6379 redis` and a `RedisCache` value of `localhost:6379` is enough. The samples below share this model and store interface (a fragment; `CosmosProductStore` is your implementation):
 
-The cache-aside pattern is a common approach to caching that involves checking the cache for a requested value, and if it is not present, retrieving it from the source and storing it in the cache before returning it to the client. This pattern is useful for maintaining a consistent cache and avoiding stale data.
+```csharp
+public record Product(string Id, string Name, decimal Price);
 
+public interface IProductStore
+{
+    Task<Product?> GetAsync(string id);
+    Task UpsertAsync(Product product);
+    Task<IReadOnlyList<Product>> GetHotProductsAsync();
+}
+```
 
-In this diagram, the client sends a request to the application. The application checks the cache for the requested data. If the data is found in the cache, the application retrieves it from the cache and returns it to the client. If the data is not found in the cache, the application retrieves it from the original source (e.g., a CosmosDB database) and stores it in the cache before returning it to the client.
+## Cache-aside: the default
 
-Here is an example of Cache-Aside in action using Azure Functions, .NET 7, C#, and Azure Redis:
+The function checks Redis first; on a miss it reads the database, writes the result to Redis with an expiry, and returns it. The cache only ever holds data someone asked for. The [cache-aside pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside) in the Azure Architecture Center covers the theory well.
 
 ```csharp
 using System.Net;
+using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 
-namespace RedisCachePatterns.Functions;
-
-public class CacheAsideFunction
+public class GetProductFunction
 {
-    private readonly IDistributedCache _redisCache;
+    private readonly IDistributedCache _cache;
+    private readonly IProductStore _store;
+    private readonly ILogger<GetProductFunction> _logger;
 
-    public CacheAsideFunction(IDistributedCache redisCache)
+    public GetProductFunction(IDistributedCache cache, IProductStore store,
+        ILogger<GetProductFunction> logger)
     {
-        _redisCache = redisCache;
+        _cache = cache;
+        _store = store;
+        _logger = logger;
     }
 
-    [Function("CacheAsideFunction")]
-    public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
-        FunctionContext executionContext, CancellationToken cancellationToken)
+    [Function("GetProduct")]
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "products/{id}")] HttpRequestData req,
+        string id)
     {
-        var logger = executionContext.GetLogger("CacheAsideFunction");
-        logger.LogInformation("Starting Cache-Aside Function.");
+        var key = $"product:{id}";
+        string? json = null;
 
-        // Get the requested key
-        var cacheKey = await req.ReadAsStringAsync();
-        // Get the cache value
-        var cacheValue = await _redisCache.GetStringAsync(cacheKey, token: cancellationToken);
-
-        // If the key is not present in the cache, retrieve it from the source and store it in the cache
-        if (cacheValue == null)
+        try
         {
-            cacheValue = await GetValueFromDatabase(cacheKey);
-            await _redisCache.SetStringAsync(cacheKey, cacheValue, token: cancellationToken);
+            json = await _cache.GetStringAsync(key);
+        }
+        catch (Exception ex) when (ex is RedisConnectionException or RedisTimeoutException)
+        {
+            // The cache is an optimisation: fail open and read the database.
+            _logger.LogWarning(ex, "Cache read failed for {Key}", key);
         }
 
-        // Return the value to the client
-        var response = req.CreateResponse(HttpStatusCode.OK);
-        await response.WriteStringAsync(cacheValue);
+        if (json is null)
+        {
+            var product = await _store.GetAsync(id);
+            if (product is null)
+            {
+                return req.CreateResponse(HttpStatusCode.NotFound);
+            }
 
+            json = JsonSerializer.Serialize(product);
+
+            try
+            {
+                await _cache.SetStringAsync(key, json, new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10)
+                });
+            }
+            catch (Exception ex) when (ex is RedisConnectionException or RedisTimeoutException)
+            {
+                _logger.LogWarning(ex, "Cache write failed for {Key}", key);
+            }
+        }
+
+        var response = req.CreateResponse(HttpStatusCode.OK);
+        response.Headers.Add("Content-Type", "application/json");
+        await response.WriteStringAsync(json);
         return response;
     }
-
-    private async Task<string?> GetValueFromDatabase(string cacheKey)
-    {
-        return "Value from Database";
-    }
 }
 ```
 
-In this example, we first check the cache for the requested key using the `GetStringAsync` method. If the key is not present in the cache, we retrieve the value from the source using the `GetValueFromDatabase` method and store it in the cache using the `StringSet` method. We then return the value of the key back to the user.
+Two details matter here. First, always set an expiry. A cache entry without a TTL is a consistency bug waiting for the day someone updates the database through another path. Second, build the key from a fixed prefix plus the ID (`$"product:{id}"`), never from caller-supplied text alone. Route values are caller input like anything else; the fixed `product:` prefix plus `InstanceName` is what stops a caller reaching keys outside the product namespace.
 
-## Write-Through
+The try/catch blocks are there because the cache must fail open. `abortConnect=False` only stops the app failing at startup when Redis is unreachable; after that, `GetStringAsync` and `SetStringAsync` throw `RedisConnectionException` or `RedisTimeoutException` on every call while the cache is down. Without the catch, a Redis outage becomes a 500 on every request, even though the database is healthy and could have answered. Log the failure, fall through to `_store`, and accept slower responses until the cache comes back. The same applies to every cache call in the samples below; I've left the try/catch out of them only to keep them short, except where it changes the response.
 
-The write-through cache pattern is a common approach to caching that involves writing data to both the cache and the source in a single operation. This pattern ensures that the cache is always consistent with the source and avoids the need for a separate cache update operation.
-
-
-In this diagram, the client sends a request to the application to write a value to the cache. The application writes the value to the cache and to the original source (e.g., a CosmosDB database).
-
-Here is an example of Write-Through in action using Azure Functions, .NET 7, C#, and Azure Redis:
+The weakness is the stampede: when a hot key expires, every concurrent invocation misses at once and they all hit the database. With Functions scaling out under load, that can be dozens of instances. If a key is hot enough for that to hurt, look at refresh-ahead below rather than adding locking to cache-aside. For the long tail, where you can't predict which keys are hot, the cheap fix is to jitter the TTL (for example 10 minutes plus a random 0 to 60 seconds) so keys written together don't expire together. Only if that isn't enough would I add a short-lived lock with `SET NX` through `IConnectionMultiplexer` (registered as described above, sharing the cache's connection), so one invocation reloads the key while the others wait or serve the old value. As a fragment, where `db` is `multiplexer.GetDatabase()`:
 
 ```csharp
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
-
-namespace RedisCachePatterns.Functions;
-
-public class WriteThroughFunction
-{
-    private readonly IDistributedCache _redisCache;
-
-    public WriteThroughFunction(IDistributedCache redisCache)
-    {
-        _redisCache = redisCache;
-    }
-
-    [Function("CacheAsideFunction")]
-    public async Task<CacheResponse> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] CacheRequest request,
-        FunctionContext executionContext, CancellationToken cancellationToken)
-    {
-        var logger = executionContext.GetLogger("WriteThroughFunction");
-        logger.LogInformation("Starting Write-Through Function.");
-
-        // Write the value to the cache and the source
-        await _redisCache.SetStringAsync(request.Key, request.ValueToInsert, token: cancellationToken);
-        await WriteValueToDatabase(request.Key, request.ValueToInsert);
-
-        // Return the value to the client
-        return new CacheResponse
-        {
-            Message = "Value written to cache and source"
-        };
-    }
-
-    private async Task WriteValueToDatabase(string requestKey, string requestValueToInsert)
-    {
-        // Perform an insert operation to your database
-    }
-}
+// Fragment: true means this invocation owns the reload for the next 10 seconds.
+var acquired = await db.StringSetAsync($"lock:{key}", instanceId, TimeSpan.FromSeconds(10), When.NotExists);
 ```
 
-In this example, we first get the key and value from the request. We then use the `StringSet` method to write the value to the cache, and the `WriteValueToDatabase` method to write the value to the source. Finally, we return a success message to the client using the `OkObjectResult` class.
+The expiry matters: if the invocation holding the lock dies, the lock releases itself. StackExchange.Redis also wraps this as `LockTakeAsync` and `LockReleaseAsync`, which check the token on release so one invocation can't delete another's lock.
 
-## Write-Behind
+## Write-through: consistent reads after writes
 
-The write-behind cache pattern is a common approach to caching that involves writing data to the cache and asynchronously updating the source at a later time. This pattern is useful for reducing the load on the source data store and improving the performance of write operations.
-
-
-In this diagram, the client sends a request to the application to write a value to the cache. The application stores the value in the cache and adds it to a write queue (Azure Event Hubs). A separate process reads from the write queue and writes the values to the original source (e.g., a CosmosDB database).
-
-Here is an example of Write-Behind in action using Azure Functions, .NET 7, C#, and Azure Redis:
+Write-through updates the database and the cache in the same request, so the next read sees the new value without a miss.
 
 ```csharp
+using System.Net;
+using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 
-namespace RedisCachePatterns.Functions;
-
-public class WriteBehindFunction
+public class PutProductFunction
 {
-    private readonly IDistributedCache _redisCache;
+    private readonly IDistributedCache _cache;
+    private readonly IProductStore _store;
+    private readonly ILogger<PutProductFunction> _logger;
 
-    public WriteBehindFunction(IDistributedCache redisCache)
+    public PutProductFunction(IDistributedCache cache, IProductStore store,
+        ILogger<PutProductFunction> logger)
     {
-        _redisCache = redisCache;
+        _cache = cache;
+        _store = store;
+        _logger = logger;
     }
 
-    [Function("WriteBehindFunction")]
-    public async Task<CacheResponse> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] CacheRequest request,
-        FunctionContext executionContext, CancellationToken cancellationToken)
+    [Function("PutProduct")]
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Function, "put", Route = "products/{id}")] HttpRequestData req,
+        string id)
     {
-        var logger = executionContext.GetLogger("WriteBehindFunction");
-        logger.LogInformation("Starting Write-Behind Function.");
-
-        // Write the value to the cache (Synchronously)
-        _redisCache.SetString(request.Key, request.ValueToInsert);
-
-		// Asynchronously update the source
-        await PublishToEventHubsAsync(request.Key, request.ValueToInsert);
-
-        return new CacheResponse
+        var body = await req.ReadFromJsonAsync<Product>();
+        if (body is null)
         {
-            Message = "Value written to cache and update to source scheduled"
-        };
-    }
-
-    private async Task PublishToEventHubsAsync(string requestKey, string requestValueToInsert)
-    {
-        // Schedule an insert operation to your database
-    }
-}
-```
-
-In this example, we first get the key and value from the request. We then use the `SetString` method to write the value to the cache, and the `PublishToEventHubsAsync` method to asynchronously update the source.
-
-Note that you can even improve this by creating an Event Hub Output binding from this function. And then create another Event Hub Trigger function to react on the published message, and save it to the database like CosmosDB.
-
-## Refresh-Ahead
-
-Read-Through pattern is a similar concept with Cache-Aside, except that it's specific for Reading data. There are a lot of variations on Read-Through as there are different techniques on how to serve "hot" data to clients as fast as possible. One of the trivial and popular pattern is Refresh-ahead.
-
-The Refresh-ahead cache pattern is a variation of the Read-Through pattern where data is preemptively retrieved from the original source and stored in the cache before it is actually needed. This can improve the performance of an application by reducing the latency of retrieving data from the original source.
-
-
-In this diagram, the client sends a request to the application to read a value from the cache. The application retrieves the value from the cache and returns it to the client. In the background, the application also retrieves the value from the original source (e.g., a CosmosDB database) and stores it in the cache. This way, the next time the value is needed, it will already be in the cache and can be retrieved more quickly.
-
-Here is an example of Refresh-ahead in action using Azure Functions, .NET 7, C#, and Azure Redis:
-
-```csharp
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
-
-namespace RedisCachePatterns.Functions;
-
-public class RefreshAheadFunction
-{
-    private readonly IDistributedCache _redisCache;
-
-    public RefreshAheadFunction(IDistributedCache redisCache)
-    {
-        _redisCache = redisCache;
-    }
-
-    [Function("HttpRefreshAheadFunction")]
-    public async Task<CacheResponse> Get([HttpTrigger(AuthorizationLevel.Function, "get", "post")] CacheRequest request,
-        FunctionContext executionContext, CancellationToken cancellationToken)
-    {
-        var logger = executionContext.GetLogger("HttpRefreshAheadFunction");
-        logger.LogInformation("Starting HTTP Refresh-Ahead Function.");
-
-        // Get the requested key
-        var cacheKey = request.Key;
-        // Get the cache value. It is guaranteed that there is a value here because of the timer refresh.
-        var cacheValue = await _redisCache.GetStringAsync(cacheKey, token: cancellationToken);
-
-        // Return the value to the client
-        return new CacheResponse
-        {
-            CacheValue = cacheValue,
-            Message = "Success"
-        };
-    }
-
-    [Function("TimerRefreshAheadFunction")]
-    public async Task<CacheResponse> Refresh([TimerTrigger("0 */5 * * * *")] CacheRequest request,
-FunctionContext context, CancellationToken cancellationToken)
-    {
-        var logger = context.GetLogger("TimerRefreshAheadFunction");
-        logger.LogInformation("Starting Timer for Refresh-Ahead Function.");
-
-        // Get the requested key
-        var cacheKey = request.Key;
-        // Get the cache value
-        var cacheValue = await _redisCache.GetStringAsync(cacheKey, token: cancellationToken);
-        // If cache value is not set, retrieve from original source and store in cache
-        if (string.IsNullOrEmpty(cacheValue))
-        {
-            string value = await GetValueFromOriginalSourceAsync();
-            cacheValue = value;
-            await _redisCache.SetStringAsync(request.Key, request.ValueToReturn, token: cancellationToken);
+            return req.CreateResponse(HttpStatusCode.BadRequest);
         }
 
-        // Return the value to the client
-        return new CacheResponse
+        var product = body with { Id = id };
+
+        // Database first: it is the source of truth.
+        await _store.UpsertAsync(product);
+
+        try
         {
-            CacheValue = cacheValue,
-            Message = "Success"
-        };
-    }
+            await _cache.SetStringAsync($"product:{id}", JsonSerializer.Serialize(product),
+                new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10) });
+        }
+        catch (Exception ex) when (ex is RedisConnectionException or RedisTimeoutException)
+        {
+            // The database write succeeded, so the caller still gets 204.
+            _logger.LogWarning(ex, "Cache update failed for product {Id}", id);
+        }
 
-    private static async Task<string> GetValueFromOriginalSourceAsync()
-    {
-        return "Retrieve data from original source (e.g., CosmosDB database)";
+        return req.CreateResponse(HttpStatusCode.NoContent);
     }
-
-    private static async Task SetCacheValueAsync(string cacheName, string key, string value)
-    {
-        // Store value in cache
-    }
-
 }
 ```
 
-In this example, we have two Azure Functions functions (weird naming). The first function, `Get`, is an HTTP trigger that handles incoming requests to read a value from the cache.
+Order matters. Write the database first. If the cache write fails afterwards, the update is already saved, so the function logs it and still returns 204; reporting a 500 for a write that succeeded only invites a retry. The stale cache entry is corrected when its TTL runs out. If you write the cache first and the database write fails, readers see data that never existed.
 
-The second function, `Refresh`, is a timer trigger that runs every 5 minutes. If the value is not set, it retrieves the value from the original source (e.g., CosmosDB) and stores it in the cache using the `GetValueFromOriginalSourceAsync` and `SetCacheValueAsync` methods, respectively.
+Note what "write-through" means here: Redis isn't writing through to anything; your function does two independent writes with no transaction around them. Two concurrent updates to the same product can land in the database in one order and in Redis in the other. If that's unacceptable, replace the `SetStringAsync` with `RemoveAsync` and let the next read repopulate through cache-aside. Invalidation is less elegant but much harder to get wrong.
 
-This way, the cache is continually refreshed with the latest data from the original source, ensuring that the next time the data is needed, it will already be in the cache and can be retrieved more quickly. This is beneficial if you're trying to serve the same set of information to a lot of users.
+## Write-behind: fast writes, deferred persistence
 
-## Conclusion
+Write-behind writes to the cache, acknowledges the caller, and persists to the database later. The classic description has the cache flush itself to the store, but Redis doesn't do that for you, so in Functions you put a durable queue in the middle. I use a Service Bus queue through an output binding, because Service Bus gives you retries, dead-lettering and per-message settlement, which is what a queue of pending database writes needs. The isolated model returns multiple outputs through a class:
 
-In this blog post, we looked at four cache patterns: Cache-Aside, Write-Through, Write-Behind, and Refresh-Ahead. We implemented these patterns using Azure Functions (ISOLATED process), .NET 7, C#, and Azure Redis. These patterns can be used to improve the performance of an application by temporarily storing frequently accessed data.
+```csharp
+using System.Net;
+using System.Text.Json;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Caching.Distributed;
 
+public class WriteBehindOutput
+{
+    [ServiceBusOutput("product-writes", Connection = "ServiceBusConnection")]
+    public string? PendingWrite { get; set; }
 
-I hope this helps! Let me know if you have any questions.
+    public HttpResponseData HttpResponse { get; set; } = default!;
+}
 
-For the code above, refer to this repository: [AzureFunctions.Samples/RedisCachePatterns at main · mjtpena/AzureFunctions.Samples (github.com)](https://github.com/mjtpena/AzureFunctions.Samples/tree/main/RedisCachePatterns)
+public class WriteBehindFunctions
+{
+    private readonly IDistributedCache _cache;
+    private readonly IProductStore _store;
+
+    public WriteBehindFunctions(IDistributedCache cache, IProductStore store)
+    {
+        _cache = cache;
+        _store = store;
+    }
+
+    [Function("AcceptProductWrite")]
+    public async Task<WriteBehindOutput> Accept(
+        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "products/{id}")] HttpRequestData req,
+        string id)
+    {
+        var body = await req.ReadFromJsonAsync<Product>();
+        if (body is null)
+        {
+            return new WriteBehindOutput { HttpResponse = req.CreateResponse(HttpStatusCode.BadRequest) };
+        }
+
+        var json = JsonSerializer.Serialize(body with { Id = id });
+        await _cache.SetStringAsync($"product:{id}", json,
+            new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30) });
+
+        return new WriteBehindOutput
+        {
+            PendingWrite = json,
+            HttpResponse = req.CreateResponse(HttpStatusCode.Accepted)
+        };
+    }
+
+    [Function("PersistProductWrite")]
+    public async Task Persist(
+        [ServiceBusTrigger("product-writes", Connection = "ServiceBusConnection")] string message)
+    {
+        var product = JsonSerializer.Deserialize<Product>(message)
+            ?? throw new InvalidOperationException("Empty product message.");
+
+        // Throwing here lets Service Bus retry, then dead-letter.
+        await _store.UpsertAsync(product);
+    }
+}
+```
+
+The HTTP function returns 202 Accepted, not 200, because the write isn't durable in the database yet. The queue consumer has to be idempotent, since Service Bus delivers at least once; an upsert keyed on the product ID is. Idempotent isn't the same as ordered, though. A plain queue with competing consumers doesn't guarantee processing order, so two quick writes to the same product can be persisted out of order, and the upsert leaves the older value in the database while Redis holds the newer one. Either enable [Service Bus sessions](https://learn.microsoft.com/en-us/azure/service-bus-messaging/message-sessions) with the product ID as the `SessionId` and `IsSessionsEnabled = true` on the trigger (the string output binding can't set `SessionId`, so you'd send with `ServiceBusSender` from `Azure.Messaging.ServiceBus`), or carry a version or timestamp in the message and make the upsert conditional so it ignores older writes.
+
+This pattern is the one I push back on most. You've traded consistency for write latency: until the consumer runs, Redis is the only place the new value exists outside the queue, and a cache eviction under memory pressure plus a dead-lettered message means a lost update. The cache write and the queue send aren't atomic either: the output binding sends after the function returns, so if that send fails, Redis serves a value that was never queued and will never reach the database. That's another reason to keep write-behind for low-value writes. Use it for high-volume, low-stakes writes such as view counts, telemetry or session activity. Don't use it for orders, payments or anything a person will later ask you to prove was saved.
+
+## Refresh-ahead: keep hot keys warm
+
+Refresh-ahead loads data into the cache before anyone asks for it. In Functions that's a timer trigger that reloads a known set of hot keys, combined with the cache-aside read path so a miss still works.
+
+```csharp
+using System.Text.Json;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
+
+public class RefreshHotProductsFunction
+{
+    private readonly IDistributedCache _cache;
+    private readonly IProductStore _store;
+    private readonly ILogger<RefreshHotProductsFunction> _logger;
+
+    public RefreshHotProductsFunction(IDistributedCache cache, IProductStore store,
+        ILogger<RefreshHotProductsFunction> logger)
+    {
+        _cache = cache;
+        _store = store;
+        _logger = logger;
+    }
+
+    [Function("RefreshHotProducts")]
+    public async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo timer)
+    {
+        var products = await _store.GetHotProductsAsync();
+
+        foreach (var product in products)
+        {
+            // TTL is longer than the refresh interval, so keys never expire between runs.
+            await _cache.SetStringAsync($"product:{product.Id}", JsonSerializer.Serialize(product),
+                new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(15) });
+        }
+
+        _logger.LogInformation("Refreshed {Count} hot products", products.Count);
+    }
+}
+```
+
+The TTL (15 minutes) is deliberately three times the schedule (5 minutes). If one timer run fails, the keys survive until the next one. Timer triggers run as a singleton across scaled-out instances, so you won't get ten instances refreshing the same keys at once.
+
+The trap is refreshing too much. Every key you pre-load costs a database read every five minutes whether anyone reads it or not. Refresh-ahead pays off for a small, predictable hot set: a home page catalogue, reference data, a leaderboard. It's wasteful for a long tail of rarely read items, where plain cache-aside is cheaper.
+
+## Choosing between them
+
+| Pattern | Read latency | Consistency | Main risk | Use it for |
+|---|---|---|---|---|
+| Cache-aside | Slow on miss, fast on hit | Stale up to the TTL | Stampede on hot keys | Almost everything, as the default |
+| Write-through | Fast after writes | Good, not transactional | Race between concurrent writers | Read-heavy data that changes through your API |
+| Write-behind | Fast | Eventual | Lost writes | High-volume, low-value writes |
+| Refresh-ahead | Fast for the hot set | Stale up to the refresh interval | Wasted reads on cold keys | Small, predictable hot data |
+
+## Where I'd start
+
+Start with cache-aside and a sensible TTL on every key. Add write-through, or better, invalidation on write, only when users notice stale reads after their own updates. Add refresh-ahead only for keys whose misses you can see hurting the database. Treat write-behind as a deliberate decision to accept data loss, and write that decision down.
+
+Also ask whether you need Redis at all. If the data fits in memory and is the same for every caller, a static in-memory cache per instance is free and fast, and Functions instances live long enough for it to be useful. Redis earns its cost when the cache has to be shared across instances, survive scale-in, or be invalidated from one place. Microsoft's [caching guidance](https://learn.microsoft.com/en-us/azure/architecture/best-practices/caching) is a good checklist before you commit.
+
+An earlier, less complete version of these samples (which used Event Hubs for the write-behind queue) is in my [AzureFunctions.Samples repository](https://github.com/mjtpena/AzureFunctions.Samples/tree/main/RedisCachePatterns).

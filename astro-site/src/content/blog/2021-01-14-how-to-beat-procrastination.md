@@ -1,6 +1,6 @@
 ---
-title: How to beat procrastination
-description: "One of the colossal beasts that all knowledge workers fight time and time again is procrastination. This is when you know you should work, but you don't…"
+title: "Five Ways I Get Unstuck When Procrastination Wins"
+description: "Five habits I use when I know what I should be working on but can't start: cut distractions, shrink the task, commit to a peer, schedule it and be kind."
 author: Michael John Peña
 draft: false
 date: 2021-01-14
@@ -8,70 +8,89 @@ url: /blog/how-to-beat-procrastination/
 images: 
      - /2021/01/jumpstory-download20210113-170737-940x510.jpg
 tags:
-  - lazy
-  - mental
-  - procrastination
   - Productivity
-  - willpower
+  - Personal
+  - Focus
+  - Procrastination
+  - Willpower
 ---
 
-One of the colossal beasts that all knowledge workers fight time and time again is procrastination. This is when you know you should work, but you don't have enough willpower to do it. You can't code, you can't do that design document, you can't write that next blog post... the list goes on. Here are 5 of my usual methods when I'm stuck in that limbo.
+You know exactly what you should be working on, and you still can't start. The code stays unwritten, the design document stays blank, the next blog post stays an idea. Every knowledge worker hits this, and these are the five methods I fall back on when I'm stuck there.
 
+## Avoid distractions
 
-## Avoid Distractions
+The first and most obvious step is to cut out distractions, because they are often what started the procrastination in the first place. You open Twitter and Facebook while the coffee brews and you're gone. From there the easy options line up: Netflix, YouTube, the infinity pools of social media, and an hour is gone. Resisting all of that costs willpower, and if you let it get to you early in the day, it sticks with you until your energy is gone.
 
-The first and obvious thing that you have to do is to avoid distraction. Maybe it was the distraction that caused your procrastination. You opened Twitter and Facebook while brewing a coffee, and you got distracted straight on. Then the simple choices become available: watching Netflix & YouTube, the infinity pools of Social media; then you get sucked to that void. These take willpower, and if you let it get to you early on, then it will stick with you until it depletes your energy.
+I think it comes down to two things.
 
-I think it boils down into two things:
+### Be intentional with your devices
 
-- Be intentional about how you use these devices, apps, and sites. As part of my journey to Digital Intentionality, I'm researching on more ways you can let these tools be in your favour, instead of being a consumer of it. Some simple tricks I've developed lately are: Don't watch Netflix on your phone or PCs, use a TV. Use your work machine purely as work machine, don't install all those mobile-sync apps such as Messaging. Be clear on how you use your phone: calls, messages, calendars - that's all I use it for right now. Only my kindle is in my bedroom because it's a place to sleep and read.
+This is part of my goal for the year, [digital intentionality](/blog/my-only-goal-for-2021-digital-intentionality/): making these tools work for me instead of me being a consumer of them. A few simple rules I've adopted lately:
 
-- If you can't help it, force yourself to not really do it. Use the Screen time limits of your mobile phones. Install time management software such as Freedom. Pay a fine to a jar every time you opened social media when you know you should do something else. Uninstall all those apps. Log-out to all of them. Change your passwords to something you can't remember (use password managers.) Make it hard and punishing for you to access those sites and apps.
+- Don't watch Netflix on your phone or PC. Use a TV.
+- Use your work machine purely as a work machine. Don't install all the mobile-sync apps, such as messaging.
+- Be clear about what your phone is for. Calls, messages and calendar are all I use mine for right now.
+- Keep the bedroom for sleep and reading. My Kindle is the only device I keep there.
 
-The key word here is "avoid." I know from experience that it's really impossible to get rid of these distractions. One way or the other, something will distract you, just be mindful of it - do some tricks that will force your brain to avoid such distractions.
+The autoplay "next episode" button deserves its own mention, and I wrote about it in [Don't Click That Next Button](/blog/digital-intentionalization-dont-click-that-next-button/).
 
-## Just do one small thing - really well
+### If you can't help it, make it hard
 
-Some days are dragging, with the mix of unscheduled work, house errands, and personal commitments, these really take a toll on your willpower for that day. Obviously, some of these things are really important and it's probably not the best idea to just ignore them. What I do in these days is to just work on one thing and do it well - or sometimes, really just doing it regardless of outcome.
+When intention isn't enough, add friction until the distraction is more trouble than it's worth:
 
-I had a misconception in the past I have to work tirelessly in big sprints to achieve meaningful goals. That's probably why it's also daunting to work on things if you know you need to work in long hours to finish it, hence you go to the straightforward route of distractions instead.
+- Set screen time limits on your phone.
+- Install a blocker such as [Freedom](https://freedom.to/), which blocks distracting sites and apps across your devices. A blocker is easy to switch off when you're the admin of the device, so pair it with the other rules here rather than relying on it alone.
+- Pay a fine into a jar every time you open social media when you know you should be doing something else.
+- Uninstall the apps, or log out of all of them.
+- Change your passwords to something you can't remember and keep them only in a password manager on a different device, so logging in takes deliberate effort.
 
-As I mature and get more experience in the field and life, I realise that the successful outcome of a project is the summation (with compound interests) of the day-to-day actions that you do. It's not the 1 straight weekend of work that will make a project successful, but the small iterations you do daily. I don't need to look at the screen for 8 hours straight to develop a feature; I have to work on it, little by little. Few minutes to solve step 1, few minutes to solve step 2, and so on.
+The key word is "avoid". I know from experience that you can't get rid of these distractions completely. One way or another something will grab your attention, so be mindful of it and use tricks that force your brain to steer around it.
 
-There are things that you can't control, you can only react properly on these situations. If you let these drag you down for the rest of the day, week, month, or year, then you will get nowhere.
+## Do one small thing, really well
+
+Some days drag. A mix of unscheduled work, house errands and personal commitments takes a toll on your willpower, and some of those things are important enough that ignoring them isn't an option. On those days I work on just one thing and do it well. My rule is to pick the smallest next action that takes under 15 minutes, such as writing the function signature or the first heading of the document, and finish that. Sometimes I simply do it, regardless of the outcome.
+
+I used to believe I had to work in long, tireless sprints to achieve anything meaningful. That belief is part of what makes starting so daunting: if you think a task needs hours of unbroken effort, the easy route of distraction looks much more attractive.
+
+As I've matured in my career and in life, I've come to see the outcome of a project as the sum, with compound interest, of what you do day to day. One heroic weekend doesn't make a project successful; small daily iterations do. I don't need to stare at a screen for eight hours straight to build a feature. I need to work on it little by little: a few minutes on step one, a few minutes on step two, and so on.
+
+There will always be things you can't control. You can only respond to them well. If you let them drag you down for the rest of the day, week, month or year, you'll get nowhere.
 
 ## Work with a peer
 
-I think that the solo heroism era is now over. A lot of really successful project outcomes are derived by teams or individuals who leverage peer reviews. This is probably the simplest trick to work on "that imaginary deadline." If you don't have a deadline in to something, the easiest trick in the book is to commit to a peer (someone you trust and "get you") when she/he can expect to review what you're doing.
+I think the era of solo heroics is over. Many of the best project outcomes come from teams, or from individuals who lean on peer review. Working with a peer is also the simplest way I know to create a deadline where none exists. Commit to someone you trust, someone who "gets" you, and tell them when they can expect to review your work.
 
-This amplifies that you're not just doing it for yourself, but someone else on the other side of the fence values what you do and will give you a constructive feedback. Since the buddy or peer-system is built on trust, you rarely want to disappoint them, there is a certain dosage of stress (in a form of challenge most of the time) that you imbue as part of this commitment.
+That commitment reminds you that you're not only doing the work for yourself: someone on the other side values it and will give you constructive feedback. Because the arrangement is built on trust, you rarely want to let them down, and that adds a small, healthy dose of pressure that feels more like a challenge than a threat.
 
-This is often not the same as committing to a manager or stakeholder, as they might bite you if you don't deliver! - again just enough dosage of stress is enough.
+This is not the same as committing to a manager or stakeholder, who might bite if you don't deliver. The point is just enough pressure to get you moving, not more. It backfires when the peer is also your manager, because the review turns into a performance check, or when the deadline is obviously made up and you both know it will slide.
 
-## Schedule things
+## Schedule it
 
-One struggle I find disturbing is once I use a ToDo list, the list eventually gets really long, and it's overwhelming on how much you're not accomplishing. I use different techniques to handle them, but one thing that really stands out is "if ain't scheduled, it ain't happening" mentality. These lists often are a "maybe lists" for me, I just place them there so it's there when I need them. When I decide that it's time to do that something, I schedule it.
+One thing that bothers me about to-do lists is that they keep growing until they become a monument to everything you haven't done. I've tried different ways to handle that, and the one that stuck is an "if it ain't scheduled, it ain't happening" mindset. My lists are really "maybe" lists, a place to park things until I need them. When I decide it's time to do something, I put it in my calendar.
 
-There are numerous advantages of using this approach:
+Scheduling a task has some clear advantages:
 
-- Once it's scheduled, it means you're going to allocate time to "really" do it.
+- Once it's scheduled, you've committed real time to doing it.
+- If your priorities change that day, you simply reschedule.
+- You can see the hours. Maybe an hour is too long and you only need 15 minutes. Maybe the task is too big for a whole day and should be split into subtasks.
+- If you don't finish in the time you set, you've learnt that the estimate was too short, and you book another slot.
 
-- If your priority changes on that day or time, you just reschedule it.
+A bonus: blocked time also protects you from meetings. If your team shares calendars, put the task number or identifier in the calendar event so everyone can see what the time is for.
 
-- It's easy to visualise the hours. Maybe 1 hour is too long, maybe you only need 15 minutes. Maybe the task is too big for an 8 hour, and should be split into different subtasks.
-
-- If you don't finish it on that specific timeframe, then you know that the time is not enough, you will then schedule another time to do it.
-
-Bonus tip: This also works best to avoid meetings. If you work in a team with transparent calendars, put in the tasks number / identifier in that calendar event. 🙂
+Scheduling has a limit. On reactive, interrupt-driven days, such as a production issue or a run of urgent requests, a fully blocked calendar just becomes a list of broken promises. On those days I keep only one or two protected blocks and let the rest of the day absorb the interruptions.
 
 ## Don't be hard on yourself
 
-Sometimes when I feel like I didn't get that productive on that day, I develop an inner voice doubting that I could have done better or maybe it's time to give up my career. **This is normal.** This happens because you really care about what you do, you're deeply invested in it. There are many scientific studies in psychoneuroimmunology on why this happens to us. One outstanding audiobook recommendation I have for you to listen to is: [I Know What to Do, So Why Don't I Do It? By Dr. Nick Hall](https://www.audible.com.au/pd/I-Know-What-to-Do-So-Why-Dont-I-Do-It-Audiobook/B00NMVRRCS).
+On days when I feel I wasn't productive, an inner voice starts telling me I could have done better, or that maybe it's time to give up on my career. **This is normal.** It happens because you care about what you do and you're deeply invested in it. If you want to understand the science behind it, I highly recommend the audiobook [I Know What to Do, So Why Don't I Do It? by Dr Nick Hall](https://www.audible.com.au/pd/I-Know-What-to-Do-So-Why-Dont-I-Do-It-Audiobook/B00NMVRRCS). Hall's background is in psychoneuroimmunology, and the book explains why knowing what to do rarely translates into doing it.
 
-Establish a method that works for you, so you don't hurt yourself mentally (and maybe physically) when this happens. Whenever this experience happens to me, I usually look at my old pictures and get the sense of nostalgia on how far I've come since then. I also look at some goals I've set in the past, and become proud of how I achieved (or overachieved) some of them, or how some goals are silly now that I'm looking at it. I also go for a run or practice some mindful meditation.
+Find a method that works for you, so you don't hurt yourself mentally (or even physically) when the voice shows up. When it happens to me, I look at old photos and feel a sense of nostalgia for how far I've come. I look at goals I set in the past and feel proud of the ones I achieved or overachieved, and amused by the ones that now look silly. I also go for a run or practise mindfulness meditation.
 
-Even the really greats like Marcus Aurelius, Victor Hugo, and a lot of the Top 1% idols that you follow, they all experienced a dosage of procrastination from time to time, but it's their habits and goals that keeps them motivated to move forward. So don't be hard on yourself. Go for a walk, play a game, chat with friends, sleep, eat that baklava; whatever suit you to regain that willpower - do it so you get energised again, just don't be hard on yourself.
+Even the greats procrastinated from time to time. Marcus Aurelius opens Book 5 of *Meditations* by arguing with himself about getting out of bed in the morning, and Victor Hugo is said to have locked away his clothes so he couldn't go out until he finished *The Hunchback of Notre-Dame*. The people you admire are no different. What kept them moving forward were their habits and their goals. So go for a walk, play a game, chat with friends, sleep, eat that baklava: whatever helps you recover your willpower and get energised again. Just don't be hard on yourself.
 
-I'd like to this with a quote I really like from Marcus Aurelius:
+When I need a reminder of what matters, I come back to a passage I really like from Marcus Aurelius's *Meditations* (Book 2, 5, in [Gregory Hays's translation for Modern Library](https://www.penguinrandomhouse.com/books/7208/meditations-by-marcus-aurelius/)):
 
-> Concentrate every minute on doing what's in front of you with precise and genuine seriousness, tenderly, willingly, with justice. And on freeing yourself from all other distractions. Yes, you can, if you do everything as if it were the last thing you were doing in your life, and stop being aimless, stop letting your emotions override what your mind tells you, stop being hypocritical, self-centered, irritable. You see how few things you have to do to live a satisfying and reverent life? If you can manage this, that's all even the gods can ask of you. -Marcus Aurelius
+> Concentrate every minute like a Roman—like a man—on doing what's in front of you with precise and genuine seriousness, tenderly, willingly, with justice. And on freeing yourself from all other distractions. Yes, you can—if you do everything as if it were the last thing you were doing in your life, and stop being aimless, stop letting your emotions override what your mind tells you, stop being hypocritical, self-centered, irritable. You see how few things you have to do to live a satisfying and reverent life? If you can manage this, that's all even the gods can ask of you.
+
+## The short version
+
+When you can't start, don't wait for motivation to arrive. Remove the easy escape routes, shrink the task until the next step takes less than 15 minutes, borrow a deadline from a peer, give the work a slot in your calendar, and forgive yourself for the days that don't go to plan. None of these needs a burst of willpower; each one just makes starting a little cheaper. Reading more books has helped me here too, which I wrote about in [how I built a reading habit](/blog/you-should-read-books-you-know-you-should/).

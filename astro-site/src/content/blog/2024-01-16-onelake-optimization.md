@@ -1,478 +1,134 @@
 ---
-title: "OneLake Optimization: Storage Patterns and Best Practices"
-description: "OneLake is central to Fabric's promise. My teams reorganised storage layouts and saw query performance improvements — these patterns capture what worked and…"
+title: "Laying Out OneLake: Workspaces, Lakehouses and Shortcuts"
+description: "How I decide OneLake layout in Fabric: workspaces as security boundaries, a lakehouse per layer, a flat Tables folder, and shortcuts where copies hurt."
 author: Michael John Peña
 draft: false
 date: 2024-01-16
 tags:
   - OneLake
   - Microsoft Fabric
-  - Data Lake
-  - Storage
-  - Architecture
+  - Lakehouse
+  - Data Architecture
+  - Medallion Architecture
 ---
 
-OneLake is central to Fabric's promise. My teams reorganised storage layouts and saw query performance improvements — these patterns capture what worked and where trade-offs lie.
+OneLake gives every Fabric tenant one logical data lake, which makes it easy to start and easy to make a mess. The layout decisions you make in the first month (which workspaces, how many lakehouses, what goes in `Tables` versus `Files`, when to shortcut instead of copy) decide who can see what, which semantic models you can build, and how much data you store twice. I've already seen OneLake layouts reorganised once projects grew, and the patterns below are what I'd now set up from the start.
 
-## OneLake Architecture
+This post is about that structure. File-level tuning (V-Order, `OPTIMIZE`, `VACUUM`, file counts) is covered in yesterday's [Tracing a Slow Fabric Report Back Through Every Layer](/blog/2024-01-15-fabric-performance-tuning/), and the general mechanics of shortcuts are in [OneLake Shortcuts: Connecting Data Without Copying](/blog/2023-06-03-onelake-shortcuts/).
 
-OneLake provides:
-- **Single namespace** across all Fabric workloads
-- **Delta Lake format** as the default
-- **Shortcuts** for virtual access to external data
-- **ADLS Gen2 compatible** APIs
+## The hierarchy you are actually designing
 
-## Storage Organization Patterns
+Fabric went GA at Ignite in November 2023, OneLake included. Its hierarchy is fixed: tenant, then workspace, then item (lakehouse, warehouse, KQL database), then folders. Every item stores its data in OneLake, and Spark and other tools address it through an ADLS Gen2-compatible endpoint:
 
-### 1. Medallion Architecture
-
-The recommended pattern for data lakes:
-
-```
-OneLake
-└── Lakehouse: analytics
-    ├── Tables/
-    │   ├── bronze/
-    │   │   ├── raw_sales_data
-    │   │   ├── raw_customer_data
-    │   │   └── raw_product_data
-    │   ├── silver/
-    │   │   ├── cleaned_sales
-    │   │   ├── cleaned_customers
-    │   │   └── cleaned_products
-    │   └── gold/
-    │       ├── sales_summary
-    │       ├── customer_360
-    │       └── product_performance
-    └── Files/
-        ├── landing/
-        │   └── {source}/{date}/
-        ├── archive/
-        │   └── {year}/{month}/
-        └── reference/
-            └── lookups/
+```text
+abfss://<workspace>@onelake.dfs.fabric.microsoft.com/<lakehouse>.Lakehouse/Tables/<table>
+abfss://<workspace-guid>@onelake.dfs.fabric.microsoft.com/<lakehouse-guid>/Files/<folder>
 ```
 
-### 2. Domain-Based Organization
+Both forms are documented in [OneLake access with APIs](https://learn.microsoft.com/fabric/onelake/onelake-access-api). I use the GUID form in anything scheduled. Rename a workspace and every name-based path in your notebooks and pipelines breaks. The GUIDs don't change.
 
-For large organizations with multiple domains:
+The important thing about this hierarchy is where security lives. As of January 2024, OneLake access is governed by workspace roles (Admin, Member, Contributor, Viewer) and by item sharing, where you can grant "Read all Apache Spark" or "Read all SQL endpoint data" on a lakehouse. There are no folder-level or table-level permissions on OneLake itself. Object-level and row-level security exist in the SQL analytics endpoint and in semantic models, but anyone reading the files through Spark or the OneLake endpoint bypasses them.
+
+That one fact drives most of my layout decisions.
+
+## Rule 1: the workspace is your security boundary
+
+If two sets of data need different people to read the raw files, they belong in different workspaces. Not different folders, not different lakehouses in the same workspace with a naming convention, but different workspaces. A Contributor in a workspace can read and write every lakehouse in it.
+
+In practice this means I split workspaces along two lines:
+
+- **Who builds versus who consumes.** Data engineers get Contributor on the engineering workspace. Analysts get Viewer on a consumption workspace, or item-level access to a specific lakehouse or semantic model.
+- **Sensitivity.** HR, payroll or anything with health data goes in its own workspace with its own small group of Contributors, even if the pipelines look the same as everything else.
+
+The trade-off is more workspaces to administer, assign to capacities and deploy. I accept that. Restructuring permissions later means moving data, and moving data means changing every path that points at it.
+
+## Rule 2: one lakehouse per medallion layer, not one folder per layer
+
+The most common layout I see in early Fabric projects puts bronze, silver and gold as subfolders under a single lakehouse's `Tables` folder. That doesn't work. The lakehouse treats `Tables` as a flat namespace: each table is a Delta folder directly under `Tables/`. Folders it can't recognise as a Delta table show up in the explorer under "Unidentified" and don't reach the SQL analytics endpoint or the default semantic model.
+
+Microsoft's guidance on the [medallion lakehouse architecture in Fabric](https://learn.microsoft.com/fabric/onelake/onelake-medallion-lakehouse-architecture) lists a lakehouse per zone as its first pattern and recommends putting each lakehouse in its own workspace. I stop short of that: bronze and silver share an engineering workspace because the same people own and read both, and the workspace split goes where the audience changes. A lakehouse per layer is the part I agree with, for three reasons:
+
+1. **Each lakehouse gets its own SQL analytics endpoint and default semantic model.** Gold tables don't sit next to raw ingestion tables in the list analysts browse.
+2. **You can share gold without sharing bronze.** Item sharing works at the lakehouse level, so a separate gold lakehouse is the smallest unit you can hand to a consumer.
+3. **A Direct Lake semantic model reads from a single lakehouse or warehouse.** If the model needs tables from several places, those tables have to appear in one lakehouse. Planning a gold lakehouse up front gives you that place.
+
+Here is the layout I start with:
+
+| Workspace | Item | Holds | Typical access |
+|---|---|---|---|
+| `sales-engineering` | `lh_bronze` | Raw Delta tables, landing files in `Files/` | Engineers only |
+| `sales-engineering` | `lh_silver` | Cleaned, conformed tables | Engineers, data scientists via item share |
+| `sales-consumption` | `lh_gold` | Shortcuts to curated tables, plus gold aggregates | Analysts, report builders |
+| `sales-consumption` | Direct Lake semantic model | Model over `lh_gold` | Report consumers |
+
+Within each lakehouse, `Tables` holds only Delta tables written with `saveAsTable` or as a correct Delta folder. `Files` holds everything that isn't a table yet: landing files by source and date, reference CSVs, exports. Don't treat `Files` as a second table area. If something is queried regularly it should be a Delta table.
+
+When not to do this: a single analyst with one source and a couple of reports doesn't need three lakehouses in two workspaces. One lakehouse with clear table prefixes is fine until a second audience shows up. The split pays off when access differs, not before.
+
+## Rule 3: shortcuts where a copy would create a second truth
+
+A [OneLake shortcut](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts) is a pointer to data in another OneLake location, in ADLS Gen2, or in Amazon S3, the three you create from a lakehouse. Shortcuts to OneLake, ADLS Gen2 and S3 were part of the GA release. A fourth kind, Dataverse, is in preview and is created from the Power Apps maker portal (Link to Fabric) rather than the Fabric UI. The data isn't copied, so you pay for storage once and there is nothing to keep in sync.
+
+I use shortcuts in three places:
+
+- **Gold lakehouse pulling curated tables from silver.** The table is written once by the engineering workspace and appears in the consumption workspace without a pipeline. This is also how a Direct Lake model gets tables from more than one source lakehouse.
+- **Existing ADLS Gen2 data.** If a Synapse or Databricks estate already writes Delta to ADLS Gen2, a shortcut lets Fabric read it during migration without a second copy.
+- **Shared reference data** such as calendars and organisation hierarchies, owned by one team and read by many.
+
+Two behaviours catch people out. First, a shortcut placed in `Tables` must sit at the top level and point at a Delta table folder to appear as a table. Point it at a parent folder full of tables and you get one "Unidentified" entry. Shortcut to each table instead. Second, [shortcut security](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts) depends on the target and on how the shortcut is read. Through Spark and the OneLake API, a OneLake-to-OneLake shortcut checks the caller's own permissions on the target, so a user without access to the source workspace sees nothing. Through the SQL analytics endpoint and Power BI semantic models it's different: the caller's identity isn't passed through, and the lakehouse owner's identity is used instead. That delegation is what lets analysts with no access to `sales-engineering` query `lh_gold`. It also means any shortcut, internal or external, effectively grants read access to whoever can query the lakehouse's SQL endpoint or model. A shortcut to ADLS Gen2 or S3 uses the credentials in the connection, so everyone who can read the lakehouse can read that external data. Treat creating any shortcut as granting access, because it is.
+
+When not to shortcut: if the consuming side needs a different shape (filtered rows, masked columns, a different grain), write a real table. A shortcut exposes the source as it is, and since there is no table-level OneLake security, you can't hide a column behind it. Security defined on the source's SQL analytics endpoint doesn't travel with the shortcut either; define it again on the gold side or write a reshaped table.
+
+## Checking a lakehouse for layout problems
+
+Before I agree to build on an existing lakehouse, I run a quick audit in a Fabric notebook. It lists everything under `Tables` and flags folders that aren't Delta tables. The `mssparkutils` file system utilities are built into Fabric notebooks.
 
 ```python
-# Python notebook for domain-based structure setup
+# Fabric notebook. Replace the GUIDs with your workspace and lakehouse IDs
+# (both are in the lakehouse URL in the Fabric portal).
+workspace_id = "<your-workspace-guid>"
+lakehouse_id = "<your-lakehouse-guid>"
 
-domains = ["sales", "marketing", "finance", "operations"]
-layers = ["bronze", "silver", "gold"]
+tables_root = f"abfss://{workspace_id}@onelake.dfs.fabric.microsoft.com/{lakehouse_id}/Tables"
 
-def create_domain_structure(domain: str):
-    """Create standardized folder structure for a domain."""
+delta_tables, not_delta = [], []
+for entry in mssparkutils.fs.ls(tables_root):
+    if not entry.isDir:
+        not_delta.append((entry.name, "loose file"))
+    elif mssparkutils.fs.exists(f"{entry.path}/_delta_log"):
+        delta_tables.append(entry.name)
+    else:
+        not_delta.append((entry.name, "folder without _delta_log"))
 
-    base_path = f"abfss://analytics@onelake.dfs.fabric.microsoft.com/{domain}"
-
-    # Create layer folders
-    for layer in layers:
-        table_path = f"{base_path}/Tables/{layer}"
-        files_path = f"{base_path}/Files/{layer}"
-
-        # Create directories using mssparkutils
-        mssparkutils.fs.mkdirs(table_path)
-        mssparkutils.fs.mkdirs(files_path)
-
-        print(f"Created: {table_path}")
-        print(f"Created: {files_path}")
-
-# Initialize all domains
-for domain in domains:
-    create_domain_structure(domain)
+print(f"Delta tables: {len(delta_tables)}")
+for name, reason in not_delta:
+    print(f"Will show as Unidentified: {name} ({reason})")
 ```
 
-## Shortcuts Strategy
+Anything in the second list is either a medallion subfolder that should be its own lakehouse, a parent-folder shortcut that should be per-table shortcuts, or raw files that belong in `Files`.
 
-### 1. External Data Access
+The same GUID-based paths let one notebook write to a lakehouse other than the one attached to it, which is how I keep a silver notebook writing into `lh_silver` while it reads from `lh_bronze`:
 
 ```python
-# Create shortcut to external ADLS storage
-def create_external_shortcut(
-    lakehouse_path: str,
-    shortcut_name: str,
-    external_storage_url: str,
-    sas_token: str
-):
-    """Create shortcut to external Azure storage."""
-
-    import requests
-
-    # Using Fabric REST API
-    payload = {
-        "path": f"{lakehouse_path}/Files/{shortcut_name}",
-        "target": {
-            "type": "AzureBlobStorage",
-            "url": external_storage_url,
-            "credentials": {
-                "sasToken": sas_token
-            }
-        }
-    }
-
-    # API call to create shortcut
-    response = requests.post(
-        "https://api.fabric.microsoft.com/v1/shortcuts",
-        json=payload,
-        headers={"Authorization": f"Bearer {access_token}"}
-    )
-
-    return response.json()
-
-# Example: Link to partner data
-create_external_shortcut(
-    lakehouse_path="/workspaces/analytics/lakehouses/main",
-    shortcut_name="partner_data",
-    external_storage_url="https://partnerstorage.blob.core.windows.net/data",
-    sas_token="sv=2021-06-08&ss=b&srt=co&sp=rl..."
+# Fragment: assumes `workspace_id` from above and a DataFrame `cleaned_df`.
+silver_lakehouse_id = "<your-silver-lakehouse-guid>"
+target = (
+    f"abfss://{workspace_id}@onelake.dfs.fabric.microsoft.com/"
+    f"{silver_lakehouse_id}/Tables/customer"
 )
+cleaned_df.write.format("delta").mode("overwrite").save(target)
 ```
 
-### 2. Cross-Workspace Shortcuts
+Writing a Delta folder directly under the target lakehouse's `Tables` like this is registered as a table there. Writing it anywhere deeper is how "Unidentified" entries are born.
 
-```python
-# Create shortcut between Fabric workspaces
-def create_internal_shortcut(
-    source_workspace: str,
-    source_lakehouse: str,
-    source_path: str,
-    target_workspace: str,
-    target_lakehouse: str,
-    shortcut_name: str
-):
-    """Create shortcut between Fabric lakehouses."""
+## Storage cost follows layout
 
-    payload = {
-        "path": f"/workspaces/{target_workspace}/lakehouses/{target_lakehouse}/Files/{shortcut_name}",
-        "target": {
-            "type": "OneLake",
-            "workspaceId": source_workspace,
-            "itemId": source_lakehouse,
-            "path": source_path
-        }
-    }
+OneLake storage is billed separately from capacity compute, so layout has a direct cost. The three habits that keep it down are all structural:
 
-    # Create via API
-    # This avoids data duplication while enabling access
+- **Shortcut instead of copy** between layers and workspaces whenever the shape doesn't change.
+- **Keep landing files on a retention plan.** `Files/landing` grows forever unless something deletes old drops once they are in bronze.
+- **Remember that Delta keeps old versions** until `VACUUM` removes them, so frequently overwritten tables can cost several times their visible size. The maintenance side is in the [performance tuning post](/blog/2024-01-15-fabric-performance-tuning/).
 
-    return payload
+## What I'd decide in week one
 
-# Example: Share curated data across workspaces
-create_internal_shortcut(
-    source_workspace="data-engineering",
-    source_lakehouse="curated",
-    source_path="Tables/gold",
-    target_workspace="data-science",
-    target_lakehouse="ml-workspace",
-    shortcut_name="curated_data"
-)
-```
-
-## File Format Optimization
-
-### 1. Delta Table Settings
-
-```python
-# Optimal Delta table configuration
-def create_optimized_delta_table(
-    df,
-    table_name: str,
-    partition_cols: list = None,
-    z_order_cols: list = None
-):
-    """Create a Delta table with optimal settings."""
-
-    writer = df.write.format("delta")
-
-    # Enable optimized writes
-    writer = writer.option("delta.autoOptimize.optimizeWrite", "true")
-    writer = writer.option("delta.autoOptimize.autoCompact", "true")
-
-    # Set target file size (128MB is good for most cases)
-    writer = writer.option("delta.targetFileSize", "134217728")
-
-    # Enable deletion vectors for faster updates
-    writer = writer.option("delta.enableDeletionVectors", "true")
-
-    # Partitioning
-    if partition_cols:
-        writer = writer.partitionBy(*partition_cols)
-
-    # Save table
-    writer.mode("overwrite").saveAsTable(table_name)
-
-    # Apply Z-ordering if specified
-    if z_order_cols:
-        from delta.tables import DeltaTable
-        delta_table = DeltaTable.forName(spark, table_name)
-        delta_table.optimize().executeZOrderBy(z_order_cols)
-
-    print(f"Created optimized table: {table_name}")
-
-# Usage
-create_optimized_delta_table(
-    df=sales_df,
-    table_name="gold_sales",
-    partition_cols=["year", "month"],
-    z_order_cols=["customer_id", "product_id"]
-)
-```
-
-### 2. Parquet for Raw Files
-
-```python
-# Optimize Parquet file writes
-def write_optimized_parquet(
-    df,
-    output_path: str,
-    compression: str = "snappy",
-    row_group_size: int = 128 * 1024 * 1024  # 128MB
-):
-    """Write Parquet files with optimal settings."""
-
-    df.write \
-        .option("compression", compression) \
-        .option("parquet.block.size", row_group_size) \
-        .mode("overwrite") \
-        .parquet(output_path)
-
-    # Verify output
-    files = mssparkutils.fs.ls(output_path)
-    print(f"Written {len(files)} files to {output_path}")
-
-    # Check file sizes
-    for f in files[:5]:
-        print(f"  {f.name}: {f.size / 1024 / 1024:.2f} MB")
-```
-
-## Access Patterns
-
-### 1. Direct OneLake Access
-
-```python
-# Access patterns for different scenarios
-
-# Pattern 1: Spark (notebooks)
-df = spark.read.format("delta").load("Tables/silver_sales")
-
-# Pattern 2: Pandas via fsspec
-import pandas as pd
-
-# Install: pip install fsspec adlfs
-storage_options = {
-    "account_name": "onelake",
-    "account_host": "onelake.dfs.fabric.microsoft.com"
-}
-
-df_pandas = pd.read_parquet(
-    "abfss://workspace@onelake.dfs.fabric.microsoft.com/lakehouse/Files/data.parquet",
-    storage_options=storage_options
-)
-
-# Pattern 3: REST API
-import requests
-
-def read_onelake_file(workspace: str, lakehouse: str, path: str, token: str):
-    """Read file from OneLake via REST API."""
-
-    url = f"https://onelake.dfs.fabric.microsoft.com/{workspace}/{lakehouse}/Files/{path}"
-
-    response = requests.get(
-        url,
-        headers={"Authorization": f"Bearer {token}"}
-    )
-
-    return response.content
-```
-
-### 2. Caching Strategy
-
-```python
-# Implement caching for frequently accessed data
-
-class OneLakeCache:
-    def __init__(self, cache_path: str = "/tmp/onelake_cache"):
-        self.cache_path = cache_path
-        self.cache_index = {}
-
-    def get_or_load(
-        self,
-        table_path: str,
-        cache_ttl_hours: int = 1
-    ):
-        """Get from cache or load from OneLake."""
-
-        import os
-        from datetime import datetime, timedelta
-
-        cache_key = table_path.replace("/", "_")
-        cache_file = f"{self.cache_path}/{cache_key}"
-
-        # Check if cached and fresh
-        if cache_key in self.cache_index:
-            cached_time = self.cache_index[cache_key]
-            if datetime.utcnow() - cached_time < timedelta(hours=cache_ttl_hours):
-                print(f"Cache hit: {table_path}")
-                return spark.read.parquet(cache_file)
-
-        # Load from OneLake
-        print(f"Cache miss: {table_path}")
-        df = spark.read.format("delta").load(table_path)
-
-        # Cache locally
-        df.write.mode("overwrite").parquet(cache_file)
-        self.cache_index[cache_key] = datetime.utcnow()
-
-        return df
-
-# Usage
-cache = OneLakeCache()
-df = cache.get_or_load("Tables/gold_sales")
-```
-
-## Governance and Security
-
-### 1. Access Control
-
-```python
-# OneLake inherits Fabric workspace permissions
-# Additional granular control via:
-
-# 1. Row-level security in semantic models
-# 2. Column-level security via views
-# 3. Object-level permissions on tables
-
-def create_secure_view(
-    source_table: str,
-    view_name: str,
-    allowed_columns: list,
-    row_filter: str = None
-):
-    """Create a secure view with column/row restrictions."""
-
-    columns_sql = ", ".join(allowed_columns)
-
-    view_sql = f"""
-    CREATE OR REPLACE VIEW {view_name} AS
-    SELECT {columns_sql}
-    FROM {source_table}
-    """
-
-    if row_filter:
-        view_sql += f" WHERE {row_filter}"
-
-    spark.sql(view_sql)
-    print(f"Created secure view: {view_name}")
-
-# Example: Create view hiding PII
-create_secure_view(
-    source_table="silver_customers",
-    view_name="customers_no_pii",
-    allowed_columns=["customer_id", "segment", "region", "signup_date"],
-    row_filter="is_active = true"
-)
-```
-
-### 2. Data Lineage
-
-```python
-# Track data lineage in OneLake
-
-def log_data_lineage(
-    source_tables: list,
-    target_table: str,
-    operation: str,
-    row_count: int
-):
-    """Log data lineage for audit trail."""
-
-    lineage_record = {
-        "timestamp": datetime.utcnow().isoformat(),
-        "source_tables": source_tables,
-        "target_table": target_table,
-        "operation": operation,
-        "row_count": row_count,
-        "user": spark.sparkContext.sparkUser(),
-        "notebook": mssparkutils.runtime.context.get("notebookPath", "unknown")
-    }
-
-    # Append to lineage log
-    lineage_df = spark.createDataFrame([lineage_record])
-    lineage_df.write \
-        .format("delta") \
-        .mode("append") \
-        .saveAsTable("_metadata.data_lineage")
-
-# Usage
-log_data_lineage(
-    source_tables=["bronze_sales", "silver_customers"],
-    target_table="gold_customer_sales",
-    operation="JOIN_AGGREGATE",
-    row_count=result_df.count()
-)
-```
-
-## Monitoring and Maintenance
-
-```python
-# OneLake storage monitoring
-
-def analyze_storage_usage(lakehouse_path: str):
-    """Analyze storage usage in a lakehouse."""
-
-    tables_path = f"{lakehouse_path}/Tables"
-    files_path = f"{lakehouse_path}/Files"
-
-    results = {
-        "tables": [],
-        "files": []
-    }
-
-    # Analyze Delta tables
-    for table_dir in mssparkutils.fs.ls(tables_path):
-        if table_dir.isDir:
-            table_files = mssparkutils.fs.ls(f"{tables_path}/{table_dir.name}")
-            total_size = sum(f.size for f in table_files if not f.isDir)
-
-            results["tables"].append({
-                "name": table_dir.name,
-                "size_mb": total_size / 1024 / 1024,
-                "file_count": len([f for f in table_files if not f.isDir])
-            })
-
-    # Analyze files
-    for file_dir in mssparkutils.fs.ls(files_path):
-        if file_dir.isDir:
-            dir_files = mssparkutils.fs.ls(f"{files_path}/{file_dir.name}")
-            total_size = sum(f.size for f in dir_files if not f.isDir)
-
-            results["files"].append({
-                "name": file_dir.name,
-                "size_mb": total_size / 1024 / 1024,
-                "file_count": len([f for f in dir_files if not f.isDir])
-            })
-
-    return results
-
-# Generate report
-usage = analyze_storage_usage("abfss://analytics@onelake.dfs.fabric.microsoft.com/main")
-
-print("=== Tables ===")
-for t in sorted(usage["tables"], key=lambda x: x["size_mb"], reverse=True):
-    print(f"{t['name']}: {t['size_mb']:.2f} MB ({t['file_count']} files)")
-```
-
-## Conclusion
-
-OneLake optimization requires:
-
-1. **Thoughtful organization** - Medallion architecture or domain-based
-2. **Strategic shortcuts** - Virtual access without duplication
-3. **Optimal file formats** - Delta with proper settings
-4. **Efficient access patterns** - Caching and proper APIs
-5. **Strong governance** - Security and lineage tracking
-
-Treat OneLake as your single source of truth and design around that principle. The unified storage model is powerful when properly architected.
+If you are starting a Fabric build this month, settle three things before anyone writes a pipeline. Draw the workspaces around who may read raw files, because that is the only OneLake boundary you have today. Give each medallion layer its own lakehouse and keep `Tables` flat. Decide which tables the consumption side will see through shortcuts and which need their own reshaped copy. Get those right and the tuning work later is about files and queries, not about moving data between places you should have picked at the start. For the reporting side of that gold lakehouse, tomorrow's post covers [Direct Lake best practices](/blog/2024-01-17-direct-lake-best-practices/).

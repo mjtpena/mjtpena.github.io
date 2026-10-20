@@ -1,6 +1,6 @@
 ---
-title: "Data Mesh Implementation: A Practical Guide for 2025"
-description: "Data mesh is a journey, not a destination. Start with a few high-value domains, prove the model, then expand. The technology enables data mesh, but success…"
+title: "Rolling Out a Data Mesh on Fabric: A Phased Plan for 2025"
+description: "A phased plan for rolling out data mesh on Microsoft Fabric and Purview in early 2025: what to build first, what's still preview, and when to stop."
 author: Michael John Peña
 draft: false
 date: 2025-01-13
@@ -8,546 +8,217 @@ tags:
   - Data Mesh
   - Data Architecture
   - Data Governance
-  - Azure
   - Microsoft Fabric
+  - Microsoft Purview
 ---
 
-## Data Mesh Principles Recap
+Most data mesh programmes don't fail on technology. They fail because the organisation tries to switch on all four principles at once, across every business unit, before a single data product has a consumer. By January 2025 Microsoft Fabric and Purview cover enough of the tooling that the platform is rarely the blocker. The order you roll things out in is what matters.
 
-1. **Domain Ownership**: Data owned and managed by domain experts
-2. **Data as a Product**: Treat data with product thinking
-3. **Self-Serve Platform**: Enable teams to work independently
-4. **Federated Governance**: Balance autonomy with standards
+I've written before about [how the four principles map onto Fabric](/blog/2024-06-15-data-mesh-fabric/) and about [Fabric domains specifically](/blog/2023-11-13-fabric-domains-organization/). This post is the sequencing companion: what to build in which phase, which pieces are GA versus preview right now, and the signals that tell you to stop expanding.
 
-## Implementing Data Mesh in Microsoft Fabric
+## First, decide whether you need a mesh at all
 
-### Domain Workspaces
+Data mesh is an operating model for organisations where a central data team has become the bottleneck. It costs you duplicated engineering effort, more governance surface, and a platform team that has to behave like a product team. If your data estate is run by eight engineers serving three business units, a well-run central lakehouse with clear ownership of each gold table will beat a mesh on cost and speed.
 
-```python
-from azure.identity import DefaultAzureCredential
-import requests
+My rule of thumb: consider a mesh when at least two of these are true.
 
-credential = DefaultAzureCredential()
-token = credential.get_token("https://api.fabric.microsoft.com/.default").token
-headers = {
-    "Authorization": f"Bearer {token}",
-    "Content-Type": "application/json"
-}
-base_url = "https://api.fabric.microsoft.com/v1"
+- The central team's backlog is measured in quarters, not weeks.
+- Business domains already have people who understand their data better than the central team does, and they're willing to own it.
+- You have several independent consumers of the same domain data and keep rebuilding it.
+- Regulatory or organisational boundaries already force separate ownership.
 
-def create_domain_workspace(name: str, description: str, capacity_id: str):
-    """Create a workspace for a domain."""
-    payload = {
-        "displayName": name,
-        "description": description,
-        "capacityId": capacity_id
-    }
-    response = requests.post(f"{base_url}/workspaces", headers=headers, json=payload)
-    return response.json()
+If none of these apply, don't do it. Adopting the vocabulary ("data products", "domains") inside a central model is fine and costs nothing. Adopting the org structure without the need is expensive.
 
-# Sales domain workspace
-sales_workspace = create_domain_workspace(
-    name="Sales-Domain",
-    description="Sales team's data products",
-    capacity_id="sales-capacity-id"
-)
-print(f"Created: {sales_workspace.get('displayName')}")
+## What the platform gives you in January 2025
 
-# Marketing domain workspace
-marketing_workspace = create_domain_workspace(
-    name="Marketing-Domain",
-    description="Marketing team's data products",
-    capacity_id="marketing-capacity-id"
-)
+Before planning phases, be precise about what exists and what status it's in. Here's how I map the principles to features as of this month.
 
-# Add workspace role assignments via Admin API
-admin_url = "https://api.fabric.microsoft.com/v1/admin"
-workspace_id = sales_workspace.get("id")
+| Principle | Fabric / Purview feature | Status (Jan 2025) |
+|---|---|---|
+| Domain ownership | [Fabric domains](https://learn.microsoft.com/fabric/governance/domains) and workspace assignment | Domains available in the admin portal; subdomains in preview |
+| Domain ownership (automation) | [Fabric admin Domains REST API](https://learn.microsoft.com/rest/api/fabric/admin/domains) | Preview |
+| Data as a product | Lakehouse/warehouse gold tables, endorsement (Promoted, Certified) | GA |
+| Data as a product (catalogue) | [Data products in Purview Unified Catalog](https://learn.microsoft.com/purview/unified-catalog-data-products) | GA (new Purview portal); check availability in your region |
+| Self-serve platform | Workspaces, Fabric REST APIs, Git integration, deployment pipelines | Core APIs GA |
+| Cross-domain consumption | [OneLake shortcuts](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts) | GA |
+| Discovery | OneLake catalog (successor to the OneLake data hub) | GA since Q4 2024 |
+| Fine-grained access | OneLake data access roles | Preview, opt-in per lakehouse |
 
-# Note: Role assignments can be managed via REST API or Fabric portal
-# Each domain workspace contains: Lakehouse(s), Warehouse(s), Pipelines, Semantic models, Reports
-```
+Two things in that table shape the plan. First, the automation and fine-grained security pieces are still in preview, so I wouldn't make a production rollout depend on them. Second, Purview's data product and governance domain constructs are separate from Fabric domains. They don't sync automatically, and you'll end up maintaining both. Decide early which one is the source of truth for ownership. I'd make Fabric domains the source of truth for where data lives and who administers it, and Purview the source of truth for business ownership and contracts.
 
-### Data Products Definition
+## Phase 1: two domains, one platform team (months 0–3)
+
+Pick two domains: one with a strong data owner and an obvious consumer, and one that consumes from it. You want a producer–consumer pair so the first cross-domain share happens inside the pilot, not a year later.
+
+The platform team's job in this phase is to make domain provisioning boring and repeatable. In practice that's a script that creates a domain, its workspaces (I use separate dev and prod workspaces per domain), and assigns them. The script below uses the Fabric REST API with `azure-identity` and provisions both pilot domains. The domain admin APIs are still preview and only accept a signed-in Fabric administrator (no service principal or managed identity), so run this interactively, e.g. with `AzureCliCredential` after `az login`, rather than from an unattended pipeline. Treat it as platform-team tooling, not something domain teams run themselves.
 
 ```python
-# Data products are defined as configuration with metadata
-# stored in a catalog (e.g., Microsoft Purview or custom metadata store)
-import json
-from azure.identity import DefaultAzureCredential
 import requests
+from azure.identity import AzureCliCredential
 
-credential = DefaultAzureCredential()
+FABRIC_API = "https://api.fabric.microsoft.com/v1"
+# Run `az login` as a Fabric administrator first; the domain admin APIs
+# don't accept service principals or managed identities.
+credential = AzureCliCredential()
 
-# Define a data product as a configuration dictionary
-customer_360_product = {
-    "name": "Customer 360",
-    "domain": "Sales",
-    "owner": "sales-data-team@company.com",
-    "description": """
-    Unified customer view combining transaction history,
-    support interactions, and marketing engagement.
-    Updated daily at 6 AM UTC.
-    """,
 
-    # Data contract
-    "contract": {
-        "schema": {
-            "customer_id": {"type": "string", "description": "Unique customer identifier"},
-            "customer_name": {"type": "string", "description": "Full customer name"},
-            "lifetime_value": {"type": "decimal", "description": "Total historical spend"},
-            "segment": {"type": "string", "enum": ["Enterprise", "SMB", "Consumer"]},
-            "churn_risk": {"type": "decimal", "description": "Churn probability 0-1"},
-            "last_updated": {"type": "timestamp", "description": "Last refresh time"}
-        },
-        "sla": {
-            "freshness": "24h",
-            "availability": "99.9%",
-            "quality_score": "95%"
-        },
-        "access_patterns": [
-            "Full table scan for analytics",
-            "Point lookup by customer_id",
-            "Filter by segment"
-        ]
-    },
+def headers() -> dict:
+    token = credential.get_token("https://api.fabric.microsoft.com/.default").token
+    return {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
 
-    # Technical implementation
-    "storage": {
-        "type": "lakehouse_table",
-        "lakehouse": "sales_lakehouse",
-        "table": "gold_customer_360"
-    },
 
-    # Quality checks
-    "quality_rules": [
-        "customer_id is not null",
-        "lifetime_value >= 0",
-        "churn_risk between 0 and 1",
-        "last_updated within 25 hours"
-    ]
-}
-
-# Register to Microsoft Purview (data catalog) via REST API
-def register_data_product(product: dict, purview_account: str):
-    """Register data product in Microsoft Purview."""
-    token = credential.get_token("https://purview.azure.net/.default").token
-    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-
-    # Create entity in Purview
-    entity_payload = {
-        "entity": {
-            "typeName": "DataProduct",
-            "attributes": {
-                "name": product["name"],
-                "qualifiedName": f"{product['domain']}/{product['name']}",
-                "description": product["description"],
-                "owner": product["owner"],
-                "contract": json.dumps(product["contract"]),
-                "storage": json.dumps(product["storage"])
-            }
-        }
-    }
-
-    response = requests.post(
-        f"https://{purview_account}.purview.azure.com/catalog/api/atlas/v2/entity",
-        headers=headers,
-        json=entity_payload
+def create_domain(name: str, description: str) -> str:
+    # Admin API (preview): caller must be a signed-in Fabric administrator
+    resp = requests.post(
+        f"{FABRIC_API}/admin/domains",
+        headers=headers(),
+        json={"displayName": name, "description": description},
     )
-    return response.json()
+    resp.raise_for_status()
+    return resp.json()["id"]
 
-register_data_product(customer_360_product, "my-purview-account")
+
+def create_workspace(name: str, capacity_id: str) -> str:
+    resp = requests.post(
+        f"{FABRIC_API}/workspaces",
+        headers=headers(),
+        json={"displayName": name, "capacityId": capacity_id},
+    )
+    resp.raise_for_status()
+    return resp.json()["id"]
+
+
+def assign_workspaces(domain_id: str, workspace_ids: list[str]) -> None:
+    resp = requests.post(
+        f"{FABRIC_API}/admin/domains/{domain_id}/assignWorkspaces",
+        headers=headers(),
+        json={"workspacesIds": workspace_ids},
+    )
+    resp.raise_for_status()
+
+
+PILOT_DOMAINS = {
+    "Sales": "Customer, order and pipeline data products",
+    "Marketing": "Campaign and segmentation data products",
+}
+
+if __name__ == "__main__":
+    capacity_id = "<your-capacity-id>"
+    for name, description in PILOT_DOMAINS.items():
+        domain_id = create_domain(name, description)
+        prefix = name.lower()
+        ws_ids = [
+            create_workspace(f"{prefix}-dev", capacity_id),
+            create_workspace(f"{prefix}-prod", capacity_id),
+        ]
+        assign_workspaces(domain_id, ws_ids)
+        print(f"Domain {name} ({domain_id}) with workspaces {ws_ids}")
 ```
 
-### Cross-Domain Data Sharing
+Workspace role assignments, Git integration, and capacity choices belong in the same script once the basics work. Whether each domain gets its own capacity is a cost-allocation decision, not a mesh requirement. Sharing a capacity in the pilot is fine; split it when a domain's workload starts throttling another.
+
+## Phase 2: the first data product, with a contract (months 2–5)
+
+A data product is not a table with a nice name. It's a table plus an owner, a documented schema, a freshness promise, and checks that fail loudly when the promise is broken. I covered contract formats in [the data contracts post](/blog/2024-06-19-data-contracts/). The minimum I'd ship in phase 2 is a check that runs at the end of the producing pipeline and stops it before bad data reaches the gold table consumers read.
+
+This is a fragment for a Fabric notebook attached to the producing lakehouse, where `spark` is already defined:
 
 ```python
-from azure.identity import DefaultAzureCredential
-import requests
+from datetime import datetime, timedelta, timezone
 
-credential = DefaultAzureCredential()
-token = credential.get_token("https://api.fabric.microsoft.com/.default").token
-headers = {
-    "Authorization": f"Bearer {token}",
-    "Content-Type": "application/json"
+from pyspark.sql import functions as F
+
+TABLE = "gold_customer_360"
+MAX_AGE = timedelta(hours=25)
+
+# Each rule is a SQL predicate that every row must satisfy.
+# A predicate that evaluates to NULL counts as a failure (see coalesce below),
+# so a NULL lifetime_value or churn_risk can't slip through.
+rules = {
+    "customer_id_not_null": "customer_id IS NOT NULL",
+    "lifetime_value_non_negative": "lifetime_value >= 0",
+    "churn_risk_in_range": "churn_risk BETWEEN 0 AND 1",
 }
-base_url = "https://api.fabric.microsoft.com/v1"
 
-# Option 1: OneLake shortcut (read-only access)
-# Marketing domain wants to use Sales' Customer 360
-target_workspace_id = "marketing-workspace-id"
-target_lakehouse_id = "marketing-lakehouse-id"
+df = spark.read.table(TABLE)
 
-shortcut_payload = {
-    "path": "Tables/shared_customer_360",
+# One pass over the table: count violations for every rule plus the max timestamp
+violation_counts = [
+    F.sum(F.when(~F.coalesce(F.expr(p), F.lit(False)), 1).otherwise(0)).alias(n)
+    for n, p in rules.items()
+]
+result = df.agg(*violation_counts, F.max("last_updated").alias("latest")).collect()[0]
+
+failures = {n: result[n] for n in rules if result[n]}
+
+latest = result["latest"]
+# Assumes spark.sql.session.timeZone is UTC, the Fabric default
+if latest is None or datetime.now(timezone.utc) - latest.replace(tzinfo=timezone.utc) > MAX_AGE:
+    failures["freshness"] = str(latest)
+
+if failures:
+    raise ValueError(f"{TABLE} broke its contract: {failures}")
+print(f"{TABLE} passed {len(rules) + 1} contract checks")
+```
+
+Raising an exception is deliberate. A failed notebook activity fails the pipeline run, which is where alerting already lives. Writing a quality score to a dashboard nobody watches is how contracts quietly rot.
+
+Once the product passes its checks consistently, endorse the item as Promoted. Reserve Certified for products that have gone through whatever review your governance group defines. If you're in a region where the new Purview data governance experience is available, register the same product in Unified Catalog with its owner and linked assets, so business users find it without needing a Fabric workspace role.
+
+## Phase 3: consume across domains without copying (months 4–6)
+
+The consuming domain shouldn't get contributor access to the producer's workspace, and it shouldn't copy the data with a pipeline either. A OneLake shortcut makes the producer's Delta table appear in the consumer's lakehouse with no data movement. The producer keeps ownership, and storage is billed once.
+
+```python
+import requests
+from azure.identity import DefaultAzureCredential
+
+FABRIC_API = "https://api.fabric.microsoft.com/v1"
+token = DefaultAzureCredential().get_token("https://api.fabric.microsoft.com/.default").token
+
+consumer_workspace_id = "<marketing-workspace-id>"
+consumer_lakehouse_id = "<marketing-lakehouse-id>"
+
+body = {
+    "path": "Tables",
+    "name": "customer_360",
     "target": {
         "oneLake": {
-            "workspaceId": "sales-workspace-id",
-            "itemId": "sales-lakehouse-id",
-            "path": "Tables/gold_customer_360"
-        }
-    }
-}
-
-response = requests.post(
-    f"{base_url}/workspaces/{target_workspace_id}/items/{target_lakehouse_id}/shortcuts",
-    headers=headers,
-    json=shortcut_payload
-)
-print(f"Shortcut created: {response.json()}")
-
-# Option 2: Semantic model sharing via workspace permissions
-# Share the semantic model by granting workspace access or using direct share
-# This is typically done via Fabric portal or Power BI REST API
-
-# Using Semantic Link for cross-workspace queries
-import sempy.fabric as fabric
-
-# Read from shared semantic model
-df = fabric.evaluate_dax(
-    dataset="Customer Analytics",
-    dax_string="EVALUATE SUMMARIZE(Customers, Customers[Segment])",
-    workspace="Sales-Domain"
-)
-```
-
-### Self-Serve Data Platform
-
-```python
-# Self-serve platform using Fabric REST APIs and templates
-from azure.identity import DefaultAzureCredential
-import requests
-import json
-
-credential = DefaultAzureCredential()
-token = credential.get_token("https://api.fabric.microsoft.com/.default").token
-headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-base_url = "https://api.fabric.microsoft.com/v1"
-
-# Platform templates stored as configuration
-TEMPLATES = {
-    "domain-lakehouse-template": {
-        "type": "Lakehouse",
-        "config": {
-            "layers": ["bronze", "silver", "gold"],
-            "default_format": "delta",
-            "retention_days": 90,
-            "auto_vacuum": True
-        },
-        "governance": {
-            "sensitivity_classification": "required",
-            "data_steward": "required",
-            "documentation": "required"
+            "workspaceId": "<sales-prod-workspace-id>",
+            "itemId": "<sales-lakehouse-id>",
+            "path": "Tables/gold_customer_360",
         }
     },
-    "ingestion-pipeline-template": {
-        "type": "DataPipeline",
-        "config": {
-            "error_handling": "retry_with_backoff",
-            "alerting": "on_failure",
-            "logging": "azure_monitor",
-            "lineage_tracking": "enabled"
-        }
-    }
 }
 
-def create_domain_lakehouse(domain_name: str, steward_email: str, capacity_id: str):
-    """Self-serve lakehouse creation using platform template."""
-    template = TEMPLATES["domain-lakehouse-template"]
-
-    # First, create or get the domain workspace
-    workspace_name = f"{domain_name}-Domain"
-    workspace_payload = {
-        "displayName": workspace_name,
-        "capacityId": capacity_id,
-        "description": f"Data products for {domain_name} domain. Steward: {steward_email}"
-    }
-
-    ws_response = requests.post(f"{base_url}/workspaces", headers=headers, json=workspace_payload)
-    workspace_id = ws_response.json().get("id")
-
-    # Create lakehouse in the workspace
-    lakehouse_payload = {
-        "displayName": f"{domain_name.lower()}_lakehouse",
-        "type": "Lakehouse",
-        "description": json.dumps({
-            "data_steward": steward_email,
-            "governance": template["governance"],
-            "config": template["config"]
-        })
-    }
-
-    lh_response = requests.post(
-        f"{base_url}/workspaces/{workspace_id}/items",
-        headers=headers,
-        json=lakehouse_payload
-    )
-
-    return lh_response.json()
-
-# Domain teams use self-serve function
-sales_lakehouse = create_domain_lakehouse(
-    domain_name="Sales",
-    steward_email="sales-steward@company.com",
-    capacity_id="capacity-id"
+resp = requests.post(
+    f"{FABRIC_API}/workspaces/{consumer_workspace_id}/items/{consumer_lakehouse_id}/shortcuts",
+    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+    json=body,
 )
+resp.raise_for_status()
+print(resp.json())
 ```
 
-### Federated Governance
+The trade-off to understand is that [shortcut security](https://learn.microsoft.com/fabric/onelake/onelake-shortcut-security) depends on the engine. Through Spark and the OneLake APIs, the caller's identity is checked against the target, so consumers need read access to the producer's lakehouse. Through the SQL analytics endpoint and semantic models, the consuming item owner's identity is used instead, so lock down who can read the consumer's SQL endpoint as well. Otherwise anyone with access to the marketing lakehouse's SQL endpoint reads sales data the producer never granted them. The Spark path is the right default for a mesh because the producer stays in control, but it means access requests flow to the producing domain. Plan that workflow before phase 3, not during it. OneLake data access roles can narrow access to specific folders, but they're preview and opt-in, so for now I'd grant read on the producing lakehouse and keep sensitive columns out of shared gold tables entirely.
 
-```python
-# Governance policies managed via Microsoft Purview REST API
-from azure.identity import DefaultAzureCredential
-import requests
+## Phase 4: federate governance, then expand (month 6 onward)
 
-credential = DefaultAzureCredential()
-purview_account = "my-purview-account"
+Only now does a governance council earn its keep, because it has two real domains and at least one real contract to argue about. Keep the global policy list short: sensitivity labelling on anything with personal information, mandatory owner and description on endorsed items, and the contract-check pattern above. Everything else is a domain decision. I go deeper on splitting global and domain policies in [the federated governance post](/blog/2024-06-17-federated-governance/).
 
-def get_purview_token():
-    return credential.get_token("https://purview.azure.net/.default").token
+Discovery moves from "ask in Teams" to the OneLake catalog for Fabric users and Purview Unified Catalog for the wider business. Expect overlap; that's the cost of two catalogues until the integration story matures.
 
-# Global policies (platform team) - defined as policy configurations
-global_policies = [
-    {
-        "name": "pii-classification",
-        "description": "All PII columns must be classified",
-        "scope": "GLOBAL",
-        "rule": """
-            columns containing 'email', 'phone', 'ssn', 'address'
-            must have sensitivity_label in ('Confidential', 'Highly Confidential')
-        """,
-        "enforcement": "block"
-    },
-    {
-        "name": "retention-minimum",
-        "description": "Data must be retained for compliance",
-        "scope": "GLOBAL",
-        "rule": "tables must have retention_days >= 7",
-        "enforcement": "warn"
-    }
-]
+Add domains one or two at a time. Each new domain should arrive with a named data owner, at least one consumer lined up, and the provisioning script from phase 1, not a bespoke setup.
 
-# Domain-specific policies (domain teams)
-sales_policies = [
-    {
-        "name": "sales-data-freshness",
-        "description": "Sales data must be refreshed daily",
-        "scope": "WORKSPACE",
-        "workspace": "Sales-Domain",
-        "rule": "gold tables must have last_refresh within 24h",
-        "enforcement": "alert"
-    }
-]
+## How to know it's working
 
-def register_policy(policy: dict):
-    """Register governance policy in Microsoft Purview."""
-    token = get_purview_token()
-    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+Skip vanity counts like "number of data products". The signals I'd track:
 
-    # Create policy in Purview
-    policy_payload = {
-        "name": policy["name"],
-        "description": policy["description"],
-        "decisionRules": [{
-            "effect": policy["enforcement"],
-            "dnfCondition": [[{
-                "attributeName": "scope",
-                "attributeValueIncludes": policy["scope"]
-            }]]
-        }]
-    }
+- **Lead time for a new data product**, from request to first consumer query.
+- **Cross-domain shortcuts in active use.** If products aren't consumed outside their domain, you've built silos with extra steps.
+- **Contract check failures caught before consumers noticed.** This number should be greater than zero; if it's zero, your checks are too weak.
+- **Central team backlog.** If the mesh is working, it shrinks.
 
-    response = requests.put(
-        f"https://{purview_account}.purview.azure.com/policystore/policies/{policy['name']}",
-        headers=headers,
-        json=policy_payload
-    )
-    return response.json()
+## The decision
 
-# Register all policies
-for policy in global_policies + sales_policies:
-    register_policy(policy)
-```
-
-### Data Product Discovery
-
-```python
-# Data product discovery using Microsoft Purview REST API
-from azure.identity import DefaultAzureCredential
-import requests
-
-credential = DefaultAzureCredential()
-purview_account = "my-purview-account"
-
-def search_data_products(query: str, filters: dict = None):
-    """Search for data products in Microsoft Purview catalog."""
-    token = credential.get_token("https://purview.azure.net/.default").token
-    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-
-    search_payload = {
-        "keywords": query,
-        "filter": {
-            "and": [
-                {"typeName": "DataProduct"},
-                *([{"attributeName": "domain", "operator": "in", "attributeValue": filters.get("domain")}]
-                  if filters and filters.get("domain") else [])
-            ]
-        },
-        "limit": 25
-    }
-
-    response = requests.post(
-        f"https://{purview_account}.purview.azure.com/catalog/api/search/query",
-        headers=headers,
-        json=search_payload
-    )
-
-    return response.json().get("value", [])
-
-# Search for data products
-results = search_data_products(
-    query="customer",
-    filters={
-        "domain": ["Sales", "Marketing"]
-    }
-)
-
-for product in results:
-    attrs = product.get("attributes", {})
-    print(f"""
-    Name: {attrs.get('name')}
-    Domain: {attrs.get('domain')}
-    Owner: {attrs.get('owner')}
-    Description: {attrs.get('description')}
-    """)
-
-# Request access via Purview access request workflow
-def request_access(product_name: str, requester: str, reason: str):
-    """Submit access request for a data product."""
-    token = credential.get_token("https://purview.azure.net/.default").token
-    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-
-    # Access requests are typically handled via Purview's self-service access workflow
-    # This creates a request that routes to the data owner for approval
-    request_payload = {
-        "resourceId": f"/subscriptions/.../dataProducts/{product_name}",
-        "requestor": requester,
-        "justification": reason,
-        "accessType": "read"
-    }
-
-    # Note: Actual endpoint depends on Purview configuration
-    print(f"Access request submitted for {product_name} by {requester}")
-    return request_payload
-
-request_access("Customer 360", "marketing-analyst@company.com", "Need for campaign targeting analysis")
-```
-
-### Quality Monitoring
-
-```python
-# Quality monitoring using PySpark and custom checks
-from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
-from datetime import datetime, timedelta
-
-spark = SparkSession.builder.getOrCreate()
-
-def run_quality_checks(table_name: str, rules: list[dict]) -> dict:
-    """Run data quality checks on a table."""
-    df = spark.read.table(table_name)
-    total_rows = df.count()
-
-    results = {"table": table_name, "total_rows": total_rows, "checks": [], "score": 0}
-    passed_checks = 0
-
-    for rule in rules:
-        rule_name = rule["name"]
-        condition = rule["condition"]
-
-        # Count rows that pass the condition
-        passing_rows = df.filter(condition).count()
-        pass_rate = (passing_rows / total_rows * 100) if total_rows > 0 else 0
-        passed = pass_rate >= rule.get("threshold", 100)
-
-        results["checks"].append({
-            "name": rule_name,
-            "passed": passed,
-            "pass_rate": round(pass_rate, 2),
-            "failure_details": f"{total_rows - passing_rows} rows failed" if not passed else None
-        })
-
-        if passed:
-            passed_checks += 1
-
-    results["score"] = round(passed_checks / len(rules) * 100, 1) if rules else 100
-    return results
-
-# Define quality rules for Customer 360
-quality_rules = [
-    {"name": "customer_id_not_null", "condition": "customer_id IS NOT NULL", "threshold": 100},
-    {"name": "lifetime_value_positive", "condition": "lifetime_value >= 0", "threshold": 100},
-    {"name": "churn_risk_valid", "condition": "churn_risk BETWEEN 0 AND 1", "threshold": 100},
-    {"name": "freshness_check", "condition": f"last_updated > '{(datetime.now() - timedelta(hours=25)).isoformat()}'", "threshold": 95}
-]
-
-# Run quality checks
-results = run_quality_checks("lakehouse.gold_customer_360", quality_rules)
-
-print(f"Overall Quality Score: {results['score']}%")
-for check in results["checks"]:
-    status = "PASS" if check["passed"] else "FAIL"
-    print(f"  {check['name']}: {status} ({check['pass_rate']}%)")
-    if not check["passed"]:
-        print(f"    Details: {check['failure_details']}")
-
-# Save quality metrics to a monitoring table
-quality_df = spark.createDataFrame([{
-    "table_name": results["table"],
-    "check_time": datetime.now().isoformat(),
-    "score": results["score"],
-    "details": str(results["checks"])
-}])
-quality_df.write.mode("append").saveAsTable("lakehouse.data_quality_metrics")
-```
-
-## Organizational Considerations
-
-### Team Structure
-
-```
-Platform Team (Central)
-├── Provides infrastructure
-├── Maintains governance tools
-├── Supports domain teams
-└── Manages shared services
-
-Domain Teams (Distributed)
-├── Own their data products
-├── Build domain-specific pipelines
-├── Define domain contracts
-└── Manage domain quality
-
-Data Governance Council (Federated)
-├── Representatives from each domain
-├── Sets global policies
-├── Resolves cross-domain issues
-└── Evolves standards
-```
-
-### Success Metrics
-
-```python
-# Track data mesh health
-mesh_metrics = {
-    "data_products_count": 45,
-    "domains_active": 8,
-    "cross_domain_shares": 120,
-    "avg_quality_score": 94.5,
-    "time_to_new_product": "5 days",
-    "self_serve_adoption": "78%",
-    "governance_compliance": "96%"
-}
-```
-
-Data mesh is a journey, not a destination. Start with a few high-value domains, prove the model, then expand. The technology enables data mesh, but success requires organizational alignment.
+Start with a producer–consumer pair, automate provisioning before adding domains, ship one contract-checked product before writing a governance charter, and use shortcuts instead of copies. Build on the GA pieces (workspaces, shortcuts, endorsement, OneLake catalog) and treat the preview ones (domain admin APIs, subdomains, OneLake data access roles) as accelerators you can swap in later. If after two domains the central backlog hasn't moved and nobody outside the producing domain is querying the product, stop and fix the operating model before scaling it.

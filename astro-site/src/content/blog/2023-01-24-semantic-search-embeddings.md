@@ -1,527 +1,256 @@
 ---
-title: "Building Semantic Search with Azure OpenAI Embeddings"
+title: "Semantic Search Prototype: Azure OpenAI Embeddings and NumPy"
+description: "Build a small semantic search prototype on Azure OpenAI embeddings and NumPy, measure it with hit rate@k, add BM25, and know when to move to a real index."
 author: Michael John Peña
 draft: false
 date: 2023-01-24
 tags:
-  - Azure
-  - OpenAI
+  - Azure OpenAI
   - Embeddings
   - Semantic Search
-  - AI
+  - Python
+  - Search
 ---
 
-## The Problem with Keyword Search
+Users don't search with your vocabulary. They type "how do I stop paying for idle machines" and your documentation says "auto-shutdown for Azure Virtual Machines", so a keyword index returns nothing useful. Embeddings fix that mismatch by comparing meaning instead of words. Before you commit to a vector database, though, you should prove that embedding search actually beats what you have on your own content, and the cheapest way to prove it is a prototype that fits in one Python file.
+
+Azure OpenAI went [generally available](/blog/2023-01-20-azure-openai-service-ga/) on 16 January, and if you need the basics of what an embedding is first, start with [text embeddings on Azure OpenAI](/blog/2023-01-23-embeddings-introduction/).
+
+## Why a prototype and not a platform
+
+The default advice right now is "pick a vector database". I think that's premature for most teams. The question you can't answer yet is whether semantic search is better than keyword search *for your corpus and your users' queries*. Internal wikis full of product codes, ticket numbers and acronyms often do fine with keywords. Long-form policy and how-to content usually doesn't.
+
+A brute-force search over a NumPy matrix answers that question in a day. A few tens of thousands of chunks at 1,536 dimensions fit comfortably in memory. Scoring every chunk against a query is a single matrix-vector multiply that takes milliseconds. Nothing to deploy, nothing to keep in sync, and nothing to unpick if the answer is "keywords were fine".
+
+The latency you'll notice is elsewhere. Every query has to be embedded first, which is an Azure OpenAI round trip that typically takes hundreds of milliseconds and counts against the same rate limit as indexing. That applies to every evaluation query and every hybrid search call too, so cache query embeddings while you iterate on chunking and fusion rather than paying for the same 50 queries on every run.
+
+## Choosing the embedding model in January 2023
+
+On 15 December 2022 OpenAI released [`text-embedding-ada-002`](https://openai.com/index/new-and-improved-embedding-model/). It replaces the first-generation similarity and search models with one model, returns 1,536 dimensions, and accepts up to 8,191 tokens on OpenAI's own API. It isn't in the Azure OpenAI model list yet: the [models page](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) lists only the first-generation embeddings models, and the January entry on the [What's new page](https://learn.microsoft.com/azure/cognitive-services/openai/whats-new) doesn't mention it. When it arrives, don't assume Azure will match OpenAI's 8,191-token limit; check the models page and the deployments list in Azure OpenAI Studio before you design around it.
+
+So on Azure this month, build on the first-generation search models. They come as pairs: `text-search-ada-doc-001` for the documents and `text-search-ada-query-001` for the queries. Both produce 1,024-dimensional vectors that are designed to be compared with each other, and the [REST reference](https://learn.microsoft.com/azure/cognitive-services/openai/reference) caps each input at 2,048 tokens. That asymmetry is why the code below takes two deployment names. With the `-001` pair you use one deployment for each. When ada-002 reaches Azure you point both at the same deployment. When you switch models later you re-embed the whole corpus, because vectors from different models aren't comparable.
+
+Two Azure details shape the code:
+
+- **One input per request.** OpenAI's own API accepts an array of inputs. In Azure OpenAI, plan on a single string per call for now. Indexing 20,000 chunks means 20,000 requests against your resource's rate limit for the model, so the indexer needs to back off on HTTP 429. At an illustrative 300 requests a minute that's a bit over an hour of wall-clock time; check the current per-model limits on the [Azure OpenAI quotas and limits page](https://learn.microsoft.com/azure/ai-services/openai/quotas-limits) before you plan around it.
+- **The deployment name is the `engine`.** You pass the name you gave the deployment, not the model name.
+
+Estimate the one-off cost before you start. Count the corpus's tokens with OpenAI's `tiktoken` library (or use roughly 1.3 tokens per English word), divide by 1,000 and multiply by the per-1K-token price for your embedding model on the Azure OpenAI pricing page. For a typical internal knowledge base that is a small number, and it's paid once per model, which is another reason to settle the model choice before you index everything.
+
+## The prototype
+
+This uses the `openai` 0.26 Python library with `api_type = "azure"` and API version `2022-12-01`, as covered in [the Azure OpenAI Python setup post](/blog/2023-01-18-azure-openai-python-sdk/). Save it as `semantic_search.py`.
 
 ```python
-# Keyword search limitations
-documents = [
-    "Azure provides cloud computing services",
-    "Microsoft's cloud platform offers IaaS and PaaS",
-    "The sky is blue with white clouds"
-]
-
-query = "cloud hosting solutions"
-
-# Keyword matching would miss document 2 (no "cloud" in query)
-# and might incorrectly match document 3 (has "cloud" but wrong context)
-```
-
-## Semantic Search Architecture
-
-```
-User Query → Embed Query → Vector Similarity → Rank Results → Return Documents
-     ↓                            ↑
-Documents → Embed Docs → Store Vectors (Index)
-```
-
-## Building the Search Engine
-
-```python
-import openai
-import numpy as np
-from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Any
-from datetime import datetime
 import json
-import hashlib
+import os
+import sys
+import time
+from pathlib import Path
+from dataclasses import dataclass, field
+from typing import Dict, List, Optional
+
+import numpy as np
+import openai
+
+openai.api_type = "azure"
+openai.api_base = "https://<your-resource-name>.openai.azure.com/"
+openai.api_version = "2022-12-01"
+openai.api_key = os.environ["AZURE_OPENAI_KEY"]
+
+# Once text-embedding-ada-002 is on Azure, set both to the same deployment.
+# With the first-generation pair, use text-search-ada-doc-001 and text-search-ada-query-001.
+DOC_DEPLOYMENT = "<your-doc-embedding-deployment>"
+QUERY_DEPLOYMENT = "<your-query-embedding-deployment>"
+
 
 @dataclass
-class Document:
-    """A searchable document."""
+class Chunk:
     id: str
-    content: str
-    metadata: Dict[str, Any] = field(default_factory=dict)
-    embedding: Optional[List[float]] = None
-    created_at: datetime = field(default_factory=datetime.now)
+    text: str
+    metadata: Dict[str, str] = field(default_factory=dict)
 
-    def to_dict(self) -> dict:
-        return {
-            "id": self.id,
-            "content": self.content,
-            "metadata": self.metadata,
-            "embedding": self.embedding,
-            "created_at": self.created_at.isoformat()
-        }
 
-@dataclass
-class SearchResult:
-    """A search result with score."""
-    document: Document
-    score: float
-    rank: int
+def embed(text: str, deployment: str, max_retries: int = 5) -> np.ndarray:
+    """Embed one string, backing off on throttling and transient service errors."""
+    text = text.replace("\n", " ")
+    for attempt in range(max_retries):
+        try:
+            response = openai.Embedding.create(engine=deployment, input=text)
+            vector = np.array(response["data"][0]["embedding"], dtype=np.float32)
+            return vector / np.linalg.norm(vector)
+        except (openai.error.RateLimitError, openai.error.ServiceUnavailableError,
+                openai.error.Timeout):
+            time.sleep(2 ** attempt)
+    raise RuntimeError(f"Embedding failed after {max_retries} attempts")
 
-class SemanticSearchEngine:
-    """Production-ready semantic search engine."""
 
-    def __init__(
-        self,
-        embedding_deployment: str = "text-embedding-ada-002",
-        similarity_metric: str = "cosine"
-    ):
-        self.embedding_deployment = embedding_deployment
-        self.similarity_metric = similarity_metric
-        self.documents: Dict[str, Document] = {}
-        self._embedding_cache: Dict[str, List[float]] = {}
+def chunk_text(doc_id: str, text: str, metadata: Dict[str, str],
+               max_words: int = 200) -> List[Chunk]:
+    """Split on paragraphs, merging small ones and splitting long ones at max_words."""
+    pieces: List[str] = []
+    for paragraph in [p.strip() for p in text.split("\n\n") if p.strip()]:
+        words = paragraph.split()
+        for start in range(0, len(words), max_words):
+            pieces.append(" ".join(words[start:start + max_words]))
 
-    def _get_embedding(self, text: str) -> List[float]:
-        """Get embedding with caching."""
-        cache_key = hashlib.md5(text.encode()).hexdigest()
+    chunks: List[str] = []
+    current: List[str] = []
+    for piece in pieces:
+        if current and len(" ".join(current + [piece]).split()) > max_words:
+            chunks.append(" ".join(current))
+            current = []
+        current.append(piece)
+    if current:
+        chunks.append(" ".join(current))
+    return [Chunk(f"{doc_id}#{i}", c, metadata) for i, c in enumerate(chunks)]
 
-        if cache_key not in self._embedding_cache:
-            response = openai.Embedding.create(
-                engine=self.embedding_deployment,
-                input=text
-            )
-            self._embedding_cache[cache_key] = response['data'][0]['embedding']
 
-        return self._embedding_cache[cache_key]
+class VectorIndex:
+    def __init__(self) -> None:
+        self.chunks: List[Chunk] = []
+        self.matrix: Optional[np.ndarray] = None
+        self.doc_deployment = DOC_DEPLOYMENT
 
-    def _calculate_similarity(self, a: List[float], b: List[float]) -> float:
-        """Calculate similarity between vectors."""
-        a = np.array(a)
-        b = np.array(b)
+    def add(self, chunks: List[Chunk]) -> None:
+        if not chunks:  # empty or whitespace-only file
+            return
+        vectors = [embed(c.text, DOC_DEPLOYMENT) for c in chunks]
+        new = np.vstack(vectors)
+        self.matrix = new if self.matrix is None else np.vstack([self.matrix, new])
+        self.chunks.extend(chunks)
 
-        if self.similarity_metric == "cosine":
-            return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
-        elif self.similarity_metric == "dot":
-            return np.dot(a, b)
-        elif self.similarity_metric == "euclidean":
-            return -np.linalg.norm(a - b)  # Negative so higher is better
-        else:
-            raise ValueError(f"Unknown metric: {self.similarity_metric}")
+    def search(self, query: str, top_k: int = 5,
+               where: Optional[Dict[str, str]] = None) -> List[tuple]:
+        if self.matrix is None:
+            return []
+        q = embed(query, QUERY_DEPLOYMENT)
+        scores = self.matrix @ q  # vectors are unit length, so this is cosine similarity
+        if where:
+            mask = np.array([all(c.metadata.get(k) == v for k, v in where.items())
+                             for c in self.chunks])
+            scores = np.where(mask, scores, -np.inf)
+        best = np.argsort(-scores)[:top_k]
+        return [(float(scores[i]), self.chunks[i]) for i in best if np.isfinite(scores[i])]
 
-    def add_document(self, doc: Document) -> str:
-        """Add a single document to the index."""
-        if doc.embedding is None:
-            doc.embedding = self._get_embedding(doc.content)
+    def save(self, path: str) -> None:
+        if self.matrix is None:
+            raise ValueError("Nothing to save: the index is empty")
+        np.save(f"{path}.npy", self.matrix)
+        with open(f"{path}.json", "w", encoding="utf-8") as f:
+            json.dump({"doc_deployment": DOC_DEPLOYMENT,
+                       "chunks": [c.__dict__ for c in self.chunks]}, f)
 
-        self.documents[doc.id] = doc
-        return doc.id
-
-    def add_documents(self, docs: List[Document], batch_size: int = 100):
-        """Add multiple documents with batch embedding."""
-        # Separate docs that need embedding
-        needs_embedding = [d for d in docs if d.embedding is None]
-        has_embedding = [d for d in docs if d.embedding is not None]
-
-        # Batch embed
-        for i in range(0, len(needs_embedding), batch_size):
-            batch = needs_embedding[i:i + batch_size]
-            texts = [d.content for d in batch]
-
-            response = openai.Embedding.create(
-                engine=self.embedding_deployment,
-                input=texts
-            )
-
-            for doc, emb_data in zip(batch, response['data']):
-                doc.embedding = emb_data['embedding']
-
-        # Add all documents
-        for doc in docs:
-            self.documents[doc.id] = doc
-
-    def search(
-        self,
-        query: str,
-        top_k: int = 10,
-        filters: Optional[Dict[str, Any]] = None,
-        min_score: Optional[float] = None
-    ) -> List[SearchResult]:
-        """Search for documents similar to query."""
-        query_embedding = self._get_embedding(query)
-
-        # Calculate scores
-        scored_docs = []
-        for doc_id, doc in self.documents.items():
-            # Apply metadata filters
-            if filters:
-                skip = False
-                for key, value in filters.items():
-                    if doc.metadata.get(key) != value:
-                        skip = True
-                        break
-                if skip:
-                    continue
-
-            score = self._calculate_similarity(query_embedding, doc.embedding)
-
-            # Apply minimum score filter
-            if min_score and score < min_score:
-                continue
-
-            scored_docs.append((doc, score))
-
-        # Sort by score
-        scored_docs.sort(key=lambda x: x[1], reverse=True)
-
-        # Build results
-        results = []
-        for rank, (doc, score) in enumerate(scored_docs[:top_k], 1):
-            results.append(SearchResult(document=doc, score=score, rank=rank))
-
-        return results
-
-    def find_similar(
-        self,
-        doc_id: str,
-        top_k: int = 5,
-        exclude_self: bool = True
-    ) -> List[SearchResult]:
-        """Find documents similar to a given document."""
-        if doc_id not in self.documents:
-            raise ValueError(f"Document {doc_id} not found")
-
-        source_doc = self.documents[doc_id]
-
-        scored_docs = []
-        for other_id, other_doc in self.documents.items():
-            if exclude_self and other_id == doc_id:
-                continue
-
-            score = self._calculate_similarity(source_doc.embedding, other_doc.embedding)
-            scored_docs.append((other_doc, score))
-
-        scored_docs.sort(key=lambda x: x[1], reverse=True)
-
-        return [
-            SearchResult(document=doc, score=score, rank=rank)
-            for rank, (doc, score) in enumerate(scored_docs[:top_k], 1)
-        ]
-
-    def delete_document(self, doc_id: str) -> bool:
-        """Delete a document from the index."""
-        if doc_id in self.documents:
-            del self.documents[doc_id]
-            return True
-        return False
-
-    def save_index(self, filepath: str):
-        """Save the index to a file."""
-        data = {
-            "documents": {
-                doc_id: doc.to_dict()
-                for doc_id, doc in self.documents.items()
-            },
-            "config": {
-                "embedding_deployment": self.embedding_deployment,
-                "similarity_metric": self.similarity_metric
-            }
-        }
-
-        with open(filepath, 'w') as f:
-            json.dump(data, f)
-
-    def load_index(self, filepath: str):
-        """Load an index from a file."""
-        with open(filepath, 'r') as f:
+    @classmethod
+    def load(cls, path: str) -> "VectorIndex":
+        index = cls()
+        index.matrix = np.load(f"{path}.npy")
+        with open(f"{path}.json", encoding="utf-8") as f:
             data = json.load(f)
+        index.doc_deployment = data["doc_deployment"]
+        if index.doc_deployment != DOC_DEPLOYMENT:
+            raise ValueError(
+                f"Index was built with '{index.doc_deployment}' but DOC_DEPLOYMENT is "
+                f"'{DOC_DEPLOYMENT}'. Re-embed the corpus before searching it.")
+        index.chunks = [Chunk(**c) for c in data["chunks"]]
+        return index
 
-        self.embedding_deployment = data["config"]["embedding_deployment"]
-        self.similarity_metric = data["config"]["similarity_metric"]
 
-        for doc_id, doc_data in data["documents"].items():
-            self.documents[doc_id] = Document(
-                id=doc_data["id"],
-                content=doc_data["content"],
-                metadata=doc_data["metadata"],
-                embedding=doc_data["embedding"],
-                created_at=datetime.fromisoformat(doc_data["created_at"])
-            )
-
-    def get_stats(self) -> dict:
-        """Get index statistics."""
-        return {
-            "document_count": len(self.documents),
-            "embedding_dimensions": len(next(iter(self.documents.values())).embedding) if self.documents else 0,
-            "cache_size": len(self._embedding_cache)
-        }
+if __name__ == "__main__":
+    # Usage: python semantic_search.py <folder-of-md-or-txt-files>
+    folder = Path(sys.argv[1])
+    index = VectorIndex()
+    for file in sorted(folder.glob("*")):
+        if file.suffix in (".md", ".txt"):
+            text = file.read_text(encoding="utf-8")
+            index.add(chunk_text(file.stem, text, {"source": file.name}))
+    index.save("kb-index")
+    print(f"Indexed {len(index.chunks)} chunks into kb-index.npy and kb-index.json")
 ```
 
-## Using the Search Engine
+A few decisions in there are deliberate.
+
+**Normalise once at index time.** OpenAI's embeddings already come back at roughly unit length, but normalising explicitly means `matrix @ q` is cosine similarity no matter what. Scoring the whole corpus is then one operation instead of a Python loop. A Python loop over documents is fine for fifty items and painful for fifty thousand.
+
+**Chunk by paragraph, not by document.** One vector for a ten-page document is an average of everything in it and matches nothing well. Paragraph-sized chunks of a couple of hundred words stay well inside the 2,048-token input limit Azure documents for embeddings, and any paragraph longer than `max_words` is split into word windows first, so one wall of text can't produce an oversized chunk that the service rejects. That also gives the search something specific to match. Overlap between chunks and splitting on headings are worth trying once you have an evaluation set to tell you whether they help.
+
+**Filter before ranking, not after.** Masking scores to `-inf` for chunks outside the filter means `top_k` always returns the best matching results *within* the filter. Filtering after taking the top five can leave you with zero results.
+
+**Record the deployment with the vectors.** The saved JSON keeps the document deployment name. `load()` compares it with the current `DOC_DEPLOYMENT` and refuses to search an index built with a different model, because a silent mismatch returns plausible-looking nonsense.
+
+## Measuring it before you believe it
+
+The step most teams skip is evaluation. A demo with three hand-picked queries always looks good. Write down 30 to 50 real queries, from search logs or support tickets if you have them, and for each one note which chunk IDs a good answer would include. Build the index first with `python semantic_search.py ./docs`; chunk IDs take the form `<file-name>#<n>`, so label your queries with those. Then measure hit rate@k: the share of queries where at least one correct chunk appears in the top k. It's often loosely called recall@k, but strictly recall@k divides the relevant chunks found by all relevant chunks for the query. Hit rate is the better first question for search, because a user usually needs one good result.
 
 ```python
-# Initialize
-engine = SemanticSearchEngine()
+from typing import Dict, Set
 
-# Add documents
-docs = [
-    Document(
-        id="doc1",
-        content="Azure Virtual Machines provide IaaS compute resources in the cloud",
-        metadata={"category": "compute", "service": "VM"}
-    ),
-    Document(
-        id="doc2",
-        content="Azure Functions is a serverless compute service that runs code on-demand",
-        metadata={"category": "compute", "service": "Functions"}
-    ),
-    Document(
-        id="doc3",
-        content="Azure Cosmos DB is a globally distributed NoSQL database service",
-        metadata={"category": "database", "service": "CosmosDB"}
-    ),
-    Document(
-        id="doc4",
-        content="Azure Blob Storage provides scalable object storage for unstructured data",
-        metadata={"category": "storage", "service": "Blob"}
-    ),
-    Document(
-        id="doc5",
-        content="Azure Kubernetes Service simplifies deploying and managing containerized applications",
-        metadata={"category": "compute", "service": "AKS"}
-    )
-]
+from semantic_search import VectorIndex
 
-engine.add_documents(docs)
 
-# Search
-results = engine.search("serverless computing", top_k=3)
-for r in results:
-    print(f"{r.rank}. [{r.score:.4f}] {r.document.content[:60]}...")
+def hit_rate_at_k(index: VectorIndex, labelled: Dict[str, Set[str]], k: int = 5) -> float:
+    hits = 0
+    for query, relevant_ids in labelled.items():
+        returned = {chunk.id for _, chunk in index.search(query, top_k=k)}
+        hits += bool(returned & relevant_ids)
+    return hits / len(labelled)
 
-# Search with filters
-compute_results = engine.search(
-    "database for high throughput",
-    filters={"category": "database"}
-)
 
-# Find similar documents
-similar = engine.find_similar("doc2", top_k=3)
+if __name__ == "__main__":
+    index = VectorIndex.load("kb-index")
+    labelled_queries: Dict[str, Set[str]] = {
+        "stop paying for idle virtual machines": {"vm-cost-guide#2"},
+        "rotate storage account keys": {"storage-security#4", "key-vault-howto#1"},
+    }
+    print(f"hit rate@5: {hit_rate_at_k(index, labelled_queries):.2f}")
 ```
 
-## Improving Search Quality
+Run the same labelled set against your current keyword search. If embeddings don't clearly win, you've saved yourself a platform decision. If they do, you have a baseline to protect when you change chunk sizes or models.
 
-### Hybrid Search
+While you're labelling, look at the raw scores. Don't read a cosine similarity of 0.82 as "82% relevant". In my experience scores cluster high (with ada-002, unrelated text often lands around 0.7), and the `-001` models have their own range, so any "minimum score" cut-off has to come from your labelled data, not from a default.
 
-Combine semantic search with keyword matching:
+## Adding keywords back in
+
+Embeddings are weak at exact identifiers. `ERR-4012` and `ERR-4021` look almost identical to an embedding model. If your users search for product codes or error numbers, combine vector results with BM25 keyword scoring. I prefer reciprocal rank fusion over a weighted sum of scores, because BM25 scores and cosine similarities sit on different scales and normalising them is fiddly. Rank fusion only uses each result's position in each list. Run BM25 on its own against the labelled set first, though. If it matches the vector hit rate@5, keep keywords and stop there.
 
 ```python
+from typing import Dict, List
+
 from rank_bm25 import BM25Okapi
 
-class HybridSearchEngine(SemanticSearchEngine):
-    """Hybrid search combining semantic and keyword matching."""
+from semantic_search import VectorIndex
 
-    def __init__(self, semantic_weight: float = 0.7, **kwargs):
-        super().__init__(**kwargs)
-        self.semantic_weight = semantic_weight
-        self.keyword_weight = 1 - semantic_weight
-        self._bm25 = None
-        self._tokenized_corpus = []
 
-    def _tokenize(self, text: str) -> List[str]:
-        """Simple tokenization."""
-        return text.lower().split()
+def hybrid_search(index: VectorIndex, query: str, top_k: int = 5, k: int = 60) -> List[str]:
+    tokenised = [c.text.lower().split() for c in index.chunks]
+    bm25_scores = BM25Okapi(tokenised).get_scores(query.lower().split())
+    order = bm25_scores.argsort()[::-1]
+    # Skip zero-score chunks so they don't collect fusion credit by accident.
+    keyword_ranking = [index.chunks[i].id for i in order[:50] if bm25_scores[i] > 0]
+    vector_ranking = [c.id for _, c in index.search(query, top_k=50)]
 
-    def _rebuild_bm25(self):
-        """Rebuild BM25 index."""
-        self._tokenized_corpus = [
-            self._tokenize(doc.content)
-            for doc in self.documents.values()
-        ]
-        self._bm25 = BM25Okapi(self._tokenized_corpus)
-
-    def add_documents(self, docs: List[Document], **kwargs):
-        super().add_documents(docs, **kwargs)
-        self._rebuild_bm25()
-
-    def search(
-        self,
-        query: str,
-        top_k: int = 10,
-        **kwargs
-    ) -> List[SearchResult]:
-        # Semantic search
-        semantic_results = super().search(query, top_k=len(self.documents), **kwargs)
-        semantic_scores = {r.document.id: r.score for r in semantic_results}
-
-        # Keyword search
-        tokenized_query = self._tokenize(query)
-        bm25_scores = self._bm25.get_scores(tokenized_query)
-
-        # Normalize BM25 scores
-        max_bm25 = max(bm25_scores) if max(bm25_scores) > 0 else 1
-        bm25_scores = bm25_scores / max_bm25
-
-        doc_ids = list(self.documents.keys())
-        keyword_scores = {doc_ids[i]: bm25_scores[i] for i in range(len(doc_ids))}
-
-        # Combine scores
-        combined_scores = {}
-        for doc_id in self.documents:
-            semantic = semantic_scores.get(doc_id, 0)
-            keyword = keyword_scores.get(doc_id, 0)
-            combined_scores[doc_id] = (
-                self.semantic_weight * semantic +
-                self.keyword_weight * keyword
-            )
-
-        # Sort and return
-        sorted_docs = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)
-
-        results = []
-        for rank, (doc_id, score) in enumerate(sorted_docs[:top_k], 1):
-            results.append(SearchResult(
-                document=self.documents[doc_id],
-                score=score,
-                rank=rank
-            ))
-
-        return results
+    fused: Dict[str, float] = {}
+    for ranking in (keyword_ranking, vector_ranking):
+        for position, chunk_id in enumerate(ranking):
+            fused[chunk_id] = fused.get(chunk_id, 0.0) + 1.0 / (k + position + 1)
+    return sorted(fused, key=fused.get, reverse=True)[:top_k]
 ```
 
-### Query Expansion
+Building the BM25 index on every call keeps the example short. In anything beyond a notebook, build it once alongside the vector matrix. The constant `k = 60` is the value commonly used for reciprocal rank fusion. Tune it against your hit-rate numbers if you like, but it rarely changes much.
 
-Expand queries for better recall:
+## When to stop using this
 
-```python
-class QueryExpander:
-    """Expand queries using LLM."""
+This prototype has clear limits, and I'd move off it when any of these become true:
 
-    def __init__(self, chat_deployment: str = "gpt-35-turbo"):
-        self.chat_deployment = chat_deployment
+| Signal | What it means |
+|---|---|
+| More than a few hundred thousand chunks | Brute force is still correct, but memory and latency start to hurt. Look at an approximate nearest neighbour library such as [FAISS](https://github.com/facebookresearch/faiss) or a managed vector store. |
+| Content changes hourly | Re-embedding and reloading a file is now a pipeline problem. You need incremental updates and deletes. |
+| Multiple app instances | Each process holding its own copy of the matrix gets wasteful and drifts out of sync. |
+| Security trimming per user | Metadata filters in Python are not access control. You need the index to enforce it. |
 
-    def expand_query(self, query: str, n_expansions: int = 3) -> List[str]:
-        """Generate query variations."""
-        prompt = f"""Generate {n_expansions} alternative ways to search for:
-"{query}"
+On the Azure side, it's worth knowing what [Azure Cognitive Search's semantic search](https://learn.microsoft.com/azure/search/semantic-search-overview) is and isn't. It's in preview, and it re-ranks keyword results using Microsoft's own language models. It doesn't take your Azure OpenAI vectors. That makes it a strong option if you already run Cognitive Search and mostly want better ranking, with no embedding pipeline to maintain. It doesn't replace this prototype if you want to search your own vectors. For that, the options today are libraries like FAISS or dedicated vector databases such as Pinecone, Weaviate, Milvus and Qdrant.
 
-Return only the alternative queries, one per line."""
+## What I'd do this week
 
-        response = openai.ChatCompletion.create(
-            engine=self.chat_deployment,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.7
-        )
-
-        expansions = response.choices[0].message.content.strip().split('\n')
-        return [query] + [e.strip() for e in expansions if e.strip()]
-
-class ExpandedSearchEngine(SemanticSearchEngine):
-    """Search engine with query expansion."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.expander = QueryExpander()
-
-    def search(
-        self,
-        query: str,
-        top_k: int = 10,
-        expand: bool = True,
-        **kwargs
-    ) -> List[SearchResult]:
-        if not expand:
-            return super().search(query, top_k, **kwargs)
-
-        # Expand query
-        queries = self.expander.expand_query(query)
-
-        # Search with all queries
-        all_results = {}
-        for q in queries:
-            results = super().search(q, top_k=top_k * 2, **kwargs)
-            for r in results:
-                if r.document.id not in all_results:
-                    all_results[r.document.id] = r
-                else:
-                    # Keep higher score
-                    if r.score > all_results[r.document.id].score:
-                        all_results[r.document.id] = r
-
-        # Re-rank by score
-        sorted_results = sorted(all_results.values(), key=lambda x: x.score, reverse=True)
-
-        # Re-assign ranks
-        return [
-            SearchResult(r.document, r.score, rank)
-            for rank, r in enumerate(sorted_results[:top_k], 1)
-        ]
-```
-
-## Performance Optimization
-
-```python
-import faiss
-import numpy as np
-
-class FAISSSearchEngine:
-    """High-performance search using FAISS."""
-
-    def __init__(self, embedding_dim: int = 1536):
-        self.embedding_dim = embedding_dim
-        self.index = faiss.IndexFlatIP(embedding_dim)  # Inner product for cosine sim
-        self.documents: List[Document] = []
-
-    def _normalize(self, embeddings: np.ndarray) -> np.ndarray:
-        """Normalize vectors for cosine similarity with dot product."""
-        norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
-        return embeddings / norms
-
-    def add_documents(self, docs: List[Document]):
-        """Add documents to FAISS index."""
-        embeddings = []
-        for doc in docs:
-            if doc.embedding is None:
-                doc.embedding = get_embedding(doc.content)
-            embeddings.append(doc.embedding)
-            self.documents.append(doc)
-
-        embeddings = np.array(embeddings, dtype=np.float32)
-        embeddings = self._normalize(embeddings)
-        self.index.add(embeddings)
-
-    def search(self, query: str, top_k: int = 10) -> List[SearchResult]:
-        """Search using FAISS."""
-        query_emb = np.array([get_embedding(query)], dtype=np.float32)
-        query_emb = self._normalize(query_emb)
-
-        scores, indices = self.index.search(query_emb, top_k)
-
-        results = []
-        for rank, (score, idx) in enumerate(zip(scores[0], indices[0]), 1):
-            if idx >= 0:  # FAISS returns -1 for empty slots
-                results.append(SearchResult(
-                    document=self.documents[idx],
-                    score=float(score),
-                    rank=rank
-                ))
-
-        return results
-```
-
-## Best Practices
-
-1. **Pre-compute embeddings**: Don't embed at query time for documents
-2. **Use appropriate chunk sizes**: Split long documents
-3. **Implement hybrid search**: Combine semantic and keyword
-4. **Cache embeddings**: Both queries and documents
-5. **Use vector databases**: For large-scale deployments
-6. **Monitor search quality**: Track relevance metrics
-
-## Resources
-
-- [FAISS Library](https://github.com/facebookresearch/faiss)
-- [Azure Cognitive Search](https://learn.microsoft.com/azure/search/vector-search-overview)
-- [Embedding Best Practices](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings)
+Pick one corpus that users complain about. Chunk it, embed it with whichever model your Azure OpenAI resource offers, and keep the source text and the model name next to the vectors. Write 30 labelled queries and compare hit rate@5 against your current search. Add BM25 fusion if your content is full of identifiers. If the numbers justify it, then choose a vector store, knowing exactly what you need from it. Microsoft's [models page](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) lists the embedding models, their dimensions and regions, and the [embeddings concept page](https://learn.microsoft.com/azure/ai-services/openai/concepts/understand-embeddings) explains how to compare the vectors.

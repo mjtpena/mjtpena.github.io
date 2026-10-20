@@ -1,409 +1,185 @@
 ---
-title: "Azure OpenAI Best Practices: Production-Ready AI Applications"
-description: "Azure OpenAI provides enterprise capabilities, but you need to build robust infrastructure around it for production use."
+title: "Azure OpenAI in Production, January 2025: Let the Platform Do the Work"
+description: "Deployment types, keyless auth, SDK retries, APIM token limits and Global Batch: what to build on Azure OpenAI in January 2025, and what to stop building."
 author: Michael John Peña
 draft: false
 date: 2025-01-25
 tags:
+  - Azure OpenAI
   - Azure
-  - OpenAI
-  - AI
   - Best Practices
-  - Enterprise
+  - API Management
+  - Production
 ---
 
-## Deployment Architecture
+A lot of Azure OpenAI production code written in 2023 is now solving problems the platform already solves: hand-rolled multi-region routers, client-side token buckets, and response caches keyed on the whole prompt. Through 2024 Microsoft shipped Global and Data Zone deployment types, hourly provisioned pricing, Global Batch, prompt caching and a set of API Management policies built for LLM traffic. If your production checklist hasn't changed since GPT-4 launched, you are carrying code you don't need and probably missing controls you do.
 
-### Multi-Region Setup
+This is the checklist I'd use for a new Azure OpenAI workload as of late January 2025, in the order the decisions should be made.
 
-```python
-from openai import AzureOpenAI
-from tenacity import retry, stop_after_attempt, wait_exponential
+## Start with the deployment type, not the code
 
-class AzureOpenAIRouter:
-    """Route requests across multiple Azure OpenAI deployments."""
+The single most important production decision is now the deployment type, because it decides your quota, your latency behaviour and where your prompts are processed. The [deployment types guide](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/deployment-types) lists eight options, and they reduce to two questions: where may data be processed, and how steady is your traffic?
 
-    def __init__(self, deployments: list[dict]):
-        self.clients = []
-        for deployment in deployments:
-            client = AzureOpenAI(
-                api_key=deployment["api_key"],
-                api_version="2024-06-01",
-                azure_endpoint=deployment["endpoint"]
-            )
-            self.clients.append({
-                "client": client,
-                "deployment": deployment["deployment_name"],
-                "region": deployment["region"],
-                "priority": deployment.get("priority", 1)
-            })
-        # Sort by priority
-        self.clients.sort(key=lambda x: x["priority"])
+| Deployment type | Data processing | Billing | When I'd pick it |
+|---|---|---|---|
+| Global Standard | Any region where the model is deployed | Per token | Default for most workloads with no processing-location constraint |
+| Data Zone Standard | Within the US or EU data zone | Per token | EU or US residency requirements with spiky traffic |
+| Standard | The resource's Azure geography | Per token | Strict in-country processing, accepting lower quota |
+| Global / Data Zone / regional Provisioned | Same split as above | Hourly per PTU, with optional Azure Reservations | Steady, latency-sensitive traffic |
+| Global Batch / Data Zone Batch | Global or data zone | Per token, 50% below the matching Standard type | Anything that can wait up to 24 hours |
 
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=1, max=10))
-    async def complete(self, messages: list, **kwargs) -> dict:
-        """Route completion request with automatic failover."""
+A few details matter more than the table suggests:
 
-        last_error = None
-        for client_info in self.clients:
-            try:
-                response = await client_info["client"].chat.completions.create(
-                    model=client_info["deployment"],
-                    messages=messages,
-                    **kwargs
-                )
-                return {
-                    "response": response,
-                    "region": client_info["region"]
-                }
-            except Exception as e:
-                last_error = e
-                print(f"Failed on {client_info['region']}: {e}")
-                continue
+- **Data at rest stays put.** For Global and Data Zone types, only inference processing moves. Uploaded files and stored data stay in the resource's geography. Security reviews care about that distinction, so put it in writing early, then enforce it: the deployment types guide includes an Azure Policy definition that denies deployments by SKU name (its example blocks `GlobalStandard`).
+- **Data Zone is US and EU only.** Data Zone Standard arrived in October 2024 and Data Zone Provisioned in December 2024. For an Australian organisation that needs in-country processing, the options are still regional Standard or regional Provisioned, so check model availability in Australia East before promising a model version.
+- **Standard has a soft ceiling.** The quotas and limits page defines usage tiers: above 12 billion tokens a month for `gpt-4o` (counted across your whole tenant), Standard, Data Zone Standard and Global Standard traffic may see more latency variability. That is the signal to look at provisioned throughput, not a hard limit.
+- **Provisioned pricing changed in December 2024.** Global, Data Zone and regional provisioned now have different hourly prices, and each has its own Azure Reservation that is not interchangeable with the others. Buy the reservation that matches the deployment type, or the deployment silently bills at the hourly rate. I covered the PTU sizing basics in [an earlier post](/blog/2024-02-11-azure-openai-ptu/).
 
-        raise last_error
+My rule of thumb: start on Global Standard unless a compliance requirement says otherwise, measure for a month, and only then decide whether a baseline of provisioned capacity is worth it.
 
-# Configure multi-region
-router = AzureOpenAIRouter([
-    {
-        "endpoint": "https://aoai-eastus.openai.azure.com/",
-        "api_key": os.environ["AZURE_OPENAI_KEY_EASTUS"],
-        "deployment_name": "gpt-4o",
-        "region": "eastus",
-        "priority": 1
-    },
-    {
-        "endpoint": "https://aoai-westus.openai.azure.com/",
-        "api_key": os.environ["AZURE_OPENAI_KEY_WESTUS"],
-        "deployment_name": "gpt-4o",
-        "region": "westus",
-        "priority": 2
-    }
-])
-```
+## Make the client boring
 
-### Managed Identity Authentication
+Once the deployment exists, the client code should be short. Two changes do most of the work: authenticate with Microsoft Entra ID instead of keys, and let the SDK handle retries.
 
 ```python
+import os
+
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from openai import AzureOpenAI
 
-# Use managed identity instead of API keys
-credential = DefaultAzureCredential()
 token_provider = get_bearer_token_provider(
-    credential,
-    "https://cognitiveservices.azure.com/.default"
+    DefaultAzureCredential(),
+    "https://cognitiveservices.azure.com/.default",
 )
 
 client = AzureOpenAI(
-    api_version="2024-06-01",
-    azure_endpoint="https://my-aoai.openai.azure.com/",
-    azure_ad_token_provider=token_provider
+    # e.g. https://<your-resource-name>.openai.azure.com/
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+    azure_ad_token_provider=token_provider,
+    api_version="2024-10-21",  # latest GA data plane version as of January 2025
+    max_retries=3,
+    timeout=30.0,
 )
 ```
 
-## Rate Limiting and Throttling
+The identity calling this needs the **Cognitive Services OpenAI User** role on the resource and nothing more. Once every caller uses Entra ID, disable local (key) authentication on the resource so a leaked key is worthless.
 
-```python
-from asyncio import Semaphore
-from datetime import datetime, timedelta
-import asyncio
+Pin the GA API version, `2024-10-21`, unless you need a preview-only feature. Preview versions ship roughly monthly and are retired on a schedule; GA versions give you a stable contract.
 
-class RateLimiter:
-    """Manage Azure OpenAI rate limits."""
+On retries: the `openai` Python library (1.60 at the time of writing) already retries 408, 409, 429 and 5xx responses, twice by default, with exponential backoff and jitter. On a 429 it honours the `retry-after-ms` and `retry-after` headers Azure OpenAI returns, as long as the requested wait is 60 seconds or less. Another retry decorator on top multiplies attempts and hides capacity problems. Raise `max_retries` slightly, set an explicit timeout (the default is 10 minutes, far too long for an interactive app), and stop there.
 
-    def __init__(self, tpm_limit: int, rpm_limit: int):
-        self.tpm_limit = tpm_limit  # Tokens per minute
-        self.rpm_limit = rpm_limit  # Requests per minute
-        self.request_semaphore = Semaphore(rpm_limit)
-        self.token_count = 0
-        self.request_count = 0
-        self.window_start = datetime.utcnow()
+What the client should *not* do is guess your rate limit. A per-process token bucket only knows about its own traffic; with three replicas it is wrong by a factor of three. Rate limiting belongs at a shared choke point, which is the next section.
 
-    async def acquire(self, estimated_tokens: int):
-        """Acquire permission to make a request."""
-        async with self.request_semaphore:
-            # Check if we need to reset the window
-            now = datetime.utcnow()
-            if (now - self.window_start) > timedelta(minutes=1):
-                self.token_count = 0
-                self.request_count = 0
-                self.window_start = now
+## Put a gateway in front once you have more than one consumer
 
-            # Check token limit
-            if self.token_count + estimated_tokens > self.tpm_limit:
-                wait_time = 60 - (now - self.window_start).seconds
-                print(f"Token limit reached, waiting {wait_time}s")
-                await asyncio.sleep(wait_time)
-                self.token_count = 0
-                self.request_count = 0
-                self.window_start = datetime.utcnow()
+For a single app talking to a single deployment, a gateway is overhead. As soon as several teams or apps share capacity, put Azure API Management in front. Microsoft's business continuity guidance for Azure OpenAI recommended a GenAI gateway such as APIM at the time, and the [GenAI gateway capabilities](https://learn.microsoft.com/en-us/azure/api-management/genai-gateway-capabilities) cover what the client-side code used to do:
 
-            # Check request limit
-            if self.request_count >= self.rpm_limit:
-                wait_time = 60 - (now - self.window_start).seconds
-                print(f"Request limit reached, waiting {wait_time}s")
-                await asyncio.sleep(wait_time)
-                self.token_count = 0
-                self.request_count = 0
-                self.window_start = datetime.utcnow()
+- **`azure-openai-token-limit`** enforces tokens per minute per key (subscription, app ID, IP, whatever you choose) and returns 429 with `Retry-After` when exceeded.
+- **`azure-openai-emit-token-metric`** sends prompt, completion and total token counts to Application Insights with dimensions you choose, which gives you chargeback per team without parsing logs.
+- **Backend pools** load-balance across deployments with round-robin, weighted or priority routing, and the **circuit breaker** takes a backend out of rotation using the backend's own `Retry-After` value. Priority routing is how you spill from a PTU deployment to a Standard one. Both are configured on the backend resource (via a preview management API version at the time of writing) and the circuit breaker isn't available in the Consumption tier.
+- **Semantic caching** (`azure-openai-semantic-cache-lookup`) exists but is still in preview.
 
-            self.request_count += 1
+A minimal inbound policy that limits each subscription and tags token metrics with it looks like this:
 
-    def record_usage(self, tokens_used: int):
-        """Record actual token usage."""
-        self.token_count += tokens_used
-
-# Usage
-rate_limiter = RateLimiter(tpm_limit=80000, rpm_limit=480)
-
-async def make_request(messages, **kwargs):
-    estimated_tokens = estimate_tokens(messages)
-    await rate_limiter.acquire(estimated_tokens)
-
-    response = await client.chat.completions.create(
-        model="gpt-4o",
-        messages=messages,
-        **kwargs
-    )
-
-    rate_limiter.record_usage(response.usage.total_tokens)
-    return response
+```xml
+<policies>
+    <inbound>
+        <base />
+        <authentication-managed-identity resource="https://cognitiveservices.azure.com" />
+        <set-backend-service backend-id="aoai-pool" />
+        <azure-openai-token-limit
+            counter-key="@(context.Subscription.Id)"
+            tokens-per-minute="20000"
+            estimate-prompt-tokens="false"
+            remaining-tokens-header-name="x-remaining-tokens" />
+        <azure-openai-emit-token-metric namespace="aoai">
+            <dimension name="Subscription ID" />
+            <dimension name="API ID" />
+        </azure-openai-emit-token-metric>
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
 ```
 
-## Content Filtering and Safety
+APIM authenticates to Azure OpenAI with its own managed identity here, so application teams never hold an Azure OpenAI credential at all. `aoai-pool` is a backend pool you define separately.
+
+When not to bother: a single internal app with one deployment and no chargeback requirement. A gateway adds a hop, a cost line and another thing to patch. Add it when the second consumer arrives, not before.
+
+## Handle content filtering as a normal outcome
+
+Content filtering is on by default, and since mid-2024 new deployments get the `DefaultV2` policy, which adds Prompt Shields for jailbreak attempts and protected material detection. There are two ways a request gets filtered, and code needs to treat them differently, as the [content filtering documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/content-filter) describes: a filtered *prompt* fails with HTTP 400 and error code `content_filter`, while a filtered *completion* returns 200 with `finish_reason` set to `content_filter` and partial or empty content. With `stream=True`, the usual case for chat apps, a filtered completion arrives as a chunk whose `finish_reason` is `content_filter`, and the default streaming mode buffers output and releases it in filtered chunks rather than token by token. Check `finish_reason` on every chunk.
 
 ```python
-class SafetyWrapper:
-    """Wrapper for Azure OpenAI with safety controls."""
+import logging
 
-    def __init__(self, client: AzureOpenAI):
-        self.client = client
+from openai import AzureOpenAI, BadRequestError
 
-    async def safe_complete(self, messages: list, **kwargs) -> dict:
-        """Make request with safety handling."""
+log = logging.getLogger("aoai")
 
-        try:
-            response = await self.client.chat.completions.create(
-                model="gpt-4o",
-                messages=messages,
-                **kwargs
-            )
 
-            # Check content filter results
-            if hasattr(response, 'choices') and response.choices:
-                choice = response.choices[0]
-                if hasattr(choice, 'content_filter_results'):
-                    self._handle_content_filter(choice.content_filter_results)
-
-            return {"success": True, "response": response}
-
-        except Exception as e:
-            # Handle content filter blocks
-            if "content_filter" in str(e).lower():
-                return {
-                    "success": False,
-                    "error": "content_filtered",
-                    "message": "Response blocked by content filter"
-                }
-            raise
-
-    def _handle_content_filter(self, filter_results):
-        """Log content filter results."""
-        categories = ["hate", "self_harm", "sexual", "violence"]
-        for category in categories:
-            if hasattr(filter_results, category):
-                result = getattr(filter_results, category)
-                if result.filtered:
-                    print(f"Content filtered: {category} - {result.severity}")
-```
-
-## Caching for Cost Optimization
-
-```python
-import hashlib
-import json
-from azure.cosmos import CosmosClient
-
-class ResponseCache:
-    """Cache Azure OpenAI responses for cost savings."""
-
-    def __init__(self, cosmos_client: CosmosClient, database: str, container: str):
-        self.container = cosmos_client.get_database_client(database).get_container_client(container)
-        self.ttl_hours = 24
-
-    def _cache_key(self, messages: list, model: str, temperature: float) -> str:
-        """Generate cache key from request parameters."""
-        content = json.dumps({
-            "messages": messages,
-            "model": model,
-            "temperature": temperature
-        }, sort_keys=True)
-        return hashlib.sha256(content.encode()).hexdigest()
-
-    async def get(self, messages: list, model: str, temperature: float = 0) -> dict | None:
-        """Get cached response if available."""
-        # Only cache deterministic requests
-        if temperature > 0:
+def ask(client: AzureOpenAI, deployment: str, messages: list[dict]) -> str | None:
+    """Non-streaming call; see the note above for stream=True."""
+    try:
+        response = client.chat.completions.create(model=deployment, messages=messages)
+    except BadRequestError as e:
+        if e.code == "content_filter":
+            detail = (e.body or {}).get("innererror", {}).get("content_filter_result")
+            log.warning("prompt filtered: %s", detail)
             return None
+        raise
 
-        key = self._cache_key(messages, model, temperature)
-        try:
-            item = self.container.read_item(item=key, partition_key=key)
-            return item.get("response")
-        except:
-            return None
+    choice = response.choices[0]
+    usage = response.usage
+    if usage:
+        details = usage.prompt_tokens_details
+        cached = details.cached_tokens if details else None
+        log.info(
+            "deployment=%s prompt=%s completion=%s cached=%s",
+            deployment, usage.prompt_tokens, usage.completion_tokens, cached,
+        )
 
-    async def set(self, messages: list, model: str, temperature: float, response: dict):
-        """Cache a response."""
-        if temperature > 0:
-            return
-
-        key = self._cache_key(messages, model, temperature)
-        self.container.upsert_item({
-            "id": key,
-            "partitionKey": key,
-            "response": response,
-            "ttl": self.ttl_hours * 3600
-        })
-
-# Usage
-cache = ResponseCache(cosmos_client, "ai_cache", "responses")
-
-async def cached_complete(messages, model="gpt-4o", temperature=0, **kwargs):
-    # Check cache
-    cached = await cache.get(messages, model, temperature)
-    if cached:
-        return cached
-
-    # Make request
-    response = await client.chat.completions.create(
-        model=model,
-        messages=messages,
-        temperature=temperature,
-        **kwargs
-    )
-
-    # Cache response
-    await cache.set(messages, model, temperature, response.model_dump())
-
-    return response
+    if choice.finish_reason == "content_filter":
+        results = (choice.model_extra or {}).get("content_filter_results")
+        log.warning("completion filtered: %s", results)
+        return None
+    return choice.message.content
 ```
 
-## Monitoring and Observability
+Azure-specific fields such as `content_filter_results` aren't part of the OpenAI schema, so the SDK keeps them in `model_extra` as plain dictionaries rather than typed attributes. Log the category and severity, return a clear message to the user, and never retry a filtered request unchanged; it will be filtered again and you pay for it.
 
-```python
-from opentelemetry import trace
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
-import time
+## Spend less without writing a cache
 
-# Setup tracing
-trace.set_tracer_provider(TracerProvider())
-tracer = trace.get_tracer(__name__)
-exporter = AzureMonitorTraceExporter(connection_string=os.environ["APPINSIGHTS_CONNECTION_STRING"])
-trace.get_tracer_provider().add_span_processor(BatchSpanProcessor(exporter))
+Two 2024 features cut cost with almost no code.
 
-class MonitoredClient:
-    """Azure OpenAI client with observability."""
+Prompt caching is on by default for `gpt-4o` (2024-08-06 and 2024-11-20), `gpt-4o-mini` and the o1 family. When a prompt of at least 1,024 tokens opens identically to a recent request, the cached input tokens are billed at a discount on Standard deployment types and at up to a 100% discount on Provisioned ones, according to the [prompt caching guide](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/prompt-caching). That second point belongs in the PTU decision above: long, stable system prompts stretch each PTU further. Caches usually clear after 5 to 10 minutes of inactivity. The practical change is to put static content (system prompt, tool definitions, few-shot examples) first and per-request content last. One catch for the code above: as of January 2025 only the o1 models return `cached_tokens` (from API version `2024-10-01-preview`), so on `gpt-4o` you'll see the discount on the invoice, not in the response. Log it anyway and treat `None` as unknown, not zero.
 
-    def __init__(self, client: AzureOpenAI):
-        self.client = client
+Global Batch is GA and costs 50% less than Global Standard, with a 24-hour target turnaround and its own enqueued-token quota, so it doesn't eat into your online capacity. Nightly classification, document enrichment and evaluation runs belong there.
 
-    async def complete(self, messages: list, **kwargs) -> dict:
-        with tracer.start_as_current_span("azure_openai_completion") as span:
-            start_time = time.time()
+I'd still avoid a home-grown exact-match response cache for chat. Hit rates on free-text conversation are low, cached answers go stale when your grounding data changes, and you now own a data store full of user prompts. If you genuinely have repeated identical requests, cache at the application layer where you know the data's lifetime.
 
-            span.set_attribute("model", kwargs.get("model", "gpt-4o"))
-            span.set_attribute("message_count", len(messages))
+## Observe tokens, not just requests
 
-            try:
-                response = await self.client.chat.completions.create(
-                    messages=messages,
-                    **kwargs
-                )
+Platform metrics are collected automatically: **Azure OpenAI Requests**, **Processed Prompt Tokens**, **Generated Completion Tokens**, and for provisioned deployments **Provisioned-managed Utilization V2**, all splittable by deployment. Request logs are not: they aren't collected until you create a diagnostic setting, as [Monitor Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/monitor-openai) explains, so add one when you create the resource, not after the first incident. Add per-request logging of deployment, token counts and finish reason in the app, and token metrics by consumer at the gateway.
 
-                # Record metrics
-                duration = time.time() - start_time
-                span.set_attribute("duration_ms", duration * 1000)
-                span.set_attribute("prompt_tokens", response.usage.prompt_tokens)
-                span.set_attribute("completion_tokens", response.usage.completion_tokens)
-                span.set_attribute("total_tokens", response.usage.total_tokens)
+The three alerts I'd set first: sustained 429 rate above a few percent, Provisioned-managed Utilization V2 above 90%, and a week-on-week jump in tokens per request, which usually means someone changed a prompt or a retrieval step started returning more context. Don't alert on every 429, though. A PTU deployment returns 429 once utilisation passes 100%, and if APIM spills that traffic to a Standard deployment, those 429s are the design working. Alert on 429s that reach the client instead.
 
-                return response
+## The short version
 
-            except Exception as e:
-                span.set_attribute("error", str(e))
-                span.record_exception(e)
-                raise
-```
+If I were reviewing an Azure OpenAI design today, these are the questions I'd ask:
 
-## Cost Management
+1. Is the deployment type chosen from data processing requirements and traffic shape, rather than defaulting to regional Standard?
+2. Is every caller on Entra ID with key authentication disabled?
+3. Is the client pinned to API version `2024-10-21`, with the SDK's retries and an explicit timeout, and no second retry layer?
+4. With more than one consumer, are rate limits and token metrics enforced in APIM rather than in each app?
+5. Does the code handle both kinds of content filter outcome without retrying?
+6. Is anything that can wait running on Global Batch, and are prompts ordered to benefit from prompt caching?
 
-```python
-class CostTracker:
-    """Track Azure OpenAI costs."""
-
-    # Pricing per 1K tokens (example - check current pricing)
-    PRICING = {
-        "gpt-4o": {"input": 0.005, "output": 0.015},
-        "gpt-4o-mini": {"input": 0.00015, "output": 0.0006},
-        "text-embedding-3-large": {"input": 0.00013, "output": 0}
-    }
-
-    def __init__(self):
-        self.usage = {}
-
-    def record(self, model: str, prompt_tokens: int, completion_tokens: int):
-        """Record usage for cost tracking."""
-        if model not in self.usage:
-            self.usage[model] = {"prompt_tokens": 0, "completion_tokens": 0}
-
-        self.usage[model]["prompt_tokens"] += prompt_tokens
-        self.usage[model]["completion_tokens"] += completion_tokens
-
-    def get_cost(self) -> dict:
-        """Calculate costs from usage."""
-        costs = {}
-        total = 0
-
-        for model, tokens in self.usage.items():
-            if model in self.PRICING:
-                pricing = self.PRICING[model]
-                input_cost = (tokens["prompt_tokens"] / 1000) * pricing["input"]
-                output_cost = (tokens["completion_tokens"] / 1000) * pricing["output"]
-                model_cost = input_cost + output_cost
-                costs[model] = {
-                    "input_cost": input_cost,
-                    "output_cost": output_cost,
-                    "total": model_cost
-                }
-                total += model_cost
-
-        costs["total"] = total
-        return costs
-
-# Usage
-cost_tracker = CostTracker()
-
-response = await client.chat.completions.create(...)
-cost_tracker.record(
-    model="gpt-4o",
-    prompt_tokens=response.usage.prompt_tokens,
-    completion_tokens=response.usage.completion_tokens
-)
-
-print(f"Current costs: ${cost_tracker.get_cost()['total']:.4f}")
-```
-
-## Best Practices Summary
-
-1. **Multi-region deployment**: Ensure availability and handle regional outages
-2. **Managed identity**: Avoid API keys in production
-3. **Rate limiting**: Implement client-side limits to avoid throttling
-4. **Caching**: Cache deterministic requests to reduce costs
-5. **Monitoring**: Track latency, tokens, and errors
-6. **Content filtering**: Handle filtered responses gracefully
-7. **Cost tracking**: Monitor and budget for AI costs
-
-Azure OpenAI provides enterprise capabilities, but you need to build robust infrastructure around it for production use.
+Most of the "production-ready" code that used to fill posts like this is now configuration. If you can only fix one item this sprint, make it the second: moving every caller to Entra ID and disabling key authentication closes the one gap you can't repair after the fact. Deployment types, gateways and batch jobs can all change later. For quota mechanics in more depth, see [Azure OpenAI quotas](/blog/2023-08-22-azure-openai-quotas/), and for the late-2024 model and feature releases that led here, see the [November 2024 updates](/blog/2024-11-01-azure-openai-november-updates/).

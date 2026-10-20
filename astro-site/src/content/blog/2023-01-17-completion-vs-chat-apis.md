@@ -1,451 +1,157 @@
 ---
-title: "Completion vs Chat APIs in Azure OpenAI: Choosing the Right Approach"
+title: "Completions Now, Chat Later: Keeping Azure OpenAI Code Portable"
+description: "Azure OpenAI is GA with a Completions API only, and ChatGPT is coming soon. How to decide what needs chat and keep your prompt code ready for the change."
 author: Michael John Peña
 draft: false
 date: 2023-01-17
 tags:
-  - Azure
+  - Azure OpenAI
   - OpenAI
-  - API
   - Architecture
-  - AI
+  - Python
+  - LLM
 ---
 
-## API Comparison
+Azure OpenAI Service went generally available yesterday, and the same announcement said ChatGPT is coming to the service "soon", with no date. That leaves teams with a real design question this week: build on the Completions API that exists, or wait for a chat-style API that doesn't. My answer is to build now, but build so the decision about *how* you talk to the model sits in one small module rather than in every feature.
 
-### Completion API
+## What exists on 17 January 2023
 
-The original API for text generation:
+Microsoft's [GA announcement](https://azure.microsoft.com/en-us/blog/general-availability-of-azure-openai-service-expands-access-to-large-advanced-ai-models-with-added-enterprise-benefits/) covers GPT-3.5 and Codex, with DALL-E 2 still invite-only, and access still gated by an application under the [Limited Access policy](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/limited-access). For text generation, the API surface is the completions endpoint (alongside embeddings and fine-tuning), on the GA `2022-12-01` API version. You send one string, `prompt`, to a deployment and get back the text the model predicts should follow.
+
+The models you'll deploy are the GPT-3 family: `text-davinci-002` is the dependable instruction-following model, and `text-davinci-003` is being added in East US and West Europe this month, according to the [Azure OpenAI What's new page](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/whats-new), so check what your resource's region can actually deploy. Both davinci models have a context window of 4,097 tokens shared between prompt and completion.
+
+What doesn't exist: a ChatGPT API on Azure or on OpenAI's own platform, a message list with roles, or a separate system instruction. The `openai` Python package is at 0.26.1 (released 13 January), and it exposes `openai.Completion`, `openai.Embedding` and friends. There is no chat class in it, because there is nothing to call.
+
+So "completion vs chat" isn't an API choice today. It's a product choice about interaction shape, and an engineering choice about how much of your code knows that the transport is a single prompt string.
+
+## Most workloads don't need chat
+
+The demand I hear is "a ChatGPT for our data". When you list what people actually want, most items are single-shot tasks: summarise this incident, classify this ticket, extract fields from this email, draft a reply for a human to edit. None of those benefits from a conversation, and several get worse with one.
+
+| Question | Single-shot completion | Conversational (multi-turn) |
+|---|---|---|
+| Who supplies context? | Your code, every call | Your code plus whatever the user said earlier |
+| Token cost per request | Roughly fixed | Grows with every turn, because history is resent |
+| Testability | Fixed input, comparable output | Depends on the path the user took |
+| Prompt injection exposure | Whatever untrusted text you pass in (emails, documents) | Every turn is a new chance to override instructions |
+| Fits | Extraction, classification, summarisation, drafting | Clarifying questions, exploratory Q&A, tutoring |
+
+Single-shot narrows the attack surface, but it doesn't remove it. An email you ask the model to summarise can carry its own instructions, so treat the output as untrusted too: validate extracted fields against a schema or allow-list before anything downstream acts on them.
+
+My rule of thumb: if the user's second message would usually be "no, try again", you don't need chat, you need a better single prompt and a regenerate button. Reach for multi-turn only when the user genuinely refines a request over several steps and the earlier steps change the answer.
+
+Conversation on the Completions API is also more expensive than it looks. With a 4,097-token window, a preamble of a few hundred tokens and a 500-token answer budget, you have room for a handful of exchanges before you must summarise or drop history. I walked through transcript formats, truncation and streaming in [ChatGPT-Style Chat on Azure OpenAI Without a Chat API](/blog/2023-01-05-chatgpt-integration-patterns/), and the instruction block that stands in for a system prompt in [No System Prompt Yet](/blog/2023-01-15-system-prompts-azure-openai/). This post is about the seam between your features and that machinery.
+
+## Separate the conversation from the prompt string
+
+The mistake I see most often is prompt strings built inline in feature code: an f-string with `"Human:"` and `"AI:"` labels in a Flask route, another variant in a Teams bot, a third in a batch job. Each has its own idea of turn labels, stop sequences and truncation. When the service adds a chat-shaped API, every one of them has to be found and rewritten.
+
+The fix is boring. Feature code works with structured data: instructions, and a list of turns with a speaker and text. One renderer turns that structure into whatever the current API wants. Today that's a completions prompt with stop sequences; if a chat API ships with a different request shape, you write a second renderer and switch deployments, and the features don't change.
+
+I'm deliberately not guessing what a future chat API will look like. Nobody outside Microsoft and OpenAI knows yet, and designing for an imagined request format is how you end up with an abstraction that fits nothing. Keeping the conversation as data is useful regardless, because it's also what you need for logging, truncation and evaluation.
+
+### A renderer for the Completions API
+
+This is complete and runs against `openai==0.26.1` with the `2022-12-01` API version. It keeps the conversation as dataclasses, renders it to a prompt in one place, trims old turns to fit a budget, and uses stop sequences so the model doesn't write the user's next line.
 
 ```python
+import os
+from dataclasses import dataclass, field
+from typing import List, Literal
+
 import openai
 
-# Completion API
-response = openai.Completion.create(
-    engine="text-davinci-003",
-    prompt="Translate the following to French: Hello, how are you?",
-    max_tokens=100,
-    temperature=0.7
-)
+openai.api_type = "azure"
+openai.api_base = "https://<your-resource-name>.openai.azure.com/"
+openai.api_version = "2022-12-01"
+openai.api_key = os.environ["AZURE_OPENAI_KEY"]
 
-print(response.choices[0].text)
-```
+DEPLOYMENT = "<your-davinci-deployment>"
+USER_LABEL = "User"
+ASSISTANT_LABEL = "Assistant"
 
-### Chat Completion API
-
-Message-based API with roles:
-
-```python
-import openai
-
-# Chat Completion API
-response = openai.ChatCompletion.create(
-    engine="gpt-35-turbo",
-    messages=[
-        {"role": "system", "content": "You are a translator."},
-        {"role": "user", "content": "Translate to French: Hello, how are you?"}
-    ],
-    max_tokens=100,
-    temperature=0.7
-)
-
-print(response.choices[0].message.content)
-```
-
-## Key Differences
-
-```python
-from dataclasses import dataclass
-from typing import List, Optional
-from enum import Enum
-
-class APIType(Enum):
-    COMPLETION = "completion"
-    CHAT = "chat"
 
 @dataclass
-class APIComparison:
-    """Comparison of Completion vs Chat APIs."""
+class Turn:
+    speaker: Literal["user", "assistant"]
+    text: str
 
-    feature: str
-    completion_api: str
-    chat_api: str
 
-COMPARISONS = [
-    APIComparison(
-        feature="Input Format",
-        completion_api="Single text prompt",
-        chat_api="Array of messages with roles"
-    ),
-    APIComparison(
-        feature="System Prompt",
-        completion_api="Must be included in prompt text",
-        chat_api="Dedicated system role"
-    ),
-    APIComparison(
-        feature="Conversation History",
-        completion_api="Manual management in prompt",
-        chat_api="Built-in message array"
-    ),
-    APIComparison(
-        feature="Models",
-        completion_api="text-davinci-003, etc.",
-        chat_api="gpt-35-turbo, gpt-4"
-    ),
-    APIComparison(
-        feature="Cost Efficiency",
-        completion_api="Higher (davinci pricing)",
-        chat_api="Lower (turbo pricing)"
-    ),
-    APIComparison(
-        feature="Best For",
-        completion_api="Text completion, single-turn",
-        chat_api="Conversations, instructions"
+@dataclass
+class Conversation:
+    instructions: str
+    turns: List[Turn] = field(default_factory=list)
+
+    def add(self, speaker: str, text: str) -> None:
+        if speaker not in ("user", "assistant"):
+            raise ValueError(f"speaker must be 'user' or 'assistant', not {speaker!r}")
+        self.turns.append(Turn(speaker, text.strip()))
+
+
+def render_completion_prompt(convo: Conversation, max_chars: int = 6000) -> str:
+    """Render structured turns into a single completions prompt.
+
+    Character budget is a rough proxy for tokens (about 4 characters per
+    token for English). Oldest turns are dropped first; instructions and
+    the newest turn always stay, and an oversized prompt raises ValueError.
+    """
+    lines = []
+    for turn in convo.turns:
+        label = USER_LABEL if turn.speaker == "user" else ASSISTANT_LABEL
+        lines.append(f"{label}: {turn.text}")
+
+    header = convo.instructions.strip() + "\n\n"
+    footer = f"\n{ASSISTANT_LABEL}:"
+    def size() -> int:
+        return len(header) + len("\n".join(lines)) + len(footer)
+
+    while len(lines) > 1 and size() > max_chars:
+        lines.pop(0)
+    if size() > max_chars:
+        raise ValueError("Instructions plus the latest turn exceed the prompt budget")
+    return header + "\n".join(lines) + footer
+
+
+def reply(convo: Conversation, max_tokens: int = 400) -> str:
+    response = openai.Completion.create(
+        engine=DEPLOYMENT,
+        prompt=render_completion_prompt(convo),
+        max_tokens=max_tokens,
+        temperature=0.3,
+        stop=[f"\n{USER_LABEL}:", f"\n{ASSISTANT_LABEL}:"],
     )
-]
+    text = response["choices"][0]["text"].strip()
+    convo.add("assistant", text)
+    return text
 
-def print_comparison_table():
-    """Print comparison as table."""
-    print(f"{'Feature':<25} {'Completion API':<30} {'Chat API':<30}")
-    print("-" * 85)
-    for comp in COMPARISONS:
-        print(f"{comp.feature:<25} {comp.completion_api:<30} {comp.chat_api:<30}")
+
+if __name__ == "__main__":
+    convo = Conversation(
+        instructions=(
+            "You are an internal IT helpdesk assistant. Answer briefly. "
+            "If you are not sure, say so and suggest raising a ticket."
+        )
+    )
+    convo.add("user", "My laptop can't reach the VPN since this morning.")
+    print(reply(convo))
+    convo.add("user", "I already restarted it. What next?")
+    print(reply(convo))
 ```
 
-## Building a Unified Client
+Notice what the feature code at the bottom touches: `Conversation`, `add` and `reply`. It never sees a label, a stop sequence or a truncation rule. That's the whole point.
 
-Create an abstraction that works with both APIs:
+### Single-shot tasks use the same seam
 
-```python
-from abc import ABC, abstractmethod
-from typing import List, Dict, Union, Optional
-import openai
+A classification or extraction call is just a conversation with one user turn and no history. Routing it through the same renderer means one place to change, but it's fine for single-shot tasks to have their own small function too, as long as it lives in the same module and not in a controller. What matters is that prompt construction has one owner.
 
-@dataclass
-class Message:
-    """A chat message."""
-    role: str  # system, user, assistant
-    content: str
+## Where this abstraction is the wrong call
 
-@dataclass
-class CompletionResponse:
-    """Unified response format."""
-    content: str
-    tokens_used: int
-    model: str
-    finish_reason: str
+Don't build a provider-agnostic "LLM client" with interfaces, factories and plug-in model registries. With one API and one model family available, that's speculative architecture, and it tends to leak the Completions API's assumptions anyway (a `prompt: str` parameter on the base class is the usual giveaway). A plain module with a data structure and one render function is enough.
 
-class LLMClient(ABC):
-    """Abstract LLM client."""
+Don't force structure where there is no conversation. A batch job that summarises 50,000 documents doesn't need turns; it needs a tested prompt template, a token check and retry handling.
 
-    @abstractmethod
-    def generate(
-        self,
-        prompt: Union[str, List[Message]],
-        max_tokens: int = 500,
-        **kwargs
-    ) -> CompletionResponse:
-        pass
+And don't hold a project waiting for ChatGPT on Azure. "Soon" has no date attached, and the instruction-following davinci models already handle the single-shot work that makes up most enterprise backlogs.
 
-class CompletionClient(LLMClient):
-    """Client for Completion API."""
+## The decision
 
-    def __init__(self, deployment: str):
-        self.deployment = deployment
-
-    def generate(
-        self,
-        prompt: Union[str, List[Message]],
-        max_tokens: int = 500,
-        **kwargs
-    ) -> CompletionResponse:
-        # Convert messages to prompt if needed
-        if isinstance(prompt, list):
-            prompt = self._messages_to_prompt(prompt)
-
-        response = openai.Completion.create(
-            engine=self.deployment,
-            prompt=prompt,
-            max_tokens=max_tokens,
-            **kwargs
-        )
-
-        return CompletionResponse(
-            content=response.choices[0].text.strip(),
-            tokens_used=response.usage.total_tokens,
-            model=response.model,
-            finish_reason=response.choices[0].finish_reason
-        )
-
-    def _messages_to_prompt(self, messages: List[Message]) -> str:
-        """Convert chat messages to completion prompt."""
-        parts = []
-        for msg in messages:
-            if msg.role == "system":
-                parts.append(f"System: {msg.content}")
-            elif msg.role == "user":
-                parts.append(f"Human: {msg.content}")
-            elif msg.role == "assistant":
-                parts.append(f"Assistant: {msg.content}")
-        parts.append("Assistant:")
-        return "\n\n".join(parts)
-
-class ChatClient(LLMClient):
-    """Client for Chat Completion API."""
-
-    def __init__(self, deployment: str):
-        self.deployment = deployment
-
-    def generate(
-        self,
-        prompt: Union[str, List[Message]],
-        max_tokens: int = 500,
-        **kwargs
-    ) -> CompletionResponse:
-        # Convert string to messages if needed
-        if isinstance(prompt, str):
-            messages = [Message(role="user", content=prompt)]
-        else:
-            messages = prompt
-
-        response = openai.ChatCompletion.create(
-            engine=self.deployment,
-            messages=[{"role": m.role, "content": m.content} for m in messages],
-            max_tokens=max_tokens,
-            **kwargs
-        )
-
-        return CompletionResponse(
-            content=response.choices[0].message.content,
-            tokens_used=response.usage.total_tokens,
-            model=response.model,
-            finish_reason=response.choices[0].finish_reason
-        )
-
-class UnifiedClient:
-    """Unified client that can use either API."""
-
-    def __init__(
-        self,
-        completion_deployment: Optional[str] = None,
-        chat_deployment: Optional[str] = None,
-        default_api: APIType = APIType.CHAT
-    ):
-        self.completion_client = CompletionClient(completion_deployment) if completion_deployment else None
-        self.chat_client = ChatClient(chat_deployment) if chat_deployment else None
-        self.default_api = default_api
-
-    def generate(
-        self,
-        prompt: Union[str, List[Message]],
-        api_type: Optional[APIType] = None,
-        **kwargs
-    ) -> CompletionResponse:
-        """Generate using specified or default API."""
-        api = api_type or self.default_api
-
-        if api == APIType.COMPLETION:
-            if not self.completion_client:
-                raise ValueError("Completion deployment not configured")
-            return self.completion_client.generate(prompt, **kwargs)
-        else:
-            if not self.chat_client:
-                raise ValueError("Chat deployment not configured")
-            return self.chat_client.generate(prompt, **kwargs)
-
-# Usage
-client = UnifiedClient(
-    completion_deployment="text-davinci-003",
-    chat_deployment="gpt-35-turbo",
-    default_api=APIType.CHAT
-)
-
-# Use chat API (default)
-result = client.generate("What is Azure?")
-
-# Explicitly use completion API
-result = client.generate(
-    "Complete this sentence: Azure is",
-    api_type=APIType.COMPLETION
-)
-```
-
-## When to Use Each API
-
-```python
-class APISelector:
-    """Help select the appropriate API."""
-
-    USE_CASES = {
-        APIType.COMPLETION: [
-            "Text completion (finish a sentence/paragraph)",
-            "Single-turn text generation",
-            "Legacy applications using davinci",
-            "Fill-in-the-blank tasks",
-            "When you need fine-grained prompt control"
-        ],
-        APIType.CHAT: [
-            "Conversational applications",
-            "Multi-turn dialogues",
-            "Instruction-following tasks",
-            "When you need system prompts",
-            "Cost-sensitive applications (cheaper)",
-            "GPT-4 access (chat only)"
-        ]
-    }
-
-    RECOMMENDATIONS = {
-        "chatbot": APIType.CHAT,
-        "code_generation": APIType.CHAT,
-        "text_completion": APIType.COMPLETION,
-        "summarization": APIType.CHAT,
-        "translation": APIType.CHAT,
-        "qa": APIType.CHAT,
-        "creative_writing": APIType.CHAT,
-        "autocomplete": APIType.COMPLETION,
-        "classification": APIType.CHAT,
-        "extraction": APIType.CHAT
-    }
-
-    @classmethod
-    def recommend(cls, task: str) -> APIType:
-        """Recommend API for a task."""
-        task_lower = task.lower()
-
-        # Check direct matches
-        if task_lower in cls.RECOMMENDATIONS:
-            return cls.RECOMMENDATIONS[task_lower]
-
-        # Check keywords
-        if any(kw in task_lower for kw in ["chat", "conversation", "dialogue"]):
-            return APIType.CHAT
-
-        if any(kw in task_lower for kw in ["complete", "finish", "continue"]):
-            return APIType.COMPLETION
-
-        # Default to chat (more versatile and cheaper)
-        return APIType.CHAT
-
-    @classmethod
-    def explain_choice(cls, api_type: APIType) -> List[str]:
-        """Explain why to use this API."""
-        return cls.USE_CASES.get(api_type, [])
-
-# Usage
-api = APISelector.recommend("build a customer support chatbot")
-print(f"Recommended: {api.value}")
-print("Reasons:")
-for reason in APISelector.explain_choice(api):
-    print(f"  - {reason}")
-```
-
-## Migrating from Completion to Chat
-
-```python
-class MigrationHelper:
-    """Help migrate from Completion to Chat API."""
-
-    @staticmethod
-    def convert_prompt_to_messages(
-        prompt: str,
-        system_message: Optional[str] = None
-    ) -> List[Dict[str, str]]:
-        """Convert a completion prompt to chat messages."""
-        messages = []
-
-        # Add system message if provided
-        if system_message:
-            messages.append({
-                "role": "system",
-                "content": system_message
-            })
-
-        # Try to detect conversation structure
-        lines = prompt.strip().split('\n')
-
-        current_role = "user"
-        current_content = []
-
-        for line in lines:
-            line = line.strip()
-            if not line:
-                continue
-
-            # Detect role markers
-            if line.startswith(("Human:", "User:", "Q:")):
-                if current_content:
-                    messages.append({
-                        "role": current_role,
-                        "content": " ".join(current_content)
-                    })
-                current_role = "user"
-                current_content = [line.split(":", 1)[-1].strip()]
-
-            elif line.startswith(("Assistant:", "AI:", "A:")):
-                if current_content:
-                    messages.append({
-                        "role": current_role,
-                        "content": " ".join(current_content)
-                    })
-                current_role = "assistant"
-                current_content = [line.split(":", 1)[-1].strip()]
-
-            elif line.startswith("System:"):
-                # Move system content to beginning
-                system_content = line.split(":", 1)[-1].strip()
-                if messages and messages[0]["role"] == "system":
-                    messages[0]["content"] += " " + system_content
-                else:
-                    messages.insert(0, {"role": "system", "content": system_content})
-
-            else:
-                current_content.append(line)
-
-        # Add remaining content
-        if current_content:
-            messages.append({
-                "role": current_role,
-                "content": " ".join(current_content)
-            })
-
-        return messages
-
-    @staticmethod
-    def migrate_parameters(completion_params: dict) -> dict:
-        """Migrate Completion API parameters to Chat API."""
-        chat_params = {}
-
-        # Direct mappings
-        direct_mappings = [
-            "max_tokens", "temperature", "top_p",
-            "frequency_penalty", "presence_penalty", "stop"
-        ]
-
-        for param in direct_mappings:
-            if param in completion_params:
-                chat_params[param] = completion_params[param]
-
-        # Renamed parameters
-        if "engine" in completion_params:
-            # Might need to map model name
-            engine = completion_params["engine"]
-            if "davinci" in engine.lower():
-                chat_params["engine"] = "gpt-35-turbo"  # or appropriate chat model
-            else:
-                chat_params["engine"] = engine
-
-        # Handle prompt
-        if "prompt" in completion_params:
-            chat_params["messages"] = MigrationHelper.convert_prompt_to_messages(
-                completion_params["prompt"]
-            )
-
-        # Note: 'n', 'best_of', 'logprobs' work differently or aren't available
-
-        return chat_params
-
-# Example migration
-old_code = {
-    "engine": "text-davinci-003",
-    "prompt": """System: You are a helpful assistant.
-```
+Build on the Completions API now. Decide per feature whether it's really conversational, and default to single-shot when in doubt, because it's cheaper, easier to test and harder to hijack. For the features that are conversational, keep turns as data and render the prompt in one place. When a chat-style API does arrive on Azure OpenAI, you'll evaluate it against your own logged conversations and swap a renderer, instead of hunting for f-strings across three codebases.

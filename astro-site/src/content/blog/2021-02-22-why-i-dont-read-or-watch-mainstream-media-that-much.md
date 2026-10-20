@@ -10,7 +10,7 @@ images:
 tags:
   - Media
   - news
-  - reading
+  - Reading
   - social media
 ---
 

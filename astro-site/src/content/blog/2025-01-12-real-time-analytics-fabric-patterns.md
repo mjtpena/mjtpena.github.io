@@ -1,439 +1,214 @@
 ---
-title: "Real-Time Analytics in Fabric: Architecture Patterns and Implementation"
-description: "Real-time analytics in Fabric provides a powerful, integrated solution for streaming data. Start with simple patterns and evolve to more complex scenarios…"
+title: "Where Streaming Logic Belongs in Fabric: Eventstream, KQL or Spark"
+description: "A decision guide for placing filters, enrichment, aggregation and alerts across Eventstream, Eventhouse and Spark in Fabric Real-Time Intelligence."
 author: Michael John Peña
 draft: false
 date: 2025-01-12
 tags:
   - Microsoft Fabric
-  - Real-Time Analytics
-  - Streaming
+  - Real-Time Intelligence
+  - Eventstream
   - KQL
-  - Azure
+  - Streaming
+  - Architecture
 ---
 
-## Real-Time Intelligence Components
+Fabric gives you at least three places to put streaming logic: the Eventstream canvas, the Eventhouse (through KQL update policies and materialized views), and Spark Structured Streaming in a notebook. All three can filter, reshape and aggregate events, so most teams pick whichever one the first engineer was comfortable with. That choice decides your cost profile, how you replay bad data, and who can debug the pipeline when it breaks out of hours, so it deserves more thought than it usually gets.
 
-```
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   Sources   │────►│  Eventstream │────►│ KQL Database│
-│ Event Hubs  │     │  Transform   │     │  Storage    │
-│ Kafka       │     │  Route       │     │  Query      │
-│ IoT Hub     │     │  Enrich      │     │  Analyze    │
-└─────────────┘     └──────────────┘     └─────────────┘
-                                                │
-                    ┌──────────────────────────┴─────────┐
-                    ▼                                    ▼
-              ┌──────────┐                        ┌──────────┐
-              │ Lakehouse│                        │Real-Time │
-              │ Archive  │                        │Dashboard │
-              └──────────┘                        └──────────┘
-```
+With Real-Time Intelligence now generally available (Microsoft announced GA for Real-Time hub, the enhanced Eventstream, Eventhouse, Real-Time Dashboards and Activator at Ignite in November 2024; the [Real-Time Intelligence overview](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/overview) maps the pieces), this is a good moment to settle the question before patterns harden. This post is a placement guide, not a feature tour. If you want the tour, I covered the [Eventstream enhancements](/blog/2024-11-23-eventstream-enhancements/) and [Eventhouses](/blog/2024-06-02-eventhouses-fabric/) separately.
 
-## Pattern 1: Simple Event Processing
+## The default I start from
 
-For straightforward event ingestion and analysis:
+My rule of thumb: **land raw events in an Eventhouse first, and move logic upstream only when you have a specific reason.**
 
-```python
-# Create eventstream via Fabric REST API
-from azure.identity import DefaultAzureCredential
-import requests
+The reasoning is simple. Once raw events are in a KQL table, you can re-derive anything. If a parsing rule was wrong, you fix the function and backfill the affected time range from the raw table. If logic ran upstream in Eventstream and dropped or mangled events before they landed, those events are gone. Eventstream retains events for a configurable window (1 day by default, up to 90), which is a buffer, not a replayable history you'd want to depend on. Keeping raw data costs storage, which is cheap in an Eventhouse with a sensible retention policy. Losing raw data costs you an incident review.
 
-credential = DefaultAzureCredential()
-token = credential.get_token("https://api.fabric.microsoft.com/.default").token
-headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+That default pushes most transformation into KQL, which suits the people who usually own these pipelines: analysts and data engineers who already think in queries, not in Spark jobs.
 
-workspace_id = "your-workspace-id"
-base_url = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}"
+## What each layer is good at
 
-# Create eventstream item
-eventstream_payload = {
-    "displayName": "iot_telemetry",
-    "type": "Eventstream",
-    "description": "IoT telemetry ingestion from Event Hub"
-}
+| Concern | Eventstream operators | Eventhouse (KQL) | Spark Structured Streaming |
+|---|---|---|---|
+| Filtering and dropping fields | Good, cheap to configure | Good, via update policy | Good |
+| Routing to several destinations | Best fit | Not its job | Possible, more code |
+| Enrichment with reference data | Limited (Join is stream-to-stream) | Strong (`lookup`, joins to dimension tables) | Strong |
+| Windowed aggregation | Group by with tumbling, hopping, sliding, session windows | Materialized views, `bin()` at query time | Full control, watermarks |
+| Replay after a logic bug | Hard | Easy, raw table stays | Possible via checkpoints and Delta history |
+| Complex logic, ML scoring | No | Some (KQL ML functions, Python plugin) | Best fit |
+| Skills needed | Low-code canvas | KQL | PySpark, checkpoint management |
 
-response = requests.post(f"{base_url}/items", headers=headers, json=eventstream_payload)
-eventstream = response.json()
-print(f"Created Eventstream: {eventstream.get('id')}")
+### Eventstream: route and trim, don't compute
 
-# Note: Eventstream source (Event Hub) and destination (KQL Database) configuration
-# is done through the Fabric portal visual designer:
-# 1. Open the eventstream in Fabric
-# 2. Add Azure Event Hub as source (configure namespace, event hub, consumer group)
-# 3. Add KQL Database as destination (select database and table)
-# 4. Configure field mapping in the visual editor
-# 5. Publish the eventstream
-```
+The [Eventstream event processor](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/process-events-using-event-processor-editor) offers Filter, Manage fields, Aggregate, Group by, Expand, Union and Join. These are useful for two jobs: shaping events so they fit a destination, and splitting a single source into derived streams for different consumers.
 
-Query the data in KQL:
+The detail that matters most is how the Eventhouse destination ingests. The [Eventhouse destination](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/add-destination-kql-database) has two modes:
+
+- **Direct ingestion** lets the Eventhouse pull events from the default stream (or a derived stream) with no Eventstream operators in between.
+- **Event processing before ingestion** runs your operators first and then pushes the result into the table.
+
+Direct ingestion keeps the pipeline simple and leaves the raw shape intact. Processing before ingestion is what you need when you want operators applied on the way into that table, and it brings the Eventstream processor's capacity consumption with it. So every operator you add to the canvas has a cost on your Fabric capacity and a cost in lost replayability.
+
+I use Eventstream operators when:
+
+- A noisy source sends fields or event types nobody will ever query, and dropping them early saves meaningful storage.
+- The same feed needs to go to an Eventhouse, a lakehouse and Activator with different shapes.
+- A downstream system needs a pre-aggregated feed and you're comfortable that the raw copy lands somewhere else.
+
+I avoid them for business logic. The canvas isn't version-controlled in a form most reviewers can read, and the Join operator joins two streams inside a time window. It isn't a lookup against a customer or device table, so enrichment doesn't belong there.
+
+### Eventhouse: the transformation layer for most teams
+
+Inside an Eventhouse, the pattern I recommend is a raw table, a parsing function, an [update policy](https://learn.microsoft.com/en-us/kusto/management/update-policy) that runs that function on every ingestion, and [materialized views](https://learn.microsoft.com/en-us/kusto/management/materialized-views/materialized-view-overview) for the aggregates dashboards hit repeatedly.
 
 ```kusto
-// Real-time device metrics
-raw_telemetry
-| where timestamp > ago(1h)
-| summarize
-    avg_temp = avg(temperature),
-    max_temp = max(temperature),
-    min_temp = min(temperature),
-    reading_count = count()
-    by device_id, bin(timestamp, 5m)
-| order by timestamp desc
+// Raw landing table: Eventstream writes here using direct ingestion
+.create table RawTelemetry (payload: dynamic)
 
-// Detect anomalies
-raw_telemetry
-| where timestamp > ago(24h)
-| summarize avg_temp = avg(temperature), stdev_temp = stdev(temperature) by device_id
-| join kind=inner (
-    raw_telemetry
-    | where timestamp > ago(1h)
-) on device_id
-| where abs(temperature - avg_temp) > 3 * stdev_temp
-| project timestamp, device_id, temperature, avg_temp, stdev_temp
+// Map the whole JSON event into the payload column.
+// Select 'RawMapping' as the existing mapping when you configure the data connection.
+.create table RawTelemetry ingestion json mapping 'RawMapping' '[{"column":"payload","Properties":{"Path":"$"}}]'
+
+// Curated table with a typed schema
+.create table Telemetry (
+    DeviceId: string,
+    Temperature: real,
+    Humidity: real,
+    ReadingTime: datetime,
+    IngestedAt: datetime
+)
+
+// Parsing logic lives in a function, so it can be versioned and re-run
+.create-or-alter function with (folder = "transforms") ParseTelemetry() {
+    RawTelemetry
+    | extend
+        DeviceId = tostring(payload.deviceId),
+        Temperature = todouble(payload.temperature),
+        Humidity = todouble(payload.humidity),
+        ReadingTime = todatetime(payload.timestamp)
+    | where isnotempty(DeviceId) and isnotnull(ReadingTime)
+    | project DeviceId, Temperature, Humidity, ReadingTime, IngestedAt = ingestion_time()
+}
+
+// Run the function on every batch that lands in RawTelemetry
+.alter table Telemetry policy update
+@'[{"IsEnabled": true, "Source": "RawTelemetry", "Query": "ParseTelemetry()", "IsTransactional": false}]'
+
+// Keep raw data long enough to replay, curated data as long as the business needs
+.alter-merge table RawTelemetry policy retention softdelete = 30d
+.alter-merge table Telemetry policy retention softdelete = 365d
+
+// Pre-aggregate what dashboards query every few seconds
+.create materialized-view with (backfill = true) DeviceMetrics5m on table Telemetry {
+    Telemetry
+    | summarize
+        AvgTemp = avg(Temperature),
+        MaxTemp = max(Temperature),
+        Readings = count()
+        by DeviceId, bin(ReadingTime, 5m)
+}
 ```
 
-## Pattern 2: Stream Processing with Transformations
+Two decisions in there are worth explaining.
 
-For scenarios requiring real-time transformations, use Spark Structured Streaming:
+`IsTransactional: false` means a failure in the parsing function doesn't fail ingestion into the raw table. I prefer that for telemetry: the raw events still land and I can fix the function and backfill.
+
+Backfill needs care, because re-running `ParseTelemetry()` over all of `RawTelemetry` re-appends rows that are already in `Telemetry`. Bound it to the window the bug affected, after removing the bad rows for that range (or rebuild into a new table and swap it in):
+
+```kusto
+// Remove the rows the broken function produced, then re-derive only that range
+.delete table Telemetry records <| Telemetry | where IngestedAt between (datetime(<start>) .. datetime(<end>))
+
+.set-or-append Telemetry <| ParseTelemetry() | where IngestedAt between (datetime(<start>) .. datetime(<end>))
+```
+
+`IngestedAt` is the raw row's `ingestion_time()`, so the same window selects the same source events both times. One catch: a materialized view doesn't see deletes on its source table, so `DeviceMetrics5m` will still hold the old aggregates for that range. After a backfill I drop and recreate the view with `backfill = true` rather than trying to patch it. If downstream correctness matters more than availability (for example, finance events that must never appear in one table and not the other), set it to `true` and accept that a bad function blocks ingestion until it's fixed.
+
+The materialized view handles the "dashboard tiles hammer the same aggregate" problem. Real-Time Dashboards and Power BI both benefit, because the aggregation is maintained incrementally instead of recomputed on every refresh. I keep views to aggregates that are queried constantly; a view nobody queries is just extra ingestion work.
+
+Enrichment also lands well here. A small `Devices` dimension table and a `lookup` in the parsing function (or at query time) beats any attempt to do the same in Eventstream.
+
+### Spark: when the logic outgrows KQL
+
+Spark Structured Streaming earns its place when you need scoring with a trained model, logic that's awkward in KQL (multi-step stateful processing, complex deduplication across long horizons), or when the destination is a lakehouse Delta table feeding a medallion architecture that the rest of your platform already uses.
+
+Add a [custom endpoint destination](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/add-destination-custom-app) to the eventstream; its Kafka tab exposes a Kafka-compatible endpoint that a Fabric notebook can read with Spark's Kafka source. This is a fragment for a Fabric notebook. Take the bootstrap server, topic and connection string from that destination's Details pane (SAS Key Authentication), and keep the connection string in Key Vault rather than in the notebook.
 
 ```python
-# Stream processing with PySpark in Fabric notebooks
-from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
-from pyspark.sql.types import StructType, StringType, DoubleType, TimestampType
+from pyspark.sql.types import StructType, StructField, StringType, DoubleType, TimestampType
 
-spark = SparkSession.builder.getOrCreate()
+# Values from the Eventstream custom endpoint destination (Kafka tab) details pane
+bootstrap_servers = "<your-namespace>.servicebus.windows.net:9093"
+topic = "<your-eventstream-topic>"
+connection_string = notebookutils.credentials.getSecret(
+    "https://<your-key-vault>.vault.azure.net/", "<eventstream-connection-secret>"
+)
 
-# Define schema for POS events
-pos_schema = StructType() \
-    .add("store_id", StringType()) \
-    .add("quantity", DoubleType()) \
-    .add("unit_price", DoubleType()) \
-    .add("event_time", TimestampType())
+jaas = (
+    'org.apache.kafka.common.security.plain.PlainLoginModule required '
+    f'username="$ConnectionString" password="{connection_string}";'
+)
 
-# Read from Kafka
-kafka_df = spark.readStream \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers", "kafka-cluster:9092") \
-    .option("subscribe", "point-of-sale") \
+schema = StructType([
+    StructField("deviceId", StringType()),
+    StructField("temperature", DoubleType()),
+    StructField("humidity", DoubleType()),
+    StructField("timestamp", TimestampType()),
+])
+
+events = (
+    spark.readStream.format("kafka")
+    .option("kafka.bootstrap.servers", bootstrap_servers)
+    .option("subscribe", topic)
+    .option("kafka.security.protocol", "SASL_SSL")
+    .option("kafka.sasl.mechanism", "PLAIN")
+    .option("kafka.sasl.jaas.config", jaas)
+    .option("startingOffsets", "latest")
     .load()
+    .select(F.from_json(F.col("value").cast("string"), schema).alias("e"))
+    .select("e.*")
+)
 
-# Parse and transform
-parsed_df = kafka_df \
-    .select(F.from_json(F.col("value").cast("string"), pos_schema).alias("data")) \
-    .select("data.*") \
-    .withColumn("total_amount", F.col("quantity") * F.col("unit_price")) \
-    .withColumn("tax_amount", F.col("total_amount") * 0.1) \
-    .withColumn("processed_time", F.current_timestamp())
-
-# Add region lookup (broadcast join with reference data)
-store_regions = spark.read.table("store_regions")
-enriched_df = parsed_df.join(F.broadcast(store_regions), "store_id", "left")
-
-# Write all transactions to Delta table
-all_sales_query = enriched_df.writeStream \
-    .format("delta") \
-    .outputMode("append") \
-    .option("checkpointLocation", "Files/checkpoints/all_sales") \
-    .toTable("all_transactions")
-
-# Write high-value alerts to separate table
-high_value_query = enriched_df \
-    .filter(F.col("total_amount") > 1000) \
-    .writeStream \
-    .format("delta") \
-    .outputMode("append") \
-    .option("checkpointLocation", "Files/checkpoints/high_value") \
-    .toTable("high_value_alerts")
-```
-
-## Pattern 3: Windowed Aggregations
-
-For time-based aggregations using Spark Structured Streaming:
-
-```python
-from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
-from pyspark.sql.types import StructType, StringType, IntegerType, TimestampType
-
-spark = SparkSession.builder.getOrCreate()
-
-# Read clickstream data
-clickstream_df = spark.readStream \
-    .format("delta") \
-    .table("raw_clickstream")
-
-# Tumbling window aggregation (1-minute windows)
-page_view_counts = clickstream_df \
-    .withWatermark("event_time", "10 minutes") \
-    .groupBy(
-        F.window("event_time", "1 minute"),
-        "page_url",
-        "user_segment"
-    ) \
-    .agg(
-        F.count("*").alias("view_count"),
-        F.countDistinct("user_id").alias("unique_users"),
-        F.avg("time_on_page").alias("avg_time_on_page")
-    ) \
+# Five-minute averages per device, tolerating ten minutes of late data
+per_device = (
+    events.withWatermark("timestamp", "10 minutes")
+    .groupBy(F.window("timestamp", "5 minutes"), "deviceId")
+    .agg(F.avg("temperature").alias("avg_temp"), F.count("*").alias("readings"))
     .select(
         F.col("window.start").alias("window_start"),
         F.col("window.end").alias("window_end"),
-        "page_url", "user_segment",
-        "view_count", "unique_users", "avg_time_on_page"
+        "deviceId", "avg_temp", "readings",
     )
+)
 
-# Sliding window for trends (5-minute window, 1-minute slide)
-rolling_metrics = clickstream_df \
-    .withWatermark("event_time", "10 minutes") \
-    .groupBy(
-        F.window("event_time", "5 minutes", "1 minute"),
-        "page_url"
-    ) \
-    .agg(
-        F.count("*").alias("rolling_views"),
-        F.countDistinct("user_id").alias("rolling_unique_users")
-    )
-
-# Write aggregations to Delta tables
-page_views_query = page_view_counts.writeStream \
-    .format("delta") \
-    .outputMode("append") \
-    .option("checkpointLocation", "Files/checkpoints/page_views") \
-    .toTable("page_view_aggregates")
+query = (
+    per_device.writeStream.format("delta")
+    .outputMode("append")
+    .option("checkpointLocation", "Files/checkpoints/device_5m")
+    .toTable("device_metrics_5m")
+)
 ```
 
-## Pattern 4: Real-Time Joins
+The costs of this route are real. A streaming notebook holds Spark compute for as long as it runs, so it consumes capacity continuously, not just when events arrive. You own the checkpoint directory, and changing the query shape often means a new checkpoint and a decision about where to restart from. Watermarks need tuning per source. None of that is hard for a data engineering team that already runs Spark, but it's a lot to hand to a team that just wanted a live dashboard.
 
-Joining streaming data with reference data using Spark:
+If what you actually need is "latest minute of data, queryable in seconds", Spark into Delta is usually the wrong tool. Write latency to Delta plus the lakehouse's SQL analytics endpoint sync is not what an operations dashboard needs. That's what an Eventhouse is for.
 
-```python
-from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
+## Alerts: keep them close to the curated data
 
-spark = SparkSession.builder.getOrCreate()
+Activator is the alerting layer in Real-Time Intelligence, and it can watch an Eventstream directly, and (in preview) run against KQL queryset queries and Real-Time Dashboard visuals. My preference is to alert on curated data (the `Telemetry` table or a materialized view) rather than on the raw stream, for the same reason as above: thresholds belong next to the logic that defines what a "reading" is. Alerting on the raw stream means duplicating parsing rules in two places, and they will drift.
 
-# Read streaming order events
-order_events = spark.readStream \
-    .format("delta") \
-    .table("raw_order_events")
+The exception is a hard, simple threshold on a field that needs no parsing, where seconds matter. Then attaching Activator to the Eventstream is reasonable.
 
-# Load reference data (static or periodically refreshed)
-# Use broadcast for small dimension tables
-customer_info = spark.read.table("customers")
-product_info = spark.read.table("products")
+## When not to use Real-Time Intelligence at all
 
-# Stream-static join with broadcast for small tables
-enriched_orders = order_events \
-    .join(
-        F.broadcast(customer_info),
-        order_events.customer_id == customer_info.customer_id,
-        "left"
-    ) \
-    .join(
-        F.broadcast(product_info),
-        order_events.product_id == product_info.product_id,
-        "left"
-    ) \
-    .select(
-        order_events.order_id,
-        order_events.customer_id,
-        customer_info.customer_name,
-        customer_info.segment,
-        order_events.product_id,
-        product_info.product_name,
-        product_info.category,
-        order_events.quantity,
-        order_events.amount,
-        order_events.order_time
-    )
+Not every "real-time" request needs streaming. If the business reviews the numbers every morning, a scheduled pipeline into a lakehouse is cheaper and easier to support. If the source is an operational database and the goal is analytical queries over near-current data, look at [mirroring](/blog/2024-08-02-fabric-mirroring-ga/) before building an event pipeline. And if your organisation has no one comfortable with KQL, budget for that learning curve explicitly; the Eventhouse-centred design above depends on it.
 
-# Write enriched stream
-query = enriched_orders.writeStream \
-    .format("delta") \
-    .outputMode("append") \
-    .option("checkpointLocation", "Files/checkpoints/enriched_orders") \
-    .toTable("enriched_orders")
+## The decision, in short
 
-# For frequently changing reference data, use foreachBatch to refresh
-def process_with_fresh_reference(batch_df, batch_id):
-    # Reload reference data each batch
-    customers = spark.read.table("customers")
-    products = spark.read.table("products")
+- Land raw events in an Eventhouse with direct ingestion wherever you can. It's the cheapest path and keeps replay possible.
+- Use Eventstream operators for routing and trimming, not business logic.
+- Put parsing, enrichment and standing aggregates in KQL with update policies and materialized views.
+- Reach for Spark only when the logic needs it or the destination is your lakehouse medallion layers, and accept that you're signing up for always-on compute and checkpoint management.
+- Alert on curated data unless a raw-field threshold genuinely can't wait.
 
-    enriched = batch_df \
-        .join(F.broadcast(customers), "customer_id", "left") \
-        .join(F.broadcast(products), "product_id", "left")
-
-    enriched.write.mode("append").saveAsTable("enriched_orders")
-```
-
-## Pattern 5: Real-Time Alerting
-
-Setting up automated alerts:
-
-```kusto
-// Create a function for anomaly detection
-.create-or-alter function DetectAnomalies() {
-    raw_telemetry
-    | where timestamp > ago(5m)
-    | summarize
-        current_temp = avg(temperature),
-        reading_count = count()
-        by device_id
-    | join kind=inner (
-        raw_telemetry
-        | where timestamp between (ago(24h) .. ago(5m))
-        | summarize baseline_temp = avg(temperature), stdev_temp = stdev(temperature)
-            by device_id
-    ) on device_id
-    | where abs(current_temp - baseline_temp) > 3 * stdev_temp
-    | project
-        device_id,
-        current_temp,
-        baseline_temp,
-        deviation = abs(current_temp - baseline_temp) / stdev_temp,
-        alert_time = now()
-}
-
-// Create continuous export for alerts
-.create-or-alter continuous-export AlertExport
-over (DetectAnomalies)
-to table AlertHistory
-with (intervalBetweenRuns = 1m)
-```
-
-Python integration for alerts using Azure Logic Apps:
-
-```python
-# Alerts in Fabric Real-Time Intelligence use Reflex (Data Activator)
-# For custom alerting, use Logic Apps or Azure Functions
-
-from azure.identity import DefaultAzureCredential
-import requests
-import json
-
-# Option 1: Send alerts to Logic App
-def send_alert_to_logic_app(alert_data: dict, logic_app_url: str):
-    """Send alert to Azure Logic App for processing."""
-    response = requests.post(
-        logic_app_url,
-        headers={"Content-Type": "application/json"},
-        json=alert_data
-    )
-    return response.status_code == 200
-
-# Option 2: Send to Teams webhook
-def send_teams_alert(device_id: str, current_temp: float, teams_webhook_url: str):
-    """Send alert to Microsoft Teams channel."""
-    message = {
-        "@type": "MessageCard",
-        "summary": "Temperature Anomaly",
-        "sections": [{
-            "activityTitle": "Temperature Anomaly Detected",
-            "facts": [
-                {"name": "Device", "value": device_id},
-                {"name": "Temperature", "value": f"{current_temp:.1f}C"}
-            ],
-            "markdown": True
-        }]
-    }
-    requests.post(teams_webhook_url, json=message)
-
-# Option 3: Use Fabric Reflex (Data Activator)
-# In Fabric portal:
-# 1. Create a Reflex item
-# 2. Connect to your KQL database or eventstream
-# 3. Define trigger conditions (e.g., deviation > 5)
-# 4. Configure actions (email, Teams, Power Automate flow)
-
-# Query KQL for anomalies and trigger alerts
-credential = DefaultAzureCredential()
-# Execute KQL query and process results for alerting
-```
-
-## Real-Time Dashboards
-
-Create live dashboards using Real-Time Dashboards in Fabric:
-
-```python
-# Real-Time Dashboards are created in the Fabric portal
-# They connect directly to KQL databases for live data
-
-# Step 1: Create Real-Time Dashboard via REST API
-from azure.identity import DefaultAzureCredential
-import requests
-
-credential = DefaultAzureCredential()
-token = credential.get_token("https://api.fabric.microsoft.com/.default").token
-headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-
-workspace_id = "your-workspace-id"
-base_url = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}"
-
-dashboard_payload = {
-    "displayName": "Live Sales Dashboard",
-    "type": "RTDashboard",
-    "description": "Real-time sales metrics dashboard"
-}
-
-response = requests.post(f"{base_url}/items", headers=headers, json=dashboard_payload)
-dashboard = response.json()
-
-# Step 2: Configure tiles in the Fabric portal with KQL queries:
-# Example KQL for dashboard tiles:
-
-kql_queries = {
-    "total_sales_card": """
-        all_transactions
-        | where timestamp > ago(1h)
-        | summarize total_sales = sum(total_amount)
-    """,
-    "sales_by_region_chart": """
-        all_transactions
-        | where timestamp > ago(1h)
-        | summarize total_sales = sum(total_amount), tx_count = count()
-            by bin(timestamp, 1m), region
-        | render timechart
-    """,
-    "transaction_count": """
-        all_transactions
-        | where timestamp > ago(1h)
-        | count
-    """
-}
-
-# Note: Real-Time Dashboards auto-refresh every 30 seconds by default
-# Configure in portal: Dashboard settings > Auto refresh interval
-
-# Alternative: Use Power BI with DirectQuery to KQL Database
-# for more customization options
-```
-
-## Performance Optimization
-
-```kusto
-// Optimize table for time-series queries
-.alter table raw_telemetry policy streamingingestion enable
-
-// Set appropriate retention
-.alter table raw_telemetry policy retention softdelete = 30d
-
-// Create materialized view for common aggregations
-.create materialized-view HourlyMetrics on table raw_telemetry {
-    raw_telemetry
-    | summarize
-        avg_temp = avg(temperature),
-        max_temp = max(temperature),
-        min_temp = min(temperature),
-        count = count()
-        by device_id, bin(timestamp, 1h)
-}
-
-// Use materialized view in queries (faster)
-HourlyMetrics
-| where timestamp > ago(7d)
-| summarize daily_avg = avg(avg_temp) by device_id, bin(timestamp, 1d)
-```
-
-Real-time analytics in Fabric provides a powerful, integrated solution for streaming data. Start with simple patterns and evolve to more complex scenarios as your needs grow.
+Most of the messy Fabric streaming designs I see come down to logic being split across all three layers without a reason. Choose a home for each concern, write it down, and the pipeline stays debuggable long after the person who built it has moved on.
