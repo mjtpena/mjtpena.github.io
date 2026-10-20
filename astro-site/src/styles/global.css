@@ -499,3 +499,30 @@
 
 /* Posts often open with a heading; don't stack its top margin on the card padding. */
 .prose-custom > :first-child { margin-top: 0; }
+
+/* ---- Series navigation: <nav class="series"> at the end of a multi-part post ---- */
+.prose-custom .series {
+  margin: 3rem 0 0;
+  padding: 18px 22px;
+  border: 1px solid #262d34;
+  border-radius: 12px;
+  background: #0f1216;
+}
+.prose-custom .series-k {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6f787f;
+}
+.prose-custom .series-t {
+  margin: 0.35rem 0 0.75rem;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 600;
+  color: #e8ecef;
+}
+.prose-custom .series ol { margin: 0; padding-left: 1.5rem; }
+.prose-custom .series li { margin: 0.2rem 0; color: #98a2ab; font-size: 0.95rem; }
+.prose-custom .series li a { color: #c4ccd2; text-decoration: none; }
+.prose-custom .series li a:hover { color: #00B7C3; }
+.prose-custom .series li.on { color: #00B7C3; font-weight: 600; }
