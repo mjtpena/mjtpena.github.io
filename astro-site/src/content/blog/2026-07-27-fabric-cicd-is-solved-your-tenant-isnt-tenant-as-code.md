@@ -1,22 +1,24 @@
 ---
-title: "Fabric CI/CD Is Solved. Your Tenant Isn't. — Treating a Microsoft Fabric Tenant as Declarative, Source-Controlled Infrastructure"
+title: "Fabric Item CI/CD Is Mostly Solved. Your Tenant Isn't"
 author: Michael John Peña
 draft: false
 date: 2026-07-27
-description: "Item-level CI/CD in Microsoft Fabric is a settled capability. The unsolved problem is source of truth and tenant governance as code — the workspaces, capacity, domains, tenant settings, connections, and roles that Git integration does not manage. A blueprint for tenant-as-code."
+description: "Git integration and fabric-cicd ship Fabric items well. Workspaces, capacity, domains, roles and tenant settings still need their own source of truth."
 tags:
   - Microsoft Fabric
   - CI/CD
-  - DevOps
+  - Governance
   - Infrastructure as Code
-  - Platform Engineering
+  - GitHub Actions
 ---
 
-Shipping Fabric *items* — notebooks, pipelines, semantic models — through Git and a CI runner is a settled problem. Microsoft documents four workflow patterns, and [fabric-cicd](https://github.com/microsoft/fabric-cicd) has emerged as the de-facto deployment tool. The unsolved problem is upstream and around it: **what is the source of truth for the tenant itself**, and **how is platform governance — workspaces, capacity, domains, tenant settings, connections, roles — expressed as reviewable, source-controlled state**. Git integration does not manage that layer. This article treats the Fabric tenant as declarative infrastructure and shows where the item pipeline ends and tenant-as-code begins.
+Getting notebooks, pipelines and semantic models from Git into a Fabric workspace is mostly a solved problem, with a few sharp edges left. Microsoft documents four workflow patterns for it, and the fabric-cicd Python library [reached 1.0 on 20 April 2026](https://microsoft.github.io/fabric-cicd/latest/changelog/). What most teams still haven't answered is where the tenant itself is defined: who created that workspace, which capacity and domain it sits in, who holds Admin, and which tenant setting someone flipped last quarter. Git integration doesn't manage any of that, and that's where Fabric platforms drift.
 
-## The four Fabric CI/CD workflow options
+I covered the item pipeline itself back in [Fabric CI/CD: Building Deployment Pipelines](/blog/2024-04-07-fabric-cicd/). This post is about the layer around it.
 
-Microsoft's [CI/CD workflow options](https://learn.microsoft.com/en-us/fabric/cicd/manage-deployment) article defines exactly four patterns, with the explicit caveat that real deployments often combine them into hybrids. The differentiators map cleanly onto a table.
+## Four ways to ship items, one gap
+
+Microsoft Learn's [CI/CD workflow options article](https://learn.microsoft.com/en-us/fabric/cicd/manage-deployment) describes four patterns and says real deployments often mix them:
 
 <div style="overflow-x:auto;margin:1.75rem 0;border:1px solid #27272a;border-radius:12px">
 <table style="width:100%;border-collapse:collapse;min-width:820px;font-size:0.88rem">
@@ -27,7 +29,7 @@ Microsoft's [CI/CD workflow options](https://learn.microsoft.com/en-us/fabric/ci
 <th style="text-align:left;padding:12px 14px;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;border-bottom:1px solid #27272a">Branching model</th>
 <th style="text-align:left;padding:12px 14px;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;border-bottom:1px solid #27272a">Deployment mechanism</th>
 <th style="text-align:left;padding:12px 14px;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;border-bottom:1px solid #27272a">Per-stage config</th>
-<th style="text-align:left;padding:12px 14px;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;border-bottom:1px solid #27272a">When appropriate</th>
+<th style="text-align:left;padding:12px 14px;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;border-bottom:1px solid #27272a">Fits</th>
 </tr>
 </thead>
 <tbody>
@@ -36,24 +38,24 @@ Microsoft's [CI/CD workflow options](https://learn.microsoft.com/en-us/fabric/ci
 <td style="padding:12px 14px;color:#00B7C3;border-bottom:1px solid #1c1c22;font-weight:600">Git</td>
 <td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22">Gitflow (a primary branch per stage)</td>
 <td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><a href="https://learn.microsoft.com/en-us/rest/api/fabric/core/git/update-from-git" style="color:#00B7C3">Fabric Git APIs</a> (<code style="background:#0f151a;color:#7fd8cf;padding:1px 4px;border-radius:4px;font-size:0.82em">update-from-git</code>)</td>
-<td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22">Separate per-stage branches</td>
-<td style="padding:12px 14px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Git as single source of truth, Gitflow teams, no build-time transform</td>
+<td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22">Separate branches</td>
+<td style="padding:12px 14px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Teams who want Git as the only origin and no definition transforms before deploy</td>
 </tr>
 <tr>
 <td style="padding:12px 14px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600">2 — Fabric Items APIs</td>
 <td style="padding:12px 14px;color:#00B7C3;border-bottom:1px solid #1c1c22;font-weight:600">Git (single <em>Main</em>)</td>
 <td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22">Trunk-based</td>
-<td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><a href="https://learn.microsoft.com/en-us/rest/api/fabric/core/items" style="color:#00B7C3">Fabric Items APIs</a> (fabric-cicd or Bulk Import)</td>
+<td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><a href="https://learn.microsoft.com/en-us/rest/api/fabric/core/items" style="color:#00B7C3">Fabric Items APIs</a> (fabric-cicd or bulk import)</td>
 <td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22">Build-environment scripts</td>
-<td style="padding:12px 14px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Trunk-based teams that must transform item definitions before deploy</td>
+<td style="padding:12px 14px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Teams who must rewrite IDs or connections before deploy</td>
 </tr>
 <tr>
 <td style="padding:12px 14px;color:#e4e4e7;border-bottom:1px solid #1c1c22;font-family:'Space Grotesk',sans-serif;font-weight:600">3 — Deployment pipelines</td>
 <td style="padding:12px 14px;color:#e0a04a;border-bottom:1px solid #1c1c22;font-weight:600">Fabric workspace <span style="color:#71717a;font-weight:400">(Git only through dev)</span></td>
 <td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22">Trunk-based</td>
 <td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22"><a href="https://learn.microsoft.com/en-us/rest/api/fabric/core/deployment-pipelines" style="color:#00B7C3">Deployment pipelines APIs</a></td>
-<td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22">Deployment rules + autobinding</td>
-<td style="padding:12px 14px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Fabric-native, low-code promotion between workspaces</td>
+<td style="padding:12px 14px;color:#d4d4d8;border-bottom:1px solid #1c1c22">Deployment rules and autobinding</td>
+<td style="padding:12px 14px;color:#a1a1aa;border-bottom:1px solid #1c1c22">Fabric-native, low-code promotion</td>
 </tr>
 <tr>
 <td style="padding:12px 14px;color:#e4e4e7;font-family:'Space Grotesk',sans-serif;font-weight:600">4 — CI/CD for ISVs</td>
@@ -61,31 +63,21 @@ Microsoft's [CI/CD workflow options](https://learn.microsoft.com/en-us/fabric/ci
 <td style="padding:12px 14px;color:#d4d4d8">Trunk-based</td>
 <td style="padding:12px 14px;color:#d4d4d8"><a href="https://learn.microsoft.com/en-us/rest/api/fabric/core/items" style="color:#00B7C3">Fabric Items APIs</a> (per customer workspace)</td>
 <td style="padding:12px 14px;color:#d4d4d8">Per-customer release parameters</td>
-<td style="padding:12px 14px;color:#a1a1aa">ISVs managing hundreds/thousands of per-customer workspaces</td>
+<td style="padding:12px 14px;color:#a1a1aa">ISVs with hundreds of customer workspaces</td>
 </tr>
 </tbody>
 </table>
 </div>
 
-**Option 1** uploads directly from the repo into the workspace; there is no build environment altering files before deployment, which is why it pairs with Gitflow and a branch per stage.
+In option 3 the source of truth after dev is a Fabric workspace, not your repo. The pipeline, its stage assignments and any workspace it creates for an empty stage are tenant-layer objects, so the manifests should own them: pre-create the stage workspaces rather than letting a deploy create them with default settings.
 
-**Option 2** exists precisely because some teams need a build step. You need it "to alter workspace-specific attributes, such as *connectionId* and *lakehouseId*, before deployment" ([manage-deployment](https://learn.microsoft.com/en-us/fabric/cicd/manage-deployment)). In this option the Test and Prod workspaces are **not** Git-connected — item definitions are pushed to them through the Items APIs from `Main`. This is the fabric-cicd path.
+All four options move **item definitions** into workspaces; none of them governs **the workspaces themselves**. Here is what sits outside the item pipeline:
 
-**Option 3** is the one whose source of truth is easy to misstate. It is the **Fabric workspace**, not Git — Git connects only through the dev stage, and promotion from dev happens workspace-to-workspace with deployment rules and autobinding. Deployments are linear and require separate pipeline permissions.
-
-**Option 4** is built on top of Option 2 for ISVs: each customer gets its own release with its own parameters, and releases run in parallel because they are independent.
-
-Microsoft's own recommendation for "the most efficient CI/CD experience" is a hybrid — connect the developer workspace to Git and promote with deployment pipelines from there ([CI/CD overview](https://learn.microsoft.com/en-us/fabric/cicd/cicd-overview)). Treat the four as a design vocabulary, not mutually exclusive products.
-
-## Where item CI/CD ends and platform governance begins
-
-Every option above moves **item definitions**. Git integration operates at the workspace level and "re-creates item definitions only and does not restore item data" ([Git integration process](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-integration-process)). That boundary — definitions in, everything else out — is the whole story. Here is the concrete state Git integration does **not** manage by default:
-
-- **Workspace creation and naming.** The Git connection is *to* an existing workspace. Nothing in the repo brings a workspace into existence, names it to a convention, or decommissions it.
-- **Capacity and domain assignment.** Which capacity backs a workspace, and which domain it belongs to, are tenant-administrative acts. Assigning a domain "requires tenant-level Fabric Administrator privileges" ([Fabric CLI `assign`](https://microsoft.github.io/fabric-cli/commands/fs/assign/)) — it is not a property Git syncs.
-- **Tenant settings.** Publish-to-web toggles, SP-access switches, delegation flags — none of these live in a workspace repo. They are read and written through the [admin tenant-settings APIs](https://learn.microsoft.com/en-us/rest/api/fabric/admin/tenants/list-tenant-settings).
-- **Connections and gateways.** References to Connections don't auto-bind on deployment; Microsoft's guidance is to "use Variable Libraries with environment-specific value sets to manage connection references across environments" ([cross-workspace dependency binding](https://learn.microsoft.com/en-us/fabric/cicd/cross-workspace-dependency-binding)). The connection object itself is out-of-band state.
-- **Roles and access.** Workspace role assignments — who is Admin, Member, Contributor, Viewer — are not carried in item definitions.
+- **Workspace lifecycle.** You connect Git *to* a workspace. Nothing in the repo creates one, enforces a naming convention or retires it.
+- **Capacity and domain.** Assigning a workspace to a capacity needs workspace Admin plus contributor rights on the capacity. Assigning it to a domain through the admin Domains APIs needs Fabric Administrator (check each API's supported identities before automating it with a service principal); domain admins and contributors can also do it in the portal.
+- **Tenant settings.** Publish to web, service principal access, delegation to capacity admins. These live in the admin portal and admin APIs, not a workspace repo.
+- **Connections and gateways.** fabric-cicd's own item type notes say connections aren't source controlled and must be created separately.
+- **Workspace roles.** Who is Admin, Member, Contributor or Viewer isn't part of an item definition.
 
 <div class="cl cl-key">
 <div class="cl-tag">The boundary</div>
@@ -96,16 +88,14 @@ Git integration versions **item definitions**. Everything that makes those items
 </div>
 </div>
 
-There is a subtler failure mode even within item deployment. Some items store dependencies as **object IDs** (workspace-specific GUIDs) rather than **logical IDs** (portable identifiers in the `.platform` file). Items using logical IDs bind to the target workspace; items using object IDs "remain pointed at the source workspace, which breaks the deployment" ([cross-workspace dependency binding](https://learn.microsoft.com/en-us/fabric/cicd/cross-workspace-dependency-binding)). Even Option 1 warns that some dependencies "require these post-deployment updates" through additional API calls ([manage-deployment](https://learn.microsoft.com/en-us/fabric/cicd/manage-deployment)). The item pipeline is not self-sufficient; it assumes a governed platform already exists around it.
+Even inside the item layer, Microsoft's page on [cross-workspace dependency binding](https://learn.microsoft.com/en-us/fabric/cicd/cross-workspace-dependency-binding) warns that items which store dependencies as workspace-specific object IDs, rather than logical IDs, stay pointed at the source workspace after deployment, which breaks it. The item pipeline assumes a governed platform around it, and I'd rather that platform be built by pull request than by portal click.
 
-## The declarative model: manifest → PR → service principal → provisioning
+## A reference blueprint for the tenant layer
 
-The missing layer has a reference implementation: Microsoft's [frontier-fabric-governance-rvas](https://github.com/microsoft/frontier-fabric-governance-rvas) blueprint. Its governing principle is unambiguous:
-
-> Treat the Fabric tenant as **declarative infrastructure**. Nothing exists unless a YAML manifest for it lives in `main`, was reviewed via Pull Request, and was provisioned by a service principal through GitHub Actions.
+Microsoft has published a workshop-style repo that takes this on directly: [microsoft/frontier-fabric-governance-rvas](https://github.com/microsoft/frontier-fabric-governance-rvas). Its principle is the one I'd adopt: nothing exists in the tenant unless a YAML manifest for it lives in `main`, was reviewed through a pull request and was provisioned by a service principal through GitHub Actions.
 
 <figure class="ff">
-<svg class="ff-svg" viewBox="0 0 900 308" role="img" aria-label="Governance loop: a YAML manifest in main flows through a pull request and validate gate, then on merge an OIDC token authorizes a service principal that provisions Fabric tenant state; a nightly drift job compares live state to the manifests and opens a GitHub issue on divergence, reconciled via a new PR.">
+<svg class="ff-svg" viewBox="0 0 900 308" role="img" aria-label="Governance loop: a YAML manifest in main flows through a pull request and validate gate, then on merge an OIDC token authorises a service principal that provisions Fabric tenant state; a nightly drift job compares live state to the manifests and opens a GitHub issue on divergence, reconciled via a new PR.">
 <defs>
 <marker id="tcF" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah-flow"/></marker>
 <marker id="tcN" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" class="ff-ah"/></marker>
@@ -131,7 +121,7 @@ The missing layer has a reference implementation: Microsoft's [frontier-fabric-g
 <image href="/icons/fabric/data_warehouse_48_item.svg" x="787" y="88" width="22" height="22"/>
 <image href="/icons/fabric/semantic_model_48_item.svg" x="813" y="88" width="22" height="22"/>
 <text x="785" y="128" text-anchor="middle" class="ff-title">Fabric tenant</text>
-<text x="785" y="142" text-anchor="middle" class="ff-tok">ws · cap · domain · roles</text>
+<text x="785" y="142" text-anchor="middle" class="ff-tok">ws · cap · roles</text>
 <line x1="192" y1="114" x2="206" y2="114" class="ff-edge-flow" marker-end="url(#tcF)"/>
 <line x1="368" y1="114" x2="382" y2="114" class="ff-edge-flow" marker-end="url(#tcF)"/>
 <line x1="526" y1="114" x2="540" y2="114" class="ff-edge-flow" marker-end="url(#tcF)"/>
@@ -148,59 +138,81 @@ The missing layer has a reference implementation: Microsoft's [frontier-fabric-g
 <text x="217" y="294" class="ff-lgd">reconcile via PR</text>
 <text x="352" y="294" class="ff-lgd" style="fill:#6f787f">· official Microsoft Fabric icons</text>
 </svg>
-<figcaption><strong>Figure 1.</strong> The tenant-as-code loop. A manifest change is reviewed and validated, then on merge a federated (secret-free) service principal provisions the tenant. A scheduled drift job reconciles live state against the manifests and raises a tracked issue when they diverge — closing the loop through another PR.</figcaption>
+<figcaption><strong>Figure 1.</strong> The tenant-as-code loop. A manifest change is reviewed and validated, then on merge a federated (secret-free) service principal provisions the tenant. A scheduled drift job reconciles live state against the manifests and raises a tracked issue when they diverge. That closes the loop through another PR. The tenant box shows the target state; the Challenge 01 scripts manage workspaces, capacity and roles.</figcaption>
 </figure>
 
-The change flow is literally `PR → validate → OIDC provision → drift` ([README](https://raw.githubusercontent.com/microsoft/frontier-fabric-governance-rvas/main/README.md)). A workspace manifest is a YAML file with a strict, validated shape — the [sample manifest](https://raw.githubusercontent.com/microsoft/frontier-fabric-governance-rvas/main/workspaces/pt-nlyt-sample-ndf-dev-hello1.yaml) carries `name`, `capacity`, `region`, `domain`, `subDomain`, `sensitivityLabel`, `costCenter`, and an `owners` array with `principalType`/`role`/`groupName`. A [JSON Schema](https://raw.githubusercontent.com/microsoft/frontier-fabric-governance-rvas/main/schemas/workspace.schema.json) enforces a naming pattern (`<country>-<area>-<subject>-<dataProductType>-<env>-<suffix>`) and rules like "at least two owners, at least one Group, at least one Admin." Governance policy — approved capacities, domains, sensitivity labels, cost centers, quotas — lives in a separate `rules/policy.yaml`, designed so "you can evolve governance without changing scripts." Provisioning is idempotent: `provision.py` looks a workspace up by display name, creates it if absent, reconciles capacity and description, and adds missing role assignments **additively** — it deliberately does not remove unknown assignments, to avoid locking the automation out of its own workspaces.
+The pieces are worth copying even if you never run the repo:
 
-The blueprint spans exactly the state the item pipeline ignores: workspace lifecycle, domains/capacities/sensitivity/endorsement, group-based access with expiring assignments, medallion bootstrap, and cross-environment promotion via deployment pipelines. (Note it is a workshop/blueprint repo; its public workflows are dormant by design until you fork and register a runner.)
+- **Manifests.** One YAML file per workspace under `workspaces/`, carrying name, capacity, region, domain, sub-domain, sensitivity label, cost centre and an `owners` list of principals and roles.
+- **A schema.** A JSON Schema enforces the naming pattern `<country>-<area>-<subject>-<dataProductType>-<env>-<suffix>` and at least two owners.
+- **A policy file.** `rules/policy.yaml` holds approved capacities, domains, sensitivity labels, cost centres and per-group quotas, plus rules such as "at least one owner is a Group" and "at least one owner is Admin". Its header says to edit it "to evolve governance without changing scripts", the right separation.
+- **An idempotent provisioner.** `provision.py` finds a workspace by display name, creates it if it's missing, sets the description and capacity, and adds any missing role assignments. Domain and sensitivity-label assignment come in a later challenge, not this script. It deliberately never removes assignments it doesn't recognise, with the comment "do NOT remove unknown to avoid locking ourselves out".
+- **Three workflows.** `validate.yml` runs on pull requests, `provision.yml` runs on merge to `main` behind a `production` environment approval, and `drift.yml` runs on a schedule to compare live state against the manifests. In Challenge 01, `drift.py` reports only unmanaged workspaces, missing workspaces and description mismatches. Capacity, domain and role drift are checks you add yourself.
 
-**What belongs in Git:** workspace and platform manifests, item definitions, parameter files, policy/rules files, JSON schemas, and pipeline/workflow definitions. **What does not:** secrets, client secrets, tokens, per-stage secret values, and ephemeral runtime state. The provisioner in the blueprint holds **no client secret at all** — credentials are federated, not stored. That is the model to copy.
+That additive role behaviour is a conscious trade-off: safe, but a manifest can't revoke access granted by hand. If you adopt it, make drift detection report unexpected role assignments and remove them through a reviewed change.
 
-## Service principal design
+### Why not the Terraform provider?
 
-Two distinct axes govern SP design: which **admin API surface** the identity can touch, and where its **credential** lives.
+Microsoft's CI/CD overview suggests the Terraform provider for Microsoft Fabric for workspaces and capacities, with fabric-cicd for items. [GA since March 2025](https://registry.terraform.io/providers/microsoft/fabric/latest), it covers `fabric_workspace` (including its `capacity_id`), `fabric_workspace_role_assignment`, `fabric_domain`, `fabric_deployment_pipeline` and, in preview, `fabric_domain_workspace_assignments`.
 
-### The admin-API surface
+| | Terraform provider | Scripts and YAML manifests |
+|---|---|---|
+| Drift detection | Built in: `terraform plan` diffs every resource in state | You write and maintain each check |
+| State | A state file to store, lock and protect | None; live tenant is compared to Git each run |
+| Unmanaged objects | Invisible to `plan` unless imported | A script can list everything and flag strays |
+| Policy | Separate tooling (validation blocks, OPA, Sentinel) | Policy is a reviewed YAML file the same scripts read |
+| Reviewer skill needed | HCL plus provider semantics and plan output | YAML plus the policy file |
 
-Fabric splits read from write with two separate tenant settings, each independently scoped to its own Entra security group:
+I'd pick Terraform if your platform team already runs it for Azure: you get plan-based drift and one state model across capacity, Entra groups and workspaces. I'd pick manifests when the people requesting workspaces aren't infrastructure engineers, when governance rules should read as policy rather than code, or when you don't want another state file to protect.
 
-- **"Service principals can access read-only admin APIs"** governs Power BI read-only admin APIs. An SP used here "**must not** have any admin-consent required permissions for Power BI set on it" ([enable SP admin APIs](https://learn.microsoft.com/en-us/fabric/admin/enable-service-principal-admin-apis)). Membership in the allowed group grants read access to all the information available through admin APIs, current and future.
-- **"Service principals can access admin APIs used for updates"** governs Fabric update APIs, "such as the Workspaces - Restore Workspace API" ([enable SP admin APIs](https://learn.microsoft.com/en-us/fabric/admin/enable-service-principal-admin-apis)).
+Treat the repo as a blueprint, not a product: adapt the workshop challenges before anything touches production.
 
-Because each toggle has its own "Specific security groups" scope, least privilege is implemented by **separating identities**: a read-only identity in the read group for inventory, drift detection, and reporting; a write identity in the update group for provisioning. Enabling the settings themselves requires Fabric admin rights, a control point separate from group membership. State one nuance accurately: the API that **modifies tenant settings** — [`POST /v1/admin/tenantsettings/{tenantSettingName}/update`](https://learn.microsoft.com/en-us/rest/api/fabric/admin/tenants/update-tenant-setting) — is explicitly **Preview**, "not recommended for production use," capped at 25 requests/minute, requiring `Tenant.ReadWrite.All`. [Listing](https://learn.microsoft.com/en-us/rest/api/fabric/admin/tenants/list-tenant-settings) tenant settings carries no Preview banner (effectively GA); programmatic *writes* are explicitly Preview.
+## Designing the service principals
 
-### The credential
+### Split read from write
 
-The blueprint's identity model is the pattern to emulate: a single app registration (`gh-fabric-workspace-provisioner`) is "the *only* identity allowed to write to Fabric in production," and "the SPN never holds a client secret; GitHub trades its short-lived OIDC token for a Fabric access token at runtime." It carries **three federated credentials** scoped to distinct GitHub OIDC subject claims — `pull_request` (read-only checks), `ref:refs/heads/main` (drift), and `environment:production` (write, only after environment approval), all with audience `api://AzureADTokenExchange`. Its granted roles are Fabric Administrator, Capacity Admin per in-scope capacity, and MIP label-publishing membership — and humans do not get the Fabric Administrator role, ownership of the SPN, or the ability to push to `main`. Where a stored secret is unavoidable it belongs in Key Vault, never the repo; OIDC/federated credentials eliminate the secret entirely and are the preferred design.
+Fabric has two Admin API tenant settings for service principals, each scoped to its own security group ([enable service principal admin APIs](https://learn.microsoft.com/en-us/fabric/admin/enable-service-principal-admin-apis)):
 
-## Environment configuration without hardcoding
+- **Service principals can access read-only admin APIs** covers the read-only admin APIs.
+- **Service principals can access admin APIs used for updates** covers Fabric admin APIs that change state, such as Restore Workspace.
 
-Per-stage values must be injected, never committed as literals into item definitions. Fabric gives you three mechanisms, matched to the three Git-based options.
+The app behind either setting must not have any admin-consent-required Fabric permissions in Entra ID.
 
-### Variable Library
+My rule of thumb is two identities: a read identity in the first group for inventory, reporting and drift detection, and a write identity in the second group used only by the provisioning job.
 
-The Fabric-native, GA approach. It is "a bucket of variables that other items in the workspace can consume," where "each variable can have multiple value-sets… One value-set is designated as 'active' per workspace" and "you can have a different active value set for each stage of a deployment pipeline" ([Variable Library overview](https://learn.microsoft.com/en-us/fabric/cicd/variable-library/variable-library-overview)). Consumers include pipelines, notebooks, Dataflow Gen2, Copy jobs, and lakehouse shortcuts. This is the recommended way to carry connection references across environments.
+The write identity also needs two Developer settings, scoped to its own group: **Service principals can create workspaces, connections, and deployment pipelines** and **Service principals can call Fabric public APIs**. Create Workspace, Assign to Capacity and Add Workspace Role Assignment are non-admin APIs gated by those settings, so without them workspace creation and role grants fail. The item-deploy identity also needs to be in the group for **Service principals can call Fabric public APIs** (it doesn't need the create-workspaces setting or any admin setting).
 
-### Deployment rules
+Be careful with tenant settings as code. Listing tenant settings is a stable admin API, but the [Update Tenant Setting API](https://learn.microsoft.com/en-us/rest/api/fabric/admin/tenants/update-tenant-setting) is still in preview, is rate-limited to 25 requests a minute, and needs the delegated `Tenant.ReadWrite.All` scope for a user caller; a service principal instead needs to be in the group for **Service principals can access admin APIs used for updates**, with no Fabric API permissions on the app. I'd version the desired settings in Git and alert on drift with the list API, and automate writes only once you trust a preview API with your most privileged configuration.
 
-These apply in Option 3. When promoting between stages you "configure deployment rules to change the content while keeping some settings intact" — e.g. pointing a production semantic model at a production database. Rules come in three types (data source, parameter, default lakehouse), "can't be created in the development stage," and "only take effect the next time you deploy" ([create deployment rules](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/create-rules)).
+### No stored secret
 
-### fabric-cicd `parameter.yml`
+The blueprint uses one app registration, `gh-fabric-workspace-provisioner`, with three federated credentials matched to GitHub OIDC subjects: `pull_request` for read-only checks, `ref:refs/heads/main` for drift and `environment:production` for writes after approval, all with audience `api://AzureADTokenExchange`. GitHub swaps a short-lived OIDC token for an Entra token at run time, so there's no client secret to rotate or leak.
 
-Build-time transforms in Option 2. fabric-cicd performs a full deployment on every run — it "does not inspect commit history or compute diffs," so "the target workspace always reflects the repository and converges to the desired state… preventing environment drift" ([deployment overview](https://microsoft.github.io/fabric-cicd/latest/how_to/deployment_overview/)). The `environment` argument selects which environment key is applied. The library exposes a small, keyword-only API — note `token_credential` is now **required**:
+It also grants that identity Fabric Administrator, Capacity Admin on each in-scope capacity and membership of the sensitivity-label publishing scope, while humans can't push to `main`. That's a lot of power, defensible only because nothing drives it except reviewed merges and an environment gate. If your branch protection is weak, split the identity further.
 
-<div class="code-title">publish_items.py</div>
+## Per-stage values without hardcoding
+
+The failure I see most often when a Fabric deployment works in dev and breaks in prod is a hardcoded ID. Fabric gives you three ways to inject them.
+
+**[Variable libraries](https://learn.microsoft.com/en-us/fabric/cicd/variable-library/variable-library-overview)** are generally available. A variable library holds variables with multiple value sets, one of which is active per workspace, and pipelines, notebooks, Dataflow Gen2, Copy job and shortcuts can consume them. This is my default for anything a running item needs to know about its environment.
+
+**Deployment rules** apply to option 3. Data source, parameter and default lakehouse rules are set on the target stage and take effect on the next deployment.
+
+**`parameter.yml`** is fabric-cicd's build-time transform for option 2. fabric-cicd 1.0 made `token_credential` a required, keyword-only argument and dropped the `DefaultAzureCredential` fallback, so pass a credential explicitly. In a GitHub Actions job that's already signed in with `azure/login`, `AzureCliCredential` picks up that session:
+
+<div class="code-title">scripts/publish_items.py</div>
 
 ```python
+import os
+
 from azure.identity import AzureCliCredential
 from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan_items
 
 target_workspace = FabricWorkspace(
-    workspace_id="your-workspace-guid",
-    repository_directory="/path/to/repo",
-    item_type_in_scope=["Notebook", "DataPipeline", "Environment", "VariableLibrary"],
-    environment="PPE",
+    workspace_id=os.environ["TARGET_WORKSPACE_ID"],
+    repository_directory="src/items",
+    item_type_in_scope=["Lakehouse", "Notebook", "DataPipeline", "Environment", "VariableLibrary"],
+    environment=os.environ["TARGET_ENVIRONMENT"],
     token_credential=AzureCliCredential(),
 )
 
@@ -208,35 +220,41 @@ publish_all_items(target_workspace)
 unpublish_all_orphan_items(target_workspace)
 ```
 
-`item_type_in_scope` accepts the [29 supported types](https://microsoft.github.io/fabric-cicd/latest/reference/item_types/) in exact casing: `Notebook`, `DataPipeline`, `Lakehouse`, `Warehouse`, `SemanticModel`, `Report`, `Environment`, `Eventhouse`, `Eventstream`, `KQLDatabase`, `KQLQueryset`, `KQLDashboard`, `Dataflow`, `CopyJob`, `SparkJobDefinition`, `MirroredDatabase`, `GraphQLApi`, `SQLDatabase`, `UserDataFunction`, `VariableLibrary`, `MLExperiment`, `DataAgent`, `ApacheAirflowJob`, `DataBuildToolJob`, `MountedDataFactory`, `Map`, `PaginatedReport`, `Reflex`, and `Ontology`. Omitting the argument defaults to all types.
+`item_type_in_scope` accepts fabric-cicd's supported item type names, with exact casing; leave it out to deploy everything. The `environment` value selects which key in `parameter.yml` applies:
 
-A `parameter.yml` at the repo root drives the transform. Current fields are `find_value`, `replace_value` (an environment-keyed dict), and optional `is_regex` / `ignore_case` plus `item_type` / `item_name` / `file_path` filters — there is no `input_type` field:
-
-<div class="code-title">parameter.yml</div>
+<div class="code-title">src/items/parameter.yml</div>
 
 ```yaml
 find_replace:
-  - find_value: "db52be81-c2b2-4261-84fa-840c67f4bbd0"
+  # Dev lakehouse GUID referenced by notebooks
+  - find_value: "<dev-lakehouse-guid>"
     replace_value:
-      PPE:  "$items.Lakehouse.Example_LH.$id"
-      PROD: "$items.Lakehouse.Example_LH.$id"
-    is_regex: "true"
+      _ALL_: "$items.Lakehouse.Example_LH.$id"
     item_type: "Notebook"
-    file_path: "**/notebook-content.py"
 
 key_value_replace:
   - find_key: $.properties.activities[?(@.name=="Run Notebook")].typeProperties.notebookId
     replace_value:
-      PPE:  "$items.Notebook.Hello World.$id"
-      PROD: "$items.Notebook.Hello World.$id"
+      _ALL_: "$items.Notebook.Hello World.$id"
     item_type: "DataPipeline"
 ```
 
-`find_replace` does string substitution; `key_value_replace` does JSONPath key replacement. Dynamic tokens like `$workspace.$id` and `$items.<Type>.<Name>.$id` resolve against the target environment.
+`$items.<type>.<name>.$id` resolves to the item's ID in the target workspace at deploy time, so one value works for every stage, and the `_ALL_` key applies it to whichever `environment` the job passes. Swap `_ALL_` for per-stage keys (`PPE`, `PROD`) once the values need to diverge; `_ALL_` must be the only key when you use it. A few resolution rules are worth knowing:
 
-## A concrete GitHub Actions reference flow
+- **Scope.** The parameterization guide only guarantees resolution for items in `repository_directory`. Current releases also resolve a lakehouse created by a bootstrap step (the blueprint's medallion-bootstrap challenge) when `Lakehouse` isn't in `item_type_in_scope`, but I wouldn't rely on it.
+- **Pre-created items.** Keep `Example_LH` in the repo and `Lakehouse` in `item_type_in_scope`, as the script above does, or reference a pre-created item explicitly with `$workspace.<name>.$items.Lakehouse.Example_LH.$id`.
+- **Regex.** For a regex `find_value`, set `is_regex: "true"` and wrap the value to replace in a capture group.
 
-The flow that ties this together: OIDC login (no stored secret), install tooling, a validation gate that fails the PR before anything touches the tenant, and a deploy job gated behind an environment approval on merge to `main`.
+By default fabric-cicd runs a full deployment rather than diffing commits (1.0 added `get_changed_items()` for opt-in selective deploys). The full run is what makes it converge, and it's also why a hotfix typed into the prod portal disappears on the next run.
+
+## Wiring it into GitHub Actions
+
+The workflow below validates on every pull request and, on merge, provisions the tenant layer before publishing items. Only the two jobs that sign in get an OIDC grant; the pull request job runs with read-only repository access. `scripts/validate.py` and `scripts/provision.py` stand in for your own manifest checks and idempotent provisioner.
+
+- **provision:** runs as the Fabric Administrator write identity behind the `production` environment approval.
+- **deploy:** uses a separate app (`FABRIC_DEPLOY_CLIENT_ID`) with only Contributor on the target workspace and its own federated credential for `environment:prod-items`, then runs the publish script above. The two environments make the double approval deliberate: tenant changes and item releases are signed off separately.
+- **PPE:** add a copy of the deploy job with its own environment, `TARGET_ENVIRONMENT: PPE` and the PPE workspace ID, and make the PROD job depend on it.
+- **The cost:** because `deploy` needs `provision` and both share one path filter, every item release also re-runs the idempotent provisioner and needs a tenant approval. If that's too much friction, split it into two workflows by path.
 
 <div class="code-title">.github/workflows/fabric-deploy.yml</div>
 
@@ -244,77 +262,80 @@ The flow that ties this together: OIDC login (no stored secret), install tooling
 name: fabric-deploy
 on:
   pull_request:
-    paths: ["workspaces/**", "src/items/**", "parameter.yml"]
+    paths: ["workspaces/**", "rules/**", "src/items/**"]
   push:
     branches: [main]
-    paths: ["workspaces/**", "src/items/**", "parameter.yml"]
+    paths: ["workspaces/**", "rules/**", "src/items/**"]
 
 permissions:
-  id-token: write        # required for OIDC
   contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: azure/login@v2
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
-          client-id: ${{ vars.AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.AZURE_TENANT_ID }}
-          allow-no-subscriptions: true
-      - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
-      - run: pip install fabric-cicd ms-fabric-cli
-      - name: Validate manifests and item scope (dry run)
-        run: python scripts/validate.py --changed-only
+          python-version: "3.12"
+      - run: pip install pyyaml jsonschema
+      - name: Validate manifests against schema and policy
+        run: python scripts/validate.py
 
-  deploy:
-    if: github.ref == 'refs/heads/main'
+  provision:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: validate
     runs-on: ubuntu-latest
-    environment: production          # manual approval gate
+    environment: production   # required reviewers configured on the environment
+    permissions:
+      id-token: write   # required for OIDC
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: azure/login@v2
+      - uses: actions/checkout@v6
+      - uses: azure/login@v3
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
           allow-no-subscriptions: true
-      - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
-      - run: pip install fabric-cicd
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r scripts/requirements.txt
+      - name: Provision workspaces, capacity and roles from manifests
+        run: python scripts/provision.py
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [validate, provision]
+    runs-on: ubuntu-latest
+    environment: prod-items   # separate approval for item releases
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: azure/login@v3
+        with:
+          client-id: ${{ vars.FABRIC_DEPLOY_CLIENT_ID }}   # Contributor on the target workspace only
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install "fabric-cicd~=1.2" azure-identity
       - name: Publish item definitions
         env:
           TARGET_WORKSPACE_ID: ${{ vars.PROD_WORKSPACE_ID }}
-        run: python scripts/deploy.py --environment PROD
+          TARGET_ENVIRONMENT: PROD
+        run: python scripts/publish_items.py
 ```
 
-The [Fabric CLI](https://microsoft.github.io/fabric-cli/) (`fab`, installed via `pip install ms-fabric-cli`) complements this for platform operations the item libraries don't cover — it authenticates with a federated token (`fab auth login --federated-token <token> --tenant <id>`) and reaches admin surfaces directly (`fab api -X get workspaces`), including workspace creation (`fab mkdir`) and capacity/domain assignment (`fab assign`), the latter requiring Fabric Administrator rights. The blueprint's own workflows follow this shape exactly: `validate.yml` on `pull_request` posts a report as a PR gate, `provision.yml` runs on push to `main` behind `environment: production`, and `drift.yml` runs nightly on cron, opening a GitHub issue when live state diverges from the manifests.
+## Where this isn't worth it
 
-## Anti-patterns
+Tenant-as-code costs real effort: schema, policy, provisioner, drift job, separate identities and the discipline to stop clicking in the portal. For a single team with three workspaces and one capacity, I'd skip it; a runbook and the audit log are enough.
 
-- **Portal-only production changes.** Any change made directly in a production workspace is invisible to Git and will be silently reverted by the next full fabric-cicd run, which "converges to the desired state regardless of what happened in previous runs" ([deployment overview](https://microsoft.github.io/fabric-cicd/latest/how_to/deployment_overview/)). The portal is for the dev workspace, not prod.
-- **Manual workspace creation.** Clicking "New workspace" produces an unnamed, unpoliced, untracked object. If it isn't a manifest in `main`, it doesn't exist.
-- **Untracked tenant settings.** Toggling SP-access or publish-to-web in the admin portal with no record is unauditable configuration drift at the most privileged layer of the platform.
-- **Secrets in the repo.** Client secrets, tokens, and per-stage secret values never belong in Git. Use federated OIDC credentials, or Key Vault where a secret is unavoidable.
-- **No per-stage parameterization.** Hardcoding a dev `lakehouseId` or `connectionId` into an item definition guarantees a broken prod deploy. Use Variable Libraries, deployment rules, or `parameter.yml`.
-- **Drift with no reconciliation.** Without a scheduled drift job comparing manifests to live tenant state, governance is aspirational. Detection must open a tracked issue, as the blueprint's nightly `drift.yml` does.
+It pays off once many teams request workspaces, when naming and ownership rules exist only on paper, or when an auditor asks who approved a tenant setting change. If you're there, start small: manifests and a validate workflow first, provisioning second, drift third, tenant settings last. My earlier post on [Fabric tenant settings](/blog/2024-06-13-tenant-settings-fabric/) is a reasonable list of which settings deserve to be in that repo.
 
-## Definition of done for tenant-as-code
+## The test I'd apply
 
-You have reached tenant-as-code when: every workspace, capacity assignment, domain, role grant, and governed tenant setting originates from a version-controlled manifest merged through PR review; no human holds standing write access to production Fabric — a federated service principal provisions, and its credential is short-lived and secret-free; per-stage values are injected through Variable Libraries, deployment rules, or `parameter.yml`, never hardcoded; a scheduled job reconciles declared state against live state and raises a tracked issue on drift; and the only thing a portal is used for in production is reading. Item CI/CD gets you a repeatable deployment. Tenant-as-code gets you a platform whose entire configuration is reviewable, auditable, and replayable — which is the part Git integration was never going to give you.
-
-## References
-
-Verified against Microsoft Learn (retrieved July 2026), the `microsoft/fabric-cicd` v1.2.0 docs and source, `microsoft/frontier-fabric-governance-rvas`, and the Fabric CLI docs. Preview features (the tenant-settings write API; the governance blueprint's dormant workflows) should be re-checked against the live product before you rely on them.
-
-1. [CI/CD workflow options in Fabric (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/cicd/manage-deployment)
-2. [Introduction to CI/CD in Microsoft Fabric (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/cicd/cicd-overview)
-3. [Overview of Fabric Git integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration) · [Git integration process](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-integration-process)
-4. [Cross-workspace dependency binding (Microsoft Learn)](https://learn.microsoft.com/en-us/fabric/cicd/cross-workspace-dependency-binding)
-5. [Variable Library overview](https://learn.microsoft.com/en-us/fabric/cicd/variable-library/variable-library-overview) · [Create deployment rules](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/create-rules)
-6. [Enable service principals to use admin APIs](https://learn.microsoft.com/en-us/fabric/admin/enable-service-principal-admin-apis) · [List Tenant Settings](https://learn.microsoft.com/en-us/rest/api/fabric/admin/tenants/list-tenant-settings) · [Update Tenant Setting (Preview)](https://learn.microsoft.com/en-us/rest/api/fabric/admin/tenants/update-tenant-setting)
-7. [microsoft/fabric-cicd](https://github.com/microsoft/fabric-cicd) · [docs](https://microsoft.github.io/fabric-cicd/) · [supported item types](https://microsoft.github.io/fabric-cicd/latest/reference/item_types/)
-8. [microsoft/frontier-fabric-governance-rvas](https://github.com/microsoft/frontier-fabric-governance-rvas)
-9. [Microsoft Fabric CLI (`fab`)](https://microsoft.github.io/fabric-cli/)
+You have tenant-as-code when every workspace, capacity assignment, domain and role grant traces back to a merged pull request; no person holds standing write access to production; the identity that does write has no secret; per-stage values come from variable libraries, deployment rules or `parameter.yml`; and a scheduled job tells you when reality has moved. Item CI/CD gives you repeatable deployments. The tenant layer makes the platform reviewable, and Git integration was never going to do that for you.

@@ -1,285 +1,192 @@
 ---
-title: "Azure OpenAI: The Hidden Costs Nobody Talks About"
-description: "Let me show you where the costs hide. Simple math, right? Wrong. Every chat conversation includes the entire history. That \"helpful\" feature where the AI…"
+title: "Azure OpenAI Hidden Costs: What Your Token Estimate Misses"
+description: "Re-sent history, hidden reasoning tokens, billed failures, idle fine-tuned deployments and re-embedding: where Azure OpenAI bills drift from the estimate."
 author: Michael John Peña
 draft: false
 date: 2026-01-04
 tags:
-  - Azure
-  - OpenAI
-  - Cost
+  - Azure OpenAI
+  - Cost Optimization
   - FinOps
+  - Microsoft Foundry
 ---
 
-Let me show you where the costs hide.
+Most Azure OpenAI cost estimates are one line of arithmetic: expected requests, times average tokens, times the price per million. The bill is rarely that tidy, because the estimate models the request you designed while the meter counts the requests your application actually sends. The gap is predictable, and almost all of it comes from a handful of places teams don't look until finance asks.
 
-## The Obvious Costs
+This isn't a general optimisation checklist. I covered model selection and caching in [Cost Optimization Strategies for Azure OpenAI Deployments](/blog/2025-10-22-october-ai-topic/). This is about the costs that never made it into the spreadsheet.
 
-These you probably know:
+## Conversation history is billed again on every turn
 
-- **Input tokens**: What you send to the model
-- **Output tokens**: What the model generates
-- **Model tier**: GPT-4o costs more than GPT-4o-mini
+Chat Completions is stateless: every call sends the whole conversation, so every earlier turn is charged as input again. The Responses API doesn't change the maths. Chain turns with `previous_response_id` or a conversation object and the service holds the history, but earlier turns are still billed as input on each new response. Server-side state saves bandwidth, not money.
 
-Simple math, right? Wrong.
+Take a simple two-turn exchange: the user pastes a 5,000-token document with a 100-token instruction, the model answers in 300 tokens, and the user asks "now translate that into Spanish" (about 10 tokens). The second call costs 5,410 input tokens, not 10: instruction, document, previous answer and new question. Add a 400-token reply and that turn is 5,810 tokens, not 410.
 
-## The Hidden Cost #1: Context Accumulation
+Two things soften this.
 
-Every chat conversation includes the entire history. That "helpful" feature where the AI remembers your conversation? You're paying for it.
+**Prompt caching.** On Azure OpenAI models from GPT-4o onward, [prompt caching](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/prompt-caching) is on by default. Once a prompt is at least 1,024 tokens and its first 1,024 tokens match a recent request, the matching prefix is billed at a discounted cached-input rate on Standard deployments, and can be discounted up to 100% against utilisation on Provisioned deployments. The catch is the word *prefix*: a timestamp in the system prompt, a per-user greeting or reordered tools near the top gives you a cache miss. Put static content first (system prompt, tool definitions, reference documents) and variable content last. Caches are typically cleared after 5 to 10 minutes of inactivity, so caching helps busy chat sessions far more than overnight jobs.
 
-Example conversation:
-```
-User: "Summarize this document" (100 tokens + 5000 token document)
-AI: "Here's a summary..." (300 tokens)
-User: "Now translate it to Spanish"
-```
+**Trimming what you send.** Translating a summary doesn't need the source document. My rule of thumb: keep full history for genuinely conversational turns, and build a fresh, minimal prompt for anything that's really a new task wearing a chat interface.
 
-That second request? You're paying for:
-- Original 100 tokens
-- The 5000 token document AGAIN
-- Previous 300 token response
-- The new 10 token request
-- The new response (probably 400 tokens)
+## Reasoning tokens you never see
 
-**Total: 5,810 tokens, not 410.**
+GPT-5 and the o-series models think before they answer, and that thinking is billed. Microsoft's [reasoning models guide](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/reasoning) describes `reasoning_tokens` as hidden tokens that aren't returned in the response content. They are counted in `completion_tokens`, which is what you pay the output rate on. In the documentation's own o1 sample, 448 of the 1,843 completion tokens are reasoning; in its GPT-5 sample it's 1,792 of 2,919.
 
-### The Fix
+Estimates based on visible response length come in low, and the hidden part sits on the output meter, which costs several times more than input.
 
-```python
-from azure.ai.openai import OpenAIClient
+The controls are `reasoning_effort` and the output cap:
 
-client = OpenAIClient(endpoint="...", credential="...")
+| Model group | `reasoning_effort` values | Default |
+|---|---|---|
+| `gpt-5`, `gpt-5-mini`, `gpt-5-nano` | `minimal`, `low`, `medium`, `high` | `medium` |
+| `gpt-5-codex` | `low`, `medium`, `high` (no `minimal`) | `medium` |
+| `gpt-5.1`, `gpt-5.2`, `gpt-5.1-codex` family | adds `none`, which removes reasoning tokens entirely | `none` on `gpt-5.1` |
 
-# Bad: Accumulating context
-messages = []
-messages.append({"role": "user", "content": long_document})
-response1 = client.chat.completions.create(messages=messages, model="gpt-4o")
-messages.append({"role": "assistant", "content": response1.content})
-messages.append({"role": "user", "content": "Translate to Spanish"})
-response2 = client.chat.completions.create(messages=messages, model="gpt-4o")
+Azure documents `xhigh` only for `gpt-5.1-codex-max`.
 
-# Good: Passing only necessary context
-messages = [
-    {"role": "user", "content": "Translate this summary to Spanish: " + response1.content}
-]
-response2 = client.chat.completions.create(messages=messages, model="gpt-4o")
-```
+Higher effort generally means more reasoning tokens. For classification, extraction and routing, `none`, `minimal` or `low` is usually enough, and often a non-reasoning model such as `gpt-4.1-mini` is cheaper still. Set `max_completion_tokens` (or `max_output_tokens` on the Responses API) with reasoning in mind. Too low and you pay for reasoning that runs out of budget before producing an answer. Too high and nothing stops a runaway.
 
-Savings: Potentially 90% on follow-up requests.
+## Failures that still cost money
 
-## The Hidden Cost #2: Embeddings at Scale
+A common belief is that retrying after rate limits means paying for every attempt. That's wrong. The [Azure OpenAI FAQ](https://learn.microsoft.com/en-us/azure/foundry-classic/openai/faq) is explicit: if the service doesn't process the request, you aren't charged. A 429 for exceeding the rate limit and a 401 for bad authentication cost nothing.
 
-"Embeddings are cheap!" Until you embed a million documents. Twice. Because you changed your chunking strategy.
+What does cost money is a failure *after* processing:
 
-Real scenario from a client:
-- 1M documents
-- Average 1000 tokens each
-- Using text-embedding-ada-002
-- Cost: ~$100
+| Response | Billed? | Why it matters |
+|---|---|---|
+| 429 rate limited | No | Retrying 429s is safe for cost, just slow |
+| 401 authentication | No | Fix the identity, not the retry policy |
+| 400 content filter or input too long | Yes | Retrying the same prompt pays again for the same rejection |
+| 408 timeout | Yes | The model did the work; a retry pays twice |
+| 200 with `finish_reason: content_filter` | Yes | The completion was generated, then filtered |
 
-Then they realized their chunks were too large. Re-embedding:
-- Another $100
+The default retry behaviour matters here. The `openai` Python SDK (2.14.0 at the time of writing) retries twice by default, on 408, 409, 429 and 5xx responses, and on client-side timeouts. Its default timeout is 600 seconds. Lower the timeout but leave a long `max_completion_tokens`, and a slow reasoning call can time out on your side while the service is still generating. The service may finish and bill that generation, and the SDK sends the request again. You risk paying twice while the user still waits.
 
-Then they wanted to support multiple languages. Per language:
-- Another $100
+My recommendation: set the timeout and the output cap together, so one can't silently undercut the other, and never wrap model calls in a generic "retry everything three times" decorator. Content filter rejections and context-length errors aren't transient.
 
-**Total: $300 for what they thought would be $100.**
+## Fine-tuned models charge by the hour, used or not
 
-### The Fix
+This produces the most surprising line item. A deployed fine-tuned model on Standard or Global Standard pays the same per-token rate as the base model *plus* an hourly hosting fee (Global Standard for fine-tuned models is in preview). Microsoft's [fine-tuning cost guide](https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/cost-management) listed that fee at $1.70 per hour at the time of writing. That's about $1,224 for a 30-day month before a single token is processed.
+
+There's a safety net that isn't a strategy: according to the [Azure OpenAI FAQ](https://learn.microsoft.com/en-us/azure/foundry-classic/openai/faq), a fine-tuned deployment with no completions or chat completions calls for 15 consecutive days is deleted automatically. The model itself survives and can be redeployed. Fifteen days of idle hosting before that kicks in is still roughly $610 per deployment.
+
+For evaluating candidates, use the **Developer** deployment type instead: pay-per-token with no hourly hosting fee, no availability SLA or data residency, and removed automatically after 24 hours. That's exactly the shape of "is this fine-tune better than the base model?". Developer deployments are available for a subset of fine-tunable models; check the list before planning on it. Only promote to Standard or Provisioned when the model has earned a production slot.
+
+## Re-embedding is cheap in tokens, expensive everywhere else
+
+Embedding tokens are cheap. A million documents at roughly 1,000 tokens each is a billion tokens: about $100 with `text-embedding-ada-002` and about $20 with `text-embedding-3-small` at list prices. The token line is rarely the problem.
+
+The cost hides in what surrounds it. Every change to chunk size, overlap or embedding model means re-embedding the corpus, re-indexing it in Azure AI Search, and often running two indexes side by side during cutover. Moving to `text-embedding-3-large` at its full 3,072 dimensions doubles vector storage against 1,536 dimensions, and vector storage is what pushes AI Search into a bigger tier. The Batch API's 50% discount doesn't help either, because it doesn't support embeddings models.
+
+The cheapest fix is to never embed the same chunk twice. Key the vector by a hash of the chunk text plus the model and dimensions, not the deployment name: deployment names are arbitrary, and redeploying a different model under the same name would serve stale vectors. Vectors are stored as packed 32-bit floats, about 6 KB each at 1,536 dimensions against roughly 30 KB as JSON, and both paths return the same values:
 
 ```python
 import hashlib
+import sqlite3
+from array import array
 
-def get_embedding_with_cache(text: str, model: str = "text-embedding-ada-002"):
-    # Hash the content
-    content_hash = hashlib.sha256(text.encode()).hexdigest()
-    cache_key = f"embedding:{model}:{content_hash}"
-    
-    # Check cache first
-    cached = redis_client.get(cache_key)
-    if cached:
-        return json.loads(cached)
-    
-    # Generate and cache
-    embedding = openai_client.embeddings.create(
-        input=text,
-        model=model
-    )
-    
-    redis_client.set(cache_key, json.dumps(embedding), ex=86400*30)  # 30 days
-    return embedding
-```
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from openai import OpenAI
 
-Only re-embed what actually changed.
-
-## The Hidden Cost #3: Retries and Errors
-
-Your code has retry logic. That's good engineering. That's also expensive.
-
-```python
-@retry(tries=3, delay=1, backoff=2)
-def call_openai(prompt):
-    return client.chat.completions.create(...)
-```
-
-This seems reasonable. But if your prompt is 10K tokens and you hit rate limits:
-- Attempt 1: 10K tokens (rate limit)
-- Attempt 2: 10K tokens (rate limit)
-- Attempt 3: 10K tokens (success)
-
-**You paid for 30K tokens to get one response.**
-
-### The Fix
-
-```python
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-from openai import RateLimitError
-
-@retry(
-    retry=retry_if_exception_type(RateLimitError),  # Only retry rate limits
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=1, min=4, max=10)
+token_provider = get_bearer_token_provider(
+    DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
 )
-def call_openai(prompt):
-    try:
-        return client.chat.completions.create(...)
-    except OpenAIError as e:
-        if "content_filter" in str(e):
-            # Don't retry content filter rejections
-            raise
-        raise
-```
+client = OpenAI(
+    base_url="https://<your-resource-name>.openai.azure.com/openai/v1/",
+    api_key=token_provider,  # keyless Entra ID auth; needs openai>=1.106
+)
+db = sqlite3.connect("embedding_cache.db")
+db.execute("CREATE TABLE IF NOT EXISTS vectors (key TEXT PRIMARY KEY, vector BLOB)")
 
-Don't retry errors that won't succeed on retry.
 
-## The Hidden Cost #4: Development vs Production
+def embed(text: str, deployment: str, model: str, dimensions: int) -> list[float]:
+    # model is the underlying model name (e.g. "text-embedding-3-small"),
+    # not the deployment name, so a redeploy can't serve stale vectors.
+    sha = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    key = f"{model}:{dimensions}:{sha}"
+    row = db.execute("SELECT vector FROM vectors WHERE key = ?", (key,)).fetchone()
+    if row:
+        return array("f", row[0]).tolist()
 
-Your dev environment uses the same API keys as production. Developers are running tests, experimenting, iterating.
-
-One developer's afternoon of debugging:
-- 50 test runs
-- Average 5K tokens per run
-- $2.50 at GPT-4o rates
-
-Times 10 developers: **$25/day or $500/month** just for development.
-
-### The Fix
-
-Separate deployments and monitoring:
-
-```python
-import os
-
-def get_deployment():
-    env = os.getenv("ENVIRONMENT", "dev")
-    
-    if env == "production":
-        return "gpt-4o"
-    elif env == "staging":
-        return "gpt-4o-mini"
-    else:
-        return "gpt-3.5-turbo"  # Cheapest for dev
-```
-
-Use cheaper models for development. Reserve GPT-4o for production.
-
-## The Hidden Cost #5: Streaming Responses
-
-Streaming feels responsive. Users love it. But if they navigate away mid-stream, you still pay for the full response.
-
-```python
-async def stream_response(prompt):
-    stream = await client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": prompt}],
-        stream=True,
-        max_tokens=4000
+    vector = (
+        client.embeddings.create(model=deployment, input=text, dimensions=dimensions)
+        .data[0]
+        .embedding
     )
-    
-    # User closes browser at token 100
-    # You still pay for all 4000 tokens the model was generating
+    blob = array("f", vector).tobytes()  # 4 bytes per dimension
+    db.execute("INSERT INTO vectors (key, vector) VALUES (?, ?)", (key, blob))
+    db.commit()
+    return array("f", vector).tolist()  # same float32 values as a cache hit
 ```
 
-### The Fix
+Call it as `embed(chunk, "<your-embedding-deployment>", "text-embedding-3-small", 1536)`; `text-embedding-ada-002` doesn't accept `dimensions`. When you re-chunk, unchanged chunks hit the cache and only new boundaries are embedded. At corpus scale I'd keep the cache alongside your source metadata rather than in local SQLite.
 
-Monitor user engagement and stop generation:
+## The costs around the model
+
+A few more line items belong to deployment choices, not single requests:
+
+- **Deployment type premiums.** Data Zone and Regional Standard generally cost more per token than Global Standard for the same model. That's the price of data residency: pay it deliberately if the requirement is real, and question it if it's just a default.
+- **Provisioned throughput bills by the hour.** PTUs are paid whether you send traffic or not. They pay off for steady, high-utilisation workloads, which I covered in [Azure OpenAI Provisioned Throughput Units](/blog/2024-02-11-azure-openai-ptu/). For spiky traffic, an idle PTU at 3am costs the same as a busy one at 10am.
+- **Built-in tools.** Every Code Interpreter session is charged separately, and file search is billed on the vector storage you keep, whether you call them through the Assistants API, the Responses API or Foundry Agent Service. OpenAI has announced the Assistants API will be retired in August 2026, and Microsoft recommends Foundry Agent Service for new builds, so new builds should use Responses or Agent Service. Either way, orphaned threads, containers and vector stores accumulate quietly.
+- **Logging.** Diagnostic logs sent to Log Analytics, or an API Management gateway logging full request and response bodies, are billed on ingestion.
+
+## Measure tokens the way the bill does
+
+Azure Cost Management tells you what a resource cost, not which feature or prompt caused it. Log the usage object on every call, including the parts that explain the bill:
 
 ```python
-async def stream_response(prompt, stop_event):
-    stream = await client.chat.completions.create(...)
-    
-    async for chunk in stream:
-        if stop_event.is_set():
-            # User disconnected, stop the stream
-            break
-        yield chunk
+import logging
+
+import openai
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from openai import OpenAI
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("aoai.usage")
+
+token_provider = get_bearer_token_provider(
+    DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
+)
+client = OpenAI(
+    base_url="https://<your-resource-name>.openai.azure.com/openai/v1/",
+    api_key=token_provider,
+    timeout=120,      # seconds; keep it consistent with the output cap below
+    max_retries=2,
+)
+
+
+def ask(feature: str, messages: list[dict]) -> str:
+    try:
+        response = client.chat.completions.create(
+            model="<your-gpt-5-mini-deployment>",
+            messages=messages,
+            reasoning_effort="low",
+            max_completion_tokens=4000,
+        )
+    except openai.BadRequestError as err:
+        # Content filter and context-length rejections are billed; record them too.
+        logger.warning("feature=%s rejected status=%d code=%s", feature, err.status_code, err.code)
+        raise
+    usage = response.usage
+    prompt_details = usage.prompt_tokens_details
+    completion_details = usage.completion_tokens_details
+    logger.info(
+        "feature=%s prompt=%d cached=%d completion=%d reasoning=%d finish=%s",
+        feature,
+        usage.prompt_tokens,
+        (prompt_details.cached_tokens or 0) if prompt_details else 0,
+        usage.completion_tokens,
+        (completion_details.reasoning_tokens or 0) if completion_details else 0,
+        response.choices[0].finish_reason,
+    )
+    return response.choices[0].message.content or ""
 ```
 
-Stop generating when no one's listening.
+The `except` branch matters because a billed 400 rejection returns no usage object. Tag each call with its feature, and within a week you'll know your cache hit rate, how much of your output spend is reasoning, and which feature re-sends the most history. Those three numbers explain most of the gap between estimate and invoice.
 
-## Real Numbers
+## Where I'd look first
 
-From a recent client project:
-- Expected monthly cost: $2,000
-- Actual first month: $8,000
-- After optimizations: $2,500
+If the bill is already higher than planned, check in this order: deployed fine-tuned models nobody is using (fastest money back), reasoning token share on high-volume features, cache hit rate on long prompts, and then history growth in chat flows. Retries are worth reviewing for correctness, but 429s aren't where the money goes.
 
-**Savings: $5,500/month or $66,000/year.**
+If you're still estimating, multiply the naive number by turns per conversation, add hosting for anything fine-tuned, and treat reasoning models as producing about 1.3x to 2.6x the visible output (per Microsoft's own samples), more at high effort. Then check it against logged usage in your first week of real traffic.
 
-Changes made:
-- Aggressive context pruning (50% savings)
-- Caching embeddings (20% savings)
-- Using GPT-4o-mini for classification (15% savings)
-- Proper retry logic (10% savings)
-- Development environment limits (5% savings)
-
-## Best Practices
-
-1. **Log everything** - Track tokens per request, per user, per feature
-2. **Set budgets** - Alert when spending exceeds thresholds
-3. **Use PTU for predictable load** - Provisioned throughput can be cheaper at scale
-4. **Right-size your model** - Don't use GPT-4o for classification tasks
-5. **Cache aggressively** - Identical requests should hit cache
-6. **Monitor your prompts** - Long system prompts multiply across all requests
-
-## Tools I Use
-
-```python
-# Cost tracking decorator
-def track_openai_cost(func):
-    @wraps(func)
-    async def wrapper(*args, **kwargs):
-        start_time = time.time()
-        result = await func(*args, **kwargs)
-        
-        cost = calculate_cost(
-            result.usage.prompt_tokens,
-            result.usage.completion_tokens,
-            result.model
-        )
-        
-        log_cost(
-            function=func.__name__,
-            cost=cost,
-            duration=time.time() - start_time,
-            model=result.model
-        )
-        
-        return result
-    return wrapper
-```
-
-Track every call. You can't optimize what you don't measure.
-
-## The Bottom Line
-
-Azure OpenAI is incredibly powerful. It's also easy to rack up costs without realizing it. Most teams overspend by 3-4x in their first few months.
-
-Pay attention to:
-- Context management
-- Caching strategies  
-- Model selection
-- Error handling
-- Development practices
-
-Your finance team will thank you.
+When not to bother: if you're spending a few hundred dollars a month on a prototype, instrument it and move on. Engineering time spent shaving tokens costs more than the tokens. These costs matter once a workload is in production, has many users, or runs fine-tuned or reasoning models at volume.
