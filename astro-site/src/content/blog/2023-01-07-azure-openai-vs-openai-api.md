@@ -1,395 +1,177 @@
 ---
-title: "Azure OpenAI vs OpenAI API: Which One Should You Choose?"
-description: "The right choice depends on your specific requirements. For most enterprise scenarios, Azure OpenAI's security and compliance features make it the clear…"
+title: "Azure OpenAI vs OpenAI API: What Differs in January 2023"
+description: "Azure OpenAI or OpenAI's own API in January 2023? Access, models, data use, cost and code compared, plus one Python client that can target either."
 author: Michael John Peña
 draft: false
 date: 2023-01-07
 tags:
-  - Azure
+  - Azure OpenAI
   - OpenAI
-  - AI
+  - Azure
   - Architecture
-  - Comparison
+  - Python
 ---
 
-## Quick Comparison Matrix
+Since ChatGPT arrived, the same question keeps coming up: should we build on OpenAI's API or on Azure OpenAI Service? Both serve the same GPT-3 model families with nearly identical request bodies, so it looks like a coin toss. It isn't. The two differ in how you get access, which models you can use this week, what happens to your prompts, and who you're buying from, and those differences decide more about a project than the model does.
 
-| Feature | OpenAI API | Azure OpenAI |
-|---------|-----------|--------------|
-| Access | Public signup | Request-based approval |
-| Models | GPT-4, GPT-3.5, DALL-E, Whisper | GPT-3.5, Codex, DALL-E (GPT-4 coming) |
-| Data Privacy | Used for training (opt-out available) | Not used for training |
-| Compliance | SOC 2 | SOC 2, HIPAA, GDPR, FedRAMP |
-| Network | Public internet only | Private endpoints, VNet |
-| SLA | Best effort | 99.9% uptime |
-| Support | Community/paid tiers | Enterprise support |
-| Pricing | Pay-as-you-go | Pay-as-you-go + commitments |
+I covered what to sort out while Azure OpenAI is still in preview in [an earlier post](/blog/2023-01-01-azure-openai-service-ga-announcement/), and the security controls in [Enterprise AI with Azure OpenAI](/blog/2023-01-06-enterprise-ai-azure-openai/). This one is the side-by-side, plus a way to write code that doesn't force you to choose permanently.
 
-## Code Comparison
+## What each one is on 7 January 2023
 
-The APIs are similar but have key differences:
+**OpenAI's API** is a self-service platform. You sign up, add a card, and get an API key. The catalogue is the GPT-3 family (with `text-davinci-003` as the newest Davinci model since late November), the Codex models in limited beta, the [DALL-E image API in public beta since November](https://openai.com/index/dall-e-api-now-available-in-public-beta), embeddings (including `text-embedding-ada-002`, released on 15 December), fine-tuning, and a free moderation endpoint.
+
+**Azure OpenAI Service** is the same model families hosted by Microsoft inside Azure, and it is still a preview. Under Microsoft's [Limited Access policy](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/limited-access) you apply, describe your use case, and wait for approval before you can create a resource. Once approved you deploy models into your own resource and call them through your own endpoint. DALL-E 2 is invitation-only within that preview.
+
+Neither offers ChatGPT as an API. If someone has promised you a "ChatGPT integration" this month, the closest thing either platform supports is a well-designed prompt against a Davinci completion model.
+
+## The comparison
+
+| Concern | OpenAI API | Azure OpenAI Service (preview) |
+|---|---|---|
+| Getting access | Self-service sign-up | Application and use-case review |
+| New models | Released here first | Arrive later, region by region |
+| Calling a model | By model name (`model=`) | By your deployment name (`engine=`) |
+| Authentication | API keys, optional organisation header | Resource keys or Azure Active Directory tokens |
+| Your data and training | Can be used to improve models unless you opt out | Not used to train OpenAI's models |
+| Content filtering | Moderation endpoint you call yourself | Built into the service, but temporarily off by default since December 2022 (Microsoft plans to re-enable it in Q1 2023) |
+| Billing | Separate OpenAI account | Your Azure subscription |
+| Rate limits and quota | Per-organisation rate limits and a monthly usage limit | Requests-per-second limits per deployment (20/s for Davinci, 50/s for other models) |
+| Access controls | API keys on an organisation | Azure resource-level controls (keys, Azure AD RBAC, customer-managed keys) |
+| Regions | Not selectable | A small set of US and European regions |
+| SLA | None published | None while in preview |
+
+Don't rely on Azure's content filter yet. Microsoft's [What's new page](https://learn.microsoft.com/en-us/azure/ai-services/openai/whats-new) lists the December 2022 changes: API version `2022-12-01`, higher rate limits, content filtering off by default, and a process for requesting modified abuse monitoring. Until the filter is back on, call OpenAI's moderation endpoint or your own filter on both platforms.
+
+A few of those rows deserve more than a table cell. On quota specifically: OpenAI raises rate limits and the monthly usage limit when you request an increase for your organisation, while Azure's preview limits are set per deployment and raising them means opening a support request. Neither is instant, so ask before a launch date, not on it.
+
+### Data use is the row legal will ask about
+
+OpenAI's [API data usage policy](https://openai.com/policies/api-data-usage-policies) as of January 2023 (it changes on 1 March 2023) allows it to use content submitted through the API to improve its services, and organisations that don't want that have to request an opt-out. For a consumer side project that's an acceptable trade. For anything that touches customer records, it's a conversation with your privacy team before a single real prompt is sent.
+
+Azure's position is different. Microsoft's [data, privacy and security page for Azure OpenAI](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy) states that your prompts and completions aren't used to train OpenAI models. The detail people miss is that the service still retains them for a limited period for abuse monitoring, and authorised Microsoft staff can review flagged content. You can apply for modified monitoring if that's a problem for your workload. Neither platform is "your data never leaves your control". Azure's terms are simply the easier ones to get past a risk committee.
+
+### Region is a residency question, not a latency one
+
+Azure OpenAI is only in a handful of US and European regions, with no Australian region. If your data residency policy says "Australia only", Azure doesn't solve it yet. What Azure does give you is a named region, a contract you already have, and an audit trail in your own subscription. OpenAI's API gives you none of those. For most Australian organisations I'd rather have a documented exception for a known Azure region than an undocumented dependency on someone else's.
+
+### The model gap runs one way
+
+New models land on OpenAI's API first. As of 7 January, the Azure preview catalogue is `text-davinci-002`, with `text-davinci-003` rolling out to East US and West Europe, plus `code-davinci-002`, the smaller GPT-3 models, and the earlier first-generation embeddings models. `text-embedding-ada-002`, which OpenAI shipped on 15 December and which is both cheaper and better than the models it replaces, isn't on Azure yet. In practice the lag is weeks, and region by region. If your project depends on the newest model on release day, Azure will frustrate you. If it depends on a model being there in eighteen months with a support contract behind it, that lag matters much less.
+
+### Cost is closer than the debate suggests
+
+Pay-as-you-go token rates for the base GPT-3 models are in the same range on both: Davinci-class models are $0.02 per 1,000 tokens on [OpenAI's price list](https://openai.com/api/pricing/), and Azure's preview price for Davinci is also $0.02 per 1,000 tokens. The differences are elsewhere. Codex is free on OpenAI while it's in limited beta, but you can't build a production commitment on a free beta. Fine-tuned models on Azure carry an hourly hosting charge for each deployment on top of token usage (about $3 per hour for a fine-tuned Davinci deployment), while OpenAI charges a higher per-token rate for fine-tuned models instead. If you fine-tune Davinci and then leave the deployment idle on Azure, that's roughly $2,000 a month for nothing. The bigger saving for most enterprises is administrative: Azure usage lands on an existing invoice and enterprise agreement instead of a new vendor and a corporate credit card.
+
+## Write once, point at either
+
+The `openai` Python library (0.26.0, released 6 January) speaks to both. Most samples configure it through module-level globals (`openai.api_type = "azure"` and so on), which is fine for a notebook and fragile in a service. The library also accepts `api_key`, `api_base`, `api_type` and `api_version` on each call, so you can keep the provider in configuration and keep the global module state clean.
 
 ```python
-# OpenAI Direct API
-import openai
-
-openai.api_key = "sk-your-key-here"
-
-# Using model name directly
-response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Hello!"}
-    ]
-)
-
-# Azure OpenAI API
-import openai
-
-openai.api_type = "azure"
-openai.api_base = "https://your-resource.openai.azure.com/"
-openai.api_version = "2023-03-15-preview"
-openai.api_key = "your-azure-key"
-
-# Using deployment name (not model name)
-response = openai.ChatCompletion.create(
-    engine="my-gpt35-deployment",  # Your deployment name
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Hello!"}
-    ]
-)
-```
-
-## Building an Abstraction Layer
-
-To support both backends, create an abstraction:
-
-```python
-from abc import ABC, abstractmethod
-from typing import List, Dict, Optional
+import os
 from dataclasses import dataclass
-import openai
-
-@dataclass
-class ChatMessage:
-    role: str  # "system", "user", or "assistant"
-    content: str
-
-@dataclass
-class ChatResponse:
-    content: str
-    tokens_used: int
-    model: str
-    finish_reason: str
-
-class LLMProvider(ABC):
-    """Abstract base class for LLM providers."""
-
-    @abstractmethod
-    def chat(self, messages: List[ChatMessage], **kwargs) -> ChatResponse:
-        pass
-
-    @abstractmethod
-    def complete(self, prompt: str, **kwargs) -> str:
-        pass
-
-class OpenAIProvider(LLMProvider):
-    """Direct OpenAI API provider."""
-
-    def __init__(self, api_key: str, model: str = "gpt-3.5-turbo"):
-        openai.api_key = api_key
-        self.model = model
-
-    def chat(self, messages: List[ChatMessage], **kwargs) -> ChatResponse:
-        response = openai.ChatCompletion.create(
-            model=self.model,
-            messages=[{"role": m.role, "content": m.content} for m in messages],
-            **kwargs
-        )
-
-        return ChatResponse(
-            content=response.choices[0].message.content,
-            tokens_used=response.usage.total_tokens,
-            model=response.model,
-            finish_reason=response.choices[0].finish_reason
-        )
-
-    def complete(self, prompt: str, **kwargs) -> str:
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=prompt,
-            **kwargs
-        )
-        return response.choices[0].text
-
-class AzureOpenAIProvider(LLMProvider):
-    """Azure OpenAI API provider."""
-
-    def __init__(
-        self,
-        endpoint: str,
-        api_key: str,
-        deployment: str,
-        api_version: str = "2023-03-15-preview"
-    ):
-        openai.api_type = "azure"
-        openai.api_base = endpoint
-        openai.api_version = api_version
-        openai.api_key = api_key
-        self.deployment = deployment
-
-    def chat(self, messages: List[ChatMessage], **kwargs) -> ChatResponse:
-        response = openai.ChatCompletion.create(
-            engine=self.deployment,
-            messages=[{"role": m.role, "content": m.content} for m in messages],
-            **kwargs
-        )
-
-        return ChatResponse(
-            content=response.choices[0].message.content,
-            tokens_used=response.usage.total_tokens,
-            model=self.deployment,
-            finish_reason=response.choices[0].finish_reason
-        )
-
-    def complete(self, prompt: str, **kwargs) -> str:
-        response = openai.Completion.create(
-            engine=self.deployment,
-            prompt=prompt,
-            **kwargs
-        )
-        return response.choices[0].text
-
-# Factory function
-def create_provider(provider_type: str, **config) -> LLMProvider:
-    """Create an LLM provider based on configuration."""
-    if provider_type == "openai":
-        return OpenAIProvider(
-            api_key=config["api_key"],
-            model=config.get("model", "gpt-3.5-turbo")
-        )
-    elif provider_type == "azure":
-        return AzureOpenAIProvider(
-            endpoint=config["endpoint"],
-            api_key=config["api_key"],
-            deployment=config["deployment"]
-        )
-    else:
-        raise ValueError(f"Unknown provider: {provider_type}")
-
-# Usage - same code works with either provider
-provider = create_provider(
-    "azure",
-    endpoint="https://my-openai.openai.azure.com",
-    api_key="my-key",
-    deployment="gpt35"
-)
-
-messages = [
-    ChatMessage(role="system", content="You are a helpful assistant."),
-    ChatMessage(role="user", content="What is Azure?")
-]
-
-response = provider.chat(messages, max_tokens=500)
-print(response.content)
-```
-
-## When to Choose OpenAI Direct
-
-Choose OpenAI's API when:
-
-1. **Rapid Prototyping**: Instant signup, no approval wait
-2. **Latest Models**: Access to GPT-4, Whisper, newer features first
-3. **Consumer Applications**: Less stringent compliance requirements
-4. **Cost Flexibility**: Pay-as-you-go without Azure subscription
-
-```python
-# Quick prototype with OpenAI
-import openai
-openai.api_key = "sk-..."
-
-# Access to latest models immediately
-response = openai.ChatCompletion.create(
-    model="gpt-4",  # GPT-4 available
-    messages=[{"role": "user", "content": "Hello!"}]
-)
-```
-
-## When to Choose Azure OpenAI
-
-Choose Azure OpenAI when:
-
-1. **Enterprise Requirements**: Compliance, SLA, support
-2. **Data Privacy**: Sensitive data that can't leave your control
-3. **Network Security**: Need private endpoints, VNet integration
-4. **Azure Integration**: Already using Azure services
-5. **Regulatory Compliance**: HIPAA, FedRAMP, GDPR requirements
-
-```python
-# Enterprise setup with Azure
-from azure.identity import DefaultAzureCredential
-import requests
-
-class EnterpriseAzureOpenAI:
-    """Enterprise-grade Azure OpenAI client."""
-
-    def __init__(self, endpoint: str):
-        self.endpoint = endpoint
-        self.credential = DefaultAzureCredential()
-
-    def _get_headers(self):
-        token = self.credential.get_token(
-            "https://cognitiveservices.azure.com/.default"
-        )
-        return {
-            "Authorization": f"Bearer {token.token}",
-            "Content-Type": "application/json"
-        }
-
-    def chat(self, deployment: str, messages: list):
-        url = f"{self.endpoint}/openai/deployments/{deployment}/chat/completions"
-
-        response = requests.post(
-            url,
-            headers=self._get_headers(),
-            params={"api-version": "2023-03-15-preview"},
-            json={"messages": messages}
-        )
-
-        return response.json()
-```
-
-## Hybrid Architecture
-
-Some organizations use both:
-
-```python
-from enum import Enum
+from functools import lru_cache
 from typing import Optional
 
-class WorkloadType(Enum):
-    INTERNAL = "internal"      # Sensitive internal data
-    EXTERNAL = "external"      # Public-facing, non-sensitive
-    EXPERIMENTAL = "experimental"  # R&D, prototyping
+import openai
 
-class HybridLLMRouter:
-    """Route requests to appropriate provider based on workload type."""
+# Requires: pip install "openai==0.26.0" azure-identity
+AZURE_API_VERSION = "2022-12-01"
 
-    def __init__(self):
-        self.azure_provider = AzureOpenAIProvider(
-            endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-            api_key=os.getenv("AZURE_OPENAI_KEY"),
-            deployment="gpt35"
+
+@dataclass(frozen=True)
+class CompletionTarget:
+    provider: str  # "openai", "azure" (key) or "azure_ad" (Azure AD token)
+    name: str  # a model name on OpenAI, your deployment name on Azure
+    api_base: Optional[str] = None
+    api_version: Optional[str] = None
+
+
+def load_target() -> CompletionTarget:
+    provider = os.environ.get("LLM_PROVIDER", "openai")
+    if provider == "openai":
+        return CompletionTarget(
+            provider="openai",
+            name=os.environ.get("OPENAI_MODEL", "text-davinci-003"),
+            api_base="https://api.openai.com/v1",
         )
-
-        self.openai_provider = OpenAIProvider(
-            api_key=os.getenv("OPENAI_API_KEY"),
-            model="gpt-4"  # Use latest model for experiments
+    if provider in ("azure", "azure_ad"):
+        return CompletionTarget(
+            provider=provider,
+            name=os.environ["AZURE_OPENAI_DEPLOYMENT"],  # e.g. <your-deployment-name>
+            api_base=os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/"),  # https://<your-resource-name>.openai.azure.com
+            api_version=AZURE_API_VERSION,
         )
+    raise ValueError(f"Unknown LLM_PROVIDER: {provider}")
 
-    def chat(
-        self,
-        messages: List[ChatMessage],
-        workload_type: WorkloadType = WorkloadType.INTERNAL,
-        **kwargs
-    ) -> ChatResponse:
-        """Route chat request to appropriate provider."""
 
-        if workload_type == WorkloadType.INTERNAL:
-            # Sensitive data - must use Azure
-            return self.azure_provider.chat(messages, **kwargs)
+@lru_cache(maxsize=1)
+def _credential():
+    # One credential per process; it caches and refreshes tokens itself.
+    from azure.identity import DefaultAzureCredential
 
-        elif workload_type == WorkloadType.EXPERIMENTAL:
-            # R&D - use OpenAI for latest models
-            return self.openai_provider.chat(messages, **kwargs)
+    return DefaultAzureCredential()
 
-        else:
-            # External/non-sensitive - use cheaper option
-            return self.azure_provider.chat(messages, **kwargs)
 
-# Usage
-router = HybridLLMRouter()
+def get_api_key(target: CompletionTarget) -> str:
+    if target.provider == "openai":
+        return os.environ["OPENAI_API_KEY"]
+    if target.provider == "azure":
+        return os.environ["AZURE_OPENAI_KEY"]
+    # Azure AD: the identity needs "Cognitive Services User" on the resource.
+    # get_token is cheap after the first call: the credential returns its
+    # cached token until it nears expiry.
+    token = _credential().get_token("https://cognitiveservices.azure.com/.default")
+    return token.token
 
-# Internal document analysis - routes to Azure
-internal_response = router.chat(
-    messages=[ChatMessage("user", "Summarize this HR document: ...")],
-    workload_type=WorkloadType.INTERNAL
-)
 
-# Experimental feature - routes to OpenAI (GPT-4)
-experiment_response = router.chat(
-    messages=[ChatMessage("user", "Test this new prompt...")],
-    workload_type=WorkloadType.EXPERIMENTAL
-)
-```
-
-## Cost Comparison
-
-Pricing is similar but Azure offers committed use discounts:
-
-```python
-def compare_costs(
-    monthly_tokens: int,
-    model: str = "gpt-3.5-turbo"
-) -> dict:
-    """Compare costs between providers."""
-
-    # Pricing per 1K tokens (approximate, check current rates)
-    pricing = {
-        "gpt-3.5-turbo": {
-            "openai": 0.002,
-            "azure_paygo": 0.002,
-            "azure_committed": 0.0015  # With provisioned throughput
-        },
-        "gpt-4": {
-            "openai": 0.03,
-            "azure_paygo": 0.03,
-            "azure_committed": 0.025
-        }
+def complete(target: CompletionTarget, prompt: str, **params) -> dict:
+    request = {
+        "api_key": get_api_key(target),
+        "api_base": target.api_base,
+        "api_type": "open_ai" if target.provider == "openai" else target.provider,
+        "prompt": prompt,
+        **params,
     }
+    if target.provider == "openai":
+        request["model"] = target.name
+    else:
+        request["engine"] = target.name
+        request["api_version"] = target.api_version
 
-    rates = pricing.get(model, pricing["gpt-3.5-turbo"])
-    tokens_in_thousands = monthly_tokens / 1000
-
+    response = openai.Completion.create(**request)
     return {
-        "openai_monthly": tokens_in_thousands * rates["openai"],
-        "azure_paygo_monthly": tokens_in_thousands * rates["azure_paygo"],
-        "azure_committed_monthly": tokens_in_thousands * rates["azure_committed"],
-        "savings_with_commitment": (
-            tokens_in_thousands * rates["azure_paygo"] -
-            tokens_in_thousands * rates["azure_committed"]
-        )
+        "text": response["choices"][0]["text"].strip(),
+        "finish_reason": response["choices"][0]["finish_reason"],
+        "total_tokens": response["usage"]["total_tokens"],
+        "provider": target.provider,
     }
 
-# Example: 10 million tokens/month
-costs = compare_costs(10_000_000)
-print(f"OpenAI: ${costs['openai_monthly']:.2f}/month")
-print(f"Azure Pay-as-you-go: ${costs['azure_paygo_monthly']:.2f}/month")
-print(f"Azure Committed: ${costs['azure_committed_monthly']:.2f}/month")
-print(f"Savings with commitment: ${costs['savings_with_commitment']:.2f}/month")
+
+if __name__ == "__main__":
+    target = load_target()
+    result = complete(
+        target,
+        "Summarise the main risk of storing API keys in source control in one sentence:",
+        max_tokens=60,
+        temperature=0.2,
+    )
+    print(result)
 ```
 
-## Migration Considerations
+Switching providers is now an environment change: `LLM_PROVIDER=azure_ad` plus the endpoint and deployment name. Three things in there are deliberate.
 
-If migrating from OpenAI to Azure:
+1. **`engine` versus `model` is the only call-site difference.** On Azure you call a deployment you named, not a model. Name deployments by purpose (`summarise-prod`) and you can swap the model behind them without a code change by deleting and recreating the deployment under the same name (plan for a short outage), which you can't do on OpenAI's side.
+2. **The API version is passed explicitly.** The library only defaults Azure calls to `2022-12-01` when `OPENAI_API_TYPE` is set in the environment before import. Set the type in code instead and the version stays empty, so the call fails (in 0.26.0 with a confusing `TypeError` rather than a clear message). Pin it yourself.
+3. **Azure AD is a first-class option.** Keys are long-lived and unattributable. The credential is created once and cached, and each request asks it for a token, which it serves from its own cache until the token is close to expiry.
 
-1. **API Changes**: `model` -> `engine`, authentication changes
-2. **Deployment Model**: Must deploy models before using
-3. **Quotas**: Different default quotas, may need increases
-4. **Feature Parity**: Some features may lag behind OpenAI
+## When to pick which
 
-## My Recommendation
+**Pick OpenAI's API when** you're prototyping outside a corporate tenant, the data is public or synthetic, and waiting weeks for approval would kill the idea. It's also the place to evaluate a new model before it reaches Azure. Just don't let the prototype quietly become production with someone's personal API key in it.
 
-- **Startups/Prototypes**: Start with OpenAI for speed
-- **Enterprise Production**: Use Azure OpenAI for security and compliance
-- **Best of Both**: Build abstraction layer, use both strategically
+**Pick Azure OpenAI when** the data is customer or employee data, you need Azure AD, role assignments and encryption keys you already govern, or procurement won't onboard a new vendor. For most organisations already on Azure that's the default, even with preview terms.
 
-The right choice depends on your specific requirements. For most enterprise scenarios, Azure OpenAI's security and compliance features make it the clear winner, even if you have to wait for approval.
+**Don't pick either yet when** the task is extraction or classification over structured documents that Azure Cognitive Services such as Form Recognizer or Language already handle, or when you need a contractual SLA today. Preview means no SLA on Azure, and OpenAI doesn't publish one.
 
-## Resources
+## My take
 
-- [Azure OpenAI Pricing](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/)
-- [OpenAI Pricing](https://openai.com/pricing)
-- [Azure OpenAI Quotas](https://learn.microsoft.com/azure/cognitive-services/openai/quotas-limits)
+Treat this as a hosting decision, not a model decision. The models are the same; the access process, data terms, billing and identity are not. If you're an enterprise on Azure, apply for Azure OpenAI now and start the paperwork. Prototype on whichever platform you can get into this week and keep the provider in configuration, but stop the abstraction there. The models are the same family on both sides, so a provider hierarchy with routing rules and fallbacks buys little and is a second thing to maintain.

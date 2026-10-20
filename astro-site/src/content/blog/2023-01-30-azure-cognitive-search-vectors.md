@@ -1,470 +1,244 @@
 ---
-title: "Azure Cognitive Search Vector Search Preview: Native Azure Vector DB"
+title: "Azure Cognitive Search and Embeddings Before Native Vector Search"
+description: "Azure Cognitive Search can't search vectors in January 2023. Here's how to re-rank its keyword results with Azure OpenAI embeddings, and when not to bother."
 author: Michael John Peña
 draft: false
 date: 2023-01-30
 tags:
   - Azure
   - Cognitive Search
-  - Vector Search
+  - Azure OpenAI
   - Embeddings
-  - AI
+  - Vector Search
 ---
 
-## Why Azure Cognitive Search for Vectors?
+If you already run Azure Cognitive Search, the obvious question after a week of embedding experiments is whether you can just put your vectors in the index you have. As of January 2023 the answer is no. Cognitive Search has no vector field type and no nearest-neighbour query, and Microsoft hasn't announced a preview. What you can do is use the index you already trust to find candidates and use Azure OpenAI embeddings to order them. That gets you most of the relevance gain without adding a second datastore, as long as you understand where it breaks.
 
-- **Native Azure Integration**: Works seamlessly with Azure services
-- **Hybrid Search**: Combine vectors with full-text search
-- **Enterprise Ready**: Security, compliance, and SLA
-- **Existing Infrastructure**: Add vectors to existing indexes
+## What Cognitive Search does and doesn't do today
 
-## Getting Started
+It's worth being precise, because "semantic" is overloaded right now.
+
+| Capability | Status in January 2023 | What it actually does |
+|---|---|---|
+| Full-text search (BM25) | GA | Keyword matching with analysers, filters, facets, scoring profiles and synonym maps |
+| [Semantic search](https://learn.microsoft.com/azure/search/semantic-search-overview) | Public preview, with Free and Standard billing plans | Re-ranks the top keyword results using Microsoft's own language models, and adds captions and answers |
+| Searching your own vectors | Not available | You can store a vector as a `Collection(Edm.Double)` field, but you can't query on similarity |
+
+Semantic search is the closest thing to what people want, and I covered it in [an earlier post](/blog/2022-08-23-semantic-search-azure/). The catch is that it uses Microsoft's models, not yours. You can't feed it `text-embedding-ada-002` vectors. It needs a Standard tier service (S1 or higher), so it isn't available on Free or Basic, and the GA Python SDK (`azure-search-documents` 11.3.0) doesn't expose it. You need the 11.4.0 betas (11.4.0b2 at the time of writing) or the `2021-04-30-Preview` REST API, and for now captions and answers are easier to read from the REST response.
+
+So if you want your own embeddings to influence ranking, the ranking has to happen in your code.
+
+## The pattern: keyword recall, embedding precision
+
+The design is a two-stage retriever, which is how most production search systems are built anyway:
+
+1. **Recall stage.** Send the user's query to Cognitive Search as a normal full-text query, with whatever filters apply (security trimming, tenant, language). Ask for more results than you'll show, say 50.
+2. **Precision stage.** Embed the query once with Azure OpenAI. Compare it with the stored embedding of each of the 50 candidates. Combine that similarity with the keyword rank and return the top 10.
+
+The document embeddings are computed at indexing time and stored on each document in a retrievable `Collection(Edm.Double)` field. Cognitive Search treats that field as opaque data. It doesn't search it, and it just hands it back with the result.
+
+Why I like this as a January 2023 answer:
+
+- **No new infrastructure.** Your security filters, indexers, replicas and SLA already exist. A separate vector database means a second copy of your content, a second sync pipeline, and a second place to enforce document-level permissions. I made the broader version of that argument in [Do You Need a Vector Database Yet?](/blog/2023-01-25-vector-databases-intro/).
+- **Filters stay exact.** Filtering happens in the recall stage on the server, before any similarity maths. Pre-filtering versus post-filtering is one of the hardest problems in ANN indexes, and this design sidesteps it.
+- **Re-ranking 50 vectors is trivial.** It's a dot product over a 50 × 1,536 matrix. There's no index to tune.
+
+## Building it
+
+The code uses `azure-search-documents` 11.3.0 and the `openai` 0.26 Python library pointed at Azure OpenAI with API version `2022-12-01`, as set up in [the Python SDK post](/blog/2023-01-18-azure-openai-python-sdk/). It assumes you have an embeddings deployment. If you're new to how embeddings behave, Microsoft's [embeddings concepts page](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings) is a good short read. Use `text-embedding-ada-002` (1,536 dimensions) if your resource offers it. If it doesn't, the [embeddings introduction](/blog/2023-01-23-embeddings-introduction/) covers the first-generation `text-search-ada-doc-001` and `-query-001` pair (1,024 dimensions), which need two deployments.
 
 ```bash
-pip install azure-search-documents openai
+pip install "azure-search-documents==11.3.0" "openai==0.26.4" numpy
 ```
 
+### The index
+
+The vector field is a `SimpleField` that is neither searchable nor filterable. It only needs to be retrievable.
+
 ```python
-from azure.search.documents import SearchClient
+# create_index.py
+import os
+
+from azure.core.credentials import AzureKeyCredential
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import (
-    SearchIndex,
-    SimpleField,
     SearchableField,
     SearchFieldDataType,
-    VectorSearch,
-    HnswVectorSearchAlgorithmConfiguration,
-    VectorSearchProfile,
-    SearchField
+    SearchIndex,
+    SimpleField,
 )
-from azure.core.credentials import AzureKeyCredential
-import openai
 
-# Configure Azure Cognitive Search
-search_endpoint = "https://your-search.search.windows.net"
-search_key = "your-search-admin-key"
-index_name = "azure-docs-vector"
+endpoint = os.environ["SEARCH_ENDPOINT"]  # https://<your-search-service>.search.windows.net
+admin_key = os.environ["SEARCH_ADMIN_KEY"]
+index_name = "docs-rerank"
 
-# Configure Azure OpenAI
-openai.api_type = "azure"
-openai.api_base = "https://your-openai.openai.azure.com/"
-openai.api_version = "2023-03-15-preview"
-openai.api_key = "your-openai-key"
-```
-
-## Creating Vector Index
-
-```python
-def create_vector_index(
-    endpoint: str,
-    key: str,
-    index_name: str
-):
-    """Create an index with vector search capability."""
-
-    index_client = SearchIndexClient(
-        endpoint=endpoint,
-        credential=AzureKeyCredential(key)
-    )
-
-    # Define vector search configuration
-    vector_search = VectorSearch(
-        algorithms=[
-            HnswVectorSearchAlgorithmConfiguration(
-                name="hnsw-config",
-                parameters={
-                    "m": 4,
-                    "efConstruction": 400,
-                    "efSearch": 500,
-                    "metric": "cosine"
-                }
-            )
-        ],
-        profiles=[
-            VectorSearchProfile(
-                name="vector-profile",
-                algorithm="hnsw-config"
-            )
-        ]
-    )
-
-    # Define fields
-    fields = [
-        SimpleField(
-            name="id",
-            type=SearchFieldDataType.String,
-            key=True,
-            filterable=True
-        ),
-        SearchableField(
-            name="title",
-            type=SearchFieldDataType.String,
-            searchable=True
-        ),
-        SearchableField(
-            name="content",
-            type=SearchFieldDataType.String,
-            searchable=True
-        ),
-        SimpleField(
-            name="category",
-            type=SearchFieldDataType.String,
-            filterable=True,
-            facetable=True
-        ),
-        SearchField(
-            name="contentVector",
-            type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
-            searchable=True,
-            vector_search_dimensions=1536,
-            vector_search_profile="vector-profile"
-        )
-    ]
-
-    index = SearchIndex(
-        name=index_name,
-        fields=fields,
-        vector_search=vector_search
-    )
-
-    index_client.create_or_update_index(index)
-    return index
-
-# Create index
-create_vector_index(search_endpoint, search_key, index_name)
-```
-
-## Uploading Documents
-
-```python
-from typing import List, Dict
-import uuid
-
-def get_embedding(text: str) -> List[float]:
-    """Get embedding from Azure OpenAI."""
-    response = openai.Embedding.create(
-        engine="text-embedding-ada-002",
-        input=text
-    )
-    return response['data'][0]['embedding']
-
-def upload_documents(
-    endpoint: str,
-    key: str,
-    index_name: str,
-    documents: List[Dict]
-):
-    """Upload documents with embeddings."""
-
-    search_client = SearchClient(
-        endpoint=endpoint,
-        index_name=index_name,
-        credential=AzureKeyCredential(key)
-    )
-
-    # Add embeddings
-    docs_with_vectors = []
-    for doc in documents:
-        text = f"{doc.get('title', '')} {doc.get('content', '')}"
-        embedding = get_embedding(text)
-
-        docs_with_vectors.append({
-            **doc,
-            "contentVector": embedding
-        })
-
-    # Upload
-    result = search_client.upload_documents(docs_with_vectors)
-    return result
-
-# Upload documents
-documents = [
-    {
-        "id": "1",
-        "title": "Azure Virtual Machines",
-        "content": "Azure VMs provide scalable IaaS compute resources in the cloud.",
-        "category": "compute"
-    },
-    {
-        "id": "2",
-        "title": "Azure Functions",
-        "content": "Azure Functions is a serverless compute service for event-driven code.",
-        "category": "compute"
-    },
-    {
-        "id": "3",
-        "title": "Azure Cosmos DB",
-        "content": "Cosmos DB is a globally distributed, multi-model database service.",
-        "category": "database"
-    }
+fields = [
+    SimpleField(name="id", type=SearchFieldDataType.String, key=True),
+    SearchableField(name="title", type=SearchFieldDataType.String),
+    SearchableField(name="content", type=SearchFieldDataType.String),
+    SimpleField(
+        name="category",
+        type=SearchFieldDataType.String,
+        filterable=True,
+        facetable=True,
+    ),
+    # Stored and returned, never searched. Cognitive Search can't query on it.
+    SimpleField(
+        name="contentVector",
+        type=SearchFieldDataType.Collection(SearchFieldDataType.Double),
+    ),
 ]
 
-upload_documents(search_endpoint, search_key, index_name, documents)
+client = SearchIndexClient(endpoint, AzureKeyCredential(admin_key))
+client.create_or_update_index(SearchIndex(name=index_name, fields=fields))
+print(f"Index '{index_name}' is ready")
 ```
 
-## Vector Search
+### Indexing with embeddings
+
+Azure OpenAI takes one input per embeddings request at the moment, so this embeds one document at a time and backs off when the deployment returns HTTP 429. Each model also has an input token limit, so the code truncates long text to a character budget before embedding (a rough proxy for tokens; use `tiktoken` if you need it exact) and logs any document the service still rejects. Uploads go in batches of 100, because a single indexing request is capped at 1,000 documents and 16 MB, and vectors make each document heavy.
 
 ```python
-from azure.search.documents.models import Vector
+# search_rerank.py
+import os
+import time
 
-def vector_search(
-    endpoint: str,
-    key: str,
-    index_name: str,
-    query: str,
-    top_k: int = 5,
-    filter: str = None
-) -> List[Dict]:
-    """Perform vector similarity search."""
+import numpy as np
+import openai
+from azure.core.credentials import AzureKeyCredential
+from azure.search.documents import SearchClient
 
-    search_client = SearchClient(
-        endpoint=endpoint,
-        index_name=index_name,
-        credential=AzureKeyCredential(key)
+openai.api_type = "azure"
+openai.api_base = os.environ["OPENAI_ENDPOINT"]  # https://<your-openai-resource>.openai.azure.com/
+openai.api_version = "2022-12-01"
+openai.api_key = os.environ["OPENAI_API_KEY"]
+EMBEDDING_DEPLOYMENT = os.environ.get("EMBEDDING_DEPLOYMENT", "<your-embedding-deployment>")
+
+search = SearchClient(
+    os.environ["SEARCH_ENDPOINT"],
+    "docs-rerank",
+    AzureKeyCredential(os.environ["SEARCH_ADMIN_KEY"]),
+)
+
+
+# Roughly 4 characters per English token keeps input under a 2,046-token limit.
+MAX_EMBED_CHARS = 6000
+UPLOAD_BATCH_SIZE = 100
+
+
+def embed(text, retries=5):
+    text = text[:MAX_EMBED_CHARS]
+    for attempt in range(retries):
+        try:
+            response = openai.Embedding.create(engine=EMBEDDING_DEPLOYMENT, input=text)
+            return response["data"][0]["embedding"]
+        except openai.error.RateLimitError:
+            time.sleep(2 ** attempt)
+    raise RuntimeError("Embedding request kept hitting the rate limit")
+
+
+def index_documents(docs):
+    batch = []
+    for doc in docs:
+        try:
+            vector = embed(f"{doc['title']}\n{doc['content']}")
+        except openai.error.InvalidRequestError as error:
+            print(f"Skipping document {doc['id']}: {error}")
+            continue
+        batch.append({**doc, "contentVector": vector})
+
+    failed = []
+    for i in range(0, len(batch), UPLOAD_BATCH_SIZE):
+        results = search.upload_documents(documents=batch[i : i + UPLOAD_BATCH_SIZE])
+        failed.extend(r.key for r in results if not r.succeeded)
+    if failed:
+        raise RuntimeError(f"Failed to index: {failed}")
+
+
+def search_rerank(query, top=10, candidates=50, odata_filter=None, rrf_k=60):
+    # Stage 1: keyword recall, filtered on the server.
+    hits = list(
+        search.search(
+            search_text=query,
+            filter=odata_filter,
+            top=candidates,
+            select=["id", "title", "category", "contentVector"],
+        )
     )
+    if not hits:
+        return []
 
-    # Get query embedding
-    query_embedding = get_embedding(query)
+    # Stage 2: cosine similarity between the query and each candidate.
+    q = np.array(embed(query))
+    q /= np.linalg.norm(q)
+    matrix = np.array([hit["contentVector"] for hit in hits])
+    matrix /= np.linalg.norm(matrix, axis=1, keepdims=True)
+    cosine = matrix @ q
 
-    # Create vector query
-    vector = Vector(
-        value=query_embedding,
-        k=top_k,
-        fields="contentVector"
-    )
-
-    results = search_client.search(
-        search_text=None,  # No text search, vector only
-        vectors=[vector],
-        filter=filter,
-        select=["id", "title", "content", "category"]
-    )
+    # Reciprocal rank fusion: combine keyword rank and vector rank.
+    vector_rank = {i: rank for rank, i in enumerate(np.argsort(-cosine))}
+    fused = []
+    for keyword_rank, hit in enumerate(hits):
+        score = 1 / (rrf_k + keyword_rank + 1) + 1 / (rrf_k + vector_rank[keyword_rank] + 1)
+        fused.append((score, float(cosine[keyword_rank]), hit))
+    fused.sort(key=lambda item: item[0], reverse=True)
 
     return [
-        {
-            "id": r["id"],
-            "title": r["title"],
-            "content": r["content"],
-            "category": r["category"],
-            "score": r["@search.score"]
-        }
-        for r in results
+        {"id": h["id"], "title": h["title"], "category": h["category"], "rrf": s, "cosine": c}
+        for s, c, h in fused[:top]
     ]
 
-# Vector search
-results = vector_search(
-    search_endpoint, search_key, index_name,
-    "serverless computing"
-)
-for r in results:
-    print(f"[{r['score']:.4f}] {r['title']}")
 
-# Vector search with filter
-results = vector_search(
-    search_endpoint, search_key, index_name,
-    "database for analytics",
-    filter="category eq 'database'"
-)
+if __name__ == "__main__":
+    index_documents(
+        [
+            {
+                "id": "1",
+                "title": "Auto-shutdown for Azure Virtual Machines",
+                "content": "Schedule VMs to stop outside business hours so you stop paying for idle compute.",
+                "category": "compute",
+            },
+            {
+                "id": "2",
+                "title": "Azure Functions Consumption plan",
+                "content": "Pay only while your functions run. Instances scale to zero when idle.",
+                "category": "compute",
+            },
+            {
+                "id": "3",
+                "title": "Azure Cosmos DB serverless",
+                "content": "Billed per request unit consumed, with no provisioned throughput to pay for when idle.",
+                "category": "database",
+            },
+        ]
+    )
+    time.sleep(2)  # give the index a moment to make new documents searchable
+    for result in search_rerank("stop paying for idle machines"):
+        print(f"{result['rrf']:.4f}  cos={result['cosine']:.3f}  {result['title']}")
 ```
 
-## Hybrid Search
+## Design decisions worth arguing about
 
-Combine vector and text search:
+**Why reciprocal rank fusion and not a weighted sum.** The `@search.score` from BM25 isn't bounded and isn't comparable across queries, so adding it to a cosine similarity between 0 and 1 means a weight that is wrong for half your queries. [Reciprocal rank fusion](https://dl.acm.org/doi/10.1145/1571941.1572114) only uses ranks, needs one constant (60 is the value from the original paper), and is hard to break. If you'd rather trust the embeddings entirely, sort by `cosine` and ignore the keyword rank. Measure both against real queries, using the recall@k approach from [the NumPy prototype post](/blog/2023-01-24-semantic-search-embeddings/).
 
-```python
-def hybrid_search(
-    endpoint: str,
-    key: str,
-    index_name: str,
-    query: str,
-    top_k: int = 5,
-    filter: str = None
-) -> List[Dict]:
-    """Perform hybrid (vector + text) search."""
+**Storing vectors in the index versus beside it.** A 1,536-dimension vector serialises to roughly 30 KB of JSON. That counts against your index storage and the per-request [indexing payload limits](https://learn.microsoft.com/azure/search/search-limits-quotas-capacity), and pulling back 50 candidates moves about 1.5 MB per query. On a small corpus that's fine. Beyond that, I'd keep only IDs in the index and fetch vectors from a cache such as Azure Cache for Redis, keyed by document ID. You trade a second round trip for a much lighter search payload. Whichever you pick, the vectors and the text must be refreshed together, so build the embedding step into the same pipeline that pushes documents.
 
-    search_client = SearchClient(
-        endpoint=endpoint,
-        index_name=index_name,
-        credential=AzureKeyCredential(key)
-    )
+**Whole documents versus chunks.** The code embeds title plus content as one string, which is fine for short articles and wrong for long ones. Every embedding model has an input limit (2,046 tokens for the first-generation ada models), so a long document either fails or gets truncated, and even when it fits, one vector averaged over twenty pages blurs whatever the document is actually about. Truncating is the simple option when the opening paragraphs carry the meaning. Otherwise, index each chunk of a few hundred tokens as its own search document with a `parentId` field, re-rank the chunks, and collapse the results to their parent before you show them. You pay for more documents in the index, but each vector is far sharper.
 
-    query_embedding = get_embedding(query)
+**Candidate count.** Larger candidate sets help recall but cost latency and bandwidth. I start at 50, check how often the final top 10 includes something that was ranked below 40 by keywords, and only raise the number if that happens a lot. Remember the query embedding too: every search now waits on an Azure OpenAI call and counts against the deployment's request limit, so cache embeddings for frequent queries and fall back to plain keyword order when that call returns a 429 or times out.
 
-    vector = Vector(
-        value=query_embedding,
-        k=top_k,
-        fields="contentVector"
-    )
+## Where this falls down
 
-    results = search_client.search(
-        search_text=query,  # Text search
-        vectors=[vector],   # Plus vector search
-        filter=filter,
-        select=["id", "title", "content", "category"],
-        top=top_k
-    )
+Be honest with yourself about the main limitation: **the embeddings can only re-order what keyword search finds.** If a relevant document shares no terms with the query, it never reaches the second stage. The example above works because "idle" appears in both the query and the documents. Ask "how do I cut my cloud bill overnight" and BM25 may return nothing useful, so there's nothing to re-rank. Synonym maps and better analysers narrow the gap, but they don't close it.
 
-    return list(results)
+So I wouldn't use this pattern when:
 
-# Hybrid search combines both approaches
-results = hybrid_search(
-    search_endpoint, search_key, index_name,
-    "Azure Functions serverless"
-)
-```
+- **Queries and documents use different vocabulary by nature**, such as customer language against engineering documentation or cross-lingual search. You need true vector retrieval, which today means a dedicated engine.
+- **Similarity is the product**, such as "more like this", duplicate detection or clustering. There's no query text to drive the recall stage.
+- **You only want better ranking and don't care whose model does it.** Turn on semantic search in preview and skip the embedding pipeline.
 
-## Complete Search Service
+Where it does fit is the common enterprise case: a Cognitive Search index that already carries the filters, security trimming and connectors you depend on, with relevance that is good but not great. Re-ranking with your own embeddings is a small, reversible change you can measure in a week.
 
-```python
-from azure.search.documents import SearchClient
-from azure.search.documents.indexes import SearchIndexClient
-from azure.core.credentials import AzureKeyCredential
-from typing import List, Dict, Optional
+## The decision
 
-class AzureSearchService:
-    """Search service using Azure Cognitive Search vectors."""
-
-    def __init__(
-        self,
-        search_endpoint: str,
-        search_key: str,
-        index_name: str,
-        embedding_deployment: str = "text-embedding-ada-002"
-    ):
-        self.search_client = SearchClient(
-            endpoint=search_endpoint,
-            index_name=index_name,
-            credential=AzureKeyCredential(search_key)
-        )
-        self.index_client = SearchIndexClient(
-            endpoint=search_endpoint,
-            credential=AzureKeyCredential(search_key)
-        )
-        self.index_name = index_name
-        self.embedding_deployment = embedding_deployment
-
-    def _embed(self, text: str) -> List[float]:
-        """Get embedding for text."""
-        response = openai.Embedding.create(
-            engine=self.embedding_deployment,
-            input=text
-        )
-        return response['data'][0]['embedding']
-
-    def add_documents(
-        self,
-        documents: List[Dict],
-        text_fields: List[str] = ["title", "content"],
-        vector_field: str = "contentVector"
-    ):
-        """Add documents with embeddings."""
-        docs_with_vectors = []
-
-        for doc in documents:
-            # Combine text fields for embedding
-            text = " ".join([
-                str(doc.get(field, ""))
-                for field in text_fields
-            ])
-
-            embedding = self._embed(text)
-            doc_with_vector = {**doc, vector_field: embedding}
-            docs_with_vectors.append(doc_with_vector)
-
-        return self.search_client.upload_documents(docs_with_vectors)
-
-    def vector_search(
-        self,
-        query: str,
-        top_k: int = 10,
-        filter_expr: Optional[str] = None,
-        vector_field: str = "contentVector"
-    ) -> List[Dict]:
-        """Perform vector-only search."""
-        query_embedding = self._embed(query)
-
-        vector = Vector(
-            value=query_embedding,
-            k=top_k,
-            fields=vector_field
-        )
-
-        results = self.search_client.search(
-            search_text=None,
-            vectors=[vector],
-            filter=filter_expr,
-            top=top_k
-        )
-
-        return [dict(r) for r in results]
-
-    def hybrid_search(
-        self,
-        query: str,
-        top_k: int = 10,
-        filter_expr: Optional[str] = None,
-        vector_field: str = "contentVector"
-    ) -> List[Dict]:
-        """Perform hybrid search."""
-        query_embedding = self._embed(query)
-
-        vector = Vector(
-            value=query_embedding,
-            k=top_k,
-            fields=vector_field
-        )
-
-        results = self.search_client.search(
-            search_text=query,
-            vectors=[vector],
-            filter=filter_expr,
-            top=top_k
-        )
-
-        return [dict(r) for r in results]
-
-    def delete_documents(self, ids: List[str]):
-        """Delete documents by ID."""
-        documents = [{"id": doc_id} for doc_id in ids]
-        return self.search_client.delete_documents(documents)
-
-    def get_document(self, doc_id: str) -> Optional[Dict]:
-        """Get a single document by ID."""
-        try:
-            return self.search_client.get_document(doc_id)
-        except:
-            return None
-
-# Usage
-service = AzureSearchService(
-    search_endpoint="https://your-search.search.windows.net",
-    search_key="your-key",
-    index_name="docs-index"
-)
-
-# Add documents
-service.add_documents([
-    {"id": "1", "title": "Azure Guide", "content": "Azure is...", "category": "cloud"}
-])
-
-# Vector search
-results = service.vector_search("cloud computing")
-
-# Hybrid search
-results = service.hybrid_search("serverless functions")
-```
-
-## Best Practices
-
-1. **Use hybrid search**: Combines strengths of both approaches
-2. **Index text fields**: For full-text search capability
-3. **Optimize HNSW params**: Balance accuracy and speed
-4. **Filter strategically**: Use filters to narrow results
-5. **Monitor performance**: Track search latency and relevance
-6. **Plan for scale**: Consider partitioning for large indexes
-
-## Resources
-
-- [Azure Cognitive Search Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview)
-- [Azure Search Python SDK](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/search/azure-search-documents)
-- [Cognitive Search Pricing](https://azure.microsoft.com/pricing/details/search/)
+If your search already lives in Azure Cognitive Search, don't move it to a vector database because the internet says so. Add embeddings as a re-ranking stage, measure the change against queries your users actually type, and look at the failures. If most of them are documents that keyword search never found, that's the evidence you need for true vector retrieval, and a reason to watch for native vector support in Cognitive Search. If most of the failures were ordering problems, you've already fixed them.

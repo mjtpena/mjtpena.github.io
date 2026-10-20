@@ -1,586 +1,188 @@
 ---
-title: "Responsible AI with Azure OpenAI: Building Ethical AI Systems"
+title: "Responsible AI on Azure OpenAI: What the Platform Covers and What You Own"
+description: "Azure OpenAI's preview ships with use-case review, content filtering and abuse monitoring. Here is where those controls stop and your application's begin."
 author: Michael John Peña
 draft: false
 date: 2023-01-08
 tags:
-  - Azure
-  - OpenAI
-  - AI
-  - Ethics
+  - Azure OpenAI
   - Responsible AI
+  - Governance
+  - Azure
+  - Python
 ---
 
-## Microsoft's Responsible AI Principles
+A common assumption about Azure OpenAI right now goes like this: "Microsoft filters the content, so we're covered on responsible AI, right?" No. The service gives you a set of platform controls, and they're genuinely useful, but they were designed to stop the worst misuse across every customer. They know nothing about your users, your data or what a harmful answer looks like in your domain. If you don't draw a clear line between what the platform does and what your application must do, the gap becomes nobody's job.
 
-Microsoft's Responsible AI framework guides Azure OpenAI Service:
+This post maps that line for Azure OpenAI Service as it stands on 8 January 2023: a limited-access preview serving the GPT-3, Codex and embeddings model families. For the mechanics of the filter itself, see [content filtering in Azure OpenAI](/blog/2023-01-09-content-filtering-azure-openai/).
 
-1. **Fairness**: AI systems should treat all people fairly
-2. **Reliability & Safety**: AI systems should perform reliably and safely
-3. **Privacy & Security**: AI systems should be secure and respect privacy
-4. **Inclusiveness**: AI systems should empower everyone
-5. **Transparency**: AI systems should be understandable
-6. **Accountability**: People should be accountable for AI systems
+## The principles are the easy part
 
-## Implementing Responsible AI
+Microsoft's six [responsible AI principles](https://www.microsoft.com/en-us/ai/responsible-ai) are fairness, reliability and safety, privacy and security, inclusiveness, transparency, and accountability. Since June 2022 they've been backed by version 2 of the Microsoft Responsible AI Standard, which is the internal rulebook that drove decisions like restricting Custom Neural Voice and retiring emotion inference in Azure Face.
 
-Here's a framework for implementing these principles:
+It's hard to find anyone who disagrees with any of the six. That's the problem: a list everyone agrees with doesn't tell you what to build. The useful exercise is to take each principle and ask two questions. What does the platform already do here? And what is left over for us?
+
+## What the platform does for you
+
+Four controls come with the preview, and none of them needs a line of your code.
+
+**Use-case review.** Under the [Limited Access policy for Azure OpenAI](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/limited-access), you apply for access and describe your intended scenarios before you can create a resource, and Microsoft reviews those use cases against what the service is approved for. Check the policy page for what's required before a solution goes to production. The review is the most underrated control in the service, because it forces you to write down who the users are and what the system is for, which is exactly the document most AI projects never produce.
+
+**Content filtering.** The service runs prompts and completions through an ensemble of classification models aimed at high-severity harmful content. Whether it blocks or only annotates on your resource is worth confirming against the [content filtering documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/content-filter) and your own testing rather than assuming (the linked page has changed a lot since early January 2023, so don't expect it to match this paragraph). When a request is blocked, a flagged prompt fails with HTTP 400 and code `content_filter`, and a flagged completion comes back with `finish_reason` set to `content_filter`, with the text usually empty (rarely partial). Either way, the response doesn't tell you which category of harm fired.
+
+**Abuse monitoring.** Per the [data, privacy and security page](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy), prompts and completions are kept for a limited period so Microsoft can detect patterns of misuse, and authorised Microsoft staff can review flagged content. If that's a problem for a sensitive workload, check the data privacy page for options. Your data isn't used to train OpenAI's models.
+
+**Documentation.** The [Transparency Note for Azure OpenAI](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/transparency-note) describes what the models are good at, where they fail, and which scenarios Microsoft considers risky. Read it before you write your use-case application, not after.
+
+## What's left for you
+
+Here's how I split the work. The right-hand column is the part teams tend to skip.
+
+| Principle | Platform side | What your application still owns |
+|---|---|---|
+| Fairness | Model-level mitigations | Testing outputs on your own scenarios and user groups |
+| Reliability and safety | Content filter (above) | Domain-specific failure handling, fallbacks, scope limits |
+| Privacy and security | No training on your data, Azure AD auth, network controls | What data goes into prompts, retention of your own logs |
+| Inclusiveness | Nothing specific | Accessible UX, language coverage, a path for people who can't use the AI feature |
+| Transparency | Transparency Note (above) | Telling users they're dealing with AI, and what it can't do |
+| Accountability | Use-case review, abuse monitoring (above) | A named owner, human review of consequential outputs, an audit trail |
+
+Two rows deserve more attention than they usually get.
+
+**Reliability and safety is mostly your problem.** Even when it blocks, the content filter targets hate speech and similar high-severity content. It won't block a confident, polite, completely wrong answer about your refund policy, and in most enterprise scenarios that's the more likely harm. A Davinci model will invent a policy clause with the same fluency it uses for a real one. The mitigation isn't a better filter. It's narrowing the task: ground the prompt in your own content, keep the model to drafting rather than deciding, and put a person between the draft and anyone who acts on it.
+
+**Accountability needs a name, not a committee.** "The AI Ethics Team" isn't an owner. Someone specific should be able to answer "why did the system say this on Tuesday?", and that requires logging enough to reconstruct the call without storing more personal data than you need.
+
+## A thin wrapper that enforces the split
+
+Most of what the right-hand column asks for can live in one place: the function that calls the model. Below is the shape I'd start from, using the `openai` Python library 0.26.0 (released on 6 January) against the `2022-12-01` API version (the newest version available to preview resources; older ones are `2022-06-01-preview` and `2022-03-01-preview`). It does four things: handles a filtered prompt as an expected outcome rather than a crash, detects filtered completions and hands them to the scenario owner, attributes each call to a pseudonymous user, and holds drafts in high-stakes scenarios in a review queue so the caller can't show them directly. If your resource isn't blocking anything today, the filtered paths won't fire yet, but build them now so a change in filter behaviour doesn't become an unhandled error.
 
 ```python
-from dataclasses import dataclass
-from typing import List, Optional, Dict, Any
-from enum import Enum
+import hashlib
+import json
 import logging
+import os
+import queue
 
-class RiskLevel(Enum):
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
-    CRITICAL = "critical"
+import openai
 
-@dataclass
-class ResponsibleAIConfig:
-    """Configuration for responsible AI deployment."""
+# Requires: pip install "openai==0.26.0"
+openai.api_type = "azure"
+openai.api_base = os.environ["AZURE_OPENAI_ENDPOINT"]  # https://<your-resource-name>.openai.azure.com/
+openai.api_version = "2022-12-01"
+openai.api_key = os.environ["AZURE_OPENAI_KEY"]
 
-    # Content filtering
-    enable_content_filtering: bool = True
-    content_filter_level: str = "medium"  # low, medium, high
+DEPLOYMENT = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # e.g. <your-davinci-003-deployment>
 
-    # Transparency
-    disclose_ai_usage: bool = True
-    log_all_interactions: bool = True
+PROMPT_TEMPLATE_VERSION = "v1"  # bump whenever the prompt template changes
 
-    # Human oversight
-    require_human_review_threshold: RiskLevel = RiskLevel.HIGH
-    escalation_contact: str = ""
+# Scenarios covered by your access application and use-case review.
+# The value says whether a person must check the output before anyone sees it.
+SCENARIO_NEEDS_REVIEW = {"draft_support_reply": True, "summarise_ticket": False}
 
-    # Fairness
-    bias_monitoring_enabled: bool = True
-    demographic_parity_threshold: float = 0.8
+logging.basicConfig(level=logging.INFO)
+audit_log = logging.getLogger("ai_audit")
 
-    # Rate limiting for safety
-    max_requests_per_user_per_hour: int = 100
+# In-process stand-ins. In production these would be a durable queue or ticketing system.
+review_queue: "queue.Queue[dict]" = queue.Queue()
+escalation_queue: "queue.Queue[dict]" = queue.Queue()
 
-class ResponsibleAIGuard:
-    """Guard rails for responsible AI deployment."""
 
-    def __init__(self, config: ResponsibleAIConfig):
-        self.config = config
-        self.logger = logging.getLogger("responsible_ai")
+def pseudonymise(user_id: str) -> str:
+    """Stable, non-reversible identifier for attribution without storing the raw ID."""
+    salt = os.environ["AUDIT_SALT"]
+    return hashlib.sha256(f"{salt}:{user_id}".encode()).hexdigest()[:16]
 
-    def pre_request_check(
-        self,
-        prompt: str,
-        user_id: str,
-        context: Dict[str, Any]
-    ) -> tuple[bool, Optional[str]]:
-        """
-        Check if request should proceed.
-        Returns (should_proceed, reason_if_blocked)
-        """
 
-        # Check rate limits
-        if not self._check_rate_limit(user_id):
-            return False, "Rate limit exceeded"
+def generate(scenario: str, prompt: str, user_id: str) -> dict:
+    if scenario not in SCENARIO_NEEDS_REVIEW:
+        raise ValueError(f"Scenario '{scenario}' is not in the approved use cases")
 
-        # Check for harmful content
-        if self.config.enable_content_filtering:
-            is_safe, category = self._check_content_safety(prompt)
-            if not is_safe:
-                self.logger.warning(
-                    f"Blocked request from {user_id}: {category}"
-                )
-                return False, f"Content blocked: {category}"
+    user_ref = pseudonymise(user_id)
+    record = {
+        "scenario": scenario,
+        "deployment": DEPLOYMENT,
+        "template_version": PROMPT_TEMPLATE_VERSION,
+        "prompt_hash": hashlib.sha256(prompt.encode()).hexdigest()[:12],
+        "user": user_ref,
+        "prompt_chars": len(prompt),
+    }
 
-        # Log interaction for transparency
-        if self.config.log_all_interactions:
-            self._log_interaction(user_id, prompt, "request")
-
-        return True, None
-
-    def post_response_check(
-        self,
-        response: str,
-        user_id: str,
-        context: Dict[str, Any]
-    ) -> tuple[str, bool]:
-        """
-        Check response and potentially modify or flag.
-        Returns (processed_response, needs_human_review)
-        """
-
-        needs_review = False
-        processed = response
-
-        # Check response safety
-        if self.config.enable_content_filtering:
-            is_safe, category = self._check_content_safety(response)
-            if not is_safe:
-                processed = self._get_safe_fallback_response()
-                self.logger.warning(
-                    f"Response filtered for {user_id}: {category}"
-                )
-
-        # Assess risk level
-        risk_level = self._assess_risk_level(response, context)
-        if risk_level.value >= self.config.require_human_review_threshold.value:
-            needs_review = True
-            self.logger.info(
-                f"Flagged for human review: risk={risk_level.value}"
-            )
-
-        # Add AI disclosure if configured
-        if self.config.disclose_ai_usage:
-            processed = self._add_ai_disclosure(processed)
-
-        # Log response
-        if self.config.log_all_interactions:
-            self._log_interaction(user_id, processed, "response")
-
-        return processed, needs_review
-
-    def _check_content_safety(self, text: str) -> tuple[bool, Optional[str]]:
-        """Check text for harmful content categories."""
-        # In production, use Azure Content Safety API
-        harmful_patterns = {
-            "hate_speech": ["hate", "discriminate"],
-            "violence": ["kill", "attack", "weapon"],
-            "self_harm": ["suicide", "self-harm"],
-            "sexual": ["explicit content patterns"]
-        }
-
-        text_lower = text.lower()
-        for category, patterns in harmful_patterns.items():
-            for pattern in patterns:
-                if pattern in text_lower:
-                    return False, category
-
-        return True, None
-
-    def _assess_risk_level(
-        self,
-        response: str,
-        context: Dict[str, Any]
-    ) -> RiskLevel:
-        """Assess risk level of response."""
-        # Risk indicators
-        high_risk_indicators = [
-            "medical advice",
-            "legal advice",
-            "financial recommendation",
-            "personal data"
-        ]
-
-        response_lower = response.lower()
-
-        for indicator in high_risk_indicators:
-            if indicator in response_lower:
-                return RiskLevel.HIGH
-
-        if len(response) > 2000:
-            return RiskLevel.MEDIUM
-
-        return RiskLevel.LOW
-
-    def _check_rate_limit(self, user_id: str) -> bool:
-        """Check if user is within rate limits."""
-        # Implement with Redis or similar
-        return True
-
-    def _get_safe_fallback_response(self) -> str:
-        """Return safe fallback when content is filtered."""
-        return "I'm not able to provide that information. Please rephrase your question or contact support for assistance."
-
-    def _add_ai_disclosure(self, response: str) -> str:
-        """Add AI-generated content disclosure."""
-        return f"{response}\n\n---\n*This response was generated by AI and may contain errors. Please verify important information.*"
-
-    def _log_interaction(
-        self,
-        user_id: str,
-        content: str,
-        interaction_type: str
-    ):
-        """Log interaction for audit and analysis."""
-        self.logger.info(
-            f"Interaction logged",
-            extra={
-                "user_id": user_id,
-                "type": interaction_type,
-                "content_length": len(content),
-                "timestamp": datetime.utcnow().isoformat()
-            }
+    try:
+        response = openai.Completion.create(
+            engine=DEPLOYMENT,
+            prompt=prompt,
+            max_tokens=300,
+            temperature=0.2,
+            user=user_ref,
         )
-```
-
-## Bias Detection and Mitigation
-
-Monitor for bias in AI outputs:
-
-```python
-from collections import Counter
-from typing import List, Dict
-import numpy as np
-
-class BiasMonitor:
-    """Monitor AI outputs for potential bias."""
-
-    def __init__(self):
-        self.demographic_groups = [
-            "male", "female", "non-binary",
-            "young", "old",
-            "asian", "black", "white", "hispanic"
-        ]
-        self.response_history: Dict[str, List[str]] = {
-            group: [] for group in self.demographic_groups
-        }
-
-    def analyze_response(
-        self,
-        response: str,
-        context: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        """Analyze response for potential bias indicators."""
-
-        analysis = {
-            "sentiment_scores": self._analyze_sentiment(response),
-            "length": len(response),
-            "formality_score": self._analyze_formality(response),
-            "detected_demographics": self._detect_demographic_references(response)
-        }
-
-        return analysis
-
-    def calculate_demographic_parity(
-        self,
-        metric: str = "sentiment"
-    ) -> Dict[str, float]:
-        """
-        Calculate demographic parity across groups.
-        Returns parity scores (1.0 = perfect parity)
-        """
-
-        if metric == "sentiment":
-            scores = {}
-            for group, responses in self.response_history.items():
-                if responses:
-                    sentiments = [
-                        self._analyze_sentiment(r)["positive"]
-                        for r in responses
-                    ]
-                    scores[group] = np.mean(sentiments)
-
-            if not scores:
-                return {}
-
-            max_score = max(scores.values())
-            min_score = min(scores.values())
-
-            # Parity ratio
-            parity = min_score / max_score if max_score > 0 else 1.0
-
-            return {
-                "parity_ratio": parity,
-                "group_scores": scores,
-                "is_fair": parity >= 0.8  # 80% rule
-            }
-
-        return {}
-
-    def _analyze_sentiment(self, text: str) -> Dict[str, float]:
-        """Basic sentiment analysis."""
-        # In production, use Azure Cognitive Services
-        positive_words = ["good", "great", "excellent", "happy", "wonderful"]
-        negative_words = ["bad", "poor", "terrible", "sad", "awful"]
-
-        text_lower = text.lower()
-        words = text_lower.split()
-
-        positive_count = sum(1 for w in words if w in positive_words)
-        negative_count = sum(1 for w in words if w in negative_words)
-        total = positive_count + negative_count
-
-        return {
-            "positive": positive_count / total if total > 0 else 0.5,
-            "negative": negative_count / total if total > 0 else 0.5
-        }
-
-    def _analyze_formality(self, text: str) -> float:
-        """Analyze text formality (0=informal, 1=formal)."""
-        formal_indicators = ["therefore", "however", "consequently", "regarding"]
-        informal_indicators = ["gonna", "wanna", "hey", "cool", "awesome"]
-
-        text_lower = text.lower()
-
-        formal_count = sum(1 for i in formal_indicators if i in text_lower)
-        informal_count = sum(1 for i in informal_indicators if i in text_lower)
-
-        total = formal_count + informal_count
-        return formal_count / total if total > 0 else 0.5
-
-    def _detect_demographic_references(self, text: str) -> List[str]:
-        """Detect demographic group references in text."""
-        detected = []
-        text_lower = text.lower()
-
-        for group in self.demographic_groups:
-            if group in text_lower:
-                detected.append(group)
-
-        return detected
-```
-
-## Human-in-the-Loop Implementation
-
-For high-stakes decisions, include human oversight:
-
-```python
-from enum import Enum
-import uuid
-from datetime import datetime
-
-class ReviewStatus(Enum):
-    PENDING = "pending"
-    APPROVED = "approved"
-    REJECTED = "rejected"
-    MODIFIED = "modified"
-
-@dataclass
-class HumanReviewRequest:
-    id: str
-    original_response: str
-    context: Dict[str, Any]
-    risk_level: RiskLevel
-    created_at: datetime
-    status: ReviewStatus = ReviewStatus.PENDING
-    reviewer: Optional[str] = None
-    reviewed_at: Optional[datetime] = None
-    final_response: Optional[str] = None
-    notes: Optional[str] = None
-
-class HumanReviewQueue:
-    """Queue for human review of AI responses."""
-
-    def __init__(self):
-        self.pending_reviews: Dict[str, HumanReviewRequest] = {}
-        self.completed_reviews: List[HumanReviewRequest] = []
-
-    def submit_for_review(
-        self,
-        response: str,
-        context: Dict[str, Any],
-        risk_level: RiskLevel
-    ) -> str:
-        """Submit response for human review."""
-        review_id = str(uuid.uuid4())
-
-        review = HumanReviewRequest(
-            id=review_id,
-            original_response=response,
-            context=context,
-            risk_level=risk_level,
-            created_at=datetime.utcnow()
-        )
-
-        self.pending_reviews[review_id] = review
-
-        # In production, send notification to reviewers
-        self._notify_reviewers(review)
-
-        return review_id
-
-    def complete_review(
-        self,
-        review_id: str,
-        status: ReviewStatus,
-        reviewer: str,
-        final_response: Optional[str] = None,
-        notes: Optional[str] = None
-    ):
-        """Complete a human review."""
-        if review_id not in self.pending_reviews:
-            raise ValueError(f"Review {review_id} not found")
-
-        review = self.pending_reviews.pop(review_id)
-        review.status = status
-        review.reviewer = reviewer
-        review.reviewed_at = datetime.utcnow()
-        review.final_response = final_response or review.original_response
-        review.notes = notes
-
-        self.completed_reviews.append(review)
-
-        return review
-
-    def get_pending_reviews(
-        self,
-        risk_level: Optional[RiskLevel] = None
-    ) -> List[HumanReviewRequest]:
-        """Get pending reviews, optionally filtered by risk level."""
-        reviews = list(self.pending_reviews.values())
-
-        if risk_level:
-            reviews = [r for r in reviews if r.risk_level == risk_level]
-
-        return sorted(reviews, key=lambda r: r.created_at)
-
-    def _notify_reviewers(self, review: HumanReviewRequest):
-        """Notify reviewers of new item."""
-        # Implement email/Slack/Teams notification
-        pass
-
-# Usage with AI system
-class ResponsibleAISystem:
-    """Complete responsible AI system with human oversight."""
-
-    def __init__(self, config: ResponsibleAIConfig):
-        self.guard = ResponsibleAIGuard(config)
-        self.review_queue = HumanReviewQueue()
-        self.bias_monitor = BiasMonitor()
-
-    async def process_request(
-        self,
-        prompt: str,
-        user_id: str,
-        context: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        """Process request with full responsible AI pipeline."""
-
-        # Pre-request checks
-        should_proceed, block_reason = self.guard.pre_request_check(
-            prompt, user_id, context
-        )
-
-        if not should_proceed:
+    except openai.error.InvalidRequestError as err:
+        if getattr(err, "code", None) == "content_filter":
+            record["outcome"] = "prompt_filtered"
+            audit_log.info(json.dumps(record))
             return {
                 "status": "blocked",
-                "reason": block_reason
+                "message": "That request can't be processed. Please rephrase it or contact support.",
             }
+        raise
 
-        # Generate response (would call Azure OpenAI here)
-        raw_response = await self._generate_response(prompt)
+    choice = response["choices"][0]
+    record["completion_tokens"] = response["usage"]["completion_tokens"]
 
-        # Post-response checks
-        processed_response, needs_review = self.guard.post_response_check(
-            raw_response, user_id, context
-        )
-
-        # Bias monitoring
-        bias_analysis = self.bias_monitor.analyze_response(
-            processed_response, context
-        )
-
-        # Human review if needed
-        if needs_review:
-            review_id = self.review_queue.submit_for_review(
-                processed_response,
-                context,
-                RiskLevel.HIGH
-            )
-
-            return {
-                "status": "pending_review",
-                "review_id": review_id,
-                "message": "Response is being reviewed by a human."
-            }
-
+    if choice["finish_reason"] == "content_filter":
+        record["outcome"] = "completion_filtered"
+        audit_log.info(json.dumps(record))
+        escalation_queue.put(record)  # the scenario owner sees every filtered completion
         return {
-            "status": "success",
-            "response": processed_response,
-            "bias_analysis": bias_analysis
+            "status": "blocked",
+            "message": "No suitable answer was produced. Please rephrase or contact support.",
         }
 
-    async def _generate_response(self, prompt: str) -> str:
-        """Generate response from Azure OpenAI."""
-        # Implementation here
-        pass
+    text = choice["text"].strip()
+    disclosure = "Drafted by an AI model. Check before relying on it."
+
+    if SCENARIO_NEEDS_REVIEW[scenario]:
+        record["outcome"] = "pending_review"
+        audit_log.info(json.dumps(record))
+        review_queue.put({"record": record, "text": text, "disclosure": disclosure})
+        return {"status": "pending_review", "message": "A person will review this before it is sent."}
+
+    record["outcome"] = "returned"
+    audit_log.info(json.dumps(record))
+    return {"status": "ok", "text": text, "disclosure": disclosure}
+
+
+if __name__ == "__main__":
+    result = generate(
+        "draft_support_reply",
+        "Write a polite reply to a customer asking how to reset their password on our portal.",
+        user_id="customer-12345",
+    )
+    print(json.dumps(result, indent=2))
+    print(f"Items waiting for review: {review_queue.qsize()}")
 ```
 
-## Transparency and Documentation
+A few deliberate choices in there:
 
-Create model cards and documentation:
+- **The scenario allow-list mirrors the use-case review.** Every entry should trace back to a scenario you described when applying for access and that Microsoft approved. If a developer wants a new scenario, they have to add it here, and that's the moment to ask whether it's covered by what Microsoft approved. Scope creep is the most common way a well-reviewed pilot drifts into something nobody signed off.
+- **The audit record holds metadata, not content.** Scenario, deployment, template version, a prompt hash, pseudonymous user, sizes, token counts and outcome let you reconstruct which configuration produced a response. Microsoft's abuse-monitoring copy isn't available to you, so decide deliberately: log the deployment name and a prompt-template version on every call, and keep full prompt/completion text only for a sampled or flagged subset under a stated retention period.
+- **Review is a property of the scenario, not a guess about the text.** Keyword-based "risk scoring", such as flagging any answer containing the word "legal", misses everything that matters and buries reviewers with false positives. Decide up front which scenarios need a person, and queue all of them. The caller only ever gets the text back for scenarios that don't need review.
+- **The disclosure travels with the response.** Where your UI renders it is a design decision, but the data shouldn't leave the function without it.
 
-```python
-@dataclass
-class ModelCard:
-    """Documentation for AI model deployment."""
+The `user` value is an optional field on the Completions request, meant to identify the end user so that abuse signals can be tied to a caller without you handing over a real identifier. Use key authentication only for experiments; for anything shared, switch to Azure AD as described in [my earlier post on preparing for GA](/blog/2023-01-01-azure-openai-service-ga-announcement/).
 
-    model_name: str
-    version: str
-    deployment_date: datetime
+## Fairness testing without pretending to measure it
 
-    # Model details
-    description: str
-    intended_use: List[str]
-    out_of_scope_uses: List[str]
+Bias in a generative model doesn't reduce neatly to a parity ratio. Counting positive words across demographic groups produces a number, but not one I'd put in front of a risk committee. What works better at this stage is plain and manual: build a small set of test prompts that differ only in names, genders, locations or other attributes relevant to your users, run them against your deployment, and have two people read the outputs side by side. Repeat when you change the prompt template or the model behind the deployment.
 
-    # Performance
-    evaluation_metrics: Dict[str, float]
-    known_limitations: List[str]
+It's slow, and it's the right amount of rigour for a preview-stage pilot. Write down what you tested and what you found, in the same place you keep your [model card](/blog/2022-12-08-model-cards-ai-transparency/).
 
-    # Ethical considerations
-    ethical_considerations: List[str]
-    bias_evaluation: Dict[str, Any]
+## When this is overkill, and when it isn't enough
 
-    # Maintenance
-    maintainer: str
-    update_frequency: str
-    feedback_channel: str
+For an internal prototype where a handful of engineers paste prompts into Azure OpenAI Studio, the platform controls plus a written use case are proportionate. Don't build a review queue for five people.
 
-# Example model card
-customer_support_model = ModelCard(
-    model_name="Customer Support Assistant",
-    version="1.0.0",
-    deployment_date=datetime(2023, 1, 8),
-    description="AI assistant for answering customer support queries about our products.",
-    intended_use=[
-        "Answering product questions",
-        "Providing troubleshooting guidance",
-        "Directing users to relevant documentation"
-    ],
-    out_of_scope_uses=[
-        "Medical advice",
-        "Legal advice",
-        "Financial recommendations",
-        "Personal counseling"
-    ],
-    evaluation_metrics={
-        "accuracy": 0.92,
-        "user_satisfaction": 0.87,
-        "escalation_rate": 0.15
-    },
-    known_limitations=[
-        "May not have information about products released after training",
-        "Cannot access user account information",
-        "May occasionally provide outdated pricing"
-    ],
-    ethical_considerations=[
-        "Responses are reviewed for bias monthly",
-        "Sensitive topics are escalated to human agents",
-        "User data is not used for training"
-    ],
-    bias_evaluation={
-        "demographic_parity": 0.91,
-        "equal_opportunity": 0.88
-    },
-    maintainer="AI Ethics Team",
-    update_frequency="Monthly review, quarterly retraining",
-    feedback_channel="ai-feedback@company.com"
-)
-```
+Once real users are involved, the wrapper above is the minimum. And if the output feeds a decision about a person, such as credit, employment, insurance or health, a completion model on a preview service isn't the place to start at all. Those are the scenarios the Transparency Note flags as high risk, and they need a formal impact assessment before any prompt is written.
 
-## Best Practices Summary
+## The takeaway
 
-1. **Always filter content**: Use Azure's content filtering by default
-2. **Log everything**: Maintain audit trails for accountability
-3. **Monitor for bias**: Regularly check outputs across demographics
-4. **Include human oversight**: Especially for high-stakes decisions
-5. **Be transparent**: Disclose AI usage, document limitations
-6. **Have escalation paths**: Know when to involve humans
-7. **Regular audits**: Review and update AI systems regularly
-
-## Resources
-
-- [Microsoft Responsible AI](https://www.microsoft.com/ai/responsible-ai)
-- [Azure AI Content Safety](https://azure.microsoft.com/services/cognitive-services/content-safety/)
-- [AI Fairness Checklist](https://www.microsoft.com/research/project/ai-fairness-checklist/)
+Azure OpenAI's preview gives you more responsible AI infrastructure than most teams realise: an access application with a use-case review, a content filter, abuse monitoring and decent documentation. It doesn't give you scope control, domain-specific safety, human review, disclosure or an accountable owner. Write those down as requirements next to your use-case application, and put the enforceable ones in the single function every call goes through. That's where the principles turn into something an auditor can check.
