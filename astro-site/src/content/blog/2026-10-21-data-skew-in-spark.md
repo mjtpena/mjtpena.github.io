@@ -3,7 +3,7 @@ title: "Data Skew: Why 199 Tasks Finish in Seconds and One Takes an Hour"
 author: Michael John Peña
 draft: false
 date: 2026-10-21T12:04:00Z
-description: "A shuffle sends every row with the same key to the same task. When one key holds a third of the data, one task does a third of the work, and adding nodes doesn't help. How to spot skew in the Spark UI, find the guilty keys, and fix it: null handling, broadcast, AQE skew joins, and salting done properly."
+description: "One hot key can make one task do a third of a job, and more nodes will not help. How to spot skew in the Spark UI, find the keys, and fix it properly."
 tags:
   - Data Engineering
   - Spark
@@ -58,7 +58,7 @@ There aren't many sources, and they repeat across most pipelines:
 
 ## Diagnose: the UI first, then the keys
 
-**In the Spark UI**, open the slow stage and look at *Summary Metrics for Completed Tasks*. Compare **Max** with **Median** for *Duration* and *Shuffle Read Size / Records*.
+**In the [Spark UI](https://spark.apache.org/docs/latest/web-ui.html)**, open the slow stage and look at *Summary Metrics for Completed Tasks*. Compare **Max** with **Median** for *Duration* and *Shuffle Read Size / Records*.
 
 | Signal | Healthy | Skewed |
 |---|---|---|
@@ -138,7 +138,7 @@ Broadcast is appropriate for tens to a few hundred MB, the typical dimension tab
 
 ### 3. Let AQE split the skewed partition
 
-With adaptive query execution (on by default since Spark 3.2, and enabled in Fabric and Databricks runtimes), Spark looks at actual shuffle partition sizes at runtime. When a partition is larger than both `skewedPartitionFactor` × the median (default 5) **and** `skewedPartitionThresholdInBytes` (default 256 MB), it splits that partition into pieces and duplicates the matching partition from the other side for each piece.
+With [adaptive query execution](https://spark.apache.org/docs/latest/sql-performance-tuning.html) (on by default since Spark 3.2, and enabled in Fabric and Databricks runtimes), Spark looks at actual shuffle partition sizes at runtime. When a partition is larger than both `skewedPartitionFactor` × the median (default 5) **and** `skewedPartitionThresholdInBytes` (default 256 MB), it splits that partition into pieces and duplicates the matching partition from the other side for each piece.
 
 <div class="code-title">spark-defaults (the relevant knobs)</div>
 
@@ -202,7 +202,7 @@ result = (partial.groupBy("user_agent")
          F.sum("events").alias("events")))
 ```
 
-If you salt by something else, the same session can appear in several buckets and summing overcounts. The [grain](/blog/2026-10-21-the-grain-of-a-table) problem from earlier in the series turns up again, this time inside a performance fix.
+If you salt by something else, the same session can appear in several buckets and summing overcounts. The [grain](/blog/2026-10-21-the-grain-of-a-table/) problem from earlier in the series turns up again, this time inside a performance fix.
 
 <div class="cl cl-note">
 <div class="cl-tag">Note</div>
@@ -222,7 +222,7 @@ Skew also appears when *writing*. `df.write.partitionBy("country")` after a `rep
    .write.partitionBy("country").format("delta").saveAsTable("silver.orders"))
 ```
 
-The opposite mistake, too many tasks writing into each partition, is the [small files problem](/blog/2026-10-21-the-small-files-problem).
+The opposite mistake, too many tasks writing into each partition, is the [small files problem](/blog/2026-10-21-the-small-files-problem/).
 
 ## On Monday
 
@@ -238,15 +238,15 @@ To confirm which joins, shuffles, and partitions a job is actually running, you 
 <div class="series-k">Series · Part 5 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data">Late-arriving data</a></li>
+<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
 <li class="on">Data skew</li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions">Slowly changing dimensions</a></li>
-<li><a href="/blog/2026-10-21-schema-evolution">Schema evolution</a></li>
+<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

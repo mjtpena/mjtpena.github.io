@@ -1,9 +1,9 @@
 ---
-title: "Slowly Changing Dimensions: Keeping History Without Corrupting Your Facts"
+title: "Slowly Changing Dimensions Without Corrupting Your Facts"
 author: Michael John Peña
 draft: false
 date: 2026-10-21T12:08:00Z
-description: "When a customer changes segment, should last year's revenue move with them? That's a business decision, and SCD types are how you implement it. Choosing a type per column, a Type 2 MERGE that is idempotent and safe to replay, point-in-time joins that don't fan out, and why the dimension should be rebuildable from an append-only change log."
+description: "Should last year's revenue move when a customer changes segment? Pick an SCD type per column, write a replay-safe Type 2 MERGE, and join facts correctly."
 tags:
   - Data Engineering
   - Data Modeling
@@ -22,7 +22,7 @@ Both are **slowly changing dimension** bugs. The first loses history, the second
 
 A dimension attribute changes: a customer's segment, a product's category, a store's region. **Which value should facts from before the change see?**
 
-That's a business question, and the answer can differ between columns of the same table. Finance probably wants Q2 revenue reported under the segment customers had *in Q2*. Account management probably wants it under the segment they have *now*, to see how their current book has grown. Both are valid. Problems start when nobody decides and the dimension load chooses implicitly.
+That's a business question ([Microsoft's star schema guidance](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema) frames it the same way), and the answer can differ between columns of the same table. Finance probably wants Q2 revenue reported under the segment customers had *in Q2*. Account management probably wants it under the segment they have *now*, to see how their current book has grown. Both are valid. Problems start when nobody decides and the dimension load chooses implicitly.
 
 | Type | On change | History | Typical use |
 |---|---|---|---|
@@ -77,11 +77,11 @@ sha2(concat_ws('||', segment, region), 256)
 sha2(to_json(named_struct('segment', segment, 'region', region)), 256)
 ```
 
-- **A deterministic surrogate key.** `xxhash64(customer_id, valid_from)` produces the same key every time the same version is loaded. Identity columns and `monotonically_increasing_id()` produce new keys on every rerun, which breaks the [idempotence](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data) the next section relies on.
+- **A deterministic surrogate key.** `xxhash64(customer_id, valid_from)` produces the same key every time the same version is loaded. Identity columns and `monotonically_increasing_id()` produce new keys on every rerun, which breaks the [idempotence](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/) the next section relies on.
 
 ## The load: one MERGE, safe to replay
 
-A Type 2 change needs two writes to the target: **update** the current row to close it, and **insert** the new version. `MERGE` applies one action per source row, so the standard approach is to feed each changed row in *twice*: once with a key that matches the current version (to close it) and once with a `NULL` key that can't match anything (to insert the new version).
+A Type 2 change needs two writes to the target: **update** the current row to close it, and **insert** the new version. `MERGE` applies one action per source row, so the standard approach (also the example in the [Delta Lake docs](https://docs.delta.io/latest/delta-update.html)) is to feed each changed row in *twice*: once with a key that matches the current version (to close it) and once with a `NULL` key that can't match anything (to insert the new version).
 
 <div class="code-title">gold/dim_customer_scd2.sql</div>
 
@@ -126,7 +126,7 @@ Here's what each kind of staged row does:
 | Same batch replayed | Matches the *new* current, hash equal → nothing | Not produced (hash equal) | No-op: idempotent |
 | Older change replayed | Guard `changed_at > valid_from` fails → nothing | Guard fails → not produced | No-op: history not rewound |
 
-Two preconditions. First, **staging must be at the grain of one row per customer per batch**. `MERGE` fails if two source rows match the same target row, and that's the [grain](/blog/2026-10-21-the-grain-of-a-table) rule again. If a batch can contain several changes to the same customer, as in CDC, either process them one at a time in order or use the rebuild approach below. Second, Type 1 columns such as `name` aren't in `row_hash`, so update them with a separate statement that sets them on **all** versions of the key. A Type 1 change applies to history as well.
+Two preconditions. First, **staging must be at the grain of one row per customer per batch**. `MERGE` fails if two source rows match the same target row, and that's the [grain](/blog/2026-10-21-the-grain-of-a-table/) rule again. If a batch can contain several changes to the same customer, as in CDC, either process them one at a time in order or use the rebuild approach below. Second, Type 1 columns such as `name` aren't in `row_hash`, so update them with a separate statement that sets them on **all** versions of the key. A Type 1 change applies to history as well.
 
 ## Joining facts: point in time, never just the business key
 
@@ -176,7 +176,7 @@ LEFT JOIN gold.dim_customer d
   AND o.order_ts <  d.valid_to
 ```
 
-Use the fact's **event time** for the lookup, not load time. A February order that [arrives late](/blog/2026-10-21-late-arriving-data) in October should still pick up the February version. Keep the equality on `customer_id` in the join condition: with only the range predicates, Spark can't hash the join and falls back to a [nested loop](/blog/2026-10-21-reading-a-spark-query-plan).
+Use the fact's **event time** for the lookup, not load time. A February order that [arrives late](/blog/2026-10-21-late-arriving-data/) in October should still pick up the February version. Keep the equality on `customer_id` in the join condition: with only the range predicates, Spark can't hash the join and falls back to a [nested loop](/blog/2026-10-21-reading-a-spark-query-plan/).
 
 For the "as it is now" question, don't join facts to `is_current` rows by business key. Add a Type 6 `current_segment` column to every version, or provide a `dim_customer_current` view and join through the surrogate key to the business key. Then both questions get correct answers from the same model.
 
@@ -252,15 +252,15 @@ The incremental `MERGE` handles the common case cheaply. The rebuild handles eve
 <div class="series-k">Series · Part 9 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem">The small files problem</a></li>
+<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
 <li class="on">Slowly changing dimensions</li>
-<li><a href="/blog/2026-10-21-schema-evolution">Schema evolution</a></li>
+<li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

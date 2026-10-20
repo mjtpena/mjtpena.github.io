@@ -3,7 +3,7 @@ title: "Reading a Spark Query Plan: Ten Minutes That Explain a Two-Hour Job"
 author: Michael John Peña
 draft: false
 date: 2026-10-21T12:05:00Z
-description: "Most Spark tuning is guessing: change a config, rerun, and hope. The physical plan tells you what Spark will actually do: how many shuffles, which join strategy, whether partitions were pruned, where Python is involved. How to read one bottom-up, the dozen operators that matter, and the three plans that should worry you on sight."
+description: "The physical plan shows what Spark will actually do: shuffles, join strategy, pruning, Python UDFs. How to read one, and which plans should worry you."
 tags:
   - Data Engineering
   - Spark
@@ -29,13 +29,13 @@ EXPLAIN FORMATTED
 SELECT ...;
 ```
 
-Spark builds four plans: **parsed** (your query as written), **analyzed** (names resolved against the catalog), **optimized logical** (after rule-based rewrites such as predicate pushdown and constant folding), and **physical** (the operators that will actually run). When you're debugging performance, the physical plan is the one you want. The others are mainly useful when Spark has rewritten your query in a way you didn't expect.
+Spark builds four plans ([`EXPLAIN` reference](https://spark.apache.org/docs/latest/sql-ref-syntax-qry-explain.html)): **parsed** (your query as written), **analyzed** (names resolved against the catalog), **optimized logical** (after rule-based rewrites such as predicate pushdown and constant folding), and **physical** (the operators that will actually run). When you're debugging performance, the physical plan is the one you want. The others are mainly useful when Spark has rewritten your query in a way you didn't expect.
 
 <div class="cl cl-note">
 <div class="cl-tag">AQE</div>
 <div class="cl-body">
 
-With adaptive query execution on (the default since Spark 3.2), `explain()` before running shows `AdaptiveSparkPlan isFinalPlan=false`. That's the *initial* plan. AQE re-plans between stages using real data sizes, and it may change join strategies, merge partitions, or split skewed ones. The **final** plan, with runtime metrics on every node, is in the Spark UI's **SQL / DataFrame** tab after the query has run. Read both.
+With [adaptive query execution](https://spark.apache.org/docs/latest/sql-performance-tuning.html) on (the default since Spark 3.2), `explain()` before running shows `AdaptiveSparkPlan isFinalPlan=false`. That's the *initial* plan. AQE re-plans between stages using real data sizes, and it may change join strategies, merge partitions, or split skewed ones. The **final** plan, with runtime metrics on every node, is in the Spark UI's **SQL / DataFrame** tab after the query has run. Read both.
 
 </div>
 </div>
@@ -146,8 +146,8 @@ AdaptiveSparkPlan isFinalPlan=false
 
 Reading from the bottom up:
 
-1. **`FileScan … silver.sales`.** `PartitionFilters` contains `sale_date = 2026-10-01`, so Spark will only list and read that day's partition. That's [partition pruning](/blog/2026-10-21-partition-pruning) working. `PushedFilters: [IsNotNull(store_id)]` means the null check is sent to the Parquet reader, which can skip row groups using column statistics. `ReadSchema` lists three columns, not all forty, so column pruning works as well.
-2. **`Filter isnotnull(store_id#11)`.** Spark added this itself. An inner join can never match a null key, so the optimiser removes nulls early. (In a left join it can't, which is how null keys end up causing [skew](/blog/2026-10-21-data-skew-in-spark).)
+1. **`FileScan … silver.sales`.** `PartitionFilters` contains `sale_date = 2026-10-01`, so Spark will only list and read that day's partition. That's [partition pruning](/blog/2026-10-21-partition-pruning/) working. `PushedFilters: [IsNotNull(store_id)]` means the null check is sent to the Parquet reader, which can skip row groups using column statistics. `ReadSchema` lists three columns, not all forty, so column pruning works as well.
+2. **`Filter isnotnull(store_id#11)`.** Spark added this itself. An inner join can never match a null key, so the optimiser removes nulls early. (In a left join it can't, which is how null keys end up causing [skew](/blog/2026-10-21-data-skew-in-spark/).)
 3. **`Exchange hashpartitioning(store_id#11, 200)`.** A shuffle. Every row is redistributed by `store_id` into 200 partitions so that matching keys meet. The same happens on the stores side.
 4. **`Sort` + `SortMergeJoin`.** Both sides are sorted by the key and merged. The join was planned this way because `stores` is about 40 MB, above the 10 MB `autoBroadcastJoinThreshold`.
 5. **`HashAggregate(partial_sum)` → `Exchange hashpartitioning(region)` → `HashAggregate(sum)`.** A two-phase aggregation. Each task pre-aggregates its rows by region, the partial results are shuffled by region, and a final aggregate combines them. The partial step is why plain sums are fairly resistant to skew.
@@ -171,7 +171,7 @@ Most of what you see in a plan is routine. These are the operators that tell you
 | `PartitionFilters: []` on a partitioned table | No partition pruning | The query filters on a date or partition-related column |
 | Your predicate missing from `PushedFilters` | Filter applied after reading everything | It involves a UDF, a cast, or a non-pushable function |
 | `BatchEvalPython` / `ArrowEvalPython` | Rows serialised out to a Python worker for a UDF | It's in a hot path that a built-in function could handle |
-| `Generate explode(...)` | One row becomes many | Downstream code assumes the original [grain](/blog/2026-10-21-the-grain-of-a-table) |
+| `Generate explode(...)` | One row becomes many | Downstream code assumes the original [grain](/blog/2026-10-21-the-grain-of-a-table/) |
 | `InMemoryTableScan` | Reading from `.cache()` | The cached data might be out of date |
 | `AQEShuffleRead` (final plan) | AQE coalesced or split shuffle partitions | Never. This is AQE working as intended |
 
@@ -191,7 +191,7 @@ by_phone = a.join(b, a.phone == b.phone)
 matched  = by_email.unionByName(by_phone).dropDuplicates(["a_id", "b_id"])
 ```
 
-Range joins (`a.ts BETWEEN b.start AND b.end`) have the same problem. Add an equality key wherever you can, such as the customer ID in a [point-in-time dimension lookup](/blog/2026-10-21-slowly-changing-dimensions), so the range condition is applied within each key.
+Range joins (`a.ts BETWEEN b.start AND b.end`) have the same problem. Add an equality key wherever you can, such as the customer ID in a [point-in-time dimension lookup](/blog/2026-10-21-slowly-changing-dimensions/), so the range condition is applied within each key.
 
 ### A window that sends everything to one task
 
@@ -212,7 +212,7 @@ The table is partitioned by `sale_date`, the query filters on a date, and `Parti
 
 ## Use the final plan's metrics
 
-The UI's SQL tab shows the *executed* plan with metrics on each node, which turns the plan from a forecast into a record of what happened:
+The [UI's SQL tab](https://spark.apache.org/docs/latest/web-ui.html) shows the *executed* plan with metrics on each node, which turns the plan from a forecast into a record of what happened:
 
 - **number of output rows** on every node. Compare input and output of a join to see fan-out immediately. If 10 million rows go in and 31 million come out, a key you assumed was unique isn't.
 - **number of files read / size of files read** on scans. This tells you whether pruning actually reduced the read and by how much.
@@ -231,15 +231,15 @@ The UI's SQL tab shows the *executed* plan with metrics on each node, which turn
 <div class="series-k">Series · Part 6 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark">Data skew</a></li>
+<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
 <li class="on">Reading a Spark query plan</li>
-<li><a href="/blog/2026-10-21-partition-pruning">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions">Slowly changing dimensions</a></li>
-<li><a href="/blog/2026-10-21-schema-evolution">Schema evolution</a></li>
+<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

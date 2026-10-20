@@ -3,7 +3,7 @@ title: "Partition Pruning: The Fastest Data Is the Data You Never Read"
 author: Michael John Peña
 draft: false
 date: 2026-10-21T12:06:00Z
-description: "A query for one day shouldn't read three years. Partition pruning skips data before Spark opens a single file, but only when the filter is on the right column, in the right form, and in a place the optimiser can see it. The four layers of not-reading data, the five ways pruning breaks, and how to choose partition columns that age well."
+description: "A query for one day should not read three years. How partition pruning works, the five ways it silently breaks, and how to pick partition columns."
 tags:
   - Data Engineering
   - Spark
@@ -179,7 +179,7 @@ FileScan parquet silver.sales[...] ...
   PushedFilters: [...], ...
 ```
 
-A non-empty `PartitionFilters` that mentions your partition column means pruning is planned. To see how much it actually saved, look at the executed scan in the Spark UI's SQL tab. *number of files read* and *number of partitions read* against the table's totals give you the real reduction. The [query plan post](/blog/2026-10-21-reading-a-spark-query-plan) covers reading the rest of the plan.
+A non-empty `PartitionFilters` that mentions your partition column means pruning is planned. To see how much it actually saved, look at the executed scan in the Spark UI's SQL tab. *number of files read* and *number of partitions read* against the table's totals give you the real reduction. The [query plan post](/blog/2026-10-21-reading-a-spark-query-plan/) covers reading the rest of the plan.
 
 ## Five ways pruning breaks
 
@@ -193,7 +193,7 @@ WHERE sale_ts >= '2026-10-14' AND sale_ts < '2026-10-15'
 
 That's a perfectly reasonable filter for the question, but the planner doesn't know that `sale_date` is derived from `sale_ts`, so `PartitionFilters` is empty and every partition is read.
 
-You can teach the engine the relationship. In Delta Lake, declare the partition column as a **generated column**, and Delta derives the partition filter from predicates on the source column:
+You can teach the engine the relationship. In Delta Lake, declare the partition column as a [**generated column**](https://docs.delta.io/latest/delta-batch.html), and Delta derives the partition filter from predicates on the source column:
 
 <div class="code-title">ddl/silver_sales.sql</div>
 
@@ -209,7 +209,7 @@ USING DELTA
 PARTITIONED BY (sale_date);
 ```
 
-With that definition, a filter on `sale_ts` gets a matching `sale_date` partition filter. Delta supports this for a specific set of expressions: `CAST(... AS DATE)`, `YEAR`, `MONTH`, `DAY`, `DATE_FORMAT`, `DATE_TRUNC`, and a few others. Arbitrary expressions don't qualify. And note that `CAST(timestamp AS DATE)` uses the session time zone, so [pin it](/blog/2026-10-21-event-time-vs-processing-time) or partitions end up a few hours off depending on which cluster wrote them.
+With that definition, a filter on `sale_ts` gets a matching `sale_date` partition filter. Delta supports this for a specific set of expressions: `CAST(... AS DATE)`, `YEAR`, `MONTH`, `DAY`, `DATE_FORMAT`, `DATE_TRUNC`, and a few others. Arbitrary expressions don't qualify. And note that `CAST(timestamp AS DATE)` uses the session time zone, so [pin it](/blog/2026-10-21-event-time-vs-processing-time/) or partitions end up a few hours off depending on which cluster wrote them.
 
 Without generated columns, the fix is a convention: always filter on the partition column, and also on the source column when you need sub-day precision.
 
@@ -262,15 +262,15 @@ Pruning only helps if the table is partitioned by something queries actually fil
 <div class="cl-tag">Rules of thumb</div>
 <div class="cl-body">
 
-- **Partition by what queries filter on and what the lifecycle acts on.** Usually a date, which is also the unit you [replace on rerun](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data) and expire on retention.
+- **Partition by what queries filter on and what the lifecycle acts on.** Usually a date, which is also the unit you [replace on rerun](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/) and expire on retention.
 - **Low cardinality.** Hundreds to low thousands of partitions, not millions. Never a customer ID.
-- **Big partitions.** Aim for each partition to hold at least around 1 GB. Databricks' guidance is not to partition tables under about 1 TB at all and to rely on file-level skipping instead.
+- **Big partitions.** Aim for each partition to hold at least around 1 GB. [Databricks' guidance](https://docs.databricks.com/en/tables/partitions.html) is not to partition tables under about 1 TB at all and to rely on file-level skipping instead.
 - **Coarser beats finer.** Daily is usually right, hourly rarely is, and a `date + country + channel` combination almost never is.
 
 </div>
 </div>
 
-Over-partitioning is the most common way teams turn pruning into a problem. Partitioning a 50 GB table by `date` and `store_id` with 400 stores gives 146,000 partitions a year averaging 340 KB each. Every query has to plan over a huge partition list, and every write produces hundreds of [tiny files](/blog/2026-10-21-the-small-files-problem).
+Over-partitioning is the most common way teams turn pruning into a problem. Partitioning a 50 GB table by `date` and `store_id` with 400 stores gives 146,000 partitions a year averaging 340 KB each. Every query has to plan over a huge partition list, and every write produces hundreds of [tiny files](/blog/2026-10-21-the-small-files-problem/).
 
 ## Inside the partition: data skipping
 
@@ -278,7 +278,7 @@ Partitions get you to the right day. Within the day, Delta's **data skipping** g
 
 Two things decide whether data skipping helps:
 
-- **Which columns have statistics.** By default Delta collects them for the first 32 columns of the schema (`delta.dataSkippingNumIndexedCols`). A filter column in position 47 has no stats and can't be used for skipping. Move commonly filtered columns towards the front, or name them explicitly with `delta.dataSkippingStatsColumns` on runtimes that support it.
+- **Which columns have statistics.** By default Delta [collects them](https://docs.delta.io/latest/optimizations-oss.html) for the first 32 columns of the schema (`delta.dataSkippingNumIndexedCols`). A filter column in position 47 has no stats and can't be used for skipping. Move commonly filtered columns towards the front, or name them explicitly with `delta.dataSkippingStatsColumns` on runtimes that support it.
 - **Whether the data is clustered.** If every file contains every store, every file's range is `[1, 900]` and nothing is skipped. Clustering the data with `OPTIMIZE ... ZORDER BY (store_id)` or liquid clustering (`CLUSTER BY`) where your runtime supports it gives each file a narrow range and makes the statistics useful.
 
 Data skipping also depends on how the predicate is written. `store_id = 412` and `amount > 1000` can be compared with min/max stats. `date_format(sale_ts, 'yyyy-MM') = '2026-10'` generally can't, so write the range directly: `sale_ts >= '2026-10-01' AND sale_ts < '2026-11-01'`.
@@ -297,15 +297,15 @@ Pruning is the rare optimisation that gets *more* valuable over time. A query th
 <div class="series-k">Series · Part 7 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
 <li class="on">Partition pruning</li>
-<li><a href="/blog/2026-10-21-the-small-files-problem">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions">Slowly changing dimensions</a></li>
-<li><a href="/blog/2026-10-21-schema-evolution">Schema evolution</a></li>
+<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

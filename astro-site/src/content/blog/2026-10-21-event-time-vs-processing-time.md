@@ -3,7 +3,7 @@ title: "Event Time vs Processing Time: Know Which Clock Your Numbers Are On"
 author: Michael John Peña
 draft: false
 date: 2026-10-21T12:02:00Z
-description: "Every record carries at least three timestamps: when it happened, when it arrived, and when your job processed it. Group by the wrong one and daily numbers move every time you rerun. The clocks, the bugs each one causes, and the rule that keeps them apart: select by arrival, report by occurrence."
+description: "Every record has three timestamps: when it happened, when it arrived, and when it was processed. Group by the wrong one and past days keep changing."
 tags:
   - Data Engineering
   - Streaming
@@ -93,17 +93,17 @@ SELECT * FROM bronze.orders
 WHERE event_ts > '${last_run_max_event_ts}'
 ```
 
-Any event that arrives after a later event has already been processed will never be picked up, because its event time is behind the cursor. The offline phone in the figure is one example. Nothing errors and the data simply never arrives. That's the main subject of [late-arriving data](/blog/2026-10-21-late-arriving-data).
+Any event that arrives after a later event has already been processed will never be picked up, because its event time is behind the cursor. The offline phone in the figure is one example. Nothing errors and the data simply never arrives. That's the main subject of [late-arriving data](/blog/2026-10-21-late-arriving-data/).
 
 ### Deriving "yesterday" from the processing clock
 
-`WHERE event_date = current_date() - 1` lets *when the job ran* decide *which data it processes*. A retry that lands after midnight processes the wrong day, and a backfill run on the 9th processes the 8th, however many times you click rerun. The logical date has to come from the orchestrator as a parameter. This is also the most common way jobs lose [idempotence](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data).
+`WHERE event_date = current_date() - 1` lets *when the job ran* decide *which data it processes*. A retry that lands after midnight processes the wrong day, and a backfill run on the 9th processes the 8th, however many times you click rerun. The logical date has to come from the orchestrator as a parameter. This is also the most common way jobs lose [idempotence](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/).
 
 ### Time zones
 
 Event time is only meaningful together with a zone, and "day" is a business definition, not a property of the timestamp. Three things go wrong regularly:
 
-- `to_date(ts)` in Spark uses `spark.sql.session.timeZone`. Two clusters with different session time zones produce different daily totals from the same table and the same SQL.
+- `to_date(ts)` in Spark uses [`spark.sql.session.timeZone`](https://spark.apache.org/docs/latest/configuration.html). Two clusters with different session time zones produce different daily totals from the same table and the same SQL.
 - Sources send local time without an offset. Twice a year, daylight saving creates an hour that happens twice and an hour that never happens.
 - The business day is in local time (Sydney trading, or a US retail calendar) while storage is in UTC. Midnight UTC is 10 or 11 in the morning in Sydney, so a "daily" UTC partition splits a Sydney trading day in two.
 
@@ -188,11 +188,11 @@ A record that arrives ten hours (or ten days) late adds its event date to `touch
 The same split applies to storage layout:
 
 - **Bronze**: partition or cluster by ingestion date. It's append-only, you can replay "everything we received on the 3rd", and late events never land in an old partition.
-- **Silver and gold**: partition or cluster by event or business date, which is how people [filter their queries](/blog/2026-10-21-partition-pruning).
+- **Silver and gold**: partition or cluster by event or business date, which is how people [filter their queries](/blog/2026-10-21-partition-pruning/).
 
 ## In streaming, the engine needs to be told
 
-Streaming engines expose the same choice directly. In Spark Structured Streaming, a window on a timestamp column from the data is an event-time window:
+Streaming engines expose the same choice directly. In [Spark Structured Streaming](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html), a window on a timestamp column from the data is an event-time window:
 
 <div class="code-title">streaming/orders_per_hour.py</div>
 
@@ -238,15 +238,15 @@ Monday's number will keep changing for a while, because events about Monday keep
 <div class="series-k">Series · Part 3 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table">The grain of a table</a></li>
+<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
 <li class="on">Event time vs processing time</li>
-<li><a href="/blog/2026-10-21-late-arriving-data">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions">Slowly changing dimensions</a></li>
-<li><a href="/blog/2026-10-21-schema-evolution">Schema evolution</a></li>
+<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

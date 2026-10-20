@@ -3,7 +3,7 @@ title: "Late-Arriving Data: Deciding When a Day Is Actually Done"
 author: Michael John Peña
 draft: false
 date: 2026-10-21T12:03:00Z
-description: "Late data isn't an edge case. It's a distribution, and you can measure it. How to find out how late your data really is, pick a waiting policy from that, handle what arrives after the policy closes (in batch, in streaming, and in dimensions), and tell consumers when a number is final."
+description: "Late data is a distribution you can measure, not an edge case. How to set a waiting policy, handle what arrives after it, and say when a number is final."
 tags:
   - Data Engineering
   - Streaming
@@ -12,7 +12,7 @@ tags:
   - Data Quality
 ---
 
-The [previous post](/blog/2026-10-21-event-time-vs-processing-time) ended with Monday's order count still changing on Wednesday. The fix there was to group by event time and select by ingestion time, so that late events land on the right day. That leaves three questions it didn't answer: how late can events be, how long should you wait for them, and what happens to the ones that arrive after you stop waiting?
+The [previous post](/blog/2026-10-21-event-time-vs-processing-time/) ended with Monday's order count still changing on Wednesday. The fix there was to group by event time and select by ingestion time, so that late events land on the right day. That leaves three questions it didn't answer: how late can events be, how long should you wait for them, and what happens to the ones that arrive after you stop waiting?
 
 Most teams never answer those questions on purpose. The answers end up being whatever the pipeline happens to do: a lookback of one day because the first version had one, a streaming watermark of ten minutes copied from a tutorial, and a finance report that silently disagrees with the dashboard every month-end.
 
@@ -103,7 +103,7 @@ def run(spark, logical_date: str):
         .saveAsTable("gold.daily_orders"))
 ```
 
-This is idempotent because it replaces a fixed slice. It's also easy to reason about: any day within *N* of today is provisional, and anything older is final. The cost is recomputing *N* days on every run, which is cheap for daily aggregates and expensive for large fact tables. For those, use the "recompute only the touched days" variant from the previous post: find the event dates in newly ingested rows and rebuild only those, capped at the lookback so a stray 2019 event doesn't reopen 2019.
+This is idempotent because [`replaceWhere`](https://docs.delta.io/latest/delta-batch.html) replaces a fixed slice. It's also easy to reason about: any day within *N* of today is provisional, and anything older is final. The cost is recomputing *N* days on every run, which is cheap for daily aggregates and expensive for large fact tables. For those, use the "recompute only the touched days" variant from the previous post: find the event dates in newly ingested rows and rebuild only those, capped at the lookback so a stray 2019 event doesn't reopen 2019.
 
 ### Tell consumers what's final
 
@@ -120,7 +120,7 @@ Some consumers, finance in particular, can't accept a closed period changing. Fo
 
 ## Streaming: watermarks are the same policy, enforced by the engine
 
-In Spark Structured Streaming, a watermark is the waiting policy expressed in code. Spark tracks the maximum event time it has seen, subtracts the delay you give it, and treats that as the point before which it no longer expects data.
+In Spark Structured Streaming, a [watermark](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html) is the waiting policy expressed in code. Spark tracks the maximum event time it has seen, subtracts the delay you give it, and treats that as the point before which it no longer expects data.
 
 <figure class="ff">
 <svg class="ff-svg" viewBox="0 0 900 300" role="img" aria-label="An event-time axis from 11:00 to 16:00 with four one-hour windows. The maximum event time seen is 15:40 and the watermark, two hours behind it, is at 13:40. The 12:00 to 13:00 window ends before the watermark, so it has been finalised and its state dropped; a late event at 12:35 arriving now is discarded. The 13:00 to 14:00 window is still open because the watermark is inside it; a late event at 13:20 is still counted.">
@@ -210,7 +210,7 @@ VALUES
 
 When the real customer record arrives, the dimension load **updates the inferred row in place** (`WHEN MATCHED AND d.is_inferred THEN UPDATE ... is_inferred = false`) instead of creating a new version. The placeholder was never a true historical state, so it shouldn't appear in history. `valid_from = 1900-01-01` means facts from before the record existed still find it. Track a count of `is_inferred = true` rows older than a day. A growing count means the dimension feed is broken, not just slow.
 
-And when a *fact* arrives late into a [Type 2 dimension](/blog/2026-10-21-slowly-changing-dimensions), look up the version that was valid at the fact's event time, not the current one. Otherwise a February order gets attributed to the segment the customer moved to in October.
+And when a *fact* arrives late into a [Type 2 dimension](/blog/2026-10-21-slowly-changing-dimensions/), look up the version that was valid at the fact's event time, not the current one. Otherwise a February order gets attributed to the segment the customer moved to in October.
 
 ## On Monday
 
@@ -226,15 +226,15 @@ Data will always arrive late. What you control is whether you've decided what ha
 <div class="series-k">Series · Part 4 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time">Event time vs processing time</a></li>
+<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
 <li class="on">Late-arriving data</li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions">Slowly changing dimensions</a></li>
-<li><a href="/blog/2026-10-21-schema-evolution">Schema evolution</a></li>
+<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

@@ -1,9 +1,9 @@
 ---
-title: "The Grain of a Table: The Sentence Every Table Needs Before Its First Join"
+title: "The Grain of a Table: Declare It Before the First Join"
 author: Michael John Peña
 draft: false
 date: 2026-10-21T12:01:00Z
-description: "Grain is what one row of a table represents. Most wrong numbers in analytics come down to a join or an aggregation that changed the grain without anyone noticing. How to declare grain, test it, and keep measures at the grain where they're true."
+description: "Grain is what one row of a table means. Most wrong numbers come from a join or aggregation that quietly changed it. How to declare grain and test it."
 tags:
   - Data Engineering
   - Data Modeling
@@ -27,7 +27,7 @@ The grain of a table is what a single row represents. You should be able to say 
 
 The primary key is how the grain is expressed mechanically: `order_id`, `(order_id, line_no)`, `(product_id, warehouse_id, snapshot_date)`. The sentence carries the meaning the key leaves out. "As of end of day", "latest state", and "duplicates included" each change which questions the table can answer.
 
-Kimball's dimensional modelling process puts **declare the grain** before choosing dimensions or facts, and that order isn't arbitrary. Each later decision depends on it: which measures belong in the table, which dimensions you can join, how to partition, what to `MERGE` on.
+Kimball's dimensional modelling process puts **declare the grain** before choosing dimensions or facts, and Microsoft's [star schema guidance](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema) makes the same point for Power BI models. That order isn't arbitrary. Each later decision depends on it: which measures belong in the table, which dimensions you can join, how to partition, what to `MERGE` on.
 
 <div class="cl cl-key">
 <div class="cl-tag">Rule</div>
@@ -90,10 +90,10 @@ A join to a table at a finer grain *fans out*. Each row on the coarse side repea
 The grain changes in other ways too, and all of them pass every syntax check:
 
 - **Mixed-grain tables.** Order-level totals stored on every line row "for convenience". Each row is accurate on its own, but summing any of those columns is wrong.
-- **Joining a history table on the business key.** A [Type 2 dimension](/blog/2026-10-21-slowly-changing-dimensions) has one row per version of each customer. Joining facts on `customer_id` alone multiplies every fact by the number of versions.
+- **Joining a history table on the business key.** A [Type 2 dimension](/blog/2026-10-21-slowly-changing-dimensions/) has one row per version of each customer. Joining facts on `customer_id` alone multiplies every fact by the number of versions.
 - **Unioning tables at different grains.** Daily snapshot rows unioned with transaction rows "to get everything in one place".
 - **A `GROUP BY` that gains a column.** Adding `channel` to a grouping changes "one row per day" to "one row per day per channel". Downstream code that assumed one row per day now sums several.
-- **Duplicates you didn't know about.** If `orders` actually holds two rows for some orders because of a [non-idempotent load](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data), the grain you declared isn't the grain you have.
+- **Duplicates you didn't know about.** If `orders` actually holds two rows for some orders because of a [non-idempotent load](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/), the grain you declared isn't the grain you have.
 
 ## Grain decides which measures can be added up
 
@@ -186,7 +186,7 @@ COMMENT 'Grain: one row per order (latest source state). Key: order_id.'
 TBLPROPERTIES ('grain' = 'order_id');
 ```
 
-Most lakehouse engines won't enforce it for you. Delta Lake supports `NOT NULL` and `CHECK` constraints but no unique constraint. Primary keys in Unity Catalog and the `PRIMARY KEY ... NOT ENFORCED` syntax in Fabric Warehouse are informational: the optimiser may rely on them, and nothing stops you inserting a duplicate. So the check has to be explicit:
+Most lakehouse engines won't enforce it for you. Delta Lake supports [`NOT NULL` and `CHECK` constraints](https://docs.delta.io/latest/delta-constraints.html) but no unique constraint. Primary keys in Unity Catalog and the [`PRIMARY KEY ... NOT ENFORCED`](https://learn.microsoft.com/en-us/fabric/data-warehouse/table-constraints) syntax in Fabric Warehouse are informational: the optimiser may rely on them, and nothing stops you inserting a duplicate. So the check has to be explicit:
 
 <div class="code-title">checks/assert_grain.py</div>
 
@@ -214,9 +214,9 @@ Put `assert_grain` after every write of a table people query. Put `assert_no_fan
 
 Once you notice grain, it turns up in most of the other topics here:
 
-- The `MERGE` key in an [idempotent write](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data) *is* the grain. If you merge on something else, duplicates follow.
-- A [slowly changing dimension](/blog/2026-10-21-slowly-changing-dimensions) is a deliberate change of grain, from "one row per customer" to "one row per customer version".
-- [Partitioning](/blog/2026-10-21-partition-pruning) should follow a column that's part of how the table is queried, and that usually means the time component of its grain.
+- The `MERGE` key in an [idempotent write](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/) *is* the grain. If you merge on something else, duplicates follow.
+- A [slowly changing dimension](/blog/2026-10-21-slowly-changing-dimensions/) is a deliberate change of grain, from "one row per customer" to "one row per customer version".
+- [Partitioning](/blog/2026-10-21-partition-pruning/) should follow a column that's part of how the table is queried, and that usually means the time component of its grain.
 
 ## On Monday
 
@@ -231,15 +231,15 @@ Most wrong numbers have nothing to do with bad data. They come from correct data
 <div class="series-k">Series · Part 2 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
 <li class="on">The grain of a table</li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions">Slowly changing dimensions</a></li>
-<li><a href="/blog/2026-10-21-schema-evolution">Schema evolution</a></li>
+<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

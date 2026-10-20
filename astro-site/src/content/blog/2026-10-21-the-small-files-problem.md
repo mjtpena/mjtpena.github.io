@@ -1,9 +1,9 @@
 ---
-title: "The Small Files Problem: How a Healthy Table Ends Up With Two Million Files"
+title: "The Small Files Problem: How Tables End Up With Two Million Files"
 author: Michael John Peña
 draft: false
 date: 2026-10-21T12:07:00Z
-description: "Nobody writes small files on purpose. They come from simple arithmetic: tasks × partitions × writes per day. Then every reader pays a cost per file. Where small files come from, how to measure them, how to stop creating them, and how to compact the ones you already have without doubling your storage bill or breaking time travel."
+description: "Small files come from simple arithmetic, and every reader pays a cost per file. Where they come from, how to measure them, and how to compact them safely."
 tags:
   - Data Engineering
   - Spark
@@ -22,9 +22,9 @@ Reading 10 GB as 40 files and reading 10 GB as 23,000 files both move 10 GB of d
 
 - **Listing and metadata.** Object storage lists in pages, so more files means more round trips. Delta records every file as an `add` action in the transaction log, which makes the log and its checkpoints bigger and slows down planning for every query.
 - **Opening files.** Each file needs a request, a footer read to get the Parquet schema and statistics, and then the actual data reads. With small files the fixed per-file cost is larger than the cost of the data itself.
-- **Scheduling.** Spark packs files into read tasks up to `spark.sql.files.maxPartitionBytes` (128 MB), but counts every file as at least `spark.sql.files.openCostInBytes` (4 MB). Ten GB in 23,040 files of 434 KB is treated as about 100 GB of work, roughly 800 tasks instead of 80.
+- **Scheduling.** Spark packs files into read tasks up to `spark.sql.files.maxPartitionBytes` (128 MB), but counts every file as at least [`spark.sql.files.openCostInBytes`](https://spark.apache.org/docs/latest/sql-performance-tuning.html) (4 MB). Ten GB in 23,040 files of 434 KB is treated as about 100 GB of work, roughly 800 tasks instead of 80.
 - **Worse compression and skipping.** Columnar encoding and compression work better on large row groups. Tiny files contain tiny row groups, so their min/max statistics cover little data each, and checking them all adds overhead instead of saving it.
-- **Downstream engines.** SQL endpoints and BI engines that read the same Delta tables pay these costs too. Fabric's Direct Lake mode, for example, has limits on Parquet files and row groups per table, and exceeding them causes queries to fall back to slower modes.
+- **Downstream engines.** SQL endpoints and BI engines that read the same Delta tables pay these costs too. Fabric's [Direct Lake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview) mode, for example, has limits on Parquet files and row groups per table, and exceeding them causes queries to fall back to slower modes.
 
 ## Where they come from: arithmetic
 
@@ -74,7 +74,7 @@ Multiply by how often the job writes and you get the growth rate. Most small-fil
 Other common sources:
 
 - **Shuffle partitions × date partitions.** A backfill of 30 days through a 200-partition shuffle followed by `write.partitionBy("sale_date")` can produce up to 6,000 files, because every task may hold rows for every date.
-- **Over-partitioning.** Partitioning by `date + store_id` multiplies the files per write by the number of stores. The [partition pruning post](/blog/2026-10-21-partition-pruning) covers choosing partition columns.
+- **Over-partitioning.** Partitioning by `date + store_id` multiplies the files per write by the number of stores. The [partition pruning post](/blog/2026-10-21-partition-pruning/) covers choosing partition columns.
 - **Frequent small `MERGE`s.** A `MERGE` rewrites every file that contains a matched row. A CDC feed merging a few hundred rows every minute rewrites files constantly and leaves the replacements fragmented.
 - **Trickle inserts.** Applications inserting rows one batch at a time through a SQL endpoint or JDBC, with each insert its own commit and its own file.
 - **The landing zone itself.** APIs and IoT devices that drop one small JSON file per call or per device per minute.
@@ -118,7 +118,7 @@ If each task writes rows for only one partition, you get one file per partition 
    .saveAsTable("silver.sales"))
 ```
 
-This has a known failure mode: one very large date ends up in one task, which writes one huge file slowly. That's [skew on write](/blog/2026-10-21-data-skew-in-spark). Add a bounded salt (`repartition("sale_date", pmod(xxhash64("sale_id"), 8))`) so large partitions are split across a fixed number of files, or cap file size with `spark.sql.files.maxRecordsPerFile`.
+This has a known failure mode: one very large date ends up in one task, which writes one huge file slowly. That's [skew on write](/blog/2026-10-21-data-skew-in-spark/). Add a bounded salt (`repartition("sale_date", pmod(xxhash64("sale_id"), 8))`) so large partitions are split across a fixed number of files, or cap file size with `spark.sql.files.maxRecordsPerFile`.
 
 ### Let the engine bin-pack: optimized write
 
@@ -136,7 +136,7 @@ A dashboard refreshed every 15 minutes doesn't need a stream committing every 10
 
 ## Fix the ones you have: compaction
 
-`OPTIMIZE` rewrites small files in a partition into fewer large ones, as a normal Delta commit. Readers see the old files until the commit and the new files after it, and the data doesn't change.
+[`OPTIMIZE`](https://docs.delta.io/latest/optimizations-oss.html) rewrites small files in a partition into fewer large ones, as a normal Delta commit. Readers see the old files until the commit and the new files after it, and the data doesn't change.
 
 <div class="code-title">ops/nightly_compaction.sql</div>
 
@@ -151,13 +151,13 @@ WHERE sale_date >= date_sub(current_date(), 3)
 ZORDER BY (store_id);
 ```
 
-`WHERE` in `OPTIMIZE` only accepts partition-column predicates, and scoping it is what keeps compaction cheap. Running it unscoped on a table with years of history means rewriting partitions that are already fine. For tables written frequently, **auto compaction** (`delta.autoOptimize.autoCompact = true`) runs a small compaction after writes so you don't need a scheduled job. On Fabric, `OPTIMIZE` can also apply V-Order, which reorganises row groups for faster reads by Fabric's engines.
+`WHERE` in `OPTIMIZE` only accepts partition-column predicates, and scoping it is what keeps compaction cheap. Running it unscoped on a table with years of history means rewriting partitions that are already fine. For tables written frequently, **auto compaction** (`delta.autoOptimize.autoCompact = true`) runs a small compaction after writes so you don't need a scheduled job. On Fabric, `OPTIMIZE` can also apply [V-Order](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order), which reorganises row groups for faster reads by Fabric's engines.
 
 <div class="cl cl-warn">
 <div class="cl-tag">Storage and time travel</div>
 <div class="cl-body">
 
-`OPTIMIZE` doesn't delete anything. The small files remain, marked as removed in the log, so that time travel and in-progress readers still work. Storage temporarily roughly doubles for compacted partitions until `VACUUM` deletes files older than the retention period (7 days by default). Don't "fix" the bill by vacuuming with zero retention. Delta blocks retention under 168 hours unless you disable the safety check, and if you do, you break time travel and can delete files that a running query is still reading.
+`OPTIMIZE` doesn't delete anything. The small files remain, marked as removed in the log, so that time travel and in-progress readers still work. Storage temporarily roughly doubles for compacted partitions until [`VACUUM`](https://docs.delta.io/latest/delta-utility.html) deletes files older than the retention period (7 days by default). Don't "fix" the bill by vacuuming with zero retention. Delta blocks retention under 168 hours unless you disable the safety check, and if you do, you break time travel and can delete files that a running query is still reading.
 
 </div>
 </div>
@@ -188,15 +188,15 @@ Small files are a slow-building problem in the opposite direction to most failur
 <div class="series-k">Series · Part 8 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning">Partition pruning</a></li>
+<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
 <li class="on">The small files problem</li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions">Slowly changing dimensions</a></li>
-<li><a href="/blog/2026-10-21-schema-evolution">Schema evolution</a></li>
+<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

@@ -3,7 +3,7 @@ title: "Idempotent Writes, and Why Retries Duplicate Data"
 author: Michael John Peña
 draft: false
 date: 2026-10-21T12:00:00Z
-description: "Every pipeline is retried eventually: by the orchestrator, by Spark, by a streaming restart, or by a person clicking rerun. If the write isn't idempotent, each retry is a duplicate. The four patterns that make a write safe to repeat, the things that quietly break them, and the one test that proves it."
+description: "Every pipeline gets retried eventually, and a non-idempotent write turns each retry into duplicates. Four patterns that make a write safe to repeat."
 tags:
   - Data Engineering
   - Spark
@@ -129,7 +129,7 @@ def load_day(spark, logical_date: str):
         .saveAsTable("silver.orders"))
 ```
 
-`replaceWhere` atomically deletes the rows matching the predicate and writes the new ones in a single Delta commit. Readers see either the old day or the new day, never half of each. Since Delta 2.0 the predicate can be on any column, not only partition columns, and by default Delta rejects the write if any incoming row falls outside the predicate.
+[`replaceWhere`](https://docs.delta.io/latest/delta-batch.html) atomically deletes the rows matching the predicate and writes the new ones in a single Delta commit. Readers see either the old day or the new day, never half of each. Since Delta 2.0 the predicate can be on any column, not only partition columns, and by default Delta rejects the write if any incoming row falls outside the predicate.
 
 <div class="cl cl-warn">
 <div class="cl-tag">Classic 2 AM</div>
@@ -172,17 +172,17 @@ WHEN NOT MATCHED THEN
 
 Three details make this idempotent rather than just "an upsert":
 
-1. **The source is deduplicated first.** Delta fails a `MERGE` when more than one source row matches the same target row. Even if it didn't, the result would depend on which row won. Deduplicate inside the batch with a deterministic ordering.
+1. **The source is deduplicated first.** Delta [fails a `MERGE`](https://docs.delta.io/latest/delta-update.html) when more than one source row matches the same target row. Even if it didn't, the result would depend on which row won. Deduplicate inside the batch with a deterministic ordering.
 2. **The tiebreak is total.** `source_updated_at` alone can tie. Add a second column that can't, like a log sequence number or offset, so two runs always choose the same row.
 3. **The update is guarded.** `s.source_updated_at > t.source_updated_at` means replaying an *older* batch can't overwrite newer state. Without the guard, a rerun of last Tuesday quietly rolls today's rows back to Tuesday's values.
 
-`rn` ends up in the table here because of `INSERT *`. In production, list the columns explicitly. That habit also protects you from [schema drift](/blog/2026-10-21-schema-evolution).
+`rn` ends up in the table here because of `INSERT *`. In production, list the columns explicitly. That habit also protects you from [schema drift](/blog/2026-10-21-schema-evolution/).
 
 ### 3. Let the sink remember what it has already committed
 
 Structured Streaming into a Delta sink is exactly-once on its own: the checkpoint and the Delta log together record which batch IDs have been written. As soon as you use `foreachBatch`, which you need for `MERGE` or for writing to several tables, that guarantee goes away. A batch that wrote its data but crashed before the checkpoint recorded it gets replayed after the restart.
 
-Delta gives you a direct fix: tag each write with an application ID and a monotonically increasing version, and Delta skips any write whose version it has already seen for that ID.
+Delta gives you a direct fix, [idempotent table writes](https://docs.delta.io/latest/delta-streaming.html): tag each write with an application ID and a monotonically increasing version, and Delta skips any write whose version it has already seen for that ID.
 
 <div class="code-title">bronze/stream_orders.py</div>
 
@@ -223,7 +223,7 @@ Some writes aren't to tables: sending an email, posting to a billing API, publis
 
 Most pipelines that duplicate data were meant to be idempotent. They stopped being idempotent through one of these:
 
-- **Relative dates in the job body.** `WHERE order_date = current_date() - 1` processes a different day if the retry happens after midnight. Pass the logical date in from the orchestrator as a parameter and never derive it from the clock inside the job. [Event time vs processing time](/blog/2026-10-21-event-time-vs-processing-time) goes deeper on this.
+- **Relative dates in the job body.** `WHERE order_date = current_date() - 1` processes a different day if the retry happens after midnight. Pass the logical date in from the orchestrator as a parameter and never derive it from the clock inside the job. [Event time vs processing time](/blog/2026-10-21-event-time-vs-processing-time/) goes deeper on this.
 - **Generated values used as keys.** `uuid()`, `monotonically_increasing_id()`, `current_timestamp()`, and identity columns all produce new values on every run, so a `MERGE` on them never matches. Ingestion timestamps are fine as attributes. They must never be part of the key.
 - **Cursors that move before the data lands.** If the high-watermark ("last processed `updated_at`") is saved before the write commits, a failure between the two skips data. If it's saved after, in a separate system, a failure between the two duplicates data. Derive the cursor from the target (`SELECT max(source_updated_at) FROM silver.orders`) or commit it in the same transaction.
 - **A non-deterministic transform.** `dropDuplicates()` without a defined order, `first()` over an unordered group, or sampling: the row count stays stable across reruns, but the *content* doesn't. That is still a correctness bug.
@@ -255,7 +255,7 @@ def test_orders_load_is_idempotent(spark, seeded_bronze):
     assert first.row_count == first.key_count   # one row per order: the grain holds
 ```
 
-The last assertion checks something slightly different: that the table has the [grain](/blog/2026-10-21-the-grain-of-a-table) it claims to have. Duplicates from retries and fan-out from bad joins look the same in a dashboard, and the same assertion catches both.
+The last assertion checks something slightly different: that the table has the [grain](/blog/2026-10-21-the-grain-of-a-table/) it claims to have. Duplicates from retries and fan-out from bad joins look the same in a dashboard, and the same assertion catches both.
 
 ## On Monday
 
@@ -272,14 +272,14 @@ The orchestrator's retry button is a promise that running the job again is safe.
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
 <li class="on">Idempotent writes, and why retries duplicate data</li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions">Slowly changing dimensions</a></li>
-<li><a href="/blog/2026-10-21-schema-evolution">Schema evolution</a></li>
+<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>
