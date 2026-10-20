@@ -1,311 +1,150 @@
 ---
-title: "Gemini 2 Updates: Google's AI Evolution and What It Means for Developers"
-description: "Provide specific improvements. \"\"\") Gemini 2 represents Google's serious commitment to AI. For organizations already on Google Cloud, it's an excellent…"
+title: "Gemini 2.0 Flash Experimental: What It Means for Azure-First Teams"
+description: "What Google actually shipped with Gemini 2.0 Flash in December 2024, what is still experimental, and when an Azure-first team should run a trial."
 author: Michael John Peña
 draft: false
 date: 2025-01-06
 tags:
-  - AI
-  - Google
   - Gemini
+  - Google AI
   - LLM
-  - Google Cloud
+  - Multimodal
+  - Azure OpenAI
 ---
 
-## Gemini 2 Overview
+Google spent December 2024 shipping. Gemini 2.0 Flash, a new SDK, a real-time streaming API and a "thinking" model all landed within about a week, and the coverage blurred what is usable now with what is promised for later. If your platform is built on Azure OpenAI, you need to know which parts are worth evaluating this quarter and which parts you should ignore until they reach general availability.
 
-Gemini 2 advances on the foundation with:
-- Enhanced multimodal understanding
-- Improved reasoning capabilities
-- Better code generation
-- Native Google Workspace integration
-- Expanded context windows
+I last compared the two ecosystems in [Gemini vs GPT: Practical Comparison for Enterprise Applications](/blog/2024-02-01-gemini-vs-gpt-comparison/), back when the line-up was Gemini Pro and Ultra. This post covers what changed with 2.0, with the release status of each piece as of early January 2025.
 
-## Getting Started with Gemini 2
+## What actually shipped
 
-```python
-import google.generativeai as genai
+The first thing to fix is the name. There is no "Gemini 2 Pro" you can call today. On 11 December 2024 Google released **Gemini 2.0 Flash as an experimental model**, model ID `gemini-2.0-flash-exp`, in Google AI Studio and Vertex AI. Google's [developer announcement](https://developers.googleblog.com/en/the-next-chapter-of-the-gemini-era-for-developers/) says general availability and more model sizes will follow in January.
 
-genai.configure(api_key="your-api-key")
+| Item | Status on 6 January 2025 | What you get |
+|---|---|---|
+| Gemini 2.0 Flash (`gemini-2.0-flash-exp`) | Experimental | Multimodal input (text, image, audio, video), text output, about 1M input tokens, 8K output tokens |
+| Native image output and text-to-speech | Early-access partners only | Not available to most developers yet |
+| Native tool use (Google Search, code execution) | Experimental, with 2.0 Flash | The model can decide to call Search or run Python itself |
+| Multimodal Live API | Experimental | Bidirectional WebSocket streaming of audio and video, with tool use |
+| Gemini 2.0 Flash Thinking (`gemini-2.0-flash-thinking-exp-1219`) | Experimental, released 19 December | Reasoning model that shows its thought process before answering |
+| Google Gen AI SDK (`google-genai`) | Pre-1.0 (0.3.0 on PyPI) | One client for the Gemini Developer API and Vertex AI |
+| Gemini 1.5 Pro and 1.5 Flash | GA | The production models today, including 1.5 Pro's 2M-token context |
 
-# Use Gemini 2 Pro
-model = genai.GenerativeModel("gemini-2-pro")
+The headline claim in the same announcement is that 2.0 Flash beats 1.5 Pro on key benchmarks at roughly twice the speed. That claim is the reason to pay attention, because Flash and Pro sit at very different price points. On the published [Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing) as of January 2025, GA Gemini 1.5 Flash costs US$0.075 per million input tokens and US$0.30 per million output tokens for prompts up to 128K tokens. GPT-4o mini, the nearest GA option on Azure OpenAI, lists at US$0.15 input and US$0.60 output per million. If 2.0 Flash lands anywhere near 1.5 Flash pricing with Pro-level quality, that changes the cost maths for high-volume workloads such as document extraction and classification. But 2.0 Flash has no published price yet, it is still Google's benchmark, and an experimental model has no SLA.
 
-# Simple text generation
-response = model.generate_content("Explain data mesh architecture")
-print(response.text)
+## The new SDK matters more than it looks
 
-# With generation config
-response = model.generate_content(
-    "Design a real-time analytics pipeline",
-    generation_config=genai.GenerationConfig(
-        temperature=0.7,
-        top_p=0.9,
-        max_output_tokens=2048
-    )
-)
-```
-
-## Multimodal Excellence
-
-Gemini 2's strength is native multimodal processing:
-
-### Image Understanding
+The SDK news got less attention than the model, but it matters more for anyone maintaining code. Until now Google had two Python stories: `google-generativeai` for the AI Studio API and the Vertex AI SDK (`import vertexai`, installed from `google-cloud-aiplatform`) for Google Cloud. The new [`google-genai` SDK](https://github.com/googleapis/python-genai) puts both behind one `Client`, and you switch backends with constructor arguments.
 
 ```python
-import PIL.Image
+import os
 
-model = genai.GenerativeModel("gemini-2-pro-vision")
+from google import genai
+from google.genai import types
 
-# Analyze architecture diagram
-image = PIL.Image.open("architecture_diagram.png")
+# Gemini Developer API (Google AI Studio key)
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-response = model.generate_content([
-    "Analyze this architecture diagram. Identify:",
-    "1. Components and their relationships",
-    "2. Data flow patterns",
-    "3. Potential bottlenecks",
-    "4. Suggestions for improvement",
-    image
-])
+# Same code against Vertex AI instead:
+# client = genai.Client(vertexai=True, project="<your-project-id>", location="us-central1")
 
-print(response.text)
-```
-
-### Video Analysis
-
-```python
-# Analyze video content
-video_file = genai.upload_file("meeting_recording.mp4")
-
-response = model.generate_content([
-    video_file,
-    """Analyze this meeting recording:
-    1. Summarize key discussion points
-    2. Identify action items and owners
-    3. Note any decisions made
-    4. Flag any concerns raised"""
-])
-
-# Gemini 2 understands temporal context in video
-```
-
-### Audio Processing
-
-```python
-# Transcribe and analyze audio
-audio_file = genai.upload_file("customer_call.mp3")
-
-response = model.generate_content([
-    audio_file,
-    """Analyze this customer support call:
-    1. Transcribe the conversation
-    2. Identify customer sentiment
-    3. Summarize the issue and resolution
-    4. Rate the support quality"""
-])
-```
-
-## Code Generation Improvements
-
-Gemini 2 excels at code tasks:
-
-```python
-model = genai.GenerativeModel("gemini-2-pro")
-
-# Generate complex code with context
-response = model.generate_content("""
-Create a Python class for managing Azure Data Factory pipelines:
-
-Requirements:
-- List all pipelines in a factory
-- Trigger pipeline runs
-- Monitor run status
-- Handle errors gracefully
-- Include type hints and docstrings
-- Add unit tests
-
-Use the azure-mgmt-datafactory SDK.
-""")
-
-print(response.text)
-```
-
-### Code Review
-
-```python
-code_to_review = """
-def process_data(df):
-    df = df.dropna()
-    df['date'] = pd.to_datetime(df['date'])
-    result = df.groupby('category').sum()
-    return result
-"""
-
-response = model.generate_content(f"""
-Review this code for:
-1. Correctness
-2. Performance
-3. Error handling
-4. Best practices
-
-Code:
-```python
-{code_to_review}
-```
-
-Provide specific improvements.
-""")
-```
-
-## Integration with Google Cloud
-
-### Vertex AI
-
-```python
-from google.cloud import aiplatform
-from vertexai.generative_models import GenerativeModel
-
-# Initialize Vertex AI
-aiplatform.init(project="your-project", location="us-central1")
-
-# Use Gemini 2 on Vertex AI
-model = GenerativeModel("gemini-2-pro")
-
-# With grounding (connect to Google Search or your data)
-response = model.generate_content(
-    "What are the latest Microsoft Fabric updates?",
-    tools=[
-        Tool.from_google_search_retrieval(
-            grounding_config=GroundingConfig(
-                google_search_retrieval=GoogleSearchRetrieval()
-            )
-        )
-    ]
+response = client.models.generate_content(
+    model="gemini-2.0-flash-exp",
+    contents="Compare a lakehouse and a warehouse for a 20-person analytics team in five bullet points.",
+    config=types.GenerateContentConfig(
+        system_instruction="You are a pragmatic data architect. Be concise.",
+        temperature=0.3,
+        max_output_tokens=1024,
+    ),
 )
 
-# Response includes citations from current web content
+print(response.text)
 ```
 
-### BigQuery Integration
+It is the same pattern Azure teams already know from the `openai` package's `AzureOpenAI` client. You prototype against the cheap, quick-to-provision endpoint, then move to the enterprise one, where Vertex AI gives you IAM, VPC Service Controls and regional controls, without rewriting the calling code. Treat the pre-1.0 version number seriously, though. Five releases shipped in its first week (0.1.0 to 0.3.0), so pin the exact version in `requirements.txt`.
+
+## Native tool use: grounding without the plumbing
+
+The 2.0 feature I find most interesting for enterprise work is that Google Search is now a tool the model calls itself, not a separate retrieval step you wire up. You declare the tool and the model decides when to search. The response carries grounding metadata with the source URLs.
 
 ```python
-from google.cloud import bigquery
-import google.generativeai as genai
+import os
 
-# Combine Gemini with BigQuery
-bq_client = bigquery.Client()
-model = genai.GenerativeModel("gemini-2-pro")
+from google import genai
+from google.genai import types
 
-# Natural language to SQL
-nl_query = "Show me the top 10 customers by revenue last quarter"
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-response = model.generate_content(f"""
-Convert this natural language query to BigQuery SQL:
-"{nl_query}"
+response = client.models.generate_content(
+    model="gemini-2.0-flash-exp",
+    contents="What did Microsoft announce for Microsoft Fabric at Ignite 2024?",
+    config=types.GenerateContentConfig(
+        tools=[types.Tool(google_search=types.GoogleSearch())],
+    ),
+)
 
-Available tables:
-- sales (customer_id, amount, date)
-- customers (id, name, segment)
+print(response.text)
 
-Return only the SQL query.
-""")
-
-sql = response.text.strip("```sql").strip("```")
-
-# Execute the generated query
-results = bq_client.query(sql).to_dataframe()
+metadata = response.candidates[0].grounding_metadata
+if metadata and metadata.grounding_chunks:
+    for chunk in metadata.grounding_chunks:
+        print(f"- {chunk.web.title}: {chunk.web.uri}")
 ```
 
-## Function Calling
+Two cautions. Older code that used the 1.5-era `google_search_retrieval` field does not carry over: 2.0 expects `google_search`. More importantly, grounding on the public web is not grounding on *your* data. For most of the organisations I work with, the hard question is "what does our policy say", not "what happened on the internet this week". That still needs a retrieval layer over your own content, whether that is Vertex AI Search on Google Cloud or Azure AI Search on Azure. Search-as-a-tool is excellent for market and competitor research assistants. It does not replace RAG.
 
-Gemini 2 supports robust function calling:
+## Multimodal input is the real differentiator
 
-```python
-# Define functions
-tools = [
-    genai.protos.Tool(
-        function_declarations=[
-            genai.protos.FunctionDeclaration(
-                name="query_database",
-                description="Execute a SQL query against the data warehouse",
-                parameters=genai.protos.Schema(
-                    type=genai.protos.Type.OBJECT,
-                    properties={
-                        "query": genai.protos.Schema(type=genai.protos.Type.STRING),
-                        "database": genai.protos.Schema(type=genai.protos.Type.STRING)
-                    },
-                    required=["query"]
-                )
-            ),
-            genai.protos.FunctionDeclaration(
-                name="create_chart",
-                description="Create a visualization from data",
-                parameters=genai.protos.Schema(
-                    type=genai.protos.Type.OBJECT,
-                    properties={
-                        "chart_type": genai.protos.Schema(type=genai.protos.Type.STRING),
-                        "data": genai.protos.Schema(type=genai.protos.Type.STRING)
-                    }
-                )
-            )
-        ]
-    )
-]
-
-model = genai.GenerativeModel("gemini-2-pro", tools=tools)
-
-chat = model.start_chat()
-response = chat.send_message("Query sales data and create a trend chart")
-
-# Process function calls
-for part in response.parts:
-    if fn := part.function_call:
-        print(f"Function: {fn.name}")
-        print(f"Arguments: {fn.args}")
-```
-
-## Context Caching
-
-Gemini 2 introduces context caching for efficiency:
+Gemini has been natively multimodal since 1.0, and 2.0 Flash keeps that lead. Images, audio and video are all first-class inputs to the same call. For a data team, the useful cases are less glamorous than the demos: reading architecture diagrams, extracting tables from scanned forms, and summarising recorded walkthroughs.
 
 ```python
-# Cache large context
-cached_content = genai.caching.CachedContent.create(
-    model="gemini-2-pro",
+import os
+
+from google import genai
+from google.genai import types
+
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+with open("architecture-diagram.png", "rb") as f:
+    image_bytes = f.read()
+
+response = client.models.generate_content(
+    model="gemini-2.0-flash-exp",
     contents=[
-        "System: You are a data engineering expert.",
-        large_documentation_text,  # Cache expensive context
-        code_repository_contents
+        types.Part.from_bytes(data=image_bytes, mime_type="image/png"),
+        "List every component in this diagram, the data flows between them, "
+        "and any single points of failure.",
     ],
-    ttl=datetime.timedelta(hours=1)
 )
 
-# Use cached context for multiple queries
-model = genai.GenerativeModel.from_cached_content(cached_content)
-
-# These queries reuse the cached context (cheaper and faster)
-response1 = model.generate_content("How do I set up incremental loads?")
-response2 = model.generate_content("What's the best practice for error handling?")
-response3 = model.generate_content("Show me an example pipeline")
+print(response.text)
 ```
 
-## Gemini vs Competition
+For video and long audio, the Gemini Developer API uses `client.files.upload(path=...)`, and the uploaded file must finish processing before you reference it. Vertex AI does not support that upload path. There you reference objects in Cloud Storage instead, which is one of the places the "same code on both backends" promise breaks down.
 
-| Feature | Gemini 2 | GPT-4 | Claude 3.5 |
-|---------|----------|-------|------------|
-| Native multimodal | Excellent | Good | Good |
-| Code generation | Excellent | Excellent | Excellent |
-| Context window | 2M tokens | 128K | 200K |
-| Google integration | Native | Via API | Via API |
-| Cost | Competitive | Higher | Moderate |
+## Live API and Flash Thinking: watch, don't build
 
-## Best Practices
+The **Multimodal Live API** streams audio and video in both directions over a WebSocket and supports tool calls mid-conversation. It is Google's answer to the `gpt-4o-realtime-preview` model that Azure OpenAI has offered in [public preview](https://learn.microsoft.com/en-us/azure/ai-services/openai/realtime-audio-quickstart) since October 2024. Both are previews, and both have the same hard problems: interruption handling, latency budgets, and working out how you would evaluate a voice conversation at all. If you are already prototyping a voice agent on Azure, I wouldn't switch stacks for this. Run the same scripted test conversations against both and compare latency and tool-call reliability.
 
-1. **Use context caching** for repeated queries with same context
-2. **Leverage multimodal** - Gemini excels when combining modalities
-3. **Ground responses** with Google Search or your data
-4. **Use appropriate model size** - Flash for speed, Pro for capability
-5. **Integrate with Google Cloud** for enterprise features
+**Gemini 2.0 Flash Thinking** is a reasoning model in the same family as OpenAI's o1, which reached Azure OpenAI as limited-access `o1` (2024-12-17) in December. Google's version exposes its thinking rather than hiding it, which helps with debugging prompts. It also has a much smaller context window than the base Flash model and is free only because it is experimental. The decision guide in [When to Use o1](/blog/2024-09-05-when-to-use-o1/) applies equally to Flash Thinking: reach for a reasoning model only when the task genuinely needs multi-step reasoning, not as a default.
 
-Gemini 2 represents Google's serious commitment to AI. For organizations already on Google Cloud, it's an excellent choice that integrates seamlessly with your existing infrastructure.
+## How I'd approach it from an Azure-first platform
+
+My position: **run an evaluation of Gemini 2.0 Flash now, and put nothing experimental into production.** Experimental models in AI Studio are rate-limited, have no SLA, and can change or disappear without the deprecation notice you'd get for a GA model version. Google shipped three different experimental model IDs in December alone (`gemini-exp-1206`, `gemini-2.0-flash-exp` and `gemini-2.0-flash-thinking-exp-1219`), and older `-exp` IDs such as `gemini-exp-1121` have already been superseded.
+
+Data use is the other caveat. Under the [Gemini API terms](https://ai.google.dev/gemini-api/terms), Google may use prompts and responses from the free tier to improve its products; the paid tier and Vertex AI do not. Run any evaluation that touches real or sensitive data on Vertex AI or a paid-tier key, never on a free AI Studio key.
+
+What's worth doing in the next few weeks:
+
+- **Build a model-agnostic evaluation set.** If you don't have 50 to 100 representative prompts with expected outputs for your main use cases, that is the actual gap, regardless of vendor. Run them against GPT-4o on Azure OpenAI and `gemini-2.0-flash-exp`, and compare quality, latency and failure modes.
+- **Test multimodal extraction specifically.** Diagram reading, scanned documents and video summaries are where Gemini has historically been strongest. If 2.0 Flash is clearly better for one of these workloads, that is a real reason to add a second provider.
+- **Keep the abstraction thin.** A small internal interface (prompt in, structured result out) is enough to swap providers per use case. Heavy multi-provider frameworks add more surface than they save at this stage.
+
+When I would *not* bother:
+
+- Your data, identity and governance all sit in Azure and Microsoft Entra, and you have no multimodal workload. Adding Google Cloud means a second set of IAM, network controls, data residency reviews and billing. That overhead is rarely worth it for a marginal quality gain on text tasks.
+- You need Australian data residency for regulated data. Confirm regional availability for the specific model version on Vertex AI before you plan anything. Experimental models typically launch in a narrow set of regions.
+
+## Where I land
+
+Gemini 2.0 Flash is the most interesting thing Google has shipped for developers in a year, mainly because of price-performance and multimodal input, not chat quality. But until it reaches GA with published pricing, it belongs in your evaluation harness and not your production architecture. Build the harness now. The models will keep moving, and a harness is how you avoid re-deciding your vendor strategy every time a new one launches.

@@ -1,391 +1,201 @@
 ---
-title: "RAG 2.0: Advanced Retrieval Patterns for Production AI"
-description: "RAG 2.0 is about precision and reliability. Invest in retrieval quality, and your generation quality will follow."
+title: "RAG Beyond Top-K: Retrieval Upgrades Worth Making in January 2025"
+description: "Which RAG retrieval upgrades Azure AI Search gives you as GA or preview in January 2025, which you build yourself, and the order I'd add them in."
 author: Michael John Peña
 draft: false
 date: 2025-01-17
 tags:
-  - AI
   - RAG
+  - Azure AI Search
   - Vector Search
-  - Azure
+  - Azure OpenAI
   - LLM
 ---
 
-## The Evolution of RAG
+Most RAG systems that disappoint in production weren't let down by the model. The retriever handed it the wrong five chunks, and the model wrote a confident answer from them. "Embed the question, take the top-k nearest chunks, stuff the prompt" is a fine demo. It breaks on product codes, acronyms, multi-part questions and anything the user phrases differently from the source document.
 
-```
-RAG 1.0 (2023):
-Query → Embed → Vector Search → Top-K → Generate
+There is now a long menu of fixes: hybrid search, rerankers, query rewriting, HyDE, decomposition, compression, self-reflective loops. Contextual AI coined "RAG 2.0" in March 2024 for retriever and generator models trained end to end; most people now use it loosely for this bundle of retrieval fixes. I'm less interested in the label than in two practical questions. Which of these does Azure AI Search already do for you, and at what release status? And which are worth building yourself? This post answers both as things stand in mid-January 2025, and gives the order I'd add them in.
 
-RAG 2.0 (2025):
-Query → Analyze → Multi-Strategy Retrieval → Rerank → Filter → Generate → Verify
-```
+## What the platform gives you, and at what status
 
-## Pattern 1: Hybrid Search
+The most useful thing a team can do before writing retrieval code is check what the search service already does. Building your own reranker on top of a service that ships one is a common way to add cost without adding quality.
 
-Combine vector and keyword search:
+| Technique | Where it lives in January 2025 | Status | When I'd skip it |
+|---|---|---|---|
+| Hybrid search (BM25 + vector, fused with RRF) | Azure AI Search | GA | Almost never for text content |
+| Semantic ranker (L2 reranking) | Azure AI Search | GA | Short, structured records with little prose |
+| Vector weighting (`weight` on a vector query) | Azure AI Search, 2024-07-01 API | GA | Until you have an evaluation set to tune against |
+| Integrated vectorization (vectorizers at query time) | Azure AI Search, 2024-07-01 API | GA | If you already embed in your own pipeline and want to keep it that way |
+| Vector thresholds, `maxTextRecallSize` | 2024-05-01-preview API | Preview | Production paths that need a support agreement |
+| RRF subscore debugging | 2024-09-01-preview API | Preview | Fine for tuning, not needed at runtime |
+| Generative query rewriting | 2024-11-01-preview API | Preview, limited regions | See below |
+| HyDE, decomposition, relevance grading, self-reflection | Your code | Not a product feature | Until retrieval evaluation shows a gap these address |
+
+The [2024 what's new archive](https://learn.microsoft.com/previous-versions/azure/search/search-whats-new-2024) for Azure AI Search is the dated record for all of this. The August 2024 entries are the important ones. The 2024-07-01 API made integrated vectorization, vectorizers, quantization and vector weighting generally available. The November 2024 entries add query rewriting and the 2024-11-01-preview API.
+
+On the Python side, the GA package is `azure-search-documents` 11.5.2, which targets the 2024-07-01 API. Preview parameters such as `query_rewrites` and `debug` only exist in the 11.6.0 betas (11.6.0b9, released on 14 January 2025, at the time of writing; `query_rewrites` first appeared in 11.6.0b7 in November 2024). The [SDK changelog](https://github.com/Azure/azure-sdk-for-python/blob/main/sdk/search/azure-search-documents/CHANGELOG.md) lists exactly which version added what. Keep production code on the GA package unless a specific preview feature is worth the risk.
+
+## Hybrid plus semantic ranker is the new baseline
+
+If you change one thing, make it this. Pure vector search is weak at exact matches: an error code, a policy number, a person's surname, an internal acronym the embedding model has never seen. BM25 is weak at paraphrase. Running both in parallel and fusing the rankings covers most of each one's blind spots.
+
+Azure AI Search fuses hybrid results with [Reciprocal Rank Fusion](https://learn.microsoft.com/azure/search/hybrid-search-ranking). Each result list contributes `1/(rank + k)` per document, with `k` set to a small constant (60). RRF works on rank positions, not raw scores. That's why you don't have to normalise a BM25 score against a cosine similarity, and why the fused `@search.score` values look tiny. Don't threshold on them.
+
+The [semantic ranker](https://learn.microsoft.com/azure/search/semantic-search-overview) then reranks the top 50 fused results using Microsoft's language models. It adds `@search.rerankerScore`, a calibrated score from 0 to 4. Microsoft moved it to new models in November 2024 with no API change, and it's free under 1,000 queries a month, which covers a pilot. It is a real cross-encoder-style reranker, already hosted. For most teams, it makes building your own reranking stage unnecessary.
+
+Here is the retrieval function I'd start with. It uses the GA SDK, lets the index's vectorizer embed the question (so the query and documents are guaranteed to use the same embedding model), and treats the reranker score as the quality gate.
 
 ```python
+import os
+
+from azure.identity import DefaultAzureCredential
 from azure.search.documents import SearchClient
-from azure.search.documents.models import VectorizedQuery
+from azure.search.documents.models import VectorizableTextQuery
 
-class HybridSearcher:
-    def __init__(self, search_client: SearchClient, embedder):
-        self.search_client = search_client
-        self.embedder = embedder
+# pip install "azure-search-documents==11.5.2" azure-identity
+search_client = SearchClient(
+    endpoint=os.environ["AZURE_SEARCH_ENDPOINT"],  # https://<your-search-service>.search.windows.net
+    index_name="<your-index-name>",
+    # requires RBAC enabled on the search service and the 'Search Index Data Reader' role
+    credential=DefaultAzureCredential(),
+)
 
-    def search(self, query: str, top_k: int = 10) -> list[dict]:
-        # Generate embedding
-        query_vector = self.embedder.embed(query)
 
-        # Hybrid search: vector + keyword
-        results = self.search_client.search(
-            search_text=query,  # Keyword search
-            vector_queries=[
-                VectorizedQuery(
-                    vector=query_vector,
-                    k_nearest_neighbors=top_k * 2,  # Over-retrieve
-                    fields="content_vector"
-                )
-            ],
-            query_type="semantic",  # Enable semantic ranking
-            semantic_configuration_name="default",
-            top=top_k,
-            select=["title", "content", "source", "metadata"]
-        )
+def retrieve(
+    question: str,
+    *,
+    max_chunks: int = 5,
+    min_reranker_score: float = 2.0,
+    odata_filter: str | None = None,
+) -> list[dict]:
+    """Hybrid retrieval with semantic reranking and a relevance floor."""
+    results = search_client.search(
+        search_text=question,  # BM25 leg
+        vector_queries=[
+            VectorizableTextQuery(  # vector leg, embedded by the index's vectorizer
+                text=question,
+                k_nearest_neighbors=50,
+                fields="content_vector",
+            )
+        ],
+        filter=odata_filter,  # e.g. "department eq 'finance'"
+        query_type="semantic",
+        semantic_configuration_name="<your-semantic-config>",
+        top=50,  # give the semantic ranker its full 50-document window
+        select=["chunk_id", "title", "content", "source_url"],
+    )
 
-        return [
+    chunks: list[dict] = []
+    for result in results:
+        reranker_score = result.get("@search.reranker_score") or 0.0
+        if reranker_score < min_reranker_score:
+            continue
+        chunks.append(
             {
-                "title": r["title"],
-                "content": r["content"],
-                "source": r["source"],
-                "score": r["@search.score"],
-                "reranker_score": r.get("@search.reranker_score", 0)
+                "chunk_id": result["chunk_id"],
+                "title": result["title"],
+                "content": result["content"],
+                "source_url": result["source_url"],
+                "reranker_score": reranker_score,
             }
-            for r in results
-        ]
+        )
+        if len(chunks) == max_chunks:
+            break
+    return chunks
 ```
 
-## Pattern 2: Query Transformation
+A few design choices are worth explaining:
 
-Improve retrieval by transforming queries:
+- **`top=50` with a small `max_chunks`.** The semantic ranker only reranks what the first stage returns, up to 50. Asking for five means it only reorders five. Retrieve wide, rerank, then cut.
+- **A reranker-score floor instead of a fixed k.** Returning zero chunks is a valid outcome. It is the signal that lets the application say "I couldn't find that" instead of making something up. A floor of 2.0 is my starting point, not a documented recommendation. Tune it against your own labelled questions.
+- **Filters in the query, not after it.** Security trimming and scoping belong in `filter`, so they apply before ranking. I covered the trade-offs of pre- and post-filtering in [filtered vector search](/blog/2024-07-31-filtered-vector-search/).
+- **`VectorizableTextQuery` needs a vectorizer** on the vector field's profile. If you embed outside the index, use `VectorizedQuery` with your own vector instead. Integrated vectorization is GA, so either is supportable.
 
-```python
-class QueryTransformer:
-    def __init__(self, llm_client):
-        self.llm = llm_client
+When not to lean on semantic ranker: catalogues of short, structured records (SKUs, people directories, ticket metadata). The ranker scores prose. With little text to read, it adds latency without changing the order much.
 
-    async def transform(self, query: str) -> dict:
-        """Transform user query for better retrieval."""
+## Query transformation: be careful what you build
 
-        # Expansion: Generate related queries
-        expansion_response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Generate 3 alternative phrasings of this query for search:
-                Query: {query}
+Query rewriting is where I see the most over-engineering. The usual pattern is an LLM call to generate paraphrases, another to decompose the question, and a third for a HyDE passage ([Gao et al., 2022](https://arxiv.org/abs/2212.10496)), which is a hypothetical answer you embed instead of the question. That is three model calls before retrieval even starts, plus a fan-out of searches you then have to merge.
 
-                Return as JSON array: ["query1", "query2", "query3"]"""
-            }]
-        )
-        expansions = json.loads(expansion_response.choices[0].message.content)
+Azure AI Search now has a built-in option. [Generative query rewriting](https://learn.microsoft.com/azure/search/semantic-how-to-query-rewrite) sends the query to a model that produces up to ten alternative phrasings, and uses them alongside the original. It requires semantic ranker and the 2024-11-01-preview API, set with `"queryRewrites": "generative|count-5"` plus a `queryLanguage`. In January 2025 it's only available in North Europe and Southeast Asia. For anyone in Sydney with data residency requirements, that rules it out for now. Microsoft's own note also warns that rewrites can drop exact terms, which hurts queries built around identifiers.
 
-        # Decomposition: Break into sub-queries
-        decomposition_response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""If this query has multiple parts, break it into sub-queries.
-                Query: {query}
+My position on the do-it-yourself versions:
 
-                Return as JSON array. If single query, return ["{query}"]"""
-            }]
-        )
-        sub_queries = json.loads(decomposition_response.choices[0].message.content)
+- **Decomposition** earns its place when users genuinely ask compound questions ("compare our leave policy in NSW and Victoria"). Detect it cheaply, and only split when needed.
+- **Paraphrase expansion** is mostly what hybrid search already gives you. Add it only if evaluation shows recall failures on vocabulary mismatch.
+- **HyDE** helps when questions and documents are written in very different registers, such as a casual question against formal policy text. It costs a full generation per query and can bias retrieval toward whatever the model already believes. I wouldn't make it the default.
 
-        # HyDE: Hypothetical Document Embedding
-        hyde_response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Write a short paragraph that would be a perfect answer to this query:
-                Query: {query}
+## Grade the context before you generate
 
-                Write as if you're the ideal document that answers this."""
-            }]
-        )
-        hypothetical_doc = hyde_response.choices[0].message.content
+The pattern I'd prioritise isn't a retrieval technique at all. It's a cheap check between retrieval and generation: given these chunks, can this question actually be answered? This is the core idea behind Self-RAG ([Asai et al., 2023](https://arxiv.org/abs/2310.11511)) and corrective RAG, reduced to one model call that works with any model.
 
-        return {
-            "original": query,
-            "expansions": expansions,
-            "sub_queries": sub_queries,
-            "hypothetical_document": hypothetical_doc
-        }
-```
-
-## Pattern 3: Multi-Index Retrieval
-
-Search across multiple specialized indexes:
+Structured outputs make this reliable. On Azure OpenAI, [structured outputs](https://learn.microsoft.com/azure/ai-services/openai/how-to/structured-outputs) are supported in the 2024-10-21 GA API with models including `gpt-4o` 2024-08-06, `gpt-4o-mini` 2024-07-18 and `o1` 2024-12-17. The model has to return the schema, so you don't parse free text looking for "YES".
 
 ```python
-class MultiIndexRetriever:
-    def __init__(self, indexes: dict):
-        self.indexes = indexes  # {"docs": SearchClient, "code": SearchClient, "faq": SearchClient}
+import os
 
-    async def retrieve(self, query: str, query_type: str = "auto") -> list[dict]:
-        # Determine which indexes to search
-        if query_type == "auto":
-            index_weights = await self._classify_query(query)
-        else:
-            index_weights = {query_type: 1.0}
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from openai import AzureOpenAI
+from pydantic import BaseModel
 
-        # Search relevant indexes in parallel
-        tasks = []
-        for index_name, weight in index_weights.items():
-            if weight > 0.1:  # Threshold
-                tasks.append(self._search_index(index_name, query, weight))
+# pip install "openai>=1.40" azure-identity pydantic
+# the identity needs the 'Cognitive Services OpenAI User' role on the Azure OpenAI resource
+token_provider = get_bearer_token_provider(
+    DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
+)
+llm = AzureOpenAI(
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],  # https://<your-resource-name>.openai.azure.com
+    azure_ad_token_provider=token_provider,
+    api_version="2024-10-21",
+)
+GRADER_DEPLOYMENT = "<your-gpt-4o-mini-deployment>"
 
-        results = await asyncio.gather(*tasks)
 
-        # Merge and sort by weighted score
-        merged = []
-        for index_results in results:
-            merged.extend(index_results)
+class ContextGrade(BaseModel):
+    answerable: bool
+    supporting_chunk_ids: list[str]
+    missing_information: str
 
-        merged.sort(key=lambda x: x["weighted_score"], reverse=True)
-        return merged[:10]  # Top 10 across all indexes
 
-    async def _classify_query(self, query: str) -> dict:
-        """Classify query to determine index weights."""
-        # Use LLM to classify
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o-mini",
-            messages=[{
-                "role": "user",
-                "content": f"""Classify this query. Return JSON with weights (0-1) for each category:
-                - docs: Technical documentation
-                - code: Code examples
-                - faq: Frequently asked questions
-
-                Query: {query}
-
-                Example output: {{"docs": 0.6, "code": 0.3, "faq": 0.1}}"""
-            }]
-        )
-        return json.loads(response.choices[0].message.content)
-
-    async def _search_index(self, index_name: str, query: str, weight: float) -> list[dict]:
-        client = self.indexes[index_name]
-        results = client.search(search_text=query, top=10)
-        return [
+def grade_context(question: str, chunks: list[dict]) -> ContextGrade:
+    context = "\n\n".join(f"[{c['chunk_id']}]\n{c['content']}" for c in chunks)
+    completion = llm.beta.chat.completions.parse(
+        model=GRADER_DEPLOYMENT,
+        temperature=0,
+        response_format=ContextGrade,
+        messages=[
             {
-                **r,
-                "index": index_name,
-                "weighted_score": r["@search.score"] * weight
-            }
-            for r in results
-        ]
+                "role": "system",
+                "content": (
+                    "Decide whether the context fully answers the question. "
+                    "Only cite chunk ids that directly support the answer. "
+                    "If it is not answerable, say what information is missing."
+                ),
+            },
+            {"role": "user", "content": f"Question: {question}\n\nContext:\n{context}"},
+        ],
+    )
+    return completion.choices[0].message.parsed
 ```
 
-## Pattern 4: Contextual Compression
+If `answerable` is false, you have three honest options: retry once with a decomposed or reworded query, widen the filter, or tell the user what's missing. If it's true, pass only the `supporting_chunk_ids` to the generator. That is contextual compression in the same call, rather than one LLM call per document, which multiplies cost by the number of chunks.
 
-Reduce retrieved content to relevant portions:
+When not to add this: low-stakes internal search where a slightly wrong answer is cheap, or latency budgets under a second or two. The grader adds a full round trip. I'd also keep it to one retry. Open-ended reflection loops are how a RAG app turns into an [agent you didn't mean to build](/blog/2025-01-15-ai-application-patterns-2025/).
 
-```python
-class ContextualCompressor:
-    def __init__(self, llm_client):
-        self.llm = llm_client
+## Multiple indexes and custom reranking stacks
 
-    async def compress(self, query: str, documents: list[dict]) -> list[dict]:
-        """Extract only relevant portions of each document."""
+Two patterns that appear in most "advanced RAG" lists, and that I'd usually avoid early on:
 
-        compressed = []
-        for doc in documents:
-            # Use LLM to extract relevant content
-            response = await self.llm.chat.complete_async(
-                deployment="gpt-4o-mini",
-                messages=[{
-                    "role": "user",
-                    "content": f"""Given this query, extract only the relevant portions from the document.
-                    If nothing is relevant, return "NOT_RELEVANT".
+**Routing across several specialised indexes** with an LLM classifier. Scores from different indexes aren't comparable, even after weighting, so merging them is guesswork. One index with a `content_type` field and a filter is simpler. It also means the semantic ranker compares everything in a single pass. Split indexes when security boundaries or schemas genuinely differ, not by topic.
 
-                    Query: {query}
+**A home-built rerank cascade** of cross-encoder plus LLM ranker plus a weighted blend of scores. On Azure AI Search, the semantic ranker already is the cross-encoder stage. Adding an LLM ranker on top costs a large prompt per query, and the hand-picked blend weights are rarely validated. If you need domain-specific ranking, start with vector weighting or a scoring profile, measured against an evaluation set.
 
-                    Document:
-                    {doc['content'][:3000]}
+## The order I'd add things
 
-                    Relevant excerpt:"""
-                }]
-            )
+1. **Build an evaluation set first.** Fifty to a hundred real questions with the chunks that should come back. Without it, every item below is opinion.
+2. **Hybrid search with semantic ranker,** retrieving 50 and cutting by reranker score. This is GA and mostly configuration.
+3. **Fix chunking and metadata filters** before touching query logic. Bad chunks can't be reranked into good ones.
+4. **Add the context grader** for anything user-facing where a wrong answer has a cost.
+5. **Only then** consider decomposition, HyDE, or the query rewriting preview, one at a time, keeping whatever moves your retrieval metrics.
 
-            excerpt = response.choices[0].message.content
-            if excerpt != "NOT_RELEVANT":
-                compressed.append({
-                    **doc,
-                    "content": excerpt,
-                    "original_length": len(doc["content"]),
-                    "compressed_length": len(excerpt)
-                })
-
-        return compressed
-```
-
-## Pattern 5: Self-RAG (Self-Reflective RAG)
-
-The model decides when and what to retrieve:
-
-```python
-class SelfRAG:
-    def __init__(self, llm_client, retriever):
-        self.llm = llm_client
-        self.retriever = retriever
-
-    async def answer(self, query: str) -> dict:
-        # Step 1: Decide if retrieval is needed
-        need_retrieval = await self._assess_retrieval_need(query)
-
-        if not need_retrieval:
-            # Answer directly
-            response = await self._generate_direct(query)
-            return {"answer": response, "retrieval": False, "sources": []}
-
-        # Step 2: Retrieve
-        docs = await self.retriever.search(query)
-
-        # Step 3: Assess relevance of each doc
-        relevant_docs = await self._filter_relevant(query, docs)
-
-        if not relevant_docs:
-            # No relevant docs, answer with caveat
-            response = await self._generate_with_caveat(query)
-            return {"answer": response, "retrieval": True, "sources": [], "caveat": True}
-
-        # Step 4: Generate with relevant docs
-        response = await self._generate_with_docs(query, relevant_docs)
-
-        # Step 5: Verify response is supported
-        is_supported = await self._verify_support(response, relevant_docs)
-
-        if not is_supported:
-            # Regenerate or add warning
-            response = await self._regenerate_grounded(query, relevant_docs)
-
-        return {
-            "answer": response,
-            "retrieval": True,
-            "sources": [d["source"] for d in relevant_docs],
-            "supported": is_supported
-        }
-
-    async def _assess_retrieval_need(self, query: str) -> bool:
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o-mini",
-            messages=[{
-                "role": "user",
-                "content": f"""Does answering this query require external information lookup?
-                Query: {query}
-                Answer YES or NO only."""
-            }]
-        )
-        return "YES" in response.choices[0].message.content.upper()
-
-    async def _filter_relevant(self, query: str, docs: list[dict]) -> list[dict]:
-        relevant = []
-        for doc in docs:
-            response = await self.llm.chat.complete_async(
-                deployment="gpt-4o-mini",
-                messages=[{
-                    "role": "user",
-                    "content": f"""Is this document relevant to the query?
-                    Query: {query}
-                    Document: {doc['content'][:500]}
-                    Answer RELEVANT or NOT_RELEVANT only."""
-                }]
-            )
-            if "RELEVANT" in response.choices[0].message.content.upper():
-                relevant.append(doc)
-        return relevant
-```
-
-## Pattern 6: Reranking Pipeline
-
-Multi-stage ranking for precision:
-
-```python
-class RerankerPipeline:
-    def __init__(self, embedding_model, cross_encoder, llm_client):
-        self.embedding_model = embedding_model
-        self.cross_encoder = cross_encoder
-        self.llm = llm_client
-
-    async def rerank(self, query: str, documents: list[dict], top_k: int = 5) -> list[dict]:
-        # Stage 1: Initial retrieval score (from search)
-        # Already have this from retrieval
-
-        # Stage 2: Cross-encoder reranking
-        cross_scores = await self._cross_encoder_rerank(query, documents)
-
-        # Stage 3: LLM relevance scoring
-        llm_scores = await self._llm_rerank(query, documents[:20])  # Top 20 only
-
-        # Combine scores
-        for i, doc in enumerate(documents):
-            doc["cross_score"] = cross_scores.get(i, 0)
-            doc["llm_score"] = llm_scores.get(i, 0)
-            doc["final_score"] = (
-                0.3 * doc.get("score", 0) +
-                0.4 * doc["cross_score"] +
-                0.3 * doc["llm_score"]
-            )
-
-        # Sort by final score
-        documents.sort(key=lambda x: x["final_score"], reverse=True)
-        return documents[:top_k]
-
-    async def _cross_encoder_rerank(self, query: str, docs: list[dict]) -> dict:
-        """Use cross-encoder model for pairwise relevance."""
-        pairs = [(query, doc["content"][:512]) for doc in docs]
-        scores = self.cross_encoder.predict(pairs)
-        return {i: score for i, score in enumerate(scores)}
-
-    async def _llm_rerank(self, query: str, docs: list[dict]) -> dict:
-        """Use LLM for relevance judgment."""
-        doc_list = "\n".join([
-            f"[{i}] {doc['content'][:200]}"
-            for i, doc in enumerate(docs)
-        ])
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o-mini",
-            messages=[{
-                "role": "user",
-                "content": f"""Rank these documents by relevance to the query.
-                Query: {query}
-
-                Documents:
-                {doc_list}
-
-                Return as JSON: {{"rankings": [doc_index, doc_index, ...]}}
-                Most relevant first."""
-            }]
-        )
-
-        rankings = json.loads(response.choices[0].message.content)["rankings"]
-        return {idx: 1.0 - (rank / len(rankings)) for rank, idx in enumerate(rankings)}
-```
-
-## Production RAG Checklist
-
-1. **Hybrid search** - Combine vector and keyword
-2. **Query transformation** - Improve retrieval queries
-3. **Multi-index** - Specialize indexes by content type
-4. **Reranking** - Multi-stage scoring
-5. **Contextual compression** - Reduce noise
-6. **Citation** - Track sources
-7. **Evaluation** - Measure retrieval and generation quality
-8. **Caching** - Cache embeddings and frequent queries
-
-RAG 2.0 is about precision and reliability. Invest in retrieval quality, and your generation quality will follow.
+In its loose sense, "RAG 2.0" isn't a new architecture. It's the discipline of measuring retrieval and using what the search service already does well before writing your own version of it. In January 2025, Azure AI Search does more of that than most teams realise.

@@ -1,426 +1,275 @@
 ---
-title: "Data Quality Automation with AI: Beyond Rule-Based Validation"
-description: "AI transforms data quality from reactive checking to proactive management. Start with profiling and anomaly detection, then expand to automated rule…"
+title: "LLM-Drafted Data Quality Rules: Let the Model Propose, Not Enforce"
+description: "Use Azure OpenAI structured outputs to draft Great Expectations rules from a data profile, then backtest and review them before they ever gate a pipeline."
 author: Michael John Peña
 draft: false
 date: 2025-01-22
 tags:
   - Data Quality
-  - AI
+  - Azure OpenAI
+  - Great Expectations
   - Data Engineering
-  - Automation
-  - Azure
+  - Python
 ---
 
-## The Evolution of Data Quality
+Most data teams don't lack a validation framework. What they lack is rules. A new table lands, nobody has time to write the forty checks it deserves, and it goes to production with a null check on the primary key and nothing else. Large language models are good at the tedious part, reading a profile and suggesting what "normal" should look like. They are bad at the part that matters, deciding what's allowed to break a pipeline.
 
-```
-Rule-Based (Traditional):
-Define rules → Execute checks → Report violations
+My position is simple: **the LLM drafts the rules, deterministic code enforces them, and a human signs off in between.** The model never sits in the hot path, never sees production rows it doesn't need, and never auto-fixes data. This post walks through a small pipeline that does exactly that with Azure OpenAI and Great Expectations (GX Core 1.x).
 
-AI-Powered:
-Profile data → Learn patterns → Detect anomalies → Suggest rules → Auto-remediate
-```
+## Why not let the model validate the data directly?
 
-## Intelligent Data Profiling
+I covered LLM-based validation back in [AI-Powered Data Quality](/blog/2023-04-23-ai-data-quality/), and the pattern still has a place for messy free-text columns. For structured tables, though, asking a model "is this row valid?" on every load has three problems:
+
+- **It's not reproducible.** The same row can pass on Monday and fail on Tuesday. A data quality gate that isn't deterministic just creates arguments.
+- **It's expensive and slow.** You pay tokens per batch, forever, for a judgement that a `BETWEEN` clause makes in microseconds.
+- **It's hard to audit.** When a load fails, "the model thought it looked wrong" doesn't help the on-call engineer.
+
+A rule set has none of those problems. Writing one is what's tedious, and that's the bit worth handing to a model. Once the rules are generated, they're plain Great Expectations expectations: versioned in Git, reviewed in a pull request, and run by an engine that gives the same answer every time.
+
+## The pipeline
+
+Four steps before enforcement, and only the second one calls a model:
+
+1. **Profile** the table locally with pandas. Summaries only, no raw rows.
+2. **Propose** rules with Azure OpenAI, constrained to a fixed schema.
+3. **Compile and backtest** the proposals against a known-good sample using GX. Anything malformed or anything that fails on good data is flagged.
+4. **Review** the generated suite in a pull request, then run it in the pipeline like any hand-written suite.
+
+| Step | Who does it | Deterministic? | Touches raw data? |
+|---|---|---|---|
+| Profile | pandas | Yes | Yes, locally |
+| Propose | LLM | No | Summaries only |
+| Compile and backtest | GX Core | Yes | Yes, locally |
+| Review | Data owner | n/a | No |
+| Enforce | GX Core in the pipeline | Yes | Yes |
+
+## Steps 1 and 2: profile, then propose with a constrained schema
+
+The single most useful thing you can do is stop the model from inventing rule types. Azure OpenAI's [structured outputs](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/structured-outputs) feature constrains the response to a JSON schema you supply. It works with `gpt-4o` version `2024-08-06` and is supported in the GA API version `2024-10-21`. With the `openai` Python package (1.x), you pass a Pydantic model and get a parsed object back.
+
+I keep the rule vocabulary deliberately small: five rule types that map one-to-one to GX expectations. If the model wants something else, it can't express it, which is the point.
 
 ```python
-from azure.ai.foundry import AIFoundryClient
+import json
+import os
+from typing import Literal, Optional
+
 import pandas as pd
-import numpy as np
+from openai import AzureOpenAI
+from pydantic import BaseModel
 
-class AIDataProfiler:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
 
-    async def profile_dataframe(self, df: pd.DataFrame, context: str = "") -> dict:
-        """Generate intelligent data profile."""
+class RuleProposal(BaseModel):
+    column: str
+    rule_type: Literal["not_null", "unique", "between", "in_set", "matches_regex"]
+    min_value: Optional[float]
+    max_value: Optional[float]
+    allowed_values: Optional[list[str]]
+    regex: Optional[str]
+    mostly: float  # fraction of rows that must pass, 0.0-1.0
+    rationale: str
 
-        # Basic statistics
-        stats = self._compute_statistics(df)
 
-        # AI-powered analysis
-        analysis = await self._analyze_with_ai(df, stats, context)
+class RuleSet(BaseModel):
+    rules: list[RuleProposal]
 
-        return {
-            "statistics": stats,
-            "analysis": analysis,
-            "suggested_rules": analysis.get("suggested_rules", []),
-            "quality_score": analysis.get("quality_score", 0),
-            "issues_found": analysis.get("issues", [])
+
+def profile(df: pd.DataFrame, max_distinct: int = 20) -> dict:
+    """Column-level summary. No raw rows leave the process."""
+    out = {"row_count": int(len(df)), "columns": {}}
+    for col in df.columns:
+        s = df[col]
+        info = {
+            "dtype": str(s.dtype),
+            "null_pct": round(float(s.isna().mean() * 100), 2),
+            "distinct": int(s.nunique()),
         }
-
-    def _compute_statistics(self, df: pd.DataFrame) -> dict:
-        """Compute basic statistics for all columns."""
-        stats = {}
-
-        for col in df.columns:
-            col_stats = {
-                "dtype": str(df[col].dtype),
-                "null_count": int(df[col].isnull().sum()),
-                "null_pct": float(df[col].isnull().mean() * 100),
-                "unique_count": int(df[col].nunique()),
-                "unique_pct": float(df[col].nunique() / len(df) * 100)
-            }
-
-            if pd.api.types.is_numeric_dtype(df[col]):
-                col_stats.update({
-                    "min": float(df[col].min()) if not pd.isna(df[col].min()) else None,
-                    "max": float(df[col].max()) if not pd.isna(df[col].max()) else None,
-                    "mean": float(df[col].mean()) if not pd.isna(df[col].mean()) else None,
-                    "std": float(df[col].std()) if not pd.isna(df[col].std()) else None,
-                    "median": float(df[col].median()) if not pd.isna(df[col].median()) else None
-                })
-            elif pd.api.types.is_string_dtype(df[col]):
-                col_stats.update({
-                    "min_length": int(df[col].str.len().min()) if df[col].notna().any() else None,
-                    "max_length": int(df[col].str.len().max()) if df[col].notna().any() else None,
-                    "sample_values": df[col].dropna().head(5).tolist()
-                })
-
-            stats[col] = col_stats
-
-        return stats
-
-    async def _analyze_with_ai(self, df: pd.DataFrame, stats: dict, context: str) -> dict:
-        """Use AI to analyze data quality."""
-
-        # Sample data for AI analysis
-        sample = df.head(100).to_dict(orient='records')
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Analyze this data for quality issues:
-
-                Context: {context}
-
-                Column Statistics:
-                {json.dumps(stats, indent=2)}
-
-                Sample Data (first 5 rows):
-                {json.dumps(sample[:5], indent=2, default=str)}
-
-                Identify:
-                1. Data quality issues (nulls, outliers, inconsistencies, format issues)
-                2. Potential data type mismatches
-                3. Business rule violations you can infer
-                4. Suggested validation rules
-
-                Return JSON:
-                {{
-                    "quality_score": 0-100,
-                    "issues": [
-                        {{"column": "col", "issue": "description", "severity": "high|medium|low", "affected_rows_estimate": "X%"}}
-                    ],
-                    "suggested_rules": [
-                        {{"column": "col", "rule_type": "not_null|range|pattern|unique|custom", "rule_definition": "...", "rationale": "why this rule"}}
-                    ],
-                    "insights": ["interesting observations about the data"]
-                }}"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-```
-
-## Anomaly Detection
-
-```python
-from sklearn.ensemble import IsolationForest
-from sklearn.preprocessing import StandardScaler
-
-class AnomalyDetector:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
-
-    def detect_numeric_anomalies(self, df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
-        """Detect anomalies in numeric columns using Isolation Forest."""
-
-        # Prepare data
-        data = df[columns].dropna()
-        scaler = StandardScaler()
-        scaled = scaler.fit_transform(data)
-
-        # Fit model
-        model = IsolationForest(contamination=0.05, random_state=42)
-        predictions = model.fit_predict(scaled)
-
-        # Mark anomalies
-        result = df.copy()
-        result['is_anomaly'] = False
-        result.loc[data.index, 'is_anomaly'] = predictions == -1
-
-        return result
-
-    async def explain_anomalies(self, df: pd.DataFrame, anomaly_rows: pd.DataFrame) -> list[dict]:
-        """Use AI to explain detected anomalies."""
-
-        normal_stats = df[~df['is_anomaly']].describe().to_dict()
-        anomaly_sample = anomaly_rows.head(10).to_dict(orient='records')
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Explain these data anomalies:
-
-                Normal data statistics:
-                {json.dumps(normal_stats, indent=2, default=str)}
-
-                Anomaly samples:
-                {json.dumps(anomaly_sample, indent=2, default=str)}
-
-                For each anomaly, explain:
-                1. Why it's anomalous
-                2. Possible causes
-                3. Recommended action (investigate, fix, or accept)
-
-                Return JSON array of explanations."""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-
-    async def detect_semantic_anomalies(self, df: pd.DataFrame, column: str, context: str) -> dict:
-        """Detect anomalies based on semantic understanding."""
-
-        sample = df[column].dropna().sample(min(100, len(df))).tolist()
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Analyze these values for semantic anomalies:
-
-                Column: {column}
-                Context: {context}
-                Sample values: {sample}
-
-                Identify values that seem incorrect based on context.
-                Consider:
-                - Values that don't fit the expected pattern
-                - Inconsistent formats
-                - Unlikely values
-                - Potential typos or encoding issues
-
-                Return JSON:
-                {{
-                    "anomalies": [
-                        {{"value": "...", "reason": "why it's anomalous", "suggestion": "possible correction"}}
-                    ],
-                    "pattern_detected": "the expected pattern if any"
-                }}"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-```
-
-## Automated Rule Generation
-
-```python
-class RuleGenerator:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
-
-    async def generate_rules(self, df: pd.DataFrame, table_name: str, context: str) -> list[dict]:
-        """Generate data quality rules from data analysis."""
-
-        profile = AIDataProfiler(self.llm)
-        profile_result = await profile.profile_dataframe(df, context)
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Generate comprehensive data quality rules for this table:
-
-                Table: {table_name}
-                Context: {context}
-                Profile: {json.dumps(profile_result['statistics'], indent=2)}
-
-                Generate rules in Great Expectations format:
-                {{
-                    "rules": [
-                        {{
-                            "name": "rule_name",
-                            "type": "expect_column_values_to_not_be_null|expect_column_values_to_be_between|...",
-                            "column": "column_name",
-                            "parameters": {{}},
-                            "severity": "critical|warning|info",
-                            "description": "what this rule checks"
-                        }}
-                    ]
-                }}
-
-                Include rules for:
-                - Completeness (nulls)
-                - Uniqueness
-                - Valid ranges
-                - Valid patterns (regex)
-                - Referential integrity hints
-                - Business logic"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)["rules"]
-
-    def to_great_expectations(self, rules: list[dict]) -> dict:
-        """Convert rules to Great Expectations suite."""
-
-        expectations = []
-
-        for rule in rules:
-            expectation = {
-                "expectation_type": rule["type"],
-                "kwargs": {"column": rule["column"], **rule["parameters"]}
-            }
-            expectations.append(expectation)
-
-        return {
-            "expectation_suite_name": "ai_generated_suite",
-            "expectations": expectations,
-            "meta": {"generated_by": "ai", "timestamp": datetime.utcnow().isoformat()}
-        }
-```
-
-## Intelligent Remediation
-
-```python
-class DataRemediator:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
-
-    async def suggest_remediation(self, issue: dict, sample_data: list) -> dict:
-        """Suggest remediation for a data quality issue."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Suggest remediation for this data quality issue:
-
-                Issue: {json.dumps(issue)}
-                Sample affected data: {json.dumps(sample_data[:10], default=str)}
-
-                Provide:
-                1. Recommended action
-                2. SQL/Python code to fix
-                3. Risk assessment
-                4. Validation query to verify fix
-
-                Return JSON:
-                {{
-                    "action": "delete|update|flag|quarantine",
-                    "code": "SQL or Python code to apply fix",
-                    "risk": "high|medium|low",
-                    "risk_explanation": "why this risk level",
-                    "validation": "query to verify fix worked"
-                }}"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-
-    async def auto_fix(self, df: pd.DataFrame, issue: dict) -> pd.DataFrame:
-        """Automatically fix certain data quality issues."""
-
-        fix_type = issue.get("fix_type")
-
-        if fix_type == "standardize_format":
-            return await self._standardize_format(df, issue)
-        elif fix_type == "fill_missing":
-            return await self._fill_missing(df, issue)
-        elif fix_type == "fix_typos":
-            return await self._fix_typos(df, issue)
+        if pd.api.types.is_numeric_dtype(s):
+            q = s.quantile([0.0, 0.01, 0.5, 0.99, 1.0])
+            info["quantiles"] = {str(k): float(v) for k, v in q.items()}
+        elif s.nunique() <= max_distinct:
+            info["values"] = sorted(map(str, s.dropna().unique()))
         else:
-            raise ValueError(f"Unknown fix type: {fix_type}")
+            lengths = s.dropna().astype(str).str.len()
+            info["length_min_max"] = [int(lengths.min()), int(lengths.max())]
+        out["columns"][col] = info
+    return out
 
-    async def _standardize_format(self, df: pd.DataFrame, issue: dict) -> pd.DataFrame:
-        """Standardize format using AI."""
 
-        column = issue["column"]
-        sample = df[column].dropna().unique()[:50].tolist()
+def propose_rules(client: AzureOpenAI, deployment: str, table: str,
+                  business_context: str, prof: dict) -> RuleSet:
+    completion = client.beta.chat.completions.parse(
+        model=deployment,
+        temperature=0,
+        response_format=RuleSet,
+        messages=[
+            {"role": "system", "content": (
+                "You propose data quality rules for a tabular dataset. "
+                "Use only the column names given. Prefer few, high-value rules. "
+                "Set mostly below 1.0 only when the profile shows legitimate exceptions. "
+                "Leave fields that do not apply to a rule_type as null."
+            )},
+            {"role": "user", "content": (
+                f"Table: {table}\nBusiness context: {business_context}\n"
+                f"Profile:\n{json.dumps(prof, indent=2)}"
+            )},
+        ],
+    )
+    message = completion.choices[0].message
+    if message.refusal:
+        raise RuntimeError(f"Model refused: {message.refusal}")
+    return message.parsed
 
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Standardize these values to a consistent format:
 
-                Values: {sample}
-
-                Return JSON mapping: {{"original": "standardized", ...}}"""
-            }]
-        )
-
-        mapping = json.loads(response.choices[0].message.content)
-
-        result = df.copy()
-        result[column] = result[column].map(lambda x: mapping.get(x, x))
-
-        return result
+if __name__ == "__main__":
+    client = AzureOpenAI(
+        azure_endpoint="https://<your-resource-name>.openai.azure.com",
+        api_key=os.environ["AZURE_OPENAI_API_KEY"],
+        api_version="2024-10-21",
+    )
+    orders = pd.read_csv("orders_sample.csv")
+    rules = propose_rules(
+        client,
+        deployment="<your-gpt-4o-2024-08-06-deployment>",
+        table="sales.orders",
+        business_context="One row per customer order. Prices in AUD incl. GST.",
+        prof=profile(orders),
+    )
+    with open("proposed_rules.json", "w") as f:
+        f.write(rules.model_dump_json(indent=2))
 ```
 
-## Continuous Monitoring
+Save this as `propose.py`. A few design choices are worth explaining.
+
+**Every field is required but nullable.** Strict structured outputs require all properties to be listed as required. `Optional[...]` without a default gives you that: the model must emit `min_value`, but it can emit `null`.
+
+**The profile is the prompt, not the data.** Quantiles, null rates and lengths tell the model almost everything it needs. The one leak is the `values` list for low-cardinality columns. That's usually fine for status codes, but check it before you point this at anything containing personal information. If the column is sensitive, drop it from the profile entirely. Azure OpenAI doesn't use your prompts to train models (see [data, privacy and security for Azure OpenAI](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy)), but data minimisation is still the right default.
+
+**Business context does real work.** "Prices in AUD incl. GST" is the difference between the model proposing `total_aud >= 0` and proposing nothing for that column. One or two sentences from the data owner beat a page of column descriptions.
+
+## Step 3: compile and backtest before anyone reviews
+
+A schema-valid response can still be wrong. The model can reference a column that doesn't exist, produce a regex that won't compile, or propose an allowed-values set that forgets a legitimate status. So before a human looks at anything, the proposals are compiled into a GX Core [Expectation Suite](https://docs.greatexpectations.io/docs/core/define_expectations/organize_expectation_suites) and run against a sample you already trust.
+
+Make that sample a held-out known-good window, such as a different month, not the same extract you profiled in Step 1. Backtest on the profiled data and every `between` rule taken from its minimum and maximum passes by construction, so over-tight thresholds sail through to review instead of failing here.
 
 ```python
-class DQMonitor:
-    def __init__(self, llm_client: AIFoundryClient, alert_threshold: float = 0.9):
-        self.llm = llm_client
-        self.alert_threshold = alert_threshold
-        self.baseline = {}
+import json
+import re
 
-    def set_baseline(self, table: str, profile: dict):
-        """Set baseline statistics for comparison."""
-        self.baseline[table] = profile
+import great_expectations as gx
+import pandas as pd
 
-    async def check_drift(self, table: str, current_profile: dict) -> dict:
-        """Check for data drift from baseline."""
+from propose import RuleProposal, RuleSet
 
-        if table not in self.baseline:
-            return {"drift_detected": False, "message": "No baseline set"}
 
-        baseline = self.baseline[table]
+def to_expectation(rule: RuleProposal):
+    common = {"column": rule.column, "mostly": rule.mostly}
+    if rule.rule_type == "not_null":
+        return gx.expectations.ExpectColumnValuesToNotBeNull(**common)
+    if rule.rule_type == "unique":
+        return gx.expectations.ExpectColumnValuesToBeUnique(**common)
+    if rule.rule_type == "between":
+        if rule.min_value is None and rule.max_value is None:
+            raise ValueError("between rule needs min_value or max_value")
+        return gx.expectations.ExpectColumnValuesToBeBetween(
+            min_value=rule.min_value, max_value=rule.max_value, **common)
+    if rule.rule_type == "in_set":
+        if not rule.allowed_values:
+            raise ValueError("in_set rule needs allowed_values")
+        return gx.expectations.ExpectColumnValuesToBeInSet(
+            value_set=rule.allowed_values, **common)
+    if rule.rule_type == "matches_regex":
+        re.compile(rule.regex or "")  # raises re.error on a bad pattern
+        return gx.expectations.ExpectColumnValuesToMatchRegex(
+            regex=rule.regex, **common)
+    raise ValueError(f"Unsupported rule_type {rule.rule_type}")
 
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Compare these data profiles and detect drift:
 
-                Baseline: {json.dumps(baseline, indent=2)}
-                Current: {json.dumps(current_profile, indent=2)}
+def build_suite(rules: RuleSet, df: pd.DataFrame, name: str):
+    suite = gx.ExpectationSuite(name=name)
+    rejected = []
+    for rule in rules.rules:
+        if rule.column not in df.columns:
+            rejected.append((rule, "unknown column"))
+        elif not 0.0 < rule.mostly <= 1.0:
+            rejected.append((rule, "mostly out of range"))
+        else:
+            try:
+                suite.add_expectation(to_expectation(rule))
+            # GX raises pydantic.v1 ValidationError, a ValueError subclass
+            except (ValueError, re.error) as exc:
+                rejected.append((rule, str(exc)))
+    return suite, rejected
 
-                Identify significant changes in:
-                - Value distributions
-                - Null rates
-                - Unique counts
-                - Statistical measures
 
-                Return JSON:
-                {{
-                    "drift_detected": true|false,
-                    "drift_score": 0-1,
-                    "changes": [
-                        {{"column": "col", "metric": "what changed", "baseline_value": "...", "current_value": "...", "severity": "high|medium|low"}}
-                    ],
-                    "recommendations": ["what to do about the drift"]
-                }}"""
-            }]
-        )
+if __name__ == "__main__":
+    context = gx.get_context(mode="ephemeral")
+    known_good = pd.read_csv("orders_known_good.csv")
+    with open("proposed_rules.json") as f:
+        rules = RuleSet.model_validate_json(f.read())
 
-        return json.loads(response.choices[0].message.content)
+    suite, rejected = build_suite(rules, known_good, "sales_orders_proposed")
+    for rule, reason in rejected:
+        print(f"REJECTED {rule.rule_type} on {rule.column}: {reason}")
+
+    batch = (
+        context.data_sources.add_pandas("backtest")
+        .add_dataframe_asset(name="orders_known_good")
+        .add_batch_definition_whole_dataframe("all_rows")
+        .get_batch(batch_parameters={"dataframe": known_good})
+    )
+    result = batch.validate(suite)
+    for r in result.results:
+        cfg = r.expectation_config
+        status = "ok" if r.success else "FAILS ON KNOWN-GOOD DATA"
+        print(f"{status:26} {cfg.type} {cfg.kwargs.get('column')} "
+              f"unexpected%={r.result.get('unexpected_percent')}")
+
+    with open("sales_orders_suite.json", "w") as f:
+        json.dump(suite.to_json_dict(), f, indent=2)
 ```
 
-## Best Practices
+This targets the GX Core 1.x API (1.3 was current at the time of writing), which replaced the 0.x `expectation_type` dictionaries and validators with expectation classes and batch definitions. If you're still on 0.18, the idea carries over but every line of the GX code changes; the [GX migration guide](https://docs.greatexpectations.io/docs/reference/learn/migration_guide) covers the changes.
 
-1. **Combine AI with rules**: Use AI to discover, rules to enforce
-2. **Human oversight**: Review AI-generated rules before production
-3. **Continuous learning**: Update models with new data patterns
-4. **Explainability**: Always understand why something is flagged
-5. **Gradual automation**: Start with detection, then move to remediation
+Two details matter here. First, `gx.get_context()` has to run before you add expectations to a suite, because GX 1.x stores suites through the active data context; that is why the `__main__` block creates the context first. Second, the `except` clause is narrow on purpose. A broad `except Exception` would quietly swallow a real configuration bug and report every rule as "rejected", which looks like a model problem when it's actually yours.
 
-AI transforms data quality from reactive checking to proactive management. Start with profiling and anomaly detection, then expand to automated rule generation and remediation.
+The backtest is the step I'd never skip. A rule that fails on data you already trust is either wrong or encodes something the business hasn't told you. Picture a proposed `status IN ('shipped', 'pending')` rule backtested against a sample where one order in five is cancelled: it fails on 20% of known-good rows, and the output tells you so before the rule goes anywhere near production. That's exactly the type of mistake a model makes from a profile, and exactly the type a backtest catches before it blocks a production load.
+
+## Step 4: review like code, enforce like code
+
+The output is a plain JSON Expectation Suite. Commit it next to the pipeline, open a pull request, and make the data owner the reviewer. Include the `rationale` field from each proposal in the PR description so the reviewer sees *why* a rule exists, not just what it checks. Once merged, the suite runs in the pipeline the same way a hand-written one would. The saved JSON has `"id": null`, so the pipeline rehydrates it into its own context, then attaches it to a validation definition and a Checkpoint. This fragment assumes `context` is your pipeline's data context and `batch_definition` points at the production table:
+
+```python
+import json
+
+import great_expectations as gx
+
+with open("sales_orders_suite.json") as f:
+    suite = context.suites.add(gx.ExpectationSuite(**json.load(f)))
+
+validation = context.validation_definitions.add(
+    gx.ValidationDefinition(name="sales_orders_gate", data=batch_definition, suite=suite))
+checkpoint = context.checkpoints.add(
+    gx.Checkpoint(name="sales_orders_checkpoint", validation_definitions=[validation]))
+result = checkpoint.run()
+```
+
+(For a dataframe asset, pass `batch_parameters={"dataframe": df}` to `run()`.) Fail the load when `result.success` is false, or wire the Checkpoint into whatever orchestration you already use.
+
+What I'd ask reviewers to look at:
+
+- **Thresholds hugging the sample.** A `between` rule built from the 0th and 100th percentile of last month's data will fail the first time the business has a good month. Widen it or drop it.
+- **`mostly` values that hide problems.** A not-null rule with `mostly=0.98` might be legitimate (guest checkouts with no customer ID) or might be papering over a bug upstream. Only the data owner knows.
+- **Missing rules.** The model only sees one table. It won't propose referential integrity, freshness, or row-count expectations across loads unless you give it that context, so add those by hand.
+
+## Where this approach doesn't fit
+
+- **You already have a governed rules catalogue.** If your organisation uses Microsoft Purview's [data quality](https://learn.microsoft.com/en-us/purview/unified-catalog-data-quality) capabilities (in preview at the time of writing) or Delta Live Tables [expectations](/blog/2022-03-22-dlt-expectations-quality/), keep the rules in that system. A side channel of LLM-generated GX suites just splits ownership.
+- **The table is tiny or stable.** Ten columns that haven't changed in three years don't need a model. Write the five rules by hand in fifteen minutes.
+- **You want auto-remediation.** I'd stay away from letting a model rewrite values in place. "Standardise these addresses" sounds harmless until it silently merges two customers. Quarantine bad rows, and fix them through a reviewed change, not a prompt.
+- **The profile itself is sensitive.** Even summaries can identify people in small populations. If you can't send the profile to an external endpoint under your data policies, this pipeline isn't for that table.
+
+## The takeaway
+
+Treat the LLM as a junior analyst who's fast, tireless, and occasionally confidently wrong. Give it a narrow vocabulary, feed it summaries rather than rows, check its work automatically against data you trust, and make a human accountable for what ships. You get most of the coverage benefit of "AI-driven data quality" while the thing that actually blocks a pipeline stays boring, deterministic, and explainable. For the habits that make any rule set stick, the older [Data Quality Practices](/blog/2021-12-25-data-quality-practices/) post still applies.

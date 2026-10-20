@@ -1,432 +1,271 @@
 ---
-title: "Testing Data Pipelines with AI: From Unit Tests to Integration Testing"
-description: "AI-assisted testing catches more bugs earlier. Combine generated tests with manual review to ensure comprehensive coverage."
+title: "LLM-Drafted Tests for PySpark: The Model Writes, pytest Judges"
+description: "Use Azure OpenAI structured outputs to draft edge-case test data for PySpark transforms, review it like code, and let pytest and assertDataFrameEqual decide."
 author: Michael John Peña
 draft: false
 date: 2025-01-23
 tags:
   - Testing
+  - PySpark
+  - Azure OpenAI
   - Data Engineering
-  - AI
-  - Data Pipelines
-  - Azure
+  - Python
 ---
 
-## The Testing Pyramid for Data Pipelines
+Most data pipelines are tested in production: a dashboard looks wrong, someone traces it back to a transform, and the fix ships without a test. The reason is rarely laziness. Writing good test data for a PySpark transform is tedious, and thinking of the nasty cases (the null in the join key, the trailing space, the date that parses in one format but not another) takes more attention than the transform itself. LLMs are good at that enumeration and bad at deciding whether your pipeline is correct. The design question is how to use the first strength without trusting the second.
 
-```
-                    ┌─────────┐
-                    │ E2E     │  ← Full pipeline tests
-                   ┌┴─────────┴┐
-                   │Integration│  ← Multi-component tests
-                  ┌┴───────────┴┐
-                  │  Unit Tests  │  ← Single function tests
-                 ┌┴─────────────┴┐
-                 │ Data Contracts │  ← Schema validation
-                └─────────────────┘
-```
+## Where an LLM helps, and where it doesn't
 
-## AI-Generated Test Cases
+I see three common ways teams put an LLM into pipeline testing:
 
-```python
-from azure.ai.foundry import AIFoundryClient
+| Approach | What the model does | My view |
+|---|---|---|
+| Generate pytest code | Writes whole test files from the function source | Useful for a first pass, but reviewers skim generated code and miss weak assertions |
+| Generate test cases as data | Proposes input rows and expected output rows in a fixed schema | The sweet spot: reviewable, diffable, deterministic once committed |
+| LLM as runtime validator | Looks at a sample of output and says whether it "looks right" | Avoid. It is non-deterministic, sees a sample, costs tokens on every run and produces opinions, not evidence |
 
-class PipelineTestGenerator:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
+The third pattern shows up in a lot of demos and I'd keep it out of a pipeline. A test that passes on Tuesday and fails on Wednesday with the same data is worse than no test, because people learn to ignore it. Runtime checks on production data should be deterministic rules: schema, nullability, ranges, row counts, freshness. I covered where AI can help with those rules in [the previous post on data quality automation](/blog/2025-01-22-data-quality-automation-ai/), and the same principle applies here: the model proposes, something deterministic decides.
 
-    async def generate_unit_tests(self, function_code: str, function_name: str) -> str:
-        """Generate unit tests for a data transformation function."""
+So this post builds the second approach. The model drafts test cases as structured data, an engineer reviews and commits them, and pytest runs them against the real transform on every change. It is the same loop I used for [generating dbt models](/blog/2025-01-21-dbt-with-ai-code-generation/), applied to PySpark.
 
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "system",
-                "content": """You are a data engineering test expert.
-                Generate comprehensive pytest tests including:
-                - Happy path tests
-                - Edge cases (nulls, empty data, type mismatches)
-                - Boundary conditions
-                - Error handling tests"""
-            }, {
-                "role": "user",
-                "content": f"""Generate pytest tests for this function:
+## The transform under test
 
-                ```python
-                {function_code}
-                ```
-
-                Include:
-                1. Test fixtures with sample data
-                2. Parametrized tests for multiple scenarios
-                3. Tests for error conditions
-                4. Assertions for both output data and side effects"""
-            }]
-        )
-
-        return response.choices[0].message.content
-
-    async def generate_integration_tests(self, pipeline_spec: dict) -> str:
-        """Generate integration tests for a data pipeline."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Generate integration tests for this pipeline:
-
-                Pipeline specification:
-                {json.dumps(pipeline_spec, indent=2)}
-
-                Generate pytest tests that:
-                1. Test data flow between components
-                2. Verify transformations are applied correctly
-                3. Check data integrity across the pipeline
-                4. Test with both valid and invalid inputs
-                5. Include setup and teardown for test resources
-
-                Use mocks where appropriate for external dependencies."""
-            }]
-        )
-
-        return response.choices[0].message.content
-```
-
-### Generated Test Example
+Here is a small but realistic cleaning step. It is deliberately the kind of function nobody writes tests for because it "obviously works".
 
 ```python
-# Generated by AI, refined by human
+# my_pipeline/transformations.py
+from pyspark.sql import DataFrame
+from pyspark.sql import functions as F
+
+EMAIL_PATTERN = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
+
+
+def clean_customers(df: DataFrame) -> DataFrame:
+    """Trim and title-case names, drop rows without a name, normalise emails,
+    parse signup dates and floor lifetime value at zero."""
+    return (
+        df.withColumn("name", F.initcap(F.trim(F.col("name"))))
+        .filter(F.col("name").isNotNull() & (F.col("name") != ""))
+        .withColumn("email", F.lower(F.trim(F.col("email"))))
+        .withColumn(
+            "email_valid",
+            F.coalesce(F.col("email").rlike(EMAIL_PATTERN), F.lit(False)),
+        )
+        .withColumn("signup_date", F.to_date(F.col("signup_date"), "yyyy-MM-dd"))
+        .withColumn("lifetime_value", F.greatest(F.col("lifetime_value"), F.lit(0.0)))
+    )
+```
+
+There are at least three decisions hiding in there that a good test should surface. `F.greatest` skips nulls, so a null `lifetime_value` becomes `0.0`, not null. Is that the business rule, or an accident? `initcap` turns `o'brien` into `O'brien` and `McDonald` into `Mcdonald`. And `to_date` does not simply return null for a bad date. Since Spark 3.0, with the default `spark.sql.legacy.timeParserPolicy` of `EXCEPTION`, a string the old parser would have accepted but the new one rejects, such as `2024-1-5`, raises a `SparkUpgradeException` and fails the whole job, while `2024-02-30` quietly becomes null. Whether a malformed date should kill the load or become null depends on a session setting the function never mentions, which makes it the most dangerous hidden decision of the three. None of these is a bug in Spark. They are questions for whoever owns the customer data, and they only get asked if someone writes the case down.
+
+## Drafting cases with structured outputs
+
+The generator asks Azure OpenAI for test cases in a fixed shape. [Structured outputs](https://learn.microsoft.com/azure/ai-services/openai/how-to/structured-outputs) constrain the response to a JSON schema, so there is no parsing of code fences or apologetic prose. As of January 2025 the feature is in the `2024-10-21` GA API version with a `gpt-4o` version `2024-08-06` deployment, and the `openai` Python library (1.x) converts a Pydantic model into the schema and parses the response back. I covered the feature itself in [an earlier post](/blog/2024-09-13-structured-outputs-openai/).
+
+Strict schemas need every field to be required, so optional values are expressed as `X | None` rather than defaults. To run the examples, install `pip install "pyspark[pandas_on_spark]==3.5.*" pytest openai pydantic`; the `pandas_on_spark` extra matters because `pyspark.testing` imports pandas and PyArrow, and a plain `pip install pyspark` fails with `ImportError: Pandas >= 1.0.5 must be installed` when the harness loads.
+
+```python
+# tools/draft_cases.py
+import inspect
+import json
+import os
+import sys
+from pathlib import Path
+
+from openai import AzureOpenAI
+from pydantic import BaseModel
+
+from my_pipeline.transformations import clean_customers
+
+
+class CustomerIn(BaseModel):
+    id: int
+    name: str | None
+    email: str | None
+    signup_date: str | None  # raw string as it arrives from the source
+    lifetime_value: float | None
+
+
+class CustomerOut(BaseModel):
+    id: int
+    name: str
+    email: str | None
+    signup_date: str | None  # yyyy-MM-dd, or null when the date doesn't parse
+    # (assumes timeParserPolicy=CORRECTED; under the default EXCEPTION, inputs
+    # like "2024-1-5" raise instead of returning null)
+    lifetime_value: float | None
+    email_valid: bool
+
+
+class TestCase(BaseModel):
+    case_id: str  # snake_case, unique
+    description: str
+    input_rows: list[CustomerIn]
+    expected_rows: list[CustomerOut]
+    question_for_reviewer: str | None  # set when the right answer is a business decision
+
+
+class TestCaseSet(BaseModel):
+    cases: list[TestCase]
+
+
+SYSTEM_PROMPT = """You write test cases for PySpark 3.5 transformations.
+Rules:
+- Read the module source carefully and predict the function's actual output.
+- Assume spark.sql.legacy.timeParserPolicy=CORRECTED: unparseable dates
+  become null rather than raising.
+- Cover nulls in every nullable column, empty and whitespace-only strings,
+  mixed case, apostrophes and hyphens in names, non-ASCII characters,
+  invalid and boundary dates, negative, zero and very large numbers.
+- Keep each case to 1-4 input rows so a reviewer can check it by eye.
+- If the code's behaviour may not match what a business owner would want,
+  still predict what the code does, and explain the doubt in
+  question_for_reviewer.
+- Produce 10 to 15 cases."""
+
+client = AzureOpenAI(
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],  # https://<your-resource-name>.openai.azure.com
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2024-10-21",
+)
+
+
+def draft_cases(output_path: Path) -> None:
+    # Send the whole module, not just the function: constants such as
+    # EMAIL_PATTERN live outside clean_customers and decide email_valid.
+    source = inspect.getsource(sys.modules[clean_customers.__module__])
+    completion = client.beta.chat.completions.parse(
+        model="<your-gpt-4o-deployment>",  # a gpt-4o 2024-08-06 deployment
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {
+                "role": "user",
+                "content": f"Write test cases for clean_customers in this module:\n\n{source}",
+            },
+        ],
+        response_format=TestCaseSet,
+        temperature=0,
+    )
+    result = completion.choices[0].message.parsed
+    if result is None:
+        raise RuntimeError(f"Model refused: {completion.choices[0].message.refusal}")
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(result.model_dump(), indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    print(f"Wrote {len(result.cases)} draft cases to {output_path}")
+
+
+if __name__ == "__main__":
+    draft_cases(Path("tests/cases/clean_customers.draft.json"))
+```
+
+Run it from the repository root as `python -m tools.draft_cases` (with an empty `tools/__init__.py`), or install the pipeline with `pip install -e .`; running `python tools/draft_cases.py` puts `tools/` rather than the root on `sys.path` and fails with `No module named 'my_pipeline'`. The generator sends the whole module rather than `inspect.getsource(clean_customers)`, because the function's source names `EMAIL_PATTERN` without its value, and a model that has to guess the regex cannot predict `email_valid`.
+
+Two choices matter more than the prompt wording.
+
+First, the output is **data, not code**. A JSON file of input and expected rows is something a reviewer can read in a pull request diff, and something a data owner who doesn't write Python can still check. Generated pytest files tend to contain assertions like `assert result.count() > 0`, which pass for almost any bug.
+
+Second, the `question_for_reviewer` field gives the model an honest place to flag business ambiguity instead of quietly picking an answer. The null lifetime value above is exactly the kind of case where I want a question, not a guess.
+
+The file is written as `.draft.json`. The test harness ignores drafts. A person renames it to `.json` after review, and that rename is the sign-off.
+
+## The harness: hand-written, small and boring
+
+The harness is the one part I would never generate. It is short, it rarely changes, and everything depends on it being right. It loads every reviewed case file, builds Spark DataFrames with explicit schemas and compares them with `assertDataFrameEqual` from [`pyspark.testing`](https://spark.apache.org/docs/3.5.0/api/python/reference/api/pyspark.testing.assertDataFrameEqual.html), which arrived in PySpark 3.5.0. Row order is ignored by default, and floats are compared with a relative tolerance.
+
+```python
+# tests/test_clean_customers.py
+import json
+from pathlib import Path
 
 import pytest
-import pandas as pd
 from pyspark.sql import SparkSession
-from my_pipeline.transformations import clean_customer_data
+from pyspark.sql import functions as F
+from pyspark.testing import assertDataFrameEqual
 
-@pytest.fixture
+from my_pipeline.transformations import clean_customers
+
+CASE_DIR = Path(__file__).parent / "cases"
+INPUT_SCHEMA = "id BIGINT, name STRING, email STRING, signup_date STRING, lifetime_value DOUBLE"
+EXPECTED_SCHEMA = (
+    "id BIGINT, name STRING, email STRING, signup_date STRING, "
+    "lifetime_value DOUBLE, email_valid BOOLEAN"
+)
+
+
+def load_cases():
+    cases = []
+    for path in sorted(CASE_DIR.glob("*.json")):
+        if path.name.endswith(".draft.json"):
+            continue  # unreviewed drafts never run in CI
+        for case in json.loads(path.read_text(encoding="utf-8"))["cases"]:
+            cases.append(pytest.param(case, id=f"{path.stem}:{case['case_id']}"))
+    return cases
+
+
+@pytest.fixture(scope="session")
 def spark():
-    """Create a local Spark session for testing."""
-    return SparkSession.builder \
-        .master("local[1]") \
-        .appName("test") \
+    session = (
+        SparkSession.builder.master("local[1]")
+        .appName("pipeline-tests")
+        .config("spark.sql.shuffle.partitions", "1")
+        .config("spark.sql.session.timeZone", "UTC")
+        .config("spark.sql.legacy.timeParserPolicy", "CORRECTED")
         .getOrCreate()
+    )
+    yield session
+    session.stop()
 
-@pytest.fixture
-def sample_customer_data(spark):
-    """Sample customer data for testing."""
-    data = [
-        (1, "John Doe", "john@email.com", "2024-01-15", 1000.50),
-        (2, "Jane Smith", "jane@email.com", "2024-01-16", 2500.00),
-        (3, None, "invalid-email", "2024-01-17", -100),  # Edge case: null name, invalid email, negative amount
-        (4, "Bob Wilson", None, "invalid-date", None),  # Edge case: null email, invalid date, null amount
-    ]
-    return spark.createDataFrame(data, ["id", "name", "email", "signup_date", "lifetime_value"])
 
-class TestCleanCustomerData:
-    """Tests for the clean_customer_data transformation."""
+def to_rows(records, columns):
+    return [tuple(r[c] for c in columns) for r in records]
 
-    def test_removes_null_names(self, spark, sample_customer_data):
-        """Records with null names should be filtered out."""
-        result = clean_customer_data(sample_customer_data)
-        assert result.filter("name IS NULL").count() == 0
 
-    def test_validates_email_format(self, spark, sample_customer_data):
-        """Invalid email formats should be flagged or fixed."""
-        result = clean_customer_data(sample_customer_data)
-        invalid_emails = result.filter("email NOT LIKE '%@%.%'").count()
-        assert invalid_emails == 0 or result.filter("email_valid = False").count() > 0
+@pytest.mark.parametrize("case", load_cases())
+def test_clean_customers(spark, case):
+    input_cols = ["id", "name", "email", "signup_date", "lifetime_value"]
+    expected_cols = input_cols + ["email_valid"]
 
-    def test_handles_negative_values(self, spark, sample_customer_data):
-        """Negative lifetime values should be set to 0 or flagged."""
-        result = clean_customer_data(sample_customer_data)
-        negative_values = result.filter("lifetime_value < 0").count()
-        assert negative_values == 0
+    source = spark.createDataFrame(to_rows(case["input_rows"], input_cols), INPUT_SCHEMA)
+    expected = spark.createDataFrame(
+        to_rows(case["expected_rows"], expected_cols), EXPECTED_SCHEMA
+    ).withColumn("signup_date", F.to_date("signup_date", "yyyy-MM-dd"))
 
-    def test_date_parsing(self, spark, sample_customer_data):
-        """Invalid dates should be handled gracefully."""
-        result = clean_customer_data(sample_customer_data)
-        # Should not throw an exception
-        assert result.count() > 0
-
-    @pytest.mark.parametrize("input_name,expected_output", [
-        ("  John Doe  ", "John Doe"),  # Trim whitespace
-        ("JOHN DOE", "John Doe"),      # Title case
-        ("john doe", "John Doe"),      # Title case
-    ])
-    def test_name_normalization(self, spark, input_name, expected_output):
-        """Names should be normalized to title case and trimmed."""
-        df = spark.createDataFrame([(1, input_name, "test@test.com", "2024-01-01", 100.0)],
-                                   ["id", "name", "email", "signup_date", "lifetime_value"])
-        result = clean_customer_data(df)
-        actual_name = result.collect()[0]["name"]
-        assert actual_name == expected_output
-
-    def test_empty_dataframe(self, spark):
-        """Should handle empty input gracefully."""
-        empty_df = spark.createDataFrame([], "id INT, name STRING, email STRING, signup_date STRING, lifetime_value DOUBLE")
-        result = clean_customer_data(empty_df)
-        assert result.count() == 0
-
-    def test_output_schema(self, spark, sample_customer_data):
-        """Output schema should match expected structure."""
-        result = clean_customer_data(sample_customer_data)
-        expected_columns = {"id", "name", "email", "signup_date", "lifetime_value", "processed_at"}
-        assert set(result.columns) == expected_columns or expected_columns.issubset(set(result.columns))
+    assertDataFrameEqual(clean_customers(source), expected)
 ```
 
-## Synthetic Test Data Generation
+Add `pythonpath = ["."]` under `[tool.pytest.ini_options]` in `pyproject.toml` (pytest 7 and later) so `my_pipeline` imports when you run `pytest` from the root.
 
-```python
-class TestDataGenerator:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
+A few details are there on purpose. Setting `timeParserPolicy` to `CORRECTED` makes `to_date` return null for any string the new parser rejects, which is the behaviour the cases describe. A test session is only honest if the deployed job runs with the same setting, so set it in the job's Spark configuration too rather than relying on whatever default the runtime ships with. If your team would rather a malformed date fail the load, keep `EXCEPTION` everywhere and write cases that expect the error instead. Explicit DDL schemas stop Spark from inferring `id` as a long in one test and an int in another, which produces confusing schema mismatches. One shuffle partition and a single local core keep the suite fast on a laptop or a CI agent. Pinning the session time zone does nothing for this date-only transform, but it saves you the day someone adds a timestamp column and the tests pass in Sydney and fail on a build agent running in UTC. Keep your local PySpark version aligned with the runtime you deploy to, for example Fabric Runtime 1.3, which is built on [Spark 3.5](https://learn.microsoft.com/fabric/data-engineering/lifecycle), so a test that passes locally means the same thing in the workspace.
 
-    async def generate_synthetic_data(self, schema: dict, num_rows: int, context: str) -> pd.DataFrame:
-        """Generate synthetic test data that's realistic."""
+## Reviewing what the model got wrong
 
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Generate {num_rows} rows of realistic synthetic test data.
+The model's expected rows are predictions. Some will be wrong, and that is useful, because every failing case lands in one of three buckets:
 
-                Schema:
-                {json.dumps(schema, indent=2)}
+1. **The model misread the code.** For example, it expects a null `lifetime_value` to stay null, but `greatest` returns `0.0`. Or it expects `2024-1-5` to parse, when under `CORRECTED` the strict `yyyy-MM-dd` pattern returns null (and under the default `EXCEPTION` policy the run would have crashed instead). Fix the expectation and move on.
+2. **The code does something nobody intended.** Same example, but the data owner says null means "unknown" and must stay null. Now you have found a real bug before production did. Fix the transform and keep the case.
+3. **The rule was never decided.** `Mcdonald` versus `McDonald` usually falls here. Write the decision down, encode it in the case, and accept that the test now documents a business rule.
 
-                Context: {context}
+This is why I don't let the model "repair" failing tests automatically. A loop that edits expectations until everything passes turns category 2 into category 1 and hides the bug. The review step is the point of the exercise, not overhead.
 
-                Requirements:
-                - Data should be realistic and follow business rules
-                - Include some edge cases (nulls, boundary values)
-                - Mix of typical and unusual values
-                - Maintain referential integrity where applicable
+The same rule applies when the transform changes. Committed cases are the regression baseline, so never regenerate the reviewed file wholesale; draft only new cases for the changed behaviour into a fresh `.draft.json`, and edit an old case by hand only when the change is intended and the data owner agrees. Behaviour that should raise, such as choosing `EXCEPTION` for malformed dates, doesn't fit rows-in, rows-out cases; write those few tests by hand with `pytest.raises` around a `collect()`, because Spark evaluates lazily and nothing fails until an action runs.
 
-                Return as JSON array of objects."""
-            }]
-        )
+Reviewing 15 small cases takes me far less time than inventing them, and the model reliably proposes cases I would skip on a busy day: whitespace-only names, Unicode in email local parts, `2024-02-30`, an empty input DataFrame.
 
-        data = json.loads(response.choices[0].message.content)
-        return pd.DataFrame(data)
+## Beyond unit tests
 
-    async def generate_edge_cases(self, schema: dict, context: str) -> list[dict]:
-        """Generate specific edge case test data."""
+The same pattern stretches, with limits.
 
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Generate edge case test data for this schema:
+- **Integration tests.** For a chain of transforms, the model can draft a small set of source rows that exercise each join and the expected final output. Keep these few and hand-checked; a wrong expectation across three joins is hard to spot in review.
+- **Synthetic volume data.** Don't ask an LLM for 100,000 rows. It is slow, expensive and the output drifts. Use a seeded generator such as Faker or plain Python for volume, and reserve the model for the dozen awkward rows that matter.
+- **Production checks.** Keep these deterministic. Schema, null, range and volume rules belong in the pipeline itself, whether that is Delta Live Tables expectations, Great Expectations or plain PySpark assertions.
 
-                Schema:
-                {json.dumps(schema, indent=2)}
+## When not to bother
 
-                Context: {context}
+Skip the generator for transforms that are a single `select` with renames; a hand-written case is quicker than a prompt. Be careful with transforms that encode contested business logic such as revenue recognition, because confident-looking expected rows anchor the discussion before the business has agreed on the rule. And never send real customer rows to the model to "inspire" cases. The function source is enough, and it keeps personal data out of prompts.
 
-                Generate test cases for:
-                1. Null values in each nullable column
-                2. Boundary values (min/max)
-                3. Empty strings
-                4. Special characters
-                5. Unicode characters
-                6. Extremely long values
-                7. Type edge cases (0, -1, MAX_INT, etc.)
-                8. Date edge cases (leap years, timezone boundaries)
+## The takeaway
 
-                Return JSON array where each object is a test case with:
-                {{"description": "what this tests", "data": {{...row data...}}}}"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-```
-
-## Contract Testing
-
-```python
-class DataContractTester:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
-
-    async def generate_contract(self, sample_data: pd.DataFrame, context: str) -> dict:
-        """Generate a data contract from sample data."""
-
-        stats = sample_data.describe(include='all').to_dict()
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Generate a data contract from this sample:
-
-                Statistics:
-                {json.dumps(stats, indent=2, default=str)}
-
-                Sample (first 5 rows):
-                {sample_data.head().to_dict(orient='records')}
-
-                Context: {context}
-
-                Return a data contract JSON:
-                {{
-                    "schema": [
-                        {{"column": "name", "type": "string|int|float|datetime|bool", "nullable": true|false, "description": "..."}}
-                    ],
-                    "constraints": [
-                        {{"type": "not_null|unique|range|pattern|enum", "column": "col", "parameters": {{}}}}
-                    ],
-                    "freshness": {{"max_age_hours": 24}},
-                    "volume": {{"min_rows": 1000, "max_rows": 1000000}}
-                }}"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-
-    def validate_contract(self, df: pd.DataFrame, contract: dict) -> dict:
-        """Validate data against a contract."""
-
-        violations = []
-
-        # Check schema
-        for col_spec in contract["schema"]:
-            col = col_spec["column"]
-
-            if col not in df.columns:
-                violations.append({"type": "missing_column", "column": col})
-                continue
-
-            if not col_spec["nullable"] and df[col].isnull().any():
-                violations.append({
-                    "type": "null_violation",
-                    "column": col,
-                    "null_count": int(df[col].isnull().sum())
-                })
-
-        # Check constraints
-        for constraint in contract["constraints"]:
-            violation = self._check_constraint(df, constraint)
-            if violation:
-                violations.append(violation)
-
-        # Check volume
-        if "volume" in contract:
-            if len(df) < contract["volume"].get("min_rows", 0):
-                violations.append({
-                    "type": "volume_violation",
-                    "expected_min": contract["volume"]["min_rows"],
-                    "actual": len(df)
-                })
-
-        return {
-            "valid": len(violations) == 0,
-            "violations": violations
-        }
-```
-
-## Output Validation with AI
-
-```python
-class OutputValidator:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
-
-    async def validate_transformation_output(
-        self,
-        input_data: pd.DataFrame,
-        output_data: pd.DataFrame,
-        transformation_description: str
-    ) -> dict:
-        """Validate that transformation output is correct."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Validate this data transformation output:
-
-                Transformation: {transformation_description}
-
-                Input (sample):
-                {input_data.head(10).to_markdown()}
-
-                Output (sample):
-                {output_data.head(10).to_markdown()}
-
-                Check:
-                1. Is the transformation applied correctly?
-                2. Are there any data integrity issues?
-                3. Are all expected columns present?
-                4. Do the values look reasonable?
-
-                Return JSON:
-                {{
-                    "valid": true|false,
-                    "issues": [
-                        {{"description": "issue", "severity": "error|warning", "example": "..."}}
-                    ],
-                    "suggestions": ["improvements"]
-                }}"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-
-    async def compare_expected_vs_actual(
-        self,
-        expected: pd.DataFrame,
-        actual: pd.DataFrame,
-        context: str
-    ) -> dict:
-        """Compare expected and actual outputs with intelligent diff."""
-
-        # Find differences
-        expected_set = set(expected.to_records(index=False).tolist())
-        actual_set = set(actual.to_records(index=False).tolist())
-
-        missing = expected_set - actual_set
-        unexpected = actual_set - expected_set
-
-        if not missing and not unexpected:
-            return {"match": True}
-
-        # Use AI to explain differences
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Analyze the differences between expected and actual data:
-
-                Context: {context}
-
-                Expected columns: {list(expected.columns)}
-                Actual columns: {list(actual.columns)}
-
-                Missing from actual (sample): {list(missing)[:5]}
-                Unexpected in actual (sample): {list(unexpected)[:5]}
-
-                Expected row count: {len(expected)}
-                Actual row count: {len(actual)}
-
-                Explain:
-                1. What's different?
-                2. Why might this have happened?
-                3. Is this a bug or expected behavior?"""
-            }]
-        )
-
-        return {
-            "match": False,
-            "missing_count": len(missing),
-            "unexpected_count": len(unexpected),
-            "analysis": response.choices[0].message.content
-        }
-```
-
-## Best Practices
-
-1. **Generate tests early**: Use AI to create tests before implementation
-2. **Include edge cases**: AI is good at thinking of unusual scenarios
-3. **Validate with domain knowledge**: AI can miss business-specific rules
-4. **Version test data**: Keep synthetic data reproducible
-5. **Continuous testing**: Run tests on every pipeline change
-
-AI-assisted testing catches more bugs earlier. Combine generated tests with manual review to ensure comprehensive coverage.
+Use the LLM for what it is good at: enumerating edge cases faster and more thoroughly than a tired engineer. Have it produce test data in a strict schema rather than test code, review that data like any other change, and let a small hand-written pytest harness with `assertDataFrameEqual` be the judge. The tests that matter most will be the ones where the model and the code disagree, because those are the conversations your pipeline needed to have anyway.

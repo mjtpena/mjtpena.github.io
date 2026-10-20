@@ -1,412 +1,242 @@
 ---
-title: "dbt with AI: Accelerating Data Transformation Development"
-description: "AI accelerates dbt development but doesn't replace data engineering expertise. Use it to handle boilerplate and documentation while focusing your expertise…"
+title: "Generating dbt Models with Azure OpenAI: Let dbt Be the Judge"
+description: "Use Azure OpenAI structured outputs to draft dbt models and YAML, then gate every draft with dbt build so nothing untested reaches review."
 author: Michael John Peña
 draft: false
 date: 2025-01-21
 tags:
   - dbt
-  - AI
-  - Data Transformation
+  - Azure OpenAI
   - Data Engineering
-  - Azure
+  - Data Transformation
+  - LLM
 ---
 
-## AI-Powered dbt Model Generation
+Most "AI for dbt" demos stop at the moment the model prints some SQL. That is the easy part. The hard part is knowing whether the SQL compiles, whether the grain is what you asked for, and whether the tests it proposes would actually catch a broken join. An LLM is a fast drafter and a poor judge of its own work, so the useful pattern is to let the model draft and let dbt decide.
 
-### From Requirements to Models
+The loop: Azure OpenAI drafts a model and its YAML in a fixed shape, the files land on a feature branch, and `dbt build` compiles, runs and tests the result before a human ever looks at it.
 
-```python
-from azure.ai.foundry import AIFoundryClient
+## What already exists, and why I'd still build this
 
-class DBTModelGenerator:
-    def __init__(self, llm_client: AIFoundryClient, project_path: str):
-        self.llm = llm_client
-        self.project_path = project_path
+If you are on dbt Cloud Enterprise, look at [dbt Copilot](https://www.getdbt.com/blog/coalesce-2024-product-announcements) first. dbt Labs announced it at Coalesce in October 2024 (it grew out of the earlier dbt Assist), and as of January 2025 it is in beta inside the dbt Cloud IDE, generating documentation, data tests and semantic models for existing models. dbt Labs manages the LLM connection, so there is no prompt plumbing on your side.
 
-    async def generate_model(self, requirements: str, source_tables: list[dict]) -> dict:
-        """Generate a dbt model from requirements."""
+There are still good reasons to run your own loop:
 
-        # Format source information
-        sources_context = self._format_sources(source_tables)
+- You run dbt Core, or you are not on the Enterprise tier.
+- Your data governance rules say prompts containing schema and business logic must go to your own Azure OpenAI resource, in your region, under your content filtering and logging. Be clear about what leaves your tenant: table and column names, the requirement text and, on a retry, dbt's error output.
+- You want generation in a batch job or pull request pipeline, not only in an IDE.
+- You want the generator to know your conventions: your staging layer naming, your surrogate key macro, your preferred incremental strategy.
 
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "system",
-                "content": """You are a dbt expert. Generate dbt models following best practices:
-                - Use CTEs for readability
-                - Include appropriate tests
-                - Write comprehensive documentation
-                - Follow naming conventions (stg_, int_, fct_, dim_)
-                - Use Jinja for reusability"""
-            }, {
-                "role": "user",
-                "content": f"""Generate a dbt model based on these requirements:
+If none of those apply, use the product and skip the rest of this post.
 
-                Requirements:
-                {requirements}
+## The shape of the loop
 
-                Available source tables:
-                {sources_context}
+| Step | Who does it | What can go wrong |
+|---|---|---|
+| Describe the requirement and the upstream models | Engineer | Vague grain ("sales by product") |
+| Draft SQL and YAML in a fixed schema | Azure OpenAI | Invented columns, wrong joins |
+| Write files to `models/` on a feature branch | Script | Clobbering an existing model |
+| `dbt build --select <model>` against a dev target | dbt | Compile errors, failing tests |
+| Feed the failure back once, then stop | Script and model | Endless retry loops |
+| Pull request review | Engineer | Rubber-stamping |
 
-                Return JSON with:
-                {{
-                    "model_name": "name following conventions",
-                    "description": "what this model does",
-                    "sql": "the dbt SQL model",
-                    "schema_yml": "the schema.yml content for this model",
-                    "tests": ["list of recommended tests"],
-                    "dependencies": ["upstream models needed"]
-                }}"""
-            }]
-        )
+The important design choice is in row four. dbt already knows how to tell you that a `ref()` points at nothing, that a column doesn't exist, or that a key you claimed was unique has duplicates. Re-implementing that check as a second LLM call ("review this SQL and score it out of 10") gives you an opinion, not evidence. I'd rather spend the tokens on a better first draft and let the warehouse answer the factual questions.
 
-        return json.loads(response.choices[0].message.content)
+## Structured outputs instead of "return JSON please"
 
-    def _format_sources(self, sources: list[dict]) -> str:
-        lines = []
-        for source in sources:
-            lines.append(f"Table: {source['name']}")
-            lines.append("Columns:")
-            for col in source['columns']:
-                lines.append(f"  - {col['name']}: {col['type']} - {col.get('description', '')}")
-            lines.append("")
-        return "\n".join(lines)
+The common failure in hand-rolled generators is parsing. You ask for JSON, the model wraps it in a code fence or adds a sentence, and `json.loads` throws. Azure OpenAI's [structured outputs](https://learn.microsoft.com/azure/ai-services/openai/how-to/structured-outputs) fix this by constraining the response to a JSON schema. It was added in API version `2024-08-01-preview` and is in the `2024-10-21` GA API, with `gpt-4o` version `2024-08-06` as the model to deploy. I covered the feature itself in [an earlier post](/blog/2024-09-13-structured-outputs-openai/).
 
-    def save_model(self, model: dict, layer: str = "marts"):
-        """Save generated model to appropriate location."""
-        import os
-
-        # Determine path based on naming convention
-        if model["model_name"].startswith("stg_"):
-            folder = "staging"
-        elif model["model_name"].startswith("int_"):
-            folder = "intermediate"
-        else:
-            folder = layer
-
-        model_path = os.path.join(self.project_path, "models", folder)
-        os.makedirs(model_path, exist_ok=True)
-
-        # Save SQL file
-        sql_path = os.path.join(model_path, f"{model['model_name']}.sql")
-        with open(sql_path, 'w') as f:
-            f.write(model["sql"])
-
-        # Append to schema.yml
-        schema_path = os.path.join(model_path, "schema.yml")
-        # ... append schema content
-
-        return sql_path
-```
-
-### Example Generated Model
-
-```sql
--- models/marts/fct_daily_sales.sql
--- Generated by AI, reviewed by human
-
-{{
-    config(
-        materialized='incremental',
-        unique_key='sale_date_product_key',
-        on_schema_change='sync_all_columns'
-    )
-}}
-
-with source_sales as (
-    select * from {{ ref('stg_sales_transactions') }}
-    {% if is_incremental() %}
-    where transaction_date > (select max(sale_date) from {{ this }})
-    {% endif %}
-),
-
-source_products as (
-    select * from {{ ref('dim_products') }}
-),
-
-source_customers as (
-    select * from {{ ref('dim_customers') }}
-),
-
-aggregated as (
-    select
-        date_trunc('day', s.transaction_date) as sale_date,
-        s.product_id,
-        p.product_key,
-        p.category,
-        p.subcategory,
-        s.customer_id,
-        c.customer_key,
-        c.segment,
-        c.region,
-        count(*) as transaction_count,
-        sum(s.quantity) as total_quantity,
-        sum(s.amount) as total_revenue,
-        avg(s.amount) as avg_transaction_value
-    from source_sales s
-    left join source_products p on s.product_id = p.product_id
-    left join source_customers c on s.customer_id = c.customer_id
-    group by 1, 2, 3, 4, 5, 6, 7, 8, 9
-),
-
-final as (
-    select
-        {{ dbt_utils.generate_surrogate_key(['sale_date', 'product_key']) }} as sale_date_product_key,
-        sale_date,
-        product_key,
-        category,
-        subcategory,
-        customer_key,
-        segment,
-        region,
-        transaction_count,
-        total_quantity,
-        total_revenue,
-        avg_transaction_value,
-        current_timestamp as loaded_at
-    from aggregated
-)
-
-select * from final
-```
-
-## AI-Generated Documentation
+Structured outputs need every field to be required and don't accept default values, so the Pydantic model below is deliberately plain. The `openai` Python library (1.x) converts it to a schema and parses the response back for you.
 
 ```python
-class DBTDocGenerator:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
-
-    async def generate_model_docs(self, sql_content: str, model_name: str) -> str:
-        """Generate documentation for existing dbt model."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Analyze this dbt model and generate schema.yml documentation:
-
-                Model name: {model_name}
-                SQL:
-                ```sql
-                {sql_content}
-                ```
-
-                Generate YAML in this format:
-                ```yaml
-                version: 2
-
-                models:
-                  - name: {model_name}
-                    description: |
-                      [Detailed description of what this model does]
-                    columns:
-                      - name: column_name
-                        description: [What this column represents]
-                        tests:
-                          - [appropriate tests]
-                ```
-
-                For each column:
-                - Write a clear business-friendly description
-                - Suggest appropriate tests (not_null, unique, accepted_values, relationships)
-                - Note any important business logic"""
-            }]
-        )
-
-        return response.choices[0].message.content
-
-    async def generate_column_descriptions(self, columns: list[str], context: str) -> dict:
-        """Generate descriptions for a list of columns."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Generate clear, business-friendly descriptions for these columns.
-
-                Context: {context}
-                Columns: {columns}
-
-                Return JSON: {{"column_name": "description", ...}}"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-```
-
-## AI-Assisted Testing
-
-```python
-class DBTTestGenerator:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
-
-    async def suggest_tests(self, model_sql: str, model_name: str) -> list[dict]:
-        """Suggest tests for a dbt model."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Analyze this dbt model and suggest comprehensive tests:
-
-                Model: {model_name}
-                SQL:
-                ```sql
-                {model_sql}
-                ```
-
-                Suggest tests in these categories:
-                1. Schema tests (not_null, unique, accepted_values, relationships)
-                2. Data tests (custom SQL tests)
-                3. Freshness tests (if applicable)
-
-                Return JSON:
-                {{
-                    "schema_tests": [
-                        {{"column": "col_name", "tests": ["not_null", "unique"]}}
-                    ],
-                    "data_tests": [
-                        {{"name": "test_name", "description": "what it tests", "sql": "SELECT..."}}
-                    ],
-                    "freshness_tests": [
-                        {{"table": "table_name", "warn_after": "12 hours", "error_after": "24 hours"}}
-                    ]
-                }}"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-
-    async def generate_custom_test(self, requirement: str, model_name: str) -> str:
-        """Generate a custom data test."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": f"""Create a dbt data test for this requirement:
-
-                Model: {model_name}
-                Requirement: {requirement}
-
-                Return a dbt test SQL file that returns rows that FAIL the test.
-                Include comments explaining the test."""
-            }]
-        )
-
-        return response.choices[0].message.content
-```
-
-## Intelligent Code Review
-
-```python
-class DBTReviewer:
-    def __init__(self, llm_client: AIFoundryClient):
-        self.llm = llm_client
-
-    async def review_model(self, sql_content: str) -> dict:
-        """Review a dbt model for best practices."""
-
-        response = await self.llm.chat.complete_async(
-            deployment="gpt-4o",
-            messages=[{
-                "role": "system",
-                "content": """You are a senior data engineer reviewing dbt code.
-                Check for:
-                - Performance issues (full table scans, missing filters on incrementals)
-                - Best practice violations
-                - Potential bugs
-                - Readability improvements
-                - Missing tests"""
-            }, {
-                "role": "user",
-                "content": f"""Review this dbt model:
-
-                ```sql
-                {sql_content}
-                ```
-
-                Return JSON:
-                {{
-                    "score": 1-10,
-                    "issues": [
-                        {{"severity": "high|medium|low", "type": "performance|bug|style|best_practice", "description": "issue description", "suggestion": "how to fix", "line": line_number_or_null}}
-                    ],
-                    "positive_aspects": ["things done well"],
-                    "suggested_refactor": "improved code if significant changes needed"
-                }}"""
-            }]
-        )
-
-        return json.loads(response.choices[0].message.content)
-```
-
-## Integration with dbt CLI
-
-```python
-import subprocess
+# dbt_draft.py
 import os
 
-class DBTAIWorkflow:
-    def __init__(self, project_path: str, llm_client: AIFoundryClient):
-        self.project_path = project_path
-        self.generator = DBTModelGenerator(llm_client, project_path)
-        self.doc_generator = DBTDocGenerator(llm_client)
-        self.test_generator = DBTTestGenerator(llm_client)
-        self.reviewer = DBTReviewer(llm_client)
+from openai import AzureOpenAI
+from pydantic import BaseModel
 
-    async def create_model_workflow(self, requirements: str, sources: list[dict]):
-        """Complete workflow for creating a new model."""
 
-        # 1. Generate model
-        print("Generating model...")
-        model = await self.generator.generate_model(requirements, sources)
+class ColumnDoc(BaseModel):
+    name: str
+    description: str
+    data_tests: list[str]  # only "not_null" or "unique"
 
-        # 2. Save model
-        model_path = self.generator.save_model(model)
-        print(f"Model saved to: {model_path}")
 
-        # 3. Review generated code
-        print("Reviewing generated code...")
-        review = await self.reviewer.review_model(model["sql"])
-        if review["score"] < 7:
-            print(f"Warning: Model scored {review['score']}/10")
-            for issue in review["issues"]:
-                print(f"  - [{issue['severity']}] {issue['description']}")
+class DbtModelDraft(BaseModel):
+    model_name: str
+    layer: str  # "staging", "intermediate" or "marts"
+    grain: str  # one sentence: what one row represents
+    sql: str
+    model_description: str
+    columns: list[ColumnDoc]
+    assumptions: list[str]  # things the reviewer must confirm
 
-        # 4. Generate tests
-        print("Generating tests...")
-        tests = await self.test_generator.suggest_tests(model["sql"], model["model_name"])
 
-        # 5. Compile and test
-        print("Compiling model...")
-        result = subprocess.run(
-            ["dbt", "compile", "--select", model["model_name"]],
-            cwd=self.project_path,
-            capture_output=True
-        )
+SYSTEM_PROMPT = """You write dbt models for a project on dbt Core 1.9.
+Rules:
+- Select only from the upstream models listed by the user, using ref().
+- Use only columns that appear in the upstream column lists.
+- Use CTEs, lower-case SQL, and the prefixes stg_, int_, fct_, dim_.
+- Generate surrogate keys with dbt_utils.generate_surrogate_key.
+- Use only not_null and unique in data_tests.
+- State the grain in one sentence. Every column that makes up the grain
+  gets not_null; the surrogate key gets unique and not_null.
+- Put anything you had to guess in assumptions. Do not invent columns."""
 
-        if result.returncode != 0:
-            print(f"Compilation failed: {result.stderr.decode()}")
+client = AzureOpenAI(
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],  # https://<your-resource-name>.openai.azure.com
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2024-10-21",
+)
 
-        return {
-            "model": model,
-            "review": review,
-            "tests": tests,
-            "compiled": result.returncode == 0
-        }
+
+def draft_model(requirement: str, upstream: str, feedback: str = "") -> DbtModelDraft:
+    user_content = f"Requirement:\n{requirement}\n\nUpstream models and columns:\n{upstream}"
+    if feedback:
+        user_content += f"\n\nYour previous draft failed dbt build with:\n{feedback}\nFix it."
+
+    completion = client.beta.chat.completions.parse(
+        model="<your-gpt-4o-deployment>",  # a gpt-4o 2024-08-06 deployment
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_content},
+        ],
+        response_format=DbtModelDraft,
+        temperature=0,
+    )
+    draft = completion.choices[0].message.parsed
+    if draft is None:
+        raise RuntimeError(f"Model refused: {completion.choices[0].message.refusal}")
+    return draft
 ```
 
-## Best Practices
+Two prompt rules do most of the work. "Use only columns that appear in the upstream column lists" cuts down invented columns, and the `assumptions` field gives the model somewhere honest to put guesses instead of burying them in the SQL. The grain sentence matters more than it looks: if the model can't state the grain clearly, the requirement was ambiguous, and no amount of retrying will fix that.
 
-1. **Human review required**: AI-generated models are starting points
-2. **Validate logic**: Check business rules are correctly implemented
-3. **Test thoroughly**: AI can miss edge cases
-4. **Iterate**: Use AI for quick iterations, refine manually
-5. **Version control**: Track AI-generated vs. human-modified code
+For the `upstream` text, don't hand-type column lists. Pull them from `target/catalog.json` after `dbt docs generate`, which records the columns the warehouse actually has. `manifest.json` only knows the columns you documented in YAML.
 
-AI accelerates dbt development but doesn't replace data engineering expertise. Use it to handle boilerplate and documentation while focusing your expertise on business logic and optimization.
+The surrogate key rule assumes `dbt_utils` is already in your `packages.yml` and installed with `dbt deps`; otherwise the very first build fails on an undefined macro. The data test rule is a scope decision too. A `list[str]` can't carry the arguments that `accepted_values` or `relationships` need, and a bare `accepted_values` fails `dbt build` with an error that wastes the one retry, so parameterised tests stay with the human reviewer.
+
+## Writing files without trusting the model
+
+The model chooses the file name, so treat it as untrusted input. Restrict the layer to known folders, refuse to overwrite existing files, and write YAML with a YAML library rather than string concatenation. Since dbt 1.8 the column-level key is `data_tests:`. The old `tests:` key is still accepted for backward compatibility (1.8 warned about it; 1.9 renames it silently), so generate the new spelling.
+
+```python
+# write_draft.py
+import re
+from pathlib import Path
+
+import yaml
+
+from dbt_draft import DbtModelDraft
+
+ALLOWED_LAYERS = {"staging", "intermediate", "marts"}
+NAME_PATTERN = re.compile(r"^(stg|int|fct|dim)_[a-z0-9_]+$")
+
+
+def write_draft(draft: DbtModelDraft, project_dir: Path) -> Path:
+    if draft.layer not in ALLOWED_LAYERS:
+        raise ValueError(f"Unexpected layer: {draft.layer}")
+    if not NAME_PATTERN.match(draft.model_name):
+        raise ValueError(f"Model name breaks conventions: {draft.model_name}")
+
+    folder = project_dir / "models" / draft.layer
+    folder.mkdir(parents=True, exist_ok=True)
+    sql_path = folder / f"{draft.model_name}.sql"
+    yml_path = folder / f"_{draft.model_name}.yml"
+    if sql_path.exists() or yml_path.exists():
+        raise FileExistsError(f"{draft.model_name} already exists; refusing to overwrite")
+
+    header = f"-- grain: {draft.grain}\n-- drafted by Azure OpenAI; review assumptions in the PR\n\n"
+    sql_path.write_text(header + draft.sql.strip() + "\n", encoding="utf-8")
+
+    properties = {
+        "version": 2,
+        "models": [{
+            "name": draft.model_name,
+            "description": draft.model_description,
+            "columns": [
+                {"name": c.name, "description": c.description, "data_tests": c.data_tests}
+                for c in draft.columns
+            ],
+        }],
+    }
+    yml_path.write_text(yaml.safe_dump(properties, sort_keys=False), encoding="utf-8")
+    return sql_path
+```
+
+One properties file per model avoids the classic problem of a generator appending to a shared `schema.yml` and corrupting it. It also makes the pull request diff easy to read.
+
+## Let dbt be the judge
+
+dbt Core has had a supported Python entry point, `dbtRunner`, since 1.5, so there is no need to shell out and scrape stdout. `dbt build --select <model>` compiles the model, runs it and then runs its data tests, which is exactly the evidence we want. Point it at a dev target with a sample of data; you do not want a generator materialising tables in production. Make that dev schema disposable, ideally one per run that you drop afterwards: the repair step below deletes the failed draft's files, but the table or view it built stays in the schema, and if the retry picks a different model name it is left orphaned.
+
+```python
+# generate.py
+from pathlib import Path
+
+from dbt.cli.main import dbtRunner
+
+from dbt_draft import draft_model
+from write_draft import write_draft
+
+PROJECT_DIR = Path("<path-to-your-dbt-project>")
+
+
+def build(model_name: str) -> tuple[bool, str]:
+    res = dbtRunner().invoke([
+        "build", "--select", model_name,
+        "--project-dir", str(PROJECT_DIR), "--target", "dev",
+    ])
+    if res.exception is not None:
+        return False, str(res.exception)
+    failures = [
+        f"{r.node.name}: {r.status} {r.message or ''}"
+        for r in res.result
+        if str(r.status) in ("error", "fail")
+    ]
+    return res.success, "\n".join(failures)
+
+
+def generate(requirement: str, upstream: str) -> None:
+    draft = draft_model(requirement, upstream)
+    sql_path = write_draft(draft, PROJECT_DIR)
+    ok, feedback = build(draft.model_name)
+
+    if not ok:
+        # One repair attempt only. A second failure means the requirement needs a human.
+        # The failed draft's relation stays in the dev schema; drop that schema after the run.
+        sql_path.unlink()
+        sql_path.with_name(f"_{draft.model_name}.yml").unlink()
+        draft = draft_model(requirement, upstream, feedback)
+        sql_path = write_draft(draft, PROJECT_DIR)
+        ok, feedback = build(draft.model_name)
+
+    print(f"{draft.model_name}: {'passed' if ok else 'FAILED'} dbt build")
+    print("Assumptions to confirm in review:")
+    for item in draft.assumptions:
+        print(f"  - {item}")
+    if not ok:
+        print(feedback)
+```
+
+The single retry is deliberate. Compile and database errors, such as a bad `ref()` or a misspelled column, come back with a precise dbt message, and in my experience those are the ones worth one retry. A failing `unique` test is different: it usually means the grain is wrong or an upstream join fans out, and a model that keeps retrying will "fix" it by adding `distinct`, which hides the bug. Stop, and give the engineer the failure plus the assumptions list.
+
+## Where this goes wrong
+
+Passing `dbt build` proves the SQL runs and the generated tests pass. It does not prove the tests are the right ones, and the model wrote both. A few failure modes to watch:
+
+- **Self-graded tests.** If the model gets the grain wrong, it will put `unique` on the wrong key and the test will pass. Reviewers should check the grain comment and the key tests before reading anything else.
+- **Left joins that should be inner joins**, or the reverse. Row counts against the upstream model are the cheapest check; a [dbt unit test](https://docs.getdbt.com/docs/build/unit-tests) (new in 1.8) on a handful of hand-written rows is the strongest.
+- **Incremental logic.** Generated `is_incremental()` filters are often subtly wrong around late-arriving data. For new models I'd have the generator default to `table` and let a human decide when a model earns incremental materialisation. If you are on 1.9 and want incremental, the new `microbatch` strategy is easier to review than a hand-written filter.
+- **Data in the feedback.** dbt error messages can quote values from your warehouse, such as a value that failed a cast. Trim or redact the feedback before it goes back into the prompt, especially when the dev target holds real customer data.
+- **Metric definitions.** "Revenue" means something specific in your business. The model will pick a plausible column. Put metric definitions in the prompt or keep metric models out of scope.
+
+## When not to bother
+
+Don't build this for a project with a dozen models; the prompt engineering will cost more than writing the SQL. Don't use it for marts that encode contested business rules, because the draft will look authoritative and anchor the discussion. And don't skip the dev target: a generator that can `dbt build` against production is a generator that can overwrite a production table.
+
+Where it does pay off is the repetitive middle of a dbt project: staging models over dozens of source tables, documentation for columns nobody described, and baseline `not_null` and `unique` tests on keys. That work follows conventions, dbt can verify it, and a reviewer can check it in minutes.
+
+## The decision
+
+Use dbt Copilot if you are on dbt Cloud Enterprise and are comfortable with its beta status and with dbt Labs managing the LLM connection. Build your own loop when you need your own Azure OpenAI resource, dbt Core, or pipeline automation. Either way, keep the rule that makes it safe: the model drafts, dbt judges, and a person who understands the business signs off on the grain.
