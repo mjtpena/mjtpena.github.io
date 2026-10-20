@@ -1,6 +1,6 @@
 ---
-title: "Agentic RAG Patterns: Self-Correcting and Adaptive Retrieval"
-description: "When RAG systems can reason about what to retrieve, they stop failing silently. My implementations of agentic RAG show how to add evaluation and iterative…"
+title: "Self-Correcting RAG: Grade Retrieval Before You Answer"
+description: "How to add retrieval grading, query rewriting, and groundedness checks to RAG on Azure OpenAI and Azure AI Search without tripling latency or cost."
 author: Michael John Peña
 draft: false
 date: 2024-01-08
@@ -8,619 +8,221 @@ tags:
   - RAG
   - AI Agents
   - Azure OpenAI
-  - LangChain
-  - Advanced AI
+  - Azure AI Search
+  - Python
 ---
 
-When RAG systems can reason about what to retrieve, they stop failing silently. My implementations of agentic RAG show how to add evaluation and iterative retrieval without exploding costs—these patterns have reduced retrieval errors in production workloads.
+A standard RAG pipeline retrieves once and generates once, whatever comes back. When retrieval misses, the model doesn't say "I couldn't find it". It writes a confident answer from whatever loosely related chunks it was handed, and nobody notices until a user does. The fix is to let the system check its own work: grade what it retrieved, try again when the evidence is weak, and verify the answer against the sources before returning it.
 
-## The Evolution from Static to Agentic RAG
+That idea gets called "agentic" RAG, and it's easy to overbuild. This post covers the self-correcting loop I'd actually put in front of users, where it pays for itself, and where it doesn't.
 
+## Where the idea comes from
+
+Two research threads from 2023 are worth knowing because they frame the design choices.
+
+[Self-RAG](https://arxiv.org/abs/2310.11511) (Asai et al., October 2023) trains a language model to emit special "reflection tokens" that decide whether to retrieve at all, judge whether each retrieved passage is relevant, and critique whether its own output is supported by the evidence. The important detail: Self-RAG is a fine-tuned model (7B and 13B Llama 2 variants), not a prompting trick. You can't switch it on in GPT-4. What you can do is borrow its structure, using separate prompted calls for "is this relevant?" and "is this answer supported?".
+
+[FLARE](https://arxiv.org/abs/2305.06983) (Jiang et al., EMNLP 2023) takes a different angle. It drafts the next sentence, and when the draft contains low-confidence tokens it uses that draft as a new retrieval query. It's clever, but it depends on token probabilities and many retrieval rounds per answer, which makes it a poor fit for a chat endpoint with a latency budget.
+
+My take: the useful, production-ready part of this research is the *evaluate, then decide* loop. Training your own reflection model, or retrieving on every sentence, is research territory for most enterprise teams right now.
+
+## The loop
+
+```text
+question
+   │
+   ▼
+retrieve (hybrid + semantic ranker)
+   │
+   ▼
+grade evidence ──── weak ───► rewrite query ──► retrieve again (max 2 rounds)
+   │ strong                                          │
+   ▼                                                 ▼
+generate with citations                     still weak → say "I don't know"
+   │
+   ▼
+groundedness check ── unsupported ──► regenerate once, or return with a warning
+   │ supported
+   ▼
+answer
 ```
-Static RAG:     Query → Retrieve → Generate → Done
 
-Agentic RAG:    Query → Plan → Retrieve → Evaluate →
-                        ↓                      ↓
-                   Sufficient?  ←  No  ←  Refine
-                        ↓ Yes
-                    Generate → Validate → Done
-```
+Three decisions drive this design.
 
-## Pattern 1: Self-RAG (Self-Reflective RAG)
+**Grade cheaply first.** If you use Azure AI Search with [semantic ranker](https://learn.microsoft.com/azure/search/semantic-search-overview) (generally available since November 2023), each result already comes back with a `@search.reranker_score` from 0 to 4. That score is a free relevance signal, computed by a cross-encoder-style model, and it's comparable across queries in a way that BM25 and vector similarity scores are not. I use it as the first gate: clearly strong results skip the LLM grader, clearly weak ones go straight to a rewrite, and only the middle band pays for a GPT-4 Turbo call. The thresholds (I start at 2.0 and 1.0) are tuning parameters; set them from your own labelled queries, not from this post.
 
-The model evaluates its own retrieval and generation:
+**Cap the iterations.** Every retry is another embedding call, another search, and another grading call. Two retrieval rounds is my default ceiling. If two reformulations of the question can't find evidence, a third rarely will, and the honest answer is that the knowledge base doesn't cover it.
+
+**Make "I don't know" a first-class outcome.** The point of grading isn't only to retry. It's to stop. A system that refuses on weak evidence is more useful than one that always answers, especially for policy, HR, or compliance content where a wrong answer has consequences.
+
+## An implementation on Azure OpenAI and Azure AI Search
+
+The code below uses the `openai` 1.x Python library's `AsyncAzureOpenAI` client and the async `SearchClient` from `azure-search-documents` 11.4.0 (install `aiohttp` too, the async client needs it). The grader uses [JSON mode](https://learn.microsoft.com/azure/ai-services/openai/how-to/json-mode), which on Azure OpenAI requires a GPT-4 Turbo `1106-preview` deployment and API version `2023-12-01-preview` or later. JSON mode also requires the word "JSON" to appear in the messages, which the prompts below include.
+
+It assumes an index with `content` and `title` fields, a `content_vector` field, and a semantic configuration named `default`. Deployment and resource names are placeholders.
 
 ```python
-from dataclasses import dataclass
-from enum import Enum
-from typing import Optional
+import asyncio
+import json
+import os
 
-class RetrievalQuality(Enum):
-    RELEVANT = "relevant"
-    PARTIALLY_RELEVANT = "partially_relevant"
-    NOT_RELEVANT = "not_relevant"
+from azure.core.credentials import AzureKeyCredential
+from azure.search.documents.aio import SearchClient
+from azure.search.documents.models import VectorizedQuery
+from openai import AsyncAzureOpenAI
 
-class GenerationQuality(Enum):
-    SUPPORTED = "supported"
-    PARTIALLY_SUPPORTED = "partially_supported"
-    NOT_SUPPORTED = "not_supported"
+CHAT_DEPLOYMENT = "<your-gpt-4-turbo-deployment>"
+EMBEDDING_DEPLOYMENT = "<your-ada-002-deployment>"
+STRONG, WEAK = 2.0, 1.0  # semantic reranker score thresholds (0-4 scale)
+MAX_ROUNDS = 2
 
-@dataclass
-class SelfRAGResult:
-    response: str
-    retrieval_quality: RetrievalQuality
-    generation_quality: GenerationQuality
-    iterations: int
-    contexts_used: list[dict]
+aoai = AsyncAzureOpenAI(
+    azure_endpoint="https://<your-openai-resource>.openai.azure.com",
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2023-12-01-preview",
+)
+search = SearchClient(
+    endpoint="https://<your-search-service>.search.windows.net",
+    index_name="<your-index>",
+    credential=AzureKeyCredential(os.environ["AZURE_SEARCH_API_KEY"]),
+)
 
-class SelfRAG:
-    def __init__(self, retriever, llm_client, max_iterations: int = 3):
-        self.retriever = retriever
-        self.llm = llm_client
-        self.max_iterations = max_iterations
 
-    async def query(self, question: str) -> SelfRAGResult:
-        """Execute self-reflective RAG."""
+async def retrieve(query: str, top: int = 5) -> list[dict]:
+    emb = await aoai.embeddings.create(model=EMBEDDING_DEPLOYMENT, input=query)
+    vq = VectorizedQuery(
+        vector=emb.data[0].embedding, k_nearest_neighbors=50, fields="content_vector"
+    )
+    results = await search.search(
+        search_text=query,
+        vector_queries=[vq],
+        query_type="semantic",
+        semantic_configuration_name="default",
+        select=["title", "content"],
+        top=top,
+    )
+    return [
+        {"title": r["title"], "content": r["content"],
+         "score": r["@search.reranker_score"] or 0.0}
+        async for r in results
+    ]
 
-        for iteration in range(self.max_iterations):
-            # Step 1: Retrieve
-            contexts = await self.retriever.retrieve(question)
 
-            # Step 2: Evaluate retrieval quality
-            retrieval_quality = await self._evaluate_retrieval(question, contexts)
+async def ask_json(system: str, user: str) -> dict:
+    resp = await aoai.chat.completions.create(
+        model=CHAT_DEPLOYMENT,
+        response_format={"type": "json_object"},
+        temperature=0,
+        messages=[{"role": "system", "content": system},
+                  {"role": "user", "content": user}],
+    )
+    return json.loads(resp.choices[0].message.content)
 
-            if retrieval_quality == RetrievalQuality.NOT_RELEVANT:
-                # Refine query and retry
-                question = await self._refine_query(question, contexts)
-                continue
 
-            # Step 3: Generate response
-            response = await self._generate(question, contexts)
-
-            # Step 4: Evaluate generation quality (groundedness)
-            generation_quality = await self._evaluate_generation(
-                question, response, contexts
-            )
-
-            if generation_quality == GenerationQuality.SUPPORTED:
-                return SelfRAGResult(
-                    response=response,
-                    retrieval_quality=retrieval_quality,
-                    generation_quality=generation_quality,
-                    iterations=iteration + 1,
-                    contexts_used=contexts
-                )
-
-            # If not supported, try again with refined approach
-            question = await self._refine_query(question, contexts)
-
-        # Max iterations reached, return best effort
-        return SelfRAGResult(
-            response=response,
-            retrieval_quality=retrieval_quality,
-            generation_quality=generation_quality,
-            iterations=self.max_iterations,
-            contexts_used=contexts
+async def grade(question: str, docs: list[dict]) -> list[dict]:
+    """Keep strong docs, drop weak ones, ask the model about the middle band."""
+    kept = [d for d in docs if d["score"] >= STRONG]
+    for d in (d for d in docs if WEAK <= d["score"] < STRONG):
+        verdict = await ask_json(
+            'Decide if the passage helps answer the question. '
+            'Reply in JSON: {"relevant": true} or {"relevant": false}.',
+            f"Question: {question}\n\nPassage:\n{d['content']}",
         )
+        if verdict.get("relevant") is True:
+            kept.append(d)
+    return kept
 
-    async def _evaluate_retrieval(
-        self,
-        question: str,
-        contexts: list[dict]
-    ) -> RetrievalQuality:
-        """Evaluate if retrieved contexts are relevant."""
 
-        context_summaries = "\n".join([
-            f"- {c['content'][:200]}..."
-            for c in contexts
-        ])
+async def rewrite(question: str, attempt: str) -> str:
+    out = await ask_json(
+        "The search query below did not find relevant documents. Rewrite it as a "
+        "single, more specific search query using likely document terminology. "
+        'Reply in JSON: {"query": "..."}.',
+        f"Original question: {question}\nLast query: {attempt}",
+    )
+    return out.get("query", question)
 
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """Evaluate if the retrieved contexts are relevant to answer the question.
-                    Return ONLY one of: RELEVANT, PARTIALLY_RELEVANT, NOT_RELEVANT"""
-                },
-                {
-                    "role": "user",
-                    "content": f"Question: {question}\n\nContexts:\n{context_summaries}"
-                }
-            ],
-            max_tokens=20
-        )
 
-        result = response.choices[0].message.content.strip().upper()
+async def generate(question: str, docs: list[dict]) -> str:
+    sources = "\n\n".join(f"[{i + 1}] {d['title']}\n{d['content']}" for i, d in enumerate(docs))
+    resp = await aoai.chat.completions.create(
+        model=CHAT_DEPLOYMENT,
+        temperature=0,
+        messages=[
+            {"role": "system", "content": "Answer only from the numbered sources. "
+             "Cite them like [1]. If they don't contain the answer, say so."},
+            {"role": "user", "content": f"Sources:\n{sources}\n\nQuestion: {question}"},
+        ],
+    )
+    return resp.choices[0].message.content
 
-        mapping = {
-            "RELEVANT": RetrievalQuality.RELEVANT,
-            "PARTIALLY_RELEVANT": RetrievalQuality.PARTIALLY_RELEVANT,
-            "NOT_RELEVANT": RetrievalQuality.NOT_RELEVANT
-        }
 
-        return mapping.get(result, RetrievalQuality.PARTIALLY_RELEVANT)
+async def is_grounded(answer: str, docs: list[dict]) -> bool:
+    sources = "\n\n".join(d["content"] for d in docs)
+    out = await ask_json(
+        "Check every factual claim in the answer against the sources. "
+        'Reply in JSON: {"supported": true} only if all claims are supported, '
+        'otherwise {"supported": false}.',
+        f"Sources:\n{sources}\n\nAnswer:\n{answer}",
+    )
+    return out.get("supported") is True
 
-    async def _evaluate_generation(
-        self,
-        question: str,
-        response: str,
-        contexts: list[dict]
-    ) -> GenerationQuality:
-        """Evaluate if response is grounded in contexts."""
 
-        context_text = "\n\n".join([c["content"] for c in contexts])
+async def answer(question: str) -> dict:
+    query, evidence = question, []
+    for round_no in range(1, MAX_ROUNDS + 1):
+        evidence = await grade(question, await retrieve(query))
+        if evidence:
+            break
+        query = await rewrite(question, query)
+    if not evidence:
+        return {"answer": "I couldn't find this in the knowledge base.", "rounds": round_no}
 
-        eval_response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """Evaluate if the response is supported by the provided contexts.
-                    Check each claim in the response against the contexts.
-                    Return ONLY one of: SUPPORTED, PARTIALLY_SUPPORTED, NOT_SUPPORTED"""
-                },
-                {
-                    "role": "user",
-                    "content": f"""Question: {question}
+    draft = await generate(question, evidence)
+    grounded = await is_grounded(draft, evidence)
+    return {"answer": draft, "grounded": grounded, "rounds": round_no}
 
-Response to evaluate:
-{response}
 
-Available contexts:
-{context_text}"""
-                }
-            ],
-            max_tokens=20
-        )
+async def main() -> None:
+    try:
+        print(await answer("<a question your index should be able to answer>"))
+    finally:
+        await search.close()
+        await aoai.close()
 
-        result = eval_response.choices[0].message.content.strip().upper()
 
-        mapping = {
-            "SUPPORTED": GenerationQuality.SUPPORTED,
-            "PARTIALLY_SUPPORTED": GenerationQuality.PARTIALLY_SUPPORTED,
-            "NOT_SUPPORTED": GenerationQuality.NOT_SUPPORTED
-        }
-
-        return mapping.get(result, GenerationQuality.PARTIALLY_SUPPORTED)
-
-    async def _refine_query(self, original: str, contexts: list[dict]) -> str:
-        """Refine query based on retrieval gaps."""
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """The original query didn't retrieve relevant results.
-                    Rewrite it to be more specific or try alternative phrasings.
-                    Return ONLY the refined query."""
-                },
-                {
-                    "role": "user",
-                    "content": f"Original query: {original}"
-                }
-            ],
-            max_tokens=100
-        )
-
-        return response.choices[0].message.content.strip()
-
-    async def _generate(self, question: str, contexts: list[dict]) -> str:
-        """Generate response from contexts."""
-
-        context_text = "\n\n".join([
-            f"[Source {i+1}]: {c['content']}"
-            for i, c in enumerate(contexts)
-        ])
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """Answer the question based ONLY on the provided contexts.
-                    Cite sources using [Source N] format.
-                    If the contexts don't contain the answer, say so."""
-                },
-                {
-                    "role": "user",
-                    "content": f"Contexts:\n{context_text}\n\nQuestion: {question}"
-                }
-            ]
-        )
-
-        return response.choices[0].message.content
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
-## Pattern 2: CRAG (Corrective RAG)
+A few things in there are deliberate.
 
-Corrective RAG explicitly corrects retrieval failures:
+The grader always judges the passage against the *original* question, even after a rewrite. Rewritten queries drift, and grading against the drifted query lets irrelevant results in. The rewriter also sees its previous attempt so it doesn't produce the same query twice.
 
-```python
-class CorrectiveRAG:
-    def __init__(
-        self,
-        retriever,
-        web_search,
-        llm_client,
-        relevance_threshold: float = 0.7
-    ):
-        self.retriever = retriever
-        self.web_search = web_search
-        self.llm = llm_client
-        self.threshold = relevance_threshold
+The grounded flag is returned rather than acted on. What you do with an unsupported answer is a product decision: regenerate once with a stricter prompt, show it with a "couldn't verify" label, or suppress it. I lean towards labelling, because silent regeneration hides the signal you need for tuning. Log it either way.
 
-    async def query(self, question: str) -> str:
-        """Execute CRAG with web search fallback."""
+Grading the middle band runs one call per document sequentially, which keeps the example readable. In production, run those calls with `asyncio.gather` so grading latency is one model call, not five.
 
-        # Initial retrieval
-        contexts = await self.retriever.retrieve(question)
+## What it costs
 
-        # Score each context
-        scored_contexts = await self._score_contexts(question, contexts)
+| Path | Model calls | When it happens |
+|---|---|---|
+| Strong first retrieval | 1 embedding, 1 generation, 1 groundedness check | Most well-covered questions |
+| Middle-band grading | Adds up to 5 grading calls (parallelisable) | Ambiguous queries |
+| Rewrite and retry | Adds 1 rewrite, 1 embedding, 1 search, plus grading | Vocabulary mismatch |
+| Nothing found | No generation at all | Out-of-scope questions |
 
-        # Separate by relevance
-        relevant = [c for c in scored_contexts if c["score"] >= self.threshold]
-        ambiguous = [c for c in scored_contexts if 0.3 <= c["score"] < self.threshold]
-        irrelevant = [c for c in scored_contexts if c["score"] < 0.3]
+The groundedness check is the cost you pay on every request, and it roughly doubles the GPT-4 Turbo tokens because it re-reads the sources. If that's too much, sample it (check 10–20% of traffic) and use the results to monitor quality rather than to gate each answer. Prompt flow's built-in [evaluation flows](https://learn.microsoft.com/azure/machine-learning/prompt-flow/how-to-bulk-test-evaluate-flow) can run the same groundedness and relevance metrics in bulk against a test set, which is where I'd validate the thresholds before trusting the loop online.
 
-        # Decide action based on results
-        if len(relevant) >= 2:
-            # Enough relevant results - proceed normally
-            return await self._generate(question, relevant)
+## When not to do this
 
-        elif len(relevant) + len(ambiguous) >= 2:
-            # Some relevant + ambiguous - use both but weight appropriately
-            all_contexts = relevant + ambiguous
-            # Refine ambiguous contexts
-            refined = await self._refine_contexts(question, ambiguous)
-            return await self._generate(question, relevant + refined)
+- **Your retrieval is the problem.** If hybrid search and semantic ranker aren't in place yet, fix that first. A grading loop over poor retrieval just retries poor retrieval. I laid out that ordering in [A RAG Maturity Model](/blog/2024-01-06-rag-architecture-maturity/); self-correction sits on top of Level 3, not in place of it.
+- **Most questions are simple lookups.** If logs show nearly every query is answered by the first retrieval, the loop adds a groundedness call and buys little. Keep the reranker-score threshold and the "I don't know" path, and skip the rest.
+- **Tight latency budgets.** Each retry adds a full embedding, search, and grading round trip. For a voice or type-ahead experience, a single well-tuned retrieval with a refusal threshold beats a smarter but slower loop.
+- **Multi-hop questions.** Comparisons and "how does X differ from Y" need decomposition into several sub-queries, not a retry of one query. That's a different pattern, covered in the query-aware retrieval level of the maturity post.
 
-        else:
-            # Not enough from knowledge base - use web search
-            web_results = await self._web_search_fallback(question)
+I'd also be cautious about adding web search as a fallback when the knowledge base comes up empty. It sounds helpful, but for internal policy content it changes what the system is: answers stop being traceable to approved sources, and you've introduced a new data flow your security team will want to review. Saying "not in the knowledge base" is usually the right behaviour.
 
-            # Combine with any relevant KB results
-            combined = relevant + web_results
+## The short version
 
-            if not combined:
-                return "I don't have enough information to answer this question."
-
-            return await self._generate(question, combined, include_web_disclaimer=True)
-
-    async def _score_contexts(
-        self,
-        question: str,
-        contexts: list[dict]
-    ) -> list[dict]:
-        """Score context relevance."""
-
-        scored = []
-
-        for ctx in contexts:
-            response = await self.llm.chat.completions.create(
-                model="gpt-4-turbo",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": """Rate how relevant this context is for answering the question.
-                        Return a score from 0.0 to 1.0 and nothing else."""
-                    },
-                    {
-                        "role": "user",
-                        "content": f"Question: {question}\n\nContext: {ctx['content']}"
-                    }
-                ],
-                max_tokens=10
-            )
-
-            try:
-                score = float(response.choices[0].message.content.strip())
-            except:
-                score = 0.5
-
-            scored.append({**ctx, "score": score})
-
-        return scored
-
-    async def _refine_contexts(
-        self,
-        question: str,
-        contexts: list[dict]
-    ) -> list[dict]:
-        """Extract relevant portions from ambiguous contexts."""
-
-        refined = []
-
-        for ctx in contexts:
-            response = await self.llm.chat.completions.create(
-                model="gpt-4-turbo",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": """Extract only the parts of this context that are relevant
-                        to answering the question. Return the relevant excerpt or 'NONE'."""
-                    },
-                    {
-                        "role": "user",
-                        "content": f"Question: {question}\n\nContext: {ctx['content']}"
-                    }
-                ]
-            )
-
-            excerpt = response.choices[0].message.content
-
-            if excerpt.strip().upper() != "NONE":
-                refined.append({
-                    "content": excerpt,
-                    "source": ctx.get("source", "refined"),
-                    "score": ctx["score"]
-                })
-
-        return refined
-
-    async def _web_search_fallback(self, question: str) -> list[dict]:
-        """Search web for additional context."""
-
-        results = await self.web_search.search(question, num_results=5)
-
-        contexts = []
-        for result in results:
-            contexts.append({
-                "content": result["snippet"],
-                "source": result["url"],
-                "score": 0.8,  # Web results get reasonable default score
-                "is_web": True
-            })
-
-        return contexts
-
-    async def _generate(
-        self,
-        question: str,
-        contexts: list[dict],
-        include_web_disclaimer: bool = False
-    ) -> str:
-        """Generate response from contexts."""
-
-        context_text = "\n\n".join([
-            f"[{c.get('source', 'KB')}]: {c['content']}"
-            for c in contexts
-        ])
-
-        system_prompt = """Answer based on the provided contexts. Cite sources."""
-
-        if include_web_disclaimer:
-            system_prompt += "\nNote: Some information comes from web search and may need verification."
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Contexts:\n{context_text}\n\nQuestion: {question}"}
-            ]
-        )
-
-        return response.choices[0].message.content
-```
-
-## Pattern 3: Adaptive RAG
-
-Choose retrieval strategy based on query complexity:
-
-```python
-from enum import Enum
-
-class QueryComplexity(Enum):
-    SIMPLE = "simple"  # Direct factual question
-    MODERATE = "moderate"  # Requires some reasoning
-    COMPLEX = "complex"  # Multi-hop, comparison, synthesis
-
-class AdaptiveRAG:
-    def __init__(self, retriever, llm_client):
-        self.retriever = retriever
-        self.llm = llm_client
-
-    async def query(self, question: str) -> str:
-        """Execute adaptive RAG based on query complexity."""
-
-        # Classify query complexity
-        complexity = await self._classify_complexity(question)
-
-        if complexity == QueryComplexity.SIMPLE:
-            return await self._simple_rag(question)
-
-        elif complexity == QueryComplexity.MODERATE:
-            return await self._iterative_rag(question)
-
-        else:  # COMPLEX
-            return await self._multi_hop_rag(question)
-
-    async def _classify_complexity(self, question: str) -> QueryComplexity:
-        """Classify query complexity."""
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """Classify the query complexity:
-                    - SIMPLE: Direct factual question, single retrieval sufficient
-                    - MODERATE: Requires some reasoning or aggregation
-                    - COMPLEX: Multi-hop reasoning, comparison, or synthesis
-
-                    Return ONLY: SIMPLE, MODERATE, or COMPLEX"""
-                },
-                {"role": "user", "content": question}
-            ],
-            max_tokens=10
-        )
-
-        result = response.choices[0].message.content.strip().upper()
-
-        mapping = {
-            "SIMPLE": QueryComplexity.SIMPLE,
-            "MODERATE": QueryComplexity.MODERATE,
-            "COMPLEX": QueryComplexity.COMPLEX
-        }
-
-        return mapping.get(result, QueryComplexity.MODERATE)
-
-    async def _simple_rag(self, question: str) -> str:
-        """Single-shot retrieval and generation."""
-
-        contexts = await self.retriever.retrieve(question, top_k=3)
-        return await self._generate(question, contexts)
-
-    async def _iterative_rag(self, question: str, max_iterations: int = 2) -> str:
-        """Retrieve, generate, check, refine if needed."""
-
-        all_contexts = []
-
-        for i in range(max_iterations):
-            contexts = await self.retriever.retrieve(question, top_k=5)
-            all_contexts.extend(contexts)
-
-            response = await self._generate(question, all_contexts)
-
-            # Check if answer is complete
-            is_complete = await self._check_completeness(question, response)
-
-            if is_complete:
-                return response
-
-            # Generate follow-up query
-            question = await self._generate_followup(question, response)
-
-        return response
-
-    async def _multi_hop_rag(self, question: str) -> str:
-        """Decompose into sub-questions and aggregate."""
-
-        # Decompose
-        sub_questions = await self._decompose_question(question)
-
-        # Answer each sub-question
-        sub_answers = []
-        all_contexts = []
-
-        for sub_q in sub_questions:
-            contexts = await self.retriever.retrieve(sub_q, top_k=3)
-            all_contexts.extend(contexts)
-
-            sub_answer = await self._generate(sub_q, contexts)
-            sub_answers.append({
-                "question": sub_q,
-                "answer": sub_answer
-            })
-
-        # Synthesize final answer
-        return await self._synthesize(question, sub_answers, all_contexts)
-
-    async def _decompose_question(self, question: str) -> list[str]:
-        """Decompose complex question into sub-questions."""
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            response_format={"type": "json_object"},
-            messages=[
-                {
-                    "role": "system",
-                    "content": """Decompose this question into simpler sub-questions.
-                    Return JSON: {"sub_questions": ["q1", "q2", ...]}"""
-                },
-                {"role": "user", "content": question}
-            ]
-        )
-
-        result = json.loads(response.choices[0].message.content)
-        return result["sub_questions"]
-
-    async def _synthesize(
-        self,
-        original_question: str,
-        sub_answers: list[dict],
-        contexts: list[dict]
-    ) -> str:
-        """Synthesize sub-answers into final response."""
-
-        sub_qa_text = "\n\n".join([
-            f"Q: {sa['question']}\nA: {sa['answer']}"
-            for sa in sub_answers
-        ])
-
-        response = await self.llm.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """Synthesize the sub-answers into a comprehensive
-                    response to the original question."""
-                },
-                {
-                    "role": "user",
-                    "content": f"""Original question: {original_question}
-
-Sub-questions and answers:
-{sub_qa_text}
-
-Provide a comprehensive answer."""
-                }
-            ]
-        )
-
-        return response.choices[0].message.content
-```
-
-## Evaluation Metrics for Agentic RAG
-
-```python
-@dataclass
-class AgenticRAGMetrics:
-    answer_relevance: float
-    faithfulness: float  # Groundedness in retrieved context
-    context_precision: float  # % of retrieved contexts actually used
-    context_recall: float  # Did we retrieve all needed information
-    iterations: int
-    latency_ms: float
-
-async def evaluate_agentic_rag(
-    rag_system,
-    test_cases: list[dict]
-) -> list[AgenticRAGMetrics]:
-    """Evaluate agentic RAG on test cases."""
-
-    results = []
-
-    for case in test_cases:
-        start = time.time()
-
-        result = await rag_system.query(case["question"])
-
-        latency = (time.time() - start) * 1000
-
-        # Calculate metrics
-        metrics = AgenticRAGMetrics(
-            answer_relevance=await _score_relevance(case["question"], result.response),
-            faithfulness=await _score_faithfulness(result.response, result.contexts_used),
-            context_precision=await _score_precision(result.contexts_used, result.response),
-            context_recall=await _score_recall(case["expected_sources"], result.contexts_used),
-            iterations=result.iterations,
-            latency_ms=latency
-        )
-
-        results.append(metrics)
-
-    return results
-```
-
-## Conclusion
-
-Agentic RAG transforms retrieval from a static lookup to an intelligent process. Key patterns:
-
-1. **Self-RAG**: Model evaluates its own retrieval and generation
-2. **CRAG**: Explicit correction with fallback strategies
-3. **Adaptive RAG**: Strategy selection based on query complexity
-
-These patterns increase latency but significantly improve answer quality for complex queries. Use them when accuracy matters more than speed.
+Self-correcting RAG is mostly about adding two questions to the pipeline: "is this evidence good enough?" and "does the answer stick to it?". Answer the first with the semantic reranker score wherever you can, and only spend an LLM call on the cases it can't decide. Cap retries at two, treat "I don't know" as a success, and measure groundedness before you decide whether to gate on it. Leave the fully autonomous, plan-everything agent for the problems that need it.

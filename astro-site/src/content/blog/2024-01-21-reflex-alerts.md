@@ -1,425 +1,170 @@
 ---
-title: "Data Activator (Reflex) Alerts: Event-Driven Actions in Fabric"
-description: "Data Activator (Reflex) brought event-driven automation to Fabric. In projects where real-time alerts matter, I've used Reflex to reduce mean time to…"
+title: "Designing Reflex Triggers in Data Activator Without Alert Spam"
+description: "How Data Activator preview triggers really fire: objects, Is vs Becomes conditions, timers, Power Automate custom actions and the throughput limits to plan for."
 author: Michael John Peña
 draft: false
 date: 2024-01-21
 tags:
   - Data Activator
-  - Reflex
   - Microsoft Fabric
+  - Eventstreams
   - Alerts
-  - Automation
+  - Power Automate
 ---
 
-Data Activator (Reflex) brought event-driven automation to Fabric. In projects where real-time alerts matter, I've used Reflex to reduce mean time to detect; below are the core concepts and setup notes I rely on.
+Most bad alerting is a modelling problem rather than a tooling problem. People pick a threshold, wire it to an inbox, and a week later everyone has a mail rule that sends the alerts straight to a folder nobody reads. Data Activator, which has been in public preview in Microsoft Fabric since October 2023, makes it very easy to build that kind of alert in a few clicks. It also gives you the tools to avoid it, but only if you understand how a Reflex item decides when to fire.
 
-## Core Concepts
+I've used Reflex on projects where real-time alerts matter, and the questions I get are rarely "how do I connect it?". They are "why did it fire 40 times?" and "why didn't it fire at all?". This post is about the trigger design choices that answer both. If you want the broader picture of where Reflex sits in a streaming design, start with [my end-to-end Fabric real-time post](/blog/2024-01-18-fabric-realtime-intelligence/). For preview readiness and governance, see [the Data Activator preview post](/blog/2024-01-22-data-activator-preview/).
 
-Data Activator consists of:
-- **Objects**: Represent real-world entities (devices, customers, orders)
-- **Triggers**: Define conditions that activate actions
-- **Actions**: What happens when triggers fire (email, Teams, Power Automate)
+## What a Reflex item is, as of January 2024
 
-## Setting Up Data Activator
+A Reflex is the Fabric item that holds your Data Activator logic. In the current preview it is a no-code experience: you build it in the browser, there is no public API or SDK for defining triggers, and nothing to deploy from source control. Any blog post showing a JSON or YAML "Reflex configuration" is describing something that doesn't exist.
 
-### Creating Your First Reflex
+According to the [Data Activator introduction on Microsoft Learn](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/data-activator/activator-introduction), the model has four parts:
 
-```python
-# Conceptual API for Reflex configuration
-reflex_config = {
-    "name": "Production Monitoring Reflex",
-    "description": "Monitor production line sensors",
-    "data_sources": [
-        {
-            "type": "KqlDatabase",
-            "database": "TelemetryDB",
-            "table": "SensorReadings"
-        },
-        {
-            "type": "Eventstream",
-            "eventstream": "production-events"
-        }
-    ]
+| Concept | What it means in practice |
+|---|---|
+| Events | Every source is treated as a stream of observations: an object ID, a timestamp and some values |
+| Objects | The business thing you monitor (a freezer, a package, a store), keyed by one ID column |
+| Properties | Reusable values or logic on an object, such as a one-hour maximum temperature |
+| Triggers | A condition on an object plus an action, evaluated per object instance |
+
+Data reaches a Reflex in two ways today. You can add a **Reflex destination** to an Eventstream, or you can select **Set alert** on a supported Power BI visual in a report published to a workspace on Premium or Fabric capacity. Reflex does not query a KQL database or a lakehouse directly in this preview. Data Activator also has to be switched on by a Fabric admin, either for the tenant or for specific capacities.
+
+The two sources behave very differently, and that matters for trigger design. Eventstream data arrives as it happens. Power BI data is sampled on a schedule that typically follows the semantic model's refresh, so a "real-time" alert on a daily-refreshed model is a daily alert with extra steps.
+
+## Model the object before you write a trigger
+
+The single most important decision is the object key. When you assign data in Data mode, you choose an object name and a key column, and every trigger then fires *per object instance*. Get the key wrong and every trigger downstream is wrong.
+
+For Eventstream sources, each event must be a JSON dictionary with a key that identifies the object. This shape works:
+
+```json
+{
+  "FreezerId": "FRZ-0042",
+  "StoreId": "SYD-017",
+  "Temperature": -14.2,
+  "DoorOpen": false,
+  "EventTime": "2024-01-21T03:15:00Z"
 }
 ```
 
-### Defining Objects
+A few rules I follow:
 
-Objects represent the things you want to monitor:
+- **Pick the grain you want to act on.** If the person who responds is a store manager, a `Store` object may be a better trigger target than `Freezer`. You can assign the same stream to more than one object, so you can have both.
+- **Combine slow and fast data on one object.** You can assign several streams to an existing object, for example reference data (which technician owns the freezer) alongside telemetry. The key column must contain the same IDs in every stream, or you'll get odd results.
+- **Put smoothing in properties, not in each trigger.** A property such as "average temperature over 10 minutes" can be reused by many triggers, and when you change the window you change it once.
+
+## How triggers decide to fire
+
+A trigger has three cards: **Select** (the value), **Detect** (the condition) and **Act** (the action). The detail in Detect is where most alert noise comes from. The [detection conditions documentation](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/data-activator/activator-detection-conditions) describes the options; this is how I think about them.
+
+### Summaries and filters in Select
+
+In the Select card you can add a summary over a time window between 1 minute and 24 hours: average, count, minimum or maximum. You can also add up to three filters, typically on text columns, such as only events where `StoreId` is a Sydney store.
+
+Use a summary whenever the raw signal is noisy. A single sensor spike to -5°C while a door is open is not a failing freezer. A 10-minute average above -12°C probably is.
+
+### Is versus Becomes
+
+This is the distinction that causes the "it fired 40 times" complaint.
+
+| Condition type | Fires when | Typical use |
+|---|---|---|
+| **Is** (e.g. is greater than) | Every event where the condition is true | Rarely what you want for notifications |
+| **Becomes** (e.g. becomes greater than) | Only when the condition goes from false to true | Threshold breaches |
+| **Enters / Exits range** | When the value moves into or out of a range | Operating bands, such as -25°C to -15°C |
+| **Changes, Changes to, Changes from** | When a value changes, or changes to or from a specific value | Status fields and true/false flags |
+
+An **Is** condition on a stream that reports every 30 seconds fires every 30 seconds for as long as the freezer is warm. **Becomes** fires once when it crosses the line, then not again until the value has dropped back below and crossed again. My default for any notification is a **Becomes** or **Enters range** condition. I only reach for **Is** when every matching event genuinely needs its own action, which is rare for a person and more common for a flow.
+
+The flip side is that **Becomes** won't remind anyone. If the first email is ignored, nothing else arrives. If you need repeated reminders or escalation, that logic belongs in the system you hand off to, not in Reflex.
+
+### Timers: the cheapest noise filter
+
+After the condition you choose a timer:
+
+- **Each time**: fire whenever the condition is true.
+- **Number of times**: fire only after the condition has been true a set number of times.
+- **Stays**: fire only if the condition remains true continuously for a set duration.
+
+"Temperature becomes greater than -12 and stays that way for 10 minutes" is a far better freezer alert than any threshold on its own. It ignores door openings and defrost cycles without needing extra logic. I'd add a **Stays** timer to almost every alert built on physical telemetry.
+
+### Test before you start
+
+Triggers are created **stopped**. Before starting one, the Detect card shows how often it would have fired across the sampled instances and the whole population, and **Send me a test alert** sends you an example built from a past event where the condition was true. If the history chart shows hundreds of activations a day, fix the condition before anyone gets an email. After you edit a running trigger, select **Update**, or the running version keeps using the old logic.
+
+## Choosing the action
+
+The Act card offers email, a Teams message, or a **custom action** that calls a Power Automate flow.
+
+Email and Teams cover most notification needs. Email recipients must be internal to the tenant that owns Fabric; external and guest addresses are not allowed. That rules out notifying a supplier or a managed service partner directly.
+
+Custom actions are the extension point for everything else: creating a ticket, posting to another system, or starting an approval. Someone comfortable with Power Automate defines the action once, with named input fields, and creates the flow from Data Activator. After that, other Reflex users can pick it from the Act card without touching Power Automate. Inside the flow, you read each input field with an expression like this one, as shown in the [custom actions documentation](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/data-activator/activator-trigger-power-automate-flows):
+
+```text
+triggerBody()?['customProperties/FreezerId']
+```
+
+I like this split. The people who understand the business condition own the trigger, and the people who understand the downstream system own the flow.
+
+## Limits that should shape your design
+
+The [preview limitations page](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/data-activator/activator-limitations) is short, and you should read it before you promise anyone anything. As of January 2024 the numbers that matter are:
+
+| Limit | Value |
+|---|---|
+| Eventstream input to Data Activator | Up to 2 events per second; above that, input may be throttled |
+| Email or Teams messages per Reflex item | 500 per hour |
+| Email or Teams messages per trigger per recipient | 30 per hour |
+| Teams messages per recipient | 100 per hour |
+| Power Automate flow runs per trigger | 10,000 per hour |
+
+The 2 events per second figure is the big one. A fleet of 500 freezers reporting every 30 seconds produces about 17 events per second, well over the limit, and throttled input means events silently missing from evaluation. In my view, that pushes Reflex towards a specific pattern: don't send raw telemetry to it. Use the Eventstream event processor to filter, or aggregate upstream, so that only the events a trigger cares about reach the Reflex destination. My [Eventstream patterns post](/blog/2024-01-19-eventstreams-patterns/) covers where that logic should live.
+
+If you want to generate test traffic that stays under the limit, the Eventstream **Custom App** source gives you an Event Hubs-compatible connection string. This script uses the `azure-eventhub` 5.x library to send one event per freezer every five seconds:
 
 ```python
-# Object definition
-object_definition = {
-    "name": "ProductionLine",
-    "id_column": "line_id",
-    "properties": [
-        {
-            "name": "CurrentTemperature",
-            "source_column": "temperature",
-            "aggregation": "latest"
-        },
-        {
-            "name": "AverageTemperature",
-            "source_column": "temperature",
-            "aggregation": "avg",
-            "window": "5m"
-        },
-        {
-            "name": "AlertCount",
-            "source_column": "alert_flag",
-            "aggregation": "sum",
-            "window": "1h"
-        },
-        {
-            "name": "Status",
-            "source_column": "status",
-            "aggregation": "latest"
-        }
-    ]
-}
-```
+import json
+import random
+import time
+from datetime import datetime, timezone
 
-## Trigger Patterns
+from azure.eventhub import EventData, EventHubProducerClient
 
-### Pattern 1: Threshold Alert
+# Connection string from the Eventstream Custom App source (includes EntityPath)
+CONNECTION_STR = "<your-eventstream-custom-app-connection-string>"
+FREEZERS = ["FRZ-0041", "FRZ-0042", "FRZ-0043"]
 
-```yaml
-trigger:
-  name: High Temperature Alert
-  object: ProductionLine
-  condition:
-    property: CurrentTemperature
-    operator: greaterThan
-    value: 85
-  action:
-    type: email
-    recipients:
-      - operations@company.com
-    subject: "High Temperature Alert: {{object.line_id}}"
-    body: |
-      Production line {{object.line_id}} has exceeded temperature threshold.
+producer = EventHubProducerClient.from_connection_string(CONNECTION_STR)
 
-      Current Temperature: {{object.CurrentTemperature}}°C
-      Threshold: 85°C
-      Time: {{trigger.timestamp}}
-
-      Please investigate immediately.
-```
-
-### Pattern 2: Trend-Based Alert
-
-```yaml
-trigger:
-  name: Temperature Rising Alert
-  object: ProductionLine
-  condition:
-    type: trend
-    property: AverageTemperature
-    direction: increasing
-    threshold: 10  # 10% increase
-    window: 30m
-  action:
-    type: teams
-    channel: production-alerts
-    message: |
-      **Temperature Trend Alert**
-      Line: {{object.line_id}}
-      Trend: Rising {{trend.percent_change}}% over 30 minutes
-      Current: {{object.CurrentTemperature}}°C
-```
-
-### Pattern 3: Absence Detection
-
-```yaml
-trigger:
-  name: Device Offline Alert
-  object: Sensor
-  condition:
-    type: absence
-    property: LastReading
-    duration: 5m
-  action:
-    type: email
-    recipients:
-      - iot-support@company.com
-    subject: "Sensor Offline: {{object.sensor_id}}"
-    body: |
-      Sensor {{object.sensor_id}} has not reported data for 5 minutes.
-
-      Last reading: {{object.LastReading}}
-      Last seen: {{object.LastSeenTimestamp}}
-```
-
-### Pattern 4: Compound Conditions
-
-```yaml
-trigger:
-  name: Critical Production Alert
-  object: ProductionLine
-  condition:
-    type: compound
-    operator: and
-    conditions:
-      - property: CurrentTemperature
-        operator: greaterThan
-        value: 80
-      - property: Status
-        operator: equals
-        value: "Running"
-      - property: AlertCount
-        operator: greaterThan
-        value: 5
-  action:
-    type: powerAutomate
-    flow: "Critical Production Response"
-    parameters:
-      line_id: "{{object.line_id}}"
-      temperature: "{{object.CurrentTemperature}}"
-      alert_count: "{{object.AlertCount}}"
-```
-
-### Pattern 5: State Change Detection
-
-```yaml
-trigger:
-  name: Status Change Alert
-  object: ProductionLine
-  condition:
-    type: stateChange
-    property: Status
-    from: "Running"
-    to: "Stopped"
-  action:
-    type: teams
-    channel: production-ops
-    message: |
-      **Production Line Status Change**
-      Line: {{object.line_id}}
-      Previous Status: Running
-      New Status: Stopped
-      Time: {{trigger.timestamp}}
-
-      Investigate cause of stoppage.
-```
-
-## Action Types
-
-### Email Actions
-
-```python
-email_action = {
-    "type": "email",
-    "recipients": ["team@company.com"],
-    "cc": ["manager@company.com"],
-    "subject": "Alert: {{trigger.name}}",
-    "body": """
-    Alert Details:
-    - Object: {{object.id}}
-    - Condition: {{trigger.condition}}
-    - Value: {{trigger.value}}
-    - Time: {{trigger.timestamp}}
-    """,
-    "priority": "high"
-}
-```
-
-### Teams Actions
-
-```python
-teams_action = {
-    "type": "teams",
-    "webhook_url": "https://company.webhook.office.com/...",
-    "adaptive_card": {
-        "type": "AdaptiveCard",
-        "body": [
-            {
-                "type": "TextBlock",
-                "text": "Alert: {{trigger.name}}",
-                "weight": "bolder",
-                "size": "large"
-            },
-            {
-                "type": "FactSet",
-                "facts": [
-                    {"title": "Object", "value": "{{object.id}}"},
-                    {"title": "Value", "value": "{{trigger.value}}"},
-                    {"title": "Time", "value": "{{trigger.timestamp}}"}
-                ]
+with producer:
+    while True:
+        batch = producer.create_batch()
+        for freezer_id in FREEZERS:
+            reading = {
+                "FreezerId": freezer_id,
+                "StoreId": "SYD-017",
+                "Temperature": round(random.uniform(-20.0, -8.0), 1),
+                "DoorOpen": random.random() < 0.1,
+                "EventTime": datetime.now(timezone.utc).isoformat(),
             }
-        ],
-        "actions": [
-            {
-                "type": "Action.OpenUrl",
-                "title": "View Dashboard",
-                "url": "https://app.fabric.microsoft.com/..."
-            }
-        ]
-    }
-}
+            batch.add(EventData(json.dumps(reading)))
+        producer.send_batch(batch)
+        time.sleep(5)  # 3 events every 5 seconds stays under 2 events/second
 ```
 
-### Power Automate Integration
+Run it, assign the stream to a `Freezer` object keyed on `FreezerId`, and compare an **Is greater than -12** trigger with **Becomes greater than -12, stays for 2 minutes** in the Detect history chart. The difference in activation counts makes the case better than any argument.
 
-```python
-power_automate_action = {
-    "type": "powerAutomate",
-    "flow_name": "Handle Production Alert",
-    "trigger_url": "https://prod-xx.westus.logic.azure.com/...",
-    "parameters": {
-        "alert_type": "{{trigger.name}}",
-        "object_id": "{{object.id}}",
-        "current_value": "{{trigger.value}}",
-        "threshold": "{{trigger.threshold}}",
-        "timestamp": "{{trigger.timestamp}}"
-    }
-}
-```
+## When not to use Reflex yet
 
-## Real-World Example: E-Commerce Monitoring
+Data Activator is a preview, with no SLA and with behaviour that can change. I wouldn't use it today for:
 
-```python
-# Complete Reflex configuration for e-commerce monitoring
+- **Anything that controls equipment or pages on-call.** A missed or duplicated action has to be acceptable. For operational paging, Azure Monitor alerts or an Azure Function reading from Event Hubs are still the safer path.
+- **High-volume per-event processing.** At 2 events per second of input, Reflex is not a stream processor. Do that work in Eventstream or a KQL database.
+- **Alerts that need to live in source control.** There is no code-first definition today, so you can't review or promote triggers through a pipeline.
+- **Notifications to people outside your tenant.** Route those through a custom action and a flow, or use another tool.
 
-ecommerce_reflex = {
-    "name": "E-Commerce Monitoring",
+## The short version
 
-    "objects": [
-        {
-            "name": "Order",
-            "id_column": "order_id",
-            "properties": [
-                {"name": "Status", "column": "status", "agg": "latest"},
-                {"name": "TotalValue", "column": "total", "agg": "sum"},
-                {"name": "ItemCount", "column": "items", "agg": "count"}
-            ]
-        },
-        {
-            "name": "Product",
-            "id_column": "product_id",
-            "properties": [
-                {"name": "StockLevel", "column": "stock", "agg": "latest"},
-                {"name": "SalesVelocity", "column": "sales", "agg": "sum", "window": "1h"}
-            ]
-        },
-        {
-            "name": "Customer",
-            "id_column": "customer_id",
-            "properties": [
-                {"name": "OrderCount", "column": "order_id", "agg": "count", "window": "24h"},
-                {"name": "TotalSpend", "column": "total", "agg": "sum", "window": "24h"}
-            ]
-        }
-    ],
-
-    "triggers": [
-        {
-            "name": "High Value Order",
-            "object": "Order",
-            "condition": {"property": "TotalValue", "op": ">", "value": 1000},
-            "action": {"type": "email", "to": "vip-sales@company.com"}
-        },
-        {
-            "name": "Low Stock Alert",
-            "object": "Product",
-            "condition": {
-                "type": "compound",
-                "op": "and",
-                "conditions": [
-                    {"property": "StockLevel", "op": "<", "value": 10},
-                    {"property": "SalesVelocity", "op": ">", "value": 5}
-                ]
-            },
-            "action": {"type": "teams", "channel": "inventory"}
-        },
-        {
-            "name": "VIP Customer Activity",
-            "object": "Customer",
-            "condition": {"property": "TotalSpend", "op": ">", "value": 5000},
-            "action": {"type": "powerAutomate", "flow": "VIP Customer Handler"}
-        }
-    ]
-}
-```
-
-## Best Practices
-
-### 1. Alert Fatigue Prevention
-
-```python
-# Configure alert throttling
-trigger_config = {
-    "name": "Temperature Alert",
-    "condition": {"property": "Temperature", "op": ">", "value": 80},
-    "throttling": {
-        "max_alerts_per_hour": 2,
-        "cooldown_minutes": 30,
-        "group_by": "object_id"
-    }
-}
-```
-
-### 2. Escalation Patterns
-
-```python
-# Multi-level escalation
-escalation_pattern = {
-    "levels": [
-        {
-            "delay": "0m",
-            "action": {"type": "email", "to": "on-call@company.com"}
-        },
-        {
-            "delay": "15m",
-            "condition": "not_acknowledged",
-            "action": {"type": "teams", "channel": "urgent"}
-        },
-        {
-            "delay": "30m",
-            "condition": "not_acknowledged",
-            "action": {"type": "phone", "to": "manager"}
-        }
-    ]
-}
-```
-
-### 3. Testing Triggers
-
-```python
-# Test trigger logic before deployment
-def test_trigger(trigger_config: dict, test_data: list[dict]) -> list[dict]:
-    """Test trigger conditions against sample data."""
-
-    results = []
-
-    for record in test_data:
-        triggered = evaluate_condition(trigger_config["condition"], record)
-
-        results.append({
-            "record": record,
-            "triggered": triggered,
-            "trigger_name": trigger_config["name"]
-        })
-
-    return results
-
-# Test data
-test_data = [
-    {"line_id": "L1", "temperature": 75, "status": "Running"},
-    {"line_id": "L2", "temperature": 90, "status": "Running"},
-    {"line_id": "L3", "temperature": 85, "status": "Stopped"}
-]
-
-results = test_trigger(high_temp_trigger, test_data)
-```
-
-## Conclusion
-
-Data Activator brings proactive intelligence to your data platform:
-
-1. **Define objects** that represent business entities
-2. **Create triggers** for conditions that matter
-3. **Configure actions** to respond automatically
-4. **Prevent alert fatigue** with throttling and escalation
-
-The combination of Eventstreams, KQL databases, and Data Activator creates a complete real-time intelligence stack - from data ingestion to automated response.
+Reflex is good at one thing right now: telling the right internal person, once, that something about a specific object has changed in a way they care about. Design for that. Choose the object key deliberately, smooth noisy values with properties, prefer **Becomes** and **Enters range** over **Is**, add a **Stays** timer to anything physical, and filter upstream so you stay under the input limit. Do that and the alerts get read. Skip it and you've built another inbox folder.
