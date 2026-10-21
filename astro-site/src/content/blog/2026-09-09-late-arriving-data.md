@@ -2,7 +2,8 @@
 title: "Late-Arriving Data: Deciding When a Day Is Actually Done"
 author: Michael John Peña
 draft: false
-date: 2026-10-21T12:03:00Z
+date: 2026-09-09
+url: "/blog/2026-10-21-late-arriving-data/"
 description: "Late data is a distribution you can measure, not an edge case. How to set a waiting policy, handle what arrives after it, and say when a number is final."
 tags:
   - Data Engineering
@@ -12,7 +13,7 @@ tags:
   - Data Quality
 ---
 
-The [previous post](/blog/2026-10-21-event-time-vs-processing-time/) ended with Monday's order count still changing on Wednesday. The fix there was to group by event time and select by ingestion time, so that late events land on the right day. That leaves three questions it didn't answer: how late can events be, how long should you wait for them, and what happens to the ones that arrive after you stop waiting?
+The [previous post](/blog/2026-09-02-event-time-vs-processing-time/) ended with Monday's order count still changing on Wednesday. The fix there was to group by event time and select by ingestion time, so that late events land on the right day. That leaves three questions it didn't answer: how late can events be, how long should you wait for them, and what happens to the ones that arrive after you stop waiting?
 
 Most teams never answer those questions on purpose. The answers end up being whatever the pipeline happens to do: a lookback of one day because the first version had one, a streaming watermark of ten minutes copied from a tutorial, and a finance report that silently disagrees with the dashboard every month-end.
 
@@ -210,7 +211,7 @@ VALUES
 
 When the real customer record arrives, the dimension load **updates the inferred row in place** (`WHEN MATCHED AND d.is_inferred THEN UPDATE ... is_inferred = false`) instead of creating a new version. The placeholder was never a true historical state, so it shouldn't appear in history. `valid_from = 1900-01-01` means facts from before the record existed still find it. Track a count of `is_inferred = true` rows older than a day. A growing count means the dimension feed is broken, not just slow.
 
-And when a *fact* arrives late into a [Type 2 dimension](/blog/2026-10-21-slowly-changing-dimensions/), look up the version that was valid at the fact's event time, not the current one. Otherwise a February order gets attributed to the segment the customer moved to in October.
+And when a *fact* arrives late into a [Type 2 dimension](/blog/2026-10-14-slowly-changing-dimensions/), look up the version that was valid at the fact's event time, not the current one. Otherwise a February order gets attributed to the segment the customer moved to in October.
 
 ## On Monday
 
@@ -226,15 +227,15 @@ Data will always arrive late. What you control is whether you've decided what ha
 <div class="series-k">Series · Part 4 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-08-19-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-08-26-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-09-02-event-time-vs-processing-time/">Event time vs processing time</a></li>
 <li class="on">Late-arriving data</li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-09-16-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-09-23-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-09-30-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-07-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-14-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
 <li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

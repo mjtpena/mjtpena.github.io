@@ -2,7 +2,8 @@
 title: "Idempotent Writes, and Why Retries Duplicate Data"
 author: Michael John Peña
 draft: false
-date: 2026-10-21T12:00:00Z
+date: 2026-08-19
+url: "/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/"
 description: "Every pipeline gets retried eventually, and a non-idempotent write turns each retry into duplicates. Four patterns that make a write safe to repeat."
 tags:
   - Data Engineering
@@ -223,7 +224,7 @@ Some writes aren't to tables: sending an email, posting to a billing API, publis
 
 Most pipelines that duplicate data were meant to be idempotent. They stopped being idempotent through one of these:
 
-- **Relative dates in the job body.** `WHERE order_date = current_date() - 1` processes a different day if the retry happens after midnight. Pass the logical date in from the orchestrator as a parameter and never derive it from the clock inside the job. [Event time vs processing time](/blog/2026-10-21-event-time-vs-processing-time/) goes deeper on this.
+- **Relative dates in the job body.** `WHERE order_date = current_date() - 1` processes a different day if the retry happens after midnight. Pass the logical date in from the orchestrator as a parameter and never derive it from the clock inside the job. [Event time vs processing time](/blog/2026-09-02-event-time-vs-processing-time/) goes deeper on this.
 - **Generated values used as keys.** `uuid()`, `monotonically_increasing_id()`, `current_timestamp()`, and identity columns all produce new values on every run, so a `MERGE` on them never matches. Ingestion timestamps are fine as attributes. They must never be part of the key.
 - **Cursors that move before the data lands.** If the high-watermark ("last processed `updated_at`") is saved before the write commits, a failure between the two skips data. If it's saved after, in a separate system, a failure between the two duplicates data. Derive the cursor from the target (`SELECT max(source_updated_at) FROM silver.orders`) or commit it in the same transaction.
 - **A non-deterministic transform.** `dropDuplicates()` without a defined order, `first()` over an unordered group, or sampling: the row count stays stable across reruns, but the *content* doesn't. That is still a correctness bug.
@@ -255,7 +256,7 @@ def test_orders_load_is_idempotent(spark, seeded_bronze):
     assert first.row_count == first.key_count   # one row per order: the grain holds
 ```
 
-The last assertion checks something slightly different: that the table has the [grain](/blog/2026-10-21-the-grain-of-a-table/) it claims to have. Duplicates from retries and fan-out from bad joins look the same in a dashboard, and the same assertion catches both.
+The last assertion checks something slightly different: that the table has the [grain](/blog/2026-08-26-the-grain-of-a-table/) it claims to have. Duplicates from retries and fan-out from bad joins look the same in a dashboard, and the same assertion catches both.
 
 ## On Monday
 
@@ -272,14 +273,14 @@ The orchestrator's retry button is a promise that running the job again is safe.
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
 <li class="on">Idempotent writes, and why retries duplicate data</li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-08-26-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-09-02-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-09-09-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-09-16-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-09-23-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-09-30-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-07-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-14-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
 <li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

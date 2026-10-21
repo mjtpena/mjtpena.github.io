@@ -2,7 +2,8 @@
 title: "Event Time vs Processing Time: Know Which Clock Your Numbers Are On"
 author: Michael John Peña
 draft: false
-date: 2026-10-21T12:02:00Z
+date: 2026-09-02
+url: "/blog/2026-10-21-event-time-vs-processing-time/"
 description: "Every record has three timestamps: when it happened, when it arrived, and when it was processed. Group by the wrong one and past days keep changing."
 tags:
   - Data Engineering
@@ -93,11 +94,11 @@ SELECT * FROM bronze.orders
 WHERE event_ts > '${last_run_max_event_ts}'
 ```
 
-Any event that arrives after a later event has already been processed will never be picked up, because its event time is behind the cursor. The offline phone in the figure is one example. Nothing errors and the data simply never arrives. That's the main subject of [late-arriving data](/blog/2026-10-21-late-arriving-data/).
+Any event that arrives after a later event has already been processed will never be picked up, because its event time is behind the cursor. The offline phone in the figure is one example. Nothing errors and the data simply never arrives. That's the main subject of [late-arriving data](/blog/2026-09-09-late-arriving-data/).
 
 ### Deriving "yesterday" from the processing clock
 
-`WHERE event_date = current_date() - 1` lets *when the job ran* decide *which data it processes*. A retry that lands after midnight processes the wrong day, and a backfill run on the 9th processes the 8th, however many times you click rerun. The logical date has to come from the orchestrator as a parameter. This is also the most common way jobs lose [idempotence](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/).
+`WHERE event_date = current_date() - 1` lets *when the job ran* decide *which data it processes*. A retry that lands after midnight processes the wrong day, and a backfill run on the 9th processes the 8th, however many times you click rerun. The logical date has to come from the orchestrator as a parameter. This is also the most common way jobs lose [idempotence](/blog/2026-08-19-idempotent-writes-and-why-retries-duplicate-data/).
 
 ### Time zones
 
@@ -188,7 +189,7 @@ A record that arrives ten hours (or ten days) late adds its event date to `touch
 The same split applies to storage layout:
 
 - **Bronze**: partition or cluster by ingestion date. It's append-only, you can replay "everything we received on the 3rd", and late events never land in an old partition.
-- **Silver and gold**: partition or cluster by event or business date, which is how people [filter their queries](/blog/2026-10-21-partition-pruning/).
+- **Silver and gold**: partition or cluster by event or business date, which is how people [filter their queries](/blog/2026-09-30-partition-pruning/).
 
 ## In streaming, the engine needs to be told
 
@@ -238,15 +239,15 @@ Monday's number will keep changing for a while, because events about Monday keep
 <div class="series-k">Series · Part 3 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-08-19-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-08-26-the-grain-of-a-table/">The grain of a table</a></li>
 <li class="on">Event time vs processing time</li>
-<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-09-09-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-09-16-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-09-23-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-09-30-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-07-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-14-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
 <li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

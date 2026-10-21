@@ -2,7 +2,8 @@
 title: "The Grain of a Table: Declare It Before the First Join"
 author: Michael John Peña
 draft: false
-date: 2026-10-21T12:01:00Z
+date: 2026-08-26
+url: "/blog/2026-10-21-the-grain-of-a-table/"
 description: "Grain is what one row of a table means. Most wrong numbers come from a join or aggregation that quietly changed it. How to declare grain and test it."
 tags:
   - Data Engineering
@@ -90,10 +91,10 @@ A join to a table at a finer grain *fans out*. Each row on the coarse side repea
 The grain changes in other ways too, and all of them pass every syntax check:
 
 - **Mixed-grain tables.** Order-level totals stored on every line row "for convenience". Each row is accurate on its own, but summing any of those columns is wrong.
-- **Joining a history table on the business key.** A [Type 2 dimension](/blog/2026-10-21-slowly-changing-dimensions/) has one row per version of each customer. Joining facts on `customer_id` alone multiplies every fact by the number of versions.
+- **Joining a history table on the business key.** A [Type 2 dimension](/blog/2026-10-14-slowly-changing-dimensions/) has one row per version of each customer. Joining facts on `customer_id` alone multiplies every fact by the number of versions.
 - **Unioning tables at different grains.** Daily snapshot rows unioned with transaction rows "to get everything in one place".
 - **A `GROUP BY` that gains a column.** Adding `channel` to a grouping changes "one row per day" to "one row per day per channel". Downstream code that assumed one row per day now sums several.
-- **Duplicates you didn't know about.** If `orders` actually holds two rows for some orders because of a [non-idempotent load](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/), the grain you declared isn't the grain you have.
+- **Duplicates you didn't know about.** If `orders` actually holds two rows for some orders because of a [non-idempotent load](/blog/2026-08-19-idempotent-writes-and-why-retries-duplicate-data/), the grain you declared isn't the grain you have.
 
 ## Grain decides which measures can be added up
 
@@ -214,9 +215,9 @@ Put `assert_grain` after every write of a table people query. Put `assert_no_fan
 
 Once you notice grain, it turns up in most of the other topics here:
 
-- The `MERGE` key in an [idempotent write](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/) *is* the grain. If you merge on something else, duplicates follow.
-- A [slowly changing dimension](/blog/2026-10-21-slowly-changing-dimensions/) is a deliberate change of grain, from "one row per customer" to "one row per customer version".
-- [Partitioning](/blog/2026-10-21-partition-pruning/) should follow a column that's part of how the table is queried, and that usually means the time component of its grain.
+- The `MERGE` key in an [idempotent write](/blog/2026-08-19-idempotent-writes-and-why-retries-duplicate-data/) *is* the grain. If you merge on something else, duplicates follow.
+- A [slowly changing dimension](/blog/2026-10-14-slowly-changing-dimensions/) is a deliberate change of grain, from "one row per customer" to "one row per customer version".
+- [Partitioning](/blog/2026-09-30-partition-pruning/) should follow a column that's part of how the table is queried, and that usually means the time component of its grain.
 
 ## On Monday
 
@@ -231,15 +232,15 @@ Most wrong numbers have nothing to do with bad data. They come from correct data
 <div class="series-k">Series · Part 2 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-08-19-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
 <li class="on">The grain of a table</li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-09-02-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-09-09-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-09-16-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-09-23-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-09-30-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-07-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-14-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
 <li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

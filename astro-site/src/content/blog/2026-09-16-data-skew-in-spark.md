@@ -2,7 +2,8 @@
 title: "Data Skew: Why 199 Tasks Finish in Seconds and One Takes an Hour"
 author: Michael John Peña
 draft: false
-date: 2026-10-21T12:04:00Z
+date: 2026-09-16
+url: "/blog/2026-10-21-data-skew-in-spark/"
 description: "One hot key can make one task do a third of a job, and more nodes will not help. How to spot skew in the Spark UI, find the keys, and fix it properly."
 tags:
   - Data Engineering
@@ -202,7 +203,7 @@ result = (partial.groupBy("user_agent")
          F.sum("events").alias("events")))
 ```
 
-If you salt by something else, the same session can appear in several buckets and summing overcounts. The [grain](/blog/2026-10-21-the-grain-of-a-table/) problem from earlier in the series turns up again, this time inside a performance fix.
+If you salt by something else, the same session can appear in several buckets and summing overcounts. The [grain](/blog/2026-08-26-the-grain-of-a-table/) problem from earlier in the series turns up again, this time inside a performance fix.
 
 <div class="cl cl-note">
 <div class="cl-tag">Note</div>
@@ -222,7 +223,7 @@ Skew also appears when *writing*. `df.write.partitionBy("country")` after a `rep
    .write.partitionBy("country").format("delta").saveAsTable("silver.orders"))
 ```
 
-The opposite mistake, too many tasks writing into each partition, is the [small files problem](/blog/2026-10-21-the-small-files-problem/).
+The opposite mistake, too many tasks writing into each partition, is the [small files problem](/blog/2026-10-07-the-small-files-problem/).
 
 ## On Monday
 
@@ -238,15 +239,15 @@ To confirm which joins, shuffles, and partitions a job is actually running, you 
 <div class="series-k">Series · Part 5 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-08-19-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-08-26-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-09-02-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-09-09-late-arriving-data/">Late-arriving data</a></li>
 <li class="on">Data skew</li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-09-23-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-09-30-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-07-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-14-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
 <li><a href="/blog/2026-10-21-schema-evolution/">Schema evolution</a></li>
 </ol>
 </nav>

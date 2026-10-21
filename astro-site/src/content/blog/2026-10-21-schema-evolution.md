@@ -2,7 +2,7 @@
 title: "Schema Evolution: Surviving the Day Upstream Renames a Column"
 author: Michael John Peña
 draft: false
-date: 2026-10-21T12:09:00Z
+date: 2026-10-21
 description: "Every source schema changes eventually. Which changes Delta accepts silently, which it rejects, a contract per layer, and the changes no schema check sees."
 tags:
   - Data Engineering
@@ -196,7 +196,7 @@ Gold tables are used by reports, semantic models, and other teams. A breaking ch
 The most dangerous change in the taxonomy is the one where the schema stays the same:
 
 - `amount` changes from cents to dollars, so every value is 100× smaller.
-- `event_ts` changes from UTC to local time, and every [daily aggregate](/blog/2026-10-21-event-time-vs-processing-time/) shifts by a few hours.
+- `event_ts` changes from UTC to local time, and every [daily aggregate](/blog/2026-09-02-event-time-vs-processing-time/) shifts by a few hours.
 - `status` gains a new value, `'PARTIALLY_SHIPPED'`, that a `CASE` expression drops into `ELSE NULL`.
 - `country` changes from ISO codes to full names.
 
@@ -232,21 +232,21 @@ All of the above protects you from changes after they happen. A contract with th
 
 That's the end of the series. Looking back across the ten topics, they share one idea: **make the implicit explicit before it fails at a bad time.**
 
-[Idempotence](/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/) makes explicit what a retry does. [Grain](/blog/2026-10-21-the-grain-of-a-table/) makes explicit what a row is. [Event time](/blog/2026-10-21-event-time-vs-processing-time/) and [late data](/blog/2026-10-21-late-arriving-data/) make explicit which clock you're using and how long you'll wait. [Skew](/blog/2026-10-21-data-skew-in-spark/), [query plans](/blog/2026-10-21-reading-a-spark-query-plan/), [pruning](/blog/2026-10-21-partition-pruning/), and [small files](/blog/2026-10-21-the-small-files-problem/) make explicit what the engine is really doing. [Slowly changing dimensions](/blog/2026-10-21-slowly-changing-dimensions/) and schema evolution make explicit how things change over time. None of them is hard on its own. They're just easy to skip until one of them causes an incident.
+[Idempotence](/blog/2026-08-19-idempotent-writes-and-why-retries-duplicate-data/) makes explicit what a retry does. [Grain](/blog/2026-08-26-the-grain-of-a-table/) makes explicit what a row is. [Event time](/blog/2026-09-02-event-time-vs-processing-time/) and [late data](/blog/2026-09-09-late-arriving-data/) make explicit which clock you're using and how long you'll wait. [Skew](/blog/2026-09-16-data-skew-in-spark/), [query plans](/blog/2026-09-23-reading-a-spark-query-plan/), [pruning](/blog/2026-09-30-partition-pruning/), and [small files](/blog/2026-10-07-the-small-files-problem/) make explicit what the engine is really doing. [Slowly changing dimensions](/blog/2026-10-14-slowly-changing-dimensions/) and schema evolution make explicit how things change over time. None of them is hard on its own. They're just easy to skip until one of them causes an incident.
 
 <nav class="series" aria-label="Series">
 <div class="series-k">Series · Part 10 of 10</div>
 <div class="series-t">Ten data engineering concepts worth learning before the 2 AM page</div>
 <ol>
-<li><a href="/blog/2026-10-21-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
-<li><a href="/blog/2026-10-21-the-grain-of-a-table/">The grain of a table</a></li>
-<li><a href="/blog/2026-10-21-event-time-vs-processing-time/">Event time vs processing time</a></li>
-<li><a href="/blog/2026-10-21-late-arriving-data/">Late-arriving data</a></li>
-<li><a href="/blog/2026-10-21-data-skew-in-spark/">Data skew</a></li>
-<li><a href="/blog/2026-10-21-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
-<li><a href="/blog/2026-10-21-partition-pruning/">Partition pruning</a></li>
-<li><a href="/blog/2026-10-21-the-small-files-problem/">The small files problem</a></li>
-<li><a href="/blog/2026-10-21-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
+<li><a href="/blog/2026-08-19-idempotent-writes-and-why-retries-duplicate-data/">Idempotent writes, and why retries duplicate data</a></li>
+<li><a href="/blog/2026-08-26-the-grain-of-a-table/">The grain of a table</a></li>
+<li><a href="/blog/2026-09-02-event-time-vs-processing-time/">Event time vs processing time</a></li>
+<li><a href="/blog/2026-09-09-late-arriving-data/">Late-arriving data</a></li>
+<li><a href="/blog/2026-09-16-data-skew-in-spark/">Data skew</a></li>
+<li><a href="/blog/2026-09-23-reading-a-spark-query-plan/">Reading a Spark query plan</a></li>
+<li><a href="/blog/2026-09-30-partition-pruning/">Partition pruning</a></li>
+<li><a href="/blog/2026-10-07-the-small-files-problem/">The small files problem</a></li>
+<li><a href="/blog/2026-10-14-slowly-changing-dimensions/">Slowly changing dimensions</a></li>
 <li class="on">Schema evolution</li>
 </ol>
 </nav>
