@@ -27,7 +27,8 @@ function scan(body) {
 }
 
 for (const file of readdirSync(dir).filter((f) => /\.mdx?$/.test(f)).sort()) {
-  const text = readFileSync(new URL(file, dir), 'utf8');
+  // Normalize CRLF (e.g. Windows checkouts with core.autocrlf) so the LF-based patterns below match.
+  const text = readFileSync(new URL(file, dir), 'utf8').replace(/\r\n?/g, '\n');
   const match = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!match) {
     errors.push(`${file}: missing frontmatter`);
