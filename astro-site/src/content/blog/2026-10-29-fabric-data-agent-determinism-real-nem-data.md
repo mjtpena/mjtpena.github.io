@@ -2,7 +2,7 @@
 title: "Fabric Data Agent Accuracy Is a Distribution, Not a Number"
 author: Michael John Peña
 draft: false
-date: 2026-10-28
+date: 2026-10-29
 description: "I asked a Fabric data agent 24 questions in three wordings, ten times each, on real AEMO data. It scored 82%, but only 39% of wordings were always right."
 tags:
   - Microsoft Fabric
@@ -86,15 +86,15 @@ The data is AEMO's [aggregated price and demand data](https://www.aemo.com.au/en
 <figcaption><strong>Figure 1.</strong> The test rig. Real AEMO data lands in a lakehouse, a Direct Lake model sits on top, and the data agent can reach both. A local harness asks every question in a brand-new conversation, then grades the answer the way <code>evaluate_data_agent</code> does. Expected values come from stored queries run at evaluation time, and every one was cross-checked against an independent recomputation.</figcaption>
 </figure>
 
-<img src="/images/blog/2026-10-28-fabric-data-agent-determinism/workspace.webp" alt="The WS-DATAAGENT-DETERMINISM workspace in the Fabric portal listing the DA_NEM data agent, the LH_NEM lakehouse with its SQL analytics endpoint, the NB_Evaluate_Repeats notebook and the SM_NEM semantic model." loading="lazy" />
+<img src="/images/blog/2026-10-29-fabric-data-agent-determinism/workspace.webp" alt="The WS-DATAAGENT-DETERMINISM workspace in the Fabric portal listing the DA_NEM data agent, the LH_NEM lakehouse with its SQL analytics endpoint, the NB_Evaluate_Repeats notebook and the SM_NEM semantic model." loading="lazy" />
 
-<img src="/images/blog/2026-10-28-fabric-data-agent-determinism/agent-config.webp" alt="The DA_NEM data agent in the Fabric portal with LH_NEM and SM_NEM ticked as sources, the Standard runtime selected, and Fabric's banner saying the agent now runs on GPT 5.1 and recommending validation with test prompts and expected outputs." loading="lazy" />
+<img src="/images/blog/2026-10-29-fabric-data-agent-determinism/agent-config.webp" alt="The DA_NEM data agent in the Fabric portal with LH_NEM and SM_NEM ticked as sources, the Standard runtime selected, and Fabric's banner saying the agent now runs on GPT 5.1 and recommending validation with test prompts and expected outputs." loading="lazy" />
 
-The questions deliberately include the traps real energy data has. AEMO timestamps mark the **end** of each interval, so September's last row is stamped 00:00 on 1 October. My ground truth follows the date dimension and assigns each row to the date on its stamp. "Average price" can mean the simple mean of intervals or the demand-weighted price, and for South Australia in 2025 those are $86.73/MWh and $117.95/MWh. The financial year runs July to June. Every expected value comes from a stored T-SQL query run against the SQL analytics endpoint at evaluation time (Marc's dynamic ground truth), and all 24 matched an independent pandas recomputation from the raw CSVs exactly.
+The questions include real traps. AEMO timestamps mark the **end** of each interval, so September's last row is stamped 00:00 on 1 October. My ground truth follows the date dimension and assigns each row to the date on its stamp. "Average price" can mean the simple mean of intervals or the demand-weighted price, and for South Australia in 2025 those are $86.73/MWh and $117.95/MWh. The financial year runs July to June. Every expected value comes from a stored T-SQL query run against the SQL analytics endpoint at evaluation time (Marc's dynamic ground truth), and all 24 matched an independent pandas recomputation from the raw CSVs exactly.
 
-The harness calls the published agent through `FabricOpenAIResponses` (SDK [0.1.33a0](https://pypi.org/project/fabric-data-agent-sdk/), which added headless credentials; see [how the Responses API client changed](/blog/2026-09-08-fabric-data-agent-responses-api-migration/)), opens a new conversation for every ask, and records the rewritten question, the data source, the generated DAX or SQL, the tool output and the answer. It grades each answer the way [`evaluate_data_agent`](https://learn.microsoft.com/en-us/fabric/data-science/evaluate-data-agent) does, with the SDK's judge prompt as a second turn, and separately with a deterministic numeric comparator. Throttled attempts were discarded and re-asked, so rate limits don't masquerade as agent behaviour. `evaluate_data_agent` can already repeat questions with `num_query_repeats`, but it doesn't keep the rewritten question or compute pass^k, and those were the point.
+The harness calls the published agent through `FabricOpenAIResponses` (SDK [0.1.33a0](https://pypi.org/project/fabric-data-agent-sdk/), which added headless credentials; see [how the Responses API client changed](/blog/2026-09-08-fabric-data-agent-responses-api-migration/)) in a new conversation for every ask. It records the rewritten question, data source, generated query and answer, and grades each answer twice: with the SDK's judge prompt as a second turn, as [`evaluate_data_agent`](https://learn.microsoft.com/en-us/fabric/data-science/evaluate-data-agent) does, and with a deterministic numeric comparator. Throttled attempts were re-asked. `evaluate_data_agent` can repeat questions itself (`num_query_repeats`), and its `_steps` table records each tool call's natural-language query, but it doesn't report pass^k.
 
-The agent ran on the Standard runtime, not the preview runtime. The SDK and `evaluate_data_agent` are in preview (0.1.33a0 is an alpha on PyPI), and these results cover 24 questions on one dataset.
+The agent ran on the Standard runtime, not the preview runtime; the API runs used F16 and the 29 October notebook and portal checks used F4. The SDK and `evaluate_data_agent` are in preview (0.1.33a0 is an alpha on PyPI), and these results cover 24 questions on one dataset.
 
 ## 82% accurate, 39% dependable
 
@@ -243,7 +243,7 @@ Across 720 runs the agent was right 82.4% of the time. Scored one pass at a time
 <figcaption><strong>Figure 2.</strong> Pass rate for each of the 72 wordings over ten fresh conversations, config v0. Teal dots were right every time, amber dots were flaky and red dots were never right. A grey bar joins the three wordings of a question when they disagree. Hover a dot for the wording and its outcome counts.</figcaption>
 </figure>
 
-The metric that captures this is **pass^k** from the [τ-bench paper](https://arxiv.org/abs/2406.12045): the chance that all *k* independent attempts at a task succeed, averaged across tasks. Pass^1 is ordinary accuracy. Pass^10 here is 38.9%.
+The metric that captures this is **pass^k** from the [τ-bench paper](https://arxiv.org/abs/2406.12045): the chance that all *k* independent attempts at a task succeed, averaged across tasks. Pass^10 here is 38.9%.
 
 <figure class="ff">
 <svg class="ff-svg" viewBox="0 0 900 330" role="img" aria-label="Line chart of pass-hat-k falling as k grows, per configuration.">
@@ -303,11 +303,11 @@ The metric that captures this is **pass^k** from the [τ-bench paper](https://ar
 <figcaption><strong>Figure 3.</strong> Pass^k falls steadily as you ask the same question more times. The v1 configuration starts higher and falls at almost the same rate, so better instructions raised the curve without flattening it.</figcaption>
 </figure>
 
-Only 3 of the 24 questions were right every time under all three wordings. Run an evaluation once and you take a single draw from each distribution; in my runs, two identical passes differed by up to 12.5 points.
+Only 3 of the 24 questions were right every time under all three wordings.
 
 ## The variance enters before the query is written
 
-The Responses API returns every tool call, so you can see where each run diverged. In the trace, the orchestrator first rewrites the user's question into a fuller instruction for the data source tool, then picks a source, then generates and runs a query, then writes the answer.
+The Responses API returns every tool call. In the trace, the orchestrator rewrites the question into a fuller instruction, picks a source, generates and runs a query, then writes the answer.
 
 <figure class="ff">
 <svg class="ff-svg" viewBox="0 0 900 330" role="img" aria-label="The data agent's answer pipeline with measured variance at each stage, config v0, 72 question wordings by 10 runs. Rewrite: the rewritten question differed on almost every run (median 10 distinct rewrites per 10 runs). Route: the semantic model was chosen in 717 of 720 runs. Query: median 9 distinct DAX texts per 10 runs. Answer: 21 of 72 wordings returned more than one distinct number. Verdict: 17 of 72 wordings flipped between right and wrong among answered runs. Separately, 42 runs, 5.8 percent, declined because the tool produced no query. The rewrite is where the interpretation is fixed.">
@@ -379,11 +379,17 @@ Generated query text is the wrong thing to diff between runs. Log the rewritten 
 
 ## Four ways it went wrong
 
-**Definitional drift.** On definitional questions, 27% of runs returned a defensible number under a different definition, usually the simple average where the business meant demand-weighted. Every South Australia 2025 run that produced a query (28 of 30) used the measure literally named `[Average Price]`, and six of those answers described the result as "volume-weighted". The label matched the business definition and the number didn't, which is exactly how a wrong answer gets past a reviewer.
+**Definitional drift.** In v0, 27% of definitional runs returned a defensible number under a different definition, usually the simple average where the business meant demand-weighted. Every South Australia 2025 run that produced a query (28 of 30) used the measure literally named `[Average Price]`, and six of those answers described the result as "volume-weighted". The label matched the business definition and the number didn't, which is exactly how a wrong answer gets past a reviewer.
 
-**Data-edge artefacts.** The single 00:00 interval on 1 October exists because AEMO stamps interval ends. Half the Queensland runs treated it as a quarter of data.
+The portal's test chat found a third reading. With the v0 settings in the draft, "What was the average price across the NEM in September 2026?" came back as $53.63/MWh, labelled volume-weighted, five times in a row. That is the unweighted mean of the five regional demand-weighted prices, which counts Tasmania the same as New South Wales. It never appeared in any of the 45 API runs of that question. (The test chat keeps one thread, so those answers could see each other.)
 
-**Prior knowledge leaking in.** The NEM moved to five-minute settlement on 1 October 2021. Eight rewrites still described "30-minute" intervals, and two answers to "how many hours of negative prices" divided the interval count by two, returning 15,940 hours instead of 2,656.7.
+<img src="/images/blog/2026-10-29-fabric-data-agent-determinism/chat-nem-average.webp" alt="The Fabric data agent test chat answering What was the average price across the NEM in September 2026 with: The average volume-weighted price across the NEM in September 2026 was $53.63/MWh (AUD)." loading="lazy" />
+
+**Data-edge artefacts.** The single 00:00 interval on 1 October exists because AEMO stamps interval ends. Half the Queensland runs treated it as a quarter of data, and the portal chat went further, reporting the period covered as 1 October to 31 December 2026.
+
+<img src="/images/blog/2026-10-29-fabric-data-agent-determinism/chat-last-quarter.webp" alt="The Fabric data agent test chat answering qld peak demand last quarter twice: 5,993.13 MW in the last available calendar quarter, Q4 2026, period covered 1 October 2026 to 31 December 2026." loading="lazy" />
+
+**Prior knowledge leaking in.** The NEM moved to five-minute settlement on 1 October 2021. Eight rewrites still described half-hourly or 30-minute intervals, and two answers to "how many hours of negative prices" divided the interval count by two, returning 15,940 hours instead of 2,656.7.
 
 **Declines.** In 42 runs (5.8%) the semantic model tool produced no query, and the agent said so rather than guessing. That's the right failure, but it hit 32 of the 72 wordings, so it shows up as flakiness on otherwise reliable questions.
 
@@ -475,37 +481,31 @@ For v1 I did what the guidance suggests: definitions in the agent instructions, 
 | Wordings flipping right/wrong among answered runs | 10 | 15 |
 | Runs routed to the lakehouse | 2 of 360 | 45 of 360 |
 
-The definitions worked where they were aimed. South Australia's 2025 average price went from 0 correct in 15 runs to 12 of 15. They also leaked. "Average price means the demand-weighted average" turned up in rewrites of questions about average *demand*, 16 times in 45 runs against none in v0, and the agent dutifully computed a demand-weighted average of demand. Tasmania's 2025 average demand came back as 1,069.0 MW instead of 1,049.7 MW in seven of 15 runs. Aggregation accuracy fell ten points.
+The definitions worked where they were aimed. South Australia's 2025 average price went from 0 correct in 15 runs to 12 of 15. They also leaked into questions about average *demand*: 16 of 45 rewrites asked for a "demand-weighted average demand", against none in v0, and the agent dutifully computed one. Tasmania's 2025 average demand came back as 1,069.0 MW instead of 1,049.7 MW in seven of 15 runs. Aggregation accuracy fell ten points.
 
 The routing hint sent all 15 timestamp lookups to the lakehouse, and the 45 lakehouse runs were right 91% of the time. The Queensland "last quarter" question got no instruction, and two of its three wordings were wrong on all five v1 runs.
 
 <div class="cl cl-warn"><div class="cl-tag">Watch for</div><div class="cl-body">
 
-An instruction is a global edit to every rewrite the agent will ever make. After changing one, re-run the whole distribution, not just the questions you meant to fix. Here the mean went up 3.3 points, well inside the 12.5-point spread between identical v0 passes, while the number of flipping wordings went up by half. The category shifts are the real signal.
+An instruction is a global edit to every rewrite the agent will ever make. After changing one, re-run the whole distribution, not just the questions you meant to fix. Here the mean went up 3.3 points, but a bootstrap over the 72 wordings puts the 95% interval at −3 to +10 points, while the number of flipping wordings went up by half. The category shifts are the real signal.
 
 </div></div>
+
+Microsoft's own tooling reproduces the label problem. I put three of the shakiest v1 wordings through `evaluate_data_agent` in a Fabric notebook, with `num_query_repeats=5` against the published v1 agent. It marked 12 of 15 answers as not matching, one right in five for each question. Three South Australia answers read "the demand-weighted average price … was $86.73/MWh", and four NEM answers gave $47.16 the same way: the instruction's label on the simple average. The SDK's own `_steps` table shows how, with a rewrite asking for "the NEM-wide demand-weighted average wholesale price … using the predefined Average Price measure".
+
+<img src="/images/blog/2026-10-29-fabric-data-agent-determinism/notebook-repeats.webp" alt="A Fabric notebook cell running evaluate_data_agent with num_query_repeats=5 against DA_NEM, followed by the SDK output listing twelve conversation links under: The result does not match the provided ground truth(s)." loading="lazy" />
 
 ## The judge held up, with two sharp edges
 
 I expected the SDK's judge to be a source of noise. It wasn't. Across all 1,080 runs in both configurations it replied with a bare "Yes", "No" or "Unclear". Its verdict matched my deterministic comparator on 1,079 runs; the other was a single "Unclear" on a wrong answer. To test the judge on its own, I held 60 stored v1 answers fixed (30 correct, 30 not) and re-ran the judge five times on each by branching off the stored answer with `previous_response_id`. All 300 replays returned the original verdict.
 
-Two details in 0.1.33a0 are still worth knowing. First, the judge is the data agent itself: `evaluate_data_agent` sends the grading prompt as a second message in the same conversation, and the default prompt asks about "the most recent answer". The verdict is then parsed with `"no" in message.lower()` before checking for "yes", so a judge that ever says "Yes, but note…" scores a fail. Second, the `critic_prompt` example on Microsoft Learn includes an `{actual_answer}` placeholder, but the SDK only formats `{query}` and `{expected_answer}`. The documented prompt raises `KeyError: 'actual_answer'` after the agent has already answered, and because results are written only at the end, the whole evaluation is lost.
+Two details in 0.1.33a0 are still worth knowing. First, the judge is the data agent itself: `evaluate_data_agent` sends the grading prompt as a second message in the same conversation, and the default prompt asks about "the most recent answer". The verdict is then parsed with `"no" in message.lower()` before checking for "yes", so a judge that ever says "Yes, but note…" scores a fail. Second, the `critic_prompt` example on Microsoft Learn uses an `{actual_answer}` placeholder the SDK never fills. It raises `KeyError` after the agent has answered, and because results are written only at the end, the run is lost. Here it is in a Fabric notebook, 31 seconds in:
 
-You can reproduce the second one without calling an agent:
-
-```python
-from fabric.dataagent.evaluation._thread import _generate_prompt  # internal helper, 0.1.33a0
-
-learn_example = "Query: {query} | Expected: {expected_answer} | Actual: {actual_answer}"
-_generate_prompt("What was peak demand?", "8187.54 MW", learn_example)
-# KeyError: 'actual_answer'
-```
+<img src="/images/blog/2026-10-29-fabric-data-agent-determinism/notebook-keyerror.webp" alt="A Fabric notebook cell defining the critic_prompt example from Microsoft Learn with an actual_answer placeholder and calling evaluate_data_agent, failing with KeyError: actual_answer." loading="lazy" />
 
 Until that changes, write a custom critic prompt the way the default one works: refer to the most recent answer and use only `{query}` and `{expected_answer}`.
 
 ## The harness
-
-The core loop needs a published agent, the SDK and a credential for headless use.
 
 <div class="code-title">repeat_eval.py</div>
 
@@ -538,7 +538,7 @@ runs = [ask_fresh("What was Queensland's highest demand over the last quarter?")
 client.close()
 ```
 
-Tool names such as `trace.analyze_semantic_model` are what this preview returned in October 2026, not a documented contract, so print the item types for your own agent first.
+Tool names like `trace.analyze_semantic_model` aren't a documented contract; print your own agent's item types first.
 
 The pass^k estimator is one line per question wording:
 
@@ -554,9 +554,8 @@ def pass_hat_k(n: int, correct: int, k: int) -> float:
 
 ## What I'd do on Monday
 
-- Run every evaluation question at least five times in fresh conversations, and report pass^5 next to accuracy. `evaluate_data_agent` takes `num_query_repeats`, so you don't need a custom harness for the repeats, only for pass^k and the rewrite.
+- Run every evaluation question at least five times in fresh conversations, and report pass^5 next to accuracy. `evaluate_data_agent` takes `num_query_repeats` and logs the rewrite in the `function_queries` column of its `_steps` table, so pass^k is a group-by over its output, not a custom harness.
 - Ask each important question in two or three wordings. Wording moved the Queensland question from 8 in 10 right to 1 in 10.
-- Log the rewritten question for every run. When an answer flips, compare rewrites first.
 - Name measures for their definition. Without instructions, 101 of 120 average-price runs picked the measure called `Average Price`.
 - Write definitions into the agent instructions and back them with example queries, then rerun the same distribution, not a single pass.
 - Grade numbers with a deterministic comparator, and keep the LLM judge for wording.
