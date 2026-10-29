@@ -14,7 +14,15 @@ tags:
 
 I asked a Fabric data agent "What was Queensland's highest demand over the last quarter?" ten times, each in a fresh conversation. Once it said 8,187.54 MW, which is correct. Nine times it said 5,993.13 MW, a single five-minute interval from 1 October. Across all three wordings it was right 14 times in 30, so for this question a one-off evaluation run is close to a coin toss.
 
-Marc's [post on data-marc.com](https://data-marc.com/2026/10/27/can-you-trust-your-fabric-data-agent-programmatically-testing-accuracy-and-determinism/) makes the case for automated tests that store the query producing the expected answer rather than the answer itself. He names determinism as the goal but doesn't measure it. So I did: 24 questions, three wordings each, ten runs per wording, on real Australian electricity market data, with every stage of the agent's work captured. **Accuracy is a distribution**, and the number your evaluation prints is one draw from it.
+The usual test for a data agent is a list of questions, an expected answer for each and one evaluation pass. That tells you whether the agent *can* answer, not whether it *will* answer the same way twice. So I measured the second: 24 questions, three wordings each, ten runs per wording, on real Australian electricity market data, with every stage of the agent's work captured. **Accuracy is a distribution**, and the number your evaluation prints is one draw from it.
+
+## How a Fabric data agent answers a question
+
+A [Fabric data agent](https://learn.microsoft.com/en-us/fabric/data-science/concept-data-agent) is a workspace item that answers plain-language questions over the data you attach to it: lakehouses, warehouses, Power BI semantic models, KQL databases and a few newer source types. You don't write any queries. An orchestrator model reads the question, restates it as a fuller instruction, and picks one of the attached sources. That source's tool generates T-SQL, DAX or KQL, validates it and runs it, and the orchestrator writes the answer from the result.
+
+You steer the agent with three levers: agent instructions, which apply to every question; data source instructions, which apply when a particular source is chosen; and example queries, which pair a sample question with the query that answers it. After you publish, the agent can be called from the Fabric portal and, through the Python SDK, from code.
+
+Every step in that chain is a model decision: the restatement, the choice of source, the query and the wording of the answer. Nothing pins any of them between one ask and the next. That's the property this post measures.
 
 ## The rig
 
@@ -90,9 +98,9 @@ The data is AEMO's [aggregated price and demand data](https://www.aemo.com.au/en
 
 <img src="/images/blog/2026-10-29-fabric-data-agent-determinism/agent-config.webp" alt="The DA_NEM data agent in the Fabric portal with LH_NEM and SM_NEM ticked as sources, the Standard runtime selected, and Fabric's banner saying the agent now runs on GPT 5.1 and recommending validation with test prompts and expected outputs." loading="lazy" />
 
-The questions include real traps. AEMO timestamps mark the **end** of each interval, so September's last row is stamped 00:00 on 1 October. My ground truth follows the date dimension and assigns each row to the date on its stamp. "Average price" can mean the simple mean of intervals or the demand-weighted price, and for South Australia in 2025 those are $86.73/MWh and $117.95/MWh. The financial year runs July to June. Every expected value comes from a stored T-SQL query run against the SQL analytics endpoint at evaluation time (Marc's dynamic ground truth), and all 24 matched an independent pandas recomputation from the raw CSVs exactly.
+The questions include real traps. AEMO timestamps mark the **end** of each interval, so September's last row is stamped 00:00 on 1 October. My ground truth follows the date dimension and assigns each row to the date on its stamp. "Average price" can mean the simple mean of intervals or the demand-weighted price, and for South Australia in 2025 those are $86.73/MWh and $117.95/MWh. The financial year runs July to June. Every expected value comes from a stored T-SQL query run against the SQL analytics endpoint at evaluation time, and all 24 matched an independent pandas recomputation from the raw CSVs exactly.
 
-The harness calls the published agent through `FabricOpenAIResponses` (SDK [0.1.33a0](https://pypi.org/project/fabric-data-agent-sdk/), which added headless credentials; see [how the Responses API client changed](/blog/2026-09-08-fabric-data-agent-responses-api-migration/)) in a new conversation for every ask. It records the rewritten question, data source, generated query and answer, and grades each answer twice: with the SDK's judge prompt as a second turn, as [`evaluate_data_agent`](https://learn.microsoft.com/en-us/fabric/data-science/evaluate-data-agent) does, and with a deterministic numeric comparator. Throttled attempts were re-asked. `evaluate_data_agent` can repeat questions itself (`num_query_repeats`), and its `_steps` table records each tool call's natural-language query, but it doesn't report pass^k.
+The harness calls the published agent through `FabricOpenAIResponses` (SDK [0.1.33a0](https://pypi.org/project/fabric-data-agent-sdk/), which added headless credentials; see [how the Responses API client changed](/blog/2026-09-08-fabric-data-agent-responses-api-migration/)) in a new conversation for every ask. It records the rewritten question, data source, generated query and answer, and grades each answer twice: with the SDK's judge prompt as a second turn, as [`evaluate_data_agent`](https://learn.microsoft.com/en-us/fabric/data-science/evaluate-data-agent) does, and with a deterministic numeric comparator. Throttled attempts were re-asked.
 
 The agent ran on the Standard runtime, not the preview runtime; the API runs used F16 and the 29 October notebook and portal checks used F4. The SDK and `evaluate_data_agent` are in preview (0.1.33a0 is an alpha on PyPI), and these results cover 24 questions on one dataset.
 
@@ -307,7 +315,7 @@ Only 3 of the 24 questions were right every time under all three wordings.
 
 ## The variance enters before the query is written
 
-The Responses API returns every tool call. In the trace, the orchestrator rewrites the question into a fuller instruction, picks a source, generates and runs a query, then writes the answer.
+The Responses API returns every tool call, so each step of the chain above is visible for every run: the rewrite, the source, the generated query and the answer.
 
 <figure class="ff">
 <svg class="ff-svg" viewBox="0 0 900 330" role="img" aria-label="The data agent's answer pipeline with measured variance at each stage, config v0, 72 question wordings by 10 runs. Rewrite: the rewritten question differed on almost every run (median 10 distinct rewrites per 10 runs). Route: the semantic model was chosen in 717 of 720 runs. Query: median 9 distinct DAX texts per 10 runs. Answer: 21 of 72 wordings returned more than one distinct number. Verdict: 17 of 72 wordings flipped between right and wrong among answered runs. Separately, 42 runs, 5.8 percent, declined because the tool produced no query. The rewrite is where the interpretation is fixed.">
@@ -367,16 +375,9 @@ The Responses API returns every tool call. In the trace, the orchestrator rewrit
 <figcaption><strong>Figure 4.</strong> Where the variance enters, config v0. Rewrites and DAX text vary on almost every run; far fewer wordings end up with a different number or verdict.</figcaption>
 </figure>
 
-The rewrite and the DAX text differed on almost every run, yet most of that variation is harmless: aliases, column choices and formatting that return the same number. Routing barely moved. Only 3 of 720 runs touched the lakehouse, even though it was attached.
+Most of that variation is harmless: aliases, column choices and formatting that return the same number. Routing barely moved; only 3 of 720 runs touched the lakehouse.
 
 In the two questions I traced end to end, what decided the answer was the **rewrite**. For the Queensland question, runs whose rewrite said "the most recent calendar quarter available in the data" returned the 1 October interval; runs that said "the last completed calendar quarter relative to today" returned the right peak. That one phrase predicted the outcome in 26 of 29 answered runs. For "the average price across the NEM in September 2026", the agent used the demand-weighted measure in all 11 runs where the rewrite contained the word "weighted", and the simple-average measure in 18 of the 19 where it didn't.
-
-<div class="cl cl-key"><div class="cl-tag">Takeaway</div><div class="cl-body">
-
-Generated query text is the wrong thing to diff between runs. Log the rewritten question. It's where an ambiguous request becomes a specific one, and it's the first step your instructions influence.
-
-</div></div>
-
 ## Four ways it went wrong
 
 **Definitional drift.** In v0, 27% of definitional runs returned a defensible number under a different definition, usually the simple average where the business meant demand-weighted. Every South Australia 2025 run that produced a query (28 of 30) used the measure literally named `[Average Price]`, and six of those answers described the result as "volume-weighted". The label matched the business definition and the number didn't, which is exactly how a wrong answer gets past a reviewer.
@@ -487,11 +488,11 @@ The routing hint sent all 15 timestamp lookups to the lakehouse, and the 45 lake
 
 <div class="cl cl-warn"><div class="cl-tag">Watch for</div><div class="cl-body">
 
-An instruction is a global edit to every rewrite the agent will ever make. After changing one, re-run the whole distribution, not just the questions you meant to fix. Here the mean went up 3.3 points, but a bootstrap over the 72 wordings puts the 95% interval at −3 to +10 points, while the number of flipping wordings went up by half. The category shifts are the real signal.
+The mean went up 3.3 points, but a bootstrap over the 72 wordings puts the 95% interval at −3 to +10 points, while the number of flipping wordings went up by half. The category shifts are the real signal.
 
 </div></div>
 
-Microsoft's own tooling reproduces the label problem. I put three of the shakiest v1 wordings through `evaluate_data_agent` in a Fabric notebook, with `num_query_repeats=5` against the published v1 agent. It marked 12 of 15 answers as not matching, one right in five for each question. Three South Australia answers read "the demand-weighted average price … was $86.73/MWh", and four NEM answers gave $47.16 the same way: the instruction's label on the simple average. The SDK's own `_steps` table shows how, with a rewrite asking for "the NEM-wide demand-weighted average wholesale price … using the predefined Average Price measure".
+Microsoft's own tooling reproduces the label problem. I ran three of the shakiest v1 wordings through `evaluate_data_agent` in a Fabric notebook, with `num_query_repeats=5` against the published v1 agent. It marked 12 of 15 answers as not matching, one right in five for each question. Three South Australia answers read "the demand-weighted average price … was $86.73/MWh", and four NEM answers gave $47.16 the same way: the instruction's label on the simple average. The SDK's own `_steps` table shows how, with a rewrite asking for "the NEM-wide demand-weighted average wholesale price … using the predefined Average Price measure".
 
 <img src="/images/blog/2026-10-29-fabric-data-agent-determinism/notebook-repeats.webp" alt="A Fabric notebook cell running evaluate_data_agent with num_query_repeats=5 against DA_NEM, followed by the SDK output listing twelve conversation links under: The result does not match the provided ground truth(s)." loading="lazy" />
 
@@ -502,8 +503,6 @@ I expected the SDK's judge to be a source of noise. It wasn't. Across all 1,080 
 Two details in 0.1.33a0 are still worth knowing. First, the judge is the data agent itself: `evaluate_data_agent` sends the grading prompt as a second message in the same conversation, and the default prompt asks about "the most recent answer". The verdict is then parsed with `"no" in message.lower()` before checking for "yes", so a judge that ever says "Yes, but note…" scores a fail. Second, the `critic_prompt` example on Microsoft Learn uses an `{actual_answer}` placeholder the SDK never fills. It raises `KeyError` after the agent has answered, and because results are written only at the end, the run is lost. Here it is in a Fabric notebook, 31 seconds in:
 
 <img src="/images/blog/2026-10-29-fabric-data-agent-determinism/notebook-keyerror.webp" alt="A Fabric notebook cell defining the critic_prompt example from Microsoft Learn with an actual_answer placeholder and calling evaluate_data_agent, failing with KeyError: actual_answer." loading="lazy" />
-
-Until that changes, write a custom critic prompt the way the default one works: refer to the most recent answer and use only `{query}` and `{expected_answer}`.
 
 ## The harness
 
@@ -552,13 +551,15 @@ def pass_hat_k(n: int, correct: int, k: int) -> float:
     return comb(correct, k) / comb(n, k)
 ```
 
-## What I'd do on Monday
+## Key takeaways about Fabric data agents
 
-- Run every evaluation question at least five times in fresh conversations, and report pass^5 next to accuracy. `evaluate_data_agent` takes `num_query_repeats` and logs the rewrite in the `function_queries` column of its `_steps` table, so pass^k is a group-by over its output, not a custom harness.
-- Ask each important question in two or three wordings. Wording moved the Queensland question from 8 in 10 right to 1 in 10.
-- Name measures for their definition. Without instructions, 101 of 120 average-price runs picked the measure called `Average Price`.
-- Write definitions into the agent instructions and back them with example queries, then rerun the same distribution, not a single pass.
-- Grade numbers with a deterministic comparator, and keep the LLM judge for wording.
-- Treat a decline as a failure in your metric but a safe one in your risk review.
+- **The same question can get a different answer.** With nothing changed, 40 of 72 wordings were right on some runs and wrong on others. Run each evaluation question at least five times in fresh conversations and report pass^5 next to accuracy. `evaluate_data_agent` takes `num_query_repeats` and logs each rewrite in its `_steps` table, so pass^k is a group-by over its output.
+- **The rewrite decides the answer, not the query.** The orchestrator restates your question before any tool runs, and that restatement is where an ambiguous request becomes a specific one. In the two questions I traced end to end, one phrase in it predicted the outcome in 55 of 59 runs. Generated DAX varied on almost every run without changing the number, so when answers flip, compare rewrites before queries.
+- **Wording moves the answer.** One wording of the Queensland question was right 8 times in 10, another once. Test important questions in two or three wordings.
+- **It defaults to the semantic model and takes measure names literally.** Without instructions, only 3 of 720 runs used the lakehouse, and 101 of 120 average-price runs picked the measure called `Average Price`. Name measures for their definition and route sources explicitly.
+- **Instructions are global edits.** An instruction reaches every rewrite the agent makes, not just the questions you wrote it for. Definitions lifted definitional questions from 66.7% to 88.9% and dropped aggregation from 85.6% to 75.6%, and they can put a definition's label on a number computed another way. Rerun the whole set after every change, and judge the change by category and pass^k, not by the mean.
+- **Declines are its safest failure.** In 5.8% of runs the source tool produced no query and the agent said so instead of guessing. Count that against your metric, not your risk review.
+- **The built-in judge is consistent, but it's the agent grading itself.** It matched a deterministic comparator on 1,079 of 1,080 runs, but it runs as a second turn in the same conversation, and its verdict parser treats any "no" as a fail. Grade numbers with a deterministic comparator, keep the judge for wording, and write custom critic prompts that refer to the most recent answer and use only `{query}` and `{expected_answer}`.
+- **The portal's test chat isn't an evaluation.** It keeps one thread, so earlier answers can shape later ones, and it produced a definition of average price that no API run did. Use it to explore, and the SDK to measure.
 
-Your data agent is still only as good as your data, as Marc says. It is also only as dependable as its least stable rewrite, and you won't see that until you ask the same question more than once.
+A data agent is only as good as its data. It is also only as dependable as its least stable rewrite, and you won't see that until you ask the same question more than once.
